@@ -1,6 +1,7 @@
 node_modules/
-dist/
+**/dist/
 .astro/
+**/.sanity/
 .wrangler/
 .agents/
 .claude/
@@ -10,5 +11,6 @@ skills-lock.json
 playwright-report/
 test-results/
 coverage/
+worker/worker-configuration.d.ts
 
 .cursor/

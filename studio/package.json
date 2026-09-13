@@ -1,0 +1,20 @@
+{
+  "name": "@ola/studio",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "check": "tsc --noEmit",
+    "typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate"
+  },
+  "dependencies": {
+    "@sanity/icons": "^5.2.2",
+    "@sanity/vision": "^5.31.2",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "sanity": "^5.31.2",
+    "styled-components": "^6.5.3"
+  }
+}

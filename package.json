@@ -2,28 +2,39 @@
   "name": "ola-website",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "studio",
+    "worker",
+    "packages/*"
+  ],
   "engines": {
     "node": ">=24.0.0"
   },
   "scripts": {
-    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1",
+    "dev": "npm run dev:web",
+    "dev:web": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1",
+    "dev:studio": "npm run dev --workspace @ola/studio",
+    "dev:worker": "npm run dev --workspace @ola/worker",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build:workspaces": "npm run build --workspaces --if-present",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1",
-    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check && npm run check --workspaces --if-present",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "verify": "npm run format:check && npm run lint && npm run check && npm run test && npm run build && npm run test:build && npm run test:e2e",
+    "verify": "npm run format:check && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e",
     "test:build": "node scripts/check-build.mjs"
   },
   "dependencies": {
     "@data-slot/dialog": "^0.2.166",
+    "@sanity/client": "^8.6.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "groq": "^6.13.2",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3"
   },

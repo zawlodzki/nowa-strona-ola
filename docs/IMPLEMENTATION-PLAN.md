@@ -213,9 +213,9 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 - [x] Skonfigurować lint, format, typy, unit/E2E, axe, kontrolę buildu i workflow CI.
       Workflow czeka na pierwsze uruchomienie w GitHub; lokalna bramka przeszła.
 
-- [ ] Utworzyć Astro, Studio i Worker, wspólne typowanie oraz jeden lockfile.
+- [x] Utworzyć Astro, Studio i Worker, wspólne typowanie oraz jeden lockfile.
 - [x] Dodać sprawdzone komendy dev, build, kontroli typów i testów do README.
-- [ ] Skonfigurować Sanity i pobieranie opublikowanych danych.
+- [x] Skonfigurować Sanity i pobieranie opublikowanych danych.
 - [ ] Przygotować chroniony podgląd ze wspólnymi komponentami.
 - [ ] Skonfigurować środowiska Cloudflare, sekrety, GitHub i Builds.
 - [ ] Przetestować podpisany webhook, publikację, wycofanie, usunięcie i błąd builda.

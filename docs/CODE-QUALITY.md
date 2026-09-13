@@ -7,8 +7,9 @@ na Node 26.8.2 / npm 11.19.1; zgodność na Node 24 musi potwierdzić pierwsze C
 ## Jedna bramka jakości
 
 `npm run verify` wykonuje kolejno formatowanie w trybie check, lint, kontrolę
-Astro/TypeScript, testy jednostkowe, produkcyjny build, kontrolę artefaktów i testy
-przeglądarkowe. Pierwszy błąd zatrzymuje całość. Polecenie nie naprawia kodu.
+Astro/TypeScript wszystkich workspace’ów, testy jednostkowe, produkcyjne buildy
+Astro i Studio, dry-run bundla Workera, kontrolę artefaktów i testy przeglądarkowe.
+Pierwszy błąd zatrzymuje całość. Polecenie nie naprawia kodu.
 Przed pierwszym uruchomieniem: `npm ci` oraz `npx playwright install`.
 
 | Polecenie            | Odpowiedzialność                                                                      |
@@ -45,8 +46,10 @@ Każda poprawka rzeczywistego błędu powinna dostać adekwatny test regresji.
 
 ## Kontrole wdrażane wraz z kolejnymi funkcjami
 
-- Sanity: walidacja schematów i danych demonstracyjnych, generowanie typów, brak
-  nieobsługiwanych sekcji, konfliktów slugów i brakujących tłumaczeń w hreflang.
+- Sanity: minimalny schemat strony, TypeGen i repozytorium opublikowanych stron są
+  objęte kontrolą typów i testami konfiguracji/kwerendy. Nadal dodać walidację
+  pełnych danych demonstracyjnych, nieobsługiwanych sekcji, konfliktów slugów
+  oraz brakujących tłumaczeń w hreflang.
 - HTML/Markdown: porównanie znaczącej treści, linków, tabel i FAQ; usunięcie publikacji
   usuwa oba formaty. JSON-LD sprawdzany strukturalnie i względem widocznej treści.
 - Workers: testy z oficjalnym runtime testowym Cloudflare zamiast samego Node dla

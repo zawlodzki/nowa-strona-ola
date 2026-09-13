@@ -17,9 +17,13 @@ hostingiem Cloudflare Workers Static Assets i edycją przez Sanity.
 ## Stan projektu
 
 Działa lokalny prototyp Astro z komponentami Bejamas dostosowanymi do Wonderful.
+Repo jest workspace’em npm: frontend pozostaje w katalogu głównym, osobne aplikacje
+znajdują się w `studio/` i `worker/`, a wspólne kontrakty w `packages/shared/`.
 Strony: `/` (PL), `/en/` (EN), `/static/` (kontrola bez JavaScriptu).
-Formularz nic nie wysyła. Sanity, Workery, n8n i c15t nie są jeszcze zintegrowane.
-Nie publikować prototypu: noindex nie zastępuje ochrony stagingu.
+Formularz nic nie wysyła. Studio zawiera minimalny model strony, a frontend pobiera
+opublikowaną treść z Sanity po ustawieniu konfiguracji. Bez niej build korzysta
+z jawnych danych demonstracyjnych. Worker pozostaje szkieletem bez kolejek, n8n
+i c15t. Nie publikować prototypu: noindex nie zastępuje ochrony stagingu.
 
 ## Uruchomienie i weryfikacja
 
@@ -37,13 +41,30 @@ Astro 7 w środowisku agenta może uruchomić CLI preview w tle; testy używają
 osobnego kontrolowanego procesu `scripts/preview-test.mjs`.
 
 ```sh
+npm run dev:studio
+npm run dev:worker
+npm run types --workspace @ola/worker
+npm run build:workspaces
+```
+
+Studio odczytuje `SANITY_STUDIO_PROJECT_ID` i opcjonalne
+`SANITY_STUDIO_DATASET` zgodnie z `studio/.env.example`. Wartość zastępcza służy
+wyłącznie do lokalnej kontroli buildu. Frontend odczytuje parę
+`PUBLIC_SANITY_PROJECT_ID` i `PUBLIC_SANITY_DATASET` zgodnie z `.env.example`;
+ustawienie tylko jednej wartości zatrzymuje build. Klient produkcyjnego buildu
+używa perspektywy `published`, bez CDN i bez tokenu. Po zmianie schematów lub GROQ
+uruchomić `npm run typegen --workspace @ola/studio`. Po zmianie
+`worker/wrangler.jsonc` ponownie wygenerować i zapisać typy Workera.
+
+```sh
 npm run verify
 ```
 
-Verify obejmuje format, lint, typy, unit tests, build, budżety artefaktów i E2E
-w trzech przeglądarkach. `npm run format` jawnie formatuje kod. Samo
-`npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane, ale nie było
-jeszcze uruchomione na GitHub (brak remote).
+Verify obejmuje format, lint, typy wszystkich workspace’ów, build frontendu,
+Studio i Workera, unit tests, budżety artefaktów i E2E w trzech przeglądarkach.
+`npm run format` jawnie formatuje kod. Samo
+`npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane; wynik jego
+pierwszego uruchomienia na GitHub wymaga osobnego sprawdzenia.
 
 n8n i self-hostowane c15t będą dostarczone poza repo. Tutaj powstaną integracje,
 formularze i panel zgód dopasowany do design systemu.

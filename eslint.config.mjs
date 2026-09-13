@@ -4,8 +4,9 @@ import astro from "eslint-plugin-astro";
 export default [
   {
     ignores: [
-      "dist/**",
+      "**/dist/**",
       ".astro/**",
+      "**/.sanity/**",
       "node_modules/**",
       "wonderful-design-system/**",
       ".agents/**",
@@ -14,6 +15,7 @@ export default [
       "playwright-report/**",
       "test-results/**",
       "coverage/**",
+      "**/worker-configuration.d.ts",
     ],
   },
   js.configs.recommended,

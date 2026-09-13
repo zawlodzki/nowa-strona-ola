@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getPage } from "../sanity/repository";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -18,12 +19,10 @@ export function getStaticPaths() {
 }
 const { lang } = Astro.props as { lang: "pl" | "en" };
 const pl = lang === "pl";
+const page = await getPage(lang, "home");
 ---
 
-<Layout
-  lang={lang}
-  title={pl ? "Próba komponentów — Wonderful" : "Component trial — Wonderful"}
->
+<Layout lang={lang} title={page.seo?.title ?? page.title}>
   <header class="shell">
     <a href={pl ? "/" : "/en/"} aria-label={pl ? "Strona główna" : "Home"}>
       W / Studio
@@ -34,21 +33,9 @@ const pl = lang === "pl";
   </header>
   <main id="main">
     <section class="hero shell" aria-labelledby="hero-title">
-      <p class="eyebrow">
-        {pl
-          ? "Strategia · technologia · ludzie"
-          : "Strategy · technology · people"}
-      </p>
-      <h1 id="hero-title">
-        {pl
-          ? "Dobry pomysł. Przemyślana realizacja."
-          : "A clear idea. Thoughtful execution."}
-      </h1>
-      <p class="lead">
-        {pl
-          ? "Spójne doświadczenie zaczyna się od detali. Sprawdź przykładowy formularz i poznaj sposób naszej pracy."
-          : "A consistent experience starts with the details. Explore the example form and discover how we work."}
-      </p>
+      <p class="eyebrow">{page.eyebrow}</p>
+      <h1 id="hero-title">{page.title}</h1>
+      <p class="lead">{page.lead}</p>
       <div class="actions">
         <Button as="a" href="#contact">
           {pl ? "Porozmawiajmy" : "Let’s talk"}
