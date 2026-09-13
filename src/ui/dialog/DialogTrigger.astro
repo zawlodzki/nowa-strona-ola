@@ -1,0 +1,11 @@
+---
+// Adapted from bejamas/ui. Native trigger avoids ARIA on an asChild wrapper div.
+import Button from "../button/Button.astro";
+import type { HTMLAttributes } from "astro/types";
+type Props = HTMLAttributes<"button">;
+const props = Astro.props;
+---
+
+<Button variant="outline" type="button" data-slot="dialog-trigger" {...props}>
+  <slot />
+</Button>

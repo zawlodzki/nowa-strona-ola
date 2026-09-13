@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.agents/
+.claude/
+wonderful-design-system/
+package-lock.json
+skills-lock.json
+playwright-report/
+test-results/
+coverage/
+
+.cursor/

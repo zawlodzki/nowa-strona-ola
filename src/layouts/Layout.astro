@@ -1,0 +1,24 @@
+---
+import "../styles/global.css";
+interface Props {
+  lang: "pl" | "en";
+  title: string;
+}
+const { lang, title } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      {lang === "pl" ? "Przejdź do treści" : "Skip to content"}
+    </a>
+    <slot />
+  </body>
+</html>

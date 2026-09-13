@@ -1,0 +1,76 @@
+/* O=odczyt, R=adaptacja. Szczegóły pochodzenia w tokens.json. Font files not bundled. */
+:root {
+  --wf-color-white: #ffffff;
+  --wf-color-paper: #fafafa;
+  --wf-color-surface: #f5f5f5;
+  --wf-color-line: #e6e6e6;
+  --wf-color-ink: #171719;
+  --wf-color-body: #393939;
+  --wf-color-muted: #6b6b6b;
+  --wf-color-black: #080808;
+  --wf-color-deep: #050505;
+  --wf-color-accent: #fc762f;
+  --wf-color-error: #ff3f3f;
+  --wf-color-error-bg: #ffecec;
+  --wf-color-success: #03a97e;
+  --wf-color-success-bg: #f0fdf2;
+  --wf-color-error-text: #b42318;
+  --wf-color-success-text: #067647;
+  --wf-space-4: 4px;
+  --wf-space-8: 8px;
+  --wf-space-12: 12px;
+  --wf-space-16: 16px;
+  --wf-space-24: 24px;
+  --wf-space-32: 32px;
+  --wf-space-48: 48px;
+  --wf-space-64: 64px;
+  --wf-space-96: 96px;
+  --wf-space-120: 120px;
+  --wf-space-180: 180px;
+  --wf-radius-4: 4px;
+  --wf-radius-8: 8px;
+  --wf-radius-10: 10px;
+  --wf-radius-12: 12px;
+  --wf-radius-999: 999px;
+  --wf-font-display: "ABC Favorit Light", Arial, sans-serif;
+  --wf-font-body: Inter, Arial, sans-serif;
+  --wf-font-mono: "IBM Plex Mono", monospace;
+  --wf-layout-gutter-mobile: 24px;
+  --wf-layout-gutter-tablet: 40px;
+  --wf-layout-gutter-desktop: 60px;
+  --wf-layout-content: 1200px;
+  --wf-layout-wide: 1680px;
+  --wf-layout-article: 600px;
+  --wf-motion-press: 100ms;
+  --wf-motion-hover: 180ms;
+  --wf-motion-panel: 250ms;
+  --wf-motion-reveal: 600ms;
+  --wf-motion-stagger: 70ms;
+  --wf-motion-dot-in: 450ms;
+  --wf-motion-dot-out: 1400ms;
+  --wf-motion-box-in: 220ms;
+  --wf-motion-panel-in: 340ms;
+  --wf-motion-type-in: 550ms;
+  --wf-motion-type-out: 350ms;
+  --wf-motion-panel-out: 272ms;
+  --wf-motion-box-out: 176ms;
+  --wf-motion-cycle: 17050ms;
+  --wf-motion-beam: 6000ms;
+  --wf-motion-breath: 3000ms;
+  --wf-motion-shimmer: 5000ms;
+  --wf-ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --wf-ease-out-quint: cubic-bezier(.22,1,.36,1);
+  --wf-ease-in-out: ease-in-out;
+  --wf-ease-linear: linear;
+  --wf-bg: var(--wf-color-white);
+  --wf-fg: var(--wf-color-ink);
+  --wf-gutter: 24px;
+  --wf-section: 64px;
+  --wf-display-size: 42px;
+  --wf-heading-size: 34px;
+  --wf-card-size: 24px;
+}
+[data-theme="dark"] { --wf-bg: var(--wf-color-black); --wf-fg: var(--wf-color-paper); }
+@media(min-width:880px) { :root { --wf-gutter:40px; --wf-section:96px; --wf-display-size:64px; --wf-heading-size:42px; --wf-card-size:22px; } }
+@media(min-width:1200px) { :root { --wf-section:120px; --wf-display-size:82px; --wf-heading-size:48px; } }
+@media(min-width:1440px) { :root { --wf-gutter:60px; --wf-card-size:32px; } }

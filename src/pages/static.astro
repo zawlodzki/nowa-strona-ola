@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+---
+
+<Layout lang="pl" title="Kontrola statycznych komponentów">
+  <main id="main" class="shell hero">
+    <h1>Bez skryptów</h1>
+    <p class="lead">Przycisk i pole wejściowe renderowane jako HTML.</p>
+    <div class="field">
+      <Label for="static-name">Imię</Label>
+      <Input id="static-name" name="name" />
+    </div>
+    <Button as="a" href="/">
+      Wróć do przykładu
+    </Button>
+  </main>
+</Layout>

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "button",
+    "url": "https://ui.bejamas.com/r/button.json",
+    "sha256": "a3ca4080b3dd4af3f1f3db40d7a0f5368426ce664ceb7ed351d946bcba121930"
+  },
+  {
+    "name": "dialog",
+    "url": "https://ui.bejamas.com/r/dialog.json",
+    "sha256": "7885f6ddaa1b741cde60a3e711c52e8cf8f2af3e5cbd43f1282de7c9d6aeb6e0"
+  },
+  {
+    "name": "input",
+    "url": "https://ui.bejamas.com/r/input.json",
+    "sha256": "35b57fcf8e292f966858a8a0758eb895cbd4e4ea1551d5cb1c182f893134ace6"
+  },
+  {
+    "name": "label",
+    "url": "https://ui.bejamas.com/r/label.json",
+    "sha256": "95fe187d9581ef3804720fb577625f6a67b0134f8effb6f5e7690b4004f54b97"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "src/**/*", "tests/**/*", "*.ts"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "wonderful-design-system",
+    ".agents",
+    ".claude",
+    "playwright-report",
+    "test-results",
+    "coverage"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
