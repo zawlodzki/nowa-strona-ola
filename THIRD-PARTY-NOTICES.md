@@ -11,6 +11,17 @@ Full text: `src/assets/fonts/switzer/FFL.txt`.
 Self-hosting with CSS `@font-face` is permitted. Subsetting, format conversion
 and redistribution of the font files are not.
 
+## Gambarino
+
+Wordmarki w `src/assets/brand/` powstały z Gambarino Regular (Théo Guillard /
+Indian Type Foundry) z oficjalnego pakietu Fontshare. Źródło:
+https://www.fontshare.com/fonts/gambarino
+Licencja: ITF Free Font License (FFL) Version 2.0 — 17 Aug 2026 (ta sama treść
+co `src/assets/fonts/switzer/FFL.txt`).
+
+Pliki fontu nie są hostowane w repo. SVG zawiera obrysy glifów, nie osadzony
+font. FFL zezwala na tworzenie logo i znaków słownych.
+
 ## bejamas/ui
 
 Button, Input, Label and Dialog in src/ui were adapted from the public registry

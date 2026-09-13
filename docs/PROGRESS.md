@@ -11,8 +11,14 @@ i bramka jakości działają w jednym workspace npm. Hosty Cloudflare są ustalo
 (apex, 301 `www`, `preview`). Wrangler CLI jest zalogowany. Kolejki i Worker
 integracji staging działają. Publiczny staging:
 `https://ola-website-staging.zawlodzki.workers.dev`. Preview staging:
-`https://ola-website-preview-staging.zawlodzki.workers.dev` (401 bez sesji).
-Brak Access na brzegu, 301 `www`, webhooka Sanity i środowisk GitHub. Etap 3:
+`https://ola-website-preview-staging.zawlodzki.workers.dev` — Access na brzegu
+(302 na `zawlodzki.cloudflareaccess.com`). Redirect 301 `www` na apex działa.
+Środowiska GitHub `staging` i `production` mają zmienne Sanity i sekrety
+Cloudflare. Podpisany webhook Sanity dla publikowanych stron jest aktywny.
+Pełny przepływ publikacji na stagingu przeszedł (Sanity → Worker 202 → Queue →
+repository dispatch → Actions → `ola-website-staging`). Publiczna produkcja
+działa na `https://aleksandraolesiewicz.com` (Worker `ola-website-production`).
+Etap 3:
 tokeny mają jedno źródło; katalog `/ui/` pokazuje bazowe elementy. Główny krój
 to Switzer (self-host).
 Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
@@ -70,9 +76,9 @@ Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
 ## Blokady i zależności
 
 Lokalny szkielet i projekt Sanity `dyuqkn8c` nie blokują dalszej pracy nad UI.
-Wdrożenie Cloudflare czeka na Access podglądu, 301 `www`, webhook Sanity,
-środowiska GitHub (zmienne i token Cloudflare) oraz produkcyjne Workery.
-Publiczny i preview staging oraz integracje staging są wdrożone.
+Do pełnego uruchomienia pozostają test unpublish/delete i błędu builda oraz
+Workery produkcji preview i integracji. Access preview staging, 301 `www`,
+przepływ publikacji na stagingu i publiczny apex działają.
 ABC Favorit nie jest licencjonowany. Główny krój to Switzer (Fontshare FFL).
 
 Pierwsza instalacja Sanity 5.31.2 zgłaszała 8 podatności przejściowych w łańcuchu
@@ -400,13 +406,112 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
 - Środowiska GitHub: 0. Token `gh` działa. Nie tworzyłem env/zmiennych bez
   osobnego potwierdzenia. Webhook Sanity i 301 `www` nie skonfigurowane.
 
+## Access preview staging i GitHub — 2026-09-13
+
+- Access na `ola-website-preview-staging` zweryfikowany: `GET /` → 302
+  `https://zawlodzki.cloudflareaccess.com/cdn-cgi/access/login/...`. Publiczny
+  staging nadal 200, bez Access. Sesja aplikacji (401) jest za Access.
+- GitHub Environment `staging`: zmienne `PUBLIC_SANITY_PROJECT_ID=dyuqkn8c`
+  i `PUBLIC_SANITY_DATASET=production`. Listowanie sekretów: Forbidden
+  (token `gh` nie ma `secrets`). Środowiska `production` nie utworzono.
+- `npx sanity hooks list -p dyuqkn8c`: pusta lista. `www` nadal 404 strefy
+  (nagłówki Webflow), bez 301 na apex.
+
+## Przygotowanie produkcji i paneli — 2026-09-13
+
+- W zalogowanym panelu GitHub utworzono Environment `production` i zweryfikowano
+  zmienne `PUBLIC_SANITY_PROJECT_ID=dyuqkn8c` oraz
+  `PUBLIC_SANITY_DATASET=production`. `staging` nadal ma te same dwie zmienne.
+  W obu środowiskach zapisano sekrety `CLOUDFLARE_ACCOUNT_ID` i
+  `CLOUDFLARE_API_TOKEN`; panel potwierdza cztery nazwy, bez ujawniania wartości.
+- Lokalny token `gh` stracił ważność; dalszy odczyt przez CLI kończy się
+  komunikatem o nieważnym tokenie. Panel GitHub pozostaje zalogowany.
+- `wrangler 4.131.1 whoami` potwierdził konto
+  `a9280171eee8bfa22ea23290a7ab72c5` i OAuth z prawem zapisu Workerów.
+  `wrangler secret list --env staging` potwierdził nazwy
+  `BUILD_TRIGGER_TOKEN`, `BUILD_TRIGGER_URL` i `SANITY_WEBHOOK_SECRET`; Cloudflare
+  nie ujawnia ich wartości. Lokalny `worker/.dev.vars` nie zawiera sekretu Sanity.
+- `npx sanity hook list --project-id dyuqkn8c` nadal zwraca pustą listę.
+  Bez odzyskania tej samej wartości `SANITY_WEBHOOK_SECRET` webhooka nie da się
+  podpisać bez rotacji sekretu Workera.
+- DNS `www` zweryfikowany w panelu: CNAME do `cdn.webflow.com`, status Proxied.
+  Wdrożono aktywny Single Redirect jako wildcard
+  `https://www.aleksandraolesiewicz.com/*` →
+  `https://aleksandraolesiewicz.com/${1}`, 301, z zachowaniem query. Test
+  `/test/sciezka?utm_source=verify` zwrócił 301 i identyczną ścieżkę oraz query
+  na apex. Apex nadal zwraca 404 Webflow, zgodnie z oczekiwaniem przed produkcją.
+- Utworzono User API Token z szablonu `Edit Cloudflare Workers`, ograniczony do
+  konta projektu oraz Workers Routes w strefie `aleksandraolesiewicz.com`.
+  Wartość zapisano bezpośrednio w GitHub i nie zapisano jej w repo ani dokumentacji.
+- Ponowna kontrola HTTP: preview staging 302 do Cloudflare Access, publiczny staging 200. Nie uruchamiano workflow publikacji ani testu leada.
+
+## Webhook Sanity — 2026-09-13
+
+- Z lokalnego, ignorowanego `studio/.env` pobrano `SANITY_WEBHOOK_SECRET` i użyto
+  go bezpośrednio w panelu Sanity; wartości nie zapisano w dokumentacji ani
+  śledzonych plikach. Tymczasowy schowek systemowy został wyczyszczony.
+- Utworzono aktywny webhook `publish-pages-staging`: dataset `production`, metoda
+  POST, zdarzenia create/update/delete, filtr `_type == "page"`, drafts i versions
+  wyłączone, API `v2025-02-19`, projekcja tylko `documentId`, `documentType` i
+  `delta::operation()`.
+- Pierwsza próba panelowa utworzyła dodatkowy webhook na wszystkich datasetach.
+  Po wykryciu w `sanity hook list` usunięto wyłącznie ten błędny duplikat. Końcowa
+  lista zawiera dokładnie jeden webhook: `publish-pages-staging` dla `production`
+  i właściwego adresu Workera.
+- Kontrola endpointu po konfiguracji: `/health` → 200, niepodpisany POST na
+  `/webhooks/sanity` → 401. Nie wysłano poprawnie podpisanego zdarzenia, więc
+  workflow publikacji nie został uruchomiony.
+
+## Przepływ publikacji i Worker produkcji — 2026-09-13
+
+- Kontrolowana zmiana opublikowanej strony PL (`page` `home`): do leada dodano
+  marker `[pubflow-20260913]`, potem przywrócono oryginalny tekst.
+- Webhook `publish-pages-staging`: `POST /webhooks/sanity` → **202**, operacja
+  `update`, dokument `354b6329-ff44-481b-b08e-0c2357788ae6`. Po ~30 s (batch
+  timeout kolejki) Worker wysłał `repository_dispatch`.
+- GitHub Actions `Publish content`:
+  [34769002456](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/34769002456)
+  success w 1 m 12 s (`ola-website-staging` version `23af064b-6831-414b-9692-4c730ae252f9`).
+  Staging serwował marker z Sanity, nie fixture.
+  [34769198624](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/34769198624)
+  success w 53 s po przywróceniu leada; marker zniknął ze stagingu.
+- Nie sprawdzono unpublish/delete ani zachowania poprzedniej wersji przy błędzie
+  builda. Nie testowano leada.
+- Publiczny Worker produkcji: `npx wrangler deploy --config wrangler.jsonc --env production`
+  po `PUBLIC_SANITY_*` build. Skrypt `ola-website-production` wgrany
+  (version `bf49c64b-4cee-4fab-b3cc-481b1eab43e2`). Custom domain
+  `aleksandraolesiewicz.com` **FAIL** Cloudflare API 100117: hostname ma obce
+  rekordy DNS (A/CNAME Webflow). Apex nadal 404 Webflow. `workers.dev` produkcji
+  jest wyłączony zgodnie z konfiguracją. 301 `www` nadal działa.
+- Ze strefy DNS usunięto rekord `A` apex `198.202.211.1` oraz weryfikacyjny TXT
+  `_webflow`. Rekordów pocztowych MX, SPF, DKIM i DMARC nie zmieniano. Proxied
+  `www → cdn.webflow.com` pozostaje tymczasowo, ponieważ utrzymuje działanie reguły
+  301; po odbiorze apex można zmienić jego cel na apex.
+- Ponowny deploy po czyszczeniu DNS: version `f81b06e5-879d-4927-995f-46874faefc45`
+  (2026-09-13T16:51Z). Kontrola HTTP: apex `/` 200, tytuł i h1 PL z Sanity, bez
+  `x-wf-region`; `/en/` 200 `lang="en"`; `/ui/` 200; nieistniejąca ścieżka 404;
+  `www` 301 z zachowaniem ścieżki i query. Staging nadal 200.
+
+## Wordmark Gambarino — 2026-09-13
+
+- Utworzono trzy warianty logo (tylko tekst, minuskuła): jedna linia, słowo pod
+  słowem, inicjały `ao`. Pliki: `src/assets/brand/logo-{wordmark,stacked,monogram}.{svg,png}`.
+- Krój: oficjalny Gambarino Regular z Fontshare (OTF). SVG to obrysy glifów z
+  kerningiem GPOS (HarfBuzz), bez plików fontu w repo. Kolor `ink` `#171719`,
+  tło przezroczyste. PNG: wordmark 3200 px, stacked 2000 px, monogram 1600 px.
+- Nie dodano Gambarino jako kroju strony; Switzer pozostaje głównym krojem.
+- Weryfikacja: oględziny na tle `paper`; piksele nieprzezroczyste wordmarku to
+  RGB (23, 23, 25); SVG otwiera się niezależnie od fontu. Nie wpinano logo w UI.
+
 ## Następny krok
 
-W dashboardzie: Access na Worker `ola-website-preview-staging` (All traffic,
-e-mail `grzesiek@zawlodzki.pl`). Potem środowiska GitHub `staging`/`production`,
-token Cloudflare do Actions, webhook Sanity na
-`https://ola-website-integrations-staging.zawlodzki.workers.dev/webhooks/sanity`
-i 301 `www`. Nie wklejać sekretów. Nie testować leada na produkcyjnym n8n.
+1. Unpublish/delete strony i błąd builda (poprzednia wersja stagingu ma zostać).
+2. Preview i Worker integracji produkcji, Access na
+   `preview.aleksandraolesiewicz.com`. Proxied `www → cdn.webflow.com` można
+   później zmienić na apex; nie dodawać `www` jako custom domain Workera.
+3. Nie testować n8n.
+
+Nie wklejać sekretów do czatu.
 
 ## Zasada aktualizacji
 

@@ -219,8 +219,11 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 - [x] Dodać sprawdzone komendy dev, build, kontroli typów i testów do README.
 - [x] Skonfigurować Sanity i pobieranie opublikowanych danych.
 - [x] Przygotować chroniony podgląd ze wspólnymi komponentami.
-- [ ] Skonfigurować środowiska Cloudflare, sekrety i wdrożenia GitHub Actions.
-- [ ] Przetestować podpisany webhook, publikację, wycofanie, usunięcie i błąd builda.
+- [ ] Dokończyć środowiska Cloudflare, sekrety i wdrożenia GitHub Actions.
+      Staging i publiczny apex działają; pozostały produkcyjne preview
+      i integracje.
+- [ ] Dokończyć test podpisanego webhooka i publikacji. Aktualizacja na stagingu
+      przeszła end-to-end; pozostały wycofanie, usunięcie i błąd builda.
 
 Odbiór: próbna zmiana przechodzi od szkicu przez podgląd do statycznej strony;
 nieautoryzowany dostęp do szkiców odrzucony.
@@ -288,12 +291,13 @@ wersji i przekazanie instrukcji utrzymania.
 
 ## 11. Zależności przed produkcją
 
-Domena produkcyjna `aleksandraolesiewicz.com` jest podpięta do Cloudflare.
-Ustalone hosty: apex jako produkcja, `www` → 301 na apex, podgląd
-`preview.aleksandraolesiewicz.com` (Access: `grzesiek@zawlodzki.pl`). Publiczny
-staging bez osobnej subdomeny — `workers.dev`. Pozostają: Workers Paid na koncie,
-logowanie Wranglera CLI, token GitHub do Repository Dispatch, środowiska GitHub,
-Access, kolejki, sekrety, Turnstile, webhook i uwierzytelnienie n8n, endpoint
+Domena produkcyjna `aleksandraolesiewicz.com` jest Custom Domain publicznego
+Workera (apex 200). Proxied `www` zostaje przy regule 301 i nie może być domeną
+Workera. Publiczny staging działa pod `workers.dev`, a preview staging jest
+chroniony przez Access. Wrangler, kolejki, webhook Sanity, Repository Dispatch
+i środowiska GitHub są skonfigurowane; przepływ aktualizacji treści na stagingu
+przeszedł end-to-end. Pozostają: produkcyjne preview i integracje, testy
+unpublish/delete oraz błędu builda, Turnstile, uwierzytelnienie n8n, endpoint
 i dozwolone originy c15t, identyfikatory GTM/GA4 oraz finalne dane marki i treści
 zgód. Brak tych danych nie blokuje etapu 3 ani lokalnych szablonów.
 

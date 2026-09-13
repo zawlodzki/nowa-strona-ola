@@ -89,6 +89,12 @@ W GitHub utworzyć środowiska `staging` i `production`. Każde wymaga:
 - sekretów `CLOUDFLARE_ACCOUNT_ID` i `CLOUDFLARE_API_TOKEN`;
 - reguł ochrony odpowiednich do środowiska; produkcja może wymagać ręcznej akceptacji.
 
+Staging i production (2026-09-13): oba środowiska GitHub istnieją. Zmienne
+`PUBLIC_SANITY_PROJECT_ID=dyuqkn8c` i `PUBLIC_SANITY_DATASET=production` oraz
+sekrety `CLOUDFLARE_ACCOUNT_ID` i `CLOUDFLARE_API_TOKEN` są ustawione. Token
+Actions to osobny API token Cloudflare (Workers Scripts), nie OAuth Wranglera.
+Pierwszy `repository_dispatch` `sanity-content-change` wdrożył staging.
+
 Token Cloudflare powinien mieć wyłącznie uprawnienia potrzebne do wdrożenia Worker
 Scripts na wskazanym koncie. Workflow nie używa Cloudflare Builds i nie tworzy
 sztucznych commitów. Pozostałe wdrożenia wykonywać osobno. Wszystkie używają Node z
@@ -125,20 +131,31 @@ po ustawieniu poprawnego originu podglądu i CORS.
 | `www`               | `www.aleksandraolesiewicz.com`                           | 301 na apex, ścieżka i query zachowane |
 | Podgląd produkcyjny | `preview.aleksandraolesiewicz.com`                       | Access + sesja aplikacji               |
 | Publiczny staging   | `ola-website-staging.zawlodzki.workers.dev`              | publiczna                              |
-| Podgląd staging     | `ola-website-preview-staging.zawlodzki.workers.dev`      | sesja aplikacji; Access do włączenia   |
+| Podgląd staging     | `ola-website-preview-staging.zawlodzki.workers.dev`      | Access + sesja aplikacji               |
 | Integracje staging  | `ola-website-integrations-staging.zawlodzki.workers.dev` | webhook `/webhooks/sanity`             |
 
-Access: najpierw Zero Trust na koncie (plan Free, karta bez obciążenia). Dla
-Workera `ola-website-preview-staging`: Workers & Pages → Worker → Access →
-Protect this Worker → All traffic → e-mail `grzesiek@zawlodzki.pl`. To chroni
-`workers.dev` i przyszłe domeny tego Workera. `noindex` i cookie sesji nie
-zastępują Access. Po wdrożeniu produkcji powtórzyć dla
-`ola-website-preview-production` (custom domain `preview.aleksandraolesiewicz.com`).
+Access staging (`ola-website-preview-staging`) jest włączony: żądanie bez
+sesji Zero Trust kończy się 302 na `zawlodzki.cloudflareaccess.com`. Dozwolony
+e-mail: `grzesiek@zawlodzki.pl`. To chroni `workers.dev` i przyszłe domeny tego
+Workera. `noindex` i cookie sesji nie zastępują Access. Po wdrożeniu produkcji
+powtórzyć dla `ola-website-preview-production` (custom domain
+`preview.aleksandraolesiewicz.com`).
 
 `www` nie dodawać jako custom domain publicznego Workera — to serwowałoby treść
-zamiast przekierowania. W strefie: proxied CNAME `www` → apex oraz Single Redirect:
-gdy hostname to `www.aleksandraolesiewicz.com`, 301 na
-`https://aleksandraolesiewicz.com` z tą samą ścieżką i query.
+zamiast przekierowania. W strefie: rekord DNS `www` musi być proxied. Single
+Redirect (Rules → Create rule → Redirect Rule), według przykładu Cloudflare
+[www → apex](https://developers.cloudflare.com/rules/url-forwarding/examples/redirect-www-to-root/):
+
+- Request URL (wildcard): `https://www.aleksandraolesiewicz.com/*`
+- Target URL: `https://aleksandraolesiewicz.com/${1}`
+- Status: 301
+- Preserve query string: włączone
+
+OAuth Wranglera ma `zone (read)` i nie wystarcza do zapisu DNS ani Redirect
+Rules — to klik w dashboardzie strefy. Custom Domain Workera na apex wymaga
+usunięcia istniejących rekordów A/CNAME (Webflow); w przeciwnym razie API
+zwraca kod 100117. Po usunięciu rekordu A Webflow i ponownym deployu apex
+serwuje `ola-website-production`.
 
 ## Koszt (stan dokumentacji Cloudflare, 2026-09-13)
 
