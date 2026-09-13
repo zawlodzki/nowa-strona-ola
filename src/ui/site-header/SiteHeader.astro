@@ -8,6 +8,7 @@ import {
   type SiteSection,
 } from "@/lib/paths";
 import Container from "@/ui/container/Container.astro";
+import Logo from "@/ui/logo/Logo.astro";
 import TextLink from "@/ui/text-link/TextLink.astro";
 
 export interface Props {
@@ -23,8 +24,17 @@ const languageHref = alternatePath(lang, section);
 ---
 
 <Container tag="header" class="site-header">
-  <TextLink href={homeHref} aria-label={pl ? "Strona główna" : "Home"}>
-    W / Studio
+  <TextLink
+    href={homeHref}
+    class="site-brand"
+    aria-label={
+      pl
+        ? "Aleksandra Olesiewicz — strona główna"
+        : "Aleksandra Olesiewicz — home"
+    }
+  >
+    <Logo variant="wordmark" class="site-brand__wide" />
+    <Logo variant="stacked" class="site-brand__narrow" />
   </TextLink>
   <nav aria-label={pl ? "Nawigacja główna" : "Primary"}>
     <TextLink

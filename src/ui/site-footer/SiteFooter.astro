@@ -1,8 +1,9 @@
 ---
 import type { Locale } from "@ola/shared";
 
-import { catalogPath } from "@/lib/paths";
+import { catalogPath, homePath } from "@/lib/paths";
 import Container from "@/ui/container/Container.astro";
+import Logo from "@/ui/logo/Logo.astro";
 import TextLink from "@/ui/text-link/TextLink.astro";
 
 export interface Props {
@@ -14,6 +15,17 @@ const pl = lang === "pl";
 ---
 
 <Container tag="footer" class="site-footer">
+  <TextLink
+    href={homePath(lang)}
+    class="site-brand"
+    aria-label={
+      pl
+        ? "Aleksandra Olesiewicz — strona główna"
+        : "Aleksandra Olesiewicz — home"
+    }
+  >
+    <Logo variant="wordmark" />
+  </TextLink>
   <p>
     {pl
       ? "Lokalny prototyp · treści demonstracyjne"

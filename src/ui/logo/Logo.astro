@@ -1,0 +1,78 @@
+---
+import {
+  logoMark,
+  prepareLogoSvg,
+  type LogoVariant,
+} from "@/assets/brand/logo";
+import monogramSvg from "@/assets/brand/logo-monogram.svg?raw";
+import stackedSvg from "@/assets/brand/logo-stacked.svg?raw";
+import wordmarkSvg from "@/assets/brand/logo-wordmark.svg?raw";
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  variant?: LogoVariant;
+  decorative?: boolean;
+  class?: string;
+}
+
+const markup = {
+  wordmark: wordmarkSvg,
+  stacked: stackedSvg,
+  monogram: monogramSvg,
+} as const;
+
+const {
+  variant = "wordmark",
+  decorative = true,
+  class: className = "",
+} = Astro.props as Props;
+const svg = prepareLogoSvg(markup[variant], variant, decorative);
+---
+
+<!-- Outlined Gambarino wordmark. Edit src/assets/brand/logo.ts -->
+<span
+  class={cn("site-logo", `site-logo--${variant}`, className)}
+  data-logo-font={logoMark.font.family}
+  data-logo-variant={variant}
+  aria-hidden={decorative ? "true" : undefined}
+  set:html={svg}
+/>
+
+<style>
+  .site-logo {
+    display: block;
+    line-height: 0;
+    color: currentColor;
+  }
+  .site-logo :global(svg) {
+    display: block;
+    width: auto;
+    height: 1.375rem;
+    max-width: 100%;
+    fill: currentColor;
+  }
+  .site-logo--stacked :global(svg) {
+    height: 2.25rem;
+  }
+  .site-logo--monogram :global(svg) {
+    height: 2rem;
+  }
+  .site-logo--display :global(svg) {
+    height: auto;
+    width: min(100%, 18rem);
+  }
+  .site-logo--display.site-logo--monogram :global(svg) {
+    width: min(100%, 6.5rem);
+  }
+  .site-brand__narrow {
+    display: none;
+  }
+  @media (max-width: 39.99rem) {
+    .site-brand__wide {
+      display: none;
+    }
+    .site-brand__narrow {
+      display: block;
+    }
+  }
+</style>

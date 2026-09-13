@@ -63,6 +63,20 @@ for (const width of [320, 390, 1440]) {
   test(`layout and accessibility at ${width}px`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
+    await expect(
+      page.getByRole("banner").getByRole("link", {
+        name: "Aleksandra Olesiewicz — strona główna",
+      }),
+    ).toBeVisible();
+    const visibleLogos = await page
+      .locator("header .site-logo")
+      .evaluateAll(
+        (elements) =>
+          elements.filter(
+            (element) => getComputedStyle(element).display !== "none",
+          ).length,
+      );
+    expect(visibleLogos).toBe(1);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -129,6 +143,14 @@ test("catalog shows tokens, Polish glyphs and Switzer", async ({ page }) => {
     "href",
     "/en/ui/",
   );
+  await expect(
+    page.getByRole("heading", { name: "Logo", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("Gambarino Regular").first()).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Fontshare · Gambarino" }),
+  ).toHaveAttribute("href", "https://www.fontshare.com/fonts/gambarino");
+  await expect(page.getByRole("img", { name: "ao" })).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
   const family = await page.evaluate(
     () => getComputedStyle(document.body).fontFamily,

@@ -501,7 +501,15 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   tło przezroczyste. PNG: wordmark 3200 px, stacked 2000 px, monogram 1600 px.
 - Nie dodano Gambarino jako kroju strony; Switzer pozostaje głównym krojem.
 - Weryfikacja: oględziny na tle `paper`; piksele nieprzezroczyste wordmarku to
-  RGB (23, 23, 25); SVG otwiera się niezależnie od fontu. Nie wpinano logo w UI.
+  RGB (23, 23, 25); SVG otwiera się niezależnie od fontu.
+- Logo wpięte w nagłówek (wordmark / stack na wąskim ekranie), stopkę, favicon
+  (`ao`) i katalog `/ui/`. Źródło kroju: `src/assets/brand/logo.ts` oraz komentarz
+  w SVG (Gambarino Regular, Fontshare). W UI `fill="currentColor"`. PNG bez zmian.
+- Kontrola: `vitest` (w tym `tests/unit/logo.test.ts`), `astro check`, `build`,
+  `test:build` (gzip CSS 7699 B), Playwright layout 320/390/1440 (jeden widoczny
+  znak w headerze) oraz katalog (Gambarino + link Fontshare). Oględziny `/` i
+  `/ui/` w przeglądarce: wordmark w headerze i stopce, trzy okazy w katalogu.
+- Nie dodano Gambarino jako kroju strony; Switzer pozostaje głównym krojem.
 
 ## Następny krok
 

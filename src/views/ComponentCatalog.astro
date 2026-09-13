@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "@ola/shared";
 
+import { logoMark, type LogoVariant } from "@/assets/brand/logo";
 import Layout from "../layouts/Layout.astro";
 import { Button } from "../ui/button";
 import Container from "../ui/container/Container.astro";
@@ -8,6 +9,7 @@ import Eyebrow from "../ui/eyebrow/Eyebrow.astro";
 import Heading from "../ui/heading/Heading.astro";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import Logo from "../ui/logo/Logo.astro";
 import SiteFooter from "../ui/site-footer/SiteFooter.astro";
 import SiteHeader from "../ui/site-header/SiteHeader.astro";
 
@@ -30,6 +32,12 @@ const colorTokens = [
 
 const { lang } = Astro.props as Props;
 const pl = lang === "pl";
+const logoVariants = Object.keys(logoMark.variants) as LogoVariant[];
+const logoLabels: Record<LogoVariant, string> = {
+  wordmark: pl ? "Jedna linia" : "One line",
+  stacked: pl ? "Słowo pod słowem" : "Stacked",
+  monogram: pl ? "Inicjały" : "Initials",
+};
 ---
 
 <Layout lang={lang} title={pl ? "Katalog komponentów" : "Component catalog"}>
@@ -49,6 +57,36 @@ const pl = lang === "pl";
             : "Tokens come from tokens.json. Headings and body copy use Switzer as the primary typeface."}
         </p>
         <p class="pangram">Zażółć gęślą jaźń ąćęłńóśźż</p>
+      </Container>
+    </section>
+    <section class="panel" aria-labelledby="logo-title">
+      <Container>
+        <Heading tag="h2" id="logo-title">
+          {pl ? "Logo" : "Logo"}
+        </Heading>
+        <p class="lead">
+          {pl
+            ? "Znaki słowne złożono z Gambarino Regular. Krój strony to nadal Switzer. Źródło i warianty zapisane są w src/assets/brand/logo.ts."
+            : "Wordmarks are set in Gambarino Regular. Page type remains Switzer. Source and variants live in src/assets/brand/logo.ts."}{" "}
+          <a href={logoMark.font.source}>Fontshare · Gambarino</a>
+        </p>
+        <ul class="logo-specimens">
+          {logoVariants.map((variant) => (
+            <li>
+              <Logo
+                variant={variant}
+                decorative={false}
+                class="site-logo--display"
+              />
+              <p>
+                <strong>{logoLabels[variant]}</strong>
+                <span>
+                  {logoMark.font.family} {logoMark.font.style}
+                </span>
+              </p>
+            </li>
+          ))}
+        </ul>
       </Container>
     </section>
     <section class="panel" aria-labelledby="tokens-title">
@@ -139,5 +177,28 @@ const pl = lang === "pl";
   }
   .catalog-inverse {
     color: var(--wf-color-paper);
+  }
+  .logo-specimens {
+    display: grid;
+    gap: var(--wf-space-32);
+    padding: 0;
+    margin: var(--wf-space-32) 0 0;
+    list-style: none;
+  }
+  .logo-specimens li {
+    display: grid;
+    gap: var(--wf-space-12);
+    min-width: 0;
+    padding: var(--wf-space-24);
+    border: 1px solid var(--wf-color-line);
+    border-radius: var(--wf-radius-12);
+    background: var(--wf-color-paper);
+  }
+  .logo-specimens p {
+    display: grid;
+    gap: var(--wf-space-4);
+    margin: 0;
+    font-size: 14px;
+    color: var(--wf-color-body);
   }
 </style>
