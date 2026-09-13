@@ -1,0 +1,3 @@
+SANITY_WEBHOOK_SECRET=shared-webhook-secret
+BUILD_TRIGGER_URL=https://example.invalid/build-hook
+BUILD_TRIGGER_TOKEN=build-trigger-token

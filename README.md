@@ -59,6 +59,10 @@ ustawienie tylko jednej wartości zatrzymuje build. Klient produkcyjnego buildu
 używa perspektywy `published`, bez CDN i bez tokenu. Po zmianie schematów lub GROQ
 uruchomić `npm run typegen --workspace @ola/studio`. Po zmianie
 `worker/wrangler.jsonc` ponownie wygenerować i zapisać typy Workera.
+Worker przyjmuje podpisane zdarzenia publikacji Sanity pod `/webhooks/sanity`,
+grupuje je w Cloudflare Queue i wyzwala jeden chroniony endpoint builda na batch.
+Lokalne nazwy sekretów znajdują się w `worker/.dev.vars.example`; szczegóły
+payloadu i konfiguracji opisuje instrukcja Cloudflare.
 
 Podgląd działa jako osobne Astro SSR na porcie 4322 i korzysta ze wspólnego
 renderera hero oraz komponentów frontendu. `preview/.dev.vars.example` wymienia

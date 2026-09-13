@@ -6,7 +6,7 @@ Aktualizacja: 2026-09-13. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-
 
 Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
 Etap 2 trwa: lokalny frontend Astro, Sanity Studio, pobieranie opublikowanej
-treści, chroniony podgląd SSR, szkielet Workera, wspólne typy i bramka jakości
+treści, chroniony podgląd SSR, webhook publikacji Workera, wspólne typy i bramka jakości
 działają w jednym workspace npm. Wykonano próbę trzech komponentów z etapu 3.
 Deklaratywne środowiska Cloudflare są przygotowane, ale integracje Workera,
 połączenie GitHub Builds i hosting nie są jeszcze wdrożone;
@@ -63,12 +63,10 @@ Brak blokad dla przygotowania repo i lokalnego szkieletu. Nie potwierdzono kont,
 projektów ani poświadczeń usług. Lista przedprodukcyjna w sekcji 11 planu.
 ABC Favorit nie jest dołączony — używać fallbacku.
 
-`npm audit` po dodaniu Sanity 5.31.2 i Wranglera 4.131.1 zgłasza 8 podatności
-przejściowych (4 moderate, 4 high) w łańcuchu CLI Sanity, m.in. `adm-zip`,
-`js-yaml` i `uuid`. `npm audit fix` bez `--force` ich nie usuwa, a proponowany
-automatyczny downgrade nadal pozostawiał podatności. Nie użyto `--force` ani
-niesprawdzonych overrides. Przed wdrożeniem Studio trzeba przejść na wydanie
-Sanity z poprawionym łańcuchem zależności lub udokumentować brak ekspozycji.
+Pierwsza instalacja Sanity 5.31.2 zgłaszała 8 podatności przejściowych w łańcuchu
+CLI. Po aktualizacji lockfile przy dodaniu `@sanity/webhook` npm zgłasza 0
+podatności, bez `--force`, downgrade’u i overrides; bezpośrednia wersja Sanity
+pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
 
 ## Analiza bibliotek UI — 2026-09-12
 
@@ -204,15 +202,38 @@ Sanity z poprawionym łańcuchem zależności lub udokumentować brak ekspozycji
   `npm run verify` zakończyło się PASS (22 unit, 27 E2E). Nie zmieniano zdalnego
   DNS ani routingu.
 
+## Webhook publikacji i kolejka buildów — 2026-09-13
+
+- Dodano `/webhooks/sanity`, który weryfikuje podpis surowego body oficjalnym
+  formatem `@sanity/webhook` 4.0.4, porównuje skróty w stałym czasie i odrzuca
+  podpisy starsze niż pięć minut. Limit body wynosi 64 KiB.
+- Minimalny payload zawiera wyłącznie identyfikator i typ dokumentu oraz operację
+  `create`, `update` albo `delete`. Drafty i niepoprawne dane są odrzucane; treść
+  dokumentu nie trafia do wiadomości ani logów.
+- Poprawne zdarzenie otrzymuje deterministyczny identyfikator SHA-256 i trafia do
+  `BUILD_QUEUE`. Konsument scala batch do jednego wywołania chronionego endpointu
+  builda. Błąd HTTP rzuca wyjątek, aby Queue ponowiła wiadomości i ostatecznie
+  skierowała je do DLQ; maksymalna współbieżność konsumenta wynosi 1.
+- Konfiguracja deklaruje oddzielne kolejki i DLQ dla stagingu i produkcji oraz
+  wymagane sekrety `SANITY_WEBHOOK_SECRET`, `BUILD_TRIGGER_URL` i
+  `BUILD_TRIGGER_TOKEN`. Nie utworzono zdalnych kolejek ani sekretów.
+- 10 testów jednostkowych obejmuje create/publish, update, delete/unpublish,
+  niepoprawny i przedawniony podpis, draft, limit body, grupowanie oraz błąd
+  endpointu builda. Dry-run Wranglera przeszedł dla obu środowisk z właściwymi
+  bindingami Queue. To test lokalny z atrapą endpointu, nie pełny przepływ Sanity.
+- `npm run verify`: PASS. Format, lint i typy bez diagnostyki; 32 testy unit;
+  publiczny build, Studio, Preview SSR i Worker przeszły; 27 E2E bez regresji.
+- `npm install` po dodaniu oficjalnego pakietu zgłosił 0 podatności w aktualnym
+  drzewie zależności. Nie zmieniono bezpośredniej wersji Sanity 5.31.2.
+
 ## Następny krok
 
-Kontynuować etap 2: zaimplementować podpisany webhook Sanity i bezpieczną
-koordynację buildów z testami publikacji, wycofania, usunięcia, grupowania zdarzeń
-i błędu builda — nadal bez zdalnego wdrożenia. Po otrzymaniu konta, domen i danych
-Sanity połączyć GitHub Builds, ustawić sekrety, Access i CORS, a następnie wykonać
-odbiór na stagingu. Przed dalszym rozwojem Studio ponownie sprawdzić wydania Sanity
-pod kątem opisanych podatności CLI. Nie odtwarzać próby ani nie inicjować projektu
-od nowa.
+Kontynuować etap 2: wybrać i zaimplementować konkretny chroniony endpoint
+orkiestracji Cloudflare Builds, który zachowa poprzednie wdrożenie przy błędzie
+i nie dopuści do zastąpienia nowszego buildu starszym. Następnie, po otrzymaniu
+danych projektu Sanity i subdomen, utworzyć kolejki, ustawić sekrety, Access i CORS
+oraz wykonać pełny przepływ na stagingu. Checklista webhooka pozostaje otwarta do
+tego testu z rzeczywistymi usługami. Nie odtwarzać wcześniejszych prób.
 
 ## Zasada aktualizacji
 

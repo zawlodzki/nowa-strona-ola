@@ -12,8 +12,78 @@
     },
     "traces": { "enabled": true, "head_sampling_rate": 0.01 },
   },
+  "secrets": {
+    "required": [
+      "SANITY_WEBHOOK_SECRET",
+      "BUILD_TRIGGER_URL",
+      "BUILD_TRIGGER_TOKEN",
+    ],
+  },
+  "queues": {
+    "producers": [
+      { "binding": "BUILD_QUEUE", "queue": "ola-site-builds-local" },
+    ],
+    "consumers": [
+      {
+        "queue": "ola-site-builds-local",
+        "max_batch_size": 100,
+        "max_batch_timeout": 30,
+        "max_retries": 3,
+        "dead_letter_queue": "ola-site-builds-local-dlq",
+        "max_concurrency": 1,
+      },
+    ],
+  },
   "env": {
-    "staging": { "name": "ola-website-integrations-staging" },
-    "production": { "name": "ola-website-integrations-production" },
+    "staging": {
+      "name": "ola-website-integrations-staging",
+      "secrets": {
+        "required": [
+          "SANITY_WEBHOOK_SECRET",
+          "BUILD_TRIGGER_URL",
+          "BUILD_TRIGGER_TOKEN",
+        ],
+      },
+      "queues": {
+        "producers": [
+          { "binding": "BUILD_QUEUE", "queue": "ola-site-builds-staging" },
+        ],
+        "consumers": [
+          {
+            "queue": "ola-site-builds-staging",
+            "max_batch_size": 100,
+            "max_batch_timeout": 30,
+            "max_retries": 3,
+            "dead_letter_queue": "ola-site-builds-staging-dlq",
+            "max_concurrency": 1,
+          },
+        ],
+      },
+    },
+    "production": {
+      "name": "ola-website-integrations-production",
+      "secrets": {
+        "required": [
+          "SANITY_WEBHOOK_SECRET",
+          "BUILD_TRIGGER_URL",
+          "BUILD_TRIGGER_TOKEN",
+        ],
+      },
+      "queues": {
+        "producers": [
+          { "binding": "BUILD_QUEUE", "queue": "ola-site-builds-production" },
+        ],
+        "consumers": [
+          {
+            "queue": "ola-site-builds-production",
+            "max_batch_size": 100,
+            "max_batch_timeout": 30,
+            "max_retries": 3,
+            "dead_letter_queue": "ola-site-builds-production-dlq",
+            "max_concurrency": 1,
+          },
+        ],
+      },
+    },
   },
 }

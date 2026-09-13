@@ -10,7 +10,8 @@
     "types": "wrangler types"
   },
   "dependencies": {
-    "@ola/shared": "0.0.0"
+    "@ola/shared": "0.0.0",
+    "@sanity/webhook": "^4.0.4"
   },
   "devDependencies": {
     "wrangler": "^4.131.1"

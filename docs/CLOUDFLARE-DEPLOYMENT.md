@@ -36,6 +36,27 @@ jako zmienne systemu buildów. Nie wymaga tokenu: pobiera tylko perspektywę
 i `CLOUDFLARE_ACCOUNT_ID` należą wyłącznie do chronionych sekretów integracji
 GitHub/Cloudflare, nigdy do pliku konfiguracyjnego.
 
+Worker integracyjny wymaga `SANITY_WEBHOOK_SECRET`, `BUILD_TRIGGER_URL` oraz
+`BUILD_TRIGGER_TOKEN`. Pierwsza wartość musi być identyczna z sekretem webhooka
+Sanity. Dwie pozostałe opisują chroniony endpoint orkiestracji builda przyjmujący
+`POST` z bearer tokenem; jego konkretną usługę wybieramy podczas podłączania
+Cloudflare Builds. Lokalny zestaw nazw znajduje się w `worker/.dev.vars.example`.
+
+Webhook Sanity kieruje `POST` na `/webhooks/sanity`, nie uwzględnia draftów i ma
+filtr ograniczony do typów publicznej treści. Projekcja payloadu:
+
+```groq
+{
+  "documentId": _id,
+  "documentType": _type,
+  "operation": delta::operation()
+}
+```
+
+Włączyć podpisywanie webhooka i nie dodawać treści dokumentu do projekcji. Worker
+przyjmuje tylko `create`, `update` i `delete`, odrzuca identyfikatory `drafts.*`,
+podpis starszy niż pięć minut oraz body większe niż 64 KiB.
+
 Dodanie wartości przez `wrangler secret put` tworzy i od razu wdraża nową wersję.
 Dlatego pierwsze ustawienie oraz rotację wykonywać dopiero po wskazaniu konta,
 środowiska i zatwierdzeniu wdrożenia; przy zmianie etapowanej użyć mechanizmu
@@ -77,11 +98,13 @@ po ustawieniu poprawnego originu podglądu i CORS.
    gałęzi i rzeczywisty projekt Sanity.
 2. Utworzyć sześć docelowych Workerów przez zatwierdzone pierwsze wdrożenia.
 3. Dodać sekrety podglądu oddzielnie dla stagingu i produkcji.
-4. Skonfigurować Access dla obu adresów podglądu oraz CORS w Sanity.
-5. Sprawdzić dry-run, potem staging: statyczne 404, autoryzację podglądu, logi
+4. Utworzyć kolejki buildów i DLQ wskazane w `worker/wrangler.jsonc`, dodać trzy
+   sekrety Workera integracyjnego i skonfigurować podpisany webhook Sanity.
+5. Skonfigurować Access dla obu adresów podglądu oraz CORS w Sanity.
+6. Sprawdzić dry-run, potem staging: statyczne 404, autoryzację podglądu, logi
    i ślady bez danych wrażliwych.
-6. Dopiero po odbiorze stagingu włączyć produkcyjny build z `main`.
+7. Dopiero po odbiorze stagingu włączyć produkcyjny build z `main`.
 
 Dry-run sprawdza pakowanie lokalne, lecz nie potwierdza konta, sekretów, domen,
-Access, CORS ani działania Cloudflare Builds. Podpisany webhook publikacji,
-kolejkowanie buildów i rollback są następnym, osobnym zadaniem etapu 2.
+Access, CORS ani działania Cloudflare Builds. Lokalne testy webhooka i kolejki nie
+zastępują próby pełnego przepływu z rzeczywistymi usługami.
