@@ -1,4 +1,4 @@
 SANITY_WEBHOOK_SECRET=shared-webhook-secret
-BUILD_TRIGGER_URL=https://example.invalid/build-hook
+BUILD_TRIGGER_URL=https://api.github.com/repos/zawlodzki/nowa-strona-ola/dispatches
 BUILD_TRIGGER_TOKEN=build-trigger-token
 N8N_LEAD_WEBHOOK_URL=https://flows.example.invalid/webhook/replace-me

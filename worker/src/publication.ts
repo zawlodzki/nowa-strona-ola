@@ -160,6 +160,7 @@ export async function triggerBuild(
   messages: readonly BuildQueueMessage[],
   triggerUrl: string,
   triggerToken: string,
+  targetEnvironment: "staging" | "production",
 ): Promise<void> {
   if (messages.length === 0) return;
 
@@ -170,12 +171,19 @@ export async function triggerBuild(
     method: "POST",
     headers: {
       authorization: `Bearer ${triggerToken}`,
+      accept: "application/vnd.github+json",
       "content-type": "application/json; charset=utf-8",
+      "user-agent": "ola-website-publication-worker",
+      "x-github-api-version": "2026-03-10",
     },
     body: JSON.stringify({
-      reason: "sanity-content-change",
-      latestEvent: latest,
-      eventCount: messages.length,
+      event_type: "sanity-content-change",
+      client_payload: {
+        target_environment: targetEnvironment,
+        reason: "sanity-content-change",
+        latest_event: latest,
+        event_count: messages.length,
+      },
     }),
   });
 

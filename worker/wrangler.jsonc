@@ -12,6 +12,7 @@
     },
     "traces": { "enabled": true, "head_sampling_rate": 0.01 },
   },
+  "vars": { "BUILD_TARGET_ENV": "staging" },
   "secrets": {
     "required": [
       "SANITY_WEBHOOK_SECRET",
@@ -38,6 +39,7 @@
   "env": {
     "staging": {
       "name": "ola-website-integrations-staging",
+      "vars": { "BUILD_TARGET_ENV": "staging" },
       "secrets": {
         "required": [
           "SANITY_WEBHOOK_SECRET",
@@ -64,6 +66,7 @@
     },
     "production": {
       "name": "ola-website-integrations-production",
+      "vars": { "BUILD_TARGET_ENV": "production" },
       "secrets": {
         "required": [
           "SANITY_WEBHOOK_SECRET",

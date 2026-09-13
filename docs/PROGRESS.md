@@ -8,8 +8,8 @@ Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
 Etap 2 trwa: lokalny frontend Astro, Sanity Studio, pobieranie opublikowanej
 treści, chroniony podgląd SSR, webhook publikacji Workera, wspólne typy i bramka jakości
 działają w jednym workspace npm. Wykonano próbę trzech komponentów z etapu 3.
-Deklaratywne środowiska Cloudflare są przygotowane, ale integracje Workera,
-połączenie GitHub Builds i hosting nie są jeszcze wdrożone;
+Deklaratywne środowiska Cloudflare i workflow publikacji treści są przygotowane,
+ale integracje Workera, zasoby i hosting nie są jeszcze wdrożone;
 etapy 4–7 pozostają otwarte.
 
 ## Wykonane
@@ -238,14 +238,39 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   buildy i kontrole typów). Oczekiwane ostrzeżenie preview dotyczy brakujących
   lokalnych sekretów Sanity.
 
+## Kontrolowane wdrożenie publikacji — 2026-09-13
+
+- Wybrano GitHub Repository Dispatch i jawny deploy przez Wrangler zamiast
+  Cloudflare Builds. Pozwala to przebudować treść bez sztucznego commita i zatrzymać
+  wdrożenie przed zmianą produkcji, gdy walidacja, test albo build zakończy się błędem.
+- Worker wysyła zgodny payload `repository_dispatch` z typem
+  `sanity-content-change`, docelowym środowiskiem, liczbą scalonych zdarzeń i tylko
+  metadanymi ostatniego zdarzenia. Używa wymaganych nagłówków GitHub API.
+- `BUILD_TARGET_ENV` jest jawną zmienną konfiguracji Workera: `staging` dla lokalnego
+  i stagingowego środowiska, `production` dla produkcji. Wygenerowane typy ograniczają
+  wartość do tych dwóch wariantów.
+- Workflow `Publish content` akceptuje tylko te dwa cele, korzysta z osobnych
+  środowisk GitHub, sprawdza obecność konfiguracji Sanity i sekretów Cloudflare,
+  uruchamia format, lint, typy, 32 testy jednostkowe, build i kontrolę budżetów,
+  a następnie wdraża publiczny Worker. Kolejność per środowisko jest serializowana.
+- Plik przykładowy wskazuje endpoint Repository Dispatch prywatnego repo. Rzeczywisty
+  token GitHub nie został zapisany ani użyty.
+- Test jednostkowy payloadu Workera: PASS (10 przypadków). TypeScript Workera i
+  generowanie typów: PASS. Publiczne dry-runy Wranglera dla stagingu i produkcji:
+  PASS. Zdalnego dispatchu ani deployu nie wykonano, bo brak tokenów, projektu Sanity
+  i skonfigurowanych środowisk GitHub/Cloudflare.
+- `npm run verify`: PASS. Format, lint i typy bez diagnostyki; 32 testy jednostkowe;
+  build publiczny, Studio, Preview SSR i Worker; kontrola budżetów oraz 27 E2E
+  w Chromium, Firefox i WebKit. Ostrzeżenie preview o brakujących lokalnych sekretach
+  Sanity jest oczekiwane.
+
 ## Następny krok
 
-Kontynuować etap 2: wybrać i zaimplementować konkretny chroniony endpoint
-orkiestracji Cloudflare Builds, który zachowa poprzednie wdrożenie przy błędzie
-i nie dopuści do zastąpienia nowszego buildu starszym. Następnie, po otrzymaniu
-danych projektu Sanity i subdomen, utworzyć kolejki, ustawić sekrety, Access i CORS
-oraz wykonać pełny przepływ na stagingu. Checklista webhooka pozostaje otwarta do
-tego testu z rzeczywistymi usługami. Nie odtwarzać wcześniejszych prób.
+Kontynuować etap 2 po otrzymaniu danych projektu Sanity: utworzyć środowiska GitHub,
+zasoby Cloudflare i kolejki, ustawić sekrety, Access i CORS oraz wykonać pełny przepływ
+na stagingu. Ustalić subdomeny stagingu i podglądu oraz obsługę `www`. Checklista
+webhooka pozostaje otwarta do testu z rzeczywistymi usługami. Nie odtwarzać
+wcześniejszych prób ani nie wysyłać testowego leada do produkcyjnego n8n.
 
 ## Zasada aktualizacji
 

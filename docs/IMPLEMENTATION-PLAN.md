@@ -35,8 +35,8 @@ odniesień do GitButlera i nieaktualnych informacji o nieustalonym hostingu.
 
 ## 3. Architektura i hosting
 
-Stos: Astro + TypeScript, Sanity, Cloudflare Workers Static Assets, GitHub
-i Cloudflare Builds. Jedno repo zawiera frontend, Studio i backend integracyjny.
+Stos: Astro + TypeScript, Sanity, Cloudflare Workers Static Assets i GitHub
+Actions. Jedno repo zawiera frontend, Studio i backend integracyjny.
 
 | Obszar            | Rozwiązanie                                               |
 | ----------------- | --------------------------------------------------------- |
@@ -45,7 +45,7 @@ i Cloudflare Builds. Jedno repo zawiera frontend, Studio i backend integracyjny.
 | Panel redakcyjny  | Osobno wdrażane Sanity Studio                             |
 | Podgląd           | Osobne Astro SSR, wspólne komponenty z produkcją          |
 | Formularze        | Worker → Cloudflare Queues → n8n                          |
-| Publikacja        | GitHub, Cloudflare Builds, podpisany webhook z Sanity     |
+| Publikacja        | GitHub Actions, Wrangler, podpisany webhook z Sanity      |
 | Zgody i analityka | Zewnętrzne self-hostowane c15t, GTM i GA4                 |
 
 Domyślnie Sanity Free i Workers Paid. Przed uruchomieniem zweryfikować bieżące
@@ -217,7 +217,7 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 - [x] Dodać sprawdzone komendy dev, build, kontroli typów i testów do README.
 - [x] Skonfigurować Sanity i pobieranie opublikowanych danych.
 - [x] Przygotować chroniony podgląd ze wspólnymi komponentami.
-- [ ] Skonfigurować środowiska Cloudflare, sekrety, GitHub i Builds.
+- [ ] Skonfigurować środowiska Cloudflare, sekrety i wdrożenia GitHub Actions.
 - [ ] Przetestować podpisany webhook, publikację, wycofanie, usunięcie i błąd builda.
 
 Odbiór: próbna zmiana przechodzi od szkicu przez podgląd do statycznej strony;

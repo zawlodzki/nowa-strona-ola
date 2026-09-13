@@ -1,0 +1,56 @@
+name: Publish content
+
+on:
+  repository_dispatch:
+    types: [sanity-content-change]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-content-${{ github.event.client_payload.target_environment }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.event.client_payload.target_environment == 'staging' ||
+      github.event.client_payload.target_environment == 'production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: ${{ github.event.client_payload.target_environment }}
+    env:
+      DEPLOYMENT_TARGET: ${{ github.event.client_payload.target_environment }}
+      PUBLIC_SANITY_PROJECT_ID: ${{ vars.PUBLIC_SANITY_PROJECT_ID }}
+      PUBLIC_SANITY_DATASET: ${{ vars.PUBLIC_SANITY_DATASET }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Validate deployment configuration
+        run: |
+          case "$DEPLOYMENT_TARGET" in
+            staging|production) ;;
+            *) exit 1 ;;
+          esac
+          test -n "$PUBLIC_SANITY_PROJECT_ID"
+          test -n "$PUBLIC_SANITY_DATASET"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+      - run: npm ci
+      - name: Validate and build public site
+        run: |
+          npm run format:check
+          npm run lint
+          npm run check
+          npm run test
+          npm run build
+          npm run test:build
+      - name: Deploy immutable successful build
+        run: npx wrangler deploy --config wrangler.jsonc --env "$DEPLOYMENT_TARGET"

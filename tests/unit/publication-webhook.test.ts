@@ -160,16 +160,26 @@ describe("build trigger", () => {
       ],
       "https://build.example/trigger",
       "secret-token",
+      "production",
     );
 
     expect(fetchMock).toHaveBeenCalledOnce();
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(init.headers).toMatchObject({
       authorization: "Bearer secret-token",
+      accept: "application/vnd.github+json",
     });
-    expect(JSON.parse(String(init.body))).toMatchObject({
-      eventCount: 2,
-      latestEvent: { eventId: "event-2", operation: "delete" },
+    expect(JSON.parse(String(init.body))).toEqual({
+      event_type: "sanity-content-change",
+      client_payload: {
+        target_environment: "production",
+        reason: "sanity-content-change",
+        event_count: 2,
+        latest_event: expect.objectContaining({
+          eventId: "event-2",
+          operation: "delete",
+        }),
+      },
     });
   });
 
@@ -183,6 +193,7 @@ describe("build trigger", () => {
         [message()],
         "https://build.example/trigger",
         "secret-token",
+        "staging",
       ),
     ).rejects.toThrow("status 503");
   });

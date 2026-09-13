@@ -33,15 +33,17 @@ Publiczny build otrzymuje `PUBLIC_SANITY_PROJECT_ID` i `PUBLIC_SANITY_DATASET`
 jako zmienne systemu buildów. Nie wymaga tokenu: pobiera tylko perspektywę
 `published`. Studio otrzymuje `SANITY_STUDIO_PROJECT_ID`,
 `SANITY_STUDIO_DATASET` oraz origin właściwego podglądu. `CLOUDFLARE_API_TOKEN`
-i `CLOUDFLARE_ACCOUNT_ID` należą wyłącznie do chronionych sekretów integracji
-GitHub/Cloudflare, nigdy do pliku konfiguracyjnego.
+i `CLOUDFLARE_ACCOUNT_ID` należą wyłącznie do sekretów środowisk GitHub Actions,
+nigdy do pliku konfiguracyjnego.
 
 Worker integracyjny wymaga `SANITY_WEBHOOK_SECRET`, `BUILD_TRIGGER_URL` oraz
 `BUILD_TRIGGER_TOKEN`. Deklaruje też `N8N_LEAD_WEBHOOK_URL` dla późniejszego
 przekazywania zgłoszeń formularzy. Pierwsza wartość musi być identyczna z sekretem
-webhooka Sanity. Dwie pozostałe opisują chroniony endpoint orkiestracji builda przyjmujący
-`POST` z bearer tokenem; jego konkretną usługę wybieramy podczas podłączania
-Cloudflare Builds. Lokalny zestaw nazw znajduje się w `worker/.dev.vars.example`.
+webhooka Sanity. `BUILD_TRIGGER_URL` wskazuje endpoint GitHub Repository Dispatch
+`https://api.github.com/repos/zawlodzki/nowa-strona-ola/dispatches`, a token musi
+mieć minimalne uprawnienie `Contents: write` do tego prywatnego repozytorium.
+Token służy wyłącznie do utworzenia zdarzenia i pozostaje sekretem Workera.
+Lokalny zestaw nazw znajduje się w `worker/.dev.vars.example`.
 Rzeczywisty adres n8n jest zapisany tylko w ignorowanym `worker/.dev.vars`, ponieważ
 unikalny identyfikator w ścieżce jest daną dostępową. Nie wykonywać testowego POST
 bez przygotowanego, odseparowanego workflow testowego w n8n.
@@ -66,10 +68,26 @@ Dlatego pierwsze ustawienie oraz rotację wykonywać dopiero po wskazaniu konta,
 środowiska i zatwierdzeniu wdrożenia; przy zmianie etapowanej użyć mechanizmu
 `wrangler versions secret`.
 
-## Cloudflare Builds i GitHub
+## GitHub Actions i wdrożenie treści
 
-Po połączeniu prywatnego repozytorium `zawlodzki/nowa-strona-ola` utworzyć osobną
-konfigurację builda dla każdej aplikacji i środowiska. Wszystkie używają Node z
+Workflow `Publish content` odbiera wyłącznie zdarzenie `sanity-content-change`.
+Worker ustawia `target_environment` na podstawie własnego środowiska, a GitHub
+przepuszcza tylko `staging` albo `production`. Dla każdego celu buildy wykonują się
+sekwencyjnie. Każdy przebieg pobiera commit gałęzi domyślnej wskazany przez zdarzenie,
+sprawdza konfigurację, instaluje zależności z lockfile, uruchamia kontrole kodu i
+testy jednostkowe, buduje publiczną stronę, sprawdza budżety i dopiero wtedy wdraża
+gotowy artefakt przez Wrangler. Nieudany przebieg nie wykonuje deployu, więc zachowuje
+poprzednią wersję.
+
+W GitHub utworzyć środowiska `staging` i `production`. Każde wymaga:
+
+- zmiennych `PUBLIC_SANITY_PROJECT_ID` i `PUBLIC_SANITY_DATASET`;
+- sekretów `CLOUDFLARE_ACCOUNT_ID` i `CLOUDFLARE_API_TOKEN`;
+- reguł ochrony odpowiednich do środowiska; produkcja może wymagać ręcznej akceptacji.
+
+Token Cloudflare powinien mieć wyłącznie uprawnienia potrzebne do wdrożenia Worker
+Scripts na wskazanym koncie. Workflow nie używa Cloudflare Builds i nie tworzy
+sztucznych commitów. Pozostałe wdrożenia wykonywać osobno. Wszystkie używają Node z
 `.node-version` oraz `npm ci`. Przed komendą wdrożenia uruchomić odpowiednio:
 
 - publiczny serwis: `npm run build`;
@@ -90,8 +108,7 @@ ponownie `--env`. Sesje Astro są wyłączone, bo aplikacja używa własnego pod
 cookie. Obrazy są optymalizowane podczas builda, więc pierwszy deploy nie może
 automatycznie utworzyć zbędnych bindingów KV ani Cloudflare Images.
 
-Automatyczne wdrożenia z `main` kierować wyłącznie do produkcji po przejściu
-workflow `Quality`. Staging wdrażać z osobnej, jawnie wybranej gałęzi. Preview SSR
+Publikacja treści nie wdraża Studio, podglądu ani Workera integracyjnego. Preview SSR
 powinien dodatkowo być chroniony Cloudflare Access; `noindex` i sesja aplikacyjna
 nie zastępują kontroli dostępu na brzegu. Studio jest wdrażane osobno przez Sanity,
 po ustawieniu poprawnego originu podglądu i CORS.
@@ -107,8 +124,9 @@ po ustawieniu poprawnego originu podglądu i CORS.
 5. Skonfigurować Access dla obu adresów podglądu oraz CORS w Sanity.
 6. Sprawdzić dry-run, potem staging: statyczne 404, autoryzację podglądu, logi
    i ślady bez danych wrażliwych.
-7. Dopiero po odbiorze stagingu włączyć produkcyjny build z `main`.
+7. Dopiero po odbiorze stagingu dodać sekrety środowiska `production` i dopuścić
+   produkcyjne zdarzenia Repository Dispatch.
 
 Dry-run sprawdza pakowanie lokalne, lecz nie potwierdza konta, sekretów, domen,
-Access, CORS ani działania Cloudflare Builds. Lokalne testy webhooka i kolejki nie
+Access, CORS ani zdalnego deployu. Lokalne testy webhooka i kolejki nie
 zastępują próby pełnego przepływu z rzeczywistymi usługami.

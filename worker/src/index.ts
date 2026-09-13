@@ -54,6 +54,7 @@ export default {
       batch.messages.map(({ body }) => body),
       env.BUILD_TRIGGER_URL,
       env.BUILD_TRIGGER_TOKEN,
+      env.BUILD_TARGET_ENV,
     );
     batch.ackAll();
   },
