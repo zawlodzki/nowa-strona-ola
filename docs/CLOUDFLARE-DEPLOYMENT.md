@@ -37,10 +37,14 @@ i `CLOUDFLARE_ACCOUNT_ID` należą wyłącznie do chronionych sekretów integrac
 GitHub/Cloudflare, nigdy do pliku konfiguracyjnego.
 
 Worker integracyjny wymaga `SANITY_WEBHOOK_SECRET`, `BUILD_TRIGGER_URL` oraz
-`BUILD_TRIGGER_TOKEN`. Pierwsza wartość musi być identyczna z sekretem webhooka
-Sanity. Dwie pozostałe opisują chroniony endpoint orkiestracji builda przyjmujący
+`BUILD_TRIGGER_TOKEN`. Deklaruje też `N8N_LEAD_WEBHOOK_URL` dla późniejszego
+przekazywania zgłoszeń formularzy. Pierwsza wartość musi być identyczna z sekretem
+webhooka Sanity. Dwie pozostałe opisują chroniony endpoint orkiestracji builda przyjmujący
 `POST` z bearer tokenem; jego konkretną usługę wybieramy podczas podłączania
 Cloudflare Builds. Lokalny zestaw nazw znajduje się w `worker/.dev.vars.example`.
+Rzeczywisty adres n8n jest zapisany tylko w ignorowanym `worker/.dev.vars`, ponieważ
+unikalny identyfikator w ścieżce jest daną dostępową. Nie wykonywać testowego POST
+bez przygotowanego, odseparowanego workflow testowego w n8n.
 
 Webhook Sanity kieruje `POST` na `/webhooks/sanity`, nie uwzględnia draftów i ma
 filtr ograniczony do typów publicznej treści. Projekcja payloadu:

@@ -17,6 +17,7 @@
       "SANITY_WEBHOOK_SECRET",
       "BUILD_TRIGGER_URL",
       "BUILD_TRIGGER_TOKEN",
+      "N8N_LEAD_WEBHOOK_URL",
     ],
   },
   "queues": {
@@ -42,6 +43,7 @@
           "SANITY_WEBHOOK_SECRET",
           "BUILD_TRIGGER_URL",
           "BUILD_TRIGGER_TOKEN",
+          "N8N_LEAD_WEBHOOK_URL",
         ],
       },
       "queues": {
@@ -67,6 +69,7 @@
           "SANITY_WEBHOOK_SECRET",
           "BUILD_TRIGGER_URL",
           "BUILD_TRIGGER_TOKEN",
+          "N8N_LEAD_WEBHOOK_URL",
         ],
       },
       "queues": {

@@ -225,6 +225,18 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   publiczny build, Studio, Preview SSR i Worker przeszły; 27 E2E bez regresji.
 - `npm install` po dodaniu oficjalnego pakietu zgłosił 0 podatności w aktualnym
   drzewie zależności. Nie zmieniono bezpośredniej wersji Sanity 5.31.2.
+- Otrzymany produkcyjny URL webhooka n8n do formularzy zapisano wyłącznie jako
+  `N8N_LEAD_WEBHOOK_URL` w ignorowanym `worker/.dev.vars`. Repo zawiera tylko nazwę
+  sekretu i bezpieczny placeholder. `git check-ignore` potwierdził regułę, typy
+  Workera i produkcyjny dry-run przeszły. Nie wysyłano żądania testowego ani danych.
+- Oficjalna dokumentacja Workers Builds potwierdza wyzwalanie przez push do
+  podłączonego repozytorium; nie znaleziono udokumentowanego bezpośredniego hooka
+  builda. `BUILD_TRIGGER_URL` pozostaje kontraktem przyszłego orkiestratora, a jego
+  implementacja wymaga decyzji między push/dispatch w GitHub a rezygnacją z
+  Cloudflare Builds na rzecz kontrolowanego workflow wdrożeniowego.
+- Po deklaracji sekretu n8n `npm run verify`: PASS (32 unit, 27 E2E, wszystkie
+  buildy i kontrole typów). Oczekiwane ostrzeżenie preview dotyczy brakujących
+  lokalnych sekretów Sanity.
 
 ## Następny krok
 
