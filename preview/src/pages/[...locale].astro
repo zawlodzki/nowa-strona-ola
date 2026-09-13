@@ -1,0 +1,42 @@
+---
+import { env } from "cloudflare:workers";
+import type { Locale } from "@ola/shared";
+
+import Layout from "../../../src/layouts/Layout.astro";
+import PageHero from "../../../src/views/PageHero.astro";
+import { getPreviewPage } from "../lib/content";
+
+const localePath = Astro.params.locale;
+const language: Locale | null =
+  localePath === undefined ? "pl" : localePath === "en" ? "en" : null;
+
+if (!language) Astro.response.status = 404;
+
+const page = language
+  ? await getPreviewPage(language, "home", {
+      SANITY_PROJECT_ID: env.SANITY_PROJECT_ID,
+      SANITY_DATASET: env.SANITY_DATASET,
+      SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
+      SANITY_API_READ_TOKEN: env.SANITY_API_READ_TOKEN,
+    })
+  : null;
+---
+
+{page && language ? (
+  <Layout lang={language} title={`Podgląd — ${page.seo?.title ?? page.title}`}>
+    <header class="shell">
+      <strong>Chroniony podgląd szkicu</strong>
+      <form method="post" action="/api/draft-mode/disable">
+        <button type="submit">Zakończ podgląd</button>
+      </form>
+    </header>
+    <main id="main">
+      <PageHero page={page} />
+      <section id="contact" class="panel shell">
+        <p>Element demonstracyjny — formularz nie jest aktywny w podglądzie.</p>
+      </section>
+    </main>
+  </Layout>
+) : (
+  <p>Nie znaleziono strony podglądu.</p>
+)}

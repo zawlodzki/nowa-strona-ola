@@ -216,7 +216,7 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 - [x] Utworzyć Astro, Studio i Worker, wspólne typowanie oraz jeden lockfile.
 - [x] Dodać sprawdzone komendy dev, build, kontroli typów i testów do README.
 - [x] Skonfigurować Sanity i pobieranie opublikowanych danych.
-- [ ] Przygotować chroniony podgląd ze wspólnymi komponentami.
+- [x] Przygotować chroniony podgląd ze wspólnymi komponentami.
 - [ ] Skonfigurować środowiska Cloudflare, sekrety, GitHub i Builds.
 - [ ] Przetestować podpisany webhook, publikację, wycofanie, usunięcie i błąd builda.
 

@@ -5,7 +5,7 @@ export default [
   {
     ignores: [
       "**/dist/**",
-      ".astro/**",
+      "**/.astro/**",
       "**/.sanity/**",
       "node_modules/**",
       "wonderful-design-system/**",

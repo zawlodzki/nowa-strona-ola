@@ -1,0 +1,2 @@
+SANITY_API_READ_TOKEN=viewer-token
+PREVIEW_SESSION_SECRET=at-least-32-random-characters

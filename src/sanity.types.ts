@@ -169,6 +169,22 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
+// Source: ../preview/src/lib/queries.ts
+// Variable: PREVIEW_PAGE_QUERY
+// Query: *[    _type == "page" &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    "slug": slug.current,    title,    eyebrow,    lead,    seo{title, description}  }
+export type PREVIEW_PAGE_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  eyebrow: string;
+  lead: string;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+} | null;
+
 // Source: ../src/sanity/queries.ts
 // Variable: PUBLISHED_PAGE_QUERY
 // Query: *[    _type == "page" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    "slug": slug.current,    title,    eyebrow,    lead,    seo{title, description}  }
@@ -189,6 +205,7 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    '\n  *[\n    _type == "page" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    "slug": slug.current,\n    title,\n    eyebrow,\n    lead,\n    seo{title, description}\n  }\n': PREVIEW_PAGE_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    "slug": slug.current,\n    title,\n    eyebrow,\n    lead,\n    seo{title, description}\n  }\n': PUBLISHED_PAGE_QUERY_RESULT;
   }
 }

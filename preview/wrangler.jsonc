@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ola-website-preview",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-09-13",
+  "vars": {
+    "SANITY_PROJECT_ID": "replace-me",
+    "SANITY_DATASET": "production",
+    "SANITY_STUDIO_URL": "http://127.0.0.1:3333",
+  },
+}

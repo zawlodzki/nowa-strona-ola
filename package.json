@@ -4,6 +4,7 @@
   "type": "module",
   "workspaces": [
     "studio",
+    "preview",
     "worker",
     "packages/*"
   ],
@@ -14,6 +15,7 @@
     "dev": "npm run dev:web",
     "dev:web": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1",
     "dev:studio": "npm run dev --workspace @ola/studio",
+    "dev:preview": "npm run dev --workspace @ola/preview",
     "dev:worker": "npm run dev --workspace @ola/worker",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "build:workspaces": "npm run build --workspaces --if-present",

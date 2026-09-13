@@ -6,7 +6,11 @@ export default defineCliConfig({
   api: sanityEnvironment,
   typegen: {
     enabled: true,
-    path: ["../src/**/*.{ts,astro}", "./schema-types/**/*.ts"],
+    path: [
+      "../src/**/*.{ts,astro}",
+      "../preview/src/**/*.{ts,astro}",
+      "./schema-types/**/*.ts",
+    ],
     schema: "schema.json",
     generates: "../src/sanity.types.ts",
     overloadClientMethods: true,

@@ -11,6 +11,6 @@ skills-lock.json
 playwright-report/
 test-results/
 coverage/
-worker/worker-configuration.d.ts
+**/worker-configuration.d.ts
 
 .cursor/

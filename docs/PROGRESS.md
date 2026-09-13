@@ -6,9 +6,10 @@ Aktualizacja: 2026-09-13. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-
 
 Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
 Etap 2 trwa: lokalny frontend Astro, Sanity Studio, pobieranie opublikowanej
-treści, szkielet Workera, wspólne typy i bramka jakości działają w jednym
-workspace npm. Wykonano próbę trzech komponentów z etapu 3. Chroniony podgląd,
-integracje Workera i hosting nie są jeszcze wdrożone; etapy 4–7 pozostają otwarte.
+treści, chroniony podgląd SSR, szkielet Workera, wspólne typy i bramka jakości
+działają w jednym workspace npm. Wykonano próbę trzech komponentów z etapu 3.
+Środowiska Cloudflare, integracje Workera i hosting nie są jeszcze wdrożone;
+etapy 4–7 pozostają otwarte.
 
 ## Wykonane
 
@@ -29,6 +30,9 @@ integracje Workera i hosting nie są jeszcze wdrożone; etapy 4–7 pozostają o
 - Frontend pobiera stronę po języku i slugu przez klienta bez CDN, w perspektywie
   `published`; kwerenda dodatkowo wyklucza `drafts.**`. Brak wyniku lub niezgodna
   odpowiedź zatrzymują build. Bez konfiguracji używany jest jawny fixture PL/EN.
+- Dodano osobne Astro SSR `preview/` z adapterem Cloudflare. Sanity Presentation
+  aktywuje je przez oficjalny, wygasający sekret; dodatkowa podpisana sesja HttpOnly
+  ogranicza dostęp do całej aplikacji. Szkice są pobierane serwerowo z tokenem Viewer.
 
 ## Decyzje obowiązujące
 
@@ -130,14 +134,51 @@ Sanity z poprawionym łańcuchem zależności lub udokumentować brak ekspozycji
   workspace’ów: PASS; 17 unit tests; build Astro (3 strony), Studio i dry-run Workera;
   27 E2E w Chromium/Firefox/WebKit; budżety bez zmiany (JS 4684 B, CSS 7344 B gzip).
 
+## Chroniony podgląd SSR — 2026-09-13
+
+- Dodano workspace `preview/`: Astro SSR 7.3.2 z adapterem Cloudflare 14.3.1,
+  osobnym buildem i konfiguracją Wrangler. Publiczny frontend pozostał statyczny.
+- Studio ma Presentation Tool kierujący do `/api/draft-mode/enable`. Endpoint
+  korzysta z `@sanity/preview-url-secret`, a dopiero po poprawnej walidacji ustawia
+  godzinną perspektywę szkiców i dodatkową sesję HMAC w cookie HttpOnly/Secure.
+- Middleware odrzuca wszystkie pozostałe żądania bez poprawnej sesji. Każda odpowiedź
+  ma `private, no-store`, `noindex, nofollow, noarchive` i `no-referrer`.
+- Token Viewer jest odczytywany wyłącznie z runtime `cloudflare:workers`. Nie trafia
+  do kodu klienta ani konfiguracji repo. Podgląd używa `perspective: drafts`,
+  `useCdn: false`, Stega i wspólnego `PageHero.astro` oraz komponentów frontendu.
+- Testy jednostkowe obejmują ważny podpis, manipulację, wygaśnięcie, maksymalny TTL,
+  minimalną długość sekretu, parametry kwerendy szkicu i brak cichego fallbacku.
+- Lokalny Astro preview/workerd: wejście bez sesji zwróciło 401 z wymaganymi
+  nagłówkami; endpoint aktywacji bez skonfigurowanych sekretów zwrócił 503.
+- `npm run verify`: PASS. Astro/TypeScript bez diagnostyki; 22 unit tests; build
+  publicznego Astro, Studio, Preview SSR i dry-run Workera; 27 E2E bez regresji.
+- Nie sprawdzono udanego handshake ani treści szkicu z rzeczywistym Sanity, CORS,
+  iframe Presentation i overlayów click-to-edit — brak projektu, tokenu i hostingu.
+
+## Konfiguracja Cursor — 2026-09-13
+
+- Codex w tym repo korzystał z MCP: `astro-docs`, `Sanity`, `context7`,
+  `chrome-devtools`; plugin `cloudflare@openai-curated` (MCP Cloudflare API).
+  W globalnym Codexie włączone były też narzędzia niezwiązane ze stosem
+  (Make, Readwise, DataForSEO, dokumenty). Sanity i Jina były w konfiguracji
+  Codex wyłączone, a skille Sanity trzymane w repo (`.agents/skills`).
+- Cursor: Sanity, Context7, Jina, Chrome DevTools i Exa są już na koncie użytkownika.
+  Plugin Cloudflare z marketplace jest zainstalowany. Plugin Sanity z marketplace
+  nie został dodany (odrzucony w tej sesji) — zostaje MCP Sanity z ustawień użytkownika.
+- W projekcie: `.cursor/mcp.json` (Astro Docs + Cloudflare API, bez sekretów),
+  reguła `.cursor/rules/stack-astro-sanity-cloudflare.mdc` oraz dowiązania skilli
+  stosu w `.cursor/skills` do tych samych katalogów co Codex (`.agents/skills`).
+- Pierwsze użycie MCP Cloudflare wymaga OAuth w Cursorze. MCP Astro startuje przez
+  `npx mcp-remote`. Nie weryfikowano połączeń OAuth w tej sesji.
+
 ## Następny krok
 
-Kontynuować etap 2: przygotować osobne Astro SSR dla chronionego podglądu szkiców,
-używające wspólnych komponentów i tokenu wyłącznie po stronie serwera. Dostęp bez
-ważnej sesji ma być odrzucany, a odpowiedzi mają mieć `no-store` i `noindex`.
-Rzeczywiste połączenie z Content Lake nadal wymaga identyfikatora projektu/datasetu.
-Przed dalszym rozwojem Studio ponownie sprawdzić wydania Sanity pod kątem opisanych
-podatności CLI. Nie odtwarzać próby ani nie inicjować projektu od nowa.
+Kontynuować etap 2: skonfigurować deklaratywne środowiska Cloudflare dla publicznego
+Static Assets, podglądu SSR i Workera integracyjnego oraz opisać sekrety i proces
+GitHub Builds bez publikowania. Rzeczywiste identyfikatory, CORS i udany handshake
+Sanity pozostają zależnością zewnętrzną. Przed dalszym rozwojem Studio ponownie
+sprawdzić wydania Sanity pod kątem opisanych podatności CLI. Nie odtwarzać próby
+ani nie inicjować projektu od nowa.
 
 ## Zasada aktualizacji
 

@@ -57,7 +57,9 @@ Każda poprawka rzeczywistego błędu powinna dostać adekwatny test regresji.
 - c15t/GTM: testy sieciowe braku tagów przed zgodą, zgód częściowych, wycofania,
   powrotu użytkownika i awarii backendu; brak PII w pomiarze.
 - Preview/publikacja: odrzucenie dostępu bez sesji, brak szkiców w produkcji,
-  kolejność buildów, zachowanie poprzedniego wdrożenia przy awarii.
+  kolejność buildów, zachowanie poprzedniego wdrożenia przy awarii. Podgląd ma
+  obecnie testy podpisu, wygaśnięcia i manipulacji sesją oraz lokalną kontrolę
+  odpowiedzi 401/nagłówków; pełny handshake z Sanity pozostaje do sprawdzenia.
 
 Każdy z tych zestawów staje się obowiązkową częścią verify/CI przy dodaniu funkcji.
 Nie są jeszcze wdrożone — prototyp nie zawiera tych integracji.

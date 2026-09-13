@@ -1,16 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getPage } from "../sanity/repository";
+import PageHero from "../views/PageHero.astro";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-} from "../ui/dialog";
 export function getStaticPaths() {
   return [
     { params: { locale: undefined }, props: { lang: "pl" } },
@@ -32,47 +26,7 @@ const page = await getPage(lang, "home");
     </a>
   </header>
   <main id="main">
-    <section class="hero shell" aria-labelledby="hero-title">
-      <p class="eyebrow">{page.eyebrow}</p>
-      <h1 id="hero-title">{page.title}</h1>
-      <p class="lead">{page.lead}</p>
-      <div class="actions">
-        <Button as="a" href="#contact">
-          {pl ? "Porozmawiajmy" : "Let’s talk"}
-        </Button>
-        <Dialog>
-          <DialogTrigger>{pl ? "Jak pracujemy" : "How we work"}</DialogTrigger>
-          <DialogContent
-            showCloseButton={false}
-            aria-labelledby="dialog-title"
-            aria-describedby="dialog-description"
-          >
-            <DialogTitle id="dialog-title">
-              {pl ? "Najpierw rozmowa" : "A conversation first"}
-            </DialogTitle>
-            <DialogDescription id="dialog-description">
-              {pl
-                ? "Poznajemy cel, porządkujemy potrzeby i wspólnie ustalamy następny krok."
-                : "We understand the goal, clarify your needs and agree on the next step together."}
-            </DialogDescription>
-            <Button
-              data-slot="dialog-close"
-              data-dialog-close
-              class="relative inset-auto text-sm"
-            >
-              {pl ? "Zamknij" : "Close"}
-            </Button>
-          </DialogContent>
-        </Dialog>
-      </div>
-      <noscript>
-        <p>
-          {pl
-            ? "Najpierw rozmowa: poznajemy cel, porządkujemy potrzeby i ustalamy następny krok."
-            : "A conversation first: we understand the goal, clarify your needs and agree on the next step."}
-        </p>
-      </noscript>
-    </section>
+    <PageHero page={page} />
     <section
       id="contact"
       class="panel shell form-grid"

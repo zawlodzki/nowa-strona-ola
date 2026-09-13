@@ -18,7 +18,8 @@ hostingiem Cloudflare Workers Static Assets i edycją przez Sanity.
 
 Działa lokalny prototyp Astro z komponentami Bejamas dostosowanymi do Wonderful.
 Repo jest workspace’em npm: frontend pozostaje w katalogu głównym, osobne aplikacje
-znajdują się w `studio/` i `worker/`, a wspólne kontrakty w `packages/shared/`.
+znajdują się w `studio/`, `preview/` i `worker/`, a wspólne kontrakty w
+`packages/shared/`.
 Strony: `/` (PL), `/en/` (EN), `/static/` (kontrola bez JavaScriptu).
 Formularz nic nie wysyła. Studio zawiera minimalny model strony, a frontend pobiera
 opublikowaną treść z Sanity po ustawieniu konfiguracji. Bez niej build korzysta
@@ -42,8 +43,10 @@ osobnego kontrolowanego procesu `scripts/preview-test.mjs`.
 
 ```sh
 npm run dev:studio
+npm run dev:preview
 npm run dev:worker
 npm run types --workspace @ola/worker
+npm run types --workspace @ola/preview
 npm run build:workspaces
 ```
 
@@ -55,6 +58,13 @@ ustawienie tylko jednej wartości zatrzymuje build. Klient produkcyjnego buildu
 używa perspektywy `published`, bez CDN i bez tokenu. Po zmianie schematów lub GROQ
 uruchomić `npm run typegen --workspace @ola/studio`. Po zmianie
 `worker/wrangler.jsonc` ponownie wygenerować i zapisać typy Workera.
+
+Podgląd działa jako osobne Astro SSR na porcie 4322 i korzysta ze wspólnego
+renderera hero oraz komponentów frontendu. `preview/.dev.vars.example` wymienia
+dwa sekrety wymagane lokalnie: token Sanity Viewer i losowy sekret sesji mający
+co najmniej 32 znaki. Produkcyjnie oba należy dodać jako sekrety Workera, nigdy
+do repozytorium. Dostęp aktywuje wyłącznie sekret wygenerowany przez Sanity
+Presentation; sesja jest podpisana, wygasa po godzinie i ma cookie HttpOnly.
 
 ```sh
 npm run verify
