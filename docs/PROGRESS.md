@@ -194,8 +194,15 @@ Sanity z poprawionym łańcuchem zależności lub udokumentować brak ekspozycji
   build publicznego Astro, Studio, Preview SSR i dry-run Workera; 27 E2E bez
   regresji. Build preview zgłasza oczekiwane ostrzeżenie o brakujących sekretach.
 - Checklisty „Cloudflare, sekrety, GitHub i Builds” nie zamknięto: repo nie jest
-  jeszcze połączone z Cloudflare Builds, a brak konta, domen i wartości Sanity
-  uniemożliwia bezpieczne utworzenie zasobów i sekretów.
+  jeszcze połączone z Cloudflare Builds, a brak identyfikacji konta, subdomen
+  pomocniczych i wartości Sanity uniemożliwia bezpieczne utworzenie zasobów
+  i sekretów.
+- Użytkownik potwierdził domenę produkcyjną `aleksandraolesiewicz.com` podpiętą
+  do Cloudflare. Publiczne środowisko `production` deklaruje ją jako custom domain
+  i wyłącza `workers.dev`; wariant `www` oraz subdomeny stagingu i preview nie są
+  jeszcze ustalone. Dry-run Wranglera dla produkcji przeszedł, a powtórzone
+  `npm run verify` zakończyło się PASS (22 unit, 27 E2E). Nie zmieniano zdalnego
+  DNS ani routingu.
 
 ## Następny krok
 

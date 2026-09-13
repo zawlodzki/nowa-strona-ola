@@ -286,7 +286,9 @@ wersji i przekazanie instrukcji utrzymania.
 
 ## 11. Zależności przed produkcją
 
-Domena i DNS, projekt Sanity i redaktorzy, konto Cloudflare, repo GitHub,
+Domena produkcyjna `aleksandraolesiewicz.com` jest podpięta do Cloudflare.
+Pozostają: docelowe rekordy DNS i subdomeny stagingu/podglądu, projekt Sanity
+i redaktorzy, konto Cloudflare, repo GitHub,
 klucze Turnstile, webhook i uwierzytelnienie n8n, endpoint i dozwolone originy c15t,
 identyfikatory GTM/GA4 oraz finalne dane marki i treści zgód. Brak tych danych
 nie blokuje etapu 1 ani lokalnych szablonów.

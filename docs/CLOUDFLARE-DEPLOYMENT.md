@@ -14,6 +14,11 @@ Nazwy docelowe mają końcówkę `-staging` albo `-production`. Nie używać
 z próbkowaniem; kod nie może zapisywać treści leadów, tokenów ani innych danych
 osobowych.
 
+Publiczny Worker produkcyjny ma przypisaną domenę własną
+`aleksandraolesiewicz.com` i wyłączony adres `workers.dev`. Konfiguracja nie
+obejmuje `www.aleksandraolesiewicz.com`, dopóki nie zostanie ustalone, czy ma być
+aliasem z przekierowaniem. Domeny stagingu i chronionego podglądu pozostają otwarte.
+
 ## Sekrety i zmienne builda
 
 Podgląd wymaga w każdym środowisku pięciu wartości zadeklarowanych przez
@@ -68,7 +73,8 @@ po ustawieniu poprawnego originu podglądu i CORS.
 
 ## Kontrola przed pierwszym wdrożeniem
 
-1. Ustalić konto Cloudflare, domeny, nazwy gałęzi i rzeczywisty projekt Sanity.
+1. Ustalić konto Cloudflare, subdomeny stagingu/podglądu, obsługę `www`, nazwy
+   gałęzi i rzeczywisty projekt Sanity.
 2. Utworzyć sześć docelowych Workerów przez zatwierdzone pierwsze wdrożenia.
 3. Dodać sekrety podglądu oddzielnie dla stagingu i produkcji.
 4. Skonfigurować Access dla obu adresów podglądu oraz CORS w Sanity.

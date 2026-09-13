@@ -9,6 +9,15 @@
   },
   "env": {
     "staging": { "name": "ola-website-staging" },
-    "production": { "name": "ola-website-production" },
+    "production": {
+      "name": "ola-website-production",
+      "workers_dev": false,
+      "routes": [
+        {
+          "pattern": "aleksandraolesiewicz.com",
+          "custom_domain": true,
+        },
+      ],
+    },
   },
 }
