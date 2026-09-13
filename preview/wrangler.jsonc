@@ -3,9 +3,49 @@
   "name": "ola-website-preview",
   "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-09-13",
-  "vars": {
-    "SANITY_PROJECT_ID": "replace-me",
-    "SANITY_DATASET": "production",
-    "SANITY_STUDIO_URL": "http://127.0.0.1:3333",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": false,
+      "head_sampling_rate": 0.1,
+    },
+    "traces": { "enabled": true, "head_sampling_rate": 0.01 },
+  },
+  "secrets": {
+    "required": [
+      "SANITY_PROJECT_ID",
+      "SANITY_DATASET",
+      "SANITY_STUDIO_URL",
+      "SANITY_API_READ_TOKEN",
+      "PREVIEW_SESSION_SECRET",
+    ],
+  },
+  "env": {
+    "staging": {
+      "name": "ola-website-preview-staging",
+      "secrets": {
+        "required": [
+          "SANITY_PROJECT_ID",
+          "SANITY_DATASET",
+          "SANITY_STUDIO_URL",
+          "SANITY_API_READ_TOKEN",
+          "PREVIEW_SESSION_SECRET",
+        ],
+      },
+    },
+    "production": {
+      "name": "ola-website-preview-production",
+      "secrets": {
+        "required": [
+          "SANITY_PROJECT_ID",
+          "SANITY_DATASET",
+          "SANITY_STUDIO_URL",
+          "SANITY_API_READ_TOKEN",
+          "PREVIEW_SESSION_SECRET",
+        ],
+      },
+    },
   },
 }

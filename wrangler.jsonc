@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ola-website",
+  "compatibility_date": "2026-09-13",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+  },
+  "env": {
+    "staging": { "name": "ola-website-staging" },
+    "production": { "name": "ola-website-production" },
+  },
+}

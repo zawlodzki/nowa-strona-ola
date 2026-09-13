@@ -4,8 +4,9 @@ import { defineConfig } from "astro/config";
 import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig({
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: "compile" }),
   output: "server",
+  session: false,
   vite: {
     plugins: [tailwindcss()],
     resolve: {

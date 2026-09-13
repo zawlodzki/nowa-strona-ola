@@ -8,6 +8,12 @@
     "logs": {
       "enabled": true,
       "invocation_logs": false,
+      "head_sampling_rate": 0.1,
     },
+    "traces": { "enabled": true, "head_sampling_rate": 0.01 },
+  },
+  "env": {
+    "staging": { "name": "ola-website-integrations-staging" },
+    "production": { "name": "ola-website-integrations-production" },
   },
 }

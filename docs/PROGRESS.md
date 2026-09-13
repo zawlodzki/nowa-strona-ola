@@ -8,7 +8,8 @@ Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
 Etap 2 trwa: lokalny frontend Astro, Sanity Studio, pobieranie opublikowanej
 treści, chroniony podgląd SSR, szkielet Workera, wspólne typy i bramka jakości
 działają w jednym workspace npm. Wykonano próbę trzech komponentów z etapu 3.
-Środowiska Cloudflare, integracje Workera i hosting nie są jeszcze wdrożone;
+Deklaratywne środowiska Cloudflare są przygotowane, ale integracje Workera,
+połączenie GitHub Builds i hosting nie są jeszcze wdrożone;
 etapy 4–7 pozostają otwarte.
 
 ## Wykonane
@@ -171,14 +172,40 @@ Sanity z poprawionym łańcuchem zależności lub udokumentować brak ekspozycji
 - Pierwsze użycie MCP Cloudflare wymaga OAuth w Cursorze. MCP Astro startuje przez
   `npx mcp-remote`. Nie weryfikowano połączeń OAuth w tej sesji.
 
+## Środowiska Cloudflare — 2026-09-13
+
+- Dodano konfiguracje `staging` i `production` dla publicznego Static Assets,
+  podglądu Astro SSR i Workera integracyjnego, z jednoznacznymi nazwami sześciu
+  docelowych Workerów. Nie utworzono ich na koncie Cloudflare.
+- Publiczny Worker serwuje `dist/`, używa stron 404 Astro i automatycznego
+  trailing slash. Preview oraz Worker integracyjny mają włączone logi i traces
+  z próbkowaniem; invocation logs pozostają wyłączone.
+- Podgląd deklaruje pięć wymaganych sekretów osobno dla obu środowisk. Usunięto
+  wdrażalne placeholdery z `vars`; lokalny przykład zawiera pełny zestaw nazw.
+- Wyłączono nieużywane sesje Astro KV i wybrano kompilacyjną optymalizację obrazów,
+  aby adapter nie automatycznie provisionował KV ani bindingu Cloudflare Images.
+- Dodano `CLOUDFLARE-DEPLOYMENT.md`: granice sekretów, komendy build/deploy,
+  spłaszczanie `CLOUDFLARE_ENV`, ochronę Access i checklistę pierwszego wdrożenia.
+- Wrangler 4.131.1 wygenerował typy preview i Workera. Dry-run przeszedł dla
+  publicznego serwisu, preview i integracji w obu środowiskach. Preview zgłaszał
+  oczekiwane ostrzeżenie o braku pięciu rzeczywistych sekretów; artefakt nie miał
+  automatycznych bindingów KV/Images. Dry-run nie sprawdza konta, domen ani Access.
+- `npm run verify`: PASS. Format, lint i typy bez diagnostyki; 22 testy unit;
+  build publicznego Astro, Studio, Preview SSR i dry-run Workera; 27 E2E bez
+  regresji. Build preview zgłasza oczekiwane ostrzeżenie o brakujących sekretach.
+- Checklisty „Cloudflare, sekrety, GitHub i Builds” nie zamknięto: repo nie jest
+  jeszcze połączone z Cloudflare Builds, a brak konta, domen i wartości Sanity
+  uniemożliwia bezpieczne utworzenie zasobów i sekretów.
+
 ## Następny krok
 
-Kontynuować etap 2: skonfigurować deklaratywne środowiska Cloudflare dla publicznego
-Static Assets, podglądu SSR i Workera integracyjnego oraz opisać sekrety i proces
-GitHub Builds bez publikowania. Rzeczywiste identyfikatory, CORS i udany handshake
-Sanity pozostają zależnością zewnętrzną. Przed dalszym rozwojem Studio ponownie
-sprawdzić wydania Sanity pod kątem opisanych podatności CLI. Nie odtwarzać próby
-ani nie inicjować projektu od nowa.
+Kontynuować etap 2: zaimplementować podpisany webhook Sanity i bezpieczną
+koordynację buildów z testami publikacji, wycofania, usunięcia, grupowania zdarzeń
+i błędu builda — nadal bez zdalnego wdrożenia. Po otrzymaniu konta, domen i danych
+Sanity połączyć GitHub Builds, ustawić sekrety, Access i CORS, a następnie wykonać
+odbiór na stagingu. Przed dalszym rozwojem Studio ponownie sprawdzić wydania Sanity
+pod kątem opisanych podatności CLI. Nie odtwarzać próby ani nie inicjować projektu
+od nowa.
 
 ## Zasada aktualizacji
 

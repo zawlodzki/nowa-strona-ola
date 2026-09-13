@@ -9,6 +9,7 @@ hostingiem Cloudflare Workers Static Assets i edycją przez Sanity.
 - [Plan wdrożenia i kryteria odbioru](docs/IMPLEMENTATION-PLAN.md)
 - [Aktualny postęp i następny krok](docs/PROGRESS.md)
 - [Zasady weryfikacji kodu](docs/CODE-QUALITY.md)
+- [Konfiguracja wdrożeń Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md)
 - [Wyniki próby Bejamas](docs/UI-SPIKE-RESULTS.md)
 - [Instrukcje pracy w repo](AGENTS.md)
 - [Design system](wonderful-design-system/README.md)
@@ -61,10 +62,13 @@ uruchomić `npm run typegen --workspace @ola/studio`. Po zmianie
 
 Podgląd działa jako osobne Astro SSR na porcie 4322 i korzysta ze wspólnego
 renderera hero oraz komponentów frontendu. `preview/.dev.vars.example` wymienia
-dwa sekrety wymagane lokalnie: token Sanity Viewer i losowy sekret sesji mający
-co najmniej 32 znaki. Produkcyjnie oba należy dodać jako sekrety Workera, nigdy
-do repozytorium. Dostęp aktywuje wyłącznie sekret wygenerowany przez Sanity
-Presentation; sesja jest podpisana, wygasa po godzinie i ma cookie HttpOnly.
+konfigurację i dwa sekrety wymagane lokalnie: token Sanity Viewer i losowy sekret
+sesji mający co najmniej 32 znaki. Produkcyjnie wartości należy dodać jako sekrety
+Workera, nigdy do repozytorium. Dostęp aktywuje wyłącznie sekret wygenerowany przez
+Sanity Presentation; sesja jest podpisana, wygasa po godzinie i ma cookie HttpOnly.
+Deklaratywne konfiguracje `staging` i `production` opisuje
+[instrukcja Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md). Nie wykonano jeszcze
+żadnego zdalnego wdrożenia.
 
 ```sh
 npm run verify

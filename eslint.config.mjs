@@ -7,6 +7,7 @@ export default [
       "**/dist/**",
       "**/.astro/**",
       "**/.sanity/**",
+      "**/.wrangler/**",
       "node_modules/**",
       "wonderful-design-system/**",
       ".agents/**",
