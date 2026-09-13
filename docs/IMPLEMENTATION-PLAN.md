@@ -23,8 +23,8 @@ wzorcem artykułu. Układ artykułu opieramy na lokalnym design systemie.
 
 ## 2. Dokumentacja i Git
 
-Lokalny Git z gałęzią main. Etap przygotowania nie tworzy remote i nie wykonuje
-push. .gitignore obejmuje sekrety, lokalne środowiska, zależności, wyniki budowania,
+Git z gałęzią main i prywatnym repozytorium GitHub. .gitignore obejmuje sekrety,
+lokalne środowiska, zależności, wyniki budowania,
 cache i pliki systemowe; pliki .env.example pozostają dostępne do wersjonowania.
 
 Ten plik przechowuje specyfikację i checklisty. PROGRESS.md przechowuje etap,
@@ -200,7 +200,7 @@ do sprawdzenia z rzeczywistą usługą; test atrapy nie oznacza gotowości produ
 - [x] Zapisać pełny plan i kryteria odbioru.
 - [x] Utworzyć rejestr postępu, decyzji, blokad i następnego kroku.
 - [x] Uprościć AGENTS.md i dodać README z odnośnikami.
-- [x] Zainicjować lokalny Git na main, zweryfikować brak remote.
+- [x] Zainicjować Git na main, utworzyć prywatne repozytorium GitHub i wysłać gałąź.
 - [x] Sprawdzić ignorowanie sekretów, zależności, cache, wyników i plików systemowych;
       przykłady środowiska i design system nie mogą być ignorowane.
 - [x] Zweryfikować kompletność dokumentacji i lokalne odnośniki.

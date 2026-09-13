@@ -15,7 +15,8 @@ nie są jeszcze wdrożone; etapy 4–7 pozostają otwarte.
 - Utworzono README i instrukcję kontynuacji pracy pomiędzy sesjami.
 - Uproszczono AGENTS.md do reguł tego projektu.
 - Dodano .gitignore dla plików lokalnych, sekretów i generowanych zasobów.
-- Zainicjowano lokalny Git na main. Bez commitów, remote i push.
+- Zainicjowano Git na main, utworzono prywatne repozytorium GitHub
+  `zawlodzki/nowa-strona-ola` i wysłano gałąź `main`.
 - Zachowano istniejący design system i lokalne umiejętności bez zmian.
 
 ## Decyzje obowiązujące
@@ -67,11 +68,21 @@ ABC Favorit nie jest dołączony — używać fallbacku.
   To zewnętrzne pliki prototypu, bez inline JS i mediów; nie wynik Lighthouse/CWV.
 - Przegląd screenshotów desktop/mobile; 320/390/1440 px, reduced motion i CSS zoom
   200% sprawdzone. Ręczny czytnik, natywny zoom i urządzenie fizyczne niesprawdzone.
-- Workflow GitHub przygotowany, bez uruchomienia na GitHub (brak remote).
+- Workflow GitHub przygotowany; pierwsze uruchomienie na GitHub nastąpiło po
+  wysłaniu repozytorium i wymaga osobnego sprawdzenia wyniku.
 - Node lokalnie 26.8.2; CI ustawione na 24. Pierwsze CI ma potwierdzić zgodność.
 - Formularz jest demonstracyjny, nic nie wysyła. Brak Sanity, n8n, c15t,
   ochrony stagingu, serializerów Markdown i docelowego SEO.
-- Materiały Wonderful i lokalne skills zachowano. Bez commitów i push.
+- Materiały Wonderful i lokalne skills zachowano w pierwszym commicie.
+
+## Repozytorium GitHub — 2026-09-13
+
+- Utworzono prywatne repozytorium `zawlodzki/nowa-strona-ola`, dodano `origin`
+  i ustawiono śledzenie `origin/main`.
+- Pierwszy commit aplikacji: `bd002fa` (`Initial project setup`).
+- Przed wysłaniem `npm run verify`: PASS; 10 testów unit i 27 E2E.
+- Usunięto obniżanie przezroczystości nieaktywnego przycisku, które powodowało
+  naruszenie kontrastu WCAG w WebKit przy szerokości 320 px.
 
 ## Następny krok
 
