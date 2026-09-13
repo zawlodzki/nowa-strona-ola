@@ -1,9 +1,10 @@
 @import "tailwindcss";
 @import "../../wonderful-design-system/tokens.css";
-/* Licensed ABC Favorit is not bundled. Documented demonstration fallback. */
+@import "./fonts.css";
+/* Site typeface is Switzer. Wonderful tokens still name ABC Favorit. */
 :root {
-  --wf-font-display: Arial, Helvetica, sans-serif;
-  --wf-font-body: Arial, Helvetica, sans-serif;
+  --wf-font-display: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --wf-font-body: "Switzer", ui-sans-serif, system-ui, sans-serif;
   --wf-font-mono: ui-monospace, Menlo, Consolas, monospace;
 }
 @theme inline {

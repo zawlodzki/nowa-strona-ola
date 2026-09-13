@@ -37,6 +37,12 @@
     },
     "production": {
       "name": "ola-website-preview-production",
+      "routes": [
+        {
+          "pattern": "preview.aleksandraolesiewicz.com",
+          "custom_domain": true,
+        },
+      ],
       "secrets": {
         "required": [
           "SANITY_PROJECT_ID",

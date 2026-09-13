@@ -1,0 +1,12 @@
+/*
+  Official Switzer Variable from Fontshare. ITF Free Font License 2.0.
+  Do not subset, convert, or edit the font file.
+  https://www.fontshare.com/fonts/switzer
+*/
+@font-face {
+  font-family: "Switzer";
+  src: url("../assets/fonts/switzer/Switzer-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

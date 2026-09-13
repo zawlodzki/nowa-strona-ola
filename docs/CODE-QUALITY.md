@@ -16,7 +16,7 @@ Przed pierwszym uruchomieniem: `npm ci` oraz `npx playwright install`.
 | -------------------- | ------------------------------------------------------------------------------------- |
 | npm run format:check | Prettier + plugin Astro: spójny format kodu i dokumentacji                            |
 | npm run format       | Jawne formatowanie podczas pracy; nigdy automatyczna naprawa w CI                     |
-| npm run tokens:check | Zgodność `tokens.css` z `tokens.json` oraz obecność fallbacku Arial                   |
+| npm run tokens:check | Zgodność `tokens.css` z `tokens.json` oraz Arial w stosach Wonderful                  |
 | npm run lint         | ESLint 10, typescript-eslint, eslint-plugin-astro; zero ostrzeżeń, zakaz explicit any |
 | npm run check        | Astro check i TypeScript strict: komponenty, props, importy, kod i testy TS           |
 | npm test             | Vitest: logika i przypadki brzegowe (walidacja, Sanity, podgląd, webhook, tokeny)     |

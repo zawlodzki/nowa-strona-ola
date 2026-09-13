@@ -7,10 +7,15 @@ Aktualizacja: 2026-09-13. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-
 Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
 Etap 2 trwa: lokalny frontend Astro, projekt Sanity `dyuqkn8c`, Studio, pobieranie
 opublikowanej treści, chroniony podgląd SSR, webhook publikacji Workera, wspólne typy
-i bramka jakości działają w jednym workspace npm. Środowiska Cloudflare i workflow
-publikacji są zadeklarowane, ale Workerów tej strony, kolejek i hostingu nie utworzono.
-Etap 3: tokeny mają jedno źródło i fallback Arial; katalog `/ui/` pokazuje bazowe
-elementy. Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
+i bramka jakości działają w jednym workspace npm. Hosty Cloudflare są ustalone
+(apex, 301 `www`, `preview`). Wrangler CLI jest zalogowany. Kolejki i Worker
+integracji staging działają. Publiczny staging:
+`https://ola-website-staging.zawlodzki.workers.dev`. Preview staging:
+`https://ola-website-preview-staging.zawlodzki.workers.dev` (401 bez sesji).
+Brak Access na brzegu, 301 `www`, webhooka Sanity i środowisk GitHub. Etap 3:
+tokeny mają jedno źródło; katalog `/ui/` pokazuje bazowe elementy. Główny krój
+to Switzer (self-host).
+Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
 
 ## Wykonane
 
@@ -48,7 +53,8 @@ elementy. Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
 - Worker → Queues → n8n; n8n deduplikuje i obsługuje dalsze automatyzacje.
 - Zewnętrzne self-hostowane c15t; tutaj tylko integracja i panel.
 - Basic Consent Mode v2; skrypty Google dopiero po właściwej zgodzie.
-- Sanity Free i Workers Paid jako założenie; limity do sprawdzenia przed wdrożeniem.
+- Sanity Free i Workers Paid (ok. 5 USD/mies. przy tej skali); Access Zero Trust
+  Free dla jednego e-maila. Sprawdzone w dokumentacji Cloudflare 2026-09-13.
 
 ## Weryfikacja etapu 1 — 2026-09-12
 
@@ -64,9 +70,10 @@ elementy. Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
 ## Blokady i zależności
 
 Lokalny szkielet i projekt Sanity `dyuqkn8c` nie blokują dalszej pracy nad UI.
-Wdrożenie Cloudflare tej strony czeka na subdomeny stagingu/podglądu, `www`,
-środowiska GitHub i sekrety. Lista przedprodukcyjna w sekcji 11 planu.
-ABC Favorit nie jest dołączony — używać fallbacku Arial.
+Wdrożenie Cloudflare czeka na Access podglądu, 301 `www`, webhook Sanity,
+środowiska GitHub (zmienne i token Cloudflare) oraz produkcyjne Workery.
+Publiczny i preview staging oraz integracje staging są wdrożone.
+ABC Favorit nie jest licencjonowany. Główny krój to Switzer (Fontshare FFL).
 
 Pierwsza instalacja Sanity 5.31.2 zgłaszała 8 podatności przejściowych w łańcuchu
 CLI. Po aktualizacji lockfile przy dodaniu `@sanity/webhook` npm zgłasza 0
@@ -286,29 +293,120 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
 
 - `tokens.json` jest źródłem; `tokens.css` jest z niego generowany. Generator
   Pythona nie nadpisuje już JSON wartościami zakodowanymi w skrypcie.
-  `npm run tokens:check` porównuje CSS z JSON i wymaga Arial w stosach display/body.
-- Aplikacja nie dołącza ABC Favorit ani Inter. Po imporcie tokenów nadpisuje rodziny
-  na Arial / ui-monospace i ustawia `font-synthesis: none`.
+  `npm run tokens:check` porównuje CSS z JSON i wymaga Arial w stosach display/body
+  referencji Wonderful (to nie jest krój aplikacji).
 - Wyodrębniono kontener, nagłówek, nadtytuł, link tekstowy, nagłówek strony i stopkę.
   Katalog: `/ui/` i `/en/ui/`. Przełącznik języka katalogu idzie na odpowiednik,
   bez polskiego fallbacku pod `/en/`.
-- `npm run verify`: PASS. Format, tokeny, lint i typy bez diagnostyki; 36 unit tests;
-  5 stron publicznego Astro, Studio, Preview SSR i dry-run Workera; budżety JS
-  4684 B gzip, CSS 7440 B gzip; 30 E2E w Chromium/Firefox/WebKit. Axe na katalogu
-  320 px bez naruszeń.
-- W przeglądarce: katalog PL, przełączenie na EN, dialog i błąd pustego formularza
-  na stronie głównej. Computed `font-family` body: `Arial, Helvetica, sans-serif`.
-  Viewport DevTools nie zejdzie poniżej ~500 px; 320 px sprawdził Playwright.
+
+## Switzer jako główny krój — 2026-09-13
+
+- Decyzja: bez licencji ABC Favorit. Switzer z Fontshare (ITF FFL 2.0) jest
+  krojem display i body, nie fallbackiem. Oficjalny `Switzer-Variable.woff2`
+  (43 220 B), bez subsetowania i bez Astro `fontProviders`.
+- Aplikacja nadpisuje `--wf-font-display` i `--wf-font-body` po imporcie tokenów.
+  Zapas systemowy: `ui-sans-serif, system-ui, sans-serif`. `font-synthesis: none`.
+- `tokens.json` Wonderful nadal mierzy Favorit/Arial — kontrola `tokens:check`
+  tego nie zmienia.
+- Kontrole: format, tokeny, lint i typy bez diagnostyki; 37 unit tests (w tym
+  niezmieniony rozmiar 43 220 B pliku woff2); 5 stron publicznego Astro, Studio,
+  Preview SSR i dry-run Workera; budżety JS 4684 B gzip, CSS 7534 B gzip.
+  Test katalogu (pangram + `document.fonts.check("16px Switzer")`) przeszedł
+  w Chromium, Firefox i WebKit. Pełne `npm run test:e2e` przy 5 workerach raz
+  zacięło się na dialogu w Firefox (timeout 30 s); te same scenariusze seryjnie
+  przeszły. Axe 320 px na katalogu bez naruszeń.
+- W przeglądarce: `/`, `/ui/` (1440 i 390 px) oraz `/en/ui/`. Computed
+  `font-family` body i h1: `Switzer, ui-sans-serif, system-ui, sans-serif`;
+  h1 waga 300, body 400, przycisk 500; pangram `Zażółć gęślą jaźń ąćęłńóśźż`.
+  Preload i `@font-face` wskazują ten sam `Switzer-Variable.7Oa6q7Y4.woff2`.
 - Nie zbudowano jeszcze wszystkich sekcji etapu 3 (hero warianty, tekst–obraz,
   logotypy, karty, proces, liczby, cennik, opinie, FAQ itd.).
 
+## Hosty, koszt i OAuth Cloudflare — 2026-09-13
+
+- Użytkownik ustalił: podgląd `preview.aleksandraolesiewicz.com`; `www` → 301 na
+  apex; Access `grzesiek@zawlodzki.pl`; osobnej nazwy publicznego stagingu nie ma.
+- Dokumentacja Cloudflare (2026-09-13): Workers Free nie wystarcza na podgląd SSR
+  (limit 10 ms CPU; SSR typowo 10–20 ms). Workers Paid: **5 USD/mies.** minimum.
+  Przy skali planu żądania Static Assets, Queues i logi powinny zmieścić się w
+  limitach wliczonych — bez dopłat. Access Zero Trust Free (do 50 osób): 0 USD.
+- OAuth MCP w Cursorze: bindings, docs, observability i builds — zalogowane.
+  Konto ma trzy stare Workery zgód, bez Workerów tej strony. Wrangler CLI:
+  `You are not authenticated`. `gh` ma nieważny token w pęku kluczy.
+- `preview/wrangler.jsonc` production ma custom domain preview. Zasobów (kolejki,
+  sześć Workerów, Access, DNS `www`) nie utworzono: brak CLI, brak włączonego
+  Workers Paid z dashboardu, brak tokenu GitHub.
+
+## Weryfikacja Wrangler CLI i dwóch Workerów — 2026-09-13
+
+- `npx wrangler whoami`: zalogowany OAuth, `grzesiek@zawlodzki.pl`, konto
+  `a9280171eee8bfa22ea23290a7ab72c5`, zakres m.in. `workers (write)` i
+  `queues (write)`.
+- Na koncie są dwa nowe skrypty z 2026-09-13: `ola-website-integrations-staging`
+  i `ola-website-integrations-production`. Każdy ma upload, potem Secret Change
+  (~1 s później). Kod obu: `export default { fetch() {} }` — placeholder dashboardu,
+  nie kod z `worker/`.
+- `npx wrangler queues list`: pusta lista. Brak `ola-website-staging`,
+  `ola-website-production`, `ola-website-preview-staging`,
+  `ola-website-preview-production`.
+- `https://aleksandraolesiewicz.com/` i `www` zwracają 404 istniejącej strefy;
+  `www` nie przekierowuje na apex. Plan Workers Paid nie został odczytany z API
+  billing — utworzenie pustych Workerów nie potwierdza subskrypcji.
+
+## Kolejki i token GitHub — 2026-09-13
+
+- Użytkownik wstawił `BUILD_TRIGGER_TOKEN` przez `wrangler secret put` na staging
+  i production. Agent ustawił `BUILD_TRIGGER_URL` na staging
+  (`https://api.github.com/repos/zawlodzki/nowa-strona-ola/dispatches`).
+- Utworzono kolejki: `ola-site-builds-staging`, `ola-site-builds-staging-dlq`,
+  `ola-site-builds-production`, `ola-site-builds-production-dlq`. Queues działają
+  na koncie (plan Workers Paid albo Free z limitowanym Queues).
+- Dry-run `wrangler deploy --config worker/wrangler.jsonc --env staging`: PASS
+  (8.76 KiB, binding `BUILD_QUEUE` → `ola-site-builds-staging`).
+- Zdalny deploy kodu z `worker/`: FAIL, brak `SANITY_WEBHOOK_SECRET`.
+  `N8N_LEAD_WEBHOOK_URL` wyłączono z `secrets.required`, bo `/api/leads` zwraca
+  501 i nie wolno podłączać produkcyjnego n8n do stagingu.
+- Placeholder `export default { fetch() {} }` na stagingu został nadpisany przez
+  `secret put` (nowa wersja pustego skryptu z sekretami), nie przez kod aplikacji.
+
+## Worker integracji staging — 2026-09-13
+
+- Użytkownik ustawił `SANITY_WEBHOOK_SECRET` na staging. Wdrożono kod:
+  `npx wrangler deploy --config worker/wrangler.jsonc --env staging`.
+  Version `e4709cf8-b561-44f2-b2be-8b367f2fa922`. Startup 4 ms.
+- Adres: `https://ola-website-integrations-staging.zawlodzki.workers.dev`.
+  Producer i consumer `ola-site-builds-staging` (1/1). Produkcyjne kolejki bez
+  konsumenta.
+- Kontrola HTTP: `GET /health` → 200 `{"status":"ok"}`; `POST /api/leads` → 501;
+  nieznana ścieżka → 404; `POST /webhooks/sanity` bez podpisu → 401
+  `invalid_signature`. Nie wysyłano poprawnie podpisanego webhooka ani dispatchu
+  GitHub.
+
+## Publiczny i preview staging — 2026-09-13
+
+- Publiczny Worker: `npx wrangler deploy --config wrangler.jsonc --env staging`.
+  Version `8e53935d-6bc0-42d6-a9be-964b46771dd0`.
+  `https://ola-website-staging.zawlodzki.workers.dev` — `/` 200 PL, `/en/` 200 EN,
+  `/ui/` i `/en/ui/` 200, nieistniejąca ścieżka 404. W przeglądarce: tytuł PL,
+  potem `/en/` z tytułem EN i nawigacją po angielsku. Treść z fixture (bez
+  `PUBLIC_SANITY_*`).
+- Preview: `CLOUDFLARE_ENV=staging` build, deploy
+  `preview/dist/server/wrangler.json` z `--secrets-file preview/.dev.vars`.
+  Version `3151fd83-bd03-41ac-a926-d9d0935729eb`. Startup 27 ms.
+  `https://ola-website-preview-staging.zawlodzki.workers.dev` — `GET /` 401
+  „Brak dostępu do podglądu.” Access na brzegu jeszcze nie włączony.
+- CORS Sanity `dyuqkn8c`: dodano
+  `https://ola-website-preview-staging.zawlodzki.workers.dev` z credentials.
+- Środowiska GitHub: 0. Token `gh` działa. Nie tworzyłem env/zmiennych bez
+  osobnego potwierdzenia. Webhook Sanity i 301 `www` nie skonfigurowane.
+
 ## Następny krok
 
-Kontynuować etap 3: kolejne elementy bazowe i sekcje z design systemu, warianty
-oraz stany, potem kontrola wizualna desktop/mobile. Etap 2 Cloudflare pozostaje
-otwarty do decyzji o subdomenach stagingu/podglądu i `www` oraz utworzenia
-zasobów, sekretów i Access. Nie wdrażać Workerów tej strony bez tych danych.
-Nie wysyłać testowego leada do produkcyjnego n8n.
+W dashboardzie: Access na Worker `ola-website-preview-staging` (All traffic,
+e-mail `grzesiek@zawlodzki.pl`). Potem środowiska GitHub `staging`/`production`,
+token Cloudflare do Actions, webhook Sanity na
+`https://ola-website-integrations-staging.zawlodzki.workers.dev/webhooks/sanity`
+i 301 `www`. Nie wklejać sekretów. Nie testować leada na produkcyjnym n8n.
 
 ## Zasada aktualizacji
 

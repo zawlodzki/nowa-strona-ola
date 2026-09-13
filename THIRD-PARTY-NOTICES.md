@@ -1,5 +1,16 @@
 # Third-party notices
 
+## Switzer
+
+The site typeface is Switzer by Jérémie Hornus / Indian Type Foundry, self-hosted
+from the official Fontshare package (`Switzer-Variable.woff2`, unmodified).
+Source: https://www.fontshare.com/fonts/switzer
+License: ITF Free Font License (FFL) Version 2.0 — 17 Aug 2026.
+Full text: `src/assets/fonts/switzer/FFL.txt`.
+
+Self-hosting with CSS `@font-face` is permitted. Subsetting, format conversion
+and redistribution of the font files are not.
+
 ## bejamas/ui
 
 Button, Input, Label and Dialog in src/ui were adapted from the public registry

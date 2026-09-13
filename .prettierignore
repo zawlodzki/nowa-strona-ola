@@ -14,3 +14,5 @@ coverage/
 **/worker-configuration.d.ts
 
 .cursor/
+src/assets/fonts/switzer/FFL.txt
+src/assets/fonts/switzer/*.woff2

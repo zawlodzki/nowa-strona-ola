@@ -26,8 +26,9 @@
 - Źródło zasad: [design system](wonderful-design-system/README.md), specyfikacja,
   tokeny, katalog i MOTION.md. Stosuj rekomendowane poprawki dostępności.
   Nie twórz równoległych tokenów ani nie kopiuj mediów Wonderful.
-- Bez dostarczonego ABC Favorit stosuj udokumentowany fallback. Treść widoczna
-  bez JS; reduced motion musi pozostawiać czytelny stan statyczny.
+- Główny krój to Switzer (Fontshare, ITF FFL): oficjalny plik, self-host,
+  bez subsetowania i bez Astro `fontProviders`. Treść widoczna bez JS;
+  reduced motion musi pozostawiać czytelny stan statyczny.
 - Sanity: sekcje z kontrolowanymi wariantami, bez dowolnego CSS. Modeluj znaczenie
   danych, dodawaj etykiety, walidację i podglądy; referencje dla treści wspólnych.
 - Każda sekcja ma schemat, renderer HTML, serializer Markdown i przykład.

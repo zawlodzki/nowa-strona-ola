@@ -69,8 +69,10 @@ Obowiązuje [wonderful-design-system](../wonderful-design-system/README.md):
 - Adaptować referencyjne CSS/JS do komponentów Astro, nie kopiować całego demonstratora.
 - Treść widoczna bez JS; reduced motion pozostawia kompletny stan statyczny.
   Pętle zatrzymują się poza ekranem i w ukrytej karcie.
-- Bez dostarczonego ABC Favorit stosować udokumentowany fallback. Nie pobierać
-  fontów ani materiałów Wonderful. Sprawdzić polskie znaki i łamanie treści PL/EN.
+- ABC Favorit nie jest licencjonowany. Główny krój aplikacji to Switzer
+  (Fontshare, ITF FFL 2.0): self-host oficjalnego pliku, bez subsetowania.
+  Nie pobierać fontów ani materiałów Wonderful. Sprawdzić polskie znaki
+  i łamanie treści PL/EN.
 - Panel c15t i wszystkie stany formularzy także korzystają z design systemu.
 
 ## 5. CMS, komponenty i języki
@@ -228,7 +230,7 @@ nieautoryzowany dostęp do szkiców odrzucony.
 - [x] Przetestować przycisk, formularz i dialog Bejamas z tokenami Wonderful.
       Zakres i ograniczenia opisane w wynikach próby; pełna biblioteka nadal do zbudowania.
 
-- [x] Zintegrować jedno źródło tokenów i udokumentowany fallback fontów.
+- [x] Zintegrować jedno źródło tokenów i Switzer jako główny krój aplikacji.
 - [ ] Zbudować elementy bazowe, nawigację, stopkę i wszystkie sekcje.
 - [ ] Dodać przykłady wariantów i stanów, responsywność oraz ruch.
 - [ ] Sprawdzić zgodność wizualną, kontrast, klawiaturę i działanie bez JS.
@@ -287,11 +289,13 @@ wersji i przekazanie instrukcji utrzymania.
 ## 11. Zależności przed produkcją
 
 Domena produkcyjna `aleksandraolesiewicz.com` jest podpięta do Cloudflare.
-Pozostają: docelowe rekordy DNS i subdomeny stagingu/podglądu, projekt Sanity
-i redaktorzy, konto Cloudflare, repo GitHub,
-klucze Turnstile, webhook i uwierzytelnienie n8n, endpoint i dozwolone originy c15t,
-identyfikatory GTM/GA4 oraz finalne dane marki i treści zgód. Brak tych danych
-nie blokuje etapu 1 ani lokalnych szablonów.
+Ustalone hosty: apex jako produkcja, `www` → 301 na apex, podgląd
+`preview.aleksandraolesiewicz.com` (Access: `grzesiek@zawlodzki.pl`). Publiczny
+staging bez osobnej subdomeny — `workers.dev`. Pozostają: Workers Paid na koncie,
+logowanie Wranglera CLI, token GitHub do Repository Dispatch, środowiska GitHub,
+Access, kolejki, sekrety, Turnstile, webhook i uwierzytelnienie n8n, endpoint
+i dozwolone originy c15t, identyfikatory GTM/GA4 oraz finalne dane marki i treści
+zgód. Brak tych danych nie blokuje etapu 3 ani lokalnych szablonów.
 
 ## Źródła techniczne
 

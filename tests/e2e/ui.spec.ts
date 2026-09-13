@@ -118,9 +118,7 @@ test("reduced motion and 200 percent CSS zoom", async ({ page }) => {
   await page.keyboard.press("Escape");
 });
 
-test("catalog shows tokens, Polish glyphs and Arial fallback", async ({
-  page,
-}) => {
+test("catalog shows tokens, Polish glyphs and Switzer", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 });
   await page.goto("/ui/");
   await expect(
@@ -131,10 +129,14 @@ test("catalog shows tokens, Polish glyphs and Arial fallback", async ({
     "href",
     "/en/ui/",
   );
+  await page.evaluate(() => document.fonts.ready);
   const family = await page.evaluate(
     () => getComputedStyle(document.body).fontFamily,
   );
-  expect(family.toLowerCase()).toMatch(/arial/);
+  expect(family).toMatch(/Switzer/);
+  expect(await page.evaluate(() => document.fonts.check("16px Switzer"))).toBe(
+    true,
+  );
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
