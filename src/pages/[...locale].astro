@@ -5,6 +5,8 @@ import PageHero from "../views/PageHero.astro";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import SiteFooter from "../ui/site-footer/SiteFooter.astro";
+import SiteHeader from "../ui/site-header/SiteHeader.astro";
 export function getStaticPaths() {
   return [
     { params: { locale: undefined }, props: { lang: "pl" } },
@@ -17,14 +19,7 @@ const page = await getPage(lang, "home");
 ---
 
 <Layout lang={lang} title={page.seo?.title ?? page.title}>
-  <header class="shell">
-    <a href={pl ? "/" : "/en/"} aria-label={pl ? "Strona główna" : "Home"}>
-      W / Studio
-    </a>
-    <a href={pl ? "/en/" : "/"} lang={pl ? "en" : "pl"}>
-      {pl ? "English" : "Polski"}
-    </a>
-  </header>
+  <SiteHeader lang={lang} />
   <main id="main">
     <PageHero page={page} />
     <section
@@ -110,11 +105,7 @@ const page = await getPage(lang, "home");
       </div>
     </section>
   </main>
-  <footer class="shell">
-    {pl
-      ? "Lokalny prototyp · treści demonstracyjne"
-      : "Local prototype · demonstration content"}
-  </footer>
+  <SiteFooter lang={lang} />
 </Layout>
 <script>
   import { validateDemo } from "../lib/validate-demo";

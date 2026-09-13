@@ -1,0 +1,143 @@
+---
+import type { Locale } from "@ola/shared";
+
+import Layout from "../layouts/Layout.astro";
+import { Button } from "../ui/button";
+import Container from "../ui/container/Container.astro";
+import Eyebrow from "../ui/eyebrow/Eyebrow.astro";
+import Heading from "../ui/heading/Heading.astro";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import SiteFooter from "../ui/site-footer/SiteFooter.astro";
+import SiteHeader from "../ui/site-header/SiteHeader.astro";
+
+export interface Props {
+  lang: Locale;
+}
+
+const colorTokens = [
+  "white",
+  "paper",
+  "surface",
+  "line",
+  "ink",
+  "body",
+  "muted",
+  "black",
+  "deep",
+  "accent",
+] as const;
+
+const { lang } = Astro.props as Props;
+const pl = lang === "pl";
+---
+
+<Layout lang={lang} title={pl ? "Katalog komponentów" : "Component catalog"}>
+  <SiteHeader lang={lang} section="catalog" />
+  <main id="main">
+    <section class="hero" aria-labelledby="catalog-title">
+      <Container>
+        <Eyebrow>
+          {pl ? "Etap 3 · design system" : "Stage 3 · design system"}
+        </Eyebrow>
+        <Heading tag="h1" id="catalog-title">
+          {pl ? "Katalog komponentów" : "Component catalog"}
+        </Heading>
+        <p class="lead">
+          {pl
+            ? "Tokeny pochodzą z tokens.json. ABC Favorit nie jest dołączony — nagłówki i treść używają udokumentowanego fallbacku Arial."
+            : "Tokens come from tokens.json. ABC Favorit is not bundled — headings and body copy use the documented Arial fallback."}
+        </p>
+        <p class="pangram">Zażółć gęślą jaźń ąćęłńóśźż</p>
+      </Container>
+    </section>
+    <section class="panel" aria-labelledby="tokens-title">
+      <Container>
+        <Heading tag="h2" id="tokens-title">
+          {pl ? "Kolory" : "Colors"}
+        </Heading>
+        <ul class="swatches">
+          {colorTokens.map((token) => (
+            <li>
+              <span
+                class="swatch"
+                style={`background: var(--wf-color-${token})`}
+              ></span>
+              <code>{token}</code>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+    <section class="panel" aria-labelledby="actions-title">
+      <Container>
+        <Heading tag="h2" id="actions-title">
+          {pl ? "Akcje i pole" : "Actions and field"}
+        </Heading>
+        <div class="actions">
+          <Button type="button">
+            {pl ? "Przycisk stały" : "Solid button"}
+          </Button>
+          <Button as="a" href={pl ? "/" : "/en/"} variant="outline">
+            {pl ? "Przycisk-link" : "Button link"}
+          </Button>
+        </div>
+        <div class="field catalog-field">
+          <Label for="catalog-name">{pl ? "Imię" : "Name"}</Label>
+          <Input id="catalog-name" name="name" value="Łucja" readonly />
+        </div>
+      </Container>
+    </section>
+    <section class="panel" data-theme="dark" aria-labelledby="dark-title">
+      <Container>
+        <Heading tag="h2" id="dark-title">
+          {pl ? "Ciemna sekcja" : "Dark section"}
+        </Heading>
+        <p class="lead catalog-inverse">
+          {pl
+            ? "Ten sam zestaw tokenów, odwrócone tło i tekst."
+            : "The same token set, with inverted background and text."}
+        </p>
+      </Container>
+    </section>
+  </main>
+  <SiteFooter lang={lang} />
+</Layout>
+
+<style>
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+    gap: var(--wf-space-16);
+    padding: 0;
+    margin: var(--wf-space-32) 0 0;
+    list-style: none;
+  }
+  .swatches li {
+    display: grid;
+    gap: var(--wf-space-8);
+    min-width: 0;
+  }
+  .swatch {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid var(--wf-color-line);
+    border-radius: var(--wf-radius-8);
+  }
+  .pangram {
+    font-family: var(--wf-font-display);
+    font-size: var(--wf-heading-size);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    max-width: 20ch;
+  }
+  .catalog-field {
+    margin-top: var(--wf-space-32);
+    max-width: 32rem;
+  }
+  .catalog-inverse {
+    color: var(--wf-color-paper);
+  }
+</style>

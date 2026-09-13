@@ -3,6 +3,7 @@ import { env } from "cloudflare:workers";
 import type { Locale } from "@ola/shared";
 
 import Layout from "../../../src/layouts/Layout.astro";
+import Container from "../../../src/ui/container/Container.astro";
 import PageHero from "../../../src/views/PageHero.astro";
 import { getPreviewPage } from "../lib/content";
 
@@ -24,12 +25,12 @@ const page = language
 
 {page && language ? (
   <Layout lang={language} title={`Podgląd — ${page.seo?.title ?? page.title}`}>
-    <header class="shell">
+    <Container tag="header" class="site-header">
       <strong>Chroniony podgląd szkicu</strong>
       <form method="post" action="/api/draft-mode/disable">
         <button type="submit">Zakończ podgląd</button>
       </form>
-    </header>
+    </Container>
     <main id="main">
       <PageHero page={page} />
       <section id="contact" class="panel shell">

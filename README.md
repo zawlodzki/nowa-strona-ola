@@ -21,10 +21,13 @@ Działa lokalny prototyp Astro z komponentami Bejamas dostosowanymi do Wonderful
 Repo jest workspace’em npm: frontend pozostaje w katalogu głównym, osobne aplikacje
 znajdują się w `studio/`, `preview/` i `worker/`, a wspólne kontrakty w
 `packages/shared/`.
-Strony: `/` (PL), `/en/` (EN), `/static/` (kontrola bez JavaScriptu).
+Strony: `/` (PL), `/en/` (EN), `/ui/` i `/en/ui/` (katalog komponentów),
+`/static/` (kontrola bez JavaScriptu).
 Formularz nic nie wysyła. Studio zawiera minimalny model strony, a frontend pobiera
 opublikowaną treść z Sanity po ustawieniu konfiguracji. Bez niej build korzysta
-z jawnych danych demonstracyjnych. Worker pozostaje szkieletem bez kolejek, n8n
+z jawnych danych demonstracyjnych. Lokalny projekt Sanity `dyuqkn8c` (dataset
+`production`) jest utworzony; sekrety pozostają w ignorowanych plikach środowiska.
+Worker pozostaje szkieletem bez kolejek, n8n
 i c15t. Nie publikować prototypu: noindex nie zastępuje ochrony stagingu.
 
 ## Uruchomienie i weryfikacja
@@ -78,7 +81,7 @@ Deklaratywne konfiguracje `staging` i `production` opisuje
 npm run verify
 ```
 
-Verify obejmuje format, lint, typy wszystkich workspace’ów, build frontendu,
+Verify obejmuje format, zgodność tokenów, lint, typy wszystkich workspace’ów, build frontendu,
 Studio i Workera, unit tests, budżety artefaktów i E2E w trzech przeglądarkach.
 `npm run format` jawnie formatuje kod. Samo
 `npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane; wynik jego

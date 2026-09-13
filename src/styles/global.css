@@ -1,5 +1,11 @@
 @import "tailwindcss";
 @import "../../wonderful-design-system/tokens.css";
+/* Licensed ABC Favorit is not bundled. Documented demonstration fallback. */
+:root {
+  --wf-font-display: Arial, Helvetica, sans-serif;
+  --wf-font-body: Arial, Helvetica, sans-serif;
+  --wf-font-mono: ui-monospace, Menlo, Consolas, monospace;
+}
 @theme inline {
   --color-background: var(--wf-bg);
   --color-foreground: var(--wf-fg);
@@ -19,6 +25,9 @@
   --font-sans: var(--wf-font-body);
 }
 @layer base {
+  html {
+    font-synthesis: none;
+  }
   body {
     margin: 0;
     background: var(--wf-bg);
@@ -92,13 +101,36 @@
   max-width: var(--wf-layout-content);
   margin: auto;
   padding-inline: var(--wf-gutter);
+  min-width: 0;
 }
-header {
-  padding-block: var(--wf-space-24);
+.site-header,
+.site-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: var(--wf-space-16);
+}
+.site-header {
+  padding-block: var(--wf-space-24);
+}
+.site-footer {
+  padding-block: var(--wf-space-32);
+  font-size: 14px;
+}
+.site-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--wf-space-16);
+  min-width: 0;
+}
+.site-header a,
+.site-footer a,
+.text-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 .hero {
   padding-block: var(--wf-section);
@@ -152,10 +184,6 @@ form {
 }
 .status {
   min-height: 28px;
-}
-footer {
-  padding-block: 32px;
-  font-size: 14px;
 }
 .skip {
   position: absolute;

@@ -228,7 +228,7 @@ nieautoryzowany dostęp do szkiców odrzucony.
 - [x] Przetestować przycisk, formularz i dialog Bejamas z tokenami Wonderful.
       Zakres i ograniczenia opisane w wynikach próby; pełna biblioteka nadal do zbudowania.
 
-- [ ] Zintegrować jedno źródło tokenów i udokumentowany fallback fontów.
+- [x] Zintegrować jedno źródło tokenów i udokumentowany fallback fontów.
 - [ ] Zbudować elementy bazowe, nawigację, stopkę i wszystkie sekcje.
 - [ ] Dodać przykłady wariantów i stanów, responsywność oraz ruch.
 - [ ] Sprawdzić zgodność wizualną, kontrast, klawiaturę i działanie bez JS.

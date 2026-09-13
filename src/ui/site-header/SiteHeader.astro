@@ -1,0 +1,44 @@
+---
+import type { Locale } from "@ola/shared";
+
+import {
+  alternatePath,
+  catalogPath,
+  homePath,
+  type SiteSection,
+} from "@/lib/paths";
+import Container from "@/ui/container/Container.astro";
+import TextLink from "@/ui/text-link/TextLink.astro";
+
+export interface Props {
+  lang: Locale;
+  section?: SiteSection;
+}
+
+const { lang, section = "home" } = Astro.props as Props;
+const pl = lang === "pl";
+const homeHref = homePath(lang);
+const catalogHref = catalogPath(lang);
+const languageHref = alternatePath(lang, section);
+---
+
+<Container tag="header" class="site-header">
+  <TextLink href={homeHref} aria-label={pl ? "Strona główna" : "Home"}>
+    W / Studio
+  </TextLink>
+  <nav aria-label={pl ? "Nawigacja główna" : "Primary"}>
+    <TextLink
+      href={catalogHref}
+      aria-current={section === "catalog" ? "page" : undefined}
+    >
+      {pl ? "Komponenty" : "Components"}
+    </TextLink>
+    <TextLink
+      href={languageHref}
+      lang={pl ? "en" : "pl"}
+      hreflang={pl ? "en" : "pl"}
+    >
+      {pl ? "English" : "Polski"}
+    </TextLink>
+  </nav>
+</Container>

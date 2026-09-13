@@ -14,7 +14,13 @@ for (const name of assets) {
 }
 assert(sizes.js <= 25 * 1024, `JS budget exceeded: ${sizes.js} B gzip`);
 assert(sizes.css <= 20 * 1024, `CSS budget exceeded: ${sizes.css} B gzip`);
-for (const path of ["index.html", "en/index.html", "static/index.html"]) {
+for (const path of [
+  "index.html",
+  "en/index.html",
+  "ui/index.html",
+  "en/ui/index.html",
+  "static/index.html",
+]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(
     html,

@@ -6,7 +6,7 @@ na Node 26.8.2 / npm 11.19.1; zgodność na Node 24 musi potwierdzić pierwsze C
 
 ## Jedna bramka jakości
 
-`npm run verify` wykonuje kolejno formatowanie w trybie check, lint, kontrolę
+`npm run verify` wykonuje kolejno formatowanie w trybie check, zgodność tokenów, lint, kontrolę
 Astro/TypeScript wszystkich workspace’ów, testy jednostkowe, produkcyjne buildy
 Astro i Studio, dry-run bundla Workera, kontrolę artefaktów i testy przeglądarkowe.
 Pierwszy błąd zatrzymuje całość. Polecenie nie naprawia kodu.
@@ -16,9 +16,10 @@ Przed pierwszym uruchomieniem: `npm ci` oraz `npx playwright install`.
 | -------------------- | ------------------------------------------------------------------------------------- |
 | npm run format:check | Prettier + plugin Astro: spójny format kodu i dokumentacji                            |
 | npm run format       | Jawne formatowanie podczas pracy; nigdy automatyczna naprawa w CI                     |
+| npm run tokens:check | Zgodność `tokens.css` z `tokens.json` oraz obecność fallbacku Arial                   |
 | npm run lint         | ESLint 10, typescript-eslint, eslint-plugin-astro; zero ostrzeżeń, zakaz explicit any |
 | npm run check        | Astro check i TypeScript strict: komponenty, props, importy, kod i testy TS           |
-| npm test             | Vitest: logika i przypadki brzegowe, obecnie walidacja formularza demonstracyjnego    |
+| npm test             | Vitest: logika i przypadki brzegowe (walidacja, Sanity, podgląd, webhook, tokeny)     |
 | npm run build        | Rzeczywisty build statyczny, nie tylko sprawdzenie składni                            |
 | npm run test:build   | Budżety gzip, noindex prototypu, jeden H1 i brak JS dla statycznych elementów         |
 | npm run test:e2e     | Playwright: Chromium, Firefox, WebKit; uruchamia podgląd wcześniej zbudowanego dist   |

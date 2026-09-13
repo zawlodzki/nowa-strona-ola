@@ -5,12 +5,12 @@ Aktualizacja: 2026-09-13. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-
 ## Aktualny etap
 
 Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
-Etap 2 trwa: lokalny frontend Astro, Sanity Studio, pobieranie opublikowanej
-treści, chroniony podgląd SSR, webhook publikacji Workera, wspólne typy i bramka jakości
-działają w jednym workspace npm. Wykonano próbę trzech komponentów z etapu 3.
-Deklaratywne środowiska Cloudflare i workflow publikacji treści są przygotowane,
-ale integracje Workera, zasoby i hosting nie są jeszcze wdrożone;
-etapy 4–7 pozostają otwarte.
+Etap 2 trwa: lokalny frontend Astro, projekt Sanity `dyuqkn8c`, Studio, pobieranie
+opublikowanej treści, chroniony podgląd SSR, webhook publikacji Workera, wspólne typy
+i bramka jakości działają w jednym workspace npm. Środowiska Cloudflare i workflow
+publikacji są zadeklarowane, ale Workerów tej strony, kolejek i hostingu nie utworzono.
+Etap 3: tokeny mają jedno źródło i fallback Arial; katalog `/ui/` pokazuje bazowe
+elementy. Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
 
 ## Wykonane
 
@@ -31,6 +31,10 @@ etapy 4–7 pozostają otwarte.
 - Frontend pobiera stronę po języku i slugu przez klienta bez CDN, w perspektywie
   `published`; kwerenda dodatkowo wyklucza `drafts.**`. Brak wyniku lub niezgodna
   odpowiedź zatrzymują build. Bez konfiguracji używany jest jawny fixture PL/EN.
+- Utworzono projekt Sanity `dyuqkn8c` (organizacja konta, dataset `production`),
+  CORS dla lokalnego Studio i podglądu oraz opublikowane demonstracyjne strony
+  `home` PL/EN. Sekrety zapisano tylko w ignorowanych plikach lokalnych. CI i
+  publiczny build bez `PUBLIC_SANITY_*` nadal używają fixture’ów.
 - Dodano osobne Astro SSR `preview/` z adapterem Cloudflare. Sanity Presentation
   aktywuje je przez oficjalny, wygasający sekret; dodatkowa podpisana sesja HttpOnly
   ogranicza dostęp do całej aplikacji. Szkice są pobierane serwerowo z tokenem Viewer.
@@ -59,9 +63,10 @@ etapy 4–7 pozostają otwarte.
 
 ## Blokady i zależności
 
-Brak blokad dla przygotowania repo i lokalnego szkieletu. Nie potwierdzono kont,
-projektów ani poświadczeń usług. Lista przedprodukcyjna w sekcji 11 planu.
-ABC Favorit nie jest dołączony — używać fallbacku.
+Lokalny szkielet i projekt Sanity `dyuqkn8c` nie blokują dalszej pracy nad UI.
+Wdrożenie Cloudflare tej strony czeka na subdomeny stagingu/podglądu, `www`,
+środowiska GitHub i sekrety. Lista przedprodukcyjna w sekcji 11 planu.
+ABC Favorit nie jest dołączony — używać fallbacku Arial.
 
 Pierwsza instalacja Sanity 5.31.2 zgłaszała 8 podatności przejściowych w łańcuchu
 CLI. Po aktualizacji lockfile przy dodaniu `@sanity/webhook` npm zgłasza 0
@@ -264,13 +269,46 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   w Chromium, Firefox i WebKit. Ostrzeżenie preview o brakujących lokalnych sekretach
   Sanity jest oczekiwane.
 
+## Projekt Sanity — 2026-09-13
+
+- Konto MCP: Grzesiek Zawłodzki, `grzesiek@zawlodzki.pl`, Google. Organizacja
+  `orZ7lye6w`. Utworzono projekt `dyuqkn8c`, dataset `production`.
+- CORS z poświadczeniami: `http://localhost:3333` (przy tworzeniu),
+  `http://127.0.0.1:3333`, `http://127.0.0.1:4322`, `http://localhost:4322`.
+- Opublikowano dwa dokumenty `page` ze slugiem `home` (PL i EN), zgodne z fixture.
+- `studio/.env` i `preview/.dev.vars` są ignorowane. Publiczny frontend nie dostał
+  `PUBLIC_SANITY_*`, więc verify pozostaje deterministyczne na fixture’ach.
+- Schema Studio nadal pochodzi z kodu lokalnego; nie używano MCP `deploy_schema`.
+- Nie uruchamiano Studio interaktywnie. Handshake Presentation z rzeczywistym
+  iframe nadal nie sprawdzony.
+
+## Tokeny, fallback fontów i katalog — 2026-09-13
+
+- `tokens.json` jest źródłem; `tokens.css` jest z niego generowany. Generator
+  Pythona nie nadpisuje już JSON wartościami zakodowanymi w skrypcie.
+  `npm run tokens:check` porównuje CSS z JSON i wymaga Arial w stosach display/body.
+- Aplikacja nie dołącza ABC Favorit ani Inter. Po imporcie tokenów nadpisuje rodziny
+  na Arial / ui-monospace i ustawia `font-synthesis: none`.
+- Wyodrębniono kontener, nagłówek, nadtytuł, link tekstowy, nagłówek strony i stopkę.
+  Katalog: `/ui/` i `/en/ui/`. Przełącznik języka katalogu idzie na odpowiednik,
+  bez polskiego fallbacku pod `/en/`.
+- `npm run verify`: PASS. Format, tokeny, lint i typy bez diagnostyki; 36 unit tests;
+  5 stron publicznego Astro, Studio, Preview SSR i dry-run Workera; budżety JS
+  4684 B gzip, CSS 7440 B gzip; 30 E2E w Chromium/Firefox/WebKit. Axe na katalogu
+  320 px bez naruszeń.
+- W przeglądarce: katalog PL, przełączenie na EN, dialog i błąd pustego formularza
+  na stronie głównej. Computed `font-family` body: `Arial, Helvetica, sans-serif`.
+  Viewport DevTools nie zejdzie poniżej ~500 px; 320 px sprawdził Playwright.
+- Nie zbudowano jeszcze wszystkich sekcji etapu 3 (hero warianty, tekst–obraz,
+  logotypy, karty, proces, liczby, cennik, opinie, FAQ itd.).
+
 ## Następny krok
 
-Kontynuować etap 2 po otrzymaniu danych projektu Sanity: utworzyć środowiska GitHub,
-zasoby Cloudflare i kolejki, ustawić sekrety, Access i CORS oraz wykonać pełny przepływ
-na stagingu. Ustalić subdomeny stagingu i podglądu oraz obsługę `www`. Checklista
-webhooka pozostaje otwarta do testu z rzeczywistymi usługami. Nie odtwarzać
-wcześniejszych prób ani nie wysyłać testowego leada do produkcyjnego n8n.
+Kontynuować etap 3: kolejne elementy bazowe i sekcje z design systemu, warianty
+oraz stany, potem kontrola wizualna desktop/mobile. Etap 2 Cloudflare pozostaje
+otwarty do decyzji o subdomenach stagingu/podglądu i `www` oraz utworzenia
+zasobów, sekretów i Access. Nie wdrażać Workerów tej strony bez tych danych.
+Nie wysyłać testowego leada do produkcyjnego n8n.
 
 ## Zasada aktualizacji
 

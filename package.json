@@ -22,11 +22,12 @@
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check && npm run check --workspaces --if-present",
     "lint": "eslint . --max-warnings 0",
+    "tokens:check": "node scripts/check-tokens.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "verify": "npm run format:check && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e",
+    "verify": "npm run format:check && npm run tokens:check && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e",
     "test:build": "node scripts/check-build.mjs"
   },
   "dependencies": {

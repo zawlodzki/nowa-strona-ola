@@ -3,9 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import SiteFooter from "../ui/site-footer/SiteFooter.astro";
+import SiteHeader from "../ui/site-header/SiteHeader.astro";
 ---
 
 <Layout lang="pl" title="Kontrola statycznych komponentów">
+  <SiteHeader lang="pl" />
   <main id="main" class="shell hero">
     <h1>Bez skryptów</h1>
     <p class="lead">Przycisk i pole wejściowe renderowane jako HTML.</p>
@@ -17,4 +20,5 @@ import { Label } from "../ui/label";
       Wróć do przykładu
     </Button>
   </main>
+  <SiteFooter lang="pl" />
 </Layout>

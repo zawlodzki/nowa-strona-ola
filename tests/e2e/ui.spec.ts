@@ -118,6 +118,45 @@ test("reduced motion and 200 percent CSS zoom", async ({ page }) => {
   await page.keyboard.press("Escape");
 });
 
+test("catalog shows tokens, Polish glyphs and Arial fallback", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.goto("/ui/");
+  await expect(
+    page.getByRole("heading", { name: "Katalog komponentów" }),
+  ).toBeVisible();
+  await expect(page.getByText("Zażółć gęślą jaźń ąćęłńóśźż")).toBeVisible();
+  await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
+    "href",
+    "/en/ui/",
+  );
+  const family = await page.evaluate(
+    () => getComputedStyle(document.body).fontFamily,
+  );
+  expect(family.toLowerCase()).toMatch(/arial/);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+  expect(
+    (
+      await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+        .analyze()
+    ).violations,
+  ).toEqual([]);
+  await page.goto("/en/ui/");
+  await expect(
+    page.getByRole("heading", { name: "Component catalog" }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Polski" })).toHaveAttribute(
+    "href",
+    "/ui/",
+  );
+});
+
 test("static primitives emit no scripts; no console errors on interactive page", async ({
   page,
 }) => {

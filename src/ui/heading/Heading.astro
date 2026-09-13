@@ -1,0 +1,15 @@
+---
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  tag?: "h1" | "h2" | "h3";
+  id?: string;
+  class?: string;
+}
+
+const { tag: Tag = "h2", id, class: className = "" } = Astro.props;
+---
+
+<Tag id={id} class={cn(className)}>
+  <slot />
+</Tag>

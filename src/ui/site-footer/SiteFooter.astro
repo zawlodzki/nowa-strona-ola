@@ -1,0 +1,25 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { catalogPath } from "@/lib/paths";
+import Container from "@/ui/container/Container.astro";
+import TextLink from "@/ui/text-link/TextLink.astro";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props as Props;
+const pl = lang === "pl";
+---
+
+<Container tag="footer" class="site-footer">
+  <p>
+    {pl
+      ? "Lokalny prototyp · treści demonstracyjne"
+      : "Local prototype · demonstration content"}
+  </p>
+  <TextLink href={catalogPath(lang)}>
+    {pl ? "Katalog komponentów" : "Component catalog"}
+  </TextLink>
+</Container>
