@@ -2,8 +2,8 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 for (const [path, openName, closeName] of [
-  ["/", "Jak pracujemy", "Zamknij"],
-  ["/en/", "How we work", "Close"],
+  ["/ui/", "Jak pracujemy", "Zamknij"],
+  ["/en/ui/", "How we work", "Close"],
 ]) {
   test(`dialog keyboard and focus ${path}`, async ({ page }) => {
     await page.goto(path);
@@ -113,7 +113,7 @@ test("no JavaScript preserves content and prevents accidental form navigation", 
 test("reduced motion and 200 percent CSS zoom", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/");
+  await page.goto("/ui/");
   await page.evaluate(() => {
     document.documentElement.style.zoom = "2";
   });
@@ -206,8 +206,59 @@ test("static primitives emit no scripts; no console errors on interactive page",
   await expect(page.locator("script")).toHaveCount(0);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("/ui/");
   await page.getByRole("button", { name: "Jak pracujemy" }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   expect(errors).toEqual([]);
+});
+
+test("landing pages, blog and missing English translation", async ({
+  page,
+}) => {
+  await page.goto("/warsztat/");
+  await expect(
+    page.getByRole("heading", { name: "Jeden dzień na wspólny porządek." }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
+    "href",
+    "/en/workshop/",
+  );
+  await page.goto("/en/workshop/");
+  await expect(
+    page.getByRole("heading", {
+      name: "One day to put the work in order.",
+    }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Polski" })).toHaveAttribute(
+    "href",
+    "/warsztat/",
+  );
+
+  await page.goto("/blog/");
+  await expect(
+    page.getByRole("heading", { name: "Blog", exact: true }),
+  ).toBeVisible();
+  await page
+    .getByRole("link", { name: "Najpierw proces, potem CRM" })
+    .first()
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Najpierw proces, potem CRM" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Spis treści" }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
+    "href",
+    "/en/blog/process-before-crm/",
+  );
+
+  await page.goto("/tylko-pl/");
+  await expect(
+    page.getByRole("heading", { name: "Ta strona nie ma wersji angielskiej." }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "English" })).toHaveCount(0);
+
+  const missing = await page.goto("/en/tylko-pl/");
+  expect(missing?.status()).toBe(404);
 });

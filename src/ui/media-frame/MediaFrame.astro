@@ -5,13 +5,27 @@ export interface Props {
   label: string;
   tone?: "photo" | "diagram" | "portrait";
   class?: string;
+  src?: string;
 }
 
-const { label, tone = "photo", class: className = "" } = Astro.props as Props;
+const {
+  label,
+  tone = "photo",
+  class: className = "",
+  src,
+} = Astro.props as Props;
 ---
 
-<div
-  class={cn("media-frame", `media-frame--${tone}`, className)}
-  role="img"
-  aria-label={label}
-></div>
+{src ? (
+  <img
+    class={cn("media-frame", `media-frame--${tone}`, className)}
+    src={src}
+    alt={label}
+  />
+) : (
+  <div
+    class={cn("media-frame", `media-frame--${tone}`, className)}
+    role="img"
+    aria-label={label}
+  ></div>
+)}

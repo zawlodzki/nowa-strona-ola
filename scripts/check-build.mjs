@@ -1,4 +1,4 @@
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
 const assets = await readdir("dist/_astro");
@@ -27,6 +27,11 @@ for (const path of [
   "ui/index.html",
   "en/ui/index.html",
   "static/index.html",
+  "warsztat/index.html",
+  "en/workshop/index.html",
+  "tylko-pl/index.html",
+  "blog/index.html",
+  "blog/najpierw-proces/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(
@@ -42,6 +47,7 @@ for (const path of [
   if (path === "static/index.html")
     assert(!html.includes("<script"), "static primitives emit JS");
 }
+await assert.rejects(access("dist/en/tylko-pl/index.html"), /ENOENT/);
 console.log(
   JSON.stringify({ gzipBytes: sizes, staticPrimitivesScripts: 0 }, null, 2),
 );

@@ -1,0 +1,30 @@
+---
+import { blogPath } from "@/lib/paths";
+import {
+  getArticleIndex,
+  getSiteSettings,
+  listCategories,
+} from "@/sanity/repository";
+import BlogIndex from "@/views/BlogIndex.astro";
+
+const lang = "en" as const;
+const [index, settings, categories] = await Promise.all([
+  getArticleIndex(lang, 1),
+  getSiteSettings(lang),
+  listCategories(lang),
+]);
+---
+
+<BlogIndex
+  lang={lang}
+  settings={settings}
+  title="Blog"
+  lead="Demonstration posts. Each language has its own documents."
+  articles={index.items}
+  featured={index.featured}
+  categories={categories}
+  page={index.page}
+  totalPages={index.totalPages}
+  pageHref={(page) => blogPath(lang, page)}
+  alternateHref="/blog/"
+/>

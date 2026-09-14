@@ -31,7 +31,11 @@ const { id, labelledby, content } = Astro.props as Props;
       ))}
     </div>
     <figure class="figure" data-reveal>
-      <MediaFrame label={content.media.label} tone={content.media.tone} />
+      <MediaFrame
+        label={content.media.label}
+        tone={content.media.tone}
+        src={content.media.src}
+      />
       {content.media.caption && (
         <figcaption>{content.media.caption}</figcaption>
       )}

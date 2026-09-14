@@ -1,79 +1,40 @@
 import { DocumentIcon } from "@sanity/icons/Document";
-import { defineField, defineType, type SlugIsUniqueValidator } from "sanity";
+import { defineField, defineType } from "sanity";
 
-const apiVersion = "2026-09-01";
-
-const isUniqueSlugPerLanguage: SlugIsUniqueValidator = async (
-  slug,
-  context,
-) => {
-  const { document, getClient } = context;
-  const language = document?.language;
-
-  if (!slug || !document || typeof language !== "string") return true;
-
-  const publishedId = document._id.replace(/^drafts\./, "");
-  const draftId = `drafts.${publishedId}`;
-  const matchingId = await getClient({ apiVersion }).fetch<string | null>(
-    /* groq */ `*[
-      _type == "page" &&
-      language == $language &&
-      slug.current == $slug &&
-      !(_id in [$draftId, $publishedId])
-    ][0]._id`,
-    { draftId, language, publishedId, slug },
-  );
-
-  return matchingId === null;
-};
+import { pageSectionsField } from "../blocks/page-sections";
+import { homeSlug, reservedPageSlugs } from "../shared/constants";
+import { languageField, slugField, translationField } from "../shared/fields";
 
 export const pageType = defineType({
   name: "page",
   title: "Strona",
   type: "document",
   icon: DocumentIcon,
+  groups: [
+    { name: "content", title: "Treść", default: true },
+    { name: "seo", title: "SEO" },
+  ],
   fields: [
-    defineField({
-      name: "language",
-      title: "Język",
-      type: "string",
-      options: {
-        layout: "radio",
-        list: [
-          { title: "Polski", value: "pl" },
-          { title: "English", value: "en" },
-        ],
-      },
-      validation: (rule) => rule.required(),
-    }),
+    { ...languageField, group: "content" },
     defineField({
       name: "title",
       title: "Tytuł",
       type: "string",
+      group: "content",
       validation: (rule) => rule.required().max(120),
     }),
-    defineField({
-      name: "slug",
-      title: "Adres",
-      description: "Dla strony głównej użyj wartości „home”.",
-      type: "slug",
-      options: { source: "title", isUnique: isUniqueSlugPerLanguage },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "eyebrow",
-      title: "Nadtytuł",
-      type: "string",
-      validation: (rule) => rule.required().max(80),
-    }),
-    defineField({
-      name: "lead",
-      title: "Lead",
-      type: "text",
-      rows: 4,
-      validation: (rule) => rule.required().max(320),
-    }),
-    defineField({ name: "seo", title: "SEO", type: "seo" }),
+    {
+      ...slugField({
+        documentType: "page",
+        reserved: reservedPageSlugs,
+        allowHome: true,
+        description: `Strona główna używa adresu „${homeSlug}”.`,
+      }),
+      group: "content",
+    },
+    { ...translationField("page"), group: "content" },
+    { ...pageSectionsField, group: "content" },
+    defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" }),
   ],
   preview: {
     select: { title: "title", language: "language", slug: "slug.current" },

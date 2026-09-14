@@ -1,14 +1,15 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-09-13. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-09-14. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
 Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
 Etap 2 — aplikacje i infrastruktura — zakończony.
-Etap 3 — design system i komponenty — biblioteka sekcji jest w katalogu
-`/ui/` i `/en/ui/`. Tokeny mają jedno źródło; główny krój to Switzer.
-Etapy 4–7 pozostają otwarte.
+Etap 3 — design system i komponenty — zakończony.
+Etap 4 — Sanity i szablony PL/EN — kod, fixture’e i trasy zweryfikowane lokalnie.
+Dataset `production` nadal ma stare dokumenty `page` (tytuł/lead, bez sekcji).
+Etapy 5–7 pozostają otwarte.
 
 ## Wykonane
 
@@ -36,6 +37,8 @@ Etapy 4–7 pozostają otwarte.
 - Dodano osobne Astro SSR `preview/` z adapterem Cloudflare. Sanity Presentation
   aktywuje je przez oficjalny, wygasający sekret; dodatkowa podpisana sesja HttpOnly
   ogranicza dostęp do całej aplikacji. Szkice są pobierane serwerowo z tokenem Viewer.
+- Rozszerzono model treści o page builder 18 sekcji, artykuły, blog, ustawienia
+  i powiązania tłumaczeń. Lokalny build bez `PUBLIC_SANITY_*` używa fixture’ów.
 
 ## Decyzje obowiązujące
 
@@ -602,14 +605,36 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   Schematów Sanity, serializerów Markdown i składania stron w CMS nie dodawano
   — to etap 4 i 5.
 
+## Modele Sanity i szablony PL/EN — 2026-09-14
+
+- Studio: dokumenty `page`, `article`, `author`, `category`, `service`,
+  `testimonial`, `form`, `redirect`, `siteSettings`; 18 obiektów sekcji z
+  walidacją i podglądem; referencje ograniczone do tego samego języka.
+  Szablony tworzenia PL/EN i desk z listami per język. Singleton ustawień
+  `siteSettings-pl` / `siteSettings-en`.
+- Frontend składa strony z sekcji. Fixture’e bez `PUBLIC_SANITY_*`: home,
+  `warsztat`/`workshop`, `wdrozenie`/`implementation`, `tylko-pl` (bez EN),
+  blog z trzema wpisami na język, kategoriami, spisem treści i powiązanymi.
+- TypeGen: `sanity schema extract --enforce-required-fields` i
+  `sanity typegen generate` — 14 kwerend, 55 typów schematu.
+- Kontrole: format, tokeny, lint i typy bez diagnostyki (Astro 110 plików,
+  Studio/Preview/Worker/shared). 53 testy unit. Build publiczny, Studio,
+  Preview SSR i dry-run Workera. Budżety JS 4684 B gzip, CSS 9423 B gzip.
+  `check-build` obejmuje landingi, blog i brak `dist/en/tylko-pl/`.
+  33 E2E w Chromium/Firefox/WebKit, w tym landingi, artykuł ze spisem
+  treści i 404 `/en/tylko-pl/`.
+- Nie publikowano nowej treści do datasetu `production` (stare `page` home
+  PL/EN bez sekcji nadal tam są). Handshake Presentation szkicu nadal
+  nie sprawdzony. Serializerów Markdown nie dodawano — etap 5.
+- Nie testowano n8n. Proxied `www → cdn.webflow.com` bez zmian.
+
 ## Następny krok
 
-1. Etap 4: modele Sanity, walidacja, podglądy i składanie stron PL/EN
-   z tych sekcji.
-2. Handshake Presentation (szkic → chroniony podgląd) nadal do sprawdzenia
-   przy okazji pracy redakcyjnej.
-3. Nie testować n8n. Proxied `www → cdn.webflow.com` można później zmienić
-   na apex; nie dodawać `www` jako custom domain Workera.
+1. Wgrać demonstracyjne strony, ustawienia, artykuły i powiązania do Sanity
+   najpierw jako szkice, żeby nie odpalać webhooków produkcji. Potem
+   sprawdzić handshake Presentation.
+2. Etap 5: serializacja Markdown, canonical, hreflang, sitemap i JSON-LD.
+3. Nie testować n8n. Nie dodawać `www` jako custom domain Workera.
 
 Nie wklejać sekretów do czatu.
 

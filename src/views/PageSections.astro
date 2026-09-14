@@ -1,0 +1,225 @@
+---
+import type { Locale } from "@ola/shared";
+
+import {
+  toCards,
+  toComparison,
+  toCta,
+  toExpert,
+  toFaq,
+  toFormCopy,
+  toHero,
+  toList,
+  toLogos,
+  toMediaSection,
+  toMetrics,
+  toPricing,
+  toProcess,
+  toQuote,
+  toRelated,
+  toTestimonials,
+  toText,
+  toTextImage,
+} from "@/content/map-sections";
+import { assertKnownSections } from "@/content/sections";
+import type { PageContent } from "@/sanity/repository";
+import CardsSection from "@/sections/CardsSection.astro";
+import ComparisonSection from "@/sections/ComparisonSection.astro";
+import CtaSection from "@/sections/CtaSection.astro";
+import ExpertSection from "@/sections/ExpertSection.astro";
+import FaqSection from "@/sections/FaqSection.astro";
+import FormSection from "@/sections/FormSection.astro";
+import HeroSection from "@/sections/HeroSection.astro";
+import ListSection from "@/sections/ListSection.astro";
+import LogosSection from "@/sections/LogosSection.astro";
+import MediaSection from "@/sections/MediaSection.astro";
+import MetricsSection from "@/sections/MetricsSection.astro";
+import PricingSection from "@/sections/PricingSection.astro";
+import ProcessSection from "@/sections/ProcessSection.astro";
+import QuoteSection from "@/sections/QuoteSection.astro";
+import RelatedArticlesSection from "@/sections/RelatedArticlesSection.astro";
+import TestimonialsSection from "@/sections/TestimonialsSection.astro";
+import TextImageSection from "@/sections/TextImageSection.astro";
+import TextSection from "@/sections/TextSection.astro";
+
+export interface Props {
+  lang: Locale;
+  sections: NonNullable<PageContent["sections"]>;
+}
+
+const { lang, sections } = Astro.props as Props;
+assertKnownSections(sections);
+const pl = lang === "pl";
+let heroCount = 0;
+let formCount = 0;
+---
+
+{sections.map((section) => {
+  const labelledby = `section-${section._key}-title`;
+  const id = `section-${section._key}`;
+
+  switch (section._type) {
+    case "heroSection": {
+      heroCount += 1;
+      return (
+        <HeroSection
+          id={id}
+          labelledby={labelledby}
+          content={toHero(section)}
+          titleAs={heroCount === 1 ? "h1" : "h2"}
+        />
+      );
+    }
+    case "textSection":
+      return (
+        <TextSection
+          id={id}
+          labelledby={labelledby}
+          content={toText(section)}
+        />
+      );
+    case "textImageSection":
+      return (
+        <TextImageSection
+          id={id}
+          labelledby={labelledby}
+          content={toTextImage(section)}
+        />
+      );
+    case "logosSection":
+      return (
+        <LogosSection
+          id={id}
+          labelledby={labelledby}
+          content={toLogos(section)}
+        />
+      );
+    case "cardsSection":
+      return (
+        <CardsSection
+          id={id}
+          labelledby={labelledby}
+          content={toCards(section)}
+          previousLabel={pl ? "Poprzednie karty" : "Previous cards"}
+          nextLabel={pl ? "Następne karty" : "Next cards"}
+          scrollerLabel={pl ? "Karuzela kart" : "Card carousel"}
+        />
+      );
+    case "listSection":
+      return (
+        <ListSection
+          id={id}
+          labelledby={labelledby}
+          content={toList(section)}
+        />
+      );
+    case "processSection":
+      return (
+        <ProcessSection
+          id={id}
+          labelledby={labelledby}
+          content={toProcess(section)}
+        />
+      );
+    case "metricsSection":
+      return (
+        <MetricsSection
+          id={id}
+          labelledby={labelledby}
+          content={toMetrics(section)}
+        />
+      );
+    case "pricingSection":
+      return (
+        <PricingSection
+          id={id}
+          labelledby={labelledby}
+          content={toPricing(section)}
+        />
+      );
+    case "testimonialsSection":
+      return (
+        <TestimonialsSection
+          id={id}
+          labelledby={labelledby}
+          content={toTestimonials(section)}
+        />
+      );
+    case "expertSection":
+      return (
+        <ExpertSection
+          id={id}
+          labelledby={labelledby}
+          content={toExpert(section)}
+        />
+      );
+    case "faqSection":
+      return (
+        <FaqSection id={id} labelledby={labelledby} content={toFaq(section)} />
+      );
+    case "comparisonSection":
+      return (
+        <ComparisonSection
+          id={id}
+          labelledby={labelledby}
+          content={toComparison(section)}
+          caption={
+            "caption" in section && typeof section.caption === "string"
+              ? section.caption
+              : pl
+                ? "Tabela porównania"
+                : "Comparison table"
+          }
+        />
+      );
+    case "quoteSection":
+      return (
+        <QuoteSection
+          id={id}
+          labelledby={labelledby}
+          heading={
+            "heading" in section && typeof section.heading === "string"
+              ? section.heading
+              : pl
+                ? "Cytat"
+                : "Quote"
+          }
+          content={toQuote(section)}
+        />
+      );
+    case "ctaSection":
+      return (
+        <CtaSection id={id} labelledby={labelledby} content={toCta(section)} />
+      );
+    case "formSection": {
+      formCount += 1;
+      return (
+        <FormSection
+          lang={lang}
+          id={formCount === 1 ? "contact" : id}
+          idPrefix={formCount === 1 ? "" : `${section._key}-`}
+          labelledby={labelledby}
+          content={toFormCopy(section)}
+        />
+      );
+    }
+    case "mediaSection":
+      return (
+        <MediaSection
+          id={id}
+          labelledby={labelledby}
+          content={toMediaSection(section)}
+        />
+      );
+    case "relatedSection":
+      return (
+        <RelatedArticlesSection
+          id={id}
+          labelledby={labelledby}
+          content={toRelated(section, lang)}
+        />
+      );
+    default:
+      throw new Error("Nieznany typ sekcji. Zatrzymuję build.");
+  }
+})}

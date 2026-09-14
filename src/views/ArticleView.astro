@@ -1,0 +1,150 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { articleBodyToHtml } from "@/content/portable-text";
+import { toRelated } from "@/content/map-sections";
+import { formatDate, toDatetime } from "@/lib/dates";
+import { articlePath, blogCategoryPath, pagePath } from "@/lib/paths";
+import type { ArticleContent, SiteSettings } from "@/sanity/repository";
+import Layout from "@/layouts/Layout.astro";
+import Heading from "@/ui/heading/Heading.astro";
+import MediaFrame from "@/ui/media-frame/MediaFrame.astro";
+import Section from "@/ui/section/Section.astro";
+import SiteFooter from "@/ui/site-footer/SiteFooter.astro";
+import SiteHeader from "@/ui/site-header/SiteHeader.astro";
+import TextLink from "@/ui/text-link/TextLink.astro";
+import RelatedArticlesSection from "@/sections/RelatedArticlesSection.astro";
+
+export interface Props {
+  lang: Locale;
+  article: ArticleContent;
+  settings: SiteSettings;
+}
+
+const { lang, article, settings } = Astro.props as Props;
+const pl = lang === "pl";
+const { html, toc } = articleBodyToHtml(article.body);
+const published = article.publishedAt
+  ? formatDate(article.publishedAt, lang)
+  : "";
+const alternateHref = article.translation?.slug
+  ? articlePath(
+      article.translation.language === "en" ? "en" : "pl",
+      article.translation.slug,
+    )
+  : null;
+const related = toRelated(
+  {
+    title: pl ? "Powiązane wpisy" : "Related posts",
+    items: (article.related ?? []).map((item) => ({
+      title: item?.title,
+      excerpt: item?.lead,
+      slug: item?.slug,
+      language: item?.language,
+      publishedAt: item?.publishedAt,
+      media: item?.media,
+    })),
+  },
+  lang,
+);
+---
+
+<Layout lang={lang} title={article.seo?.title ?? article.title}>
+  <SiteHeader
+    lang={lang}
+    section="blog"
+    alternateHref={alternateHref}
+    navigation={settings.navigation}
+  />
+  <main id="main">
+    <Section labelledby="article-title" class="article-hero">
+      <p class="muted">
+        <time
+          datetime={
+            article.publishedAt ? toDatetime(article.publishedAt) : undefined
+          }
+        >
+          {published}
+        </time>
+        {article.categories?.map((category) =>
+          category?.slug ? (
+            <TextLink href={blogCategoryPath(lang, category.slug)}>
+              {category.title}
+            </TextLink>
+          ) : null,
+        )}
+      </p>
+      <Heading tag="h1" id="article-title">
+        {article.title}
+      </Heading>
+      <p class="lead">{article.lead}</p>
+      {article.authors?.length ? (
+        <p>
+          {article.authors
+            .map((person) => person?.name)
+            .filter(Boolean)
+            .join(", ")}
+        </p>
+      ) : null}
+      {article.media ? (
+        <MediaFrame
+          label={article.media.label ?? article.media.alt ?? article.title}
+          tone={
+            article.media.tone === "diagram" ||
+            article.media.tone === "portrait"
+              ? article.media.tone
+              : "photo"
+          }
+          src={article.media.src ?? undefined}
+        />
+      ) : null}
+    </Section>
+    {toc.length ? (
+      <nav class="panel shell article-toc" aria-labelledby="article-toc-title">
+        <Heading tag="h2" id="article-toc-title">
+          {pl ? "Spis treści" : "Contents"}
+        </Heading>
+        <ol>
+          {toc.map((entry) => (
+            <li>
+              <a href={`#${entry.id}`}>{entry.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    ) : null}
+    <Section class="article-body">
+      <div class="section-stack" set:html={html} />
+    </Section>
+    {article.sources?.length ? (
+      <Section labelledby="article-sources-title">
+        <Heading tag="h2" id="article-sources-title">
+          {pl ? "Źródła" : "Sources"}
+        </Heading>
+        <ul>
+          {article.sources.map((source) =>
+            source?.href && source.title ? (
+              <li>
+                <TextLink href={source.href} rel="noreferrer">
+                  {source.title}
+                </TextLink>
+              </li>
+            ) : null,
+          )}
+        </ul>
+      </Section>
+    ) : null}
+    {related.items.length ? (
+      <RelatedArticlesSection
+        labelledby="article-related-title"
+        content={related}
+      />
+    ) : null}
+    <p class="panel shell">
+      <TextLink href={pagePath(lang, "home")}>
+        {pl ? "Strona główna" : "Home"}
+      </TextLink>
+    </p>
+  </main>
+  <SiteFooter lang={lang} note={settings.footerNote ?? undefined} />
+</Layout>

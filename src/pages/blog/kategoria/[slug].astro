@@ -1,0 +1,48 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import { blogCategoryPath } from "@/lib/paths";
+import {
+  getArticleIndex,
+  getCategory,
+  getSiteSettings,
+  listCategories,
+} from "@/sanity/repository";
+import BlogIndex from "@/views/BlogIndex.astro";
+
+export const getStaticPaths = (async () => {
+  const categories = await listCategories("pl");
+  return categories
+    .filter((category) => category.slug)
+    .map((category) => ({ params: { slug: category.slug } }));
+}) satisfies GetStaticPaths;
+
+const lang = "pl" as const;
+const slug = Astro.params.slug;
+if (!slug) throw new Error("Brak sluga kategorii.");
+const [category, index, settings, categories] = await Promise.all([
+  getCategory(lang, slug),
+  getArticleIndex(lang, 1, { categorySlug: slug }),
+  getSiteSettings(lang),
+  listCategories(lang),
+]);
+---
+
+<BlogIndex
+  lang={lang}
+  settings={settings}
+  title={category.title ?? slug}
+  lead={category.description ?? ""}
+  articles={index.items}
+  featured={index.featured}
+  categories={categories}
+  page={index.page}
+  totalPages={index.totalPages}
+  category={category}
+  pageHref={(page) => blogCategoryPath(lang, slug, page)}
+  alternateHref={
+    category.translation?.slug
+      ? blogCategoryPath("en", category.translation.slug)
+      : null
+  }
+/>

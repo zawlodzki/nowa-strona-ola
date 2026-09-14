@@ -1,26 +1,45 @@
 ---
 import type { Locale } from "@ola/shared";
 
-import {
-  alternatePath,
-  catalogPath,
-  homePath,
-  type SiteSection,
-} from "@/lib/paths";
+import { catalogPath, homePath, type SiteSection } from "@/lib/paths";
 import Container from "@/ui/container/Container.astro";
 import Logo from "@/ui/logo/Logo.astro";
 import TextLink from "@/ui/text-link/TextLink.astro";
 
+export interface HeaderLink {
+  href: string;
+  label: string;
+}
+
 export interface Props {
   lang: Locale;
   section?: SiteSection;
+  alternateHref?: string | null;
+  navigation?: HeaderLink[] | null;
 }
 
-const { lang, section = "home" } = Astro.props as Props;
+const {
+  lang,
+  section = "home",
+  alternateHref,
+  navigation,
+} = Astro.props as Props;
 const pl = lang === "pl";
 const homeHref = homePath(lang);
-const catalogHref = catalogPath(lang);
-const languageHref = alternatePath(lang, section);
+const languageHref =
+  alternateHref === undefined
+    ? section === "catalog"
+      ? catalogPath(pl ? "en" : "pl")
+      : homePath(pl ? "en" : "pl")
+    : alternateHref;
+const links = navigation?.length
+  ? navigation
+  : [
+      {
+        href: catalogPath(lang),
+        label: pl ? "Komponenty" : "Components",
+      },
+    ];
 ---
 
 <Container tag="header" class="site-header">
@@ -37,18 +56,17 @@ const languageHref = alternatePath(lang, section);
     <Logo variant="stacked" class="site-brand__narrow" />
   </TextLink>
   <nav aria-label={pl ? "Nawigacja główna" : "Primary"}>
-    <TextLink
-      href={catalogHref}
-      aria-current={section === "catalog" ? "page" : undefined}
-    >
-      {pl ? "Komponenty" : "Components"}
-    </TextLink>
-    <TextLink
-      href={languageHref}
-      lang={pl ? "en" : "pl"}
-      hreflang={pl ? "en" : "pl"}
-    >
-      {pl ? "English" : "Polski"}
-    </TextLink>
+    {links.map((link) => (
+      <TextLink href={link.href}>{link.label}</TextLink>
+    ))}
+    {languageHref ? (
+      <TextLink
+        href={languageHref}
+        lang={pl ? "en" : "pl"}
+        hreflang={pl ? "en" : "pl"}
+      >
+        {pl ? "English" : "Polski"}
+      </TextLink>
+    ) : null}
   </nav>
 </Container>

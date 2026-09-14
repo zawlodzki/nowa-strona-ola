@@ -17,7 +17,11 @@ const { id, labelledby, content } = Astro.props as Props;
 <Section id={id} labelledby={labelledby}>
   <div class="expert-section">
     <figure class="figure" data-reveal>
-      <MediaFrame label={content.media.label} tone={content.media.tone} />
+      <MediaFrame
+        label={content.media.label}
+        tone={content.media.tone}
+        src={content.media.src}
+      />
     </figure>
     <div class="expert-copy section-stack" data-reveal>
       <p class="muted">{content.title}</p>

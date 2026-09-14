@@ -446,6 +446,37 @@
     aspect-ratio: 16 / 10;
   }
 }
+
+.article-toc ol {
+  display: grid;
+  gap: var(--wf-space-8);
+  padding-left: 1.25rem;
+}
+
+.article-body .section-stack {
+  max-width: 68ch;
+}
+
+.article-body h2,
+.article-body h3 {
+  margin: 0;
+}
+
+.article-highlight,
+.article-cta {
+  display: grid;
+  gap: var(--wf-space-12);
+  padding: var(--wf-space-24);
+  border: 1px solid var(--wf-color-line);
+  border-radius: var(--wf-radius-12);
+  background: var(--wf-color-surface);
+}
+
+.article-body img {
+  width: 100%;
+  height: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .js-reveal,
   .card-media .media-frame,

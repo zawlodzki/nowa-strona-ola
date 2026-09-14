@@ -54,7 +54,11 @@ const TitleTag = titleAs === "h2" ? "h2" : titleAs === "h1" ? "h1" : "p";
     </div>
     {content.variant === "split" && content.media && (
       <div data-reveal>
-        <MediaFrame label={content.media.label} tone={content.media.tone} />
+        <MediaFrame
+          label={content.media.label}
+          tone={content.media.tone}
+          src={content.media.src}
+        />
       </div>
     )}
   </div>

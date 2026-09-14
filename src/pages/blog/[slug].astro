@@ -1,0 +1,27 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import {
+  getArticle,
+  getArticlePaths,
+  getSiteSettings,
+} from "@/sanity/repository";
+import ArticleView from "@/views/ArticleView.astro";
+
+export const getStaticPaths = (async () => {
+  const paths = await getArticlePaths();
+  return paths
+    .filter((entry) => entry.language === "pl" && entry.slug)
+    .map((entry) => ({ params: { slug: entry.slug } }));
+}) satisfies GetStaticPaths;
+
+const lang = "pl" as const;
+const slug = Astro.params.slug;
+if (!slug) throw new Error("Brak sluga artykułu.");
+const [article, settings] = await Promise.all([
+  getArticle(lang, slug),
+  getSiteSettings(lang),
+]);
+---
+
+<ArticleView lang={lang} article={article} settings={settings} />

@@ -249,14 +249,20 @@ z poprawnym stanem statycznym przy reduced motion.
 
 ### Etap 4 — Sanity i szablony PL/EN
 
-- [ ] Wdrożyć modele, walidację, podglądy, referencje i mapowanie sekcji.
-- [ ] Umożliwić składanie i duplikowanie stron bez kodu.
-- [ ] Dodać powiązania tłumaczeń i lokalizowane adresy.
-- [ ] Przygotować demonstracyjną stronę główną, dwa landing page’e, artykuły i blog.
-- [ ] Wdrożyć paginację, kategorie, spis treści i powiązane wpisy.
+- [x] Wdrożyć modele, walidację, podglądy, referencje i mapowanie sekcji.
+      Schema, GROQ, TypeGen i renderery zweryfikowane lokalnie; Content Lake
+      nadal ma stare dokumenty `page` bez sekcji.
+- [x] Umożliwić składanie i duplikowanie stron bez kodu.
+      Tablica sekcji w Studio, szablony PL/EN i natywne duplikowanie dokumentu.
+- [x] Dodać powiązania tłumaczeń i lokalizowane adresy.
+- [x] Przygotować demonstracyjną stronę główną, dwa landing page’e, artykuły i blog.
+      Fixture’e lokalne; nie opublikowano nowej treści do datasetu.
+- [x] Wdrożyć paginację, kategorie, spis treści i powiązane wpisy.
 
 Odbiór: redaktor sam tworzy landing page i publikuje PL/EN; brak tłumaczenia
-nie prowadzi do polskiej treści pod angielskim adresem.
+nie prowadzi do polskiej treści pod angielskim adresem. Drugi warunek przeszedł
+lokalnie (`/tylko-pl/` bez przełącznika, `/en/tylko-pl/` 404). Publikacja
+landingów z Studio do Content Lake pozostaje do zrobienia.
 
 ### Etap 5 — SEO i eksport treści
 

@@ -1,4 +1,10 @@
 {
   "extends": "../tsconfig.base.json",
-  "include": ["sanity.cli.ts", "sanity.config.ts", "schema-types/**/*.ts"]
+  "include": [
+    "sanity.cli.ts",
+    "sanity.config.ts",
+    "presentation.ts",
+    "structure.ts",
+    "schema-types/**/*.ts"
+  ]
 }

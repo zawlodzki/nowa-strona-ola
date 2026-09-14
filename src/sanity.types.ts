@@ -15,6 +15,234 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type SiteSettingsReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "siteSettings";
+};
+
+export type SiteSettings = {
+  _id: string;
+  _type: "siteSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  translation?: SiteSettingsReference;
+  siteTitle: string;
+  contactEmail?: string;
+  footerNote: string;
+  defaultSeo?: Seo;
+  navigation: Array<{
+    label: string;
+    href: string;
+    _key: string;
+  }>;
+  socialLinks?: Array<{
+    label: string;
+    href: string;
+    _key: string;
+  }>;
+};
+
+export type Seo = {
+  _type: "seo";
+  title?: string;
+  description?: string;
+};
+
+export type Redirect = {
+  _id: string;
+  _type: "redirect";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  from: string;
+  to: string;
+  status: "301" | "302";
+};
+
+export type TestimonialReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "testimonial";
+};
+
+export type Testimonial = {
+  _id: string;
+  _type: "testimonial";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  translation?: TestimonialReference;
+  quote: string;
+  name: string;
+  role: string;
+};
+
+export type ServiceReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "service";
+};
+
+export type Service = {
+  _id: string;
+  _type: "service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  title: string;
+  slug: Slug;
+  translation?: ServiceReference;
+  summary: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
+};
+
+export type CategoryReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "category";
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  title: string;
+  slug: Slug;
+  translation?: CategoryReference;
+  description: string;
+};
+
+export type ArticleReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "article";
+};
+
+export type AuthorReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "author";
+};
+
+export type Article = {
+  _id: string;
+  _type: "article";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  title: string;
+  slug: Slug;
+  translation?: ArticleReference;
+  lead: string;
+  publishedAt: string;
+  updatedAt?: string;
+  featured?: "standard" | "featured";
+  authors: Array<
+    {
+      _key: string;
+    } & AuthorReference
+  >;
+  categories: Array<
+    {
+      _key: string;
+    } & CategoryReference
+  >;
+  image: MediaObject;
+  body: ArticleBody;
+  sources?: Array<{
+    title: string;
+    href: string;
+    _key: string;
+  }>;
+  related?: Array<
+    {
+      _key: string;
+    } & ArticleReference
+  >;
+  seo?: Seo;
+};
+
+export type ArticleBody = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h2" | "h3" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & ArticleImage)
+  | ({
+      _key: string;
+    } & ArticleHighlight)
+  | ({
+      _key: string;
+    } & ArticleCta)
+  | ({
+      _key: string;
+    } & ArticleTable)
+>;
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type MediaObject = {
+  _type: "mediaObject";
+  alt: string;
+  tone: "photo" | "diagram" | "portrait";
+  caption?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type PageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "page";
+};
+
 export type Page = {
   _id: string;
   _type: "page";
@@ -24,21 +252,350 @@ export type Page = {
   language: "pl" | "en";
   title: string;
   slug: Slug;
-  eyebrow: string;
-  lead: string;
+  translation?: PageReference;
+  sections: Array<
+    | ({
+        _key: string;
+      } & HeroSection)
+    | ({
+        _key: string;
+      } & TextSection)
+    | ({
+        _key: string;
+      } & TextImageSection)
+    | ({
+        _key: string;
+      } & LogosSection)
+    | ({
+        _key: string;
+      } & CardsSection)
+    | ({
+        _key: string;
+      } & ListSection)
+    | ({
+        _key: string;
+      } & ProcessSection)
+    | ({
+        _key: string;
+      } & MetricsSection)
+    | ({
+        _key: string;
+      } & PricingSection)
+    | ({
+        _key: string;
+      } & TestimonialsSection)
+    | ({
+        _key: string;
+      } & ExpertSection)
+    | ({
+        _key: string;
+      } & FaqSection)
+    | ({
+        _key: string;
+      } & ComparisonSection)
+    | ({
+        _key: string;
+      } & QuoteSection)
+    | ({
+        _key: string;
+      } & CtaSection)
+    | ({
+        _key: string;
+      } & FormSection)
+    | ({
+        _key: string;
+      } & MediaSection)
+    | ({
+        _key: string;
+      } & RelatedSection)
+  >;
   seo?: Seo;
 };
 
-export type Seo = {
-  _type: "seo";
-  title?: string;
-  description?: string;
+export type RelatedSection = {
+  _type: "relatedSection";
+  title: string;
+  items: Array<
+    {
+      _key: string;
+    } & ArticleReference
+  >;
 };
 
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
+export type MediaSection = {
+  _type: "mediaSection";
+  title: string;
+  lead: string;
+  image: MediaObject;
+  videoTitle: string;
+  videoUrl: string;
+  videoPlatform: string;
+};
+
+export type FormReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "form";
+};
+
+export type FormSection = {
+  _type: "formSection";
+  eyebrow: string;
+  title: string;
+  lead: string;
+  form: FormReference;
+};
+
+export type Form = {
+  _id: string;
+  _type: "form";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  title: string;
+  translation?: FormReference;
+  submitLabel: string;
+  successMessage: string;
+  noscriptMessage: string;
+  fields: Array<{
+    name: string;
+    input: "text" | "email" | "tel" | "textarea" | "select" | "checkbox";
+    label: string;
+    errorMessage: string;
+    required?: "required" | "optional";
+    options?: Array<string>;
+    _key: string;
+  }>;
+};
+
+export type CtaSection = {
+  _type: "ctaSection";
+  theme?: "light" | "dark";
+  title: string;
+  lead: string;
+  action: ActionLink;
+};
+
+export type ActionLink = {
+  _type: "actionLink";
+  label: string;
+  href: string;
+  emphasis?: "default" | "outline";
+};
+
+export type QuoteSection = {
+  _type: "quoteSection";
+  theme?: "light" | "dark";
+  heading: string;
+  quote: string;
+  attribution: string;
+};
+
+export type ComparisonSection = {
+  _type: "comparisonSection";
+  title: string;
+  lead: string;
+  caption: string;
+  rowHeading: string;
+  columns: Array<string>;
+  rows: Array<{
+    feature: string;
+    values: Array<string>;
+    _key: string;
+  }>;
+};
+
+export type FaqSection = {
+  _type: "faqSection";
+  title: string;
+  lead: string;
+  items: Array<{
+    question: string;
+    answer: string;
+    _key: string;
+  }>;
+};
+
+export type ExpertSection = {
+  _type: "expertSection";
+  title: string;
+  person: AuthorReference;
+  body: string;
+  action: ActionLink;
+  media: MediaObject;
+};
+
+export type Author = {
+  _id: string;
+  _type: "author";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  name: string;
+  slug: Slug;
+  translation?: AuthorReference;
+  role: string;
+  bio: string;
+  photo?: MediaObject;
+};
+
+export type TestimonialsSection = {
+  _type: "testimonialsSection";
+  title: string;
+  items: Array<
+    {
+      _key: string;
+    } & TestimonialReference
+  >;
+};
+
+export type PricingSection = {
+  _type: "pricingSection";
+  title: string;
+  lead: string;
+  plans: Array<{
+    name: string;
+    price: string;
+    summary: string;
+    emphasis?: "standard" | "featured";
+    features: Array<string>;
+    action: ActionLink;
+    _key: string;
+  }>;
+};
+
+export type MetricsSection = {
+  _type: "metricsSection";
+  title: string;
+  lead: string;
+  items: Array<{
+    value: number;
+    suffix?: string;
+    label: string;
+    _key: string;
+  }>;
+};
+
+export type ProcessSection = {
+  _type: "processSection";
+  title: string;
+  lead: string;
+  steps: Array<{
+    title: string;
+    body: string;
+    _key: string;
+  }>;
+};
+
+export type ListSection = {
+  _type: "listSection";
+  title: string;
+  lead: string;
+  items: Array<string>;
+};
+
+export type CardsSection = {
+  _type: "cardsSection";
+  eyebrow?: string;
+  title: string;
+  lead: string;
+  items: Array<{
+    title: string;
+    body: string;
+    href: string;
+    media: MediaObject;
+    _key: string;
+  }>;
+};
+
+export type LogosSection = {
+  _type: "logosSection";
+  title: string;
+  lead: string;
+  names: Array<string>;
+};
+
+export type TextImageSection = {
+  _type: "textImageSection";
+  eyebrow?: string;
+  title: string;
+  body: Array<string>;
+  mediaPosition: "end" | "start";
+  media: MediaObject;
+};
+
+export type TextSection = {
+  _type: "textSection";
+  eyebrow?: string;
+  title: string;
+  body: Array<string>;
+};
+
+export type HeroSection = {
+  _type: "heroSection";
+  variant: "editorial" | "cinematic" | "split";
+  theme?: "light" | "dark";
+  eyebrow: string;
+  title: string;
+  lead: string;
+  primary: ActionLink;
+  secondary?: ActionLink;
+  media?: MediaObject;
+};
+
+export type ArticleTable = {
+  _type: "articleTable";
+  caption: string;
+  headers: Array<string>;
+  rows: Array<{
+    cells: Array<string>;
+    _key: string;
+  }>;
+};
+
+export type ArticleCta = {
+  _type: "articleCta";
+  title: string;
+  lead: string;
+  action: ActionLink;
+};
+
+export type ArticleHighlight = {
+  _type: "articleHighlight";
+  title?: string;
+  body: string;
+};
+
+export type ArticleImage = {
+  _type: "articleImage";
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt: string;
+  caption?: string;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -77,22 +634,6 @@ export type SanityImageMetadata = {
   thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
 };
 
 export type SanityFileAsset = {
@@ -155,15 +696,57 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | Page
+  | SiteSettingsReference
+  | SiteSettings
   | Seo
+  | Redirect
+  | TestimonialReference
+  | Testimonial
+  | ServiceReference
+  | Service
   | Slug
+  | CategoryReference
+  | Category
+  | ArticleReference
+  | AuthorReference
+  | Article
+  | ArticleBody
+  | SanityImageAssetReference
+  | MediaObject
+  | PageReference
+  | Page
+  | RelatedSection
+  | MediaSection
+  | FormReference
+  | FormSection
+  | Form
+  | CtaSection
+  | ActionLink
+  | QuoteSection
+  | ComparisonSection
+  | FaqSection
+  | ExpertSection
+  | Author
+  | TestimonialsSection
+  | PricingSection
+  | MetricsSection
+  | ProcessSection
+  | ListSection
+  | CardsSection
+  | LogosSection
+  | TextImageSection
+  | TextSection
+  | HeroSection
+  | ArticleTable
+  | ArticleCta
+  | ArticleHighlight
+  | ArticleImage
+  | SanityImageCrop
+  | SanityImageHotspot
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
@@ -171,41 +754,1021 @@ export type AllSanitySchemaTypes =
 
 // Source: ../preview/src/lib/queries.ts
 // Variable: PREVIEW_PAGE_QUERY
-// Query: *[    _type == "page" &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    "slug": slug.current,    title,    eyebrow,    lead,    seo{title, description}  }
+// Query: *[    _type == "page" &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    "slug": slug.current,    title,    seo{title, description},    "translation": translation->{ language, "slug": slug.current },    sections[]{   _key,  _type,  _type == "heroSection" => {    variant,    theme,    eyebrow,    title,    lead,    "primary": primary{ label, href, emphasis },    "secondary": secondary{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "textSection" => { eyebrow, title, body },  _type == "textImageSection" => {    eyebrow,    title,    body,    mediaPosition,    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "logosSection" => { title, lead, names },  _type == "cardsSection" => {    eyebrow,    title,    lead,    items[]{      _key,      title,      body,      href,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "listSection" => { title, lead, items },  _type == "processSection" => {    title,    lead,    steps[]{ _key, title, body }  },  _type == "metricsSection" => {    title,    lead,    items[]{ _key, value, suffix, label }  },  _type == "pricingSection" => {    title,    lead,    plans[]{      _key,      name,      price,      summary,      emphasis,      features,      "action": action{ label, href, emphasis }    }  },  _type == "testimonialsSection" => {    title,    items[]->{ quote, name, role }  },  _type == "expertSection" => {    title,    body,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "person": person->{ name, role }  },  _type == "faqSection" => {    title,    lead,    items[]{ _key, question, answer }  },  _type == "comparisonSection" => {    title,    lead,    caption,    rowHeading,    columns,    rows[]{ _key, feature, values }  },  _type == "quoteSection" => { theme, heading, quote, attribution },  _type == "ctaSection" => {    theme,    title,    lead,    "action": action{ label, href, emphasis }  },  _type == "formSection" => {    eyebrow,    title,    lead,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        errorMessage,        required,        options      }    }  },  _type == "mediaSection" => {    title,    lead,    "image": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    videoTitle,    videoUrl,    videoPlatform  },  _type == "relatedSection" => {    title,    items[]->{      title,      "excerpt": lead,      "slug": slug.current,      language,      publishedAt,      "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  } }  }
 export type PREVIEW_PAGE_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
   slug: string;
   title: string;
-  eyebrow: string;
-  lead: string;
   seo: {
     title: string | null;
     description: string | null;
+  } | null;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+  sections: Array<
+    | {
+        _key: string;
+        _type: "cardsSection";
+        eyebrow: string | null;
+        title: string;
+        lead: string;
+        items: Array<{
+          _key: string;
+          title: string;
+          body: string;
+          href: string;
+          media: {
+            alt: string;
+            tone: "diagram" | "photo" | "portrait";
+            caption: string | null;
+            label: string;
+            src: string | null;
+          };
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "comparisonSection";
+        title: string;
+        lead: string;
+        caption: string;
+        rowHeading: string;
+        columns: Array<string>;
+        rows: Array<{
+          _key: string;
+          feature: string;
+          values: Array<string>;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "ctaSection";
+        theme: "dark" | "light" | null;
+        title: string;
+        lead: string;
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        };
+      }
+    | {
+        _key: string;
+        _type: "expertSection";
+        title: string;
+        body: string;
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        };
+        media: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        };
+        person: {
+          name: string;
+          role: string;
+        };
+      }
+    | {
+        _key: string;
+        _type: "faqSection";
+        title: string;
+        lead: string;
+        items: Array<{
+          _key: string;
+          question: string;
+          answer: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "formSection";
+        eyebrow: string;
+        title: string;
+        lead: string;
+        form: {
+          id: string;
+          language: "en" | "pl";
+          title: string;
+          submitLabel: string;
+          successMessage: string;
+          noscriptMessage: string;
+          fields: Array<{
+            _key: string;
+            name: string;
+            input:
+              "checkbox" | "email" | "select" | "tel" | "text" | "textarea";
+            label: string;
+            errorMessage: string;
+            required: "optional" | "required" | null;
+            options: Array<string> | null;
+          }>;
+        };
+      }
+    | {
+        _key: string;
+        _type: "heroSection";
+        variant: "cinematic" | "editorial" | "split";
+        theme: "dark" | "light" | null;
+        eyebrow: string;
+        title: string;
+        lead: string;
+        primary: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        };
+        secondary: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        } | null;
+        media: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "listSection";
+        title: string;
+        lead: string;
+        items: Array<string>;
+      }
+    | {
+        _key: string;
+        _type: "logosSection";
+        title: string;
+        lead: string;
+        names: Array<string>;
+      }
+    | {
+        _key: string;
+        _type: "mediaSection";
+        title: string;
+        lead: string;
+        image: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        };
+        videoTitle: string;
+        videoUrl: string;
+        videoPlatform: string;
+      }
+    | {
+        _key: string;
+        _type: "metricsSection";
+        title: string;
+        lead: string;
+        items: Array<{
+          _key: string;
+          value: number;
+          suffix: string | null;
+          label: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "pricingSection";
+        title: string;
+        lead: string;
+        plans: Array<{
+          _key: string;
+          name: string;
+          price: string;
+          summary: string;
+          emphasis: "featured" | "standard" | null;
+          features: Array<string>;
+          action: {
+            label: string;
+            href: string;
+            emphasis: "default" | "outline" | null;
+          };
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "processSection";
+        title: string;
+        lead: string;
+        steps: Array<{
+          _key: string;
+          title: string;
+          body: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "quoteSection";
+        theme: "dark" | "light" | null;
+        heading: string;
+        quote: string;
+        attribution: string;
+      }
+    | {
+        _key: string;
+        _type: "relatedSection";
+        title: string;
+        items: Array<{
+          title: string;
+          excerpt: string;
+          slug: string;
+          language: "en" | "pl";
+          publishedAt: string;
+          media: {
+            alt: string;
+            tone: "diagram" | "photo" | "portrait";
+            caption: string | null;
+            label: string;
+            src: string | null;
+          };
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "testimonialsSection";
+        title: string;
+        items: Array<{
+          quote: string;
+          name: string;
+          role: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "textImageSection";
+        eyebrow: string | null;
+        title: string;
+        body: Array<string>;
+        mediaPosition: "end" | "start";
+        media: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        };
+      }
+    | {
+        _key: string;
+        _type: "textSection";
+        eyebrow: string | null;
+        title: string;
+        body: Array<string>;
+      }
+  >;
+} | null;
+
+// Source: ../preview/src/lib/queries.ts
+// Variable: PREVIEW_ARTICLE_QUERY
+// Query: *[    _type == "article" &&    language == $language &&    slug.current == $slug  ][0]{      "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current },    updatedAt,    seo{title, description},    authors[]->{ name, role, "slug": slug.current },    body[]{   ...,  _type == "articleImage" => {    alt,    caption,    "src": image.asset->url  },  _type == "articleCta" => {    title,    lead,    "action": action{ label, href, emphasis }  } },    sources[]{ _key, title, href },    related[]->{   "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current } }  }
+export type PREVIEW_ARTICLE_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  lead: string;
+  publishedAt: string;
+  featured: "featured" | "standard" | null;
+  media: {
+    alt: string;
+    tone: "diagram" | "photo" | "portrait";
+    caption: string | null;
+    label: string;
+    src: string | null;
+  };
+  categories: Array<{
+    title: string;
+    slug: string;
+    language: "en" | "pl";
+  }>;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+  updatedAt: string | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+  authors: Array<{
+    name: string;
+    role: string;
+    slug: string;
+  }>;
+  body: Array<
+    | {
+        _key: string;
+        _type: "articleCta";
+        title: string;
+        lead: string;
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        };
+      }
+    | {
+        _key: string;
+        _type: "articleHighlight";
+        title?: string;
+        body: string;
+      }
+    | {
+        _key: string;
+        _type: "articleImage";
+        image: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        alt: string;
+        caption: string | null;
+        src: string | null;
+      }
+    | {
+        _key: string;
+        _type: "articleTable";
+        caption: string;
+        headers: Array<string>;
+        rows: Array<{
+          cells: Array<string>;
+          _key: string;
+        }>;
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+  >;
+  sources: Array<{
+    _key: string;
+    title: string;
+    href: string;
+  }> | null;
+  related: Array<{
+    id: string;
+    language: "en" | "pl";
+    slug: string;
+    title: string;
+    lead: string;
+    publishedAt: string;
+    featured: "featured" | "standard" | null;
+    media: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+    };
+    categories: Array<{
+      title: string;
+      slug: string;
+      language: "en" | "pl";
+    }>;
+    translation: {
+      language: "en" | "pl";
+      slug: string;
+    } | null;
+  }> | null;
+} | null;
+
+// Source: ../preview/src/lib/queries.ts
+// Variable: PREVIEW_SITE_SETTINGS_QUERY
+// Query: *[    _type == "siteSettings" &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  socialLinks[]{ _key, label, href },  "translation": translation->{ language } }
+export type PREVIEW_SITE_SETTINGS_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  siteTitle: string;
+  contactEmail: string | null;
+  footerNote: string;
+  defaultSeo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+  navigation: Array<{
+    _key: string;
+    label: string;
+    href: string;
+  }>;
+  socialLinks: Array<{
+    _key: string;
+    label: string;
+    href: string;
+  }> | null;
+  translation: {
+    language: "en" | "pl";
+  } | null;
+} | null;
+
+// Source: ../preview/src/lib/queries.ts
+// Variable: PREVIEW_ARTICLES_QUERY
+// Query: *[    _type == "article" &&    language == $language  ] | order(publishedAt desc){   "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current } }
+export type PREVIEW_ARTICLES_QUERY_RESULT = Array<{
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  lead: string;
+  publishedAt: string;
+  featured: "featured" | "standard" | null;
+  media: {
+    alt: string;
+    tone: "diagram" | "photo" | "portrait";
+    caption: string | null;
+    label: string;
+    src: string | null;
+  };
+  categories: Array<{
+    title: string;
+    slug: string;
+    language: "en" | "pl";
+  }>;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+}>;
+
+// Source: ../preview/src/lib/queries.ts
+// Variable: PREVIEW_CATEGORIES_QUERY
+// Query: *[    _type == "category" &&    language == $language  ] | order(title asc){    title,    "slug": slug.current,    language  }
+export type PREVIEW_CATEGORIES_QUERY_RESULT = Array<{
+  title: string;
+  slug: string;
+  language: "en" | "pl";
+}>;
+
+// Source: ../preview/src/lib/queries.ts
+// Variable: PREVIEW_CATEGORY_QUERY
+// Query: *[    _type == "category" &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    title,    description,    "slug": slug.current,    "translation": translation->{ language, "slug": slug.current }  }
+export type PREVIEW_CATEGORY_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  title: string;
+  description: string;
+  slug: string;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
   } | null;
 } | null;
 
 // Source: ../src/sanity/queries.ts
 // Variable: PUBLISHED_PAGE_QUERY
-// Query: *[    _type == "page" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    "slug": slug.current,    title,    eyebrow,    lead,    seo{title, description}  }
+// Query: *[    _type == "page" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{   "id": _id,  language,  "slug": slug.current,  title,  seo{title, description},  "translation": translation->{ language, "slug": slug.current },  sections[]{   _key,  _type,  _type == "heroSection" => {    variant,    theme,    eyebrow,    title,    lead,    "primary": primary{ label, href, emphasis },    "secondary": secondary{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "textSection" => { eyebrow, title, body },  _type == "textImageSection" => {    eyebrow,    title,    body,    mediaPosition,    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "logosSection" => { title, lead, names },  _type == "cardsSection" => {    eyebrow,    title,    lead,    items[]{      _key,      title,      body,      href,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "listSection" => { title, lead, items },  _type == "processSection" => {    title,    lead,    steps[]{ _key, title, body }  },  _type == "metricsSection" => {    title,    lead,    items[]{ _key, value, suffix, label }  },  _type == "pricingSection" => {    title,    lead,    plans[]{      _key,      name,      price,      summary,      emphasis,      features,      "action": action{ label, href, emphasis }    }  },  _type == "testimonialsSection" => {    title,    items[]->{ quote, name, role }  },  _type == "expertSection" => {    title,    body,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "person": person->{ name, role }  },  _type == "faqSection" => {    title,    lead,    items[]{ _key, question, answer }  },  _type == "comparisonSection" => {    title,    lead,    caption,    rowHeading,    columns,    rows[]{ _key, feature, values }  },  _type == "quoteSection" => { theme, heading, quote, attribution },  _type == "ctaSection" => {    theme,    title,    lead,    "action": action{ label, href, emphasis }  },  _type == "formSection" => {    eyebrow,    title,    lead,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        errorMessage,        required,        options      }    }  },  _type == "mediaSection" => {    title,    lead,    "image": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    videoTitle,    videoUrl,    videoPlatform  },  _type == "relatedSection" => {    title,    items[]->{      title,      "excerpt": lead,      "slug": slug.current,      language,      publishedAt,      "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  } } }
 export type PUBLISHED_PAGE_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
   slug: string;
   title: string;
-  eyebrow: string;
-  lead: string;
   seo: {
     title: string | null;
     description: string | null;
   } | null;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+  sections: Array<
+    | {
+        _key: string;
+        _type: "cardsSection";
+        eyebrow: string | null;
+        title: string;
+        lead: string;
+        items: Array<{
+          _key: string;
+          title: string;
+          body: string;
+          href: string;
+          media: {
+            alt: string;
+            tone: "diagram" | "photo" | "portrait";
+            caption: string | null;
+            label: string;
+            src: string | null;
+          };
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "comparisonSection";
+        title: string;
+        lead: string;
+        caption: string;
+        rowHeading: string;
+        columns: Array<string>;
+        rows: Array<{
+          _key: string;
+          feature: string;
+          values: Array<string>;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "ctaSection";
+        theme: "dark" | "light" | null;
+        title: string;
+        lead: string;
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        };
+      }
+    | {
+        _key: string;
+        _type: "expertSection";
+        title: string;
+        body: string;
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        };
+        media: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        };
+        person: {
+          name: string;
+          role: string;
+        };
+      }
+    | {
+        _key: string;
+        _type: "faqSection";
+        title: string;
+        lead: string;
+        items: Array<{
+          _key: string;
+          question: string;
+          answer: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "formSection";
+        eyebrow: string;
+        title: string;
+        lead: string;
+        form: {
+          id: string;
+          language: "en" | "pl";
+          title: string;
+          submitLabel: string;
+          successMessage: string;
+          noscriptMessage: string;
+          fields: Array<{
+            _key: string;
+            name: string;
+            input:
+              "checkbox" | "email" | "select" | "tel" | "text" | "textarea";
+            label: string;
+            errorMessage: string;
+            required: "optional" | "required" | null;
+            options: Array<string> | null;
+          }>;
+        };
+      }
+    | {
+        _key: string;
+        _type: "heroSection";
+        variant: "cinematic" | "editorial" | "split";
+        theme: "dark" | "light" | null;
+        eyebrow: string;
+        title: string;
+        lead: string;
+        primary: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        };
+        secondary: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        } | null;
+        media: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        } | null;
+      }
+    | {
+        _key: string;
+        _type: "listSection";
+        title: string;
+        lead: string;
+        items: Array<string>;
+      }
+    | {
+        _key: string;
+        _type: "logosSection";
+        title: string;
+        lead: string;
+        names: Array<string>;
+      }
+    | {
+        _key: string;
+        _type: "mediaSection";
+        title: string;
+        lead: string;
+        image: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        };
+        videoTitle: string;
+        videoUrl: string;
+        videoPlatform: string;
+      }
+    | {
+        _key: string;
+        _type: "metricsSection";
+        title: string;
+        lead: string;
+        items: Array<{
+          _key: string;
+          value: number;
+          suffix: string | null;
+          label: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "pricingSection";
+        title: string;
+        lead: string;
+        plans: Array<{
+          _key: string;
+          name: string;
+          price: string;
+          summary: string;
+          emphasis: "featured" | "standard" | null;
+          features: Array<string>;
+          action: {
+            label: string;
+            href: string;
+            emphasis: "default" | "outline" | null;
+          };
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "processSection";
+        title: string;
+        lead: string;
+        steps: Array<{
+          _key: string;
+          title: string;
+          body: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "quoteSection";
+        theme: "dark" | "light" | null;
+        heading: string;
+        quote: string;
+        attribution: string;
+      }
+    | {
+        _key: string;
+        _type: "relatedSection";
+        title: string;
+        items: Array<{
+          title: string;
+          excerpt: string;
+          slug: string;
+          language: "en" | "pl";
+          publishedAt: string;
+          media: {
+            alt: string;
+            tone: "diagram" | "photo" | "portrait";
+            caption: string | null;
+            label: string;
+            src: string | null;
+          };
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "testimonialsSection";
+        title: string;
+        items: Array<{
+          quote: string;
+          name: string;
+          role: string;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "textImageSection";
+        eyebrow: string | null;
+        title: string;
+        body: Array<string>;
+        mediaPosition: "end" | "start";
+        media: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        };
+      }
+    | {
+        _key: string;
+        _type: "textSection";
+        eyebrow: string | null;
+        title: string;
+        body: Array<string>;
+      }
+  >;
 } | null;
+
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_PAGE_PATHS_QUERY
+// Query: *[    _type == "page" &&    !(_id in path("drafts.**")) &&    defined(slug.current) &&    defined(language)  ]{ language, "slug": slug.current }
+export type PUBLISHED_PAGE_PATHS_QUERY_RESULT = Array<{
+  language: "en" | "pl";
+  slug: string;
+}>;
+
+// Source: ../src/sanity/queries.ts
+// Variable: SITE_SETTINGS_QUERY
+// Query: *[    _type == "siteSettings" &&    !(_id in path("drafts.**")) &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  socialLinks[]{ _key, label, href },  "translation": translation->{ language } }
+export type SITE_SETTINGS_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  siteTitle: string;
+  contactEmail: string | null;
+  footerNote: string;
+  defaultSeo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+  navigation: Array<{
+    _key: string;
+    label: string;
+    href: string;
+  }>;
+  socialLinks: Array<{
+    _key: string;
+    label: string;
+    href: string;
+  }> | null;
+  translation: {
+    language: "en" | "pl";
+  } | null;
+} | null;
+
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_ARTICLE_QUERY
+// Query: *[    _type == "article" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{      "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current },    updatedAt,    seo{title, description},    authors[]->{ name, role, "slug": slug.current },    body[]{   ...,  _type == "articleImage" => {    alt,    caption,    "src": image.asset->url  },  _type == "articleCta" => {    title,    lead,    "action": action{ label, href, emphasis }  } },    sources[]{ _key, title, href },    related[]->{   "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current } }  }
+export type PUBLISHED_ARTICLE_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  lead: string;
+  publishedAt: string;
+  featured: "featured" | "standard" | null;
+  media: {
+    alt: string;
+    tone: "diagram" | "photo" | "portrait";
+    caption: string | null;
+    label: string;
+    src: string | null;
+  };
+  categories: Array<{
+    title: string;
+    slug: string;
+    language: "en" | "pl";
+  }>;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+  updatedAt: string | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+  authors: Array<{
+    name: string;
+    role: string;
+    slug: string;
+  }>;
+  body: Array<
+    | {
+        _key: string;
+        _type: "articleCta";
+        title: string;
+        lead: string;
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        };
+      }
+    | {
+        _key: string;
+        _type: "articleHighlight";
+        title?: string;
+        body: string;
+      }
+    | {
+        _key: string;
+        _type: "articleImage";
+        image: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        alt: string;
+        caption: string | null;
+        src: string | null;
+      }
+    | {
+        _key: string;
+        _type: "articleTable";
+        caption: string;
+        headers: Array<string>;
+        rows: Array<{
+          cells: Array<string>;
+          _key: string;
+        }>;
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+  >;
+  sources: Array<{
+    _key: string;
+    title: string;
+    href: string;
+  }> | null;
+  related: Array<{
+    id: string;
+    language: "en" | "pl";
+    slug: string;
+    title: string;
+    lead: string;
+    publishedAt: string;
+    featured: "featured" | "standard" | null;
+    media: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+    };
+    categories: Array<{
+      title: string;
+      slug: string;
+      language: "en" | "pl";
+    }>;
+    translation: {
+      language: "en" | "pl";
+      slug: string;
+    } | null;
+  }> | null;
+} | null;
+
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_ARTICLE_PATHS_QUERY
+// Query: *[    _type == "article" &&    !(_id in path("drafts.**")) &&    defined(slug.current) &&    defined(language)  ]{ language, "slug": slug.current }
+export type PUBLISHED_ARTICLE_PATHS_QUERY_RESULT = Array<{
+  language: "en" | "pl";
+  slug: string;
+}>;
+
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_ARTICLES_QUERY
+// Query: *[    _type == "article" &&    !(_id in path("drafts.**")) &&    language == $language  ] | order(publishedAt desc){   "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current } }
+export type PUBLISHED_ARTICLES_QUERY_RESULT = Array<{
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  lead: string;
+  publishedAt: string;
+  featured: "featured" | "standard" | null;
+  media: {
+    alt: string;
+    tone: "diagram" | "photo" | "portrait";
+    caption: string | null;
+    label: string;
+    src: string | null;
+  };
+  categories: Array<{
+    title: string;
+    slug: string;
+    language: "en" | "pl";
+  }>;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+}>;
+
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_CATEGORY_QUERY
+// Query: *[    _type == "category" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    title,    description,    "slug": slug.current,    "translation": translation->{ language, "slug": slug.current }  }
+export type PUBLISHED_CATEGORY_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  title: string;
+  description: string;
+  slug: string;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+} | null;
+
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_CATEGORIES_QUERY
+// Query: *[    _type == "category" &&    !(_id in path("drafts.**")) &&    language == $language  ] | order(title asc){    title,    "slug": slug.current,    language  }
+export type PUBLISHED_CATEGORIES_QUERY_RESULT = Array<{
+  title: string;
+  slug: string;
+  language: "en" | "pl";
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[\n    _type == "page" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    "slug": slug.current,\n    title,\n    eyebrow,\n    lead,\n    seo{title, description}\n  }\n': PREVIEW_PAGE_QUERY_RESULT;
-    '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    "slug": slug.current,\n    title,\n    eyebrow,\n    lead,\n    seo{title, description}\n  }\n': PUBLISHED_PAGE_QUERY_RESULT;
+    '\n  *[\n    _type == "page" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    "slug": slug.current,\n    title,\n    seo{title, description},\n    "translation": translation->{ language, "slug": slug.current },\n    sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    eyebrow,\n    title,\n    body,\n    mediaPosition,\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "logosSection" => { title, lead, names },\n  _type == "cardsSection" => {\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    steps[]{ _key, title, body }\n  },\n  _type == "metricsSection" => {\n    title,\n    lead,\n    items[]{ _key, value, suffix, label }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    items[]->{ quote, name, role }\n  },\n  _type == "expertSection" => {\n    title,\n    body,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "person": person->{ name, role }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  }\n }\n  }\n': PREVIEW_PAGE_QUERY_RESULT;
+    '\n  *[\n    _type == "article" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n    updatedAt,\n    seo{title, description},\n    authors[]->{ name, role, "slug": slug.current },\n    body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n    sources[]{ _key, title, href },\n    related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n  }\n': PREVIEW_ARTICLE_QUERY_RESULT;
+    '\n  *[\n    _type == "siteSettings" &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  "translation": translation->{ language }\n }\n': PREVIEW_SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[\n    _type == "article" &&\n    language == $language\n  ] | order(publishedAt desc){ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PREVIEW_ARTICLES_QUERY_RESULT;
+    '\n  *[\n    _type == "category" &&\n    language == $language\n  ] | order(title asc){\n    title,\n    "slug": slug.current,\n    language\n  }\n': PREVIEW_CATEGORIES_QUERY_RESULT;
+    '\n  *[\n    _type == "category" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    title,\n    description,\n    "slug": slug.current,\n    "translation": translation->{ language, "slug": slug.current }\n  }\n': PREVIEW_CATEGORY_QUERY_RESULT;
+    '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    eyebrow,\n    title,\n    body,\n    mediaPosition,\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "logosSection" => { title, lead, names },\n  _type == "cardsSection" => {\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    steps[]{ _key, title, body }\n  },\n  _type == "metricsSection" => {\n    title,\n    lead,\n    items[]{ _key, value, suffix, label }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    items[]->{ quote, name, role }\n  },\n  _type == "expertSection" => {\n    title,\n    body,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "person": person->{ name, role }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  }\n }\n }\n': PUBLISHED_PAGE_QUERY_RESULT;
+    '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_PAGE_PATHS_QUERY_RESULT;
+    '\n  *[\n    _type == "siteSettings" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  "translation": translation->{ language }\n }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n    updatedAt,\n    seo{title, description},\n    authors[]->{ name, role, "slug": slug.current },\n    body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n    sources[]{ _key, title, href },\n    related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n  }\n': PUBLISHED_ARTICLE_QUERY_RESULT;
+    '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_ARTICLE_PATHS_QUERY_RESULT;
+    '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ] | order(publishedAt desc){ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PUBLISHED_ARTICLES_QUERY_RESULT;
+    '\n  *[\n    _type == "category" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    title,\n    description,\n    "slug": slug.current,\n    "translation": translation->{ language, "slug": slug.current }\n  }\n': PUBLISHED_CATEGORY_QUERY_RESULT;
+    '\n  *[\n    _type == "category" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ] | order(title asc){\n    title,\n    "slug": slug.current,\n    language\n  }\n': PUBLISHED_CATEGORIES_QUERY_RESULT;
   }
 }

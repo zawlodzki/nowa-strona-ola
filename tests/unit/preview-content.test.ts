@@ -1,7 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { getPreviewPage } from "../../preview/src/lib/content";
-import { PREVIEW_PAGE_QUERY } from "../../preview/src/lib/queries";
+import {
+  PREVIEW_ARTICLE_QUERY,
+  PREVIEW_PAGE_QUERY,
+} from "../../preview/src/lib/queries";
 
 const environment = {
   SANITY_PROJECT_ID: "project123",
@@ -17,9 +20,22 @@ describe("preview content repository", () => {
       language: "en" as const,
       slug: "home",
       title: "Draft title",
-      eyebrow: "Draft eyebrow",
-      lead: "Draft lead",
       seo: null,
+      translation: null,
+      sections: [
+        {
+          _key: "hero",
+          _type: "heroSection",
+          variant: "editorial",
+          theme: "light",
+          eyebrow: "Draft eyebrow",
+          title: "Draft title",
+          lead: "Draft lead",
+          primary: { label: "Talk", href: "#contact", emphasis: "default" },
+          secondary: null,
+          media: null,
+        },
+      ],
     };
     const fetch = vi.fn().mockResolvedValue(page);
 
@@ -31,6 +47,7 @@ describe("preview content repository", () => {
       slug: "home",
     });
     expect(PREVIEW_PAGE_QUERY).not.toContain('path("drafts.**")');
+    expect(PREVIEW_ARTICLE_QUERY).toContain("related[]->");
   });
 
   it("fails instead of falling back when a preview document is missing", async () => {

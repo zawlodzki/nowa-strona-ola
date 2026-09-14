@@ -35,6 +35,7 @@ export interface MediaSpec {
   label: string;
   tone: "photo" | "diagram" | "portrait";
   caption?: string;
+  src?: string;
 }
 
 export interface HeroContent {

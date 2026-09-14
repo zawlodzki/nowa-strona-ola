@@ -1,0 +1,140 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { formatDate, toDatetime } from "@/lib/dates";
+import { articlePath, blogCategoryPath, blogPath } from "@/lib/paths";
+import type {
+  ArticleCard,
+  CategoryContent,
+  SiteSettings,
+} from "@/sanity/repository";
+import Layout from "@/layouts/Layout.astro";
+import Heading from "@/ui/heading/Heading.astro";
+import Section from "@/ui/section/Section.astro";
+import SiteFooter from "@/ui/site-footer/SiteFooter.astro";
+import SiteHeader from "@/ui/site-header/SiteHeader.astro";
+import TextLink from "@/ui/text-link/TextLink.astro";
+
+export interface Props {
+  lang: Locale;
+  settings: SiteSettings;
+  title: string;
+  lead: string;
+  articles: ArticleCard[];
+  featured?: ArticleCard[];
+  categories: { title?: string | null; slug?: string | null }[];
+  page: number;
+  totalPages: number;
+  category?: CategoryContent;
+  pageHref: (pageNumber: number) => string;
+  alternateHref?: string | null;
+}
+
+const {
+  lang,
+  settings,
+  title,
+  lead,
+  articles,
+  featured: featuredProp,
+  categories,
+  page,
+  totalPages,
+  category,
+  pageHref,
+  alternateHref = null,
+} = Astro.props as Props;
+const pl = lang === "pl";
+const featured =
+  featuredProp ?? articles.filter((item) => item.featured === "featured");
+---
+
+<Layout lang={lang} title={title}>
+  <SiteHeader
+    lang={lang}
+    section="blog"
+    alternateHref={alternateHref}
+    navigation={settings.navigation}
+  />
+  <main id="main">
+    <Section labelledby="blog-title">
+      <Heading tag="h1" id="blog-title">
+        {title}
+      </Heading>
+      <p class="lead">{lead}</p>
+      {categories.length ? (
+        <p>
+          {categories.map((item) =>
+            item.slug ? (
+              <TextLink href={blogCategoryPath(lang, item.slug)}>
+                {item.title}
+              </TextLink>
+            ) : null,
+          )}
+        </p>
+      ) : null}
+    </Section>
+    {!category && featured.length ? (
+      <Section labelledby="featured-title">
+        <Heading tag="h2" id="featured-title">
+          {pl ? "Wyróżnione" : "Featured"}
+        </Heading>
+        <ul class="related-grid">
+          {featured.map((item) =>
+            item.slug ? (
+              <li>
+                <a class="related-card" href={articlePath(lang, item.slug)}>
+                  <h3>{item.title}</h3>
+                  <p>{item.lead}</p>
+                </a>
+              </li>
+            ) : null,
+          )}
+        </ul>
+      </Section>
+    ) : null}
+    <Section labelledby="posts-title">
+      <Heading tag="h2" id="posts-title">
+        {pl ? "Wpisy" : "Posts"}
+      </Heading>
+      <ul class="related-grid">
+        {articles.map((item) =>
+          item.slug && item.publishedAt ? (
+            <li>
+              <a class="related-card" href={articlePath(lang, item.slug)}>
+                <time datetime={toDatetime(item.publishedAt)}>
+                  {formatDate(item.publishedAt, lang)}
+                </time>
+                <h3>{item.title}</h3>
+                <p>{item.lead}</p>
+              </a>
+            </li>
+          ) : null,
+        )}
+      </ul>
+    </Section>
+    {totalPages > 1 ? (
+      <nav class="panel shell" aria-label={pl ? "Paginacja" : "Pagination"}>
+        {page > 1 ? (
+          <TextLink href={pageHref(page - 1)}>
+            {pl ? "Poprzednia" : "Previous"}
+          </TextLink>
+        ) : null}
+        <span>
+          {page} / {totalPages}
+        </span>
+        {page < totalPages ? (
+          <TextLink href={pageHref(page + 1)}>
+            {pl ? "Następna" : "Next"}
+          </TextLink>
+        ) : null}
+      </nav>
+    ) : null}
+    <p class="panel shell">
+      <TextLink href={blogPath(lang)}>
+        {pl ? "Wszystkie wpisy" : "All posts"}
+      </TextLink>
+    </p>
+  </main>
+  <SiteFooter lang={lang} note={settings.footerNote ?? undefined} />
+</Layout>

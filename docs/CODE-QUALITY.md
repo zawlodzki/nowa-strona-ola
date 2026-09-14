@@ -47,10 +47,9 @@ Każda poprawka rzeczywistego błędu powinna dostać adekwatny test regresji.
 
 ## Kontrole wdrażane wraz z kolejnymi funkcjami
 
-- Sanity: minimalny schemat strony, TypeGen i repozytorium opublikowanych stron są
-  objęte kontrolą typów i testami konfiguracji/kwerendy. Nadal dodać walidację
-  pełnych danych demonstracyjnych, nieobsługiwanych sekcji, konfliktów slugów
-  oraz brakujących tłumaczeń w hreflang.
+- Sanity: schemat stron z page builderem, artykułów, ustawień i referencji jest
+  objęty TypeGen oraz testami fixture’ów, nieznanych sekcji, paginacji i braku
+  tłumaczenia EN. Hreflang HTML i Markdown to etap 5.
 - HTML/Markdown: porównanie znaczącej treści, linków, tabel i FAQ; usunięcie publikacji
   usuwa oba formaty. JSON-LD sprawdzany strukturalnie i względem widocznej treści.
 - Workers: testy z oficjalnym runtime testowym Cloudflare zamiast samego Node dla

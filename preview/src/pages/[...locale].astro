@@ -4,26 +4,72 @@ import type { Locale } from "@ola/shared";
 
 import Layout from "../../../src/layouts/Layout.astro";
 import Container from "../../../src/ui/container/Container.astro";
-import PageHero from "../../../src/views/PageHero.astro";
-import { getPreviewPage } from "../lib/content";
+import PageSections from "../../../src/views/PageSections.astro";
+import ArticleView from "../../../src/views/ArticleView.astro";
+import BlogIndex from "../../../src/views/BlogIndex.astro";
+import { parseContentPath } from "../../../src/lib/content-path";
+import { blogCategoryPath, blogPath } from "../../../src/lib/paths";
+import { demonstrationSettings } from "../../../src/sanity/fixtures";
+import {
+  getPreviewArticle,
+  getPreviewArticleIndex,
+  getPreviewCategories,
+  getPreviewCategory,
+  getPreviewPage,
+  getPreviewSiteSettings,
+} from "../lib/content";
 
-const localePath = Astro.params.locale;
+const route = parseContentPath(Astro.params.locale);
+const environment = {
+  SANITY_PROJECT_ID: env.SANITY_PROJECT_ID,
+  SANITY_DATASET: env.SANITY_DATASET,
+  SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
+  SANITY_API_READ_TOKEN: env.SANITY_API_READ_TOKEN,
+};
+
+if (route.kind === "unknown") {
+  Astro.response.status = 404;
+}
+
 const language: Locale | null =
-  localePath === undefined ? "pl" : localePath === "en" ? "en" : null;
+  route.kind === "unknown" ? null : route.language;
 
-if (!language) Astro.response.status = 404;
-
-const page = language
-  ? await getPreviewPage(language, "home", {
-      SANITY_PROJECT_ID: env.SANITY_PROJECT_ID,
-      SANITY_DATASET: env.SANITY_DATASET,
-      SANITY_STUDIO_URL: env.SANITY_STUDIO_URL,
-      SANITY_API_READ_TOKEN: env.SANITY_API_READ_TOKEN,
-    })
+const settings = language
+  ? await getPreviewSiteSettings(language, environment).catch(
+      () => demonstrationSettings[language],
+    )
   : null;
+const page =
+  route.kind === "home"
+    ? await getPreviewPage(route.language, "home", environment)
+    : route.kind === "page"
+      ? await getPreviewPage(route.language, route.slug, environment)
+      : null;
+const article =
+  route.kind === "article"
+    ? await getPreviewArticle(route.language, route.slug, environment)
+    : null;
+const blogIndex =
+  route.kind === "blogIndex" && language
+    ? await getPreviewArticleIndex(language, route.page, environment)
+    : null;
+const blogCategory =
+  route.kind === "blogCategory" && language
+    ? {
+        category: await getPreviewCategory(language, route.slug, environment),
+        index: await getPreviewArticleIndex(language, route.page, environment, {
+          categorySlug: route.slug,
+        }),
+      }
+    : null;
+const categories = language
+  ? await getPreviewCategories(language, environment)
+  : [];
 ---
 
-{page && language ? (
+{article && language && settings ? (
+  <ArticleView lang={language} article={article} settings={settings} />
+) : page && language ? (
   <Layout lang={language} title={`Podgląd — ${page.seo?.title ?? page.title}`}>
     <Container tag="header" class="site-header">
       <strong>Chroniony podgląd szkicu</strong>
@@ -32,12 +78,52 @@ const page = language
       </form>
     </Container>
     <main id="main">
-      <PageHero page={page} />
-      <section id="contact" class="panel shell">
-        <p>Element demonstracyjny — formularz nie jest aktywny w podglądzie.</p>
-      </section>
+      <PageSections lang={language} sections={page.sections} />
     </main>
   </Layout>
+) : blogIndex && language && settings ? (
+  <BlogIndex
+    lang={language}
+    settings={settings}
+    title="Blog"
+    lead={
+      language === "pl"
+        ? "Wpisy demonstracyjne. Każdy język ma osobne dokumenty."
+        : "Demonstration posts. Each language has its own documents."
+    }
+    articles={blogIndex.items}
+    featured={blogIndex.featured}
+    categories={categories}
+    page={blogIndex.page}
+    totalPages={blogIndex.totalPages}
+    pageHref={(pageNumber) => blogPath(language, pageNumber)}
+    alternateHref={blogPath(language === "pl" ? "en" : "pl", blogIndex.page)}
+  />
+) : blogCategory && language && settings ? (
+  <BlogIndex
+    lang={language}
+    settings={settings}
+    title={blogCategory.category.title ?? blogCategory.category.slug ?? ""}
+    lead={blogCategory.category.description ?? ""}
+    articles={blogCategory.index.items}
+    featured={blogCategory.index.featured}
+    categories={categories}
+    page={blogCategory.index.page}
+    totalPages={blogCategory.index.totalPages}
+    category={blogCategory.category}
+    pageHref={(pageNumber) =>
+      blogCategoryPath(language, blogCategory.category.slug ?? "", pageNumber)
+    }
+    alternateHref={
+      blogCategory.category.translation?.slug
+        ? blogCategoryPath(
+            language === "pl" ? "en" : "pl",
+            blogCategory.category.translation.slug,
+            blogCategory.index.page,
+          )
+        : null
+    }
+  />
 ) : (
   <p>Nie znaleziono strony podglądu.</p>
 )}
