@@ -1,0 +1,33 @@
+---
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  id?: string;
+  theme?: "light" | "dark";
+  labelledby?: string;
+  class?: string;
+  contain?: boolean;
+}
+
+const {
+  id,
+  theme = "light",
+  labelledby,
+  class: className = "",
+  contain = true,
+} = Astro.props as Props;
+---
+
+<section
+  id={id}
+  class={cn("panel", contain && "shell", className)}
+  data-theme={theme === "dark" ? "dark" : undefined}
+  aria-labelledby={labelledby}
+>
+  <slot />
+</section>
+
+<script>
+  import { initReveal } from "@/lib/reveal";
+  initReveal();
+</script>

@@ -1,10 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { catalogCopy } from "../sections/catalog-examples";
+import CtaSection from "../sections/CtaSection.astro";
+import FormSection from "../sections/FormSection.astro";
 import { getPage } from "../sanity/repository";
 import PageHero from "../views/PageHero.astro";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import SiteFooter from "../ui/site-footer/SiteFooter.astro";
 import SiteHeader from "../ui/site-header/SiteHeader.astro";
 export function getStaticPaths() {
@@ -16,126 +16,39 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: "pl" | "en" };
 const pl = lang === "pl";
 const page = await getPage(lang, "home");
+const form = catalogCopy(lang).form;
 ---
 
 <Layout lang={lang} title={page.seo?.title ?? page.title}>
   <SiteHeader lang={lang} />
   <main id="main">
     <PageHero page={page} />
-    <section
-      id="contact"
-      class="panel shell form-grid"
-      aria-labelledby="contact-title"
-    >
-      <div>
-        <p class="eyebrow">
-          {pl ? "Zacznijmy od kontaktu" : "Start a conversation"}
-        </p>
-        <h2 id="contact-title">
-          {pl ? "Co chcesz zmienić?" : "What would you like to change?"}
-        </h2>
-        <p class="lead">
-          {pl
-            ? "To formularz demonstracyjny. Dane pozostają w przeglądarce i nie są wysyłane."
-            : "This is a demonstration form. Your data stays in the browser and is not sent."}
-        </p>
-      </div>
-      <form id="demo-form" novalidate data-lang={lang}>
-        <div class="field">
-          <Label for="name">{pl ? "Imię" : "Name"}</Label>
-          <Input
-            id="name"
-            name="name"
-            autocomplete="given-name"
-            required
-            maxlength="100"
-            aria-describedby="name-error"
-          />
-          <p id="name-error" class="error" hidden>
-            {pl
-              ? "Wpisz imię (od 2 do 100 znaków)."
-              : "Enter a name (2 to 100 characters)."}
-          </p>
-        </div>
-        <div class="field">
-          <Label for="email">E-mail</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            required
-            maxlength="254"
-            aria-describedby="email-error"
-          />
-          <p id="email-error" class="error" hidden>
-            {pl
-              ? "Wpisz poprawny adres e-mail."
-              : "Enter a valid email address."}
-          </p>
-        </div>
-        <Button id="demo-submit" type="submit" disabled>
-          {pl ? "Sprawdź formularz" : "Check the form"}
-        </Button>
-        <p class="status" role="status" aria-live="polite"></p>
-        <noscript>
-          <p>
-            {pl
-              ? "Włącz JavaScript, aby sprawdzić formularz demonstracyjny."
-              : "Enable JavaScript to try the demo form."}
-          </p>
-        </noscript>
-      </form>
-    </section>
-    <section class="panel" data-theme="dark">
-      <div class="shell">
-        <h2>
-          {pl
-            ? "Ten sam system. Inny kontekst."
-            : "One system. A different context."}
-        </h2>
-        <p class="lead" style="color:var(--wf-color-paper)">
-          {pl
-            ? "Jasny i ciemny wariant korzystają ze wspólnych tokenów."
-            : "Light and dark sections share the same design tokens."}
-        </p>
-        <Button as="a" href="#contact">
-          {pl ? "Wróć do formularza" : "Back to the form"}
-        </Button>
-      </div>
-    </section>
+    <FormSection
+      lang={lang}
+      labelledby="contact-title"
+      content={{
+        ...form,
+        lead: pl
+          ? "To formularz demonstracyjny. Dane pozostają w przeglądarce i nie są wysyłane."
+          : "This is a demonstration form. Your data stays in the browser and is not sent.",
+      }}
+    />
+    <CtaSection
+      labelledby="home-cta-title"
+      content={{
+        theme: "dark",
+        title: pl
+          ? "Ten sam system. Inny kontekst."
+          : "One system. A different context.",
+        lead: pl
+          ? "Jasny i ciemny wariant korzystają ze wspólnych tokenów."
+          : "Light and dark sections share the same design tokens.",
+        action: {
+          href: "#contact",
+          label: pl ? "Wróć do formularza" : "Back to the form",
+        },
+      }}
+    />
   </main>
   <SiteFooter lang={lang} />
 </Layout>
-<script>
-  import { validateDemo } from "../lib/validate-demo";
-  const form = document.querySelector<HTMLFormElement>("#demo-form");
-  if (form) {
-    const button = form.querySelector<HTMLButtonElement>("#demo-submit");
-    if (button) button.disabled = false;
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const data = new FormData(form);
-      const errors = validateDemo({
-        name: String(data.get("name") ?? ""),
-        email: String(data.get("email") ?? ""),
-      });
-      let first: HTMLInputElement | undefined;
-      for (const key of ["name", "email"] as const) {
-        const input = form.querySelector<HTMLInputElement>(`#${key}`);
-        const error = form.querySelector<HTMLElement>(`#${key}-error`);
-        input?.setAttribute("aria-invalid", String(errors[key]));
-        if (error) error.hidden = !errors[key];
-        if (errors[key] && input && !first) first = input;
-      }
-      const status = form.querySelector<HTMLElement>('[role="status"]');
-      if (status)
-        status.textContent = first
-          ? ""
-          : form.dataset.lang === "pl"
-            ? "Dane poprawne. Nic nie wysłano."
-            : "Details valid. Nothing was sent.";
-      first?.focus();
-    });
-  }
-</script>

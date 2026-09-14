@@ -1,0 +1,61 @@
+---
+import type { HeroContent } from "@/sections/types";
+import { Button } from "@/ui/button";
+import Eyebrow from "@/ui/eyebrow/Eyebrow.astro";
+import MediaFrame from "@/ui/media-frame/MediaFrame.astro";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: HeroContent;
+  titleAs?: "h1" | "h2" | "specimen";
+}
+
+const { id, labelledby, content, titleAs = "h1" } = Astro.props as Props;
+const theme = content.theme ?? "light";
+const TitleTag = titleAs === "h2" ? "h2" : titleAs === "h1" ? "h1" : "p";
+---
+
+<Section
+  id={id}
+  theme={theme}
+  labelledby={labelledby}
+  class={`hero-section hero-section--${content.variant}`}
+>
+  <div
+    class:list={["hero-split", content.variant !== "split" && "section-stack"]}
+  >
+    <div class="section-stack" data-reveal>
+      <Eyebrow>{content.eyebrow}</Eyebrow>
+      <TitleTag
+        id={labelledby}
+        class={titleAs === "h1" ? undefined : "hero-title"}
+      >
+        {content.title}
+      </TitleTag>
+      <p class="lead section-lead">{content.lead}</p>
+      <div class="actions">
+        <Button as="a" href={content.primary.href}>
+          {content.primary.label}
+        </Button>
+        {content.secondary && (
+          <Button
+            as="a"
+            href={content.secondary.href}
+            variant={
+              content.secondary.variant === "outline" ? "outline" : "default"
+            }
+          >
+            {content.secondary.label}
+          </Button>
+        )}
+      </div>
+    </div>
+    {content.variant === "split" && content.media && (
+      <div data-reveal>
+        <MediaFrame label={content.media.label} tone={content.media.tone} />
+      </div>
+    )}
+  </div>
+</Section>

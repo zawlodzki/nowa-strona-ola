@@ -1,0 +1,48 @@
+---
+import type { PricingContent } from "@/sections/types";
+import { Button } from "@/ui/button";
+import Heading from "@/ui/heading/Heading.astro";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: PricingContent;
+}
+
+const { id, labelledby, content } = Astro.props as Props;
+---
+
+<Section id={id} labelledby={labelledby}>
+  <div class="section-stack" data-reveal>
+    <Heading tag="h2" id={labelledby}>
+      {content.title}
+    </Heading>
+    <p class="lead section-lead">{content.lead}</p>
+  </div>
+  <ul class="price-grid">
+    {content.plans.map((plan) => (
+      <li
+        class:list={["price-card", plan.featured && "price-card--featured"]}
+        data-theme={plan.featured ? "dark" : undefined}
+        data-reveal
+      >
+        <h3>{plan.name}</h3>
+        <p class="price-amount">{plan.price}</p>
+        <p class="muted">{plan.summary}</p>
+        <ul class="price-features">
+          {plan.features.map((feature) => (
+            <li>{feature}</li>
+          ))}
+        </ul>
+        <Button
+          as="a"
+          href={plan.action.href}
+          variant={plan.featured ? "default" : "outline"}
+        >
+          {plan.action.label}
+        </Button>
+      </li>
+    ))}
+  </ul>
+</Section>

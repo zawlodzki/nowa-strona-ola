@@ -1,0 +1,36 @@
+---
+import type { ExpertContent } from "@/sections/types";
+import { Button } from "@/ui/button";
+import Heading from "@/ui/heading/Heading.astro";
+import MediaFrame from "@/ui/media-frame/MediaFrame.astro";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: ExpertContent;
+}
+
+const { id, labelledby, content } = Astro.props as Props;
+---
+
+<Section id={id} labelledby={labelledby}>
+  <div class="expert-section">
+    <figure class="figure" data-reveal>
+      <MediaFrame label={content.media.label} tone={content.media.tone} />
+    </figure>
+    <div class="expert-copy section-stack" data-reveal>
+      <p class="muted">{content.title}</p>
+      <Heading tag="h2" id={labelledby}>
+        {content.name}
+      </Heading>
+      <h3>{content.role}</h3>
+      <p>{content.body}</p>
+      <div class="actions">
+        <Button as="a" href={content.action.href}>
+          {content.action.label}
+        </Button>
+      </div>
+    </div>
+  </div>
+</Section>

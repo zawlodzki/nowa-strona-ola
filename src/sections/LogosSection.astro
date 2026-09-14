@@ -1,0 +1,27 @@
+---
+import type { LogosContent } from "@/sections/types";
+import Heading from "@/ui/heading/Heading.astro";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: LogosContent;
+}
+
+const { id, labelledby, content } = Astro.props as Props;
+---
+
+<Section id={id} labelledby={labelledby}>
+  <div class="section-stack" data-reveal>
+    <Heading tag="h2" id={labelledby}>
+      {content.title}
+    </Heading>
+    <p class="lead section-lead">{content.lead}</p>
+  </div>
+  <ul class="logo-strip" data-reveal>
+    {content.names.map((name) => (
+      <li>{name}</li>
+    ))}
+  </ul>
+</Section>

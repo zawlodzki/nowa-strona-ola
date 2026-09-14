@@ -1,0 +1,35 @@
+---
+description: Dokumentacja i skille stosu Astro, Sanity i Cloudflare
+alwaysApply: true
+---
+
+# Stos dokumentacji
+
+Przed zmianą Astro, Sanity lub Cloudflare odczytaj pasujący skill w `.cursor/skills`
+i aktualną dokumentację przez MCP. Nie polegaj na zapamiętanej składni CLI ani API.
+
+## Astro
+
+- MCP `astro-docs` (oficjalny serwer docs.astro.build).
+- Context7: biblioteka `/withastro/docs`.
+- Preferuj komponenty `.astro`; wyspy, SSR i biblioteki tylko gdy wymaga tego plan.
+
+## Sanity
+
+- MCP `Sanity` (konto użytkownika) oraz skille `sanity-best-practices`,
+  `content-modeling-best-practices`, `portable-text-serialization`,
+  `portable-text-conversion`, `seo-aeo-best-practices`.
+- Przed GROQ, schematem lub TypeGen: `search_docs` / `read_docs` i lokalny skill.
+- Osobne dokumenty PL/EN; nieznany typ sekcji blokuje build.
+
+## Cloudflare
+
+- MCP `cloudflare` (`https://mcp.cloudflare.com/mcp`; pierwsze użycie wymaga OAuth).
+- Skille `cloudflare`, `wrangler`, `workers-best-practices`; przy kolejkach/formularzach
+  także `turnstile-spin` i `web-perf`.
+- Używaj Wranglera z workspace `worker/` i lokalnego lockfile; nie publikuj bez zlecenia.
+
+## Poza zakresem tego repo
+
+Nie wdrażaj n8n ani backendu c15t. Sekrety i zgłoszenia nie trafiają do Sanity,
+logów aplikacji ani publicznych zasobów.

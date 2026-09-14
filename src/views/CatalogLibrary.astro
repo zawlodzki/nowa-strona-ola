@@ -1,0 +1,160 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { catalogCopy, catalogToc } from "@/sections/catalog-examples";
+import CardsSection from "@/sections/CardsSection.astro";
+import ComparisonSection from "@/sections/ComparisonSection.astro";
+import CtaSection from "@/sections/CtaSection.astro";
+import ExpertSection from "@/sections/ExpertSection.astro";
+import FaqSection from "@/sections/FaqSection.astro";
+import FormSection from "@/sections/FormSection.astro";
+import HeroSection from "@/sections/HeroSection.astro";
+import ListSection from "@/sections/ListSection.astro";
+import LogosSection from "@/sections/LogosSection.astro";
+import MediaSection from "@/sections/MediaSection.astro";
+import MetricsSection from "@/sections/MetricsSection.astro";
+import PricingSection from "@/sections/PricingSection.astro";
+import ProcessSection from "@/sections/ProcessSection.astro";
+import QuoteSection from "@/sections/QuoteSection.astro";
+import RelatedArticlesSection from "@/sections/RelatedArticlesSection.astro";
+import TestimonialsSection from "@/sections/TestimonialsSection.astro";
+import TextImageSection from "@/sections/TextImageSection.astro";
+import TextSection from "@/sections/TextSection.astro";
+import Heading from "@/ui/heading/Heading.astro";
+
+export interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props as Props;
+const copy = catalogCopy(lang);
+const toc = catalogToc(lang);
+const pl = lang === "pl";
+---
+
+<nav class="panel shell catalog-toc" aria-labelledby="catalog-toc-title">
+  <Heading tag="h2" id="catalog-toc-title">
+    {copy.tocLabel}
+  </Heading>
+  <ol>
+    {toc.map((item) => (
+      <li>
+        <a href={`#section-${item.id}`}>{item.label}</a>
+      </li>
+    ))}
+  </ol>
+</nav>
+<HeroSection
+  id="section-hero"
+  labelledby="section-hero-title"
+  content={copy.heroEditorial}
+  titleAs="h2"
+/>
+<HeroSection
+  id="section-hero-cinematic"
+  labelledby="section-hero-cinematic-title"
+  content={copy.heroCinematic}
+  titleAs="h2"
+/>
+<HeroSection
+  id="section-hero-split"
+  labelledby="section-hero-split-title"
+  content={copy.heroSplit}
+  titleAs="h2"
+/>
+<TextSection
+  id="section-text"
+  labelledby="section-text-title"
+  content={copy.text}
+/>
+<TextImageSection
+  id="section-text-image"
+  labelledby="section-text-image-title"
+  content={copy.textImage}
+/>
+<LogosSection
+  id="section-logos"
+  labelledby="section-logos-title"
+  content={copy.logos}
+/>
+<CardsSection
+  id="section-cards"
+  labelledby="section-cards-title"
+  content={copy.cards}
+  previousLabel={pl ? "Poprzednie karty" : "Previous cards"}
+  nextLabel={pl ? "Następne karty" : "Next cards"}
+  scrollerLabel={pl ? "Karuzela kart" : "Card carousel"}
+/>
+<ListSection
+  id="section-list"
+  labelledby="section-list-title"
+  content={copy.list}
+/>
+<ProcessSection
+  id="section-process"
+  labelledby="section-process-title"
+  content={copy.process}
+/>
+<MetricsSection
+  id="section-metrics"
+  labelledby="section-metrics-title"
+  content={copy.metrics}
+/>
+<PricingSection
+  id="section-pricing"
+  labelledby="section-pricing-title"
+  content={copy.pricing}
+/>
+<TestimonialsSection
+  id="section-testimonials"
+  labelledby="section-testimonials-title"
+  content={copy.testimonials}
+/>
+<ExpertSection
+  id="section-expert"
+  labelledby="section-expert-title"
+  content={copy.expert}
+/>
+<FaqSection
+  id="section-faq"
+  labelledby="section-faq-title"
+  content={copy.faq}
+/>
+<ComparisonSection
+  id="section-comparison"
+  labelledby="section-comparison-title"
+  content={copy.comparison}
+  caption={
+    pl
+      ? "Porównanie zakresu warsztatu, wdrożenia i opieki."
+      : "Comparison of workshop, implementation and care."
+  }
+/>
+<QuoteSection
+  id="section-quote"
+  labelledby="section-quote-title"
+  heading={copy.sections.quote}
+  content={copy.quote}
+/>
+<CtaSection
+  id="section-cta"
+  labelledby="section-cta-title"
+  content={copy.cta}
+/>
+<FormSection
+  lang={lang}
+  id="section-form"
+  idPrefix="catalog-"
+  labelledby="section-form-title"
+  content={copy.form}
+/>
+<MediaSection
+  id="section-media"
+  labelledby="section-media-title"
+  content={copy.media}
+/>
+<RelatedArticlesSection
+  id="section-related"
+  labelledby="section-related-title"
+  content={copy.related}
+/>

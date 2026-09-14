@@ -125,21 +125,23 @@ po ustawieniu poprawnego originu podglądu i CORS.
 
 ## Hosty i Access
 
-| Środowisko          | Adres                                                    | Ochrona                                |
-| ------------------- | -------------------------------------------------------- | -------------------------------------- |
-| Publiczna produkcja | `aleksandraolesiewicz.com`                               | publiczna                              |
-| `www`               | `www.aleksandraolesiewicz.com`                           | 301 na apex, ścieżka i query zachowane |
-| Podgląd produkcyjny | `preview.aleksandraolesiewicz.com`                       | Access + sesja aplikacji               |
-| Publiczny staging   | `ola-website-staging.zawlodzki.workers.dev`              | publiczna                              |
-| Podgląd staging     | `ola-website-preview-staging.zawlodzki.workers.dev`      | Access + sesja aplikacji               |
-| Integracje staging  | `ola-website-integrations-staging.zawlodzki.workers.dev` | webhook `/webhooks/sanity`             |
+| Środowisko           | Adres                                                       | Ochrona                                |
+| -------------------- | ----------------------------------------------------------- | -------------------------------------- |
+| Publiczna produkcja  | `aleksandraolesiewicz.com`                                  | publiczna                              |
+| `www`                | `www.aleksandraolesiewicz.com`                              | 301 na apex, ścieżka i query zachowane |
+| Podgląd produkcyjny  | `preview.aleksandraolesiewicz.com`                          | Access + sesja aplikacji               |
+| Publiczny staging    | `ola-website-staging.zawlodzki.workers.dev`                 | publiczna                              |
+| Podgląd staging      | `ola-website-preview-staging.zawlodzki.workers.dev`         | Access + sesja aplikacji               |
+| Integracje staging   | `ola-website-integrations-staging.zawlodzki.workers.dev`    | webhook `/webhooks/sanity`             |
+| Integracje produkcji | `ola-website-integrations-production.zawlodzki.workers.dev` | webhook `/webhooks/sanity`             |
 
 Access staging (`ola-website-preview-staging`) jest włączony: żądanie bez
 sesji Zero Trust kończy się 302 na `zawlodzki.cloudflareaccess.com`. Dozwolony
 e-mail: `grzesiek@zawlodzki.pl`. To chroni `workers.dev` i przyszłe domeny tego
-Workera. `noindex` i cookie sesji nie zastępują Access. Po wdrożeniu produkcji
-powtórzyć dla `ola-website-preview-production` (custom domain
-`preview.aleksandraolesiewicz.com`).
+Workera. `noindex` i cookie sesji nie zastępują Access. Preview produkcji
+(`ola-website-preview-production`, custom domain
+`preview.aleksandraolesiewicz.com`) bez sesji Access też zwraca 302 na
+`zawlodzki.cloudflareaccess.com` z `cache-control: private, no-store`.
 
 `www` nie dodawać jako custom domain publicznego Workera — to serwowałoby treść
 zamiast przekierowania. W strefie: rekord DNS `www` musi być proxied. Single

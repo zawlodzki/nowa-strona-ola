@@ -1,0 +1,45 @@
+---
+import type { RelatedContent } from "@/sections/types";
+import Heading from "@/ui/heading/Heading.astro";
+import MediaFrame from "@/ui/media-frame/MediaFrame.astro";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: RelatedContent;
+}
+
+const { id, labelledby, content } = Astro.props as Props;
+---
+
+<Section id={id} labelledby={labelledby}>
+  <div class="section-stack" data-reveal>
+    <Heading tag="h2" id={labelledby}>
+      {content.title}
+    </Heading>
+  </div>
+  <ul class="related-grid">
+    {content.items.map((item) => (
+      <li data-reveal>
+        <a class="related-card" href={item.href}>
+          <div class="card-media">
+            <MediaFrame
+              label={item.media.label}
+              tone={item.media.tone}
+              class="media-frame--card"
+            />
+          </div>
+          <time datetime={item.datetime}>{item.date}</time>
+          <h3>
+            {item.title}{" "}
+            <span class="arrow" aria-hidden="true">
+              →
+            </span>
+          </h3>
+          <p>{item.excerpt}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Section>

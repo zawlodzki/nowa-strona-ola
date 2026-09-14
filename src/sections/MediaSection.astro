@@ -1,0 +1,42 @@
+---
+import type { MediaContent } from "@/sections/types";
+import Heading from "@/ui/heading/Heading.astro";
+import MediaFrame from "@/ui/media-frame/MediaFrame.astro";
+import Section from "@/ui/section/Section.astro";
+import TextLink from "@/ui/text-link/TextLink.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: MediaContent;
+}
+
+const { id, labelledby, content } = Astro.props as Props;
+---
+
+<Section id={id} labelledby={labelledby}>
+  <div class="section-stack" data-reveal>
+    <Heading tag="h2" id={labelledby}>
+      {content.title}
+    </Heading>
+    <p class="lead section-lead">{content.lead}</p>
+  </div>
+  <div class="media-pair">
+    <figure class="figure" data-reveal>
+      <MediaFrame label={content.image.label} tone={content.image.tone} />
+      {content.image.caption && (
+        <figcaption>{content.image.caption}</figcaption>
+      )}
+    </figure>
+    <div class="video-card" data-reveal>
+      <p class="muted">{content.video.platform}</p>
+      <h3>{content.video.title}</h3>
+      <TextLink href={content.video.href} rel="noreferrer">
+        {content.video.platform}
+        <span class="arrow" aria-hidden="true">
+          →
+        </span>
+      </TextLink>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,121 @@
+---
+import type { Locale } from "@ola/shared";
+
+import type { FormCopy } from "@/sections/types";
+import { Button } from "@/ui/button";
+import Eyebrow from "@/ui/eyebrow/Eyebrow.astro";
+import Heading from "@/ui/heading/Heading.astro";
+import { Input } from "@/ui/input";
+import { Label } from "@/ui/label";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  lang: Locale;
+  labelledby: string;
+  content: FormCopy;
+  id?: string;
+  idPrefix?: string;
+}
+
+const {
+  lang,
+  labelledby,
+  content,
+  id = "contact",
+  idPrefix = "",
+} = Astro.props as Props;
+const formId = `${idPrefix}demo-form`;
+const nameId = `${idPrefix}name`;
+const emailId = `${idPrefix}email`;
+const submitId = `${idPrefix}demo-submit`;
+---
+
+<Section id={id} labelledby={labelledby} class="form-grid">
+  <div class="section-stack" data-reveal>
+    <Eyebrow>{content.eyebrow}</Eyebrow>
+    <Heading tag="h2" id={labelledby}>
+      {content.title}
+    </Heading>
+    <p class="lead section-lead">{content.lead}</p>
+  </div>
+  <form
+    id={formId}
+    lang={lang}
+    novalidate
+    data-demo-form
+    data-success={content.success}
+  >
+    <div class="field">
+      <Label for={nameId}>{content.nameLabel}</Label>
+      <Input
+        id={nameId}
+        name="name"
+        autocomplete="given-name"
+        required
+        maxlength="100"
+        aria-describedby={`${nameId}-error`}
+      />
+      <p id={`${nameId}-error`} class="error" hidden>
+        {content.nameError}
+      </p>
+    </div>
+    <div class="field">
+      <Label for={emailId}>{content.emailLabel}</Label>
+      <Input
+        id={emailId}
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        maxlength="254"
+        aria-describedby={`${emailId}-error`}
+      />
+      <p id={`${emailId}-error`} class="error" hidden>
+        {content.emailError}
+      </p>
+    </div>
+    <Button id={submitId} type="submit" disabled>
+      {content.submit}
+    </Button>
+    <p class="status" role="status" aria-live="polite"></p>
+    <noscript>
+      <p>{content.noscript}</p>
+    </noscript>
+  </form>
+</Section>
+
+<script>
+  import { validateDemo } from "@/lib/validate-demo";
+
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-demo-form]");
+  for (const form of forms) {
+    const button = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]',
+    );
+    if (button) button.disabled = false;
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const errors = validateDemo({
+        name: String(data.get("name") ?? ""),
+        email: String(data.get("email") ?? ""),
+      });
+      let first: HTMLInputElement | undefined;
+      for (const key of ["name", "email"] as const) {
+        const input = form.querySelector<HTMLInputElement>(`[name="${key}"]`);
+        const describedBy = input?.getAttribute("aria-describedby");
+        const error = describedBy
+          ? form.querySelector<HTMLElement>(`#${CSS.escape(describedBy)}`)
+          : null;
+        input?.setAttribute("aria-invalid", String(errors[key]));
+        if (error) error.hidden = !errors[key];
+        if (errors[key] && input && !first) first = input;
+      }
+      const status = form.querySelector<HTMLElement>('[role="status"]');
+      if (status) {
+        status.textContent = first ? "" : (form.dataset.success ?? "");
+      }
+      first?.focus();
+    });
+  }
+</script>

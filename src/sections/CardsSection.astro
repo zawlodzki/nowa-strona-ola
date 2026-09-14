@@ -1,0 +1,90 @@
+---
+import type { CardsContent } from "@/sections/types";
+import Eyebrow from "@/ui/eyebrow/Eyebrow.astro";
+import Heading from "@/ui/heading/Heading.astro";
+import MediaFrame from "@/ui/media-frame/MediaFrame.astro";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: CardsContent;
+  previousLabel: string;
+  nextLabel: string;
+  scrollerLabel: string;
+}
+
+const { id, labelledby, content, previousLabel, nextLabel, scrollerLabel } =
+  Astro.props as Props;
+---
+
+<Section id={id} labelledby={labelledby}>
+  <div class="section-stack" data-reveal>
+    {content.eyebrow && <Eyebrow>{content.eyebrow}</Eyebrow>}
+    <Heading tag="h2" id={labelledby}>
+      {content.title}
+    </Heading>
+    <p class="lead section-lead">{content.lead}</p>
+  </div>
+  <div
+    class="cards-scroller"
+    data-scroller
+    tabindex="0"
+    role="region"
+    aria-label={scrollerLabel}
+  >
+    {content.items.map((item) => (
+      <a class="card-link" href={item.href}>
+        <div class="card-media">
+          <MediaFrame
+            label={item.media.label}
+            tone={item.media.tone}
+            class="media-frame--card"
+          />
+        </div>
+        <div class="card-copy">
+          <h3>
+            {item.title}{" "}
+            <span class="arrow" aria-hidden="true">
+              →
+            </span>
+          </h3>
+          <p>{item.body}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+  <div class="cards-nav" hidden data-scroller-nav>
+    <button type="button" data-scroll="-1">
+      {previousLabel}
+    </button>
+    <button type="button" data-scroll="1">
+      {nextLabel}
+    </button>
+  </div>
+</Section>
+
+<script>
+  const scrollers = document.querySelectorAll<HTMLElement>("[data-scroller]");
+  for (const scroller of scrollers) {
+    const nav = scroller.parentElement?.querySelector<HTMLElement>(
+      "[data-scroller-nav]",
+    );
+    if (!nav) continue;
+    nav.hidden = window.matchMedia("(min-width: 880px)").matches;
+    for (const button of nav.querySelectorAll<HTMLButtonElement>(
+      "[data-scroll]",
+    )) {
+      button.addEventListener("click", () => {
+        const direction = Number(button.dataset.scroll);
+        scroller.scrollBy({
+          left: direction * scroller.clientWidth * 0.8,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "auto"
+            : "smooth",
+        });
+      });
+    }
+  }
+</script>

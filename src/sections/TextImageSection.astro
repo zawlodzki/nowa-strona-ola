@@ -1,0 +1,40 @@
+---
+import type { TextImageContent } from "@/sections/types";
+import Eyebrow from "@/ui/eyebrow/Eyebrow.astro";
+import Heading from "@/ui/heading/Heading.astro";
+import MediaFrame from "@/ui/media-frame/MediaFrame.astro";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: TextImageContent;
+}
+
+const { id, labelledby, content } = Astro.props as Props;
+---
+
+<Section id={id} labelledby={labelledby}>
+  <div
+    class:list={[
+      "split-section",
+      content.mediaPosition === "start" && "split-section--media-start",
+    ]}
+  >
+    <div class="section-stack" data-reveal>
+      {content.eyebrow && <Eyebrow>{content.eyebrow}</Eyebrow>}
+      <Heading tag="h2" id={labelledby}>
+        {content.title}
+      </Heading>
+      {content.body.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+    <figure class="figure" data-reveal>
+      <MediaFrame label={content.media.label} tone={content.media.tone} />
+      {content.media.caption && (
+        <figcaption>{content.media.caption}</figcaption>
+      )}
+    </figure>
+  </div>
+</Section>

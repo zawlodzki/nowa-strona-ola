@@ -1,0 +1,17 @@
+---
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  label: string;
+  tone?: "photo" | "diagram" | "portrait";
+  class?: string;
+}
+
+const { label, tone = "photo", class: className = "" } = Astro.props as Props;
+---
+
+<div
+  class={cn("media-frame", `media-frame--${tone}`, className)}
+  role="img"
+  aria-label={label}
+></div>

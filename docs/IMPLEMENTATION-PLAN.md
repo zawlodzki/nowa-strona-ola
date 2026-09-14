@@ -219,11 +219,13 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 - [x] Dodać sprawdzone komendy dev, build, kontroli typów i testów do README.
 - [x] Skonfigurować Sanity i pobieranie opublikowanych danych.
 - [x] Przygotować chroniony podgląd ze wspólnymi komponentami.
-- [ ] Dokończyć środowiska Cloudflare, sekrety i wdrożenia GitHub Actions.
-      Staging i publiczny apex działają; pozostały produkcyjne preview
-      i integracje.
-- [ ] Dokończyć test podpisanego webhooka i publikacji. Aktualizacja na stagingu
-      przeszła end-to-end; pozostały wycofanie, usunięcie i błąd builda.
+- [x] Dokończyć środowiska Cloudflare, sekrety i wdrożenia GitHub Actions.
+      Staging, publiczny apex, preview i Workery integracji działają;
+      Access chroni oba podglądy. Podpisany webhook produkcji przeszedł
+      na apex (marker, potem przywrócenie).
+- [x] Dokończyć test podpisanego webhooka i publikacji. Aktualizacja,
+      wycofanie i usunięcie na stagingu przeszły end-to-end; błąd builda
+      zachował poprzednią wersję Workera.
 
 Odbiór: próbna zmiana przechodzi od szkicu przez podgląd do statycznej strony;
 nieautoryzowany dostęp do szkiców odrzucony.
@@ -231,12 +233,16 @@ nieautoryzowany dostęp do szkiców odrzucony.
 ### Etap 3 — design system i komponenty
 
 - [x] Przetestować przycisk, formularz i dialog Bejamas z tokenami Wonderful.
-      Zakres i ograniczenia opisane w wynikach próby; pełna biblioteka nadal do zbudowania.
+      Zakres i ograniczenia opisane w wynikach próby.
 
 - [x] Zintegrować jedno źródło tokenów i Switzer jako główny krój aplikacji.
-- [ ] Zbudować elementy bazowe, nawigację, stopkę i wszystkie sekcje.
-- [ ] Dodać przykłady wariantów i stanów, responsywność oraz ruch.
-- [ ] Sprawdzić zgodność wizualną, kontrast, klawiaturę i działanie bez JS.
+- [x] Zbudować elementy bazowe, nawigację, stopkę i wszystkie sekcje.
+      Katalog `/ui/` i `/en/ui/` pokazuje 18 typów z planu. Schematy Sanity
+      i serializacja Markdown to etapy 4–5.
+- [x] Dodać przykłady wariantów i stanów, responsywność oraz ruch.
+- [x] Sprawdzić zgodność wizualną, kontrast, klawiaturę i działanie bez JS.
+      Axe, no-JS, klawiatura i reduced motion w E2E; oględziny desktop i mobile.
+      Czytnik, natywny zoom i urządzenie fizyczne pozostają do etapu 7.
 
 Odbiór: katalog aplikacji pokazuje komponenty PL/EN na desktopie i mobile,
 z poprawnym stanem statycznym przy reduced motion.
@@ -293,13 +299,16 @@ wersji i przekazanie instrukcji utrzymania.
 
 Domena produkcyjna `aleksandraolesiewicz.com` jest Custom Domain publicznego
 Workera (apex 200). Proxied `www` zostaje przy regule 301 i nie może być domeną
-Workera. Publiczny staging działa pod `workers.dev`, a preview staging jest
-chroniony przez Access. Wrangler, kolejki, webhook Sanity, Repository Dispatch
-i środowiska GitHub są skonfigurowane; przepływ aktualizacji treści na stagingu
-przeszedł end-to-end. Pozostają: produkcyjne preview i integracje, testy
-unpublish/delete oraz błędu builda, Turnstile, uwierzytelnienie n8n, endpoint
-i dozwolone originy c15t, identyfikatory GTM/GA4 oraz finalne dane marki i treści
-zgód. Brak tych danych nie blokuje etapu 3 ani lokalnych szablonów.
+Workera. Publiczny staging działa pod `workers.dev`, a preview staging i
+preview produkcji są chronione przez Access. Worker integracji produkcji jest
+wdrożony, a webhook Sanity `publish-pages-production` po ujednoliceniu sekretu
+przeszedł end-to-end (202 → Actions → apex, potem przywrócenie). Wrangler,
+kolejki, webhook staging, Repository Dispatch i środowiska GitHub są
+skonfigurowane; aktualizacja, wycofanie i błąd builda na stagingu też przeszły.
+Pozostają: handshake Presentation szkicu, Turnstile, uwierzytelnienie n8n,
+endpoint i dozwolone originy c15t, identyfikatory GTM/GA4 oraz finalne dane
+marki i treści zgód. Brak tych danych nie blokuje etapu 3 ani lokalnych
+szablonów.
 
 ## Źródła techniczne
 

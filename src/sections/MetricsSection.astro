@@ -1,0 +1,44 @@
+---
+import type { MetricsContent } from "@/sections/types";
+import Heading from "@/ui/heading/Heading.astro";
+import Section from "@/ui/section/Section.astro";
+
+export interface Props {
+  id?: string;
+  labelledby: string;
+  content: MetricsContent;
+}
+
+const { id, labelledby, content } = Astro.props as Props;
+---
+
+<Section id={id} labelledby={labelledby}>
+  <div class="section-stack" data-reveal>
+    <Heading tag="h2" id={labelledby}>
+      {content.title}
+    </Heading>
+    <p class="lead section-lead">{content.lead}</p>
+  </div>
+  <ul class="metrics-grid">
+    {content.items.map((item) => {
+      const visible = `${item.value}${item.suffix}`;
+      return (
+        <li class="metric-card" data-reveal>
+          <p class="metric-value">
+            <span class="visually-hidden">{visible}</span>
+            <span aria-hidden="true">
+              <span data-metric={String(item.value)}>{item.value}</span>
+              {item.suffix}
+            </span>
+          </p>
+          <p class="muted">{item.label}</p>
+        </li>
+      );
+    })}
+  </ul>
+</Section>
+
+<script>
+  import { initMetrics } from "@/lib/metrics";
+  initMetrics();
+</script>

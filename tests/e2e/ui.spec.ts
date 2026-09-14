@@ -151,6 +151,17 @@ test("catalog shows tokens, Polish glyphs and Switzer", async ({ page }) => {
     page.getByRole("link", { name: "Fontshare · Gambarino" }),
   ).toHaveAttribute("href", "https://www.fontshare.com/fonts/gambarino");
   await expect(page.getByRole("img", { name: "ao" })).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Spis sekcji" }),
+  ).toBeVisible();
+  for (const name of [
+    "Tekst ma rytm i szerokość do czytania.",
+    "Pytania, które wracają",
+    "Pakiety demonstracyjne",
+    "Powiązane wpisy",
+  ]) {
+    await expect(page.getByRole("heading", { name })).toBeVisible();
+  }
   await page.evaluate(() => document.fonts.ready);
   const family = await page.evaluate(
     () => getComputedStyle(document.body).fontFamily,
@@ -171,6 +182,10 @@ test("catalog shows tokens, Polish glyphs and Switzer", async ({ page }) => {
         .analyze()
     ).violations,
   ).toEqual([]);
+  await page.locator("#section-faq summary").first().click();
+  await expect(
+    page.getByText("Nie. To demonstracyjny układ sekcji", { exact: false }),
+  ).toBeVisible();
   await page.goto("/en/ui/");
   await expect(
     page.getByRole("heading", { name: "Component catalog" }),
@@ -179,6 +194,9 @@ test("catalog shows tokens, Polish glyphs and Switzer", async ({ page }) => {
     "href",
     "/ui/",
   );
+  await expect(
+    page.getByRole("heading", { name: "Questions that return" }),
+  ).toBeVisible();
 });
 
 test("static primitives emit no scripts; no console errors on interactive page", async ({

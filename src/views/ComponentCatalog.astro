@@ -12,6 +12,7 @@ import { Label } from "../ui/label";
 import Logo from "../ui/logo/Logo.astro";
 import SiteFooter from "../ui/site-footer/SiteFooter.astro";
 import SiteHeader from "../ui/site-header/SiteHeader.astro";
+import CatalogLibrary from "./CatalogLibrary.astro";
 
 export interface Props {
   lang: Locale;
@@ -53,8 +54,8 @@ const logoLabels: Record<LogoVariant, string> = {
         </Heading>
         <p class="lead">
           {pl
-            ? "Tokeny pochodzą z tokens.json. Nagłówki i treść używają Switzera jako głównego kroju."
-            : "Tokens come from tokens.json. Headings and body copy use Switzer as the primary typeface."}
+            ? "Tokeny pochodzą z tokens.json. Nagłówki i treść używają Switzera. Poniżej fundamenty, potem wszystkie sekcje strony."
+            : "Tokens come from tokens.json. Headings and body copy use Switzer. Foundations come first, then every page section."}
         </p>
         <p class="pangram">Zażółć gęślą jaźń ąćęłńóśźż</p>
       </Container>
@@ -119,10 +120,38 @@ const logoLabels: Record<LogoVariant, string> = {
           <Button as="a" href={pl ? "/" : "/en/"} variant="outline">
             {pl ? "Przycisk-link" : "Button link"}
           </Button>
+          <Button type="button" disabled>
+            {pl ? "Niedostępny" : "Unavailable"}
+          </Button>
         </div>
-        <div class="field catalog-field">
-          <Label for="catalog-name">{pl ? "Imię" : "Name"}</Label>
-          <Input id="catalog-name" name="name" value="Łucja" readonly />
+        <div class="field-states">
+          <div class="field catalog-field">
+            <Label for="catalog-specimen-name">{pl ? "Imię" : "Name"}</Label>
+            <Input
+              id="catalog-specimen-name"
+              name="specimen-name"
+              value="Łucja"
+              readonly
+            />
+          </div>
+          <div class="field catalog-field">
+            <Label for="catalog-specimen-error">
+              {pl ? "Imię z błędem" : "Name with error"}
+            </Label>
+            <Input
+              id="catalog-specimen-error"
+              name="specimen-error"
+              value="A"
+              aria-invalid="true"
+              aria-describedby="catalog-specimen-error-text"
+              readonly
+            />
+            <p id="catalog-specimen-error-text" class="error">
+              {pl
+                ? "Wpisz imię (od 2 do 100 znaków)."
+                : "Enter a name (2 to 100 characters)."}
+            </p>
+          </div>
         </div>
       </Container>
     </section>
@@ -138,6 +167,7 @@ const logoLabels: Record<LogoVariant, string> = {
         </p>
       </Container>
     </section>
+    <CatalogLibrary lang={lang} />
   </main>
   <SiteFooter lang={lang} />
 </Layout>

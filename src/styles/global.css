@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "../../wonderful-design-system/tokens.css";
 @import "./fonts.css";
+@import "./sections.css";
 /* Site typeface is Switzer. Wonderful tokens still name ABC Favorit. */
 :root {
   --wf-font-display: "Switzer", ui-sans-serif, system-ui, sans-serif;
@@ -36,7 +37,8 @@
     font-family: var(--wf-font-body);
   }
   h1,
-  h2 {
+  h2,
+  h3 {
     font-family: var(--wf-font-display);
     font-weight: 300;
     text-wrap: balance;
@@ -49,6 +51,11 @@
   }
   h2 {
     font-size: var(--wf-heading-size);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+  h3 {
+    font-size: var(--wf-card-size);
     line-height: 1.15;
     letter-spacing: -0.04em;
   }

@@ -5,23 +5,10 @@ Aktualizacja: 2026-09-13. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-
 ## Aktualny etap
 
 Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
-Etap 2 trwa: lokalny frontend Astro, projekt Sanity `dyuqkn8c`, Studio, pobieranie
-opublikowanej treści, chroniony podgląd SSR, webhook publikacji Workera, wspólne typy
-i bramka jakości działają w jednym workspace npm. Hosty Cloudflare są ustalone
-(apex, 301 `www`, `preview`). Wrangler CLI jest zalogowany. Kolejki i Worker
-integracji staging działają. Publiczny staging:
-`https://ola-website-staging.zawlodzki.workers.dev`. Preview staging:
-`https://ola-website-preview-staging.zawlodzki.workers.dev` — Access na brzegu
-(302 na `zawlodzki.cloudflareaccess.com`). Redirect 301 `www` na apex działa.
-Środowiska GitHub `staging` i `production` mają zmienne Sanity i sekrety
-Cloudflare. Podpisany webhook Sanity dla publikowanych stron jest aktywny.
-Pełny przepływ publikacji na stagingu przeszedł (Sanity → Worker 202 → Queue →
-repository dispatch → Actions → `ola-website-staging`). Publiczna produkcja
-działa na `https://aleksandraolesiewicz.com` (Worker `ola-website-production`).
-Etap 3:
-tokeny mają jedno źródło; katalog `/ui/` pokazuje bazowe elementy. Główny krój
-to Switzer (self-host).
-Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
+Etap 2 — aplikacje i infrastruktura — zakończony.
+Etap 3 — design system i komponenty — biblioteka sekcji jest w katalogu
+`/ui/` i `/en/ui/`. Tokeny mają jedno źródło; główny krój to Switzer.
+Etapy 4–7 pozostają otwarte.
 
 ## Wykonane
 
@@ -76,10 +63,10 @@ Pełna biblioteka sekcji oraz etapy 4–7 pozostają otwarte.
 ## Blokady i zależności
 
 Lokalny szkielet i projekt Sanity `dyuqkn8c` nie blokują dalszej pracy nad UI.
-Do pełnego uruchomienia pozostają test unpublish/delete i błędu builda oraz
-Workery produkcji preview i integracji. Access preview staging, 301 `www`,
-przepływ publikacji na stagingu i publiczny apex działają.
-ABC Favorit nie jest licencjonowany. Główny krój to Switzer (Fontshare FFL).
+Access preview staging i produkcji, 301 `www`, przepływ publikacji na stagingu
+i produkcji oraz publiczny apex działają. Pozostaje handshake Presentation
+szkicu w podglądzie. ABC Favorit nie jest licencjonowany. Główny krój to
+Switzer (Fontshare FFL).
 
 Pierwsza instalacja Sanity 5.31.2 zgłaszała 8 podatności przejściowych w łańcuchu
 CLI. Po aktualizacji lockfile przy dodaniu `@sanity/webhook` npm zgłasza 0
@@ -511,13 +498,118 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   `/ui/` w przeglądarce: wordmark w headerze i stopce, trzy okazy w katalogu.
 - Nie dodano Gambarino jako kroju strony; Switzer pozostaje głównym krojem.
 
+## Wycofanie, usunięcie i błąd builda — 2026-09-13
+
+- Utworzono tymczasową stronę `unpublish-test-20260913` (PL), opublikowano i
+  wycofano. Webhook `publish-pages-staging`: oba zdarzenia **202**. Staging:
+  `b92543b7-e13a-45f3-b018-49c200438222` (17:21Z po publikacji) oraz
+  `e2132606-6719-4a17-a32d-11e828ec2c2f` (17:33Z po wycofaniu). Strona główna
+  PL/EN na stagingu bez zmiany. Szkic testowy usunięty.
+- Błąd builda: wycofano opublikowaną stronę EN `home`. Webhook **202**
+  (17:35:53Z). Po ~2,5 min wersja stagingu nadal `e2132606` — deploy nie
+  nadpisał poprzedniej. `/en/` nadal serwował „A clear idea. Thoughtful
+  execution.” Przywrócono publikację EN `home` (202 o 17:38:55Z); nowa wersja
+  `009d1564-4d0e-4233-9b6f-ce31add23ee7` (17:40Z). Oba `home` PL/EN są znowu
+  opublikowane. Apex nie brał udziału (brak webhooka produkcji).
+- Lokalny `gh` ma nieważny token; numeru runu GitHub Actions przy błędzie
+  nie odczytano. Dowód to webhook 202 bez nowej wersji Workera, potem udany
+  deploy po przywróceniu.
+
+## Preview i integracje produkcji — 2026-09-13
+
+- Preview: `CLOUDFLARE_ENV=production` build, deploy
+  `preview/dist/server/wrangler.json` z `--secrets-file preview/.dev.vars`.
+  Version `01de6645-cdea-411c-b878-c899fc62396e`. Startup 19 ms. Custom domain
+  `preview.aleksandraolesiewicz.com` — `GET /` **401** „Brak dostępu do
+  podglądu.”, `private, no-store`, `noindex, nofollow, noarchive`.
+  `workers.dev` tego Workera zwraca Cloudflare 1042 (oczekiwane przy custom
+  domain). Access na brzegu jeszcze nie: dashboard wymaga logowania, OAuth
+  Wranglera nie ma uprawnień Zero Trust.
+- CORS Sanity `dyuqkn8c`: dodano `https://preview.aleksandraolesiewicz.com`
+  z credentials.
+- Worker integracji produkcji: brakowało `BUILD_TRIGGER_URL` i
+  `SANITY_WEBHOOK_SECRET`. Wdrożono kod z ignorowanego
+  `worker/.dev.vars.production` (gitignored). Version
+  `1c863a8d-f26b-4ead-b86e-7ce3a7cb8129`. Startup 5 ms. Producer i consumer
+  `ola-site-builds-production`. Kontrola:
+  `https://ola-website-integrations-production.zawlodzki.workers.dev`
+  — `GET /health` 200, niepodpisany POST `/webhooks/sanity` 401
+  `invalid_signature`, `POST /api/leads` 501. Webhooka Sanity produkcji nie
+  utworzono, żeby zmiana treści nie wdrażała apexu.
+- Podsumowanie deployu pokazało nowe sekrety URL i webhook; `BUILD_TRIGGER_TOKEN`
+  nie pojawił się w tej liście bindingów. Przed podłączeniem webhooka produkcji
+  sprawdzić, czy token dispatch nadal jest na Workerze. n8n nie testowano.
+  Apex i staging nadal 200.
+
+## Access preview produkcji — 2026-09-13
+
+- W panelu Workera `ola-website-preview-production` włączono Worker Access dla
+  `All traffic`. Przypięta wielokrotnego użytku polityka
+  `Allow administrator with MFA` dopuszcza `grzesiek@zawlodzki.pl`; czas sesji
+  wynosi 7 dni.
+- Panel po zapisie pokazuje `Worker Access All traffic`, wymaganie logowania dla
+  produkcji i preview oraz przypiętą politykę z akcją Allow.
+- Niezależny `GET https://preview.aleksandraolesiewicz.com/` bez sesji zwrócił
+  **302** do `zawlodzki.cloudflareaccess.com/cdn-cgi/access/login/...`, z
+  `cache-control: private, no-store`. Ochrona na brzegu jest aktywna.
+
+## Produkcyjny webhook Sanity — 2026-09-13
+
+- `npx wrangler secret list --config worker/wrangler.jsonc --env production`
+  potwierdził obecność `BUILD_TRIGGER_TOKEN`, `BUILD_TRIGGER_URL` i
+  `SANITY_WEBHOOK_SECRET`; wartości nie zostały odczytane.
+- Z powodu przypadkowego ujawnienia starej wartości podczas lokalnej kontroli
+  zrotowano `SANITY_WEBHOOK_SECRET` na Workerze
+  `ola-website-integrations-production` (`wrangler secret put` zakończone
+  powodzeniem). Nowa wartość nie jest zapisywana w repozytorium ani w logach.
+- W panelu Sanity jest aktywny webhook `publish-pages-production` dla datasetu
+  `production`: POST na
+  `https://ola-website-integrations-production.zawlodzki.workers.dev/webhooks/sanity`.
+  Lista `sanity hook list` pokazuje go obok `publish-pages-staging`.
+- Test podpisanego przepływu (2026-09-13): do leada PL `home` dodano marker
+  `[pubflow-prod-20260913]`. Staging `publish-pages-staging` → **202** i deploy
+  `71866d99` (19:53Z). Produkcja `publish-pages-production` → **401** (niezgodny
+  podpis). Apex pozostał na wersji `f81b06e5` (16:51Z) i nie pokazał markera.
+  Lead przywrócono; staging `bd7c3fcf` (20:03Z) znowu serwuje oryginalny tekst.
+  Ponowny test po dodaniu sekretu (20:48Z, marker `[pubflow-prod-20260913b]`):
+  staging znowu **202**, produkcja znowu **401**. Na `ola-website-production`
+  (publiczny serwis) jest Secret Change 20:44Z; Worker integracji produkcji
+  ostatni Secret Change ma o 19:31Z.
+- Po Secret Change na `ola-website-integrations-production` (21:00Z, version
+  `ac941bc8`) test markera `[pubflow-prod-20260913c]`: oba webhooki **202**
+  (21:04:37Z). Apex version `eb240623` (21:06Z) serwował marker; staging
+  `7d5f99fd`. Po przywróceniu leada oba webhooki **202** (21:11:31Z); apex
+  `d62164ef` i staging `132cc4d6` (21:13Z) bez markera. n8n nie testowano.
+
+## Biblioteka sekcji w katalogu — 2026-09-13
+
+- 18 typów z planu ma renderer HTML i przykład PL/EN w `/ui/` oraz `/en/ui/`:
+  hero (editorial, cinematic, split), tekst, tekst–obraz, logotypy, karty,
+  lista, proces, liczby, pakiety, opinie, ekspert, FAQ, porównanie, cytat,
+  wezwanie, formularz, media, powiązane artykuły. Media to kadry CSS, bez
+  kopiowania zdjęć Wonderful. Film jest odnośnikiem, nie osadzonym odtwarzaczem.
+- Fundamenty katalogu: stany przycisku (w tym disabled bez obniżania kontrastu),
+  pole poprawne i pole z błędem. FAQ to natywne `details`/`summary`.
+- Ruch: wejście sekcji po IntersectionObserver (treść w HTML bez JS), licznik
+  jednorazowy, hover karty i strzałki. Reduced motion zostawia stan statyczny.
+  Formularz, FAQ, tabela i karuzela nie startują z opacity 0.
+- `npm run verify`: PASS. 45 testów unit; 30 E2E w Chromium/Firefox/WebKit;
+  budżety JS 4684 B gzip, CSS 9361 B gzip; `/static/` bez skryptów.
+- W przeglądarce: `/ui/` 1440 px (spis, hero, pakiety, FAQ otwarte, formularz
+  „Dane poprawne. Nic nie wysłano.”) oraz szerokość mobilna (stacked logo,
+  bez poziomego overflow). `/en/ui/` ma H1 „Component catalog” i link do `/ui/`.
+- Nie sprawdzono czytnika ekranu, natywnego zoomu 200% ani urządzenia fizycznego.
+  Schematów Sanity, serializerów Markdown i składania stron w CMS nie dodawano
+  — to etap 4 i 5.
+
 ## Następny krok
 
-1. Unpublish/delete strony i błąd builda (poprzednia wersja stagingu ma zostać).
-2. Preview i Worker integracji produkcji, Access na
-   `preview.aleksandraolesiewicz.com`. Proxied `www → cdn.webflow.com` można
-   później zmienić na apex; nie dodawać `www` jako custom domain Workera.
-3. Nie testować n8n.
+1. Etap 4: modele Sanity, walidacja, podglądy i składanie stron PL/EN
+   z tych sekcji.
+2. Handshake Presentation (szkic → chroniony podgląd) nadal do sprawdzenia
+   przy okazji pracy redakcyjnej.
+3. Nie testować n8n. Proxied `www → cdn.webflow.com` można później zmienić
+   na apex; nie dodawać `www` jako custom domain Workera.
 
 Nie wklejać sekretów do czatu.
 
