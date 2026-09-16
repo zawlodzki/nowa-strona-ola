@@ -1,19 +1,17 @@
 ---
 // Adapted from bejamas/ui; see THIRD-PARTY-NOTICES.md.
 
-import { cn } from "@/lib/utils";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div"> {
   defaultOpen?: boolean;
-  class?: string;
   closeOnClickOutside?: boolean;
   closeOnEscape?: boolean;
   lockScroll?: boolean;
 }
 
 const {
-  class: className = "",
+  class: className,
   defaultOpen = false,
   closeOnClickOutside = true,
   closeOnEscape = true,
@@ -28,7 +26,7 @@ const {
   data-close-on-click-outside={closeOnClickOutside}
   data-close-on-escape={closeOnEscape}
   data-lock-scroll={lockScroll}
-  class={cn("", className)}
+  class={className}
   {...rest}
 >
   <slot />
