@@ -642,8 +642,16 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
 
 ### Weryfikacja
 
-- Unit i `astro check` przed pełnym `verify`: 55 testów, 99 plików Astro, 0 diagnostyki.
-- Pełne `npm run verify` (E2E PL/EN, w tym kategorie) — w toku / uzupełnione po biegu.
+- `npm run verify`: PASS. Format, tokeny, lint; Astro check 99 plików + workspace’y
+  bez diagnostyki; 55 testów unit; build 22 stron (home, landingi, blog, kategorie
+  PL/EN, `/ui/` i `/static/`); Studio, Preview SSR, Worker dry-run; budżety
+  JS 4694 B gzip, CSS 9431 B gzip; 33 E2E w Chromium/Firefox/WebKit, w tym
+  `/`, `/en/`, `/warsztat/`, `/en/workshop/`, `/blog/`, `/en/blog/`, artykuł,
+  `/blog/kategoria/proces/`, `/en/blog/category/process/` i 404 `/en/tylko-pl/`.
+- Paginacja `/blog/strona/2/` i `/en/blog/page/2/` nie jest w `dist/` przy 3
+  wpisach fixture i 6 na stronę — jak wcześniej. Routing `strona`/`page`
+  pokryty testem jednostkowym (`parseContentPath` + `paginateArticles`).
+- Nie sprawdzono czytnika ekranu, natywnego zoomu 200% ani urządzenia fizycznego.
 
 ## Następny krok
 
