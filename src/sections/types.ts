@@ -1,4 +1,6 @@
-export { catalogSectionIds, type CatalogSectionId } from "../content/sections";
+import { catalogSectionIds, type CatalogSectionId } from "../content/sections";
+
+export { catalogSectionIds, type CatalogSectionId };
 
 export type SectionTheme = "light" | "dark";
 
