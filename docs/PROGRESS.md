@@ -642,6 +642,15 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   od 880 px). Klik nadal przewija.
 - `ArticleView` używa `homePath(lang)`; `Layout` — wspólnego `Locale`.
 - 18 rendererów sekcji bez zmian. Tras catch-all z PR #6 nie ruszano.
+- `npm run verify`: PASS. Format, tokeny, lint, Astro check 110 plików
+  (0 błędów/ostrzeżeń/hints). 53 testy unit, w tym katalog 18 id
+  wyprowadzonych z `knownSectionTypes` i odrzucenie `unknownSection`.
+  Build 22 stron. 36 E2E Chromium/Firefox/WebKit, w tym karuzela:
+  nav widoczny przy 390 px i ukryty przy 1440 px przez CSS; klik
+  „Następne karty” zwiększa `scrollLeft`.
+- Nie sprawdzono czytnika ekranu, natywnego zoomu 200% ani urządzenia
+  fizycznego. Nie ruszano CI, skilli, Wonderful, Bejamas ani martwych
+  eksportów.
 
 ## Następny krok
 
