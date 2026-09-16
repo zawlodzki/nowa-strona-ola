@@ -1,23 +1,11 @@
 {
   "version": 1,
   "skills": {
-    "agents-sdk": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/agents-sdk/SKILL.md",
-      "computedHash": "a9f1d15143627d772d318e8675f8a26999d372592d21a2134d25c2ed15ebc8e5"
-    },
     "animate": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
       "skillPath": "skills/animate/SKILL.md",
       "computedHash": "609e30351bf518b21a8cfe87cd1111554855527075d6563605bafe61963252f7"
-    },
-    "animate-expo": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "skillPath": "skills/animate-expo/SKILL.md",
-      "computedHash": "c9eaf6603b97ca61b05c7561e1045b2f58b6d84cdf8d67565bff23a9ff94ce8a"
     },
     "animation-vocabulary": {
       "source": "emilkowalski/skills",
@@ -25,41 +13,11 @@
       "skillPath": "skills/animation-vocabulary/SKILL.md",
       "computedHash": "39319fc9a33c15be08666b3685f58666f042ff36bb902b7814c0834a5ba99df4"
     },
-    "apple-design": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "skillPath": "skills/apple-design/SKILL.md",
-      "computedHash": "8b94db67cb9edaad5f1501010804caa610131f1d2dfda0a27664b2e858deade3"
-    },
-    "ask-sonner": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "skillPath": "skills/ask-sonner/SKILL.md",
-      "computedHash": "23f724e97247b2003ccc479f3a9b3af8e4191a0e133b94ee6b73f8405349687f"
-    },
     "cloudflare": {
       "source": "cloudflare/skills",
       "sourceType": "github",
       "skillPath": "skills/cloudflare/SKILL.md",
       "computedHash": "c9b25ff6c3be26e74162e7df183990f8ee76ad6d1ee37d9ca50b4dd23cb06ad1"
-    },
-    "cloudflare-email-service": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/cloudflare-email-service/SKILL.md",
-      "computedHash": "d2905141e0883fd3dfd4318e582de04f5a49d6e1b8971b2c7dcf708baf79cb0e"
-    },
-    "cloudflare-one": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/cloudflare-one/SKILL.md",
-      "computedHash": "b59b87e0f533dce3bf32d7e46f6f14f1d01bab5158b59679c8f4644522df3447"
-    },
-    "cloudflare-one-migrations": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/cloudflare-one-migrations/SKILL.md",
-      "computedHash": "24b397f739cc639f8bff90255a8c237c14ab84753a04ccc934e9a7030dce9549"
     },
     "content-experimentation-best-practices": {
       "source": "sanity-io/agent-toolkit",
@@ -79,12 +37,6 @@
       "skillPath": "skills/durable-objects/SKILL.md",
       "computedHash": "39266b1d6b680c584cc7f75459a2b7eb428a06f6b5f4e95d45a8aa7454fbf53e"
     },
-    "emil-design-eng": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "skillPath": "skills/emil-design-eng/SKILL.md",
-      "computedHash": "41b0a4dc1a27164fe297845a6c6850a39e9242c42c9be999967fcee9df2c5974"
-    },
     "find-animation-opportunities": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
@@ -96,18 +48,6 @@
       "sourceType": "github",
       "skillPath": "skills/improve-animations/SKILL.md",
       "computedHash": "eeb219a407e325b687af88db25771cc3018e3148245604112f5ac6990b6fd79c"
-    },
-    "nextjs-on-cloudflare": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/nextjs-on-cloudflare/SKILL.md",
-      "computedHash": "bd6ffed7a3d8ed0fcddedb370f64808750b1f5a7d9f4c70fd1ba6cb4c7933b12"
-    },
-    "pick-ui-library": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "skillPath": "skills/pick-ui-library/SKILL.md",
-      "computedHash": "f8d4d2cf4677bf54b14f35f62a741add93541bfcb67863315a40164365161b49"
     },
     "portable-text-conversion": {
       "source": "sanity-io/agent-toolkit",
@@ -121,35 +61,11 @@
       "skillPath": "skills/portable-text-serialization/SKILL.md",
       "computedHash": "a4cec92378298c8ef502bf9698112f054d86fc03e814257fa07d6aaac12b9376"
     },
-    "prototype": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "skillPath": "skills/prototype/SKILL.md",
-      "computedHash": "f246d1f47566481d9207e1aa574bdee5454257d862919a6591283e9af2f57eab"
-    },
     "review-animations": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
       "skillPath": "skills/review-animations/SKILL.md",
       "computedHash": "b9f669af5ae280c19a592a94611520335a81de25c88f225bf60ae4b2d66c8c7c"
-    },
-    "sandbox-migrate-to-next": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/sandbox-migrate-to-next/SKILL.md",
-      "computedHash": "8efafcedb1d674900751d683c416452a2320dea8a57d4257c3c61d1a3a127e12"
-    },
-    "sandbox-next": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/sandbox-next/SKILL.md",
-      "computedHash": "e399a6cadee9ce2a48731c796f1d89e7b7a84cbe45f1ecf9da5c235b41133b95"
-    },
-    "sandbox-stable": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/sandbox-stable/SKILL.md",
-      "computedHash": "1b77b09631eb6c01d4b2d5c97afd7e24fd588d6fa8c8dc421abeb7acdf26d2bb"
     },
     "sanity-best-practices": {
       "source": "sanity-io/agent-toolkit",
@@ -198,12 +114,6 @@
       "sourceType": "github",
       "skillPath": "skills/wrangler/SKILL.md",
       "computedHash": "4d247a243fec7e23f1247976e0e491520cb0feb397c5477022551e7b4f5cdd93"
-    },
-    "write-swift": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "skillPath": "skills/write-swift/SKILL.md",
-      "computedHash": "ccbb74cac81765fcf2912ceba8d188fddbd75393ecb808aa1a4f6f58d9c2c828"
     }
   }
 }
