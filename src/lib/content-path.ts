@@ -16,6 +16,18 @@ export function parseContentPath(param?: string): ContentRoute {
   return parseLocalized(segments, "pl");
 }
 
+export function hrefToContentPathParam(href: string): string | undefined {
+  const segments = href.split("/").filter(Boolean);
+  return segments.length > 0 ? segments.join("/") : undefined;
+}
+
+export function isExcludedCatchAllPath(param?: string): boolean {
+  if (!param) return false;
+  const [first, second] = param.split("/");
+  if (first === "ui" || first === "static") return true;
+  return first === "en" && (second === "ui" || second === "static");
+}
+
 function parseLocalized(segments: string[], language: Locale): ContentRoute {
   if (segments.length === 0) return { kind: "home", language };
 

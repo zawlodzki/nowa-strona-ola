@@ -238,6 +238,9 @@ test("landing pages, blog and missing English translation", async ({
   await expect(
     page.getByRole("heading", { name: "Blog", exact: true }),
   ).toBeVisible();
+  await expect(
+    page.getByText("Wpisy demonstracyjne. Każdy język ma osobne dokumenty."),
+  ).toBeVisible();
   await page
     .getByRole("link", { name: "Najpierw proces, potem CRM" })
     .first()
@@ -251,6 +254,27 @@ test("landing pages, blog and missing English translation", async ({
   await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
     "href",
     "/en/blog/process-before-crm/",
+  );
+
+  await page.goto("/en/blog/");
+  await expect(
+    page.getByRole("heading", { name: "Blog", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Demonstration posts. Each language has its own documents."),
+  ).toBeVisible();
+
+  await page.goto("/blog/kategoria/proces/");
+  await expect(page.getByRole("heading", { name: "Proces" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
+    "href",
+    "/en/blog/category/process/",
+  );
+  await page.goto("/en/blog/category/process/");
+  await expect(page.getByRole("heading", { name: "Process" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Polski" })).toHaveAttribute(
+    "href",
+    "/blog/kategoria/proces/",
   );
 
   await page.goto("/tylko-pl/");

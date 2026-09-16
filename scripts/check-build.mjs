@@ -32,6 +32,9 @@ for (const path of [
   "tylko-pl/index.html",
   "blog/index.html",
   "blog/najpierw-proces/index.html",
+  "en/blog/index.html",
+  "blog/kategoria/proces/index.html",
+  "en/blog/category/process/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(

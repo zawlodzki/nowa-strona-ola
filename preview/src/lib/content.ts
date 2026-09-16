@@ -1,8 +1,7 @@
 import { createClient } from "@sanity/client";
 import type { Locale } from "@ola/shared";
 
-import { ARTICLES_PER_PAGE } from "../../../src/lib/paths";
-import { paginate } from "../../../src/lib/pagination";
+import { paginateArticles } from "../../../src/lib/pagination";
 import type {
   ArticleCard,
   ArticleContent,
@@ -115,18 +114,7 @@ export async function getPreviewArticleIndex(
         ),
       )
     : articles;
-  const result = paginate(
-    filtered,
-    page,
-    options.pageSize ?? ARTICLES_PER_PAGE,
-  );
-  if (!result) {
-    throw new Error(`Brak strony ${page} indeksu podglądu ${language}.`);
-  }
-  return {
-    ...result,
-    featured: filtered.filter((article) => article.featured === "featured"),
-  };
+  return paginateArticles(filtered, page, { pageSize: options.pageSize });
 }
 
 export async function getPreviewCategories(

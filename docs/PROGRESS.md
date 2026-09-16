@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-09-14. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-09-16. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -627,6 +627,23 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   PL/EN bez sekcji nadal tam są). Handshake Presentation szkicu nadal
   nie sprawdzony. Serializerów Markdown nie dodawano — etap 5.
 - Nie testowano n8n. Proxied `www → cdn.webflow.com` bez zmian.
+
+## Zwiniecie zduplikowanych tras PL/EN — 2026-09-16
+
+- Publiczne strony treści: jeden statyczny `[...path].astro` z `parseContentPath`
+  (jak podgląd). Katalog `/ui/`, `/en/ui/` i `/static/` zostają osobnymi plikami.
+- Loady `loadHome` / `loadPage` / `loadArticle` / `loadBlogIndex` obok repozytorium.
+  Lead bloga: tabela `blogIndexLead` per Locale (strony publiczne i podgląd).
+  `paginateArticles` wspólne dla publikacji i podglądu.
+- Adresy PL/EN bez zmian (`/blog/strona/`, `/en/blog/page/`, `kategoria`/`category`).
+  Brak nowego frameworku i18n.
+- Paginacja `/blog/strona/2/` nie powstaje przy 3 wpisach fixture i 6 na stronę
+  — to ten sam próg co wcześniej; routing `strona`/`page` pokryty testem jednostkowym.
+
+### Weryfikacja
+
+- Unit i `astro check` przed pełnym `verify`: 55 testów, 99 plików Astro, 0 diagnostyki.
+- Pełne `npm run verify` (E2E PL/EN, w tym kategorie) — w toku / uzupełnione po biegu.
 
 ## Następny krok
 

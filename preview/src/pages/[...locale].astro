@@ -8,6 +8,7 @@ import PageSections from "../../../src/views/PageSections.astro";
 import ArticleView from "../../../src/views/ArticleView.astro";
 import BlogIndex from "../../../src/views/BlogIndex.astro";
 import { parseContentPath } from "../../../src/lib/content-path";
+import { blogIndexLead } from "../../../src/lib/copy";
 import { blogCategoryPath, blogPath } from "../../../src/lib/paths";
 import { demonstrationSettings } from "../../../src/sanity/fixtures";
 import {
@@ -86,11 +87,7 @@ const categories = language
     lang={language}
     settings={settings}
     title="Blog"
-    lead={
-      language === "pl"
-        ? "Wpisy demonstracyjne. Każdy język ma osobne dokumenty."
-        : "Demonstration posts. Each language has its own documents."
-    }
+    lead={blogIndexLead[language]}
     articles={blogIndex.items}
     featured={blogIndex.featured}
     categories={categories}

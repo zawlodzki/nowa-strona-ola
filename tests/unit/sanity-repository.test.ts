@@ -1,9 +1,15 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { assertKnownSections } from "../../src/content/sections";
-import { paginate } from "../../src/lib/pagination";
-import { parseContentPath } from "../../src/lib/content-path";
-import { pagePath, translationHref } from "../../src/lib/paths";
+import {
+  hrefToContentPathParam,
+  isExcludedCatchAllPath,
+  parseContentPath,
+} from "../../src/lib/content-path";
+import { blogIndexLead } from "../../src/lib/copy";
+import { paginate, paginateArticles } from "../../src/lib/pagination";
+import { blogPath, pagePath, translationHref } from "../../src/lib/paths";
+import { listPublishedContentParams } from "../../src/sanity/loaders";
 import { PUBLISHED_PAGE_QUERY } from "../../src/sanity/queries";
 import {
   getArticle,
@@ -106,6 +112,21 @@ describe("pagination", () => {
     });
     expect(paginate(["a"], 2, 2)).toBeNull();
   });
+
+  it("shares article index paging and featured selection", () => {
+    const articles = Array.from({ length: 7 }, (_, index) => ({
+      slug: `post-${index + 1}`,
+      featured: index === 0 ? ("featured" as const) : ("standard" as const),
+    }));
+    const result = paginateArticles(articles, 2, { pageSize: 6 });
+    expect(result.page).toBe(2);
+    expect(result.items).toEqual([articles[6]]);
+    expect(result.featured).toEqual([articles[0]]);
+    expect(paginateArticles(articles, 1, { pageSize: 6 }).totalPages).toBe(2);
+    expect(() => paginateArticles(articles, 3, { pageSize: 6 })).toThrow(
+      "Brak strony 3",
+    );
+  });
 });
 
 describe("localized paths", () => {
@@ -129,6 +150,59 @@ describe("localized paths", () => {
       slug: "process",
       page: 1,
     });
+    expect(parseContentPath("blog/strona/2")).toEqual({
+      kind: "blogIndex",
+      language: "pl",
+      page: 2,
+    });
+    expect(parseContentPath("en/blog/page/2")).toEqual({
+      kind: "blogIndex",
+      language: "en",
+      page: 2,
+    });
+    expect(parseContentPath("blog/kategoria/proces/strona/2")).toEqual({
+      kind: "blogCategory",
+      language: "pl",
+      slug: "proces",
+      page: 2,
+    });
+    expect(hrefToContentPathParam("/")).toBeUndefined();
+    expect(hrefToContentPathParam("/en/blog/page/2/")).toBe("en/blog/page/2");
+    expect(isExcludedCatchAllPath("ui")).toBe(true);
+    expect(isExcludedCatchAllPath("en/ui")).toBe(true);
+    expect(isExcludedCatchAllPath("static")).toBe(true);
+    expect(isExcludedCatchAllPath("en/blog")).toBe(false);
+    expect(blogPath("pl", 2)).toBe("/blog/strona/2/");
+    expect(blogPath("en", 2)).toBe("/en/blog/page/2/");
+  });
+
+  it("lists published catch-all params for both languages and skips catalog routes", async () => {
+    const params = await listPublishedContentParams({ environment: {} });
+    expect(params).toEqual(
+      expect.arrayContaining([
+        undefined,
+        "en",
+        "warsztat",
+        "en/workshop",
+        "blog",
+        "en/blog",
+        "blog/najpierw-proces",
+        "en/blog/process-before-crm",
+        "blog/kategoria/proces",
+        "en/blog/category/process",
+      ]),
+    );
+    expect(params).not.toContain("ui");
+    expect(params).not.toContain("en/ui");
+    expect(params).not.toContain("static");
+    expect(params).not.toContain("blog/strona/2");
+    expect(params).not.toContain("en/blog/page/2");
+    for (const param of params) {
+      expect(parseContentPath(param).kind).not.toBe("unknown");
+      expect(isExcludedCatchAllPath(param)).toBe(false);
+    }
+    expect(blogIndexLead.pl).toContain("Wpisy demonstracyjne");
+    expect(blogIndexLead.en).toContain("Demonstration posts");
   });
 });
 

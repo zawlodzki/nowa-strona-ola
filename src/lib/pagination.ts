@@ -1,3 +1,5 @@
+import { ARTICLES_PER_PAGE } from "./paths";
+
 export function paginate<T>(
   items: readonly T[],
   page: number,
@@ -17,5 +19,20 @@ export function paginate<T>(
     page,
     totalPages,
     total,
+  };
+}
+
+export function paginateArticles<T extends { featured?: string | null }>(
+  articles: readonly T[],
+  page: number,
+  opts: { pageSize?: number } = {},
+) {
+  const result = paginate(articles, page, opts.pageSize ?? ARTICLES_PER_PAGE);
+  if (!result) {
+    throw new Error(`Brak strony ${page} indeksu bloga.`);
+  }
+  return {
+    ...result,
+    featured: articles.filter((article) => article.featured === "featured"),
   };
 }

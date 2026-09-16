@@ -2,7 +2,7 @@ import { createClient } from "@sanity/client";
 import type { Locale } from "@ola/shared";
 
 import { ARTICLES_PER_PAGE } from "@/lib/paths";
-import { paginate } from "@/lib/pagination";
+import { paginateArticles } from "@/lib/pagination";
 import { assertKnownSections } from "@/content/sections";
 import { sanityApiVersion, readSanityPublicConfig } from "./config";
 import {
@@ -218,18 +218,7 @@ export async function getArticleIndex(
   } = {},
 ) {
   const articles = await listArticles(language, options);
-  const result = paginate(
-    articles,
-    page,
-    options.pageSize ?? ARTICLES_PER_PAGE,
-  );
-  if (!result) {
-    throw new Error(`Brak strony ${page} indeksu bloga ${language}.`);
-  }
-  return {
-    ...result,
-    featured: articles.filter((article) => article.featured === "featured"),
-  };
+  return paginateArticles(articles, page, { pageSize: options.pageSize });
 }
 
 export async function listCategoryPageParams(

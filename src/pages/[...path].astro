@@ -1,0 +1,100 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import { parseContentPath } from "@/lib/content-path";
+import { blogIndexLead } from "@/lib/copy";
+import { blogCategoryPath, blogPath } from "@/lib/paths";
+import {
+  listPublishedContentParams,
+  loadArticle,
+  loadBlogIndex,
+  loadHome,
+  loadPage,
+} from "@/sanity/loaders";
+import ArticleView from "@/views/ArticleView.astro";
+import BlogIndex from "@/views/BlogIndex.astro";
+import ComposedPage from "@/views/ComposedPage.astro";
+
+export const getStaticPaths = (async () => {
+  const paths = await listPublishedContentParams();
+  return paths.map((path) => ({ params: { path } }));
+}) satisfies GetStaticPaths;
+
+const route = parseContentPath(Astro.params.path);
+if (route.kind === "unknown") {
+  throw new Error(`Nieobsługiwana ścieżka treści: ${Astro.params.path ?? "/"}`);
+}
+
+const language = route.language;
+const home = route.kind === "home" ? await loadHome(language) : null;
+const page =
+  route.kind === "page" ? await loadPage(language, route.slug) : null;
+const article =
+  route.kind === "article" ? await loadArticle(language, route.slug) : null;
+const blogIndex =
+  route.kind === "blogIndex" ? await loadBlogIndex(language, route.page) : null;
+const blogCategory =
+  route.kind === "blogCategory"
+    ? await loadBlogIndex(language, route.page, { categorySlug: route.slug })
+    : null;
+const categorySlug = route.kind === "blogCategory" ? route.slug : "";
+---
+
+{article ? (
+  <ArticleView
+    lang={language}
+    article={article.article}
+    settings={article.settings}
+  />
+) : home ? (
+  <ComposedPage
+    lang={language}
+    page={home.page}
+    settings={home.settings}
+    section="home"
+  />
+) : page ? (
+  <ComposedPage lang={language} page={page.page} settings={page.settings} />
+) : blogIndex ? (
+  <BlogIndex
+    lang={language}
+    settings={blogIndex.settings}
+    title="Blog"
+    lead={blogIndexLead[language]}
+    articles={blogIndex.index.items}
+    featured={blogIndex.index.featured}
+    categories={blogIndex.categories}
+    page={blogIndex.index.page}
+    totalPages={blogIndex.index.totalPages}
+    pageHref={(pageNumber) => blogPath(language, pageNumber)}
+    alternateHref={blogPath(
+      language === "pl" ? "en" : "pl",
+      blogIndex.index.page,
+    )}
+  />
+) : blogCategory ? (
+  <BlogIndex
+    lang={language}
+    settings={blogCategory.settings}
+    title={blogCategory.category?.title ?? categorySlug}
+    lead={blogCategory.category?.description ?? ""}
+    articles={blogCategory.index.items}
+    featured={blogCategory.index.featured}
+    categories={blogCategory.categories}
+    page={blogCategory.index.page}
+    totalPages={blogCategory.index.totalPages}
+    category={blogCategory.category ?? undefined}
+    pageHref={(pageNumber) =>
+      blogCategoryPath(language, categorySlug, pageNumber)
+    }
+    alternateHref={
+      blogCategory.category?.translation?.slug
+        ? blogCategoryPath(
+            language === "pl" ? "en" : "pl",
+            blogCategory.category.translation.slug,
+            blogCategory.index.page,
+          )
+        : null
+    }
+  />
+) : null}
