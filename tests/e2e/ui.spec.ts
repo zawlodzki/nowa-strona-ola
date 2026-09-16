@@ -265,13 +265,17 @@ test("landing pages, blog and missing English translation", async ({
   ).toBeVisible();
 
   await page.goto("/blog/kategoria/proces/");
-  await expect(page.getByRole("heading", { name: "Proces" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Proces", exact: true }),
+  ).toBeVisible();
   await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
     "href",
     "/en/blog/category/process/",
   );
   await page.goto("/en/blog/category/process/");
-  await expect(page.getByRole("heading", { name: "Process" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Process", exact: true }),
+  ).toBeVisible();
   await expect(page.getByRole("link", { name: "Polski" })).toHaveAttribute(
     "href",
     "/blog/kategoria/proces/",
