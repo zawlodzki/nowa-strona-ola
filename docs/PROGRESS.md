@@ -642,7 +642,10 @@ przepisywaniu dokumentacji i CI.
 - GROQ (frontend + preview): ustawienia tylko `footerNote` + `navigation` (+ id/język/tłumaczenie); artykuł bez `updatedAt` i `seo.description`; strona `seo{title}`. Pola zostają w schemacie Studio. TypeGen: 14 kwerend, 55 typów schematu.
 - Usunięto PNG wordmarków; runtime i favicon zostają na SVG.
 
-Weryfikacja: wyniki `npm run verify` dopiszę po uruchomieniu w tej sesji.
+Weryfikacja: `npm run verify` PASS.
+Format, tokeny, ESLint 0, Astro check 101 plików / Studio / Preview / Worker / shared bez diagnostyki.
+52 testy unit (ubył test tylko pod `alternatePath`). Build publiczny, Studio, Preview SSR i dry-run Workera.
+Budżety JS 4694 B gzip, CSS 9431 B gzip. 33 E2E Chromium/Firefox/WebKit.
 
 ## Następny krok
 
