@@ -48,22 +48,3 @@ export function blogCategoryPath(
 export function articlePath(language: Locale, slug: string): string {
   return language === "pl" ? `/blog/${slug}/` : `/en/blog/${slug}/`;
 }
-
-export function alternatePath(language: Locale, section: SiteSection): string {
-  const nextLanguage: Locale = language === "pl" ? "en" : "pl";
-  if (section === "catalog") return catalogPath(nextLanguage);
-  if (section === "blog") return blogPath(nextLanguage);
-  return homePath(nextLanguage);
-}
-
-export function translationHref(
-  language: Locale,
-  kind: "page" | "article",
-  slug: string | null | undefined,
-): string | null {
-  if (!slug) return null;
-  const nextLanguage: Locale = language === "pl" ? "en" : "pl";
-  return kind === "article"
-    ? articlePath(nextLanguage, slug)
-    : pagePath(nextLanguage, slug);
-}

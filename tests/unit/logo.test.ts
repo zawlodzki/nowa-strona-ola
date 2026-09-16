@@ -23,18 +23,14 @@ describe("logo source", () => {
   });
 
   it.each(Object.keys(logoMark.variants) as LogoVariant[])(
-    "keeps outlined SVG and PNG for %s with a font comment",
+    "keeps outlined SVG for %s with a font comment",
     (variant) => {
       const files = logoMark.variants[variant];
       const svg = readFileSync(join(brandDir, files.svg), "utf8");
-      const png = readFileSync(join(brandDir, files.png));
       expect(svg).toContain("Gambarino Regular");
       expect(svg).toContain(logoMark.font.source);
       expect(svg).toContain("src/assets/brand/logo.ts");
       expect(svg).toContain('fill="currentColor"');
-      expect(png.subarray(0, 8)).toEqual(
-        Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
-      );
     },
   );
 

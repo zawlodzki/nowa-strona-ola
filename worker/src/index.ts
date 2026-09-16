@@ -1,11 +1,8 @@
-import type { LeadSubmission } from "@ola/shared";
 import {
   readSignedPublication,
   triggerBuild,
   type BuildQueueMessage,
 } from "./publication";
-
-export type LeadSubmissionContract = LeadSubmission;
 
 const jsonHeaders = { "content-type": "application/json; charset=utf-8" };
 

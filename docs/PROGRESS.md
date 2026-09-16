@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-09-14. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-09-16. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -627,6 +627,22 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   PL/EN bez sekcji nadal tam są). Handshake Presentation szkicu nadal
   nie sprawdzony. Serializerów Markdown nie dodawano — etap 5.
 - Nie testowano n8n. Proxied `www → cdn.webflow.com` bez zmian.
+
+## Cleanup martwej powierzchni — 2026-09-16
+
+Tylko ten obszar: baryłki, martwe eksporty, nieużywane pola GROQ i PNG znaku.
+Bez zmian w wonderful-design-system, Bejamas, złączaniu tras PL/EN, skillach,
+przepisywaniu dokumentacji i CI.
+
+- Usunięto nieużywane `index.ts` w `src/ui/{container,eyebrow,heading,logo,media-frame,section,site-footer,site-header,text-link}/`. Zostawiono baryłki `button`, `input`, `label`, `dialog`.
+- `HeroSection`: bez `titleAs="specimen"` i gałęzi `<p>`.
+- Usunięto `ContentIdentity`, alias `LeadSubmissionContract`, `alternatePath`, `translationHref`.
+- `demonstrationPages` / `demonstrationArticles`, `createPublishedContentClient` i `isKnownSectionType` bez eksportu.
+- `BlogIndex` wymaga `featured` z trasy; bez fallbacku `articles.filter`.
+- GROQ (frontend + preview): ustawienia tylko `footerNote` + `navigation` (+ id/język/tłumaczenie); artykuł bez `updatedAt` i `seo.description`; strona `seo{title}`. Pola zostają w schemacie Studio. TypeGen: 14 kwerend, 55 typów schematu.
+- Usunięto PNG wordmarków; runtime i favicon zostają na SVG.
+
+Weryfikacja: wyniki `npm run verify` dopiszę po uruchomieniu w tej sesji.
 
 ## Następny krok
 

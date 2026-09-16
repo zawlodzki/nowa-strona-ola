@@ -9,12 +9,12 @@ export interface Props {
   id?: string;
   labelledby: string;
   content: HeroContent;
-  titleAs?: "h1" | "h2" | "specimen";
+  titleAs?: "h1" | "h2";
 }
 
 const { id, labelledby, content, titleAs = "h1" } = Astro.props as Props;
 const theme = content.theme ?? "light";
-const TitleTag = titleAs === "h2" ? "h2" : titleAs === "h1" ? "h1" : "p";
+const TitleTag = titleAs === "h2" ? "h2" : "h1";
 ---
 
 <Section

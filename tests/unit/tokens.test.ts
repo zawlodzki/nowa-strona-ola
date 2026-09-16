@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 import { generateTokensCss } from "../../scripts/tokens.mjs";
-import { alternatePath, catalogPath, homePath } from "../../src/lib/paths";
+import { catalogPath, homePath } from "../../src/lib/paths";
 
 const tokens = JSON.parse(
   readFileSync("wonderful-design-system/tokens.json", "utf8"),
@@ -34,12 +34,5 @@ describe("localized paths", () => {
     expect(homePath("en")).toBe("/en/");
     expect(catalogPath("pl")).toBe("/ui/");
     expect(catalogPath("en")).toBe("/en/ui/");
-  });
-
-  it("switches language without a Polish fallback on English routes", () => {
-    expect(alternatePath("pl", "home")).toBe("/en/");
-    expect(alternatePath("en", "home")).toBe("/");
-    expect(alternatePath("pl", "catalog")).toBe("/en/ui/");
-    expect(alternatePath("en", "catalog")).toBe("/ui/");
   });
 });

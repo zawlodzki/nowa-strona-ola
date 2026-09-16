@@ -21,7 +21,7 @@ export interface Props {
   title: string;
   lead: string;
   articles: ArticleCard[];
-  featured?: ArticleCard[];
+  featured: ArticleCard[];
   categories: { title?: string | null; slug?: string | null }[];
   page: number;
   totalPages: number;
@@ -36,7 +36,7 @@ const {
   title,
   lead,
   articles,
-  featured: featuredProp,
+  featured,
   categories,
   page,
   totalPages,
@@ -45,8 +45,6 @@ const {
   alternateHref = null,
 } = Astro.props as Props;
 const pl = lang === "pl";
-const featured =
-  featuredProp ?? articles.filter((item) => item.featured === "featured");
 ---
 
 <Layout lang={lang} title={title}>

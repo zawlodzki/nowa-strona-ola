@@ -21,7 +21,7 @@ export const knownSectionTypes = [
 
 export type KnownSectionType = (typeof knownSectionTypes)[number];
 
-export function isKnownSectionType(value: string): value is KnownSectionType {
+function isKnownSectionType(value: string): value is KnownSectionType {
   return (knownSectionTypes as readonly string[]).includes(value);
 }
 

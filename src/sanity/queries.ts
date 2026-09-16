@@ -147,7 +147,7 @@ const pageProjection = /* groq */ `
   language,
   "slug": slug.current,
   title,
-  seo{title, description},
+  seo{title},
   "translation": translation->{ language, "slug": slug.current },
   sections[]{ ${PAGE_SECTION_PROJECTION} }
 `;
@@ -173,12 +173,8 @@ export const PUBLISHED_PAGE_PATHS_QUERY = defineQuery(/* groq */ `
 export const siteSettingsProjection = /* groq */ `
   "id": _id,
   language,
-  siteTitle,
-  contactEmail,
   footerNote,
-  defaultSeo{title, description},
   navigation[]{ _key, label, href },
-  socialLinks[]{ _key, label, href },
   "translation": translation->{ language }
 `;
 
@@ -225,8 +221,7 @@ export const PUBLISHED_ARTICLE_QUERY = defineQuery(/* groq */ `
     slug.current == $slug
   ][0]{
     ${articleCardProjection},
-    updatedAt,
-    seo{title, description},
+    seo{title},
     authors[]->{ name, role, "slug": slug.current },
     body[]{ ${articleBodyProjection} },
     sources[]{ _key, title, href },

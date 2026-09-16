@@ -44,7 +44,7 @@ interface QueryClient {
   fetch: <T>(query: string, parameters?: Record<string, unknown>) => Promise<T>;
 }
 
-export function createPublishedContentClient(config: {
+function createPublishedContentClient(config: {
   projectId: string;
   dataset: string;
 }): QueryClient {

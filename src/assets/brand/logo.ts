@@ -27,21 +27,18 @@ export const logoMark = {
       layout: "single-line",
       text: "aleksandra olesiewicz",
       svg: "logo-wordmark.svg",
-      png: "logo-wordmark.png",
     },
     stacked: {
       id: "stacked",
       layout: "stacked",
       text: "aleksandra\nolesiewicz",
       svg: "logo-stacked.svg",
-      png: "logo-stacked.png",
     },
     monogram: {
       id: "monogram",
       layout: "initials",
       text: "ao",
       svg: "logo-monogram.svg",
-      png: "logo-monogram.png",
     },
   },
 } as const;

@@ -17,7 +17,7 @@ export const PREVIEW_PAGE_QUERY = defineQuery(/* groq */ `
     language,
     "slug": slug.current,
     title,
-    seo{title, description},
+    seo{title},
     "translation": translation->{ language, "slug": slug.current },
     sections[]{ ${PAGE_SECTION_PROJECTION} }
   }
@@ -30,8 +30,7 @@ export const PREVIEW_ARTICLE_QUERY = defineQuery(/* groq */ `
     slug.current == $slug
   ][0]{
     ${articleCardProjection},
-    updatedAt,
-    seo{title, description},
+    seo{title},
     authors[]->{ name, role, "slug": slug.current },
     body[]{ ${articleBodyProjection} },
     sources[]{ _key, title, href },

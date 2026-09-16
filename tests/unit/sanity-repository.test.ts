@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import { assertKnownSections } from "../../src/content/sections";
 import { paginate } from "../../src/lib/pagination";
 import { parseContentPath } from "../../src/lib/content-path";
-import { pagePath, translationHref } from "../../src/lib/paths";
+import { pagePath } from "../../src/lib/paths";
 import { PUBLISHED_PAGE_QUERY } from "../../src/sanity/queries";
 import {
   getArticle,
@@ -112,7 +112,6 @@ describe("localized paths", () => {
   it("does not fall back to Polish under English URLs", () => {
     expect(pagePath("en", "workshop")).toBe("/en/workshop/");
     expect(pagePath("pl", "warsztat")).toBe("/warsztat/");
-    expect(translationHref("pl", "page", undefined)).toBeNull();
     expect(parseContentPath("en/tylko-pl")).toEqual({
       kind: "page",
       language: "en",
