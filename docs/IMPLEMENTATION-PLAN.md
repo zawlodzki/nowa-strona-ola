@@ -1,7 +1,8 @@
 # Plan wdrożenia i przygotowania repozytorium
 
 Zatwierdzony: 2026-09-12. Realizacja etapami w wielu sesjach.
-Stan wykonania: [PROGRESS.md](PROGRESS.md). Instrukcje: [AGENTS.md](../AGENTS.md).
+Etapy 1–4 zamknięte. Stan wykonania: [PROGRESS.md](PROGRESS.md).
+Instrukcje: [AGENTS.md](../AGENTS.md).
 Weryfikacja kodu: [CODE-QUALITY.md](CODE-QUALITY.md).
 Próba komponentów: [UI-SPIKE-RESULTS.md](UI-SPIKE-RESULTS.md).
 
@@ -213,7 +214,6 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 
 - [x] Utworzyć lokalną próbę Astro/Bejamas PL/EN z jednym lockfile npm.
 - [x] Skonfigurować lint, format, typy, unit/E2E, axe, kontrolę buildu i workflow CI.
-      Workflow czeka na pierwsze uruchomienie w GitHub; lokalna bramka przeszła.
 
 - [x] Utworzyć Astro, Studio i Worker, wspólne typowanie oraz jeden lockfile.
 - [x] Dodać sprawdzone komendy dev, build, kontroli typów i testów do README.

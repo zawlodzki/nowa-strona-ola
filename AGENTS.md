@@ -4,9 +4,9 @@
 
 - Przeczytaj [plan](docs/IMPLEMENTATION-PLAN.md) i [postęp](docs/PROGRESS.md).
   Kontynuuj wskazany etap, uwzględniając aktualne polecenie użytkownika.
-- Po sesji aktualizuj checklistę i postęp: wykonane zadania, rzeczywiste wyniki
-  kontroli, decyzje, blokady i konkretny następny krok. Dokumentacja nie oznacza
-  zakończenia opisanej w niej implementacji.
+- Po sesji aktualizuj w [postępie](docs/PROGRESS.md) tylko aktualny etap
+  i następny krok. Dokumentacja nie oznacza zakończenia opisanej w niej
+  implementacji.
 - Komunikacja i dokumentacja po polsku, nazwy w kodzie po angielsku.
 
 ## Architektura

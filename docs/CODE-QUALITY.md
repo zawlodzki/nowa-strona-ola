@@ -2,7 +2,7 @@
 
 Stan: wdrożone narzędzia dla prototypu Astro; zakres rośnie razem z aplikacją.
 Node 24 (CI, .node-version), npm i jeden package-lock.json. Lokalna próba uruchomiona
-na Node 26.8.2 / npm 11.19.1; zgodność na Node 24 musi potwierdzić pierwsze CI.
+na Node 26.8.2 / npm 11.19.1.
 
 ## Jedna bramka jakości
 
@@ -85,8 +85,8 @@ w .gitignore nie zastępuje przeglądu kodu i zmian.
 
 .github/workflows/quality.yml uruchamia npm ci, instaluje trzy przeglądarki i wykonuje
 verify na push/PR. Ma odczyt repo i zapisuje raport/trace przy błędzie przez 7 dni.
-Nie publikuje strony. Po podłączeniu remote ustawić ten job jako wymagany do merge.
-Nie jest jeszcze uruchomiony na GitHub, ponieważ repo nie ma remote.
+Nie publikuje strony. Workflow działa na GitHub; ustawienie jako wymagany do merge
+pozostaje w ustawieniach repozytorium.
 
 Przy zmianie dokumentacji: format i odnośniki. Przy logice: lint, typy i powiązane
 unit tests. Przy UI: dodatkowo build i E2E. Przed przekazaniem zmiany aplikacji:

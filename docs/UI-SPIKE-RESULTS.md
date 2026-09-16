@@ -3,6 +3,12 @@
 Zakończona 2026-09-13. Rekomendacja: używać selektywnie skopiowanych komponentów
 Bejamas, z lokalnymi poprawkami i testami. Lumos pozostaje inspiracją, nie zależnością.
 
+Przed próbą porównano dokumentację Lumos i bejamas/ui (bez pomiaru bundla).
+Lumos — system Webflow — zostaje inspiracją semantycznych tokenów, bez wdrażania.
+Bejamas/ui (MIT, Tailwind v4, komponenty kopiowane do projektu) przyjęto
+selektywnie po mapowaniu na Wonderful. Żadne z narzędzi nie zastępuje modeli
+Sanity, serializerów Markdown, SEO, backendu leadów ani c15t.
+
 ## Co uruchomiono
 
 Astro 7.3.2, Tailwind 4.3.3, @data-slot/dialog 0.2.166. npm i package-lock.json.

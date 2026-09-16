@@ -23,12 +23,17 @@ znajdują się w `studio/`, `preview/` i `worker/`, a wspólne kontrakty w
 `packages/shared/`.
 Strony: `/` (PL), `/en/` (EN), `/ui/` i `/en/ui/` (katalog komponentów),
 `/static/` (kontrola bez JavaScriptu).
-Formularz nic nie wysyła. Studio zawiera minimalny model strony, a frontend pobiera
-opublikowaną treść z Sanity po ustawieniu konfiguracji. Bez niej build korzysta
-z jawnych danych demonstracyjnych. Lokalny projekt Sanity `dyuqkn8c` (dataset
-`production`) jest utworzony; sekrety pozostają w ignorowanych plikach środowiska.
-Worker pozostaje szkieletem bez kolejek, n8n
-i c15t. Nie publikować prototypu: noindex nie zastępuje ochrony stagingu.
+Formularz nic nie wysyła (`/api/leads` zwraca 501). Studio zawiera modele stron
+i sekcji; frontend pobiera opublikowaną treść z Sanity po ustawieniu konfiguracji.
+Bez niej build korzysta z jawnych danych demonstracyjnych. Projekt Sanity
+`dyuqkn8c` (dataset `production`) jest utworzony; sekrety pozostają w ignorowanych
+plikach środowiska.
+
+Publiczna produkcja: `aleksandraolesiewicz.com` (`www` → 301 na apex). Worker
+integracyjny ma kolejki i podpisane webhooki Sanity. GitHub Actions (`Quality`
+oraz `Publish content`) już działały na tym repozytorium. Szczegóły:
+[instrukcja Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md). n8n i c15t pozostają
+poza repo.
 
 ## Uruchomienie i weryfikacja
 
@@ -74,8 +79,7 @@ sesji mający co najmniej 32 znaki. Produkcyjnie wartości należy dodać jako s
 Workera, nigdy do repozytorium. Dostęp aktywuje wyłącznie sekret wygenerowany przez
 Sanity Presentation; sesja jest podpisana, wygasa po godzinie i ma cookie HttpOnly.
 Deklaratywne konfiguracje `staging` i `production` opisuje
-[instrukcja Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md). Nie wykonano jeszcze
-żadnego zdalnego wdrożenia.
+[instrukcja Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md).
 
 ```sh
 npm run verify
@@ -84,8 +88,9 @@ npm run verify
 Verify obejmuje format, zgodność tokenów, lint, typy wszystkich workspace’ów, build frontendu,
 Studio i Workera, unit tests, budżety artefaktów i E2E w trzech przeglądarkach.
 `npm run format` jawnie formatuje kod. Samo
-`npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane; wynik jego
-pierwszego uruchomienia na GitHub wymaga osobnego sprawdzenia.
+`npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane i było
+uruchamiane na GitHub (`Quality` na push/PR, `Publish content` po webhooku
+Sanity).
 
 n8n i self-hostowane c15t będą dostarczone poza repo. Tutaj powstaną integracje,
 formularze i panel zgód dopasowany do design systemu.
