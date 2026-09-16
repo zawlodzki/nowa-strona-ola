@@ -642,6 +642,10 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
 - `preview/wrangler.jsonc` i `worker/wrangler.jsonc`: `secrets.required` w
   `env.*` zostawione — Wrangler nie dziedziczy `secrets` do środowisk
   ([non-inheritable keys](https://developers.cloudflare.com/workers/wrangler/configuration/#non-inheritable-keys)).
+- `npm run verify`: PASS na Node 24.21.0. Format, `tokens:check`, lint, Astro
+  check 110 plików + workspace’y, 51 testów unit (11 plików), buildy, dry-run
+  Workera Wrangler 4.131.1, 33 E2E w Chromium/Firefox/WebKit. Root
+  `@types/node@^24.13.5`, `wrangler@^4.131.1`.
 
 ## Następny krok
 
