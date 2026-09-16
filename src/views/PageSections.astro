@@ -162,14 +162,7 @@ let formCount = 0;
         <ComparisonSection
           id={id}
           labelledby={labelledby}
-          content={toComparison(section)}
-          caption={
-            "caption" in section && typeof section.caption === "string"
-              ? section.caption
-              : pl
-                ? "Tabela porównania"
-                : "Comparison table"
-          }
+          content={toComparison(section, lang)}
         />
       );
     case "quoteSection":
@@ -177,14 +170,7 @@ let formCount = 0;
         <QuoteSection
           id={id}
           labelledby={labelledby}
-          heading={
-            "heading" in section && typeof section.heading === "string"
-              ? section.heading
-              : pl
-                ? "Cytat"
-                : "Quote"
-          }
-          content={toQuote(section)}
+          content={toQuote(section, lang)}
         />
       );
     case "ctaSection":

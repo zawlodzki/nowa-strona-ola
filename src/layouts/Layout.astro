@@ -1,9 +1,11 @@
 ---
+import type { Locale } from "@ola/shared";
+
 import monogramIcon from "../assets/brand/logo-monogram.svg?url";
 import switzerWoff2 from "../assets/fonts/switzer/Switzer-Variable.woff2?url";
 import "../styles/global.css";
 interface Props {
-  lang: "pl" | "en";
+  lang: Locale;
   title: string;
 }
 const { lang, title } = Astro.props;

@@ -4,7 +4,7 @@ import type { Locale } from "@ola/shared";
 import { articleBodyToHtml } from "@/content/portable-text";
 import { toRelated } from "@/content/map-sections";
 import { formatDate, toDatetime } from "@/lib/dates";
-import { articlePath, blogCategoryPath, pagePath } from "@/lib/paths";
+import { articlePath, blogCategoryPath, homePath } from "@/lib/paths";
 import type { ArticleContent, SiteSettings } from "@/sanity/repository";
 import Layout from "@/layouts/Layout.astro";
 import Heading from "@/ui/heading/Heading.astro";
@@ -141,9 +141,7 @@ const related = toRelated(
       />
     ) : null}
     <p class="panel shell">
-      <TextLink href={pagePath(lang, "home")}>
-        {pl ? "Strona główna" : "Home"}
-      </TextLink>
+      <TextLink href={homePath(lang)}>{pl ? "Strona główna" : "Home"}</TextLink>
     </p>
   </main>
   <SiteFooter lang={lang} note={settings.footerNote ?? undefined} />

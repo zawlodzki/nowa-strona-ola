@@ -1,25 +1,4 @@
-export const catalogSectionIds = [
-  "hero",
-  "text",
-  "text-image",
-  "logos",
-  "cards",
-  "list",
-  "process",
-  "metrics",
-  "pricing",
-  "testimonials",
-  "expert",
-  "faq",
-  "comparison",
-  "quote",
-  "cta",
-  "form",
-  "media",
-  "related",
-] as const;
-
-export type CatalogSectionId = (typeof catalogSectionIds)[number];
+export { catalogSectionIds, type CatalogSectionId } from "../content/sections";
 
 export type SectionTheme = "light" | "dark";
 
@@ -163,12 +142,14 @@ export interface ComparisonRow {
 export interface ComparisonContent {
   title: string;
   lead: string;
+  caption: string;
   rowHeading: string;
   columns: string[];
   rows: ComparisonRow[];
 }
 
 export interface QuoteContent {
+  heading: string;
   quote: string;
   attribution: string;
   theme?: SectionTheme;

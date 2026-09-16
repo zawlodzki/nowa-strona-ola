@@ -293,17 +293,24 @@ export function toFaq(section: {
   };
 }
 
-export function toComparison(section: {
-  title?: string | null;
-  lead?: string | null;
-  rowHeading?: string | null;
-  columns?: (string | null)[] | null;
-  rows?:
-    { feature?: string | null; values?: (string | null)[] | null }[] | null;
-}): ComparisonContent {
+export function toComparison(
+  section: {
+    title?: string | null;
+    lead?: string | null;
+    caption?: string | null;
+    rowHeading?: string | null;
+    columns?: (string | null)[] | null;
+    rows?:
+      { feature?: string | null; values?: (string | null)[] | null }[] | null;
+  },
+  language: Locale,
+): ComparisonContent {
   return {
     title: required(section.title, "tytuł porównania"),
     lead: required(section.lead, "lead porównania"),
+    caption:
+      section.caption ||
+      (language === "pl" ? "Tabela porównania" : "Comparison table"),
     rowHeading: required(section.rowHeading, "nagłówek wierszy"),
     columns: (section.columns ?? []).filter((item): item is string =>
       Boolean(item),
@@ -317,13 +324,18 @@ export function toComparison(section: {
   };
 }
 
-export function toQuote(section: {
-  theme?: string | null;
-  quote?: string | null;
-  attribution?: string | null;
-}): QuoteContent {
+export function toQuote(
+  section: {
+    theme?: string | null;
+    heading?: string | null;
+    quote?: string | null;
+    attribution?: string | null;
+  },
+  language: Locale,
+): QuoteContent {
   return {
     theme: section.theme === "dark" ? "dark" : "light",
+    heading: section.heading || (language === "pl" ? "Cytat" : "Quote"),
     quote: required(section.quote, "cytat"),
     attribution: required(section.attribution, "przypisanie"),
   };

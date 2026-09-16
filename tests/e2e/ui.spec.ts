@@ -199,6 +199,23 @@ test("catalog shows tokens, Polish glyphs and Switzer", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("cards nav scrolls on a narrow viewport and is hidden on a wide one", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/ui/");
+  const nav = page.locator(".cards-nav");
+  await expect(nav).toBeVisible();
+  const scroller = page.locator("[data-scroller]");
+  const before = await scroller.evaluate((element) => element.scrollLeft);
+  await page.getByRole("button", { name: "Następne karty" }).click();
+  await expect
+    .poll(async () => scroller.evaluate((element) => element.scrollLeft))
+    .toBeGreaterThan(before);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(nav).toBeHidden();
+});
+
 test("static primitives emit no scripts; no console errors on interactive page", async ({
   page,
 }) => {

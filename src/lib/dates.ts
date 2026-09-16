@@ -39,9 +39,7 @@ export function formatDate(value: string, language: Locale): string {
   const day = date.getUTCDate();
   const month = months[language][date.getUTCMonth()];
   const year = date.getUTCFullYear();
-  return language === "pl"
-    ? `${day} ${month} ${year}`
-    : `${day} ${month} ${year}`;
+  return `${day} ${month} ${year}`;
 }
 
 export function toDatetime(value: string): string {

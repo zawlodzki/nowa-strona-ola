@@ -7,10 +7,9 @@ export interface Props {
   id?: string;
   labelledby: string;
   content: ComparisonContent;
-  caption: string;
 }
 
-const { id, labelledby, content, caption } = Astro.props as Props;
+const { id, labelledby, content } = Astro.props as Props;
 ---
 
 <Section id={id} labelledby={labelledby}>
@@ -20,9 +19,14 @@ const { id, labelledby, content, caption } = Astro.props as Props;
     </Heading>
     <p class="lead section-lead">{content.lead}</p>
   </div>
-  <div class="table-wrap" tabindex="0" role="region" aria-label={caption}>
+  <div
+    class="table-wrap"
+    tabindex="0"
+    role="region"
+    aria-label={content.caption}
+  >
     <table class="comparison-table">
-      <caption>{caption}</caption>
+      <caption>{content.caption}</caption>
       <thead>
         <tr>
           <th scope="col">{content.rowHeading}</th>

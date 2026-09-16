@@ -55,7 +55,7 @@ const { id, labelledby, content, previousLabel, nextLabel, scrollerLabel } =
       </a>
     ))}
   </div>
-  <div class="cards-nav" hidden data-scroller-nav>
+  <div class="cards-nav" data-scroller-nav>
     <button type="button" data-scroll="-1">
       {previousLabel}
     </button>
@@ -72,7 +72,6 @@ const { id, labelledby, content, previousLabel, nextLabel, scrollerLabel } =
       "[data-scroller-nav]",
     );
     if (!nav) continue;
-    nav.hidden = window.matchMedia("(min-width: 880px)").matches;
     for (const button of nav.querySelectorAll<HTMLButtonElement>(
       "[data-scroll]",
     )) {

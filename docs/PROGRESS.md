@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-09-14. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-09-16. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -627,6 +627,21 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   PL/EN bez sekcji nadal tam są). Handshake Presentation szkicu nadal
   nie sprawdzony. Serializerów Markdown nie dodawano — etap 5.
 - Nie testowano n8n. Proxied `www → cdn.webflow.com` bez zmian.
+
+## Porządki mapperów, skryptów i dat — 2026-09-16
+
+- `PageSections` to czysty switch: `caption` i `heading` wychodzą z
+  `toComparison` / `toQuote` (z fallbackiem PL/EN), nie z runtime
+  `"caption" in section`.
+- Jedna tabela `sectionCatalog`: `knownSectionTypes` i `catalogSectionIds`
+  z tego samego porządku 18 sekcji. Nieznany typ nadal zatrzymuje build.
+- `formatDate`: jeden szablon `${day} ${month} ${year}`; tabele miesięcy
+  bez zmian.
+- Karuzela kart: usunięty `matchMedia("(min-width: 880px)")` i atrybut
+  `hidden`. Widoczność na szerokim ekranie zostaje w CSS (`display: none`
+  od 880 px). Klik nadal przewija.
+- `ArticleView` używa `homePath(lang)`; `Layout` — wspólnego `Locale`.
+- 18 rendererów sekcji bez zmian. Tras catch-all z PR #6 nie ruszano.
 
 ## Następny krok
 

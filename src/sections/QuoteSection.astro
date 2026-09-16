@@ -6,16 +6,15 @@ import Section from "@/ui/section/Section.astro";
 export interface Props {
   id?: string;
   labelledby: string;
-  heading: string;
   content: QuoteContent;
 }
 
-const { id, labelledby, heading, content } = Astro.props as Props;
+const { id, labelledby, content } = Astro.props as Props;
 ---
 
 <Section id={id} theme={content.theme ?? "light"} labelledby={labelledby}>
   <Heading tag="h2" id={labelledby} class="visually-hidden">
-    {heading}
+    {content.heading}
   </Heading>
   <blockquote class="pull-quote-block" data-reveal>
     <p class="pull-quote">{content.quote}</p>

@@ -221,6 +221,7 @@ const pl: CatalogCopy = {
   comparison: {
     title: "Co wybieracie na start",
     lead: "Tabela ma podpis i nagłówki kolumn. Na wąskim ekranie przewija się poziomo.",
+    caption: "Porównanie zakresu warsztatu, wdrożenia i opieki.",
     rowHeading: "Zakres",
     columns: ["Warsztat", "Wdrożenie", "Opieka"],
     rows: [
@@ -235,6 +236,7 @@ const pl: CatalogCopy = {
   },
   quote: {
     theme: "dark",
+    heading: "Cytat",
     quote: "Najpierw zrozumieć pracę. Potem dopiero ją przyspieszyć.",
     attribution: "Zasada współpracy",
   },
@@ -522,6 +524,7 @@ const en: CatalogCopy = {
   comparison: {
     title: "What you start with",
     lead: "The table has a caption and column headers. On a narrow screen it scrolls horizontally.",
+    caption: "Comparison of workshop, implementation and care.",
     rowHeading: "Scope",
     columns: ["Workshop", "Implementation", "Care"],
     rows: [
@@ -533,6 +536,7 @@ const en: CatalogCopy = {
   },
   quote: {
     theme: "dark",
+    heading: "Quote",
     quote: "Understand the work first. Speed it up second.",
     attribution: "A working principle",
   },

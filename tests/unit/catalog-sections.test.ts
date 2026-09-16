@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { knownSectionTypes } from "../../src/content/sections";
 import { metricFrame } from "../../src/lib/metrics";
 import { revealDelay } from "../../src/lib/reveal";
 import { catalogCopy, catalogToc } from "../../src/sections/catalog-examples";
@@ -8,6 +9,13 @@ import { catalogSectionIds } from "../../src/sections/types";
 describe("catalog sections", () => {
   it("lists every planned section in both languages", () => {
     expect(catalogSectionIds).toHaveLength(18);
+    expect(catalogSectionIds).toEqual(
+      knownSectionTypes.map((type) =>
+        type
+          .replace(/Section$/, "")
+          .replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`),
+      ),
+    );
     for (const lang of ["pl", "en"] as const) {
       const copy = catalogCopy(lang);
       const toc = catalogToc(lang);
