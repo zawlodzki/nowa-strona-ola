@@ -19,7 +19,7 @@ Przed pierwszym uruchomieniem: `npm ci` oraz `npx playwright install`.
 | npm run tokens:check | Zgodność `tokens.css` z `tokens.json` oraz Arial w stosach Wonderful                  |
 | npm run lint         | ESLint 10, typescript-eslint, eslint-plugin-astro; zero ostrzeżeń, zakaz explicit any |
 | npm run check        | Astro check i TypeScript strict: komponenty, props, importy, kod i testy TS           |
-| npm test             | Vitest: logika i przypadki brzegowe (walidacja, Sanity, podgląd, webhook, tokeny)     |
+| npm test             | Vitest: logika i przypadki brzegowe (walidacja, Sanity, podgląd, webhook, ścieżki)    |
 | npm run build        | Rzeczywisty build statyczny, nie tylko sprawdzenie składni                            |
 | npm run test:build   | Budżety gzip, noindex prototypu, jeden H1 i brak JS dla statycznych elementów         |
 | npm run test:e2e     | Playwright: Chromium, Firefox, WebKit; uruchamia podgląd wcześniej zbudowanego dist   |
@@ -84,7 +84,8 @@ w .gitignore nie zastępuje przeglądu kodu i zmian.
 ## CI i codzienna praca
 
 .github/workflows/quality.yml uruchamia npm ci, instaluje trzy przeglądarki i wykonuje
-verify na push/PR. Ma odczyt repo i zapisuje raport/trace przy błędzie przez 7 dni.
+verify na pull_request oraz push do main. Współbieżność anuluje niedokończone runy
+tego samego ref. Ma odczyt repo i zapisuje raport/trace przy błędzie przez 7 dni.
 Nie publikuje strony. Po podłączeniu remote ustawić ten job jako wymagany do merge.
 Nie jest jeszcze uruchomiony na GitHub, ponieważ repo nie ma remote.
 

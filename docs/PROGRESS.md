@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-09-14. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-09-16. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -627,6 +627,21 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   PL/EN bez sekcji nadal tam są). Handshake Presentation szkicu nadal
   nie sprawdzony. Serializerów Markdown nie dodawano — etap 5.
 - Nie testowano n8n. Proxied `www → cdn.webflow.com` bez zmian.
+
+## CI i tooling — 2026-09-16
+
+- Quality: `pull_request` oraz `push` tylko do `main`; `concurrency` anuluje
+  niedokończone runy tego samego ref. Trzy przeglądarki Playwright i sekwencyjne
+  `npm run verify` bez zmian.
+- E2E: usunięto `page.screenshot({ fullPage: true })` przy 320/390/1440 px.
+  Axe i asercje layoutu zostają; screenshoty nie są baseline’ami.
+- Root `package.json`: `wrangler` jako `devDependency` w wersji workspace’ów;
+  `@types/node` wyrównane do 24 (`engines` / `.node-version`).
+- Testy tokenów: Arial i CSS-from-JSON zostają w `tokens:check`; Vitest trzyma
+  tylko helpery ścieżek (`homePath` / `catalogPath` / `alternatePath`).
+- `preview/wrangler.jsonc` i `worker/wrangler.jsonc`: `secrets.required` w
+  `env.*` zostawione — Wrangler nie dziedziczy `secrets` do środowisk
+  ([non-inheritable keys](https://developers.cloudflare.com/workers/wrangler/configuration/#non-inheritable-keys)).
 
 ## Następny krok
 

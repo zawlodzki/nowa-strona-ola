@@ -60,7 +60,7 @@ test("form validation, error recovery and no network submission", async ({
 });
 
 for (const width of [320, 390, 1440]) {
-  test(`layout and accessibility at ${width}px`, async ({ page }, testInfo) => {
+  test(`layout and accessibility at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
     await expect(
@@ -89,10 +89,6 @@ for (const width of [320, 390, 1440]) {
           .analyze()
       ).violations,
     ).toEqual([]);
-    await page.screenshot({
-      path: testInfo.outputPath(`wonderful-${width}.png`),
-      fullPage: true,
-    });
   });
 }
 
