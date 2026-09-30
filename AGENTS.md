@@ -53,3 +53,20 @@
   których nie wykonano. Po uruchomieniu aplikacji dodaj sprawdzone komendy do README.
 - UI porównuj z design systemem na desktopie i mobile, także dla klawiatury,
   320 px, zoomu 200% i reduced motion. Zapisuj niewykonane kontrole w postępie.
+
+## Cursor Cloud
+
+Powłoka agenta może rozwiązywać `node` jako `/exec-daemon/node` (Node 22).
+Projekt wymaga Node 24 z `.node-version`. Przed `npm` ustaw wersję z nvm:
+
+```sh
+export NVM_DIR="$HOME/.nvm"
+. "$NVM_DIR/nvm.sh"
+nvm use 24
+export PATH="$NVM_DIR/versions/node/$(nvm version 24)/bin:$PATH"
+```
+
+Publiczny serwis Astro startuje bez sekretów Sanity: `npm run dev` na
+`http://127.0.0.1:4321`. Build bez `PUBLIC_SANITY_*` używa fixture’ów.
+Podgląd i Worker wymagają sekretów z plików `.dev.vars.example` i nie są
+częścią domyślnego startu.
