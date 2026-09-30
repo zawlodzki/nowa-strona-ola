@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import {
   createPreviewSession,
+  previewPerspectiveCookie,
+  previewSessionCookie,
   previewSessionTtlSeconds,
   verifyPreviewSession,
 } from "../../preview/src/lib/session";
@@ -34,6 +36,14 @@ describe("preview session", () => {
     await expect(
       verifyPreviewSession(`${Number(expiry) + 1}.${signature}`, secret, now),
     ).resolves.toBe(false);
+  });
+
+  it("uses SameSite=None so Presentation can keep the session in a cross-origin iframe", () => {
+    expect(previewSessionCookie.sameSite).toBe("none");
+    expect(previewSessionCookie.secure).toBe(true);
+    expect(previewSessionCookie.httpOnly).toBe(true);
+    expect(previewPerspectiveCookie.sameSite).toBe("none");
+    expect(previewPerspectiveCookie.secure).toBe(true);
   });
 
   it("rejects a session secret shorter than 32 characters", async () => {

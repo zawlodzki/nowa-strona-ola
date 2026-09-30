@@ -1,15 +1,15 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-09-14. Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-09-14 (Presentation / Access). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
 Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
 Etap 2 — aplikacje i infrastruktura — zakończony.
 Etap 3 — design system i komponenty — zakończony.
-Etap 4 — Sanity i szablony PL/EN — kod, fixture’e i trasy zweryfikowane lokalnie.
-Dataset `production` nadal ma stare dokumenty `page` (tytuł/lead, bez sekcji).
-Etapy 5–7 pozostają otwarte.
+Etap 4 — Sanity i szablony PL/EN — kod zweryfikowany lokalnie; demonstracyjna
+treść jest w datasetcie `production`. Strony i artykuły są szkicami, żeby nie
+odpalać webhooków. Opublikowane `home` PL/EN nadal bez sekcji. Etapy 5–7 otwarte.
 
 ## Wykonane
 
@@ -641,13 +641,70 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
 - Nie przejechano pozostałych czterech funkcji mapy. Nie uruchamiano
   `npm run verify` dla tej zmiany dokumentacji i skryptu pomocniczego.
 
+## Demonstracyjna treść Sanity — 2026-09-14
+
+- Dataset `production`, projekt `dyuqkn8c`. Webhooki stron nie były odpalane:
+  strony i artykuły pozostają szkicami. Opublikowano wyłącznie dokumenty
+  wspierające (nie `_type == "page"`): `siteSettings-pl/en`, autorzy, kategorie,
+  formularze, usługi, opinie, przekierowanie `/stara-strona/` → `/warsztat/`.
+- Szkice stron: `home` PL/EN (stare opublikowane `home` bez sekcji nadal żywe),
+  `warsztat`/`workshop`, `wdrozenie`/`implementation`, `tylko-pl`.
+- Szkice artykułów (3× PL/EN): wyróżniony `najpierw-proces` /
+  `process-before-crm` ma akapity, H2/H3, cytaty blockquote, listy, tabelę,
+  dwie ryciny z podpisami, wyróżnienie, CTA oraz źródła (Kotter HBR i książka,
+  Edmondson 1999 DOI i _The Fearless Organization_, Payne i Frow 2005 DOI).
+- Trzy assety obrazów w CDN: hero warsztatu, tablica, schemat warstw.
+  Podpięte do wyróżnionych wpisów, pozostałych kart bloga i mediów wdrożenia.
+- Powiązania tłumaczeń i related na szkicach są referencjami słabymi (`_weak`),
+  bo strony i artykuły nie są opublikowane. Handshake Presentation nie
+  sprawdzono. Apex i staging nadal serwują stare opublikowane `home`.
+
+## Hostowane Studio — 2026-09-14
+
+Adres: `https://studio.aleksandraolesiewicz.com` (Worker
+`ola-website-studio-production`, version `539c695d-37be-49e3-859b-0cebe9f58831`).
+Build z `SANITY_STUDIO_PREVIEW_ORIGIN=https://preview.aleksandraolesiewicz.com`.
+CORS z poświadczeniami dodany. Sanity `deploy --external` zarejestrował studio
+`eotkhlsk0a6m8yibs02m17y8`. Sekret podglądu produkcji `SANITY_STUDIO_URL`
+wskazuje hostowany panel. Kontrola: `/` i `/structure` 200 HTML; w przeglądarce
+ekran logowania „Ola — treści” (Google, GitHub, e-mail). Access nie obejmuje
+Studio — logowanie Sanity.
+
+## Presentation i Cloudflare Access — 2026-09-14
+
+Hostowane Studio ładuje `https://preview.aleksandraolesiewicz.com/api/draft-mode/enable`
+w iframe. Access pokazywał w ramce „Authentication failed”:
+`publickey-credentials-get` nie jest dozwolone w cross-origin iframe (MFA
+passkey). Sanity nie ma obejścia Access jak dla Vercel.
+
+Zmiana Access (API, bez usuwania ochrony): obie aplikacje Worker Access preview
+mają `allow_iframe: true` i `same_site_cookie_attribute: none`. Polityka
+`Allow administrator with MFA` nadal wymaga `grzesiek@zawlodzki.pl`.
+Kod podglądu ustawia sesję i ciasteczko perspektywy `SameSite=None; Secure`
+oraz `Content-Security-Policy: frame-ancestors` dla originu Studio.
+
+Po zalogowaniu Access strona nadal zwracała 401 „Brak dostępu do podglądu.”:
+middleware wymagał ciasteczka z `/api/draft-mode/enable`, którego zwykła
+wizyta po Access nie ustawia. Middleware dodatkowo wpuszcza żądanie z
+podpisem JWT Access (`CF-Access-Jwt-Assertion`, aud aplikacji, ISS zespołu,
+klucze z `/cdn-cgi/access/certs`) i wtedy wystawia sesję aplikacji.
+`npx vitest run tests/unit/access-jwt.test.ts tests/unit/preview-session.test.ts`:
+7 testów PASS. `npm run check --workspace @ola/preview`: 0 błędów.
+Wdrożono `ola-website-preview-production` version
+`ca730a63-bc13-4e51-9688-add70d299705` (custom domain preview). Handshake
+Presentation w Studio i pełne `npm run verify` nie uruchamiano.
+
 ## Następny krok
 
-1. Wgrać demonstracyjne strony, ustawienia, artykuły i powiązania do Sanity
-   najpierw jako szkice, żeby nie odpalać webhooków produkcji. Potem
-   sprawdzić handshake Presentation.
-2. Etap 5: serializacja Markdown, canonical, hreflang, sitemap i JSON-LD.
-3. Nie testować n8n. Nie dodawać `www` jako custom domain Workera.
+1. Odświeżyć `https://preview.aleksandraolesiewicz.com` przy aktywnej sesji
+   Access — zamiast 401 powinien być chroniony podgląd szkicu.
+2. W Studio Presentation odświeżyć podgląd (Access raz w nowej karcie, bez
+   passkey w iframe).
+3. Zaprosić drugiego administratora w Sanity Manage (`dyuqkn8c`).
+4. W Studio przejrzeć szkice; po akceptacji publikować strony i artykuły
+   (to odpali webhooki staging/produkcji).
+5. Etap 5: serializacja Markdown, canonical, hreflang, sitemap i JSON-LD.
+6. Nie testować n8n. Nie dodawać `www` jako custom domain Workera.
 
 Nie wklejać sekretów do czatu.
 

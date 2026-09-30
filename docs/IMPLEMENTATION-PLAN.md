@@ -306,7 +306,9 @@ wersji i przekazanie instrukcji utrzymania.
 Domena produkcyjna `aleksandraolesiewicz.com` jest Custom Domain publicznego
 Workera (apex 200). Proxied `www` zostaje przy regule 301 i nie może być domeną
 Workera. Publiczny staging działa pod `workers.dev`, a preview staging i
-preview produkcji są chronione przez Access. Worker integracji produkcji jest
+preview produkcji są chronione przez Access (iframe Presentation wymaga
+`allow_iframe` i ciasteczka `SameSite=None`; logowanie MFA w ramce nie działa).
+Worker integracji produkcji jest
 wdrożony, a webhook Sanity `publish-pages-production` po ujednoliceniu sekretu
 przeszedł end-to-end (202 → Actions → apex, potem przywrócenie). Wrangler,
 kolejki, webhook staging, Repository Dispatch i środowiska GitHub są

@@ -1,5 +1,6 @@
 SANITY_PROJECT_ID=your-project-id
 SANITY_DATASET=production
 SANITY_STUDIO_URL=http://127.0.0.1:3333
+# Hostowane Studio: https://studio.aleksandraolesiewicz.com
 SANITY_API_READ_TOKEN=viewer-token
 PREVIEW_SESSION_SECRET=at-least-32-random-characters

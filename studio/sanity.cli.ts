@@ -4,6 +4,9 @@ import { sanityEnvironment } from "./sanity.env";
 
 export default defineCliConfig({
   api: sanityEnvironment,
+  deployment: {
+    appId: "eotkhlsk0a6m8yibs02m17y8",
+  },
   typegen: {
     enabled: true,
     path: [

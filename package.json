@@ -19,6 +19,7 @@
     "dev:worker": "npm run dev --workspace @ola/worker",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "build:workspaces": "npm run build --workspaces --if-present",
+    "deploy:studio": "npx wrangler deploy --config studio/wrangler.jsonc --env production",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check && npm run check --workspaces --if-present",
     "lint": "eslint . --max-warnings 0",

@@ -52,8 +52,11 @@ npm run dev:worker
 npm run types --workspace @ola/worker
 npm run types --workspace @ola/preview
 npm run build:workspaces
+npm run deploy:studio
 ```
 
+Hostowane Studio: `https://studio.aleksandraolesiewicz.com`. Build hostowany
+wymaga `SANITY_STUDIO_PREVIEW_ORIGIN=https://preview.aleksandraolesiewicz.com`.
 Studio odczytuje `SANITY_STUDIO_PROJECT_ID` i opcjonalne
 `SANITY_STUDIO_DATASET` zgodnie z `studio/.env.example`. Wartość zastępcza służy
 wyłącznie do lokalnej kontroli buildu. Frontend odczytuje parę
@@ -74,8 +77,7 @@ sesji mający co najmniej 32 znaki. Produkcyjnie wartości należy dodać jako s
 Workera, nigdy do repozytorium. Dostęp aktywuje wyłącznie sekret wygenerowany przez
 Sanity Presentation; sesja jest podpisana, wygasa po godzinie i ma cookie HttpOnly.
 Deklaratywne konfiguracje `staging` i `production` opisuje
-[instrukcja Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md). Nie wykonano jeszcze
-żadnego zdalnego wdrożenia.
+[instrukcja Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md).
 
 ```sh
 npm run verify

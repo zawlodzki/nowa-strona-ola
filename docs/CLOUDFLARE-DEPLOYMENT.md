@@ -6,6 +6,7 @@ i `production`. Ten dokument nie potwierdza utworzenia zasobów ani wdrożenia.
 | Aplikacja        | Konfiguracja             | Artefakt / punkt wejścia  |
 | ---------------- | ------------------------ | ------------------------- |
 | Publiczny serwis | `wrangler.jsonc`         | statyczny katalog `dist/` |
+| Studio           | `studio/wrangler.jsonc`  | SPA z `studio/dist/`      |
 | Podgląd SSR      | `preview/wrangler.jsonc` | adapter Astro Cloudflare  |
 | Integracje       | `worker/wrangler.jsonc`  | `worker/src/index.ts`     |
 
@@ -26,7 +27,10 @@ stagingu. Access dotyczy obu adresów podglądu; dozwolony e-mail:
 
 Podgląd wymaga w każdym środowisku pięciu wartości zadeklarowanych przez
 `secrets.required`: `SANITY_PROJECT_ID`, `SANITY_DATASET`, `SANITY_STUDIO_URL`,
-`SANITY_API_READ_TOKEN` i `PREVIEW_SESSION_SECRET`. Trzy pierwsze są konfiguracją
+`SANITY_API_READ_TOKEN` i `PREVIEW_SESSION_SECRET`. Zmienne `ACCESS_TEAM_DOMAIN`
+i `ACCESS_AUD` są w `preview/wrangler.jsonc` (osobny audience stagingu i
+produkcji). Po zalogowaniu Access Worker weryfikuje JWT z JWKS zespołu i wpuszcza
+do szkiców bez sekretu Presentation. Trzy pierwsze sekrety są konfiguracją
 operacyjną, ale również trafiają do sekretów, aby środowiska nie wymagały
 placeholderów w repo. Token musi mieć wyłącznie uprawnienia Viewer, a sekret sesji
 powinien być losowy i mieć co najmniej 32 znaki. Lokalnie skopiować
@@ -35,7 +39,9 @@ powinien być losowy i mieć co najmniej 32 znaki. Lokalnie skopiować
 Publiczny build otrzymuje `PUBLIC_SANITY_PROJECT_ID` i `PUBLIC_SANITY_DATASET`
 jako zmienne systemu buildów. Nie wymaga tokenu: pobiera tylko perspektywę
 `published`. Studio otrzymuje `SANITY_STUDIO_PROJECT_ID`,
-`SANITY_STUDIO_DATASET` oraz origin właściwego podglądu. `CLOUDFLARE_API_TOKEN`
+`SANITY_STUDIO_DATASET` oraz origin właściwego podglądu. Hostowany panel
+budować z `SANITY_STUDIO_PREVIEW_ORIGIN=https://preview.aleksandraolesiewicz.com`.
+`CLOUDFLARE_API_TOKEN`
 i `CLOUDFLARE_ACCOUNT_ID` należą wyłącznie do sekretów środowisk GitHub Actions,
 nigdy do pliku konfiguracyjnego.
 
@@ -101,6 +107,7 @@ sztucznych commitów. Pozostałe wdrożenia wykonywać osobno. Wszystkie używaj
 `.node-version` oraz `npm ci`. Przed komendą wdrożenia uruchomić odpowiednio:
 
 - publiczny serwis: `npm run build`;
+- Studio: `SANITY_STUDIO_PREVIEW_ORIGIN=https://preview.aleksandraolesiewicz.com npm run build --workspace @ola/studio`;
 - podgląd: `CLOUDFLARE_ENV=<environment> npm run build --workspace @ola/preview`;
 - Worker integracyjny: `npm run check --workspace @ola/worker`.
 
@@ -108,6 +115,7 @@ Komenda wdrożenia musi jawnie wskazywać konfigurację i środowisko:
 
 ```sh
 npx wrangler deploy --config wrangler.jsonc --env <environment>
+npx wrangler deploy --config studio/wrangler.jsonc --env production
 npx wrangler deploy --config preview/dist/server/wrangler.json
 npx wrangler deploy --config worker/wrangler.jsonc --env <environment>
 ```
@@ -120,8 +128,19 @@ automatycznie utworzyć zbędnych bindingów KV ani Cloudflare Images.
 
 Publikacja treści nie wdraża Studio, podglądu ani Workera integracyjnego. Preview SSR
 powinien dodatkowo być chroniony Cloudflare Access; `noindex` i sesja aplikacyjna
-nie zastępują kontroli dostępu na brzegu. Studio jest wdrażane osobno przez Sanity,
-po ustawieniu poprawnego originu podglądu i CORS.
+nie zastępują kontroli dostępu na brzegu. Presentation ładuje podgląd w iframe
+z `studio.aleksandraolesiewicz.com`, więc aplikacje Access podglądu mają
+`allow_iframe` i ciasteczko Access `SameSite=None`. Logowanie Access z MFA
+(passkey) w iframe nadal nie działa — raz zalogować Access w nowej karcie
+`https://preview.aleksandraolesiewicz.com`. Worker podglądu uznaje zweryfikowany
+JWT Access (`CF-Access-Jwt-Assertion`, audience aplikacji) za uprawnienie do
+treści szkicu; sekret Presentation nadal ustawia tryb edycji w Studio.
+Sesja aplikacji podglądu też jest `SameSite=None`. Studio jest statyczną SPA na
+`studio.aleksandraolesiewicz.com` (Sanity logowanie, bez Access). Po wrzuceniu
+plików zarejestrować je w Sanity: `npx sanity deploy --external --url https://studio.aleksandraolesiewicz.com --yes --no-build --schema-required`
+z katalogu `studio/`. CORS origin z poświadczeniami:
+`https://studio.aleksandraolesiewicz.com`. Sekret podglądu `SANITY_STUDIO_URL`
+musi wskazywać ten adres.
 
 ## Hosty i Access
 
@@ -130,6 +149,7 @@ po ustawieniu poprawnego originu podglądu i CORS.
 | Publiczna produkcja  | `aleksandraolesiewicz.com`                                  | publiczna                              |
 | `www`                | `www.aleksandraolesiewicz.com`                              | 301 na apex, ścieżka i query zachowane |
 | Podgląd produkcyjny  | `preview.aleksandraolesiewicz.com`                          | Access + sesja aplikacji               |
+| Studio               | `studio.aleksandraolesiewicz.com`                           | logowanie Sanity                       |
 | Publiczny staging    | `ola-website-staging.zawlodzki.workers.dev`                 | publiczna                              |
 | Podgląd staging      | `ola-website-preview-staging.zawlodzki.workers.dev`         | Access + sesja aplikacji               |
 | Integracje staging   | `ola-website-integrations-staging.zawlodzki.workers.dev`    | webhook `/webhooks/sanity`             |
@@ -142,6 +162,9 @@ Workera. `noindex` i cookie sesji nie zastępują Access. Preview produkcji
 (`ola-website-preview-production`, custom domain
 `preview.aleksandraolesiewicz.com`) bez sesji Access też zwraca 302 na
 `zawlodzki.cloudflareaccess.com` z `cache-control: private, no-store`.
+Aplikacje Access preview (produkcja i staging) mają włączone osadzanie w iframe
+oraz `SameSite=None` na ciasteczku sesji Zero Trust, żeby Presentation mogło
+wysłać sesję z hostowanego Studio. Polityka Allow z MFA bez zmian.
 
 `www` nie dodawać jako custom domain publicznego Workera — to serwowałoby treść
 zamiast przekierowania. W strefie: rekord DNS `www` musi być proxied. Single
