@@ -628,6 +628,19 @@ pozostała 5.31.2. Stan nadal sprawdzać przed wdrożeniem Studio.
   nie sprawdzony. Serializerów Markdown nie dodawano — etap 5.
 - Nie testowano n8n. Proxied `www → cdn.webflow.com` bez zmian.
 
+## Skill weryfikacji publicznego serwisu — 2026-09-30
+
+- Dodano `.cursor/skills/verify-ola/`: osobny podgląd Astro na porcie 4340–4390,
+  sesja Chromium i mapa pięciu funkcji (formularz, język, dialog katalogu,
+  artykuł, `/static/`). Studio, podgląd szkiców i Worker są poza skillem.
+- Doctor czyta `/proc`, więc działa na Linuksie. Node według `.node-version`.
+- Przebieg `ola-proof-3`: launch, doctor, formularz na `/` (pusty błąd imienia,
+  zły e-mail, status „Dane poprawne. Nic nie wysłano.”, `posts` = `[]`),
+  snapshot ARIA i zrzut. Po cleanup katalog
+  `/tmp/ola-verify-evidence/ola-proof-3/` nadal zawiera te pliki.
+- Nie przejechano pozostałych czterech funkcji mapy. Nie uruchamiano
+  `npm run verify` dla tej zmiany dokumentacji i skryptu pomocniczego.
+
 ## Następny krok
 
 1. Wgrać demonstracyjne strony, ustawienia, artykuły i powiązania do Sanity
