@@ -6,6 +6,8 @@ import {
   mkdirSync,
   openSync,
   readFileSync,
+  readdirSync,
+  readlinkSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
@@ -106,16 +108,43 @@ function stopPid(pid) {
   }
 }
 
-function portOwner(port) {
-  const probe = spawnSync("ss", ["-ltnp", `sport = :${port}`], {
-    encoding: "utf8",
-  });
-  if (probe.status !== 0) return "";
-  return probe.stdout;
+function listeningInodes(port) {
+  const inodes = new Set();
+  for (const file of ["/proc/net/tcp", "/proc/net/tcp6"]) {
+    if (!existsSync(file)) continue;
+    const lines = readFileSync(file, "utf8").trim().split("\n").slice(1);
+    for (const line of lines) {
+      const parts = line.trim().split(/\s+/);
+      const local = parts[1];
+      const state = parts[3];
+      const inode = parts[9];
+      const hexPort = local?.split(":")[1];
+      if (state === "0A" && Number.parseInt(hexPort, 16) === port) {
+        inodes.add(inode);
+      }
+    }
+  }
+  return inodes;
+}
+
+function portOwnedBy(port, pid) {
+  const inodes = listeningInodes(port);
+  const fdDir = `/proc/${pid}/fd`;
+  if (inodes.size === 0 || !existsSync(fdDir)) return false;
+  for (const fd of readdirSync(fdDir)) {
+    try {
+      const target = readlinkSync(path.join(fdDir, fd));
+      const match = /^socket:\[(\d+)\]$/.exec(target);
+      if (match && inodes.has(match[1])) return true;
+    } catch {
+      // The fd can disappear while we read the process.
+    }
+  }
+  return false;
 }
 
 function portFree(port) {
-  return !portOwner(port).includes("pid=");
+  return listeningInodes(port).size === 0;
 }
 
 async function waitForHttp(url) {
@@ -211,9 +240,8 @@ async function doctor() {
   if (!existsSync(file)) fail(`No server state for ${id}. Launch first.`);
   const state = readJson(file);
   if (!alive(state.pid)) fail(`Preview pid ${state.pid} is not running.`);
-  const owners = portOwner(state.port);
-  if (!owners.includes(`pid=${state.pid},`)) {
-    fail(`Port ${state.port} is not owned by pid ${state.pid}.\n${owners}`);
+  if (!portOwnedBy(state.port, state.pid)) {
+    fail(`Port ${state.port} is not owned by pid ${state.pid}.`);
   }
   const response = await fetch(`http://127.0.0.1:${state.port}/`);
   const body = await response.text();
@@ -255,34 +283,35 @@ async function browserStart() {
   }
   const token = randomBytes(16).toString("hex");
   const log = openSync(path.join(stateDir(id), "browser.log"), "a");
-  const child = spawn(process.execPath, [path.join(scriptDir, "browser-session.mjs")], {
-    cwd: repoRoot,
-    detached: true,
-    stdio: ["ignore", "pipe", log],
-    env: {
-      ...process.env,
-      VERIFY_BASE_URL: `http://127.0.0.1:${server.port}`,
-      VERIFY_BROWSER_TOKEN: token,
-      VERIFY_EVIDENCE_ROOT: evidenceDir(id),
+  const portFile = path.join(stateDir(id), "browser.port");
+  rmSync(portFile, { force: true });
+  const child = spawn(
+    process.execPath,
+    [path.join(scriptDir, "browser-session.mjs"), portFile],
+    {
+      cwd: repoRoot,
+      detached: true,
+      stdio: ["ignore", log, log],
+      env: {
+        ...process.env,
+        VERIFY_BASE_URL: `http://127.0.0.1:${server.port}`,
+        VERIFY_BROWSER_TOKEN: token,
+        VERIFY_EVIDENCE_ROOT: evidenceDir(id),
+      },
     },
-  });
-  let announced = "";
-  child.stdout.on("data", (chunk) => {
-    announced += chunk.toString("utf8");
-  });
+  );
+  child.unref();
   const started = Date.now();
-  while (!announced.includes("control ") && Date.now() - started < 30000) {
-    if (child.exitCode !== null) {
-      fail(`Browser session exited ${child.exitCode}. See ${stateDir(id)}/browser.log`);
+  while (!existsSync(portFile) && Date.now() - started < 30000) {
+    if (!alive(child.pid)) {
+      fail(`Browser session exited. See ${stateDir(id)}/browser.log`);
     }
     await sleep(100);
   }
-  const match = announced.match(/control (\d+)/);
-  if (!match) fail("Browser session did not announce a control port.");
-  child.unref();
+  if (!existsSync(portFile)) fail("Browser session did not announce a control port.");
   const state = {
     pid: child.pid,
-    controlPort: Number(match[1]),
+    controlPort: Number(readFileSync(portFile, "utf8").trim()),
     token,
   };
   writeFileSync(browserFile, `${JSON.stringify(state, null, 2)}\n`);

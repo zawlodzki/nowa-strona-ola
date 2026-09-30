@@ -1,14 +1,16 @@
 // Long-lived Chromium for sequential verification commands.
 import { createServer } from "node:http";
 import { mkdir, writeFile } from "node:fs/promises";
+import { writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
 
 const baseUrl = process.env.VERIFY_BASE_URL;
 const token = process.env.VERIFY_BROWSER_TOKEN;
 const evidenceRoot = process.env.VERIFY_EVIDENCE_ROOT;
-if (!baseUrl || !token || !evidenceRoot) {
-  process.stderr.write("browser-session: missing VERIFY_* environment\n");
+const portFile = process.argv[2];
+if (!baseUrl || !token || !evidenceRoot || !portFile) {
+  process.stderr.write("browser-session: missing VERIFY_* environment or port file\n");
   process.exit(1);
 }
 
@@ -16,6 +18,8 @@ const browser = await chromium.launch({ headless: true });
 let context = await browser.newContext({
   viewport: { width: 1280, height: 900 },
 });
+context.setDefaultTimeout(15000);
+context.setDefaultNavigationTimeout(15000);
 let page = await context.newPage();
 const posts = [];
 
@@ -74,6 +78,8 @@ async function run(body) {
         viewport: { width: 1280, height: 900 },
         javaScriptEnabled: body.javascript !== false,
       });
+      context.setDefaultTimeout(15000);
+      context.setDefaultNavigationTimeout(15000);
       page = await context.newPage();
       track(page);
       return `javascript ${body.javascript !== false}`;
@@ -181,7 +187,7 @@ if (address === null || typeof address === "string") {
   process.stderr.write("browser-session: no control port\n");
   process.exit(1);
 }
-process.stdout.write(`control ${address.port}\n`);
+writeFileSync(portFile, `${address.port}\n`);
 
 for (const signal of ["SIGINT", "SIGTERM"]) {
   process.once(signal, async () => {

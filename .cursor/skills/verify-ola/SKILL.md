@@ -37,7 +37,7 @@ Uruchom zanim cokolwiek klikniesz, oraz gdy odpowiedź wygląda podejrzanie:
 node .cursor/skills/verify-ola/scripts/verify.mjs doctor
 ```
 
-Przechodzi tylko wtedy, gdy pid z `/tmp/ola-verify/$VERIFY_RUN_ID/server.json` żyje, ten sam pid trzyma port, a `GET /` zwraca 200 i zawiera `Aleksandra Olesiewicz — strona główna`. Wypisuje też URL, wersję Node zapisaną przy starcie i katalog dowodów. Jeśli sesja przeglądarki jest zapisana, doctor wymaga żywego pidu i odpowiedzi control portu.
+Przechodzi tylko wtedy, gdy pid z `/tmp/ola-verify/$VERIFY_RUN_ID/server.json` żyje, ten sam pid trzyma port (odczyt `/proc/net/tcp` i `/proc/<pid>/fd`, więc doctor jest na Linuksa), a `GET /` zwraca 200 i zawiera `Aleksandra Olesiewicz — strona główna`. Wypisuje też URL, wersję Node zapisaną przy starcie i katalog dowodów. Jeśli sesja przeglądarki jest zapisana, doctor wymaga żywego pidu i odpowiedzi control portu.
 
 ## Drive
 
