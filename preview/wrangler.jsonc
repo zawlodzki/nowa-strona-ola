@@ -4,6 +4,10 @@
   "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-09-13",
   "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "https://zawlodzki.cloudflareaccess.com",
+    "ACCESS_AUD": "",
+  },
   "observability": {
     "enabled": true,
     "logs": {
@@ -25,6 +29,10 @@
   "env": {
     "staging": {
       "name": "ola-website-preview-staging",
+      "vars": {
+        "ACCESS_TEAM_DOMAIN": "https://zawlodzki.cloudflareaccess.com",
+        "ACCESS_AUD": "e6f951dff0d0f58c9a4c48487d0ceea0f491b0573d42367fe17702af734a6aac",
+      },
       "secrets": {
         "required": [
           "SANITY_PROJECT_ID",
@@ -37,6 +45,10 @@
     },
     "production": {
       "name": "ola-website-preview-production",
+      "vars": {
+        "ACCESS_TEAM_DOMAIN": "https://zawlodzki.cloudflareaccess.com",
+        "ACCESS_AUD": "790c501487cb832953c83615a01e15ad96dbb22ce92a754acf6692a844616c83",
+      },
       "routes": [
         {
           "pattern": "preview.aleksandraolesiewicz.com",

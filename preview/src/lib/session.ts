@@ -1,6 +1,22 @@
 export const previewSessionCookieName = "ola-preview-session";
 export const previewSessionTtlSeconds = 60 * 60;
 
+/** Cross-site iframe (Sanity Presentation) requires SameSite=None; Secure. */
+export const previewSessionCookie = {
+  httpOnly: true,
+  maxAge: previewSessionTtlSeconds,
+  path: "/",
+  sameSite: "none" as const,
+  secure: true,
+};
+
+export const previewPerspectiveCookie = {
+  maxAge: previewSessionTtlSeconds,
+  path: "/",
+  sameSite: "none" as const,
+  secure: true,
+};
+
 const encoder = new TextEncoder();
 
 function assertSecret(secret: string): void {
