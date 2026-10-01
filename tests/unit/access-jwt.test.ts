@@ -34,7 +34,9 @@ async function generateKeys(): Promise<CryptoKeyPair> {
   );
 }
 
-async function publicJwk(publicKey: CryptoKey): Promise<JsonWebKey> {
+async function publicJwk(
+  publicKey: CryptoKey,
+): Promise<JsonWebKey & { kid: string }> {
   const jwk = await crypto.subtle.exportKey("jwk", publicKey);
   return { ...jwk, alg: "RS256", kid, use: "sig" };
 }
