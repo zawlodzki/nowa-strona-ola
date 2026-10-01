@@ -694,6 +694,33 @@ Wdrożono `ola-website-preview-production` version
 `ca730a63-bc13-4e51-9688-add70d299705` (custom domain preview). Handshake
 Presentation w Studio i pełne `npm run verify` nie uruchamiano.
 
+## Typ `kid` w teście Access JWT — 2026-10-01
+
+`npm run verify` na `e48a04c` (merge PR #11) kończył się w `astro check`.
+`tests/unit/access-jwt.test.ts` zwracał `JsonWebKey` i dopisywał `kid`.
+Typ DOM `JsonWebKey` w TypeScript nie ma `kid`, więc diagnostyka to
+`ts(2353)` w linii 39. Ta sama diagnostyka jest na jobie Quality
+pusha do `main` (`36771450577`) i na jobie Quality pull requesta
+(`36771442997`).
+
+`publicJwk` zwraca teraz `JsonWebKey & { kid: string }`.
+`npm run check` ma 0 błędów. `npx vitest run tests/unit/access-jwt.test.ts`
+ma 3 testy PASS. `npm run test:e2e` ma 33 PASS (Chromium, Firefox, WebKit).
+Pierwszy lokalny `npm run verify` odpadł na WebKit z braku bibliotek
+systemowych. Po `npx playwright install-deps webkit` sam `test:e2e` jest zielony.
+Pełnego `npm run verify` po instalacji bibliotek nie powtarzano.
+
+Skill `verify-ola`, przebieg `ola-1790839417`, port 4340, Node 24.21.0.
+Doctor przeszedł. Formularz na `/` (puste imię, zły e-mail, status
+„Dane poprawne. Nic nie wysłano.”, `posts` = `[]`). Język PL/EN, warsztat,
+`/tylko-pl/` i 404 `/en/tylko-pl/`. Dialog katalogu otwiera się i zamyka
+Escape oraz „Zamknij”. `/static/` przy wyłączonym JavaScript ma `scripts 0`.
+Wejście w artykuł z `/blog/` nie doszło do skutku. Komenda
+`click --role link --name "Najpierw proces, potem CRM" --exact` nie znajduje
+linku. Dostępna nazwa na liście to
+„Najpierw proces, potem CRM Narzędzie nie naprawi niejasnych decyzji.”
+Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
+
 ## Następny krok
 
 1. Odświeżyć `https://preview.aleksandraolesiewicz.com` przy aktywnej sesji
