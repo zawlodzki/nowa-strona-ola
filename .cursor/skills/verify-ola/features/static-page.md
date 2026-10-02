@@ -24,7 +24,7 @@ Preconditions:
 - **Otwórz stronę.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /static/`. Wynik zaczyna się od `status 200`.
 - **Treść.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Bez skryptów"`.
 - **Brak skryptów.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser script-count`. Wynik to `scripts 0`.
-- **Powrót.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Wróć do przykładu" --attribute href --value "/"`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Wróć do przykładu"`. Następny dokument to strona główna: `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Aleksandra Olesiewicz — strona główna"`.
+- **Powrót.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Wróć do przykładu" --attribute href --value "/"`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Wróć do przykładu"`. Następny dokument to strona główna: `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Dobry pomysł. Przemyślana realizacja."`.
 - **Dowód.** Zbierz go jeszcze na `/static/`, przed kliknięciem powrotu: `node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path static-page/page.aria.txt` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path static-page/page.png`.
 
 ## Gotchas
@@ -32,3 +32,4 @@ Preconditions:
 - `browser context` kasuje poprzednią stronę sesji. Nie łącz tego przepisu w tej samej sesji z niedokończonym formularzem.
 - Licznik `script-count` dotyczy elementów w dokumencie, nie braku żądań sieciowych.
 - Formularz na `/` przy tym kontekście zostaje disabled. To inna funkcja, opisana w formularzu demonstracyjnym.
+- Link marki „Aleksandra Olesiewicz — strona główna” jest też na `/static/`. Dowodem powrotu jest nagłówek strony głównej, nie sam ten link.
