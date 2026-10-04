@@ -1,0 +1,49 @@
+{
+  "selectedAt": "2026-10-04",
+  "generation": "image_gen",
+  "revision": 2,
+  "portraits": [
+    {
+      "role": "hero",
+      "selectedVariant": "Hero A",
+      "sourceProposal": "hero-a-v2.png",
+      "original": "originals/hero.png",
+      "web": "hero.webp",
+      "width": 1122,
+      "height": 1402,
+      "transparent": true,
+      "alt": {
+        "pl": "Aleksandra Olesiewicz w jasnej marynarce, z uśmiechem pokazującym zęby.",
+        "en": "Aleksandra Olesiewicz in an ivory blazer, smiling with visible teeth."
+      }
+    },
+    {
+      "role": "about",
+      "selectedVariant": "O mnie C",
+      "sourceProposal": "about-c-v2.png",
+      "original": "originals/about.png",
+      "web": "about.webp",
+      "width": 1122,
+      "height": 1402,
+      "transparent": false,
+      "alt": {
+        "pl": "Aleksandra Olesiewicz w malinowej bluzce, ze spokojnym spojrzeniem poza obiektyw.",
+        "en": "Aleksandra Olesiewicz in a raspberry blouse, looking thoughtfully off camera."
+      }
+    },
+    {
+      "role": "contact",
+      "selectedVariant": "Kontakt C",
+      "sourceProposal": "contact-c-v2.png",
+      "original": "originals/contact.png",
+      "web": "contact.webp",
+      "width": 1536,
+      "height": 1024,
+      "transparent": false,
+      "alt": {
+        "pl": "Aleksandra Olesiewicz uśmiecha się i gestykuluje podczas rozmowy.",
+        "en": "Aleksandra Olesiewicz smiling and gesturing during a conversation."
+      }
+    }
+  ]
+}

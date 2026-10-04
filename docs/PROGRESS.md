@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-09-14 (Presentation / Access). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-10-04 (wybrane fotografie). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -721,7 +721,39 @@ linku. Dostępna nazwa na liście to
 „Najpierw proces, potem CRM Narzędzie nie naprawi niejasnych decyzji.”
 Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 
+## Wybrane fotografie — 2026-10-04
+
+- Po przeglądzie obu profili Instagram przygotowano lokalnie dwie serie po
+  dziewięć propozycji. W drugiej serii użyto czterech rzeczywistych referencji,
+  w tym wskazanego uśmiechu z zębami i zrzutu klatki nagrania zawodowego.
+  Skorygowano szerokość ramion, zróżnicowano mimikę i przygotowano hero bez tła.
+- Użytkownik wybrał Hero A, O mnie C i Kontakt C z drugiej serii oraz zlecił PR
+  i merge. Do repo dodano tylko trzy wybrane fotografie: źródłowe PNG,
+  bezstratne WebP i mapowanie wariantów z opisami PL/EN.
+  [Materiały i pochodzenie](../src/assets/portraits/README.md).
+- Eksport zachowuje wszystkie widoczne piksele, wymiary oraz kanał alfa PNG.
+  Hero i O mnie: 1122 × 1402 px; Kontakt: 1536 × 1024 px.
+  Hero zachowuje 562466 całkowicie przezroczystych pikseli.
+- Galeria propozycji, pozostałe warianty, źródłowe prywatne zdjęcia i klatki
+  nie trafiły do PR. Zastane zmiany skilli i skills-lock.json zachowano w głównym
+  katalogu. Gałąź przygotowano w osobnym worktree na aktualnym origin/main.
+- npm run verify na Node 24.21.0: PASS. Format, tokeny, lint i typy bez błędów;
+  57 testów jednostkowych, build 22 stron, buildy workspace’ów i 33 E2E
+  (Chromium, Firefox, WebKit). Budżety: JS 4694 B gzip, CSS 11290 B gzip,
+  /static/ bez skryptów. Nie dodawano testów kopiowania statycznych zasobów.
+- Kontrola 23 lokalnych odnośników i git diff --check: PASS. Oryginały PNG
+  zgodne bitowo z wybranymi propozycjami; WebP zachowuje widoczne piksele i alfa.
+  Łączny rozmiar WebP to 4034692 B zamiast 6109798 B PNG (około 34% mniej).
+- npm ci nie zmieniło zależności ani lockfile. Audyt istniejącego drzewa zgłosił
+  23 podatności (1 low, 8 moderate, 14 high); nie naprawiano ich w PR z materiałami.
+- Nie zmieniono rendererów ani treści Sanity. Dopasowanie kadrów do docelowego
+  układu, podłączenie mediów w CMS i wizualne kontrole na finalnej stronie
+  (desktop/mobile, 320 px, klawiatura, zoom 200%, reduced motion) pozostają otwarte.
+
 ## Następny krok
+
+Materiały fotograficzne: dopasować wybrany zestaw do sekcji strony i podłączyć
+media w Sanity. Wybór użytkownika jest zapisany; dalsze kroki techniczne poniżej.
 
 1. Odświeżyć `https://preview.aleksandraolesiewicz.com` przy aktywnej sesji
    Access — zamiast 401 powinien być chroniony podgląd szkicu.

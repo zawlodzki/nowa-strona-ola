@@ -318,6 +318,17 @@ endpoint i dozwolone originy c15t, identyfikatory GTM/GA4 oraz finalne dane
 marki i treści zgód. Brak tych danych nie blokuje etapu 3 ani lokalnych
 szablonów.
 
+## Materiały fotograficzne — 2026-10-04
+
+- [x] Przejrzeć oba profile Instagram i przygotować propozycje dla trzech sekcji.
+- [x] Poprawić proporcje ramion, zróżnicować mimikę i przygotować hero bez tła.
+- [x] Zapisać wybór użytkownika: Hero A, O mnie C, Kontakt C z wersji 2.
+- [x] Dodać trzy źródłowe PNG oraz bezstratne WebP z zachowaniem alfa hero.
+- [ ] Dopasować kadry do docelowych sekcji i podłączyć wybrane media w Sanity.
+
+Materiały: [wybrane fotografie](../src/assets/portraits/README.md).
+Pozostałe propozycje i galeria pozostają lokalnie. Ten zestaw nie zamyka etapów 5–7.
+
 ## Źródła techniczne
 
 - [Cloudflare Static Assets](https://developers.cloudflare.com/workers/static-assets/)
