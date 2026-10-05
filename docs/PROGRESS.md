@@ -752,32 +752,29 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 
 ## Mockupy strony głównej — 2026-10-05
 
-Trzy samodzielne HTML-e w `mocks/homepage/` do wyboru kierunku. **Nie są**
+Samodzielne HTML-e w `mocks/homepage/` do wyboru kierunku. **Nie są**
 wdrożeniem Astro/Sanity. Draft PR: https://github.com/zawlodzki/nowa-strona-ola/pull/15
-(nie merge’ować).
+(nie merge’ować). Płótno strony: biel `#fff` we wszystkich wersjach.
 
 - V1: język Wonderful z repo (Switzer, tokeny, pill CTA).
-- V2 i V3: plan od zera ze skilla `design-taste-frontend` (v2, nie v1).
-  V2 zimne studio (Satoshi, chłodna szarość, malina z żakietu).
-  V3 atelier leśne (Cabinet Grotesk, zieleń, kość, ta sama malina).
-  Impeccable nie projektował greenfieldu V2/V3. `gpt-taste` wtórnie
-  (editorial split vs. asymetria).
-- Partnerzy jako wordmarki tekstowe, zgodnie z briefem.
-- Liczba 180+ i cytaty oznaczone jako poglądowe.
+- V2: zimne studio na bieli (Satoshi, ostre narożniki, malina). Bez `#EEF1F4`.
+- V3: indeks protokołu (Clash Grotesk + General Sans, kadr, kropki).
+  Zastępuje wycofane atelier leśne.
+- V4: founder/coach, owalne kadry (Chillax + Author).
+- Skill `design-taste-frontend` (v2) planował V2–V4. Partnerzy jako tekst.
+- Liczba 180+ i cytaty poglądowe.
 
-Kontrola Chromium, serwer `python3 -m http.server` w `mocks/homepage/`,
-1440×900 i 390×844: slider e-booków 4 karty / 3 widoczne na desktopie,
-„Następne” przesuwa track, hamburger otwiera nav, newsletter waliduje
-i nic nie wysyła. Zrzuty viewport i full-page w
-`mocks/homepage/previews/`. Nie odpalano osobno 320 px, zoom 200%
-ani `prefers-reduced-motion` (reguły CSS są w HTML).
+Kontrola Chromium 1440×900 i 390×844: `body` białe, slider 3/4 kart,
+przewijanie, hamburger, newsletter bez wysyłki. Zrzuty w
+`mocks/homepage/previews/`. Nie odpalano 320 px, zoom 200%
+ani osobnej sesji `prefers-reduced-motion`.
 
 ## Następny krok
 
 Materiały fotograficzne: dopasować wybrany zestaw do sekcji strony i podłączyć
 media w Sanity. Wybór użytkownika jest zapisany; dalsze kroki techniczne poniżej.
 
-0. Grzesiek wybiera kierunek wizualny z draft PR mockupów (V1 / V2 / V3);
+0. Grzesiek wybiera kierunek wizualny z draft PR mockupów (V1–V4);
    mockupy nie wchodzą na produkcję bez osobnej decyzji.
 1. Odświeżyć `https://preview.aleksandraolesiewicz.com` przy aktywnej sesji
    Access — zamiast 401 powinien być chroniony podgląd szkicu.

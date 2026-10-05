@@ -48,12 +48,13 @@ Brak przepisu stron Astro, schematów Sanity i tras produkcyjnych.
 
 ## Kontrole
 
-Do uzupełnienia po zrzutach Chromium (1440×900 i 390×844):
+Chromium 1440×900 i 390×844, 2026-10-05, serwer `python3 -m http.server` w tym katalogu:
 
-- [ ] Desktop i mobile (zrzuty viewport i full-page w `previews/`)
-- [ ] Slider e-booków: 4 karty, **3 widoczne** na 1440 px
-- [ ] Slider opinii
-- [ ] Menu mobilne
-- [ ] Newsletter: pusty e-mail → błąd; `anna@poczta.pl` → komunikat poglądowy, bez wysyłki
+- [x] Desktop i mobile (zrzuty viewport i full-page w `previews/`) dla V1–V4
+- [x] Slider e-booków: 4 karty, **3 widoczne** na 1440 px
+- [x] Slider opinii
+- [x] Menu mobilne
+- [x] Newsletter: pusty e-mail → błąd; `anna@poczta.pl` → komunikat poglądowy, bez wysyłki
+- [x] `body` tło `rgb(255, 255, 255)` we wszystkich czterech
 - [ ] `prefers-reduced-motion`: reguły CSS są; nie odpalano osobnej sesji
 - [ ] 320 px, zoom 200%, klawiatura end-to-end
