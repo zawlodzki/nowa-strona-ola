@@ -43,8 +43,12 @@ Brak przepisu stron Astro, schematów Sanity i tras produkcyjnych.
 
 ## Kontrole
 
-- [ ] Desktop i mobile w przeglądarce (zrzuty w `previews/`)
-- [ ] Slider e-booków i opinii (przyciski + przeciągnięcie)
-- [ ] Menu mobilne
-- [ ] Formularz newslettera (walidacja, bez wysyłki)
-- [ ] `prefers-reduced-motion`
+Wykonane 2026-10-05 w Chromium (1440×900 i 390×844) na lokalnym serwerze `python3 -m http.server` w tym katalogu:
+
+- [x] Desktop i mobile (zrzuty viewport i full-page w `previews/`)
+- [x] Slider e-booków: 4 karty, **3 widoczne** na 1440 px; „Następne” przewija
+- [x] Slider opinii (te same przyciski)
+- [x] Menu mobilne (hamburger otwiera nawigację)
+- [x] Newsletter: pusty e-mail → błąd; `anna@poczta.pl` → komunikat poglądowy, bez wysyłki
+- [ ] `prefers-reduced-motion`: reguły CSS są; nie odpalano osobnej sesji z tym ustawieniem
+- [ ] 320 px, zoom 200%, klawiatura end-to-end — nie robione w tej sesji

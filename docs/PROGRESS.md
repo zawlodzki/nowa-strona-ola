@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-04 (wybrane fotografie). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-10-05 (mockupy strony głównej). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -750,11 +750,35 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   układu, podłączenie mediów w CMS i wizualne kontrole na finalnej stronie
   (desktop/mobile, 320 px, klawiatura, zoom 200%, reduced motion) pozostają otwarte.
 
+## Mockupy strony głównej — 2026-10-05
+
+Trzy samodzielne HTML-e w `mocks/homepage/` do wyboru kierunku. **Nie są**
+wdrożeniem Astro/Sanity. Draft PR: https://github.com/zawlodzki/nowa-strona-ola/pull/15
+(nie merge’ować).
+
+- V1: język Wonderful z repo (Switzer, tokeny, pill CTA).
+- V2 i V3: plan od zera ze skilla `design-taste-frontend` (v2, nie v1).
+  V2 zimne studio (Satoshi, chłodna szarość, malina z żakietu).
+  V3 atelier leśne (Cabinet Grotesk, zieleń, kość, ta sama malina).
+  Impeccable nie projektował greenfieldu V2/V3. `gpt-taste` wtórnie
+  (editorial split vs. asymetria).
+- Partnerzy jako wordmarki tekstowe, zgodnie z briefem.
+- Liczba 180+ i cytaty oznaczone jako poglądowe.
+
+Kontrola Chromium, serwer `python3 -m http.server` w `mocks/homepage/`,
+1440×900 i 390×844: slider e-booków 4 karty / 3 widoczne na desktopie,
+„Następne” przesuwa track, hamburger otwiera nav, newsletter waliduje
+i nic nie wysyła. Zrzuty viewport i full-page w
+`mocks/homepage/previews/`. Nie odpalano osobno 320 px, zoom 200%
+ani `prefers-reduced-motion` (reguły CSS są w HTML).
+
 ## Następny krok
 
 Materiały fotograficzne: dopasować wybrany zestaw do sekcji strony i podłączyć
 media w Sanity. Wybór użytkownika jest zapisany; dalsze kroki techniczne poniżej.
 
+0. Grzesiek wybiera kierunek wizualny z draft PR mockupów (V1 / V2 / V3);
+   mockupy nie wchodzą na produkcję bez osobnej decyzji.
 1. Odświeżyć `https://preview.aleksandraolesiewicz.com` przy aktywnej sesji
    Access — zamiast 401 powinien być chroniony podgląd szkicu.
 2. W Studio Presentation odświeżyć podgląd (Access raz w nowej karcie, bez
