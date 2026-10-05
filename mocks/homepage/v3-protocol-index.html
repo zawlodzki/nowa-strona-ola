@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aleksandra Olesiewicz. Przestań zgadywać</title>
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@500,600,700&amp;f[]=general-sans@400,500,600&amp;display=swap" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #141414;
+      --mute: #5c5c5c;
+      --line: #e8e8e8;
+      --accent: #a33b5c;
+      --gutter: 20px;
+      --display: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
+      --text: "General Sans", ui-sans-serif, system-ui, sans-serif;
+      --mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 768px) { :root { --gutter: 36px; } }
+    @media (min-width: 1280px) { :root { --gutter: 56px; } }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--text);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+    button, input { font: inherit; color: inherit; }
+    h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 600; letter-spacing: -0.04em; text-wrap: balance; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); line-height: 1.08; max-width: 12ch; }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.12; }
+    p { margin: 0; max-width: 62ch; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    ::selection { background: var(--accent); color: #fff; }
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 16px; top: 12px; z-index: 80; background: #fff; padding: 12px; }
+    .wrap { width: min(1280px, 100% - 2 * var(--gutter)); margin-inline: auto; }
+    header.top {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; position: sticky; top: 0; z-index: 40;
+      background: #fff; border-bottom: 1px solid var(--line);
+    }
+    .word {
+      font-family: var(--display); font-weight: 600; text-decoration: none;
+      font-size: 15px; letter-spacing: -0.03em;
+    }
+    .nav { display: flex; gap: 8px 28px; font-size: 13px; }
+    .nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+    .nav a:hover { color: var(--accent); }
+    .idx {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--accent);
+    }
+    .nav-toggle {
+      position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0);
+    }
+    .burger { display: none; border: 0; background: none; min-width: 44px; min-height: 44px; cursor: pointer; z-index: 50; }
+    .burger i { display: block; width: 18px; height: 1.5px; background: currentColor; box-shadow: 0 -6px, 0 6px; }
+    .still {
+      margin: 0; position: relative; background: #fff;
+    }
+    .still img {
+      width: 100%; height: min(44vh, 460px); object-fit: cover; object-position: center 14%;
+    }
+    .credit {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--mute);
+      padding: 10px var(--gutter) 0; max-width: none;
+    }
+    .hero-copy { padding: 24px 0 12px; display: grid; gap: 16px; }
+    .hero-copy p { color: var(--mute); font-size: 1.1rem; max-width: 36ch; }
+    .cta-index { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 0; max-width: 28rem; }
+    .cta-index a {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      min-height: 52px; text-decoration: none; border-top: 1px solid var(--line);
+      font-family: var(--display); font-weight: 600; font-size: 1.05rem;
+    }
+    .cta-index li:last-child a { border-bottom: 1px solid var(--line); }
+    .cta-index a:hover { color: var(--accent); }
+    .partners {
+      margin: 0; padding: 20px 0 48px; color: var(--mute); font-size: 13px; max-width: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .chapter { padding-block: 88px; border-bottom: 1px solid var(--line); }
+    .protocol { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 0; }
+    .protocol li {
+      display: grid; grid-template-columns: 4.5rem 1fr; gap: 16px;
+      padding: 28px 0; border-top: 1px solid var(--line); font-size: 1.2rem;
+      font-family: var(--display); letter-spacing: -0.03em; max-width: 54rem;
+    }
+    .protocol li:last-child { border-bottom: 1px solid var(--line); }
+    .protocol .n { font-family: var(--mono); font-size: 12px; color: var(--accent); padding-top: 6px; }
+    .metric-line {
+      margin-top: 36px; font-family: var(--mono); font-size: 12px; color: var(--mute); letter-spacing: 0.04em;
+    }
+    .metric-line strong { color: var(--accent); font-size: 1.1rem; letter-spacing: 0; }
+    .about-copy { display: grid; gap: 18px; padding: 28px 0 0; max-width: 40rem; }
+    .link {
+      display: inline-flex; align-items: center; min-height: 44px; text-decoration: none;
+      font-family: var(--display); font-weight: 600; border-bottom: 1px solid var(--ink);
+    }
+    .link:hover { color: var(--accent); border-color: var(--accent); }
+    .slider-bar { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 20px; }
+    .pager { display: flex; gap: 8px; align-items: center; }
+    .pager button {
+      width: 10px; height: 10px; padding: 0; border: 1px solid var(--ink); background: transparent;
+      border-radius: 50%; cursor: pointer;
+    }
+    .pager button[aria-current="true"] { background: var(--accent); border-color: var(--accent); }
+    .progress { height: 2px; background: var(--line); margin: 0 0 20px; }
+    .progress > span { display: block; height: 2px; width: 25%; background: var(--accent); }
+    .track {
+      display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
+      scrollbar-width: none; cursor: grab;
+    }
+    .track::-webkit-scrollbar { display: none; }
+    .book {
+      flex: 0 0 calc((100% - 40px) / 3); scroll-snap-align: start; min-width: 0;
+      text-decoration: none; display: grid; gap: 12px;
+    }
+    .book img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+    .book strong { font-family: var(--display); font-size: 1.15rem; }
+    .book small { color: var(--mute); font-family: var(--mono); font-size: 12px; }
+    .consult-still img {
+      width: 100%; height: min(48vh, 480px); object-fit: cover; object-position: 75% 18%;
+    }
+    .consult-copy { display: grid; gap: 16px; padding: 28px 0 0; max-width: 40rem; }
+    .quotes .card {
+      flex: 0 0 100%; scroll-snap-align: start; min-width: 0; padding: 8px 0 24px;
+    }
+    .quotes .card p {
+      font-family: var(--display); font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: -0.03em; line-height: 1.25; max-width: 28ch;
+    }
+    .quotes .card footer { margin-top: 20px; color: var(--mute); font-size: 14px; }
+    form.news {
+      display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: end; max-width: 36rem;
+    }
+    form.news .field { display: grid; gap: 8px; }
+    label { font-size: 14px; }
+    input[type="email"] {
+      min-height: 48px; border: 0; border-bottom: 1px solid var(--ink);
+      background: transparent; font-size: 16px; width: 100%;
+    }
+    .submit {
+      min-height: 48px; padding: 0 18px; border: 0; background: transparent;
+      font-family: var(--display); font-weight: 600; cursor: pointer;
+      border-bottom: 1px solid var(--ink);
+    }
+    .submit:hover { color: var(--accent); border-color: var(--accent); }
+    .hint, .status { font-size: 13px; color: var(--mute); min-height: 20px; grid-column: 1 / -1; }
+    .status[data-state="ok"] { color: #1f6b4a; }
+    .status[data-state="err"] { color: var(--accent); }
+    footer.site {
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px;
+      padding-block: 48px; font-size: 14px;
+    }
+    footer.site nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    footer.site a { min-height: 44px; display: inline-flex; align-items: center; }
+    @media (max-width: 767px) {
+      .book { flex-basis: 86%; }
+      .protocol li { grid-template-columns: 3rem 1fr; font-size: 1.05rem; }
+      form.news { grid-template-columns: 1fr; }
+      .still img { height: 38vh; }
+      .consult-still img { height: 42vh; }
+      .burger { display: inline-flex; align-items: center; justify-content: center; }
+      .nav {
+        display: none; position: fixed; inset: 0; background: #fff;
+        flex-direction: column; justify-content: center; align-items: flex-start;
+        padding: 72px var(--gutter) 40px; gap: 8px; z-index: 45;
+      }
+      .nav a { font-family: var(--display); font-size: 1.8rem; font-weight: 600; }
+      .nav-toggle:checked ~ .nav { display: flex; }
+      .wrap.rel { position: relative; }
+      .chapter { padding-block: 64px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Przejdź do treści</a>
+  <div class="wrap rel">
+    <header class="top">
+      <a class="word" href="./v3-protocol-index.html">Aleksandra Olesiewicz</a>
+      <input class="nav-toggle" id="nav-v3" type="checkbox" />
+      <label class="burger" for="nav-v3" aria-label="Menu"><i></i></label>
+      <nav class="nav" aria-label="Nawigacja główna">
+        <a href="/o-mnie"><span class="idx">01</span> O mnie</a>
+        <a href="#ebooki"><span class="idx">02</span> E-booki</a>
+        <a href="/konsultacja"><span class="idx">03</span> Konsultacje</a>
+        <a href="/blog"><span class="idx">04</span> Blog</a>
+      </nav>
+    </header>
+  </div>
+  <main id="main">
+    <section aria-labelledby="hero-title">
+      <figure class="still">
+        <img src="assets/hero.webp" alt="Aleksandra Olesiewicz, dietetyczka kliniczna, w jasnym żakiecie" width="1122" height="1402" />
+        <figcaption class="credit wrap">Kadr 01. Portret, żakiet jasny.</figcaption>
+      </figure>
+      <div class="wrap hero-copy">
+        <h1 id="hero-title">Przestań zgadywać.</h1>
+        <p>Dietetyka kliniczna dla kobiet z PCOS i zmianą składu ciała.</p>
+        <ol class="cta-index">
+          <li><a href="#ebooki"><span class="idx">01</span> Zobacz e-booki</a></li>
+          <li><a href="/konsultacja"><span class="idx">02</span> Umów konsultację</a></li>
+        </ol>
+        <p class="partners" aria-label="Partnerzy">ALAB Laboratoria · UNS · Norsan · Norsa Pharma · Omni-Biotic</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="dlaczego" aria-labelledby="why-title">
+      <div class="wrap">
+        <h2 id="why-title">Dlaczego ja</h2>
+        <ol class="protocol">
+          <li><span class="n">01</span><span>Przestałam dokładać kolejny suplement na wszelki wypadek. W szafce zostaje to, co ma uzasadnienie.</span></li>
+          <li><span class="n">02</span><span>Na wizytę idę z listą badań i pytaniami. Lekarz dostaje konkret, nie mgłę.</span></li>
+          <li><span class="n">03</span><span>Nie ścigam wagi. Mierzę talię, siłę i to, czy starcza mi energii.</span></li>
+        </ol>
+        <p class="metric-line"><strong>180+</strong> kobiet w indywidualnej współpracy. Liczba poglądowa.</p>
+      </div>
+    </section>
+
+    <section id="o-mnie" aria-labelledby="about-title">
+      <figure class="still">
+        <img src="assets/about.webp" alt="Portret Aleksandry, ujęcie studyjne" width="1122" height="1402" />
+        <figcaption class="credit wrap">Kadr 02. O mnie.</figcaption>
+      </figure>
+      <div class="wrap about-copy">
+        <h2 id="about-title">O mnie</h2>
+        <p>Jestem Aleksandra Olesiewicz. Pracuję z kobietami, którym powiedziano „proszę schudnąć” albo „taka pani uroda”. Tłumaczę badania, porządkuję suplementy i układam jedzenie, które da się utrzymać.</p>
+        <a class="link" href="/o-mnie">Więcej o mnie</a>
+      </div>
+    </section>
+
+    <section class="chapter" id="ebooki" aria-labelledby="ebooks-title">
+      <div class="wrap">
+        <div class="slider-bar">
+          <h2 id="ebooks-title">E-booki</h2>
+          <div class="pager" data-pager="v3-ebooks" role="tablist" aria-label="E-booki"></div>
+        </div>
+        <div class="progress" aria-hidden="true"><span data-bar="v3-ebooks"></span></div>
+        <div class="track" id="v3-ebooks" data-slider data-visible="3" tabindex="0">
+          <a class="book" data-slide href="/ebooki/suplementy-pcos">
+            <img src="assets/ebook-pcos-suplementy.jpg" alt="" width="900" height="1200" />
+            <strong>Suplementy w PCOS</strong>
+            <p>Co zostawić, co odstawić, czego nigdy nie kupować.</p>
+            <small>99 zł</small>
+          </a>
+          <a class="book" data-slide href="/ebooki/waga-oklamuje">
+            <img src="assets/ebook-waga-oklamuje.jpg" alt="" width="900" height="1200" />
+            <strong>Waga Cię okłamuje</strong>
+            <p>Osiem tygodni ze składem ciała w perimenopauzie.</p>
+            <small>99 zł</small>
+          </a>
+          <a class="book" data-slide href="/ebooki/badania-pcos">
+            <img src="assets/ebook-pcos-badania.jpg" alt="" width="900" height="1200" />
+            <strong>PCOS: badania, które mają sens</strong>
+            <p>Co zbadać, kiedy w cyklu i po co.</p>
+            <small>99 zł</small>
+          </a>
+          <a class="book" data-slide href="/ebooki/szczupla-pcos">
+            <img src="assets/ebook-szczupla-pcos.jpg" alt="" width="900" height="1200" />
+            <strong>Szczupła, a jednak PCOS</strong>
+            <p>Jedzenie bez deficytu, kiedy rada brzmi: schudnij.</p>
+            <small>99 zł</small>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="konsultacje" aria-labelledby="consult-title">
+      <figure class="still consult-still">
+        <img src="assets/contact.webp" alt="Aleksandra w żakiecie malinowym, w trakcie rozmowy" width="1536" height="1024" />
+        <figcaption class="credit wrap">Kadr 03. Konsultacja online.</figcaption>
+      </figure>
+      <div class="wrap consult-copy">
+        <h2 id="consult-title">Konsultacje online</h2>
+        <p>Indywidualna współpraca po rozmowie kwalifikacyjnej. Składam Twoje wyniki i to, co już próbowałaś, w kolejność działań.</p>
+        <a class="link" href="/konsultacja">Umów konsultację</a>
+      </div>
+    </section>
+
+    <section class="chapter quotes" id="opinie" aria-labelledby="q-title">
+      <div class="wrap">
+        <div class="slider-bar">
+          <h2 id="q-title">Głosy klientek</h2>
+          <div class="pager" data-pager="v3-quotes" role="tablist" aria-label="Opinie"></div>
+        </div>
+        <div class="progress" aria-hidden="true"><span data-bar="v3-quotes"></span></div>
+        <div class="track" id="v3-quotes" data-slider data-visible="1" tabindex="0">
+          <figure class="card" data-slide>
+            <blockquote><p>Przestałam dokładać inozytol na wszelki wypadek. Szafka jest krótsza, a ja wiem, po co zostaje witamina D.</p></blockquote>
+            <footer>Magda K., 34 lata, Wrocław. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="card" data-slide>
+            <blockquote><p>Na wizytę poszłam z listą badań ułożoną w domu. Lekarz dostał konkret, nie mgłę.</p></blockquote>
+            <footer>Karolina W., 29 lat, Kraków. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="card" data-slide>
+            <blockquote><p>Nie ważę się codziennie. Mierzę talię i to, czy starcza mi energii do końca dnia.</p></blockquote>
+            <footer>Anna P., 47 lat, Gdańsk. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="card" data-slide>
+            <blockquote><p>Dostałam kryterium: zostawiam, odstawiam albo nie kupuję. Nie dostałam kolejnej listy „co jest dobre”.</p></blockquote>
+            <footer>Zuzanna L., 31 lat, Poznań. Cytat poglądowy.</footer>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="newsletter" aria-labelledby="n-title">
+      <div class="wrap">
+        <h2 id="n-title">List, nie lejek</h2>
+        <p style="margin:16px 0 28px;color:var(--mute)">Raz na dwa tygodnie: co zostawić, co odstawić, jakie pytanie zabrać do lekarza.</p>
+        <form class="news" id="news-form" action="#" method="post" novalidate>
+          <div class="field">
+            <label for="news-email">Adres e-mail</label>
+            <input id="news-email" name="email" type="email" autocomplete="email" required placeholder="np. anna@poczta.pl" />
+          </div>
+          <button class="submit" type="submit">Zapisz mnie</button>
+          <p class="hint">Zgoda na newsletter. Regulamin i polityka prywatności są w stopce.</p>
+          <p class="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap site">
+    <a class="word" href="./v3-protocol-index.html">Aleksandra Olesiewicz</a>
+    <nav aria-label="Stopka">
+      <a href="https://www.instagram.com/aleksandra_olesiewicz">Instagram</a>
+      <a href="https://www.facebook.com/">Facebook</a>
+      <a href="https://www.tiktok.com/">TikTok</a>
+      <a href="/regulamin">Regulamin</a>
+      <a href="/polityka-prywatnosci">Polityka prywatności</a>
+    </nav>
+    <p class="hint">Mockup kierunku V3. Treści poglądowe.</p>
+  </footer>
+  <script>
+    (function () {
+      function setup(track) {
+        var slides = track.querySelectorAll("[data-slide]");
+        var pager = document.querySelector('[data-pager="' + track.id + '"]');
+        var bar = document.querySelector('[data-bar="' + track.id + '"]');
+        if (!pager || !slides.length) return;
+        slides.forEach(function (_, i) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.setAttribute("aria-label", "Slajd " + (i + 1));
+          b.addEventListener("click", function () {
+            slides[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+          });
+          pager.appendChild(b);
+        });
+        function sync() {
+          var max = track.scrollWidth - track.clientWidth;
+          var ratio = max <= 0 ? 0 : track.scrollLeft / max;
+          if (bar) bar.style.width = Math.max(12, ratio * 100) + "%";
+          var idx = 0;
+          var best = Infinity;
+          slides.forEach(function (s, i) {
+            var d = Math.abs(s.getBoundingClientRect().left - track.getBoundingClientRect().left);
+            if (d < best) { best = d; idx = i; }
+          });
+          pager.querySelectorAll("button").forEach(function (b, i) {
+            if (i === idx) b.setAttribute("aria-current", "true");
+            else b.removeAttribute("aria-current");
+          });
+        }
+        track.addEventListener("scroll", sync, { passive: true });
+        sync();
+      }
+      document.querySelectorAll("[data-slider]").forEach(setup);
+      var form = document.getElementById("news-form");
+      var status = form.querySelector(".status");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = document.getElementById("news-email");
+        if (!email.value || !email.checkValidity()) {
+          status.dataset.state = "err";
+          status.textContent = "Podaj poprawny adres e-mail.";
+          email.focus();
+          return;
+        }
+        status.dataset.state = "ok";
+        status.textContent = "Zapis poglądowy. W mockupie nic nie wysyłamy.";
+      });
+    })();
+  </script>
+</body>
+</html>

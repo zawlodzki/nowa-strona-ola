@@ -2,50 +2,74 @@
 
 ## Design Read
 
-Czytamy to jako: **landing strony głównej** dla kobiet szukających dietetyczki klinicznej (PCOS, IO, perimenopauza), język **trust-first / premium professional**, nie wellness goddess i nie szpital. Mockupy standalone HTML. V1 dziedziczy istniejący system; V2 i V3 to dwa osobne światy.
+Czytamy to jako: **landing strony głównej** dla kobiet szukających dietetyczki klinicznej (PCOS, IO, perimenopauza), język **trust-first / premium professional**, nie wellness goddess i nie szpital. Mockupy standalone HTML. V1 dziedziczy Wonderful. V2, V3 i V4 to osobne światy na **białym płótnie** (`#fff`).
 
-Brand już w portretach: żakiet malinowy, loki, złota zawieszka. Akcent malinowy pochodzi z ubrań, nie z palety „glina + krem”.
+Płótno strony we wszystkich wersjach: biel. Sekcje mogą mieć linie, chipy i dzielniki. Zakaz pełnostronicowych law (`#EEF1F4`, zieleń leśna, kość jako tło).
+
+Brand w portretach: żakiet malinowy. Akcent malinowy pochodzi z ubrań.
 
 ## V1 `v1-design-system.html`
 
-Zachowanie Wonderful: Switzer 300, biel / tusz / linia / oszczędny pomarańcz `#FC762F`, pill CTA, ciemne rozdziały, pasek partnerów jako tracked caps. Dials jak incumbent: wariancja 5, ruch 4, gęstość 3.
+Zachowanie Wonderful: Switzer 300, biel / tusz / linia / oszczędny pomarańcz `#FC762F`, pill CTA, ciemny rozdział konsultacji (język systemu, nie tło strony). Dials: wariancja 5, ruch 4, gęstość 3.
 
 ## V2 `v2-cold-studio.html`: zimne studio diagnostyczne
 
-**Reading this as:** landing kliniczny dla kobiet 25-45, język cold luxury (studio diagnostyczne), Satoshi, chłodne szarości + jeden akcent malinowy z żakietu.
+**Reading this as:** landing kliniczny dla kobiet 25-45, język cold luxury (studio diagnostyczne) na białym płótnie, Satoshi, ostre narożniki, jeden akcent malinowy z żakietu.
 
 | Dial | Wartość | Powód |
 | --- | --- | --- |
 | DESIGN_VARIANCE | 5 | Trust-first, nie Awwwards |
-| MOTION_INTENSITY | 4 | Hover, slider, delikatny reveal |
-| VISUAL_DENSITY | 4 | Czytelna oferta, nie galeria |
+| MOTION_INTENSITY | 4 | Hover, slider |
+| VISUAL_DENSITY | 4 | Czytelna oferta |
 
-- Paleta: Cold Luxury. Tło `#EEF1F4`, tusz `#1C2228`, stal `#6B7580`, akcent `#A33B5C` (desaturacja < 80%). Zakaz kremu i mosiądzu.
-- Typ: Satoshi (Fontshare). Zero szeryfów.
-- Promień: 0 (ostre studio).
-- Hero: editorial split, max 4 elementy tekstowe, CTA w pierwszym viewportcie.
-- Motyw: jasny, spójny; `prefers-color-scheme: dark` w tej samej rodzinie chłodnej, bez inwersji sekcji.
-- Układy: split hero, pasek logo, metryki jako duża typografia (nie 3 identyczne karty), O mnie pełna szerokość, slider e-booków, blok konsultacji, slider opinii, formularz, stopka.
+- Płótno: `#ffffff`. Charakter studia niesie krój, kąt 0, outline, malina `#A33B5C`. Nie szara lawka strony.
+- Typ: Satoshi. Zero szeryfów.
+- Hero: editorial split (tekst lewo, portret w ramce prawo).
+- Interakcja: kwadratowe strzałki, hamburger dropdown.
 
-## V3 `v3-forest-atelier.html`: atelier leśne
+## V3 `v3-protocol-index.html`: indeks protokołu
 
-**Reading this as:** ten sam produkt, język Forest (ciemna zieleń wnętrza + kość + malina z portretu), Cabinet Grotesk, fotografia prowadzi.
+**Reading this as:** ten sam produkt, język **indeksu redakcyjnego / arkusza protokołu** na białym płótnie. Clash Grotesk + General Sans. Fotografia jako kadr filmowy na całą szerokość. Interakcja: kropki i pasek postępu.
 
 | Dial | Wartość | Powód |
 | --- | --- | --- |
-| DESIGN_VARIANCE | 7 | Asymetria, większa skala obrazu |
-| MOTION_INTENSITY | 6 | Reveal, hover scale, jeden marquee partnerów |
-| VISUAL_DENSITY | 3 | Powietrze, rozdziały jak kadry |
+| DESIGN_VARIANCE | 7 | Kadr na pełną szerokość, indeks zamiast kart |
+| MOTION_INTENSITY | 5 | Pasek postępu, snap, overlay menu |
+| VISUAL_DENSITY | 3 | Powietrze magazynu |
 
-- Paleta: głęboka zieleń `#16241C`, kość `#E8EDE6` (chłodna, nie krem rzemieślniczy), malina `#C45B6A`. Jeden akcent na całą stronę.
-- Typ: Cabinet Grotesk. Zero szeryfów.
-- Promień: 12 px, miękki.
-- Hero: artystyczna asymetria, portret nachodzi na typ.
-- Motyw: ciemny lock (cała strona las). Kość to tekst, nie tło-papier.
-- Jeden marquee partnerów. Slider e-booków 3 widoczne. Bez kickerów numerowanych.
+- Hero: kadr, potem typ. CTA jako indeks `01` / `02`.
+- Cytaty: jeden na raz. Menu mobilne na cały ekran.
+- Partnerzy: zdanie z interpunktami.
+
+Forest-atelier jest wycofany (tło nie było białe).
+
+## V4 `v4-founder-soft.html`: founder / coach
+
+**Reading this as:** landing osobisty dietetyczki-założycielki, język **personal site for founder and coach** (referencja Dribbble 24935244), na białym płótnie. Miękko, dużo powietrza, owalne kadry. Nie boxy V2 i nie indeks V3.
+
+| Dial | Wartość | Powód |
+| --- | --- | --- |
+| DESIGN_VARIANCE | 6 | Asymetria i owal, nie chaos |
+| MOTION_INTENSITY | 4 | Hover scale, okrągłe strzałki |
+| VISUAL_DENSITY | 2 | Dużo białego, wąska kolumna tekstu |
+
+- Typ: Chillax (nagłówki, zaokrąglony display) + Author (treść).
+- Zasada kształtu: zdjęcia organiczne (owal / koło / `2.75rem`), przyciski i chipy pill.
+- Hero: pozdrowienie + H1 osobisty, portret jako owal (nie ramka, nie kadr 16:9).
+- Partnerzy: pill chipy. 180+ jako pill. O mnie: kadr koło. Cytaty: dwa zaokrąglone bąble. Menu: zaokrąglony panel.
+- Płótno: `#ffffff`. Akcent malinowy na CTA, nie na tło strony.
+
+## Różnice (nie paleta)
+
+| Oś | V1 | V2 | V3 | V4 |
+| --- | --- | --- | --- | --- |
+| Układ | Split 50/50, ciemny blok | Split w ramce, wielka metryka | Kadr pełnej szerokości, protokół | Owal + powietrze, koło O mnie, bąble cytatów |
+| Typ | Switzer 300 | Satoshi | Clash Grotesk + General Sans | Chillax + Author |
+| Zdjęcie | Płyta 12 px | Contain, ostry outline | Cover bez ramki, credit | Owal / koło / duży radius |
+| Interakcja | Strzałki pill | Strzałki kwadrat | Kropki + pasek, overlay | Okrągłe strzałki, panel zaokrąglony |
 
 ## Wspólne (brief)
 
-Te same sekcje, ta sama treść PL, te same CTA (`Zobacz e-booki` / `Umów konsultację`). Partnerzy jako wordmarki tekstowe (ALAB, UNS, Norsan, Norsa Pharma, Omni-Biotic). Bez obietnic klinicznych. Liczby i cytaty to placeholdery.
+Te same sekcje, treść PL, CTA (`Zobacz e-booki` / `Umów konsultację`). Partnerzy jako wordmarki tekstowe. Bez obietnic klinicznych. Liczby i cytaty to placeholdery.
 
-gpt-taste (wtórnie): V2 hero = Editorial Split, V3 = Artistic Asymmetry. Fonty z puli Satoshi / Cabinet. Motion CSS, nie GSAP (standalone HTML).
+gpt-taste (wtórnie): V2 = Editorial Split. V3 = cinematic still. V4 = osobisty split z owalnym portretem. Motion CSS, nie GSAP.

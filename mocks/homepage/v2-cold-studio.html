@@ -7,11 +7,10 @@
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" />
   <style>
     :root {
-      --bg: #eef1f4;
-      --bg-2: #e3e7ec;
+      --bg: #ffffff;
       --ink: #1c2228;
       --steel: #4a5560;
-      --line: #c5ccd4;
+      --line: #d7dce2;
       --accent: #a33b5c;
       --accent-ink: #fff7f9;
       --gutter: 20px;
@@ -50,7 +49,7 @@
     header.top {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
       height: 64px; border-bottom: 1px solid var(--line); position: sticky; top: 0;
-      background: rgb(238 241 244 / .94); z-index: 20;
+      background: #fff; z-index: 20;
     }
     .word { font-weight: 700; letter-spacing: -0.04em; text-decoration: none; font-size: 15px; }
     .nav { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; }
@@ -63,7 +62,7 @@
     .burger i { display: block; width: 18px; height: 1px; background: currentColor; box-shadow: 0 -6px, 0 6px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      min-height: 48px; padding: 0 22px; background: var(--ink); color: var(--bg);
+      min-height: 48px; padding: 0 22px; background: var(--ink); color: #fff;
       text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: -0.02em;
       border: 1px solid var(--ink); border-radius: var(--radius); white-space: nowrap;
       transition: transform 120ms var(--ease), background 180ms var(--ease);
@@ -71,7 +70,7 @@
     .btn:hover { background: #2a323a; }
     .btn:active { transform: translateY(1px); }
     .btn.ghost { background: transparent; color: var(--ink); }
-    .btn.ghost:hover { background: var(--bg-2); }
+    .btn.ghost:hover { background: transparent; color: var(--accent); }
     .btn.accent { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
     .btn.accent:hover { background: #8c314e; }
     .hero {
@@ -81,7 +80,7 @@
     .hero p { color: var(--steel); font-size: 1.05rem; margin: 20px 0 28px; max-width: 38ch; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .hero figure {
-      margin: 0; background: var(--bg-2); min-height: 0; display: grid; align-items: end;
+      margin: 0; background: #fff; min-height: 0; display: grid; align-items: end;
       outline: 1px solid var(--line);
     }
     .hero img { width: 100%; max-height: 78dvh; object-fit: contain; object-position: center bottom; }
@@ -102,7 +101,7 @@
       outline: 1px solid var(--line);
     }
     .about img { width: 100%; height: 100%; object-fit: cover; min-height: 420px; }
-    .about-copy { padding: 48px; display: grid; align-content: end; gap: 20px; background: var(--bg-2); }
+    .about-copy { padding: 48px; display: grid; align-content: end; gap: 20px; background: #fff; }
     .slider-bar { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
     .arrows { display: flex; gap: 8px; }
     .arrows button {
@@ -118,7 +117,7 @@
     .book strong { font-weight: 700; }
     .book small { color: var(--steel); }
     .consult {
-      display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-2);
+      display: grid; grid-template-columns: 1fr 1fr; background: #fff;
       outline: 1px solid var(--line);
     }
     .consult img { width: 100%; height: 100%; object-fit: cover; min-height: 360px; object-position: 70% 20%; }
@@ -153,19 +152,6 @@
       .nav-toggle:checked ~ .nav { display: flex; }
       header.top { position: sticky; }
       .wrap.top-wrap { position: relative; }
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #16191d;
-        --bg-2: #1d2228;
-        --ink: #e8edf2;
-        --steel: #9aa3ad;
-        --line: #2c343c;
-        --accent: #d46a86;
-      }
-      header.top { background: rgb(22 25 29 / .94); }
-      .btn { background: var(--ink); color: #16191d; }
-      .btn.ghost { color: var(--ink); }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }

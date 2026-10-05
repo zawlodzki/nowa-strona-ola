@@ -30,7 +30,7 @@ Mapa serwisu (kontekst, nie zakres tego zadania): Home, O mnie, regulaminy, poli
 
 - Mockupy: trzy samodzielne HTML, bez Astro/Sanity/CMS.
 - V1 dziedziczy istniejący Wonderful design system (tokeny, Switzer, język wizualny bieżącej strony).
-- V2 i V3 to dwa **inne** światy wizualne dla tej samej treści i publiczności. Kierunek od zera ustala skill `design-taste-frontend` (v2). Impeccable najwyżej poleruje, nie projektuje greenfield.
+- V2, V3 i V4 to **inne** światy wizualne dla tej samej treści, na **białym płótnie**. Kierunek od zera ustala skill `design-taste-frontend` (v2). Impeccable najwyżej poleruje, nie projektuje greenfield.
 - Treść po polsku. Responsywność desktop + mobile. Działające slidery.
 - Partnerzy jako wordmarki tekstowe: ALAB Laboratoria, UNS, Norsan, Norsa Pharma, Omni-Biotic.
 - Sekrety i dane zgłoszeń nie trafiają do mockupów.
