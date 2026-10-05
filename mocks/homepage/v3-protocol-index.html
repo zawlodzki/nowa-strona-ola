@@ -70,8 +70,14 @@
     .hero-copy p { color: var(--mute); font-size: 1.1rem; max-width: 36ch; }
     .cutout { margin: 0; background: transparent; min-width: 0; overflow: visible; }
     .cutout img {
-      width: 100%; height: auto; max-width: 100%;
+      width: auto; height: auto; max-width: 100%;
       object-fit: contain; object-position: center bottom;
+    }
+    .hero .cutout {
+      display: flex; justify-content: flex-end; align-items: flex-end;
+    }
+    .hero .cutout img {
+      max-height: calc(100svh - 96px);
     }
     .cta-index { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 0; max-width: 28rem; }
     .cta-index a {
@@ -173,7 +179,11 @@
       form.news { grid-template-columns: 1fr; }
       .hero, .about-block, .consult-stage { grid-template-columns: 1fr; min-height: 0; }
       .hero .cutout, .about-block .cutout, .consult-stage .cutout { order: -1; }
-      .cutout img, .about-block .cutout img, .consult-stage .cutout img { width: 100%; max-width: 100%; }
+      .hero .cutout { justify-content: center; }
+      .cutout img, .about-block .cutout img, .consult-stage .cutout img {
+        width: auto; max-width: 100%;
+      }
+      .hero .cutout img { max-height: min(70svh, calc(100svh - 96px)); }
       .burger { display: inline-flex; align-items: center; justify-content: center; }
       .nav {
         display: none; position: fixed; inset: 0; background: #fff;
