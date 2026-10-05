@@ -23,7 +23,7 @@ Plan: [DIRECTIONS.md](DIRECTIONS.md). Kierunek od zera V2–V4: skill `design-ta
 
 **V2** jest innym światem na bieli: Satoshi, ostre narożniki, outline, jeden akcent malinowy z żakietu (`#A33B5C`). Nie ma szarej lawki `#EEF1F4`. Hero split, metryki jako wielka typografia, slider ze strzałkami kwadratowymi.
 
-**V3** jest trzecim światem na bieli, nie wariacją koloru: Clash Grotesk + General Sans, **wycięta sylwetka hero** na białym (bez ramki i bez obciętego kadru), partnerzy jako zdanie z kropkami, protokół numerowany, slider z kropkami i paskiem, cytat jeden na raz, menu mobilne na cały ekran.
+**V3** jest trzecim światem na bieli, nie wariacją koloru: Clash Grotesk + General Sans, **wycięte sylwetki** (hero z `hero.webp`, O mnie i konsultacje z `about-cutout.webp` / `contact-cutout.webp`) na białym — bez ramki zdjęcia, bez `object-fit: cover` i bez `overflow: hidden` na portretach. Partnerzy jako zdanie z kropkami, protokół numerowany, slider z kropkami i paskiem, cytat jeden na raz, menu mobilne na cały ekran.
 
 **V4** jest czwartym światem na bieli, inspirowany osobistą stroną founder/coach: Chillax + Author, owalny portret, koło w O mnie, dużo powietrza, chipy partnerów, okrągłe strzałki, zaokrąglone cytaty. Mniej kanciasto niż V2, mniej „indeks magazynu” niż V3, inny rytm niż Wonderful.
 

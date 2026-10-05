@@ -758,8 +758,11 @@ wdrożeniem Astro/Sanity. Draft PR: https://github.com/zawlodzki/nowa-strona-ola
 
 - V1: język Wonderful z repo (Switzer, tokeny, pill CTA).
 - V2: zimne studio na bieli (Satoshi, ostre narożniki, malina). Bez `#EEF1F4`.
-- V3: indeks protokołu (Clash Grotesk + General Sans, kadr, kropki).
-  Zastępuje wycofane atelier leśne.
+- V3: indeks protokołu (Clash Grotesk + General Sans, numerowany indeks, kropki).
+  Portrety jako wycięte sylwetki na bieli (`hero.webp` z alfy; O mnie i konsultacje
+  z `about-cutout.webp` / `contact-cutout.webp`). Bez ramki zdjęcia, bez
+  `object-fit: cover` i bez `overflow: hidden` na grafikach. Zastępuje wycofane
+  atelier leśne.
 - V4: founder/coach, owalne kadry (Chillax + Author).
 - Skill `design-taste-frontend` (v2) planował V2–V4. Partnerzy jako tekst.
 - Liczba 180+ i cytaty poglądowe.

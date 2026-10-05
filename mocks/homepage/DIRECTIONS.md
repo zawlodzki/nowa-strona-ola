@@ -29,7 +29,7 @@ Zachowanie Wonderful: Switzer 300, biel / tusz / linia / oszczędny pomarańcz `
 
 ## V3 `v3-protocol-index.html`: indeks protokołu
 
-**Reading this as:** ten sam produkt, język **indeksu redakcyjnego / arkusza protokołu** na białym płótnie. Clash Grotesk + General Sans. Hero: wycięta sylwetka (`hero.webp`, alfa) na bieli, `object-fit: contain`, bez ramki i bez `cover`. Interakcja: kropki i pasek postępu.
+**Reading this as:** ten sam produkt, język **indeksu redakcyjnego / arkusza protokołu** na białym płótnie. Clash Grotesk + General Sans. Portrety: wycięte sylwetki na bieli (`hero.webp` z alfy; O mnie i konsultacje z maską tła), `object-fit: contain`, bez ramki zdjęcia i bez `cover` / `overflow: hidden`. Interakcja: kropki i pasek postępu.
 
 | Dial | Wartość | Powód |
 | --- | --- | --- |
@@ -37,7 +37,7 @@ Zachowanie Wonderful: Switzer 300, biel / tusz / linia / oszczędny pomarańcz `
 | MOTION_INTENSITY | 5 | Pasek postępu, snap, overlay menu |
 | VISUAL_DENSITY | 3 | Powietrze magazynu |
 
-- Hero: wycięta sylwetka obok indeksu CTA `01` / `02`. Bez przycinania głowy i ramion.
+- Hero, O mnie i konsultacje: wycięte sylwetki obok indeksu CTA. Pełny kadr assetu, bez przycinania głowy, ramion i dłoni.
 - Cytaty: jeden na raz. Menu mobilne na cały ekran.
 - Partnerzy: zdanie z interpunktami.
 
@@ -65,7 +65,7 @@ Forest-atelier jest wycofany (tło nie było białe).
 | --- | --- | --- | --- | --- |
 | Układ | Split 50/50, ciemny blok | Split w ramce, wielka metryka | Kadr pełnej szerokości, protokół | Owal + powietrze, koło O mnie, bąble cytatów |
 | Typ | Switzer 300 | Satoshi | Clash Grotesk + General Sans | Chillax + Author |
-| Zdjęcie | Płyta 12 px | Contain, ostry outline | Cut-out contain na bieli | Owal / koło / duży radius |
+| Zdjęcie | Płyta 12 px | Contain, ostry outline | Cut-out (hero + O mnie + konsultacje) na bieli | Owal / koło / duży radius |
 | Interakcja | Strzałki pill | Strzałki kwadrat | Kropki + pasek, overlay | Okrągłe strzałki, panel zaokrąglony |
 
 ## Wspólne (brief)

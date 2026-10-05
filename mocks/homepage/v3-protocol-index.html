@@ -21,17 +21,16 @@
     @media (min-width: 768px) { :root { --gutter: 36px; } }
     @media (min-width: 1280px) { :root { --gutter: 56px; } }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      overflow-x: hidden;
       background: #fff;
       color: var(--ink);
       font-family: var(--text);
       font-size: 16px;
       line-height: 1.5;
     }
-    img { max-width: 100%; height: auto; display: block; }
+    img { max-width: 100%; height: auto; display: block; object-fit: contain; }
     a { color: inherit; }
     button, input { font: inherit; color: inherit; }
     h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 600; letter-spacing: -0.04em; text-wrap: balance; }
@@ -64,23 +63,16 @@
     .burger { display: none; border: 0; background: none; min-width: 44px; min-height: 44px; cursor: pointer; z-index: 50; }
     .burger i { display: block; width: 18px; height: 1.5px; background: currentColor; box-shadow: 0 -6px, 0 6px; }
     .hero {
-      display: grid; grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.05fr);
-      align-items: end; gap: 24px; padding-top: 8px;
-      min-height: calc(100dvh - 72px);
+      display: grid; grid-template-columns: minmax(16rem, 0.92fr) minmax(0, 1.08fr);
+      align-items: end; gap: 12px 32px; padding: 20px 0 8px;
     }
-    .hero-copy { padding: 20px 0 36px; display: grid; gap: 16px; align-content: end; }
+    .hero-copy { padding: 12px 0 28px; display: grid; gap: 16px; align-content: end; }
     .hero-copy p { color: var(--mute); font-size: 1.1rem; max-width: 36ch; }
-    .cutout { margin: 0; background: transparent; min-width: 0; }
+    .cutout { margin: 0; background: transparent; min-width: 0; overflow: visible; }
     .cutout img {
-      width: 100%; height: auto; max-height: calc(100dvh - 72px);
+      width: 100%; height: auto; max-width: 100%;
       object-fit: contain; object-position: center bottom;
     }
-    .portrait-full { margin: 0; min-width: 0; }
-    .portrait-full img {
-      width: min(100%, 480px); height: auto; object-fit: contain;
-    }
-    .consult-stage { position: relative; }
-    .consult-stage img { width: 100%; height: auto; object-fit: contain; display: block; }
     .cta-index { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 0; max-width: 28rem; }
     .cta-index a {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -107,7 +99,8 @@
     }
     .metric-line strong { color: var(--accent); font-size: 1.1rem; letter-spacing: 0; }
     .about-block { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 40px; align-items: end; }
-    .about-copy { display: grid; gap: 18px; padding: 0; max-width: 40rem; }
+    .about-block .cutout img { width: min(100%, 440px); }
+    .about-copy { display: grid; gap: 18px; padding: 0 0 12px; max-width: 40rem; }
     .link {
       display: inline-flex; align-items: center; min-height: 44px; text-decoration: none;
       font-family: var(--display); font-weight: 600; border-bottom: 1px solid var(--ink);
@@ -131,13 +124,17 @@
       flex: 0 0 calc((100% - 40px) / 3); scroll-snap-align: start; min-width: 0;
       text-decoration: none; display: grid; gap: 12px;
     }
-    .book img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+    .book img { width: 100%; height: auto; object-fit: contain; background: #fff; }
     .book strong { font-family: var(--display); font-size: 1.15rem; }
     .book small { color: var(--mute); font-family: var(--mono); font-size: 12px; }
-    .consult-copy {
-      position: absolute; inset: 0 auto 0 0; width: min(34%, 24rem);
-      padding: 40px; display: grid; align-content: center; gap: 16px;
+    .consult-stage {
+      display: grid; grid-template-columns: minmax(16rem, 0.9fr) minmax(0, 1.1fr);
+      gap: 40px; align-items: end;
     }
+    .consult-copy {
+      display: grid; align-content: end; gap: 16px; padding: 0 0 16px;
+    }
+    .consult-stage .cutout img { width: min(100%, 520px); }
     .quotes .card {
       flex: 0 0 100%; scroll-snap-align: start; min-width: 0; padding: 8px 0 24px;
     }
@@ -174,10 +171,9 @@
       .book { flex-basis: 86%; }
       .protocol li { grid-template-columns: 3rem 1fr; font-size: 1.05rem; }
       form.news { grid-template-columns: 1fr; }
-      .hero, .about-block { grid-template-columns: 1fr; min-height: 0; }
-      .cutout { order: -1; }
-      .cutout img { max-height: 62dvh; }
-      .consult-copy { position: static; width: auto; padding: 28px 0 0; }
+      .hero, .about-block, .consult-stage { grid-template-columns: 1fr; min-height: 0; }
+      .hero .cutout, .about-block .cutout, .consult-stage .cutout { order: -1; }
+      .cutout img, .about-block .cutout img, .consult-stage .cutout img { width: 100%; max-width: 100%; }
       .burger { display: inline-flex; align-items: center; justify-content: center; }
       .nav {
         display: none; position: fixed; inset: 0; background: #fff;
@@ -221,7 +217,7 @@
         </ol>
       </div>
       <figure class="cutout">
-        <img src="assets/hero.webp" alt="Aleksandra Olesiewicz, dietetyczka kliniczna, w jasnym żakiecie" width="1122" height="1402" />
+        <img src="assets/hero.webp" alt="Aleksandra Olesiewicz, dietetyczka kliniczna, wycięta sylwetka na białym" width="1122" height="1402" />
       </figure>
     </section>
     <p class="wrap partners" aria-label="Partnerzy">ALAB Laboratoria · UNS · Norsan · Norsa Pharma · Omni-Biotic</p>
@@ -239,8 +235,8 @@
     </section>
 
     <section class="wrap about-block chapter" id="o-mnie" aria-labelledby="about-title">
-      <figure class="portrait-full">
-        <img src="assets/about.webp" alt="Portret Aleksandry, ujęcie studyjne" width="1122" height="1402" />
+      <figure class="cutout">
+        <img src="assets/about-cutout.webp" alt="Portret Aleksandry, wycięta sylwetka na białym" width="999" height="1400" />
       </figure>
       <div class="about-copy">
         <h2 id="about-title">O mnie</h2>
@@ -285,14 +281,16 @@
       </div>
     </section>
 
-    <section class="wrap" id="konsultacje" aria-labelledby="consult-title">
+    <section class="wrap chapter" id="konsultacje" aria-labelledby="consult-title">
       <div class="consult-stage">
-        <img src="assets/contact.webp" alt="Aleksandra w żakiecie malinowym, w trakcie rozmowy" width="1536" height="1024" />
         <div class="consult-copy">
           <h2 id="consult-title">Konsultacje online</h2>
           <p>Indywidualna współpraca po rozmowie kwalifikacyjnej. Składam Twoje wyniki i to, co już próbowałaś, w kolejność działań.</p>
           <a class="link" href="/konsultacja">Umów konsultację</a>
         </div>
+        <figure class="cutout">
+          <img src="assets/contact-cutout.webp" alt="Aleksandra w żakiecie malinowym, wycięta sylwetka na białym" width="939" height="1024" />
+        </figure>
       </div>
     </section>
 
