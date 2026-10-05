@@ -35,7 +35,7 @@
     a { color: inherit; }
     button, input { font: inherit; color: inherit; }
     h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 600; letter-spacing: -0.04em; text-wrap: balance; }
-    h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); line-height: 1.08; max-width: 12ch; }
+    h1 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); line-height: 1.08; max-width: 14ch; }
     h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.12; }
     p { margin: 0; max-width: 62ch; }
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -63,18 +63,24 @@
     }
     .burger { display: none; border: 0; background: none; min-width: 44px; min-height: 44px; cursor: pointer; z-index: 50; }
     .burger i { display: block; width: 18px; height: 1.5px; background: currentColor; box-shadow: 0 -6px, 0 6px; }
-    .still {
-      margin: 0; position: relative; background: #fff;
+    .hero {
+      display: grid; grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.05fr);
+      align-items: end; gap: 24px; padding-top: 8px;
+      min-height: calc(100dvh - 72px);
     }
-    .still img {
-      width: 100%; height: min(44vh, 460px); object-fit: cover; object-position: center 14%;
-    }
-    .credit {
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--mute);
-      padding: 10px var(--gutter) 0; max-width: none;
-    }
-    .hero-copy { padding: 24px 0 12px; display: grid; gap: 16px; }
+    .hero-copy { padding: 20px 0 36px; display: grid; gap: 16px; align-content: end; }
     .hero-copy p { color: var(--mute); font-size: 1.1rem; max-width: 36ch; }
+    .cutout { margin: 0; background: transparent; min-width: 0; }
+    .cutout img {
+      width: 100%; height: auto; max-height: calc(100dvh - 72px);
+      object-fit: contain; object-position: center bottom;
+    }
+    .portrait-full { margin: 0; min-width: 0; }
+    .portrait-full img {
+      width: min(100%, 480px); height: auto; object-fit: contain;
+    }
+    .consult-stage { position: relative; }
+    .consult-stage img { width: 100%; height: auto; object-fit: contain; display: block; }
     .cta-index { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 0; max-width: 28rem; }
     .cta-index a {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -100,7 +106,8 @@
       margin-top: 36px; font-family: var(--mono); font-size: 12px; color: var(--mute); letter-spacing: 0.04em;
     }
     .metric-line strong { color: var(--accent); font-size: 1.1rem; letter-spacing: 0; }
-    .about-copy { display: grid; gap: 18px; padding: 28px 0 0; max-width: 40rem; }
+    .about-block { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 40px; align-items: end; }
+    .about-copy { display: grid; gap: 18px; padding: 0; max-width: 40rem; }
     .link {
       display: inline-flex; align-items: center; min-height: 44px; text-decoration: none;
       font-family: var(--display); font-weight: 600; border-bottom: 1px solid var(--ink);
@@ -127,10 +134,10 @@
     .book img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
     .book strong { font-family: var(--display); font-size: 1.15rem; }
     .book small { color: var(--mute); font-family: var(--mono); font-size: 12px; }
-    .consult-still img {
-      width: 100%; height: min(48vh, 480px); object-fit: cover; object-position: 75% 18%;
+    .consult-copy {
+      position: absolute; inset: 0 auto 0 0; width: min(34%, 24rem);
+      padding: 40px; display: grid; align-content: center; gap: 16px;
     }
-    .consult-copy { display: grid; gap: 16px; padding: 28px 0 0; max-width: 40rem; }
     .quotes .card {
       flex: 0 0 100%; scroll-snap-align: start; min-width: 0; padding: 8px 0 24px;
     }
@@ -167,8 +174,10 @@
       .book { flex-basis: 86%; }
       .protocol li { grid-template-columns: 3rem 1fr; font-size: 1.05rem; }
       form.news { grid-template-columns: 1fr; }
-      .still img { height: 38vh; }
-      .consult-still img { height: 42vh; }
+      .hero, .about-block { grid-template-columns: 1fr; min-height: 0; }
+      .cutout { order: -1; }
+      .cutout img { max-height: 62dvh; }
+      .consult-copy { position: static; width: auto; padding: 28px 0 0; }
       .burger { display: inline-flex; align-items: center; justify-content: center; }
       .nav {
         display: none; position: fixed; inset: 0; background: #fff;
@@ -202,21 +211,20 @@
     </header>
   </div>
   <main id="main">
-    <section aria-labelledby="hero-title">
-      <figure class="still">
-        <img src="assets/hero.webp" alt="Aleksandra Olesiewicz, dietetyczka kliniczna, w jasnym żakiecie" width="1122" height="1402" />
-        <figcaption class="credit wrap">Kadr 01. Portret, żakiet jasny.</figcaption>
-      </figure>
-      <div class="wrap hero-copy">
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
         <h1 id="hero-title">Przestań zgadywać.</h1>
         <p>Dietetyka kliniczna dla kobiet z PCOS i zmianą składu ciała.</p>
         <ol class="cta-index">
           <li><a href="#ebooki"><span class="idx">01</span> Zobacz e-booki</a></li>
           <li><a href="/konsultacja"><span class="idx">02</span> Umów konsultację</a></li>
         </ol>
-        <p class="partners" aria-label="Partnerzy">ALAB Laboratoria · UNS · Norsan · Norsa Pharma · Omni-Biotic</p>
       </div>
+      <figure class="cutout">
+        <img src="assets/hero.webp" alt="Aleksandra Olesiewicz, dietetyczka kliniczna, w jasnym żakiecie" width="1122" height="1402" />
+      </figure>
     </section>
+    <p class="wrap partners" aria-label="Partnerzy">ALAB Laboratoria · UNS · Norsan · Norsa Pharma · Omni-Biotic</p>
 
     <section class="chapter" id="dlaczego" aria-labelledby="why-title">
       <div class="wrap">
@@ -230,12 +238,11 @@
       </div>
     </section>
 
-    <section id="o-mnie" aria-labelledby="about-title">
-      <figure class="still">
+    <section class="wrap about-block chapter" id="o-mnie" aria-labelledby="about-title">
+      <figure class="portrait-full">
         <img src="assets/about.webp" alt="Portret Aleksandry, ujęcie studyjne" width="1122" height="1402" />
-        <figcaption class="credit wrap">Kadr 02. O mnie.</figcaption>
       </figure>
-      <div class="wrap about-copy">
+      <div class="about-copy">
         <h2 id="about-title">O mnie</h2>
         <p>Jestem Aleksandra Olesiewicz. Pracuję z kobietami, którym powiedziano „proszę schudnąć” albo „taka pani uroda”. Tłumaczę badania, porządkuję suplementy i układam jedzenie, które da się utrzymać.</p>
         <a class="link" href="/o-mnie">Więcej o mnie</a>
@@ -278,15 +285,14 @@
       </div>
     </section>
 
-    <section id="konsultacje" aria-labelledby="consult-title">
-      <figure class="still consult-still">
+    <section class="wrap" id="konsultacje" aria-labelledby="consult-title">
+      <div class="consult-stage">
         <img src="assets/contact.webp" alt="Aleksandra w żakiecie malinowym, w trakcie rozmowy" width="1536" height="1024" />
-        <figcaption class="credit wrap">Kadr 03. Konsultacja online.</figcaption>
-      </figure>
-      <div class="wrap consult-copy">
-        <h2 id="consult-title">Konsultacje online</h2>
-        <p>Indywidualna współpraca po rozmowie kwalifikacyjnej. Składam Twoje wyniki i to, co już próbowałaś, w kolejność działań.</p>
-        <a class="link" href="/konsultacja">Umów konsultację</a>
+        <div class="consult-copy">
+          <h2 id="consult-title">Konsultacje online</h2>
+          <p>Indywidualna współpraca po rozmowie kwalifikacyjnej. Składam Twoje wyniki i to, co już próbowałaś, w kolejność działań.</p>
+          <a class="link" href="/konsultacja">Umów konsultację</a>
+        </div>
       </div>
     </section>
 
