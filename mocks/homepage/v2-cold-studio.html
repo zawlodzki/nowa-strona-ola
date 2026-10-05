@@ -56,7 +56,9 @@
     .nav { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; }
     .nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
     .nav a:hover { color: var(--accent); }
-    .nav-toggle { display: none; }
+    .nav-toggle {
+      position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0);
+    }
     .burger { display: none; border: 0; background: none; min-width: 44px; min-height: 44px; cursor: pointer; }
     .burger i { display: block; width: 18px; height: 1px; background: currentColor; box-shadow: 0 -6px, 0 6px; }
     .btn {
@@ -74,7 +76,7 @@
     .btn.accent:hover { background: #8c314e; }
     .hero {
       display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
-      gap: 48px; align-items: end; min-height: 100dvh; padding-top: 32px; padding-bottom: 48px;
+      gap: 48px; align-items: center; min-height: calc(100dvh - 72px); padding-top: 28px; padding-bottom: 40px;
     }
     .hero p { color: var(--steel); font-size: 1.05rem; margin: 20px 0 28px; max-width: 38ch; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }

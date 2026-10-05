@@ -36,7 +36,7 @@
     a { color: inherit; }
     button, input { font: inherit; color: inherit; }
     h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.045em; text-wrap: balance; }
-    h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: 1.1; max-width: 11ch; }
+    h1 { font-size: clamp(2.2rem, 5.2vw, 4.2rem); line-height: 1.1; max-width: 14ch; }
     h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.12; }
     p { margin: 0; max-width: 62ch; }
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -53,7 +53,9 @@
     .nav { display: flex; gap: 28px; font-size: 15px; font-weight: 500; }
     .nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
     .nav a:hover { color: var(--accent); }
-    .nav-toggle { display: none; }
+    .nav-toggle {
+      position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0);
+    }
     .burger { display: none; border: 0; background: none; min-width: 44px; min-height: 44px; cursor: pointer; color: var(--bone); }
     .burger i { display: block; width: 18px; height: 1.5px; background: currentColor; box-shadow: 0 -6px currentColor, 0 6px currentColor; }
     .btn {
@@ -70,17 +72,20 @@
     .btn.accent { background: var(--accent); color: var(--accent-ink); }
     .btn.accent:hover { background: #d46b78; }
     .hero {
-      position: relative; min-height: 100dvh; padding-top: 24px; padding-bottom: 72px;
-      display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 24px;
+      position: relative; min-height: calc(100dvh - 72px); padding-top: 8px; padding-bottom: 40px;
+      display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: end; gap: 0; overflow: hidden;
     }
+    .hero > div { position: relative; z-index: 2; padding-right: 10%; padding-bottom: 12px; }
     .hero p { color: var(--mute); margin: 22px 0 28px; font-size: 1.15rem; max-width: 34ch; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .hero-photo {
-      position: relative; margin: 0; justify-self: end; width: min(100%, 420px);
+      position: relative; margin: 0; justify-self: stretch; width: 100%; z-index: 1;
     }
     .hero-photo img {
-      width: 100%; border-radius: var(--radius); object-fit: cover; aspect-ratio: 3 / 4;
-      transform: translate(-8%, 6%);
+      width: 118%; max-width: none; border-radius: var(--radius);
+      object-fit: cover; object-position: center 12%;
+      aspect-ratio: 3 / 4; max-height: 82dvh; transform: translateX(-14%);
     }
     .marquee {
       overflow: hidden; border-block: 1px solid var(--line); padding-block: 18px;
@@ -157,8 +162,10 @@
     footer.site a { min-height: 44px; display: inline-flex; align-items: center; }
     @media (max-width: 767px) {
       .hero, .why, .consult { grid-template-columns: 1fr; }
+      .hero { align-items: start; min-height: 0; overflow: visible; }
+      .hero > div { padding-right: 0; }
       .hero-photo { justify-self: stretch; width: 100%; }
-      .hero-photo img { transform: none; max-height: 64dvh; }
+      .hero-photo img { transform: none; width: 100%; max-height: 64dvh; }
       .book, .quotes .card { flex-basis: 86%; }
       .consult-copy { padding: 36px 24px; }
       .burger { display: inline-flex; align-items: center; justify-content: center; }
@@ -197,7 +204,7 @@
   <main id="main">
     <section class="wrap hero" aria-labelledby="hero-title">
       <div>
-        <h1 id="hero-title">Przestań dokładać. Zacznij decydować.</h1>
+        <h1 id="hero-title">Przestań zgadywać.</h1>
         <p>Dietetyka kliniczna dla kobiet z PCOS i zmianą składu ciała.</p>
         <div class="hero-actions">
           <a class="btn" href="#ebooki">Zobacz e-booki</a>

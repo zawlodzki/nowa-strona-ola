@@ -12,7 +12,7 @@ To nie jest produkcyjna strona Astro i nie podłącza Sanity.
 | [v2-cold-studio.html](v2-cold-studio.html) | Zimne studio diagnostyczne |
 | [v3-forest-atelier.html](v3-forest-atelier.html) | Ciemne atelier leśne |
 
-Plan V2/V3: [DIRECTIONS.md](DIRECTIONS.md) (taste-skill v2). Zrzuty: [previews/](previews/).
+Plan V2/V3: [DIRECTIONS.md](DIRECTIONS.md). Kierunek od zera: skill `design-taste-frontend` (v2, nie v1). Impeccable nie planuje V2/V3. Zrzuty: [previews/](previews/).
 
 ## Różnice
 
