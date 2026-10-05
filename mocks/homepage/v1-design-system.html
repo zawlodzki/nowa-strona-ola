@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aleksandra Olesiewicz. Dietetyka kliniczna dla kobiet</title>
+  <style>
+    @font-face {
+      font-family: "Switzer";
+      src: url("assets/Switzer-Variable.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --wf-color-white: #ffffff;
+      --wf-color-paper: #fafafa;
+      --wf-color-surface: #f5f5f5;
+      --wf-color-line: #e6e6e6;
+      --wf-color-ink: #171719;
+      --wf-color-body: #393939;
+      --wf-color-muted: #6b6b6b;
+      --wf-color-black: #080808;
+      --wf-color-accent: #fc762f;
+      --wf-color-error-text: #b42318;
+      --wf-color-success-text: #067647;
+      --wf-space-8: 8px;
+      --wf-space-12: 12px;
+      --wf-space-16: 16px;
+      --wf-space-24: 24px;
+      --wf-space-32: 32px;
+      --wf-space-48: 48px;
+      --wf-space-64: 64px;
+      --wf-radius-10: 10px;
+      --wf-radius-12: 12px;
+      --wf-radius-999: 999px;
+      --wf-layout-content: 1200px;
+      --wf-gutter: 24px;
+      --wf-section: 64px;
+      --wf-display-size: 42px;
+      --wf-heading-size: 34px;
+      --wf-font: "Switzer", ui-sans-serif, system-ui, sans-serif;
+      --wf-ease: cubic-bezier(.22, 1, .36, 1);
+      --wf-bg: var(--wf-color-white);
+      --wf-fg: var(--wf-color-ink);
+    }
+    @media (min-width: 880px) {
+      :root { --wf-gutter: 40px; --wf-section: 96px; --wf-display-size: 64px; --wf-heading-size: 42px; }
+    }
+    @media (min-width: 1200px) {
+      :root { --wf-section: 120px; --wf-display-size: 72px; --wf-heading-size: 48px; }
+    }
+    @media (min-width: 1440px) { :root { --wf-gutter: 60px; } }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--wf-bg);
+      color: var(--wf-fg);
+      font-family: var(--wf-font);
+      font-size: 16px;
+      line-height: 1.5;
+      font-synthesis: none;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    h1, h2, h3 { font-weight: 300; letter-spacing: -0.04em; text-wrap: balance; margin: 0; }
+    h1 { font-size: var(--wf-display-size); line-height: 1.05; letter-spacing: -0.05em; max-width: 16ch; }
+    h2 { font-size: var(--wf-heading-size); line-height: 1.12; }
+    h3 { font-size: 24px; line-height: 1.15; }
+    p { margin: 0; max-width: 68ch; line-height: 1.6; }
+    :focus-visible { outline: 2px solid var(--wf-fg); outline-offset: 4px; }
+    ::selection { background: var(--wf-color-ink); color: var(--wf-color-paper); }
+    .skip {
+      position: absolute; left: -9999px;
+    }
+    .skip:focus { left: 24px; top: 12px; z-index: 80; background: #fff; padding: 12px; }
+    .shell { max-width: var(--wf-layout-content); margin-inline: auto; padding-inline: var(--wf-gutter); min-width: 0; }
+    .site-header {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: var(--wf-space-16); padding-block: 18px; min-height: 64px; max-height: 80px;
+      border-bottom: 1px solid var(--wf-color-line); background: rgb(255 255 255 / .96);
+      position: sticky; top: 0; z-index: 20;
+    }
+    .brand { display: flex; align-items: center; min-height: 44px; text-decoration: none; }
+    .brand img { height: 22px; width: auto; }
+    .brand-narrow { display: none; height: 36px; }
+    .nav { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px 20px; }
+    .nav a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; font-size: 14px; }
+    .nav a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+    .nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .burger {
+      display: none; min-width: 44px; min-height: 44px; align-items: center; justify-content: center;
+      border: 0; background: transparent; cursor: pointer;
+    }
+    .burger i { display: block; width: 18px; height: 1.5px; background: currentColor; box-shadow: 0 -6px, 0 6px; }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 50px; padding: 12px 18px; border-radius: var(--wf-radius-999);
+      border: 1px solid var(--wf-color-ink); background: var(--wf-color-ink); color: #fff;
+      text-decoration: none; font-size: 16px; line-height: 1.3; white-space: nowrap;
+      transition: background 180ms var(--wf-ease), transform 100ms var(--wf-ease);
+    }
+    .btn:hover { background: #393939; }
+    .btn:active { transform: scale(0.98); }
+    .btn.outline { background: transparent; color: var(--wf-color-ink); }
+    .btn.outline:hover { background: rgb(0 0 0 / .05); }
+    .btn.inverse { background: #fff; color: #171719; border-color: #fff; }
+    .btn.inverse:hover { background: #e6e6e6; }
+    .btn.inverse.outline { background: transparent; color: #fff; border-color: #fff; }
+    .btn.inverse.outline:hover { background: rgb(255 255 255 / .12); }
+    .panel { padding-block: var(--wf-section); border-top: 1px solid var(--wf-color-line); }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px; color: var(--wf-color-muted);
+    }
+    .eyebrow:before {
+      content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 12px; background: var(--wf-color-accent); vertical-align: 1px;
+    }
+    .lead { margin-block: 24px 32px; color: var(--wf-color-body); font-size: 18px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .hero-split {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      gap: var(--wf-space-48); align-items: center; padding-block: var(--wf-section);
+    }
+    .portrait-wrap {
+      min-width: 0; display: grid; place-items: end center;
+      background: var(--wf-color-surface); border-radius: var(--wf-radius-12); overflow: hidden;
+    }
+    .portrait-wrap img { width: 100%; max-height: 72vh; object-fit: contain; object-position: center bottom; }
+    .logo-strip {
+      display: flex; flex-wrap: wrap; gap: 16px 48px; padding: 28px 0; margin: 0;
+      list-style: none; border-top: 1px solid var(--wf-color-line); border-bottom: 1px solid var(--wf-color-line);
+    }
+    .logo-strip li {
+      font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wf-color-muted);
+    }
+    .why-layout {
+      display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 64px; align-items: start;
+    }
+    .metric {
+      font-size: clamp(4rem, 10vw, 7rem); font-weight: 300; letter-spacing: -0.05em; line-height: 0.9; margin: 0;
+    }
+    .outcomes { display: grid; gap: 0; margin: 32px 0 0; padding: 0; list-style: none; }
+    .outcomes li { padding: 20px 0; border-top: 1px solid var(--wf-color-line); }
+    .outcomes li:last-child { border-bottom: 1px solid var(--wf-color-line); }
+    .about-split {
+      display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 48px; align-items: center;
+    }
+    .photo-frame { border-radius: var(--wf-radius-12); overflow: hidden; }
+    .photo-frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .slider-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 32px; }
+    .slider-nav { display: flex; gap: 12px; }
+    .slider-nav button {
+      min-width: 44px; min-height: 44px; border-radius: var(--wf-radius-999);
+      border: 1px solid var(--wf-color-ink); background: #fff; cursor: pointer;
+    }
+    .track {
+      display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory;
+      scrollbar-width: thin; padding-bottom: 8px;
+    }
+    .ebook {
+      flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; min-width: 0;
+      color: inherit; text-decoration: none; display: grid; gap: 16px;
+    }
+    .ebook img {
+      width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--wf-radius-10); background: var(--wf-color-surface);
+    }
+    .ebook h3 { font-size: 22px; }
+    .price { font-size: 14px; color: var(--wf-color-muted); }
+    .consult { background: var(--wf-color-black); color: var(--wf-color-paper); border-top: 0; }
+    .consult .lead { color: rgb(250 250 250 / .72); }
+    .consult-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; }
+    .consult img { width: 100%; border-radius: var(--wf-radius-12); aspect-ratio: 4 / 3; object-fit: cover; object-position: 70% 20%; }
+    .quote {
+      flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; min-width: 0;
+      padding: 24px; background: var(--wf-color-surface); border-radius: var(--wf-radius-12); display: grid; gap: 16px;
+    }
+    .quote p { font-size: 18px; line-height: 1.4; max-width: none; }
+    .quote footer { font-size: 14px; color: var(--wf-color-muted); }
+    form { display: grid; gap: 16px; max-width: 420px; }
+    label { display: grid; gap: 8px; font-size: 14px; }
+    input[type="email"] {
+      min-height: 44px; padding: 12px; border-radius: var(--wf-radius-10);
+      border: 1px solid rgb(136 136 136 / .2); background: rgb(0 0 0 / .04); font-size: 16px;
+    }
+    .hint, .form-status { font-size: 14px; color: var(--wf-color-muted); min-height: 24px; }
+    .form-status[data-state="ok"] { color: var(--wf-color-success-text); }
+    .form-status[data-state="err"] { color: var(--wf-color-error-text); }
+    .site-footer {
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px;
+      padding-block: 64px; border-top: 1px solid var(--wf-color-line); font-size: 14px;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+    .footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
+    [data-theme="dark"] { background: var(--wf-color-black); color: var(--wf-color-paper); }
+    @media (max-width: 879px) {
+      .hero-split, .why-layout, .about-split, .consult-grid { grid-template-columns: 1fr; }
+      .about-split { grid-template-columns: 1fr; }
+      .about-split .photo-frame { order: -1; }
+      .ebook, .quote { flex-basis: 85%; }
+      .slider-head { align-items: start; flex-direction: column; }
+      .burger { display: inline-flex; }
+      .nav {
+        display: none; width: 100%; flex-direction: column; align-items: stretch; padding-bottom: 12px;
+      }
+      .nav-toggle:checked ~ .nav { display: flex; }
+      .site-header { max-height: none; }
+      .brand-wide { display: none; }
+      .brand-narrow { display: block; }
+      h1 { max-width: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Przejdź do treści</a>
+  <header class="shell site-header">
+    <a class="brand" href="./v1-design-system.html" aria-label="Aleksandra Olesiewicz. Strona główna">
+      <img class="brand-wide" src="assets/logo-wordmark.svg" alt="" />
+      <img class="brand-narrow" src="assets/logo-stacked.svg" alt="" />
+    </a>
+    <input class="nav-toggle" id="nav-v1" type="checkbox" />
+    <label class="burger" for="nav-v1"><i></i><span class="visually-hidden">Menu</span></label>
+    <nav class="nav" aria-label="Nawigacja główna">
+      <a href="/o-mnie">O mnie</a>
+      <a href="#ebooki">E-booki</a>
+      <a href="/konsultacja">Konsultacje</a>
+      <a href="/blog">Blog</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="shell hero-split" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">Dietetyka kliniczna</p>
+        <h1 id="hero-title">Co zostawić. Co odstawić.</h1>
+        <p class="lead">Prowadzę kobiety z PCOS i zmianą składu ciała. E-book daje decyzję. Konsultacja składa wyniki w plan.</p>
+        <div class="actions">
+          <a class="btn" href="#ebooki">Zobacz e-booki</a>
+          <a class="btn outline" href="/konsultacja">Umów konsultację</a>
+        </div>
+      </div>
+      <div class="portrait-wrap">
+        <img src="assets/hero.webp" alt="Aleksandra Olesiewicz, dietetyczka kliniczna, w jasnym żakiecie" width="1122" height="1402" />
+      </div>
+    </section>
+
+    <div class="shell">
+      <ul class="logo-strip" aria-label="Partnerzy">
+        <li>ALAB Laboratoria</li>
+        <li>UNS</li>
+        <li>Norsan</li>
+        <li>Norsa Pharma</li>
+        <li>Omni-Biotic</li>
+      </ul>
+    </div>
+
+    <section class="panel" id="dlaczego" aria-labelledby="why-title">
+      <div class="shell why-layout">
+        <div>
+          <h2 id="why-title">Dlaczego ja</h2>
+          <p class="metric">180+</p>
+          <p class="lead" style="margin-top:16px">kobiet w indywidualnej współpracy. Liczba poglądowa do podmiany.</p>
+        </div>
+        <ul class="outcomes">
+          <li>Przestałam dokładać kolejny suplement na wszelki wypadek. W szafce zostaje to, co ma uzasadnienie.</li>
+          <li>Na wizytę idę z listą badań i pytaniami. Lekarz dostaje konkret, nie mgłę.</li>
+          <li>Nie ścigam wagi. Mierzę talię, siłę i to, czy starcza mi energii.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="o-mnie" aria-labelledby="about-title">
+      <div class="shell about-split">
+        <div class="photo-frame">
+          <img src="assets/about.webp" alt="Portret Aleksandry, spokojne ujęcie studyjne" width="1122" height="1402" />
+        </div>
+        <div>
+          <h2 id="about-title">O mnie</h2>
+          <p class="lead">Jestem Aleksandra Olesiewicz. Pracuję z kobietami, którym powiedziano „proszę schudnąć” albo „taka pani uroda”. Tłumaczę badania, porządkuję suplementy i układam jedzenie tak, żeby dało się je utrzymać.</p>
+          <a class="btn outline" href="/o-mnie">Więcej o mnie</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="ebooki" aria-labelledby="ebooks-title">
+      <div class="shell">
+        <div class="slider-head">
+          <div>
+            <h2 id="ebooks-title">E-booki</h2>
+            <p class="lead">Materiały decyzyjne, nie kolejne jadłospisy na siedem dni.</p>
+          </div>
+          <div class="slider-nav" data-slider-controls="ebooks">
+            <button type="button" data-prev aria-controls="ebook-track">Poprzednie</button>
+            <button type="button" data-next aria-controls="ebook-track">Następne</button>
+          </div>
+        </div>
+        <div class="track" id="ebook-track" data-slider tabindex="0" aria-label="Lista e-booków">
+          <a class="ebook" data-slide href="/ebooki/suplementy-pcos">
+            <img src="assets/ebook-pcos-suplementy.jpg" alt="" width="900" height="1200" />
+            <h3>Suplementy w PCOS</h3>
+            <p>Co zostawić, co odstawić, czego nigdy nie kupować. Audyt szafki na podstawie objawów i wyników.</p>
+            <p class="price">99 zł</p>
+          </a>
+          <a class="ebook" data-slide href="/ebooki/waga-oklamuje">
+            <img src="assets/ebook-waga-oklamuje.jpg" alt="" width="900" height="1200" />
+            <h3>Waga Cię okłamuje</h3>
+            <p>Osiem tygodni pracy ze składem ciała w perimenopauzie. Bez obietnicy spadku kilogramów.</p>
+            <p class="price">99 zł</p>
+          </a>
+          <a class="ebook" data-slide href="/ebooki/badania-pcos">
+            <img src="assets/ebook-pcos-badania.jpg" alt="" width="900" height="1200" />
+            <h3>PCOS: badania, które mają sens</h3>
+            <p>Co zbadać, kiedy w cyklu i po co, żeby nie wyjść z gabinetu z niczym.</p>
+            <p class="price">99 zł</p>
+          </a>
+          <a class="ebook" data-slide href="/ebooki/szczupla-pcos">
+            <img src="assets/ebook-szczupla-pcos.jpg" alt="" width="900" height="1200" />
+            <h3>Szczupła, a jednak PCOS</h3>
+            <p>Model jedzenia bez deficytu, kiedy jedyna rada, którą słyszysz, to proszę schudnąć.</p>
+            <p class="price">99 zł</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel consult" id="konsultacje" data-theme="dark" aria-labelledby="consult-title">
+      <div class="shell consult-grid">
+        <div>
+          <h2 id="consult-title">Konsultacje online</h2>
+          <p class="lead">Indywidualna współpraca po rozmowie kwalifikacyjnej. Składam Twoje wyniki, objawy i to, co już próbowałaś, w kolejność działań. Bez pakietu „jedz mniej”.</p>
+          <a class="btn inverse" href="/konsultacja">Umów konsultację</a>
+        </div>
+        <img src="assets/contact.webp" alt="Aleksandra w trakcie rozmowy, żakiet malinowy" width="1536" height="1024" />
+      </div>
+    </section>
+
+    <section class="panel" id="opinie" aria-labelledby="quotes-title">
+      <div class="shell">
+        <div class="slider-head">
+          <h2 id="quotes-title">Głosy klientek</h2>
+          <div class="slider-nav" data-slider-controls="quotes">
+            <button type="button" data-prev aria-controls="quote-track">Poprzednie</button>
+            <button type="button" data-next aria-controls="quote-track">Następne</button>
+          </div>
+        </div>
+        <div class="track" id="quote-track" data-slider tabindex="0" aria-label="Opinie">
+          <figure class="quote" data-slide>
+            <blockquote><p>Przestałam dokładać inozytol na wszelki wypadek. Szafka jest krótsza, a ja wiem, po co zostaje witamina D.</p></blockquote>
+            <footer>Magda K., 34 lata, Wrocław. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="quote" data-slide>
+            <blockquote><p>Na wizytę poszłam z listą badań ułożoną w domu. Lekarz dostał konkret, nie mgłę.</p></blockquote>
+            <footer>Karolina W., 29 lat, Kraków. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="quote" data-slide>
+            <blockquote><p>Nie ważę się codziennie. Mierzę talię i to, czy starcza mi energii do końca dnia.</p></blockquote>
+            <footer>Anna P., 47 lat, Gdańsk. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="quote" data-slide>
+            <blockquote><p>Dostałam kryterium: zostawiam, odstawiam albo nie kupuję. Nie dostałam kolejnej listy „co jest dobre na PCOS”.</p></blockquote>
+            <footer>Zuzanna L., 31 lat, Poznań. Cytat poglądowy.</footer>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="newsletter" aria-labelledby="news-title">
+      <div class="shell">
+        <h2 id="news-title">List, nie lejek</h2>
+        <p class="lead">Raz na dwa tygodnie: co zostawić, co odstawić, jakie pytanie zabrać do lekarza.</p>
+        <form id="news-form" action="#" method="post" novalidate>
+          <label>Adres e-mail
+            <input id="news-email" name="email" type="email" autocomplete="email" required placeholder="np. anna@poczta.pl" />
+          </label>
+          <p class="hint">Zgoda na newsletter. Regulamin i polityka prywatności pod linkami w stopce.</p>
+          <button class="btn" type="submit">Zapisz mnie</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="shell site-footer">
+    <a class="brand" href="./v1-design-system.html" aria-label="Aleksandra Olesiewicz">
+      <img src="assets/logo-wordmark.svg" alt="" height="22" />
+    </a>
+    <nav class="footer-links" aria-label="Stopka">
+      <a href="https://www.instagram.com/aleksandra_olesiewicz">Instagram</a>
+      <a href="https://www.facebook.com/">Facebook</a>
+      <a href="https://www.tiktok.com/">TikTok</a>
+      <a href="/blog">Blog</a>
+      <a href="/regulamin">Regulamin</a>
+      <a href="/polityka-prywatnosci">Polityka prywatności</a>
+    </nav>
+    <p class="hint">Mockup kierunku V1. Treści i liczby poglądowe.</p>
+  </footer>
+  <script>
+    (function () {
+      function amount(track) {
+        var slide = track.querySelector("[data-slide]");
+        if (!slide) return track.clientWidth * 0.8;
+        var styles = getComputedStyle(track);
+        var gap = parseFloat(styles.columnGap || styles.gap) || 0;
+        return slide.getBoundingClientRect().width + gap;
+      }
+      document.querySelectorAll("[data-slider]").forEach(function (track) {
+        var bar = track.previousElementSibling;
+        var controls = bar && bar.querySelector(".slider-nav");
+        if (!controls) return;
+        controls.querySelector("[data-prev]").addEventListener("click", function () { track.scrollBy({ left: -amount(track), behavior: "smooth" }); });
+        controls.querySelector("[data-next]").addEventListener("click", function () { track.scrollBy({ left: amount(track), behavior: "smooth" }); });
+      });
+      var form = document.getElementById("news-form");
+      var status = form.querySelector(".form-status");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = document.getElementById("news-email");
+        if (!email.value || !email.checkValidity()) {
+          status.dataset.state = "err";
+          status.textContent = "Podaj poprawny adres e-mail.";
+          email.focus();
+          return;
+        }
+        status.dataset.state = "ok";
+        status.textContent = "Zapis poglądowy. W mockupie nic nie wysyłamy.";
+      });
+    })();
+  </script>
+</body>
+</html>

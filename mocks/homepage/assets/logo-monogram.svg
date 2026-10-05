@@ -1,0 +1,5 @@
+<!-- Source: src/assets/brand/logo.ts. Font: Gambarino Regular, https://www.fontshare.com/fonts/gambarino. Outlines from the official Fontshare OTF; do not redraw by hand. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-48 -622 1070 704" fill="currentColor" role="img" aria-labelledby="title">
+  <title id="title">ao</title>
+  <path d="M449 0V-19C378 -26 374 -27 374 -132V-401C374 -497 335 -550 241 -550C147 -550 39 -488 39 -429C39 -408 52 -385 90 -385C180 -385 104 -522 204 -522C259 -522 282 -477 282 -374V-266L171 -229C63 -193 24 -163 24 -102C24 -51 53 10 130 10C186 10 238 -24 282 -58V0ZM178 -43C136 -43 118 -78 118 -113C118 -153 138 -184 207 -207L282 -231V-132C274 -67 215 -43 178 -43Z M730 -550C588 -550 497 -433 497 -255C497 -91 572 10 717 10C857 10 950 -107 950 -284C950 -449 872 -550 730 -550ZM734 -16C640 -16 602 -155 602 -307C602 -459 643 -524 710 -524C808 -524 848 -383 848 -235C848 -81 798 -16 734 -16Z"/>
+</svg>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aleksandra Olesiewicz. Co zostawić, co odstawić</title>
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" />
+  <style>
+    :root {
+      --bg: #eef1f4;
+      --bg-2: #e3e7ec;
+      --ink: #1c2228;
+      --steel: #4a5560;
+      --line: #c5ccd4;
+      --accent: #a33b5c;
+      --accent-ink: #fff7f9;
+      --gutter: 20px;
+      --radius: 0;
+      --font: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 768px) { :root { --gutter: 40px; } }
+    @media (min-width: 1280px) { :root { --gutter: 64px; } }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.04em; text-wrap: balance; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.08; max-width: 12ch; }
+    h2 { font-size: clamp(1.8rem, 3.4vw, 2.8rem); line-height: 1.12; }
+    h3 { font-size: 1.25rem; }
+    p { margin: 0; max-width: 65ch; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+    ::-webkit-scrollbar { height: 8px; }
+    ::-webkit-scrollbar-thumb { background: var(--steel); }
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 16px; top: 12px; z-index: 80; background: var(--bg); padding: 12px; }
+    .wrap { width: min(1400px, 100% - 2 * var(--gutter)); margin-inline: auto; }
+    header.top {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      height: 64px; border-bottom: 1px solid var(--line); position: sticky; top: 0;
+      background: rgb(238 241 244 / .94); z-index: 20;
+    }
+    .word { font-weight: 700; letter-spacing: -0.04em; text-decoration: none; font-size: 15px; }
+    .nav { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; }
+    .nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+    .nav a:hover { color: var(--accent); }
+    .nav-toggle { display: none; }
+    .burger { display: none; border: 0; background: none; min-width: 44px; min-height: 44px; cursor: pointer; }
+    .burger i { display: block; width: 18px; height: 1px; background: currentColor; box-shadow: 0 -6px, 0 6px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 22px; background: var(--ink); color: var(--bg);
+      text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: -0.02em;
+      border: 1px solid var(--ink); border-radius: var(--radius); white-space: nowrap;
+      transition: transform 120ms var(--ease), background 180ms var(--ease);
+    }
+    .btn:hover { background: #2a323a; }
+    .btn:active { transform: translateY(1px); }
+    .btn.ghost { background: transparent; color: var(--ink); }
+    .btn.ghost:hover { background: var(--bg-2); }
+    .btn.accent { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .btn.accent:hover { background: #8c314e; }
+    .hero {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+      gap: 48px; align-items: end; min-height: 100dvh; padding-top: 32px; padding-bottom: 48px;
+    }
+    .hero p { color: var(--steel); font-size: 1.05rem; margin: 20px 0 28px; max-width: 38ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero figure {
+      margin: 0; background: var(--bg-2); min-height: 0; display: grid; align-items: end;
+      outline: 1px solid var(--line);
+    }
+    .hero img { width: 100%; max-height: 78dvh; object-fit: contain; object-position: center bottom; }
+    .partners {
+      display: flex; flex-wrap: wrap; gap: 12px 40px; padding: 28px 0;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      list-style: none; margin: 0; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel);
+    }
+    .chapter { padding-block: 96px; }
+    .why { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; }
+    .count { font-size: clamp(5rem, 12vw, 9rem); font-weight: 700; letter-spacing: -0.07em; line-height: 0.8; color: var(--accent); }
+    .count span { display: block; margin-top: 16px; font-size: 1rem; font-weight: 500; letter-spacing: 0; color: var(--steel); line-height: 1.4; }
+    .why ol { margin: 0; padding: 0; list-style: none; }
+    .why li { padding: 22px 0; border-top: 1px solid var(--line); font-size: 1.15rem; max-width: 46ch; }
+    .why li:last-child { border-bottom: 1px solid var(--line); }
+    .about {
+      display: grid; grid-template-columns: 1.3fr 0.7fr; min-height: 70dvh;
+      outline: 1px solid var(--line);
+    }
+    .about img { width: 100%; height: 100%; object-fit: cover; min-height: 420px; }
+    .about-copy { padding: 48px; display: grid; align-content: end; gap: 20px; background: var(--bg-2); }
+    .slider-bar { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+    .arrows { display: flex; gap: 8px; }
+    .arrows button {
+      width: 44px; height: 44px; border: 1px solid var(--ink); background: transparent; cursor: pointer;
+    }
+    .track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+    .book {
+      flex: 0 0 calc((100% - 32px) / 3); scroll-snap-align: start; min-width: 0;
+      text-decoration: none; display: grid; gap: 12px; color: inherit;
+    }
+    .book img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; filter: grayscale(0.15) contrast(1.05); }
+    .book:focus-within img, .book:hover img { filter: none; }
+    .book strong { font-weight: 700; }
+    .book small { color: var(--steel); }
+    .consult {
+      display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-2);
+      outline: 1px solid var(--line);
+    }
+    .consult img { width: 100%; height: 100%; object-fit: cover; min-height: 360px; object-position: 70% 20%; }
+    .consult-copy { padding: 56px var(--gutter); display: grid; align-content: center; gap: 20px; }
+    .quotes .card {
+      flex: 0 0 calc((100% - 32px) / 3); scroll-snap-align: start; min-width: 0;
+      padding: 28px 0; border-top: 1px solid var(--line);
+    }
+    .quotes .card p { font-size: 1.2rem; letter-spacing: -0.02em; max-width: none; }
+    .quotes .card footer { margin-top: 16px; color: var(--steel); font-size: 14px; }
+    form { display: grid; gap: 12px; max-width: 28rem; }
+    label { display: grid; gap: 6px; font-size: 14px; font-weight: 500; }
+    input[type="email"] {
+      min-height: 48px; border: 0; border-bottom: 1px solid var(--ink); background: transparent; border-radius: 0; font-size: 16px;
+    }
+    .hint, .status { font-size: 13px; color: var(--steel); min-height: 20px; }
+    .status[data-state="ok"] { color: #1f6b4a; }
+    .status[data-state="err"] { color: var(--accent); }
+    footer.site {
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px;
+      padding-block: 48px; border-top: 1px solid var(--line); font-size: 14px;
+    }
+    footer.site nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    footer.site a { min-height: 44px; display: inline-flex; align-items: center; }
+    @media (max-width: 767px) {
+      .hero, .why, .about, .consult { grid-template-columns: 1fr; min-height: 0; }
+      .hero { padding-top: 24px; }
+      .book, .quotes .card { flex-basis: 88%; }
+      .about img, .consult img { min-height: 280px; }
+      .burger { display: inline-flex; align-items: center; justify-content: center; }
+      .nav { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg); flex-direction: column; padding: 12px var(--gutter) 20px; border-bottom: 1px solid var(--line); }
+      .nav-toggle:checked ~ .nav { display: flex; }
+      header.top { position: sticky; }
+      .wrap.top-wrap { position: relative; }
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #16191d;
+        --bg-2: #1d2228;
+        --ink: #e8edf2;
+        --steel: #9aa3ad;
+        --line: #2c343c;
+        --accent: #d46a86;
+      }
+      header.top { background: rgb(22 25 29 / .94); }
+      .btn { background: var(--ink); color: #16191d; }
+      .btn.ghost { color: var(--ink); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Przejdź do treści</a>
+  <div class="wrap top-wrap">
+    <header class="top">
+      <a class="word" href="./v2-cold-studio.html">Aleksandra Olesiewicz</a>
+      <input class="nav-toggle" id="nav-v2" type="checkbox" />
+      <label class="burger" for="nav-v2" aria-label="Menu"><i></i></label>
+      <nav class="nav" aria-label="Nawigacja główna">
+        <a href="/o-mnie">O mnie</a>
+        <a href="#ebooki">E-booki</a>
+        <a href="/konsultacja">Konsultacje</a>
+        <a href="/blog">Blog</a>
+      </nav>
+    </header>
+  </div>
+  <main id="main">
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">Co zostawić. Co odstawić.</h1>
+        <p>Prowadzę kobiety z PCOS i zmianą składu ciała. Bez kolejnego jadłospisu.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#ebooki">Zobacz e-booki</a>
+          <a class="btn ghost" href="/konsultacja">Umów konsultację</a>
+        </div>
+      </div>
+      <figure>
+        <img src="assets/hero.webp" alt="Aleksandra Olesiewicz w jasnym żakiecie" width="1122" height="1402" />
+      </figure>
+    </section>
+
+    <div class="wrap">
+      <ul class="partners" aria-label="Partnerzy">
+        <li>ALAB Laboratoria</li>
+        <li>UNS</li>
+        <li>Norsan</li>
+        <li>Norsa Pharma</li>
+        <li>Omni-Biotic</li>
+      </ul>
+    </div>
+
+    <section class="chapter" id="dlaczego" aria-labelledby="why-title">
+      <div class="wrap why">
+        <div>
+          <h2 id="why-title">Dlaczego ja</h2>
+          <p class="count">180+<span>kobiet w indywidualnej współpracy. Liczba poglądowa.</span></p>
+        </div>
+        <ol>
+          <li>Przestałam dokładać kolejny suplement na wszelki wypadek. W szafce zostaje to, co ma uzasadnienie.</li>
+          <li>Na wizytę idę z listą badań i pytaniami. Lekarz dostaje konkret, nie mgłę.</li>
+          <li>Nie ścigam wagi. Mierzę talię, siłę i to, czy starcza mi energii.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="wrap" id="o-mnie" aria-labelledby="about-title">
+      <div class="about">
+        <img src="assets/about.webp" alt="Portret Aleksandry, ujęcie studyjne" width="1122" height="1402" />
+        <div class="about-copy">
+          <h2 id="about-title">O mnie</h2>
+          <p>Pracuję z kobietami, którym powiedziano „proszę schudnąć” albo „taka pani uroda”. Tłumaczę badania i porządkuję suplementy.</p>
+          <a class="btn ghost" href="/o-mnie">Więcej o mnie</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="ebooki" aria-labelledby="ebooks-title">
+      <div class="wrap">
+        <div class="slider-bar">
+          <h2 id="ebooks-title">E-booki</h2>
+          <div class="arrows">
+            <button type="button" data-prev aria-controls="v2-ebooks">Poprzednie</button>
+            <button type="button" data-next aria-controls="v2-ebooks">Następne</button>
+          </div>
+        </div>
+        <div class="track" id="v2-ebooks" data-slider tabindex="0">
+          <a class="book" data-slide href="/ebooki/suplementy-pcos">
+            <img src="assets/ebook-pcos-suplementy.jpg" alt="" width="900" height="1200" />
+            <strong>Suplementy w PCOS</strong>
+            <p>Co zostawić, co odstawić, czego nigdy nie kupować.</p>
+            <small>99 zł</small>
+          </a>
+          <a class="book" data-slide href="/ebooki/waga-oklamuje">
+            <img src="assets/ebook-waga-oklamuje.jpg" alt="" width="900" height="1200" />
+            <strong>Waga Cię okłamuje</strong>
+            <p>Osiem tygodni ze składem ciała w perimenopauzie.</p>
+            <small>99 zł</small>
+          </a>
+          <a class="book" data-slide href="/ebooki/badania-pcos">
+            <img src="assets/ebook-pcos-badania.jpg" alt="" width="900" height="1200" />
+            <strong>PCOS: badania, które mają sens</strong>
+            <p>Co zbadać, kiedy w cyklu i po co.</p>
+            <small>99 zł</small>
+          </a>
+          <a class="book" data-slide href="/ebooki/szczupla-pcos">
+            <img src="assets/ebook-szczupla-pcos.jpg" alt="" width="900" height="1200" />
+            <strong>Szczupła, a jednak PCOS</strong>
+            <p>Jedzenie bez deficytu, kiedy rada brzmi: schudnij.</p>
+            <small>99 zł</small>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="konsultacje" aria-labelledby="consult-title">
+      <div class="consult">
+        <div class="consult-copy">
+          <h2 id="consult-title">Konsultacje online</h2>
+          <p>Indywidualna współpraca po rozmowie kwalifikacyjnej. Składam wyniki, objawy i to, co już próbowałaś, w kolejność działań.</p>
+          <a class="btn accent" href="/konsultacja">Umów konsultację</a>
+        </div>
+        <img src="assets/contact.webp" alt="Aleksandra w trakcie rozmowy" width="1536" height="1024" />
+      </div>
+    </section>
+
+    <section class="chapter quotes" id="opinie" aria-labelledby="q-title">
+      <div class="wrap">
+        <div class="slider-bar">
+          <h2 id="q-title">Głosy klientek</h2>
+          <div class="arrows">
+            <button type="button" data-prev aria-controls="v2-quotes">Poprzednie</button>
+            <button type="button" data-next aria-controls="v2-quotes">Następne</button>
+          </div>
+        </div>
+        <div class="track" id="v2-quotes" data-slider tabindex="0">
+          <figure class="card" data-slide>
+            <blockquote><p>Przestałam dokładać inozytol na wszelki wypadek. Szafka jest krótsza, a ja wiem, po co zostaje witamina D.</p></blockquote>
+            <footer>Magda K., 34 lata, Wrocław. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="card" data-slide>
+            <blockquote><p>Na wizytę poszłam z listą badań ułożoną w domu. Lekarz dostał konkret, nie mgłę.</p></blockquote>
+            <footer>Karolina W., 29 lat, Kraków. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="card" data-slide>
+            <blockquote><p>Nie ważę się codziennie. Mierzę talię i to, czy starcza mi energii do końca dnia.</p></blockquote>
+            <footer>Anna P., 47 lat, Gdańsk. Cytat poglądowy.</footer>
+          </figure>
+          <figure class="card" data-slide>
+            <blockquote><p>Dostałam kryterium: zostawiam, odstawiam albo nie kupuję. Nie dostałam kolejnej listy „co jest dobre”.</p></blockquote>
+            <footer>Zuzanna L., 31 lat, Poznań. Cytat poglądowy.</footer>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="newsletter" aria-labelledby="n-title">
+      <div class="wrap">
+        <h2 id="n-title">List, nie lejek</h2>
+        <p style="margin:16px 0 28px;color:var(--steel)">Raz na dwa tygodnie: co zostawić, co odstawić, jakie pytanie zabrać do lekarza.</p>
+        <form id="news-form" action="#" method="post" novalidate>
+          <label>Adres e-mail
+            <input id="news-email" name="email" type="email" autocomplete="email" required placeholder="np. anna@poczta.pl" />
+          </label>
+          <p class="hint">Zgoda na newsletter. Regulamin i polityka prywatności są w stopce.</p>
+          <button class="btn" type="submit">Zapisz mnie</button>
+          <p class="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap site">
+    <a class="word" href="./v2-cold-studio.html">Aleksandra Olesiewicz</a>
+    <nav aria-label="Stopka">
+      <a href="https://www.instagram.com/aleksandra_olesiewicz">Instagram</a>
+      <a href="https://www.facebook.com/">Facebook</a>
+      <a href="https://www.tiktok.com/">TikTok</a>
+      <a href="/regulamin">Regulamin</a>
+      <a href="/polityka-prywatnosci">Polityka prywatności</a>
+    </nav>
+    <p class="hint">Mockup kierunku V2. Treści poglądowe.</p>
+  </footer>
+  <script>
+    (function () {
+      function amount(track) {
+        var slide = track.querySelector("[data-slide]");
+        if (!slide) return 280;
+        var gap = parseFloat(getComputedStyle(track).gap) || 0;
+        return slide.getBoundingClientRect().width + gap;
+      }
+      document.querySelectorAll("[data-slider]").forEach(function (track) {
+        var box = track.previousElementSibling && track.previousElementSibling.querySelector(".arrows");
+        if (!box) box = track.parentElement.querySelector(".arrows");
+        if (!box) return;
+        box.querySelector("[data-prev]").addEventListener("click", function () { track.scrollBy({ left: -amount(track), behavior: "smooth" }); });
+        box.querySelector("[data-next]").addEventListener("click", function () { track.scrollBy({ left: amount(track), behavior: "smooth" }); });
+      });
+      var form = document.getElementById("news-form");
+      var status = form.querySelector(".status");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = document.getElementById("news-email");
+        if (!email.value || !email.checkValidity()) {
+          status.dataset.state = "err";
+          status.textContent = "Podaj poprawny adres e-mail.";
+          email.focus();
+          return;
+        }
+        status.dataset.state = "ok";
+        status.textContent = "Zapis poglądowy. W mockupie nic nie wysyłamy.";
+      });
+    })();
+  </script>
+</body>
+</html>
