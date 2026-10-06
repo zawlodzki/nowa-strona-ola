@@ -243,3 +243,21 @@ automatycznie; skopiowany lokalny URL wymaga tego samego komputera.
 Między e-bookami a newsletterem znajduje się FAQ: cztery przykładowe pytania,
 natywny akordeon bez JS i zgodne `FAQPage` JSON-LD. Docelowe pole CMS i zasady
 SEO opisano w [instrukcji bloga](../../docs/BLOG-CMS-CONFIG-3A.md#faq-między-e-bookami-a-newsletterem--2026-10-06).
+
+## Landing e-booka 3a — 2026-10-06
+
+[Suplementy w PCOS](ebook-3a.html): samodzielny landing w palecie 3a i Switzerze.
+Navbar, hero, problem, dla kogo, zawartość, efekty, cena 97 zł brutto, opinie,
+FAQ i footer. Dodatkowo portret autorki, ilustracja półki, okładka i podgląd karty
+audytu. Native details/summary dla rozdziałów, FAQ i demonstracji zakupu;
+treść działa bez JS. Opinie dotyczą współpracy, nie produktu. Oferta jest
+propozycją; brak checkoutu i gotowych plików. Bez publikacji i zmian Sanity.
+
+Copy na podstawie dwóch plików użytkownika, opisanych w
+[instrukcji kolekcji CMS](../../docs/EBOOK-CMS-CONFIG-3A.md). Kolory pochodzą z
+`cherry.css`/`white-background.css`; layout w [ebook-3a.css](ebook-3a.css).
+Okładka i karta są kontrolowanym HTML/CSS, portret istniejącym zasobem projektu.
+Nie kopiowano mediów Wonderful ani nie dodawano bibliotek.
+
+Podgląd: istniejąca komenda `node scripts/preview-homepage-mockups.mjs`, adres
+`http://127.0.0.1:8766/mockups/homepage/ebook-3a.html`.

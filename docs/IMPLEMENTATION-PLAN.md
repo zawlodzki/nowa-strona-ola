@@ -443,3 +443,14 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
 - [x] Zachować próg 50% rich textu i układ w przepływie na tablet/mobile.
 - [x] Sprawdzić brak kolizji przy 320/390/768/1440 px i wysokości 600 px
       w Chromium/Firefox/WebKit; pełne verify: 57 unit i 45 E2E PASS.
+
+## Landing e-booka 3a — 2026-10-06
+
+- [x] Przygotować osobny mockup „Suplementy w PCOS” z pełnym układem sprzedażowym.
+- [x] Zastosować paletę 3a, Switzer, okładkę, podgląd karty, ilustrację i portret.
+- [x] Przygotować copy według wskazanego poradnika i koncepcji A researchu.
+- [x] Zapisać instrukcję osobnej kolekcji e-booków i wspólnych referencji CMS.
+- [ ] Zatwierdzić finalny zakres, copy, dostępność, pliki i obsługę sprzedaży.
+- [ ] Wdrożyć kolekcję, szablon Astro, Markdown, TypeGen i referencje po akceptacji.
+
+[Mockup](../mockups/homepage/ebook-3a.html), [instrukcja CMS](EBOOK-CMS-CONFIG-3A.md).

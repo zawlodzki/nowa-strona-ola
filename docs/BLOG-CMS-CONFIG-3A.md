@@ -58,6 +58,11 @@ odpowiadających pięciu H2 treści; jest statycznym HTML, bez połączenia z Po
 
 ### Trzy e-booki
 
+Szczegółowy kontrakt osobnej kolekcji i landingu opisuje
+[instrukcja e-booków 3a](EBOOK-CMS-CONFIG-3A.md). Wspólny dokument `ebook`
+pozostaje źródłem ceny, statusu i treści produktu; adres generować ze sluga
+zgodnie z tą instrukcją, zamiast utrzymywać osobny adres szczegółów.
+
 Współdzielić przyszły model produktu z
 [instrukcją homepage](HOMEPAGE-CMS-CONFIG.md#e-booki--wartości-do-przyszłego-modelu-produktu).
 Proponowana nazwa dokumentu: `ebook`; pola: język, powiązanie tłumaczenia, tytuł,

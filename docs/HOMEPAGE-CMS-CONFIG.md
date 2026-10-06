@@ -278,3 +278,19 @@ renderer, bez fikcyjnych ścieżek do obrazów w CMS.
 Nie tworzono dokumentów w Content Lake, nie zmieniano schematów ani aplikacji
 w ramach sporządzenia tego dokumentu. Bieżące decyzje są zapisane, a wdrożenie
 CMS pozostaje odrębną pracą.
+
+## Landing e-booka i kolekcja — decyzja 2026-10-06
+
+Bezpośrednie zlecenie użytkownika: kolejny lokalny mockup w palecie 3a,
+e-book o suplementach w PCOS oraz **osobna kolekcja e-booków w CMS**.
+Cena zachowana: 97 PLN brutto (wcześniejsza decyzja). Navbar, hero, problem,
+dla kogo, zawartość, efekty, cena, opinie, FAQ i footer wymagane; dodano podgląd
+karty i autorkę jako propozycję wizualną. Copy i zakres z researchu są propozycją,
+nie akceptacją finalnego produktu. Opinie współpracy nie stają się opiniami ebooka.
+
+Mapowanie: `ebook` jako dokument produktu, homepage `items[]` → `ebook`, blog
+`relatedEbooks[]` → `ebook`, treść landingu w `ebook.landing`; adres generowany ze
+sluga, cena i status z produktu. **Luka schematu:** kolekcja i pola landingu nie
+istnieją. **Wykonane:** [mockup](../mockups/homepage/ebook-3a.html) oraz
+[instrukcja wdrożenia](EBOOK-CMS-CONFIG-3A.md). Bez konfiguracji Content Lake,
+checkoutu i zmiany dostępności. Brak uruchomionej sprzedaży.
