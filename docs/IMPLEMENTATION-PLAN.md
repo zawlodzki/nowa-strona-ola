@@ -373,6 +373,8 @@ materiały dla kobiet z PCOS i w perimenopauzie oraz konsultacje dietetyczne onl
 - [x] Zapisać bieżące decyzje, treści i mapowanie homepage 3a w
       [specyfikacji konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md) oraz zasadę
       aktualizacji dokumentu przy kolejnych decyzjach użytkownika (2026-10-06).
+- [x] Przygotować [PR #18](https://github.com/zawlodzki/nowa-strona-ola/pull/18)
+      z aktualizacją mockupów 3a i dokumentacją CMS po pełnej weryfikacji lokalnej.
 - [ ] Ustalić finalne treści i dostępność e-booków, ceny konsultacji,
       współprace i profile social media.
 - [ ] Dopiero po wyborze przenieść zaakceptowane rozwiązanie do współdzielonych

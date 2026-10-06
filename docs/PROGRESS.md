@@ -1220,6 +1220,8 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 
 - Użytkownik zlecił utworzenie PR i scalenie zmian. PR #17 jest już scalony;
   bieżący zakres przygotowano na nowej gałęzi `codex/mockups-3a-cms` z `origin/main`.
+- Utworzono [PR #18](https://github.com/zawlodzki/nowa-strona-ola/pull/18)
+  i dołączono go do zadania. Scalenie zlecone po przejściu kontroli GitHub.
 - Zakres: copy homepage, mockup artykułu, dokumentacja konfiguracji CMS,
   poprawka inicjalizacji karuzeli w WebKit i test regresji. Lokalne zmiany
   skilli, lockfile skilli oraz robocze raporty nie wchodzą do PR.
