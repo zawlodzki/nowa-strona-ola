@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-06 (wdrożenie copy w lokalnym mockupie 3a). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-10-06 (landing e-booka i instrukcja kolekcji CMS). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -11,10 +11,11 @@ Etap 4 — Sanity i szablony PL/EN — kod zweryfikowany lokalnie; demonstracyjn
 treść jest w datasetcie `production`. Strony i artykuły są szkicami, żeby nie
 odpalać webhooków. Opublikowane `home` PL/EN nadal bez sekcji. Etapy 5–7 otwarte.
 
-Bieżące zlecenie: copy wdrożone w lokalnym mockupie 3a. Użytkownik potwierdził
-pojedyncze konsultacje oraz prawdziwość opinii z `ola-homepage`.
-[Copy i decyzje](HOMEPAGE-COPY-3A.md); brak zmian CMS i publikacji.
-Dalsza implementacja Astro pozostaje odłożona.
+Bieżące zlecenie: lokalny landing e-booka „Suplementy w PCOS” w palecie 3a
+oraz [instrukcja osobnej kolekcji CMS](EBOOK-CMS-CONFIG-3A.md). Mockup gotowy
+i zweryfikowany. Wcześniejsze decyzje o pojedynczych konsultacjach, cenie
+97 zł brutto i prawdziwości opinii współpracy pozostają aktualne.
+Brak zmian CMS i publikacji; dalsza implementacja Astro odłożona.
 
 ## Wykonane
 
@@ -1323,9 +1324,51 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   `/private/tmp/ola-blog-sidebar-verify.log`. Instrukcję CMS i README dopasowano
   do nowego układu. Bez zmian CMS, publikacji, commita i pusha.
 
+## Landing e-booka „Suplementy w PCOS” 3a — 2026-10-06
+
+- Na zlecenie użytkownika przygotowano `mockups/homepage/ebook-3a.html` i CSS:
+  navbar, hero, problem, dla kogo, zawartość, efekty, cena, opinie, FAQ i footer.
+  Dodatkowo podgląd karty audytu oraz autorka. Wygląd dziedziczy paletę 3a,
+  oficjalny Switzer i wordmark; bez zmian tokenów Wonderful i nowych bibliotek.
+- Wizualia: okładka HTML/CSS zgodna z istniejącą koncepcją, ilustracja półki,
+  karta pracy, porównanie przed/po i istniejący portret. Rozdziały/FAQ/zakup:
+  natywne details/summary; zakup pokazuje informację o nieaktywnej sprzedaży.
+- Copy z koncepcji A wskazanego researchu i poradnika „10000000 Sales Copy Advice”.
+  Mały pierwszy krok, konkretne pytania i rezultat edukacyjny; bez obwiniania,
+  zmyślonej historii Oli, dawkowania i obietnic efektów zdrowotnych. Sprawdzono
+  źródło wytycznych PCOS 2023 (sekcja 4.7). Cena zachowana: 97 PLN brutto.
+  Zakres, pliki, dostarczanie i dostępność są propozycją do zatwierdzenia.
+- Użyto dwóch pełnych opinii współpracy z homepage, wyraźnie odróżnionych od
+  recenzji ebooka. Bez fikcyjnych nabywczyń, ocen i przypisania wyników produktowi.
+- Dodano [instrukcję osobnej kolekcji e-booków](EBOOK-CMS-CONFIG-3A.md): dokument
+  produktu, stały landing, referencje z homepage/bloga, walidacje, status sprzedaży,
+  PL/EN, HTML/Markdown, TypeGen, ochronę płatnych plików i checklistę wdrożenia.
+  Zapis decyzji w HOMEPAGE-CMS-CONFIG.md. Schema, Content Lake i Astro bez zmian.
+- Lokalny indeks, karta „Suplementy w PCOS” homepage 3a i bloga prowadzą do landingu.
+  Użyto działającego serwera 127.0.0.1:8766. Próba startu w sandboxie: EPERM;
+  poza nim EADDRINUSE, więc wykorzystano istniejący proces. Podgląd zlecono w Codex.
+- QA Chromium/Firefox/WebKit: PASS dla 320/390/768/900/1024/1440 px, obrazów,
+  braku overflow, CSS zoom 200%, klawiatury menu/rozdziałów/FAQ/zakupu/kotwic,
+  reduced motion i treści bez JS; brak POST i błędów JS. Axe Chromium light/dark:
+  0 naruszeń. Desktop/mobile obejrzano: `/private/tmp/ola-ebook-3a-qa/`.
+- Przegląd wizualny ujawnił zasłonięty front okładki przez pseudo-element kartek;
+  poprawiono geometrię i powtórzono QA. Pomocniczy skrypt QA poprawiono, aby
+  czekał na dekodowanie portretu lazy-loaded oraz używał klawiatury do kotwicy
+  bez JS (smooth scroll utrudniał automatyczny click). Bez wyciszania testów.
+- Pierwsze `npm run verify`: PASS na Node 24.21.0, 57 unit i 45 E2E, format,
+  tokeny, lint, typy, build Astro/Studio, dry-run Workera i kontrola artefaktów.
+  Końcowe `npm run verify` po poprawce CSS: PASS, ponownie 57 unit i 45 E2E.
+  Log: `/private/tmp/ola-ebook-3a-verify-final.log`. Format, 109 lokalnych odnośników
+  dokumentacji, 34 odnośniki/zasoby HTML, unikalność ID i diff-check: PASS.
+- Natywny zoom, czytnik, urządzenie fizyczne i Lighthouse/CWV niewykonane.
+  Bez publikacji, commita, pusha, checkoutu i zmian CMS. Istniejące zmiany
+  użytkownika, w tym równoległy zapis scalenia PR #19, zachowano.
+
 ## Następny krok
 
-Zebrać feedback do lokalnego 3a i nowego mockupu artykułu blogowego.
+Zebrać feedback do lokalnego 3a, artykułu blogowego i landingu ebooka.
+Zatwierdzić copy i finalny zakres produktu, potem wdrożyć osobną kolekcję według
+EBOOK-CMS-CONFIG-3A.md oraz wspólne referencje homepage/bloga.
 Po akceptacji bloga przenieść jego szablon do Astro oraz wdrożyć rozszerzenia
 z `BLOG-CMS-CONFIG-3A.md`; przykładowy artykuł zastąpić zaakceptowaną treścią. Kolejne decyzje zapisywać
 w HOMEPAGE-CMS-CONFIG.md. Na jej podstawie przygotować warianty i konfigurację
