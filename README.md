@@ -30,6 +30,27 @@ z jawnych danych demonstracyjnych. Lokalny projekt Sanity `dyuqkn8c` (dataset
 Worker pozostaje szkieletem bez kolejek, n8n
 i c15t. Nie publikować prototypu: noindex nie zastępuje ochrony stagingu.
 
+## Mockupy docelowej strony głównej
+
+Trzy kierunki estetyki dla Aleksandry Olesiewicz: Wonderful, botaniczny magazyn
+oraz wiśniowa energia, a także warianty 2a i 3a z białym tłem
+oraz 1a łączący Wonderful z paletą 3a.
+Wersje 2/2a i 3/3a mają wordmarki dopasowane do ich typografii.
+[Opis i pliki HTML](mockups/homepage/README.md).
+Lokalny podgląd (sprawdzone na Node 24):
+
+```sh
+node scripts/preview-homepage-mockups.mjs
+```
+
+[Porównanie kierunków lokalnie](http://127.0.0.1:8766/mockups/homepage/index.html).
+Publiczny feedback: [wszystkie makiety](https://design.aleksandraolesiewicz.com/)
+i [wersja 1a](https://design.aleksandraolesiewicz.com/1a).
+Publikacja jest odseparowana od strony i CMS; [opis i komendy](mockups/homepage/README.md#publiczny-feedback).
+Mockupy są osobne od aplikacji i CMS; formularz nic nie wysyła.
+Opublikowane warianty zawierają poprawki po Impeccable: SVG strzałek,
+wybór grup PCOS / Perimenopauza i rozróżnione tematycznie okładki.
+
 ## Uruchomienie i weryfikacja
 
 Node 24 według `.node-version`, npm oraz jeden `package-lock.json`.

@@ -1,0 +1,103 @@
+/* 1a: geometria i typografia Wonderful, paleta z 3a z kontrastowym akcentem matcha.
+   Lokalny wariant mockupu; tokeny produkcji pozostają bez zmian. */
+.wonderful.cherry-palette {
+  --bg: #ffffff;
+  --ink: #70283f;
+  --muted: #785861;
+  --line: #dac3cc;
+  --soft: #f2dce3;
+  --primary: #882f48;
+  --on-primary: #fff4f6;
+  --accent: #53671b;
+}
+.cherry-palette .brand-mark {
+  display: block;
+  width: 290px;
+  aspect-ratio: 9274 / 934;
+  background: var(--ink);
+  mask: url("../../src/assets/brand/logo-wordmark.svg") left center / contain
+    no-repeat;
+}
+.wonderful.cherry-palette .eyebrow::before,
+.wonderful.cherry-palette .cover-bottom::before {
+  background: var(--accent);
+}
+.wonderful.cherry-palette .why,
+.wonderful.cherry-palette .consultation-copy {
+  --ink: #fff4f6;
+  --muted: #f2dce3;
+  --line: #ddb9c7;
+  --primary: #fff4f6;
+  --on-primary: #882f48;
+  --accent: #d8e78a;
+  background: #882f48;
+  color: var(--ink);
+}
+/* Akcent ma różną jasność na jasnej i wiśniowej powierzchni. */
+.wonderful.cherry-palette .quote-symbol,
+.wonderful.cherry-palette .text-link > span,
+.wonderful.cherry-palette .carousel-controls button {
+  color: var(--accent);
+}
+.wonderful.cherry-palette .hero-actions .secondary {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.wonderful.cherry-palette .consultation-copy .button:focus-visible {
+  outline-color: var(--primary);
+}
+.wonderful.cherry-palette .book-stage {
+  background: #f2dce3;
+}
+.wonderful.cherry-palette .stage-2,
+.wonderful.cherry-palette .stage-5 {
+  background: #e8c9d3;
+}
+.wonderful.cherry-palette .book-cover {
+  background: #fff4f6;
+  color: #70283f;
+  border-color: #ddb9c7;
+}
+.wonderful.cherry-palette .cover-2,
+.wonderful.cherry-palette .cover-5 {
+  background: #882f48;
+  color: #fff4f6;
+  border-color: #b15d77;
+  --accent: #d8e78a;
+}
+[data-theme="dark"] .wonderful.cherry-palette {
+  --bg: #291a21;
+  --ink: #f3dce5;
+  --muted: #d1b1bd;
+  --line: #6c4655;
+  --soft: #422a35;
+  --primary: #edb8cb;
+  --on-primary: #291a21;
+  --accent: #d8e78a;
+}
+[data-theme="dark"] .wonderful.cherry-palette .why,
+[data-theme="dark"] .wonderful.cherry-palette .consultation-copy {
+  --ink: #f3dce5;
+  --muted: #d1b1bd;
+  --line: #6c4655;
+  --primary: #edb8cb;
+  --on-primary: #291a21;
+  background: #422a35;
+}
+[data-theme="dark"] .wonderful.cherry-palette .book-stage {
+  background: #573441;
+}
+[data-theme="dark"] .wonderful.cherry-palette .stage-2,
+[data-theme="dark"] .wonderful.cherry-palette .stage-5 {
+  background: #704555;
+}
+@container page (max-width: 1199px) {
+  .cherry-palette .brand-mark {
+    width: 240px;
+  }
+}
+@container page (max-width: 374px) {
+  .cherry-palette .brand-mark {
+    width: 210px;
+  }
+}

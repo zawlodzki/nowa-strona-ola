@@ -1,0 +1,120 @@
+/* Wariant 01: istniejące tokeny Wonderful, bez nowej palety. */
+.wonderful {
+  --wf-font-display: Switzer, Arial, sans-serif;
+  --wf-font-body: Switzer, Arial, sans-serif;
+}
+.wonderful .hero h1 {
+  max-width: 650px;
+}
+.wonderful .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--wf-space-12);
+}
+.wonderful .eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--wf-color-accent);
+}
+.wonderful .hero-visual {
+  margin-top: var(--wf-space-16);
+}
+.wonderful .portrait-backdrop {
+  inset: var(--wf-space-48) 0 0;
+}
+.wonderful .why {
+  --ink: var(--wf-color-paper);
+  --muted: var(--wf-color-line);
+  --line: var(--wf-color-body);
+  background: var(--wf-color-black);
+  color: var(--ink);
+}
+.wonderful .results article h3 {
+  font-weight: 300;
+  font-size: 26px;
+}
+.wonderful .books {
+  background: var(--soft);
+}
+.wonderful .book-stage {
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.wonderful .book-cover {
+  background: var(--wf-color-paper);
+  color: var(--wf-color-ink);
+  border-color: var(--wf-color-line);
+}
+.wonderful .cover-art {
+  filter: grayscale(1);
+}
+.wonderful .cover-2,
+.wonderful .cover-5 {
+  background: var(--wf-color-black);
+  color: var(--wf-color-paper);
+  border-color: var(--wf-color-body);
+}
+.wonderful .cover-3 .cover-art {
+  background-position: left bottom;
+}
+.wonderful .cover-4 .cover-art {
+  background-position: center;
+}
+.wonderful .cover-6 .cover-art {
+  background-position: left top;
+}
+.wonderful .cover-bottom::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 7px;
+  background: var(--wf-color-accent);
+}
+.wonderful .consultation {
+  padding-bottom: var(--wf-space-48);
+}
+.wonderful .consultation-copy {
+  --ink: var(--wf-color-paper);
+  --muted: var(--wf-color-line);
+  --primary: var(--wf-color-paper);
+  --on-primary: var(--wf-color-ink);
+  background: var(--wf-color-black);
+  color: var(--ink);
+}
+.wonderful .consultation-copy .button:focus-visible {
+  outline-color: var(--wf-color-paper);
+}
+.wonderful .testimonials {
+  padding-top: var(--wf-space-64);
+}
+.wonderful .quote-symbol {
+  color: var(--ink);
+  font-weight: 300;
+  font-family: Switzer, Arial, sans-serif;
+}
+.wonderful .review-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.wonderful .newsletter {
+  border-top: 1px solid var(--line);
+}
+[data-theme="dark"] .wonderful {
+  --bg: var(--wf-color-black);
+  --ink: var(--wf-color-paper);
+  --muted: var(--wf-color-line);
+  --line: var(--wf-color-body);
+  --soft: var(--wf-color-ink);
+  --primary: var(--wf-color-paper);
+  --on-primary: var(--wf-color-ink);
+}
+@container page (max-width: 767px) {
+  .wonderful .hero-visual {
+    margin-top: 0;
+  }
+  .wonderful .portrait-backdrop {
+    inset-block-start: var(--wf-space-24);
+  }
+}
