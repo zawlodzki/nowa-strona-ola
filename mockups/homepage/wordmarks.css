@@ -1,0 +1,45 @@
+/* Propozycje wordmarków tylko dla kierunków 02/2a i 03/3a.
+   Edytowalny tekst używa tych samych krojów co dany homepage. */
+.wordmark {
+  display: block;
+  width: 290px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.wordmark > span {
+  display: block;
+}
+.wordmark-botanical {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
+.wordmark-botanical > span:first-child {
+  font-size: 23px;
+  line-height: 1.02;
+}
+.wordmark-botanical > span:last-child {
+  font-size: 31px;
+  font-style: italic;
+  line-height: 1.03;
+}
+.wordmark-cherry {
+  font-family: Switzer, Arial, sans-serif;
+  font-weight: 750;
+  letter-spacing: -0.065em;
+  font-size: 28px;
+  line-height: 0.93;
+}
+.wordmark-cherry > span:last-child {
+  margin-top: 2px;
+}
+@container page (max-width: 1199px) {
+  .wordmark {
+    width: 240px;
+  }
+}
+@container page (max-width: 374px) {
+  .wordmark {
+    width: 210px;
+  }
+}

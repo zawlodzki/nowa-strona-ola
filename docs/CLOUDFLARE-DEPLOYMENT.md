@@ -248,3 +248,21 @@ GitHub Actions, nie do Workera.
 Dry-run sprawdza pakowanie lokalne, lecz nie potwierdza konta, sekretów, domen,
 Access, CORS ani zdalnego deployu. Lokalne testy webhooka i kolejki nie
 zastępują próby pełnego przepływu z rzeczywistymi usługami.
+
+## Osobne makiety do feedbacku
+
+Konfiguracja [mockups/wrangler.jsonc](../mockups/wrangler.jsonc) określa osobny
+Worker `ola-homepage-mockups-feedback` w środowisku `feedback` z domeną
+`design.aleksandraolesiewicz.com`. To publiczne makiety HTML, odseparowane
+od serwisu, Studio, podglądu CMS i integracji. Nie zawierają bindingów ani sekretów.
+
+Przed publikacją uruchomić `node scripts/build-homepage-feedback.mjs`,
+`npm run verify` i `npx wrangler deploy --config mockups/wrangler.jsonc --env feedback --dry-run`.
+Publikacja: `npx wrangler deploy --config mockups/wrangler.jsonc --env feedback`.
+Nie używać domyślnego środowiska ani głównego `wrangler.jsonc` do tych makiet.
+Po publikacji sprawdzić publiczne HTTPS, sześć makiet, obrazy/font, nagłówki
+`noindex` oraz brak dostępu do sekretów i źródeł. Wyniki są w [PROGRESS.md](PROGRESS.md).
+
+Korzystamy z oficjalnych mechanizmów [Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/),
+[nagłówków](https://developers.cloudflare.com/workers/static-assets/headers/)
+i [przekierowań](https://developers.cloudflare.com/workers/static-assets/redirects/).

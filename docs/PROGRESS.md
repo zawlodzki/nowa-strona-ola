@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-04 (wybrane fotografie). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-10-06 (publikacja publicznych makiet do feedbacku). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -10,6 +10,10 @@ Etap 3 — design system i komponenty — zakończony.
 Etap 4 — Sanity i szablony PL/EN — kod zweryfikowany lokalnie; demonstracyjna
 treść jest w datasetcie `production`. Strony i artykuły są szkicami, żeby nie
 odpalać webhooków. Opublikowane `home` PL/EN nadal bez sekcji. Etapy 5–7 otwarte.
+
+Bieżące zlecenie: wybór docelowej estetyki homepage dietetyczki Aleksandry
+Olesiewicz. Trzy kierunki HTML oraz 1a z paletą 3a i akcentem matcha, warianty 2a/3a z białym tłem i dopasowane
+wordmarki, później implementacja wybranego kierunku w Astro i konfiguracja treści w Sanity.
 
 ## Wykonane
 
@@ -750,10 +754,297 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   układu, podłączenie mediów w CMS i wizualne kontrole na finalnej stronie
   (desktop/mobile, 320 px, klawiatura, zoom 200%, reduced motion) pozostają otwarte.
 
+## Trzy kierunki homepage — 2026-10-05
+
+- Przygotowano [ekran porównania i trzy kompletne HTML](../mockups/homepage/README.md):
+  Wonderful, botaniczny magazyn i wiśniową energię. Dwie alternatywy powstały
+  zgodnie z poleceniem użytkownika z użyciem `design-taste-frontend`.
+- Każda propozycja ma navbar, hero ze zdjęciem i dwoma CTA, pięć logotypów,
+  przykładowe efekty, O mnie, sześć e-booków, konsultacje, opinie, opt-in i stopkę.
+  Biblioteka pokazuje trzy całe e-booki na desktopie; karty i opinie przewijają
+  się natywnie, przez przyciski i klawiaturę. Nie ma automatycznego przewijania.
+- Przeczytano dwa wskazane dokumenty researchu PCOS/perimenopauza, z których
+  wykorzystano sześć koncepcji. Research rekomenduje po jednej koncepcji w każdej
+  grupie; umieszczenie sześciu nie oznacza gotowości produktów do sprzedaży.
+  Kwota około 100 zł, okładki i skróty tytułów są robocze.
+- Użyto istniejących, zaakceptowanych portretów i znaku marki. Dodano fotografię
+  kulinarną przez wbudowany image_gen oraz jej WebP, a pięć logotypów pobrano
+  z oficjalnych stron marek. Źródła zapisano w README mockupów.
+- Liczba `500+`, efekty i opinie są jawnie oznaczonymi przykładami. Współprace
+  wymagają finalnego potwierdzenia; profile społecznościowe i przyszłe podstrony
+  mają lokalny ekran objaśniający. Nie dodano fikcyjnych kwalifikacji ani
+  klinicznych obietnic efektu. Zgoda newslettera to tekst roboczy.
+- Wariant Wonderful importuje istniejące tokeny. Alternatywne palety są tylko
+  w odseparowanych CSS mockupów. Switzer jest głównym krojem UI; w botanicznych
+  nagłówkach użyto systemowej Georgii. Nie zmieniono aplikacji ani Sanity.
+- Formularz waliduje wyłącznie lokalnie i potwierdza, że nic nie wysłano.
+  Bez JS pola i przycisk są wyłączone. Brak usług newslettera, POST, zapisu
+  danych i analityki. Menu używa natywnego `details` z Escape i powrotem fokusu.
+- Dodano sprawdzony serwer `node scripts/preview-homepage-mockups.mjs` na
+  `127.0.0.1:8766`; dopuszcza tylko makiety i potrzebne publiczne zasoby.
+  Nie udostępnia sekretów ani źródeł aplikacji. Otworzono porównanie w panelu Codex.
+- Pierwszy `npm run verify` wykrył brak importu `URL` w nowym skrypcie;
+  poprawiono import. Kolejny przebieg przeszedł do E2E, gdzie sandbox blokował
+  port 4321. Pełny przebieg poza sandboxem oraz ponowna końcowa bramka na Node 24.21.0:
+  PASS, 57 unit i 33 E2E. Build nadal ma 22 strony; mockupy nie są częścią Astro.
+- Kontrola makiet wykryła przesunięcie snapu o 4 px po Home; dodano
+  `scroll-padding-inline`. Zarezerwowano miejsce komunikatów walidacji, aby
+  pojawienie się błędu przy blur nie przesuwało checkboxa podczas kliknięcia.
+  Breakpointy kontenerowe pozwalają reagować także na CSS zoom 200%.
+  Poprawiono dostępne nazwy okładek i przełącznika kierunków.
+  Dodano zawijanie logotypów, minimalną szerokość zero dla dzieci gridów
+  i awaryjne łamanie długich tekstów przy CSS zoom w Firefox. Menu i znak marki
+  mieszczą się w jednym wierszu także przy 320 px. Escape działa
+  na poziomie dokumentu także wtedy, gdy WebKit pomija linki menu przy Tab.
+- Lighthouse dla trzech kierunków: Accessibility 100, Best Practices 100,
+  Agentic Browsing 100. SEO 63; jedyny negatywny wynik dotyczy indeksowalności,
+  celowo zablokowanej przez `noindex`. Audyt nie obejmował Performance.
+- Sprawdzono odpowiedzi serwera: trzy mockupy 200, `.env`, `worker/.dev.vars`
+  i źródło Sanity 404. Kontrola 38 lokalnych odnośników Markdown oraz zasobów
+  i odnośników HTML: PASS. `git diff --check` dla własnych dokumentów: PASS.
+  Pełny diff zgłasza zastany whitespace w skillu `sandbox-stable`; nie zmieniano go.
+- Końcowe QA makiet: PASS dla 9 kombinacji (3 kierunki × Chromium, Firefox,
+  WebKit). Sprawdzono 1440/390/320 px bez overflow, CSS zoom 200%, menu
+  Enter/Escape i powrót fokusu, przewijanie e-booków i opinii, wymagany/poprawny
+  e-mail, checkbox, brak POST, przełączanie jasny/ciemny i reduced motion.
+  Bez JS w 320 px treść pozostaje widoczna, sześć e-booków jest w HTML,
+  a formularz nie może wysłać danych. Brak błędów JS.
+- Axe (WCAG 2 A/AA, 2.1 AA, 2.2 AA) w Chromium: zero naruszeń w trzech kierunkach
+  dla widoków jasnego desktop, mobile i ciemnego. Obejmuje także widoczne błędy
+  newslettera. Nie jest to pełny odbiór WCAG ani kontrola czytnikiem ekranu.
+- Obejrzano desktop i mobile oraz zestawiono Wonderful z lokalną specyfikacją:
+  lekki Switzer, neutralna paleta, ciemne rozdziały, pomarańczowy detal,
+  geometria i rytm sekcji. Screenshoty oraz `qa-results.json` i
+  `lighthouse-summary.json`: `output/homepage-mockups/2026-10-05/`.
+- Nie wykonano natywnego zoomu przeglądarki, testu czytnikiem ekranu ani kontroli
+  na fizycznym urządzeniu. Nie mierzono Lighthouse Performance ani CWV.
+- Zachowano zastane zmiany lokalnych skilli, `skills-lock.json` i `output/`.
+  Nie wykonano commita, pusha, wdrożenia ani zmian w CMS.
+
+## Białe warianty i wordmarki — 2026-10-06
+
+- Na polecenie użytkownika dodano [2a](../mockups/homepage/botanical-white.html)
+  i [3a](../mockups/homepage/cherry-white.html). Jedyna różnica wizualna względem
+  wersji bazowych to białe główne tło w jasnym podglądzie. Panele, okładki,
+  układ, treści i zdjęcia są wspólne. Ciemny podgląd zachowuje pierwotne palety.
+- W nagłówkach i stopkach wersji 2/2a jest nowy wordmark Georgia Regular/Italic,
+  a w 3/3a zwarty, dwuliniowy Switzer 750 zapisany małymi literami. Propozycje
+  używają krojów obecnych na tych stronach, są tekstowe, edytowalne i widoczne
+  bez JS. Nazwę marki udostępnia `role="img"` z `aria-label`.
+- Wonderful zachowuje znak Gambarino. Nie zmieniono produkcyjnych zasobów marki,
+  fontów, aplikacji Astro, CMS ani tokenów Wonderful.
+- Ekran porównania i dolny przełącznik obejmują pięć makiet; przełącznik mieści
+  się przy 320 px. Powrót z lokalnego ekranu przyszłej podstrony zachowuje 2a/3a.
+- `npm run verify` na Node 24.21.0: PASS, 57 unit i 33 E2E; build 22 stron.
+  Własne pliki HTML/CSS/JS i dokumenty sprawdzono Prettierem. Kontrola lokalnych
+  odnośników oraz zgodności treści par 2/2a i 3/3a: PASS.
+- Lokalne QA: PASS dla 12 kombinacji (4 zmienione propozycje × Chromium,
+  Firefox, WebKit). Sprawdzono tło, wordmarki w nagłówku i stopce, obrazy,
+  1440/390/320 px bez overflow, brak nakładania logo i menu, CSS zoom 200%,
+  Enter/Escape i powrót fokusu, jasny/ciemny podgląd z reduced motion,
+  powrót z przyszłej podstrony oraz wordmarki i sześć e-booków bez JS.
+- Axe w Chromium: zero naruszeń WCAG 2 A/AA, 2.1 AA i 2.2 AA w czterech
+  propozycjach na mobile 320 px oraz na ciemnym desktopie (8 audytów).
+  Ekran porównania sprawdzono przy 1440 i 320 px, Wonderful przy 320 px.
+- Obejrzano nowe hero na desktopie oraz mobile, ekran porównania i ciemny
+  wordmark. Dowody: `output/homepage-mockups/2026-10-06/qa-results.json`
+  oraz screenshoty w tym samym katalogu.
+- W tej sesji nie powtarzano Lighthouse ani kontroli sliderów/formularza makiet,
+  których kod nie uległ zmianie. Nie wykonano natywnego zoomu, kontroli czytnikiem
+  ekranu, na urządzeniu fizycznym ani pomiarów CWV. Nie wykonano publikacji.
+
+## 1a: Wonderful z paletą 3a — 2026-10-06
+
+- Dodano [wersję 1a](../mockups/homepage/wonderful-cherry.html): układ i lekki
+  Switzer z Wonderful, białe tło, wiśniowy tekst/CTA i różowe powierzchnie z 3a.
+  Czarne sekcje mają wiśniowe tła, a okładki korzystają z kolorów 3a.
+- Zachowano obrysy logo Gambarino; maska istniejącego SVG pozwala dopasować jego
+  kolor do palety bez zmiany fontu. Nadpisania są wyłącznie w lokalnym
+  `wonderful-cherry.css`; aplikacja, CMS i produkcyjne tokeny bez zmian.
+- Porównanie i przełączniki obejmują sześć makiet. Dopasowano szerokość pozycji
+  przełącznika do 320 px i powrót z przyszłej podstrony do wersji 1a.
+- QA w Chromium, Firefox i WebKit: PASS. Potwierdzono identyczne kolory główne
+  jak w 3a oraz identyczne wysokości wszystkich sekcji jak w Wonderful na
+  desktopie. Sprawdzono 1440/390/320 px, CSS zoom 200%, klawiaturę Enter/Escape
+  i powrót fokusu, trzy całe e-booki, przewijanie, jasny/ciemny podgląd,
+  reduced motion, powrót do 1a oraz logo i sześć e-booków bez JS.
+- Wszystkie sześć przełączników i ekran porównania sprawdzono przy 320 px
+  bez overflow. Brak błędów JS. Axe w Chromium: zero naruszeń WCAG 2 A/AA,
+  2.1 AA i 2.2 AA na desktopie, przy 320 px i w ciemnym widoku (3 audyty).
+- Obejrzano hero desktop, 320 px i pełną stronę. Dowody są w
+  `output/homepage-mockups/2026-10-06/qa-1a.json` i plikach `wonderful-cherry-*`.
+- Pierwsza bramka zatrzymała się na formatowaniu wcześniejszego raportu
+  `qa-results.json`; sformatowano własny raport. Pierwszy dodatkowy proces QA
+  przestał raportować postęp w Firefox; zakończono wyłącznie własne procesy
+  testowe i powtórzono z ograniczonym oczekiwaniem. Drugi przebieg przeszedł
+  we wszystkich trzech przeglądarkach bez zmiany kodu makiet.
+- Końcowe `npm run verify` na Node 24.21.0: PASS, 57 unit i 33 E2E,
+  build 22 stron. Format, lint, typy i budżety przeszły. Kontrola lokalnych
+  odnośników HTML/Markdown, własnego diffu oraz identycznej treści `main`
+  wersji 1/1a: PASS. Brak zmian w źródłach aplikacji i lockfile.
+- Natywny zoom, czytnik ekranu, urządzenie fizyczne i Lighthouse/CWV pozostają
+  niewykonane w tej sesji. Nie wykonano publikacji ani zmian zewnętrznych.
+
+## Kontrastowy akcent w 1a — 2026-10-06
+
+- Na polecenie użytkownika uzupełniono 1a o akcent z innej rodziny kolorów:
+  matcha `#53671b` na jasnych powierzchniach i jasna zieleń `#d8e78a` na
+  wiśniowych oraz w ciemnym podglądzie. Wiśniowe CTA i różowe powierzchnie
+  pozostały; pozostałe makiety nie zmieniły palety.
+- Akcent wyróżnia znaczniki nad sekcjami i na okładkach, `+` przy liczbie
+  pacjentek, cytaty, strzałki linków i sliderów oraz drugie CTA hero.
+  Miniatura 1a w porównaniu ma próbkę zieleni i aktualny opis palety.
+- QA: PASS w Chromium, Firefox i WebKit dla 1440/390/320 px bez overflow,
+  CSS zoom 200%, jasnego/ciemnego widoku, reduced motion i akcentu bez JS.
+  Brak błędów JS. Axe w Chromium: zero naruszeń WCAG 2 A/AA, 2.1 AA i 2.2 AA
+  w czterech widokach: 1440, 390, 320 i ciemnym desktopie.
+- Końcowe `npm run verify` na Node 24.21.0: PASS, 57 unit, 33 E2E i build
+  22 stron. Kontrola lokalnych odnośników i własnego diffu: PASS.
+- Obejrzano hero na desktopie i 320 px oraz pełną stronę. Screenshoty `wonderful-cherry-matcha-*`
+  i raport `qa-matcha.json` są w `output/homepage-mockups/2026-10-06/`.
+- Nie zmieniono geometrii, treści ani logiki interakcji. W tej sesji nie
+  powtarzano ręcznego QA formularza i sliderów; nie wykonano natywnego zoomu,
+  kontroli czytnikiem ekranu, na fizycznym urządzeniu ani Lighthouse/CWV.
+
+## Publiczne makiety do feedbacku — 2026-10-06
+
+- Na wyraźne polecenie użytkownika opublikowano wszystkie sześć propozycji:
+  [porównanie](https://design.aleksandraolesiewicz.com/),
+  [wersja 1a](https://design.aleksandraolesiewicz.com/1a).
+  To publiczny adres bez logowania, z `noindex`, bez CMS i obsługi danych.
+- Utworzono osobny Worker `ola-homepage-mockups-feedback`, środowisko `feedback`,
+  konfiguracja `mockups/wrangler.jsonc`, domena `design.aleksandraolesiewicz.com`.
+  Wersja publikacji: `2799f0ba-d574-4a01-94ea-200a63a30b8a`.
+  Odczyt API po wdrożeniu potwierdził nową domenę i zachowane przypisania
+  apexu, Studio i podglądu CMS do ich dotychczasowych Workerów.
+- `scripts/build-homepage-feedback.mjs` tworzy `build/homepage-feedback/`:
+  30 publicznych plików oraz robots, nagłówki i przekierowania. Wrangler
+  przesłał 31 zasobów; `_headers` i `_redirects` są konfiguracją obsługi zasobów.
+  Paczka ma wyłącznie makiety i potrzebne media/font z licencją; odnośniki
+  lokalne muszą wskazywać pliki z listy publicznej. Brak dokumentacji,
+  researchu, sekretów, źródeł Astro/Sanity i oryginałów portretów.
+- Przeczytano aktualne oficjalne zasady Static Assets, Custom Domains,
+  nagłówków, przekierowań i uprawnień. Użyto istniejącego Wrangler 4.131.1,
+  Node 24.21.0 i istniejącego OAuth konta właściciela. Wartości tokenów nie
+  trafiły do poleceń, paczki ani wyników. Nie zmieniano zależności/lockfile.
+- `node scripts/build-homepage-feedback.mjs`, dry-run z konfiguracją makiet
+  i `--env feedback`: PASS. `npm run verify`: PASS, 57 unit, 33 E2E,
+  build 22 stron Astro; makiety pozostają osobnym artefaktem statycznym.
+- Lokalny runtime odrzucił nową datę kompatybilności 2026-10-06; kontrolę
+  lokalną uruchomiono z CLI `--compatibility-date 2026-09-18`, najnowszą
+  datą obsługiwaną przez zainstalowany workerd. Konfiguracja zdalna zachowała
+  datę 2026-10-06 i została poprawnie wdrożona bez aktualizacji bibliotek.
+- Lokalnie i publicznie: PASS dla sześciu makiet, obrazów, fontu, 320 px,
+  slidera e-booków, formularza potwierdzającego brak wysłania, powrotu do 1a
+  i porównania sześciu kierunków. Brak błędów JS/CSP, uszkodzonych żądań
+  zasobów i żądań innych niż GET. Root i `/1a`: 302; robots: 200.
+  Potwierdzono `X-Robots-Tag` i CSP blokującą zewnętrzne połączenia i formularze.
+- Publiczne `/.env`, `/worker/.dev.vars`, źródło Sanity, `logo.ts` i README
+  makiet: 404. Dostęp do strony jest publiczny; noindex nie jest kontrolą dostępu.
+- DNS Cloudflare i Google potwierdziły rekordy nowej subdomeny. Lokalny
+  resolver systemowy nadal zwracał ENOTFOUND z wcześniejszego cache.
+  Publiczny smoke użył aktualnego adresu z publicznego DNS, zachowując hostname,
+  SNI i pełną weryfikację certyfikatu HTTPS. Logi kontroli są lokalnie:
+  `/private/tmp/ola-feedback-local.log`, `/private/tmp/ola-feedback-public.log`.
+  Zwykłe połączenie przez lokalny cache DNS wymaga odświeżenia rekordu w resolverze.
+- Nie wykonano pusha, commita, publikacji treści CMS ani zmian obecnej aplikacji.
+  Nie dodano zbierania feedbacku/PII przez formularz. Opinie zbiera użytkownik
+  swoimi kanałami po udostępnieniu linków. Natywny zoom, czytnik ekranu,
+  fizyczne urządzenie i nowe pomiary Lighthouse/CWV nie były częścią tej sesji.
+
+## Przegląd Impeccable przed poprawkami — 2026-10-06
+
+- Użytkownik zlecił ocenę AI slopu przed zmianami i jawnie zatwierdził dwóch
+  subagentów. A wykonał niezależny przegląd wizualny, B detektor i kontrolę
+  przeglądarki. Wyniki B trafiły do syntezy dopiero po ukończeniu A.
+- [Raport sześciu makiet](HOMEPAGE-DESIGN-REVIEW.md): 24/32 wspólnych heurystyk,
+  bez P0; jeden priorytet P1 i cztery P2. Propozycje wymagają odpowiedzi
+  użytkownika, nie zostały zaimplementowane.
+- Detektor uruchomiono dokładnie raz: exit 2, 196 sygnałów, z czego 190
+  w sześciu makietach. Zweryfikowano fałszywe klasyfikacje okładek,
+  przełącznika feedbacku i zewnętrznych sekcji z wewnętrznym kontenerem.
+  Rzeczywiste małe przypisy i tracking zapisano do decyzji, bez mechanicznej
+  zmiany przypiętej typografii.
+- A obejrzał sześć desktopów 1440 px i sześć mobile 390 px; B sześć desktopów
+  1988 px i sześć mobile 320 px. B: brak poziomego overflow dokumentu,
+  uszkodzonych zakończonych obrazów i końcowych warning/error na publicznym /1a.
+- Publiczne strzałki to U+2197/U+2190/U+2192 bez variation selectors. CDP
+  potwierdził Hiragino Sans W3 dla CTA i ArialMT dla slidera. Apple Color Emoji
+  nie odtworzono. Proponowane SVG uniezależni wygląd od fontów platformy.
+- Lokalny overlay detektora wykonano na trzech rodzinach; widoczność
+  potwierdzono na Wonderful/Cherry, Botanical tylko w logu. Publiczny CSP
+  blokował inline preflight. Overlay usunięto nawigacją, własne serwery
+  zatrzymano. A usunął tymczasowe zrzuty; dowody B pozostały poza publiczną
+  paczką w `/tmp/ola-assessment-b`.
+- Zapisano snapshot `.impeccable/critique/` dla `wonderful-cherry.html`;
+  pierwszy wynik 24/32, bez wcześniejszego trendu. Snapshot ma fingerprint 1a,
+  raport opisuje cały zakres sześciu makiet.
+- Dokumentację sformatowano i sprawdzono nowe lokalne odnośniki. Nie zmieniono
+  HTML/CSS/JS, nie publikowano, nie uruchamiano ponownie `npm run verify`
+  (zmiany wyłącznie dokumentacyjne). Nie powtarzano pełnej klawiatury,
+  natywnego zoomu, reduced motion, Safari/VoiceOver ani Lighthouse/CWV.
+
+## Wdrożenie poprawek Impeccable — 2026-10-06
+
+- Użytkownik zlecił wdrożenie poprawek i aktualizację subdomeny. Przyjęto cały
+  pakiet oraz dwa wejścia PCOS / Perimenopauza, z zachowaniem trzech kart desktop.
+  Zastosowano Impeccable polish i istniejącą konfigurację Wrangler feedback.
+- Zastąpiono strzałki i ikonę motywu geometrycznymi SVG, zachowując kierunki,
+  `currentColor` i dostępne nazwy. Dotyczy sześciu makiet, porównania i podglądu.
+- Wejścia do grup biblioteki przewijają do pierwszej karty grupy, aktualizują
+  `aria-current` podczas przewijania i działają jako kotwice bez JS.
+- Doprecyzowano hero, nagłówki i O mnie na podstawie briefu i koncepcji e-booków.
+  Nie wymyślano kwalifikacji ani wyników. Oznaczenia roboczych liczb/opinii/cen
+  zachowano. Potwierdzenie faktów do produkcji nadal wymaga materiałów Oli.
+- Pięć okładek otrzymało znaczące diagramy/narzędzia, fotografia posiłku pozostała
+  na materiale o odżywianiu. To propozycje okładek, nie gotowe strony e-booków.
+  W 03/3a otwarto sekcje marek i opinii; fonty, palety, portrety i układy rodzin
+  zachowano. Przypisy powiększono do 13 px. Nadtytuły i numery efektów usunięto.
+  Mobilny przełącznik wersji umieszczono po stopce, bez zasłaniania produktów.
+- `npm run verify`: PASS, 57 unit, 33 E2E i build 22 stron. Pierwszy przebieg
+  sandbox zatrzymał się na EPERM portu 4321; pełny przebieg poza ograniczeniem
+  portów przeszedł. Nie pomijano czerwonych kontroli ani nie zmieniano zależności.
+- Osobna kontrola makiet: PASS w Chromium/Firefox/WebKit dla sześciu wersji,
+  320/390/768/1440 px, wybór grup klawiaturą, Home/End, Escape, reduced motion,
+  brak JS i brak uszkodzonych obrazów/błędów JS. Axe w Chromium: brak naruszeń
+  dla sześciu stron w jasnym i ciemnym motywie. Zrzuty przeglądu w
+  `/private/tmp/ola-refinement-qa` obejrzano dla trzech rodzin.
+- Zrzut pełnej strony/sekcji zmieniał pozycję karuzeli podczas wykonywania
+  screenshotu; dodatkowe potwierdzenie świeżych mobile po załadowaniu fontów
+  wykazało prawidłowy, stabilny stan `4 z 6` w trzech silnikach i sześciu makietach.
+  Zrzut zwykłego viewportu potwierdził grupę perimenopauzy. Brak potrzeby
+  korekty działającego przewijania na podstawie artefaktu screenshotu.
+- Detektor uruchomiono raz po poprawkach: exit 2, 150 sygnałów zamiast 196.
+  Brak tiny-text; brak nadtytułów sześciu homepage (jeden na ekranie podglądu).
+  Pozostały głównie okładki, kontenery, świadomy tracking i przełącznik makiet;
+  nie usuwano ich mechanicznie. Nie wyznaczano nowego wyniku heurystycznego.
+  Snapshot oceny zachowano jako historyczny; potwierdzone kwalifikacje i fakty
+  nie są jeszcze dostarczone, więc nie zamknięto całego backlogu treści.
+- Paczka publiczna: 30 plików + robots, nagłówki i przekierowania; dry-run PASS.
+  Wrangler 4.131.1 i OAuth właściciela konta, bez odczytu wartości sekretów.
+  Wdrożono 11 zmienionych zasobów na `ola-homepage-mockups-feedback`,
+  wersja `b16cbbc0-3ad6-4d68-b558-857ec4e75ca2`. Domena:
+  `design.aleksandraolesiewicz.com`. Nie zmieniano domen aplikacji ani CMS.
+- Publiczne HTTPS: PASS dla sześciu stron, nowych SVG/treści/grup, mobile grupy
+  w 1a, braku overflow przy CSS zoom 200%, zasobów, nagłówków, slidera,
+  demonstracji formularza i powrotu do 1a. Root i /1a: 302; prywatne ścieżki
+  nadal 404. Smoke bez mapowania DNS przeszedł. Logi w
+  `/private/tmp/ola-refinement-public.log` i `ola-refinement-public-new.log`.
+- Dokumentację sformatowano i nowe lokalne odnośniki sprawdzono. Bez commita,
+  pusha i publikacji CMS. Natywny zoom 200%, czytnik, fizyczne urządzenie
+  i Lighthouse/CWV nie były wykonywane; automatyczne kontrole nie oznaczają AA.
+
 ## Następny krok
 
-Materiały fotograficzne: dopasować wybrany zestaw do sekcji strony i podłączyć
-media w Sanity. Wybór użytkownika jest zapisany; dalsze kroki techniczne poniżej.
+Zebrać feedback dla poprawionych sześciu makiet na subdomenie i wybrać kierunek.
+Potwierdzić z Aleksandrą kwalifikacje, metodę pracy, fakty, opinie, ceny,
+charakter współprac i profile przed przeniesieniem do Astro/Sanity.
+
+Użytkownik zbiera feedback pod publicznym adresem `design.aleksandraolesiewicz.com`,
+a następnie wybiera kierunek i tło spośród sześciu mockupów homepage
+oraz ocenia propozycje wordmarków. Następnie
+dopracować ten kierunek, potwierdzić treści i fakty, a dopiero potem przenieść go
+do komponentów Astro i Sanity. Dalsze kroki techniczne pozostają odłożone poniżej.
 
 1. Odświeżyć `https://preview.aleksandraolesiewicz.com` przy aktywnej sesji
    Access — zamiast 401 powinien być chroniony podgląd szkicu.

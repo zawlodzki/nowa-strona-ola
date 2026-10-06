@@ -329,6 +329,45 @@ szablonów.
 Materiały: [wybrane fotografie](../src/assets/portraits/README.md).
 Pozostałe propozycje i galeria pozostają lokalnie. Ten zestaw nie zamyka etapów 5–7.
 
+## Wybór estetyki homepage — 2026-10-05
+
+Bieżące zlecenie użytkownika poprzedza dalszą implementację docelowego wyglądu
+oraz konfigurację treści w CMS. Strona Aleksandry Olesiewicz ma sprzedawać
+materiały dla kobiet z PCOS i w perimenopauzie oraz konsultacje dietetyczne online.
+
+- [x] Przygotować osobny mockup HTML zgodny z Wonderful.
+- [x] Przygotować dwie odmienne propozycje z `design-taste-frontend`:
+      botaniczny magazyn oraz wiśniowa energia.
+- [x] Uwzględnić wszystkie sekcje briefu, istniejące portrety i znak marki.
+- [x] Umieścić sześć koncepcji e-booków z researchu w przewijanej bibliotece.
+- [x] Dodać lokalny ekran porównania, menu mobilne i demonstrację newslettera.
+- [x] Sprawdzić trzy makiety w trzech przeglądarkach, dostępność automatyczną,
+      320 px, CSS zoom 200% i reduced motion; zapisać rzeczywisty zakres.
+      Natywny zoom, czytnik ekranu i fizyczne urządzenie pozostają otwarte.
+- [x] Dodać wersje 2a i 3a z białym głównym tłem oraz wspólne wordmarki
+      dopasowane do typografii wersji 2/2a i 3/3a (2026-10-06).
+- [x] Dodać 1a: układ Wonderful z paletą 3a i porównanie sześciu makiet
+      (2026-10-06).
+- [x] Uzupełnić 1a o kontrastowy zielony akcent matcha, z czytelnym wariantem
+      na jasnych i wiśniowych powierzchniach (2026-10-06).
+- [x] Opublikować odseparowany publiczny feedback sześciu makiet na
+      `design.aleksandraolesiewicz.com`, z noindex i kontrolą rzeczywistego HTTPS
+      (2026-10-06).
+- [x] Przeprowadzić niezależny przegląd Impeccable sześciu makiet przed zmianami;
+      zapisać [ocenę i zakres kontroli](HOMEPAGE-DESIGN-REVIEW.md) (2026-10-06).
+- [x] Ustalić zakres poprawek po przeglądzie: SVG strzałek, rozpoznawanie grup
+      e-booków, treści i okładki, rytm paneli 03/3a oraz drobna czytelność.
+- [x] Wdrożyć pakiet poprawek we wszystkich sześciu makietach i zaktualizować
+      subdomenę feedbacku po kontroli lokalnej i publicznym smoke (2026-10-06).
+- [ ] Wybrać kierunek z użytkownikiem i ustalić finalne treści, dane pacjentek,
+      opinie, ceny, współprace i profile social media.
+- [ ] Dopiero po wyborze przenieść zaakceptowane rozwiązanie do współdzielonych
+      komponentów Astro i modelu treści Sanity.
+
+[Mockupy i źródła materiałów](../mockups/homepage/README.md).
+Alternatywne palety oraz redakcyjny krój istnieją tylko w mockupach na wyraźne
+polecenie użytkownika; nie zmieniono tokenów Wonderful ani styli aplikacji.
+
 ## Źródła techniczne
 
 - [Cloudflare Static Assets](https://developers.cloudflare.com/workers/static-assets/)

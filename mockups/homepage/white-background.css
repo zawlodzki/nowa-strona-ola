@@ -1,0 +1,13 @@
+/* Jedyna zmiana wizualna wariantów 2a i 3a względem 02 i 03:
+   białe główne tło w jasnym podglądzie. Układ i kolorowe panele bez zmian. */
+.botanical.white-background,
+.cherry.white-background {
+  --bg: #ffffff;
+}
+/* Ciemny podgląd zachowuje paletę kierunku bazowego i czytelność. */
+[data-theme="dark"] .botanical.white-background {
+  --bg: #17271f;
+}
+[data-theme="dark"] .cherry.white-background {
+  --bg: #291a21;
+}

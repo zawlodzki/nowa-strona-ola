@@ -1,0 +1,410 @@
+/* Wariant 03: współczesna marka osobista, mocna typografia Switzer.
+   DESIGN_VARIANCE 8 / MOTION_INTENSITY 3 / VISUAL_DENSITY 4.
+   Jeden akcent wiśniowy, media 24px, CTA pill. Alternatywa lokalna do wyboru. */
+.cherry {
+  --bg: #fbf4f6;
+  --ink: #70283f;
+  --muted: #785861;
+  --line: #dac3cc;
+  --soft: #f2dce3;
+  --primary: #882f48;
+  --on-primary: #fff4f6;
+  --accent: #882f48;
+  --media-radius: 24px;
+}
+.cherry h1 {
+  font-weight: 750;
+  font-size: clamp(62px, 7.4vw, 106px);
+  line-height: 0.98;
+  letter-spacing: -0.07em;
+}
+.cherry h2 {
+  font-weight: 650;
+  line-height: 1.07;
+  letter-spacing: -0.055em;
+}
+.cherry .site-header {
+  border: 0;
+}
+.cherry .nav-inner {
+  height: 80px;
+}
+.cherry .header-cta {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 13px;
+}
+.cherry .hero {
+  position: relative;
+  grid-template-columns: 1.12fr 1fr;
+  padding-top: 48px;
+  padding-bottom: 40px;
+  gap: 64px;
+}
+.cherry .hero-copy {
+  padding-bottom: 24px;
+}
+.cherry .hero-copy .eyebrow {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+.cherry .hero-description {
+  max-width: 440px;
+  color: var(--muted);
+}
+.cherry .hero-visual {
+  height: 560px;
+}
+.cherry .portrait-backdrop {
+  inset: 24px 0 0;
+  border-radius: 160px 24px 24px 24px;
+  background: var(--soft);
+}
+.cherry .hero-actions .secondary {
+  border-color: var(--primary);
+}
+.cherry .partners {
+  padding-bottom: 64px;
+}
+.cherry .partner-logos {
+  padding: 28px 0;
+  background: transparent;
+  border-radius: 0;
+  border-block: 1px solid var(--line);
+}
+.cherry .why {
+  padding-top: 64px;
+}
+.cherry .why-layout {
+  grid-template-columns: 0.95fr 1.2fr;
+  gap: 80px;
+}
+.cherry .why-intro h2 {
+  font-size: 56px;
+}
+.cherry .patient-count > strong {
+  font-weight: 700;
+  font-size: 92px;
+}
+.cherry .results {
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.cherry .results article {
+  display: block;
+  border: 0;
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--soft);
+}
+.cherry .results article:first-child {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  align-items: center;
+}
+.cherry .results article:first-child p {
+  margin: 0;
+}
+.cherry .result-index {
+  display: none;
+}
+.cherry .results h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+.cherry .results > .mock-note {
+  grid-column: span 2;
+}
+.cherry .results article:nth-child(2) {
+  background: transparent;
+  border: 1px solid var(--line);
+}
+.cherry .about {
+  padding-top: 64px;
+  gap: 80px;
+}
+.cherry .about-media {
+  max-width: none;
+}
+.cherry .about-media > img:first-child {
+  height: 540px;
+  border-radius: 24px;
+}
+.cherry .about-media .food-inset {
+  right: 24px;
+  bottom: -32px;
+  width: 220px;
+  height: 150px;
+  border-radius: 24px;
+}
+.cherry .about-copy h2 {
+  font-size: 64px;
+}
+.cherry .about-copy .large-copy {
+  font-size: 25px;
+  font-weight: 500;
+}
+.cherry .books {
+  padding-top: 64px;
+}
+.cherry .section-heading h2 {
+  font-size: 64px;
+}
+.cherry .book-stage {
+  background: #f2dce3;
+  border-radius: 24px;
+}
+.cherry .stage-2,
+.cherry .stage-5 {
+  background: #e8c9d3;
+}
+.cherry .book-cover {
+  background: #fff4f6;
+  color: #70283f;
+  border-color: #ddb9c7;
+}
+.cherry .cover-title {
+  font-size: 35px;
+  font-weight: 750;
+  line-height: 1.02;
+  letter-spacing: -0.065em;
+}
+.cherry .cover-2,
+.cherry .cover-5 {
+  background: #882f48;
+  color: #fff4f6;
+  border-color: #b15d77;
+}
+.cherry .cover-art {
+  border-radius: 0;
+}
+.cherry .cover-art.art-nutrition {
+  border-radius: 4px;
+}
+.cherry .cover-3 .cover-art,
+.cherry .cover-6 .cover-art {
+  background-position: left bottom;
+}
+.cherry .book-card h3 {
+  font-weight: 550;
+}
+.cherry .consultation {
+  padding-top: 64px;
+}
+.cherry .consultation-panel {
+  grid-template-columns: 1.1fr 1fr;
+  background: var(--soft);
+  border-radius: 24px;
+}
+.cherry .consultation-copy {
+  padding: 56px;
+}
+.cherry .consultation-copy h2 {
+  font-size: 60px;
+}
+.cherry .consultation-facts {
+  gap: 8px;
+}
+.cherry .consultation-media {
+  padding: 24px 24px 24px 0;
+}
+.cherry .consultation-media img {
+  border-radius: 20px;
+  min-height: 520px;
+}
+.cherry .testimonials {
+  padding-top: 48px;
+}
+.cherry .review-card {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+}
+.cherry .review-card:nth-child(even) {
+  background: transparent;
+  border-color: var(--line);
+}
+.cherry .review-card blockquote {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.cherry .quote-symbol {
+  font-family: Switzer, Arial, sans-serif;
+  font-weight: 650;
+}
+.cherry .newsletter {
+  background: var(--soft);
+}
+.cherry .newsletter h2 {
+  font-size: 64px;
+}
+.cherry .email-row input {
+  border-radius: 999px;
+  border-color: var(--muted);
+}
+.cherry .footer-top > p {
+  font-weight: 600;
+  font-size: 26px;
+}
+[data-theme="dark"] .cherry {
+  --bg: #291a21;
+  --ink: #f3dce5;
+  --muted: #d1b1bd;
+  --line: #6c4655;
+  --soft: #422a35;
+  --primary: #edb8cb;
+  --on-primary: #291a21;
+  --accent: #edb8cb;
+}
+[data-theme="dark"] .cherry .book-stage {
+  background: #573441;
+}
+[data-theme="dark"] .cherry .stage-2,
+[data-theme="dark"] .cherry .stage-5 {
+  background: #704555;
+}
+@container page (max-width: 1199px) {
+  .cherry .hero {
+    gap: 40px;
+  }
+  .cherry h1 {
+    font-size: 80px;
+  }
+  .cherry .hero-visual {
+    height: 520px;
+  }
+  .cherry .why-layout,
+  .cherry .about {
+    gap: 48px;
+  }
+  .cherry .why-intro h2 {
+    font-size: 48px;
+  }
+  .cherry .results article {
+    padding: 24px;
+  }
+  .cherry .results article:first-child {
+    display: block;
+  }
+  .cherry .results article:first-child p {
+    margin-top: 12px;
+  }
+  .cherry .about-copy h2 {
+    font-size: 52px;
+  }
+  .cherry .consultation-copy {
+    padding: 40px;
+  }
+  .cherry .consultation-copy h2 {
+    font-size: 48px;
+  }
+}
+@container page (max-width: 879px) {
+  .cherry .hero {
+    gap: 24px;
+  }
+  .cherry h1 {
+    font-size: 70px;
+  }
+  .cherry .hero-visual {
+    height: 480px;
+  }
+  .cherry .why-layout {
+    grid-template-columns: 1fr;
+  }
+  .cherry .results {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cherry .results article:first-child {
+    grid-column: span 2;
+  }
+  .cherry .consultation-panel {
+    grid-template-columns: 1fr;
+  }
+  .cherry .consultation-media {
+    padding: 0 24px 24px;
+  }
+  .cherry .consultation-media img {
+    min-height: 0;
+    height: 390px;
+  }
+  .cherry .newsletter h2,
+  .cherry .section-heading h2 {
+    font-size: 52px;
+  }
+}
+@container page (max-width: 767px) {
+  .cherry .hero {
+    grid-template-columns: 1fr;
+    padding-block: 40px 24px;
+    gap: 24px;
+  }
+  .cherry h1 {
+    font-size: clamp(64px, 12vw, 84px);
+  }
+  .cherry .hero-copy {
+    padding-bottom: 0;
+  }
+  .cherry .hero-visual {
+    height: 420px;
+  }
+  .cherry .portrait-backdrop {
+    border-radius: 100px 24px 24px 24px;
+  }
+  .cherry .partner-logos {
+    padding: 28px 16px;
+  }
+  .cherry .why-intro h2 {
+    font-size: 42px;
+  }
+  .cherry .patient-count > strong {
+    font-size: 78px;
+  }
+  .cherry .results {
+    grid-template-columns: 1fr;
+  }
+  .cherry .results article:first-child,
+  .cherry .results > .mock-note {
+    grid-column: auto;
+  }
+  .cherry .about-media > img:first-child {
+    height: 440px;
+  }
+  .cherry .about-media .food-inset {
+    width: 176px;
+    height: 125px;
+    right: 16px;
+    bottom: -20px;
+  }
+  .cherry .about-copy h2,
+  .cherry .newsletter h2,
+  .cherry .section-heading h2 {
+    font-size: 42px;
+  }
+  .cherry .consultation-copy {
+    padding: 32px 24px;
+  }
+  .cherry .consultation-copy h2 {
+    font-size: 40px;
+  }
+  .cherry .consultation-media img {
+    height: 280px;
+  }
+  .cherry .review-card blockquote {
+    font-size: 26px;
+  }
+}
+@container page (max-width: 374px) {
+  .cherry h1 {
+    font-size: 52px;
+  }
+  .cherry .hero-visual {
+    height: 350px;
+  }
+}

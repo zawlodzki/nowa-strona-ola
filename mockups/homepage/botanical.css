@@ -1,0 +1,329 @@
+/* Wariant 02: makieta redakcyjna. Switzer w UI, Georgia wyłącznie w nagłówkach
+   i okładkach: świadome odniesienie do magazynu o zdrowiu, nie nowy system produkcji.
+   DESIGN_VARIANCE 7 / MOTION_INTENSITY 3 / VISUAL_DENSITY 3.
+   Jedna skala: CTA pill, media 4px, zdjęcie hero jako jedyny łuk. */
+.botanical {
+  --bg: #f4f7f2;
+  --ink: #24493c;
+  --muted: #52655b;
+  --line: #c8d4c7;
+  --soft: #e4ece0;
+  --primary: #24493c;
+  --on-primary: #f4f7f2;
+  --accent: #426c52;
+  --media-radius: 4px;
+}
+.botanical h1,
+.botanical h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1.13;
+}
+.botanical .site-header {
+  border: 0;
+}
+.botanical .nav-inner {
+  border-bottom: 1px solid var(--line);
+}
+.botanical .hero {
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 100px;
+  padding-top: 56px;
+  padding-bottom: 64px;
+}
+.botanical .hero-visual {
+  order: -1;
+  height: 535px;
+}
+.botanical .hero-copy h1 {
+  font-size: clamp(48px, 4.8vw, 70px);
+}
+.botanical .hero-description {
+  max-width: 370px;
+}
+.botanical .portrait-backdrop {
+  background: #d9e5d4;
+  border-radius: 49% 49% 4px 4px;
+}
+.botanical .hero-portrait {
+  border-radius: 49% 49% 4px 4px;
+}
+.botanical .partners {
+  padding-bottom: 72px;
+}
+.botanical .why {
+  background: var(--soft);
+}
+.botanical .why-layout {
+  grid-template-columns: 1.2fr 1fr;
+  gap: 120px;
+}
+.botanical .why-intro h2 {
+  font-size: 58px;
+}
+.botanical .patient-count {
+  margin-top: 40px;
+}
+.botanical .patient-count > strong {
+  font-family: Georgia, serif;
+  font-size: 88px;
+}
+.botanical .results {
+  gap: 24px;
+}
+.botanical .result-index {
+  display: none;
+}
+.botanical .results article {
+  display: block;
+  padding-bottom: 24px;
+}
+.botanical .results h3 {
+  font-size: 22px;
+  font-weight: 500;
+}
+.botanical .about {
+  gap: 150px;
+}
+.botanical .about-media {
+  max-width: 430px;
+}
+.botanical .about-media > img:first-child {
+  height: 540px;
+}
+.botanical .about-media .food-inset {
+  width: 240px;
+  height: 170px;
+  right: -80px;
+  bottom: -32px;
+}
+.botanical .about-copy .large-copy {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.botanical .books {
+  padding-top: 64px;
+}
+.botanical .section-heading {
+  margin-inline: auto;
+  text-align: center;
+  max-width: 720px;
+}
+.botanical .section-heading > p {
+  margin-inline: auto;
+}
+.botanical .book-stage {
+  background: #e8eee4;
+  border-radius: 4px;
+}
+.botanical .stage-2,
+.botanical .stage-5 {
+  background: #dde7db;
+}
+.botanical .book-cover {
+  background: #f4f7f2;
+  border-color: #b9c9b4;
+  color: #24493c;
+}
+.botanical .cover-title {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 1.07;
+  letter-spacing: -0.055em;
+}
+.botanical .cover-1,
+.botanical .cover-4 {
+  background: #24493c;
+  border-color: #507060;
+  color: #f4f7f2;
+}
+.botanical .cover-2 .cover-art,
+.botanical .cover-5 .cover-art {
+  height: 88px;
+  background-position: left bottom;
+}
+.botanical .cover-3 .cover-art,
+.botanical .cover-6 .cover-art {
+  background-position: 65% center;
+}
+.botanical .consultation {
+  padding-top: 72px;
+}
+.botanical .consultation-panel {
+  background: var(--soft);
+  grid-template-columns: 1.05fr 0.95fr;
+  border-radius: 4px;
+}
+.botanical .consultation-copy {
+  padding: 64px;
+}
+.botanical .consultation-copy h2 {
+  font-size: 50px;
+}
+.botanical .consultation-media {
+  padding: 24px 24px 24px 0;
+}
+.botanical .consultation-media img {
+  min-height: 510px;
+  border-radius: 40% 40% 0 0;
+}
+.botanical .testimonials {
+  padding-top: 48px;
+}
+.botanical .review-card {
+  background: transparent;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+}
+.botanical .review-card blockquote {
+  font-family: Georgia, serif;
+  font-size: 29px;
+  line-height: 1.4;
+  letter-spacing: -0.045em;
+}
+.botanical .newsletter {
+  background: var(--soft);
+}
+.botanical .newsletter h2 {
+  font-size: 58px;
+}
+.botanical .footer-top > p {
+  font-family: Georgia, serif;
+  font-size: 28px;
+}
+[data-theme="dark"] .botanical {
+  --bg: #17271f;
+  --ink: #e7efe2;
+  --muted: #b3c5b8;
+  --line: #47634f;
+  --soft: #243b2d;
+  --primary: #dbe8cd;
+  --on-primary: #17271f;
+  --accent: #c0d0ad;
+}
+[data-theme="dark"] .botanical .portrait-backdrop {
+  background: #385440;
+}
+[data-theme="dark"] .botanical .book-stage {
+  background: #304938;
+}
+[data-theme="dark"] .botanical .stage-2,
+[data-theme="dark"] .botanical .stage-5 {
+  background: #3a5140;
+}
+@container page (max-width: 1199px) {
+  .botanical .hero {
+    gap: 48px;
+  }
+  .botanical .hero-copy h1 {
+    font-size: 56px;
+  }
+  .botanical .why-layout,
+  .botanical .about {
+    gap: 80px;
+  }
+  .botanical .why-intro h2 {
+    font-size: 48px;
+  }
+  .botanical .about-media .food-inset {
+    right: -32px;
+    width: 190px;
+  }
+  .botanical .consultation-copy {
+    padding: 40px;
+  }
+  .botanical .consultation-copy h2 {
+    font-size: 42px;
+  }
+}
+@container page (max-width: 879px) {
+  .botanical .hero {
+    gap: 32px;
+  }
+  .botanical .hero-copy h1 {
+    font-size: 48px;
+  }
+  .botanical .hero-visual {
+    height: 440px;
+  }
+  .botanical .why-layout,
+  .botanical .about {
+    gap: 40px;
+  }
+  .botanical .consultation-panel {
+    grid-template-columns: 1fr;
+  }
+  .botanical .consultation-media {
+    padding: 0 24px 24px;
+  }
+  .botanical .consultation-media img {
+    min-height: 0;
+    height: 400px;
+    border-radius: 4px;
+  }
+}
+@container page (max-width: 767px) {
+  .botanical .hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+  .botanical .hero-visual {
+    order: initial;
+    height: 420px;
+  }
+  .botanical .hero-copy h1 {
+    font-size: 48px;
+  }
+  .botanical .why-layout {
+    grid-template-columns: 1fr;
+  }
+  .botanical .why-intro h2,
+  .botanical .newsletter h2 {
+    font-size: 40px;
+  }
+  .botanical .patient-count > strong {
+    font-size: 74px;
+  }
+  .botanical .about-media {
+    max-width: 100%;
+  }
+  .botanical .about-media > img:first-child {
+    height: 450px;
+  }
+  .botanical .about-media .food-inset {
+    right: 12px;
+    bottom: -24px;
+    width: 190px;
+    height: 135px;
+  }
+  .botanical .section-heading {
+    text-align: left;
+  }
+  .botanical .consultation-copy {
+    padding: 32px 24px;
+  }
+  .botanical .consultation-copy h2 {
+    font-size: 38px;
+  }
+  .botanical .consultation-media img {
+    height: 280px;
+  }
+  .botanical .review-card blockquote {
+    font-size: 27px;
+  }
+}
+@container page (max-width: 374px) {
+  .botanical .hero-copy h1 {
+    font-size: 40px;
+  }
+  .botanical .hero-visual {
+    height: 350px;
+  }
+}
