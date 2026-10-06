@@ -232,3 +232,14 @@ zasobów makiet. Formularz korzysta z tej samej lokalnej demonstracji co homepag
 Indeks bloga w breadcrumb prowadzi do ekranu objaśniającego makiety.
 [Konfiguracja CMS](../../docs/BLOG-CMS-CONFIG-3A.md) rozróżnia istniejące pola
 od proponowanych referencji e-booków i newslettera. Bez publikacji i zmian CMS.
+
+Artykuł 3a ma także menu **Udostępnij** pod spisem treści (hover, kliknięcie,
+klawiatura, dotyk) z kopiowaniem URL, e-mailem, Facebookiem i WhatsAppem.
+Po przekroczeniu połowy rich textu pojawia się panel **Sprawdź również** z dwoma
+przykładowymi artykułami; listę można zwinąć. Bez JS rekomendacje są pod CTA newslettera.
+Interakcje: [article-3a.js](article-3a.js). Udostępnianie nie wysyła wiadomości
+automatycznie; skopiowany lokalny URL wymaga tego samego komputera.
+
+Między e-bookami a newsletterem znajduje się FAQ: cztery przykładowe pytania,
+natywny akordeon bez JS i zgodne `FAQPage` JSON-LD. Docelowe pole CMS i zasady
+SEO opisano w [instrukcji bloga](../../docs/BLOG-CMS-CONFIG-3A.md#faq-między-e-bookami-a-newsletterem--2026-10-06).

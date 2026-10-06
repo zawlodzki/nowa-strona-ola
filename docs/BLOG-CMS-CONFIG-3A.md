@@ -117,3 +117,79 @@ waliduje dane lokalnie; bez JS jest wyłączony, a po poprawnej walidacji inform
 - [ ] Uruchomić `npm run verify`, sprawdzić chroniony podgląd; publikacja na zlecenie.
 
 Żaden z powyższych kroków CMS nie jest zakończony przez sam zapis instrukcji.
+
+## Rekomendacje po połowie tekstu i udostępnianie — 2026-10-06
+
+Na polecenie użytkownika dodano interakcje inspirowane
+[artykułem a16z](https://a16z.com/state-of-markets-ii/), w estetyce 3a.
+
+**Sprawdź również:** panel w prawej kolumnie pod CTA newslettera pojawia się, gdy środek widoku
+przekroczy 50% wysokości rich textu. Hero, autor, e-booki i stopka nie wchodzą do
+obliczenia. Powrót przed próg chowa panel, o ile nie zawiera on fokusu klawiatury.
+Panel pokazuje dwa linki i pozwala zwinąć listę; bez JS jest zwykłym blokiem pod
+CTA newslettera. W makiecie są to przykładowe tytuły prowadzące do ekranów objaśniających.
+
+Wykorzystać istniejące `article.related[]` — nie dodawać drugiego pola rekomendacji.
+Do tego panelu wybierać dwie pierwsze pozycje w kolejności redakcyjnej. Istniejący
+limit czterech powiązanych wpisów może pozostać dla innych miejsc; dodać walidację
+unikalności, wykluczenie bieżącego artykułu i kontrolę opublikowanych referencji
+w tym samym języku. Przy mniej niż dwóch dostępnych wpisach pominąć panel,
+zamiast tworzyć sztuczne linki. Nie publikować tytułów demonstracyjnych z makiety.
+
+**Udostępnij:** przycisk pod spisem H2 otwiera panel przy najechaniu myszą,
+kliknięciu, dotyku i Enter/Space. Cztery stałe opcje: kopiuj link, wyślij mailem,
+Facebook i WhatsApp. Escape, zamknięcie i kliknięcie poza panelem działają;
+po zamknięciu z klawiatury fokus wraca na przycisk. To niemodalny popover, który
+nie blokuje czytania artykułu. Nie dodawać konfiguracji sieci społecznościowych
+ani SDK w CMS. Produkcyjny URL pobierać z canonical wygenerowanego dla artykułu,
+bez hash, parametrów kampanii, adresu preview i sekretów sesji. Nie włączać
+udostępniania chronionych szkiców. Makieta udostępnia swój bieżący adres bez query
+lub hash; lokalny adres jest dostępny wyłącznie na tym komputerze.
+
+Kopiowanie potwierdzać dopiero po sukcesie Clipboard API. Przy braku uprawnień
+pokazać zaznaczony URL do ręcznego skopiowania. Linki społecznościowe otwierają
+narzędzie udostępniania dopiero po akcji czytelnika, bez wcześniejszych połączeń
+z Facebook/WhatsApp. E-mail otwiera klienta poczty; nic nie jest wysyłane automatycznie.
+
+- [ ] Przenieść interakcje do szablonu Astro, wykorzystując opublikowane dane
+      `related[]` i canonical. Sprawdzić próg, brak referencji i chroniony preview.
+
+## FAQ między e-bookami a newsletterem — 2026-10-06
+
+Dodano cztery przykładowe pytania o przygotowanie do konsultacji. Natywne
+`details/summary` działa bez JavaScriptu i z klawiatury; pierwsza odpowiedź jest
+rozwinięta. FAQ jest poza rich textem, nie trafia do lewego spisu ani obliczenia
+połowy tekstu. Kolejność szablonu: e-booki → FAQ → newsletter.
+
+Proponowane nowe pole `article.faq` typu istniejącego `faqSection`:
+`title`, `lead`, `items[].question`, `items[].answer`. Nie tworzyć równoległego
+modelu pytań. To pole jeszcze nie jest wdrożone w artykule; istniejący typ
+[FAQ](../studio/schema-types/blocks/page-sections.ts) i
+[renderer Astro](../src/sections/FaqSection.astro) są punktem wyjścia.
+Pole opcjonalne: bez danych pominąć sekcję i jej dane strukturalne. Zachować
+istniejące walidacje typu oraz dodać kontrolę powtarzających się pytań.
+
+Mockup zawiera `FAQPage` JSON-LD dokładnie z czterema widocznymi pytaniami
+oraz pełnymi odpowiedziami. Docelowo HTML, Markdown i JSON-LD generować z tego
+samego `article.faq`, bez ręcznie powielanych odpowiedzi. Dane włączyć do grafu
+strony i artykułu, z identyfikatorami z canonical; nie tworzyć drugiego sprzecznego
+grafu. Przykładowe odpowiedzi wymagają akceptacji redakcyjnej przed publikacją.
+
+`FAQPage` opisuje znaczenie treści zgodnie ze
+[Schema.org](https://schema.org/FAQPage). Nie traktować go jako obietnicy efektu
+SEO: Google usunął wyświetlanie FAQ rich results od 7 maja 2026,
+[aktualizacja dokumentacji](https://developers.google.com/search/updates#may-2026).
+Wartość tej sekcji to dostępne odpowiedzi na pytania czytelniczek; makieta nadal
+ma `noindex`.
+
+- [ ] Dodać `article.faq`, GROQ/TypeGen/mapper, wspólny renderer oraz serializer
+      Markdown i JSON-LD; zweryfikować brak FAQ i zgodność pełnych odpowiedzi.
+
+### Położenie rekomendacji — korekta 2026-10-06
+
+Na najnowsze polecenie użytkownika „Sprawdź również” pozostaje w prawej kolumnie,
+pod CTA newslettera. Nie jest nakładką fixed. Desktop ma wspólną kolumnę sticky,
+z przewijaniem wewnętrznym przy niskim oknie. Na tabletach i telefonach oba bloki
+są w przepływie dokumentu pod tekstem i autorem. Próg 50% pozostaje; pojawienie się
+panelu zajmuje miejsce w kolumnie i nie przykrywa artykułu, e-booków, FAQ ani stopki.
+To obowiązująca korekta wcześniejszego wzorca z a16z.

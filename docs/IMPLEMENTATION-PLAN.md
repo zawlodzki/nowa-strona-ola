@@ -415,3 +415,31 @@ zależności; źródła nie zastępują wyników testów w projekcie.
 [Mockup](../mockups/homepage/article-3a.html),
 [instrukcja CMS](BLOG-CMS-CONFIG-3A.md). Mockup i dokumentacja nie zamykają
 etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
+
+## Interakcje artykułu 3a — 2026-10-06
+
+- [x] Dodać rekomendacje dwóch wpisów w prawej kolumnie pod newsletterem po 50% rich textu.
+- [x] Dodać Udostępnij pod spisem: hover, kliknięcie, dotyk, klawiatura, Escape,
+      kopiuj link, e-mail, Facebook, WhatsApp i fallback schowka.
+- [x] Wykorzystać istniejącą paletę i tokeny ruchu, uwzględnić reduced motion.
+- [x] Rozszerzyć instrukcję CMS o istniejące `related[]` oraz canonical
+      i ochronę szkiców przy przyszłym przeniesieniu do Astro.
+- [x] Sprawdzić oba panele na desktop/mobile i w trzech przeglądarkach;
+      pełne verify: 57 unit i 42 E2E PASS, w tym regresje progu/schowka/fokusu.
+- [ ] Powiązać panel z dwoma rzeczywistymi opublikowanymi wpisami w CMS.
+
+## FAQ artykułu 3a — 2026-10-06
+
+- [x] Dodać cztery pytania między e-bookami a newsletterem w estetyce 3a.
+- [x] Zapewnić natywne rozwijanie, klawiaturę i działanie bez JS.
+- [x] Dodać JSON-LD FAQPage zgodne z pełnymi widocznymi odpowiedziami.
+- [x] Opisać wykorzystanie istniejącego typu FAQ w przyszłym polu artykułu,
+      wspólny HTML/Markdown/JSON-LD i aktualny status Google FAQ rich results.
+- [ ] Wdrożyć pole `article.faq`, pobieranie i renderer w Astro/Sanity.
+
+## Korekta prawej kolumny artykułu 3a — 2026-10-06
+
+- [x] Umieścić „Sprawdź również” pod CTA newslettera, bez nakładania na treść.
+- [x] Zachować próg 50% rich textu i układ w przepływie na tablet/mobile.
+- [x] Sprawdzić brak kolizji przy 320/390/768/1440 px i wysokości 600 px
+      w Chromium/Firefox/WebKit; pełne verify: 57 unit i 45 E2E PASS.
