@@ -129,6 +129,10 @@ async function run(body) {
         }
         return `count ${actual}`;
       }
+      // Locators are lazy. Role+name with no action would always report matched.
+      if (body.state !== "visible") {
+        await target.waitFor({ state: "visible" });
+      }
       return "matched";
     }
     case "script-count": {

@@ -57,7 +57,7 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser script-count
 node .cursor/skills/verify-ola/scripts/verify.mjs browser press --key Escape
 ```
 
-`browser context` otwiera nową stronę i kasuje poprzedni stan sesji. Domyślnie JavaScript jest włączony. Ścieżki `--path` przy snapshot i screenshot są względne wobec katalogu dowodów. Mapa funkcji jest w [features/README.md](features/README.md).
+`browser context` otwiera nową stronę i kasuje poprzedni stan sesji. Domyślnie JavaScript jest włączony. `expect` z rolą czeka, aż locator będzie widoczny, chyba że podasz `--state`, `--text`, `--attribute` albo `--count`. Ścieżki `--path` przy snapshot i screenshot są względne wobec katalogu dowodów. Mapa funkcji jest w [features/README.md](features/README.md).
 
 ## Evidence
 
