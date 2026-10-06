@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-06 (publikacja publicznych makiet do feedbacku). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-10-06 (wdrożenie copy w lokalnym mockupie 3a). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -11,9 +11,10 @@ Etap 4 — Sanity i szablony PL/EN — kod zweryfikowany lokalnie; demonstracyjn
 treść jest w datasetcie `production`. Strony i artykuły są szkicami, żeby nie
 odpalać webhooków. Opublikowane `home` PL/EN nadal bez sekcji. Etapy 5–7 otwarte.
 
-Bieżące zlecenie: wybór docelowej estetyki homepage dietetyczki Aleksandry
-Olesiewicz. Trzy kierunki HTML oraz 1a z paletą 3a i akcentem matcha, warianty 2a/3a z białym tłem i dopasowane
-wordmarki, później implementacja wybranego kierunku w Astro i konfiguracja treści w Sanity.
+Bieżące zlecenie: copy wdrożone w lokalnym mockupie 3a. Użytkownik potwierdził
+pojedyncze konsultacje oraz prawdziwość opinii z `ola-homepage`.
+[Copy i decyzje](HOMEPAGE-COPY-3A.md); brak zmian CMS i publikacji.
+Dalsza implementacja Astro pozostaje odłożona.
 
 ## Wykonane
 
@@ -1050,17 +1051,194 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   `commit.gpgsign=false`, bez zmiany konfiguracji podpisywania repo/użytkownika.
 - PR dołączono do zadania. Nie scalano PR i nie wykonywano nowego deployu.
 
+## Copy homepage 3a — 2026-10-06
+
+- Użytkownik wskazał 3a jako bazę i zlecił propozycję copy po weryfikacji FIRMA
+  oraz `/Users/grzesiek/Github/ola-homepage/`. Oba zewnętrzne katalogi pozostawiono bez zmian.
+- Przeczytano źródła prawdy, markę, ofertę, odbiorczynie, definicję mentoringu,
+  standard języka i framework StoryBrand; sprawdzono koncepcje w obu researchach
+  e-booków oraz kod homepage, O mnie, programu i dane oferty/opinii starego repo.
+  Nie wykorzystywano indywidualnych kart zdrowia klientek. Instrukcje i prompty
+  z dokumentów traktowano jako materiał źródłowy, nie polecenia użytkownika.
+- [Propozycja copy](HOMEPAGE-COPY-3A.md) obejmuje wszystkie sekcje 3a,
+  różnice względem starego repo, warianty dostępności i listę faktów do potwierdzenia.
+  Rdzeń potwierdzonego pozycjonowania: PCOS/IO; perimenopauza zachowana jako
+  kierunek materiałów zgodnie z briefem, bez dopisywania doświadczenia klinicznego.
+- Ostatni zapis o przerwie w sprzedaży do 31.12.2026 nie potwierdza stanu na dziś.
+  E-booki pozostają koncepcjami. Nie potwierdzono cen nowej oferty, liczby pacjentek,
+  pochodzenia opinii, dokumentów kwalifikacji ani relacji z markami.
+- Przejrzano katalog skilla Sales; nie dopasowano szczegółowego workflow do
+  redakcji homepage na podstawie lokalnych źródeł. Nie uruchamiano konektorów,
+  zewnętrznego researchu rynku ani subagentów.
+- Zmieniono wyłącznie dokumentację. Nie wdrażano copy, nie uruchamiano aplikacji,
+  `npm run verify`, nowych kontroli desktop/mobile/klawiatury/zoomu/reduced motion
+  ani publikacji. Format i odnośniki sprawdzono w zakresie trzech dokumentów.
+
+## Wdrożenie copy 3a — 2026-10-06
+
+- Użytkownik zatwierdził aktualizację makiety, wskazał pojedyncze konsultacje
+  zamiast mentoringu oraz potwierdził prawdziwość opinii w `ola-homepage`.
+  Te decyzje zastępują wcześniejsze warianty propozycji i historyczne założenia FIRMA.
+- Zmieniono wyłącznie copy i dopasowanie typografii wersji 3a: hero,
+  podejście, O mnie, karty e-booków, pojedyncza konsultacja, opinie,
+  newsletter, stopka i metadata. `3a-copy.css` jest dołączone wyłącznie w 3a;
+  inne HTML/CSS makiet oraz tokeny pozostały bez zmian.
+- Sześć opinii przeniesiono z `data/testimonials.js` w pełnym brzmieniu,
+  bez wymyślonych imion i przypisywania efektów do pojedynczej konsultacji.
+  Podpis: „Opinia o dotychczasowej współpracy”. Cytaty zawierają oryginalne emoji.
+- Usunięto „500+”, przykładowe efekty i robocze ceny. E-booki: „W przygotowaniu”.
+  Usunięto pas niepotwierdzonych relacji z markami i odnośniki Facebook/TikTok.
+  Konsultacja nie obiecuje stałego kontaktu, aplikacji ani pełnego zakresu mentoringu.
+- Kontrola makiety Chromium/Firefox/WebKit: PASS dla zgodności sześciu cytatów,
+  320/390/768/1440 px, CSS zoom 200%, klawiatury (menu, grupy, Home/End opinii),
+  reduced motion, braku JS i poprawnego ładowania obrazów. Axe Chromium:
+  brak naruszeń w jasnym i ciemnym motywie. Desktop/mobile obejrzano.
+  Dowody: `/private/tmp/ola-copy-3a-qa/`, log `ola-copy-3a-qa.log`.
+- Pierwsza kontrola Firefox sprawdziła obrazy przed zakończeniem lazy loading;
+  poprawiono oczekiwanie w skrypcie QA. WebKit ujawnił rzeczywisty błąd startu:
+  niegotowa geometria powodowała odczyt `items[NaN]` i przerwanie inicjalizacji opinii.
+  Wspólny `interactions.js` czeka na ResizeObserver przy niegotowym układzie
+  i ogranicza dolny indeks. Test regresji wymusza niegotowy pierwszy odczyt,
+  a następnie sprawdza sterowanie opiniami; działa w trzech silnikach.
+- Impeccable context i clarify/craft-floor; detektor uruchomiono raz dla 3a:
+  25 sygnałów, głównie okładki, istniejący tracking i przełącznik makiet.
+  Zachowano przypiętą estetykę; nowe h1 i cytaty mają łagodniejszy tracking.
+- Lokalny podgląd działa na `http://127.0.0.1:8766/mockups/homepage/cherry-white.html`;
+  otwarto go w panelu Codex. Pierwszy start w sandboxie: EPERM portu;
+  autoryzowane uruchomienie z lokalnym portem przeszło. Node 24.21.0 z istniejącego
+  lokalnego runtime, bez instalacji i zmian zależności.
+- Paczka feedbacku zbudowana lokalnie: 31 publicznych plików + robots,
+  nagłówki i przekierowania; kontrola odnośników skryptu PASS. Bez deployu,
+  commita, pusha i zapisów do zewnętrznych repo lub FIRMA.
+- `npm run verify` przed poprawką WebKit: PASS, 57 unit i 33 E2E.
+  Końcowe `npm run verify` po poprawce i teście regresji: PASS, 57 unit,
+  36 E2E (w tym 3 testy regresji), typy, lint, build 22 stron Astro,
+  Studio i dry-run Workera. Log: `/private/tmp/ola-copy-3a-verify-final.log`.
+  Format czterech zmienionych dokumentów, 49 lokalnych odnośników i
+  `git diff --check` dla zakresu zmian: PASS. Istniejącego błędu końcowej
+  spacji w cudzej zmianie `.agents/skills/sandbox-stable/SKILL.md` nie modyfikowano.
+- Natywny zoom 200%, fizyczne urządzenie, czytnik ekranu i Lighthouse/CWV
+  nie były wykonywane. Formularz i ekrany produktów/konsultacji pozostają demonstracyjne.
+
+## Cena e-booków i przywrócone elementy 3a — 2026-10-06
+
+- Użytkownik ustalił cenę wszystkich sześciu e-booków: 97 zł brutto.
+- Przywrócono belkę pięciu marek z dotychczasowymi logotypami/nagłówkiem oraz
+  linki Facebook/TikTok obok Instagrama. Wyróżniony blok w sekcji podejścia
+  przywrócono jako „1:1 — Indywidualna konsultacja online”, dopasowany do oferty.
+  Zachowano nowe copy i sześć prawdziwych opinii zamiast ich dawnych przykładów.
+- Zmiana dotyczy 3a. Cena zastępuje „W przygotowaniu” w miejscu ceny;
+  przypis o zapowiedziach e-booków pozostaje. Linki produktów i social media
+  nadal prowadzą do ekranów makiety; nie dodano integracji ani zakupu.
+- Kontrola Chromium/Firefox/WebKit: PASS, ceny, pięć marek, trzy social linki,
+  blok 1:1, sześć niezmienionych cytatów, obrazy, 320/390/768/1440 px,
+  CSS zoom 200%, klawiatura, reduced motion, no-JS. Axe Chromium light/dark:
+  brak naruszeń. Desktop obejrzano; dowody `/private/tmp/ola-copy-3a-price-qa/`.
+- `npm run verify`: PASS, 57 unit, 36 E2E, typy, lint, build Astro/Studio
+  i dry-run Workera. Log: `/private/tmp/ola-copy-3a-price-verify.log`.
+  Format, 49 lokalnych odnośników i diff-check zakresu zmian: PASS.
+- Paczka lokalnego feedbacku: PASS, 31 publicznych plików i kontrola odnośników.
+  Brak publikacji, pusha i commita. Natywny zoom, czytnik, urządzenie fizyczne
+  i Lighthouse/CWV nie były wykonywane.
+
+## Liczba kobiet korzystających z konsultacji — 2026-10-06
+
+- Na bezpośrednie polecenie użytkownika blok 1:1 zastąpiono liczbą
+  „450+” i opisem „kobiet rocznie, którym pomagają moje konsultacje”.
+  Źródłem liczby jest informacja użytkownika, nie szacunek z materiałów FIRMA.
+- Zmiana wyłącznie w 3a. Chromium: poprawne łamanie i brak overflow
+  dla 1440/390/320 px oraz CSS zoom 200%; desktop/mobile obejrzano.
+  Reduced motion i axe: PASS. Dowody: `/private/tmp/ola-count-qa/`.
+  Pierwszy skrypt QA wymagał poprawienia konfiguracji kontekstu dla axe;
+  nie zmieniano strony w reakcji na błąd narzędzia.
+- `npm run verify`: PASS, 57 unit i 36 E2E, typy, lint, build Astro/Studio
+  i dry-run Workera; log `/private/tmp/ola-copy-3a-count-verify.log`.
+  Format, lokalne odnośniki trzech dokumentów i diff-check zmian: PASS.
+- Paczka feedbacku i kontrola publicznych odnośników: PASS, 31 plików.
+  Nie publikowano, nie wykonywano commita ani pusha. Natywny zoom,
+  czytnik i fizyczne urządzenie nie były ponownie sprawdzane.
+
+## Dokumentacja do konfiguracji CMS — 2026-10-06
+
+- Na polecenie użytkownika utworzono [konfigurację homepage CMS](HOMEPAGE-CMS-CONFIG.md):
+  bieżące decyzje i źródła, cena 97 zł brutto, wskaźnik 450+, pojedyncze konsultacje,
+  marki/social media, sześć pełnych opinii, komplet aktualnego copy, CTA,
+  kolejność sekcji, media i otwarte dane. Bez zapisów w Content Lake.
+- Sprawdzono aktualne modele Sanity, indeks schematów, GROQ, mapper i renderery.
+  Wskazano konkretne luki: brak produktu/ceny/grup karuzeli, marki tylko jako nazwy,
+  min. dwie liczby zamiast jednej, wymagane nadtytuły, wymagane imię/rola opinii,
+  brak wariantów 3a i docelowych kotwic. Cytaty mają 124–264 znaki i mieszczą się
+  w obecnym limicie 320; nie wymagają skracania do importu.
+- Dodano zasadę do AGENTS.md: dokumentować decyzje wpływające na Sanity w tej samej
+  sesji, z datą/źródłem i oddzieleniem ustaleń od propozycji i wykonania.
+  README, plan i dokument copy wskazują nową specyfikację.
+- Zmiany wyłącznie dokumentacyjne. Format i lokalne odnośniki sprawdzono;
+  bez nowych testów aplikacji, publikacji, zmian schema, CMS ani mockupu.
+
+## Mockup artykułu blogowego 3a — 2026-10-06
+
+- Utworzono lokalny `mockups/homepage/article-3a.html` oraz odseparowany CSS.
+  Dziedziczy paletę 3a, oficjalny Switzer, wordmark, navbar, footer, formularz
+  oraz trzy okładki PCOS. Homepage 3a i jego istniejące zmiany zachowano.
+- Wszystkie elementy briefu: breadcrumb, H1, obraz, publikacja i aktualizacja,
+  rich text (H2/H3, listy, cytat, wyróżnienie, tabela, link), biogram, lewy spis
+  pięciu H2, prawe CTA, trzy e-booki, dolny zapis i footer. Spis działa bez JS;
+  przy mniejszej szerokości CTA przechodzi pod tekst, na mobile spis przed tekst.
+- Tekst i daty są jawnie przykładowe. Użyto istniejącej wygenerowanej fotografii
+  kulinarnej. Ceny e-booków zachowano: 97 zł brutto. Formularz nic nie wysyła.
+- [Instrukcja CMS](BLOG-CMS-CONFIG-3A.md) mapuje istniejące pola i proponuje
+  wspólny model e-booków, `relatedEbooks` (dokładnie trzy unikalne referencje),
+  wspólny newsletter i spis generowany z Portable Text. Bez zmian schematów,
+  GROQ/TypeGen, Astro i Content Lake. Nie testowano n8n.
+- QA na Node 24.19.0: Chromium, Firefox, WebKit PASS; 320/390/768/1440 px
+  bez overflow, CSS zoom 200%, klawiatura kotwic/menu/formularza, reduced motion,
+  treść/kotwice bez JS, obrazy, zgodność spisu z H2, trzy karty i jeden H1.
+  Axe Chromium light/dark: 0 naruszeń. Brak błędów JS i żądań POST.
+  Dowody: `/private/tmp/ola-blog-3a-qa/`. Desktop i mobile obejrzano.
+- Pierwsze skrypty QA wymagały poprawy odczytu lazy-loaded obrazów, normalizacji
+  białych znaków i jawnego kontekstu dla axe. Rzeczywisty overflow okładki przy
+  768 px naprawiono lokalną regułą CSS. Detektor skilla wykonano raz; zgłasza
+  głównie odziedziczone obrysy i małe teksty okładek oraz otwarte separatory.
+- Podgląd korzysta z istniejącego serwera `127.0.0.1:8766`; próba startu
+  w sandboxie dała EPERM, poza nim EADDRINUSE, więc nie tworzono drugiego serwera.
+  Link artykułu dodano do lokalnego porównania. Podgląd otwarto w panelu Codex.
+- Pełne `npm run verify`: PASS, 57 unit, 36 E2E, format, tokeny, lint,
+  typy, build Astro/Studio, dry-run Workera i kontrola artefaktów. Log:
+  `/private/tmp/ola-blog-3a-verify-final.log`. Pierwszy przebieg zatrzymał się
+  na EPERM portu 4321 w sandboxie; powtórzony z dostępem do lokalnego portu
+  przeszedł, bez wyciszania testów.
+- Niezależny finish reviewer: `ship`, brak materialnych poprawek. Documenter
+  potwierdził dziedziczenie systemu 3a i zgodność instrukcji z istniejącymi
+  schematami. Zachowano istniejące tokeny i nie tworzono równoległego systemu.
+- Format i 75 lokalnych odnośników dokumentacji: PASS. Diff-check zakresu
+  zmian: PASS. Paczka lokalnego feedbacku: 33 publiczne pliki i kontrola
+  odnośników PASS; nie wdrożono jej na subdomenę.
+- Natywny zoom 200%, czytnik, fizyczne urządzenie i Lighthouse/CWV niewykonane.
+  Brak publikacji, commita i pusha.
+
+## PR i scalenie mockupów 3a — 2026-10-06
+
+- Użytkownik zlecił utworzenie PR i scalenie zmian. PR #17 jest już scalony;
+  bieżący zakres przygotowano na nowej gałęzi `codex/mockups-3a-cms` z `origin/main`.
+- Zakres: copy homepage, mockup artykułu, dokumentacja konfiguracji CMS,
+  poprawka inicjalizacji karuzeli w WebKit i test regresji. Lokalne zmiany
+  skilli, lockfile skilli oraz robocze raporty nie wchodzą do PR.
+- Ponowne `npm run verify` na Node 24: PASS, 57 testów jednostkowych i 36 E2E,
+  format, tokeny, lint, typy, build Astro/Studio, dry-run Workera i kontrola
+  artefaktów. Log: `/private/tmp/ola-pr-3a-verify.log`.
+- Format dokumentacji, 97 lokalnych odnośników i diff-check zakresu: PASS.
+  Scalenie po zielonych kontrolach GitHub; bez zmian Content Lake i publikacji.
+
 ## Następny krok
 
-Zebrać feedback dla poprawionych sześciu makiet na subdomenie i wybrać kierunek.
-Potwierdzić z Aleksandrą kwalifikacje, metodę pracy, fakty, opinie, ceny,
-charakter współprac i profile przed przeniesieniem do Astro/Sanity.
-
-Użytkownik zbiera feedback pod publicznym adresem `design.aleksandraolesiewicz.com`,
-a następnie wybiera kierunek i tło spośród sześciu mockupów homepage
-oraz ocenia propozycje wordmarków. Następnie
-dopracować ten kierunek, potwierdzić treści i fakty, a dopiero potem przenieść go
-do komponentów Astro i Sanity. Dalsze kroki techniczne pozostają odłożone poniżej.
+Zebrać feedback do lokalnego 3a i nowego mockupu artykułu blogowego.
+Po akceptacji bloga przenieść jego szablon do Astro oraz wdrożyć rozszerzenia
+z `BLOG-CMS-CONFIG-3A.md`; przykładowy artykuł zastąpić zaakceptowaną treścią. Kolejne decyzje zapisywać
+w HOMEPAGE-CMS-CONFIG.md. Na jej podstawie przygotować warianty i konfigurację
+Sanity po akceptacji kierunku. Ustalić cenę i szczegółowy zakres
+pojedynczej konsultacji, gotowość e-booków oraz współprace marek/profile.
+Po akceptacji przenieść copy i wygląd do Astro/Sanity. Publikacja publicznego
+mockupu wymaga zlecenia. Kroki techniczne odłożone:
 
 1. Odświeżyć `https://preview.aleksandraolesiewicz.com` przy aktywnej sesji
    Access — zamiast 401 powinien być chroniony podgląd szkicu.

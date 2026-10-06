@@ -193,3 +193,42 @@ Screenshoty i lokalne raporty QA są w `output/homepage-mockups/2026-10-05/`
 oraz `output/homepage-mockups/2026-10-06/`.
 Pełny odbiór produkcyjny, czytnik ekranu, natywny zoom i fizyczne urządzenie
 pozostają odrębnymi kontrolami po wyborze kierunku.
+
+## Copy 3a — 2026-10-06
+
+Wersja [3a](cherry-white.html) otrzymała copy po przeglądzie FIRMA i poprzedniego
+repo `ola-homepage`: specjalizacja PCOS/IO, opis podejścia i osobistego doświadczenia,
+pojedyncze konsultacje, zapowiedzi sześciu e-booków oraz sześć prawdziwych opinii
+potwierdzonych przez użytkownika. Cytaty zachowują pełne brzmienie i anonimowy podpis
+„Opinia o dotychczasowej współpracy”; nie są przedstawiane jako rezultaty jednej wizyty.
+Usunięto robocze liczby/ceny, pas niepotwierdzonych relacji z markami i Facebook/TikTok.
+Dopasowanie typografii dłuższego copy: [3a-copy.css](3a-copy.css), wyłącznie w 3a.
+Pozostałe pięć wersji zachowuje wcześniejsze treści. Szczegóły:
+[copy i decyzje](../../docs/HOMEPAGE-COPY-3A.md).
+
+Sprawdzony podgląd lokalny: `node scripts/preview-homepage-mockups.mjs`, następnie
+`http://127.0.0.1:8766/mockups/homepage/cherry-white.html`. Ta aktualizacja nie została
+opublikowana na subdomenie. Formularz, linki do produktów i konsultacji nadal są demonstracyjne.
+
+### Przywrócenie elementów i ceny
+
+Na polecenie użytkownika z 2026-10-06 przywrócono belkę pięciu marek oraz
+Facebook/TikTok. Cena każdej zapowiedzi e-booka: **97 zł brutto**.
+Po kolejnej decyzji użytkownika wyróżnienie przy opisie podejścia:
+**450+ — kobiet rocznie, którym pomagają moje konsultacje**.
+Nowe copy i sześć opinii zachowano. Linki nadal prowadzą do ekranów makiety.
+
+## Artykuł blogowy 3a — 2026-10-06
+
+[Otwórz mockup artykułu](article-3a.html). Dziedziczy style, font, wordmark,
+newsletter, stopkę i trzy okładki PCOS z homepage 3a. Ma breadcrumb, obraz główny,
+obie daty, rich text, biogram oraz spis pięciu H2 po lewej i CTA newslettera
+po prawej. Na mobile spis trafia przed tekst, a CTA pod autora.
+
+Sprawdzona komenda podglądu: `node scripts/preview-homepage-mockups.mjs`.
+Adres: `http://127.0.0.1:8766/mockups/homepage/article-3a.html`.
+Treść i daty są przykładami redakcyjnymi, fotografia pochodzi z istniejących
+zasobów makiet. Formularz korzysta z tej samej lokalnej demonstracji co homepage.
+Indeks bloga w breadcrumb prowadzi do ekranu objaśniającego makiety.
+[Konfiguracja CMS](../../docs/BLOG-CMS-CONFIG-3A.md) rozróżnia istniejące pola
+od proponowanych referencji e-booków i newslettera. Bez publikacji i zmian CMS.

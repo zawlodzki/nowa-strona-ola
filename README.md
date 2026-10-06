@@ -8,6 +8,7 @@ hostingiem Cloudflare Workers Static Assets i edycją przez Sanity.
 
 - [Plan wdrożenia i kryteria odbioru](docs/IMPLEMENTATION-PLAN.md)
 - [Aktualny postęp i następny krok](docs/PROGRESS.md)
+- [Treści i decyzje do konfiguracji homepage w CMS](docs/HOMEPAGE-CMS-CONFIG.md)
 - [Zasady weryfikacji kodu](docs/CODE-QUALITY.md)
 - [Konfiguracja wdrożeń Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md)
 - [Wyniki próby Bejamas](docs/UI-SPIKE-RESULTS.md)
@@ -112,3 +113,7 @@ pierwszego uruchomienia na GitHub wymaga osobnego sprawdzenia.
 
 n8n i self-hostowane c15t będą dostarczone poza repo. Tutaj powstaną integracje,
 formularze i panel zgód dopasowany do design systemu.
+
+Mockup artykułu 3a: `node scripts/preview-homepage-mockups.mjs`, następnie
+`http://127.0.0.1:8766/mockups/homepage/article-3a.html`.
+[Instrukcja konfiguracji bloga w CMS](docs/BLOG-CMS-CONFIG-3A.md).

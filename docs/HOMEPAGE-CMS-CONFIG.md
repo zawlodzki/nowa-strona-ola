@@ -1,0 +1,280 @@
+# Homepage 3a — konfiguracja treści CMS
+
+Aktualizacja: 2026-10-06. Status: specyfikacja do konfiguracji Sanity,
+nie wykonana migracja. Obowiązuje dla polskiej strony głównej.
+
+## Źródła i sposób aktualizacji
+
+Najnowsza bezpośrednia decyzja użytkownika ma pierwszeństwo przed wcześniejszą
+propozycją, dokumentami FIRMA i demonstracyjnymi danymi CMS. Aktualny układ
+oraz copy: [mockup 3a](../mockups/homepage/cherry-white.html).
+Historia analizy: [copy i decyzje](HOMEPAGE-COPY-3A.md).
+Stan implementacji: [postęp](PROGRESS.md).
+
+Przy każdej decyzji dotyczącej treści, ceny, oferty, kolejności, widoczności,
+CTA lub wariantu sekcji aktualizować ten dokument w tej samej sesji.
+Podać wynikową wartość, miejsce docelowe, datę i źródło oraz status:
+ustalone / do decyzji / wymaga implementacji. Zastępować bieżącą wartość,
+a historię zmian zachować w PROGRESS.md. Nie zamieniać propozycji w decyzję
+ani dokumentacji w deklarację wykonania. Nie kopiować sekretów i danych zgłoszeń.
+
+## Decyzje ustalone przez użytkownika
+
+| Obszar        | Wartość obowiązująca                                                               | Źródło / status                                                                       |
+| ------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Wygląd        | 3a: białe tło, wiśniowa paleta, Switzer i istniejące portrety                      | Wskazanie kierunku 06.10.2026; wdrożone w mockupie                                    |
+| Usługa        | Pojedyncze konsultacje dietetyczne online                                          | Bezpośrednia decyzja 06.10.2026; nie przenosić mentoringu ani dawnych pakietów        |
+| Cena e-booków | Każdy z sześciu: 97 zł brutto, waluta PLN                                          | Bezpośrednia decyzja 06.10.2026; nie oznacza gotowego sklepu                          |
+| Wskaźnik      | Wartość 450, przyrostek +, opis „kobiet rocznie, którym pomagają moje konsultacje” | Bezpośrednia informacja 06.10.2026; nie zmieniać na sumę historyczną                  |
+| Opinie        | Sześć pełnych cytatów z `/Users/grzesiek/Github/ola-homepage/data/testimonials.js` | Prawdziwość potwierdzona przez użytkownika 06.10.2026                                 |
+| Podpis opinii | „Opinia o dotychczasowej współpracy”; bez imion                                    | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                   |
+| Marki         | Belka widoczna: ALAB laboratoria, UNS, NORSAN, Norsa Pharma, OMNi-BiOTiC           | Przywrócenie na polecenie użytkownika 06.10.2026                                      |
+| Social media  | Instagram, Facebook, TikTok widoczne                                               | Przywrócenie na polecenie użytkownika 06.10.2026; docelowe URL pozostają do ustalenia |
+| Copy          | Nowe copy 3a zachowane                                                             | Zlecona aktualizacja; bieżąca treść poniżej                                           |
+
+Specjalizacja w copy: PCOS i insulinooporność. Perimenopauza jest tematem
+materiałów; nie dopisywać doświadczenia klinicznego ani kwalifikacji ponad
+podany kontekst. E-booki nadal oznaczone jako zapowiedzi. To stan makiety,
+nie potwierdzenie ukończenia produktu lub uruchomienia sprzedaży.
+
+## Dokument strony, ustawienia i kolejność
+
+Istniejący model strony: `page`, `language = pl`, `slug.current = home`.
+Daje publiczny adres `/`. Nie tworzyć drugiej polskiej strony głównej.
+EN wymaga osobnego dokumentu i rzeczywistego tłumaczenia; brak fallbacku PL.
+
+Kolejność: **hero → marki → podejście z liczbą → O mnie → e-booki →
+konsultacje → opinie → newsletter**. Nawigacja i stopka należą do ustawień
+wspólnych. Sekcji podejścia nie rozbijać wizualnie na odległe bloki tylko po to,
+by dopasować ją do obecnego schematu.
+
+`siteSettings.siteTitle`: Aleksandra Olesiewicz.
+`siteSettings.footerNote`: PCOS, insulinooporność i odżywianie dopasowane do życia.
+Nawigacja: E-booki `#ebooki`, Konsultacje `#konsultacje`, O mnie `#o-mnie`,
+Newsletter `#newsletter`. Kotwice muszą istnieć w docelowym rendererze.
+Profile w `siteSettings.socialLinks`: nazwy ustalone, prawdziwe HTTPS URL do
+uzupełnienia. `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
+
+Tytuł i opis SEO w makiecie zawierają oznaczenie 3a i dłuższe teksty.
+Nie kopiować ich automatycznie do produkcji: `seo.title` ma limit 60 znaków,
+`seo.description` 160. Finalne metadata trzeba zatwierdzić w tych limitach.
+Noindex i przełącznik kierunków są elementami mockupu, nie treścią homepage w CMS.
+
+## Mapowanie do obecnego Sanity i brakujące możliwości
+
+Sprawdzone lokalnie w [schematach sekcji](../studio/schema-types/blocks/page-sections.ts),
+[ustawieniach](../studio/schema-types/documents/site-settings.ts),
+[opiniach](../studio/schema-types/documents/testimonial.ts),
+[usłudze](../studio/schema-types/documents/service.ts),
+[GROQ](../src/sanity/queries.ts) i [mapowaniu treści](../src/content/map-sections.ts).
+Poniższa tabela rozróżnia istniejące pola od wymagań do wdrożenia.
+
+| Miejsce 3a       | Istniejący model / pola                                                              | Co wymaga pracy przed odwzorowaniem 3a                                                                                                                                               |
+| ---------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Hero             | `heroSection`: `title`, `lead`, `primary`, `secondary`, `media`, wariant `split`     | `eyebrow` jest wymagany także w mapperze, a 3a nie ma nadtytułu. Nie dodawać sztucznego tekstu; dostosować schema/typy/renderer.                                                     |
+| Marki            | `logosSection.names`                                                                 | Teraz tylko nazwy, bez grafik. Dodać media i kontrolowany wariant belki. Nie wymyślać leadu, który obecnie jest wymagany.                                                            |
+| Podejście + 450+ | `metricsSection.items[].value/suffix/label`; `cardsSection`                          | Liczby wymagają min. 2 pozycji, obecna kompozycja jednej liczby z trzema opisami nie istnieje. Rozszerzyć kontrolowany wariant lub dedykowany typ, bez drugiej fikcyjnej statystyki. |
+| O mnie           | `textImageSection`: `title`, `body`, `media`, `mediaPosition`                        | Brak osobnego wyróżnionego leadu i CTA oraz drugiego zdjęcia posiłku. Zaplanować wariant zachowujący układ 3a.                                                                       |
+| E-booki          | `cardsSection` ma tytuł, opis, adres i medium karty                                  | Nie ma dokumentu produktu, ceny, kategorii ani grupowanej karuzeli. Dodać model produktu i sekcję z referencjami.                                                                    |
+| Konsultacje      | `service` ma `title`, `summary`, `slug`; `textImageSection` częściowo opisuje wygląd | Brak pełnego wariantu z faktami i CTA do konsultacji. Nie wkładać treści poza limit `service.summary` 240 znaków.                                                                    |
+| Opinie           | `testimonialsSection.items` referencje do `testimonial`                              | Cytaty mieszczą się w limicie 320; model i mapper wymagają `name` oraz `role`. Obsłużyć anonimowy podpis, bez fikcyjnego imienia. Obecny renderer nie odpowiada karuzeli 3a.         |
+| Newsletter       | `formSection` + referencja `form`                                                    | Nadtytuł wymagany; 3a nie ma nadtytułu. Docelowo formularz tylko z e-mailem i zgodą: sprawdzić mapper, który obecnie oczekuje także pola imienia. Integracja pozostaje etapem 6.     |
+| Kotwice          | `PageSections.astro` generuje identyfikatory sekcji                                  | Dopasować kontrolowane identyfikatory do nawigacji 3a; nie wstawiać niedziałających kotwic.                                                                                          |
+
+Przy zmianie typu sekcji obowiązuje schema + renderer HTML + serializer
+Markdown + przykład, spójne GROQ/TypeGen/TypeScript i blokada nieznanego typu.
+Paleta, typografia, spacing oraz ruch pozostają w kontrolowanym wariancie kodu,
+bez dowolnego CSS lub tokenów zapisanych przez redaktora.
+
+## E-booki — wartości do przyszłego modelu produktu
+
+Nazwy pól niżej są propozycją przyszłego modelu, **nie istniejącymi polami Sanity**.
+W każdym produkcie: tytuł, język PL, temat (`pcos` / `perimenopause`), opis karty,
+okładka, tekst alternatywny, status dostępności, docelowy adres i cena brutto.
+Cena jako wartość liczbowa 97, waluta PLN i jawne oznaczenie brutto.
+Nie wyliczać VAT ani ceny netto bez osobnej konfiguracji. Format „97 zł brutto”
+generować z danych; nie powielać ceny w HTML, okładce i ręcznie wpisanym opisie.
+
+| Kolejność | Tytuł                         | Temat         | Cena         |
+| --------- | ----------------------------- | ------------- | ------------ |
+| 1         | Suplementy w PCOS             | PCOS          | 97 zł brutto |
+| 2         | Badania, które mają sens      | PCOS          | 97 zł brutto |
+| 3         | Szczupła, a jednak PCOS       | PCOS          | 97 zł brutto |
+| 4         | Waga Cię okłamuje             | Perimenopauza | 97 zł brutto |
+| 5         | Czy to już?                   | Perimenopauza | 97 zł brutto |
+| 6         | Noc zaczyna się o osiemnastej | Perimenopauza | 97 zł brutto |
+
+Homepage ma referencje do produktów w tej kolejności, a nie sześć kopii cen
+i opisów w osadzonych kartach. Wybranie grupy przewija do pierwszego produktu
+tej grupy; zachować kotwice, klawiaturę i widoczność treści bez JS.
+CTA makiety: „Poznaj temat”. Docelowe linki i zakup pozostają do decyzji.
+
+## Bieżąca treść sekcji do przeniesienia
+
+Poniższy zapis pochodzi z aktualnego HTML 3a. Zachowuje słowa, kolejność
+akapitów i pełne opinie; łamanie nagłówków dopasowuje renderer.
+Nie zapisywać znaczników `<br>` jako tekstu redaktora.
+CTA oraz media opisano osobno pod zestawieniem.
+
+### start
+
+**Zrozum swoje ciało. Zacznij od odżywiania.**
+
+Jestem Ola, dietetyczka kliniczna. Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Przygotowuję też e-booki o PCOS i perimenopauzie.
+
+### marki
+
+Współpracuję z markami, które znasz
+
+### dlaczego-ja
+
+Wartość wskaźnika: **450+**.
+
+**Wiesz, od czego zacząć. Rozumiesz, po co to robisz.**
+
+Po diagnozie łatwo pogubić się w radach o diecie, badaniach i suplementach. Pomogę Ci uporządkować informacje i przełożyć je na codzienne decyzje.
+
+kobiet rocznie, którym pomagają moje konsultacje
+
+**Twoja sytuacja jest punktem wyjścia.**
+
+Przyglądam się Twoim wynikom badań, sposobowi odżywiania i codziennym nawykom.
+
+**Zmieniamy to, co jesz na co dzień.**
+
+Szukamy rozwiązań, które uwzględniają Twoje ulubione posiłki, czas i możliwości.
+
+**Rozumiesz kolejne kroki.**
+
+Wyjaśniam zalecenia, żebyś wiedziała, co robisz i dlaczego.
+
+### o-mnie
+
+**Jestem Ola.**
+
+Znam PCOS także z własnego doświadczenia.
+
+Jestem dietetyczką kliniczną i sama mam doświadczenie z PCOS. Wiem, jak trudno odnaleźć się w sprzecznych radach i kolejnych próbach zmiany odżywiania.
+
+W pracy z kobietami z PCOS i insulinoopornością łączę analizę wyników badań z praktycznymi zmianami w posiłkach. Zależy mi, żebyś rozumiała zalecenia i potrafiła korzystać z nich w swojej codzienności.
+
+### ebooki
+
+**E-booki o PCOS i perimenopauzie.**
+
+Badania, suplementy, codzienne posiłki i obserwacja samopoczucia. Wybierz temat, w którym potrzebujesz więcej jasności.
+
+**Suplementy w PCOS**
+
+Uporządkuj pytania o suplementy: po co je stosować i co omówić ze specjalistą przed zakupem.
+
+**Badania, które mają sens**
+
+Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.
+
+**Szczupła, a jednak PCOS**
+
+Jak podejść do odżywiania przy PCOS, kiedy Twoim celem nie jest odchudzanie.
+
+**Waga Cię okłamuje**
+
+Przyjrzyj się zmianom w sylwetce i codziennych nawykach w okresie perimenopauzy.
+
+**Czy to już?**
+
+Dziennik cyklu i samopoczucia, który pomoże Ci przygotować się do rozmowy z lekarzem.
+
+Od kolacji do snu
+
+**Noc zaczyna się o osiemnastej**
+
+Uporządkuj wieczorne posiłki i nawyki. Sprawdź, co warto obserwować przed rozmową o problemach ze snem.
+
+Zapowiedzi e-booków. Tytuły i okładki są propozycją; materiały są w przygotowaniu.
+
+1–3 z 6
+
+### konsultacje
+
+**Konsultacje dietetyczne online.**
+
+Podczas pojedynczej konsultacji przyjrzymy się Twoim wynikom badań, sposobowi odżywiania i temu, z czym trudno Ci sobie poradzić na co dzień. Ustalimy priorytety i zmiany, od których możesz zacząć.
+
+### opinie
+
+**O współpracy ze mną.**
+
+Doświadczenia moich podopiecznych
+
+> Ola, muszę się pochwalić choć dopiero co zaczęłyśmy! 😀 Na wadze dopiero -3kg, ale już się zadział mały cud. Z twarzy zaczęły znikać mi pryszcze, nie mam już tak wielkiej ochoty na słodycze!! Nawet nie wiesz jak się cieszę ❤️ a to dopiero początek naszej współpracy
+
+Opinia o dotychczasowej współpracy
+
+> Dzięki współpracy z Olą schudłam 8 kg w 3 miesiące bez wyrzeczeń. Hormony się ustabilizowały, energii mam więcej niż kiedykolwiek!
+
+Opinia o dotychczasowej współpracy
+
+> Najlepsza decyzja jaką podjęłam! Aplikacja jest super intuicyjna, a Ola zawsze dostępna gdy potrzebuję pomocy. Polecam z całego serca!
+
+Opinia o dotychczasowej współpracy
+
+> Po latach walki z PCOS w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!
+
+Opinia o dotychczasowej współpracy
+
+> Miałam problem z insulinoopornością i nie widziałam efektów mimo wielu diet. Z Olą w 2 miesiące schudłam 5 kg i wyniki badań się poprawiły!
+
+Opinia o dotychczasowej współpracy
+
+> Nie wierzyłam, że dieta może być elastyczna i smaczna jednocześnie. Ola udowodniła mi, że to możliwe. Gotuje dla całej rodziny z tych samych przepisów!
+
+Opinia o dotychczasowej współpracy
+
+### newsletter
+
+**Mniej sprzecznych rad. Więcej konkretów.**
+
+Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.
+
+Wpisz poprawny adres e-mail.
+
+Zaznacz zgodę, aby sprawdzić formularz.
+
+Makieta formularza. Dane nie są zapisywane ani wysyłane.
+
+## CTA i media
+
+| Miejsce      | Etykieta                   | Adres docelowy / status                                                    |
+| ------------ | -------------------------- | -------------------------------------------------------------------------- |
+| Hero: główne | Poznaj e-booki             | `#ebooki`                                                                  |
+| Hero: drugie | Poznaj konsultacje         | `#konsultacje`                                                             |
+| O mnie       | Poznaj moją historię       | Podstrona O mnie; docelowy slug do ustalenia                               |
+| E-booki      | Poznaj temat               | Podstrona danego produktu; docelowe slugi do ustalenia                     |
+| Konsultacja  | Poznaj konsultację         | Podstrona pojedynczej konsultacji; zakres/cena/rezerwacja do ustalenia     |
+| Newsletter   | Chcę otrzymywać newsletter | Zapis po faktycznym przyjęciu przez backend; w makiecie tylko demonstracja |
+
+Media do zaimportowania z zaakceptowanych lokalnych plików:
+[Hero](../src/assets/portraits/hero.webp),
+[O mnie](../src/assets/portraits/about.webp),
+[Konsultacje](../src/assets/portraits/contact.webp),
+[Posiłek](../mockups/homepage/assets/food-editorial.webp).
+Logotypy i ich źródła: [README makiet](../mockups/homepage/README.md#materiały).
+Okładki e-booków są dziś kompozycją HTML/CSS; nie istnieją jako sześć gotowych
+plików obrazu. Zaplanować eksport zaakceptowanych okładek albo kontrolowany
+renderer, bez fikcyjnych ścieżek do obrazów w CMS.
+
+## Konfiguracja i kryteria przeniesienia — jeszcze niewykonane
+
+- [ ] Dostosować modele i kontrolowane warianty do luk opisanych wyżej.
+- [ ] Uzupełnić docelowe HTTPS profile, slugi, kontakt, cenę i zakres konsultacji.
+- [ ] Ustalić gotowość e-booków i rzeczywiste miejsca zakupu.
+- [ ] Przygotować krótkie metadata produkcyjne i docelowe teksty formularza/zgód.
+- [ ] Zaimportować media i utworzyć sześć produktów oraz sześć opinii jako referencje.
+- [ ] Uzupełnić szkic `page` PL z sekcjami i `siteSettings` w ustalonej kolejności.
+- [ ] Sprawdzić podgląd, cytaty, ceny, wskaźnik i zgodność HTML/Markdown.
+- [ ] Zweryfikować desktop/mobile, 320 px, zoom, klawiaturę i reduced motion.
+- [ ] Publikować dopiero na zlecenie; zapisana konfiguracja nie oznacza publikacji.
+
+Nie tworzono dokumentów w Content Lake, nie zmieniano schematów ani aplikacji
+w ramach sporządzenia tego dokumentu. Bieżące decyzje są zapisane, a wdrożenie
+CMS pozostaje odrębną pracą.

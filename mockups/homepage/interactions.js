@@ -61,9 +61,18 @@ for (const track of document.querySelectorAll(".carousel-track")) {
     if (position) {
       const gap = parseFloat(window.getComputedStyle(track).columnGap);
       const itemWidth = items[0].getBoundingClientRect().width;
-      const first = Math.min(
-        items.length,
-        Math.round(track.scrollLeft / (itemWidth + gap)) + 1,
+      // WebKit może jeszcze nie mieć geometrii podczas pierwszego odczytu.
+      // ResizeObserver ponowi aktualizację, gdy układ będzie gotowy.
+      if (!Number.isFinite(gap) || itemWidth <= 0) {
+        updatePending = false;
+        return;
+      }
+      const first = Math.max(
+        1,
+        Math.min(
+          items.length,
+          Math.round(track.scrollLeft / (itemWidth + gap)) + 1,
+        ),
       );
       const visible = Math.max(
         1,
