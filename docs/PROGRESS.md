@@ -1034,6 +1034,22 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   pusha i publikacji CMS. Natywny zoom 200%, czytnik, fizyczne urządzenie
   i Lighthouse/CWV nie były wykonywane; automatyczne kontrole nie oznaczają AA.
 
+## PR makiet homepage — 2026-10-06
+
+- Na zlecenie użytkownika utworzono
+  [PR #17](https://github.com/zawlodzki/nowa-strona-ola/pull/17), baza `main`,
+  gałąź `codex/homepage-design-mockups`. Commit implementacji: `4ecaa05`.
+- PR obejmuje 31 plików: sześć makiet i publiczne media, CSS/JS, skrypty
+  lokalnego podglądu i paczki feedbacku, konfigurację Workera oraz dokumentację.
+  Lokalne dowody `output/`, archiwum `.impeccable/`, zmiany `.agents` i
+  `skills-lock.json` pozostały poza commitem. Nie modyfikowano tych zmian.
+- Zachowano wyniki wcześniejszej pełnej weryfikacji i publicznego smoke;
+  w tej sesji bez zmian kodu ponownie sprawdzono format zakresu PR i
+  `git diff --cached --check`: PASS. Nie powtarzano testów bez potrzeby.
+- Agent podpisujący 1Password był niedostępny. Commit zapisano z jednorazowym
+  `commit.gpgsign=false`, bez zmiany konfiguracji podpisywania repo/użytkownika.
+- PR dołączono do zadania. Nie scalano PR i nie wykonywano nowego deployu.
+
 ## Następny krok
 
 Zebrać feedback dla poprawionych sześciu makiet na subdomenie i wybrać kierunek.

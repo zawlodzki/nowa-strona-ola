@@ -359,6 +359,8 @@ materiały dla kobiet z PCOS i w perimenopauzie oraz konsultacje dietetyczne onl
       e-booków, treści i okładki, rytm paneli 03/3a oraz drobna czytelność.
 - [x] Wdrożyć pakiet poprawek we wszystkich sześciu makietach i zaktualizować
       subdomenę feedbacku po kontroli lokalnej i publicznym smoke (2026-10-06).
+- [x] Przygotować [PR #17](https://github.com/zawlodzki/nowa-strona-ola/pull/17)
+      z makietami, poprawkami i konfiguracją publicznego podglądu (2026-10-06).
 - [ ] Wybrać kierunek z użytkownikiem i ustalić finalne treści, dane pacjentek,
       opinie, ceny, współprace i profile social media.
 - [ ] Dopiero po wyborze przenieść zaakceptowane rozwiązanie do współdzielonych
