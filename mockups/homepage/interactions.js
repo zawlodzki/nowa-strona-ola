@@ -191,6 +191,14 @@ const previewTitle = document.querySelector("#preview-title");
 if (previewTitle) {
   const params = new URLSearchParams(window.location.search);
   const pages = {
+    "blog-posilki": [
+      "Codzienne posiłki przy PCOS: zacznij od swojego rytmu",
+      "Przykładowy powiązany artykuł do oceny makiety. Docelowa treść i adres wymagają przygotowania w CMS.",
+    ],
+    "blog-pytania": [
+      "Jak uporządkować pytania o PCOS przed wizytą?",
+      "Przykładowy powiązany artykuł do oceny makiety. Docelowa treść i adres wymagają przygotowania w CMS.",
+    ],
     "o-mnie": [
       "O mnie",
       "Tutaj znajdzie się historia Aleksandry, jej podejście do pracy i potwierdzone kwalifikacje.",

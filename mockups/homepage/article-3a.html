@@ -22,6 +22,48 @@
     <link rel="stylesheet" href="3a-copy.css" />
     <link rel="stylesheet" href="article-3a.css" />
     <script src="interactions.js" defer></script>
+    <script src="article-3a.js" defer></script>
+    <script type="application/ld+json" id="article-faq-schema">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "inLanguage": "pl",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Czy przed konsultacją muszę przygotować idealny jadłospis?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nie. Punktem wyjścia jest opis Twojego zwykłego dnia i tego, z czym potrzebujesz wsparcia. Nie poprawiaj notatek po to, żeby wyglądały lepiej — mają pomóc w rozmowie o Twojej codzienności."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Jakie informacje warto zebrać przed rozmową?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Przygotuj dokumenty, które już masz, nazwy stosowanych preparatów, wcześniejsze zalecenia oraz krótkie notatki o posiłkach i codziennych trudnościach. Zakres potrzebnych informacji sprawdź w instrukcji organizacyjnej konsultacji."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Co zrobić, jeśli nie mam wszystkich dokumentów?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zapisz, czego brakuje, i potraktuj to jako pytanie na spotkanie. Nie musisz tworzyć kompletnego archiwum przed pierwszą rozmową. Możesz zacząć od opisu zwykłego dnia i najważniejszej wątpliwości."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Jak przygotować listę pytań na konsultację?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zanotuj, co chcesz lepiej zrozumieć, które wcześniejsze zmiany były trudne oraz jak dopasować kolejne kroki do czasu i budżetu. Wybierz pytania, które są dla Ciebie najważniejsze, i zostaw miejsce na ustalenia ze spotkania."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body class="cherry white-background copy-refined article-page">
     <a class="skip-link" href="#main">Przejdź do treści</a>
@@ -145,6 +187,138 @@
               </ol>
             </details>
           </nav>
+          <div class="article-share">
+            <button
+              class="share-trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="share-options"
+              disabled
+            >
+              <svg
+                class="ui-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <path d="m9 10 6-3M9 14l6 3" /></svg
+              >Udostępnij
+            </button>
+            <div
+              id="share-options"
+              class="share-options"
+              popover="auto"
+              role="dialog"
+              aria-label="Udostępnij artykuł"
+            >
+              <div class="share-options-heading">
+                <strong>Udostępnij artykuł</strong
+                ><button
+                  class="share-close"
+                  type="button"
+                  aria-label="Zamknij opcje udostępniania"
+                >
+                  <svg
+                    class="ui-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 6 12 12M18 6 6 18" />
+                  </svg>
+                </button>
+              </div>
+              <div class="share-actions">
+                <button class="share-option" type="button" data-share="copy">
+                  <svg
+                    class="ui-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0M16 8l1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0"
+                    /></svg
+                  ><span>Kopiuj link</span></button
+                ><a class="share-option" data-share="email"
+                  ><svg
+                    class="ui-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3 7 9 6 9-6" /></svg
+                  ><span>Wyślij mailem</span></a
+                ><a
+                  class="share-option"
+                  data-share="facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><svg
+                    class="ui-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M14 21v-9h3l.5-4H14V6c0-1 .5-2 2-2h2V1h-3c-3 0-5 2-5 5v2H7v4h3v9"
+                    /></svg
+                  ><span>Udostępnij na Facebooku</span></a
+                ><a
+                  class="share-option"
+                  data-share="whatsapp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><svg
+                    class="ui-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M20 11.5a8 8 0 0 1-12 7L3 20l1.5-5A8 8 0 1 1 20 11.5Z"
+                    />
+                    <path
+                      d="M8 7c-1 1-1 3 2 6s5 3 6 2l-2-2-1 1c-2-1-3-2-4-4l1-1Z"
+                    /></svg
+                  ><span>Prześlij przez WhatsApp</span></a
+                >
+              </div>
+              <p class="share-status" role="status" aria-live="polite"></p>
+              <div class="share-copy-fallback" hidden>
+                <label for="share-url">Skopiuj adres ręcznie</label
+                ><input id="share-url" type="url" readonly />
+              </div>
+            </div>
+          </div>
         </aside>
         <div class="article-center">
           <article class="article-richtext" aria-label="Treść artykułu">
@@ -324,27 +498,88 @@
             </div>
           </section>
         </div>
-        <aside class="article-newsletter" aria-labelledby="sidebar-title">
-          <div class="sidebar-panel">
-            <svg
-              class="mail-icon"
-              viewBox="0 0 48 48"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              aria-hidden="true"
+        <aside
+          class="article-sidebar"
+          aria-label="Newsletter i polecane artykuły"
+        >
+          <section class="article-newsletter" aria-labelledby="sidebar-title">
+            <div class="sidebar-panel">
+              <svg
+                class="mail-icon"
+                viewBox="0 0 48 48"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+              >
+                <rect x="5" y="11" width="38" height="27" rx="5" />
+                <path d="m6 13 18 14 18-14" />
+              </svg>
+              <h2 id="sidebar-title">Zostańmy w kontakcie.</h2>
+              <p>
+                PCOS, odżywianie i więcej jasności w codziennych wyborach.
+                Prosto do Twojej skrzynki.
+              </p>
+              <a class="button" href="#newsletter">Chcę czytać więcej</a>
+              <p class="sidebar-note">Możesz wypisać się w każdej chwili.</p>
+            </div>
+          </section>
+          <aside class="article-recommendations" aria-label="Polecane artykuły">
+            <button
+              class="recommendations-trigger"
+              type="button"
+              aria-expanded="true"
+              aria-controls="recommended-articles"
+              disabled
             >
-              <rect x="5" y="11" width="38" height="27" rx="5" />
-              <path d="m6 13 18 14 18-14" />
-            </svg>
-            <h2 id="sidebar-title">Zostańmy w kontakcie.</h2>
-            <p>
-              PCOS, odżywianie i więcej jasności w codziennych wyborach. Prosto
-              do Twojej skrzynki.
-            </p>
-            <a class="button" href="#newsletter">Chcę czytać więcej</a>
-            <p class="sidebar-note">Możesz wypisać się w każdej chwili.</p>
-          </div>
+              <span>Sprawdź również</span
+              ><svg
+                class="ui-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path class="recommendation-plus" d="M12 5v14" />
+                <path d="M5 12h14" />
+              </svg>
+            </button>
+            <div id="recommended-articles">
+              <a href="podglad.html?strona=blog-posilki"
+                ><span>PCOS · Odżywianie</span
+                ><strong
+                  >Codzienne posiłki przy PCOS: zacznij od swojego rytmu</strong
+                ><svg
+                  class="ui-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7M7 7h10v10" /></svg></a
+              ><a href="podglad.html?strona=blog-pytania"
+                ><span>PCOS · Konsultacje</span
+                ><strong>Jak uporządkować pytania o PCOS przed wizytą?</strong
+                ><svg
+                  class="ui-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7M7 7h10v10" /></svg
+              ></a>
+            </div>
+          </aside>
         </aside>
       </div>
       <section
@@ -504,6 +739,107 @@
           Zapowiedzi e-booków. Tytuły i okładki są propozycją; materiały są w
           przygotowaniu.
         </p>
+      </section>
+      <section
+        class="container article-faq section"
+        id="faq"
+        aria-labelledby="faq-title"
+      >
+        <div class="faq-intro">
+          <h2 id="faq-title">Pytania przed pierwszą konsultacją.</h2>
+          <p>Krótko o tym, jak przygotować się do rozmowy.</p>
+          <p class="mock-note">Przykładowe FAQ do akceptacji redakcyjnej.</p>
+        </div>
+        <div class="article-faq-list">
+          <details open>
+            <summary>
+              <span
+                >Czy przed konsultacją muszę przygotować idealny
+                jadłospis?</span
+              ><svg
+                class="faq-toggle"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path class="faq-plus" d="M12 5v14" />
+              </svg>
+            </summary>
+            <p>
+              Nie. Punktem wyjścia jest opis Twojego zwykłego dnia i tego, z
+              czym potrzebujesz wsparcia. Nie poprawiaj notatek po to, żeby
+              wyglądały lepiej — mają pomóc w rozmowie o Twojej codzienności.
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span>Jakie informacje warto zebrać przed rozmową?</span
+              ><svg
+                class="faq-toggle"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path class="faq-plus" d="M12 5v14" />
+              </svg>
+            </summary>
+            <p>
+              Przygotuj dokumenty, które już masz, nazwy stosowanych preparatów,
+              wcześniejsze zalecenia oraz krótkie notatki o posiłkach i
+              codziennych trudnościach. Zakres potrzebnych informacji sprawdź w
+              instrukcji organizacyjnej konsultacji.
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span>Co zrobić, jeśli nie mam wszystkich dokumentów?</span
+              ><svg
+                class="faq-toggle"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path class="faq-plus" d="M12 5v14" />
+              </svg>
+            </summary>
+            <p>
+              Zapisz, czego brakuje, i potraktuj to jako pytanie na spotkanie.
+              Nie musisz tworzyć kompletnego archiwum przed pierwszą rozmową.
+              Możesz zacząć od opisu zwykłego dnia i najważniejszej wątpliwości.
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span>Jak przygotować listę pytań na konsultację?</span
+              ><svg
+                class="faq-toggle"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path class="faq-plus" d="M12 5v14" />
+              </svg>
+            </summary>
+            <p>
+              Zanotuj, co chcesz lepiej zrozumieć, które wcześniejsze zmiany
+              były trudne oraz jak dopasować kolejne kroki do czasu i budżetu.
+              Wybierz pytania, które są dla Ciebie najważniejsze, i zostaw
+              miejsce na ustalenia ze spotkania.
+            </p>
+          </details>
+        </div>
       </section>
       <section class="newsletter section" id="newsletter">
         <div class="container newsletter-layout">

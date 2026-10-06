@@ -1231,6 +1231,98 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 - Format dokumentacji, 97 lokalnych odnośników i diff-check zakresu: PASS.
   Scalenie po zielonych kontrolach GitHub; bez zmian Content Lake i publikacji.
 
+## Udostępnianie i rekomendacje artykułu 3a — 2026-10-06
+
+- Na polecenie użytkownika rozszerzono mockup o dwa wzorce z
+  [a16z](https://a16z.com/state-of-markets-ii/). Referencję przeczytano i
+  sprawdzono jej strukturę udostępniania/rekomendacji w przeglądarce.
+- Pod spisem treści dodano natywny popover Udostępnij: hover, kliknięcie,
+  klawiatura i dotyk; kopiowanie linku, e-mail, Facebook oraz WhatsApp.
+  Escape i zamknięcie przywracają fokus przy użyciu klawiatury; kliknięcie
+  poza panelem go zamyka. Opcje otwierają narzędzie udostępniania, nie wysyłają
+  wiadomości automatycznie. Brak zewnętrznych SDK i analityki.
+- Kopiowanie ma potwierdzenie dopiero po sukcesie Clipboard API oraz fallback
+  ręcznego kopiowania zaznaczonego URL. Makieta używa bieżącego adresu bez query
+  i hash; przy produkcyjnym wdrożeniu wymagany canonical i ochrona preview.
+- Panel Sprawdź również pojawia się w prawym dolnym rogu po przekroczeniu
+  przez środek widoku 50% rich textu; pokazuje dwa linki, pozwala zwinąć listę
+  i znika po powrocie powyżej progu (bez usuwania aktywnego fokusu). Hero i reszta
+  strony nie wchodzą do obliczenia. Bez JS jest zwykłym blokiem pod autorem.
+- Dodano dwa demonstracyjne tytuły i ekrany objaśniające; docelowe artykuły
+  nie są jeszcze przygotowane. Instrukcja CMS wykorzystuje istniejące `related[]`
+  (pierwsze dwie pozycje), bez nowego pola. Wdrożenie Astro/Sanity pozostaje otwarte.
+- Pierwszy E2E ujawnił, że WebKit może oddać fokus do body na mousedown
+  przed aktywacją opcji. Popover zamyka się po focusout wyłącznie przy konkretnym
+  docelowym elemencie poza panelem. Test regresji fallbacku schowka przechodzi
+  we wszystkich trzech przeglądarkach. Lokalnie zawężono selektory opcji, aby
+  linki nie dziedziczyły układu odnośników TOC.
+- Pierwsze pełne verify: 41 E2E PASS, 1 FAIL (Firefox). Powiększony fallback
+  schowka mógł zasłonić trigger po ponownym hoverze. Naprawiono pozycjonowanie:
+  wysokość panelu jest ograniczona do większej dostępnej przestrzeni nad/pod
+  przyciskiem, bez jego przykrywania. Rozszerzono regresję o geometrię i sukces
+  kopiowania po wcześniejszej odmowie dostępu. Nie omijano czerwonego testu.
+- QA Chromium/Firefox/WebKit: PASS dla 320/390/768/1440 px, pozycjonowania
+  popovera, braku overflow, CSS zoom 200%, reduced motion, no-JS i braku błędów JS.
+  Axe Chromium z otwartym udostępnianiem light/dark: 0 naruszeń. Zrzuty obejrzano:
+  `/private/tmp/ola-blog-sharing-qa/`. Skrypt QA wymagał poprawki kolejności,
+  ponieważ przewinięcie do udostępniania na mobile prawidłowo chowa rekomendacje.
+- Końcowe `npm run verify`: PASS na Node 24.19.0, 57 unit i 42 E2E
+  (6 nowych regresji w trzech przeglądarkach), format, tokeny, lint, typy,
+  build Astro/Studio, dry-run Workera i kontrola artefaktów. Log:
+  `/private/tmp/ola-blog-sharing-verify-final.log`.
+- Finish reviewer: `ship`, poprawka geometrii fallbacku oceniona jako `resolved`.
+  Documenter potwierdził zgodność CMS i dziedziczenie istniejących tokenów.
+  Format, 63 lokalne odnośniki dokumentacji i diff-check zakresu zmian: PASS.
+  Lokalna paczka feedbacku: 34 publiczne pliki, odnośniki PASS, bez deployu.
+  Podgląd w Codex odświeżono.
+- Natywny zoom, czytnik i fizyczne urządzenie niewykonane. Nie wysyłano
+  e-maila, nie publikowano postów w social media, nie publikowano mockupu
+  i nie zmieniano Content Lake. Bez commita i pusha.
+
+## FAQ artykułu 3a — 2026-10-06
+
+- Na zlecenie użytkownika dodano sekcję FAQ między e-bookami a newsletterem:
+  cztery przykładowe pytania o przygotowanie do konsultacji, pierwsza odpowiedź
+  rozwinięta. Natywne details/summary, SVG plus/minus, istniejąca paleta i Switzer.
+  FAQ pozostaje poza spisem H2 i obliczaniem połowy rich textu.
+- Dodano FAQPage JSON-LD z identycznymi pytaniami i pełnymi odpowiedziami.
+  Regresja E2E sprawdza kolejność sekcji, zgodność danych i klawiaturę.
+- Instrukcja CMS proponuje opcjonalne `article.faq` z istniejącym typem
+  `faqSection`, bez równoległego modelu. HTML/Markdown/JSON-LD mają docelowo
+  korzystać z tych samych danych. Schema/GROQ/TypeGen/Astro nie zmieniano.
+- Aktualną dokumentację SEO sprawdzono: Google nie pokazuje FAQ rich results
+  od 7 maja 2026; FAQPage pozostaje typem Schema.org. Źródła i ograniczenie
+  zapisano w BLOG-CMS-CONFIG-3A.md. Makieta nadal ma noindex; bez publikacji.
+- QA Chromium/Firefox/WebKit: PASS, 320/390/1440 px bez overflow, CSS zoom 200%,
+  reduced motion, klawiatura bez JS. Axe FAQ Chromium light/dark: 0 naruszeń.
+  Desktop/mobile obejrzano: `/private/tmp/ola-blog-faq-qa/`. Natywny zoom,
+  czytnik i fizyczne urządzenie niewykonane.
+- `npm run verify`: PASS, 57 unit, 45 E2E, format, tokeny, lint, typy,
+  build Astro/Studio, dry-run Workera i kontrola artefaktów. Log:
+  `/private/tmp/ola-blog-faq-verify.log`. Końcowy format i lokalne odnośniki
+  dokumentacji oraz diff-check zakresu: PASS. Paczka feedbacku: 34 publiczne
+  pliki i kontrola odnośników PASS; bez deployu. Podgląd otwarto na `#faq`.
+  Bez commita, pusha i zmian CMS.
+
+## Korekta prawej kolumny artykułu 3a — 2026-10-06
+
+- Na zlecenie użytkownika „Sprawdź również” przeniesiono z pływającego panelu
+  do prawej kolumny, pod CTA newslettera. Cała kolumna jest sticky na desktopie;
+  przy małej wysokości ma własne przewijanie. Na tablet/mobile oba bloki
+  pozostają w przepływie pod artykułem i autorem. Próg 50% rich textu zachowano.
+- Regresję E2E rozszerzono o położenie panelu wewnątrz kolumny i pod newsletterem.
+  Dodatkowy QA Chromium/Firefox/WebKit: brak kolizji z tekstem, e-bookami, FAQ,
+  newsletterem i footerem przy 320/390/768/1440 px oraz wysokości 600 px;
+  brak overflow, CSS zoom 200%, reduced motion i treść bez JS: PASS.
+  Axe Chromium: 0 naruszeń. Desktop/mobile obejrzano w
+  `/private/tmp/ola-blog-sidebar-qa/`. Natywny zoom, czytnik i fizyczne urządzenie
+  niewykonane. Pierwszy pomocniczy pomiar WebKit wykonany po stałych 100 ms był
+  przed ujawnieniem panelu; ponowny pomiar czekał na widoczność i przeszedł.
+- `npm run verify`: PASS, 57 unit i 45 E2E, format, tokeny, lint, typy,
+  build Astro/Studio, dry-run Workera i kontrola artefaktów. Log:
+  `/private/tmp/ola-blog-sidebar-verify.log`. Instrukcję CMS i README dopasowano
+  do nowego układu. Bez zmian CMS, publikacji, commita i pusha.
+
 ## Następny krok
 
 Zebrać feedback do lokalnego 3a i nowego mockupu artykułu blogowego.
