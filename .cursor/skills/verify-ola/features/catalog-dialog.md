@@ -22,9 +22,9 @@ Preconditions:
 
 - **Katalog.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /ui/`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Katalog komponentów"`.
 - **Otwórz.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Jak pracujemy" --exact`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role dialog --state visible`.
+- **Dowód.** Przy otwartym dialogu uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path catalog-dialog/open.aria.txt` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path catalog-dialog/open.png`.
 - **Escape.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser press --key Escape`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role dialog --state hidden`.
 - **Zamknij przyciskiem.** Uruchom ponownie click „Jak pracujemy”, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Zamknij" --exact` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role dialog --state hidden`.
-- **Dowód.** Przed zamknięciem drugiego otwarcia zbierz otwarty dialog: po pierwszym `expect --role dialog --state visible` uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path catalog-dialog/open.aria.txt` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path catalog-dialog/open.png`. Powtórz otwarcie, jeśli dowód zbierasz po zamknięciu.
 
 ## Gotchas
 
