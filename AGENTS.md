@@ -8,6 +8,12 @@
   kontroli, decyzje, blokady i konkretny następny krok. Dokumentacja nie oznacza
   zakończenia opisanej w niej implementacji.
 - Komunikacja i dokumentacja po polsku, nazwy w kodzie po angielsku.
+- Decyzje użytkownika dotyczące treści, cen, oferty, CTA, kolejności i widoczności
+  sekcji zapisuj w tej samej sesji w [konfiguracji CMS](docs/HOMEPAGE-CMS-CONFIG.md),
+  gdy wpływają na przyszłą konfigurację Sanity. Utrzymuj bieżące wartości, źródło
+  i datę decyzji oraz mapowanie do pól. Rozróżniaj ustalenia, propozycje,
+  brakujące możliwości schematu i wykonaną konfigurację; nie deklaruj wdrożenia
+  CMS na podstawie dokumentacji lub mockupu.
 
 ## Architektura
 

@@ -1,0 +1,39 @@
+/* Dopasowanie zatwierdzonego copy wyłącznie w mockupie 3a. */
+.copy-refined .hero h1 {
+  font-size: clamp(48px, 5.8vw, 84px);
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.copy-refined .hero-description {
+  max-width: 52ch;
+}
+.copy-refined .approach-summary {
+  margin-top: 32px;
+  font-size: 24px;
+  font-weight: 550;
+  max-width: 24ch;
+}
+.copy-refined .why-intro h2 {
+  text-wrap: balance;
+}
+.copy-refined .book-card > p {
+  min-height: 5.4em;
+}
+.copy-refined .review-card blockquote {
+  font-size: clamp(22px, 2vw, 28px);
+  letter-spacing: -0.025em;
+}
+.copy-refined .newsletter .email-row {
+  flex-wrap: wrap;
+}
+.copy-refined .newsletter .button {
+  white-space: normal;
+}
+@container page (max-width: 767px) {
+  .copy-refined .hero h1 {
+    font-size: clamp(42px, 9.4vw, 64px);
+  }
+  .copy-refined .book-card > p {
+    min-height: 0;
+  }
+}

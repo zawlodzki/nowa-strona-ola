@@ -361,8 +361,22 @@ materiały dla kobiet z PCOS i w perimenopauzie oraz konsultacje dietetyczne onl
       subdomenę feedbacku po kontroli lokalnej i publicznym smoke (2026-10-06).
 - [x] Przygotować [PR #17](https://github.com/zawlodzki/nowa-strona-ola/pull/17)
       z makietami, poprawkami i konfiguracją publicznego podglądu (2026-10-06).
-- [ ] Wybrać kierunek z użytkownikiem i ustalić finalne treści, dane pacjentek,
-      opinie, ceny, współprace i profile social media.
+- [x] Wybrać 3a jako bazę dalszej pracy z użytkownikiem (2026-10-06).
+- [x] Zweryfikować kontekst FIRMA i poprzednie repo `ola-homepage`; przygotować
+      [propozycję copy 3a](HOMEPAGE-COPY-3A.md) bez wdrożenia (2026-10-06).
+- [x] Wdrożyć zatwierdzone copy w 3a; oferta: pojedyncze konsultacje.
+      Opinie z `ola-homepage` potwierdzone przez użytkownika (2026-10-06).
+- [x] Ustawić 97 zł brutto dla sześciu e-booków i przywrócić marki/social media
+      oraz wyróżnienie konsultacji 1:1 na polecenie użytkownika (2026-10-06).
+- [x] Ustawić liczbę 450+ kobiet rocznie zgodnie z informacją użytkownika
+      przy opisie konsultacji w 3a (2026-10-06).
+- [x] Zapisać bieżące decyzje, treści i mapowanie homepage 3a w
+      [specyfikacji konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md) oraz zasadę
+      aktualizacji dokumentu przy kolejnych decyzjach użytkownika (2026-10-06).
+- [x] Przygotować [PR #18](https://github.com/zawlodzki/nowa-strona-ola/pull/18)
+      z aktualizacją mockupów 3a i dokumentacją CMS po pełnej weryfikacji lokalnej.
+- [ ] Ustalić finalne treści i dostępność e-booków, ceny konsultacji,
+      współprace i profile social media.
 - [ ] Dopiero po wyborze przenieść zaakceptowane rozwiązanie do współdzielonych
       komponentów Astro i modelu treści Sanity.
 
@@ -385,3 +399,19 @@ polecenie użytkownika; nie zmieniono tokenów Wonderful ani styli aplikacji.
 
 Przed implementacją zmiennych API sprawdzić aktualną dokumentację i wersje
 zależności; źródła nie zastępują wyników testów w projekcie.
+
+## Mockup artykułu blogowego 3a — 2026-10-06
+
+- [x] Przygotować osobny mockup HTML w estetyce zaakceptowanego homepage 3a.
+- [x] Dodać navbar, breadcrumb, H1, obraz główny i obie daty.
+- [x] Zbudować rich text, spis H2 po lewej i CTA newslettera po prawej.
+- [x] Dodać biogram autora, trzy tematyczne e-booki, dolny newsletter i footer.
+- [x] Sprawdzić Chromium/Firefox/WebKit, 320/390/768/1440 px, CSS zoom 200%,
+      klawiaturę, reduced motion, brak JS i lokalny formularz; axe Chromium light/dark.
+- [x] Opisać istniejące pola i wymagane rozszerzenia Sanity.
+- [ ] Przenieść zaakceptowany szablon do Astro i wdrożyć rozszerzenia CMS.
+- [ ] Uzupełnić rzeczywisty artykuł, daty i media po akceptacji redakcyjnej.
+
+[Mockup](../mockups/homepage/article-3a.html),
+[instrukcja CMS](BLOG-CMS-CONFIG-3A.md). Mockup i dokumentacja nie zamykają
+etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
