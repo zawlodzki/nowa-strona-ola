@@ -1,11 +1,11 @@
 ---
 name: verify-ola
-description: "Uruchamia statyczny serwis Astro (strona Oli) i prowadzi go jak użytkownik przez Chromium: strony PL/EN, katalog, blog i formularz demonstracyjny. Sięgnij po ten skill, gdy zmiana dotyczy publicznego UI, tras, treści fixture albo zachowania bez wysyłki leada."
+description: "Uruchamia statyczny serwis Astro (strona Oli) i prowadzi go jak użytkownik przez Chromium: strony PL/EN, katalog, katalog 3a, blog i formularz demonstracyjny. Sięgnij po ten skill, gdy zmiana dotyczy publicznego UI, tras, treści fixture albo zachowania bez wysyłki leada."
 ---
 
 # Weryfikacja strony Oli
 
-Publiczna powierzchnia to statyczny serwis Astro. Użytkownik otwiera HTML w przeglądarce: strona główna `/`, angielska `/en/`, katalog `/ui/` i `/en/ui/`, blog, landingi oraz `/static/`. Studio Sanity, podgląd szkiców na porcie 4322 i Worker integracji są osobnymi procesami. Ten skill ich nie uruchamia i nie weryfikuje.
+Publiczna powierzchnia to statyczny serwis Astro. Użytkownik otwiera HTML w przeglądarce: strona główna `/`, angielska `/en/`, katalog `/ui/` i `/en/ui/`, katalog 3a `/design-system/`, blog, landingi fixture oraz `/static/`. Studio Sanity, podgląd szkiców na porcie 4322 i Worker integracji są osobnymi procesami. Ten skill ich nie uruchamia i nie weryfikuje. Mockupy HTML w `mockups/homepage/` nie są tym serwisem.
 
 Treść bez `PUBLIC_SANITY_*` pochodzi z fixture’ów wbudowanych w `dist/`. Dwa podglądy na różnych portach mogą czytać ten sam `dist/` równolegle. Nie przebudowuj `dist/` w trakcie sesji. Nie podłączaj się do cudzego procesu na 4321 (testy Playwright) ani 4322 (podgląd szkiców).
 

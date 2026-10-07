@@ -31,3 +31,4 @@ Preconditions:
 - „Zamknij” jest w dialogu. Kliknięcie poza otwartym dialogiem nie jest tym przepisem.
 - Angielskie nazwy to „How we work” i „Close”. Nie mieszaj ich z polskim przebiegiem.
 - Fokus po Escape wraca na przycisk w teście Playwright. Ten harness nie czyta aktywnego elementu. Dowodem zamknięcia jest brak dialogu, nie sam fokus.
+- Link „Docelowy design system 3a” prowadzi na `/design-system/`. To inna strona i inny przepis. Ten przebieg zostaje na `/ui/`.
