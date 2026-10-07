@@ -89,7 +89,7 @@ export const EBOOK_SEED = [
     slug: { pl: "waga-cie-oklamuje", en: "the-scale-is-lying" },
     topic: "perimenopause" as const,
     sortOrder: 4,
-    coverTone: "cherry" as const,
+    coverTone: "light" as const,
     title: { pl: "Waga Cię okłamuje", en: "The scale is lying" },
     subtitle: { pl: "Więcej niż kilogramy", en: "More than kilograms" },
     description: {
@@ -101,7 +101,7 @@ export const EBOOK_SEED = [
     slug: { pl: "czy-to-juz", en: "is-this-it" },
     topic: "perimenopause" as const,
     sortOrder: 5,
-    coverTone: "light" as const,
+    coverTone: "cherry" as const,
     title: { pl: "Czy to już?", en: "Is this it already?" },
     subtitle: { pl: "Poznaj swój rytm", en: "Learn your rhythm" },
     description: {
@@ -113,7 +113,7 @@ export const EBOOK_SEED = [
     slug: { pl: "noc-zaczyna-sie-o-osiemnastej", en: "night-starts-at-six" },
     topic: "perimenopause" as const,
     sortOrder: 6,
-    coverTone: "cherry" as const,
+    coverTone: "light" as const,
     title: {
       pl: "Noc zaczyna się o osiemnastej",
       en: "Night starts at six",
@@ -165,6 +165,54 @@ export function homepageHeaderCta(language: Locale) {
     href: homeAnchor(language, "newsletter"),
     emphasis: "default",
   };
+}
+
+export function footerSocialLinks() {
+  return [
+    {
+      _key: "social-instagram",
+      label: "Instagram",
+      href: "https://www.instagram.com/",
+    },
+    {
+      _key: "social-facebook",
+      label: "Facebook",
+      href: "https://www.facebook.com/",
+    },
+    {
+      _key: "social-tiktok",
+      label: "TikTok",
+      href: "https://www.tiktok.com/",
+    },
+  ];
+}
+
+export function footerLegalLinks(language: Locale) {
+  return language === "pl"
+    ? [
+        {
+          _key: "legal-privacy",
+          label: "Polityka prywatności",
+          href: "/polityka-prywatnosci/",
+        },
+        {
+          _key: "legal-terms",
+          label: "Regulamin",
+          href: "/regulamin/",
+        },
+      ]
+    : [
+        {
+          _key: "legal-privacy",
+          label: "Privacy policy",
+          href: "/en/privacy/",
+        },
+        {
+          _key: "legal-terms",
+          label: "Terms",
+          href: "/en/terms/",
+        },
+      ];
 }
 
 export const homepageCopy = {
@@ -224,14 +272,15 @@ export const homepageCopy = {
     consultationAction: "Zarezerwuj konsultację",
     testimonialsTitle: "O współpracy ze mną.",
     testimonialsLead: "Doświadczenia moich podopiecznych",
-    newsletterTitle: "Mniej sprzecznych rad. Więcej konkretów.",
+    newsletterTitle: "Mniej sprzecznych rad.\nWięcej konkretów.",
     newsletterLead:
       "Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.",
     newsletterSubmit: "Chcę otrzymywać newsletter",
     newsletterSuccess: "Dane poprawne. Nic nie wysłano.",
     newsletterNoscript:
       "Włącz JavaScript, aby sprawdzić formularz demonstracyjny. Dane nie są zapisywane ani wysyłane.",
-    emailLabel: "Adres e-mail",
+    emailLabel: "Twój adres e-mail",
+    emailPlaceholder: "np. ola@przyklad.pl",
     emailError: "Wpisz poprawny adres e-mail.",
     consentLabel:
       "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane.",
@@ -296,14 +345,15 @@ export const homepageCopy = {
     consultationAction: "Book a consultation",
     testimonialsTitle: "About working with me.",
     testimonialsLead: "Experiences of the women I support",
-    newsletterTitle: "Fewer conflicting tips. More specifics.",
+    newsletterTitle: "Fewer conflicting tips.\nMore specifics.",
     newsletterLead:
       "I write about PCOS, insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and news about new materials, including perimenopause.",
     newsletterSubmit: "I want the newsletter",
     newsletterSuccess: "The details look correct. Nothing was sent.",
     newsletterNoscript:
       "Turn on JavaScript to check the demonstration form. Nothing is stored or sent.",
-    emailLabel: "Email address",
+    emailLabel: "Your email address",
+    emailPlaceholder: "e.g. ola@example.com",
     emailError: "Enter a valid email address.",
     consentLabel:
       "I agree to receive the newsletter. This is a demonstration — nothing will be sent.",

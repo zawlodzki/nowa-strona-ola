@@ -64,8 +64,15 @@ Stan kodu 07.10.2026 (pakiet 5): fixture’y mają Konsultacje → `/konsultacje
 (EN `/en/consultations/`), O mnie → `/o-mnie/` (EN `/en/about/`),
 E-booki → `/ebooki/` (EN `/en/ebooks/`), Blog → `/blog/`.
 `siteSettings` w Content Lake nie zmieniono.
-Profile w `siteSettings.socialLinks`: nazwy ustalone, prawdziwe HTTPS URL do
-uzupełnienia. `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
+Profile w `siteSettings.socialLinks`: nazwy ustalone (Instagram, Facebook,
+TikTok). Fixture i fallback 07.10.2026 używają stron głównych platform
+(`https://www.instagram.com/`, `https://www.facebook.com/`,
+`https://www.tiktok.com/`) wyłącznie jako wartości makiety, żeby linki były
+widoczne. To **nie** są profile Oli. Prawdziwe HTTPS URL do decyzji.
+`podglad.html?...` nie jest adresem profilu ani produktu do CMS.
+Linki prawne w `siteSettings.legalLinks`: fixture PL `/polityka-prywatnosci/`
+i `/regulamin/`, EN `/en/privacy/` i `/en/terms/`. Stron jeszcze nie ma;
+treść i docelowe slugi do decyzji. Pola schematu już istniały.
 
 Tytuł i opis SEO w makiecie zawierają oznaczenie 3a i dłuższe teksty.
 Nie kopiować ich automatycznie do produkcji: `seo.title` ma limit 60 znaków,
@@ -107,14 +114,17 @@ Cena jako wartość liczbowa 97, waluta PLN i jawne oznaczenie brutto.
 Nie wyliczać VAT ani ceny netto bez osobnej konfiguracji. Format „97 zł brutto”
 generować z danych; nie powielać ceny w HTML, okładce i ręcznie wpisanym opisie.
 
-| Kolejność | Tytuł                         | Temat         | Cena         |
-| --------- | ----------------------------- | ------------- | ------------ |
-| 1         | Suplementy w PCOS             | PCOS          | 97 zł brutto |
-| 2         | Badania, które mają sens      | PCOS          | 97 zł brutto |
-| 3         | Szczupła, a jednak PCOS       | PCOS          | 97 zł brutto |
-| 4         | Waga Cię okłamuje             | Perimenopauza | 97 zł brutto |
-| 5         | Czy to już?                   | Perimenopauza | 97 zł brutto |
-| 6         | Noc zaczyna się o osiemnastej | Perimenopauza | 97 zł brutto |
+| Kolejność | Tytuł                         | Temat         | Cena         | Ton okładki (makieta 3a) |
+| --------- | ----------------------------- | ------------- | ------------ | ------------------------ |
+| 1         | Suplementy w PCOS             | PCOS          | 97 zł brutto | jasny                    |
+| 2         | Badania, które mają sens      | PCOS          | 97 zł brutto | wiśniowy                 |
+| 3         | Szczupła, a jednak PCOS       | PCOS          | 97 zł brutto | jasny                    |
+| 4         | Waga Cię okłamuje             | Perimenopauza | 97 zł brutto | jasny                    |
+| 5         | Czy to już?                   | Perimenopauza | 97 zł brutto | wiśniowy                 |
+| 6         | Noc zaczyna się o osiemnastej | Perimenopauza | 97 zł brutto | jasny                    |
+
+Tony 4–6 poprawiono 07.10.2026 do 1:1 z makietą (`cover-4` i `cover-6` jasne,
+`cover-5` ciemny). Fixture i seed są źródłem homepage, kolekcji i landingów.
 
 Homepage ma referencje do produktów w tej kolejności, a nie sześć kopii cen
 i opisów w osadzonych kartach. Wybranie grupy przewija do pierwszego produktu
@@ -246,7 +256,12 @@ Opinia o dotychczasowej współpracy
 
 ### newsletter
 
-**Mniej sprzecznych rad. Więcej konkretów.**
+**Mniej sprzecznych rad.**
+**Więcej konkretów.**
+
+Etykieta pola: Twój adres e-mail. Placeholder: `np. ola@przyklad.pl`.
+Przycisk „Chcę otrzymywać newsletter” ze strzałką, potem checkbox zgody.
+Układ wspólny 3a (07.10.2026, wyrównanie do makiety).
 
 Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.
 

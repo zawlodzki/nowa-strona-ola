@@ -527,6 +527,7 @@ export function toFormCopy(section: {
           name?: string | null;
           input?: string | null;
           label?: string | null;
+          placeholder?: string | null;
           errorMessage?: string | null;
           required?: string | null;
           options?: (string | null)[] | null;
@@ -540,6 +541,7 @@ export function toFormCopy(section: {
       name: required(field.name, "identyfikator pola"),
       input,
       label: required(field.label, "etykieta pola"),
+      placeholder: field.placeholder ?? undefined,
       errorMessage: required(field.errorMessage, "komunikat błędu pola"),
       required: field.required !== "optional",
       options: (field.options ?? []).filter((item): item is string =>

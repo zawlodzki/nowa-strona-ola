@@ -10,6 +10,7 @@ import DemoForm from "@/design-system/components/DemoForm.astro";
 import Heading from "@/design-system/components/Heading.astro";
 import Hero from "@/design-system/components/Hero.astro";
 import Newsletter from "@/design-system/components/Newsletter.astro";
+import PriceGross from "@/design-system/components/PriceGross.astro";
 import ReviewCard from "@/design-system/components/ReviewCard.astro";
 import Section from "@/design-system/components/Section.astro";
 import SplitPanel from "@/design-system/components/SplitPanel.astro";
@@ -21,7 +22,7 @@ import BookCoverArt, {
 import CheckMark from "@/design-system/decorations/CheckMark.astro";
 import CoverStage from "@/design-system/decorations/CoverStage.astro";
 import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
-import { formatPriceGross, topicLabel } from "@/lib/offer";
+import { currencyLabel, topicLabel } from "@/lib/offer";
 import { pickSiteImage } from "@/lib/site-images";
 import type { HomepageView } from "@/content/map-homepage";
 import type { LogoItem } from "@/sections/types";
@@ -275,9 +276,12 @@ function coverLabels(kind: CoverArtKind): string[] {
                     />
                   </BookCover>
                 </CoverStage>
-                <span slot="price">
-                  {formatPriceGross(item.priceGross, item.currency, lang)}
-                </span>
+                <PriceGross
+                  slot="price"
+                  amount={item.priceGross}
+                  unit={currencyLabel(item.currency, lang)}
+                  note={pl ? "brutto" : "gross"}
+                />
               </ContentCard>
             </div>
           );

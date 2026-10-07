@@ -7,6 +7,7 @@ import Container from "@/design-system/components/Container.astro";
 import DemoForm from "@/design-system/components/DemoForm.astro";
 import Heading from "@/design-system/components/Heading.astro";
 import Newsletter from "@/design-system/components/Newsletter.astro";
+import PriceGross from "@/design-system/components/PriceGross.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
 import BookCoverArt from "@/design-system/decorations/BookCoverArt.astro";
 import CoverStage from "@/design-system/decorations/CoverStage.astro";
@@ -17,7 +18,7 @@ import {
 } from "@/content/ebook-collection-seed";
 import type { EbookCollectionView } from "@/content/map-ebook-collection";
 import { ebookCoverArt, ebookCoverLabels } from "@/lib/ebook-covers";
-import { formatPriceGross, topicLabel } from "@/lib/offer";
+import { currencyLabel, topicLabel } from "@/lib/offer";
 import {
   ebookCollectionFilterParam,
   ebookCollectionPath,
@@ -222,14 +223,12 @@ const jsonLd = {
                   </h3>
                   <p>{item.description}</p>
                   <div class="ebooks3a-action">
-                    <span class="ebooks3a-price">
-                      {formatPriceGross(
-                        item.priceGross,
-                        item.currency,
-                        lang,
-                      ).replace(pl ? " brutto" : " gross", "")}{" "}
-                      <small>{pl ? "brutto" : "gross"}</small>
-                    </span>
+                    <PriceGross
+                      class="ebooks3a-price"
+                      amount={item.priceGross}
+                      unit={currencyLabel(item.currency, lang)}
+                      note={pl ? "brutto" : "gross"}
+                    />
                     <TextLink href={item.href}>
                       {collection.cardActionLabel}
                     </TextLink>
@@ -502,7 +501,7 @@ const jsonLd = {
     color: var(--ao-muted);
   }
   .ebooks3a-price {
-    font-size: 15px;
+    font-size: 17px;
   }
   .ebooks3a-price small {
     font-size: 13px;

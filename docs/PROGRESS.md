@@ -1,9 +1,41 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 5 — EbookCollection3a).
+Aktualizacja: 2026-10-07 (pakiet 5 — wyrównanie makiety kolekcji).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja poprawek makiety kolekcji — 07.10.2026
+
+Zakres: nic nie wypada względem `ebooks-3a.html` (zasada Grzesia). Poprawki
+na tym samym branchu co pakiet 5.
+
+Wykonane:
+
+1. Tony okładek 4–6 w `EBOOK_SEED`: „Waga Cię okłamuje” i „Noc zaczyna się o
+   osiemnastej” jasne, „Czy to już?” wiśniowa. Ten sam seed zasila homepage,
+   kolekcję i landing.
+2. Cena kart: „97 zł” + mniejsze „brutto” w nowej linii (`PriceGross` /
+   `.ao-price small { display: block }`), także na homepage.
+3. Newsletter 3a (`DemoForm` wszędzie tam, gdzie 3a go używa): etykieta
+   „Twój adres e-mail”, placeholder `np. ola@przyklad.pl`, zaokrąglone pole
+   (`--ao-radius-panel`), rząd e-mail + przycisk ze strzałką, checkbox po
+   przycisku.
+4. Stopka wspólna: Instagram / Facebook / TikTok ze strzałkami oraz Polityka
+   prywatności / Regulamin. Pola `siteSettings` już istniały; uzupełniono
+   fixture i fallback przy pustych tablicach.
+5. Nagłówek newslettera w seedzie homepage ma łamanie wiersza jak w makiecie.
+
+Kontrole i screenshoty — w tej samej sesji po `npm run verify`.
+
+Do decyzji (brak prawdziwych adresów):
+
+- Profile: Instagram, Facebook, TikTok Oli. Fixture używa stron głównych
+  platform, nie kont.
+- Strony prawne: `/polityka-prywatnosci/`, `/regulamin/` (EN `/en/privacy/`,
+  `/en/terms/`) — brak dokumentów i treści.
+
+Następny krok po tej sesji: pakiet 6 BlogCollection3a, o ile verify przejdzie.
 
 ### Sesja pakietu 5 — kolekcja e-booków 3a — 07.10.2026
 

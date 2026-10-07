@@ -1,0 +1,16 @@
+---
+interface Props {
+  amount: number;
+  unit: string;
+  note: string;
+  class?: string;
+}
+
+const { amount, unit, note, class: className } = Astro.props;
+---
+
+<span class:list={["ao-price", className]}>
+  {amount}
+  {unit}
+  <small>{note}</small>
+</span>

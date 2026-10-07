@@ -32,6 +32,14 @@ describe("ebook collection 3a fixtures", () => {
     );
     expect(view.isEmpty).toBe(false);
     expect(view.alternateHref).toBe("/en/ebooks/");
+    expect(view.collection.items.map((item) => item.coverTone)).toEqual([
+      "light",
+      "cherry",
+      "light",
+      "light",
+      "cherry",
+      "light",
+    ]);
   });
 
   it("does not use Polish copy under the English collection", async () => {

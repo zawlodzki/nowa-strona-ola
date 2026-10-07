@@ -1,5 +1,6 @@
 import type { Locale } from "@ola/shared";
 
+import { footerLegalLinks, footerSocialLinks } from "@/content/homepage-seed";
 import type { PageContent } from "@/sanity/repository";
 
 type PageSection = NonNullable<PageContent["sections"]>[number];
@@ -124,6 +125,7 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
 }
 
 export function shellLinks(settings: {
+  language?: string | null;
   navigation?:
     ({ label?: string | null; href?: string | null } | null)[] | null;
   headerCta?: { label?: string | null; href?: string | null } | null;
@@ -132,6 +134,13 @@ export function shellLinks(settings: {
   legalLinks?:
     ({ label?: string | null; href?: string | null } | null)[] | null;
 }) {
+  const language = settings.language === "en" ? "en" : "pl";
+  const socialLinks = (settings.socialLinks ?? []).flatMap((item) =>
+    item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
+  );
+  const legalLinks = (settings.legalLinks ?? []).flatMap((item) =>
+    item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
+  );
   return {
     navigation: (settings.navigation ?? []).flatMap((item) =>
       item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
@@ -140,11 +149,7 @@ export function shellLinks(settings: {
       settings.headerCta?.label && settings.headerCta.href
         ? { label: settings.headerCta.label, href: settings.headerCta.href }
         : undefined,
-    socialLinks: (settings.socialLinks ?? []).flatMap((item) =>
-      item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
-    ),
-    legalLinks: (settings.legalLinks ?? []).flatMap((item) =>
-      item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
-    ),
+    socialLinks: socialLinks.length > 0 ? socialLinks : footerSocialLinks(),
+    legalLinks: legalLinks.length > 0 ? legalLinks : footerLegalLinks(language),
   };
 }

@@ -51,13 +51,17 @@ test("form validation, error recovery and no network submission", async ({
     exact: true,
   });
   await submit.click();
-  await expect(page.getByLabel("Adres e-mail", { exact: true })).toBeFocused();
+  await expect(
+    page.getByLabel("Twój adres e-mail", { exact: true }),
+  ).toBeFocused();
   await expect(page.locator("#email-error")).toBeVisible();
-  await page.getByLabel("Adres e-mail", { exact: true }).fill("wrong");
+  await page.getByLabel("Twój adres e-mail", { exact: true }).fill("wrong");
   await submit.click();
-  await expect(page.getByLabel("Adres e-mail", { exact: true })).toBeFocused();
+  await expect(
+    page.getByLabel("Twój adres e-mail", { exact: true }),
+  ).toBeFocused();
   await page
-    .getByLabel("Adres e-mail", { exact: true })
+    .getByLabel("Twój adres e-mail", { exact: true })
     .fill("test@example.com");
   await submit.click();
   await expect(
@@ -421,6 +425,16 @@ test("ebook collection Polish and English with categories, empty URL and no POST
       .getByRole("navigation", { name: "Nawigacja w stopce" })
       .getByRole("link", { name: "E-booki", exact: true }),
   ).toHaveAttribute("aria-current", "page");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Profile społecznościowe" })
+      .getByRole("link", { name: "Instagram" }),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("navigation", { name: "Informacje prawne" })
+      .getByRole("link", { name: "Polityka prywatności" }),
+  ).toHaveAttribute("href", "/polityka-prywatnosci/");
 
   const all = page.getByRole("radio", { name: /Wszystkie/ });
   await all.focus();

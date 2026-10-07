@@ -262,6 +262,7 @@ export interface FormFieldCopy {
   name: string;
   input: FormInputKind;
   label: string;
+  placeholder?: string;
   errorMessage: string;
   required: boolean;
   options?: string[];
