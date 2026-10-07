@@ -1364,6 +1364,152 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   Bez publikacji, commita, pusha, checkoutu i zmian CMS. Istniejące zmiany
   użytkownika, w tym równoległy zapis scalenia PR #19, zachowano.
 
+## Plan „O mnie” 3a — 2026-10-06
+
+- Na zlecenie użytkownika przygotowano [plan mockupu i propozycję copy](ABOUT-MOCKUP-PLAN-3A.md).
+  Zakres sesji: planowanie, bez zmian HTML/CSS/JS, CMS i poprzedniego repo.
+- Przejrzano aktualny plan, postęp, zasady jakości, decyzje CMS, źródła FIRMA
+  (marka, klienci, style guide, rozstrzygnięcia źródeł), `app/o-mnie/page.js`,
+  pełny zestaw opinii oraz „10000000 Sales Copy Advice”. Nie korzystano z kart
+  zdrowia pacjentek. Instrukcje w materiałach zewnętrznych traktowano jako kontekst.
+- Zaproponowano hero „Jestem Ola. Znam PCOS od środka.”, krótki osobisty kontekst,
+  trzy panele podejścia, dwa pełne cytaty, panel pojedynczej konsultacji i wspólny
+  newsletter. Układ, nowe copy, dobór opinii, CTA i slug są propozycją do oceny.
+- Zachowano ustalenia o specjalizacji PCOS/IO i liczbie 450+ kobiet rocznie.
+  Nie rozszerzono kwalifikacji o perimenopauzę, nie dopisano uczelni ani efektów
+  zdrowotnych. Historia czterech lat do diagnozy znaleziona w wtórnym style guide
+  pozostaje poza podstawowym copy do potwierdzenia; informacje rodzinne nie są publicznym bio.
+- Użyto skilla Impeccable do planowania. Helper `context` rozpoznał workspace’y,
+  ale nie wskazał głównego frontendu; kierunek i zakres ustalono z bezpośredniego
+  zlecenia oraz rzeczywistego 3a. Nie tworzono alternatywnej tożsamości marki.
+- Narzędzie Chrome DevTools nie otworzyło strony z powodu zajętego profilu.
+  Playwright Chromium w sandboxie zgłosił błąd uprawnień macOS; uruchomienie poza
+  sandboxem wykonało świeże zrzuty istniejącego 3a przy 1440/390 px. Oba obejrzano:
+  `/private/tmp/ola-about-reference-1440.png` i `/private/tmp/ola-about-reference-390.png`.
+  Potwierdzono biały background i aktualny H1. To oględziny referencji, nie QA nowej strony.
+- Sprawdzono istniejące modele `page`, sekcji i `author`; opisano luki nadtytułu,
+  pojedynczego wskaźnika, paneli tekstowych, anonimowych opinii i CTA tekst–obraz.
+  Zapisano ustalony zakres i status propozycji w HOMEPAGE-CMS-CONFIG.md.
+- Kontrole dokumentacji: cztery dokumenty, 73 lokalne odnośniki i brak końcowych
+  białych znaków: PASS. Dwa cytaty zgodne z oryginałem znak w znak; metadata
+  propozycji: tytuł 54/60, opis 153/160 znaków. Format czterech plików: PASS.
+  Lokalne nvm niedostępne; pierwsze formatowanie wykonał Node 26.10.0, końcową
+  kontrolę wykonano Node 24.21.0 z `/private/tmp/ola-node24/`.
+  `git diff --check` dla zmienionych dokumentów: PASS; kontrola całego repo
+  wskazała istniejącą końcową spację w cudzej zmianie
+  `.agents/skills/sandbox-stable/SKILL.md:109` — pozostawiono bez zmian.
+  `npm run verify` nie uruchamiano, ponieważ nie zmieniono aplikacji.
+  Testy nowej strony, 320 px, zoom, klawiatura, axe i reduced motion pozostają
+  do wykonania po implementacji mockupu. Bez commita, pusha i publikacji.
+
+## Doprecyzowanie konsultacji i dyplomu — 2026-10-06
+
+- Bezpośrednia decyzja użytkownika: CTA ma prowadzić do kalendarza rezerwacji
+  płatnej konsultacji, 450 zł za godzinę. W planie zapisano 450 zł / 60 minut
+  obok obu głównych CTA; proponowana etykieta „Zarezerwuj konsultację”.
+- Użytkownik potwierdził ukończenie dietetyki klinicznej na Śląskim Uniwersytecie
+  Medycznym. Uczelnię dodano do leadu i osobnego bloku wykształcenia;
+  zaplanowano ramkę „Miejsce na skan dyplomu” oraz przyszły podgląd dokumentu.
+  Nie dopisano stopnia akademickiego ani daty ukończenia.
+- Zaktualizowano plan, checklistę i bieżące wartości w HOMEPAGE-CMS-CONFIG.md.
+  Wyjaśniono, że nowa decyzja o rezerwacji jest nowsza niż obecne HTML homepage.
+  Sprawdzono `service` i `mediaObject`; opisano brakujące pola ceny/czasu/URL,
+  wykształcenia i skanu oraz ograniczenie obrazu względem PDF.
+- Stary Cal.com `dietetyk/bezplatna-konsultacja` znaleziony w `CalEmbed.js`
+  dotyczy darmowego wydarzenia. Nie przypisano go do płatnego CTA; poproszono
+  o właściwy URL. Użytkownik wskazał tymczasowo `https://cal.com` i zapowiedział
+  późniejsze uzupełnienie konkretnego linku. Plan i konfiguracja zapisują ten
+  adres jako cel mockupu, bez deklarowania gotowej płatnej rezerwacji.
+  Docelowy link wydarzenia i skan pozostają do uzupełnienia, nie blokują planu.
+- Zakres: wyłącznie dokumentacja. HTML, CMS, kalendarz i płatności nie zostały
+  zmienione ani skonfigurowane. Bez publikacji. Kontrole dokumentacji na Node
+  24.21.0: format czterech plików, 73 lokalne odnośniki, brak końcowych białych
+  znaków i diff-check dokumentów: PASS. Sprawdzono spójność ceny, czasu, CTA,
+  uczelni i ramki skanu w planie; cytaty opinii pozostają zgodne z oryginałem.
+  `npm run verify` nie uruchamiano — wyłącznie zmiany dokumentacji.
+
+## Mockup „O mnie” i korekta CTA — 2026-10-07
+
+- Użytkownik wyjaśnił, że wcześniejsza wyłączność CTA konsultacji wynikała
+  z pomylenia podstron. Zlecił mockup „O mnie” i uwzględnienie E-E-A-T.
+  Nowy zakres ma pierwszeństwo; cena/czas, Cal.com i uczelnia pozostają ustalone.
+- Wykonano `about-3a.html` oraz układ CSS dziedziczący paletę i komponenty 3a.
+  Hero: osobiste doświadczenie i ukończona uczelnia, akcje do podejścia/materiałów.
+  Dalej historia z 450+, wykształcenie i jawne miejsce na skan, trzy panele
+  podejścia, dwie pełne opinie, materiały, konsultacja i wspólny newsletter.
+- Dodano wejście z homepage 3a, biogramu artykułu i indeksu. Pozostałe kierunki
+  zachowane. Ekran kontaktu makiety ma własny opis; powrót rozpoznaje `about-3a`.
+- Skille Impeccable oraz SEO/AEO; sprawdzono aktualne Google Search Central
+  o pomocnej treści i ProfilePage. Wynik opisano w ABOUT-EEAT-3A.md.
+  Widoczne dane tożsamości i kwalifikacji zgodne z ProfilePage/Person/alumniOf;
+  bez fikcyjnego sameAs, ratings lub dokumentu. Noindex pozostaje.
+- Zaznaczono granice konsultacji dietetycznej, historyczny kontekst opinii,
+  status produktów i pochodzenie portretu AI. Nie deklarowano zweryfikowanego
+  zewnętrznie autorytetu, stopnia akademickiego ani procesu recenzji treści.
+  Skan, realny kontakt/profil i właściwe płatne wydarzenie są do uzupełnienia.
+- Próba uruchomienia serwera poza sandboxem: EADDRINUSE; użyto istniejącego
+  podglądu na 127.0.0.1:8766. Playwright odczytał nową stronę i jej zasoby.
+- Pierwsza kontrola wykazała overflow przy CSS zoom 200% w Chromium, potem
+  w Firefox. Usunięto sztywne szerokości logo, umożliwiono zawijanie akcji,
+  elementów nagłówka i wskaźnika oraz dodano układ dla bardzo wąskiej szerokości.
+  Pomocniczy skrypt axe poprawiono na jawny `browser.newContext()` — błąd
+  konfiguracji narzędzia, nie wyciszenie naruszenia. Wyniki końcowe poniżej.
+- Desktop, mobilne hero i sekcję dyplomu oraz ciemny motyw obejrzano
+  z aktualnych zrzutów i porównano z kierunkiem 3a.
+  Artefakty kontroli: `/private/tmp/ola-about-3a-qa/`.
+- QA mockupu: PASS, 21 zestawów kontroli w Chromium/Firefox/WebKit.
+  Szerokości 320, 390, 768, 900, 1024 i 1440 px bez poziomego overflow;
+  obrazy załadowane, jeden H1, unikalne ID, działające kotwice. Menu działa
+  klawiaturą (Enter/Escape i powrót fokusu). Newsletter pokazuje demo, bez POST.
+  CSS zoom 200%, reduced motion, Cal.com, JSON-LD i wersja bez JS: PASS.
+  Axe WCAG 2 A/AA, 2.1 AA i 2.2 AA: 0 naruszeń w jasnym i ciemnym motywie.
+- `npm run verify`: PASS na Node 24.21.0. Format, zgodność tokenów, ESLint,
+  typy aplikacji/workspace’ów, 57 testów jednostkowych, build publiczny/Studio/
+  podglądu/Worker (dry-run), kontrola buildu i 45 testów E2E przeszły.
+  Log: `/private/tmp/ola-about-3a-verify-complete.log`.
+- Wcześniejsze uruchomienia zatrzymały się na formatowaniu raportów QA
+  równoległego mockupu i jego dokumentacji. Dodano generowany katalog
+  `.impeccable/review/` do `.prettierignore`, zgodnie z wyłączeniem innych
+  raportów; dokument konsultacji wyłącznie sformatowano, bez zmiany treści.
+  Pełna bramka została następnie uruchomiona od początku i przeszła.
+- Kontrola dokumentacji: 7 plików, 141 lokalnych odnośników i 29 lokalnych
+  zasobów/linków HTML, kotwice oraz unikalne ID: PASS. `git diff --check`: PASS.
+  Pakowanie `node scripts/build-homepage-feedback.mjs`: PASS — 40 plików
+  publicznych, bez wdrażania.
+- Natywny zoom,
+  czytnik ekranu, urządzenie fizyczne, Lighthouse/CWV, Search Console i Google
+  Rich Results Test nie zostały wykonane. Bez publikacji, commita i pusha.
+
+## Przygotowanie PR „O mnie” — 2026-10-07
+
+- Na polecenie „pr merge” wydzielono mockup i jego dokumentację w osobnym
+  worktree. Zmiany konsultacji, skillów i lokalne raporty pozostały poza PR-em.
+- Poprawiono omyłkowo nadpisany nagłówek tabeli e-booków w instrukcji CMS.
+  Kolejność strony „O mnie” pozostaje w jej własnej tabeli.
+- Dokładny zakres PR ponownie zweryfikowano na Node 24.21.0: pełne verify
+  PASS, 57 unit i 45 E2E. Log `/private/tmp/ola-about-pr-verify.log`.
+  Siedem dokumentów, 134 lokalne odnośniki, 13 tabel Markdown, zasoby HTML
+  i diff-check: PASS. Bez publikacji i zmian CMS.
+- Utworzono PR #22; obie kontrole pierwszego commita przeszły. Próbę merge
+  przerwało równoległe scalenie PR #21. Połączono nowy main, zachowując oba
+  wpisy README, sekcje CMS/postępu i wejścia w indeksie; konsultacja identyczna
+  z main. Siedem dokumentów, 141 linków i 14 tabel: PASS.
+- Ponowne verify: 57 unit PASS, jeden timeout z 45 E2E w WebKit przy ponownym
+  otwarciu rekomendacji bloga. Osobna próba tego testu przeszła, ale odczyt
+  pokazał brak ustawienia fokusu po kliknięciu w Safari i możliwość ukrycia
+  panelu przy zmianie przewinięcia. Dodano fokus z preventScroll oraz asercje
+  utrzymania panelu z aktywnym przyciskiem poniżej progu; pełna bramka
+  wymagała domknięcia focusout opisanego poniżej. Log pierwszej próby po połączeniu:
+  `/private/tmp/ola-about-pr-verify-merged.log`.
+- Kolejna próba: 57 unit i 43/45 E2E; dwa błędy końcowego ukrycia panelu.
+  Dotychczasowy test próbował przenieść fokus na niefokusowalny H2. Zmieniono
+  go na natywny summary z asercją fokusu oraz przeliczanie widoczności po
+  focusout. Regresja rekomendacji Chromium/Firefox/WebKit: 3/3 PASS.
+  Nie zwiększono timeoutów, nie dodano retry ani nie wyłączono testu.
+- Końcowe pełne verify po połączeniu z PR #21 i poprawce: PASS, 57 unit
+  i 45 E2E na Node 24.21.0. Log `/private/tmp/ola-about-pr-verify-combined.log`.
+  Aktualizacja PR wymaga ponownego CI przed scaleniem.
+
 ## Landing pojedynczej konsultacji 3a — 2026-10-07
 
 - Na bezpośrednie zlecenie przygotowano `consultation-3a.html` i CSS:
@@ -1463,9 +1609,23 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   „O mnie”, indeksu bloga i skillów pozostają w dotychczasowym checkoutcie.
 - Nawigacja „O mnie” kolekcji prowadzi do istniejącej sekcji homepage, aby PR
   nie zależał od odrębnego mockupu.
-- Kolejny krok: kontrola wydzielonego zakresu, PR, zielone CI i squash merge.
+- Wydzielony worktree: `npm run verify` PASS na Node 24 (57 unit, 51 E2E),
+  log `/private/tmp/ola-ebooks-3a-pr-verify-final.log`. Pierwsza próba nie miała
+  workspace’owych zależności Studio; po ich podłączeniu pełna bramka PASS.
+- Utworzono [PR #23](https://github.com/zawlodzki/nowa-strona-ola/pull/23).
+  Obie kontrole Quality dla początkowego commita PASS: 4m52s i 5m7s.
+- W trakcie CI main otrzymał scalony PR #22. GitHub zablokował merge konfliktami.
+  Po kontroli zakresu i poleceniu „kontynuuj” włączono konkretny commit main
+  `d028de5`; konflikty dotyczyły tylko tego postępu i README makiet. Zachowano
+  opis obu mockupów, ich linki i implementacje.
+- Kolejny krok: ponowne kontrole z aktualnym main i squash merge PR #23.
 
 ## Następny krok
+
+Ocenić lokalny mockup „O mnie” i nowe wejścia do podejścia/materiałów.
+Uzupełnić skan dyplomu, rzeczywisty kontakt/profile oraz link płatnego wydarzenia;
+uczelnia, kierunek i 450 zł/60 minut są ustalone. Po akceptacji przenieść
+szablon i wspólny profil autora do Astro/Sanity. Pozostałe prace:
 
 Nowe zlecenie 07.10.2026: ocenić także lokalny landing pojedynczej konsultacji
 3a, jego copy i zakres. Uzupełnić URL wydarzenia oraz ustalić ewentualne pisemne
@@ -1479,8 +1639,8 @@ EBOOK-CMS-CONFIG-3A.md oraz wspólne referencje homepage/bloga.
 Po akceptacji bloga przenieść jego szablon do Astro oraz wdrożyć rozszerzenia
 z `BLOG-CMS-CONFIG-3A.md`; przykładowy artykuł zastąpić zaakceptowaną treścią. Kolejne decyzje zapisywać
 w HOMEPAGE-CMS-CONFIG.md. Na jej podstawie przygotować warianty i konfigurację
-Sanity po akceptacji kierunku. Ustalić cenę i szczegółowy zakres
-pojedynczej konsultacji, gotowość e-booków oraz współprace marek/profile.
+Sanity po akceptacji kierunku. Ustalić dodatkowy zakres
+pojedynczej konsultacji (cena 450 zł/60 minut ustalona), gotowość e-booków oraz współprace marek/profile.
 Po akceptacji przenieść copy i wygląd do Astro/Sanity. Publikacja publicznego
 mockupu wymaga zlecenia. Kroki techniczne odłożone:
 

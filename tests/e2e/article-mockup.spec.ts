@@ -84,9 +84,16 @@ test("related articles appear at half of the text and can be collapsed", async (
   expect(bounds.position).toBe("static");
   await panel.getByRole("button", { name: "Sprawdź również" }).click();
   await expect(page.locator("#recommended-articles")).toBeHidden();
+  await expect(
+    panel.getByRole("button", { name: "Sprawdź również" }),
+  ).toBeFocused();
+  await scrollToReadingProgress(page, 0.1);
+  await expect(panel).toBeVisible();
   await panel.getByRole("button", { name: "Sprawdź również" }).click();
   await expect(page.locator("#recommended-articles")).toBeVisible();
-  await page.locator(".article-richtext h2").first().focus();
+  const outsideTrigger = page.locator(".article-toc summary");
+  await outsideTrigger.focus();
+  await expect(outsideTrigger).toBeFocused();
   await scrollToReadingProgress(page, 0.1);
   await expect(panel).toBeHidden();
 });

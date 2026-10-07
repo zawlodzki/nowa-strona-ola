@@ -132,6 +132,8 @@ recommendations.hidden = true;
 recommendations.dataset.enhanced = "true";
 recommendationsTrigger.disabled = false;
 recommendationsTrigger.addEventListener("click", () => {
+  // Safari nie ustawia fokusu po kliknięciu przycisku; utrzymaj aktywny panel.
+  recommendationsTrigger.focus({ preventScroll: true });
   const expanded =
     recommendationsTrigger.getAttribute("aria-expanded") !== "true";
   recommendationsTrigger.setAttribute("aria-expanded", String(expanded));
@@ -153,6 +155,7 @@ function queueReadingProgress() {
   scrollPending = true;
   requestAnimationFrame(updateReadingProgress);
 }
+recommendations.addEventListener("focusout", queueReadingProgress);
 window.addEventListener("scroll", queueReadingProgress, { passive: true });
 window.addEventListener("resize", queueReadingProgress);
 new ResizeObserver(queueReadingProgress).observe(articleBody);
