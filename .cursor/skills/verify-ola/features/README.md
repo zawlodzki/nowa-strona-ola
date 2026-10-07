@@ -34,6 +34,7 @@ Każdy plik ma H1, jeden akapit zachowania widocznego dla użytkownika i dokład
 ## Features
 
 - [Formularz demonstracyjny](./home-form.md) sprawdza walidację na stronie głównej i brak wysyłki.
+- [Strona O mnie](./about.md) otwiera `/o-mnie/` i `/en/about/`, ramkę dyplomu i newsletter bez POST.
 - [Przełącznik języka](./language.md) prowadzi z PL na EN i z powrotem, w tym stronę bez tłumaczenia.
 - [Dialog katalogu](./catalog-dialog.md) otwiera i zamyka dialog „Jak pracujemy”.
 - [Katalog 3a](./design-system.md) otwiera `/design-system/`, motyw i karuzelę.

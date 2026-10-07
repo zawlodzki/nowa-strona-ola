@@ -45,6 +45,7 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     }
   },
   _type == "cardsSection" => {
+    variant,
     eyebrow,
     title,
     lead,
@@ -53,6 +54,7 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
       title,
       body,
       href,
+      status,
       "media": media${mediaFields}
     }
   },
@@ -60,6 +62,7 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
   _type == "processSection" => {
     title,
     lead,
+    note,
     steps[]{ _key, title, body }
   },
   _type == "metricsSection" => {
@@ -191,6 +194,7 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     body,
     facts,
     "action": action${actionFields},
+    "secondary": secondary${actionFields},
     "media": media${mediaFields},
     "service": service->{
       "id": _id,
@@ -202,6 +206,21 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
       durationMinutes,
       bookingUrl,
       bookingStatus
+    }
+  },
+  _type == "credentialsSection" => {
+    title,
+    body,
+    diplomaCaption,
+    "person": person->{
+      "id": _id,
+      name,
+      role,
+      bio,
+      educationInstitution,
+      educationProgram,
+      "photo": photo${mediaFields},
+      "diplomaScan": diplomaScan${mediaFields}
     }
   }
 `;

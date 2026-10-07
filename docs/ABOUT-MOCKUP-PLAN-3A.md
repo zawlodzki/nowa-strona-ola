@@ -1,6 +1,7 @@
 # „O mnie” — mockup i copy 3a
 
-Aktualizacja: 2026-10-07. Status: **mockup HTML/CSS wykonany lokalnie; bez wdrożenia CMS i publikacji**.
+Aktualizacja: 2026-10-07. Status: **mockup HTML/CSS oraz szablon About3a w kodzie
+(fixture PL/EN); bez konfiguracji Content Lake i publikacji**.
 [Otwórz mockup](../mockups/homepage/about-3a.html).
 
 Użytkownik skorygował wcześniejszy kierunek: strona „O mnie” nie ma służyć

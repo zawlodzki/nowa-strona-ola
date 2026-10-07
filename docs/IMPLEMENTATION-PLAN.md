@@ -269,15 +269,16 @@ Zlecenie 07.10.2026: dalszą implementację oprzeć na przygotowanych mockupach,
 nowym design systemie i przeniesieniu treści do Sanity. Etapy 3–4 pozostają
 zapisem wykonanych fundamentów; nie oznaczają ukończenia docelowych stron.
 
-Stan po pakiecie 1 (07.10.2026):
+Stan po pakiecie 2 (07.10.2026):
 
-- Publiczne `/` i `/en/` oraz preview home używają `SiteShell3a`/`Layout3a` i
-  `Homepage3a`. Blog, landingi i `/ui/` nadal importują wcześniejszy Layout.
-- Sanity ma page builder 20 typów (w tym `ebooksSection`, `serviceOfferSection`),
-  dokument `ebook` oraz rozszerzenia `service`/`testimonial`/`author`/
-  `siteSettings`. Serializery Markdown nowych sekcji są w kodzie; trasy `.md`
-  i pełny eksport to etap 5.
-- Dry-run importu homepage istnieje; Content Lake i publikacja nie były
+- Publiczne `/`, `/en/`, `/o-mnie/` i `/en/about/` oraz preview home/about
+  używają `SiteShell3a`/`Layout3a` i `Homepage3a` / `About3a`. Blog, landingi
+  i `/ui/` nadal importują wcześniejszy Layout.
+- Sanity ma page builder 21 typów (w tym `credentialsSection`, `ebooksSection`,
+  `serviceOfferSection`), dokument `ebook` oraz rozszerzenia
+  `service`/`testimonial`/`author`/`siteSettings`. Serializery Markdown nowych
+  sekcji są w kodzie; trasy `.md` i pełny eksport to etap 5.
+- Dry-run importu homepage i About istnieje; Content Lake i publikacja nie były
   zapisywane. Stan usług zewnętrznych nie był ponownie sprawdzany.
 
 Kolejność wynika z [mapy integracji](../design-system/ASTRO-INTEGRATION.md).
@@ -325,7 +326,7 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 
 - [x] Zweryfikować stan repo i uzgodnić kolejność migracji z systemem 3a.
 - [x] Wdrożyć wspólny shell publiczny/preview i Homepage3a wraz z modelami zależnymi.
-- [ ] Wdrożyć About3a oraz wspólny profil autora.
+- [x] Wdrożyć About3a oraz wspólny profil autora (kod i fixture; bez Content Lake).
 - [ ] Wdrożyć Consultation3a i model usługi.
 - [ ] Wdrożyć Ebook3a i model produktu.
 - [ ] Wdrożyć EbookCollection3a, kategorie i filtrowanie.

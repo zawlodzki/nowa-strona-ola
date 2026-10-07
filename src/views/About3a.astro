@@ -1,0 +1,566 @@
+---
+import type { Locale } from "@ola/shared";
+
+import Button from "@/design-system/components/Button.astro";
+import Container from "@/design-system/components/Container.astro";
+import DemoForm from "@/design-system/components/DemoForm.astro";
+import Heading from "@/design-system/components/Heading.astro";
+import Hero from "@/design-system/components/Hero.astro";
+import Newsletter from "@/design-system/components/Newsletter.astro";
+import ReviewCard from "@/design-system/components/ReviewCard.astro";
+import Section from "@/design-system/components/Section.astro";
+import SplitPanel from "@/design-system/components/SplitPanel.astro";
+import TextLink from "@/design-system/components/TextLink.astro";
+import { aboutCopy } from "@/content/about-seed";
+import type { AboutView } from "@/content/map-about";
+import aboutPortrait from "@/assets/portraits/about.webp?url";
+import contactPortrait from "@/assets/portraits/contact.webp?url";
+
+export interface Props {
+  lang: Locale;
+  content: AboutView;
+}
+
+const { lang, content } = Astro.props;
+const copy = aboutCopy[lang];
+const pl = lang === "pl";
+const localMedia: Record<string, string> = {
+  about: aboutPortrait,
+  contact: contactPortrait,
+};
+
+function resolveSrc(src?: string) {
+  if (!src) return undefined;
+  return (
+    localMedia[src] ??
+    (src.startsWith("http") || src.startsWith("/") ? src : undefined)
+  );
+}
+
+const heroSrc = resolveSrc(content.hero.media?.src);
+const consultSrc = resolveSrc(content.consultation.media.src);
+const diplomaSrc = resolveSrc(content.credentials.person.diploma?.src);
+const person = content.credentials.person;
+const profileJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: person.name,
+    alternateName: "Ola",
+    jobTitle: person.role,
+    description: person.bio ?? content.hero.lead.replaceAll("\n", " "),
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: person.educationInstitution,
+    },
+  },
+};
+---
+
+<main id="main" class="about3a">
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(profileJsonLd)}
+  ></script>
+  <Hero
+    id="start"
+    kind="about"
+    title={content.hero.title}
+    description={content.hero.lead}
+  >
+    <Button slot="actions" as="a" href={content.hero.primary.href} arrow>
+      {content.hero.primary.label}
+    </Button>
+    {content.hero.secondary && (
+      <TextLink slot="actions" href={content.hero.secondary.href}>
+        {content.hero.secondary.label}
+      </TextLink>
+    )}
+    <figure slot="media" class="about3a-portrait">
+      {heroSrc && (
+        <img
+          src={heroSrc}
+          alt={content.hero.media?.label ?? ""}
+          width="1122"
+          height="1402"
+          fetchpriority="high"
+        />
+      )}
+      <figcaption>
+        <span>{person.name}</span>
+        <span>{person.role}</span>
+      </figcaption>
+      {content.hero.media?.caption && (
+        <p class="about3a-credit">{content.hero.media.caption}</p>
+      )}
+    </figure>
+  </Hero>
+
+  <Section id="moja-historia" class="about3a-story">
+    <Container class="about3a-story__grid">
+      <Heading>{content.story.title}</Heading>
+      <div>
+        {content.story.body.map((paragraph, index) => (
+          <p class={index === 0 ? "about3a-large" : undefined}>{paragraph}</p>
+        ))}
+        <div class="about3a-count">
+          <strong>
+            {content.experience.value}
+            <span>{content.experience.suffix}</span>
+          </strong>
+          <p>{content.experience.label}</p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="wyksztalcenie">
+    <Container>
+      <div class="about3a-education">
+        <div>
+          <Heading>{content.credentials.title}</Heading>
+          {content.credentials.body.map((paragraph, index) => (
+            <p class={index === 0 ? "about3a-large" : undefined}>{paragraph}</p>
+          ))}
+          <dl>
+            <div>
+              <dt>{pl ? "Uczelnia" : "University"}</dt>
+              <dd>{person.educationInstitution}</dd>
+            </div>
+            <div>
+              <dt>{pl ? "Kierunek" : "Programme"}</dt>
+              <dd>{person.educationProgram}</dd>
+            </div>
+          </dl>
+        </div>
+        <figure class="about3a-diploma">
+          {diplomaSrc ? (
+            <img
+              src={diplomaSrc}
+              alt={content.credentials.person.diploma?.label ?? ""}
+              width="680"
+              height="860"
+              loading="lazy"
+            />
+          ) : (
+            <div class="about3a-diploma__slot">
+              <svg
+                viewBox="0 0 48 56"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M8 2h21l11 11v41H8zM29 2v12h11M16 25h16M16 32h16M16 39h10"></path>
+              </svg>
+              <p>{copy.diplomaPlaceholderTitle}</p>
+              <span>{copy.diplomaPlaceholderNote}</span>
+            </div>
+          )}
+          {content.credentials.diplomaCaption && (
+            <figcaption>{content.credentials.diplomaCaption}</figcaption>
+          )}
+        </figure>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="jak-pracuje">
+    <Container>
+      <div class="about3a-approach-head">
+        <Heading>{content.approach.title}</Heading>
+        <p>{content.approach.lead}</p>
+      </div>
+      <div class="about3a-panels">
+        {content.approach.steps.map((step) => (
+          <article>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </article>
+        ))}
+      </div>
+      {content.approach.note && (
+        <p class="about3a-note">{content.approach.note}</p>
+      )}
+    </Container>
+  </Section>
+
+  <Section id="opinie">
+    <Container>
+      <Heading>{content.testimonials.title}</Heading>
+      <div class="about3a-reviews">
+        {content.testimonials.items.map((item) => (
+          <ReviewCard
+            author={
+              item.anonymous ? (item.displayLabel ?? "") : (item.name ?? "")
+            }
+            context={item.anonymous ? undefined : item.role}
+          >
+            <p>{item.quote}</p>
+          </ReviewCard>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="materialy" class="about3a-materials">
+    <Container class="about3a-materials__grid">
+      <div>
+        <Heading>{content.materials.title}</Heading>
+        <p>{content.materials.lead}</p>
+      </div>
+      <div>
+        {content.materials.items.map((item) => (
+          <a class="about3a-resource" href={item.href}>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              {item.status && <span class="about3a-status">{item.status}</span>}
+              <span class="about3a-resource__action">
+                {item.title === copy.materialsEbooksTitle
+                  ? copy.materialsEbooksAction
+                  : copy.materialsBlogAction}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="konsultacja" spacing="compact">
+    <Container>
+      <SplitPanel labelledBy="about-consultation-title" id="konsultacja-panel">
+        <Heading id="about-consultation-title">
+          {content.consultation.title}
+        </Heading>
+        {content.consultation.body.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+        {content.consultation.priceLabel && (
+          <p class="about3a-price">
+            <strong>{content.consultation.priceLabel}</strong>
+            {content.consultation.facts.map((fact) => (
+              <span>{fact}</span>
+            ))}
+          </p>
+        )}
+        <Button as="a" href={content.consultation.action.href} arrow>
+          {content.consultation.action.label}
+        </Button>
+        {content.consultation.bookingStatus === "placeholder" && (
+          <p class="about3a-note">
+            {pl
+              ? "W podglądzie link prowadzi do Cal.com. Kalendarz płatnej konsultacji zostanie podłączony później. To nie jest potwierdzenie wizyty."
+              : "The preview link goes to Cal.com. The paid booking event will be added later. This is not a booking confirmation."}
+          </p>
+        )}
+        {content.consultation.secondary && (
+          <TextLink
+            class="about3a-contact"
+            href={content.consultation.secondary.href}
+          >
+            {content.consultation.secondary.label}
+          </TextLink>
+        )}
+        {consultSrc && (
+          <img
+            slot="media"
+            src={consultSrc}
+            alt={content.consultation.media.label}
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
+        )}
+      </SplitPanel>
+    </Container>
+  </Section>
+
+  <Newsletter
+    id="newsletter"
+    title={content.newsletter.title}
+    description={content.newsletter.lead}
+  >
+    <DemoForm slot="form" content={content.newsletter} lang={lang} />
+  </Newsletter>
+</main>
+
+<style>
+  .about3a :global(.ao-hero--about .ao-heading) {
+    white-space: pre-line;
+  }
+  .about3a-portrait {
+    margin: 0;
+    min-width: 0;
+  }
+  .about3a-portrait img {
+    width: 100%;
+    height: 540px;
+    object-fit: cover;
+    border-radius: 24px;
+  }
+  .about3a-portrait figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--ao-space-8);
+    margin-top: var(--ao-space-16);
+    font-size: 14px;
+  }
+  .about3a-credit {
+    margin-top: var(--ao-space-8);
+    color: var(--ao-muted);
+    font-size: 13px;
+  }
+  .about3a-story__grid,
+  .about3a-materials__grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.2fr;
+    column-gap: var(--ao-space-96);
+  }
+  .about3a-story :global(.ao-heading) {
+    max-width: 13ch;
+  }
+  .about3a-story p + p {
+    margin-top: var(--ao-space-24);
+  }
+  .about3a-large {
+    font-size: 26px;
+    line-height: 1.35;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .about3a-count {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ao-space-24);
+    margin-top: var(--ao-space-32);
+    padding-top: var(--ao-space-24);
+    border-top: 1px solid var(--ao-line);
+  }
+  .about3a-count strong {
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 650;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .about3a-count strong span {
+    color: var(--ao-primary);
+  }
+  .about3a-count p {
+    max-width: 24ch;
+    font-size: 15px;
+    color: var(--ao-muted);
+  }
+  .about3a-education {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--ao-space-64);
+    align-items: center;
+    padding: var(--ao-space-48);
+    border-radius: 24px;
+    background: var(--ao-surface);
+  }
+  .about3a-education > div > p {
+    margin-top: var(--ao-space-24);
+  }
+  .about3a-education dl {
+    margin: var(--ao-space-32) 0 0;
+  }
+  .about3a-education dl div {
+    padding-block: var(--ao-space-16);
+    border-top: 1px solid var(--ao-line);
+  }
+  .about3a-education dt {
+    font-size: 13px;
+    color: var(--ao-muted);
+  }
+  .about3a-education dd {
+    margin: 4px 0 0;
+    font-weight: 550;
+  }
+  .about3a-diploma {
+    width: 100%;
+    max-width: 340px;
+    justify-self: center;
+    margin: 0;
+  }
+  .about3a-diploma img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  .about3a-diploma__slot {
+    min-height: 380px;
+    padding: var(--ao-space-32);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px dashed var(--ao-muted);
+    border-radius: 12px;
+    background: var(--ao-background);
+  }
+  .about3a-diploma__slot svg {
+    width: 48px;
+    height: 56px;
+    margin-bottom: var(--ao-space-24);
+  }
+  .about3a-diploma__slot p {
+    font-size: 20px;
+    font-weight: 550;
+  }
+  .about3a-diploma__slot span,
+  .about3a-diploma figcaption {
+    font-size: 13px;
+    color: var(--ao-muted);
+  }
+  .about3a-diploma__slot span {
+    margin-top: var(--ao-space-8);
+  }
+  .about3a-diploma figcaption {
+    margin-top: var(--ao-space-16);
+    text-align: center;
+  }
+  .about3a-approach-head {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: end;
+    gap: var(--ao-space-64);
+    margin-bottom: var(--ao-space-32);
+  }
+  .about3a-approach-head p {
+    max-width: 52ch;
+    color: var(--ao-muted);
+  }
+  .about3a-panels {
+    display: grid;
+    gap: var(--ao-space-32);
+  }
+  .about3a-panels article {
+    min-width: 0;
+    padding-bottom: var(--ao-space-24);
+    border-bottom: 1px solid var(--ao-line);
+  }
+  .about3a-panels h3 {
+    font-size: 22px;
+    letter-spacing: -0.03em;
+  }
+  .about3a-panels p {
+    margin-top: 10px;
+    color: var(--ao-muted);
+    font-size: 14px;
+  }
+  .about3a-note {
+    margin-top: var(--ao-space-24);
+    color: var(--ao-muted);
+    font-size: 14px;
+    max-width: 80ch;
+  }
+  .about3a-reviews {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ao-space-48);
+    margin-top: var(--ao-space-32);
+  }
+  .about3a-materials > :global(.ao-container) p,
+  .about3a-materials__grid > div > p {
+    margin-top: var(--ao-space-24);
+    max-width: 48ch;
+    color: var(--ao-muted);
+  }
+  .about3a-resource {
+    display: block;
+    padding-block: var(--ao-space-24);
+    border-top: 1px solid var(--ao-line);
+    color: inherit;
+    text-decoration: none;
+  }
+  .about3a-resource:last-child {
+    border-bottom: 1px solid var(--ao-line);
+  }
+  .about3a-resource p {
+    margin-top: var(--ao-space-12);
+    color: var(--ao-muted);
+  }
+  .about3a-status {
+    display: block;
+    margin-top: var(--ao-space-12);
+    color: var(--ao-muted);
+    font-size: 13px;
+  }
+  .about3a-resource__action {
+    display: block;
+    margin-top: var(--ao-space-16);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    font-size: 15px;
+  }
+  .about3a-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--ao-space-16);
+  }
+  .about3a-price strong {
+    font-size: 32px;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    font-variant-numeric: tabular-nums;
+  }
+  .about3a-price span {
+    font-size: 15px;
+  }
+  .about3a-contact {
+    margin-top: var(--ao-space-24);
+    font-size: 14px;
+  }
+  @container page3a (max-width: 879px) {
+    .about3a-story__grid,
+    .about3a-materials__grid,
+    .about3a-approach-head,
+    .about3a-education {
+      gap: var(--ao-space-32);
+      grid-template-columns: 1fr;
+    }
+    .about3a-portrait img {
+      height: auto;
+      aspect-ratio: 4 / 5;
+    }
+    .about3a-story :global(.ao-heading) {
+      max-width: 20ch;
+    }
+  }
+  @container page3a (max-width: 767px) {
+    .about3a-large {
+      font-size: 23px;
+    }
+    .about3a-education {
+      padding: var(--ao-space-24);
+    }
+    .about3a-diploma__slot {
+      min-height: 300px;
+      padding: var(--ao-space-24);
+    }
+    .about3a-reviews {
+      grid-template-columns: 1fr;
+      gap: var(--ao-space-24);
+    }
+    .about3a-count strong {
+      font-size: 54px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about3a-resource {
+      transition: none;
+    }
+  }
+</style>

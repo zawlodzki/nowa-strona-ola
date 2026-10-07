@@ -19,6 +19,7 @@ export const knownSectionTypes = [
   "relatedSection",
   "ebooksSection",
   "serviceOfferSection",
+  "credentialsSection",
 ] as const;
 
 export type KnownSectionType = (typeof knownSectionTypes)[number];

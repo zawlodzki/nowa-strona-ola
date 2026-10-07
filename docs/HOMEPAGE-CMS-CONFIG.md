@@ -258,7 +258,7 @@ Makieta formularza. Dane nie są zapisywane ani wysyłane.
 | ------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Hero: główne | Poznaj e-booki             | `#ebooki`                                                                                                                                                                      |
 | Hero: drugie | Poznaj konsultacje         | `#konsultacje`                                                                                                                                                                 |
-| O mnie       | Poznaj moją historię       | Podstrona O mnie; docelowy slug do ustalenia                                                                                                                                   |
+| O mnie       | Poznaj moją historię       | Fixture i kod: `/o-mnie/` (EN `/en/about/`). Dokument `page` w Content Lake nieutworzony.                                                                                      |
 | E-booki      | Poznaj temat               | Podstrona danego produktu; docelowe slugi do ustalenia                                                                                                                         |
 | Konsultacja  | Zarezerwuj konsultację     | Kalendarz rezerwacji płatnej konsultacji: 450 zł / 60 minut; tymczasowo `https://cal.com`, właściwy URL wydarzenia później. Decyzja 06.10.2026, HTML jeszcze bez aktualizacji. |
 | Newsletter   | Chcę otrzymywać newsletter | Zapis po faktycznym przyjęciu przez backend; w makiecie tylko demonstracja                                                                                                     |
@@ -313,13 +313,13 @@ i techniki z „10000000 Sales Copy Advice”. Źródło: bezpośrednie zlecenie
 06.10.2026. Korekta 07.10.2026: „O mnie” nie ma kierować wyłącznie do konsultacji;
 uwzględnić E-E-A-T i wykonać mockup. **Wykonane:** [mockup](../mockups/homepage/about-3a.html),
 [opis aktualnego układu i copy](ABOUT-MOCKUP-PLAN-3A.md),
-[ocena E-E-A-T](ABOUT-EEAT-3A.md), wejścia z homepage, biogramu artykułu i indeksu.
-**Niewykonane:** konfiguracja Sanity i publikacja.
+[ocena E-E-A-T](ABOUT-EEAT-3A.md), szablon About3a, trasy `/o-mnie/` i `/en/about/`,
+wejścia z homepage. **Niewykonane:** dokumenty w Content Lake i publikacja.
 
 | Obszar                  | Bieżąca wartość / mapowanie                                                                                               | Status i źródło                                                                                                                |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Wygląd podstrony        | 3a: białe tło, wiśniowa paleta, Switzer, istniejące portrety                                                              | Ustalone w zleceniu 06.10.2026.                                                                                                |
-| Adres                   | Proponowane `page.language = pl`, `slug.current = o-mnie` → `/o-mnie/`                                                    | Propozycja planu z 06.10.2026, nie utworzony dokument.                                                                         |
+| Adres                   | Fixture i trasy Astro: `page.language = pl`, `slug.current = o-mnie` → `/o-mnie/`; EN `about` → `/en/about/`              | Kod 07.10.2026 (pakiet 2). Dokument w Content Lake nieutworzony; bez publikacji.                                               |
 | Kolejność               | Hero → osobisty kontekst z 450+ → wykształcenie i dyplom → podejście → dwie opinie → materiały → konsultacja → newsletter | Wykonane w lokalnym mockupie 07.10.2026; bez konfiguracji CMS.                                                                 |
 | H1                      | „Jestem Ola. Znam PCOS od środka.” → `heroSection.title`                                                                  | Propozycja redakcyjna wykonana lokalnie; bez akceptacji finalnego copy i konfiguracji CMS.                                     |
 | Specjalizacja           | Dietetyczka kliniczna; PCOS i insulinooporność                                                                            | Istniejący kontekst marki i zatwierdzone copy homepage.                                                                        |
@@ -332,23 +332,22 @@ uwzględnić E-E-A-T i wykonać mockup. **Wykonane:** [mockup](../mockups/homepa
 | Historia i kwalifikacje | Własne doświadczenie PCOS oraz ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym; miejsce na skan dyplomu  | Uczelnia, kierunek i ramka potwierdzone 06.10.2026. Stopień, daty, dodatkowe certyfikaty i szczegółowa historia nie są podane. |
 | Newsletter              | Tekst, formularz i status demonstracji jak w homepage 3a                                                                  | Propozycja ponownego użycia, bez zmiany zgód i bez integracji.                                                                 |
 
-Luki schematu: pojedynczy współdzielony wskaźnik zamiast minimum dwóch,
-opcjonalny nadtytuł hero, kontrolowany wariant paneli podejścia, anonimowe opinie
-i CTA w `textImageSection`, cena/czas/URL kalendarza w `service` oraz wykształcenie
-i skan dyplomu. Proponowane `author.education.institution/program`, sekcja
-`credentialsSection` z referencją autora i opcjonalnym `diplomaScan` są nowymi
-polami/typem do wdrożenia, nie istniejącą konfiguracją. Obraz może korzystać
-z `mediaObject`; PDF wymaga dodatkowego pola pliku. Szczegóły mapowania istniejących pól oraz proponowanych
-rozszerzeń są w planie. `author` może przechowywać wspólne krótkie bio,
-rolę i portret; długa historia należy do `page.sections`.
+Luki danych, nie schematu: skan dyplomu (pole `author.diplomaScan` puste),
+URL płatnej rezerwacji, strona kontaktu. W kodzie Studio są już
+`author.educationInstitution`/`educationProgram`/`diplomaScan` oraz sekcja
+`credentialsSection` z referencją autora; to nie jest konfiguracja Content Lake.
+Obraz korzysta z `mediaObject`; osobny PDF nie został dodany, bo pliku nie ma.
+`author` przechowuje wspólne krótkie bio, rolę i portret; długa historia należy
+do `page.sections`.
 
-Homepage 3a CTA „Poznaj moją historię” oraz biogram artykułu „Poznaj mnie bliżej”
-prowadzą już do lokalnego `about-3a.html`. Docelowy slug `/o-mnie/` nadal jest
-propozycją do konfiguracji CMS. Nowa propozycja nie zastępuje zaakceptowanego
-copy homepage, ceny e-booków, liczby ani sześciu opinii. Decyzja użytkownika
-o cenie konsultacji, czasie i płatnej rezerwacji uzupełnia wcześniejszą
-konfigurację usługi; nowa uczelnia uzupełnia bio. HTML „O mnie” jest wykonane;
-konfiguracja Content Lake pozostaje bez zmian.
+Homepage 3a CTA „Poznaj moją historię” oraz nawigacja „O mnie” prowadzą w
+fixture’ach do `/o-mnie/` (EN `/en/about/`). Mockup `about-3a.html` pozostaje
+referencją wyglądu, nie publiczną trasą. Nowa propozycja nie zastępuje
+zaakceptowanego copy homepage, ceny e-booków, liczby ani sześciu opinii.
+Decyzja użytkownika o cenie konsultacji, czasie i płatnej rezerwacji uzupełnia
+wcześniejszą konfigurację usługi; nowa uczelnia uzupełnia bio. Szablon
+`About3a` i schemat (`credentialsSection`, `author.diplomaScan`) są w kodzie;
+konfiguracja Content Lake i publikacja pozostają bez zmian.
 
 ### Rezerwacja i kwalifikacje — uzupełnienie 06.10.2026
 

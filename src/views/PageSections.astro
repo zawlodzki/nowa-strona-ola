@@ -221,8 +221,9 @@ let formCount = 0;
       );
     case "ebooksSection":
     case "serviceOfferSection":
+    case "credentialsSection":
       throw new Error(
-        `Sekcja ${section._type} jest renderowana przez Homepage3a. Zatrzymuję build PageSections.`,
+        `Sekcja ${section._type} jest renderowana przez szablon 3a. Zatrzymuję build PageSections.`,
       );
     default:
       throw new Error("Nieznany typ sekcji. Zatrzymuję build.");

@@ -79,10 +79,12 @@ export interface CardItem {
   title: string;
   body: string;
   href: string;
-  media: MediaSpec;
+  media?: MediaSpec;
+  status?: string;
 }
 
 export interface CardsContent {
+  variant: "media" | "links";
   eyebrow?: string;
   title: string;
   lead: string;
@@ -104,6 +106,7 @@ export interface ProcessContent {
   title: string;
   lead: string;
   steps: ProcessStep[];
+  note?: string;
 }
 
 export interface MetricItem {
@@ -286,8 +289,26 @@ export interface ServiceOfferContent {
   facts: string[];
   media: MediaSpec;
   action: ActionLink;
+  secondary?: ActionLink;
   priceLabel?: string;
   bookingStatus?: "placeholder" | "live";
+}
+
+export interface CredentialsPerson {
+  name: string;
+  role: string;
+  bio?: string;
+  educationInstitution: string;
+  educationProgram: string;
+  photo?: MediaSpec;
+  diploma?: MediaSpec;
+}
+
+export interface CredentialsContent {
+  title: string;
+  body: string[];
+  person: CredentialsPerson;
+  diplomaCaption?: string;
 }
 
 export interface CatalogCopy {

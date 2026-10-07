@@ -1,13 +1,15 @@
 ---
 import type { Locale } from "@ola/shared";
 
+import { mapAbout } from "@/content/map-about";
 import { mapHomepage, shellLinks } from "@/content/map-homepage";
 import { homepageCopyright } from "@/sanity/homepage-fixtures";
-import { pagePath } from "@/lib/paths";
+import { aboutPath, pagePath } from "@/lib/paths";
 import type { PageContent, SiteSettings } from "@/sanity/repository";
 import Layout from "@/layouts/Layout.astro";
 import SiteFooter from "@/ui/site-footer/SiteFooter.astro";
 import SiteHeader from "@/ui/site-header/SiteHeader.astro";
+import About3a from "@/views/About3a.astro";
 import Homepage3a from "@/views/Homepage3a.astro";
 import PageSections from "@/views/PageSections.astro";
 import SiteShell3a from "@/views/SiteShell3a.astro";
@@ -34,6 +36,18 @@ const alternateHref = page.translation?.slug
     )
   : null;
 const isHome = page.slug === "home" || section === "home";
+const isAbout = page.slug === "o-mnie" || page.slug === "about";
+const shell = shellLinks(settings);
+const aboutHref = aboutPath(lang);
+const navigation = shell.navigation.map((item) => ({
+  ...item,
+  current: item.href === aboutHref,
+}));
+const headerCta = isAbout
+  ? shell.headerCta
+    ? { ...shell.headerCta, href: "#newsletter" }
+    : undefined
+  : shell.headerCta;
 ---
 
 {isHome ? (
@@ -45,9 +59,25 @@ const isHome = page.slug === "home" || section === "home";
     footerNote={settings.footerNote ?? ""}
     copyright={homepageCopyright(lang)}
     languageHref={alternateHref}
-    {...shellLinks(settings)}
+    {...shell}
   >
     <Homepage3a lang={lang} content={mapHomepage(page, lang)} />
+  </SiteShell3a>
+) : isAbout ? (
+  <SiteShell3a
+    lang={lang}
+    title={page.seo?.title ?? page.title}
+    description={page.seo?.description ?? undefined}
+    preview={preview}
+    footerNote={settings.footerNote ?? ""}
+    copyright={homepageCopyright(lang)}
+    languageHref={alternateHref}
+    navigation={navigation}
+    headerCta={headerCta}
+    socialLinks={shell.socialLinks}
+    legalLinks={shell.legalLinks}
+  >
+    <About3a lang={lang} content={mapAbout(page, lang)} />
   </SiteShell3a>
 ) : (
   <Layout lang={lang} title={page.seo?.title ?? page.title}>

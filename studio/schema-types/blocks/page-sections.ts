@@ -283,6 +283,20 @@ export const cardsSectionType = defineType({
   icon: DocumentsIcon,
   fields: [
     defineField({
+      name: "variant",
+      title: "Wariant",
+      type: "string",
+      options: {
+        layout: "radio",
+        list: [
+          { title: "Karty z medium", value: "media" },
+          { title: "Lista odnośników", value: "links" },
+        ],
+      },
+      initialValue: "media",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "eyebrow",
       title: "Nadtytuł",
       type: "string",
@@ -329,16 +343,40 @@ export const cardsSectionType = defineType({
               validation: (rule) => rule.required(),
             }),
             defineField({
+              name: "status",
+              title: "Status",
+              description:
+                "Opcjonalny, np. „W przygotowaniu”. Renderer listy odnośników go pokazuje.",
+              type: "string",
+              validation: (rule) => rule.max(80),
+            }),
+            defineField({
               name: "media",
               title: "Medium",
               type: "mediaObject",
-              validation: (rule) => rule.required(),
             }),
           ],
           preview: { select: { title: "title", subtitle: "href" } },
         }),
       ],
-      validation: (rule) => rule.required().min(2).max(6),
+      validation: (rule) =>
+        rule
+          .required()
+          .min(2)
+          .max(6)
+          .custom((items, context) => {
+            const parent = context.parent as { variant?: string } | undefined;
+            if ((parent?.variant ?? "media") !== "media") return true;
+            const missing = (items ?? []).some(
+              (item) =>
+                item &&
+                typeof item === "object" &&
+                !("media" in item && item.media),
+            );
+            if (missing)
+              return "Wariant z medium wymaga obrazu na każdej karcie.";
+            return true;
+          }),
     }),
   ],
   preview: sectionPreview("Karty"),
@@ -419,6 +457,15 @@ export const processSectionType = defineType({
         }),
       ],
       validation: (rule) => rule.required().min(3).max(6),
+    }),
+    defineField({
+      name: "note",
+      title: "Uwaga",
+      description:
+        "Opcjonalna granica zakresu, np. że konsultacja nie zastępuje opieki lekarskiej.",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.max(240),
     }),
   ],
   preview: sectionPreview("Proces"),
@@ -1121,6 +1168,12 @@ export const serviceOfferSectionType = defineType({
       type: "actionLink",
     }),
     defineField({
+      name: "secondary",
+      title: "Druga akcja",
+      description: "Opcjonalny odnośnik, np. do kontaktu.",
+      type: "actionLink",
+    }),
+    defineField({
       name: "media",
       title: "Medium",
       type: "mediaObject",
@@ -1128,6 +1181,45 @@ export const serviceOfferSectionType = defineType({
     }),
   ],
   preview: sectionPreview("Oferta usługi"),
+});
+
+export const credentialsSectionType = defineType({
+  name: "credentialsSection",
+  title: "Kwalifikacje",
+  type: "object",
+  icon: UserIcon,
+  fields: [
+    defineField({
+      name: "title",
+      title: "Tytuł",
+      type: "string",
+      validation: requiredString,
+    }),
+    defineField({
+      name: "body",
+      title: "Akapity",
+      type: "array",
+      of: [defineArrayMember({ type: "text" })],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "person",
+      title: "Osoba",
+      description:
+        "Wspólny profil autora. Uczelnia, kierunek i skan dyplomu pochodzą stąd.",
+      type: "reference",
+      to: [{ type: "author" }],
+      options: sameLanguageFilter("author"),
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "diplomaCaption",
+      title: "Podpis ramki dyplomu",
+      type: "string",
+      validation: (rule) => rule.max(200),
+    }),
+  ],
+  preview: sectionPreview("Kwalifikacje"),
 });
 
 export const pageSectionTypes = [
@@ -1151,6 +1243,7 @@ export const pageSectionTypes = [
   relatedSectionType,
   ebooksSectionType,
   serviceOfferSectionType,
+  credentialsSectionType,
 ];
 
 export const pageSectionsField = defineField({

@@ -229,6 +229,53 @@ test("static primitives emit no scripts; no console errors on interactive page",
   expect(errors).toEqual([]);
 });
 
+test("about page Polish and English plus missing Polish under English slug", async ({
+  page,
+}) => {
+  await page.goto("/o-mnie/");
+  await expect(page.getByRole("heading", { name: /Jestem Ola/ })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Wiedza, którą możesz sprawdzić." }),
+  ).toBeVisible();
+  await expect(page.getByText("Miejsce na skan dyplomu")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Zarezerwuj konsultację" }),
+  ).toHaveAttribute("href", "https://cal.com");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Nawigacja główna" })
+      .getByRole("link", {
+        name: "O mnie",
+        exact: true,
+      }),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(
+    page.getByRole("link", { name: "English" }).first(),
+  ).toHaveAttribute("href", "/en/about/");
+
+  const posts: string[] = [];
+  page.on("request", (request) => {
+    if (request.method() === "POST") posts.push(request.url());
+  });
+  await page
+    .getByRole("button", { name: "Chcę otrzymywać newsletter" })
+    .click();
+  expect(posts).toEqual([]);
+
+  await page.goto("/en/about/");
+  await expect(page.getByRole("heading", { name: /I am Ola/ })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
+    /Jestem Ola/,
+  );
+  await expect(page.getByText("Space for the diploma scan")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Polski" }).first(),
+  ).toHaveAttribute("href", "/o-mnie/");
+
+  const missing = await page.goto("/en/o-mnie/");
+  expect(missing?.status()).toBe(404);
+});
+
 test("landing pages, blog and missing English translation", async ({
   page,
 }) => {
