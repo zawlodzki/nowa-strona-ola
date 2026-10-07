@@ -5,16 +5,29 @@ interface Props {
   href: string;
   description: string;
   metadata?: string;
+  metadataEnd?: string;
   actionLabel: string;
 }
-const { title, href, description, metadata, actionLabel } = Astro.props;
+const { title, href, description, metadata, metadataEnd, actionLabel } =
+  Astro.props;
 ---
 
 <article class="ao-card">
   <a class="ao-card__media" href={href} aria-label={title} tabindex="-1">
     <slot name="media" />
   </a>
-  {metadata && <p class="ao-card__meta">{metadata}</p>}
+  {(metadata || metadataEnd) && (
+    <p class="ao-card__meta">
+      {metadata && metadataEnd ? (
+        <>
+          <span>{metadata}</span>
+          <span>{metadataEnd}</span>
+        </>
+      ) : (
+        (metadata ?? metadataEnd)
+      )}
+    </p>
+  )}
   <h3 class="ao-heading ao-heading--card">
     <a href={href}>{title}</a>
   </h3>

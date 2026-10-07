@@ -2102,6 +2102,16 @@ oraz przywrócenie pominięć pakietów 1–3. Draft PR #30, bez merge.
   Axe/overflow 320/390/1440 px w E2E. Natywny zoom, czytnik i urządzenie
   fizyczne — niesprawdzone.
 
+Audyt pakietów 1–3 po SVG (2026-10-07, wieczór): największe luki z raportu
+(mozaika wyników, motywy okładek, scena alt, licznik 92 px, ramka partnerów,
+strzałki zasobów, ścieżka konsultacji) były już w kodzie. Dociągnięte
+pozostałe różnice vs `cherry-white.html` / `about-3a` / `consultation-3a`:
+pille tematów z `aria-current` i zsynchronizowanym scrollem, pozycja karuzeli,
+meta karty na krańcach, hover okładki, `mix-blend-mode` logotypów, rząd
+kontrolek z grupami/ledem, kadr zdjęć, kąty chmury pytań, strzałka w dół
+przy CTA konsultacji. FAQ zostaje przy wspólnym `FaqItem` (+/×), nie chevronie
+z makiety konsultacji — to wspólny komponent 3a.
+
 ## Następny krok
 
 Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty

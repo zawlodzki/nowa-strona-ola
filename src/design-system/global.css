@@ -507,6 +507,12 @@ body.ao-site {
   place-items: center;
   border-radius: var(--ao-radius-panel);
 }
+.ao-card__media .ao-book-cover {
+  transition: transform var(--ao-motion-hover) var(--ao-ease-out);
+}
+.ao-card__media:hover .ao-book-cover {
+  transform: translateY(-5px);
+}
 .ao-card__media img {
   width: 100%;
   aspect-ratio: 1.5;
@@ -514,6 +520,10 @@ body.ao-site {
   border-radius: var(--ao-radius-panel);
 }
 .ao-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ao-space-12);
   font-size: 12px;
   color: var(--ao-muted);
   margin-block: var(--ao-space-24) var(--ao-space-12) !important;
@@ -639,11 +649,25 @@ body.ao-site {
   object-fit: cover;
   border-radius: var(--ao-radius-image);
 }
+.ao-carousel__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ao-space-24);
+  margin-bottom: var(--ao-space-24);
+}
+.ao-carousel__heading:not(
+  :has(.ao-carousel__toolbar:has(*), .ao-carousel__controls:not([hidden]))
+) {
+  display: none;
+}
+.ao-carousel__toolbar:not(:has(*)) {
+  display: none;
+}
 .ao-carousel__controls {
   display: flex;
-  justify-content: flex-end;
+  margin-left: auto;
   gap: var(--ao-space-8);
-  margin-bottom: var(--ao-space-24);
 }
 .ao-carousel__controls button {
   display: grid;
@@ -676,6 +700,21 @@ body.ao-site {
 .ao-carousel__track > * {
   flex: 0 0 var(--ao-carousel-card-width);
   scroll-snap-align: start;
+}
+.ao-carousel__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: var(--ao-space-24);
+  margin-top: var(--ao-space-16);
+}
+.ao-carousel__footer:not(:has(*)) {
+  display: none;
+}
+.ao-carousel__position {
+  color: var(--ao-muted);
+  font-size: 12px;
+  flex-shrink: 0;
 }
 .ao-skip {
   position: absolute;
@@ -781,7 +820,8 @@ body.ao-site {
     transition: none !important;
   }
   .ao-button:active,
-  .ao-text-link:hover .ao-icon {
+  .ao-text-link:hover .ao-icon,
+  .ao-card__media:hover .ao-book-cover {
     transform: none;
   }
 }

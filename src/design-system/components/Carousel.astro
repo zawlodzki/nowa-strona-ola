@@ -5,28 +5,53 @@ interface Props {
   label: string;
   columns?: 2 | 3;
   lang?: "pl" | "en";
+  showPosition?: boolean;
+  itemCount?: number;
 }
-const { id, label, columns = 3, lang = "pl" } = Astro.props;
+const {
+  id,
+  label,
+  columns = 3,
+  lang = "pl",
+  showPosition = false,
+  itemCount = 0,
+} = Astro.props;
+const visible = Math.min(columns, itemCount);
+const positionLabel =
+  itemCount < 1
+    ? ""
+    : visible <= 1
+      ? lang === "pl"
+        ? `1 z ${itemCount}`
+        : `1 of ${itemCount}`
+      : lang === "pl"
+        ? `1–${visible} z ${itemCount}`
+        : `1–${visible} of ${itemCount}`;
 ---
 
-<div class="ao-carousel" data-carousel>
-  <div class="ao-carousel__controls" hidden>
-    <button
-      type="button"
-      aria-label={lang === "pl" ? "Poprzednie elementy" : "Previous items"}
-      aria-controls={id}
-      data-direction="-1"
-    >
-      <ArrowIcon direction="left" />
-    </button>
-    <button
-      type="button"
-      aria-label={lang === "pl" ? "Następne elementy" : "Next items"}
-      aria-controls={id}
-      data-direction="1"
-    >
-      <ArrowIcon direction="right" />
-    </button>
+<div class="ao-carousel" data-carousel data-lang={lang}>
+  <div class="ao-carousel__heading">
+    <div class="ao-carousel__toolbar">
+      <slot name="toolbar" />
+    </div>
+    <div class="ao-carousel__controls" hidden>
+      <button
+        type="button"
+        aria-label={lang === "pl" ? "Poprzednie elementy" : "Previous items"}
+        aria-controls={id}
+        data-direction="-1"
+      >
+        <ArrowIcon direction="left" />
+      </button>
+      <button
+        type="button"
+        aria-label={lang === "pl" ? "Następne elementy" : "Next items"}
+        aria-controls={id}
+        data-direction="1"
+      >
+        <ArrowIcon direction="right" />
+      </button>
+    </div>
   </div>
   <div
     class:list={["ao-carousel__track", `ao-carousel__track--${columns}`]}
@@ -36,6 +61,19 @@ const { id, label, columns = 3, lang = "pl" } = Astro.props;
     aria-label={label}
   >
     <slot />
+  </div>
+  <slot name="after" />
+  <div class="ao-carousel__footer">
+    <slot name="footer" />
+    {showPosition && (
+      <p
+        class="ao-carousel__position"
+        data-carousel-position
+        aria-live="polite"
+      >
+        {positionLabel}
+      </p>
+    )}
   </div>
 </div>
 <script>
@@ -48,24 +86,82 @@ const { id, label, columns = 3, lang = "pl" } = Astro.props;
     );
     if (!track || !controls) continue;
     const buttons = controls.querySelectorAll<HTMLButtonElement>("button");
+    const position = carousel.querySelector<HTMLElement>(
+      "[data-carousel-position]",
+    );
+    const groups = [
+      ...carousel.querySelectorAll<HTMLAnchorElement>(
+        ".ao-carousel__toolbar [data-book-group]",
+      ),
+    ];
+    const polish = carousel.dataset.lang !== "en";
+    const reduced = () =>
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const children = () => [...track.children] as HTMLElement[];
     const update = () => {
       for (const button of buttons)
         button.disabled =
           button.dataset.direction === "-1"
             ? track.scrollLeft < 2
             : track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+      const items = children();
+      if (position && items.length) {
+        const first = items.findIndex(
+          (item) => item.offsetLeft + item.offsetWidth - 8 > track.scrollLeft,
+        );
+        let last = -1;
+        for (let index = items.length - 1; index >= 0; index -= 1) {
+          if (
+            items[index].offsetLeft <
+            track.scrollLeft + track.clientWidth - 8
+          ) {
+            last = index;
+            break;
+          }
+        }
+        const start = Math.max(1, first + 1);
+        const end = Math.max(start, last + 1);
+        position.textContent =
+          start === end
+            ? polish
+              ? `${start} z ${items.length}`
+              : `${start} of ${items.length}`
+            : polish
+              ? `${start}–${end} z ${items.length}`
+              : `${start}–${end} of ${items.length}`;
+      }
+      if (groups.length && items.length) {
+        const visible = items.find(
+          (item) => item.offsetLeft + item.offsetWidth / 2 > track.scrollLeft,
+        );
+        const current = visible?.dataset.bookGroup;
+        for (const link of groups) {
+          if (link.dataset.bookGroup === current)
+            link.setAttribute("aria-current", "true");
+          else link.removeAttribute("aria-current");
+        }
+      }
     };
     controls.hidden = false;
     for (const button of buttons)
       button.addEventListener("click", () =>
         track.scrollBy({
           left: Number(button.dataset.direction) * track.clientWidth,
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-            .matches
-            ? "instant"
-            : "smooth",
+          behavior: reduced() ? "instant" : "smooth",
         }),
       );
+    for (const link of groups)
+      link.addEventListener("click", (event) => {
+        const selector = link.hash || link.getAttribute("href") || "";
+        if (!selector.startsWith("#")) return;
+        const target = track.querySelector<HTMLElement>(selector);
+        if (!target) return;
+        event.preventDefault();
+        track.scrollTo({
+          left: target.offsetLeft,
+          behavior: reduced() ? "instant" : "smooth",
+        });
+      });
     track.addEventListener("scroll", update, { passive: true });
     new ResizeObserver(update).observe(track);
     update();

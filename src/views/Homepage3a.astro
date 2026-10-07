@@ -226,19 +226,6 @@ function coverLabels(kind: CoverArtKind): string[] {
         <Heading>{content.ebooks.title}</Heading>
         <p class="ao-lead">{content.ebooks.lead}</p>
       </div>
-      <div class="home3a-books-toolbar">
-        <nav
-          class="home3a-groups"
-          aria-label={pl ? "Temat e-booków" : "E-book topics"}
-        >
-          {firstPcos && <a href={`#ebook-${firstPcos.slug}`}>PCOS</a>}
-          {firstPeri && (
-            <a href={`#ebook-${firstPeri.slug}`}>
-              {pl ? "Perimenopauza" : "Perimenopause"}
-            </a>
-          )}
-        </nav>
-      </div>
       <Carousel
         id="ebooks-track"
         label={
@@ -246,19 +233,45 @@ function coverLabels(kind: CoverArtKind): string[] {
         }
         columns={3}
         lang={lang}
+        showPosition
+        itemCount={content.ebooks.items.length}
       >
+        <nav
+          slot="toolbar"
+          class="home3a-groups"
+          aria-label={pl ? "Temat e-booków" : "E-book topics"}
+        >
+          {firstPcos && (
+            <a
+              href={`#ebook-${firstPcos.slug}`}
+              data-book-group="pcos"
+              aria-current="true"
+            >
+              PCOS
+            </a>
+          )}
+          {firstPeri && (
+            <a
+              href={`#ebook-${firstPeri.slug}`}
+              data-book-group="perimenopause"
+            >
+              {pl ? "Perimenopauza" : "Perimenopause"}
+            </a>
+          )}
+        </nav>
         {content.ebooks.items.map((item, index) => {
           const art = coverArts[index] ?? {
             kind: "decisions" as const,
             variant: "default" as const,
           };
           return (
-            <div id={`ebook-${item.slug}`}>
+            <div id={`ebook-${item.slug}`} data-book-group={item.topic}>
               <ContentCard
                 title={item.title}
                 href={item.href}
                 description={item.description}
-                metadata={`${topicLabel(item.topic, lang)} · E-book`}
+                metadata={topicLabel(item.topic, lang)}
+                metadataEnd="E-book"
                 actionLabel={content.ebooks.cardActionLabel}
               >
                 <CoverStage slot="media" variant={art.variant}>
@@ -288,15 +301,22 @@ function coverLabels(kind: CoverArtKind): string[] {
             </div>
           );
         })}
+        {content.ebooks.collection && (
+          <p slot="after" class="home3a-collection">
+            <TextLink
+              href={content.ebooks.collection.href}
+              arrowDirection="right"
+            >
+              {content.ebooks.collection.label}
+            </TextLink>
+          </p>
+        )}
+        {content.ebooks.note && (
+          <p slot="footer" class="home3a-note">
+            {content.ebooks.note}
+          </p>
+        )}
       </Carousel>
-      {content.ebooks.collection && (
-        <p class="home3a-collection">
-          <TextLink href={content.ebooks.collection.href}>
-            {content.ebooks.collection.label}
-          </TextLink>
-        </p>
-      )}
-      {content.ebooks.note && <p class="home3a-note">{content.ebooks.note}</p>}
     </Container>
   </Section>
 
@@ -346,9 +366,6 @@ function coverLabels(kind: CoverArtKind): string[] {
     <Container>
       <div class="home3a-section-head">
         <Heading>{content.testimonials.title}</Heading>
-        {content.testimonials.lead && (
-          <p class="ao-lead">{content.testimonials.lead}</p>
-        )}
       </div>
       <Carousel
         id="reviews-track"
@@ -356,6 +373,11 @@ function coverLabels(kind: CoverArtKind): string[] {
         columns={2}
         lang={lang}
       >
+        {content.testimonials.lead && (
+          <p slot="toolbar" class="home3a-reviews-lead">
+            {content.testimonials.lead}
+          </p>
+        )}
         {content.testimonials.items.map((item) => (
           <ReviewCard
             author={
@@ -419,6 +441,24 @@ function coverLabels(kind: CoverArtKind): string[] {
     object-fit: contain;
     filter: grayscale(1);
     opacity: 0.78;
+    mix-blend-mode: multiply;
+  }
+  .home3a-partners li:nth-child(2) img {
+    height: 40px;
+    width: 82px;
+  }
+  .home3a-partners li:nth-child(4) img {
+    height: 35px;
+  }
+  :global([data-theme="dark"]) .home3a-partners img {
+    filter: grayscale(1) invert(1);
+    mix-blend-mode: screen;
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .home3a-partners img {
+      filter: grayscale(1) invert(1);
+      mix-blend-mode: screen;
+    }
   }
   .home3a-why {
     display: grid;
@@ -525,19 +565,33 @@ function coverLabels(kind: CoverArtKind): string[] {
     max-width: 720px;
     margin-bottom: var(--ao-space-40);
   }
-  .home3a-books-toolbar {
-    margin-bottom: var(--ao-space-24);
-  }
   .home3a-groups {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--ao-space-16);
+    gap: var(--ao-space-8);
     font-size: 14px;
   }
   .home3a-groups a {
-    min-height: var(--ao-target-min);
     display: inline-flex;
     align-items: center;
+    min-height: var(--ao-target-min);
+    padding: 10px 16px;
+    border: 1px solid var(--ao-line);
+    border-radius: 999px;
+  }
+  .home3a-groups a[aria-current] {
+    background: var(--ao-primary);
+    border-color: var(--ao-primary);
+    color: var(--ao-on-primary);
+  }
+  .home3a-groups a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .home3a-reviews-lead {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ao-muted);
   }
   .home3a-collection {
     margin-top: var(--ao-space-32);
@@ -546,6 +600,9 @@ function coverLabels(kind: CoverArtKind): string[] {
     margin-top: var(--ao-space-16);
     font-size: 12px;
     color: var(--ao-muted);
+  }
+  .home3a :global(.ao-carousel__footer) .home3a-note {
+    margin: 0;
   }
   .home3a-facts {
     display: grid;
@@ -573,7 +630,7 @@ function coverLabels(kind: CoverArtKind): string[] {
   .home3a :global(#konsultacje-panel img) {
     width: 100%;
     height: 100%;
-    min-height: 420px;
+    min-height: 520px;
     object-fit: cover;
     object-position: 70% center;
   }

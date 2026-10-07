@@ -4,11 +4,17 @@ import ArrowIcon from "./ArrowIcon.astro";
 interface Props extends HTMLAttributes<"a"> {
   href: string;
   arrow?: boolean;
+  arrowDirection?: "up-right" | "left" | "right" | "down";
 }
-const { arrow = true, class: className, ...attrs } = Astro.props;
+const {
+  arrow = true,
+  arrowDirection = "up-right",
+  class: className,
+  ...attrs
+} = Astro.props;
 ---
 
 <a class:list={["ao-text-link", className]} {...attrs}>
   <slot />
-  {arrow && <ArrowIcon />}
+  {arrow && <ArrowIcon direction={arrowDirection} />}
 </a>

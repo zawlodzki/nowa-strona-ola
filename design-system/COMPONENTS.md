@@ -11,8 +11,8 @@ Nie wpisywać testowych profili i niezatwierdzonych URL w komponentach.
 | Heading     | `as: h1/h2/h3`, `size: display/section/card/article`, HTML attrs                                              | Rozdziela semantykę od wielkości                               |
 | Hero        | `title`, `description`, `kind: home/about/service/product`, `id`; slots `kicker`, `actions`, `media`, default | Wspólny szkielet hero; kadry pozostają w szablonie             |
 | Button      | `as: a` + `href` lub native button, `variant: primary/secondary`, `arrow`, `loading`, HTML attrs              | CTA; domyślny button type=button, formularz jawnie type=submit |
-| TextLink    | `href`, `arrow`, HTML attrs                                                                                   | Link liniowy z SVG                                             |
-| ArrowIcon   | `direction: up-right/left/right`                                                                              | Jednolita dekoracyjna strzałka                                 |
+| TextLink    | `href`, `arrow`, `arrowDirection`, HTML attrs                                                                 | Link liniowy z SVG                                             |
+| ArrowIcon   | `direction: up-right/left/right/down`                                                                         | Jednolita dekoracyjna strzałka                                 |
 | Wordmark    | `href`, `label`, HTML attrs                                                                                   | Znak Switzer z dostępną nazwą linku                            |
 | SiteHeader  | `homeHref`, `links`, opcjonalne `cta`, `lang`                                                                 | Jeden header; globalne lub lokalne linki landingu              |
 | SiteFooter  | `homeHref`, `description`, `links`, `socialLinks`, `legalLinks`, `copyright`, `lang`                          | Wspólna stopka; `links[].current` daje `aria-current`          |
@@ -22,9 +22,9 @@ Nie wpisywać testowych profili i niezatwierdzonych URL w komponentach.
 | FormField   | `id`, `label`, `hint`, `error`, input attrs                                                                   | Label, aria błędu, powiązania opisów                           |
 | FaqItem     | `question`, `open`, default slot                                                                              | Natywny disclosure z treścią HTML                              |
 | BookCover   | `title`, `subtitle`, `author`, `topic`, `tone: light/cherry`, slot `art`                                      | Front produktu; dekoracja, tytuł czytany z karty               |
-| ContentCard | `title`, `href`, `description`, `metadata`, `actionLabel`, slots `media`, `price`                             | Wspólna karta e-booka/wpisu                                    |
+| ContentCard | `title`, `href`, `description`, `metadata`, `metadataEnd`, `actionLabel`, slots `media`, `price`              | Wspólna karta e-booka/wpisu                                    |
 | ReviewCard  | `author`, `context`, default slot                                                                             | Opinia z figure/blockquote/figcaption                          |
-| Carousel    | unikalne `id`, `label`, `columns: 2/3`, `lang`, default slot                                                  | Karty, opinie, powiązane materiały; własny scroll              |
+| Carousel    | unikalne `id`, `label`, `columns: 2/3`, `lang`, `showPosition`, `itemCount`, sloty `toolbar`/`after`/`footer` | Karty, opinie; pille grup i pozycja w HTML, sterowanie z JS    |
 | Pagination  | `pages: {href,page,current}[]`, `label`, `pageLabel`                                                          | Prawdziwe adresy, bez zależności od JS                         |
 | SplitPanel  | `labelledBy`, `id`, slots default/media                                                                       | Panel konsultacji i tekst–zdjęcie                              |
 
