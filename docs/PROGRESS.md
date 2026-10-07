@@ -1364,7 +1364,62 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   Bez publikacji, commita, pusha, checkoutu i zmian CMS. Istniejące zmiany
   użytkownika, w tym równoległy zapis scalenia PR #19, zachowano.
 
+## Landing pojedynczej konsultacji 3a — 2026-10-07
+
+- Na bezpośrednie zlecenie przygotowano `consultation-3a.html` i CSS:
+  navbar, hero, problem, dla kogo, przebieg, efekty, cena, opinie, FAQ i footer.
+  Dodatkowo prowadząca. Paleta/wordmark/Switzer i geometria z istniejącego 3a;
+  trzy zaakceptowane portrety, mapa pytań, schemat etapów i karta celów rozmowy.
+- Przejrzano FIRMA (marka, oferta, klienci, style guide), poprzednie repo oraz
+  wskazany poradnik Sales Copy Advice. Instrukcje w źródłach to kontekst,
+  nie zmiana aktualnego polecenia. Nie czytano prywatnych kart pacjentek.
+  Copy skupia się na małym kroku, jasności i uznaniu dotychczasowych starań.
+- Zachowano 450 zł/60 minut online, tymczasowy Cal.com, PCOS/IO, potwierdzoną
+  uczelnię i 450+ kobiet rocznie. Bez mentoringu, dawnych cen, aplikacji i
+  gwarantowanych rezultatów zdrowotnych. Zapytano o pisemne podsumowanie;
+  bez odpowiedzi nie obiecano pliku ani dodatkowej opieki.
+- Użyto pełnych opinii nr 4 i 6 z wcześniejszego repo, potwierdzonych uprzednio
+  przez użytkownika. Jawny zakres dotychczasowej współpracy, nie jednej wizyty.
+  Native menu/FAQ, treść bez JS, istniejący skrypt motywu i Escape/fokusu.
+- Połączono lokalny indeks i przycisk sekcji konsultacji homepage. Zachowano
+  równolegle powstające zmiany „O mnie”, bloga, skryptu i dokumentacji.
+  Dodano CONSULTATION-CMS-CONFIG-3A.md i bieżące decyzje w HOMEPAGE-CMS-CONFIG.md.
+  Opisano faktyczne luki service, hero, cards, pricing i anonimowych opinii.
+  Bez zmian schematów, Content Lake, Astro i kalendarza.
+- Skill Impeccable: context, odczyt nowej pracy/craft floor, jednorazowy detektor,
+  niezależny przegląd i kontrola dokumentacji. Ostrzeżenia tight-leading i
+  cramped-padding zweryfikowano na zrzutach/CSS: nagłówki display i istniejące
+  odstępy są czytelne. Nie tworzono nowego systemu kolorów.
+- Pierwszy QA przerwała niewłaściwa konfiguracja axe (browser.newPage zamiast
+  jawnego browser.newContext); poprawiono skrypt pomocniczy. Oględziny wykazały
+  sklejanie słów po ukryciu br w nagłówkach mobile. Usunięto dwie reguły,
+  powtórzono QA i zrzuty. Przegląd końcowy: poprawka resolved, disposition ship
+  dla lokalnego mockupu, nie dla produkcyjnej rezerwacji.
+- Końcowe QA Chromium/Firefox/WebKit: PASS, 320/390/768/900/1024/1440 px,
+  CSS zoom 200%, klawiatura menu/FAQ/kotwic, Escape i fokus, reduced motion,
+  brak JS, dekodowanie fotografii, brak overflow, POST, błędów JS i zasobów.
+  Axe Chromium light/dark: 0 naruszeń. Artefakty lokalne:
+  `.impeccable/review/consultation-3a/`; desktop/mobile i cena obejrzane.
+- `npm run verify` na Node 24.21.0: PASS, 57 unit i 45 E2E, format, tokeny,
+  lint, typy, build Astro/Studio, dry-run Workera i kontrola artefaktów.
+  Log `/private/tmp/ola-consultation-verify.log`. Późniejsze zmiany tylko w
+  dokumentacji; po nich ponowny format, 120 lokalnych odnośników dokumentacji,
+  33 lokalne odnośniki/zasoby HTML, unikalne ID i dwa pełne cytaty zgodne ze
+  źródłem: PASS. Diff-check plików tej pracy: PASS.
+- Start lokalnego serwera początkowo EPERM w sandboxie; uruchomienie poza nim
+  udane na 127.0.0.1:8766. Sprawdzoną komendę i URL zapisano w obu README.
+  Zlecono otwarcie podglądu w Codex (status queued).
+- Natywny zoom, czytnik, fizyczne urządzenie i Lighthouse/CWV niewykonane.
+  Bez publikacji, commita, pusha i zmian rezerwacji. Następny krok: feedback
+  do copy/zakresu, właściwy URL kalendarza, potem akceptowana migracja Astro/Sanity.
+
 ## Następny krok
+
+Nowe zlecenie 07.10.2026: ocenić także lokalny landing pojedynczej konsultacji
+3a, jego copy i zakres. Uzupełnić URL wydarzenia oraz ustalić ewentualne pisemne
+podsumowanie; cena 450 zł/60 minut i tymczasowy Cal.com pozostają ustalone.
+Po akceptacji wdrożyć wspólną referencję usługi i warianty według
+CONSULTATION-CMS-CONFIG-3A.md. Mockup nie oznacza konfiguracji Sanity ani płatności.
 
 Zebrać feedback do lokalnego 3a, artykułu blogowego i landingu ebooka.
 Zatwierdzić copy i finalny zakres produktu, potem wdrożyć osobną kolekcję według

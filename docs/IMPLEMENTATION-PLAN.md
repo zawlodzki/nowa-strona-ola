@@ -454,3 +454,20 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
 - [ ] Wdrożyć kolekcję, szablon Astro, Markdown, TypeGen i referencje po akceptacji.
 
 [Mockup](../mockups/homepage/ebook-3a.html), [instrukcja CMS](EBOOK-CMS-CONFIG-3A.md).
+
+## Landing pojedynczej konsultacji 3a — 2026-10-07
+
+- [x] Przejrzeć kontekst FIRMA, poprzednią stronę i wskazany poradnik copywriterski.
+- [x] Wykonać lokalny landing z dziesięcioma wymaganymi częściami i blokiem prowadzącej.
+- [x] Zastosować istniejącą paletę 3a, fotografie, wizualną mapę pytań i celów spotkania.
+- [x] Zachować 450 zł/60 minut i tymczasowy Cal.com; nie dodawać pakietów mentoringu.
+- [x] Połączyć landing z lokalnym indeksem i CTA konsultacji homepage 3a.
+- [x] Zapisać propozycje copy, źródła i rzeczywiste luki CMS.
+- [x] Sprawdzić Chromium/Firefox/WebKit, 320–1440 px, zoom CSS 200%, klawiaturę,
+      brak JS, reduced motion, obrazy i axe light/dark.
+- [ ] Potwierdzić finalny zakres, pisemne podsumowanie, FAQ i URL płatnej rezerwacji.
+- [ ] Po akceptacji wdrożyć warianty Astro/Sanity oraz serializery Markdown.
+
+[Mockup](../mockups/homepage/consultation-3a.html),
+[mapowanie CMS i copy](CONSULTATION-CMS-CONFIG-3A.md).
+Lokalny landing nie zamyka wdrożenia CMS ani kalendarza.
