@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "@ola/shared";
 
+import ArrowIcon from "@/design-system/components/ArrowIcon.astro";
 import Button from "@/design-system/components/Button.astro";
 import Container from "@/design-system/components/Container.astro";
 import DemoForm from "@/design-system/components/DemoForm.astro";
@@ -225,6 +226,7 @@ const profileJsonLd = {
                   : copy.materialsBlogAction}
               </span>
             </div>
+            <ArrowIcon />
           </a>
         ))}
       </div>
@@ -475,7 +477,10 @@ const profileJsonLd = {
     color: var(--ao-muted);
   }
   .about3a-resource {
-    display: block;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: var(--ao-space-24);
     padding-block: var(--ao-space-24);
     border-top: 1px solid var(--ao-line);
     color: inherit;
@@ -483,6 +488,16 @@ const profileJsonLd = {
   }
   .about3a-resource:last-child {
     border-bottom: 1px solid var(--ao-line);
+  }
+  .about3a-resource :global(.ao-icon) {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    margin-top: 4px;
+    transition: transform var(--ao-motion-hover);
+  }
+  .about3a-resource:hover :global(.ao-icon) {
+    transform: translate(3px, -3px);
   }
   .about3a-resource p {
     margin-top: var(--ao-space-12);

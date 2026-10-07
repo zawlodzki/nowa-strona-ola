@@ -505,9 +505,7 @@ body.ao-site {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   place-items: center;
-  background: var(--ao-stage);
   border-radius: var(--ao-radius-panel);
-  padding: 36px var(--ao-space-24);
 }
 .ao-card__media img {
   width: 100%;

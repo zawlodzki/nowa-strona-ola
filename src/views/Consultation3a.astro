@@ -9,6 +9,8 @@ import Hero from "@/design-system/components/Hero.astro";
 import ReviewCard from "@/design-system/components/ReviewCard.astro";
 import Section from "@/design-system/components/Section.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
+import CheckMark from "@/design-system/decorations/CheckMark.astro";
+import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
 import { consultationCopy } from "@/content/consultation-seed";
 import type { ConsultationView } from "@/content/map-consultation";
 import aboutPortrait from "@/assets/portraits/about.webp?url";
@@ -118,6 +120,7 @@ const jsonLd = {
     {placeholder && <p class="consult3a-note">{copy.bookingPlaceholder}</p>}
     <figure slot="media" class="consult3a-portrait">
       <div class="consult3a-portrait__stage">
+        <StageBackdrop wideTopLeft={150} />
         {heroSrc && (
           <img
             src={heroSrc}
@@ -136,15 +139,15 @@ const jsonLd = {
   </Hero>
 
   <Container>
-    <ol class="consult3a-path" aria-label={path.title}>
-      {path.items.map((item, index) =>
-        index === path.items.length - 1 ? (
-          <li>
+    <div class="consult3a-path" aria-label={path.title}>
+      {path.items.map((item, index) => (
+        <>
+          {index === path.items.length - 1 ? (
             <strong>{item}</strong>
-          </li>
-        ) : (
-          <li>
+          ) : (
             <span>{item}</span>
+          )}
+          {index < path.items.length - 1 && (
             <svg
               viewBox="0 0 120 24"
               fill="none"
@@ -154,12 +157,12 @@ const jsonLd = {
               focusable="false"
               preserveAspectRatio="none"
             >
-              <path d="M1 12h116m-7-7 7 7-7 7" />
+              <path d="M1 12h116m-7-7 7 7-7 7"></path>
             </svg>
-          </li>
-        ),
-      )}
-    </ol>
+          )}
+        </>
+      ))}
+    </div>
   </Container>
 
   <Section id="problem">
@@ -347,7 +350,10 @@ const jsonLd = {
         </p>
         <ul>
           {offer.facts.map((fact) => (
-            <li>{fact}</li>
+            <li>
+              <CheckMark />
+              <span>{fact}</span>
+            </li>
           ))}
         </ul>
         <Button as="a" href={offer.action.href} arrow>
@@ -460,15 +466,9 @@ const jsonLd = {
     isolation: isolate;
     height: 520px;
   }
-  .consult3a-portrait__stage::before {
-    content: "";
-    position: absolute;
-    inset: 24px 0 0;
-    z-index: -1;
-    border-radius: 150px 24px 24px 24px;
-    background: var(--ao-surface);
-  }
   .consult3a-portrait img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -486,25 +486,17 @@ const jsonLd = {
     color: var(--ao-muted);
   }
   .consult3a-path {
-    display: flex;
-    gap: var(--ao-space-32);
+    display: grid;
+    grid-template-columns: auto minmax(32px, 1fr) auto minmax(32px, 1fr) auto;
+    align-items: center;
+    gap: 32px;
     margin: 0;
     padding: var(--ao-space-32) 0;
-    list-style: none;
     border-block: 1px solid var(--ao-line);
     font-size: 18px;
   }
-  .consult3a-path li {
-    display: flex;
-    align-items: center;
-    gap: var(--ao-space-32);
-  }
-  .consult3a-path li:not(:last-child) {
-    flex: 1;
-  }
   .consult3a-path svg {
-    flex: 1;
-    min-width: 32px;
+    width: 100%;
     height: 24px;
   }
   .consult3a-path strong {
@@ -726,15 +718,13 @@ const jsonLd = {
     display: grid;
     grid-template-columns: 20px 1fr;
     gap: var(--ao-space-12);
+    align-items: start;
   }
-  .consult3a-offer li::before {
-    content: "";
-    width: 7px;
+  .consult3a-offer :global(.ao-deco-check) {
+    width: 12px;
     height: 12px;
-    margin: 3px 0 0 4px;
-    border: solid var(--ao-primary);
-    border-width: 0 1.6px 1.6px 0;
-    rotate: 45deg;
+    margin-top: 4px;
+    color: var(--ao-primary);
   }
   .consult3a-offer :global(.ao-button) {
     width: 100%;
@@ -800,19 +790,13 @@ const jsonLd = {
     .consult3a-portrait__stage {
       height: 400px;
     }
-    .consult3a-portrait__stage::before {
-      border-top-left-radius: 100px;
-    }
     .consult3a-path {
-      flex-direction: column;
+      grid-template-columns: 1fr;
       gap: var(--ao-space-12);
       padding-block: var(--ao-space-24);
     }
-    .consult3a-path li {
-      gap: var(--ao-space-16);
-    }
     .consult3a-path svg {
-      flex: 0 0 40px;
+      width: 40px;
       height: 12px;
     }
     .consult3a-map {

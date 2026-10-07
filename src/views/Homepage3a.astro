@@ -14,6 +14,12 @@ import ReviewCard from "@/design-system/components/ReviewCard.astro";
 import Section from "@/design-system/components/Section.astro";
 import SplitPanel from "@/design-system/components/SplitPanel.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
+import BookCoverArt, {
+  type CoverArtKind,
+} from "@/design-system/decorations/BookCoverArt.astro";
+import CheckMark from "@/design-system/decorations/CheckMark.astro";
+import CoverStage from "@/design-system/decorations/CoverStage.astro";
+import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
 import { formatPriceGross, topicLabel } from "@/lib/offer";
 import type { HomepageView } from "@/content/map-homepage";
 import type { LogoItem } from "@/sections/types";
@@ -63,6 +69,33 @@ const firstPeri = content.ebooks.items.find(
   (item) => item.topic === "perimenopause",
 );
 const pl = lang === "pl";
+const coverArts: { kind: CoverArtKind; variant: "default" | "alt" }[] = [
+  { kind: "decisions", variant: "default" },
+  { kind: "route", variant: "alt" },
+  { kind: "nutrition", variant: "default" },
+  { kind: "observation", variant: "default" },
+  { kind: "journal", variant: "alt" },
+  { kind: "evening", variant: "default" },
+];
+
+function coverLabels(kind: CoverArtKind): string[] {
+  switch (kind) {
+    case "decisions":
+      return pl ? ["Cel", "Dawka", "Decyzja"] : ["Aim", "Dose", "Decision"];
+    case "route":
+      return pl ? ["Badania", "Termin", "Wizyta"] : ["Tests", "Date", "Visit"];
+    case "observation":
+      return pl ? ["Energia", "Siła", "Sen"] : ["Energy", "Strength", "Sleep"];
+    case "journal":
+      return pl ? ["12 tygodni obserwacji"] : ["12 weeks of observation"];
+    case "evening":
+      return pl
+        ? ["18:00", "20:00", "22:00", "Od kolacji do snu"]
+        : ["18:00", "20:00", "22:00", "From dinner to sleep"];
+    default:
+      return [];
+  }
+}
 ---
 
 <main id="main" class="home3a">
@@ -87,7 +120,7 @@ const pl = lang === "pl";
       </Button>
     )}
     <div slot="media" class="home3a-portrait">
-      <div class="home3a-portrait__backdrop"></div>
+      <StageBackdrop />
       {heroSrc && (
         <img
           src={heroSrc}
@@ -214,33 +247,47 @@ const pl = lang === "pl";
         columns={3}
         lang={lang}
       >
-        {content.ebooks.items.map((item) => (
-          <div id={`ebook-${item.slug}`}>
-            <ContentCard
-              title={item.title}
-              href={item.href}
-              description={item.description}
-              metadata={`${topicLabel(item.topic, lang)} · E-book`}
-              actionLabel={content.ebooks.cardActionLabel}
-            >
-              <BookCover
-                slot="media"
+        {content.ebooks.items.map((item, index) => {
+          const art = coverArts[index] ?? {
+            kind: "decisions" as const,
+            variant: "default" as const,
+          };
+          return (
+            <div id={`ebook-${item.slug}`}>
+              <ContentCard
                 title={item.title}
-                subtitle={item.subtitle ?? ""}
-                author={item.authorName}
-                topic={
-                  pl
-                    ? "Praktyczny przewodnik dla kobiet"
-                    : "A practical guide for women"
-                }
-                tone={item.coverTone}
-              />
-              <span slot="price">
-                {formatPriceGross(item.priceGross, item.currency, lang)}
-              </span>
-            </ContentCard>
-          </div>
-        ))}
+                href={item.href}
+                description={item.description}
+                metadata={`${topicLabel(item.topic, lang)} · E-book`}
+                actionLabel={content.ebooks.cardActionLabel}
+              >
+                <CoverStage slot="media" variant={art.variant}>
+                  <BookCover
+                    title={item.title}
+                    subtitle={item.subtitle ?? ""}
+                    author={item.authorName}
+                    topic={
+                      pl
+                        ? "Praktyczny przewodnik dla kobiet"
+                        : "A practical guide for women"
+                    }
+                    tone={item.coverTone}
+                  >
+                    <BookCoverArt
+                      slot="art"
+                      kind={art.kind}
+                      labels={coverLabels(art.kind)}
+                      imageSrc={art.kind === "nutrition" ? foodSrc : undefined}
+                    />
+                  </BookCover>
+                </CoverStage>
+                <span slot="price">
+                  {formatPriceGross(item.priceGross, item.currency, lang)}
+                </span>
+              </ContentCard>
+            </div>
+          );
+        })}
       </Carousel>
       {content.ebooks.collection && (
         <p class="home3a-collection">
@@ -262,7 +309,10 @@ const pl = lang === "pl";
         ))}
         <ul class="home3a-facts">
           {content.consultation.facts.map((fact) => (
-            <li>{fact}</li>
+            <li>
+              <CheckMark />
+              <span>{fact}</span>
+            </li>
           ))}
         </ul>
         {content.consultation.priceLabel && (
@@ -334,14 +384,9 @@ const pl = lang === "pl";
     position: relative;
     height: 560px;
   }
-  .home3a-portrait__backdrop {
-    position: absolute;
-    inset: 24px 0 0;
-    border-radius: 160px 24px 24px 24px;
-    background: var(--ao-surface);
-  }
   .home3a-portrait img {
     position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -363,8 +408,9 @@ const pl = lang === "pl";
     align-items: center;
     gap: 36px;
     margin: 0;
-    padding: 0;
+    padding: 28px 0;
     list-style: none;
+    border-block: 1px solid var(--ao-line);
   }
   .home3a-partners img {
     width: auto;
@@ -376,9 +422,12 @@ const pl = lang === "pl";
   }
   .home3a-why {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--ao-space-64);
+    grid-template-columns: 0.95fr 1.2fr;
+    gap: 80px;
     align-items: start;
+  }
+  .home3a-why :global(.ao-heading) {
+    font-size: 56px;
   }
   .home3a-count {
     display: flex;
@@ -387,8 +436,8 @@ const pl = lang === "pl";
     margin-top: var(--ao-space-48);
   }
   .home3a-count strong {
-    font-size: 80px;
-    font-weight: 300;
+    font-size: 92px;
+    font-weight: 700;
     line-height: 1;
     letter-spacing: -0.07em;
   }
@@ -401,14 +450,28 @@ const pl = lang === "pl";
   }
   .home3a-results {
     display: grid;
-    gap: var(--ao-space-32);
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
   .home3a-results article {
-    padding-bottom: var(--ao-space-24);
-    border-bottom: 1px solid var(--ao-line);
+    padding: 28px;
+    border-radius: 24px;
+    background: var(--ao-surface);
+  }
+  .home3a-results article:first-child {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    align-items: center;
+  }
+  .home3a-results article:nth-child(2) {
+    background: transparent;
+    border: 1px solid var(--ao-line);
   }
   .home3a-results h3 {
-    font-size: 22px;
+    font-size: 24px;
+    font-weight: 600;
     letter-spacing: -0.03em;
   }
   .home3a-results p {
@@ -416,31 +479,42 @@ const pl = lang === "pl";
     color: var(--ao-muted);
     font-size: 14px;
   }
+  .home3a-results article:first-child p {
+    margin: 0;
+  }
   .home3a-about__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--ao-space-64);
+    gap: 80px;
     align-items: center;
   }
   .home3a-about__media {
     position: relative;
-    max-width: 490px;
+    max-width: none;
   }
   .home3a-about__media > img:first-child {
     width: 100%;
-    border-radius: var(--ao-radius-image);
+    height: 540px;
+    object-fit: cover;
+    border-radius: 24px;
   }
   .home3a-about__food {
     position: absolute;
-    right: -8%;
-    bottom: -8%;
-    width: 46%;
-    border-radius: var(--ao-radius-panel);
+    right: 24px;
+    bottom: -32px;
+    width: 220px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 24px;
     outline: 8px solid var(--ao-background);
+  }
+  .home3a-about :global(.ao-heading) {
+    font-size: 64px;
   }
   .home3a-large {
     margin-top: var(--ao-space-24);
-    font-size: 22px;
+    font-size: 25px;
+    font-weight: 500;
   }
   .home3a-about p + p,
   .home3a-about .ao-text-link {
@@ -482,12 +556,15 @@ const pl = lang === "pl";
     font-size: 13px;
   }
   .home3a-facts li {
-    display: flex;
+    display: grid;
+    grid-template-columns: 16px 1fr;
     align-items: center;
     gap: 12px;
   }
-  .home3a-facts li::before {
-    content: "✓";
+  .home3a-facts :global(.ao-deco-check) {
+    width: 12px;
+    height: 12px;
+    color: var(--ao-primary);
   }
   .home3a-price {
     font-size: 18px;
@@ -506,15 +583,29 @@ const pl = lang === "pl";
       grid-template-columns: minmax(0, 1fr);
       gap: var(--ao-space-40);
     }
+    .home3a-why :global(.ao-heading),
+    .home3a-about :global(.ao-heading) {
+      font-size: clamp(36px, 8vw, 52px);
+    }
+    .home3a-results {
+      grid-template-columns: 1fr;
+    }
+    .home3a-results article:first-child {
+      grid-column: auto;
+      grid-template-columns: 1fr;
+    }
     .home3a-portrait {
       height: 420px;
     }
-    .home3a-portrait__backdrop {
-      border-top-left-radius: 100px;
+    .home3a-about__media > img:first-child {
+      height: auto;
+      aspect-ratio: 4 / 5;
     }
     .home3a-about__food {
       right: 8%;
       bottom: -12%;
+      width: 46%;
+      height: auto;
     }
   }
   @container page3a (max-width: 374px) {
