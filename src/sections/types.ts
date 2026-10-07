@@ -56,11 +56,19 @@ export interface TextContent {
 }
 
 export interface TextImageContent extends TextContent {
+  variant: "photo";
   lead?: string;
   action?: ActionLink;
   media: MediaSpec;
   secondaryMedia?: MediaSpec;
   mediaPosition: "start" | "end";
+}
+
+export interface QuestionMapContent extends TextContent {
+  variant: "questions";
+  prompts: string[];
+  resolution: { eyebrow?: string; title: string };
+  caption?: string;
 }
 
 export interface LogoItem {
@@ -91,9 +99,23 @@ export interface CardsContent {
   items: CardItem[];
 }
 
-export interface ListContent {
+export interface TextCardItem {
+  title: string;
+  body: string;
+}
+
+export interface TextCardsContent {
+  variant: "situations" | "goals";
+  eyebrow?: string;
   title: string;
   lead: string;
+  items: TextCardItem[];
+  closing?: string;
+}
+
+export interface ListContent {
+  title: string;
+  lead?: string;
   items: string[];
 }
 
@@ -107,6 +129,7 @@ export interface ProcessContent {
   lead: string;
   steps: ProcessStep[];
   note?: string;
+  media?: MediaSpec;
 }
 
 export interface MetricItem {
@@ -162,9 +185,12 @@ export interface ExpertContent {
   title: string;
   name: string;
   role: string;
+  intro?: string;
   body: string;
   media: MediaSpec;
-  action: ActionLink;
+  action?: ActionLink;
+  metric?: MetricItem;
+  education?: { institution: string; program: string };
 }
 
 export interface FaqItem {
@@ -283,15 +309,24 @@ export interface EbooksContent {
   items: EbookCardContent[];
 }
 
+export interface ServiceDetails {
+  name: string;
+  price: number;
+  currency: "PLN";
+  durationMinutes: number;
+}
+
 export interface ServiceOfferContent {
   title: string;
   body: string[];
   facts: string[];
-  media: MediaSpec;
+  note?: string;
+  media?: MediaSpec;
   action: ActionLink;
   secondary?: ActionLink;
   priceLabel?: string;
   bookingStatus?: "placeholder" | "live";
+  service?: ServiceDetails;
 }
 
 export interface CredentialsPerson {

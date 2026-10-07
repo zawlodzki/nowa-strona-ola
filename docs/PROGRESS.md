@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 2 etapu 4a: About3a i wspólny profil autora).
+Aktualizacja: 2026-10-07 (pakiet 3 etapu 4a: Consultation3a i wspólna usługa).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
@@ -8,13 +8,13 @@ Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiety 1–2 (Homepage3a, About3a, wspólny shell i profil autora) są w kodzie
+**Pakiety 1–3 (Homepage3a, About3a, Consultation3a, wspólny shell) są w kodzie
 i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były zlecone.**
 
-Publiczne `/`, `/en/`, `/o-mnie/` i `/en/about/` oraz preview `page` home/about
-renderują `SiteShell3a` + `Homepage3a` / `About3a` z fixture’ów. Blog, landingi
-i `/ui/` nadal używają wcześniejszego Layout. Etapy 5–7 oraz pakiety 3–7 etapu 4a
-pozostają otwarte.
+Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/` i
+`/en/consultations/` oraz preview tych stron renderują `SiteShell3a` z
+fixture’ów. Blog, landingi demo i `/ui/` nadal używają wcześniejszego Layout.
+Etapy 5–7 oraz pakiety 4–7 etapu 4a pozostają otwarte.
 
 ## Wykonane
 
@@ -1965,12 +1965,67 @@ Otwarte w pakiecie 2 (dane, nie kod): import szkiców do Content Lake po
 porównaniu z istniejącymi dokumentami autora; odbiór edycji w Studio
 i chronionym preview z prawdziwym datasetem. Bez publikacji.
 
+## Pakiet 3 etapu 4a — 2026-10-07
+
+Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
+`cursor/consultation-3a-0940`, draft PR, bez merge.
+
+- Inwentaryzacja: `consultation-3a.html` + [CONSULTATION-CMS-CONFIG-3A](CONSULTATION-CMS-CONFIG-3A.md).
+  Cena 450 zł / 60 minut i tymczasowy `https://cal.com` z istniejącego
+  dokumentu `service`; wskaźnik 450+ i opinie 4 i 6 jak na homepage/About.
+  Copy EN robocze.
+- Modele: bez nowego `_type`, `pricingSection` i drugiej usługi. Warianty
+  `textImageSection` `questions`, `cardsSection` `situations`/`goals`
+  (karty bez linków i zdjęć, `closing`), opcjonalne `media` w przebiegu,
+  `expertSection` z `intro`, `metric` i referencją autora,
+  `serviceOfferSection.note`. Slugi `konsultacje`/`consultations` w allowliście.
+  GROQ publiczny i preview, TypeGen, typy i mappery z typowanymi wariantami.
+- UI: `Consultation3a` na `SiteShell3a`; preview używa tego samego
+  `ComposedPage`. Nagłówek z lokalnymi kotwicami i CTA „Konsultacja · 450 zł”
+  → `#cena`; stopka z pełną nawigacją i `aria-current`. Nawigacja homepage
+  i „Poznaj konsultacje” prowadzą do `/konsultacje/` i `/en/consultations/`.
+  JSON-LD `WebPage`/`Service`/`Offer`/`FAQPage` z widocznych danych.
+  Brak formularza i potwierdzenia rezerwacji; placeholder Cal.com opisany
+  przy hero i cenie.
+- Markdown: serializer mapy pytań, kart tekstowych, wskaźnika i notatki;
+  nieznany blok zatrzymuje build.
+- Import: `npm run import:consultation` dry-run, 2 dokumenty
+  (`page-consultation-pl/en`), `write: false`, exit 0; `--write` exit 2.
+  Porównanie Content Lake pominięte, brak tokenu w tej sesji.
+- `npm run verify` na Node 24.21.0: PASS. Format, tokeny, ESLint, Astro/TS
+  (163 + 11 plików, 0 diagnostyki), 74 unit tests w 15 plikach, build
+  27 stron, Studio, Worker dry-run, budżety JS 5770 B / CSS 20155 B gzip
+  (limit 20480), **87 E2E PASS** (Chromium/Firefox/WebKit), w tym PL/EN
+  konsultacji, natywne FAQ, brak POST i 404 `/en/konsultacje/`.
+  Firefox i WebKit doinstalowane w tej sesji przez `npx playwright install`.
+- verify-ola `ola-1791391606`: doctor PASS na porcie 4340, Node 24.21.0.
+  Homepage „Poznaj konsultacje” ma `href=/konsultacje/` i otwiera H1 landingu.
+  Przepis [consultation.md](../.cursor/skills/verify-ola/features/consultation.md):
+  dwa Cal.com, CTA „Konsultacja · 450 zł” → `#cena`, `aria-current=page` na
+  „Konsultacje” w stopce, 6 FAQ `group`, `posts []`, EN H1 bez polskiego leadu,
+  `/en/konsultacje/` status 404. Treść i 450 zł bez JS. About nadal rezerwuje
+  przez Cal.com. Dowody: `/tmp/ola-verify-evidence/ola-1791391606/`.
+  Viewport CLI: 1280×900. Axe/overflow 320/390/1440 px w tym przebiegu nie
+  powtarzano (są w `npm run verify` / E2E). Natywny zoom, czytnik i urządzenie
+  fizyczne — niesprawdzone.
+
+Luki (nie blokują komponentów): URL płatnej rezerwacji, pisemne
+podsumowanie po spotkaniu, potwierdzenie zakresu i FAQ, copy EN, strona
+kontaktu, nagłówek „60 minut” jako tekst obok `durationMinutes`. Budżet CSS
+ma około 325 B zapasu, bo CSS trzech szablonów 3a trafia do jednego pliku;
+pakiet 4 musi go podzielić albo odchudzić.
+
+Otwarte w pakiecie 3 (dane, nie kod): zapis szkiców `page-consultation-*`
+do Content Lake po porównaniu, odbiór w Studio i chronionym preview
+z datasetem. Bez publikacji.
+
 ## Następny krok
 
-Pakiet 3 etapu 4a: Consultation3a (`consultation-3a.html`) na tym samym
-shellu, wspólna usługa 450 zł/60 min, FAQ i rezerwacja. Potem produkt →
-kolekcja → blog → artykuł. Import About/homepage do szkiców Sanity dopiero
-na osobne zlecenie zapisu. Publikacja treści/strony wymaga osobnego zlecenia.
+Pakiet 4 etapu 4a: Ebook3a (`ebook-3a.html`) i wspólny dokument produktu
+według EBOOK-CMS-CONFIG-3A. Przed pierwszym nowym blokiem CSS sprawdzić
+budżet 20 KB gzip. Potem kolekcja → blog → artykuł. Import
+homepage/About/konsultacji do szkiców Sanity dopiero na osobne zlecenie
+zapisu. Publikacja treści/strony wymaga osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
 axe/overflow About przy 320/390/1440 px, natywny zoom, czytnik i fizyczne

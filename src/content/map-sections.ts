@@ -22,13 +22,17 @@ import type {
   LogosContent,
   MediaContent,
   MediaSpec,
+  MetricItem,
   MetricsContent,
   PricingContent,
   ProcessContent,
+  QuestionMapContent,
   QuoteContent,
   RelatedContent,
+  ServiceDetails,
   ServiceOfferContent,
   TestimonialsContent,
+  TextCardsContent,
   TextContent,
   TextImageContent,
 } from "@/sections/types";
@@ -124,6 +128,7 @@ export function toText(section: {
 }
 
 export function toTextImage(section: {
+  variant?: string | null;
   eyebrow?: string | null;
   title?: string | null;
   lead?: string | null;
@@ -132,9 +137,35 @@ export function toTextImage(section: {
   action?: LinkValue | null;
   media?: MediaValue | null;
   secondaryMedia?: MediaValue | null;
-}): TextImageContent {
+  prompts?: (string | null)[] | null;
+  resolutionEyebrow?: string | null;
+  resolutionTitle?: string | null;
+  caption?: string | null;
+}): TextImageContent | QuestionMapContent {
+  if (section.variant === "questions") {
+    const prompts = (section.prompts ?? []).filter((item): item is string =>
+      Boolean(item),
+    );
+    if (prompts.length < 3 || prompts.length > 8) {
+      throw new Error("Mapa pytań wymaga od 3 do 8 pytań.");
+    }
+    return {
+      ...toText(section),
+      variant: "questions",
+      prompts,
+      resolution: {
+        eyebrow: section.resolutionEyebrow ?? undefined,
+        title: required(section.resolutionTitle, "odpowiedź mapy pytań"),
+      },
+      caption: section.caption ?? undefined,
+    };
+  }
+  if (section.variant && section.variant !== "photo") {
+    throw new Error(`Nieznany wariant tekstu i obrazu: ${section.variant}.`);
+  }
   return {
     ...toText(section),
+    variant: "photo",
     lead: section.lead ?? undefined,
     action: section.action?.href ? toAction(section.action) : undefined,
     mediaPosition: section.mediaPosition === "start" ? "start" : "end",
@@ -187,13 +218,31 @@ export function toCards(section: {
         media?: MediaValue | null;
       }[]
     | null;
-}): CardsContent {
-  const variant = section.variant === "links" ? "links" : "media";
-  return {
-    variant,
+  closing?: string | null;
+}): CardsContent | TextCardsContent {
+  const variant = section.variant ?? "media";
+  const heading = {
     eyebrow: section.eyebrow ?? undefined,
     title: required(section.title, "tytuł kart"),
     lead: required(section.lead, "lead kart"),
+  };
+  if (variant === "situations" || variant === "goals") {
+    return {
+      ...heading,
+      variant,
+      items: (section.items ?? []).map((item) => ({
+        title: required(item.title, "tytuł karty"),
+        body: required(item.body, "opis karty"),
+      })),
+      closing: section.closing ?? undefined,
+    };
+  }
+  if (variant !== "media" && variant !== "links") {
+    throw new Error(`Nieznany wariant kart: ${variant}.`);
+  }
+  return {
+    ...heading,
+    variant,
     items: (section.items ?? []).map((item) => {
       const hasMedia = Boolean(item.media?.alt || item.media?.label);
       if (variant === "media" && !hasMedia) {
@@ -210,6 +259,12 @@ export function toCards(section: {
   };
 }
 
+export function isTextCards(
+  content: CardsContent | TextCardsContent,
+): content is TextCardsContent {
+  return content.variant === "situations" || content.variant === "goals";
+}
+
 export function toList(section: {
   title?: string | null;
   lead?: string | null;
@@ -217,7 +272,7 @@ export function toList(section: {
 }): ListContent {
   return {
     title: required(section.title, "tytuł listy"),
-    lead: required(section.lead, "lead listy"),
+    lead: section.lead ?? undefined,
     items: (section.items ?? []).filter((item): item is string =>
       Boolean(item),
     ),
@@ -229,6 +284,7 @@ export function toProcess(section: {
   lead?: string | null;
   note?: string | null;
   steps?: { title?: string | null; body?: string | null }[] | null;
+  media?: MediaValue | null;
 }): ProcessContent {
   return {
     title: required(section.title, "tytuł procesu"),
@@ -238,6 +294,10 @@ export function toProcess(section: {
       title: required(step.title, "krok"),
       body: required(step.body, "opis kroku"),
     })),
+    media:
+      section.media?.alt || section.media?.label
+        ? toMedia(section.media)
+        : undefined,
   };
 }
 
@@ -338,18 +398,54 @@ export function toTestimonials(section: {
 
 export function toExpert(section: {
   title?: string | null;
+  intro?: string | null;
   body?: string | null;
+  metric?: {
+    value?: number | null;
+    suffix?: string | null;
+    label?: string | null;
+  } | null;
   action?: LinkValue | null;
   media?: MediaValue | null;
-  person?: { name?: string | null; role?: string | null } | null;
+  person?: {
+    name?: string | null;
+    role?: string | null;
+    educationInstitution?: string | null;
+    educationProgram?: string | null;
+  } | null;
 }): ExpertContent {
+  const person = section.person;
   return {
     title: required(section.title, "nadtytuł eksperta"),
-    name: required(section.person?.name, "imię eksperta"),
-    role: required(section.person?.role, "rola eksperta"),
+    name: required(person?.name, "imię eksperta"),
+    role: required(person?.role, "rola eksperta"),
+    intro: section.intro ?? undefined,
     body: required(section.body, "opis eksperta"),
     media: toMedia(section.media),
-    action: toAction(section.action),
+    action: section.action?.href ? toAction(section.action) : undefined,
+    metric: section.metric ? toExpertMetric(section.metric) : undefined,
+    education:
+      person?.educationInstitution && person.educationProgram
+        ? {
+            institution: person.educationInstitution,
+            program: person.educationProgram,
+          }
+        : undefined,
+  };
+}
+
+function toExpertMetric(metric: {
+  value?: number | null;
+  suffix?: string | null;
+  label?: string | null;
+}): MetricItem {
+  if (typeof metric.value !== "number") {
+    throw new Error("Wskaźnik eksperta wymaga liczby.");
+  }
+  return {
+    value: metric.value,
+    suffix: metric.suffix ?? "",
+    label: required(metric.label, "opis wskaźnika eksperta"),
   };
 }
 
@@ -597,6 +693,7 @@ export function toServiceOffer(
     title?: string | null;
     body?: (string | null)[] | null;
     facts?: (string | null)[] | null;
+    note?: string | null;
     action?: LinkValue | null;
     secondary?: LinkValue | null;
     media?: MediaValue | null;
@@ -619,24 +716,18 @@ export function toServiceOffer(
   if (!bookingUrl) {
     throw new Error("Oferta usługi wymaga adresu rezerwacji.");
   }
-  const price =
-    typeof service?.price === "number" &&
-    typeof service.durationMinutes === "number" &&
-    service.currency
-      ? formatServicePrice(
-          service.price,
-          service.currency,
-          service.durationMinutes,
-          language,
-        )
-      : undefined;
+  const details = service ? toServiceDetails(service) : undefined;
   return {
     title: required(section.title, "tytuł oferty usługi"),
     body: (section.body ?? []).filter((item): item is string => Boolean(item)),
     facts: (section.facts ?? []).filter((item): item is string =>
       Boolean(item),
     ),
-    media: toMedia(section.media),
+    note: section.note ?? undefined,
+    media:
+      section.media?.alt || section.media?.label
+        ? toMedia(section.media)
+        : undefined,
     action: {
       href: bookingUrl,
       label: actionLabel,
@@ -645,8 +736,40 @@ export function toServiceOffer(
     secondary: section.secondary?.href
       ? toAction(section.secondary)
       : undefined,
-    priceLabel: price,
+    priceLabel: details
+      ? formatServicePrice(
+          details.price,
+          details.currency,
+          details.durationMinutes,
+          language,
+        )
+      : undefined,
     bookingStatus: service?.bookingStatus === "live" ? "live" : "placeholder",
+    service: details,
+  };
+}
+
+function toServiceDetails(service: {
+  title?: string | null;
+  price?: number | null;
+  currency?: string | null;
+  durationMinutes?: number | null;
+}): ServiceDetails | undefined {
+  if (
+    typeof service.price !== "number" ||
+    typeof service.durationMinutes !== "number" ||
+    !service.currency
+  ) {
+    return undefined;
+  }
+  if (service.currency !== "PLN") {
+    throw new Error(`Nieobsługiwana waluta: ${service.currency}.`);
+  }
+  return {
+    name: required(service.title, "nazwa usługi"),
+    price: service.price,
+    currency: service.currency,
+    durationMinutes: service.durationMinutes,
   };
 }
 

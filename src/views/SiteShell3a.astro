@@ -12,6 +12,7 @@ export interface Props {
   title: string;
   description?: string;
   navigation: NavigationLink[];
+  footerLinks?: NavigationLink[];
   headerCta?: NavigationLink;
   footerNote: string;
   socialLinks?: SocialLink[];
@@ -26,6 +27,7 @@ const {
   title,
   description,
   navigation,
+  footerLinks = navigation,
   headerCta,
   footerNote,
   socialLinks = [],
@@ -61,7 +63,7 @@ const homeHref = homePath(lang);
   <SiteFooter
     homeHref={homeHref}
     description={footerNote}
-    links={navigation}
+    links={footerLinks}
     socialLinks={socialLinks}
     legalLinks={legalLinks}
     copyright={copyright}

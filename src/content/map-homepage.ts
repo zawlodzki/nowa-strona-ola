@@ -33,6 +33,7 @@ import type {
   FormCopy,
   HeroContent,
   LogosContent,
+  MediaSpec,
   MetricsContent,
   ServiceOfferContent,
   TestimonialsContent,
@@ -45,7 +46,7 @@ export interface HomepageView {
   approach: MetricsContent;
   about: TextImageContent;
   ebooks: EbooksContent;
-  consultation: ServiceOfferContent;
+  consultation: ServiceOfferContent & { media: MediaSpec };
   testimonials: TestimonialsContent;
   newsletter: FormCopy;
 }
@@ -100,6 +101,12 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
       "Homepage 3a wymaga jednego wskaźnika w wariancie podejścia.",
     );
   }
+  if (about.variant !== "photo") {
+    throw new Error("Homepage 3a wymaga sekcji O mnie z fotografią.");
+  }
+  if (!consultation.media) {
+    throw new Error("Homepage 3a wymaga fotografii przy ofercie konsultacji.");
+  }
   if (newsletter.fields.some((field) => field.input === "checkbox") === false) {
     throw new Error("Newsletter homepage wymaga zgody (checkbox).");
   }
@@ -110,7 +117,7 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
     approach,
     about,
     ebooks,
-    consultation,
+    consultation: { ...consultation, media: consultation.media },
     testimonials,
     newsletter,
   };

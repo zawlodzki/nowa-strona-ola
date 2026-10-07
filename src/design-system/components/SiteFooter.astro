@@ -53,7 +53,9 @@ const pl = lang === "pl";
       aria-label={pl ? "Nawigacja w stopce" : "Footer navigation"}
     >
       {links.map((link) => (
-        <a href={link.href}>{link.label}</a>
+        <a href={link.href} aria-current={link.current ? "page" : undefined}>
+          {link.label}
+        </a>
       ))}
     </nav>
     <div class="ao-footer__bottom">

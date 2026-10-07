@@ -144,12 +144,31 @@ export const textSectionType = defineType({
   preview: sectionPreview("Tekst"),
 });
 
+function isQuestionsVariant(parent: unknown) {
+  return (parent as { variant?: string } | undefined)?.variant === "questions";
+}
+
 export const textImageSectionType = defineType({
   name: "textImageSection",
   title: "Tekst i obraz",
   type: "object",
   icon: ImageIcon,
   fields: [
+    defineField({
+      name: "variant",
+      title: "Wariant",
+      description:
+        "Mapa pytań to diagram z HTML na landingu konsultacji; nie wymaga fotografii.",
+      type: "string",
+      options: {
+        layout: "radio",
+        list: [
+          { title: "Tekst z fotografią", value: "photo" },
+          { title: "Mapa pytań", value: "questions" },
+        ],
+      },
+      initialValue: "photo",
+    }),
     defineField({
       name: "eyebrow",
       title: "Nadtytuł",
@@ -167,6 +186,7 @@ export const textImageSectionType = defineType({
       title: "Wyróżniony lead",
       type: "text",
       rows: 2,
+      hidden: ({ parent }) => isQuestionsVariant(parent),
       validation: (rule) => rule.max(240),
     }),
     defineField({
@@ -180,6 +200,7 @@ export const textImageSectionType = defineType({
       name: "action",
       title: "Akcja",
       type: "actionLink",
+      hidden: ({ parent }) => isQuestionsVariant(parent),
     }),
     defineField({
       name: "mediaPosition",
@@ -193,19 +214,81 @@ export const textImageSectionType = defineType({
         ],
       },
       initialValue: "end",
-      validation: (rule) => rule.required(),
+      hidden: ({ parent }) => isQuestionsVariant(parent),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          value || isQuestionsVariant(context.parent)
+            ? true
+            : "Wybierz położenie medium.",
+        ),
     }),
     defineField({
       name: "media",
       title: "Medium",
       type: "mediaObject",
-      validation: (rule) => rule.required(),
+      hidden: ({ parent }) => isQuestionsVariant(parent),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          value || isQuestionsVariant(context.parent)
+            ? true
+            : "Wariant z fotografią wymaga medium.",
+        ),
     }),
     defineField({
       name: "secondaryMedia",
       title: "Drugie medium",
       description: "Opcjonalny kadr nakładany, np. posiłek w sekcji O mnie.",
       type: "mediaObject",
+      hidden: ({ parent }) => isQuestionsVariant(parent),
+    }),
+    defineField({
+      name: "prompts",
+      title: "Pytania na mapie",
+      description: "Krótkie pytania odbiorczyni, od 3 do 8.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "string",
+          validation: (rule) => rule.max(60),
+        }),
+      ],
+      hidden: ({ parent }) => !isQuestionsVariant(parent),
+      validation: (rule) =>
+        rule.custom((prompts, context) => {
+          if (!isQuestionsVariant(context.parent)) return true;
+          const count = Array.isArray(prompts) ? prompts.length : 0;
+          return count >= 3 && count <= 8
+            ? true
+            : "Mapa pytań wymaga od 3 do 8 pytań.";
+        }),
+    }),
+    defineField({
+      name: "resolutionEyebrow",
+      title: "Nadtytuł odpowiedzi",
+      type: "string",
+      hidden: ({ parent }) => !isQuestionsVariant(parent),
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
+      name: "resolutionTitle",
+      title: "Odpowiedź na mapie",
+      type: "string",
+      hidden: ({ parent }) => !isQuestionsVariant(parent),
+      validation: (rule) =>
+        rule
+          .max(80)
+          .custom((value, context) =>
+            value || !isQuestionsVariant(context.parent)
+              ? true
+              : "Mapa pytań wymaga odpowiedzi.",
+          ),
+    }),
+    defineField({
+      name: "caption",
+      title: "Podpis mapy",
+      type: "string",
+      hidden: ({ parent }) => !isQuestionsVariant(parent),
+      validation: (rule) => rule.max(160),
     }),
   ],
   preview: sectionPreview("Tekst i obraz"),
@@ -291,6 +374,8 @@ export const cardsSectionType = defineType({
         list: [
           { title: "Karty z medium", value: "media" },
           { title: "Lista odnośników", value: "links" },
+          { title: "Sytuacje odbiorczyni (bez linków)", value: "situations" },
+          { title: "Cele rozmowy (bez linków)", value: "goals" },
         ],
       },
       initialValue: "media",
@@ -339,8 +424,9 @@ export const cardsSectionType = defineType({
             defineField({
               name: "href",
               title: "Adres",
+              description:
+                "Wymagany dla kart z medium i listy odnośników. Sytuacje i cele są bez linków.",
               type: "string",
-              validation: (rule) => rule.required(),
             }),
             defineField({
               name: "status",
@@ -366,17 +452,32 @@ export const cardsSectionType = defineType({
           .max(6)
           .custom((items, context) => {
             const parent = context.parent as { variant?: string } | undefined;
-            if ((parent?.variant ?? "media") !== "media") return true;
-            const missing = (items ?? []).some(
-              (item) =>
-                item &&
-                typeof item === "object" &&
-                !("media" in item && item.media),
+            const variant = parent?.variant ?? "media";
+            const cards = (items ?? []).filter(
+              (item): item is Record<string, unknown> =>
+                Boolean(item) && typeof item === "object",
             );
-            if (missing)
+            if (
+              (variant === "media" || variant === "links") &&
+              cards.some((item) => !item.href)
+            ) {
+              return "Karty z medium i lista odnośników wymagają adresu na każdej karcie.";
+            }
+            if (variant === "media" && cards.some((item) => !item.media)) {
               return "Wariant z medium wymaga obrazu na każdej karcie.";
+            }
             return true;
           }),
+    }),
+    defineField({
+      name: "closing",
+      title: "Akapit zamykający",
+      description: "Opcjonalne zdanie po kartach, np. przy celach rozmowy.",
+      type: "text",
+      rows: 2,
+      hidden: ({ parent }) =>
+        parent?.variant !== "situations" && parent?.variant !== "goals",
+      validation: (rule) => rule.max(240),
     }),
   ],
   preview: sectionPreview("Karty"),
@@ -391,6 +492,8 @@ export const listSectionType = defineType({
     defineField({
       name: "title",
       title: "Tytuł",
+      description:
+        "Na landingu konsultacji jest etykietą ścieżki dla czytnika, nie widocznym nagłówkiem.",
       type: "string",
       validation: requiredString,
     }),
@@ -399,7 +502,7 @@ export const listSectionType = defineType({
       title: "Lead",
       type: "text",
       rows: 2,
-      validation: (rule) => rule.required().max(240),
+      validation: (rule) => rule.max(240),
     }),
     defineField({
       name: "items",
@@ -462,10 +565,16 @@ export const processSectionType = defineType({
       name: "note",
       title: "Uwaga",
       description:
-        "Opcjonalna granica zakresu, np. że konsultacja nie zastępuje opieki lekarskiej.",
+        "Opcjonalna granica zakresu albo przygotowanie do spotkania („Co przygotować?”).",
       type: "text",
       rows: 2,
       validation: (rule) => rule.max(240),
+    }),
+    defineField({
+      name: "media",
+      title: "Medium",
+      description: "Opcjonalna fotografia obok kroków.",
+      type: "mediaObject",
     }),
   ],
   preview: sectionPreview("Proces"),
@@ -722,29 +831,68 @@ export const expertSectionType = defineType({
     defineField({
       name: "title",
       title: "Nadtytuł sekcji",
+      description: "W szablonach 3a jest nagłówkiem sekcji.",
       type: "string",
       validation: (rule) => rule.required().max(80),
     }),
     defineField({
       name: "person",
       title: "Osoba",
+      description:
+        "Wspólny profil autora. Imię, rola i wykształcenie pochodzą stąd.",
       type: "reference",
       to: [{ type: "author" }],
       options: sameLanguageFilter("author"),
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "intro",
+      title: "Wprowadzenie",
+      description: "Opcjonalne wyróżnione zdanie przed opisem.",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.max(120),
+    }),
+    defineField({
       name: "body",
       title: "Opis",
+      description: "Akapity oddziel pustą linią.",
       type: "text",
       rows: 4,
       validation: (rule) => rule.required().max(400),
     }),
     defineField({
+      name: "metric",
+      title: "Wskaźnik",
+      description:
+        "Opcjonalny. Użyj tej samej potwierdzonej liczby co na homepage, bez nowych danych.",
+      type: "object",
+      fields: [
+        defineField({
+          name: "value",
+          title: "Wartość",
+          type: "number",
+          validation: (rule) => rule.required().min(0),
+        }),
+        defineField({
+          name: "suffix",
+          title: "Przyrostek",
+          type: "string",
+          validation: (rule) => rule.max(24),
+        }),
+        defineField({
+          name: "label",
+          title: "Opis",
+          type: "string",
+          validation: (rule) => rule.required().max(80),
+        }),
+      ],
+    }),
+    defineField({
       name: "action",
       title: "Akcja",
+      description: "Opcjonalna.",
       type: "actionLink",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "media",
@@ -1174,10 +1322,20 @@ export const serviceOfferSectionType = defineType({
       type: "actionLink",
     }),
     defineField({
+      name: "note",
+      title: "Uwaga przy cenie",
+      description:
+        "Opcjonalna, np. brak zobowiązania do dalszej współpracy. Nie wpisuj tu ceny.",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.max(200),
+    }),
+    defineField({
       name: "media",
       title: "Medium",
+      description:
+        "Fotografia przy ofercie na homepage i O mnie. Karta ceny konsultacji jest bez zdjęcia.",
       type: "mediaObject",
-      validation: (rule) => rule.required(),
     }),
   ],
   preview: sectionPreview("Oferta usługi"),

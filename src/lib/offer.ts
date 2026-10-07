@@ -11,18 +11,24 @@ export function formatPriceGross(
   return language === "pl" ? `${amount} zł brutto` : `${amount} PLN gross`;
 }
 
+export function currencyLabel(currency: string, language: Locale): string {
+  if (currency !== "PLN") {
+    throw new Error(`Nieobsługiwana waluta: ${currency}.`);
+  }
+  return language === "pl" ? "zł" : "PLN";
+}
+
+export function durationLabel(minutes: number, language: Locale): string {
+  return language === "pl" ? `${minutes} minut` : `${minutes} min`;
+}
+
 export function formatServicePrice(
   amount: number,
   currency: string,
   minutes: number,
   language: Locale,
 ): string {
-  if (currency !== "PLN") {
-    throw new Error(`Nieobsługiwana waluta: ${currency}.`);
-  }
-  return language === "pl"
-    ? `${amount} zł / ${minutes} minut`
-    : `${amount} PLN / ${minutes} min`;
+  return `${amount} ${currencyLabel(currency, language)} / ${durationLabel(minutes, language)}`;
 }
 
 export function topicLabel(

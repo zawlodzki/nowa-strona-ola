@@ -1,0 +1,836 @@
+---
+import type { Locale } from "@ola/shared";
+
+import Button from "@/design-system/components/Button.astro";
+import Container from "@/design-system/components/Container.astro";
+import FaqItem from "@/design-system/components/FaqItem.astro";
+import Heading from "@/design-system/components/Heading.astro";
+import Hero from "@/design-system/components/Hero.astro";
+import ReviewCard from "@/design-system/components/ReviewCard.astro";
+import Section from "@/design-system/components/Section.astro";
+import TextLink from "@/design-system/components/TextLink.astro";
+import { consultationCopy } from "@/content/consultation-seed";
+import type { ConsultationView } from "@/content/map-consultation";
+import aboutPortrait from "@/assets/portraits/about.webp?url";
+import contactPortrait from "@/assets/portraits/contact.webp?url";
+import heroPortrait from "@/assets/portraits/hero.webp?url";
+
+export interface Props {
+  lang: Locale;
+  content: ConsultationView;
+}
+
+const { lang, content } = Astro.props;
+const copy = consultationCopy[lang];
+const localMedia: Record<string, string> = {
+  hero: heroPortrait,
+  contact: contactPortrait,
+  about: aboutPortrait,
+};
+
+function resolveSrc(src?: string) {
+  if (!src) return undefined;
+  return (
+    localMedia[src] ??
+    (src.startsWith("http") || src.startsWith("/") ? src : undefined)
+  );
+}
+
+const { hero, path, problem, audience, process, outcomes, expert } = content;
+const { offer, testimonials, faq, price } = content;
+const heroSrc = resolveSrc(hero.media?.src);
+const processSrc = resolveSrc(process.media?.src);
+const expertSrc = resolveSrc(expert.media.src);
+const placeholder = offer.bookingStatus !== "live";
+const expertParagraphs = expert.body
+  .split(/\n\s*\n/)
+  .map((paragraph) => paragraph.trim())
+  .filter(Boolean);
+const oneLine = (value: string) => value.replaceAll("\n", " ");
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      name: oneLine(hero.title),
+      description: hero.lead,
+      inLanguage: lang,
+      about: { "@id": "#konsultacja" },
+    },
+    {
+      "@type": "Service",
+      "@id": "#konsultacja",
+      name: price.name,
+      description: hero.lead,
+      provider: {
+        "@type": "Person",
+        name: expert.name,
+        jobTitle: expert.role,
+        ...(expert.education && {
+          alumniOf: {
+            "@type": "CollegeOrUniversity",
+            name: expert.education.institution,
+          },
+        }),
+      },
+      offers: {
+        "@type": "Offer",
+        price: price.price,
+        priceCurrency: price.currency,
+        description: `${price.durationLabel} · ${copy.format}`,
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+  ],
+};
+---
+
+<main id="main" class="consult3a">
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(jsonLd)}
+  ></script>
+  <Hero id="start" kind="service" title={hero.title} description={hero.lead}>
+    <Button slot="actions" as="a" href={hero.primary.href} arrow>
+      {hero.primary.label}
+    </Button>
+    <p slot="actions" class="consult3a-hero-price">
+      <strong>
+        {price.price} {price.currencyLabel}
+      </strong>
+      <span>
+        {price.durationLabel} · {copy.format}
+      </span>
+    </p>
+    {hero.secondary && (
+      <TextLink class="consult3a-secondary" href={hero.secondary.href}>
+        {hero.secondary.label}
+      </TextLink>
+    )}
+    {placeholder && <p class="consult3a-note">{copy.bookingPlaceholder}</p>}
+    <figure slot="media" class="consult3a-portrait">
+      <div class="consult3a-portrait__stage">
+        {heroSrc && (
+          <img
+            src={heroSrc}
+            alt={hero.media?.label ?? ""}
+            width="1122"
+            height="1402"
+            fetchpriority="high"
+          />
+        )}
+      </div>
+      <figcaption>
+        <strong>{expert.name}</strong>
+        {hero.media?.caption && <span>{hero.media.caption}</span>}
+      </figcaption>
+    </figure>
+  </Hero>
+
+  <Container>
+    <ol class="consult3a-path" aria-label={path.title}>
+      {path.items.map((item, index) =>
+        index === path.items.length - 1 ? (
+          <li>
+            <strong>{item}</strong>
+          </li>
+        ) : (
+          <li>
+            <span>{item}</span>
+            <svg
+              viewBox="0 0 120 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+              aria-hidden="true"
+              focusable="false"
+              preserveAspectRatio="none"
+            >
+              <path d="M1 12h116m-7-7 7 7-7 7" />
+            </svg>
+          </li>
+        ),
+      )}
+    </ol>
+  </Container>
+
+  <Section id="problem">
+    <Container class="consult3a-split">
+      <div>
+        <Heading>{problem.title}</Heading>
+        {problem.body.map((paragraph) => (
+          <p class="consult3a-intro">{paragraph}</p>
+        ))}
+      </div>
+      <figure class="consult3a-map">
+        <ul>
+          {problem.prompts.map((prompt) => (
+            <li>{prompt}</li>
+          ))}
+        </ul>
+        <svg
+          viewBox="0 0 300 100"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M25 1v25q0 20 20 20h105m125-45v25q0 20-20 20H150m0-45v93m-7-7 7 7 7-7"></path>
+        </svg>
+        <p class="consult3a-map__answer">
+          {problem.resolution.eyebrow && (
+            <span>{problem.resolution.eyebrow}</span>
+          )}
+          <strong>{problem.resolution.title}</strong>
+        </p>
+        {problem.caption && <figcaption>{problem.caption}</figcaption>}
+      </figure>
+    </Container>
+  </Section>
+
+  <Section id="dla-kogo">
+    <Container>
+      <Heading>{audience.title}</Heading>
+      <div class="consult3a-audience">
+        <p class="consult3a-intro">{audience.lead}</p>
+        <div class="consult3a-audience__list">
+          {audience.items.map((item) => (
+            <article>
+              <h3>{item.title}</h3>
+              <p class="consult3a-muted">{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="przebieg">
+    <Container>
+      <Heading>{process.title}</Heading>
+      <p class="consult3a-intro">{process.lead}</p>
+      <div class="consult3a-process">
+        {process.media && processSrc && (
+          <figure>
+            <img
+              src={processSrc}
+              alt={process.media.label}
+              width="1536"
+              height="1024"
+              loading="lazy"
+            />
+            {process.media.caption && (
+              <figcaption class="consult3a-muted">
+                {process.media.caption}
+              </figcaption>
+            )}
+          </figure>
+        )}
+        <ol class="consult3a-steps">
+          {process.steps.map((step, index) => (
+            <li>
+              <span aria-hidden="true">{index + 1}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p class="consult3a-muted">{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+      {process.note && (
+        <div class="consult3a-panel consult3a-prep">
+          <strong>{copy.preparationLabel}</strong>
+          <p class="consult3a-muted">{process.note}</p>
+        </div>
+      )}
+    </Container>
+  </Section>
+
+  <Section id="efekty" surface="soft">
+    <Container class="consult3a-split">
+      <div>
+        <Heading>{outcomes.title}</Heading>
+        <p class="consult3a-intro">{outcomes.lead}</p>
+        {outcomes.closing && (
+          <p class="consult3a-closing">{outcomes.closing}</p>
+        )}
+      </div>
+      <div class="consult3a-panel consult3a-sheet">
+        <h3>{copy.goalsSheetTitle}</h3>
+        <dl>
+          {outcomes.items.map((item) => (
+            <div>
+              <dt>{item.title}</dt>
+              <dd class="consult3a-muted">{item.body}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="consult3a-small">{copy.goalsSheetCaption}</p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="prowadzaca">
+    <Container class="consult3a-split consult3a-expert">
+      <figure>
+        {expertSrc && (
+          <img
+            src={expertSrc}
+            alt={expert.media.label}
+            width="1122"
+            height="1402"
+            loading="lazy"
+          />
+        )}
+        <figcaption class="consult3a-small">
+          {expert.name} · {expert.role}
+        </figcaption>
+      </figure>
+      <div>
+        <Heading>{expert.title}</Heading>
+        {expert.intro && <p class="consult3a-closing">{expert.intro}</p>}
+        {expertParagraphs.map((paragraph) => (
+          <p class="consult3a-intro">{paragraph}</p>
+        ))}
+        {expert.metric && (
+          <p class="consult3a-proof">
+            <strong>
+              {expert.metric.value}
+              <span>{expert.metric.suffix}</span>
+            </strong>
+            <span>{expert.metric.label}</span>
+          </p>
+        )}
+        {expert.action && (
+          <TextLink href={expert.action.href}>{expert.action.label}</TextLink>
+        )}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="cena">
+    <Container class="consult3a-split">
+      <div>
+        <Heading>{offer.title}</Heading>
+        {offer.body.map((paragraph) => (
+          <p class="consult3a-intro">{paragraph}</p>
+        ))}
+        <svg
+          class="consult3a-art"
+          viewBox="0 0 330 150"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M1 120c10-140 170 10 80-30s40-100 65-50-80 80-30 60 70-70 160-70h40m-20-20 20 20-20 20"></path>
+        </svg>
+      </div>
+      <div class="consult3a-panel consult3a-offer">
+        <h3>{price.name}</h3>
+        <p class="consult3a-offer__value">
+          {price.price} <span>{price.currencyLabel}</span>
+        </p>
+        <p class="consult3a-muted">
+          {price.durationLabel} · {copy.format} · {copy.host}
+        </p>
+        <ul>
+          {offer.facts.map((fact) => (
+            <li>{fact}</li>
+          ))}
+        </ul>
+        <Button as="a" href={offer.action.href} arrow>
+          {offer.action.label}
+        </Button>
+        {offer.note && <p class="consult3a-small">{offer.note}</p>}
+        {placeholder && <p class="consult3a-note">{copy.bookingPlaceholder}</p>}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="opinie">
+    <Container>
+      <Heading>{testimonials.title}</Heading>
+      {testimonials.lead && <p class="consult3a-intro">{testimonials.lead}</p>}
+      <div class="consult3a-reviews">
+        {testimonials.items.map((item) => (
+          <ReviewCard
+            author={
+              item.anonymous ? (item.displayLabel ?? "") : (item.name ?? "")
+            }
+            context={item.anonymous ? undefined : item.role}
+          >
+            <p>{item.quote}</p>
+          </ReviewCard>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="faq">
+    <Container class="consult3a-split consult3a-faq">
+      <div>
+        <Heading>{faq.title}</Heading>
+        <p class="consult3a-intro">{faq.lead}</p>
+      </div>
+      <div>
+        {faq.items.map((item) => (
+          <FaqItem question={item.question}>
+            <p>{item.answer}</p>
+          </FaqItem>
+        ))}
+      </div>
+    </Container>
+  </Section>
+</main>
+
+<style>
+  .consult3a :global(.ao-heading),
+  .consult3a h3,
+  .consult3a-closing {
+    white-space: pre-line;
+  }
+  .consult3a h3 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  .consult3a-muted,
+  .consult3a-intro {
+    color: var(--ao-muted);
+  }
+  .consult3a-intro {
+    max-width: 50ch;
+    margin-top: var(--ao-space-24);
+    font-size: 18px;
+  }
+  .consult3a-small {
+    margin-top: var(--ao-space-16);
+    font-size: 14px;
+  }
+  .consult3a-note {
+    margin-top: var(--ao-space-16);
+    color: var(--ao-muted);
+    font-size: 13px;
+  }
+  .consult3a figure {
+    margin: 0;
+  }
+  .consult3a-panel {
+    padding: var(--ao-space-40);
+    border-radius: var(--ao-radius-image);
+    background: var(--ao-surface);
+  }
+  .consult3a-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ao-space-96);
+    align-items: center;
+  }
+  .consult3a-split > *,
+  .consult3a-process > * {
+    min-width: 0;
+  }
+  .consult3a-hero-price {
+    display: grid;
+    font-size: 14px;
+  }
+  .consult3a-hero-price strong {
+    font-size: 21px;
+    font-weight: 650;
+  }
+  .consult3a-hero-price span {
+    color: var(--ao-muted);
+  }
+  .consult3a-secondary {
+    margin-top: var(--ao-space-16);
+  }
+  .consult3a-portrait__stage {
+    position: relative;
+    isolation: isolate;
+    height: 520px;
+  }
+  .consult3a-portrait__stage::before {
+    content: "";
+    position: absolute;
+    inset: 24px 0 0;
+    z-index: -1;
+    border-radius: 150px 24px 24px 24px;
+    background: var(--ao-surface);
+  }
+  .consult3a-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+  .consult3a figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--ao-space-8) var(--ao-space-16);
+    margin-top: var(--ao-space-16);
+    font-size: 14px;
+  }
+  .consult3a-portrait figcaption span {
+    color: var(--ao-muted);
+  }
+  .consult3a-path {
+    display: flex;
+    gap: var(--ao-space-32);
+    margin: 0;
+    padding: var(--ao-space-32) 0;
+    list-style: none;
+    border-block: 1px solid var(--ao-line);
+    font-size: 18px;
+  }
+  .consult3a-path li {
+    display: flex;
+    align-items: center;
+    gap: var(--ao-space-32);
+  }
+  .consult3a-path li:not(:last-child) {
+    flex: 1;
+  }
+  .consult3a-path svg {
+    flex: 1;
+    min-width: 32px;
+    height: 24px;
+  }
+  .consult3a-path strong {
+    font-weight: 650;
+  }
+  .consult3a-map {
+    padding: var(--ao-space-48) var(--ao-space-32) var(--ao-space-32);
+    border-radius: var(--ao-radius-image);
+    background: var(--ao-surface);
+    text-align: center;
+  }
+  .consult3a-map ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--ao-space-16) var(--ao-space-12);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .consult3a-map li {
+    padding: var(--ao-space-12) 18px;
+    border: 1px solid var(--ao-muted);
+    border-radius: var(--ao-radius-image);
+    background: var(--ao-background);
+    font-size: 15px;
+  }
+  .consult3a-map li:nth-child(odd) {
+    rotate: -4deg;
+  }
+  .consult3a-map li:nth-child(even) {
+    rotate: 3deg;
+  }
+  .consult3a-map svg {
+    display: block;
+    width: 70%;
+    height: 90px;
+    margin: var(--ao-space-16) auto var(--ao-space-8);
+  }
+  .consult3a-map__answer {
+    display: grid;
+    gap: var(--ao-space-4);
+    padding: var(--ao-space-24) var(--ao-space-20);
+    border-radius: var(--ao-radius-image);
+    background: var(--ao-primary);
+    color: var(--ao-on-primary);
+    font-size: 14px;
+  }
+  .consult3a-map__answer strong {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+  .consult3a-map figcaption {
+    justify-content: center;
+    margin-top: var(--ao-space-24);
+    color: var(--ao-muted);
+    font-size: 13px;
+  }
+  .consult3a-audience {
+    display: grid;
+    grid-template-columns: 0.8fr 1.6fr;
+    gap: var(--ao-space-80);
+    margin-top: var(--ao-space-40);
+  }
+  .consult3a-audience .consult3a-intro {
+    margin-top: 0;
+    max-width: 26ch;
+    font-size: 20px;
+  }
+  .consult3a-audience__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ao-space-40) var(--ao-space-48);
+  }
+  .consult3a-audience__list article,
+  .consult3a-sheet dl > div {
+    padding-top: var(--ao-space-20);
+    border-top: 1px solid var(--ao-line);
+  }
+  .consult3a-audience__list p,
+  .consult3a-steps p {
+    margin-top: var(--ao-space-12);
+  }
+  .consult3a-process {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--ao-space-64);
+    align-items: start;
+    margin-top: var(--ao-space-48);
+  }
+  .consult3a-process img,
+  .consult3a-expert img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--ao-radius-image);
+  }
+  .consult3a-steps {
+    display: grid;
+    gap: var(--ao-space-32);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .consult3a-steps li {
+    display: flex;
+    gap: var(--ao-space-24);
+  }
+  .consult3a-steps li > span {
+    display: grid;
+    flex: 0 0 48px;
+    place-items: center;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--ao-surface);
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .consult3a-prep {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr;
+    gap: var(--ao-space-24);
+    margin-top: var(--ao-space-40);
+    padding-block: var(--ao-space-24);
+  }
+  .consult3a-closing {
+    margin-top: var(--ao-space-40);
+    max-width: 32ch;
+    font-size: 22px;
+    font-weight: 550;
+  }
+  .consult3a-sheet {
+    background: var(--ao-background);
+  }
+  .consult3a-sheet h3 {
+    font-size: 30px;
+  }
+  .consult3a-sheet dl {
+    margin: var(--ao-space-24) 0 0;
+  }
+  .consult3a-sheet dl > div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: var(--ao-space-24);
+    padding-bottom: var(--ao-space-20);
+  }
+  .consult3a-sheet dt {
+    font-weight: 650;
+  }
+  .consult3a-sheet dd {
+    margin: 0;
+  }
+  .consult3a-expert {
+    grid-template-columns: 0.9fr 1.15fr;
+  }
+  .consult3a-expert img {
+    height: 520px;
+    object-position: center 28%;
+  }
+  .consult3a-expert .consult3a-closing {
+    margin-top: var(--ao-space-24);
+  }
+  .consult3a-proof {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ao-space-24);
+    margin-top: var(--ao-space-24);
+    padding-top: var(--ao-space-24);
+    border-top: 1px solid var(--ao-line);
+    font-size: 14px;
+  }
+  .consult3a-proof strong {
+    font-size: 62px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .consult3a-proof > span {
+    max-width: 25ch;
+  }
+  .consult3a-art {
+    display: block;
+    width: 100%;
+    max-width: 330px;
+    height: auto;
+    margin-top: var(--ao-space-32);
+  }
+  .consult3a-offer h3 {
+    font-size: 22px;
+  }
+  .consult3a-offer__value {
+    margin-top: var(--ao-space-32);
+    font-size: 100px;
+    font-weight: 750;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .consult3a-offer__value span {
+    font-size: 32px;
+    font-weight: 550;
+    letter-spacing: -0.02em;
+  }
+  .consult3a-offer__value + p {
+    margin-top: var(--ao-space-12);
+  }
+  .consult3a-offer ul {
+    display: grid;
+    gap: var(--ao-space-12);
+    margin: var(--ao-space-28) 0;
+    padding: 0;
+    list-style: none;
+  }
+  .consult3a-offer li {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: var(--ao-space-12);
+  }
+  .consult3a-offer li::before {
+    content: "";
+    width: 7px;
+    height: 12px;
+    margin: 3px 0 0 4px;
+    border: solid var(--ao-primary);
+    border-width: 0 1.6px 1.6px 0;
+    rotate: 45deg;
+  }
+  .consult3a-offer :global(.ao-button) {
+    width: 100%;
+  }
+  .consult3a-offer .consult3a-note {
+    max-width: none;
+    margin-top: var(--ao-space-24);
+    padding-top: var(--ao-space-20);
+    border-top: 1px solid var(--ao-line);
+  }
+  .consult3a-reviews {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ao-space-48);
+    margin-top: var(--ao-space-32);
+  }
+  .consult3a-faq {
+    grid-template-columns: 0.7fr 1.3fr;
+    align-items: start;
+  }
+  @container page3a (max-width: 1199px) {
+    .consult3a-split,
+    .consult3a-audience,
+    .consult3a-process {
+      gap: var(--ao-space-48);
+    }
+    .consult3a-portrait__stage {
+      height: 480px;
+    }
+  }
+  @container page3a (max-width: 879px) {
+    .consult3a-audience,
+    .consult3a-process {
+      grid-template-columns: 1fr;
+    }
+    .consult3a-offer__value {
+      font-size: 84px;
+    }
+    .consult3a-panel {
+      padding: var(--ao-space-28);
+    }
+    .consult3a-sheet dl > div {
+      grid-template-columns: 1fr;
+      gap: var(--ao-space-8);
+    }
+  }
+  @container page3a (max-width: 767px) {
+    .consult3a-split,
+    .consult3a-expert,
+    .consult3a-faq,
+    .consult3a-audience__list,
+    .consult3a-reviews,
+    .consult3a-prep {
+      grid-template-columns: 1fr;
+      gap: var(--ao-space-32);
+    }
+    .consult3a-hero-price {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--ao-space-12);
+    }
+    .consult3a-portrait__stage {
+      height: 400px;
+    }
+    .consult3a-portrait__stage::before {
+      border-top-left-radius: 100px;
+    }
+    .consult3a-path {
+      flex-direction: column;
+      gap: var(--ao-space-12);
+      padding-block: var(--ao-space-24);
+    }
+    .consult3a-path li {
+      gap: var(--ao-space-16);
+    }
+    .consult3a-path svg {
+      flex: 0 0 40px;
+      height: 12px;
+    }
+    .consult3a-map {
+      padding: var(--ao-space-32) var(--ao-space-20);
+    }
+    .consult3a-map__answer strong {
+      font-size: 24px;
+    }
+    .consult3a-expert img {
+      height: auto;
+      aspect-ratio: 4 / 5;
+    }
+    .consult3a-proof strong {
+      font-size: 54px;
+    }
+    .consult3a-prep {
+      gap: var(--ao-space-12);
+    }
+  }
+</style>

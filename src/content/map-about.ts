@@ -18,6 +18,7 @@ import type {
   CredentialsContent,
   FormCopy,
   HeroContent,
+  MediaSpec,
   MetricItem,
   ProcessContent,
   ServiceOfferContent,
@@ -49,7 +50,7 @@ export interface AboutView {
   approach: ProcessContent;
   testimonials: TestimonialsContent;
   materials: CardsContent;
-  consultation: ServiceOfferContent;
+  consultation: ServiceOfferContent & { media: MediaSpec };
   newsletter: FormCopy;
 }
 
@@ -116,6 +117,9 @@ export function mapAbout(page: PageContent, language: Locale): AboutView {
   if (materials.variant !== "links" || materials.items.length !== 2) {
     throw new Error("About 3a wymaga dwóch odnośników do materiałów.");
   }
+  if (!consultation.media) {
+    throw new Error("About 3a wymaga fotografii przy ofercie konsultacji.");
+  }
   if (newsletter.fields.some((field) => field.input === "checkbox") === false) {
     throw new Error("Newsletter strony O mnie wymaga zgody (checkbox).");
   }
@@ -128,7 +132,7 @@ export function mapAbout(page: PageContent, language: Locale): AboutView {
     approach,
     testimonials,
     materials,
-    consultation,
+    consultation: { ...consultation, media: consultation.media },
     newsletter,
   };
 }
