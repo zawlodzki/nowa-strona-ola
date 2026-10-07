@@ -41,7 +41,7 @@ export interface MediaSpec {
 export interface HeroContent {
   variant: HeroVariant;
   theme?: SectionTheme;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lead: string;
   primary: ActionLink;
@@ -56,14 +56,23 @@ export interface TextContent {
 }
 
 export interface TextImageContent extends TextContent {
+  lead?: string;
+  action?: ActionLink;
   media: MediaSpec;
+  secondaryMedia?: MediaSpec;
   mediaPosition: "start" | "end";
+}
+
+export interface LogoItem {
+  name: string;
+  media?: MediaSpec;
 }
 
 export interface LogosContent {
   title: string;
-  lead: string;
+  lead?: string;
   names: string[];
+  items: LogoItem[];
 }
 
 export interface CardItem {
@@ -103,10 +112,17 @@ export interface MetricItem {
   label: string;
 }
 
-export interface MetricsContent {
+export interface MetricHighlight {
   title: string;
-  lead: string;
+  body: string;
+}
+
+export interface MetricsContent {
+  variant: "grid" | "approach";
+  title: string;
+  lead?: string;
   items: MetricItem[];
+  highlights: MetricHighlight[];
 }
 
 export interface PricingPlan {
@@ -126,12 +142,16 @@ export interface PricingContent {
 
 export interface TestimonialItem {
   quote: string;
-  name: string;
-  role: string;
+  name?: string;
+  role?: string;
+  anonymous: boolean;
+  displayLabel?: string;
+  scope: "cooperation" | "product";
 }
 
 export interface TestimonialsContent {
   title: string;
+  lead?: string;
   items: TestimonialItem[];
 }
 
@@ -206,17 +226,68 @@ export interface MediaContent {
   };
 }
 
+export type FormInputKind =
+  "text" | "email" | "tel" | "textarea" | "select" | "checkbox";
+
+export interface FormFieldCopy {
+  name: string;
+  input: FormInputKind;
+  label: string;
+  errorMessage: string;
+  required: boolean;
+  options?: string[];
+}
+
 export interface FormCopy {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lead: string;
-  nameLabel: string;
-  nameError: string;
-  emailLabel: string;
-  emailError: string;
+  nameLabel?: string;
+  nameError?: string;
+  emailLabel?: string;
+  emailError?: string;
   submit: string;
   success: string;
   noscript: string;
+  fields: FormFieldCopy[];
+}
+
+export type EbookTopic = "pcos" | "perimenopause";
+export type EbookAvailability = "planned" | "presale" | "available" | "paused";
+
+export interface EbookCardContent {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  topic: EbookTopic;
+  description: string;
+  href: string;
+  coverTone: "light" | "cherry";
+  availability: EbookAvailability;
+  priceGross: number;
+  currency: string;
+  authorName: string;
+  cover?: MediaSpec;
+}
+
+export interface EbooksContent {
+  title: string;
+  lead: string;
+  cardActionLabel: string;
+  note?: string;
+  collection?: ActionLink;
+  items: EbookCardContent[];
+}
+
+export interface ServiceOfferContent {
+  title: string;
+  body: string[];
+  facts: string[];
+  media: MediaSpec;
+  action: ActionLink;
+  priceLabel?: string;
+  bookingStatus?: "placeholder" | "live";
 }
 
 export interface CatalogCopy {

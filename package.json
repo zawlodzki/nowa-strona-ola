@@ -30,6 +30,7 @@
     "test:e2e": "playwright test",
     "verify": "npm run format:check && npm run tokens:check && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e",
     "test:build": "node scripts/check-build.mjs",
+    "import:homepage": "node scripts/import-homepage-content.mjs",
     "tokens:generate": "node scripts/generate-tokens.mjs"
   },
   "dependencies": {
@@ -56,5 +57,10 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.70.0",
     "vitest": "^5.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "esbuild@0.28.1": true,
+    "workerd@1.20260911.1": true
   }
 }

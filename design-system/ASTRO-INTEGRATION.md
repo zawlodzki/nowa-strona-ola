@@ -78,11 +78,12 @@ kolejność siedmiu pakietów i kryteria: etap 4a
 
 ## Stan wykonania
 
-Wykonane: tokeny, globalne style, 21 wspólnych komponentów, Layout3a i żywy katalog.
-Aktywny runtime nie importuje archiwum Wonderful. Starszy prototyp korzysta
-z aliasów nowego systemu, a `/ui/` informuje o przejściowym charakterze.
-Nie wykonano jeszcze pełnej migracji wszystkich stron, konfiguracji Sanity,
-serializacji nowych szablonów ani publikacji. Stan testów zapisany w PROGRESS.md.
+Wykonane: tokeny, globalne style, 21 wspólnych komponentów, Layout3a, katalog
+oraz pakiet 1: publiczny i preview shell `SiteShell3a`/`Layout3a`, szablon
+`Homepage3a`, model `ebook` i rozszerzenia zależne. Aktywny runtime nie
+importuje archiwum Wonderful. `/ui/` oraz landingi nadal używają wcześniejszego
+Layout. Serializery nowych sekcji homepage są w kodzie; import Content Lake,
+pozostałe szablony 4a i publikacja pozostają otwarte. Stan testów: PROGRESS.md.
 
 Przy budowaniu API i CSS użyto zasad [Astro: styling](https://docs.astro.build/en/guides/styling/),
 [TypeScript](https://docs.astro.build/en/guides/typescript/) i

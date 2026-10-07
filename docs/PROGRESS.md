@@ -1,25 +1,19 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (audyt planu po wdrożeniu design systemu 3a).
+Aktualizacja: 2026-10-07 (pakiet 1 etapu 4a: Homepage3a i wspólny shell).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
-Etapy 3–4 opisują wykonany prototyp, nie ukończenie docelowych stron 3a.
-Nowy system 3a jest wykonany: tokeny, Layout3a, 21 komponentów i katalog.
+Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-Etapy 5–7 pozostają otwarte; serializery nowych sekcji powstają już podczas 4a.
+**Pakiet 1 (Homepage3a + wspólny shell) jest w kodzie i weryfikacji fixture’ów;
+zapis do Content Lake i publikacja nie były zlecone.**
 
-Publiczne ComposedPage/BlogIndex/ArticleView nadal korzystają ze wcześniejszego
-Layout i `src/ui`. Schematy CMS są fundamentem do rozszerzenia; model e-booka,
-warianty 3a, dane docelowe i wspólny shell preview pozostają do wdrożenia.
-Historycznie opublikowane home PL/EN były bez sekcji, a demonstracyjne strony
-były szkicami. W tej sesji nie odczytywano Content Lake ani usług zewnętrznych.
-
-Zlecenie użytkownika: zweryfikować i zaktualizować plan pod implementację
-podstron z mockupów wraz z przeniesieniem treści do Sanity. Audyt i aktualizacja
-planu wykonane; nie rozpoczęto migracji kodu ani importu treści.
+Publiczne `/` i `/en/` oraz preview `page` home renderują `SiteShell3a` +
+`Homepage3a` z fixture’ów. Blog, landingi i `/ui/` nadal używają wcześniejszego
+Layout. Etapy 5–7 oraz pakiety 2–7 etapu 4a pozostają otwarte.
 
 ## Wykonane
 
@@ -1878,26 +1872,64 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   npm run verify (zakres referencyjnych skillów i dokumentacji).
 - Następny krok implementacji pozostaje bez zmian: pakiet 1 etapu 4a.
 
+## Pakiet 1 etapu 4a — 2026-10-07
+
+Kod i fixture’y, bez zapisu Content Lake i bez publikacji.
+
+- Modele: dokument `ebook`; rozszerzenia `service` (cena/czas/booking),
+  `testimonial` (anonimowość, podpis, zakres), `author` (uczelnia/kierunek),
+  `siteSettings` (headerCta, legalLinks), `form` (checkbox zgody), sekcje
+  `ebooksSection` i `serviceOfferSection` oraz opcjonalne pola hero/textImage/
+  logos/metrics. GROQ publiczny i preview, TypeGen, mappery.
+- UI: `SiteShell3a` na `Layout3a`; `Homepage3a` ze składanych komponentów 3a
+  i scoped CSS. Preview `[...locale].astro` używa tego samego ComposedPage.
+  Nawigacja homepage to kotwice do czasu pakietów 2–5.
+- Markdown: serializery i przykłady nowych typów; nieznany blok zatrzymuje build.
+- Import: `npm run import:homepage` dry-run, 34 dokumenty PL/EN, raport braków
+  w `reports/` (gitignored). Porównanie Content Lake pominięte — brak tokenu
+  w tej sesji. Fixture ≠ dowód zapisu CMS.
+- `npm run verify`: PASS (przed rebase i po rebase na `main` / `8a989fa`).
+  Format, tokeny, ESLint, Astro/TS wszystkich workspace’ów, 64 unit tests,
+  build 23 stron, Studio, preview, Worker dry-run, budżety JS 5770 B /
+  CSS 17875 B gzip, 81 E2E Chromium/Firefox/WebKit, axe na `/` przy
+  320/390/1440, reduced motion i CSS zoom 200% (katalog), formularz
+  newslettera bez POST, treść bez JS.
+- Rebase PR #27 na `origin/main` (2026-10-07): mergeable było CONFLICTING.
+  #25 (design-system 3a) był już w merge-base. Auto-merge #26 (verify-ola):
+  README, catalog-dialog, design-system, language, static-page. Jedyny
+  konflikt treści: `.cursor/skills/verify-ola/features/home-form.md`.
+  Rozwiązanie: kroki newslettera pakietu 1 (przycisk, e-mail, zgoda) oraz
+  gotche #26 (`browser context` nie czyści POST; katalog `/ui/` i `/en/ui/`
+  mają inne copy). Zachowanie pakietu 1 bez zmian. Draft, bez scalania.
+- verify-ola `ola-1791384765`: doctor PASS na porcie 4340. Formularz e-mail+zgoda,
+  status „Dane poprawne. Nic nie wysłano.”, `posts []`, przełącznik PL/EN,
+  przycisk disabled bez JS. Zrzuty: `/opt/cursor/artifacts/screenshots/`.
+  CLI verify-ola nie ma viewportu; 320/390/1440 i axe homepage są z Playwright.
+  Paleta ciemna homepage nie dotyczy cherry-white. Natywny zoom, czytnik i
+  urządzenie fizyczne — niesprawdzone.
+
+Ustalenia zachowane: 450 zł/60 min, 97 zł brutto, 450+, Cal.com jako placeholder,
+formularz demonstracyjny. Copy EN i tytuły e-booków oznaczone jako robocze.
+
+Luki (nie blokują komponentów): URL płatnej rezerwacji, skan dyplomu, prawdziwe
+URL social, pliki e-booków, zaakceptowane artykuły. Nawigacja do `/o-mnie/`,
+`/konsultacje/`, `/ebooki/` czeka na pakiety 2–5.
+
+Otwarte w pakiecie 1 (dane, nie kod): import szkiców do Content Lake po
+porównaniu z istniejącymi dokumentami; odbiór edycji w Studio i chronionym
+preview z prawdziwym datasetem.
+
 ## Następny krok
 
-Rozpocząć pakiet 1 etapu 4a: zinwentaryzować treści homepage 3a względem pól,
-rozszerzyć modele zależne (w tym wspólne produkty/usługę/opinie/newsletter),
-GROQ publiczny i preview oraz TypeGen. Następnie przenieść homepage na Layout3a
-z tym samym shell w chronionym podglądzie, dodać serializery i przykłady sekcji.
-Przygotować import bez zapisu, a po sprawdzeniu istniejących danych przenieść
-copy/media do szkiców Sanity. Kolejne pakiety: O mnie → konsultacja → produkt
-→ kolekcja e-booków → indeks bloga → artykuł.
-
-Brak finalnego URL płatnej rezerwacji, skanu dyplomu, rzeczywistych profili,
-gotowych plików e-booków i zaakceptowanych artykułów/metadanych odnotowywać
-przy właściwym pakiecie. Zachować ustalone 450 zł/60 minut, 97 zł brutto i status
-zapowiedzi; przykładowych tytułów/dat nie publikować. Te braki nie blokują
-niezależnego wdrażania komponentów i szkiców.
+Pakiet 2 etapu 4a: About3a (`about-3a.html`) na tym samym shellu, wspólny
+profil autora, miejsce na skan dyplomu. Potem konsultacja → produkt → kolekcja
+→ blog → artykuł. Import homepage do szkiców Sanity dopiero na osobne zlecenie
+zapisu. Publikacja treści/strony wymaga osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
 natywny zoom, czytnik i fizyczne urządzenie. Etapy 5–7 domykają SEO/eksport,
 formularze/c15t i odbiór. Nie testować n8n ani nie dodawać `www` jako domeny
-Workera. Publikacja treści/strony wymaga osobnego zlecenia; nie wklejać sekretów.
+Workera. Nie wklejać sekretów.
 
 ## Zasada aktualizacji
 

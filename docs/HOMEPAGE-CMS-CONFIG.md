@@ -275,7 +275,7 @@ renderer, bez fikcyjnych ścieżek do obrazów w CMS.
 
 ## Konfiguracja i kryteria przeniesienia — jeszcze niewykonane
 
-- [ ] Dostosować modele i kontrolowane warianty do luk opisanych wyżej.
+- [x] Dostosować modele i kontrolowane warianty do luk opisanych wyżej.
 - [ ] Uzupełnić docelowe HTTPS profile, slugi, kontakt, URL płatnego kalendarza i dodatkowy zakres konsultacji; cena 450 zł / 60 minut ustalona.
 - [ ] Ustalić gotowość e-booków i rzeczywiste miejsca zakupu.
 - [ ] Przygotować krótkie metadata produkcyjne i docelowe teksty formularza/zgód.
@@ -285,9 +285,9 @@ renderer, bez fikcyjnych ścieżek do obrazów w CMS.
 - [ ] Zweryfikować desktop/mobile, 320 px, zoom, klawiaturę i reduced motion.
 - [ ] Publikować dopiero na zlecenie; zapisana konfiguracja nie oznacza publikacji.
 
-Nie tworzono dokumentów w Content Lake, nie zmieniano schematów ani aplikacji
-w ramach sporządzenia tego dokumentu. Bieżące decyzje są zapisane, a wdrożenie
-CMS pozostaje odrębną pracą.
+Schematy, GROQ i fixture homepage 3a wdrożono w pakiecie 1 (07.10.2026).
+`npm run import:homepage` przygotowuje dry-run bez zapisu. Content Lake,
+szkice Sanity i publikacja pozostają niewykonane.
 
 ## Landing e-booka i kolekcja — decyzja 2026-10-06
 

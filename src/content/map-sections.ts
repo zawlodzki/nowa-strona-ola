@@ -7,9 +7,15 @@ import type {
   CardsContent,
   ComparisonContent,
   CtaContent,
+  EbookAvailability,
+  EbookCardContent,
+  EbookTopic,
+  EbooksContent,
   ExpertContent,
   FaqContent,
   FormCopy,
+  FormFieldCopy,
+  FormInputKind,
   HeroContent,
   ListContent,
   LogosContent,
@@ -20,10 +26,12 @@ import type {
   ProcessContent,
   QuoteContent,
   RelatedContent,
+  ServiceOfferContent,
   TestimonialsContent,
   TextContent,
   TextImageContent,
 } from "@/sections/types";
+import { formatServicePrice } from "@/lib/offer";
 
 interface LinkValue {
   href?: string | null;
@@ -88,7 +96,7 @@ export function toHero(section: {
   return {
     variant,
     theme: section.theme === "dark" ? "dark" : "light",
-    eyebrow: required(section.eyebrow, "nadtytuł hero"),
+    eyebrow: section.eyebrow ?? undefined,
     title: required(section.title, "tytuł hero"),
     lead: required(section.lead, "lead hero"),
     primary: toAction(section.primary),
@@ -117,14 +125,23 @@ export function toText(section: {
 export function toTextImage(section: {
   eyebrow?: string | null;
   title?: string | null;
+  lead?: string | null;
   body?: (string | null)[] | null;
   mediaPosition?: string | null;
+  action?: LinkValue | null;
   media?: MediaValue | null;
+  secondaryMedia?: MediaValue | null;
 }): TextImageContent {
   return {
     ...toText(section),
+    lead: section.lead ?? undefined,
+    action: section.action?.href ? toAction(section.action) : undefined,
     mediaPosition: section.mediaPosition === "start" ? "start" : "end",
     media: toMedia(section.media),
+    secondaryMedia:
+      section.secondaryMedia?.alt || section.secondaryMedia?.label
+        ? toMedia(section.secondaryMedia)
+        : undefined,
   };
 }
 
@@ -132,13 +149,26 @@ export function toLogos(section: {
   title?: string | null;
   lead?: string | null;
   names?: (string | null)[] | null;
+  items?: { name?: string | null; media?: MediaValue | null }[] | null;
 }): LogosContent {
+  const items = (section.items ?? [])
+    .filter((item) => item?.name)
+    .map((item) => ({
+      name: required(item.name, "nazwa logotypu"),
+      media:
+        item.media?.alt || item.media?.label ? toMedia(item.media) : undefined,
+    }));
+  const names = (section.names ?? []).filter((item): item is string =>
+    Boolean(item),
+  );
+  if (items.length + names.length < 2) {
+    throw new Error("Logotypy wymagają co najmniej dwóch pozycji.");
+  }
   return {
     title: required(section.title, "tytuł logotypów"),
-    lead: required(section.lead, "lead logotypów"),
-    names: (section.names ?? []).filter((item): item is string =>
-      Boolean(item),
-    ),
+    lead: section.lead ?? undefined,
+    names,
+    items,
   };
 }
 
@@ -198,19 +228,27 @@ export function toProcess(section: {
 }
 
 export function toMetrics(section: {
+  variant?: string | null;
   title?: string | null;
   lead?: string | null;
   items?:
     | { value?: number | null; suffix?: string | null; label?: string | null }[]
     | null;
+  highlights?: { title?: string | null; body?: string | null }[] | null;
 }): MetricsContent {
+  const variant = section.variant === "approach" ? "approach" : "grid";
   return {
+    variant,
     title: required(section.title, "tytuł liczb"),
-    lead: required(section.lead, "lead liczb"),
+    lead: section.lead ?? undefined,
     items: (section.items ?? []).map((item) => ({
       value: item.value ?? 0,
       suffix: item.suffix ?? "",
       label: required(item.label, "opis liczby"),
+    })),
+    highlights: (section.highlights ?? []).map((item) => ({
+      title: required(item.title, "nagłówek wyróżnienia"),
+      body: required(item.body, "opis wyróżnienia"),
     })),
   };
 }
@@ -247,17 +285,40 @@ export function toPricing(section: {
 
 export function toTestimonials(section: {
   title?: string | null;
+  lead?: string | null;
   items?:
-    | { quote?: string | null; name?: string | null; role?: string | null }[]
+    | {
+        quote?: string | null;
+        name?: string | null;
+        role?: string | null;
+        anonymous?: boolean | null;
+        displayLabel?: string | null;
+        scope?: string | null;
+      }[]
     | null;
 }): TestimonialsContent {
   return {
     title: required(section.title, "tytuł opinii"),
-    items: (section.items ?? []).map((item) => ({
-      quote: required(item.quote, "cytat"),
-      name: required(item.name, "autor opinii"),
-      role: required(item.role, "rola opinii"),
-    })),
+    lead: section.lead ?? undefined,
+    items: (section.items ?? []).map((item) => {
+      const anonymous = item.anonymous === true;
+      const scope = item.scope === "product" ? "product" : "cooperation";
+      if (anonymous && !item.displayLabel) {
+        throw new Error("Anonimowa opinia wymaga podpisu widocznego.");
+      }
+      if (!anonymous) {
+        required(item.name, "autor opinii");
+        required(item.role, "rola opinii");
+      }
+      return {
+        quote: required(item.quote, "cytat"),
+        name: item.name ?? undefined,
+        role: item.role ?? undefined,
+        anonymous,
+        displayLabel: item.displayLabel ?? undefined,
+        scope,
+      };
+    }),
   };
 }
 
@@ -357,26 +418,217 @@ export function toFormCopy(section: {
           input?: string | null;
           label?: string | null;
           errorMessage?: string | null;
+          required?: string | null;
+          options?: (string | null)[] | null;
         }[]
       | null;
   } | null;
 }): FormCopy {
-  const fields = section.form?.fields ?? [];
+  const fields = (section.form?.fields ?? []).map((field): FormFieldCopy => {
+    const input = toFormInput(field.input);
+    return {
+      name: required(field.name, "identyfikator pola"),
+      input,
+      label: required(field.label, "etykieta pola"),
+      errorMessage: required(field.errorMessage, "komunikat błędu pola"),
+      required: field.required !== "optional",
+      options: (field.options ?? []).filter((item): item is string =>
+        Boolean(item),
+      ),
+    };
+  });
+  if (fields.length === 0) {
+    throw new Error("Formularz nie ma pól.");
+  }
   const nameField =
     fields.find((field) => field.name === "name") ??
     fields.find((field) => field.input === "text");
   const emailField = fields.find((field) => field.input === "email");
   return {
-    eyebrow: required(section.eyebrow, "nadtytuł formularza"),
+    eyebrow: section.eyebrow ?? undefined,
     title: required(section.title, "tytuł formularza"),
     lead: required(section.lead, "lead formularza"),
-    nameLabel: required(nameField?.label, "etykieta imienia"),
-    nameError: required(nameField?.errorMessage, "błąd imienia"),
-    emailLabel: required(emailField?.label, "etykieta e-mail"),
-    emailError: required(emailField?.errorMessage, "błąd e-mail"),
+    nameLabel: nameField?.label,
+    nameError: nameField?.errorMessage,
+    emailLabel: emailField?.label,
+    emailError: emailField?.errorMessage,
     submit: required(section.form?.submitLabel, "etykieta wysyłki"),
     success: required(section.form?.successMessage, "komunikat sukcesu"),
     noscript: required(section.form?.noscriptMessage, "komunikat noscript"),
+    fields,
+  };
+}
+
+function toFormInput(value: string | null | undefined): FormInputKind {
+  if (
+    value === "text" ||
+    value === "email" ||
+    value === "tel" ||
+    value === "textarea" ||
+    value === "select" ||
+    value === "checkbox"
+  ) {
+    return value;
+  }
+  throw new Error(`Nieznany typ pola formularza: ${value ?? "brak"}.`);
+}
+
+export function toEbooks(
+  section: {
+    title?: string | null;
+    lead?: string | null;
+    cardActionLabel?: string | null;
+    note?: string | null;
+    collection?: LinkValue | null;
+    items?:
+      | {
+          id?: string | null;
+          language?: string | null;
+          slug?: string | null;
+          title?: string | null;
+          subtitle?: string | null;
+          topic?: string | null;
+          cardDescription?: string | null;
+          coverTone?: string | null;
+          availability?: string | null;
+          priceGross?: number | null;
+          currency?: string | null;
+          authorName?: string | null;
+          cover?: MediaValue | null;
+        }[]
+      | null;
+  },
+  language: Locale,
+): EbooksContent {
+  return {
+    title: required(section.title, "tytuł e-booków"),
+    lead: required(section.lead, "lead e-booków"),
+    cardActionLabel: required(
+      section.cardActionLabel,
+      "etykieta karty e-booka",
+    ),
+    note: section.note ?? undefined,
+    collection: section.collection?.href
+      ? toAction(section.collection)
+      : undefined,
+    items: (section.items ?? []).map((item) => toEbookCard(item, language)),
+  };
+}
+
+function toEbookCard(
+  item: {
+    id?: string | null;
+    language?: string | null;
+    slug?: string | null;
+    title?: string | null;
+    subtitle?: string | null;
+    topic?: string | null;
+    cardDescription?: string | null;
+    coverTone?: string | null;
+    availability?: string | null;
+    priceGross?: number | null;
+    currency?: string | null;
+    authorName?: string | null;
+    cover?: MediaValue | null;
+  },
+  language: Locale,
+): EbookCardContent {
+  const topic = toEbookTopic(item.topic);
+  const availability = toEbookAvailability(item.availability);
+  if (item.language && item.language !== language) {
+    throw new Error(
+      `E-book ${item.slug ?? "bez adresu"} ma język ${item.language}, oczekiwano ${language}.`,
+    );
+  }
+  const slug = required(item.slug, "adres e-booka");
+  return {
+    id: required(item.id, "identyfikator e-booka"),
+    slug,
+    title: required(item.title, "tytuł e-booka"),
+    subtitle: item.subtitle ?? undefined,
+    topic,
+    description: required(item.cardDescription, "opis e-booka"),
+    href: `#ebook-${slug}`,
+    coverTone: item.coverTone === "cherry" ? "cherry" : "light",
+    availability,
+    priceGross: item.priceGross ?? 0,
+    currency: required(item.currency, "waluta e-booka"),
+    authorName: required(item.authorName, "autorka e-booka"),
+    cover:
+      item.cover?.alt || item.cover?.label ? toMedia(item.cover) : undefined,
+  };
+}
+
+function toEbookTopic(value: string | null | undefined): EbookTopic {
+  if (value === "pcos" || value === "perimenopause") return value;
+  throw new Error(`Nieznany temat e-booka: ${value ?? "brak"}.`);
+}
+
+function toEbookAvailability(
+  value: string | null | undefined,
+): EbookAvailability {
+  if (
+    value === "planned" ||
+    value === "presale" ||
+    value === "available" ||
+    value === "paused"
+  ) {
+    return value;
+  }
+  throw new Error(`Nieznany status e-booka: ${value ?? "brak"}.`);
+}
+
+export function toServiceOffer(
+  section: {
+    title?: string | null;
+    body?: (string | null)[] | null;
+    facts?: (string | null)[] | null;
+    action?: LinkValue | null;
+    media?: MediaValue | null;
+    service?: {
+      title?: string | null;
+      price?: number | null;
+      currency?: string | null;
+      durationMinutes?: number | null;
+      bookingUrl?: string | null;
+      bookingStatus?: string | null;
+    } | null;
+  },
+  language: Locale,
+): ServiceOfferContent {
+  const service = section.service;
+  const bookingUrl = service?.bookingUrl ?? section.action?.href;
+  const actionLabel =
+    section.action?.label ??
+    (language === "pl" ? "Zarezerwuj konsultację" : "Book a consultation");
+  if (!bookingUrl) {
+    throw new Error("Oferta usługi wymaga adresu rezerwacji.");
+  }
+  const price =
+    typeof service?.price === "number" &&
+    typeof service.durationMinutes === "number" &&
+    service.currency
+      ? formatServicePrice(
+          service.price,
+          service.currency,
+          service.durationMinutes,
+          language,
+        )
+      : undefined;
+  return {
+    title: required(section.title, "tytuł oferty usługi"),
+    body: (section.body ?? []).filter((item): item is string => Boolean(item)),
+    facts: (section.facts ?? []).filter((item): item is string =>
+      Boolean(item),
+    ),
+    media: toMedia(section.media),
+    action: {
+      href: bookingUrl,
+      label: actionLabel,
+      variant: section.action?.emphasis === "outline" ? "outline" : "default",
+    },
+    priceLabel: price,
+    bookingStatus: service?.bookingStatus === "live" ? "live" : "placeholder",
   };
 }
 

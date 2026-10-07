@@ -27,7 +27,7 @@ const TitleTag = titleAs === "h2" ? "h2" : titleAs === "h1" ? "h1" : "p";
     class:list={["hero-split", content.variant !== "split" && "section-stack"]}
   >
     <div class="section-stack" data-reveal>
-      <Eyebrow>{content.eyebrow}</Eyebrow>
+      {content.eyebrow && <Eyebrow>{content.eyebrow}</Eyebrow>}
       <TitleTag
         id={labelledby}
         class={titleAs === "h1" ? undefined : "hero-title"}

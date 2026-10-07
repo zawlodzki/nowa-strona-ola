@@ -1,0 +1,536 @@
+---
+import type { Locale } from "@ola/shared";
+
+import BookCover from "@/design-system/components/BookCover.astro";
+import Button from "@/design-system/components/Button.astro";
+import Carousel from "@/design-system/components/Carousel.astro";
+import Container from "@/design-system/components/Container.astro";
+import ContentCard from "@/design-system/components/ContentCard.astro";
+import DemoForm from "@/design-system/components/DemoForm.astro";
+import Heading from "@/design-system/components/Heading.astro";
+import Hero from "@/design-system/components/Hero.astro";
+import Newsletter from "@/design-system/components/Newsletter.astro";
+import ReviewCard from "@/design-system/components/ReviewCard.astro";
+import Section from "@/design-system/components/Section.astro";
+import SplitPanel from "@/design-system/components/SplitPanel.astro";
+import TextLink from "@/design-system/components/TextLink.astro";
+import { formatPriceGross, topicLabel } from "@/lib/offer";
+import type { HomepageView } from "@/content/map-homepage";
+import type { LogoItem } from "@/sections/types";
+import heroPortrait from "@/assets/portraits/hero.webp?url";
+import aboutPortrait from "@/assets/portraits/about.webp?url";
+import contactPortrait from "@/assets/portraits/contact.webp?url";
+import foodEditorial from "@/assets/editorial/food-editorial.webp?url";
+import alabLogo from "@/assets/partners/alab.svg?url";
+import unsLogo from "@/assets/partners/uns.png?url";
+import norsanLogo from "@/assets/partners/norsan.png?url";
+import norsaLogo from "@/assets/partners/norsa.png?url";
+import omniLogo from "@/assets/partners/omni.png?url";
+
+export interface Props {
+  lang: Locale;
+  content: HomepageView;
+}
+
+const { lang, content } = Astro.props;
+const localMedia: Record<string, string> = {
+  hero: heroPortrait,
+  about: aboutPortrait,
+  contact: contactPortrait,
+  food: foodEditorial,
+  alab: alabLogo,
+  uns: unsLogo,
+  norsan: norsanLogo,
+  norsa: norsaLogo,
+  omni: omniLogo,
+};
+
+function resolveSrc(src?: string) {
+  if (!src) return undefined;
+  return (
+    localMedia[src] ??
+    (src.startsWith("http") || src.startsWith("/") ? src : undefined)
+  );
+}
+
+const heroSrc = resolveSrc(content.hero.media?.src);
+const aboutSrc = resolveSrc(content.about.media.src);
+const foodSrc = resolveSrc(content.about.secondaryMedia?.src);
+const consultSrc = resolveSrc(content.consultation.media.src);
+const metric = content.approach.items[0];
+const firstPcos = content.ebooks.items.find((item) => item.topic === "pcos");
+const firstPeri = content.ebooks.items.find(
+  (item) => item.topic === "perimenopause",
+);
+const pl = lang === "pl";
+---
+
+<main id="main" class="home3a">
+  <Hero
+    id="start"
+    kind="home"
+    title={content.hero.title}
+    description={content.hero.lead}
+  >
+    <Button slot="actions" as="a" href={content.hero.primary.href} arrow>
+      {content.hero.primary.label}
+    </Button>
+    {content.hero.secondary && (
+      <Button
+        slot="actions"
+        as="a"
+        href={content.hero.secondary.href}
+        variant="secondary"
+        arrow
+      >
+        {content.hero.secondary.label}
+      </Button>
+    )}
+    <div slot="media" class="home3a-portrait">
+      <div class="home3a-portrait__backdrop"></div>
+      {heroSrc && (
+        <img
+          src={heroSrc}
+          alt={content.hero.media?.label ?? ""}
+          width="1122"
+          height="1402"
+          fetchpriority="high"
+        />
+      )}
+    </div>
+  </Hero>
+
+  <Section
+    spacing="compact"
+    class="home3a-partners"
+    aria-label={content.partners.title}
+  >
+    <Container>
+      <p>{content.partners.title}</p>
+      <ul>
+        {(content.partners.items.length > 0
+          ? content.partners.items
+          : content.partners.names.map((name): LogoItem => ({ name }))
+        ).map((item) => {
+          const src = resolveSrc(item.media?.src);
+          return (
+            <li>
+              {src ? <img src={src} alt={item.name} height="43" /> : item.name}
+            </li>
+          );
+        })}
+      </ul>
+    </Container>
+  </Section>
+
+  <Section id="dlaczego-ja">
+    <Container class="home3a-why">
+      <div>
+        <Heading class="home3a-break">{content.approach.title}</Heading>
+        {content.approach.lead && (
+          <p class="ao-lead">{content.approach.lead}</p>
+        )}
+        <p class="home3a-count">
+          <strong>
+            {metric.value}
+            <span>{metric.suffix}</span>
+          </strong>
+          <span>{metric.label}</span>
+        </p>
+      </div>
+      <div class="home3a-results">
+        {content.approach.highlights.map((item) => (
+          <article>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="o-mnie" class="home3a-about">
+    <Container class="home3a-about__grid">
+      <div class="home3a-about__media">
+        {aboutSrc && (
+          <img
+            src={aboutSrc}
+            alt={content.about.media.label}
+            width="1122"
+            height="1402"
+            loading="lazy"
+          />
+        )}
+        {foodSrc && (
+          <img
+            class="home3a-about__food"
+            src={foodSrc}
+            alt={content.about.secondaryMedia?.label ?? ""}
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
+        )}
+      </div>
+      <div>
+        <Heading>{content.about.title}</Heading>
+        {content.about.lead && <p class="home3a-large">{content.about.lead}</p>}
+        {content.about.body.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+        {content.about.action && (
+          <TextLink href={content.about.action.href}>
+            {content.about.action.label}
+          </TextLink>
+        )}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="ebooki">
+    <Container>
+      <div class="home3a-section-head">
+        <Heading class="home3a-break">{content.ebooks.title}</Heading>
+        <p class="ao-lead">{content.ebooks.lead}</p>
+      </div>
+      <div class="home3a-books-toolbar">
+        <nav
+          class="home3a-groups"
+          aria-label={pl ? "Temat e-booków" : "E-book topics"}
+        >
+          {firstPcos && <a href={`#ebook-${firstPcos.slug}`}>PCOS</a>}
+          {firstPeri && (
+            <a href={`#ebook-${firstPeri.slug}`}>
+              {pl ? "Perimenopauza" : "Perimenopause"}
+            </a>
+          )}
+        </nav>
+      </div>
+      <Carousel
+        id="ebooks-track"
+        label={
+          pl ? "E-booki, przewijaj w poziomie" : "E-books, scroll sideways"
+        }
+        columns={3}
+        lang={lang}
+      >
+        {content.ebooks.items.map((item) => (
+          <div id={`ebook-${item.slug}`}>
+            <ContentCard
+              title={item.title}
+              href={item.href}
+              description={item.description}
+              metadata={`${topicLabel(item.topic, lang)} · E-book`}
+              actionLabel={content.ebooks.cardActionLabel}
+            >
+              <BookCover
+                slot="media"
+                title={item.title}
+                subtitle={item.subtitle ?? ""}
+                author={item.authorName}
+                topic={
+                  pl
+                    ? "Praktyczny przewodnik dla kobiet"
+                    : "A practical guide for women"
+                }
+                tone={item.coverTone}
+              />
+              <span slot="price">
+                {formatPriceGross(item.priceGross, item.currency, lang)}
+              </span>
+            </ContentCard>
+          </div>
+        ))}
+      </Carousel>
+      {content.ebooks.collection && (
+        <p class="home3a-collection">
+          <TextLink href={content.ebooks.collection.href}>
+            {content.ebooks.collection.label}
+          </TextLink>
+        </p>
+      )}
+      {content.ebooks.note && <p class="home3a-note">{content.ebooks.note}</p>}
+    </Container>
+  </Section>
+
+  <Section id="konsultacje" spacing="compact">
+    <Container>
+      <SplitPanel labelledBy="consultation-title" id="konsultacje-panel">
+        <Heading id="consultation-title" class="home3a-break">
+          {content.consultation.title}
+        </Heading>
+        {content.consultation.body.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+        <ul class="home3a-facts">
+          {content.consultation.facts.map((fact) => (
+            <li>{fact}</li>
+          ))}
+        </ul>
+        {content.consultation.priceLabel && (
+          <p class="home3a-price">{content.consultation.priceLabel}</p>
+        )}
+        <Button as="a" href={content.consultation.action.href} arrow>
+          {content.consultation.action.label}
+        </Button>
+        {content.consultation.bookingStatus === "placeholder" && (
+          <p class="home3a-note">
+            {pl
+              ? "Tymczasowy adres kalendarza. Właściwe wydarzenie rezerwacji będzie podane później. To nie jest potwierdzenie wizyty."
+              : "Temporary calendar address. The real booking event will be added later. This is not a booking confirmation."}
+          </p>
+        )}
+        {consultSrc && (
+          <img
+            slot="media"
+            src={consultSrc}
+            alt={content.consultation.media.label}
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
+        )}
+      </SplitPanel>
+    </Container>
+  </Section>
+
+  <Section id="opinie">
+    <Container>
+      <div class="home3a-section-head">
+        <Heading>{content.testimonials.title}</Heading>
+        {content.testimonials.lead && (
+          <p class="ao-lead">{content.testimonials.lead}</p>
+        )}
+      </div>
+      <Carousel
+        id="reviews-track"
+        label={pl ? "Opinie, przewijaj w poziomie" : "Reviews, scroll sideways"}
+        columns={2}
+        lang={lang}
+      >
+        {content.testimonials.items.map((item) => (
+          <ReviewCard
+            author={
+              item.anonymous ? (item.displayLabel ?? "") : (item.name ?? "")
+            }
+            context={item.anonymous ? undefined : item.role}
+          >
+            <p>{item.quote}</p>
+          </ReviewCard>
+        ))}
+      </Carousel>
+    </Container>
+  </Section>
+
+  <Newsletter
+    id="newsletter"
+    title={content.newsletter.title}
+    description={content.newsletter.lead}
+  >
+    <DemoForm slot="form" content={content.newsletter} lang={lang} />
+  </Newsletter>
+</main>
+
+<style>
+  .home3a :global(.ao-hero--home .ao-heading) {
+    white-space: pre-line;
+  }
+  .home3a-break {
+    white-space: pre-line;
+  }
+  .home3a-portrait {
+    position: relative;
+    height: 560px;
+  }
+  .home3a-portrait__backdrop {
+    position: absolute;
+    inset: 24px 0 0;
+    border-radius: 160px 24px 24px 24px;
+    background: var(--ao-surface);
+  }
+  .home3a-portrait img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+  .home3a-partners {
+    padding-block: var(--ao-space-32) var(--ao-space-64);
+  }
+  .home3a-partners p {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ao-muted);
+    margin-bottom: var(--ao-space-32);
+  }
+  .home3a-partners ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 36px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .home3a-partners img {
+    width: auto;
+    max-width: 160px;
+    height: 43px;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.78;
+  }
+  .home3a-why {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ao-space-64);
+    align-items: start;
+  }
+  .home3a-count {
+    display: flex;
+    align-items: center;
+    gap: var(--ao-space-24);
+    margin-top: var(--ao-space-48);
+  }
+  .home3a-count strong {
+    font-size: 80px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.07em;
+  }
+  .home3a-count strong span {
+    color: var(--ao-primary);
+  }
+  .home3a-count > span {
+    max-width: 180px;
+    font-size: 14px;
+  }
+  .home3a-results {
+    display: grid;
+    gap: var(--ao-space-32);
+  }
+  .home3a-results article {
+    padding-bottom: var(--ao-space-24);
+    border-bottom: 1px solid var(--ao-line);
+  }
+  .home3a-results h3 {
+    font-size: 22px;
+    letter-spacing: -0.03em;
+  }
+  .home3a-results p {
+    margin-top: 10px;
+    color: var(--ao-muted);
+    font-size: 14px;
+  }
+  .home3a-about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ao-space-64);
+    align-items: center;
+  }
+  .home3a-about__media {
+    position: relative;
+    max-width: 490px;
+  }
+  .home3a-about__media > img:first-child {
+    width: 100%;
+    border-radius: var(--ao-radius-image);
+  }
+  .home3a-about__food {
+    position: absolute;
+    right: -8%;
+    bottom: -8%;
+    width: 46%;
+    border-radius: var(--ao-radius-panel);
+    outline: 8px solid var(--ao-background);
+  }
+  .home3a-large {
+    margin-top: var(--ao-space-24);
+    font-size: 22px;
+  }
+  .home3a-about p + p,
+  .home3a-about .ao-text-link {
+    margin-top: var(--ao-space-24);
+    display: inline-flex;
+  }
+  .home3a-section-head {
+    max-width: 720px;
+    margin-bottom: var(--ao-space-40);
+  }
+  .home3a-books-toolbar {
+    margin-bottom: var(--ao-space-24);
+  }
+  .home3a-groups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ao-space-16);
+    font-size: 14px;
+  }
+  .home3a-groups a {
+    min-height: var(--ao-target-min);
+    display: inline-flex;
+    align-items: center;
+  }
+  .home3a-collection {
+    margin-top: var(--ao-space-32);
+  }
+  .home3a-note {
+    margin-top: var(--ao-space-16);
+    font-size: 12px;
+    color: var(--ao-muted);
+  }
+  .home3a-facts {
+    display: grid;
+    gap: 12px;
+    margin: var(--ao-space-32) 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+  }
+  .home3a-facts li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .home3a-facts li::before {
+    content: "✓";
+  }
+  .home3a-price {
+    font-size: 18px;
+    margin-bottom: var(--ao-space-24);
+  }
+  .home3a :global(#konsultacje-panel img) {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+    object-position: 70% center;
+  }
+  @container page3a (max-width: 879px) {
+    .home3a-why,
+    .home3a-about__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--ao-space-40);
+    }
+    .home3a-portrait {
+      height: 420px;
+    }
+    .home3a-portrait__backdrop {
+      border-top-left-radius: 100px;
+    }
+    .home3a-about__food {
+      right: 8%;
+      bottom: -12%;
+    }
+  }
+  @container page3a (max-width: 374px) {
+    .home3a-portrait {
+      height: 350px;
+    }
+    .home3a-count strong {
+      font-size: 64px;
+    }
+  }
+</style>

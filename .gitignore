@@ -34,3 +34,6 @@ secrets/
 
 # Local logs
 *.log
+
+# Generated dry-run import artefacts
+reports/

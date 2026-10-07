@@ -19,6 +19,8 @@ const {
   class: className,
   ...attrs
 } = Astro.props;
+const buttonAttrs = attrs as HTMLAttributes<"button">;
+const { type: buttonType = "button", disabled, ...buttonRest } = buttonAttrs;
 ---
 
 {as === "a" ? (
@@ -32,11 +34,11 @@ const {
   </a>
 ) : (
   <button
-    type="button"
+    type={buttonType}
     class:list={["ao-button", `ao-button--${variant}`, className]}
     aria-busy={loading || undefined}
-    {...(attrs as HTMLAttributes<"button">)}
-    disabled={loading || (attrs as HTMLAttributes<"button">).disabled}
+    disabled={loading || disabled}
+    {...buttonRest}
   >
     <slot />
     {arrow && <ArrowIcon />}

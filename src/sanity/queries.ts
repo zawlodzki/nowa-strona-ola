@@ -27,11 +27,23 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
   _type == "textImageSection" => {
     eyebrow,
     title,
+    lead,
     body,
     mediaPosition,
-    "media": media${mediaFields}
+    "action": action${actionFields},
+    "media": media${mediaFields},
+    "secondaryMedia": secondaryMedia${mediaFields}
   },
-  _type == "logosSection" => { title, lead, names },
+  _type == "logosSection" => {
+    title,
+    lead,
+    names,
+    items[]{
+      _key,
+      name,
+      "media": media${mediaFields}
+    }
+  },
   _type == "cardsSection" => {
     eyebrow,
     title,
@@ -51,9 +63,11 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     steps[]{ _key, title, body }
   },
   _type == "metricsSection" => {
+    variant,
     title,
     lead,
-    items[]{ _key, value, suffix, label }
+    items[]{ _key, value, suffix, label },
+    highlights[]{ _key, title, body }
   },
   _type == "pricingSection" => {
     title,
@@ -70,7 +84,15 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
   },
   _type == "testimonialsSection" => {
     title,
-    items[]->{ quote, name, role }
+    lead,
+    items[]->{
+      quote,
+      name,
+      role,
+      anonymous,
+      displayLabel,
+      scope
+    }
   },
   _type == "expertSection" => {
     title,
@@ -139,6 +161,48 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
       publishedAt,
       "media": image${mediaFields}
     }
+  },
+  _type == "ebooksSection" => {
+    title,
+    lead,
+    cardActionLabel,
+    note,
+    "collection": collection${actionFields},
+    items[]->{
+      "id": _id,
+      language,
+      "slug": slug.current,
+      title,
+      subtitle,
+      topic,
+      cardDescription,
+      coverTone,
+      availability,
+      priceGross,
+      currency,
+      format,
+      sortOrder,
+      "cover": cover${mediaFields},
+      "authorName": author->name
+    }
+  },
+  _type == "serviceOfferSection" => {
+    title,
+    body,
+    facts,
+    "action": action${actionFields},
+    "media": media${mediaFields},
+    "service": service->{
+      "id": _id,
+      title,
+      summary,
+      "slug": slug.current,
+      price,
+      currency,
+      durationMinutes,
+      bookingUrl,
+      bookingStatus
+    }
   }
 `;
 
@@ -178,6 +242,8 @@ export const siteSettingsProjection = /* groq */ `
   footerNote,
   defaultSeo{title, description},
   navigation[]{ _key, label, href },
+  "headerCta": headerCta${actionFields},
+  legalLinks[]{ _key, label, href },
   socialLinks[]{ _key, label, href },
   "translation": translation->{ language }
 `;

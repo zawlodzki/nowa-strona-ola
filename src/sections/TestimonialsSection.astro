@@ -25,7 +25,9 @@ const { id, labelledby, content } = Astro.props as Props;
           <p>{item.quote}</p>
           <footer>
             <cite>
-              {item.name}, {item.role}
+              {item.anonymous
+                ? item.displayLabel
+                : `${item.name}, ${item.role}`}
             </cite>
           </footer>
         </blockquote>

@@ -39,6 +39,18 @@ export const authorType = defineType({
       title: "Portret",
       type: "mediaObject",
     }),
+    defineField({
+      name: "educationInstitution",
+      title: "Uczelnia",
+      type: "string",
+      validation: (rule) => rule.max(160),
+    }),
+    defineField({
+      name: "educationProgram",
+      title: "Kierunek",
+      type: "string",
+      validation: (rule) => rule.max(160),
+    }),
   ],
   preview: {
     select: { title: "name", subtitle: "role", language: "language" },
