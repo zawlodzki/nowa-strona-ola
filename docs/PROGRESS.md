@@ -1860,6 +1860,24 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 - Kontrole dokumentacji i lokalnych odnośników przeszły; brak zmian aplikacji,
   konfiguracji Sanity i publikacji strony. Następny krok to pakiet 1 etapu 4a.
 
+## Bezpośredni zapis aktualizacji skillów na main — 2026-10-07
+
+- Polecenie użytkownika: scalić lokalne zmiany skillów do main; zgodnie
+  z wcześniejszym ustaleniem bez PR. Zakres: 13 skillów Cloudflare,
+  227 zmienionych i 15 usuniętych plików oraz skills-lock.json.
+- Sprawdzono metadane SKILL.md, poprawność JSON i zgodność zestawu zmienionych
+  skillów z 13 aktualizacjami computedHash. Nie weryfikowano ponownie algorytmu
+  hashy instalatora ani zewnętrznych URL; 632 lokalne odnośniki poprawne.
+- Diff-check zgłosił jedno zachowane z poprzedniej wersji źródła Markdown
+  łamanie wiersza dwiema spacjami w sandbox-stable/SKILL.md. Nie zmieniano
+  importowanych źródeł ani ustawień kontroli białych znaków. Skille i lockfile
+  są wyłączone z Prettier zgodnie z .prettierignore; format tej notatki sprawdzony.
+- Osobny indeks zawiera tylko skille, lockfile i ten zapis postępu.
+  Zastane notatki wcześniejszych PR, raporty i materiały pozostają poza commitem.
+  Nie zmieniono kodu aplikacji ani CMS, nie publikowano strony i nie uruchamiano
+  npm run verify (zakres referencyjnych skillów i dokumentacji).
+- Następny krok implementacji pozostaje bez zmian: pakiet 1 etapu 4a.
+
 ## Następny krok
 
 Rozpocząć pakiet 1 etapu 4a: zinwentaryzować treści homepage 3a względem pól,
