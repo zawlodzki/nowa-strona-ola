@@ -54,8 +54,12 @@ by dopasować ją do obecnego schematu.
 
 `siteSettings.siteTitle`: Aleksandra Olesiewicz.
 `siteSettings.footerNote`: PCOS, insulinooporność i odżywianie dopasowane do życia.
-Nawigacja: E-booki `#ebooki`, Konsultacje `#konsultacje`, O mnie `#o-mnie`,
-Newsletter `#newsletter`. Kotwice muszą istnieć w docelowym rendererze.
+Globalna nawigacja: E-booki → kolekcja, Konsultacje → landing usługi,
+O mnie → profil, Blog → indeks; CTA Newsletter → `#newsletter` na homepage
+lub adres homepage z tą kotwicą na stronach bez formularza. To ustalenie
+z 07.10.2026 po ujednoliceniu mockupów, zastępujące wcześniejsze menu kotwicowe.
+Docelowe URL generować z rzeczywistych slugów i języka; landingi mają osobne
+menu lokalnych sekcji. Kotwice muszą istnieć w rendererze.
 Profile w `siteSettings.socialLinks`: nazwy ustalone, prawdziwe HTTPS URL do
 uzupełnienia. `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
 
@@ -522,3 +526,23 @@ Wykonane w kodzie: system/tokeny, style globalne, komponenty i katalog Astro.
 Treści, ceny, widoczność i kolejność sekcji pozostają według poprzednich ustaleń.
 Brak migracji wszystkich stron oraz zapisu do Content Lake; dokument nie jest
 dowodem konfiguracji Sanity.
+
+## Sposób dalszego wdrożenia treści — 07.10.2026
+
+Źródło: bezpośrednie zlecenie użytkownika, aby wdrażać podstrony na podstawie
+przygotowanych mockupów wraz z przeniesieniem ich treści do Sanity.
+Status: **ustalenie procesu**, bez wykonanej konfiguracji CMS.
+
+Bieżące źródło układu i copy stanowią ujednolicone mockupy 3a oraz późniejsze
+bezpośrednie decyzje użytkownika. Mapowanie: istniejące `page.sections[]`,
+`siteSettings.navigation[]`, autor, opinie, usługa i formularz; nowe produkty
+oraz rozszerzenia zgodnie z instrukcjami CMS. Nazwy nowych pól pozostają
+proponowane do czasu wdrożenia schematów.
+
+Treści wspólne importować jednokrotnie i łączyć referencjami. Każdy pakiet
+obejmuje modele, renderer Astro, Markdown, media i szkice Content Lake oraz
+odbiór edycji w preview. Propozycje copy i przykładowe artykuły/daty pozostają
+materiałem roboczym do zatwierdzenia; ustalenie procesu nie zmienia cen,
+oferty, dostępności produktów ani nie autoryzuje publikacji. Braki materiałów
+zapisywać w raporcie importu. Szczegółowa kolejność i kryteria: etap 4a
+[planu](IMPLEMENTATION-PLAN.md).

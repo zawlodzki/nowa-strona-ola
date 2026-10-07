@@ -51,7 +51,9 @@ produktu oraz kontrolowany renderer; nie losować ich na każdym użyciu.
 
 1. Wpiąć Layout3a i Header/Footer w pierwszy szablon z rzeczywistymi ustawieniami.
 2. Przenieść homepage 3a: wspólne komponenty, pozostała geometria scoped,
-   oficjalne portrety i partnerzy z potwierdzonych danych.
+   oficjalne portrety i partnerzy z potwierdzonych danych. Już tu rozszerzyć
+   współdzielone modele produktów/usługi/opinii/formularza potrzebne homepage,
+   bez odkładania danych Sanity do zakończenia wszystkich szablonów.
 3. About, konsultacja i ebook: ten sam shell, kontrolowane kompozycje, ceny
    oraz CTA zgodne z ustaleniami. Nie uruchamiać demonstracyjnych ofert.
 4. Kolekcje i artykuł: dane Sanity, rzeczywista paginacja/filtrowanie,
@@ -64,6 +66,15 @@ produktu oraz kontrolowany renderer; nie losować ich na każdym użyciu.
 7. Odebrać całe szablony względem mockupów: 1440/390/320, obie palety,
    klawiatura, 200% zoom, bez JS, reduced motion, axe i pełne verify.
    Czytnik i fizyczne urządzenie uzupełniają testy automatyczne.
+
+Każdy pakiet obejmuje schema/walidację, GROQ publiczny i preview, TypeGen,
+mappery, renderer Astro, serializer Markdown i przykład nowych sekcji,
+a następnie import treści/mediów do szkiców oraz odbiór edycji w podglądzie.
+Najpierw wykonać import bez zapisu i kopię obecnych danych; zachować istniejące
+zmiany redaktorów. Preview `page` ma obecnie osobny shell, który także wymaga
+migracji. Fixture nie jest dowodem zapisu do CMS. Szczegółowa checklista,
+kolejność siedmiu pakietów i kryteria: etap 4a
+[planu](../docs/IMPLEMENTATION-PLAN.md). Publikacja pozostaje osobnym działaniem.
 
 ## Stan wykonania
 

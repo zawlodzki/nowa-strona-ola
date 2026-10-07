@@ -1,6 +1,7 @@
 # Plan wdrożenia i przygotowania repozytorium
 
-Zatwierdzony: 2026-09-12. Realizacja etapami w wielu sesjach.
+Zatwierdzony: 2026-09-12. Aktualizacja kolejności prac: 2026-10-07.
+Realizacja etapami w wielu sesjach; bieżący zakres opisuje etap 4a.
 Stan wykonania: [PROGRESS.md](PROGRESS.md). Instrukcje: [AGENTS.md](../AGENTS.md).
 Weryfikacja kodu: [CODE-QUALITY.md](CODE-QUALITY.md).
 Próba komponentów: [UI-SPIKE-RESULTS.md](UI-SPIKE-RESULTS.md).
@@ -228,7 +229,7 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 Odbiór: próbna zmiana przechodzi od szkicu przez podgląd do statycznej strony;
 nieautoryzowany dostęp do szkiców odrzucony.
 
-### Etap 3 — design system i komponenty
+### Etap 3 — design system i komponenty prototypu (historyczny odbiór)
 
 - [x] Przetestować przycisk, formularz i dialog Bejamas z tokenami Wonderful.
       Zakres i ograniczenia opisane w wynikach próby.
@@ -245,7 +246,7 @@ nieautoryzowany dostęp do szkiców odrzucony.
 Odbiór: katalog aplikacji pokazuje komponenty PL/EN na desktopie i mobile,
 z poprawnym stanem statycznym przy reduced motion.
 
-### Etap 4 — Sanity i szablony PL/EN
+### Etap 4 — Sanity i szablony PL/EN prototypu (historyczny odbiór)
 
 - [x] Wdrożyć modele, walidację, podglądy, referencje i mapowanie sekcji.
       Schema, GROQ, TypeGen i renderery zweryfikowane lokalnie; Content Lake
@@ -261,6 +262,92 @@ Odbiór: redaktor sam tworzy landing page i publikuje PL/EN; brak tłumaczenia
 nie prowadzi do polskiej treści pod angielskim adresem. Drugi warunek przeszedł
 lokalnie (`/tylko-pl/` bez przełącznika, `/en/tylko-pl/` 404). Publikacja
 landingów z Studio do Content Lake pozostaje do zrobienia.
+
+### Etap 4a — docelowe strony 3a i treści z mockupów (bieżący)
+
+Zlecenie 07.10.2026: dalszą implementację oprzeć na przygotowanych mockupach,
+nowym design systemie i przeniesieniu treści do Sanity. Etapy 3–4 pozostają
+zapisem wykonanych fundamentów; nie oznaczają ukończenia docelowych stron.
+
+Stan sprawdzony w repo:
+
+- `src/design-system` zawiera Layout3a, tokeny, style i 21 komponentów.
+  Layout3a wykorzystuje katalog `/design-system/`; publiczne ComposedPage,
+  BlogIndex i ArticleView nadal importują wcześniejszy Layout i `src/ui`.
+- Sanity ma page builder 18 typów, `article`, `author`, `service`, `form`,
+  `testimonial`, `category`, `siteSettings` i `redirect`. Brakuje modelu e-booka
+  oraz rozszerzeń 3a opisanych w instrukcjach CMS; nie tworzyć tych modeli od zera
+  tam, gdzie istnieją już odpowiednie pola.
+- Preview współdzieli część rendererów, ale strona `page` ma osobny shell.
+  Migracja musi objąć również `preview/src/pages/[...locale].astro`, jego
+  kwerendy i mapowanie tras, a nie wyłącznie statyczną aplikację.
+- Nie ma jeszcze serializerów Markdown ani tras `.md`. Wprowadzać serializery
+  razem z nowymi sekcjami; etap 5 domyka eksport, metadane i indeksy.
+- Osiem widoków HTML odpowiada siedmiu szablonom: druga strona bloga jest
+  stanem paginacji tego samego indeksu. Stan Content Lake i usług zewnętrznych
+  jest znany z wcześniejszych zapisów, nie został ponownie sprawdzony w tym audycie.
+
+Kolejność wynika z [mapy integracji](../design-system/ASTRO-INTEGRATION.md).
+Modele współdzielone potrzebne homepage wprowadzić już w pierwszym pakiecie,
+choć pełne landingi i kolekcje powstaną później.
+
+| Kolejność | Pakiet i mockup                                          | Model i zakres treści                                                                                                                                                          |
+| --------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1         | Wspólny shell + Homepage3a, `cherry-white.html`          | `page` home, `siteSettings`, referencje autora/opinii/usługi/formularza oraz nowy model e-booka; hero, marki, podejście 450+, O mnie, e-booki, konsultacje, opinie, newsletter |
+| 2         | About3a, `about-3a.html`                                 | `page` i wspólny `author`; historia, wartości, wykształcenie, media i miejsce na rzeczywisty dyplom                                                                            |
+| 3         | Consultation3a, `consultation-3a.html`                   | Rozszerzenie `service` i referencja ze strony; zakres, proces, 450 PLN/60 minut, FAQ i rezerwacja                                                                              |
+| 4         | Ebook3a, `ebook-3a.html`                                 | Wspólny dokument produktu według EBOOK-CMS-CONFIG-3A; rozdziały, próbka, 97 PLN brutto, status, front i CTA                                                                    |
+| 5         | EbookCollection3a, `ebooks-3a.html`                      | Referencje tych samych produktów, kategorie, filtrowanie, stany pustej kolekcji i newsletter                                                                                   |
+| 6         | BlogCollection3a, `blog-3a.html` i `blog-3a-page-2.html` | Istniejący `article` i `category`, ustawienia indeksu; najnowszy wpis, stabilne sortowanie i paginacja bez duplikatów                                                          |
+| 7         | Article3a, `article-3a.html`                             | Portable Text, wspólny autor, źródła, related, referencje e-booków, FAQ i newsletter; TOC, rekomendacje i udostępnianie                                                        |
+
+Dla każdego pakietu stosować ten sam cykl odbioru:
+
+1. Zinwentaryzować teksty, media, CTA, kolejność i widoczność z mockupu;
+   przypisać je do istniejących pól albo jawnie wskazać brakujące pole/typ.
+   Korzystać z HOMEPAGE/BLOG/EBOOK/CONSULTATION-CMS-CONFIG i zapisywać decyzje.
+   Zachować ustalone wartości; propozycje, przykładowe artykuły/daty i brakujące
+   adresy oznaczać do decyzji. Akceptacja kierunku pozwala rozwijać szablony,
+   ale nie potwierdza gotowości produktu ani finalnej treści do publikacji.
+2. Rozszerzyć schematy, walidacje, etykiety i preview Studio, GROQ publiczny
+   i chroniony, TypeGen, typy oraz mappery. Zachować kontrolowane warianty,
+   kolejność i widoczność sekcji, bez dowolnego CSS w CMS.
+3. Wdrożyć wspólny renderer Astro oparty na Layout3a; odtworzyć mockup przez
+   istniejące komponenty i scoped CSS kompozycji. Równolegle dodać serializer
+   Markdown i przykład dla każdego nowego typu, z blokadą nieznanych bloków.
+4. Przygotować powtarzalny import treści do szkiców Sanity: stabilne ID/klucze,
+   referencje, przesłanie mediów z alt/kadrem, raport braków i mapowanie źródeł.
+   Przed zapisem porównać obecne dokumenty, zachować zmiany redaktorów;
+   zapewnić eksport/kopię oraz tryb bez zapisu. Fixture służy testom,
+   nie stanowi wykonanej konfiguracji Content Lake.
+5. Sprawdzić szkice w Studio i chronionym preview oraz zmianę pola widoczną
+   w obu rendererach. PL/EN to osobne treści; brak EN daje brak trasy/tłumaczenia.
+   Niewypełnione dane blokują właściwą publikację, nie niezależne lokalne prace.
+6. Uruchomić pełne `npm run verify`, porównać z mockupem desktop/mobile,
+   320/390/1440 px, obie palety, klawiaturę, 200% zoom, bez JS, reduced motion
+   i axe; zapisać niewykonany natywny zoom, czytnik i urządzenie fizyczne.
+   Sprawdzić zgodność znaczącej treści HTML/Markdown i referencji.
+
+Checklista wykonania (zaznaczać osobno kod i dane):
+
+- [x] Zweryfikować stan repo i uzgodnić kolejność migracji z systemem 3a.
+- [ ] Wdrożyć wspólny shell publiczny/preview i Homepage3a wraz z modelami zależnymi.
+- [ ] Wdrożyć About3a oraz wspólny profil autora.
+- [ ] Wdrożyć Consultation3a i model usługi.
+- [ ] Wdrożyć Ebook3a i model produktu.
+- [ ] Wdrożyć EbookCollection3a, kategorie i filtrowanie.
+- [ ] Wdrożyć BlogCollection3a i rzeczywistą paginację.
+- [ ] Wdrożyć Article3a, Portable Text i jego powiązane bloki.
+- [ ] Przygotować i sprawdzić import bez zapisu oraz kopię obecnych danych.
+- [ ] Przenieść treści i media do szkiców Content Lake; zapisać wyniki walidacji.
+- [ ] Odebrać edycję i chroniony podgląd wszystkich szablonów z Sanity.
+- [ ] Po zastąpieniu zastosowań usunąć dawną prezentację i aliasy `--wf-*`.
+
+Odbiór pakietu wymaga osobnych dowodów: kod/verify, zgodność wyglądu, dane
+w Sanity oraz podgląd. Sam katalog, mockup czy instrukcja CMS nie zamyka pakietu.
+Publikacja treści uruchamia webhooki; wykonać ją dopiero na osobne zlecenie.
+Formularze pozostają w jawnym stanie demonstracyjnym do integracji z etapu 6,
+a brak checkoutu/kalendarza nie może dawać fałszywego potwierdzenia zakupu/zapisu.
 
 ### Etap 5 — SEO i eksport treści
 
@@ -313,8 +400,8 @@ kolejki, webhook staging, Repository Dispatch i środowiska GitHub są
 skonfigurowane; aktualizacja, wycofanie i błąd builda na stagingu też przeszły.
 Pozostają: handshake Presentation szkicu, Turnstile, uwierzytelnienie n8n,
 endpoint i dozwolone originy c15t, identyfikatory GTM/GA4 oraz finalne dane
-marki i treści zgód. Brak tych danych nie blokuje etapu 3 ani lokalnych
-szablonów.
+marki i treści zgód. Brak tych danych nie blokuje lokalnej migracji 3a w etapie 4a; blokuje
+odpowiednie integracje i odbiór produkcyjny.
 
 ## Materiały fotograficzne — 2026-10-04
 

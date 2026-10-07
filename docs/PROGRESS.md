@@ -1,20 +1,25 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (design system 3a, przygotowanie PR). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-10-07 (audyt planu po wdrożeniu design systemu 3a).
+Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
-Etap 1 — przygotowanie repozytorium i dokumentacji — zakończony.
-Etap 2 — aplikacje i infrastruktura — zakończony.
-Etap 3 — design system i komponenty — zakończony.
-Etap 4 — Sanity i szablony PL/EN — kod zweryfikowany lokalnie; demonstracyjna
-treść jest w datasetcie `production`. Strony i artykuły są szkicami, żeby nie
-odpalać webhooków. Opublikowane `home` PL/EN nadal bez sekcji. Etapy 5–7 otwarte.
+Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
+Etapy 3–4 opisują wykonany prototyp, nie ukończenie docelowych stron 3a.
+Nowy system 3a jest wykonany: tokeny, Layout3a, 21 komponentów i katalog.
+Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
+Etapy 5–7 pozostają otwarte; serializery nowych sekcji powstają już podczas 4a.
 
-Bieżące zlecenie: PR i scalenie ujednolicenia mockupów oraz docelowego design
-systemu 3a. Wybrano 3a, pozostałe warianty porzucono, Wonderful zarchiwizowano.
-Biblioteka Astro i katalog są zweryfikowane; migracja wszystkich stron i CMS
-pozostaje otwarta. Zmiany skillów oraz inne lokalne prace są poza tym zakresem.
+Publiczne ComposedPage/BlogIndex/ArticleView nadal korzystają ze wcześniejszego
+Layout i `src/ui`. Schematy CMS są fundamentem do rozszerzenia; model e-booka,
+warianty 3a, dane docelowe i wspólny shell preview pozostają do wdrożenia.
+Historycznie opublikowane home PL/EN były bez sekcji, a demonstracyjne strony
+były szkicami. W tej sesji nie odczytywano Content Lake ani usług zewnętrznych.
+
+Zlecenie użytkownika: zweryfikować i zaktualizować plan pod implementację
+podstron z mockupów wraz z przeniesieniem treści do Sanity. Audyt i aktualizacja
+planu wykonane; nie rozpoczęto migracji kodu ani importu treści.
 
 ## Wykonane
 
@@ -47,9 +52,11 @@ pozostaje otwarta. Zmiany skillów oraz inne lokalne prace są poza tym zakresem
 
 ## Decyzje obowiązujące
 
-- Nowa marka, fundament z treściami demonstracyjnymi, bez migracji; PL/EN.
+- Nowa marka i PL/EN; fundament demonstracyjny wykonany. Dalsze prace obejmują
+  migrację treści przygotowanych mockupów do Sanity (decyzja 07.10.2026).
 - Astro SSG, Sanity, Cloudflare Workers Static Assets; osobny chroniony podgląd.
-- Wygląd z wonderful-design-system; bez konkurencyjnej palety/tokenów.
+- Docelowy design system 3a i opracowane mockupy; Wonderful zarchiwizowany,
+  pozostałe kierunki porzucone. Jedno źródło tokenów i komponentów.
 - Sekcje z wariantami w CMS; każda ma HTML, Markdown i przykład.
 - Worker → Queues → n8n; n8n deduplikuje i obsługuje dalsze automatyzacje.
 - Zewnętrzne self-hostowane c15t; tutaj tylko integracja i panel.
@@ -1820,57 +1827,59 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 - Następny etap: migracja homepage 3a do Layout3a/wspólnego shell i istniejących
   modeli treści, potem pozostałe szablony według ASTRO-INTEGRATION.md.
 
+## Audyt planu migracji stron i treści — 2026-10-07
+
+- Sprawdzono plan, postęp, design system i mapę Astro/Sanity, instrukcje CMS,
+  publiczne widoki, routing preview, rejestr schematów, GROQ i mappery.
+- Plan częściowo odpowiadał nowemu kierunkowi, ale nie miał bieżącego etapu
+  łączącego szablony z rzeczywistym importem treści. Początek postępu nadal
+  wskazywał Wonderful i zlecenie kolekcji e-booków; końcowe kroki były powielone.
+- Dodano etap 4a: siedem szablonów z ośmiu mockupów, zależności modeli,
+  cykl schema/GROQ/TypeGen → Astro/Markdown → szkice CMS → preview → QA.
+  Rozdzielono wykonanie kodu od przeniesienia danych i publikacji.
+- Doprecyzowano import z trwałymi ID, mediami, referencjami, kopią i próbą bez
+  zapisu; istniejące dokumenty i zmiany redakcyjne trzeba zachować.
+- W HOMEPAGE-CMS-CONFIG zapisano decyzję o przenoszeniu treści z mockupów
+  i zastąpiono nieaktualną nawigację kotwicową globalnymi celami podstron.
+  Uzgodniono kolejność i cykl odbioru w ASTRO-INTEGRATION.
+- Zmiany tylko dokumentacji; zachowano zastane lokalne zmiany. Nie odczytywano
+  CMS na żywo, nie uruchamiano aplikacji, nie zmieniano schematów ani danych.
+  Bez commita, pusha i publikacji.
+- Kontrole dokumentacji: Prettier czterech zmienionych dokumentów PASS;
+  81 lokalnych odnośników prowadzi do istniejących plików; diff-check PASS.
+  Nie sprawdzano zewnętrznych URL ani kotwic. `npm run verify` niewykonane
+  zgodnie z zasadą dla zmian wyłącznie dokumentacji; wyniki wcześniejszego
+  verify systemu 3a pozostają historyczne, nie są wynikiem tej sesji.
+
+## Bezpośredni zapis aktualizacji planu na main — 2026-10-07
+
+- Na polecenie „merguj do main bez pr” przygotowano osobny indeks Git
+  z czterema dokumentami audytu planu. Repo już jest na main; PR nie jest potrzebny.
+- Z zakresu commita wyłączono zastane notatki wcześniejszych scaleń i zmiany
+  skillów oraz raporty. Pliki robocze pozostają zachowane.
+- Kontrole dokumentacji i lokalnych odnośników przeszły; brak zmian aplikacji,
+  konfiguracji Sanity i publikacji strony. Następny krok to pakiet 1 etapu 4a.
+
 ## Następny krok
 
-Docelowy 3a został zatwierdzony. System i wspólne komponenty Astro są wykonane
-i zweryfikowane. Przenieść homepage do Layout3a, następnie pozostałe szablony
-według design-system/ASTRO-INTEGRATION.md. Wonderful i inne warianty są archiwalne.
-Kontrole na urządzeniu, czytnikiem i z natywnym zoomem są otwarte.
+Rozpocząć pakiet 1 etapu 4a: zinwentaryzować treści homepage 3a względem pól,
+rozszerzyć modele zależne (w tym wspólne produkty/usługę/opinie/newsletter),
+GROQ publiczny i preview oraz TypeGen. Następnie przenieść homepage na Layout3a
+z tym samym shell w chronionym podglądzie, dodać serializery i przykłady sekcji.
+Przygotować import bez zapisu, a po sprawdzeniu istniejących danych przenieść
+copy/media do szkiców Sanity. Kolejne pakiety: O mnie → konsultacja → produkt
+→ kolekcja e-booków → indeks bloga → artykuł.
 
-Indeks bloga 3a został scalony w PR #24. Ocenić najnowszy wpis, dwie kolumny,
-paginację i newsletter. Po akceptacji wdrożyć wybór kolekcji i wspólny szablon według
-BLOG-CMS-CONFIG-3A.md; przykładowych tytułów i dat nie publikować.
+Brak finalnego URL płatnej rezerwacji, skanu dyplomu, rzeczywistych profili,
+gotowych plików e-booków i zaakceptowanych artykułów/metadanych odnotowywać
+przy właściwym pakiecie. Zachować ustalone 450 zł/60 minut, 97 zł brutto i status
+zapowiedzi; przykładowych tytułów/dat nie publikować. Te braki nie blokują
+niezależnego wdrażania komponentów i szkiców.
 
-Landing konsultacji został scalony w PR #21; dalszy krok to feedback do copy
-i zakresu oraz właściwy URL wydarzenia przed wdrożeniem Astro/Sanity.
-
-Ocenić lokalną kolekcję e-booków 3a, copy i wybór kategorii. Po akceptacji
-wdrożyć dokumenty produktów oraz szablon kolekcji w Astro/Sanity z serializerem
-Markdown zgodnie z EBOOK-CMS-CONFIG-3A.md. Publikacja wymaga osobnego zlecenia.
-
-Nowe zlecenie 07.10.2026: ocenić także lokalny landing pojedynczej konsultacji
-3a, jego copy i zakres. Uzupełnić URL wydarzenia oraz ustalić ewentualne pisemne
-podsumowanie; cena 450 zł/60 minut i tymczasowy Cal.com pozostają ustalone.
-Po akceptacji wdrożyć wspólną referencję usługi i warianty według
-CONSULTATION-CMS-CONFIG-3A.md. Mockup nie oznacza konfiguracji Sanity ani płatności.
-
-Ocenić lokalny mockup „O mnie” i nowe wejścia do podejścia/materiałów.
-Uzupełnić skan dyplomu, rzeczywisty kontakt/profile oraz link płatnego wydarzenia;
-uczelnia, kierunek i 450 zł/60 minut są ustalone. Po akceptacji przenieść
-szablon i wspólny profil autora do Astro/Sanity. Pozostałe prace:
-
-Zebrać feedback do lokalnego 3a, artykułu blogowego i landingu ebooka.
-Zatwierdzić copy i finalny zakres produktu, potem wdrożyć osobną kolekcję według
-EBOOK-CMS-CONFIG-3A.md oraz wspólne referencje homepage/bloga.
-Po akceptacji bloga przenieść jego szablon do Astro oraz wdrożyć rozszerzenia
-z `BLOG-CMS-CONFIG-3A.md`; przykładowy artykuł zastąpić zaakceptowaną treścią. Kolejne decyzje zapisywać
-w HOMEPAGE-CMS-CONFIG.md. Na jej podstawie wdrażać wybrany 3a i konfigurację
-Sanity; kierunek został zaakceptowany 07.10.2026. Ustalić dodatkowy zakres
-pojedynczej konsultacji (cena 450 zł/60 minut ustalona), gotowość e-booków oraz współprace marek/profile.
-Po akceptacji przenieść copy i wygląd do Astro/Sanity. Publikacja publicznego
-mockupu wymaga zlecenia. Kroki techniczne odłożone:
-
-1. Odświeżyć `https://preview.aleksandraolesiewicz.com` przy aktywnej sesji
-   Access — zamiast 401 powinien być chroniony podgląd szkicu.
-2. W Studio Presentation odświeżyć podgląd (Access raz w nowej karcie, bez
-   passkey w iframe).
-3. Zaprosić drugiego administratora w Sanity Manage (`dyuqkn8c`).
-4. W Studio przejrzeć szkice; po akceptacji publikować strony i artykuły
-   (to odpali webhooki staging/produkcji).
-5. Etap 5: serializacja Markdown, canonical, hreflang, sitemap i JSON-LD.
-6. Nie testować n8n. Nie dodawać `www` jako custom domain Workera.
-
-Nie wklejać sekretów do czatu.
+Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
+natywny zoom, czytnik i fizyczne urządzenie. Etapy 5–7 domykają SEO/eksport,
+formularze/c15t i odbiór. Nie testować n8n ani nie dodawać `www` jako domeny
+Workera. Publikacja treści/strony wymaga osobnego zlecenia; nie wklejać sekretów.
 
 ## Zasada aktualizacji
 
