@@ -2118,6 +2118,41 @@ z makiety konsultacji — to wspólny komponent 3a.
   nawigacja „Temat e-booków”, pozycja `1–3 z 6`. Screenshoty desktop 1280×900
   i mobile 390×844 obok makiet. Dowody: `/tmp/ola-verify-evidence/ola-1791402970/`.
 
+## Zdjęcia makiet 3a na produkcji — 2026-10-07
+
+Uwaga Grzesia po porównaniach: zdjęcia z makiet mają być na produkcji w tym
+samym miejscu, z tym samym kadrem, proporcjami i wycięciem tła. Te same pliki
+co makieta (hashe `src/assets` = `mockups/homepage/assets` / portrety), pipeline
+Astro (`SiteImage` + `astro:assets`, `layout="none"`, WebP, `width`/`height`,
+lazy poniżej folda). Fallback CMS: klucze fixture `hero|about|contact|food`
+oraz logotypy, gdy `mediaObject.image` jest puste. `author.photo` w seedzie
+wskazuje `about.webp`. Skan dyplomu **nie został dostarczony** — bez
+placeholdera-zdjęcia.
+
+| Zdjęcie z makiety                                            | Plik na produkcji                                                                     | Strona i sekcja                                                                                          | Status                                                                    |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `hero.webp` (wycięcie tła, 1122×1402, alpha)                 | `src/assets/portraits/hero.webp` → `/_astro/hero.*.webp` (WebP VP8X z alpha, 164 KiB) | Homepage hero; konsultacja hero (desktop i mobile)                                                       | OK, `object-fit: contain` / `center bottom`                               |
+| `about.webp` (portret)                                       | `src/assets/portraits/about.webp` → `/_astro/about.*.webp`                            | Homepage „O mnie”; O mnie hero; konsultacja „Po drugiej stronie jest Ola”; landing e-booka PL/EN autorka | OK; ekspert: 520 px / `center 28%` (470/400/340 w breakpointach)          |
+| `contact.webp` (wnętrze, 1536×1024)                          | `src/assets/portraits/contact.webp` → `/_astro/contact.*.webp`                        | Homepage panel konsultacji; O mnie panel; konsultacja przebieg                                           | OK; przebieg `object-position: 72% center`, 460/360/320/280 px            |
+| `food-editorial.webp` inset                                  | `src/assets/editorial/food-editorial.webp` (identyczny z makietą)                     | Homepage „O mnie”, kadr 220×156 / `right: -56px`                                                         | OK                                                                        |
+| `food-editorial.webp` tło okładki `art-nutrition`            | ten sam plik, wariant 320×180                                                         | Homepage karta e-booka „Szczupła, a jednak PCOS”                                                         | OK; `.ao-card__media > img` żeby globalny kadr 1.5 nie nadpisywał okładki |
+| `alab.svg`, `uns.png`, `norsan.png`, `norsa.png`, `omni.png` | `src/assets/partners/*` → `/_astro/*`                                                 | Homepage belka marek                                                                                     | OK; SVG poza rasterem, PNG przez pipeline                                 |
+| Skan dyplomu                                                 | **brak pliku w repo**                                                                 | O mnie, wykształcenie                                                                                    | Placeholder SVG jak makieta; bez fikcyjnego dokumentu                     |
+| Awatary opinii                                               | —                                                                                     | Homepage / O mnie / konsultacja / e-book opinie                                                          | Nie ma w makiecie; nie dodano                                             |
+
+`npm run verify` Node 24.21.0: **PASS**. 183 + 11 plików Astro/TS, 87 unit,
+29 stron, JS **5770 B**, CSS **23405 B gzip** (limit 32768, zapas 9363 B),
+**90 E2E PASS**. Build wypisał 10 zoptymalizowanych obrazów.
+
+verify-ola `ola-1791404697`, port 4340, doctor PASS, Node 24.21.0, `posts []`
+na homepage, konsultacji i landingu e-booka. H1 PL/EN zgodne z fixture.
+Screenshoty desktop 1280×900 (verify-ola, fullPage) i mobile 390×844 obok
+makiet: homepage, O mnie, konsultacja, ebook PL/EN. Dowody:
+`/tmp/ola-verify-evidence/ola-1791404697/`. Viewport CLI verify-ola to
+1280×900; mobile z osobnego Chromium na tym samym `base`. Axe/overflow
+320/390/1440 px w E2E. Natywny zoom, czytnik i urządzenie fizyczne —
+niesprawdzone.
+
 ## Następny krok
 
 Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty
