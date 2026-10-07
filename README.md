@@ -4,6 +4,17 @@ Fundament strony nowej marki: landing page’e, blog i formularze leadowe, w ję
 polskim i angielskim. Publiczny serwis będzie statyczny, z HTML i Markdown,
 hostingiem Cloudflare Workers Static Assets i edycją przez Sanity.
 
+## Lista wszystkich wpisów bloga 3a — 2026-10-07
+
+[Otwórz indeks bloga](mockups/homepage/blog-3a.html): najnowszy wpis nad dwoma kolumnami,
+sześć kart na podstronę, działająca paginacja i newsletter. Druga podstrona
+pokazuje kolejne cztery wpisy. Na mobile jedna kolumna; paginacja działa bez JS.
+Jedenaście przykładowych wpisów, istniejące obrazy 3a, formularz demonstracyjny.
+Bez konfiguracji CMS i wysyłania danych.
+
+Sprawdzony lokalny podgląd: `node scripts/preview-homepage-mockups.mjs`,
+[blog 3a](http://127.0.0.1:8766/mockups/homepage/blog-3a.html).
+
 ## Dokumentacja
 
 - [Plan wdrożenia i kryteria odbioru](docs/IMPLEMENTATION-PLAN.md)
