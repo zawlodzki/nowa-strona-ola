@@ -239,6 +239,10 @@ if (previewTitle) {
       "Konsultacje online",
       "Tutaj znajdą się zakres konsultacji, przebieg współpracy, ceny i rezerwacja terminu.",
     ],
+    kontakt: [
+      "Kontakt z Aleksandrą",
+      "Tutaj zostaną podłączone potwierdzone dane kontaktowe. Ten ekran makiety nie wysyła wiadomości.",
+    ],
     prywatnosc: [
       "Polityka prywatności",
       "Treść informacyjna i zgody zostaną przygotowane przed uruchomieniem docelowego formularza.",
@@ -295,9 +299,9 @@ if (previewTitle) {
     document.querySelector("#preview-detail").textContent =
       "Koncepcja z researchu. Robocza cena: około 100 zł. E-book i zakup nie są jeszcze dostępne w tej makiecie.";
   }
-  // Powrót wyłącznie do lokalnej propozycji albo podstrony bloga 3a.
+  // Powrót wyłącznie do lokalnej propozycji albo podstrony makiety 3a.
   const match = document.referrer.match(
-    /\/(wonderful(?:-cherry)?|botanical(?:-white)?|cherry(?:-white)?|blog-3a(?:-page-2)?)\.html(?:[?#]|$)/,
+    /\/(wonderful(?:-cherry)?|botanical(?:-white)?|cherry(?:-white)?|about-3a|blog-3a(?:-page-2)?)\.html(?:[?#]|$)/,
   );
   if (match)
     document.querySelector("#back-to-design").href = `${match[1]}.html`;

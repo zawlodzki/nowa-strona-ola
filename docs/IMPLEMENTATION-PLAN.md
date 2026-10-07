@@ -384,6 +384,30 @@ materiały dla kobiet z PCOS i w perimenopauzie oraz konsultacje dietetyczne onl
 Alternatywne palety oraz redakcyjny krój istnieją tylko w mockupach na wyraźne
 polecenie użytkownika; nie zmieniono tokenów Wonderful ani styli aplikacji.
 
+## Podstrona „O mnie” 3a — 2026-10-06/07
+
+- [x] Przejrzeć kontekst FIRMA, poprzednią stronę oraz poradnik copywriterski.
+- [x] Obejrzeć bieżące 3a na desktopie i mobile; zaplanować układ oraz copy.
+- [x] Zapisać źródła, propozycje CTA, mapowanie do CMS i brakujące możliwości.
+- [ ] Zebrać ocenę [planu „O mnie”](ABOUT-MOCKUP-PLAN-3A.md) i dopracować
+      ewentualne szczegóły autobiografii; uczelnia i kierunek już potwierdzone.
+- [x] Zapisać cenę 450 zł/60 minut, CTA do płatnego kalendarza oraz wykształcenie
+      i miejsce na skan dyplomu, zgodnie z decyzją użytkownika 06.10.2026.
+- [x] Zapisać tymczasowy cel CTA `https://cal.com`; użytkownik uzupełni link wydarzenia później.
+- [ ] Uzupełnić adres wydarzenia płatnej konsultacji i rzeczywisty skan dyplomu.
+- [x] Wykonać lokalny mockup i podłączyć wejście „Poznaj moją historię” z 3a
+      oraz biogram artykułu i indeks.
+- [x] Uwzględnić korektę CTA i dobre praktyki E-E-A-T: profil, kwalifikacje,
+      granice konsultacji, opinie, materiały i spójne `ProfilePage`/`Person`.
+- [x] Zweryfikować mockup na desktopie/mobile, dla klawiatury, 320 px,
+      CSS zoom 200%, reduced motion i bez JavaScriptu w trzech przeglądarkach.
+- [ ] Utworzyć i scalić PR mockupu na polecenie „pr merge” z 07.10.2026.
+- [ ] Po akceptacji przenieść szablon do Astro i Sanity.
+
+Pierwsze zlecenie dotyczyło planowania; 07.10.2026 użytkownik zlecił mockup.
+[Wykonany HTML](../mockups/homepage/about-3a.html) i [ocena E-E-A-T](ABOUT-EEAT-3A.md)
+nie oznaczają wdrożenia Astro/CMS ani odbioru produkcyjnego.
+
 ## Źródła techniczne
 
 - [Cloudflare Static Assets](https://developers.cloudflare.com/workers/static-assets/)
