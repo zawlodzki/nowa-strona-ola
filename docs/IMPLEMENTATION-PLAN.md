@@ -512,3 +512,19 @@ Lokalny landing nie zamyka wdrożenia CMS ani kalendarza.
 [Mockup](../mockups/homepage/ebooks-3a.html),
 [wartości i mapowanie CMS](HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026).
 Dokumentacja oraz mockup nie oznaczają wdrożenia kolekcji w CMS.
+
+## Lista wszystkich wpisów bloga 3a — 2026-10-07
+
+- [x] Przygotować indeks: jeden najnowszy wpis nad siatką dwóch kolumn.
+- [x] Dodać działające odnośniki paginacji i osobną drugą podstronę kolekcji.
+- [x] Dodać pełny newsletter po paginacji oraz menu/stopkę wspólnego 3a.
+- [x] Połączyć indeks z lokalnymi stronami 3a i breadcrumb artykułu.
+- [ ] Scalić PR mockupu indeksu bloga po kontroli GitHub Quality.
+- [x] Zapisać decyzje, propozycje copy i docelowy algorytm kolekcji w instrukcji CMS.
+- [x] Sprawdzić obie podstrony w Chromium/Firefox/WebKit, 320 px, CSS zoom 200%,
+      klawiaturę, brak JS, reduced motion i axe; wykonać przegląd wizualny.
+- [ ] Przenieść zaakceptowany indeks do Astro/Sanity oraz serializera Markdown.
+
+[Mockup](../mockups/homepage/blog-3a.html),
+[instrukcja przyszłej konfiguracji](BLOG-CMS-CONFIG-3A.md#kolekcja-wszystkich-wpisów--07102026).
+Kontrole i ograniczenia tej sesji: [postęp](PROGRESS.md).

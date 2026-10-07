@@ -439,3 +439,25 @@ kolekcji wzrośnie. Nie deklarować wykonania modelu na podstawie mockupu.
 Docelowe `/ebooki/` i `/en/ebooks/` są propozycją routingu. EN wymaga osobnego
 zaakceptowanego dokumentu i tłumaczeń produktów; bez polskiego fallbacku.
 Szczegóły produktu: [instrukcja kolekcji CMS](EBOOK-CMS-CONFIG-3A.md).
+
+## Kolekcja wszystkich wpisów bloga 3a — 07.10.2026
+
+Źródło: bezpośrednie zlecenie użytkownika z 07.10.2026. Wykonano lokalny
+[mockup listy](../mockups/homepage/blog-3a.html) i
+[drugą podstronę](../mockups/homepage/blog-3a-page-2.html).
+
+| Obszar      | Bieżąca wartość                                                  | Mapowanie i status                                                                                                                                                                     |
+| ----------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Układ       | Najnowszy wpis nad listą, poniżej dwie kolumny                   | Decyzja użytkownika; wykonana w HTML/CSS. Stały szablon `BlogIndex`, bez CSS w Sanity. Mobile: jedna kolumna.                                                                          |
+| Kolekcja    | Wszystkie opublikowane wpisy danego języka, od najnowszych       | Istniejące dokumenty `article`; `publishedAt`, `title`, `lead`, `image`, `categories`. Makieta ma 11 przykładów, bez pobierania CMS.                                                   |
+| Wyróżnienie | Jeden najnowszy wpis, wyłącznie na pierwszej podstronie          | Doprecyzowanie implementacyjne: automatyczny wybór po `publishedAt`, bez duplikatu w siatce. Istniejące `article.featured` nie określa najnowszego wpisu. Astro jeszcze bez zmiany.    |
+| Paginacja   | Poprzednia, numery stron, Następna pod siatką                    | Decyzja użytkownika; działające osobne strony HTML bez JS. Sześć kart w siatce na stronę według `ARTICLES_PER_PAGE = 6`; liczba stron wyliczana po odjęciu wyróżnionego wpisu.         |
+| Newsletter  | Pełny formularz po paginacji na każdej podstronie                | Decyzja użytkownika; wspólne copy/formularz 3a. Docelowo proponowane `siteSettings.blogNewsletter` i referencja `form` z instrukcji bloga. Tych pól konfiguracji jeszcze nie wdrożono. |
+| Nagłówek    | „Blog. Po Twojemu.” i lead o PCOS, IO oraz odżywianiu            | Propozycja copy do oceny; brak istniejących pól tytułu/leadu indeksu w `siteSettings`. Proponowane lokalizowane `blogIndex.title` i `blogIndex.lead`.                                  |
+| Nawigacja   | „Blog” prowadzi do indeksu; breadcrumb artykułu wraca do indeksu | Wykonano lokalne połączenia 3a. Docelowe `siteSettings.navigation[]`: PL `/blog/`, EN `/en/blog/`.                                                                                     |
+
+Nie zmieniono schematów Sanity, Content Lake ani szablonu Astro. Newsletter
+jedynie waliduje dane i pokazuje demo; bez integracji i zapisu danych.
+Tytuły, opisy i daty kart są przykładami, a istniejące obrazy AI służą
+ocenie układu. Nie są finalnymi treściami publikacji.
+[Szczegóły przyszłej paginacji i pól](BLOG-CMS-CONFIG-3A.md#kolekcja-wszystkich-wpisów--07102026).

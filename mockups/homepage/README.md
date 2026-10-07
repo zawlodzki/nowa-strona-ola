@@ -3,6 +3,17 @@
 Samodzielne mockupy HTML przygotowane 2026-10-05 przed wyborem finalnej estetyki.
 Nie są podłączone do Astro ani CMS. Wszystkie strony mają `noindex,nofollow`.
 
+## Lista wszystkich wpisów bloga 3a — 2026-10-07
+
+[Otwórz indeks bloga](blog-3a.html): najnowszy wpis nad dwoma kolumnami,
+sześć kart na podstronę, działająca paginacja i newsletter. Druga podstrona
+pokazuje kolejne cztery wpisy. Na mobile jedna kolumna; paginacja działa bez JS.
+Jedenaście przykładowych wpisów, istniejące obrazy 3a, formularz demonstracyjny.
+Bez konfiguracji CMS i wysyłania danych.
+
+Sprawdzony lokalny podgląd: `node scripts/preview-homepage-mockups.mjs`,
+[blog 3a](http://127.0.0.1:8766/mockups/homepage/blog-3a.html).
+
 ## Landing pojedynczej konsultacji 3a — 2026-10-07
 
 [Otwórz landing](consultation-3a.html). Zawiera navbar, hero, definicję problemu,

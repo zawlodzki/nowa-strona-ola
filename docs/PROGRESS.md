@@ -1618,9 +1618,87 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   Po kontroli zakresu i poleceniu „kontynuuj” włączono konkretny commit main
   `d028de5`; konflikty dotyczyły tylko tego postępu i README makiet. Zachowano
   opis obu mockupów, ich linki i implementacje.
-- Kolejny krok: ponowne kontrole z aktualnym main i squash merge PR #23.
+- Po aktualizacji do PR #22 pełne lokalne verify PASS (57 unit, 51 E2E),
+  log `/private/tmp/ola-ebooks-3a-pr-updated-verify.log`; obie kontrole GitHub
+  także PASS: 4m21s i 5m13s.
+- W międzyczasie main otrzymał PR #24, commit `4268166`. Uwzględniono go,
+  zachowując obie sekcje w postępie, planie i konfiguracji CMS. Różnica względem
+  aktualnego main nadal obejmuje wyłącznie 12 plików kolekcji e-booków.
+- Kolejny krok: ostatnie kontrole aktualnej gałęzi i squash merge PR #23.
+
+## Lista wszystkich wpisów bloga 3a — 2026-10-07
+
+- Bezpośrednie zlecenie: dwie kolumny wpisów, najnowszy nad nimi, paginacja
+  kolekcji pod listą i zapis do newslettera. Wykonano `blog-3a.html`,
+  `blog-3a-page-2.html` oraz wspólny CSS. Sześć kart na stronę zgodnie
+  z obecną stałą projektu; kolekcja demonstracyjna ma 11 wpisów: wyróżniony,
+  sześć kart pierwszej podstrony i cztery drugiej, bez duplikatów.
+- Najnowszy wpis prowadzi do istniejącego artykułu 3a; pozostałe tytuły do
+  odpowiadających im ekranów objaśniających. Paginacja jest natywnym odnośnikiem
+  do osobnego HTML i działa bez JS. Skrajne akcje nie są fokusowalne, aktywny
+  numer ma `aria-current`. Mobile: jedna kolumna, newsletter na obu stronach.
+- Paleta/Switzer/wordmark/formularz dziedziczą istniejące 3a. Użyto istniejących
+  obrazów AI; bez nowych mediów, bibliotek i tokenów. Jeden H1, breadcrumbs,
+  kategorie/daty/lead kart oraz jawna informacja o przykładowej kolekcji.
+  Newsletter jedynie waliduje formularz i informuje, że nic nie wysłano.
+- Połączono indeks porównania, menu homepage, nawigację i breadcrumb
+  artykułu oraz linki Blog w stopkach e-booka/konsultacji. Zachowano wszystkie
+  zastane i równolegle tworzone zmiany; bez commita, pusha i publikacji.
+- Decyzje zapisano w HOMEPAGE-CMS-CONFIG.md, przyszłe pola i algorytm
+  w BLOG-CMS-CONFIG-3A.md. Docelowo automatyczny wybór najnowszego po
+  `publishedAt`, stabilne sortowanie, osobna paginacja pozostałych pozycji,
+  referencja wspólnego formularza i lokalizowane copy indeksu.
+  Sanity, Content Lake i Astro nie zostały zmienione.
+- Start serwera zastał zajęty port 8766 (`EADDRINUSE`); wykorzystano działający
+  lokalny podgląd i potwierdzono odczyt nowych zasobów. Komendę/URL dopisano
+  do obu README; zlecono otwarcie podglądu w panelu Codex (status queued).
+- Początkowe QA wykazało nieprawidłową wysokość zdjęć wynikającą z atrybutów
+  HTML oraz overflow przy CSS zoom 200%: przycisk newslettera w Chromium,
+  minimum siatki i długie słowa w Firefox. Poprawiono `height: auto`, rzeczywiste
+  wymiary źródeł, kadr, minimum kolumny, szerokość/przerwy przycisków i zawijanie
+  tekstu. Nie wyłączano kontroli ani nie maskowano overflow.
+- Końcowe QA: PASS, 39 zestawów w Chromium/Firefox/WebKit, obie strony przy
+  320/390/768/900/1024/1440 px bez overflow, właściwe kolumny, obrazy, jeden H1,
+  kotwice i ID. Paginacja Enter/numery/powrót działa z JS i bez JS; wpisy nie
+  powtarzają się między stronami. Menu Enter/Escape i powrót fokusu, błędy
+  newslettera, brak POST/błędów JS/zasobów, CSS zoom 200% przy 320/390/1440 px
+  oraz reduced motion: PASS. Axe Chromium obu podstron light/dark: 0 naruszeń.
+  Artefakty: `.impeccable/review/blog-index-3a/`.
+- Skill Impeccable: odczyt kontekstu i craft floor, detektor oraz niezależny
+  przegląd obrazów/kodu. Werdykt `ship` dla lokalnego mockupu. Ostrzeżenia
+  tight-leading/cramped-padding dotyczą nagłówków lub nie rozpoznają padding
+  sekcji; przegląd zrzutów i CSS potwierdził czytelność i istniejący rytm 3a.
+  Nie tworzono drugiego systemu projektowego ani zmiany tożsamości marki.
+- Pierwsze `npm run verify` zakończyło się błędem `ENOENT` przy zamykaniu
+  kontekstu/archiwizacji trace w `test-results/.playwright-artifacts-2/`
+  (50 E2E PASS, 1 błąd raportu). Brakujący plik nie dowodzi błędu aplikacji,
+  przyczyny nie potwierdzono. Ponowne pełne verify: PASS, 57 unit i 51 E2E.
+  Log: `/private/tmp/ola-blog-index-verify-final.log`.
+  Ostateczne pełne verify po ostatnich poprawkach CSS/menu: również PASS
+  (57 unit, 51 E2E), `/private/tmp/ola-blog-index-verify-complete.log`.
+  Ponowny niezależny przegląd odświeżonych zrzutów: `ship` dla sprawdzonych
+  poprawek, bez regresji tekstu, przycisków i menu.
+- Kontrola dokumentacji: 143 lokalne odnośniki, 110 lokalnych zasobów/linków
+  obu nowych HTML, kotwice i unikalne ID: PASS. Pakowanie feedbacku: PASS,
+  46 publicznych plików w lokalnym pełnym katalogu, bez wdrażania.
+  PR obejmuje sam blog; lokalne „O mnie” i kolekcja e-booków pozostają oddzielne. Diff-check dokumentacji/mockupów: PASS.
+- Natywny zoom, czytnik, urządzenie fizyczne i Lighthouse/CWV niewykonane.
+  Kolejny krok: feedback do kolekcji i copy, potem zaakceptowana implementacja
+  wspólnego indeksu Astro/Sanity i Markdown z rzeczywistymi treściami.
+
+## Przygotowanie PR indeksu bloga — 2026-10-07
+
+- Na zlecenie „pr merge” wybrano wyłącznie zakres bloga i jego dokumentacji.
+  Pozostałe zmiany zachowano poza commitem. W PR odnośnik „O mnie” prowadzi
+  do istniejącej sekcji homepage, aby nie zależeć od osobnego otwartego PR.
+- Po scaleniu PR „O mnie” uzgodniono wspólny postęp i powrót z ekranów
+  objaśniających: zachowano oba zakresy. Kolejny krok: nowe kontrole Quality
+  i scalenie bloga; bez publikacji.
 
 ## Następny krok
+
+Ocenić indeks bloga 3a; po akceptacji przenieść wspólny szablon do Astro/Sanity
+i Markdown według BLOG-CMS-CONFIG-3A.md.
 
 Ocenić lokalny mockup „O mnie” i nowe wejścia do podejścia/materiałów.
 Uzupełnić skan dyplomu, rzeczywisty kontakt/profile oraz link płatnego wydarzenia;
