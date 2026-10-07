@@ -10,6 +10,24 @@ const mediaFields = /* groq */ `{
 
 const actionFields = /* groq */ `{ label, href, emphasis }`;
 
+export const ebookCardProjection = /* groq */ `
+  "id": _id,
+  language,
+  "slug": slug.current,
+  title,
+  subtitle,
+  topic,
+  cardDescription,
+  coverTone,
+  availability,
+  priceGross,
+  currency,
+  format,
+  sortOrder,
+  "cover": cover${mediaFields},
+  "authorName": author->name
+`;
+
 export const PAGE_SECTION_PROJECTION = /* groq */ `
   _key,
   _type,
@@ -187,23 +205,19 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     cardActionLabel,
     note,
     "collection": collection${actionFields},
-    items[]->{
-      "id": _id,
-      language,
-      "slug": slug.current,
-      title,
-      subtitle,
-      topic,
-      cardDescription,
-      coverTone,
-      availability,
-      priceGross,
-      currency,
-      format,
-      sortOrder,
-      "cover": cover${mediaFields},
-      "authorName": author->name
-    }
+    items[]->{ ${ebookCardProjection} }
+  },
+  _type == "ebookCollectionSection" => {
+    variant,
+    title,
+    lead,
+    catalogTitle,
+    catalogLead,
+    findTopicLabel,
+    cardActionLabel,
+    note,
+    emptyMessage,
+    emptyCategoryMessage
   },
   _type == "serviceOfferSection" => {
     title,
@@ -481,4 +495,14 @@ export const PUBLISHED_EBOOK_PATHS_QUERY = defineQuery(/* groq */ `
     defined(language) &&
     defined(landing)
   ]{ language, "slug": slug.current }
+`);
+
+export const PUBLISHED_EBOOKS_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "ebook" &&
+    !(_id in path("drafts.**")) &&
+    language == $language
+  ] | order(coalesce(sortOrder, 9999) asc, title asc) {
+    ${ebookCardProjection}
+  }
 `);

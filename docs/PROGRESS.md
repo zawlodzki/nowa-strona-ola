@@ -1,9 +1,35 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 4 + wyrównanie makiet 3a / SVG).
+Aktualizacja: 2026-10-07 (pakiet 5 — EbookCollection3a).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja pakietu 5 — kolekcja e-booków 3a — 07.10.2026
+
+Zakres: `EbookCollection3a` na `/ebooki/` i `/en/ebooks/` według makiety
+`ebooks-3a.html`. Te same dokumenty `ebook` co homepage i landing (referencje,
+bez drugiej tablicy produktów). Kategorie Wszystkie / PCOS / Perimenopauza
+z licznikami, CSS `:has` bez JS, ścieżki `/ebooki/kategoria/{topic}/` oraz
+query `?kategoria=` z JS. Pusta kolekcja ukrywa filtry; pusta kategoria ma
+komunikat. Karty używają `ebookPath`; cena 97 zł brutto i status przygotowania
+jak w makiecie. Newsletter to `DemoForm` bez POST. Copy i UX kolekcji są
+**propozycją**.
+
+Kod: schemat `ebookCollectionSection` (cherry3a), GROQ publiczny i preview,
+TypeGen, mappery, serializer Markdown z przykładem, fixture, dry-run importu
+(`npm run import:ebook-collection`, `--write` kończy się kodem 2). Okładka
+„Szczupła, a jednak PCOS” używa `SiteImage` + `food` (`food-editorial.webp`);
+pozostałe okładki to SVG w `src/design-system/decorations/`. Wyrównanie
+akcentów matcha z PR #31 jest poza tym pakietem.
+
+`npm run verify` i compare screenshotów z makietą — w toku tej sesji; liczby
+unit/E2E i CSS gzip uzupełnić po zakończeniu kontroli. Natywny zoom, czytnik
+i urządzenie fizyczne nie są wykonywane w tej sesji.
+
+Następny krok po odbiorze kodu: pakiet 6 BlogCollection3a. Dane kolekcji
+w Content Lake i odbiór Studio/preview pozostają otwarte. Copy kolekcji
+do zatwierdzenia.
 
 ### Sesja dodatkowego akcentu — 07.10.2026
 
@@ -40,15 +66,15 @@ wdrożyć tokeny/komponenty i wykonać odbiór UI; etap pozostaje 4a.
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiety 1–4 (Homepage3a, About3a, Consultation3a, Ebook3a, wspólny shell) są
-w kodzie i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były
-zlecone.**
+**Pakiety 1–5 (Homepage3a, About3a, Consultation3a, Ebook3a, EbookCollection3a,
+wspólny shell) są w kodzie i fixture’ach; zapis do Content Lake i publikacja
+nie były zlecone.**
 
 Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
-`/en/consultations/`, `/ebooki/<slug>/` i `/en/ebooks/<slug>/` oraz preview
-tych stron renderują `SiteShell3a` z fixture’ów. Blog, kolekcja e-booków
-i `/ui/` nadal używają wcześniejszego Layout albo czekają na pakiet 5.
-Etapy 5–7 oraz pakiety 5–7 etapu 4a pozostają otwarte.
+`/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/` i
+`/en/ebooks/<slug>/` oraz preview tych stron renderują `SiteShell3a`
+z fixture’ów. Blog i `/ui/` nadal używają wcześniejszego Layout albo czekają
+na pakiety 6–7. Etapy 5–7 oraz pakiety 6–7 etapu 4a pozostają otwarte.
 
 ## Wykonane
 

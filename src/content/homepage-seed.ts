@@ -1,6 +1,11 @@
 import type { Locale } from "@ola/shared";
 
-import { aboutPath, consultationPath, homeAnchor } from "@/lib/paths";
+import {
+  aboutPath,
+  consultationPath,
+  ebookCollectionPath,
+  homeAnchor,
+} from "@/lib/paths";
 
 export const homepageMediaKeys = {
   hero: "hero",
@@ -134,7 +139,7 @@ export function homepageNavigation(language: Locale) {
     {
       _key: "nav-ebooks",
       label: language === "pl" ? "E-booki" : "E-books",
-      href: homeAnchor(language, "ebooki"),
+      href: ebookCollectionPath(language),
     },
     {
       _key: "nav-consultations",

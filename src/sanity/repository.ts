@@ -13,7 +13,11 @@ import {
   fixturePagesForLanguage,
   demonstrationCategories,
 } from "./fixtures";
-import { fixtureEbook, fixtureEbooksWithLanding } from "./ebook-fixtures";
+import {
+  fixtureEbook,
+  fixtureEbooksForLanguage,
+  fixtureEbooksWithLanding,
+} from "./ebook-fixtures";
 import {
   PUBLISHED_ARTICLE_PATHS_QUERY,
   PUBLISHED_ARTICLE_QUERY,
@@ -22,6 +26,7 @@ import {
   PUBLISHED_CATEGORY_QUERY,
   PUBLISHED_EBOOK_PATHS_QUERY,
   PUBLISHED_EBOOK_QUERY,
+  PUBLISHED_EBOOKS_QUERY,
   PUBLISHED_PAGE_PATHS_QUERY,
   PUBLISHED_PAGE_QUERY,
   SITE_SETTINGS_QUERY,
@@ -34,6 +39,7 @@ import type {
   PUBLISHED_CATEGORY_QUERY_RESULT,
   PUBLISHED_EBOOK_PATHS_QUERY_RESULT,
   PUBLISHED_EBOOK_QUERY_RESULT,
+  PUBLISHED_EBOOKS_QUERY_RESULT,
   PUBLISHED_PAGE_PATHS_QUERY_RESULT,
   PUBLISHED_PAGE_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
@@ -45,6 +51,7 @@ export type ArticleCard = PUBLISHED_ARTICLES_QUERY_RESULT[number];
 export type SiteSettings = NonNullable<SITE_SETTINGS_QUERY_RESULT>;
 export type CategoryContent = NonNullable<PUBLISHED_CATEGORY_QUERY_RESULT>;
 export type EbookContent = NonNullable<PUBLISHED_EBOOK_QUERY_RESULT>;
+export type EbookCard = PUBLISHED_EBOOKS_QUERY_RESULT[number];
 
 interface QueryClient {
   fetch: <T>(query: string, parameters?: Record<string, unknown>) => Promise<T>;
@@ -355,4 +362,18 @@ export async function getEbookPaths(
     }));
   }
   return client.fetch(PUBLISHED_EBOOK_PATHS_QUERY);
+}
+
+export async function listEbooks(
+  language: Locale,
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+): Promise<EbookCard[]> {
+  const client = resolveClient(options);
+  if (!client) {
+    return fixtureEbooksForLanguage(language) as unknown as EbookCard[];
+  }
+  return client.fetch<EbookCard[]>(PUBLISHED_EBOOKS_QUERY, { language });
 }

@@ -30,7 +30,11 @@ for (const path of [
   "en/about/index.html",
   "konsultacje/index.html",
   "en/consultations/index.html",
+  "ebooki/index.html",
+  "ebooki/kategoria/pcos/index.html",
   "ebooki/suplementy-w-pcos/index.html",
+  "en/ebooks/index.html",
+  "en/ebooks/category/pcos/index.html",
   "en/ebooks/supplements-in-pcos/index.html",
   "ui/index.html",
   "en/ui/index.html",
@@ -61,6 +65,20 @@ await assert.rejects(
   access("dist/en/ebooki/suplementy-w-pcos/index.html"),
   /ENOENT/,
 );
+await assert.rejects(access("dist/en/ebooki/index.html"), /ENOENT/);
+const collectionHtml = await readFile("dist/ebooki/index.html", "utf8");
+assert.match(collectionHtml, /Więcej jasności/);
+assert.match(collectionHtml, /97/);
+assert.match(collectionHtml, /materiały są w przygotowaniu/);
+assert.match(collectionHtml, /\/ebooki\/suplementy-w-pcos\//);
+assert.match(collectionHtml, /\/ebooki\/badania-ktore-maja-sens\//);
+assert.doesNotMatch(collectionHtml, /potwierdzenie zakupu|płatność przyjęta/i);
+const collectionPcosHtml = await readFile(
+  "dist/ebooki/kategoria/pcos/index.html",
+  "utf8",
+);
+assert.match(collectionPcosHtml, /value="pcos"/);
+assert.match(collectionPcosHtml, /checked/);
 const ebookHtml = await readFile(
   "dist/ebooki/suplementy-w-pcos/index.html",
   "utf8",

@@ -269,18 +269,19 @@ Zlecenie 07.10.2026: dalszą implementację oprzeć na przygotowanych mockupach,
 nowym design systemie i przeniesieniu treści do Sanity. Etapy 3–4 pozostają
 zapisem wykonanych fundamentów; nie oznaczają ukończenia docelowych stron.
 
-Stan po pakiecie 4 (07.10.2026):
+Stan po pakiecie 5 (07.10.2026):
 
 - Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
-  `/en/consultations/`, `/ebooki/<slug>/` i `/en/ebooks/<slug>/` oraz preview
-  tych stron używają `SiteShell3a`/`Layout3a` i `Homepage3a` / `About3a` /
-  `Consultation3a` / `Ebook3a`. Blog, kolekcja e-booków i `/ui/` nadal
-  importują wcześniejszy Layout albo czekają na kolejne pakiety.
+  `/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/` i
+  `/en/ebooks/<slug>/` oraz preview tych stron używają `SiteShell3a`/`Layout3a`
+  i `Homepage3a` / `About3a` / `Consultation3a` / `Ebook3a` /
+  `EbookCollection3a`. Blog i `/ui/` nadal importują wcześniejszy Layout albo
+  czekają na kolejne pakiety.
 - Sanity ma dokument `ebook` z `ebookLanding` (wariant `cherry3a`), rozdziałami,
-  materiałami i źródłami. Serializery Markdown nowych typów są w kodzie;
-  trasy `.md` i pełny eksport to etap 5.
-- Dry-run importu homepage, About, konsultacji i landingu e-booka istnieje;
-  Content Lake i publikacja nie były zapisywane.
+  materiałami i źródłami oraz `ebookCollectionSection` (cherry3a). Serializery
+  Markdown nowych typów są w kodzie; trasy `.md` i pełny eksport to etap 5.
+- Dry-run importu homepage, About, konsultacji, landingu e-booka i kolekcji
+  e-booków istnieje; Content Lake i publikacja nie były zapisywane.
 - Budżet CSS w `scripts/check-build.mjs` wynosi tymczasowo **32 KiB gzip**
   na etap 4a (pakiety 5–7). Nie jest to docelowy budżet; optymalizacja
   później. Decyzja 07.10.2026.
@@ -337,7 +338,9 @@ Checklista wykonania (zaznaczać osobno kod i dane):
       i właściwego kalendarza).
 - [x] Wdrożyć Ebook3a i model produktu (kod i fixture; bez Content Lake,
       checkoutu i płatnego pliku).
-- [ ] Wdrożyć EbookCollection3a, kategorie i filtrowanie.
+- [x] Wdrożyć EbookCollection3a, kategorie i filtrowanie (kod i fixture;
+      bez Content Lake). Copy i UX kolekcji są propozycją.
+- [ ] Dane kolekcji w Content Lake i odbiór Studio/preview.
 - [ ] Wdrożyć BlogCollection3a i rzeczywistą paginację.
 - [ ] Wdrożyć Article3a, Portable Text i jego powiązane bloki.
 - [ ] Przygotować i sprawdzić import bez zapisu oraz kopię obecnych danych.
@@ -564,7 +567,8 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
 - [ ] Zatwierdzić finalny zakres, copy, dostępność, pliki i obsługę sprzedaży.
 - [x] Wdrożyć szablon landingu Ebook3a, Markdown, TypeGen i referencje produktu
       (kod i fixture, pakiet 4; bez Content Lake).
-- [ ] Wdrożyć kolekcję EbookCollection3a (pakiet 5).
+- [x] Wdrożyć kolekcję EbookCollection3a (pakiet 5; kod i fixture, bez
+      Content Lake). Copy i UX kolekcji są propozycją.
 
 [Mockup](../mockups/homepage/ebook-3a.html), [instrukcja CMS](EBOOK-CMS-CONFIG-3A.md).
 
@@ -595,8 +599,9 @@ Lokalny landing nie zamyka wdrożenia CMS ani kalendarza.
 - [x] Sprawdzić trzy przeglądarki, kategorie/URL/historię, brak JS, 320 px,
       klawiaturę, zoom CSS 200%, reduced motion i axe light/dark.
 - [x] Potwierdzić końcowe `npm run verify`: 57 unit i 51 E2E PASS na Node 24.
-- [ ] Zatwierdzić copy i UX kolekcji przed przeniesieniem do Astro/Sanity.
-- [ ] Wdrożyć model produktów, renderer kolekcji i serializer Markdown.
+- [ ] Zatwierdzić copy i UX kolekcji (propozycja z mockupu; nie blokuje kodu).
+- [x] Wdrożyć model produktów, renderer kolekcji i serializer Markdown (kod
+      i fixture; bez zapisu Content Lake).
 
 [Mockup](../mockups/homepage/ebooks-3a.html),
 [wartości i mapowanie CMS](HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026).

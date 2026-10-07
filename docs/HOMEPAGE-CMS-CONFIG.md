@@ -60,9 +60,9 @@ lub adres homepage z tą kotwicą na stronach bez formularza. To ustalenie
 z 07.10.2026 po ujednoliceniu mockupów, zastępujące wcześniejsze menu kotwicowe.
 Docelowe URL generować z rzeczywistych slugów i języka; landingi mają osobne
 menu lokalnych sekcji. Kotwice muszą istnieć w rendererze.
-Stan kodu 07.10.2026 (pakiet 3): fixture’y i dry-run `import:homepage` mają
-Konsultacje → `/konsultacje/` (EN `/en/consultations/`), O mnie → `/o-mnie/`
-(EN `/en/about/`), Blog → `/blog/`. E-booki nadal `#ebooki` do pakietu 5.
+Stan kodu 07.10.2026 (pakiet 5): fixture’y mają Konsultacje → `/konsultacje/`
+(EN `/en/consultations/`), O mnie → `/o-mnie/` (EN `/en/about/`),
+E-booki → `/ebooki/` (EN `/en/ebooks/`), Blog → `/blog/`.
 `siteSettings` w Content Lake nie zmieniono.
 Profile w `siteSettings.socialLinks`: nazwy ustalone, prawdziwe HTTPS URL do
 uzupełnienia. `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
@@ -429,9 +429,11 @@ HTML/Markdown z tych samych danych, osobne PL/EN i fixture każdego wariantu.
 
 Źródło: bezpośrednie zlecenie użytkownika 07.10.2026: mockup kolekcji wszystkich
 e-booków w wersji 3a, z możliwością wyboru kategorii.
-**Wykonane lokalnie:** [kolekcja HTML](../mockups/homepage/ebooks-3a.html),
-filtry i wejścia z porównania oraz sekcji e-booków homepage 3a.
-Nie zmieniono Sanity ani publicznego wdrożenia.
+**Kod (pakiet 5, 07.10.2026):** renderer `EbookCollection3a` na `/ebooki/`
+i `/en/ebooks/`, schemat `ebookCollectionSection`, GROQ, fixture, serializer
+i dry-run importu bez zapisu. Copy i UX kolekcji pozostają **propozycją**.
+Content Lake i publikacja nie były zapisywane.
+**Mockup:** [kolekcja HTML](../mockups/homepage/ebooks-3a.html).
 
 | Element            | Bieżąca wartość i status                                                                                   | Mapowanie do przyszłego CMS                                                                                                   |
 | ------------------ | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -440,19 +442,21 @@ Nie zmieniono Sanity ani publicznego wdrożenia.
 | Kategorie          | Wszystkie / PCOS / Perimenopauza, domyślnie Wszystkie — propozycja UX oparta na istniejących dwóch grupach | Proponowane `ebook.topic`: `pcos`, `perimenopause`; Wszystkie to stan filtra, nie kategoria produktu                          |
 | Cena i status      | 97 zł brutto; materiały w przygotowaniu — zachowane ustalenie 06.10.2026                                   | `ebook.priceGross = 97`, `currency = PLN`, `availability = planned`                                                           |
 | Układ              | Siatka 3 / 2 / 1 kolumna, filtry z liczbami i liczbą wyników — wykonana propozycja                         | Liczniki wyliczać z kolekcji; kontrolowany renderer, bez dowolnego CSS                                                        |
-| Copy               | „Więcej jasności. W Twoim tempie.” i krótki wstęp — propozycja dla mockupu                                 | Proponowany `ebookCollectionSection`: `title`, `lead`, `catalogTitle`, `catalogLead`; wariant `cherry3a`                      |
+| Copy               | „Więcej jasności. W Twoim tempie.” i krótki wstęp — **propozycja**, nie zatwierdzona treść                  | `ebookCollectionSection`: `title`, `lead`, `catalogTitle`, `catalogLead`; wariant `cherry3a` (kod; Content Lake bez zapisu)   |
 | CTA kart           | „Poznaj temat”; Suplementy w PCOS → lokalny landing, pozostałe → ekran objaśniający                        | Generować adres ze sluga `ebook`; nie modelować lokalnych ekranów makiety jako checkout                                       |
 | Wejście z homepage | „Zobacz wszystkie e-booki” pod karuzelą — wykonana propozycja                                              | Link sekcji biblioteki do proponowanego `/ebooki/`                                                                            |
-| Kategorie w URL    | `?kategoria=pcos` / `?kategoria=perimenopause`; powrót przywraca filtr                                     | Stan interfejsu, bez zapisu danych w CMS; canonical do pełnej kolekcji przy wdrożeniu                                         |
+| Kategorie w URL    | `?kategoria=pcos` oraz ścieżki `/ebooki/kategoria/pcos/` (EN `category`) — propozycja UX                    | Stan interfejsu, bez zapisu w CMS; canonical do `/ebooki/`; ścieżka działa bez JS, query z JS jak w makiecie                   |
 
-**Luki schematu:** `ebook`, `ebookCollectionSection` i `sortOrder` nadal nie istnieją.
+**Schemat w kodzie (pakiet 5):** `ebook`, `sortOrder` i `ebookCollectionSection` istnieją.
+Content Lake bez zapisu. Copy kolekcji jest propozycją.
 Obecny `category` dotyczy artykułów; nie przenosić jego referencji automatycznie
 na e-booki. Dwie kontrolowane wartości `topic` wystarczą dla obecnego zakresu.
 Rozszerzenie kategorii i użycie referencji wymaga osobnej decyzji, kiedy zakres
 kolekcji wzrośnie. Nie deklarować wykonania modelu na podstawie mockupu.
 
-Docelowe `/ebooki/` i `/en/ebooks/` są propozycją routingu. EN wymaga osobnego
-zaakceptowanego dokumentu i tłumaczeń produktów; bez polskiego fallbacku.
+Adresy `/ebooki/` i `/en/ebooks/` są w kodzie. EN wymaga osobnego
+zaakceptowanego dokumentu i tłumaczeń; bez polskiego fallbacku. Copy kolekcji
+pozostaje propozycją.
 Szczegóły produktu: [instrukcja kolekcji CMS](EBOOK-CMS-CONFIG-3A.md).
 
 ## Kolekcja wszystkich wpisów bloga 3a — 07.10.2026

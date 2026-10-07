@@ -19,6 +19,14 @@ export const presentationResolve = {
       filter: `_type == "article" && language == "en" && slug.current == $slug`,
     },
     {
+      route: "/ebooki",
+      filter: `_type == "page" && language == "pl" && slug.current == "ebooki"`,
+    },
+    {
+      route: "/en/ebooks",
+      filter: `_type == "page" && language == "en" && slug.current == "ebooks"`,
+    },
+    {
       route: "/ebooki/:slug",
       filter: `_type == "ebook" && language == "pl" && slug.current == $slug`,
     },

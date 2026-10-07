@@ -35,6 +35,7 @@ describe("homepage 3a fixtures", () => {
       true,
     );
     expect(view.ebooks.items[0]?.href).toBe("/ebooki/suplementy-w-pcos/");
+    expect(view.ebooks.collection?.href).toBe("/ebooki/");
     expect(view.ebooks.items[0]?.slug).toBe("suplementy-w-pcos");
     expect(view.consultation.action.href).toBe("https://cal.com");
     expect(view.consultation.priceLabel).toBe("450 zł / 60 minut");

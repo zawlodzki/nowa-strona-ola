@@ -1380,6 +1380,89 @@ export const credentialsSectionType = defineType({
   preview: sectionPreview("Kwalifikacje"),
 });
 
+export const ebookCollectionSectionType = defineType({
+  name: "ebookCollectionSection",
+  title: "Kolekcja e-booków",
+  type: "object",
+  icon: DocumentsIcon,
+  fields: [
+    defineField({
+      name: "variant",
+      title: "Wariant",
+      type: "string",
+      options: {
+        layout: "radio",
+        list: [{ title: "Cherry 3a", value: "cherry3a" }],
+      },
+      initialValue: "cherry3a",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "title",
+      title: "Tytuł",
+      description:
+        "Nagłówek kolekcji. Copy kolekcji jest propozycją do zatwierdzenia.",
+      type: "string",
+      validation: requiredString,
+    }),
+    defineField({
+      name: "lead",
+      title: "Lead",
+      type: "text",
+      rows: 3,
+      validation: (rule) => rule.required().max(400),
+    }),
+    defineField({
+      name: "catalogTitle",
+      title: "Tytuł katalogu",
+      type: "string",
+      validation: requiredString,
+    }),
+    defineField({
+      name: "catalogLead",
+      title: "Lead katalogu",
+      type: "string",
+      validation: (rule) => rule.required().max(180),
+    }),
+    defineField({
+      name: "findTopicLabel",
+      title: "Odnośnik do katalogu",
+      type: "string",
+      initialValue: "Znajdź swój temat",
+      validation: (rule) => rule.required().max(60),
+    }),
+    defineField({
+      name: "cardActionLabel",
+      title: "Etykieta karty",
+      type: "string",
+      initialValue: "Poznaj temat",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "note",
+      title: "Nota o statusie",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.max(240),
+    }),
+    defineField({
+      name: "emptyMessage",
+      title: "Komunikat pustej kolekcji",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.required().max(240),
+    }),
+    defineField({
+      name: "emptyCategoryMessage",
+      title: "Komunikat pustej kategorii",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.required().max(240),
+    }),
+  ],
+  preview: sectionPreview("Kolekcja e-booków"),
+});
+
 export const pageSectionTypes = [
   heroSectionType,
   textSectionType,
@@ -1402,6 +1485,7 @@ export const pageSectionTypes = [
   ebooksSectionType,
   serviceOfferSectionType,
   credentialsSectionType,
+  ebookCollectionSectionType,
 ];
 
 export const pageSectionsField = defineField({

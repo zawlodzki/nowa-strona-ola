@@ -1,0 +1,28 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import { EBOOK_TOPICS, parseEbookCollectionFilter } from "@/lib/paths";
+import { getPage, getSiteSettings, listEbooks } from "@/sanity/repository";
+import EbookCollectionPage from "@/views/EbookCollectionPage.astro";
+
+export const getStaticPaths = (() =>
+  EBOOK_TOPICS.map((topic) => ({
+    params: { topic },
+  }))) satisfies GetStaticPaths;
+
+const lang = "pl" as const;
+const filter = parseEbookCollectionFilter(Astro.params.topic);
+const [page, settings, ebooks] = await Promise.all([
+  getPage(lang, "ebooki"),
+  getSiteSettings(lang),
+  listEbooks(lang),
+]);
+---
+
+<EbookCollectionPage
+  lang={lang}
+  page={page}
+  settings={settings}
+  ebooks={ebooks}
+  filter={filter}
+/>

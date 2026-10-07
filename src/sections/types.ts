@@ -309,6 +309,20 @@ export interface EbooksContent {
   items: EbookCardContent[];
 }
 
+export interface EbookCollectionContent {
+  variant: "cherry3a";
+  title: string;
+  lead: string;
+  catalogTitle: string;
+  catalogLead: string;
+  findTopicLabel: string;
+  cardActionLabel: string;
+  note?: string;
+  emptyMessage: string;
+  emptyCategoryMessage: string;
+  items: EbookCardContent[];
+}
+
 export interface ServiceDetails {
   name: string;
   price: number;

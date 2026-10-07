@@ -11,7 +11,7 @@ import {
   TESTIMONIAL_QUOTES_EN,
   TESTIMONIAL_QUOTES_PL,
 } from "@/content/homepage-seed";
-import { consultationPath } from "@/lib/paths";
+import { consultationPath, ebookCollectionPath } from "@/lib/paths";
 
 function media(
   key: string,
@@ -269,7 +269,7 @@ export function homepageSections(language: Locale) {
       note: copy.ebooksNote,
       collection: {
         label: copy.ebooksCollection,
-        href: `#${ebookAnchor}`,
+        href: ebookCollectionPath(language),
         emphasis: "default",
       },
       items: ebooks,

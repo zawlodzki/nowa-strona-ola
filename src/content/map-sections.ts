@@ -625,7 +625,7 @@ export function toEbooks(
   };
 }
 
-function toEbookCard(
+export function toEbookCard(
   item: {
     id?: string | null;
     language?: string | null;

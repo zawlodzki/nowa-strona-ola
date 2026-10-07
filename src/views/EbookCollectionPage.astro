@@ -1,0 +1,55 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { mapEbookCollection } from "@/content/map-ebook-collection";
+import { shellLinks } from "@/content/map-homepage";
+import { homepageCopyright } from "@/sanity/homepage-fixtures";
+import { ebookCollectionPath } from "@/lib/paths";
+import type { EbookCard, PageContent, SiteSettings } from "@/sanity/repository";
+import EbookCollection3a from "@/views/EbookCollection3a.astro";
+import SiteShell3a from "@/views/SiteShell3a.astro";
+
+export interface Props {
+  lang: Locale;
+  page: PageContent;
+  settings: SiteSettings;
+  ebooks: EbookCard[];
+  filter?: string | null;
+  preview?: boolean;
+}
+
+const {
+  lang,
+  page,
+  settings,
+  ebooks,
+  filter = "all",
+  preview = false,
+} = Astro.props;
+const content = mapEbookCollection(page, ebooks, lang, filter);
+const shell = shellLinks(settings);
+const currentHref = ebookCollectionPath(lang);
+const navigation = shell.navigation.map((item) => ({
+  ...item,
+  current: item.href === currentHref,
+}));
+const headerCta = shell.headerCta
+  ? { ...shell.headerCta, href: "#newsletter" }
+  : undefined;
+---
+
+<SiteShell3a
+  lang={lang}
+  title={content.seoTitle}
+  description={content.seoDescription}
+  preview={preview}
+  footerNote={settings.footerNote ?? ""}
+  copyright={homepageCopyright(lang)}
+  languageHref={content.alternateHref}
+  navigation={navigation}
+  headerCta={headerCta}
+  socialLinks={shell.socialLinks}
+  legalLinks={shell.legalLinks}
+>
+  <EbookCollection3a lang={lang} content={content} />
+</SiteShell3a>

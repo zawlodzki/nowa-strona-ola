@@ -48,7 +48,7 @@ const GAPS = [
     id: "about-consultation-collection-routes",
     status: "open",
     detail:
-      "Trasy /o-mnie/ (pakiet 2) i /konsultacje/ (pakiet 3) są w kodzie. /ebooki/ nadal czeka na pakiet 5. Nawigacja „O mnie” i „Konsultacje” prowadzi do landingów.",
+      "Trasy /o-mnie/, /konsultacje/ i /ebooki/ są w kodzie. Nawigacja „E-booki” prowadzi do kolekcji.",
   },
 ];
 
@@ -320,7 +320,7 @@ function documents() {
     siteTitle: "Aleksandra Olesiewicz",
     footerNote: "PCOS, insulinooporność i odżywianie dopasowane do życia.",
     navigation: [
-      { _key: "nav-ebooks", label: "E-booki", href: "/#ebooki" },
+      { _key: "nav-ebooks", label: "E-booki", href: "/ebooki/" },
       {
         _key: "nav-consultations",
         label: "Konsultacje",
@@ -343,7 +343,7 @@ function documents() {
     language: "en",
     footerNote: "PCOS, insulin resistance and nutrition that fits real life.",
     navigation: [
-      { _key: "nav-ebooks", label: "E-books", href: "/en/#ebooki" },
+      { _key: "nav-ebooks", label: "E-books", href: "/en/ebooks/" },
       {
         _key: "nav-consultations",
         label: "Consultations",

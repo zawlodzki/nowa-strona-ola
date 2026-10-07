@@ -8,6 +8,7 @@ import type {
   ArticleCard,
   ArticleContent,
   CategoryContent,
+  EbookCard,
   EbookContent,
   PageContent,
   SiteSettings,
@@ -20,6 +21,7 @@ import {
   PREVIEW_CATEGORIES_QUERY,
   PREVIEW_CATEGORY_QUERY,
   PREVIEW_EBOOK_QUERY,
+  PREVIEW_EBOOKS_QUERY,
   PREVIEW_PAGE_QUERY,
   PREVIEW_SITE_SETTINGS_QUERY,
 } from "./queries";
@@ -101,6 +103,14 @@ export async function getPreviewEbook(
     throw new Error(`Brak e-booka podglądu ${language}/${slug}.`);
   }
   return ebook;
+}
+
+export async function getPreviewEbooks(
+  language: Locale,
+  environment: PreviewEnvironment,
+  client = createPreviewContentClient(environment),
+): Promise<EbookCard[]> {
+  return client.fetch<EbookCard[]>(PREVIEW_EBOOKS_QUERY, { language });
 }
 
 export async function getPreviewSiteSettings(
