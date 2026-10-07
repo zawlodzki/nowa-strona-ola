@@ -261,3 +261,21 @@ Nie kopiowano mediów Wonderful ani nie dodawano bibliotek.
 
 Podgląd: istniejąca komenda `node scripts/preview-homepage-mockups.mjs`, adres
 `http://127.0.0.1:8766/mockups/homepage/ebook-3a.html`.
+
+## Strona „O mnie” 3a — 2026-10-07
+
+[Otwórz mockup](about-3a.html). Tożsamość, osobisty kontekst PCOS, ukończona
+dietetyka kliniczna na Śląskim Uniwersytecie Medycznym, miejsce na skan dyplomu,
+podejście, dwa pełne cytaty, materiały, konsultacja i newsletter. Hero prowadzi
+do podejścia i materiałów; rezerwacja jest jednym z kolejnych kroków. Konsultacja:
+450 zł / 60 minut; tymczasowy cel Cal.com wskazany przez użytkownika.
+
+Wygląd dziedziczy 3a; osobny układ w [about-3a.css](about-3a.css).
+[Copy i mapowanie CMS](../../docs/ABOUT-MOCKUP-PLAN-3A.md),
+[ocena E-E-A-T](../../docs/ABOUT-EEAT-3A.md). Profile, kontakt i prawne strony
+pozostają ekranami makiety, a newsletter demonstracją. `ProfilePage`/`Person`
+odzwierciedla widoczną tożsamość i uczelnię; noindex zachowane. Bez publikacji.
+
+Komenda: `node scripts/preview-homepage-mockups.mjs` z katalogu repo;
+adres: `http://127.0.0.1:8766/mockups/homepage/about-3a.html`.
+Wejścia dodane w homepage 3a, biogramie artykułu i indeksie porównania.
