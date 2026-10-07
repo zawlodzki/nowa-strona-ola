@@ -32,6 +32,29 @@ Przełącznik w stopce nie wymaga localStorage i nie zmienia zgód użytkownika.
 Okładki to grafika produktu: ich jasny lub wiśniowy front nie odwraca kolorów
 w dark. Stage zmienia paletę. Ten sam produkt ma jeden front w każdym szablonie.
 
+## Dodatkowy akcent matcha — decyzja 07.10.2026
+
+Użytkownik wybrał odcienie z 1a: **#53671B** na jasnej powierzchni oraz
+**#D8E78A** na wiśniowej lub ciemnej powierzchni.
+Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
+[Wizualizacja zastosowań](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).
+
+- Secondary button: białe wnętrze, cienka obwódka matcha. Tekst i strzałka
+  matcha są propozycją pokazaną na planszy.
+- Drobne elementy grafik: pojedyncza linia, punkt, strzałka lub symbol.
+  Rozmieszczenie w konkretnych grafikach pozostaje do ustalenia.
+- Tło hero i portretu zachowuje dotychczasową paletę. Matcha nie służy
+  do wypełniania dużych paneli ani secondary buttonów.
+- Nagłówki, logo, primary CTA i treść zachowują wiśniową hierarchię.
+  Nie stosować matchy automatycznie do wszystkich ikon i linków.
+- Nie używać akcentu jako jedynego oznaczenia sukcesu, błędu lub aktywnego stanu.
+  Na bieli stosować ciemny odcień, jasny zarezerwować dla ciemnej powierzchni.
+
+Status: decyzja o palecie i granicach użycia, wizualizacja rastrowa.
+Tokeny i CSS komponentów nie zostały jeszcze zmienione. Przy wdrożeniu
+dodać wartości do jednego źródła tokens.json, następnie wygenerować CSS.
+Pełna mapa zastosowań i odbiór UI pozostają do wykonania.
+
 ## Typografia
 
 Oficjalny, niezmodyfikowany Switzer Variable WOFF2, lokalnie, `font-display: swap`,

@@ -637,3 +637,14 @@ w [postępie](PROGRESS.md). Nie oznacza to migracji Astro ani konfiguracji CMS.
 - [ ] Wdrożyć wynik w modelach Sanity/rendererach/Markdown i wykonać odbiór stron.
 
 Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.
+
+### Propozycje dodatkowego akcentu — 2026-10-07
+
+- [x] Przygotować trzy wizualizacje katalogu 3a: oliwka, morela i błękit.
+- [x] Po odrzuceniu oliwki przygotować dodatkową wizualizację matcha.
+- [x] Zachować aktualne tokeny; zapisać propozycje i pełne prompty w
+      [materiale porównawczym](../output/design-system-3a/2026-10-07/accent-proposals/README.md).
+- [x] Wybrać matchę z 1a: #53671B / #D8E78A; delikatny akcent bez tła hero.
+- [x] Pokazać biały secondary button z obwódką oraz drobne elementy grafik.
+- [ ] Ustalić pełną mapę zastosowań w sekcjach i grafikach.
+- [ ] Po wyborze wdrożyć go w jednym źródle tokenów i wykonać odbiór UI.
