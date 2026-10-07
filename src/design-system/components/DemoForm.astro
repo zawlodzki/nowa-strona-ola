@@ -1,0 +1,117 @@
+---
+import type { FormCopy } from "@/sections/types";
+import Button from "./Button.astro";
+
+interface Props {
+  content: FormCopy;
+  idPrefix?: string;
+  lang: "pl" | "en";
+}
+
+const { content, idPrefix = "", lang } = Astro.props;
+---
+
+<form
+  id={`${idPrefix}demo-form`}
+  class="ao-form"
+  lang={lang}
+  novalidate
+  data-demo-form
+  data-success={content.success}
+>
+  {content.fields.map((field) => {
+    const fieldId = `${idPrefix}${field.name}`;
+    const errorId = `${fieldId}-error`;
+    if (field.input === "checkbox") {
+      return (
+        <div class="ao-field">
+          <label class="ao-checkbox">
+            <input
+              id={fieldId}
+              name={field.name}
+              type="checkbox"
+              value="on"
+              required={field.required}
+              aria-describedby={errorId}
+              data-input="checkbox"
+              data-required={field.required ? "true" : "false"}
+            />
+            <span>{field.label}</span>
+          </label>
+          <p id={errorId} class="ao-field__error" hidden>
+            {field.errorMessage}
+          </p>
+        </div>
+      );
+    }
+    return (
+      <div class="ao-field">
+        <label for={fieldId}>{field.label}</label>
+        <input
+          class="ao-input"
+          id={fieldId}
+          name={field.name}
+          type={field.input === "email" ? "email" : "text"}
+          required={field.required}
+          autocomplete={field.input === "email" ? "email" : undefined}
+          maxlength={field.input === "email" ? 254 : 100}
+          aria-describedby={errorId}
+          data-input={field.input}
+          data-required={field.required ? "true" : "false"}
+        />
+        <p id={errorId} class="ao-field__error" hidden>
+          {field.errorMessage}
+        </p>
+      </div>
+    );
+  })}
+  <p class="ao-form-note">
+    {lang === "pl"
+      ? "Makieta formularza. Dane nie są zapisywane ani wysyłane."
+      : "Demonstration form. Nothing is stored or sent."}
+  </p>
+  <Button as="button" type="submit" disabled>
+    {content.submit}
+  </Button>
+  <p class="status" role="status" aria-live="polite"></p>
+  <noscript>
+    <p>{content.noscript}</p>
+  </noscript>
+</form>
+
+<script>
+  import { validateDemoField } from "@/lib/validate-demo";
+
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-demo-form]");
+  for (const form of forms) {
+    const button = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]',
+    );
+    if (button) button.disabled = false;
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const controls = [
+        ...form.querySelectorAll<HTMLInputElement>("input[name]"),
+      ];
+      let first: HTMLInputElement | undefined;
+      for (const input of controls) {
+        const kind = input.dataset.input ?? input.type;
+        const required = input.dataset.required === "true";
+        const value =
+          input.type === "checkbox" ? (input.checked ? "on" : "") : input.value;
+        const invalid = validateDemoField(kind, value, required);
+        const error = form.querySelector<HTMLElement>(
+          `#${CSS.escape(`${input.id}-error`)}`,
+        );
+        input.setAttribute("aria-invalid", String(invalid));
+        if (error) error.hidden = !invalid;
+        if (invalid && !first) first = input;
+      }
+      const status = form.querySelector<HTMLElement>('[role="status"]');
+      if (status) {
+        status.textContent = first ? "" : (form.dataset.success ?? "");
+      }
+      first?.focus();
+    });
+  }
+</script>

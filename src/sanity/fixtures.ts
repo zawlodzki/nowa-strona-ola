@@ -1,5 +1,10 @@
 import type { Locale } from "@ola/shared";
 
+import {
+  homepagePageFixture,
+  homepageSettingsFixture,
+} from "./homepage-fixtures";
+
 function block(
   key: string,
   text: string,
@@ -88,117 +93,8 @@ const photo = {
 };
 
 export const demonstrationSettings = {
-  pl: {
-    id: "siteSettings-pl",
-    language: "pl" as const,
-    siteTitle: "Aleksandra Olesiewicz",
-    contactEmail: null,
-    footerNote: "Lokalny prototyp · treści demonstracyjne",
-    defaultSeo: { title: "Aleksandra Olesiewicz", description: null },
-    navigation: [
-      { _key: "nav-workshop", label: "Warsztat", href: "/warsztat/" },
-      { _key: "nav-impl", label: "Wdrożenie", href: "/wdrozenie/" },
-      { _key: "nav-blog", label: "Blog", href: "/blog/" },
-      { _key: "nav-ui", label: "Komponenty", href: "/ui/" },
-    ],
-    socialLinks: [],
-    translation: { language: "en" as const },
-  },
-  en: {
-    id: "siteSettings-en",
-    language: "en" as const,
-    siteTitle: "Aleksandra Olesiewicz",
-    contactEmail: null,
-    footerNote: "Local prototype · demonstration content",
-    defaultSeo: { title: "Aleksandra Olesiewicz", description: null },
-    navigation: [
-      { _key: "nav-workshop", label: "Workshop", href: "/en/workshop/" },
-      {
-        _key: "nav-impl",
-        label: "Implementation",
-        href: "/en/implementation/",
-      },
-      { _key: "nav-blog", label: "Blog", href: "/en/blog/" },
-      { _key: "nav-ui", label: "Components", href: "/en/ui/" },
-    ],
-    socialLinks: [],
-    translation: { language: "pl" as const },
-  },
-};
-
-const homeSections = {
-  pl: [
-    {
-      _key: "home-hero",
-      _type: "heroSection",
-      variant: "editorial",
-      theme: "light",
-      eyebrow: "Strategia · technologia · ludzie",
-      title: "Dobry pomysł. Przemyślana realizacja.",
-      lead: "Spójne doświadczenie zaczyna się od detali. Sprawdź przykładowy formularz i poznaj sposób naszej pracy.",
-      primary: {
-        label: "Porozmawiajmy",
-        href: "#contact",
-        emphasis: "default",
-      },
-      secondary: null,
-      media: null,
-    },
-    {
-      _key: "home-form",
-      _type: "formSection",
-      eyebrow: "Kontakt demonstracyjny",
-      title: "Co chcesz zmienić?",
-      lead: "To formularz demonstracyjny. Dane pozostają w przeglądarce i nie są wysyłane.",
-      form: forms.pl,
-    },
-    {
-      _key: "home-cta",
-      _type: "ctaSection",
-      theme: "dark",
-      title: "Ten sam system. Inny kontekst.",
-      lead: "Jasny i ciemny wariant korzystają ze wspólnych tokenów.",
-      action: {
-        label: "Wróć do formularza",
-        href: "#contact",
-        emphasis: "default",
-      },
-    },
-  ],
-  en: [
-    {
-      _key: "home-hero",
-      _type: "heroSection",
-      variant: "editorial",
-      theme: "light",
-      eyebrow: "Strategy · technology · people",
-      title: "A clear idea. Thoughtful execution.",
-      lead: "A consistent experience starts with the details. Explore the example form and discover how we work.",
-      primary: { label: "Let’s talk", href: "#contact", emphasis: "default" },
-      secondary: null,
-      media: null,
-    },
-    {
-      _key: "home-form",
-      _type: "formSection",
-      eyebrow: "Demonstration contact",
-      title: "What would you like to change?",
-      lead: "This is a demonstration form. Your data stays in the browser and is not sent.",
-      form: forms.en,
-    },
-    {
-      _key: "home-cta",
-      _type: "ctaSection",
-      theme: "dark",
-      title: "One system. A different context.",
-      lead: "Light and dark sections share the same design tokens.",
-      action: {
-        label: "Back to the form",
-        href: "#contact",
-        emphasis: "default",
-      },
-    },
-  ],
+  pl: homepageSettingsFixture("pl"),
+  en: homepageSettingsFixture("en"),
 };
 
 const workshopSections = {
@@ -501,24 +397,8 @@ const implementationSections = {
 };
 
 export const demonstrationPages = {
-  "pl/home": {
-    id: "demo-home-pl",
-    language: "pl" as const,
-    slug: "home",
-    title: "Dobry pomysł. Przemyślana realizacja.",
-    seo: { title: "Próba komponentów — Wonderful", description: null },
-    translation: { language: "en" as const, slug: "home" },
-    sections: homeSections.pl,
-  },
-  "en/home": {
-    id: "demo-home-en",
-    language: "en" as const,
-    slug: "home",
-    title: "A clear idea. Thoughtful execution.",
-    seo: { title: "Component trial — Wonderful", description: null },
-    translation: { language: "pl" as const, slug: "home" },
-    sections: homeSections.en,
-  },
+  "pl/home": homepagePageFixture("pl"),
+  "en/home": homepagePageFixture("en"),
   "pl/warsztat": {
     id: "demo-workshop-pl",
     language: "pl" as const,

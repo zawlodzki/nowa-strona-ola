@@ -32,7 +32,7 @@ const submitId = `${idPrefix}demo-submit`;
 
 <Section id={id} labelledby={labelledby} class="form-grid">
   <div class="section-stack" data-reveal>
-    <Eyebrow>{content.eyebrow}</Eyebrow>
+    {content.eyebrow && <Eyebrow>{content.eyebrow}</Eyebrow>}
     <Heading tag="h2" id={labelledby}>
       {content.title}
     </Heading>
@@ -46,7 +46,7 @@ const submitId = `${idPrefix}demo-submit`;
     data-success={content.success}
   >
     <div class="field">
-      <Label for={nameId}>{content.nameLabel}</Label>
+      <Label for={nameId}>{content.nameLabel ?? ""}</Label>
       <Input
         id={nameId}
         name="name"
@@ -60,7 +60,7 @@ const submitId = `${idPrefix}demo-submit`;
       </p>
     </div>
     <div class="field">
-      <Label for={emailId}>{content.emailLabel}</Label>
+      <Label for={emailId}>{content.emailLabel ?? ""}</Label>
       <Input
         id={emailId}
         name="email"

@@ -4,7 +4,19 @@ export type SiteSection = "home" | "catalog" | "blog" | "page";
 
 export const HOME_SLUG = "home";
 export const ARTICLES_PER_PAGE = 6;
-export const reservedPageSlugs = ["blog", "en", "ui", "static", "api"] as const;
+export const reservedPageSlugs = [
+  "blog",
+  "en",
+  "ui",
+  "static",
+  "api",
+  "ebooki",
+  "ebooks",
+  "o-mnie",
+  "about",
+  "konsultacje",
+  "consultations",
+] as const;
 export const reservedArticleSlugs = [
   "strona",
   "kategoria",
@@ -14,6 +26,26 @@ export const reservedArticleSlugs = [
 
 export function homePath(language: Locale): string {
   return language === "pl" ? "/" : "/en/";
+}
+
+export function aboutPath(language: Locale): string {
+  return language === "pl" ? "/o-mnie/" : "/en/about/";
+}
+
+export function consultationPath(language: Locale): string {
+  return language === "pl" ? "/konsultacje/" : "/en/consultations/";
+}
+
+export function ebookCollectionPath(language: Locale): string {
+  return language === "pl" ? "/ebooki/" : "/en/ebooks/";
+}
+
+export function ebookPath(language: Locale, slug: string): string {
+  return language === "pl" ? `/ebooki/${slug}/` : `/en/ebooks/${slug}/`;
+}
+
+export function homeAnchor(language: Locale, id: string): string {
+  return `${homePath(language)}#${id}`;
 }
 
 export function catalogPath(language: Locale): string {

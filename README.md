@@ -114,10 +114,13 @@ Deklaratywne konfiguracje `staging` i `production` opisuje
 
 ```sh
 npm run verify
+npm run import:homepage
 ```
 
 Verify obejmuje format, zgodność tokenów, lint, typy wszystkich workspace’ów, build frontendu,
 Studio i Workera, unit tests, budżety artefaktów i E2E w trzech przeglądarkach.
+`npm run import:homepage` robi dry-run szkiców homepage 3a do `reports/` i nic
+nie zapisuje do Content Lake.
 `npm run format` jawnie formatuje kod. Samo
 `npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane; wynik jego
 pierwszego uruchomienia na GitHub wymaga osobnego sprawdzenia.

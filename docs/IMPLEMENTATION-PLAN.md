@@ -269,23 +269,16 @@ Zlecenie 07.10.2026: dalszą implementację oprzeć na przygotowanych mockupach,
 nowym design systemie i przeniesieniu treści do Sanity. Etapy 3–4 pozostają
 zapisem wykonanych fundamentów; nie oznaczają ukończenia docelowych stron.
 
-Stan sprawdzony w repo:
+Stan po pakiecie 1 (07.10.2026):
 
-- `src/design-system` zawiera Layout3a, tokeny, style i 21 komponentów.
-  Layout3a wykorzystuje katalog `/design-system/`; publiczne ComposedPage,
-  BlogIndex i ArticleView nadal importują wcześniejszy Layout i `src/ui`.
-- Sanity ma page builder 18 typów, `article`, `author`, `service`, `form`,
-  `testimonial`, `category`, `siteSettings` i `redirect`. Brakuje modelu e-booka
-  oraz rozszerzeń 3a opisanych w instrukcjach CMS; nie tworzyć tych modeli od zera
-  tam, gdzie istnieją już odpowiednie pola.
-- Preview współdzieli część rendererów, ale strona `page` ma osobny shell.
-  Migracja musi objąć również `preview/src/pages/[...locale].astro`, jego
-  kwerendy i mapowanie tras, a nie wyłącznie statyczną aplikację.
-- Nie ma jeszcze serializerów Markdown ani tras `.md`. Wprowadzać serializery
-  razem z nowymi sekcjami; etap 5 domyka eksport, metadane i indeksy.
-- Osiem widoków HTML odpowiada siedmiu szablonom: druga strona bloga jest
-  stanem paginacji tego samego indeksu. Stan Content Lake i usług zewnętrznych
-  jest znany z wcześniejszych zapisów, nie został ponownie sprawdzony w tym audycie.
+- Publiczne `/` i `/en/` oraz preview home używają `SiteShell3a`/`Layout3a` i
+  `Homepage3a`. Blog, landingi i `/ui/` nadal importują wcześniejszy Layout.
+- Sanity ma page builder 20 typów (w tym `ebooksSection`, `serviceOfferSection`),
+  dokument `ebook` oraz rozszerzenia `service`/`testimonial`/`author`/
+  `siteSettings`. Serializery Markdown nowych sekcji są w kodzie; trasy `.md`
+  i pełny eksport to etap 5.
+- Dry-run importu homepage istnieje; Content Lake i publikacja nie były
+  zapisywane. Stan usług zewnętrznych nie był ponownie sprawdzany.
 
 Kolejność wynika z [mapy integracji](../design-system/ASTRO-INTEGRATION.md).
 Modele współdzielone potrzebne homepage wprowadzić już w pierwszym pakiecie,
@@ -331,7 +324,7 @@ Dla każdego pakietu stosować ten sam cykl odbioru:
 Checklista wykonania (zaznaczać osobno kod i dane):
 
 - [x] Zweryfikować stan repo i uzgodnić kolejność migracji z systemem 3a.
-- [ ] Wdrożyć wspólny shell publiczny/preview i Homepage3a wraz z modelami zależnymi.
+- [x] Wdrożyć wspólny shell publiczny/preview i Homepage3a wraz z modelami zależnymi.
 - [ ] Wdrożyć About3a oraz wspólny profil autora.
 - [ ] Wdrożyć Consultation3a i model usługi.
 - [ ] Wdrożyć Ebook3a i model produktu.

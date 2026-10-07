@@ -61,6 +61,37 @@ export const siteSettingsType = defineType({
       validation: (rule) => rule.required().min(1).max(8),
     }),
     defineField({
+      name: "headerCta",
+      title: "CTA w nagłówku",
+      type: "actionLink",
+    }),
+    defineField({
+      name: "legalLinks",
+      title: "Linki prawne",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              title: "Etykieta",
+              type: "string",
+              validation: (rule) => rule.required().max(40),
+            }),
+            defineField({
+              name: "href",
+              title: "Adres",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: { select: { title: "label", subtitle: "href" } },
+        }),
+      ],
+      validation: (rule) => rule.max(6),
+    }),
+    defineField({
       name: "socialLinks",
       title: "Profile",
       type: "array",

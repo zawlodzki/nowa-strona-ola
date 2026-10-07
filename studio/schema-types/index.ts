@@ -4,6 +4,7 @@ import { pageSectionTypes } from "./blocks/page-sections";
 import { articleType } from "./documents/article";
 import { authorType } from "./documents/author";
 import { categoryType } from "./documents/category";
+import { ebookType } from "./documents/ebook";
 import { formType } from "./documents/form";
 import { pageType } from "./documents/page";
 import { redirectType } from "./documents/redirect";
@@ -36,6 +37,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   authorType,
   categoryType,
   serviceType,
+  ebookType,
   testimonialType,
   formType,
   redirectType,

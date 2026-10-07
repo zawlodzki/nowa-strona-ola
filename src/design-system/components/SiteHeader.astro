@@ -7,9 +7,16 @@ interface Props {
   links: NavigationLink[];
   cta?: NavigationLink;
   lang?: Locale;
+  languageHref?: string | null;
 }
-const { homeHref, links, cta, lang = "pl" } = Astro.props;
+const { homeHref, links, cta, lang = "pl", languageHref } = Astro.props;
 const pl = lang === "pl";
+const languageLink: NavigationLink | null = languageHref
+  ? {
+      href: languageHref,
+      label: pl ? "English" : "Polski",
+    }
+  : null;
 ---
 
 <header class="ao-header">
@@ -31,6 +38,15 @@ const pl = lang === "pl";
           {link.label}
         </a>
       ))}
+      {languageLink && (
+        <a
+          href={languageLink.href}
+          lang={pl ? "en" : "pl"}
+          hreflang={pl ? "en" : "pl"}
+        >
+          {languageLink.label}
+        </a>
+      )}
     </nav>
     {cta && (
       <a class="ao-header__cta" href={cta.href}>
@@ -41,7 +57,11 @@ const pl = lang === "pl";
     <details class="ao-mobile-menu">
       <summary>{pl ? "Menu" : "Menu"}</summary>
       <nav aria-label={pl ? "Nawigacja mobilna" : "Mobile navigation"}>
-        {[...links, ...(cta ? [cta] : [])].map((link) => (
+        {[
+          ...links,
+          ...(cta ? [cta] : []),
+          ...(languageLink ? [languageLink] : []),
+        ].map((link) => (
           <a href={link.href} aria-current={link.current ? "page" : undefined}>
             {link.label}
           </a>

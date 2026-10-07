@@ -1,6 +1,7 @@
 import { createClient } from "@sanity/client";
 import type { Locale } from "@ola/shared";
 
+import { assertKnownSections } from "../../../src/content/sections";
 import { ARTICLES_PER_PAGE } from "../../../src/lib/paths";
 import { paginate } from "../../../src/lib/pagination";
 import type {
@@ -64,6 +65,7 @@ export async function getPreviewPage(
     slug,
   });
   if (!page) throw new Error(`Brak strony podglądu ${language}/${slug}.`);
+  assertKnownSections(page.sections);
   return page;
 }
 

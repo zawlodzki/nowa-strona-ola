@@ -1,5 +1,7 @@
 import { BlockContentIcon } from "@sanity/icons/BlockContent";
 import { BillIcon } from "@sanity/icons/Bill";
+import { BookIcon } from "@sanity/icons/Book";
+import { CaseIcon } from "@sanity/icons/Case";
 import { ClockIcon } from "@sanity/icons/Clock";
 import { CommentIcon } from "@sanity/icons/Comment";
 import { DocumentsIcon } from "@sanity/icons/Documents";
@@ -61,8 +63,9 @@ export const heroSectionType = defineType({
     defineField({
       name: "eyebrow",
       title: "Nadtytuł",
+      description: "Opcjonalny. Wariant homepage 3a nie używa nadtytułu.",
       type: "string",
-      validation: (rule) => rule.required().max(80),
+      validation: (rule) => rule.max(80),
     }),
     defineField({
       name: "title",
@@ -160,11 +163,23 @@ export const textImageSectionType = defineType({
       validation: requiredString,
     }),
     defineField({
+      name: "lead",
+      title: "Wyróżniony lead",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.max(240),
+    }),
+    defineField({
       name: "body",
       title: "Akapity",
       type: "array",
       of: [defineArrayMember({ type: "text" })],
       validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "action",
+      title: "Akcja",
+      type: "actionLink",
     }),
     defineField({
       name: "mediaPosition",
@@ -185,6 +200,12 @@ export const textImageSectionType = defineType({
       title: "Medium",
       type: "mediaObject",
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "secondaryMedia",
+      title: "Drugie medium",
+      description: "Opcjonalny kadr nakładany, np. posiłek w sekcji O mnie.",
+      type: "mediaObject",
     }),
   ],
   preview: sectionPreview("Tekst i obraz"),
@@ -207,14 +228,49 @@ export const logosSectionType = defineType({
       title: "Lead",
       type: "text",
       rows: 2,
-      validation: (rule) => rule.required().max(240),
+      validation: (rule) => rule.max(240),
     }),
     defineField({
       name: "names",
       title: "Nazwy",
+      description: "Używane, gdy brak osobnych logotypów z mediami.",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
-      validation: (rule) => rule.required().min(2).max(8),
+      validation: (rule) => rule.max(8),
+    }),
+    defineField({
+      name: "items",
+      title: "Logotypy",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "name",
+              title: "Nazwa",
+              type: "string",
+              validation: (rule) => rule.required().max(80),
+            }),
+            defineField({
+              name: "media",
+              title: "Znak",
+              type: "mediaObject",
+            }),
+          ],
+          preview: { select: { title: "name" } },
+        }),
+      ],
+      validation: (rule) =>
+        rule.max(8).custom((items, context) => {
+          const parent = context.parent as { names?: string[] } | undefined;
+          const named = (parent?.names ?? []).filter(Boolean);
+          const listed = Array.isArray(items) ? items.length : 0;
+          if (named.length + listed < 2) {
+            return "Podaj co najmniej dwa logotypy (nazwy albo znaki).";
+          }
+          return true;
+        }),
     }),
   ],
   preview: sectionPreview("Logotypy"),
@@ -375,6 +431,20 @@ export const metricsSectionType = defineType({
   icon: HashIcon,
   fields: [
     defineField({
+      name: "variant",
+      title: "Wariant",
+      type: "string",
+      options: {
+        layout: "radio",
+        list: [
+          { title: "Siatka liczb", value: "grid" },
+          { title: "Podejście z jedną liczbą", value: "approach" },
+        ],
+      },
+      initialValue: "grid",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "title",
       title: "Tytuł",
       type: "string",
@@ -385,7 +455,7 @@ export const metricsSectionType = defineType({
       title: "Lead",
       type: "text",
       rows: 2,
-      validation: (rule) => rule.required().max(240),
+      validation: (rule) => rule.max(240),
     }),
     defineField({
       name: "items",
@@ -419,7 +489,60 @@ export const metricsSectionType = defineType({
           },
         }),
       ],
-      validation: (rule) => rule.required().min(2).max(4),
+      validation: (rule) =>
+        rule
+          .required()
+          .min(1)
+          .max(4)
+          .custom((items, context) => {
+            const parent = context.parent as { variant?: string } | undefined;
+            const count = Array.isArray(items) ? items.length : 0;
+            if ((parent?.variant ?? "grid") === "grid" && count < 2) {
+              return "Siatka liczb wymaga co najmniej dwóch wskaźników.";
+            }
+            if (parent?.variant === "approach" && count !== 1) {
+              return "Wariant podejścia ma dokładnie jeden wskaźnik.";
+            }
+            return true;
+          }),
+    }),
+    defineField({
+      name: "highlights",
+      title: "Wyróżnienia",
+      description: "Trzy opisy podejścia przy wariancie z jedną liczbą.",
+      type: "array",
+      hidden: ({ parent }) => parent?.variant !== "approach",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Nagłówek",
+              type: "string",
+              validation: requiredString,
+            }),
+            defineField({
+              name: "body",
+              title: "Opis",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required().max(240),
+            }),
+          ],
+          preview: { select: { title: "title" } },
+        }),
+      ],
+      validation: (rule) =>
+        rule.custom((highlights, context) => {
+          const parent = context.parent as { variant?: string } | undefined;
+          if (parent?.variant !== "approach") return true;
+          const count = Array.isArray(highlights) ? highlights.length : 0;
+          if (count < 3 || count > 3) {
+            return "Wariant podejścia wymaga dokładnie trzech wyróżnień.";
+          }
+          return true;
+        }),
     }),
   ],
   preview: sectionPreview("Liczby"),
@@ -518,6 +641,13 @@ export const testimonialsSectionType = defineType({
       title: "Tytuł",
       type: "string",
       validation: requiredString,
+    }),
+    defineField({
+      name: "lead",
+      title: "Lead",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.max(240),
     }),
     defineField({
       name: "items",
@@ -789,8 +919,9 @@ export const formSectionType = defineType({
     defineField({
       name: "eyebrow",
       title: "Nadtytuł",
+      description: "Opcjonalny. Newsletter 3a nie używa nadtytułu.",
       type: "string",
-      validation: (rule) => rule.required().max(80),
+      validation: (rule) => rule.max(80),
     }),
     defineField({
       name: "title",
@@ -893,6 +1024,112 @@ export const relatedSectionType = defineType({
   preview: sectionPreview("Powiązane artykuły"),
 });
 
+export const ebooksSectionType = defineType({
+  name: "ebooksSection",
+  title: "E-booki",
+  type: "object",
+  icon: BookIcon,
+  fields: [
+    defineField({
+      name: "title",
+      title: "Tytuł",
+      type: "string",
+      validation: requiredString,
+    }),
+    defineField({
+      name: "lead",
+      title: "Lead",
+      type: "text",
+      rows: 3,
+      validation: (rule) => rule.required().max(320),
+    }),
+    defineField({
+      name: "items",
+      title: "Produkty",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "ebook" }],
+          options: sameLanguageFilter("ebook"),
+        }),
+      ],
+      validation: (rule) => rule.required().min(1).max(12),
+    }),
+    defineField({
+      name: "cardActionLabel",
+      title: "Etykieta karty",
+      type: "string",
+      initialValue: "Poznaj temat",
+      validation: (rule) => rule.required().max(40),
+    }),
+    defineField({
+      name: "collection",
+      title: "Link do kolekcji",
+      type: "actionLink",
+    }),
+    defineField({
+      name: "note",
+      title: "Nota o statusie",
+      type: "text",
+      rows: 2,
+      validation: (rule) => rule.max(240),
+    }),
+  ],
+  preview: sectionPreview("E-booki"),
+});
+
+export const serviceOfferSectionType = defineType({
+  name: "serviceOfferSection",
+  title: "Oferta usługi",
+  type: "object",
+  icon: CaseIcon,
+  fields: [
+    defineField({
+      name: "title",
+      title: "Tytuł",
+      type: "string",
+      validation: requiredString,
+    }),
+    defineField({
+      name: "body",
+      title: "Akapity",
+      type: "array",
+      of: [defineArrayMember({ type: "text" })],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "facts",
+      title: "Fakty",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+      validation: (rule) => rule.min(1).max(6),
+    }),
+    defineField({
+      name: "service",
+      title: "Usługa",
+      type: "reference",
+      to: [{ type: "service" }],
+      options: sameLanguageFilter("service"),
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "action",
+      title: "Akcja",
+      description:
+        "Jeśli puste, renderer używa bookingUrl i tytułu z dokumentu usługi.",
+      type: "actionLink",
+    }),
+    defineField({
+      name: "media",
+      title: "Medium",
+      type: "mediaObject",
+      validation: (rule) => rule.required(),
+    }),
+  ],
+  preview: sectionPreview("Oferta usługi"),
+});
+
 export const pageSectionTypes = [
   heroSectionType,
   textSectionType,
@@ -912,6 +1149,8 @@ export const pageSectionTypes = [
   formSectionType,
   mediaSectionType,
   relatedSectionType,
+  ebooksSectionType,
+  serviceOfferSectionType,
 ];
 
 export const pageSectionsField = defineField({

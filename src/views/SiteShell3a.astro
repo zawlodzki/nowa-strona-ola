@@ -1,0 +1,90 @@
+---
+import type { Locale } from "@ola/shared";
+
+import Layout3a from "@/design-system/Layout3a.astro";
+import SiteFooter from "@/design-system/components/SiteFooter.astro";
+import SiteHeader from "@/design-system/components/SiteHeader.astro";
+import { homePath } from "@/lib/paths";
+import type { NavigationLink, SocialLink } from "@/design-system/types";
+
+export interface Props {
+  lang: Locale;
+  title: string;
+  description?: string;
+  navigation: NavigationLink[];
+  headerCta?: NavigationLink;
+  footerNote: string;
+  socialLinks?: SocialLink[];
+  legalLinks?: NavigationLink[];
+  copyright: string;
+  preview?: boolean;
+  languageHref?: string | null;
+}
+
+const {
+  lang,
+  title,
+  description,
+  navigation,
+  headerCta,
+  footerNote,
+  socialLinks = [],
+  legalLinks = [],
+  copyright,
+  preview = false,
+  languageHref = null,
+} = Astro.props;
+const homeHref = homePath(lang);
+---
+
+<Layout3a lang={lang} title={title} description={description}>
+  {preview && (
+    <div class="preview-banner">
+      <strong>
+        {lang === "pl" ? "Chroniony podgląd szkicu" : "Protected draft preview"}
+      </strong>
+      <form method="post" action="/api/draft-mode/disable">
+        <button type="submit">
+          {lang === "pl" ? "Zakończ podgląd" : "End preview"}
+        </button>
+      </form>
+    </div>
+  )}
+  <SiteHeader
+    homeHref={homeHref}
+    links={navigation}
+    cta={headerCta}
+    lang={lang}
+    languageHref={languageHref}
+  />
+  <slot />
+  <SiteFooter
+    homeHref={homeHref}
+    description={footerNote}
+    links={navigation}
+    socialLinks={socialLinks}
+    legalLinks={legalLinks}
+    copyright={copyright}
+    lang={lang}
+  />
+</Layout3a>
+
+<style>
+  .preview-banner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--ao-space-16);
+    padding: var(--ao-space-12) var(--ao-space-24);
+    background: var(--ao-surface);
+    border-bottom: 1px solid var(--ao-line);
+    font-size: 14px;
+  }
+  .preview-banner button {
+    min-height: var(--ao-target-min);
+    padding-inline: var(--ao-space-16);
+    border: 1px solid var(--ao-line);
+    background: transparent;
+    color: inherit;
+  }
+</style>

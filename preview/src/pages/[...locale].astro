@@ -2,11 +2,9 @@
 import { env } from "cloudflare:workers";
 import type { Locale } from "@ola/shared";
 
-import Layout from "../../../src/layouts/Layout.astro";
-import Container from "../../../src/ui/container/Container.astro";
-import PageSections from "../../../src/views/PageSections.astro";
 import ArticleView from "../../../src/views/ArticleView.astro";
 import BlogIndex from "../../../src/views/BlogIndex.astro";
+import ComposedPage from "../../../src/views/ComposedPage.astro";
 import { parseContentPath } from "../../../src/lib/content-path";
 import { blogCategoryPath, blogPath } from "../../../src/lib/paths";
 import { demonstrationSettings } from "../../../src/sanity/fixtures";
@@ -69,18 +67,14 @@ const categories = language
 
 {article && language && settings ? (
   <ArticleView lang={language} article={article} settings={settings} />
-) : page && language ? (
-  <Layout lang={language} title={`Podgląd — ${page.seo?.title ?? page.title}`}>
-    <Container tag="header" class="site-header">
-      <strong>Chroniony podgląd szkicu</strong>
-      <form method="post" action="/api/draft-mode/disable">
-        <button type="submit">Zakończ podgląd</button>
-      </form>
-    </Container>
-    <main id="main">
-      <PageSections lang={language} sections={page.sections} />
-    </main>
-  </Layout>
+) : page && language && settings ? (
+  <ComposedPage
+    lang={language}
+    page={page}
+    settings={settings}
+    section={route.kind === "home" ? "home" : "page"}
+    preview
+  />
 ) : blogIndex && language && settings ? (
   <BlogIndex
     lang={language}

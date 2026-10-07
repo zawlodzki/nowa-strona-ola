@@ -43,15 +43,32 @@ test("form validation, error recovery and no network submission", async ({
     if (request.method() === "POST") requests.push(request.url());
   });
   await page.goto("/");
-  await page.getByRole("button", { name: "Sprawdź formularz" }).click();
-  await expect(page.getByLabel("Imię", { exact: true })).toBeFocused();
-  await expect(page.locator("#name-error")).toBeVisible();
-  await page.getByLabel("Imię", { exact: true }).fill("Łucja");
-  await page.getByLabel("E-mail", { exact: true }).fill("wrong");
-  await page.getByRole("button", { name: "Sprawdź formularz" }).click();
-  await expect(page.getByLabel("E-mail", { exact: true })).toBeFocused();
-  await page.getByLabel("E-mail", { exact: true }).fill("test@example.com");
-  await page.getByRole("button", { name: "Sprawdź formularz" }).click();
+  await expect(
+    page.getByRole("link", { name: "English", exact: true }).first(),
+  ).toHaveAttribute("href", "/en/");
+  const submit = page.getByRole("button", {
+    name: "Chcę otrzymywać newsletter",
+    exact: true,
+  });
+  await submit.click();
+  await expect(page.getByLabel("Adres e-mail", { exact: true })).toBeFocused();
+  await expect(page.locator("#email-error")).toBeVisible();
+  await page.getByLabel("Adres e-mail", { exact: true }).fill("wrong");
+  await submit.click();
+  await expect(page.getByLabel("Adres e-mail", { exact: true })).toBeFocused();
+  await page
+    .getByLabel("Adres e-mail", { exact: true })
+    .fill("test@example.com");
+  await submit.click();
+  await expect(
+    page.getByText("Zaznacz zgodę, aby sprawdzić formularz."),
+  ).toBeVisible();
+  await page
+    .getByRole("checkbox", {
+      name: "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane.",
+    })
+    .check();
+  await submit.click();
   await expect(page.getByRole("status")).toHaveText(
     "Dane poprawne. Nic nie wysłano.",
   );
@@ -69,7 +86,7 @@ for (const width of [320, 390, 1440]) {
       }),
     ).toBeVisible();
     const visibleLogos = await page
-      .locator("header .site-logo")
+      .locator("header .ao-wordmark")
       .evaluateAll(
         (elements) =>
           elements.filter(
@@ -104,7 +121,7 @@ test("no JavaScript preserves content and prevents accidental form navigation", 
   await page.goto("http://127.0.0.1:4321/");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Sprawdź formularz" }),
+    page.getByRole("button", { name: "Chcę otrzymywać newsletter" }),
   ).toBeDisabled();
   await expect(page.locator("noscript p").first()).toBeVisible();
   await context.close();

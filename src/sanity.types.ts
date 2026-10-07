@@ -39,11 +39,24 @@ export type SiteSettings = {
     href: string;
     _key: string;
   }>;
+  headerCta?: ActionLink;
+  legalLinks?: Array<{
+    label: string;
+    href: string;
+    _key: string;
+  }>;
   socialLinks?: Array<{
     label: string;
     href: string;
     _key: string;
   }>;
+};
+
+export type ActionLink = {
+  _type: "actionLink";
+  label: string;
+  href: string;
+  emphasis?: "default" | "outline";
 };
 
 export type Seo = {
@@ -70,6 +83,13 @@ export type TestimonialReference = {
   [internalGroqTypeReferenceTo]?: "testimonial";
 };
 
+export type EbookReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "ebook";
+};
+
 export type Testimonial = {
   _id: string;
   _type: "testimonial";
@@ -79,28 +99,64 @@ export type Testimonial = {
   language: "pl" | "en";
   translation?: TestimonialReference;
   quote: string;
-  name: string;
-  role: string;
+  anonymous?: boolean;
+  displayLabel?: string;
+  name?: string;
+  role?: string;
+  scope: "cooperation" | "product";
+  product?: EbookReference;
 };
 
-export type ServiceReference = {
+export type AuthorReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "service";
+  [internalGroqTypeReferenceTo]?: "author";
 };
 
-export type Service = {
+export type Ebook = {
   _id: string;
-  _type: "service";
+  _type: "ebook";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   language: "pl" | "en";
   title: string;
   slug: Slug;
-  translation?: ServiceReference;
-  summary: string;
+  translation?: EbookReference;
+  subtitle?: string;
+  topic: "pcos" | "perimenopause";
+  cardDescription: string;
+  cover: MediaObject;
+  coverTone: "light" | "cherry";
+  author: AuthorReference;
+  availability: "planned" | "presale" | "available" | "paused";
+  priceGross: number;
+  currency: "PLN";
+  format?: "pdf";
+  sortOrder?: number;
+  seo?: Seo;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type MediaObject = {
+  _type: "mediaObject";
+  alt: string;
+  tone: "photo" | "diagram" | "portrait";
+  caption?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type Slug = {
@@ -134,13 +190,6 @@ export type ArticleReference = {
   _type: "reference";
   _weak?: boolean;
   [internalGroqTypeReferenceTo]?: "article";
-};
-
-export type AuthorReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "author";
 };
 
 export type Article = {
@@ -215,27 +264,6 @@ export type ArticleBody = Array<
     } & ArticleTable)
 >;
 
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
-
-export type MediaObject = {
-  _type: "mediaObject";
-  alt: string;
-  tone: "photo" | "diagram" | "portrait";
-  caption?: string;
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-};
-
 export type PageReference = {
   _ref: string;
   _type: "reference";
@@ -308,8 +336,63 @@ export type Page = {
     | ({
         _key: string;
       } & RelatedSection)
+    | ({
+        _key: string;
+      } & EbooksSection)
+    | ({
+        _key: string;
+      } & ServiceOfferSection)
   >;
   seo?: Seo;
+};
+
+export type ServiceReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "service";
+};
+
+export type ServiceOfferSection = {
+  _type: "serviceOfferSection";
+  title: string;
+  body: Array<string>;
+  facts?: Array<string>;
+  service: ServiceReference;
+  action?: ActionLink;
+  media: MediaObject;
+};
+
+export type Service = {
+  _id: string;
+  _type: "service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  title: string;
+  slug: Slug;
+  translation?: ServiceReference;
+  summary: string;
+  price?: number;
+  currency?: "PLN";
+  durationMinutes?: number;
+  bookingUrl?: string;
+  bookingStatus?: "placeholder" | "live";
+};
+
+export type EbooksSection = {
+  _type: "ebooksSection";
+  title: string;
+  lead: string;
+  items: Array<
+    {
+      _key: string;
+    } & EbookReference
+  >;
+  cardActionLabel: string;
+  collection?: ActionLink;
+  note?: string;
 };
 
 export type RelatedSection = {
@@ -341,7 +424,7 @@ export type FormReference = {
 
 export type FormSection = {
   _type: "formSection";
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lead: string;
   form: FormReference;
@@ -376,13 +459,6 @@ export type CtaSection = {
   title: string;
   lead: string;
   action: ActionLink;
-};
-
-export type ActionLink = {
-  _type: "actionLink";
-  label: string;
-  href: string;
-  emphasis?: "default" | "outline";
 };
 
 export type QuoteSection = {
@@ -440,11 +516,14 @@ export type Author = {
   role: string;
   bio: string;
   photo?: MediaObject;
+  educationInstitution?: string;
+  educationProgram?: string;
 };
 
 export type TestimonialsSection = {
   _type: "testimonialsSection";
   title: string;
+  lead?: string;
   items: Array<
     {
       _key: string;
@@ -469,12 +548,18 @@ export type PricingSection = {
 
 export type MetricsSection = {
   _type: "metricsSection";
+  variant: "grid" | "approach";
   title: string;
-  lead: string;
+  lead?: string;
   items: Array<{
     value: number;
     suffix?: string;
     label: string;
+    _key: string;
+  }>;
+  highlights?: Array<{
+    title: string;
+    body: string;
     _key: string;
   }>;
 };
@@ -514,17 +599,25 @@ export type CardsSection = {
 export type LogosSection = {
   _type: "logosSection";
   title: string;
-  lead: string;
-  names: Array<string>;
+  lead?: string;
+  names?: Array<string>;
+  items?: Array<{
+    name: string;
+    media?: MediaObject;
+    _key: string;
+  }>;
 };
 
 export type TextImageSection = {
   _type: "textImageSection";
   eyebrow?: string;
   title: string;
+  lead?: string;
   body: Array<string>;
+  action?: ActionLink;
   mediaPosition: "end" | "start";
   media: MediaObject;
+  secondaryMedia?: MediaObject;
 };
 
 export type TextSection = {
@@ -538,7 +631,7 @@ export type HeroSection = {
   _type: "heroSection";
   variant: "editorial" | "cinematic" | "split";
   theme?: "light" | "dark";
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lead: string;
   primary: ActionLink;
@@ -698,30 +791,34 @@ export type Geopoint = {
 export type AllSanitySchemaTypes =
   | SiteSettingsReference
   | SiteSettings
+  | ActionLink
   | Seo
   | Redirect
   | TestimonialReference
+  | EbookReference
   | Testimonial
-  | ServiceReference
-  | Service
+  | AuthorReference
+  | Ebook
+  | SanityImageAssetReference
+  | MediaObject
   | Slug
   | CategoryReference
   | Category
   | ArticleReference
-  | AuthorReference
   | Article
   | ArticleBody
-  | SanityImageAssetReference
-  | MediaObject
   | PageReference
   | Page
+  | ServiceReference
+  | ServiceOfferSection
+  | Service
+  | EbooksSection
   | RelatedSection
   | MediaSection
   | FormReference
   | FormSection
   | Form
   | CtaSection
-  | ActionLink
   | QuoteSection
   | ComparisonSection
   | FaqSection
@@ -754,7 +851,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../preview/src/lib/queries.ts
 // Variable: PREVIEW_PAGE_QUERY
-// Query: *[    _type == "page" &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    "slug": slug.current,    title,    seo{title, description},    "translation": translation->{ language, "slug": slug.current },    sections[]{   _key,  _type,  _type == "heroSection" => {    variant,    theme,    eyebrow,    title,    lead,    "primary": primary{ label, href, emphasis },    "secondary": secondary{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "textSection" => { eyebrow, title, body },  _type == "textImageSection" => {    eyebrow,    title,    body,    mediaPosition,    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "logosSection" => { title, lead, names },  _type == "cardsSection" => {    eyebrow,    title,    lead,    items[]{      _key,      title,      body,      href,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "listSection" => { title, lead, items },  _type == "processSection" => {    title,    lead,    steps[]{ _key, title, body }  },  _type == "metricsSection" => {    title,    lead,    items[]{ _key, value, suffix, label }  },  _type == "pricingSection" => {    title,    lead,    plans[]{      _key,      name,      price,      summary,      emphasis,      features,      "action": action{ label, href, emphasis }    }  },  _type == "testimonialsSection" => {    title,    items[]->{ quote, name, role }  },  _type == "expertSection" => {    title,    body,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "person": person->{ name, role }  },  _type == "faqSection" => {    title,    lead,    items[]{ _key, question, answer }  },  _type == "comparisonSection" => {    title,    lead,    caption,    rowHeading,    columns,    rows[]{ _key, feature, values }  },  _type == "quoteSection" => { theme, heading, quote, attribution },  _type == "ctaSection" => {    theme,    title,    lead,    "action": action{ label, href, emphasis }  },  _type == "formSection" => {    eyebrow,    title,    lead,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        errorMessage,        required,        options      }    }  },  _type == "mediaSection" => {    title,    lead,    "image": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    videoTitle,    videoUrl,    videoPlatform  },  _type == "relatedSection" => {    title,    items[]->{      title,      "excerpt": lead,      "slug": slug.current,      language,      publishedAt,      "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  } }  }
+// Query: *[    _type == "page" &&    language == $language &&    slug.current == $slug  ][0]{    "id": _id,    language,    "slug": slug.current,    title,    seo{title, description},    "translation": translation->{ language, "slug": slug.current },    sections[]{   _key,  _type,  _type == "heroSection" => {    variant,    theme,    eyebrow,    title,    lead,    "primary": primary{ label, href, emphasis },    "secondary": secondary{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "textSection" => { eyebrow, title, body },  _type == "textImageSection" => {    eyebrow,    title,    lead,    body,    mediaPosition,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "secondaryMedia": secondaryMedia{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "logosSection" => {    title,    lead,    names,    items[]{      _key,      name,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "cardsSection" => {    eyebrow,    title,    lead,    items[]{      _key,      title,      body,      href,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "listSection" => { title, lead, items },  _type == "processSection" => {    title,    lead,    steps[]{ _key, title, body }  },  _type == "metricsSection" => {    variant,    title,    lead,    items[]{ _key, value, suffix, label },    highlights[]{ _key, title, body }  },  _type == "pricingSection" => {    title,    lead,    plans[]{      _key,      name,      price,      summary,      emphasis,      features,      "action": action{ label, href, emphasis }    }  },  _type == "testimonialsSection" => {    title,    lead,    items[]->{      quote,      name,      role,      anonymous,      displayLabel,      scope    }  },  _type == "expertSection" => {    title,    body,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "person": person->{ name, role }  },  _type == "faqSection" => {    title,    lead,    items[]{ _key, question, answer }  },  _type == "comparisonSection" => {    title,    lead,    caption,    rowHeading,    columns,    rows[]{ _key, feature, values }  },  _type == "quoteSection" => { theme, heading, quote, attribution },  _type == "ctaSection" => {    theme,    title,    lead,    "action": action{ label, href, emphasis }  },  _type == "formSection" => {    eyebrow,    title,    lead,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        errorMessage,        required,        options      }    }  },  _type == "mediaSection" => {    title,    lead,    "image": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    videoTitle,    videoUrl,    videoPlatform  },  _type == "relatedSection" => {    title,    items[]->{      title,      "excerpt": lead,      "slug": slug.current,      language,      publishedAt,      "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "ebooksSection" => {    title,    lead,    cardActionLabel,    note,    "collection": collection{ label, href, emphasis },    items[]->{      "id": _id,      language,      "slug": slug.current,      title,      subtitle,      topic,      cardDescription,      coverTone,      availability,      priceGross,      currency,      format,      sortOrder,      "cover": cover{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},      "authorName": author->name    }  },  _type == "serviceOfferSection" => {    title,    body,    facts,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "service": service->{      "id": _id,      title,      summary,      "slug": slug.current,      price,      currency,      durationMinutes,      bookingUrl,      bookingStatus    }  } }  }
 export type PREVIEW_PAGE_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
@@ -817,6 +914,42 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "ebooksSection";
+        title: string;
+        lead: string;
+        cardActionLabel: string;
+        note: string | null;
+        collection: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        } | null;
+        items: Array<{
+          id: string;
+          language: "en" | "pl";
+          slug: string;
+          title: string;
+          subtitle: string | null;
+          topic: "pcos" | "perimenopause";
+          cardDescription: string;
+          coverTone: "cherry" | "light";
+          availability: "available" | "paused" | "planned" | "presale";
+          priceGross: number;
+          currency: "PLN";
+          format: "pdf" | null;
+          sortOrder: number | null;
+          cover: {
+            alt: string;
+            tone: "diagram" | "photo" | "portrait";
+            caption: string | null;
+            label: string;
+            src: string | null;
+          };
+          authorName: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "expertSection";
         title: string;
         body: string;
@@ -851,7 +984,7 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "formSection";
-        eyebrow: string;
+        eyebrow: string | null;
         title: string;
         lead: string;
         form: {
@@ -878,7 +1011,7 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
         _type: "heroSection";
         variant: "cinematic" | "editorial" | "split";
         theme: "dark" | "light" | null;
-        eyebrow: string;
+        eyebrow: string | null;
         title: string;
         lead: string;
         primary: {
@@ -910,8 +1043,19 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
         _key: string;
         _type: "logosSection";
         title: string;
-        lead: string;
-        names: Array<string>;
+        lead: string | null;
+        names: Array<string> | null;
+        items: Array<{
+          _key: string;
+          name: string;
+          media: {
+            alt: string;
+            tone: "diagram" | "photo" | "portrait";
+            caption: string | null;
+            label: string;
+            src: string | null;
+          } | null;
+        }> | null;
       }
     | {
         _key: string;
@@ -932,14 +1076,20 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "metricsSection";
+        variant: "approach" | "grid";
         title: string;
-        lead: string;
+        lead: string | null;
         items: Array<{
           _key: string;
           value: number;
           suffix: string | null;
           label: string;
         }>;
+        highlights: Array<{
+          _key: string;
+          title: string;
+          body: string;
+        }> | null;
       }
     | {
         _key: string;
@@ -1000,21 +1150,15 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
       }
     | {
         _key: string;
-        _type: "testimonialsSection";
-        title: string;
-        items: Array<{
-          quote: string;
-          name: string;
-          role: string;
-        }>;
-      }
-    | {
-        _key: string;
-        _type: "textImageSection";
-        eyebrow: string | null;
+        _type: "serviceOfferSection";
         title: string;
         body: Array<string>;
-        mediaPosition: "end" | "start";
+        facts: Array<string> | null;
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        } | null;
         media: {
           alt: string;
           tone: "diagram" | "photo" | "portrait";
@@ -1022,6 +1166,59 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
           label: string;
           src: string | null;
         };
+        service: {
+          id: string;
+          title: string;
+          summary: string;
+          slug: string;
+          price: number | null;
+          currency: "PLN" | null;
+          durationMinutes: number | null;
+          bookingUrl: string | null;
+          bookingStatus: "live" | "placeholder" | null;
+        };
+      }
+    | {
+        _key: string;
+        _type: "testimonialsSection";
+        title: string;
+        lead: string | null;
+        items: Array<{
+          quote: string;
+          name: string | null;
+          role: string | null;
+          anonymous: boolean | null;
+          displayLabel: string | null;
+          scope: "cooperation" | "product";
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "textImageSection";
+        eyebrow: string | null;
+        title: string;
+        lead: string | null;
+        body: Array<string>;
+        mediaPosition: "end" | "start";
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        } | null;
+        media: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        };
+        secondaryMedia: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        } | null;
       }
     | {
         _key: string;
@@ -1165,7 +1362,7 @@ export type PREVIEW_ARTICLE_QUERY_RESULT = {
 
 // Source: ../preview/src/lib/queries.ts
 // Variable: PREVIEW_SITE_SETTINGS_QUERY
-// Query: *[    _type == "siteSettings" &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  socialLinks[]{ _key, label, href },  "translation": translation->{ language } }
+// Query: *[    _type == "siteSettings" &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  "headerCta": headerCta{ label, href, emphasis },  legalLinks[]{ _key, label, href },  socialLinks[]{ _key, label, href },  "translation": translation->{ language } }
 export type PREVIEW_SITE_SETTINGS_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
@@ -1181,6 +1378,16 @@ export type PREVIEW_SITE_SETTINGS_QUERY_RESULT = {
     label: string;
     href: string;
   }>;
+  headerCta: {
+    label: string;
+    href: string;
+    emphasis: "default" | "outline" | null;
+  } | null;
+  legalLinks: Array<{
+    _key: string;
+    label: string;
+    href: string;
+  }> | null;
   socialLinks: Array<{
     _key: string;
     label: string;
@@ -1246,7 +1453,7 @@ export type PREVIEW_CATEGORY_QUERY_RESULT = {
 
 // Source: ../src/sanity/queries.ts
 // Variable: PUBLISHED_PAGE_QUERY
-// Query: *[    _type == "page" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{   "id": _id,  language,  "slug": slug.current,  title,  seo{title, description},  "translation": translation->{ language, "slug": slug.current },  sections[]{   _key,  _type,  _type == "heroSection" => {    variant,    theme,    eyebrow,    title,    lead,    "primary": primary{ label, href, emphasis },    "secondary": secondary{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "textSection" => { eyebrow, title, body },  _type == "textImageSection" => {    eyebrow,    title,    body,    mediaPosition,    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "logosSection" => { title, lead, names },  _type == "cardsSection" => {    eyebrow,    title,    lead,    items[]{      _key,      title,      body,      href,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "listSection" => { title, lead, items },  _type == "processSection" => {    title,    lead,    steps[]{ _key, title, body }  },  _type == "metricsSection" => {    title,    lead,    items[]{ _key, value, suffix, label }  },  _type == "pricingSection" => {    title,    lead,    plans[]{      _key,      name,      price,      summary,      emphasis,      features,      "action": action{ label, href, emphasis }    }  },  _type == "testimonialsSection" => {    title,    items[]->{ quote, name, role }  },  _type == "expertSection" => {    title,    body,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "person": person->{ name, role }  },  _type == "faqSection" => {    title,    lead,    items[]{ _key, question, answer }  },  _type == "comparisonSection" => {    title,    lead,    caption,    rowHeading,    columns,    rows[]{ _key, feature, values }  },  _type == "quoteSection" => { theme, heading, quote, attribution },  _type == "ctaSection" => {    theme,    title,    lead,    "action": action{ label, href, emphasis }  },  _type == "formSection" => {    eyebrow,    title,    lead,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        errorMessage,        required,        options      }    }  },  _type == "mediaSection" => {    title,    lead,    "image": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    videoTitle,    videoUrl,    videoPlatform  },  _type == "relatedSection" => {    title,    items[]->{      title,      "excerpt": lead,      "slug": slug.current,      language,      publishedAt,      "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  } } }
+// Query: *[    _type == "page" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{   "id": _id,  language,  "slug": slug.current,  title,  seo{title, description},  "translation": translation->{ language, "slug": slug.current },  sections[]{   _key,  _type,  _type == "heroSection" => {    variant,    theme,    eyebrow,    title,    lead,    "primary": primary{ label, href, emphasis },    "secondary": secondary{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "textSection" => { eyebrow, title, body },  _type == "textImageSection" => {    eyebrow,    title,    lead,    body,    mediaPosition,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "secondaryMedia": secondaryMedia{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "logosSection" => {    title,    lead,    names,    items[]{      _key,      name,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "cardsSection" => {    eyebrow,    title,    lead,    items[]{      _key,      title,      body,      href,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "listSection" => { title, lead, items },  _type == "processSection" => {    title,    lead,    steps[]{ _key, title, body }  },  _type == "metricsSection" => {    variant,    title,    lead,    items[]{ _key, value, suffix, label },    highlights[]{ _key, title, body }  },  _type == "pricingSection" => {    title,    lead,    plans[]{      _key,      name,      price,      summary,      emphasis,      features,      "action": action{ label, href, emphasis }    }  },  _type == "testimonialsSection" => {    title,    lead,    items[]->{      quote,      name,      role,      anonymous,      displayLabel,      scope    }  },  _type == "expertSection" => {    title,    body,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "person": person->{ name, role }  },  _type == "faqSection" => {    title,    lead,    items[]{ _key, question, answer }  },  _type == "comparisonSection" => {    title,    lead,    caption,    rowHeading,    columns,    rows[]{ _key, feature, values }  },  _type == "quoteSection" => { theme, heading, quote, attribution },  _type == "ctaSection" => {    theme,    title,    lead,    "action": action{ label, href, emphasis }  },  _type == "formSection" => {    eyebrow,    title,    lead,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        errorMessage,        required,        options      }    }  },  _type == "mediaSection" => {    title,    lead,    "image": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    videoTitle,    videoUrl,    videoPlatform  },  _type == "relatedSection" => {    title,    items[]->{      title,      "excerpt": lead,      "slug": slug.current,      language,      publishedAt,      "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "ebooksSection" => {    title,    lead,    cardActionLabel,    note,    "collection": collection{ label, href, emphasis },    items[]->{      "id": _id,      language,      "slug": slug.current,      title,      subtitle,      topic,      cardDescription,      coverTone,      availability,      priceGross,      currency,      format,      sortOrder,      "cover": cover{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},      "authorName": author->name    }  },  _type == "serviceOfferSection" => {    title,    body,    facts,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "service": service->{      "id": _id,      title,      summary,      "slug": slug.current,      price,      currency,      durationMinutes,      bookingUrl,      bookingStatus    }  } } }
 export type PUBLISHED_PAGE_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
@@ -1309,6 +1516,42 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "ebooksSection";
+        title: string;
+        lead: string;
+        cardActionLabel: string;
+        note: string | null;
+        collection: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        } | null;
+        items: Array<{
+          id: string;
+          language: "en" | "pl";
+          slug: string;
+          title: string;
+          subtitle: string | null;
+          topic: "pcos" | "perimenopause";
+          cardDescription: string;
+          coverTone: "cherry" | "light";
+          availability: "available" | "paused" | "planned" | "presale";
+          priceGross: number;
+          currency: "PLN";
+          format: "pdf" | null;
+          sortOrder: number | null;
+          cover: {
+            alt: string;
+            tone: "diagram" | "photo" | "portrait";
+            caption: string | null;
+            label: string;
+            src: string | null;
+          };
+          authorName: string;
+        }>;
+      }
+    | {
+        _key: string;
         _type: "expertSection";
         title: string;
         body: string;
@@ -1343,7 +1586,7 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "formSection";
-        eyebrow: string;
+        eyebrow: string | null;
         title: string;
         lead: string;
         form: {
@@ -1370,7 +1613,7 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
         _type: "heroSection";
         variant: "cinematic" | "editorial" | "split";
         theme: "dark" | "light" | null;
-        eyebrow: string;
+        eyebrow: string | null;
         title: string;
         lead: string;
         primary: {
@@ -1402,8 +1645,19 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
         _key: string;
         _type: "logosSection";
         title: string;
-        lead: string;
-        names: Array<string>;
+        lead: string | null;
+        names: Array<string> | null;
+        items: Array<{
+          _key: string;
+          name: string;
+          media: {
+            alt: string;
+            tone: "diagram" | "photo" | "portrait";
+            caption: string | null;
+            label: string;
+            src: string | null;
+          } | null;
+        }> | null;
       }
     | {
         _key: string;
@@ -1424,14 +1678,20 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "metricsSection";
+        variant: "approach" | "grid";
         title: string;
-        lead: string;
+        lead: string | null;
         items: Array<{
           _key: string;
           value: number;
           suffix: string | null;
           label: string;
         }>;
+        highlights: Array<{
+          _key: string;
+          title: string;
+          body: string;
+        }> | null;
       }
     | {
         _key: string;
@@ -1492,21 +1752,15 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
       }
     | {
         _key: string;
-        _type: "testimonialsSection";
-        title: string;
-        items: Array<{
-          quote: string;
-          name: string;
-          role: string;
-        }>;
-      }
-    | {
-        _key: string;
-        _type: "textImageSection";
-        eyebrow: string | null;
+        _type: "serviceOfferSection";
         title: string;
         body: Array<string>;
-        mediaPosition: "end" | "start";
+        facts: Array<string> | null;
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        } | null;
         media: {
           alt: string;
           tone: "diagram" | "photo" | "portrait";
@@ -1514,6 +1768,59 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
           label: string;
           src: string | null;
         };
+        service: {
+          id: string;
+          title: string;
+          summary: string;
+          slug: string;
+          price: number | null;
+          currency: "PLN" | null;
+          durationMinutes: number | null;
+          bookingUrl: string | null;
+          bookingStatus: "live" | "placeholder" | null;
+        };
+      }
+    | {
+        _key: string;
+        _type: "testimonialsSection";
+        title: string;
+        lead: string | null;
+        items: Array<{
+          quote: string;
+          name: string | null;
+          role: string | null;
+          anonymous: boolean | null;
+          displayLabel: string | null;
+          scope: "cooperation" | "product";
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "textImageSection";
+        eyebrow: string | null;
+        title: string;
+        lead: string | null;
+        body: Array<string>;
+        mediaPosition: "end" | "start";
+        action: {
+          label: string;
+          href: string;
+          emphasis: "default" | "outline" | null;
+        } | null;
+        media: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        };
+        secondaryMedia: {
+          alt: string;
+          tone: "diagram" | "photo" | "portrait";
+          caption: string | null;
+          label: string;
+          src: string | null;
+        } | null;
       }
     | {
         _key: string;
@@ -1535,7 +1842,7 @@ export type PUBLISHED_PAGE_PATHS_QUERY_RESULT = Array<{
 
 // Source: ../src/sanity/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[    _type == "siteSettings" &&    !(_id in path("drafts.**")) &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  socialLinks[]{ _key, label, href },  "translation": translation->{ language } }
+// Query: *[    _type == "siteSettings" &&    !(_id in path("drafts.**")) &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  "headerCta": headerCta{ label, href, emphasis },  legalLinks[]{ _key, label, href },  socialLinks[]{ _key, label, href },  "translation": translation->{ language } }
 export type SITE_SETTINGS_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
@@ -1551,6 +1858,16 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     label: string;
     href: string;
   }>;
+  headerCta: {
+    label: string;
+    href: string;
+    emphasis: "default" | "outline" | null;
+  } | null;
+  legalLinks: Array<{
+    _key: string;
+    label: string;
+    href: string;
+  }> | null;
   socialLinks: Array<{
     _key: string;
     label: string;
@@ -1756,15 +2073,15 @@ export type PUBLISHED_CATEGORIES_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[\n    _type == "page" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    "slug": slug.current,\n    title,\n    seo{title, description},\n    "translation": translation->{ language, "slug": slug.current },\n    sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    eyebrow,\n    title,\n    body,\n    mediaPosition,\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "logosSection" => { title, lead, names },\n  _type == "cardsSection" => {\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    steps[]{ _key, title, body }\n  },\n  _type == "metricsSection" => {\n    title,\n    lead,\n    items[]{ _key, value, suffix, label }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    items[]->{ quote, name, role }\n  },\n  _type == "expertSection" => {\n    title,\n    body,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "person": person->{ name, role }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  }\n }\n  }\n': PREVIEW_PAGE_QUERY_RESULT;
+    '\n  *[\n    _type == "page" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    "slug": slug.current,\n    title,\n    seo{title, description},\n    "translation": translation->{ language, "slug": slug.current },\n    sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    eyebrow,\n    title,\n    lead,\n    body,\n    mediaPosition,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "secondaryMedia": secondaryMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "logosSection" => {\n    title,\n    lead,\n    names,\n    items[]{\n      _key,\n      name,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "cardsSection" => {\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    steps[]{ _key, title, body }\n  },\n  _type == "metricsSection" => {\n    variant,\n    title,\n    lead,\n    items[]{ _key, value, suffix, label },\n    highlights[]{ _key, title, body }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    lead,\n    items[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    }\n  },\n  _type == "expertSection" => {\n    title,\n    body,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "person": person->{ name, role }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "ebooksSection" => {\n    title,\n    lead,\n    cardActionLabel,\n    note,\n    "collection": collection{ label, href, emphasis },\n    items[]->{\n      "id": _id,\n      language,\n      "slug": slug.current,\n      title,\n      subtitle,\n      topic,\n      cardDescription,\n      coverTone,\n      availability,\n      priceGross,\n      currency,\n      format,\n      sortOrder,\n      "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n      "authorName": author->name\n    }\n  },\n  _type == "serviceOfferSection" => {\n    title,\n    body,\n    facts,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "service": service->{\n      "id": _id,\n      title,\n      summary,\n      "slug": slug.current,\n      price,\n      currency,\n      durationMinutes,\n      bookingUrl,\n      bookingStatus\n    }\n  }\n }\n  }\n': PREVIEW_PAGE_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n    updatedAt,\n    seo{title, description},\n    authors[]->{ name, role, "slug": slug.current },\n    body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n    sources[]{ _key, title, href },\n    related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n  }\n': PREVIEW_ARTICLE_QUERY_RESULT;
-    '\n  *[\n    _type == "siteSettings" &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  "translation": translation->{ language }\n }\n': PREVIEW_SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[\n    _type == "siteSettings" &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  "headerCta": headerCta{ label, href, emphasis },\n  legalLinks[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  "translation": translation->{ language }\n }\n': PREVIEW_SITE_SETTINGS_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    language == $language\n  ] | order(publishedAt desc){ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PREVIEW_ARTICLES_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    language == $language\n  ] | order(title asc){\n    title,\n    "slug": slug.current,\n    language\n  }\n': PREVIEW_CATEGORIES_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    title,\n    description,\n    "slug": slug.current,\n    "translation": translation->{ language, "slug": slug.current }\n  }\n': PREVIEW_CATEGORY_QUERY_RESULT;
-    '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    eyebrow,\n    title,\n    body,\n    mediaPosition,\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "logosSection" => { title, lead, names },\n  _type == "cardsSection" => {\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    steps[]{ _key, title, body }\n  },\n  _type == "metricsSection" => {\n    title,\n    lead,\n    items[]{ _key, value, suffix, label }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    items[]->{ quote, name, role }\n  },\n  _type == "expertSection" => {\n    title,\n    body,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "person": person->{ name, role }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  }\n }\n }\n': PUBLISHED_PAGE_QUERY_RESULT;
+    '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    eyebrow,\n    title,\n    lead,\n    body,\n    mediaPosition,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "secondaryMedia": secondaryMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "logosSection" => {\n    title,\n    lead,\n    names,\n    items[]{\n      _key,\n      name,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "cardsSection" => {\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    steps[]{ _key, title, body }\n  },\n  _type == "metricsSection" => {\n    variant,\n    title,\n    lead,\n    items[]{ _key, value, suffix, label },\n    highlights[]{ _key, title, body }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    lead,\n    items[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    }\n  },\n  _type == "expertSection" => {\n    title,\n    body,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "person": person->{ name, role }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "ebooksSection" => {\n    title,\n    lead,\n    cardActionLabel,\n    note,\n    "collection": collection{ label, href, emphasis },\n    items[]->{\n      "id": _id,\n      language,\n      "slug": slug.current,\n      title,\n      subtitle,\n      topic,\n      cardDescription,\n      coverTone,\n      availability,\n      priceGross,\n      currency,\n      format,\n      sortOrder,\n      "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n      "authorName": author->name\n    }\n  },\n  _type == "serviceOfferSection" => {\n    title,\n    body,\n    facts,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "service": service->{\n      "id": _id,\n      title,\n      summary,\n      "slug": slug.current,\n      price,\n      currency,\n      durationMinutes,\n      bookingUrl,\n      bookingStatus\n    }\n  }\n }\n }\n': PUBLISHED_PAGE_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_PAGE_PATHS_QUERY_RESULT;
-    '\n  *[\n    _type == "siteSettings" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  "translation": translation->{ language }\n }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[\n    _type == "siteSettings" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  "headerCta": headerCta{ label, href, emphasis },\n  legalLinks[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  "translation": translation->{ language }\n }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n    updatedAt,\n    seo{title, description},\n    authors[]->{ name, role, "slug": slug.current },\n    body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n    sources[]{ _key, title, href },\n    related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n  }\n': PUBLISHED_ARTICLE_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_ARTICLE_PATHS_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ] | order(publishedAt desc){ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PUBLISHED_ARTICLES_QUERY_RESULT;

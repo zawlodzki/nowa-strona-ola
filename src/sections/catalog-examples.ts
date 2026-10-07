@@ -81,6 +81,7 @@ const pl: CatalogCopy = {
     title: "Zaufanie bez udawania nawigacji",
     lead: "Pasek logotypów jest podpisany i statyczny. Pętli nie ma, żeby treść nie wymagała pauzy.",
     names: ["Northwind", "Contoso", "Fabrikam", "Litware", "Adventure Works"],
+    items: [],
   },
   cards: {
     eyebrow: "Siatka",
@@ -128,6 +129,7 @@ const pl: CatalogCopy = {
     ],
   },
   metrics: {
+    variant: "grid",
     title: "Liczby, które da się obronić",
     lead: "Czytnik dostaje wartość końcową od razu. Animacja jest dekoracją.",
     items: [
@@ -135,6 +137,7 @@ const pl: CatalogCopy = {
       { value: 40, suffix: "+", label: "wdrożeń procesów i narzędzi" },
       { value: 5, suffix: " dni", label: "do pierwszego czytelnego prototypu" },
     ],
+    highlights: [],
   },
   pricing: {
     title: "Pakiety demonstracyjne",
@@ -171,17 +174,23 @@ const pl: CatalogCopy = {
         quote: "Wreszcie wiemy, po czym poznać, że proces działa.",
         name: "Anna Kwiatkowska",
         role: "Dyrektorka sprzedaży",
+        anonymous: false,
+        scope: "cooperation",
       },
       {
         quote:
           "Szkolenie nie było pokazem narzędzia. Było pracą na naszych sprawach.",
         name: "Marek Lis",
         role: "Head of Operations",
+        anonymous: false,
+        scope: "cooperation",
       },
       {
         quote: "Zespół sam utrzymuje rytm. Nie wracamy do starych arkuszy.",
         name: "Julia Berg",
         role: "COO",
+        anonymous: false,
+        scope: "cooperation",
       },
     ],
   },
@@ -255,6 +264,22 @@ const pl: CatalogCopy = {
     submit: "Sprawdź formularz",
     success: "Dane poprawne. Nic nie wysłano.",
     noscript: "Włącz JavaScript, aby sprawdzić formularz demonstracyjny.",
+    fields: [
+      {
+        name: "name",
+        input: "text",
+        label: "Imię",
+        errorMessage: "Wpisz imię (od 2 do 100 znaków).",
+        required: true,
+      },
+      {
+        name: "email",
+        input: "email",
+        label: "E-mail",
+        errorMessage: "Wpisz poprawny adres e-mail.",
+        required: true,
+      },
+    ],
   },
   media: {
     title: "Obraz z podpisem i film z zewnątrz",
@@ -377,6 +402,7 @@ const en: CatalogCopy = {
     title: "Trust, not a second navigation",
     lead: "The logo strip is labelled and static. There is no loop, so nothing needs a pause control.",
     names: ["Northwind", "Contoso", "Fabrikam", "Litware", "Adventure Works"],
+    items: [],
   },
   cards: {
     eyebrow: "Grid",
@@ -430,6 +456,7 @@ const en: CatalogCopy = {
     ],
   },
   metrics: {
+    variant: "grid",
     title: "Numbers you can stand behind",
     lead: "Assistive technology gets the final value immediately. The count-up is decoration.",
     items: [
@@ -437,6 +464,7 @@ const en: CatalogCopy = {
       { value: 40, suffix: "+", label: "process and tool implementations" },
       { value: 5, suffix: " days", label: "to a first readable prototype" },
     ],
+    highlights: [],
   },
   pricing: {
     title: "Demonstration packages",
@@ -473,16 +501,22 @@ const en: CatalogCopy = {
         quote: "We finally know how to tell whether the process is working.",
         name: "Anna Kwiatkowska",
         role: "Sales director",
+        anonymous: false,
+        scope: "cooperation",
       },
       {
         quote: "The training was not a product tour. It was work on our cases.",
         name: "Marek Lis",
         role: "Head of Operations",
+        anonymous: false,
+        scope: "cooperation",
       },
       {
         quote: "The team keeps the rhythm. We are not back in the old sheets.",
         name: "Julia Berg",
         role: "COO",
+        anonymous: false,
+        scope: "cooperation",
       },
     ],
   },
@@ -553,6 +587,22 @@ const en: CatalogCopy = {
     submit: "Check the form",
     success: "Details valid. Nothing was sent.",
     noscript: "Enable JavaScript to try the demonstration form.",
+    fields: [
+      {
+        name: "name",
+        input: "text",
+        label: "Name",
+        errorMessage: "Enter a name (2 to 100 characters).",
+        required: true,
+      },
+      {
+        name: "email",
+        input: "email",
+        label: "E-mail",
+        errorMessage: "Enter a valid email address.",
+        required: true,
+      },
+    ],
   },
   media: {
     title: "An image with a caption and an external film",

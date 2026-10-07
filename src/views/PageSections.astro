@@ -219,6 +219,11 @@ let formCount = 0;
           content={toRelated(section, lang)}
         />
       );
+    case "ebooksSection":
+    case "serviceOfferSection":
+      throw new Error(
+        `Sekcja ${section._type} jest renderowana przez Homepage3a. Zatrzymuję build PageSections.`,
+      );
     default:
       throw new Error("Nieznany typ sekcji. Zatrzymuję build.");
   }

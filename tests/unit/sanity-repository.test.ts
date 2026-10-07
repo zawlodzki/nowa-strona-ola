@@ -143,8 +143,13 @@ describe("demonstration templates", () => {
 
     expect(home.sections?.map((section) => section?._type)).toEqual([
       "heroSection",
+      "logosSection",
+      "metricsSection",
+      "textImageSection",
+      "ebooksSection",
+      "serviceOfferSection",
+      "testimonialsSection",
       "formSection",
-      "ctaSection",
     ]);
     expect(workshop.translation?.slug).toBe("workshop");
     expect(implementation.translation?.slug).toBe("wdrozenie");

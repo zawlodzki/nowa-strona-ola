@@ -1,38 +1,65 @@
 ---
 import type { Locale } from "@ola/shared";
 
-import type { PageContent, SiteSettings } from "@/sanity/repository";
+import { mapHomepage, shellLinks } from "@/content/map-homepage";
+import { homepageCopyright } from "@/sanity/homepage-fixtures";
 import { pagePath } from "@/lib/paths";
+import type { PageContent, SiteSettings } from "@/sanity/repository";
 import Layout from "@/layouts/Layout.astro";
 import SiteFooter from "@/ui/site-footer/SiteFooter.astro";
 import SiteHeader from "@/ui/site-header/SiteHeader.astro";
+import Homepage3a from "@/views/Homepage3a.astro";
 import PageSections from "@/views/PageSections.astro";
+import SiteShell3a from "@/views/SiteShell3a.astro";
 
 export interface Props {
   lang: Locale;
   page: PageContent;
   settings: SiteSettings;
   section?: "home" | "page";
+  preview?: boolean;
 }
 
-const { lang, page, settings, section = "page" } = Astro.props as Props;
+const {
+  lang,
+  page,
+  settings,
+  section = "page",
+  preview = false,
+} = Astro.props as Props;
 const alternateHref = page.translation?.slug
   ? pagePath(
       page.translation.language === "en" ? "en" : "pl",
       page.translation.slug,
     )
   : null;
+const isHome = page.slug === "home" || section === "home";
 ---
 
-<Layout lang={lang} title={page.seo?.title ?? page.title}>
-  <SiteHeader
+{isHome ? (
+  <SiteShell3a
     lang={lang}
-    section={section}
-    alternateHref={alternateHref}
-    navigation={settings.navigation}
-  />
-  <main id="main">
-    <PageSections lang={lang} sections={page.sections} />
-  </main>
-  <SiteFooter lang={lang} note={settings.footerNote ?? undefined} />
-</Layout>
+    title={page.seo?.title ?? page.title}
+    description={page.seo?.description ?? undefined}
+    preview={preview}
+    footerNote={settings.footerNote ?? ""}
+    copyright={homepageCopyright(lang)}
+    languageHref={alternateHref}
+    {...shellLinks(settings)}
+  >
+    <Homepage3a lang={lang} content={mapHomepage(page, lang)} />
+  </SiteShell3a>
+) : (
+  <Layout lang={lang} title={page.seo?.title ?? page.title}>
+    <SiteHeader
+      lang={lang}
+      section={section}
+      alternateHref={alternateHref}
+      navigation={settings.navigation}
+    />
+    <main id="main">
+      <PageSections lang={lang} sections={page.sections} />
+    </main>
+    <SiteFooter lang={lang} note={settings.footerNote ?? undefined} />
+  </Layout>
+)}

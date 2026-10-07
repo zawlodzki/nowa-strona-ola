@@ -86,6 +86,7 @@ export const structure: StructureResolver = (S) =>
       languageList(S, "author", "Autorzy").icon(UserIcon),
       S.divider(),
       languageList(S, "service", "Usługi").icon(CaseIcon),
+      languageList(S, "ebook", "E-booki").icon(DocumentTextIcon),
       languageList(S, "testimonial", "Opinie").icon(CommentIcon),
       languageList(S, "form", "Formularze").icon(EnvelopeIcon),
       S.listItem()
@@ -104,6 +105,7 @@ export const structure: StructureResolver = (S) =>
             "category",
             "author",
             "service",
+            "ebook",
             "testimonial",
             "form",
             "redirect",
