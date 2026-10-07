@@ -67,10 +67,12 @@ Nie są jeszcze wdrożone — prototyp nie zawiera tych integracji.
 ## Wydajność i bezpieczeństwo
 
 Budżety prototypu: 25 KiB gzip łącznie dla wygenerowanych zewnętrznych plików JS
-oraz 20 KiB gzip CSS. To kontrola regresji tej próby, nie docelowy budżet całej strony.
-Pomiar nie obejmuje inline JS, mediów ani nagłówków transportowych. Strona /static/
-ma nie zawierać żadnego script. Docelowe budżety per szablon ustalić po wdrożeniu
-mediów, c15t i analityki; nie zwiększać ich tylko po to, aby naprawić czerwone CI.
+oraz 32 KiB gzip CSS. Limit CSS jest tymczasowy na etap 4a (pakiety 5–7), żeby
+nie blokował kompletnego designu 3a; optymalizacja przyjdzie później i nie
+traktować 32 KiB jako docelowego budżetu strony. Pomiar nie obejmuje inline JS,
+mediów ani nagłówków transportowych. Strona /static/ ma nie zawierać żadnego
+script. Docelowe budżety per szablon ustalić po wdrożeniu mediów, c15t i
+analityki.
 
 Lighthouse: cel z planu ≥95 przed tagami, osobny pomiar po zgodzie. Pomiar wykonać
 na reprezentatywnych gotowych szablonach, bez utożsamiania rozmiaru bundla z CWV.

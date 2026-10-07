@@ -1,0 +1,48 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { ebookCopy } from "@/content/ebook-seed";
+import { mapEbook } from "@/content/map-ebook";
+import { shellLinks } from "@/content/map-homepage";
+import { homepageCopyright } from "@/sanity/homepage-fixtures";
+import type { EbookContent, SiteSettings } from "@/sanity/repository";
+import Ebook3a from "@/views/Ebook3a.astro";
+import SiteShell3a from "@/views/SiteShell3a.astro";
+
+export interface Props {
+  lang: Locale;
+  ebook: EbookContent;
+  settings: SiteSettings;
+  preview?: boolean;
+}
+
+const { lang, ebook, settings, preview = false } = Astro.props;
+const content = mapEbook(ebook, lang);
+const copy = ebookCopy[lang];
+const shell = shellLinks(settings);
+const currentHref = content.href;
+const footerLinks = shell.navigation.map((item) => ({
+  ...item,
+  current: item.href === currentHref,
+}));
+---
+
+<SiteShell3a
+  lang={lang}
+  title={content.seoTitle}
+  description={content.seoDescription}
+  preview={preview}
+  footerNote={settings.footerNote ?? ""}
+  copyright={homepageCopyright(lang)}
+  languageHref={content.alternateHref}
+  navigation={[...copy.navigation]}
+  footerLinks={footerLinks}
+  headerCta={{
+    label: `${copy.headerCtaPrefix} · ${content.priceGross} ${content.currencyLabel}`,
+    href: "#cena",
+  }}
+  socialLinks={shell.socialLinks}
+  legalLinks={shell.legalLinks}
+>
+  <Ebook3a lang={lang} content={content} />
+</SiteShell3a>

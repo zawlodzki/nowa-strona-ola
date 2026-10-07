@@ -16,6 +16,7 @@ export const ebookType = defineType({
   groups: [
     { name: "product", title: "Produkt", default: true },
     { name: "offer", title: "Oferta" },
+    { name: "landing", title: "Landing" },
     { name: "seo", title: "SEO" },
   ],
   fields: [
@@ -148,11 +149,104 @@ export const ebookType = defineType({
       initialValue: "pdf",
     }),
     defineField({
+      name: "chapters",
+      title: "Rozdziały",
+      type: "array",
+      group: "product",
+      of: [{ type: "ebookChapter" }],
+      validation: (rule) =>
+        rule.max(20).custom((chapters, context) => {
+          const landing = (
+            context.document as { landing?: unknown } | undefined
+          )?.landing;
+          if (landing && (!chapters || chapters.length < 1)) {
+            return "Landing wymaga od 1 do 20 rozdziałów.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "includedMaterials",
+      title: "Materiały w pakiecie",
+      type: "array",
+      group: "product",
+      of: [{ type: "ebookMaterial" }],
+      validation: (rule) =>
+        rule.max(10).custom((materials, context) => {
+          const landing = (
+            context.document as { landing?: unknown } | undefined
+          )?.landing;
+          if (landing && (!materials || materials.length < 1)) {
+            return "Landing wymaga od 1 do 10 materiałów.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "delivery",
+      title: "Dostarczenie",
+      type: "ebookDelivery",
+      group: "offer",
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const availability = (
+            context.document as { availability?: string } | undefined
+          )?.availability;
+          if (
+            (availability === "presale" || availability === "available") &&
+            !value
+          ) {
+            return "Aktywna sprzedaż wymaga opisu dostarczenia.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "checkoutUrl",
+      title: "Adres zakupu",
+      description:
+        "Wyłącznie HTTPS zatwierdzonego operatora. Wymagany przy przedsprzedaży i sprzedaży. Nie wklejać kotwicy mockupu.",
+      type: "url",
+      group: "offer",
+      validation: (rule) =>
+        rule.uri({ scheme: ["https"] }).custom((value, context) => {
+          const availability = (
+            context.document as { availability?: string } | undefined
+          )?.availability;
+          if (
+            (availability === "presale" || availability === "available") &&
+            !value
+          ) {
+            return "Aktywna sprzedaż wymaga adresu checkout HTTPS.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "reviewedAt",
+      title: "Data przeglądu merytorycznego",
+      type: "date",
+      group: "product",
+    }),
+    defineField({
+      name: "sources",
+      title: "Źródła",
+      type: "array",
+      group: "product",
+      of: [{ type: "ebookSource" }],
+    }),
+    defineField({
       name: "sortOrder",
       title: "Kolejność",
       type: "number",
       group: "product",
       validation: (rule) => rule.integer().min(0),
+    }),
+    defineField({
+      name: "landing",
+      title: "Landing",
+      type: "ebookLanding",
+      group: "landing",
     }),
     defineField({
       name: "seo",

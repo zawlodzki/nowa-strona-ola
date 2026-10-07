@@ -38,3 +38,11 @@ export function topicLabel(
   if (topic === "pcos") return "PCOS";
   return language === "pl" ? "Perimenopauza" : "Perimenopause";
 }
+
+export function schemaOfferAvailability(
+  availability: "planned" | "presale" | "available" | "paused",
+): string {
+  if (availability === "available") return "https://schema.org/InStock";
+  if (availability === "presale") return "https://schema.org/PreOrder";
+  return "https://schema.org/OutOfStock";
+}

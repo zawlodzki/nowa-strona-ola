@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 3 etapu 4a: Consultation3a i wspólna usługa).
+Aktualizacja: 2026-10-07 (pakiet 4 + wyrównanie makiet 3a / SVG).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
@@ -40,13 +40,15 @@ wdrożyć tokeny/komponenty i wykonać odbiór UI; etap pozostaje 4a.
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiety 1–3 (Homepage3a, About3a, Consultation3a, wspólny shell) są w kodzie
-i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były zlecone.**
+**Pakiety 1–4 (Homepage3a, About3a, Consultation3a, Ebook3a, wspólny shell) są
+w kodzie i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były
+zlecone.**
 
-Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/` i
-`/en/consultations/` oraz preview tych stron renderują `SiteShell3a` z
-fixture’ów. Blog, landingi demo i `/ui/` nadal używają wcześniejszego Layout.
-Etapy 5–7 oraz pakiety 4–7 etapu 4a pozostają otwarte.
+Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
+`/en/consultations/`, `/ebooki/<slug>/` i `/en/ebooks/<slug>/` oraz preview
+tych stron renderują `SiteShell3a` z fixture’ów. Blog, kolekcja e-booków
+i `/ui/` nadal używają wcześniejszego Layout albo czekają na pakiet 5.
+Etapy 5–7 oraz pakiety 5–7 etapu 4a pozostają otwarte.
 
 ## Wykonane
 
@@ -2051,13 +2053,145 @@ Otwarte w pakiecie 3 (dane, nie kod): zapis szkiców `page-consultation-*`
 do Content Lake po porównaniu, odbiór w Studio i chronionym preview
 z datasetem. Bez publikacji.
 
+## Pakiet 4 etapu 4a — 2026-10-07
+
+Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
+`cursor/ebook3a-landing-08b1`, draft PR, bez merge.
+
+- Inwentaryzacja: `ebook-3a.html` + [EBOOK-CMS-CONFIG-3A](EBOOK-CMS-CONFIG-3A.md).
+  Cena **97 PLN brutto**, temat `pcos`, status `planned`, tytuł „Suplementy
+  w PCOS” / „Decyzje, które mają sens”. Copy rozdziałów, kart i EN jest
+  **propozycją**. Opinie 4 i 6 ze współpracy, nie recenzje produktu.
+- Modele: rozszerzenie istniejącego `ebook` (rozdziały, materiały, źródła,
+  dostarczenie, checkoutUrl) oraz obiekt `ebookLanding` wariantu `cherry3a`.
+  GROQ publiczny i preview, TypeGen, mapper `mapEbook`. Brak drugiego typu
+  produktu. Checkout i płatny PDF nie wchodzą do fixture’ów.
+- UI: `Ebook3a` na `SiteShell3a`/`Layout3a`; preview używa tego samego
+  `EbookPage`. Trasy `/ebooki/suplementy-w-pcos/` i
+  `/en/ebooks/supplements-in-pcos/`. Karty homepage używają `ebookPath`,
+  nie kotwic. Status `planned`: natywne `details` bez checkoutu i bez
+  potwierdzenia zakupu. JSON-LD `Product`/`Offer` z `OutOfStock`.
+- Markdown: serializer landingu i przykład; nieznany wariant zatrzymuje build.
+- Import: `npm run import:ebook` dry-run, 2 dokumenty
+  (`ebook-suplementy-w-pcos-pl/en`), `write: false`, exit 0; `--write` exit 2.
+  Porównanie Content Lake pominięte, brak tokenu w tej sesji.
+- Budżet CSS, 2026-10-07 (pierwsza iteracja pakietu 4): Quality padało na
+  `CSS budget exceeded: 21564 B gzip` przy limicie 20 KiB. Butelki i orbita
+  wtedy nie weszły. Decyzja Grzesia z tej samej doby: nic nie może wypadać
+  z designu 3a; limit podniesiony tymczasowo do **32 KiB gzip** na etap 4a
+  (pakiety 5–7), bez optymalizacji teraz.
+- `npm run verify` na Node 24.21.0: PASS. Format, tokeny, ESLint, Astro/TS
+  (172 + 11 plików, 0 diagnostyki), 82 unit tests w 16 plikach, build
+  29 stron, Studio, Worker dry-run, budżety JS 5770 B / CSS **20429 B gzip**
+  (zapas 51 B). **90 E2E PASS** (Chromium/Firefox/WebKit), w tym PL/EN
+  landingu, karta homepage → `/ebooki/suplementy-w-pcos/`, natywne `details`
+  zakupu, brak POST i 404 `/en/ebooki/suplementy-w-pcos/`. Playwright deps
+  doinstalowane w tej sesji (`npx playwright install-deps`).
+- verify-ola `ola-1791399453`: doctor PASS na porcie 4340, Node 24.21.0.
+  ARIA homepage: oba linki karty „Suplementy w PCOS” mają
+  `href=/ebooki/suplementy-w-pcos/` (nie kotwica). Landing PL: H1 „Zrób
+  porządek z suplementami.”, CTA nagłówka „E-book · 97 zł” → `#cena`, cena
+  97 zł, `posts []`. EN H1 „Put your supplements in order.” bez polskiego
+  leadu. `/en/ebooki/suplementy-w-pcos/` status 404. Treść i 97 zł bez JS
+  (H1 matched, ARIA zawiera 97). `click --role button` na zakup nie trafia
+  (`summary` jako `group`); otwarcie potwierdzone w E2E. Dowody:
+  `/tmp/ola-verify-evidence/ola-1791399453/`. Viewport CLI: 1280×900.
+  Axe/overflow 320/390/1440 px w tym przebiegu nie powtarzano (są w
+  `npm run verify` / E2E). Natywny zoom, czytnik i urządzenie fizyczne —
+  niesprawdzone.
+
+Luki (nie blokują komponentów): checkout, płatny plik, finalne copy EN,
+kolekcja `/ebooki/` (pakiet 5), skan dyplomu, URL rezerwacji. Zapas CSS
+51 B nie mieści pakietu 5.
+
+Otwarte w pakiecie 4 (dane, nie kod): zapis szkiców e-booka do Content Lake
+po porównaniu, odbiór w Studio i chronionym preview z datasetem. Bez publikacji.
+
+## Wyrównanie makiet 3a i SVG — 2026-10-07
+
+Decyzja Grzesia: dekoracje 3a jako SVG (nie CSS), kompletny design Ebook3a
+oraz przywrócenie pominięć pakietów 1–3. Draft PR #30, bez merge.
+
+- Limit CSS w `scripts/check-build.mjs`: **32 KiB gzip**, komentarz że
+  tymczasowy na etap 4a. `CODE-QUALITY.md` i `IMPLEMENTATION-PLAN.md`
+  zaktualizowane. Optymalizacji CSS nie robiono.
+- Zasada SVG: `design-system/ASTRO-INTEGRATION.md`, `COMPONENTS.md`,
+  kanoniczne miejsce `src/design-system/decorations/`.
+- Ebook3a 1:1 z `ebook-3a.html`: orbita i butelki SVG, scena produktu,
+  rozdziały z numerami, karta z cieniem SVG, porównanie, cena 88 px,
+  znaczniki, strzałki audience, zakup z `ArrowIcon`.
+- Pakiety 1–3: `StageBackdrop` zamiast `::before`/div tła, motywy okładek
+  SVG, `CheckMark` zamiast `::before`, ścieżka konsultacji jak w makiecie,
+  zasoby O mnie ze strzałką, układ wyników homepage jak cherry-white.
+- `npm run verify` Node 24.21.0: **PASS**. 180 + 11 plików Astro/TS,
+  82 unit, 29 stron, JS **5770 B**, CSS **22810 B gzip** (limit 32768,
+  zapas 9958 B). **90 E2E PASS**.
+- verify-ola `ola-1791401668`, port 4340, doctor PASS, `posts []`.
+  Screenshoty desktop 1280×900 i mobile 390×844: homepage, O mnie,
+  konsultacja, landing PL/EN, każda obok makiety. Dowody:
+  `/tmp/ola-verify-evidence/ola-1791401668/`. Viewport CLI verify-ola
+  to 1280×900; mobile z osobnego Chromium na tym samym `base`.
+  Axe/overflow 320/390/1440 px w E2E. Natywny zoom, czytnik i urządzenie
+  fizyczne — niesprawdzone.
+
+Audyt pakietów 1–3 po SVG (2026-10-07, wieczór): największe luki z raportu
+(mozaika wyników, motywy okładek, scena alt, licznik 92 px, ramka partnerów,
+strzałki zasobów, ścieżka konsultacji) były już w kodzie. Dociągnięte
+pozostałe różnice vs `cherry-white.html` / `about-3a` / `consultation-3a`:
+pille tematów z `aria-current` i zsynchronizowanym scrollem, pozycja karuzeli,
+meta karty na krańcach, hover okładki, `mix-blend-mode` logotypów, rząd
+kontrolek z grupami/ledem, kadr zdjęć, kąty chmury pytań, strzałka w dół
+przy CTA konsultacji. FAQ zostaje przy wspólnym `FaqItem` (+/×), nie chevronie
+z makiety konsultacji — to wspólny komponent 3a.
+
+- `npm run verify` po dociągnięciu: **PASS**. CSS **23293 B gzip** / limit 32768
+  (zapas 9475 B), JS 5770 B, **90 E2E PASS**.
+- verify-ola `ola-1791402970`, port 4340, doctor PASS, `posts []`. ARIA homepage:
+  nawigacja „Temat e-booków”, pozycja `1–3 z 6`. Screenshoty desktop 1280×900
+  i mobile 390×844 obok makiet. Dowody: `/tmp/ola-verify-evidence/ola-1791402970/`.
+
+## Zdjęcia makiet 3a na produkcji — 2026-10-07
+
+Uwaga Grzesia po porównaniach: zdjęcia z makiet mają być na produkcji w tym
+samym miejscu, z tym samym kadrem, proporcjami i wycięciem tła. Te same pliki
+co makieta (hashe `src/assets` = `mockups/homepage/assets` / portrety), pipeline
+Astro (`SiteImage` + `astro:assets`, `layout="none"`, WebP, `width`/`height`,
+lazy poniżej folda). Fallback CMS: klucze fixture `hero|about|contact|food`
+oraz logotypy, gdy `mediaObject.image` jest puste. `author.photo` w seedzie
+wskazuje `about.webp`. Skan dyplomu **nie został dostarczony** — bez
+placeholdera-zdjęcia.
+
+| Zdjęcie z makiety                                            | Plik na produkcji                                                                     | Strona i sekcja                                                                                          | Status                                                                    |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `hero.webp` (wycięcie tła, 1122×1402, alpha)                 | `src/assets/portraits/hero.webp` → `/_astro/hero.*.webp` (WebP VP8X z alpha, 164 KiB) | Homepage hero; konsultacja hero (desktop i mobile)                                                       | OK, `object-fit: contain` / `center bottom`                               |
+| `about.webp` (portret)                                       | `src/assets/portraits/about.webp` → `/_astro/about.*.webp`                            | Homepage „O mnie”; O mnie hero; konsultacja „Po drugiej stronie jest Ola”; landing e-booka PL/EN autorka | OK; ekspert: 520 px / `center 28%` (470/400/340 w breakpointach)          |
+| `contact.webp` (wnętrze, 1536×1024)                          | `src/assets/portraits/contact.webp` → `/_astro/contact.*.webp`                        | Homepage panel konsultacji; O mnie panel; konsultacja przebieg                                           | OK; przebieg `object-position: 72% center`, 460/360/320/280 px            |
+| `food-editorial.webp` inset                                  | `src/assets/editorial/food-editorial.webp` (identyczny z makietą)                     | Homepage „O mnie”, kadr 220×156 / `right: -56px`                                                         | OK                                                                        |
+| `food-editorial.webp` tło okładki `art-nutrition`            | ten sam plik, wariant 320×180                                                         | Homepage karta e-booka „Szczupła, a jednak PCOS”                                                         | OK; `.ao-card__media > img` żeby globalny kadr 1.5 nie nadpisywał okładki |
+| `alab.svg`, `uns.png`, `norsan.png`, `norsa.png`, `omni.png` | `src/assets/partners/*` → `/_astro/*`                                                 | Homepage belka marek                                                                                     | OK; SVG poza rasterem, PNG przez pipeline                                 |
+| Skan dyplomu                                                 | **brak pliku w repo**                                                                 | O mnie, wykształcenie                                                                                    | Placeholder SVG jak makieta; bez fikcyjnego dokumentu                     |
+| Awatary opinii                                               | —                                                                                     | Homepage / O mnie / konsultacja / e-book opinie                                                          | Nie ma w makiecie; nie dodano                                             |
+
+`npm run verify` Node 24.21.0: **PASS**. 183 + 11 plików Astro/TS, 87 unit,
+29 stron, JS **5770 B**, CSS **23405 B gzip** (limit 32768, zapas 9363 B),
+**90 E2E PASS**. Build wypisał 10 zoptymalizowanych obrazów.
+
+verify-ola `ola-1791404697`, port 4340, doctor PASS, Node 24.21.0, `posts []`
+na homepage, konsultacji i landingu e-booka. H1 PL/EN zgodne z fixture.
+Screenshoty desktop 1280×900 (verify-ola, fullPage) i mobile 390×844 obok
+makiet: homepage, O mnie, konsultacja, ebook PL/EN. Dowody:
+`/tmp/ola-verify-evidence/ola-1791404697/`. Viewport CLI verify-ola to
+1280×900; mobile z osobnego Chromium na tym samym `base`. Axe/overflow
+320/390/1440 px w E2E. Natywny zoom, czytnik i urządzenie fizyczne —
+niesprawdzone.
+
 ## Następny krok
 
-Pakiet 4 etapu 4a: Ebook3a (`ebook-3a.html`) i wspólny dokument produktu
-według EBOOK-CMS-CONFIG-3A. Przed pierwszym nowym blokiem CSS sprawdzić
-budżet 20 KB gzip. Potem kolekcja → blog → artykuł. Import
-homepage/About/konsultacji do szkiców Sanity dopiero na osobne zlecenie
-zapisu. Publikacja treści/strony wymaga osobnego zlecenia.
+Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty
+produktu, kategorie i filtrowanie. Limit CSS jest tymczasowo 32 KiB;
+optymalizacja później. Import homepage/About/konsultacji/e-booka do szkiców
+Sanity dopiero na osobne zlecenie zapisu. Publikacja treści/strony wymaga
+osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
 axe/overflow About przy 320/390/1440 px, natywny zoom, czytnik i fizyczne

@@ -19,6 +19,13 @@ import {
   articleImageType,
   articleTableType,
 } from "./objects/article-body";
+import {
+  ebookChapterType,
+  ebookDeliveryType,
+  ebookLandingType,
+  ebookMaterialType,
+  ebookSourceType,
+} from "./objects/ebook-landing";
 import { mediaObjectType } from "./objects/media-object";
 import { seoType } from "./objects/seo";
 
@@ -32,6 +39,11 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   articleTableType,
   articleBodyType,
   ...pageSectionTypes,
+  ebookChapterType,
+  ebookMaterialType,
+  ebookSourceType,
+  ebookDeliveryType,
+  ebookLandingType,
   pageType,
   articleType,
   authorType,

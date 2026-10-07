@@ -1,6 +1,6 @@
 import type { Locale } from "@ola/shared";
 
-import { articlePath } from "@/lib/paths";
+import { articlePath, ebookPath } from "@/lib/paths";
 import { formatDate, toDatetime } from "@/lib/dates";
 import type {
   ActionLink,
@@ -658,7 +658,7 @@ function toEbookCard(
     subtitle: item.subtitle ?? undefined,
     topic,
     description: required(item.cardDescription, "opis e-booka"),
-    href: `#ebook-${slug}`,
+    href: ebookPath(language, slug),
     coverTone: item.coverTone === "cherry" ? "cherry" : "light",
     availability,
     priceGross: item.priceGross ?? 0,
@@ -674,7 +674,7 @@ function toEbookTopic(value: string | null | undefined): EbookTopic {
   throw new Error(`Nieznany temat e-booka: ${value ?? "brak"}.`);
 }
 
-function toEbookAvailability(
+export function toEbookAvailability(
   value: string | null | undefined,
 ): EbookAvailability {
   if (

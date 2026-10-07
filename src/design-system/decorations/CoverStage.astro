@@ -1,0 +1,45 @@
+---
+interface Props {
+  variant?: "default" | "alt";
+  class?: string;
+}
+const { variant = "default", class: className } = Astro.props;
+---
+
+<div class:list={["ao-cover-stage", `ao-cover-stage--${variant}`, className]}>
+  <svg class="ao-cover-stage__fill" aria-hidden="true" focusable="false">
+    <rect width="100%" height="100%" rx="24" fill="currentColor"></rect>
+  </svg>
+  <div class="ao-cover-stage__content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .ao-cover-stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 440px;
+    padding: 36px var(--ao-space-24);
+    color: var(--ao-stage);
+  }
+  .ao-cover-stage--alt {
+    color: var(--ao-stage-alt);
+  }
+  .ao-cover-stage__fill {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .ao-cover-stage__content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+  }
+</style>

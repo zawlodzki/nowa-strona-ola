@@ -1,0 +1,1030 @@
+---
+import type { Locale } from "@ola/shared";
+
+import ArrowIcon from "@/design-system/components/ArrowIcon.astro";
+import BookCover from "@/design-system/components/BookCover.astro";
+import Button from "@/design-system/components/Button.astro";
+import Container from "@/design-system/components/Container.astro";
+import FaqItem from "@/design-system/components/FaqItem.astro";
+import Heading from "@/design-system/components/Heading.astro";
+import Hero from "@/design-system/components/Hero.astro";
+import ReviewCard from "@/design-system/components/ReviewCard.astro";
+import Section from "@/design-system/components/Section.astro";
+import TextLink from "@/design-system/components/TextLink.astro";
+import BookArtDecisions from "@/design-system/decorations/BookArtDecisions.astro";
+import CheckMark from "@/design-system/decorations/CheckMark.astro";
+import ProductOrbit from "@/design-system/decorations/ProductOrbit.astro";
+import SheetShadow from "@/design-system/decorations/SheetShadow.astro";
+import SupplementBottles from "@/design-system/decorations/SupplementBottles.astro";
+import SiteImage from "@/design-system/components/SiteImage.astro";
+import { ebookCopy } from "@/content/ebook-seed";
+import { canPurchase, type EbookView } from "@/content/map-ebook";
+import { schemaOfferAvailability } from "@/lib/offer";
+
+export interface Props {
+  lang: Locale;
+  content: EbookView;
+}
+
+const { lang, content } = Astro.props;
+const copy = ebookCopy[lang];
+const { landing, author, chapters, materials } = content;
+const planned = !canPurchase(content.availability);
+const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${content.currencyLabel}`;
+const oneLine = (value: string) => value.replaceAll("\n", " ");
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      name: oneLine(landing.heroTitle),
+      description: landing.heroLead,
+      inLanguage: lang,
+      about: { "@id": "#ebook" },
+    },
+    {
+      "@type": "Product",
+      "@id": "#ebook",
+      name: content.title,
+      description: landing.heroLead,
+      author: {
+        "@type": "Person",
+        name: author.name,
+        jobTitle: author.role,
+      },
+      offers: {
+        "@type": "Offer",
+        price: content.priceGross,
+        priceCurrency: content.currency,
+        availability: schemaOfferAvailability(content.availability),
+        url: content.checkoutUrl,
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: landing.faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+  ],
+};
+---
+
+<main id="main" class="ebook3a">
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(jsonLd)}
+  ></script>
+  <Hero
+    id="start"
+    kind="product"
+    title={landing.heroTitle}
+    description={landing.heroLead}
+  >
+    <p class="ebook3a-eyebrow" slot="kicker">
+      {copy.heroEyebrow}
+    </p>
+    <Button slot="actions" as="a" href="#cena" arrow>
+      {landing.primaryLabel}
+    </Button>
+    <TextLink slot="actions" href="#podglad">
+      {landing.secondaryLabel}
+    </TextLink>
+    <figure slot="media" class="ebook3a-stage">
+      <div class="ebook3a-orbit">
+        <ProductOrbit />
+      </div>
+      <div class="ebook3a-book">
+        <BookCover
+          title={content.title}
+          subtitle={content.subtitle ?? ""}
+          author={author.name}
+          topic={copy.coverTopic}
+          tone={content.coverTone}
+        >
+          <BookArtDecisions slot="art" labels={copy.coverArt} />
+        </BookCover>
+      </div>
+      <figcaption class="ebook3a-caption">{copy.coverCaption}</figcaption>
+    </figure>
+  </Hero>
+
+  <div class="ao-container ebook3a-facts" aria-label={copy.factsAria}>
+    {landing.facts.map((fact) => (
+      <p>
+        <strong>{fact.title}</strong>
+        <span>{fact.detail}</span>
+      </p>
+    ))}
+  </div>
+
+  <Section id="problem">
+    <Container class="ebook3a-split ebook3a-problem">
+      <div>
+        <Heading>{landing.problemTitle}</Heading>
+        {landing.problemParagraphs.map((paragraph, index) => (
+          <p class="ebook3a-copy">
+            {index === 1 ? <strong>{paragraph}</strong> : paragraph}
+          </p>
+        ))}
+      </div>
+      <div class="ebook3a-shelf">
+        <SupplementBottles labels={copy.bottleLabels} />
+        <div class="ebook3a-questions">
+          {landing.problemQuestions.map((question) => (
+            <p>{question}</p>
+          ))}
+        </div>
+        <p class="ebook3a-caption">{copy.problemCaption}</p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="dla-kogo" surface="soft">
+    <Container>
+      <div class="ebook3a-audience-head">
+        <Heading>{landing.audienceTitle}</Heading>
+        <p class="ebook3a-copy">{landing.audienceLead}</p>
+      </div>
+      <div class="ebook3a-audience">
+        {landing.audienceItems.map((item) => (
+          <article>
+            <span class="ebook3a-mark" aria-hidden="true">
+              <ArrowIcon />
+            </span>
+            <Heading as="h3" size="card">
+              {item.title}
+            </Heading>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+      <p class="ebook3a-note ebook3a-audience-note">{landing.educationNote}</p>
+    </Container>
+  </Section>
+
+  <Section id="zawartosc">
+    <Container class="ebook3a-split ebook3a-contents">
+      <div>
+        <p class="ebook3a-eyebrow">{copy.contentsEyebrow}</p>
+        <Heading>{landing.contentsTitle}</Heading>
+        <p class="ebook3a-copy">{landing.contentsLead}</p>
+        <TextLink href="#podglad">{copy.sampleLink}</TextLink>
+        <p class="ebook3a-cloud" aria-label={copy.ingredientsAria}>
+          {landing.ingredients.map((item) => (
+            <span>{item}</span>
+          ))}
+        </p>
+      </div>
+      <div class="ebook3a-chapters">
+        {chapters.map((chapter, index) => (
+          <details class="ebook3a-chapter" open={index === 0}>
+            <summary>
+              <span class="ebook3a-chapter-num">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span>{chapter.title}</span>
+              <svg
+                class="ao-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>
+            </summary>
+            <p>{chapter.summary}</p>
+          </details>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="podglad" surface="soft">
+    <Container class="ebook3a-split ebook3a-preview">
+      <div class="ebook3a-sheet-wrap">
+        <SheetShadow />
+        <div class="ebook3a-sheet">
+          <p class="ebook3a-eyebrow">{copy.sampleKicker}</p>
+          <Heading as="h3" size="card">
+            {copy.sampleSheetTitle}
+          </Heading>
+          <p>{copy.sampleSheetLead}</p>
+          <dl>
+            {landing.sampleFields.map((label) => (
+              <div>
+                <dt>{label}</dt>
+                <dd>................................................</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="ebook3a-caption ebook3a-sheet-foot">
+            {copy.sampleSheetFooter.map((item) => (
+              <span>{item}</span>
+            ))}
+          </p>
+        </div>
+      </div>
+      <div>
+        <Heading>{landing.sampleTitle}</Heading>
+        <p class="ebook3a-copy">{landing.sampleLead}</p>
+        <ul class="ebook3a-materials">
+          {materials.map((item) => (
+            <li>
+              <CheckMark />
+              <span>{item.title}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="ebook3a-note">{landing.sampleCaption}</p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="efekty">
+    <Container>
+      <Heading>{landing.outcomesTitle}</Heading>
+      <p class="ebook3a-copy ebook3a-outcomes-lead">{landing.outcomesLead}</p>
+      <div class="ebook3a-compare">
+        <div>
+          <span class="ebook3a-eyebrow">{copy.beforeLabel}</span>
+          {landing.comparisonItems.map((item) => (
+            <p>{item.before}</p>
+          ))}
+        </div>
+        <div>
+          <span class="ebook3a-eyebrow">{copy.afterLabel}</span>
+          {landing.comparisonItems.map((item) => (
+            <p>{item.after}</p>
+          ))}
+        </div>
+      </div>
+      <p class="ebook3a-note">{landing.outcomesNote}</p>
+    </Container>
+  </Section>
+
+  <Section id="autorka">
+    <Container class="ebook3a-split ebook3a-author">
+      <figure>
+        <SiteImage
+          src={author.photo?.src}
+          fallback="about"
+          alt={author.photo?.label ?? author.name}
+          width={700}
+          height={900}
+          loading="lazy"
+        />
+      </figure>
+      <div>
+        <p class="ebook3a-eyebrow">{copy.authorEyebrow}</p>
+        <Heading>{landing.authorTitle}</Heading>
+        {landing.authorParagraphs.map((paragraph) => (
+          <p class="ebook3a-copy">{paragraph}</p>
+        ))}
+        {content.sources[0] && (
+          <TextLink
+            href={content.sources[0].href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {content.sources[0].title}
+          </TextLink>
+        )}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="cena" surface="soft">
+    <Container class="ebook3a-split ebook3a-price-layout">
+      <div>
+        <Heading>{landing.offerTitle}</Heading>
+        <p class="ebook3a-copy">{landing.offerLead}</p>
+        <div class="ebook3a-price-book" aria-hidden="true">
+          <div class="ebook3a-book">
+            <BookCover
+              title={content.title}
+              subtitle={content.subtitle ?? ""}
+              author={author.name}
+              topic={copy.coverTopic}
+              tone={content.coverTone}
+            >
+              <BookArtDecisions slot="art" labels={copy.coverArt} />
+            </BookCover>
+          </div>
+        </div>
+      </div>
+      <div class="ebook3a-offer">
+        <p class="ebook3a-eyebrow">{copy.offerPackage}</p>
+        <Heading as="h3" size="card">
+          {content.title}
+        </Heading>
+        {content.subtitle && <p class="ebook3a-muted">{content.subtitle}</p>}
+        <p class="ebook3a-price">
+          {content.priceGross}
+          <span>{content.currencyLabel}</span>
+          <small>{copy.offerPriceNote}</small>
+        </p>
+        <ul class="ebook3a-materials">
+          {copy.offerIncludes.map((item) => (
+            <li>
+              <CheckMark />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        {planned || !content.checkoutUrl ? (
+          <details class="ebook3a-purchase">
+            <summary class="ao-button">
+              {purchaseText}
+              <ArrowIcon />
+            </summary>
+            <div>
+              <strong>{copy.purchasePreviewTitle}</strong>
+              <p>{copy.purchasePreviewBody}</p>
+            </div>
+          </details>
+        ) : (
+          <Button as="a" href={content.checkoutUrl} arrow>
+            {purchaseText}
+          </Button>
+        )}
+        {landing.offerNote && <p class="ebook3a-note">{landing.offerNote}</p>}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="opinie">
+    <Container>
+      <Heading>{landing.testimonials.title}</Heading>
+      <p class="ebook3a-copy">{landing.testimonials.lead}</p>
+      <div class="ebook3a-reviews">
+        {landing.testimonials.items.map((item) => (
+          <ReviewCard
+            author={
+              item.anonymous ? (item.displayLabel ?? "") : (item.name ?? "")
+            }
+            context={item.anonymous ? undefined : item.role}
+          >
+            <p>{item.quote}</p>
+          </ReviewCard>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="faq">
+    <Container class="ebook3a-split ebook3a-faq">
+      <div>
+        <Heading>{landing.faq.title}</Heading>
+        <p class="ebook3a-copy">{landing.faq.lead}</p>
+        <TextLink href="#cena">{copy.faqCta}</TextLink>
+      </div>
+      <div>
+        {landing.faq.items.map((item, index) => (
+          <FaqItem question={item.question} open={index === 0}>
+            <p>{item.answer}</p>
+          </FaqItem>
+        ))}
+      </div>
+    </Container>
+  </Section>
+</main>
+
+<style>
+  .ebook3a :global(.ao-hero--product) {
+    gap: 32px;
+    padding-block: 44px 52px;
+  }
+  .ebook3a :global(.ao-hero--product .ao-lead) {
+    max-width: 480px;
+    font-size: 20px;
+  }
+  .ebook3a :global(.ao-text-link) {
+    width: fit-content;
+    justify-content: flex-start;
+    gap: 14px;
+    border-bottom: 0;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+  .ebook3a-eyebrow {
+    margin: 0 0 var(--ao-space-12);
+    color: var(--ao-muted);
+    font-size: 13px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .ebook3a-copy {
+    max-width: 48ch;
+    margin-top: 22px;
+    font-size: 18px;
+    color: var(--ao-muted);
+  }
+  .ebook3a-copy strong {
+    color: var(--ao-ink);
+    font-weight: 600;
+  }
+  .ebook3a-muted,
+  .ebook3a-note,
+  .ebook3a-caption {
+    color: var(--ao-muted);
+    font-size: 14px;
+  }
+  .ebook3a-note,
+  .ebook3a-caption {
+    margin-top: 24px;
+  }
+  .ebook3a-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+  .ebook3a-stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    min-height: 540px;
+    margin: 0;
+    padding: 40px 32px 18px;
+    overflow: hidden;
+    border-radius: 160px 24px 24px 24px;
+    background: var(--ao-surface);
+  }
+  .ebook3a-orbit {
+    position: absolute;
+    width: min(500px, 120%);
+    pointer-events: none;
+  }
+  .ebook3a-orbit :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+    color: var(--ao-line);
+    transform: rotate(-20deg) scaleY(0.8);
+  }
+  .ebook3a-book {
+    position: relative;
+    width: 252px;
+    max-width: 100%;
+    transform: rotate(-8deg);
+  }
+  .ebook3a-stage .ebook3a-caption {
+    position: relative;
+    margin-top: 30px;
+  }
+  .ebook3a-facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-block: 24px;
+    border-block: 1px solid var(--ao-line);
+  }
+  .ebook3a-facts p {
+    display: grid;
+    gap: 2px;
+    padding-inline: 24px;
+    border-left: 1px solid var(--ao-line);
+  }
+  .ebook3a-facts p:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .ebook3a-facts strong {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .ebook3a-facts span {
+    color: var(--ao-muted);
+    font-size: 14px;
+  }
+  .ebook3a-shelf {
+    min-width: 0;
+    padding: 32px 36px;
+    border-radius: var(--ao-radius-image);
+    background: var(--ao-surface);
+  }
+  .ebook3a-shelf :global(.ao-deco-bottles) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .ebook3a-questions {
+    display: grid;
+    gap: 8px;
+    margin-top: 22px;
+  }
+  .ebook3a-questions p {
+    width: fit-content;
+    padding: 8px 15px;
+    border: 1px solid var(--ao-line);
+    border-radius: 999px;
+    background: var(--ao-background);
+    font-size: 14px;
+  }
+  .ebook3a-questions p:nth-child(2) {
+    margin-left: auto;
+  }
+  .ebook3a-audience-head {
+    max-width: 700px;
+  }
+  .ebook3a-audience {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 80px;
+    row-gap: 35px;
+    margin-top: 48px;
+  }
+  .ebook3a-audience article {
+    position: relative;
+    padding-left: 48px;
+  }
+  .ebook3a-mark {
+    position: absolute;
+    left: 0;
+    top: -4px;
+    display: grid;
+    color: var(--ao-ink);
+  }
+  .ebook3a-audience p {
+    margin-top: 12px;
+    max-width: 420px;
+    color: var(--ao-muted);
+  }
+  .ebook3a-audience-note {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ao-line);
+  }
+  .ebook3a-contents {
+    align-items: start;
+  }
+  .ebook3a-contents :global(.ao-text-link) {
+    margin-top: 20px;
+  }
+  .ebook3a-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 360px;
+    margin-top: 32px;
+  }
+  .ebook3a-cloud span {
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--ao-surface);
+    font-size: 14px;
+  }
+  .ebook3a-chapter {
+    padding-block: 19px;
+    border-bottom: 1px solid var(--ao-line);
+  }
+  .ebook3a-chapter:first-child {
+    padding-top: 0;
+  }
+  .ebook3a-chapter summary {
+    display: grid;
+    grid-template-columns: 35px 1fr 20px;
+    gap: 14px;
+    align-items: baseline;
+    min-height: 44px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 21px;
+    font-weight: 550;
+    line-height: 1.3;
+  }
+  .ebook3a-chapter summary::-webkit-details-marker {
+    display: none;
+  }
+  .ebook3a-chapter-num {
+    color: var(--ao-muted);
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .ebook3a-chapter[open] summary :global(.ao-icon) {
+    transform: rotate(45deg);
+  }
+  .ebook3a-chapter p {
+    margin: 10px 34px 0 49px;
+    color: var(--ao-muted);
+  }
+  .ebook3a-preview {
+    align-items: center;
+  }
+  .ebook3a-sheet-wrap {
+    position: relative;
+    transform: rotate(-3deg);
+  }
+  .ebook3a-sheet-wrap :global(.ao-deco-sheet-shadow) {
+    position: absolute;
+    inset: 14px -12px -14px 12px;
+    display: block;
+    width: auto;
+    height: auto;
+    color: color-mix(in srgb, var(--ao-ink) 9%, transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ebook3a-sheet {
+    position: relative;
+    z-index: 1;
+    padding: 40px;
+    border-radius: 12px;
+    background: var(--ao-background);
+  }
+  .ebook3a-sheet :global(.ao-heading--card) {
+    margin-top: 25px;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .ebook3a-sheet > p:not(.ebook3a-eyebrow):not(.ebook3a-caption) {
+    margin-top: 15px;
+    color: var(--ao-muted);
+    font-size: 14px;
+  }
+  .ebook3a-sheet dl {
+    margin: 24px 0;
+  }
+  .ebook3a-sheet dl div {
+    padding-block: 10px;
+  }
+  .ebook3a-sheet dt {
+    font-size: 14px;
+    font-weight: 550;
+  }
+  .ebook3a-sheet dd {
+    margin: 4px 0 0;
+    overflow: hidden;
+    color: var(--ao-muted);
+    white-space: nowrap;
+  }
+  .ebook3a-sheet-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 0;
+    padding-top: 15px;
+    border-top: 1px solid var(--ao-line);
+    font-size: 11px;
+  }
+  .ebook3a-materials {
+    display: grid;
+    gap: 10px;
+    margin: 25px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ebook3a-materials li {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .ebook3a-materials :global(.ao-deco-check) {
+    width: 12px;
+    height: 12px;
+    margin-top: 4px;
+    color: var(--ao-primary);
+  }
+  .ebook3a-outcomes-lead {
+    max-width: 650px;
+  }
+  .ebook3a-compare {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    margin-top: 40px;
+    overflow: hidden;
+    border: 1px solid var(--ao-line);
+    border-radius: var(--ao-radius-image);
+  }
+  .ebook3a-compare > div {
+    padding: 40px;
+  }
+  .ebook3a-compare > div:last-child {
+    background: var(--ao-surface);
+  }
+  .ebook3a-compare .ebook3a-eyebrow {
+    display: block;
+    margin-bottom: 24px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .ebook3a-compare p {
+    margin-top: 22px;
+    font-size: 27px;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+  }
+  .ebook3a-compare > div:first-child p {
+    color: var(--ao-muted);
+  }
+  .ebook3a-compare > div:last-child p {
+    font-weight: 550;
+  }
+  .ebook3a-author {
+    align-items: center;
+    padding-block: 0;
+  }
+  .ebook3a-author img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    object-position: center 35%;
+    border-radius: 100px 24px 24px 24px;
+    background: var(--ao-surface);
+  }
+  .ebook3a-author .ebook3a-eyebrow {
+    line-height: 1.6;
+  }
+  .ebook3a-author :global(.ao-text-link) {
+    margin-top: 22px;
+    font-size: 13px;
+  }
+  .ebook3a-price-layout {
+    align-items: start;
+    gap: 70px;
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+  .ebook3a-price-book {
+    padding: 55px 35px 0;
+  }
+  .ebook3a-offer {
+    padding: 40px;
+    border-radius: var(--ao-radius-image);
+    background: var(--ao-background);
+  }
+  .ebook3a-offer :global(.ao-heading--card) {
+    margin-top: 8px;
+    font-size: 31px;
+    font-weight: 650;
+  }
+  .ebook3a-muted {
+    margin-top: 8px;
+  }
+  .ebook3a-price {
+    margin-top: 30px;
+    font-size: 88px;
+    font-weight: 650;
+    line-height: 1;
+    letter-spacing: -0.06em;
+  }
+  .ebook3a-price span {
+    font-size: 38px;
+    letter-spacing: -0.03em;
+  }
+  .ebook3a-price small {
+    display: block;
+    margin-top: 10px;
+    color: var(--ao-muted);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .ebook3a-offer .ebook3a-materials {
+    margin-block: 30px;
+    font-size: 15px;
+  }
+  .ebook3a-purchase summary {
+    width: 100%;
+    margin-top: 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  .ebook3a-purchase summary::-webkit-details-marker {
+    display: none;
+  }
+  .ebook3a-purchase div {
+    margin-top: 16px;
+    padding: 18px;
+    border: 1px solid var(--ao-line);
+    border-radius: 12px;
+    font-size: 14px;
+  }
+  .ebook3a-purchase p {
+    margin-top: 8px;
+    color: var(--ao-muted);
+  }
+  .ebook3a-offer .ebook3a-note {
+    margin-top: 18px;
+    font-size: 12px;
+  }
+  .ebook3a-reviews {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 40px;
+  }
+  .ebook3a-reviews :global(.ao-review) {
+    padding: 28px 32px;
+    border: 0;
+    border-radius: var(--ao-radius-image);
+    background: var(--ao-surface);
+  }
+  .ebook3a-reviews :global(.ao-review__mark) {
+    margin-bottom: 4px;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1;
+    color: inherit;
+  }
+  .ebook3a-reviews :global(.ao-review blockquote) {
+    max-width: none;
+    margin: 4px 0 25px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .ebook3a-faq {
+    align-items: start;
+    gap: 90px;
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+  .ebook3a-faq .ebook3a-copy {
+    max-width: 290px;
+  }
+  .ebook3a-faq :global(.ao-text-link) {
+    margin-top: 20px;
+  }
+  @container page3a (max-width: 1199px) {
+    .ebook3a-split,
+    .ebook3a-faq {
+      gap: 50px;
+    }
+    .ebook3a-price-layout {
+      gap: 40px;
+    }
+  }
+  @container page3a (max-width: 999px) {
+    .ebook3a :global(.ao-hero--product) {
+      gap: 24px;
+    }
+    .ebook3a-stage {
+      min-height: 485px;
+      padding-inline: 22px;
+    }
+    .ebook3a-split.ebook3a-problem,
+    .ebook3a-contents {
+      gap: 35px;
+    }
+    .ebook3a-shelf {
+      padding: 25px 20px;
+    }
+    .ebook3a-chapter summary {
+      font-size: 18px;
+    }
+    .ebook3a-sheet {
+      padding: 25px;
+    }
+    .ebook3a-preview {
+      gap: 45px;
+    }
+    .ebook3a-compare > div {
+      padding: 30px;
+    }
+    .ebook3a-compare p {
+      font-size: 23px;
+    }
+    .ebook3a-author {
+      gap: 40px;
+    }
+    .ebook3a-price-layout {
+      gap: 35px;
+    }
+    .ebook3a-offer {
+      padding: 28px;
+    }
+    .ebook3a-reviews {
+      gap: 25px;
+    }
+    .ebook3a-reviews :global(.ao-review blockquote) {
+      font-size: 21px;
+    }
+    .ebook3a-faq {
+      gap: 40px;
+    }
+  }
+  @container page3a (max-width: 767px) {
+    .ebook3a :global(.ao-hero--product) {
+      gap: 35px;
+      padding-block: 32px 36px;
+    }
+    .ebook3a :global(.ao-hero--product .ao-lead) {
+      font-size: 18px;
+    }
+    .ebook3a-stage {
+      min-height: 510px;
+      padding-block: 40px 25px;
+    }
+    .ebook3a-facts {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .ebook3a-facts p,
+    .ebook3a-facts p:first-child {
+      grid-template-columns: 1fr 1.1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 0;
+      border: 0;
+    }
+    .ebook3a-facts strong {
+      font-size: 17px;
+    }
+    .ebook3a-facts span {
+      font-size: 12px;
+    }
+    .ebook3a-split,
+    .ebook3a-price-layout,
+    .ebook3a-faq {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .ebook3a-audience {
+      grid-template-columns: 1fr;
+      row-gap: 28px;
+      margin-top: 35px;
+    }
+    .ebook3a-cloud {
+      max-width: none;
+    }
+    .ebook3a-sheet-wrap {
+      margin: 10px 8px;
+    }
+    .ebook3a-sheet {
+      padding: 30px;
+    }
+    .ebook3a-preview > div:last-child {
+      order: -1;
+    }
+    .ebook3a-preview {
+      display: flex;
+      flex-direction: column;
+    }
+    .ebook3a-compare {
+      grid-template-columns: 1fr;
+    }
+    .ebook3a-compare p {
+      font-size: 25px;
+    }
+    .ebook3a-author img {
+      height: 390px;
+      max-width: 470px;
+    }
+    .ebook3a-price-book {
+      display: none;
+    }
+    .ebook3a-offer {
+      padding: 30px;
+    }
+    .ebook3a-reviews {
+      grid-template-columns: 1fr;
+    }
+    .ebook3a-reviews :global(.ao-review blockquote) {
+      font-size: 23px;
+    }
+  }
+  @container page3a (max-width: 374px) {
+    .ebook3a-stage {
+      min-height: 465px;
+      padding-inline: 18px;
+    }
+    .ebook3a-orbit {
+      width: 370px;
+    }
+    .ebook3a-sheet-wrap {
+      transform: none;
+    }
+    .ebook3a-sheet {
+      padding: 22px;
+    }
+    .ebook3a-sheet :global(.ao-heading--card) {
+      font-size: 32px;
+    }
+    .ebook3a-chapter p {
+      margin-inline: 0;
+    }
+    .ebook3a-chapter summary {
+      grid-template-columns: 24px 1fr 16px;
+      gap: 10px;
+      font-size: 18px;
+    }
+    .ebook3a-offer {
+      padding: 24px;
+    }
+    .ebook3a-compare > div {
+      padding: 24px;
+    }
+    .ebook3a-reviews :global(.ao-review) {
+      padding: 24px;
+    }
+  }
+</style>

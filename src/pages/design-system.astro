@@ -18,8 +18,9 @@ import Carousel from "../design-system/components/Carousel.astro";
 import Breadcrumbs from "../design-system/components/Breadcrumbs.astro";
 import ReviewCard from "../design-system/components/ReviewCard.astro";
 import Hero from "../design-system/components/Hero.astro";
-import heroPortrait from "../assets/portraits/hero.webp?url";
-import portrait from "../assets/portraits/contact.webp?url";
+import BookArtDecisions from "../design-system/decorations/BookArtDecisions.astro";
+import CoverStage from "../design-system/decorations/CoverStage.astro";
+import SiteImage from "../design-system/components/SiteImage.astro";
 const links = [
   { label: "Fundamenty", href: "#fundamentals" },
   { label: "Komponenty", href: "#components" },
@@ -61,11 +62,13 @@ const colors = [
         </Button>
         <div slot="media" class="ds-portrait">
           <div class="ds-portrait__backdrop"></div>
-          <img
-            src={heroPortrait}
+          <SiteImage
+            src="hero"
+            fallback="hero"
             alt="Aleksandra Olesiewicz"
-            width="1122"
-            height="1402"
+            width={1122}
+            height={1402}
+            loading="eager"
             fetchpriority="high"
           />
         </div>
@@ -159,34 +162,31 @@ const colors = [
               }
               href="#reading"
               description="Przykład kompozycji okładki, metadanych i linku do produktu."
-              metadata="PCOS · e-book"
+              metadata="PCOS"
+              metadataEnd="e-book"
               actionLabel="Zobacz e-book"
             >
-              <BookCover
+              <CoverStage
                 slot="media"
-                author="Aleksandra Olesiewicz"
-                title={
-                  number === 1 ? "Suplementy w PCOS" : "Odżywianie na co dzień"
-                }
-                subtitle="Jak wybrać to, co ma sens — bez szumu informacyjnego."
-                topic="PCOS / PRAKTYCZNY PRZEWODNIK"
-                tone={number === 2 ? "cherry" : "light"}
+                variant={number === 2 ? "alt" : "default"}
               >
-                <div slot="art" class="ao-book-decisions">
-                  <div>
-                    Cel
-                    <i />
-                  </div>
-                  <div>
-                    Dawka
-                    <i />
-                  </div>
-                  <div>
-                    Decyzja
-                    <i />
-                  </div>
-                </div>
-              </BookCover>
+                <BookCover
+                  author="Aleksandra Olesiewicz"
+                  title={
+                    number === 1
+                      ? "Suplementy w PCOS"
+                      : "Odżywianie na co dzień"
+                  }
+                  subtitle="Jak wybrać to, co ma sens — bez szumu informacyjnego."
+                  topic="PCOS / PRAKTYCZNY PRZEWODNIK"
+                  tone={number === 2 ? "cherry" : "light"}
+                >
+                  <BookArtDecisions
+                    slot="art"
+                    labels={["Cel", "Dawka", "Decyzja"]}
+                  />
+                </BookCover>
+              </CoverStage>
               <span slot="price">Przykład ceny</span>
             </ContentCard>
           ))}
@@ -221,12 +221,13 @@ const colors = [
           <Button as="a" href="#newsletter" arrow>
             Poznaj kolejne kroki
           </Button>
-          <img
+          <SiteImage
             slot="media"
-            src={portrait}
+            src="contact"
+            fallback="contact"
             alt="Aleksandra Olesiewicz"
-            width="1122"
-            height="1402"
+            width={1536}
+            height={1024}
             loading="lazy"
           />
         </SplitPanel>

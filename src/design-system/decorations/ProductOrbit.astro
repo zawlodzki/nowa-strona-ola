@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  class:list={["ao-deco-orbit", className]}
+  viewBox="0 0 500 500"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1"
+  aria-hidden="true"
+  focusable="false"
+>
+  <circle cx="250" cy="250" r="249.5"></circle>
+  <circle cx="250" cy="250" r="214.5"></circle>
+</svg>

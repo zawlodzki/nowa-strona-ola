@@ -271,8 +271,13 @@ Media do zaimportowania z zaakceptowanych lokalnych plików:
 [Hero](../src/assets/portraits/hero.webp),
 [O mnie](../src/assets/portraits/about.webp),
 [Konsultacje](../src/assets/portraits/contact.webp),
-[Posiłek](../mockups/homepage/assets/food-editorial.webp).
+[Posiłek](../src/assets/editorial/food-editorial.webp)
+(ten sam plik co [makieta](../mockups/homepage/assets/food-editorial.webp)).
 Logotypy i ich źródła: [README makiet](../mockups/homepage/README.md#materiały).
+Produkcja (07.10.2026): te pliki są fallbackiem i seedem kluczy `hero|about|contact|food`
+oraz logotypów, gdy `mediaObject.image` w CMS jest puste. Renderer idzie przez
+pipeline Astro (`SiteImage`), nie przez surowy `?url`. Skan dyplomu nadal nie jest
+w repo — kadr na „O mnie” zostaje miejscem do uzupełnienia, bez fikcyjnego dokumentu.
 Okładki e-booków są dziś kompozycją HTML/CSS; nie istnieją jako sześć gotowych
 plików obrazu. Zaplanować eksport zaakceptowanych okładek albo kontrolowany
 renderer, bez fikcyjnych ścieżek do obrazów w CMS.
@@ -304,8 +309,11 @@ nie akceptacją finalnego produktu. Opinie współpracy nie stają się opiniami
 
 Mapowanie: `ebook` jako dokument produktu, homepage `items[]` → `ebook`, blog
 `relatedEbooks[]` → `ebook`, treść landingu w `ebook.landing`; adres generowany ze
-sluga, cena i status z produktu. **Luka schematu:** kolekcja i pola landingu nie
-istnieją. **Wykonane:** [mockup](../mockups/homepage/ebook-3a.html) oraz
+sluga (`ebookPath`), cena i status z produktu. **Pakiet 4 (07.10.2026, kod
+i fixture):** landing `Ebook3a`, wariant `cherry3a`, karty homepage →
+`/ebooki/<slug>/` i `/en/ebooks/<slug>/`. Status `planned`, 97 PLN brutto.
+**Niewykonane:** kolekcja (pakiet 5), Content Lake, checkout, płatny plik.
+**Wykonane wcześniej:** [mockup](../mockups/homepage/ebook-3a.html) oraz
 [instrukcja wdrożenia](EBOOK-CMS-CONFIG-3A.md). Bez konfiguracji Content Lake,
 checkoutu i zmiany dostępności. Brak uruchomionej sprzedaży.
 

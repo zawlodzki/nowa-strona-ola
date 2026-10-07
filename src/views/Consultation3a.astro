@@ -9,11 +9,11 @@ import Hero from "@/design-system/components/Hero.astro";
 import ReviewCard from "@/design-system/components/ReviewCard.astro";
 import Section from "@/design-system/components/Section.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
+import CheckMark from "@/design-system/decorations/CheckMark.astro";
+import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
+import SiteImage from "@/design-system/components/SiteImage.astro";
 import { consultationCopy } from "@/content/consultation-seed";
 import type { ConsultationView } from "@/content/map-consultation";
-import aboutPortrait from "@/assets/portraits/about.webp?url";
-import contactPortrait from "@/assets/portraits/contact.webp?url";
-import heroPortrait from "@/assets/portraits/hero.webp?url";
 
 export interface Props {
   lang: Locale;
@@ -22,25 +22,8 @@ export interface Props {
 
 const { lang, content } = Astro.props;
 const copy = consultationCopy[lang];
-const localMedia: Record<string, string> = {
-  hero: heroPortrait,
-  contact: contactPortrait,
-  about: aboutPortrait,
-};
-
-function resolveSrc(src?: string) {
-  if (!src) return undefined;
-  return (
-    localMedia[src] ??
-    (src.startsWith("http") || src.startsWith("/") ? src : undefined)
-  );
-}
-
 const { hero, path, problem, audience, process, outcomes, expert } = content;
 const { offer, testimonials, faq, price } = content;
-const heroSrc = resolveSrc(hero.media?.src);
-const processSrc = resolveSrc(process.media?.src);
-const expertSrc = resolveSrc(expert.media.src);
 const placeholder = offer.bookingStatus !== "live";
 const expertParagraphs = expert.body
   .split(/\n\s*\n/)
@@ -111,22 +94,28 @@ const jsonLd = {
       </span>
     </p>
     {hero.secondary && (
-      <TextLink class="consult3a-secondary" href={hero.secondary.href}>
+      <TextLink
+        slot="actions"
+        class="consult3a-secondary"
+        href={hero.secondary.href}
+        arrowDirection="down"
+      >
         {hero.secondary.label}
       </TextLink>
     )}
     {placeholder && <p class="consult3a-note">{copy.bookingPlaceholder}</p>}
     <figure slot="media" class="consult3a-portrait">
       <div class="consult3a-portrait__stage">
-        {heroSrc && (
-          <img
-            src={heroSrc}
-            alt={hero.media?.label ?? ""}
-            width="1122"
-            height="1402"
-            fetchpriority="high"
-          />
-        )}
+        <StageBackdrop wideTopLeft={150} />
+        <SiteImage
+          src={hero.media?.src}
+          fallback="hero"
+          alt={hero.media?.label ?? ""}
+          width={1122}
+          height={1402}
+          loading="eager"
+          fetchpriority="high"
+        />
       </div>
       <figcaption>
         <strong>{expert.name}</strong>
@@ -136,15 +125,15 @@ const jsonLd = {
   </Hero>
 
   <Container>
-    <ol class="consult3a-path" aria-label={path.title}>
-      {path.items.map((item, index) =>
-        index === path.items.length - 1 ? (
-          <li>
+    <div class="consult3a-path" aria-label={path.title}>
+      {path.items.map((item, index) => (
+        <>
+          {index === path.items.length - 1 ? (
             <strong>{item}</strong>
-          </li>
-        ) : (
-          <li>
+          ) : (
             <span>{item}</span>
+          )}
+          {index < path.items.length - 1 && (
             <svg
               viewBox="0 0 120 24"
               fill="none"
@@ -154,12 +143,12 @@ const jsonLd = {
               focusable="false"
               preserveAspectRatio="none"
             >
-              <path d="M1 12h116m-7-7 7 7-7 7" />
+              <path d="M1 12h116m-7-7 7 7-7 7"></path>
             </svg>
-          </li>
-        ),
-      )}
-    </ol>
+          )}
+        </>
+      ))}
+    </div>
   </Container>
 
   <Section id="problem">
@@ -219,13 +208,14 @@ const jsonLd = {
       <Heading>{process.title}</Heading>
       <p class="consult3a-intro">{process.lead}</p>
       <div class="consult3a-process">
-        {process.media && processSrc && (
+        {process.media && (
           <figure>
-            <img
-              src={processSrc}
+            <SiteImage
+              src={process.media.src}
+              fallback="contact"
               alt={process.media.label}
-              width="1536"
-              height="1024"
+              width={1536}
+              height={1024}
               loading="lazy"
             />
             {process.media.caption && (
@@ -283,15 +273,14 @@ const jsonLd = {
   <Section id="prowadzaca">
     <Container class="consult3a-split consult3a-expert">
       <figure>
-        {expertSrc && (
-          <img
-            src={expertSrc}
-            alt={expert.media.label}
-            width="1122"
-            height="1402"
-            loading="lazy"
-          />
-        )}
+        <SiteImage
+          src={expert.media.src}
+          fallback="about"
+          alt={expert.media.label}
+          width={1122}
+          height={1402}
+          loading="lazy"
+        />
         <figcaption class="consult3a-small">
           {expert.name} · {expert.role}
         </figcaption>
@@ -347,7 +336,10 @@ const jsonLd = {
         </p>
         <ul>
           {offer.facts.map((fact) => (
-            <li>{fact}</li>
+            <li>
+              <CheckMark />
+              <span>{fact}</span>
+            </li>
           ))}
         </ul>
         <Button as="a" href={offer.action.href} arrow>
@@ -396,7 +388,6 @@ const jsonLd = {
 </main>
 
 <style>
-  .consult3a :global(.ao-heading),
   .consult3a h3,
   .consult3a-closing {
     white-space: pre-line;
@@ -461,15 +452,9 @@ const jsonLd = {
     isolation: isolate;
     height: 520px;
   }
-  .consult3a-portrait__stage::before {
-    content: "";
-    position: absolute;
-    inset: 24px 0 0;
-    z-index: -1;
-    border-radius: 150px 24px 24px 24px;
-    background: var(--ao-surface);
-  }
   .consult3a-portrait img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -487,25 +472,17 @@ const jsonLd = {
     color: var(--ao-muted);
   }
   .consult3a-path {
-    display: flex;
-    gap: var(--ao-space-32);
+    display: grid;
+    grid-template-columns: auto minmax(32px, 1fr) auto minmax(32px, 1fr) auto;
+    align-items: center;
+    gap: 32px;
     margin: 0;
     padding: var(--ao-space-32) 0;
-    list-style: none;
     border-block: 1px solid var(--ao-line);
     font-size: 18px;
   }
-  .consult3a-path li {
-    display: flex;
-    align-items: center;
-    gap: var(--ao-space-32);
-  }
-  .consult3a-path li:not(:last-child) {
-    flex: 1;
-  }
   .consult3a-path svg {
-    flex: 1;
-    min-width: 32px;
+    width: 100%;
     height: 24px;
   }
   .consult3a-path strong {
@@ -533,11 +510,17 @@ const jsonLd = {
     background: var(--ao-background);
     font-size: 15px;
   }
-  .consult3a-map li:nth-child(odd) {
-    rotate: -4deg;
+  .consult3a-map li:nth-child(1) {
+    rotate: -5deg;
   }
-  .consult3a-map li:nth-child(even) {
+  .consult3a-map li:nth-child(2) {
+    rotate: 4deg;
+  }
+  .consult3a-map li:nth-child(3) {
     rotate: 3deg;
+  }
+  .consult3a-map li:nth-child(4) {
+    rotate: -4deg;
   }
   .consult3a-map svg {
     display: block;
@@ -597,12 +580,18 @@ const jsonLd = {
     align-items: start;
     margin-top: var(--ao-space-48);
   }
-  .consult3a-process img,
+  .consult3a-process > figure img {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    object-position: 72% center;
+    border-radius: var(--ao-radius-image);
+  }
   .consult3a-expert img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
+    height: 520px;
     object-fit: cover;
+    object-position: center 28%;
     border-radius: var(--ao-radius-image);
   }
   .consult3a-steps {
@@ -662,10 +651,6 @@ const jsonLd = {
   }
   .consult3a-expert {
     grid-template-columns: 0.9fr 1.15fr;
-  }
-  .consult3a-expert img {
-    height: 520px;
-    object-position: center 28%;
   }
   .consult3a-expert .consult3a-closing {
     margin-top: var(--ao-space-24);
@@ -727,15 +712,13 @@ const jsonLd = {
     display: grid;
     grid-template-columns: 20px 1fr;
     gap: var(--ao-space-12);
+    align-items: start;
   }
-  .consult3a-offer li::before {
-    content: "";
-    width: 7px;
+  .consult3a-offer :global(.ao-deco-check) {
+    width: 12px;
     height: 12px;
-    margin: 3px 0 0 4px;
-    border: solid var(--ao-primary);
-    border-width: 0 1.6px 1.6px 0;
-    rotate: 45deg;
+    margin-top: 4px;
+    color: var(--ao-primary);
   }
   .consult3a-offer :global(.ao-button) {
     width: 100%;
@@ -749,8 +732,17 @@ const jsonLd = {
   .consult3a-reviews {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--ao-space-48);
-    margin-top: var(--ao-space-32);
+    gap: var(--ao-space-64);
+    margin-top: var(--ao-space-48);
+  }
+  .consult3a-reviews :global(.ao-review) {
+    padding: 32px 0 0;
+  }
+  .consult3a-reviews :global(.ao-review__mark) {
+    margin-bottom: var(--ao-space-8);
+  }
+  .consult3a-reviews :global(.ao-review figcaption) {
+    margin-top: var(--ao-space-24);
   }
   .consult3a-faq {
     grid-template-columns: 0.7fr 1.3fr;
@@ -770,6 +762,15 @@ const jsonLd = {
     .consult3a-audience,
     .consult3a-process {
       grid-template-columns: 1fr;
+    }
+    .consult3a-portrait__stage {
+      height: 430px;
+    }
+    .consult3a-process > figure img {
+      height: 360px;
+    }
+    .consult3a-expert img {
+      height: 470px;
     }
     .consult3a-offer__value {
       font-size: 84px;
@@ -801,19 +802,13 @@ const jsonLd = {
     .consult3a-portrait__stage {
       height: 400px;
     }
-    .consult3a-portrait__stage::before {
-      border-top-left-radius: 100px;
-    }
     .consult3a-path {
-      flex-direction: column;
+      grid-template-columns: 1fr;
       gap: var(--ao-space-12);
       padding-block: var(--ao-space-24);
     }
-    .consult3a-path li {
-      gap: var(--ao-space-16);
-    }
     .consult3a-path svg {
-      flex: 0 0 40px;
+      width: 40px;
       height: 12px;
     }
     .consult3a-map {
@@ -823,14 +818,28 @@ const jsonLd = {
       font-size: 24px;
     }
     .consult3a-expert img {
-      height: auto;
-      aspect-ratio: 4 / 5;
+      height: 400px;
+      object-position: center 24%;
+    }
+    .consult3a-process > figure img {
+      height: 320px;
     }
     .consult3a-proof strong {
       font-size: 54px;
     }
     .consult3a-prep {
       gap: var(--ao-space-12);
+    }
+  }
+  @container page3a (max-width: 374px) {
+    .consult3a-portrait__stage {
+      height: 330px;
+    }
+    .consult3a-process > figure img {
+      height: 280px;
+    }
+    .consult3a-expert img {
+      height: 340px;
     }
   }
 </style>

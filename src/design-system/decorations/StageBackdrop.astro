@@ -1,0 +1,62 @@
+---
+interface Props {
+  wideTopLeft?: number;
+  narrowTopLeft?: number;
+  class?: string;
+}
+const {
+  wideTopLeft = 160,
+  narrowTopLeft = 100,
+  class: className,
+} = Astro.props;
+const width = 600;
+const height = 536;
+const corner = 24;
+
+function stagePath(topLeft: number) {
+  return `M${topLeft} 0H${width - corner}a${corner} ${corner} 0 0 1 ${corner} ${corner}v${height - corner * 2}a${corner} ${corner} 0 0 1 ${-corner} ${corner}H${corner}a${corner} ${corner} 0 0 1 ${-corner} ${-corner}V${topLeft}A${topLeft} ${topLeft} 0 0 1 ${topLeft} 0Z`;
+}
+---
+
+<svg
+  class:list={["ao-deco-stage", "ao-deco-stage--wide", className]}
+  viewBox={`0 0 ${width} ${height}`}
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path fill="currentColor" d={stagePath(wideTopLeft)}></path>
+</svg>
+<svg
+  class:list={["ao-deco-stage", "ao-deco-stage--narrow", className]}
+  viewBox={`0 0 ${width} ${height}`}
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path fill="currentColor" d={stagePath(narrowTopLeft)}></path>
+</svg>
+
+<style>
+  .ao-deco-stage {
+    position: absolute;
+    inset: 24px 0 0;
+    display: block;
+    width: 100%;
+    height: calc(100% - 24px);
+    color: var(--ao-surface);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ao-deco-stage--narrow {
+    display: none;
+  }
+  @container page3a (max-width: 879px) {
+    .ao-deco-stage--wide {
+      display: none;
+    }
+    .ao-deco-stage--narrow {
+      display: block;
+    }
+  }
+</style>

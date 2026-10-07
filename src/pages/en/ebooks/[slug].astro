@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import { getEbook, getEbookPaths, getSiteSettings } from "@/sanity/repository";
+import EbookPage from "@/views/EbookPage.astro";
+
+export const getStaticPaths = (async () => {
+  const paths = await getEbookPaths();
+  return paths
+    .filter((entry) => entry.language === "en" && entry.slug)
+    .map((entry) => ({ params: { slug: entry.slug as string } }));
+}) satisfies GetStaticPaths;
+
+const lang = "en" as const;
+const slug = Astro.params.slug;
+if (!slug) throw new Error("Missing e-book slug.");
+const [ebook, settings] = await Promise.all([
+  getEbook(lang, slug),
+  getSiteSettings(lang),
+]);
+---
+
+<EbookPage lang={lang} ebook={ebook} settings={settings} />

@@ -6,6 +6,9 @@ import { fileURLToPath, URL } from "node:url";
 export default defineConfig({
   adapter: cloudflare({ imageService: "compile" }),
   output: "server",
+  image: {
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
+  },
   session: false,
   vite: {
     plugins: [tailwindcss()],
