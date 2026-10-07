@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 1 etapu 4a: Homepage3a i wspólny shell).
+Aktualizacja: 2026-10-07 (pakiet 2 etapu 4a: About3a i wspólny profil autora).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
@@ -8,12 +8,13 @@ Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiet 1 (Homepage3a + wspólny shell) jest w kodzie i weryfikacji fixture’ów;
-zapis do Content Lake i publikacja nie były zlecone.**
+**Pakiety 1–2 (Homepage3a, About3a, wspólny shell i profil autora) są w kodzie
+i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były zlecone.**
 
-Publiczne `/` i `/en/` oraz preview `page` home renderują `SiteShell3a` +
-`Homepage3a` z fixture’ów. Blog, landingi i `/ui/` nadal używają wcześniejszego
-Layout. Etapy 5–7 oraz pakiety 2–7 etapu 4a pozostają otwarte.
+Publiczne `/`, `/en/`, `/o-mnie/` i `/en/about/` oraz preview `page` home/about
+renderują `SiteShell3a` + `Homepage3a` / `About3a` z fixture’ów. Blog, landingi
+i `/ui/` nadal używają wcześniejszego Layout. Etapy 5–7 oraz pakiety 3–7 etapu 4a
+pozostają otwarte.
 
 ## Wykonane
 
@@ -1919,17 +1920,63 @@ Otwarte w pakiecie 1 (dane, nie kod): import szkiców do Content Lake po
 porównaniu z istniejącymi dokumentami; odbiór edycji w Studio i chronionym
 preview z prawdziwym datasetem.
 
+## Pakiet 2 etapu 4a — 2026-10-07
+
+Kod i fixture’y, bez zapisu Content Lake i bez publikacji.
+
+- Inwentaryzacja: `about-3a.html` + [ABOUT-MOCKUP-PLAN-3A](ABOUT-MOCKUP-PLAN-3A.md)
+  / [ABOUT-EEAT-3A](ABOUT-EEAT-3A.md). Uczelnia i kierunek potwierdzone,
+  450 zł/60 min oraz tymczasowy Cal.com zachowane. Copy EN robocze.
+  Brak skanu dyplomu — ramka zastępcza, bez fikcyjnego pliku.
+- Modele: wspólny `author` (`educationInstitution`/`educationProgram`/`diplomaScan`),
+  `credentialsSection`, wariant `cards` `links`, opcjonalna `process.note`,
+  `serviceOffer.secondary`. Slugi `o-mnie`/`about` w allowlist Studio.
+  GROQ publiczny i preview, TypeGen, mapper `mapAbout`.
+- UI: `About3a` na `Layout3a`/`SiteShell3a`; preview `page` o slugu about
+  używa tego samego `ComposedPage`. Nawigacja homepage i CTA
+  „Poznaj moją historię” prowadzą do `/o-mnie/` i `/en/about/`.
+- Markdown: serializer i przykład `credentialsSection`; nieznany blok
+  zatrzymuje build.
+- Import: `npm run import:about` dry-run, 4 dokumenty (`author`/`page` PL/EN),
+  `write: false`. Porównanie Content Lake pominięte — brak tokenu w tej sesji.
+  Raport braków w `reports/` (gitignored). Fixture ≠ dowód zapisu CMS.
+- `npm run verify` na Node 24.21.0: format, tokeny, ESLint, Astro/TS
+  wszystkich workspace’ów (156 plików, 0 diagnostyki), 68 unit tests,
+  build 25 stron (w tym `/o-mnie/` i `/en/about/`), Studio, preview,
+  Worker dry-run, budżety JS 5770 B / CSS 18826 B gzip. Pierwszy
+  `test:e2e` przerwał się na braku binariów Playwright; po
+  `npx playwright install` i `install-deps`: **84 E2E PASS**
+  (Chromium/Firefox/WebKit), w tym PL/EN About, 404 `/en/o-mnie/`,
+  Cal.com i newsletter bez POST.
+- verify-ola `ola-1791387828`: doctor PASS na porcie 4340. CTA homepage
+  otwiera H1 About; ARIA nawigacji ma `/o-mnie/`; ramka dyplomu, uczelnia,
+  450 zł / 60 minut, `href=https://cal.com`, `posts []` po newsletterze;
+  EN H1 bez polskiego leadu; `/en/o-mnie/` status 404; treść bez JS.
+  Nagłówek „O mnie” ma `aria-current="page"` (e2e + locator Playwright).
+  Viewport CLI: 1280×900. Axe i overflow 320/390/1440 px w tym przebiegu
+  dotyczą `/` i katalogu, nie osobno About3a. Natywny zoom, czytnik i
+  urządzenie fizyczne — niesprawdzone.
+
+Luki (nie blokują komponentów): skan dyplomu, URL płatnej rezerwacji,
+strona kontaktu (tymczasowo `/#konsultacje`), copy EN do akceptacji,
+trasa kolekcji e-booków (tymczasowo `/#ebooki` do pakietu 5).
+
+Otwarte w pakiecie 2 (dane, nie kod): import szkiców do Content Lake po
+porównaniu z istniejącymi dokumentami autora; odbiór edycji w Studio
+i chronionym preview z prawdziwym datasetem. Bez publikacji.
+
 ## Następny krok
 
-Pakiet 2 etapu 4a: About3a (`about-3a.html`) na tym samym shellu, wspólny
-profil autora, miejsce na skan dyplomu. Potem konsultacja → produkt → kolekcja
-→ blog → artykuł. Import homepage do szkiców Sanity dopiero na osobne zlecenie
-zapisu. Publikacja treści/strony wymaga osobnego zlecenia.
+Pakiet 3 etapu 4a: Consultation3a (`consultation-3a.html`) na tym samym
+shellu, wspólna usługa 450 zł/60 min, FAQ i rezerwacja. Potem produkt →
+kolekcja → blog → artykuł. Import About/homepage do szkiców Sanity dopiero
+na osobne zlecenie zapisu. Publikacja treści/strony wymaga osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
-natywny zoom, czytnik i fizyczne urządzenie. Etapy 5–7 domykają SEO/eksport,
-formularze/c15t i odbiór. Nie testować n8n ani nie dodawać `www` jako domeny
-Workera. Nie wklejać sekretów.
+axe/overflow About przy 320/390/1440 px, natywny zoom, czytnik i fizyczne
+urządzenie. Etapy 5–7 domykają SEO/eksport, formularze/c15t i odbiór.
+Nie testować n8n ani nie dodawać `www` jako domeny Workera. Nie wklejać
+sekretów.
 
 ## Zasada aktualizacji
 
