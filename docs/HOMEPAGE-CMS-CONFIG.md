@@ -60,6 +60,10 @@ lub adres homepage z tą kotwicą na stronach bez formularza. To ustalenie
 z 07.10.2026 po ujednoliceniu mockupów, zastępujące wcześniejsze menu kotwicowe.
 Docelowe URL generować z rzeczywistych slugów i języka; landingi mają osobne
 menu lokalnych sekcji. Kotwice muszą istnieć w rendererze.
+Stan kodu 07.10.2026 (pakiet 3): fixture’y i dry-run `import:homepage` mają
+Konsultacje → `/konsultacje/` (EN `/en/consultations/`), O mnie → `/o-mnie/`
+(EN `/en/about/`), Blog → `/blog/`. E-booki nadal `#ebooki` do pakietu 5.
+`siteSettings` w Content Lake nie zmieniono.
 Profile w `siteSettings.socialLinks`: nazwy ustalone, prawdziwe HTTPS URL do
 uzupełnienia. `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
 
@@ -257,7 +261,7 @@ Makieta formularza. Dane nie są zapisywane ani wysyłane.
 | Miejsce      | Etykieta                   | Adres docelowy / status                                                                                                                                                        |
 | ------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Hero: główne | Poznaj e-booki             | `#ebooki`                                                                                                                                                                      |
-| Hero: drugie | Poznaj konsultacje         | `#konsultacje`                                                                                                                                                                 |
+| Hero: drugie | Poznaj konsultacje         | Fixture i kod: `/konsultacje/` (EN `/en/consultations/`), pakiet 3 07.10.2026. Dokument `page` w Content Lake nieutworzony.                                                    |
 | O mnie       | Poznaj moją historię       | Fixture i kod: `/o-mnie/` (EN `/en/about/`). Dokument `page` w Content Lake nieutworzony.                                                                                      |
 | E-booki      | Poznaj temat               | Podstrona danego produktu; docelowe slugi do ustalenia                                                                                                                         |
 | Konsultacja  | Zarezerwuj konsultację     | Kalendarz rezerwacji płatnej konsultacji: 450 zł / 60 minut; tymczasowo `https://cal.com`, właściwy URL wydarzenia później. Decyzja 06.10.2026, HTML jeszcze bez aktualizacji. |

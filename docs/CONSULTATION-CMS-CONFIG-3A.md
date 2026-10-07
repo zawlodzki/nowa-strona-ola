@@ -2,8 +2,10 @@
 
 Stan: 07.10.2026. [Mockup HTML](../mockups/homepage/consultation-3a.html),
 [kompozycja CSS](../mockups/homepage/consultation-3a.css).
-To lokalna propozycja wyglądu i copy, nie wdrożenie Astro, Sanity ani rezerwacji.
-Bieżące decyzje wspólne: [HOMEPAGE-CMS-CONFIG.md](HOMEPAGE-CMS-CONFIG.md).
+Mockup jest referencją wyglądu i copy. Od pakietu 3 etapu 4a (07.10.2026)
+szablon Astro, schemat, GROQ i fixture’y są w kodzie; Content Lake, właściwa
+rezerwacja i publikacja nie są wykonane. Bieżące decyzje wspólne:
+[HOMEPAGE-CMS-CONFIG.md](HOMEPAGE-CMS-CONFIG.md).
 
 ## Ustalenia i źródła
 
@@ -90,10 +92,44 @@ dosłownie sugestii „natychmiastowego rozwiązania” na zdrowie.
 | Opinie           | `testimonialsSection.items[]` → `testimonial.quote/name/role`      | Obecne `name` i `role` wymagane. Dodać wariant anonimowy, źródło i zakres opinii („dotychczasowa współpraca”), nie wymyślać imion.                                |
 | FAQ              | `faqSection.title/lead/items[].question/answer`                    | Istniejący typ pokrywa sześć pytań; renderer wariantu 3a. JSON-LD ewentualnie z tych samych widocznych danych.                                                    |
 
-Nie zmieniono schematów, Content Lake, GROQ, TypeGen, renderera Astro ani
-serializerów. Przy przyszłej implementacji: walidacja HTTPS URL, dodatnia cena
-i czas, zgodność PL/EN bez fallbacku PL, fixture, renderer HTML, serializer
-Markdown każdego wariantu oraz błąd buildu dla nieznanego typu.
+Tabela opisuje stan przed pakietem 3. Wykonane mapowanie jest niżej.
+
+## Wdrożenie w kodzie (pakiet 3, 07.10.2026)
+
+Trasy `/konsultacje/` i `/en/consultations/` renderują `Consultation3a` w
+`SiteShell3a`; chroniony preview używa tego samego `ComposedPage`. Strona to
+`page` o slugu `konsultacje`/`consultations` (allowlista slugów Studio).
+Nie dodano nowego `_type`, `pricingSection` ani drugiego dokumentu usługi.
+
+| Część      | Typ i wariant                  | Pola                                                                                        |
+| ---------- | ------------------------------ | ------------------------------------------------------------------------------------------- |
+| Hero       | `heroSection` `split`          | `title`, `lead`, `primary` → `service.bookingUrl`, `secondary` → `#przebieg`, `media`       |
+| Ścieżka    | `listSection`                  | `title` (etykieta listy), trzy `items`; `lead` opcjonalny                                   |
+| Problem    | `textImageSection` `questions` | `body`, `prompts` (3–8), `resolutionEyebrow`, `resolutionTitle`, `caption`; bez medium      |
+| Dla kogo   | `cardsSection` `situations`    | cztery karty `title`/`body` bez `href` i medium                                             |
+| Przebieg   | `processSection`               | trzy `steps`, `note` jako „Co przygotować?”, opcjonalne `media`                             |
+| Efekty     | `cardsSection` `goals`         | trzy karty, `closing`                                                                       |
+| Prowadząca | `expertSection`                | `intro`, `body`, `metric` {450, +, opis}, `person` → `author`, `media`; `action` opcjonalny |
+| Cena       | `serviceOfferSection`          | `service` → cena, waluta, czas, `bookingUrl`, `bookingStatus`; `facts`, `note`; bez medium  |
+| Opinie     | `testimonialsSection`          | referencje opinii 4 i 6, podpis anonimowy                                                   |
+| FAQ        | `faqSection`                   | sześć pytań; JSON-LD `FAQPage` z tych samych danych                                         |
+
+Mapper `mapConsultation` wymaga dokładnie tej kolejności i liczności oraz
+tego samego adresu rezerwacji w hero i ofercie; inaczej build się zatrzymuje.
+Cena 450 zł / 60 minut pochodzi wyłącznie z `service`: hero, przycisk
+nagłówka „Konsultacja · 450 zł” → `#cena`, karta oferty, Markdown i JSON-LD
+`Service`/`Offer`. Wskaźnik 450+ to liczba kobiet rocznie z homepage, nie cena.
+Serializer Markdown obsługuje warianty `questions`, `situations`/`goals`,
+`metric` i `note`. Dry-run: `npm run import:consultation`.
+
+Odstępstwa od mockupu: odpowiedź FAQ o pojedynczym spotkaniu i opis SEO nie
+powtarzają kwoty, tylko odsyłają do przycisku rezerwacji. Pogrubione pierwsze
+zdanie drugiego akapitu problemu jest zwykłym tekstem, bo `body` to lista
+akapitów. EN używa polskich kotwic, jak strona O mnie.
+
+Zamknięte luki schematu: wariant jednej usługi (zamiast `pricingSection`),
+karty bez linków i zdjęć, mapa pytań, lista celów, medium i przygotowanie
+w przebiegu, osoba i wskaźnik prowadzącej, opcjonalne `eyebrow` hero.
 
 ## Otwarte decyzje
 
@@ -101,7 +137,11 @@ Markdown każdego wariantu oraz błąd buildu dla nieznanego typu.
 - Czy po spotkaniu jest pisemne podsumowanie. Pytanie zadano 07.10.2026;
   mockup nie obiecuje PDF, listy badań ani dodatkowej opieki.
 - Finalne potwierdzenie przebiegu, FAQ, zakresu i zasad usługi. Copy jest propozycją.
-- Zatwierdzenie landingu, następnie wdrożenie w Astro/Sanity i publikacja na
-  osobne zlecenie. Lokalny mockup pozostaje `noindex,nofollow`.
+- Nagłówek przebiegu „60 minut” powtarza `durationMinutes` jako tekst; przy
+  zmianie czasu trzeba go poprawić ręcznie.
+- Tłumaczenie EN jest robocze. Brak osobnej strony kontaktu.
+- Zapis szkiców `page-consultation-pl/en` do Content Lake, odbiór w Studio
+  i chronionym preview z datasetem oraz publikacja: osobne zlecenie.
+  Lokalny mockup pozostaje `noindex,nofollow`.
 
 Kontrole i następny krok: [PROGRESS.md](PROGRESS.md).

@@ -15,7 +15,7 @@ Nie wpisywać testowych profili i niezatwierdzonych URL w komponentach.
 | ArrowIcon   | `direction: up-right/left/right`                                                                    | Jednolita dekoracyjna strzałka                                 |
 | Wordmark    | `href`, `label`, HTML attrs                                                                         | Znak Switzer z dostępną nazwą linku                            |
 | SiteHeader  | `homeHref`, `links`, opcjonalne `cta`, `lang`                                                       | Jeden header; globalne lub lokalne linki landingu              |
-| SiteFooter  | `homeHref`, `description`, `links`, `socialLinks`, `legalLinks`, `copyright`, `lang`                | Wspólna stopka bez testowych danych                            |
+| SiteFooter  | `homeHref`, `description`, `links`, `socialLinks`, `legalLinks`, `copyright`, `lang`                | Wspólna stopka; `links[].current` daje `aria-current`          |
 | ThemeToggle | `label`                                                                                             | Używany raz przez footer; systemowy motyw bez JS               |
 | Breadcrumbs | `links: {href,label,current}[]`, `label`                                                            | Ścieżka; ostatnia pozycja jest tekstem                         |
 | Newsletter  | `id`, `title`, `description`, slot `form`                                                           | Wygląd wspólny, wysyłka poza komponentem                       |
