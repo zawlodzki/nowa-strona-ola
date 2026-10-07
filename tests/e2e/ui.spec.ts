@@ -276,6 +276,62 @@ test("about page Polish and English plus missing Polish under English slug", asy
   expect(missing?.status()).toBe(404);
 });
 
+test("consultation page Polish and English plus missing Polish under English slug", async ({
+  page,
+}) => {
+  const posts: string[] = [];
+  page.on("request", (request) => {
+    if (request.method() === "POST") posts.push(request.url());
+  });
+
+  await page.goto("/konsultacje/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /Wiesz już dużo\.\s*Ustal, co dalej\./,
+  );
+  const booking = page.getByRole("link", { name: "Zarezerwuj konsultację" });
+  await expect(booking).toHaveCount(2);
+  for (const link of await booking.all()) {
+    await expect(link).toHaveAttribute("href", "https://cal.com");
+  }
+  await expect(
+    page.getByText(/To nie jest potwierdzenie wizyty\./).first(),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Konsultacja · 450 zł" }),
+  ).toHaveAttribute("href", "#cena");
+  await expect(page.locator("#cena")).toContainText("450 zł");
+  await expect(page.locator("#cena")).toContainText("60 minut");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Nawigacja w stopce" })
+      .getByRole("link", { name: "Konsultacje", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(
+    page.getByRole("link", { name: "English" }).first(),
+  ).toHaveAttribute("href", "/en/consultations/");
+
+  const answer = page.getByText(/Konsultacja nie zobowiązuje Cię do pakietu/);
+  await expect(answer).toBeHidden();
+  await page.getByText("Czy to jest pojedyncze spotkanie?").click();
+  await expect(answer).toBeVisible();
+  expect(posts).toEqual([]);
+
+  await page.goto("/en/consultations/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /You already know a lot\./,
+  );
+  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
+    /Wiesz już dużo/,
+  );
+  await expect(page.locator("#cena")).toContainText("450 PLN");
+  await expect(
+    page.getByRole("link", { name: "Polski" }).first(),
+  ).toHaveAttribute("href", "/konsultacje/");
+
+  const missing = await page.goto("/en/konsultacje/");
+  expect(missing?.status()).toBe(404);
+});
+
 test("landing pages, blog and missing English translation", async ({
   page,
 }) => {
