@@ -121,3 +121,7 @@ Mockup artykułu 3a: `node scripts/preview-homepage-mockups.mjs`, następnie
 Mockup landingu e-booka 3a: `node scripts/preview-homepage-mockups.mjs`, następnie
 `http://127.0.0.1:8766/mockups/homepage/ebook-3a.html`.
 [Instrukcja osobnej kolekcji e-booków w CMS](docs/EBOOK-CMS-CONFIG-3A.md).
+
+Mockup pojedynczej konsultacji 3a: `node scripts/preview-homepage-mockups.mjs`, następnie
+`http://127.0.0.1:8766/mockups/homepage/consultation-3a.html`.
+[Copy, zakres i mapowanie CMS](docs/CONSULTATION-CMS-CONFIG-3A.md).

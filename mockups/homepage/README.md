@@ -3,6 +3,25 @@
 Samodzielne mockupy HTML przygotowane 2026-10-05 przed wyborem finalnej estetyki.
 Nie są podłączone do Astro ani CMS. Wszystkie strony mają `noindex,nofollow`.
 
+## Landing pojedynczej konsultacji 3a — 2026-10-07
+
+[Otwórz landing](consultation-3a.html). Zawiera navbar, hero, definicję problemu,
+dla kogo, przebieg, efekty, cenę, opinie, FAQ i footer oraz blok prowadzącej.
+Paleta 3a, Switzer, trzy istniejące fotografie Oli, mapa pytań, schemat etapów
+i karta celów spotkania. Copy na podstawie wskazanego poradnika i FIRMA;
+dwa pełne cytaty dotyczą wcześniejszej współpracy, nie jednej wizyty.
+
+Cena ustalona: **450 zł / 60 minut online**. Rezerwacja tymczasowo prowadzi do
+`https://cal.com`, zgodnie z wcześniejszą decyzją użytkownika. Zakres i FAQ są
+propozycją; brak obietnicy PDF, aplikacji, jadłospisu i stałej opieki. Menu/FAQ
+są natywne i działają bez JS. Nie dodano integracji, płatności ani analityki.
+
+Sprawdzony lokalny start: `node scripts/preview-homepage-mockups.mjs`, adres
+`http://127.0.0.1:8766/mockups/homepage/consultation-3a.html`.
+Wejście także z indeksu i przycisku sekcji konsultacji homepage 3a.
+[Źródła, propozycje copy i mapowanie CMS](../../docs/CONSULTATION-CMS-CONFIG-3A.md).
+Bez publikacji i zmian Sanity.
+
 ## Oglądanie
 
 Sprawdzona komenda z katalogu głównego repo, na Node 24:
