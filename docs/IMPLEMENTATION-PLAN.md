@@ -281,6 +281,9 @@ Stan po pakiecie 4 (07.10.2026):
   trasy `.md` i pełny eksport to etap 5.
 - Dry-run importu homepage, About, konsultacji i landingu e-booka istnieje;
   Content Lake i publikacja nie były zapisywane.
+- Budżet CSS w `scripts/check-build.mjs` wynosi tymczasowo **32 KiB gzip**
+  na etap 4a (pakiety 5–7). Nie jest to docelowy budżet; optymalizacja
+  później. Decyzja 07.10.2026.
 
 Kolejność wynika z [mapy integracji](../design-system/ASTRO-INTEGRATION.md).
 Modele współdzielone potrzebne homepage wprowadzić już w pierwszym pakiecie,
