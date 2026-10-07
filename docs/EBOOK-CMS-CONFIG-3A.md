@@ -186,3 +186,28 @@ Dokumentacja Sanity sprawdzona 06.10.2026:
 - [ ] Sprawdzić keyboard, 320 px, desktop/mobile, zoom 200%, reduced motion,
       axe, treść bez JS, zgodność HTML/Markdown/JSON-LD; uruchomić `npm run verify`.
 - [ ] Po odrębnej zgodzie wdrożyć Studio, przygotować dokumenty i publikację.
+
+## Widok pełnej kolekcji — mockup 07.10.2026
+
+Na zlecenie użytkownika wykonano [kolekcję 3a](../mockups/homepage/ebooks-3a.html)
+z sześcioma istniejącymi zapowiedziami i wyborem kategorii. Kategorie oraz
+liczniki działają także bez JS przez natywne radio i CSS; JS dodaje odczyt URL,
+historię przeglądarki i komunikat o wynikach. Bez JS adres nie ustawia filtra,
+ale ręczny wybór działa. Ceny, opisy i okładki zachowują wartości homepage.
+
+Proponowane rozszerzenie przyszłego modelu: `ebook.sortOrder` (liczba całkowita,
+≥0) i `ebookCollectionSection` z kontrolowanym wariantem `cherry3a`, polami
+`title`, `lead`, `catalogTitle`, `catalogLead`. Pełna kolekcja pobiera wszystkie
+opublikowane `ebook` w języku strony; nie utrzymywać drugiej tablicy produktów.
+Liczniki wyliczać z danych, puste kategorie pomijać. Dla pustej kolekcji renderer
+ma pokazać czytelny komunikat bez filtrów. Przyszłe testy muszą objąć puste
+kolekcje; obecny mockup demonstruje sześć produktów i dwie niepuste kategorie.
+
+Proponowany adres `/ebooki/`, osobno `/en/ebooks/`. Markdown zawiera całą
+kolekcję w tym samym porządku, z kategoriami, cenami, statusem i linkami.
+Filtr pozostaje zachowaniem HTML, nie zmienia źródła danych Markdown.
+Przy wdrożeniu ustalić canonical dla adresów z filtrem i JSON-LD zgodne z
+widoczną listą; makieta noindex nie deklaruje aktywnej sprzedaży.
+
+[Bieżące wartości, źródła decyzji i mapowanie](HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026).
+Model produktu, kolekcja w Content Lake, Astro i serializery nadal niewykonane.
