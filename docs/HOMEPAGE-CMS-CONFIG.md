@@ -1,6 +1,6 @@
 # Homepage 3a — konfiguracja treści CMS
 
-Aktualizacja: 2026-10-06. Status: specyfikacja do konfiguracji Sanity,
+Aktualizacja: 2026-10-07. Status: specyfikacja do konfiguracji Sanity,
 nie wykonana migracja. Obowiązuje dla polskiej strony głównej.
 
 ## Źródła i sposób aktualizacji
@@ -20,17 +20,21 @@ ani dokumentacji w deklarację wykonania. Nie kopiować sekretów i danych zgło
 
 ## Decyzje ustalone przez użytkownika
 
-| Obszar        | Wartość obowiązująca                                                               | Źródło / status                                                                       |
-| ------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Wygląd        | 3a: białe tło, wiśniowa paleta, Switzer i istniejące portrety                      | Wskazanie kierunku 06.10.2026; wdrożone w mockupie                                    |
-| Usługa        | Pojedyncze konsultacje dietetyczne online                                          | Bezpośrednia decyzja 06.10.2026; nie przenosić mentoringu ani dawnych pakietów        |
-| Cena e-booków | Każdy z sześciu: 97 zł brutto, waluta PLN                                          | Bezpośrednia decyzja 06.10.2026; nie oznacza gotowego sklepu                          |
-| Wskaźnik      | Wartość 450, przyrostek +, opis „kobiet rocznie, którym pomagają moje konsultacje” | Bezpośrednia informacja 06.10.2026; nie zmieniać na sumę historyczną                  |
-| Opinie        | Sześć pełnych cytatów z `/Users/grzesiek/Github/ola-homepage/data/testimonials.js` | Prawdziwość potwierdzona przez użytkownika 06.10.2026                                 |
-| Podpis opinii | „Opinia o dotychczasowej współpracy”; bez imion                                    | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                   |
-| Marki         | Belka widoczna: ALAB laboratoria, UNS, NORSAN, Norsa Pharma, OMNi-BiOTiC           | Przywrócenie na polecenie użytkownika 06.10.2026                                      |
-| Social media  | Instagram, Facebook, TikTok widoczne                                               | Przywrócenie na polecenie użytkownika 06.10.2026; docelowe URL pozostają do ustalenia |
-| Copy          | Nowe copy 3a zachowane                                                             | Zlecona aktualizacja; bieżąca treść poniżej                                           |
+| Obszar                  | Wartość obowiązująca                                                                        | Źródło / status                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Wygląd                  | 3a: białe tło, wiśniowa paleta, Switzer i istniejące portrety                               | Wskazanie kierunku 06.10.2026; wdrożone w mockupie                                                                |
+| Usługa                  | Pojedyncze konsultacje dietetyczne online                                                   | Bezpośrednia decyzja 06.10.2026; nie przenosić mentoringu ani dawnych pakietów                                    |
+| Cena i czas konsultacji | 450 zł za 60 minut, waluta PLN                                                              | Bezpośrednia decyzja użytkownika 06.10.2026; konfiguracja płatnej rezerwacji niewykonana.                         |
+| Rezerwacja konsultacji  | CTA do kalendarza wyboru terminu i płatności; proponowana etykieta „Zarezerwuj konsultację” | Cel ustalony 06.10.2026; tymczasowo `https://cal.com` na polecenie użytkownika, właściwy link wydarzenia później. |
+| Wykształcenie Oli       | Ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym                            | Bezpośrednie potwierdzenie użytkownika 06.10.2026.                                                                |
+| Dyplom                  | Miejsce na skan w mockupie „O mnie”; docelowo rzeczywisty podgląd dokumentu                 | Bezpośrednie zlecenie użytkownika 06.10.2026; plik nie został dostarczony.                                        |
+| Cena e-booków           | Każdy z sześciu: 97 zł brutto, waluta PLN                                                   | Bezpośrednia decyzja 06.10.2026; nie oznacza gotowego sklepu                                                      |
+| Wskaźnik                | Wartość 450, przyrostek +, opis „kobiet rocznie, którym pomagają moje konsultacje”          | Bezpośrednia informacja 06.10.2026; nie zmieniać na sumę historyczną                                              |
+| Opinie                  | Sześć pełnych cytatów z `/Users/grzesiek/Github/ola-homepage/data/testimonials.js`          | Prawdziwość potwierdzona przez użytkownika 06.10.2026                                                             |
+| Podpis opinii           | „Opinia o dotychczasowej współpracy”; bez imion                                             | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                                               |
+| Marki                   | Belka widoczna: ALAB laboratoria, UNS, NORSAN, Norsa Pharma, OMNi-BiOTiC                    | Przywrócenie na polecenie użytkownika 06.10.2026                                                                  |
+| Social media            | Instagram, Facebook, TikTok widoczne                                                        | Przywrócenie na polecenie użytkownika 06.10.2026; docelowe URL pozostają do ustalenia                             |
+| Copy                    | Nowe copy 3a zachowane                                                                      | Zlecona aktualizacja; bieżąca treść poniżej                                                                       |
 
 Specjalizacja w copy: PCOS i insulinooporność. Perimenopauza jest tematem
 materiałów; nie dopisywać doświadczenia klinicznego ani kwalifikacji ponad
@@ -69,17 +73,17 @@ Sprawdzone lokalnie w [schematach sekcji](../studio/schema-types/blocks/page-sec
 [GROQ](../src/sanity/queries.ts) i [mapowaniu treści](../src/content/map-sections.ts).
 Poniższa tabela rozróżnia istniejące pola od wymagań do wdrożenia.
 
-| Miejsce 3a       | Istniejący model / pola                                                              | Co wymaga pracy przed odwzorowaniem 3a                                                                                                                                               |
-| ---------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Hero             | `heroSection`: `title`, `lead`, `primary`, `secondary`, `media`, wariant `split`     | `eyebrow` jest wymagany także w mapperze, a 3a nie ma nadtytułu. Nie dodawać sztucznego tekstu; dostosować schema/typy/renderer.                                                     |
-| Marki            | `logosSection.names`                                                                 | Teraz tylko nazwy, bez grafik. Dodać media i kontrolowany wariant belki. Nie wymyślać leadu, który obecnie jest wymagany.                                                            |
-| Podejście + 450+ | `metricsSection.items[].value/suffix/label`; `cardsSection`                          | Liczby wymagają min. 2 pozycji, obecna kompozycja jednej liczby z trzema opisami nie istnieje. Rozszerzyć kontrolowany wariant lub dedykowany typ, bez drugiej fikcyjnej statystyki. |
-| O mnie           | `textImageSection`: `title`, `body`, `media`, `mediaPosition`                        | Brak osobnego wyróżnionego leadu i CTA oraz drugiego zdjęcia posiłku. Zaplanować wariant zachowujący układ 3a.                                                                       |
-| E-booki          | `cardsSection` ma tytuł, opis, adres i medium karty                                  | Nie ma dokumentu produktu, ceny, kategorii ani grupowanej karuzeli. Dodać model produktu i sekcję z referencjami.                                                                    |
-| Konsultacje      | `service` ma `title`, `summary`, `slug`; `textImageSection` częściowo opisuje wygląd | Brak pełnego wariantu z faktami i CTA do konsultacji. Nie wkładać treści poza limit `service.summary` 240 znaków.                                                                    |
-| Opinie           | `testimonialsSection.items` referencje do `testimonial`                              | Cytaty mieszczą się w limicie 320; model i mapper wymagają `name` oraz `role`. Obsłużyć anonimowy podpis, bez fikcyjnego imienia. Obecny renderer nie odpowiada karuzeli 3a.         |
-| Newsletter       | `formSection` + referencja `form`                                                    | Nadtytuł wymagany; 3a nie ma nadtytułu. Docelowo formularz tylko z e-mailem i zgodą: sprawdzić mapper, który obecnie oczekuje także pola imienia. Integracja pozostaje etapem 6.     |
-| Kotwice          | `PageSections.astro` generuje identyfikatory sekcji                                  | Dopasować kontrolowane identyfikatory do nawigacji 3a; nie wstawiać niedziałających kotwic.                                                                                          |
+| Miejsce 3a       | Istniejący model / pola                                                              | Co wymaga pracy przed odwzorowaniem 3a                                                                                                                                                   |
+| ---------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hero             | `heroSection`: `title`, `lead`, `primary`, `secondary`, `media`, wariant `split`     | `eyebrow` jest wymagany także w mapperze, a 3a nie ma nadtytułu. Nie dodawać sztucznego tekstu; dostosować schema/typy/renderer.                                                         |
+| Marki            | `logosSection.names`                                                                 | Teraz tylko nazwy, bez grafik. Dodać media i kontrolowany wariant belki. Nie wymyślać leadu, który obecnie jest wymagany.                                                                |
+| Podejście + 450+ | `metricsSection.items[].value/suffix/label`; `cardsSection`                          | Liczby wymagają min. 2 pozycji, obecna kompozycja jednej liczby z trzema opisami nie istnieje. Rozszerzyć kontrolowany wariant lub dedykowany typ, bez drugiej fikcyjnej statystyki.     |
+| O mnie           | `textImageSection`: `title`, `body`, `media`, `mediaPosition`                        | Brak osobnego wyróżnionego leadu i CTA oraz drugiego zdjęcia posiłku. Zaplanować wariant zachowujący układ 3a.                                                                           |
+| E-booki          | `cardsSection` ma tytuł, opis, adres i medium karty                                  | Nie ma dokumentu produktu, ceny, kategorii ani grupowanej karuzeli. Dodać model produktu i sekcję z referencjami.                                                                        |
+| Konsultacje      | `service` ma `title`, `summary`, `slug`; `textImageSection` częściowo opisuje wygląd | Brak pełnego wariantu z faktami i CTA do konsultacji oraz pól `service.price`, `currency`, `durationMinutes` i `bookingUrl`. Nie wkładać treści poza limit `service.summary` 240 znaków. |
+| Opinie           | `testimonialsSection.items` referencje do `testimonial`                              | Cytaty mieszczą się w limicie 320; model i mapper wymagają `name` oraz `role`. Obsłużyć anonimowy podpis, bez fikcyjnego imienia. Obecny renderer nie odpowiada karuzeli 3a.             |
+| Newsletter       | `formSection` + referencja `form`                                                    | Nadtytuł wymagany; 3a nie ma nadtytułu. Docelowo formularz tylko z e-mailem i zgodą: sprawdzić mapper, który obecnie oczekuje także pola imienia. Integracja pozostaje etapem 6.         |
+| Kotwice          | `PageSections.astro` generuje identyfikatory sekcji                                  | Dopasować kontrolowane identyfikatory do nawigacji 3a; nie wstawiać niedziałających kotwic.                                                                                              |
 
 Przy zmianie typu sekcji obowiązuje schema + renderer HTML + serializer
 Markdown + przykład, spójne GROQ/TypeGen/TypeScript i blokada nieznanego typu.
@@ -111,7 +115,9 @@ CTA makiety: „Poznaj temat”. Docelowe linki i zakup pozostają do decyzji.
 
 ## Bieżąca treść sekcji do przeniesienia
 
-Poniższy zapis pochodzi z aktualnego HTML 3a. Zachowuje słowa, kolejność
+Poniższy zapis pochodzi z aktualnego HTML 3a. Decyzja o konsultacji 450 zł /
+60 minut i CTA rezerwacji jest nowsza od tego HTML i czeka na przeniesienie
+do mockupu; bieżące wartości obowiązują z tabeli decyzji powyżej. Zachowuje słowa, kolejność
 akapitów i pełne opinie; łamanie nagłówków dopasowuje renderer.
 Nie zapisywać znaczników `<br>` jako tekstu redaktora.
 CTA oraz media opisano osobno pod zestawieniem.
@@ -244,14 +250,14 @@ Makieta formularza. Dane nie są zapisywane ani wysyłane.
 
 ## CTA i media
 
-| Miejsce      | Etykieta                   | Adres docelowy / status                                                    |
-| ------------ | -------------------------- | -------------------------------------------------------------------------- |
-| Hero: główne | Poznaj e-booki             | `#ebooki`                                                                  |
-| Hero: drugie | Poznaj konsultacje         | `#konsultacje`                                                             |
-| O mnie       | Poznaj moją historię       | Podstrona O mnie; docelowy slug do ustalenia                               |
-| E-booki      | Poznaj temat               | Podstrona danego produktu; docelowe slugi do ustalenia                     |
-| Konsultacja  | Poznaj konsultację         | Podstrona pojedynczej konsultacji; zakres/cena/rezerwacja do ustalenia     |
-| Newsletter   | Chcę otrzymywać newsletter | Zapis po faktycznym przyjęciu przez backend; w makiecie tylko demonstracja |
+| Miejsce      | Etykieta                   | Adres docelowy / status                                                                                                                                                        |
+| ------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Hero: główne | Poznaj e-booki             | `#ebooki`                                                                                                                                                                      |
+| Hero: drugie | Poznaj konsultacje         | `#konsultacje`                                                                                                                                                                 |
+| O mnie       | Poznaj moją historię       | Podstrona O mnie; docelowy slug do ustalenia                                                                                                                                   |
+| E-booki      | Poznaj temat               | Podstrona danego produktu; docelowe slugi do ustalenia                                                                                                                         |
+| Konsultacja  | Zarezerwuj konsultację     | Kalendarz rezerwacji płatnej konsultacji: 450 zł / 60 minut; tymczasowo `https://cal.com`, właściwy URL wydarzenia później. Decyzja 06.10.2026, HTML jeszcze bez aktualizacji. |
+| Newsletter   | Chcę otrzymywać newsletter | Zapis po faktycznym przyjęciu przez backend; w makiecie tylko demonstracja                                                                                                     |
 
 Media do zaimportowania z zaakceptowanych lokalnych plików:
 [Hero](../src/assets/portraits/hero.webp),
@@ -266,7 +272,7 @@ renderer, bez fikcyjnych ścieżek do obrazów w CMS.
 ## Konfiguracja i kryteria przeniesienia — jeszcze niewykonane
 
 - [ ] Dostosować modele i kontrolowane warianty do luk opisanych wyżej.
-- [ ] Uzupełnić docelowe HTTPS profile, slugi, kontakt, cenę i zakres konsultacji.
+- [ ] Uzupełnić docelowe HTTPS profile, slugi, kontakt, URL płatnego kalendarza i dodatkowy zakres konsultacji; cena 450 zł / 60 minut ustalona.
 - [ ] Ustalić gotowość e-booków i rzeczywiste miejsca zakupu.
 - [ ] Przygotować krótkie metadata produkcyjne i docelowe teksty formularza/zgód.
 - [ ] Zaimportować media i utworzyć sześć produktów oraz sześć opinii jako referencje.
@@ -294,6 +300,90 @@ sluga, cena i status z produktu. **Luka schematu:** kolekcja i pola landingu nie
 istnieją. **Wykonane:** [mockup](../mockups/homepage/ebook-3a.html) oraz
 [instrukcja wdrożenia](EBOOK-CMS-CONFIG-3A.md). Bez konfiguracji Content Lake,
 checkoutu i zmiany dostępności. Brak uruchomionej sprzedaży.
+
+## Podstrona „O mnie” — mockup 2026-10-07
+
+**Ustalone przez użytkownika:** zaplanować mockup podstrony „O mnie” zgodny
+z designem 3a, wykorzystując materiały FIRMA, poprzednią stronę `ola-homepage`
+i techniki z „10000000 Sales Copy Advice”. Źródło: bezpośrednie zlecenie
+06.10.2026. Korekta 07.10.2026: „O mnie” nie ma kierować wyłącznie do konsultacji;
+uwzględnić E-E-A-T i wykonać mockup. **Wykonane:** [mockup](../mockups/homepage/about-3a.html),
+[opis aktualnego układu i copy](ABOUT-MOCKUP-PLAN-3A.md),
+[ocena E-E-A-T](ABOUT-EEAT-3A.md), wejścia z homepage, biogramu artykułu i indeksu.
+**Niewykonane:** konfiguracja Sanity i publikacja.
+
+| Obszar                  | Bieżąca wartość / mapowanie                                                                                               | Status i źródło                                                                                                                |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Wygląd podstrony        | 3a: białe tło, wiśniowa paleta, Switzer, istniejące portrety                                                              | Ustalone w zleceniu 06.10.2026.                                                                                                |
+| Adres                   | Proponowane `page.language = pl`, `slug.current = o-mnie` → `/o-mnie/`                                                    | Propozycja planu z 06.10.2026, nie utworzony dokument.                                                                         |
+| Kolejność               | Hero → osobisty kontekst z 450+ → wykształcenie i dyplom → podejście → dwie opinie → materiały → konsultacja → newsletter | Wykonane w lokalnym mockupie 07.10.2026; bez konfiguracji CMS.                                                                 |
+| H1                      | „Jestem Ola. Znam PCOS od środka.” → `heroSection.title`                                                                  | Propozycja redakcyjna wykonana lokalnie; bez akceptacji finalnego copy i konfiguracji CMS.                                     |
+| Specjalizacja           | Dietetyczka kliniczna; PCOS i insulinooporność                                                                            | Istniejący kontekst marki i zatwierdzone copy homepage.                                                                        |
+| Wskaźnik                | 450, przyrostek +, „kobiet rocznie, którym pomagają moje konsultacje”; pod osobistym kontekstem                           | Wartość ustalona wcześniej, umieszczenie wykonane w mockupie 07.10.2026.                                                       |
+| CTA główne w hero       | „Zobacz, jak pracuję” → `#jak-pracuje`                                                                                    | Korekta zakresu użytkownika 07.10.2026; konkretna etykieta wykonana jako propozycja w mockupie.                                |
+| CTA pomocnicze w hero   | „Poznaj moje materiały” → `#materialy`                                                                                    | Wykonane lokalnie 07.10.2026; dodatkowe wejścia do e-booków i bloga.                                                           |
+| CTA konsultacji         | „Zarezerwuj konsultację” → `https://cal.com`; 450 zł / 60 minut                                                           | Wcześniejsze decyzje o cenie i rezerwacji zachowane; tylko blok konsultacji ma ten cel.                                        |
+| Opinie                  | Dwa pełne cytaty: o zrozumieniu PCOS oraz gotowaniu dla rodziny; referencje `testimonialsSection.items`                   | Prawdziwość zestawu ustalona wcześniej; dobór dwóch i wariant statyczny są propozycją. Pełne teksty w planie.                  |
+| Portrety                | `about.webp` w hero, `contact.webp` w panelu konsultacji                                                                  | Istniejący zaakceptowany zestaw; rozmieszczenie proponowane.                                                                   |
+| Historia i kwalifikacje | Własne doświadczenie PCOS oraz ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym; miejsce na skan dyplomu  | Uczelnia, kierunek i ramka potwierdzone 06.10.2026. Stopień, daty, dodatkowe certyfikaty i szczegółowa historia nie są podane. |
+| Newsletter              | Tekst, formularz i status demonstracji jak w homepage 3a                                                                  | Propozycja ponownego użycia, bez zmiany zgód i bez integracji.                                                                 |
+
+Luki schematu: pojedynczy współdzielony wskaźnik zamiast minimum dwóch,
+opcjonalny nadtytuł hero, kontrolowany wariant paneli podejścia, anonimowe opinie
+i CTA w `textImageSection`, cena/czas/URL kalendarza w `service` oraz wykształcenie
+i skan dyplomu. Proponowane `author.education.institution/program`, sekcja
+`credentialsSection` z referencją autora i opcjonalnym `diplomaScan` są nowymi
+polami/typem do wdrożenia, nie istniejącą konfiguracją. Obraz może korzystać
+z `mediaObject`; PDF wymaga dodatkowego pola pliku. Szczegóły mapowania istniejących pól oraz proponowanych
+rozszerzeń są w planie. `author` może przechowywać wspólne krótkie bio,
+rolę i portret; długa historia należy do `page.sections`.
+
+Homepage 3a CTA „Poznaj moją historię” oraz biogram artykułu „Poznaj mnie bliżej”
+prowadzą już do lokalnego `about-3a.html`. Docelowy slug `/o-mnie/` nadal jest
+propozycją do konfiguracji CMS. Nowa propozycja nie zastępuje zaakceptowanego
+copy homepage, ceny e-booków, liczby ani sześciu opinii. Decyzja użytkownika
+o cenie konsultacji, czasie i płatnej rezerwacji uzupełnia wcześniejszą
+konfigurację usługi; nowa uczelnia uzupełnia bio. HTML „O mnie” jest wykonane;
+konfiguracja Content Lake pozostaje bez zmian.
+
+### Rezerwacja i kwalifikacje — uzupełnienie 06.10.2026
+
+Cena konsultacji to **450 zł za godzinę (60 minut)**. Kwota jest zapisana jako
+450 i waluta PLN; użytkownik nie określił rozliczenia podatkowego, więc nie
+przenosić automatycznie oznaczenia brutto z e-booków. Cena i czas obok CTA,
+na homepage i „O mnie”, mają pochodzić ze wspólnej usługi.
+CTA prowadzi do kalendarza umożliwiającego rezerwację i płatność za tę usługę.
+Użytkownik wskazał tymczasowo `https://cal.com`, a właściwy URL wydarzenia
+uzupełni później. Link główny Cal.com jest celem makiety, nie konfiguracją
+konkretnej płatnej usługi. Nie podano operatora płatności; historyczny Cal.com
+`dietetyk/bezplatna-konsultacja` ze starego repo opisuje darmowe wydarzenie
+i nie jest właściwym celem. Podłączenie rzeczywistej rezerwacji wymaga URL wydarzenia, a dostępność terminów
+wynika z faktycznej konfiguracji kalendarza.
+
+Wykształcenie wyróżnić już w leadzie „O mnie” i w osobnej sekcji z miejscem
+na skan. Copy: „Ukończyłam dietetykę kliniczną na Śląskim Uniwersytecie Medycznym”.
+Ramka w mockupie: „Miejsce na skan dyplomu”. Po dodaniu dokumentu miniatura
+oraz link „Zobacz dyplom”; bez pliku brak pozornego podglądu. Ukończenie kierunku
+potwierdził użytkownik; nie dopisujemy stopnia akademickiego ani roku ukończenia.
+
+### E-E-A-T i połączenia — 07.10.2026
+
+Wykonano pełną tożsamość i rolę w hero, własne doświadczenie PCOS, ukończony
+kierunek/uczelnię, jawny placeholder skanu, sposób pracy i dwa pełne cytaty.
+Dodano granice konsultacji dietetycznej i pochodzenie portretu AI.
+Nie dopisano zewnętrznych publikacji, stopnia akademickiego ani certyfikatów.
+
+JSON-LD `ProfilePage` → `Person`: `name`, `alternateName`, `jobTitle`,
+`description`, `alumniOf.name` z widocznych danych. Bez niepotwierdzonego `sameAs`,
+ratings i dokumentu, który nie istnieje. Po migracji wspólne `author` ma być
+źródłem biogramu i danych strukturalnych. Kontakt/profil społecznościowy i skan
+wymagają realnych danych przed produkcją; makieta nie dowodzi pełnego E-E-A-T.
+
+Nowy blok materiałów ma dwa wejścia: homepage `#ebooki` oraz przykład artykułu
+`article-3a.html`. Istniejący `relatedSection` obsługuje wyłącznie referencje
+do 2–4 artykułów. Mieszany blok e-booków i bloga wymaga rozszerzenia modelu
+lub nowego kontrolowanego wariantu. Zachować linki jako dane semantyczne
+i dodać renderer HTML oraz serializer Markdown zamiast CSS redaktora.
 
 ## Landing pojedynczej konsultacji 3a — 07.10.2026
 

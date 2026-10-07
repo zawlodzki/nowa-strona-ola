@@ -207,6 +207,10 @@ if (previewTitle) {
       "Konsultacje online",
       "Tutaj znajdą się zakres konsultacji, przebieg współpracy, ceny i rezerwacja terminu.",
     ],
+    kontakt: [
+      "Kontakt z Aleksandrą",
+      "Tutaj zostaną podłączone potwierdzone dane kontaktowe. Ten ekran makiety nie wysyła wiadomości.",
+    ],
     prywatnosc: [
       "Polityka prywatności",
       "Treść informacyjna i zgody zostaną przygotowane przed uruchomieniem docelowego formularza.",
@@ -263,9 +267,9 @@ if (previewTitle) {
     document.querySelector("#preview-detail").textContent =
       "Koncepcja z researchu. Robocza cena: około 100 zł. E-book i zakup nie są jeszcze dostępne w tej makiecie.";
   }
-  // Powrót wyłącznie do jednej z sześciu lokalnych propozycji.
+  // Powrót wyłącznie do lokalnej propozycji albo podstrony O mnie.
   const match = document.referrer.match(
-    /\/(wonderful(?:-cherry)?|botanical(?:-white)?|cherry(?:-white)?)\.html(?:[?#]|$)/,
+    /\/(wonderful(?:-cherry)?|botanical(?:-white)?|cherry(?:-white)?|about-3a)\.html(?:[?#]|$)/,
   );
   if (match)
     document.querySelector("#back-to-design").href = `${match[1]}.html`;
