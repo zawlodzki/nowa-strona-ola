@@ -92,7 +92,10 @@ const categories = language
   <ArticleView lang={language} article={article} settings={settings} />
 ) : ebook && language && settings ? (
   <EbookPage lang={language} ebook={ebook} settings={settings} preview />
-) : collectionPage && language && settings && route.kind === "ebookCollection" ? (
+) : collectionPage &&
+  language &&
+  settings &&
+  route.kind === "ebookCollection" ? (
   <EbookCollectionPage
     lang={language}
     page={collectionPage}

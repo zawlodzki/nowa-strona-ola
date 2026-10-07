@@ -415,9 +415,7 @@ test("ebook collection Polish and English with categories, empty URL and no POST
     page.getByRole("link", { name: "Badania, które mają sens" }).first(),
   ).toHaveAttribute("href", "/ebooki/badania-ktore-maja-sens/");
   await expect(page.getByText("97 zł").first()).toBeVisible();
-  await expect(
-    page.getByText(/materiały są w przygotowaniu/i),
-  ).toBeVisible();
+  await expect(page.getByText(/materiały są w przygotowaniu/i)).toBeVisible();
   await expect(
     page
       .getByRole("navigation", { name: "Nawigacja w stopce" })
@@ -469,19 +467,19 @@ test("ebook collection categories work without JavaScript", async ({
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     /Więcej jasności/,
   );
-  await expect(page.locator(".ebooks3a-grid .ebooks3a-card:visible")).toHaveCount(
-    6,
-  );
+  await expect(
+    page.locator(".ebooks3a-grid .ebooks3a-card:visible"),
+  ).toHaveCount(6);
   await page.getByRole("radio", { name: "Perimenopauza" }).check();
-  await expect(page.locator(".ebooks3a-grid .ebooks3a-card:visible")).toHaveCount(
-    3,
-  );
+  await expect(
+    page.locator(".ebooks3a-grid .ebooks3a-card:visible"),
+  ).toHaveCount(3);
   await expect(page.locator('[data-count="perimenopause"]')).toBeVisible();
   await page.goto("/ebooki/kategoria/pcos/");
   await expect(page.getByRole("radio", { name: /PCOS/ })).toBeChecked();
-  await expect(page.locator(".ebooks3a-grid .ebooks3a-card:visible")).toHaveCount(
-    3,
-  );
+  await expect(
+    page.locator(".ebooks3a-grid .ebooks3a-card:visible"),
+  ).toHaveCount(3);
   await page.close();
 });
 

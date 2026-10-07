@@ -442,10 +442,10 @@ Content Lake i publikacja nie były zapisywane.
 | Kategorie          | Wszystkie / PCOS / Perimenopauza, domyślnie Wszystkie — propozycja UX oparta na istniejących dwóch grupach | Proponowane `ebook.topic`: `pcos`, `perimenopause`; Wszystkie to stan filtra, nie kategoria produktu                          |
 | Cena i status      | 97 zł brutto; materiały w przygotowaniu — zachowane ustalenie 06.10.2026                                   | `ebook.priceGross = 97`, `currency = PLN`, `availability = planned`                                                           |
 | Układ              | Siatka 3 / 2 / 1 kolumna, filtry z liczbami i liczbą wyników — wykonana propozycja                         | Liczniki wyliczać z kolekcji; kontrolowany renderer, bez dowolnego CSS                                                        |
-| Copy               | „Więcej jasności. W Twoim tempie.” i krótki wstęp — **propozycja**, nie zatwierdzona treść                  | `ebookCollectionSection`: `title`, `lead`, `catalogTitle`, `catalogLead`; wariant `cherry3a` (kod; Content Lake bez zapisu)   |
+| Copy               | „Więcej jasności. W Twoim tempie.” i krótki wstęp — **propozycja**, nie zatwierdzona treść                 | `ebookCollectionSection`: `title`, `lead`, `catalogTitle`, `catalogLead`; wariant `cherry3a` (kod; Content Lake bez zapisu)   |
 | CTA kart           | „Poznaj temat”; Suplementy w PCOS → lokalny landing, pozostałe → ekran objaśniający                        | Generować adres ze sluga `ebook`; nie modelować lokalnych ekranów makiety jako checkout                                       |
 | Wejście z homepage | „Zobacz wszystkie e-booki” pod karuzelą — wykonana propozycja                                              | Link sekcji biblioteki do proponowanego `/ebooki/`                                                                            |
-| Kategorie w URL    | `?kategoria=pcos` oraz ścieżki `/ebooki/kategoria/pcos/` (EN `category`) — propozycja UX                    | Stan interfejsu, bez zapisu w CMS; canonical do `/ebooki/`; ścieżka działa bez JS, query z JS jak w makiecie                   |
+| Kategorie w URL    | `?kategoria=pcos` oraz ścieżki `/ebooki/kategoria/pcos/` (EN `category`) — propozycja UX                   | Stan interfejsu, bez zapisu w CMS; canonical do `/ebooki/`; ścieżka działa bez JS, query z JS jak w makiecie                  |
 
 **Schemat w kodzie (pakiet 5):** `ebook`, `sortOrder` i `ebookCollectionSection` istnieją.
 Content Lake bez zapisu. Copy kolekcji jest propozycją.

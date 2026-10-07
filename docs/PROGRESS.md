@@ -17,19 +17,45 @@ jak w makiecie. Newsletter to `DemoForm` bez POST. Copy i UX kolekcji są
 **propozycją**.
 
 Kod: schemat `ebookCollectionSection` (cherry3a), GROQ publiczny i preview,
-TypeGen, mappery, serializer Markdown z przykładem, fixture, dry-run importu
-(`npm run import:ebook-collection`, `--write` kończy się kodem 2). Okładka
-„Szczupła, a jednak PCOS” używa `SiteImage` + `food` (`food-editorial.webp`);
-pozostałe okładki to SVG w `src/design-system/decorations/`. Wyrównanie
-akcentów matcha z PR #31 jest poza tym pakietem.
+TypeGen (19 kwerend, 67 typów schematu), mappery, serializer Markdown
+z przykładem, fixture, dry-run importu (`npm run import:ebook-collection`,
+`--write` kończy się kodem 2). Okładka „Szczupła, a jednak PCOS” używa
+`SiteImage` + `astro:assets` (`food` → `src/assets/editorial/food-editorial.webp`);
+pozostałe okładki to SVG w `src/design-system/decorations/` (`BookCoverArt`).
+Wyrównanie akcentów matcha z PR #31 jest poza tym pakietem.
 
-`npm run verify` i compare screenshotów z makietą — w toku tej sesji; liczby
-unit/E2E i CSS gzip uzupełnić po zakończeniu kontroli. Natywny zoom, czytnik
-i urządzenie fizyczne nie są wykonywane w tej sesji.
+Kontrole tej sesji (Node 24.21.0):
 
-Następny krok po odbiorze kodu: pakiet 6 BlogCollection3a. Dane kolekcji
-w Content Lake i odbiór Studio/preview pozostają otwarte. Copy kolekcji
-do zatwierdzenia.
+- `npm run verify` PASS: 95 unit, 96 E2E (Chromium/Firefox/WebKit).
+- CSS gzip `dist/_astro`: **24 636 B** (limit tymczasowy 32 KiB); JS gzip
+  5 770 B. Designu nie wycinano pod budżet.
+- Dry-run importu: 2 dokumenty `page`, 0 duplikatów `ebook`, bez zapisu.
+- verify-ola (`VERIFY_RUN_ID=ola-1791408926`, baza `http://127.0.0.1:4340`):
+  PL/EN, Wszystkie / PCOS / Perimenopauza, ścieżka `/ebooki/kategoria/pcos/`,
+  bez JS, desktop 1280 i mobile 390. `browser posts` = `[]`. `/en/ebooki/`
+  → 404. Dowody: `/tmp/ola-verify-evidence/ola-1791408926/`.
+- Porównanie z makietą: siatka, filtry, okładki, ceny 97 zł brutto i nota
+  przygotowania 1:1 w `<main>`. Różnice shella (Blog i English w menu,
+  DemoForm newslettera, stopka bez social z makiety) pochodzą ze wspólnego
+  `SiteShell3a` z pakietów 1–4, nie z ucięcia kolekcji.
+- Pusty stan kolekcji/kategorii: mapper + unit; fixture ma 6 e-booków, więc
+  zrzut pustej siatki nie istnieje na tym `dist/`.
+- Pięć kart poza Suplementami w PCOS ma prawdziwy `ebookPath`; landingi
+  tych slugów jeszcze nie istnieją (404 do kolejnych prac).
+- Playwright Chromium/Firefox/WebKit zainstalowano; `install-deps` nie
+  zawisł. Natywny zoom przeglądarki, czytnik i urządzenie fizyczne **nie
+  sprawdzone**.
+
+Tabela zdjęć z makiety:
+
+| Zdjęcie z makiety                                                     | Plik na produkcji                                                         | Sekcja                                                   | Status                                         |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------- |
+| `assets/food-editorial.webp` (CSS `.art-nutrition`)                   | `src/assets/editorial/food-editorial.webp` przez `SiteImage` klucz `food` | okładka „Szczupła, a jednak PCOS” / Slim, and still PCOS | na miejscu, ten sam kadr                       |
+| pozostałe 5 okładek (art-decisions/route/observation/journal/evening) | SVG `BookCoverArt` w `src/design-system/decorations/`                     | karty kolekcji                                           | SVG, bez rastrów — zgodnie z makietą           |
+| brak innych `<img>` w `ebooks-3a.html`                                | —                                                                         | —                                                        | nic nie brakuje; placeholderów nie podstawiano |
+
+Następny krok: pakiet 6 BlogCollection3a. Dane kolekcji w Content Lake
+i odbiór Studio/preview pozostają otwarte. Copy i UX kolekcji do zatwierdzenia.
 
 ### Sesja dodatkowego akcentu — 07.10.2026
 
