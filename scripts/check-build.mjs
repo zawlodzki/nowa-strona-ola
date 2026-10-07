@@ -26,6 +26,8 @@ for (const path of [
   "en/index.html",
   "o-mnie/index.html",
   "en/about/index.html",
+  "konsultacje/index.html",
+  "en/consultations/index.html",
   "ui/index.html",
   "en/ui/index.html",
   "static/index.html",
@@ -50,6 +52,7 @@ for (const path of [
     assert(!html.includes("<script"), "static primitives emit JS");
 }
 await assert.rejects(access("dist/en/tylko-pl/index.html"), /ENOENT/);
+await assert.rejects(access("dist/en/konsultacje/index.html"), /ENOENT/);
 console.log(
   JSON.stringify({ gzipBytes: sizes, staticPrimitivesScripts: 0 }, null, 2),
 );

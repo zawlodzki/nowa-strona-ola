@@ -1,15 +1,18 @@
 ---
 import type { Locale } from "@ola/shared";
 
+import { consultationCopy } from "@/content/consultation-seed";
 import { mapAbout } from "@/content/map-about";
+import { mapConsultation } from "@/content/map-consultation";
 import { mapHomepage, shellLinks } from "@/content/map-homepage";
 import { homepageCopyright } from "@/sanity/homepage-fixtures";
-import { aboutPath, pagePath } from "@/lib/paths";
+import { pagePath } from "@/lib/paths";
 import type { PageContent, SiteSettings } from "@/sanity/repository";
 import Layout from "@/layouts/Layout.astro";
 import SiteFooter from "@/ui/site-footer/SiteFooter.astro";
 import SiteHeader from "@/ui/site-header/SiteHeader.astro";
 import About3a from "@/views/About3a.astro";
+import Consultation3a from "@/views/Consultation3a.astro";
 import Homepage3a from "@/views/Homepage3a.astro";
 import PageSections from "@/views/PageSections.astro";
 import SiteShell3a from "@/views/SiteShell3a.astro";
@@ -37,17 +40,21 @@ const alternateHref = page.translation?.slug
   : null;
 const isHome = page.slug === "home" || section === "home";
 const isAbout = page.slug === "o-mnie" || page.slug === "about";
+const isConsultation =
+  page.slug === "konsultacje" || page.slug === "consultations";
 const shell = shellLinks(settings);
-const aboutHref = aboutPath(lang);
+const currentHref = pagePath(lang, page.slug);
 const navigation = shell.navigation.map((item) => ({
   ...item,
-  current: item.href === aboutHref,
+  current: item.href === currentHref,
 }));
 const headerCta = isAbout
   ? shell.headerCta
     ? { ...shell.headerCta, href: "#newsletter" }
     : undefined
   : shell.headerCta;
+const consultation = isConsultation ? mapConsultation(page, lang) : undefined;
+const consultationLabels = consultationCopy[lang];
 ---
 
 {isHome ? (
@@ -78,6 +85,26 @@ const headerCta = isAbout
     legalLinks={shell.legalLinks}
   >
     <About3a lang={lang} content={mapAbout(page, lang)} />
+  </SiteShell3a>
+) : consultation ? (
+  <SiteShell3a
+    lang={lang}
+    title={page.seo?.title ?? page.title}
+    description={page.seo?.description ?? undefined}
+    preview={preview}
+    footerNote={settings.footerNote ?? ""}
+    copyright={homepageCopyright(lang)}
+    languageHref={alternateHref}
+    navigation={[...consultationLabels.navigation]}
+    footerLinks={navigation}
+    headerCta={{
+      label: `${consultationLabels.headerCtaPrefix} · ${consultation.price.price} ${consultation.price.currencyLabel}`,
+      href: "#cena",
+    }}
+    socialLinks={shell.socialLinks}
+    legalLinks={shell.legalLinks}
+  >
+    <Consultation3a lang={lang} content={consultation} />
   </SiteShell3a>
 ) : (
   <Layout lang={lang} title={page.seo?.title ?? page.title}>

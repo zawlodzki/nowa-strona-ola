@@ -1,6 +1,7 @@
 import type { Locale } from "@ola/shared";
 
 import { aboutPageFixture } from "./about-fixtures";
+import { consultationPageFixture } from "./consultation-fixtures";
 import {
   homepagePageFixture,
   homepageSettingsFixture,
@@ -402,6 +403,8 @@ export const demonstrationPages = {
   "en/home": homepagePageFixture("en"),
   "pl/o-mnie": aboutPageFixture("pl"),
   "en/about": aboutPageFixture("en"),
+  "pl/konsultacje": consultationPageFixture("pl"),
+  "en/consultations": consultationPageFixture("en"),
   "pl/warsztat": {
     id: "demo-workshop-pl",
     language: "pl" as const,

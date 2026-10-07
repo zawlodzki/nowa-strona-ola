@@ -48,7 +48,7 @@ const GAPS = [
     id: "about-consultation-collection-routes",
     status: "open",
     detail:
-      "Trasa /o-mnie/ i /en/about/ jest w kodzie pakietu 2. /konsultacje/ i /ebooki/ nadal czekają na pakiety 3 i 5. Nawigacja „O mnie” prowadzi do profilu.",
+      "Trasy /o-mnie/ (pakiet 2) i /konsultacje/ (pakiet 3) są w kodzie. /ebooki/ nadal czeka na pakiet 5. Nawigacja „O mnie” i „Konsultacje” prowadzi do landingów.",
   },
 ];
 
@@ -324,7 +324,7 @@ function documents() {
       {
         _key: "nav-consultations",
         label: "Konsultacje",
-        href: "/#konsultacje",
+        href: "/konsultacje/",
       },
       { _key: "nav-about", label: "O mnie", href: "/o-mnie/" },
       { _key: "nav-blog", label: "Blog", href: "/blog/" },
@@ -347,7 +347,7 @@ function documents() {
       {
         _key: "nav-consultations",
         label: "Consultations",
-        href: "/en/#konsultacje",
+        href: "/en/consultations/",
       },
       { _key: "nav-about", label: "About", href: "/en/about/" },
       { _key: "nav-blog", label: "Blog", href: "/en/blog/" },

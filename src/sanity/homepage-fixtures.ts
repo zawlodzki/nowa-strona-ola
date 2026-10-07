@@ -11,6 +11,7 @@ import {
   TESTIMONIAL_QUOTES_EN,
   TESTIMONIAL_QUOTES_PL,
 } from "@/content/homepage-seed";
+import { consultationPath } from "@/lib/paths";
 
 function media(
   key: string,
@@ -165,7 +166,6 @@ export function homepageSections(language: Locale) {
   const service = serviceFixture(language);
   const form = newsletterFormFixture(language);
   const ebookAnchor = language === "pl" ? "ebooki" : "ebooki";
-  const consultAnchor = language === "pl" ? "konsultacje" : "konsultacje";
 
   return [
     {
@@ -183,7 +183,7 @@ export function homepageSections(language: Locale) {
       },
       secondary: {
         label: copy.heroSecondary,
-        href: `#${consultAnchor}`,
+        href: consultationPath(language),
         emphasis: "outline",
       },
       media: media(
