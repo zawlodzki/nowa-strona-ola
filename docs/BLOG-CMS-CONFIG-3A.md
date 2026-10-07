@@ -198,3 +198,52 @@ z przewijaniem wewnętrznym przy niskim oknie. Na tabletach i telefonach oba blo
 są w przepływie dokumentu pod tekstem i autorem. Próg 50% pozostaje; pojawienie się
 panelu zajmuje miejsce w kolumnie i nie przykrywa artykułu, e-booków, FAQ ani stopki.
 To obowiązująca korekta wcześniejszego wzorca z a16z.
+
+## Kolekcja wszystkich wpisów — 07.10.2026
+
+Na polecenie użytkownika wykonano [indeks bloga 3a](../mockups/homepage/blog-3a.html)
+i [stronę 2](../mockups/homepage/blog-3a-page-2.html): najnowszy artykuł nad
+siatką dwóch kolumn, paginacja pod siatką, następnie pełny newsletter.
+Na mobile jedna kolumna. Pierwsza podstrona ma wyróżniony wpis i sześć kart,
+druga cztery starsze karty. Wszystkie 11 pozycji są przykładami; żadne dane
+kolekcji nie zostały pobrane ani zapisane w Sanity. Najnowszy wpis prowadzi
+do istniejącego mockupu artykułu, pozostałe do ekranów objaśniających.
+Paginacja działa zwykłymi odnośnikami również bez JS.
+
+### Docelowy wybór i paginacja
+
+Wykorzystać istniejące `article` i `PUBLISHED_ARTICLES_QUERY`, z filtrem języka
+i wykluczeniem szkiców. Ustalić stabilne sortowanie `publishedAt desc, _id asc`
+na wypadek identycznych dat. Nie używać flagi `featured` jako zamiennika
+najnowszego wpisu: wybrana karta to pierwszy artykuł po sortowaniu.
+
+Najpierw wybrać jeden najnowszy wpis, następnie usunąć go z paginowanej listy.
+Wyróżniony wpis renderować tylko na stronie 1, bez powtarzania w siatce.
+Pozostałe artykuły dzielić według istniejącego `ARTICLES_PER_PAGE = 6`.
+Dla `n > 0`: liczba stron `max(1, ceil((n - 1) / 6))`.
+Dla strony `p` wybrać zakres pozostałej kolekcji `[(p - 1) * 6, p * 6)`.
+Jeden wpis oznacza tylko wyróżnienie; zerowa kolekcja oznacza komunikat pustej
+listy bez paginacji. Nie generować pustych ani nieistniejących numerów stron.
+Paginację pominąć przy jednej stronie; skrajne akcje nie są klikalne ani
+fokusowalne. Bieżąca strona ma `aria-current="page"`.
+
+Wykorzystać istniejące `blogPath`: PL `/blog/strona/2/`, EN `/en/blog/page/2/`.
+Podgląd i produkcja korzystają ze wspólnego szablonu, bez polskiego fallbacku
+pod EN. Karty korzystają z tytułu, leadu, daty, obrazu z alt/hotspot
+oraz referencji kategorii. Bez osobnej kolekcji duplikującej artykuły.
+
+Tytuł „Blog. Po Twojemu.” i lead są propozycją do oceny. Obecne `siteSettings`
+nie zawiera ustawień indeksu; proponowany lokalizowany obiekt `blogIndex`
+ma `title` i `lead`, bez pól szerokości czy CSS. Newsletter współdzieli wcześniej
+opisane `siteSettings.blogNewsletter` i referencję `form`; ta konfiguracja
+pozostaje propozycją, nie wdrożonym polem. Navbar/stopka z ustawień serwisu.
+HTML i Markdown mają korzystać z tego samego wyboru artykułów i linków stron.
+
+- [x] Wykonać samodzielny HTML/CSS 3a z kolekcją, paginacją i newsletterem.
+- [x] Połączyć lokalne menu 3a i breadcrumb artykułu z indeksem.
+- [ ] Zatwierdzić copy indeksu oraz rzeczywiste tytuły, daty i obrazy wpisów.
+- [ ] Wdrożyć wybór najnowszego wpisu i paginację bez duplikatu w Astro/GROQ.
+- [ ] Dodać konfigurację indeksu/newslettera, TypeGen, mappery i Markdown.
+- [ ] Sprawdzić docelowe kolekcje 0/1/7/8/13/14 wpisów, remisy dat i brak EN.
+
+Makieta nie zamyka żadnego z powyższych kroków implementacji CMS ani Astro.

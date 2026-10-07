@@ -495,3 +495,19 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
 [Mockup](../mockups/homepage/consultation-3a.html),
 [mapowanie CMS i copy](CONSULTATION-CMS-CONFIG-3A.md).
 Lokalny landing nie zamyka wdrożenia CMS ani kalendarza.
+
+## Lista wszystkich wpisów bloga 3a — 2026-10-07
+
+- [x] Przygotować indeks: jeden najnowszy wpis nad siatką dwóch kolumn.
+- [x] Dodać działające odnośniki paginacji i osobną drugą podstronę kolekcji.
+- [x] Dodać pełny newsletter po paginacji oraz menu/stopkę wspólnego 3a.
+- [x] Połączyć indeks z lokalnymi stronami 3a i breadcrumb artykułu.
+- [ ] Scalić PR mockupu indeksu bloga po kontroli GitHub Quality.
+- [x] Zapisać decyzje, propozycje copy i docelowy algorytm kolekcji w instrukcji CMS.
+- [x] Sprawdzić obie podstrony w Chromium/Firefox/WebKit, 320 px, CSS zoom 200%,
+      klawiaturę, brak JS, reduced motion i axe; wykonać przegląd wizualny.
+- [ ] Przenieść zaakceptowany indeks do Astro/Sanity oraz serializera Markdown.
+
+[Mockup](../mockups/homepage/blog-3a.html),
+[instrukcja przyszłej konfiguracji](BLOG-CMS-CONFIG-3A.md#kolekcja-wszystkich-wpisów--07102026).
+Kontrole i ograniczenia tej sesji: [postęp](PROGRESS.md).

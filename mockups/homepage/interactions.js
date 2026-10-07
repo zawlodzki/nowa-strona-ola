@@ -191,6 +191,38 @@ const previewTitle = document.querySelector("#preview-title");
 if (previewTitle) {
   const params = new URLSearchParams(window.location.search);
   const pages = {
+    "blog-badania": [
+      "Wyniki badań: co zabrać na konsultację?",
+      "Przykładowy wpis kolekcji bloga 3a. Ta makieta pokazuje układ listy; treść artykułu wymaga przygotowania i akceptacji redakcyjnej.",
+    ],
+    "blog-regularnosc": [
+      "Regularne posiłki, kiedy każdy dzień wygląda inaczej",
+      "Przykładowy wpis kolekcji bloga 3a. Ta makieta pokazuje układ listy; treść artykułu wymaga przygotowania i akceptacji redakcyjnej.",
+    ],
+    "blog-io": [
+      "Insulinooporność: od czego zacząć rozmowę o odżywianiu?",
+      "Przykładowy wpis kolekcji bloga 3a. Ta makieta pokazuje układ listy; treść artykułu wymaga przygotowania i akceptacji redakcyjnej.",
+    ],
+    "blog-suplementy": [
+      "Suplementy w PCOS: uporządkuj pytania, zanim kupisz",
+      "Przykładowy wpis kolekcji bloga 3a. Ta makieta pokazuje układ listy; treść artykułu wymaga przygotowania i akceptacji redakcyjnej.",
+    ],
+    "blog-notatki": [
+      "Dzienniczek posiłków bez presji perfekcji",
+      "Przykładowy wpis kolekcji bloga 3a. Ta makieta pokazuje układ listy; treść artykułu wymaga przygotowania i akceptacji redakcyjnej.",
+    ],
+    "blog-cele": [
+      "Co chcesz zmienić? Jak nazwać cel konsultacji",
+      "Przykładowy wpis kolekcji bloga 3a. Ta makieta pokazuje układ listy; treść artykułu wymaga przygotowania i akceptacji redakcyjnej.",
+    ],
+    "blog-zakupy": [
+      "Zakupy spożywcze dopasowane do Twojego tygodnia",
+      "Przykładowy wpis kolekcji bloga 3a. Ta makieta pokazuje układ listy; treść artykułu wymaga przygotowania i akceptacji redakcyjnej.",
+    ],
+    "blog-rady": [
+      "Sprzeczne rady o PCOS: zapisz to, co chcesz wyjaśnić",
+      "Przykładowy wpis kolekcji bloga 3a. Ta makieta pokazuje układ listy; treść artykułu wymaga przygotowania i akceptacji redakcyjnej.",
+    ],
     "blog-posilki": [
       "Codzienne posiłki przy PCOS: zacznij od swojego rytmu",
       "Przykładowy powiązany artykuł do oceny makiety. Docelowa treść i adres wymagają przygotowania w CMS.",
@@ -267,9 +299,9 @@ if (previewTitle) {
     document.querySelector("#preview-detail").textContent =
       "Koncepcja z researchu. Robocza cena: około 100 zł. E-book i zakup nie są jeszcze dostępne w tej makiecie.";
   }
-  // Powrót wyłącznie do lokalnej propozycji albo podstrony O mnie.
+  // Powrót wyłącznie do lokalnej propozycji albo podstrony makiety 3a.
   const match = document.referrer.match(
-    /\/(wonderful(?:-cherry)?|botanical(?:-white)?|cherry(?:-white)?|about-3a)\.html(?:[?#]|$)/,
+    /\/(wonderful(?:-cherry)?|botanical(?:-white)?|cherry(?:-white)?|about-3a|blog-3a(?:-page-2)?)\.html(?:[?#]|$)/,
   );
   if (match)
     document.querySelector("#back-to-design").href = `${match[1]}.html`;
