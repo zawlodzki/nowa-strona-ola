@@ -13,12 +13,15 @@ import {
   fixturePagesForLanguage,
   demonstrationCategories,
 } from "./fixtures";
+import { fixtureEbook, fixtureEbooksWithLanding } from "./ebook-fixtures";
 import {
   PUBLISHED_ARTICLE_PATHS_QUERY,
   PUBLISHED_ARTICLE_QUERY,
   PUBLISHED_ARTICLES_QUERY,
   PUBLISHED_CATEGORIES_QUERY,
   PUBLISHED_CATEGORY_QUERY,
+  PUBLISHED_EBOOK_PATHS_QUERY,
+  PUBLISHED_EBOOK_QUERY,
   PUBLISHED_PAGE_PATHS_QUERY,
   PUBLISHED_PAGE_QUERY,
   SITE_SETTINGS_QUERY,
@@ -29,6 +32,8 @@ import type {
   PUBLISHED_ARTICLES_QUERY_RESULT,
   PUBLISHED_CATEGORIES_QUERY_RESULT,
   PUBLISHED_CATEGORY_QUERY_RESULT,
+  PUBLISHED_EBOOK_PATHS_QUERY_RESULT,
+  PUBLISHED_EBOOK_QUERY_RESULT,
   PUBLISHED_PAGE_PATHS_QUERY_RESULT,
   PUBLISHED_PAGE_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
@@ -39,6 +44,7 @@ export type ArticleContent = NonNullable<PUBLISHED_ARTICLE_QUERY_RESULT>;
 export type ArticleCard = PUBLISHED_ARTICLES_QUERY_RESULT[number];
 export type SiteSettings = NonNullable<SITE_SETTINGS_QUERY_RESULT>;
 export type CategoryContent = NonNullable<PUBLISHED_CATEGORY_QUERY_RESULT>;
+export type EbookContent = NonNullable<PUBLISHED_EBOOK_QUERY_RESULT>;
 
 interface QueryClient {
   fetch: <T>(query: string, parameters?: Record<string, unknown>) => Promise<T>;
@@ -296,4 +302,57 @@ export async function listCategories(
   const client = resolveClient(options);
   if (!client) return demonstrationCategories[language];
   return client.fetch(PUBLISHED_CATEGORIES_QUERY, { language });
+}
+
+export async function getEbook(
+  language: Locale,
+  slug: string,
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+): Promise<EbookContent> {
+  const client = resolveClient(options);
+  if (!client) {
+    const fixture = fixtureEbook(language, slug);
+    if (!fixture) {
+      throw new Error(`Brak demonstracyjnego e-booka ${language}/${slug}.`);
+    }
+    return fixture as unknown as EbookContent;
+  }
+
+  const ebook = await client.fetch<EbookContent | null>(PUBLISHED_EBOOK_QUERY, {
+    language,
+    slug,
+  });
+  if (!ebook) {
+    throw new Error(`Brak opublikowanego e-booka ${language}/${slug}.`);
+  }
+  if (ebook.language !== language || ebook.slug !== slug) {
+    throw new Error(
+      `Sanity zwróciło e-book niezgodny z żądaniem ${language}/${slug}.`,
+    );
+  }
+  if (!ebook.landing) {
+    throw new Error(
+      `E-book ${language}/${slug} nie ma landingu. Zatrzymuję build.`,
+    );
+  }
+  return ebook;
+}
+
+export async function getEbookPaths(
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+): Promise<PUBLISHED_EBOOK_PATHS_QUERY_RESULT> {
+  const client = resolveClient(options);
+  if (!client) {
+    return fixtureEbooksWithLanding().map((ebook) => ({
+      language: ebook.language,
+      slug: ebook.slug,
+    }));
+  }
+  return client.fetch(PUBLISHED_EBOOK_PATHS_QUERY);
 }

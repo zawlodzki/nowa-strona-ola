@@ -140,8 +140,93 @@ export type Ebook = {
   priceGross: number;
   currency: "PLN";
   format?: "pdf";
+  chapters?: Array<
+    {
+      _key: string;
+    } & EbookChapter
+  >;
+  includedMaterials?: Array<
+    {
+      _key: string;
+    } & EbookMaterial
+  >;
+  delivery?: EbookDelivery;
+  checkoutUrl?: string;
+  reviewedAt?: string;
+  sources?: Array<
+    {
+      _key: string;
+    } & EbookSource
+  >;
   sortOrder?: number;
+  landing?: EbookLanding;
   seo?: Seo;
+};
+
+export type EbookLanding = {
+  _type: "ebookLanding";
+  variant: "cherry3a";
+  heroTitle: string;
+  heroLead: string;
+  primaryLabel: string;
+  secondaryLabel: string;
+  facts?: Array<{
+    title: string;
+    detail: string;
+    _key: string;
+  }>;
+  problemTitle: string;
+  problemParagraphs: Array<string>;
+  problemQuestions: Array<string>;
+  problemMedia?: MediaObject;
+  audienceTitle: string;
+  audienceLead: string;
+  audienceItems: Array<{
+    title: string;
+    body: string;
+    _key: string;
+  }>;
+  educationNote: string;
+  contentsTitle: string;
+  contentsLead: string;
+  ingredients: Array<string>;
+  sampleTitle: string;
+  sampleLead: string;
+  sampleMedia?: MediaObject;
+  sampleFields: Array<{
+    label: string;
+    _key: string;
+  }>;
+  sampleCaption: string;
+  outcomesTitle: string;
+  outcomesLead: string;
+  comparisonItems: Array<{
+    before: string;
+    after: string;
+    _key: string;
+  }>;
+  outcomesNote: string;
+  authorTitle: string;
+  authorParagraphs: Array<string>;
+  offerTitle: string;
+  offerLead: string;
+  purchaseLabel: string;
+  offerNote?: string;
+  testimonialsTitle: string;
+  testimonialsContext: string;
+  testimonialsScope: "cooperation" | "product";
+  testimonials: Array<
+    {
+      _key: string;
+    } & TestimonialReference
+  >;
+  faq: FaqSection;
+};
+
+export type EbookDelivery = {
+  _type: "ebookDelivery";
+  description: string;
+  timeline?: string;
 };
 
 export type SanityImageAssetReference = {
@@ -355,6 +440,36 @@ export type Page = {
   seo?: Seo;
 };
 
+export type FaqSection = {
+  _type: "faqSection";
+  title: string;
+  lead: string;
+  items: Array<{
+    question: string;
+    answer: string;
+    _key: string;
+  }>;
+};
+
+export type EbookSource = {
+  _type: "ebookSource";
+  title: string;
+  href: string;
+  scope?: string;
+};
+
+export type EbookMaterial = {
+  _type: "ebookMaterial";
+  title: string;
+  description?: string;
+};
+
+export type EbookChapter = {
+  _type: "ebookChapter";
+  title: string;
+  summary: string;
+};
+
 export type CredentialsSection = {
   _type: "credentialsSection";
   title: string;
@@ -498,17 +613,6 @@ export type ComparisonSection = {
   rows: Array<{
     feature: string;
     values: Array<string>;
-    _key: string;
-  }>;
-};
-
-export type FaqSection = {
-  _type: "faqSection";
-  title: string;
-  lead: string;
-  items: Array<{
-    question: string;
-    answer: string;
     _key: string;
   }>;
 };
@@ -832,6 +936,8 @@ export type AllSanitySchemaTypes =
   | Testimonial
   | AuthorReference
   | Ebook
+  | EbookLanding
+  | EbookDelivery
   | SanityImageAssetReference
   | MediaObject
   | Slug
@@ -842,6 +948,10 @@ export type AllSanitySchemaTypes =
   | ArticleBody
   | PageReference
   | Page
+  | FaqSection
+  | EbookSource
+  | EbookMaterial
+  | EbookChapter
   | CredentialsSection
   | ServiceReference
   | ServiceOfferSection
@@ -855,7 +965,6 @@ export type AllSanitySchemaTypes =
   | CtaSection
   | QuoteSection
   | ComparisonSection
-  | FaqSection
   | ExpertSection
   | Author
   | TestimonialsSection
@@ -1552,6 +1661,157 @@ export type PREVIEW_CATEGORY_QUERY_RESULT = {
   } | null;
 } | null;
 
+// Source: ../preview/src/lib/queries.ts
+// Variable: PREVIEW_EBOOK_QUERY
+// Query: *[    _type == "ebook" &&    language == $language &&    slug.current == $slug  ][0]{   "id": _id,  language,  "slug": slug.current,  title,  subtitle,  topic,  cardDescription,  coverTone,  availability,  priceGross,  currency,  format,  sortOrder,  reviewedAt,  "cover": cover{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},  "author": author->{    name,    role,    bio,    educationInstitution,    educationProgram,    "photo": photo{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  chapters[]{ _key, title, summary },  includedMaterials[]{ _key, title, description },  delivery{ description, timeline },  checkoutUrl,  sources[]{ _key, title, href, scope },  seo{title, description},  "translation": translation->{ language, "slug": slug.current },  landing{    variant,    heroTitle,    heroLead,    primaryLabel,    secondaryLabel,    facts[]{ _key, title, detail },    problemTitle,    problemParagraphs,    problemQuestions,    "problemMedia": problemMedia{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    audienceTitle,    audienceLead,    audienceItems[]{ _key, title, body },    educationNote,    contentsTitle,    contentsLead,    ingredients,    sampleTitle,    sampleLead,    "sampleMedia": sampleMedia{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    sampleFields[]{ _key, label },    sampleCaption,    outcomesTitle,    outcomesLead,    comparisonItems[]{ _key, before, after },    outcomesNote,    authorTitle,    authorParagraphs,    offerTitle,    offerLead,    purchaseLabel,    offerNote,    testimonialsTitle,    testimonialsContext,    testimonialsScope,    testimonials[]->{      quote,      name,      role,      anonymous,      displayLabel,      scope    },    faq{      title,      lead,      items[]{ _key, question, answer }    }  } }
+export type PREVIEW_EBOOK_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  subtitle: string | null;
+  topic: "pcos" | "perimenopause";
+  cardDescription: string;
+  coverTone: "cherry" | "light";
+  availability: "available" | "paused" | "planned" | "presale";
+  priceGross: number;
+  currency: "PLN";
+  format: "pdf" | null;
+  sortOrder: number | null;
+  reviewedAt: string | null;
+  cover: {
+    alt: string;
+    tone: "diagram" | "photo" | "portrait";
+    caption: string | null;
+    label: string;
+    src: string | null;
+  };
+  author: {
+    name: string;
+    role: string;
+    bio: string;
+    educationInstitution: string | null;
+    educationProgram: string | null;
+    photo: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+    } | null;
+  };
+  chapters: Array<{
+    _key: string;
+    title: string;
+    summary: string;
+  }> | null;
+  includedMaterials: Array<{
+    _key: string;
+    title: string;
+    description: string | null;
+  }> | null;
+  delivery: {
+    description: string;
+    timeline: string | null;
+  } | null;
+  checkoutUrl: string | null;
+  sources: Array<{
+    _key: string;
+    title: string;
+    href: string;
+    scope: string | null;
+  }> | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+  landing: {
+    variant: "cherry3a";
+    heroTitle: string;
+    heroLead: string;
+    primaryLabel: string;
+    secondaryLabel: string;
+    facts: Array<{
+      _key: string;
+      title: string;
+      detail: string;
+    }> | null;
+    problemTitle: string;
+    problemParagraphs: Array<string>;
+    problemQuestions: Array<string>;
+    problemMedia: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+    } | null;
+    audienceTitle: string;
+    audienceLead: string;
+    audienceItems: Array<{
+      _key: string;
+      title: string;
+      body: string;
+    }>;
+    educationNote: string;
+    contentsTitle: string;
+    contentsLead: string;
+    ingredients: Array<string>;
+    sampleTitle: string;
+    sampleLead: string;
+    sampleMedia: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+    } | null;
+    sampleFields: Array<{
+      _key: string;
+      label: string;
+    }>;
+    sampleCaption: string;
+    outcomesTitle: string;
+    outcomesLead: string;
+    comparisonItems: Array<{
+      _key: string;
+      before: string;
+      after: string;
+    }>;
+    outcomesNote: string;
+    authorTitle: string;
+    authorParagraphs: Array<string>;
+    offerTitle: string;
+    offerLead: string;
+    purchaseLabel: string;
+    offerNote: string | null;
+    testimonialsTitle: string;
+    testimonialsContext: string;
+    testimonialsScope: "cooperation" | "product";
+    testimonials: Array<{
+      quote: string;
+      name: string | null;
+      role: string | null;
+      anonymous: boolean | null;
+      displayLabel: string | null;
+      scope: "cooperation" | "product";
+    }>;
+    faq: {
+      title: string;
+      lead: string;
+      items: Array<{
+        _key: string;
+        question: string;
+        answer: string;
+      }>;
+    };
+  } | null;
+} | null;
+
 // Source: ../src/sanity/queries.ts
 // Variable: PUBLISHED_PAGE_QUERY
 // Query: *[    _type == "page" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{   "id": _id,  language,  "slug": slug.current,  title,  seo{title, description},  "translation": translation->{ language, "slug": slug.current },  sections[]{   _key,  _type,  _type == "heroSection" => {    variant,    theme,    eyebrow,    title,    lead,    "primary": primary{ label, href, emphasis },    "secondary": secondary{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "textSection" => { eyebrow, title, body },  _type == "textImageSection" => {    variant,    eyebrow,    title,    lead,    body,    mediaPosition,    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "secondaryMedia": secondaryMedia{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    prompts,    resolutionEyebrow,    resolutionTitle,    caption  },  _type == "logosSection" => {    title,    lead,    names,    items[]{      _key,      name,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "cardsSection" => {    variant,    eyebrow,    title,    lead,    items[]{      _key,      title,      body,      href,      status,      "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    },    closing  },  _type == "listSection" => { title, lead, items },  _type == "processSection" => {    title,    lead,    note,    steps[]{ _key, title, body },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  _type == "metricsSection" => {    variant,    title,    lead,    items[]{ _key, value, suffix, label },    highlights[]{ _key, title, body }  },  _type == "pricingSection" => {    title,    lead,    plans[]{      _key,      name,      price,      summary,      emphasis,      features,      "action": action{ label, href, emphasis }    }  },  _type == "testimonialsSection" => {    title,    lead,    items[]->{      quote,      name,      role,      anonymous,      displayLabel,      scope    }  },  _type == "expertSection" => {    title,    intro,    body,    metric{ value, suffix, label },    "action": action{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "person": person->{      name,      role,      bio,      educationInstitution,      educationProgram,      "photo": photo{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "faqSection" => {    title,    lead,    items[]{ _key, question, answer }  },  _type == "comparisonSection" => {    title,    lead,    caption,    rowHeading,    columns,    rows[]{ _key, feature, values }  },  _type == "quoteSection" => { theme, heading, quote, attribution },  _type == "ctaSection" => {    theme,    title,    lead,    "action": action{ label, href, emphasis }  },  _type == "formSection" => {    eyebrow,    title,    lead,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        errorMessage,        required,        options      }    }  },  _type == "mediaSection" => {    title,    lead,    "image": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    videoTitle,    videoUrl,    videoPlatform  },  _type == "relatedSection" => {    title,    items[]->{      title,      "excerpt": lead,      "slug": slug.current,      language,      publishedAt,      "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  },  _type == "ebooksSection" => {    title,    lead,    cardActionLabel,    note,    "collection": collection{ label, href, emphasis },    items[]->{      "id": _id,      language,      "slug": slug.current,      title,      subtitle,      topic,      cardDescription,      coverTone,      availability,      priceGross,      currency,      format,      sortOrder,      "cover": cover{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},      "authorName": author->name    }  },  _type == "serviceOfferSection" => {    title,    body,    facts,    note,    "action": action{ label, href, emphasis },    "secondary": secondary{ label, href, emphasis },    "media": media{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    "service": service->{      "id": _id,      title,      summary,      "slug": slug.current,      price,      currency,      durationMinutes,      bookingUrl,      bookingStatus    }  },  _type == "credentialsSection" => {    title,    body,    diplomaCaption,    "person": person->{      "id": _id,      name,      role,      bio,      educationInstitution,      educationProgram,      "photo": photo{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},      "diplomaScan": diplomaScan{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}    }  } } }
@@ -2237,6 +2497,165 @@ export type PUBLISHED_CATEGORIES_QUERY_RESULT = Array<{
   language: "en" | "pl";
 }>;
 
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_EBOOK_QUERY
+// Query: *[    _type == "ebook" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{   "id": _id,  language,  "slug": slug.current,  title,  subtitle,  topic,  cardDescription,  coverTone,  availability,  priceGross,  currency,  format,  sortOrder,  reviewedAt,  "cover": cover{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},  "author": author->{    name,    role,    bio,    educationInstitution,    educationProgram,    "photo": photo{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url}  },  chapters[]{ _key, title, summary },  includedMaterials[]{ _key, title, description },  delivery{ description, timeline },  checkoutUrl,  sources[]{ _key, title, href, scope },  seo{title, description},  "translation": translation->{ language, "slug": slug.current },  landing{    variant,    heroTitle,    heroLead,    primaryLabel,    secondaryLabel,    facts[]{ _key, title, detail },    problemTitle,    problemParagraphs,    problemQuestions,    "problemMedia": problemMedia{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    audienceTitle,    audienceLead,    audienceItems[]{ _key, title, body },    educationNote,    contentsTitle,    contentsLead,    ingredients,    sampleTitle,    sampleLead,    "sampleMedia": sampleMedia{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url},    sampleFields[]{ _key, label },    sampleCaption,    outcomesTitle,    outcomesLead,    comparisonItems[]{ _key, before, after },    outcomesNote,    authorTitle,    authorParagraphs,    offerTitle,    offerLead,    purchaseLabel,    offerNote,    testimonialsTitle,    testimonialsContext,    testimonialsScope,    testimonials[]->{      quote,      name,      role,      anonymous,      displayLabel,      scope    },    faq{      title,      lead,      items[]{ _key, question, answer }    }  } }
+export type PUBLISHED_EBOOK_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  subtitle: string | null;
+  topic: "pcos" | "perimenopause";
+  cardDescription: string;
+  coverTone: "cherry" | "light";
+  availability: "available" | "paused" | "planned" | "presale";
+  priceGross: number;
+  currency: "PLN";
+  format: "pdf" | null;
+  sortOrder: number | null;
+  reviewedAt: string | null;
+  cover: {
+    alt: string;
+    tone: "diagram" | "photo" | "portrait";
+    caption: string | null;
+    label: string;
+    src: string | null;
+  };
+  author: {
+    name: string;
+    role: string;
+    bio: string;
+    educationInstitution: string | null;
+    educationProgram: string | null;
+    photo: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+    } | null;
+  };
+  chapters: Array<{
+    _key: string;
+    title: string;
+    summary: string;
+  }> | null;
+  includedMaterials: Array<{
+    _key: string;
+    title: string;
+    description: string | null;
+  }> | null;
+  delivery: {
+    description: string;
+    timeline: string | null;
+  } | null;
+  checkoutUrl: string | null;
+  sources: Array<{
+    _key: string;
+    title: string;
+    href: string;
+    scope: string | null;
+  }> | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+  landing: {
+    variant: "cherry3a";
+    heroTitle: string;
+    heroLead: string;
+    primaryLabel: string;
+    secondaryLabel: string;
+    facts: Array<{
+      _key: string;
+      title: string;
+      detail: string;
+    }> | null;
+    problemTitle: string;
+    problemParagraphs: Array<string>;
+    problemQuestions: Array<string>;
+    problemMedia: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+    } | null;
+    audienceTitle: string;
+    audienceLead: string;
+    audienceItems: Array<{
+      _key: string;
+      title: string;
+      body: string;
+    }>;
+    educationNote: string;
+    contentsTitle: string;
+    contentsLead: string;
+    ingredients: Array<string>;
+    sampleTitle: string;
+    sampleLead: string;
+    sampleMedia: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+    } | null;
+    sampleFields: Array<{
+      _key: string;
+      label: string;
+    }>;
+    sampleCaption: string;
+    outcomesTitle: string;
+    outcomesLead: string;
+    comparisonItems: Array<{
+      _key: string;
+      before: string;
+      after: string;
+    }>;
+    outcomesNote: string;
+    authorTitle: string;
+    authorParagraphs: Array<string>;
+    offerTitle: string;
+    offerLead: string;
+    purchaseLabel: string;
+    offerNote: string | null;
+    testimonialsTitle: string;
+    testimonialsContext: string;
+    testimonialsScope: "cooperation" | "product";
+    testimonials: Array<{
+      quote: string;
+      name: string | null;
+      role: string | null;
+      anonymous: boolean | null;
+      displayLabel: string | null;
+      scope: "cooperation" | "product";
+    }>;
+    faq: {
+      title: string;
+      lead: string;
+      items: Array<{
+        _key: string;
+        question: string;
+        answer: string;
+      }>;
+    };
+  } | null;
+} | null;
+
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_EBOOK_PATHS_QUERY
+// Query: *[    _type == "ebook" &&    !(_id in path("drafts.**")) &&    defined(slug.current) &&    defined(language) &&    defined(landing)  ]{ language, "slug": slug.current }
+export type PUBLISHED_EBOOK_PATHS_QUERY_RESULT = Array<{
+  language: "en" | "pl";
+  slug: string;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -2247,6 +2666,7 @@ declare module "@sanity/client" {
     '\n  *[\n    _type == "article" &&\n    language == $language\n  ] | order(publishedAt desc){ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PREVIEW_ARTICLES_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    language == $language\n  ] | order(title asc){\n    title,\n    "slug": slug.current,\n    language\n  }\n': PREVIEW_CATEGORIES_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    title,\n    description,\n    "slug": slug.current,\n    "translation": translation->{ language, "slug": slug.current }\n  }\n': PREVIEW_CATEGORY_QUERY_RESULT;
+    '\n  *[\n    _type == "ebook" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  reviewedAt,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  "author": author->{\n    name,\n    role,\n    bio,\n    educationInstitution,\n    educationProgram,\n    "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  chapters[]{ _key, title, summary },\n  includedMaterials[]{ _key, title, description },\n  delivery{ description, timeline },\n  checkoutUrl,\n  sources[]{ _key, title, href, scope },\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  landing{\n    variant,\n    heroTitle,\n    heroLead,\n    primaryLabel,\n    secondaryLabel,\n    facts[]{ _key, title, detail },\n    problemTitle,\n    problemParagraphs,\n    problemQuestions,\n    "problemMedia": problemMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    audienceTitle,\n    audienceLead,\n    audienceItems[]{ _key, title, body },\n    educationNote,\n    contentsTitle,\n    contentsLead,\n    ingredients,\n    sampleTitle,\n    sampleLead,\n    "sampleMedia": sampleMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    sampleFields[]{ _key, label },\n    sampleCaption,\n    outcomesTitle,\n    outcomesLead,\n    comparisonItems[]{ _key, before, after },\n    outcomesNote,\n    authorTitle,\n    authorParagraphs,\n    offerTitle,\n    offerLead,\n    purchaseLabel,\n    offerNote,\n    testimonialsTitle,\n    testimonialsContext,\n    testimonialsScope,\n    testimonials[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    },\n    faq{\n      title,\n      lead,\n      items[]{ _key, question, answer }\n    }\n  }\n }\n': PREVIEW_EBOOK_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    variant,\n    eyebrow,\n    title,\n    lead,\n    body,\n    mediaPosition,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "secondaryMedia": secondaryMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    prompts,\n    resolutionEyebrow,\n    resolutionTitle,\n    caption\n  },\n  _type == "logosSection" => {\n    title,\n    lead,\n    names,\n    items[]{\n      _key,\n      name,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "cardsSection" => {\n    variant,\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      status,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    },\n    closing\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    note,\n    steps[]{ _key, title, body },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  _type == "metricsSection" => {\n    variant,\n    title,\n    lead,\n    items[]{ _key, value, suffix, label },\n    highlights[]{ _key, title, body }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    lead,\n    items[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    }\n  },\n  _type == "expertSection" => {\n    title,\n    intro,\n    body,\n    metric{ value, suffix, label },\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "person": person->{\n      name,\n      role,\n      bio,\n      educationInstitution,\n      educationProgram,\n      "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  },\n  _type == "ebooksSection" => {\n    title,\n    lead,\n    cardActionLabel,\n    note,\n    "collection": collection{ label, href, emphasis },\n    items[]->{\n      "id": _id,\n      language,\n      "slug": slug.current,\n      title,\n      subtitle,\n      topic,\n      cardDescription,\n      coverTone,\n      availability,\n      priceGross,\n      currency,\n      format,\n      sortOrder,\n      "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n      "authorName": author->name\n    }\n  },\n  _type == "serviceOfferSection" => {\n    title,\n    body,\n    facts,\n    note,\n    "action": action{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    "service": service->{\n      "id": _id,\n      title,\n      summary,\n      "slug": slug.current,\n      price,\n      currency,\n      durationMinutes,\n      bookingUrl,\n      bookingStatus\n    }\n  },\n  _type == "credentialsSection" => {\n    title,\n    body,\n    diplomaCaption,\n    "person": person->{\n      "id": _id,\n      name,\n      role,\n      bio,\n      educationInstitution,\n      educationProgram,\n      "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n      "diplomaScan": diplomaScan{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n    }\n  }\n }\n }\n': PUBLISHED_PAGE_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_PAGE_PATHS_QUERY_RESULT;
     '\n  *[\n    _type == "siteSettings" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  "headerCta": headerCta{ label, href, emphasis },\n  legalLinks[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  "translation": translation->{ language }\n }\n': SITE_SETTINGS_QUERY_RESULT;
@@ -2255,5 +2675,7 @@ declare module "@sanity/client" {
     '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ] | order(publishedAt desc){ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PUBLISHED_ARTICLES_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    title,\n    description,\n    "slug": slug.current,\n    "translation": translation->{ language, "slug": slug.current }\n  }\n': PUBLISHED_CATEGORY_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ] | order(title asc){\n    title,\n    "slug": slug.current,\n    language\n  }\n': PUBLISHED_CATEGORIES_QUERY_RESULT;
+    '\n  *[\n    _type == "ebook" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  reviewedAt,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n  "author": author->{\n    name,\n    role,\n    bio,\n    educationInstitution,\n    educationProgram,\n    "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n}\n  },\n  chapters[]{ _key, title, summary },\n  includedMaterials[]{ _key, title, description },\n  delivery{ description, timeline },\n  checkoutUrl,\n  sources[]{ _key, title, href, scope },\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  landing{\n    variant,\n    heroTitle,\n    heroLead,\n    primaryLabel,\n    secondaryLabel,\n    facts[]{ _key, title, detail },\n    problemTitle,\n    problemParagraphs,\n    problemQuestions,\n    "problemMedia": problemMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    audienceTitle,\n    audienceLead,\n    audienceItems[]{ _key, title, body },\n    educationNote,\n    contentsTitle,\n    contentsLead,\n    ingredients,\n    sampleTitle,\n    sampleLead,\n    "sampleMedia": sampleMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url\n},\n    sampleFields[]{ _key, label },\n    sampleCaption,\n    outcomesTitle,\n    outcomesLead,\n    comparisonItems[]{ _key, before, after },\n    outcomesNote,\n    authorTitle,\n    authorParagraphs,\n    offerTitle,\n    offerLead,\n    purchaseLabel,\n    offerNote,\n    testimonialsTitle,\n    testimonialsContext,\n    testimonialsScope,\n    testimonials[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    },\n    faq{\n      title,\n      lead,\n      items[]{ _key, question, answer }\n    }\n  }\n }\n': PUBLISHED_EBOOK_QUERY_RESULT;
+    '\n  *[\n    _type == "ebook" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language) &&\n    defined(landing)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_EBOOK_PATHS_QUERY_RESULT;
   }
 }

@@ -124,6 +124,11 @@ test("no JavaScript preserves content and prevents accidental form navigation", 
     page.getByRole("button", { name: "Chcę otrzymywać newsletter" }),
   ).toBeDisabled();
   await expect(page.locator("noscript p").first()).toBeVisible();
+  await page.goto("http://127.0.0.1:4321/ebooki/suplementy-w-pcos/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /Zrób porządek/,
+  );
+  await expect(page.locator("#cena")).toContainText("97");
   await context.close();
 });
 
@@ -330,6 +335,58 @@ test("consultation page Polish and English plus missing Polish under English slu
 
   const missing = await page.goto("/en/konsultacje/");
   expect(missing?.status()).toBe(404);
+});
+
+test("ebook landing Polish and English plus missing Polish under English slug", async ({
+  page,
+}) => {
+  const posts: string[] = [];
+  page.on("request", (request) => {
+    if (request.method() === "POST") posts.push(request.url());
+  });
+
+  await page.goto("/");
+  const card = page
+    .locator("#ebook-suplementy-w-pcos")
+    .getByRole("heading")
+    .getByRole("link");
+  await expect(card).toHaveAttribute("href", "/ebooki/suplementy-w-pcos/");
+  await card.click();
+  await expect(page).toHaveURL(/\/ebooki\/suplementy-w-pcos\/$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /Zrób porządek\s*z suplementami\./,
+  );
+  await expect(page.locator("#cena")).toContainText("97");
+  await expect(page.locator("#cena")).toContainText("zł");
+  await expect(
+    page.getByRole("link", { name: "E-book · 97 zł" }),
+  ).toHaveAttribute("href", "#cena");
+  await expect(page.getByText("Sprzedaż nie jest uruchomiona")).toBeHidden();
+  await page.getByText("Chcę ebook · 97 zł").click();
+  await expect(page.getByText("Sprzedaż nie jest uruchomiona")).toBeVisible();
+  await expect(
+    page.getByText(/nie pobiera płatności i nie potwierdza zakupu/),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "English" }).first(),
+  ).toHaveAttribute("href", "/en/ebooks/supplements-in-pcos/");
+  expect(posts).toEqual([]);
+
+  await page.goto("/en/ebooks/supplements-in-pcos/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /Put your supplements/,
+  );
+  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
+    /Zrób porządek/,
+  );
+  await expect(page.locator("#cena")).toContainText("97");
+  await expect(page.locator("#cena")).toContainText("PLN");
+  await expect(
+    page.getByRole("link", { name: "Polski" }).first(),
+  ).toHaveAttribute("href", "/ebooki/suplementy-w-pcos/");
+
+  const missingPolish = await page.goto("/en/ebooki/suplementy-w-pcos/");
+  expect(missingPolish?.status()).toBe(404);
 });
 
 test("landing pages, blog and missing English translation", async ({

@@ -34,6 +34,8 @@ describe("homepage 3a fixtures", () => {
     expect(view.ebooks.items.every((item) => item.priceGross === 97)).toBe(
       true,
     );
+    expect(view.ebooks.items[0]?.href).toBe("/ebooki/suplementy-w-pcos/");
+    expect(view.ebooks.items[0]?.slug).toBe("suplementy-w-pcos");
     expect(view.consultation.action.href).toBe("https://cal.com");
     expect(view.consultation.priceLabel).toBe("450 zł / 60 minut");
     expect(view.testimonials.items).toHaveLength(6);
@@ -59,6 +61,7 @@ describe("section serializers", () => {
     const markdown = serializePage(page, "pl");
     expect(markdown).toContain("450+");
     expect(markdown).toContain("97 zł brutto");
+    expect(markdown).toContain("/ebooki/suplementy-w-pcos/");
     expect(markdown).toContain("Opinia o dotychczasowej współpracy");
     expect(markdown).toContain("Zarezerwuj konsultację");
   });

@@ -280,6 +280,7 @@ export function serializeSection(section: Section, language: Locale): string {
         ...content.items.flatMap((item) => [
           heading(3, item.title),
           item.description,
+          `[${item.title}](${item.href})`,
           formatPriceGross(item.priceGross, item.currency, language),
           topicLabel(item.topic, language),
           item.availability === "planned"

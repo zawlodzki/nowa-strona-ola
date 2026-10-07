@@ -5,6 +5,7 @@ import type { Locale } from "@ola/shared";
 import ArticleView from "../../../src/views/ArticleView.astro";
 import BlogIndex from "../../../src/views/BlogIndex.astro";
 import ComposedPage from "../../../src/views/ComposedPage.astro";
+import EbookPage from "../../../src/views/EbookPage.astro";
 import { parseContentPath } from "../../../src/lib/content-path";
 import { blogCategoryPath, blogPath } from "../../../src/lib/paths";
 import { demonstrationSettings } from "../../../src/sanity/fixtures";
@@ -13,6 +14,7 @@ import {
   getPreviewArticleIndex,
   getPreviewCategories,
   getPreviewCategory,
+  getPreviewEbook,
   getPreviewPage,
   getPreviewSiteSettings,
 } from "../lib/content";
@@ -47,6 +49,10 @@ const article =
   route.kind === "article"
     ? await getPreviewArticle(route.language, route.slug, environment)
     : null;
+const ebook =
+  route.kind === "ebook"
+    ? await getPreviewEbook(route.language, route.slug, environment)
+    : null;
 const blogIndex =
   route.kind === "blogIndex" && language
     ? await getPreviewArticleIndex(language, route.page, environment)
@@ -67,6 +73,8 @@ const categories = language
 
 {article && language && settings ? (
   <ArticleView lang={language} article={article} settings={settings} />
+) : ebook && language && settings ? (
+  <EbookPage lang={language} ebook={ebook} settings={settings} preview />
 ) : page && language && settings ? (
   <ComposedPage
     lang={language}

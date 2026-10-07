@@ -1,8 +1,17 @@
 # Kolekcja e-booków i landing 3a
 
-Data: 2026-10-06. Status: **instrukcja przyszłej implementacji**. W tej sesji
-powstał [mockup HTML](../mockups/homepage/ebook-3a.html); nie dodano schematu,
-dokumentów Content Lake, checkoutu ani produkcyjnego renderera.
+Data: 2026-10-06. Aktualizacja: 2026-10-07 (pakiet 4: landing Ebook3a w kodzie
+i fixture’ach). Status: **landing pojedynczego produktu w kodzie; kolekcja,
+Content Lake, checkout i publikacja otwarte**.
+
+Wykonane w pakiecie 4 (bez zapisu CMS): schemat `ebook` + `ebookLanding`
+`cherry3a`, GROQ, TypeGen, mapper, `Ebook3a` na `Layout3a`, trasy
+`/ebooki/<slug>/` i `/en/ebooks/<slug>/`, serializer Markdown, dry-run importu.
+Karty homepage prowadzą do landingu przez `ebookPath`. Status `planned`,
+97 PLN brutto, temat `pcos`, tytuł „Suplementy w PCOS”. Nie ma checkoutu,
+płatnego PDF ani zapisu do Content Lake.
+
+Kolekcja (`EbookCollection3a`, `/ebooki/`) pozostaje pakietem 5.
 
 ## Ustalenia i propozycja
 
@@ -175,14 +184,13 @@ Dokumentacja Sanity sprawdzona 06.10.2026:
 ## Kolejność wdrożenia i odbiór
 
 - [ ] Zatwierdzić copy, finalną zawartość, pliki, status, dostarczanie i warunki zakupu.
-- [ ] Dodać `ebook`, obiekty landingu, rejestrację i listę PL/EN w Studio.
-- [ ] Dodać walidacje, previews i brakujące pola anonimowych opinii.
-- [ ] Zastąpić kopie kart referencjami na homepage i blogu.
-- [ ] Uzupełnić schemat, HTML, Markdown i fixture każdego wariantu sekcji.
-- [ ] Dodać GROQ/mappery, TypeGen i współdzielony szablon Astro/preview.
-- [ ] Sprawdzić identyczną cenę/status w trzech miejscach, brakujące referencje,
-      szkice, brak tłumaczenia, statusy sprzedaży, nieznany typ i wariant.
-- [ ] Sprawdzić brak płatnego pliku/sekretów w publicznych zasobach i projekcji.
+- [x] Dodać `ebook`, obiekty landingu, rejestrację i listę PL/EN w Studio (kod).
+- [x] Dodać walidacje, previews i brakujące pola anonimowych opinii (kod; opinie od pakietu 1).
+- [x] Zastąpić kotwice kart adresem landingu na homepage; blog nadal czeka na Article3a.
+- [x] Uzupełnić schemat, HTML, Markdown i fixture wariantu `cherry3a`.
+- [x] Dodać GROQ/mappery, TypeGen i współdzielony szablon Astro/preview.
+- [x] Sprawdzić identyczną cenę/status homepage/landing, nieznany wariant i brak PL pod EN (fixture).
+- [x] Sprawdzić brak płatnego pliku/sekretów w publicznych zasobach i projekcji (fixture, `planned`).
 - [ ] Sprawdzić keyboard, 320 px, desktop/mobile, zoom 200%, reduced motion,
       axe, treść bez JS, zgodność HTML/Markdown/JSON-LD; uruchomić `npm run verify`.
 - [ ] Po odrębnej zgodzie wdrożyć Studio, przygotować dokumenty i publikację.

@@ -304,8 +304,11 @@ nie akceptacją finalnego produktu. Opinie współpracy nie stają się opiniami
 
 Mapowanie: `ebook` jako dokument produktu, homepage `items[]` → `ebook`, blog
 `relatedEbooks[]` → `ebook`, treść landingu w `ebook.landing`; adres generowany ze
-sluga, cena i status z produktu. **Luka schematu:** kolekcja i pola landingu nie
-istnieją. **Wykonane:** [mockup](../mockups/homepage/ebook-3a.html) oraz
+sluga (`ebookPath`), cena i status z produktu. **Pakiet 4 (07.10.2026, kod
+i fixture):** landing `Ebook3a`, wariant `cherry3a`, karty homepage →
+`/ebooki/<slug>/` i `/en/ebooks/<slug>/`. Status `planned`, 97 PLN brutto.
+**Niewykonane:** kolekcja (pakiet 5), Content Lake, checkout, płatny plik.
+**Wykonane wcześniej:** [mockup](../mockups/homepage/ebook-3a.html) oraz
 [instrukcja wdrożenia](EBOOK-CMS-CONFIG-3A.md). Bez konfiguracji Content Lake,
 checkoutu i zmiany dostępności. Brak uruchomionej sprzedaży.
 

@@ -84,11 +84,12 @@ oraz pakiet 1: publiczny i preview shell `SiteShell3a`/`Layout3a`, szablon
 (`/o-mnie/`, `/en/about/`). Pakiet 3: `Consultation3a` (`/konsultacje/`,
 `/en/consultations/`) na istniejących typach sekcji z kontrolowanymi
 wariantami; `SiteShell3a` przyjmuje osobne `footerLinks`, gdy nagłówek ma
-lokalne kotwice. Aktywny runtime nie importuje archiwum Wonderful. `/ui/` oraz
-pozostałe landingi nadal używają wcześniejszego Layout. Serializery sekcji są
-w kodzie; import Content Lake, szablony 4a od pakietu 4 i publikacja pozostają
-otwarte. CSS trzech szablonów 3a trafia do jednego `ComposedPage.css`, a budżet
-CSS 20 KB gzip ma po pakiecie 3 około 325 B zapasu. Stan testów: PROGRESS.md.
+lokalne kotwice. Pakiet 4: `Ebook3a` z dokumentu `ebook` + `ebookLanding`
+`cherry3a` (`/ebooki/<slug>/`, `/en/ebooks/<slug>/`); karty homepage używają
+`ebookPath`. Aktywny runtime nie importuje archiwum Wonderful. `/ui/`, blog
+i kolekcja e-booków nadal czekają na kolejne pakiety albo wcześniejszy Layout.
+Serializery sekcji są w kodzie; import Content Lake i publikacja pozostają
+otwarte. CSS szablonów 3a jest scoped per widok. Stan testów: PROGRESS.md.
 
 Przy budowaniu API i CSS użyto zasad [Astro: styling](https://docs.astro.build/en/guides/styling/),
 [TypeScript](https://docs.astro.build/en/guides/typescript/) i

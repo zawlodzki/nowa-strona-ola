@@ -4,6 +4,7 @@ export type ContentRoute =
   | { kind: "home"; language: Locale }
   | { kind: "page"; language: Locale; slug: string }
   | { kind: "article"; language: Locale; slug: string }
+  | { kind: "ebook"; language: Locale; slug: string }
   | { kind: "blogIndex"; language: Locale; page: number }
   | { kind: "blogCategory"; language: Locale; slug: string; page: number }
   | { kind: "unknown" };
@@ -37,6 +38,11 @@ function parseLocalized(segments: string[], language: Locale): ContentRoute {
       return { kind: "article", language, slug: segments[1] };
     }
     return { kind: "unknown" };
+  }
+
+  const ebookRoot = language === "pl" ? "ebooki" : "ebooks";
+  if (segments[0] === ebookRoot && segments.length === 2 && segments[1]) {
+    return { kind: "ebook", language, slug: segments[1] };
   }
 
   if (segments.length === 1) {

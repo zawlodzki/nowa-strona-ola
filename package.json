@@ -33,6 +33,7 @@
     "import:homepage": "node scripts/import-homepage-content.mjs",
     "import:about": "node scripts/import-about-content.mjs",
     "import:consultation": "node scripts/import-consultation-content.mjs",
+    "import:ebook": "node scripts/import-ebook-content.mjs",
     "tokens:generate": "node scripts/generate-tokens.mjs"
   },
   "dependencies": {

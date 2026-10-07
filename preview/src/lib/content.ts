@@ -8,6 +8,7 @@ import type {
   ArticleCard,
   ArticleContent,
   CategoryContent,
+  EbookContent,
   PageContent,
   SiteSettings,
 } from "../../../src/sanity/repository";
@@ -18,6 +19,7 @@ import {
   PREVIEW_ARTICLES_QUERY,
   PREVIEW_CATEGORIES_QUERY,
   PREVIEW_CATEGORY_QUERY,
+  PREVIEW_EBOOK_QUERY,
   PREVIEW_PAGE_QUERY,
   PREVIEW_SITE_SETTINGS_QUERY,
 } from "./queries";
@@ -83,6 +85,22 @@ export async function getPreviewArticle(
     throw new Error(`Brak artykułu podglądu ${language}/${slug}.`);
   }
   return article;
+}
+
+export async function getPreviewEbook(
+  language: Locale,
+  slug: string,
+  environment: PreviewEnvironment,
+  client = createPreviewContentClient(environment),
+): Promise<EbookContent> {
+  const ebook = await client.fetch<EbookContent | null>(PREVIEW_EBOOK_QUERY, {
+    language,
+    slug,
+  });
+  if (!ebook) {
+    throw new Error(`Brak e-booka podglądu ${language}/${slug}.`);
+  }
+  return ebook;
 }
 
 export async function getPreviewSiteSettings(

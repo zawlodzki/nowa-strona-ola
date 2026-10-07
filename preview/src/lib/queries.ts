@@ -3,6 +3,7 @@ import { defineQuery } from "groq";
 import {
   articleBodyProjection,
   articleCardProjection,
+  ebookProjection,
   PAGE_SECTION_PROJECTION,
   siteSettingsProjection,
 } from "../../../src/sanity/queries";
@@ -77,4 +78,12 @@ export const PREVIEW_CATEGORY_QUERY = defineQuery(/* groq */ `
     "slug": slug.current,
     "translation": translation->{ language, "slug": slug.current }
   }
+`);
+
+export const PREVIEW_EBOOK_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "ebook" &&
+    language == $language &&
+    slug.current == $slug
+  ][0]{ ${ebookProjection} }
 `);

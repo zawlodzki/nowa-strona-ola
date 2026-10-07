@@ -269,18 +269,18 @@ Zlecenie 07.10.2026: dalszą implementację oprzeć na przygotowanych mockupach,
 nowym design systemie i przeniesieniu treści do Sanity. Etapy 3–4 pozostają
 zapisem wykonanych fundamentów; nie oznaczają ukończenia docelowych stron.
 
-Stan po pakiecie 3 (07.10.2026):
+Stan po pakiecie 4 (07.10.2026):
 
-- Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/` i
-  `/en/consultations/` oraz preview tych stron używają `SiteShell3a`/`Layout3a`
-  i `Homepage3a` / `About3a` / `Consultation3a`. Blog, pozostałe landingi
-  i `/ui/` nadal importują wcześniejszy Layout.
-- Sanity ma page builder 21 typów (w tym `credentialsSection`, `ebooksSection`,
-  `serviceOfferSection`), dokument `ebook` oraz rozszerzenia
-  `service`/`testimonial`/`author`/`siteSettings`. Serializery Markdown nowych
-  sekcji są w kodzie; trasy `.md` i pełny eksport to etap 5.
-- Dry-run importu homepage, About i konsultacji istnieje; Content Lake
-  i publikacja nie były zapisywane. Stan usług zewnętrznych nie był ponownie sprawdzany.
+- Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
+  `/en/consultations/`, `/ebooki/<slug>/` i `/en/ebooks/<slug>/` oraz preview
+  tych stron używają `SiteShell3a`/`Layout3a` i `Homepage3a` / `About3a` /
+  `Consultation3a` / `Ebook3a`. Blog, kolekcja e-booków i `/ui/` nadal
+  importują wcześniejszy Layout albo czekają na kolejne pakiety.
+- Sanity ma dokument `ebook` z `ebookLanding` (wariant `cherry3a`), rozdziałami,
+  materiałami i źródłami. Serializery Markdown nowych typów są w kodzie;
+  trasy `.md` i pełny eksport to etap 5.
+- Dry-run importu homepage, About, konsultacji i landingu e-booka istnieje;
+  Content Lake i publikacja nie były zapisywane.
 
 Kolejność wynika z [mapy integracji](../design-system/ASTRO-INTEGRATION.md).
 Modele współdzielone potrzebne homepage wprowadzić już w pierwszym pakiecie,
@@ -330,7 +330,8 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 - [x] Wdrożyć About3a oraz wspólny profil autora (kod i fixture; bez Content Lake).
 - [x] Wdrożyć Consultation3a i model usługi (kod i fixture; bez Content Lake
       i właściwego kalendarza).
-- [ ] Wdrożyć Ebook3a i model produktu.
+- [x] Wdrożyć Ebook3a i model produktu (kod i fixture; bez Content Lake,
+      checkoutu i płatnego pliku).
 - [ ] Wdrożyć EbookCollection3a, kategorie i filtrowanie.
 - [ ] Wdrożyć BlogCollection3a i rzeczywistą paginację.
 - [ ] Wdrożyć Article3a, Portable Text i jego powiązane bloki.
@@ -556,7 +557,9 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
 - [x] Przygotować copy według wskazanego poradnika i koncepcji A researchu.
 - [x] Zapisać instrukcję osobnej kolekcji e-booków i wspólnych referencji CMS.
 - [ ] Zatwierdzić finalny zakres, copy, dostępność, pliki i obsługę sprzedaży.
-- [ ] Wdrożyć kolekcję, szablon Astro, Markdown, TypeGen i referencje po akceptacji.
+- [x] Wdrożyć szablon landingu Ebook3a, Markdown, TypeGen i referencje produktu
+      (kod i fixture, pakiet 4; bez Content Lake).
+- [ ] Wdrożyć kolekcję EbookCollection3a (pakiet 5).
 
 [Mockup](../mockups/homepage/ebook-3a.html), [instrukcja CMS](EBOOK-CMS-CONFIG-3A.md).
 

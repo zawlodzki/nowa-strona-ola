@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 3 etapu 4a: Consultation3a i wspólna usługa).
+Aktualizacja: 2026-10-07 (pakiet 4 etapu 4a: Ebook3a, landing produktu).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
@@ -8,13 +8,15 @@ Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiety 1–3 (Homepage3a, About3a, Consultation3a, wspólny shell) są w kodzie
-i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były zlecone.**
+**Pakiety 1–4 (Homepage3a, About3a, Consultation3a, Ebook3a, wspólny shell) są
+w kodzie i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były
+zlecone.**
 
-Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/` i
-`/en/consultations/` oraz preview tych stron renderują `SiteShell3a` z
-fixture’ów. Blog, landingi demo i `/ui/` nadal używają wcześniejszego Layout.
-Etapy 5–7 oraz pakiety 4–7 etapu 4a pozostają otwarte.
+Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
+`/en/consultations/`, `/ebooki/<slug>/` i `/en/ebooks/<slug>/` oraz preview
+tych stron renderują `SiteShell3a` z fixture’ów. Blog, kolekcja e-booków
+i `/ui/` nadal używają wcześniejszego Layout albo czekają na pakiet 5.
+Etapy 5–7 oraz pakiety 5–7 etapu 4a pozostają otwarte.
 
 ## Wykonane
 
@@ -2019,13 +2021,43 @@ Otwarte w pakiecie 3 (dane, nie kod): zapis szkiców `page-consultation-*`
 do Content Lake po porównaniu, odbiór w Studio i chronionym preview
 z datasetem. Bez publikacji.
 
+## Pakiet 4 etapu 4a — 2026-10-07
+
+Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
+`cursor/ebook3a-landing-08b1`, draft PR, bez merge.
+
+- Inwentaryzacja: `ebook-3a.html` + [EBOOK-CMS-CONFIG-3A](EBOOK-CMS-CONFIG-3A.md).
+  Cena **97 PLN brutto**, temat `pcos`, status `planned`, tytuł „Suplementy
+  w PCOS” / „Decyzje, które mają sens”. Copy rozdziałów, kart i EN jest
+  **propozycją**. Opinie 4 i 6 ze współpracy, nie recenzje produktu.
+- Modele: rozszerzenie istniejącego `ebook` (rozdziały, materiały, źródła,
+  dostarczenie, checkoutUrl) oraz obiekt `ebookLanding` wariantu `cherry3a`.
+  GROQ publiczny i preview, TypeGen, mapper `mapEbook`. Brak drugiego typu
+  produktu. Checkout i płatny PDF nie wchodzą do fixture’ów.
+- UI: `Ebook3a` na `SiteShell3a`/`Layout3a`; preview używa tego samego
+  `EbookPage`. Trasy `/ebooki/suplementy-w-pcos/` i
+  `/en/ebooks/supplements-in-pcos/`. Karty homepage używają `ebookPath`,
+  nie kotwic. Status `planned`: natywne `details` bez checkoutu i bez
+  potwierdzenia zakupu. JSON-LD `Product`/`Offer` z `OutOfStock`.
+- Markdown: serializer landingu i przykład; nieznany wariant zatrzymuje build.
+- Import: `npm run import:ebook` dry-run, 2 dokumenty
+  (`ebook-suplementy-w-pcos-pl/en`), `write: false`, exit 0; `--write` exit 2.
+  Porównanie Content Lake pominięte, brak tokenu w tej sesji.
+- Weryfikacja pełna: zapisana po `npm run verify` i verify-ola w tej samej
+  sesji (poniżej albo w aktualizacji PR).
+
+Luki (nie blokują komponentów): checkout, płatny plik, finalne copy EN,
+kolekcja `/ebooki/` (pakiet 5), skan dyplomu, URL rezerwacji.
+
+Otwarte w pakiecie 4 (dane, nie kod): zapis szkiców e-booka do Content Lake
+po porównaniu, odbiór w Studio i chronionym preview z datasetem. Bez publikacji.
+
 ## Następny krok
 
-Pakiet 4 etapu 4a: Ebook3a (`ebook-3a.html`) i wspólny dokument produktu
-według EBOOK-CMS-CONFIG-3A. Przed pierwszym nowym blokiem CSS sprawdzić
-budżet 20 KB gzip. Potem kolekcja → blog → artykuł. Import
-homepage/About/konsultacji do szkiców Sanity dopiero na osobne zlecenie
-zapisu. Publikacja treści/strony wymaga osobnego zlecenia.
+Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty
+produktu, kategorie i filtrowanie. Import homepage/About/konsultacji/e-booka
+do szkiców Sanity dopiero na osobne zlecenie zapisu. Publikacja treści/strony
+wymaga osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
 axe/overflow About przy 320/390/1440 px, natywny zoom, czytnik i fizyczne

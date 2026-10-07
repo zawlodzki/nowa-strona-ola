@@ -19,6 +19,14 @@ export const presentationResolve = {
       filter: `_type == "article" && language == "en" && slug.current == $slug`,
     },
     {
+      route: "/ebooki/:slug",
+      filter: `_type == "ebook" && language == "pl" && slug.current == $slug`,
+    },
+    {
+      route: "/en/ebooks/:slug",
+      filter: `_type == "ebook" && language == "en" && slug.current == $slug`,
+    },
+    {
       route: "/:slug",
       filter: `_type == "page" && language == "pl" && slug.current == $slug`,
     },
@@ -44,6 +52,19 @@ export const presentationResolve = {
               : `/en/${slug}/`;
         return {
           locations: [{ title: document.title || "Strona", href }],
+        };
+      },
+    }),
+    ebook: defineLocations({
+      select: { title: "title", slug: "slug.current", language: "language" },
+      resolve: (document) => {
+        const slug = document?.slug;
+        const language = document?.language;
+        if (!slug || (language !== "pl" && language !== "en")) return null;
+        const href =
+          language === "pl" ? `/ebooki/${slug}/` : `/en/ebooks/${slug}/`;
+        return {
+          locations: [{ title: document.title || "E-book", href }],
         };
       },
     }),

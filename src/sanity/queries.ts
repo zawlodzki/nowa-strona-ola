@@ -380,3 +380,105 @@ export const PUBLISHED_CATEGORIES_QUERY = defineQuery(/* groq */ `
     language
   }
 `);
+
+export const ebookProjection = /* groq */ `
+  "id": _id,
+  language,
+  "slug": slug.current,
+  title,
+  subtitle,
+  topic,
+  cardDescription,
+  coverTone,
+  availability,
+  priceGross,
+  currency,
+  format,
+  sortOrder,
+  reviewedAt,
+  "cover": cover${mediaFields},
+  "author": author->{
+    name,
+    role,
+    bio,
+    educationInstitution,
+    educationProgram,
+    "photo": photo${mediaFields}
+  },
+  chapters[]{ _key, title, summary },
+  includedMaterials[]{ _key, title, description },
+  delivery{ description, timeline },
+  checkoutUrl,
+  sources[]{ _key, title, href, scope },
+  seo{title, description},
+  "translation": translation->{ language, "slug": slug.current },
+  landing{
+    variant,
+    heroTitle,
+    heroLead,
+    primaryLabel,
+    secondaryLabel,
+    facts[]{ _key, title, detail },
+    problemTitle,
+    problemParagraphs,
+    problemQuestions,
+    "problemMedia": problemMedia${mediaFields},
+    audienceTitle,
+    audienceLead,
+    audienceItems[]{ _key, title, body },
+    educationNote,
+    contentsTitle,
+    contentsLead,
+    ingredients,
+    sampleTitle,
+    sampleLead,
+    "sampleMedia": sampleMedia${mediaFields},
+    sampleFields[]{ _key, label },
+    sampleCaption,
+    outcomesTitle,
+    outcomesLead,
+    comparisonItems[]{ _key, before, after },
+    outcomesNote,
+    authorTitle,
+    authorParagraphs,
+    offerTitle,
+    offerLead,
+    purchaseLabel,
+    offerNote,
+    testimonialsTitle,
+    testimonialsContext,
+    testimonialsScope,
+    testimonials[]->{
+      quote,
+      name,
+      role,
+      anonymous,
+      displayLabel,
+      scope
+    },
+    faq{
+      title,
+      lead,
+      items[]{ _key, question, answer }
+    }
+  }
+`;
+
+export const PUBLISHED_EBOOK_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "ebook" &&
+    !(_id in path("drafts.**")) &&
+    language == $language &&
+    slug.current == $slug
+  ][0]{ ${ebookProjection} }
+`);
+
+export const PUBLISHED_EBOOK_PATHS_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "ebook" &&
+    !(_id in path("drafts.**")) &&
+    defined(slug.current) &&
+    defined(language) &&
+    defined(landing)
+  ]{ language, "slug": slug.current }
+`);
