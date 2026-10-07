@@ -1888,11 +1888,19 @@ Kod i fixture’y, bez zapisu Content Lake i bez publikacji.
 - Import: `npm run import:homepage` dry-run, 34 dokumenty PL/EN, raport braków
   w `reports/` (gitignored). Porównanie Content Lake pominięte — brak tokenu
   w tej sesji. Fixture ≠ dowód zapisu CMS.
-- `npm run verify`: PASS. Format, tokeny, ESLint, Astro/TS wszystkich
-  workspace’ów, 64 unit tests, build 23 stron, Studio, preview, Worker dry-run,
-  budżety JS 5770 B / CSS 17875 B gzip, 81 E2E Chromium/Firefox/WebKit, axe na
-  `/` przy 320/390/1440, reduced motion i CSS zoom 200% (katalog), formularz
+- `npm run verify`: PASS (przed rebase i po rebase na `main` / `8a989fa`).
+  Format, tokeny, ESLint, Astro/TS wszystkich workspace’ów, 64 unit tests,
+  build 23 stron, Studio, preview, Worker dry-run, budżety JS 5770 B /
+  CSS 17875 B gzip, 81 E2E Chromium/Firefox/WebKit, axe na `/` przy
+  320/390/1440, reduced motion i CSS zoom 200% (katalog), formularz
   newslettera bez POST, treść bez JS.
+- Rebase PR #27 na `origin/main` (2026-10-07): mergeable było CONFLICTING.
+  #25 (design-system 3a) był już w merge-base. Auto-merge #26 (verify-ola):
+  README, catalog-dialog, design-system, language, static-page. Jedyny
+  konflikt treści: `.cursor/skills/verify-ola/features/home-form.md`.
+  Rozwiązanie: kroki newslettera pakietu 1 (przycisk, e-mail, zgoda) oraz
+  gotche #26 (`browser context` nie czyści POST; katalog `/ui/` i `/en/ui/`
+  mają inne copy). Zachowanie pakietu 1 bez zmian. Draft, bez scalania.
 - verify-ola `ola-1791384765`: doctor PASS na porcie 4340. Formularz e-mail+zgoda,
   status „Dane poprawne. Nic nie wysłano.”, `posts []`, przełącznik PL/EN,
   przycisk disabled bez JS. Zrzuty: `/opt/cursor/artifacts/screenshots/`.
