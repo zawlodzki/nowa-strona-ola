@@ -8,6 +8,7 @@ Na `/design-system/` użytkownik ogląda zatwierdzony katalog komponentów 3a. P
 - `ds-theme` przełącza przycisk „Ciemny motyw” na `aria-pressed="true"`.
 - `ds-carousel` pokazuje przycisk „Następne elementy”.
 - `ds-from-ui` prowadzi z `/ui/` linkiem „Docelowy design system 3a”.
+- `ds-no-js` przy wyłączonym JavaScript ukrywa motyw i sterowanie karuzelą.
 
 ## How to get to it (user POV)
 
@@ -27,6 +28,7 @@ Preconditions:
 - **Karuzela.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Następne elementy" --exact`. Wynik to kliknięcie tego przycisku.
 - **Otwarte FAQ.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "To katalog stanów. Wysłanie danych wymaga integracji formularza z Workerem, kolejką i n8n."`. Ten blok jest otwarty w HTML.
 - **Dowód.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path design-system/page.aria.txt` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path design-system/page.png`. Snapshot zawiera H1 i przycisk motywu.
+- **Bez JS.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser context --javascript false`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /design-system/`. Następnie `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Design system 3a" --exact`, `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button --name "Ciemny motyw" --exact --count 0` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button --name "Następne elementy" --exact --count 0`.
 
 ## Gotchas
 
