@@ -384,3 +384,28 @@ Nowy blok materiałów ma dwa wejścia: homepage `#ebooki` oraz przykład artyku
 do 2–4 artykułów. Mieszany blok e-booków i bloga wymaga rozszerzenia modelu
 lub nowego kontrolowanego wariantu. Zachować linki jako dane semantyczne
 i dodać renderer HTML oraz serializer Markdown zamiast CSS redaktora.
+
+## Landing pojedynczej konsultacji 3a — 07.10.2026
+
+Na bezpośrednie zlecenie wykonano lokalny [mockup konsultacji](../mockups/homepage/consultation-3a.html).
+Pełne źródła copy, propozycje treści i mapowanie pól:
+[CONSULTATION-CMS-CONFIG-3A.md](CONSULTATION-CMS-CONFIG-3A.md).
+
+| Obszar                    | Bieżąca wartość                                                                                    | Źródło i status                                                                                                                   |
+| ------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Cel i paleta              | Landing sprzedażowy jednej konsultacji, kolorystyka 3a                                             | Bezpośrednie zlecenie 07.10.2026; wykonany lokalny HTML/CSS.                                                                      |
+| Kolejność                 | Navbar → hero → problem → dla kogo → przebieg → efekty → prowadząca → cena → opinie → FAQ → footer | Dziesięć wymaganych części z polecenia 07.10.2026; dodatkowy blok prowadzącej i szczegółowa kompozycja to propozycja.             |
+| Cena i czas               | 450 zł, PLN, 60 minut online                                                                       | Zachowane ustalenia 06.10.2026; bez dodatkowych pakietów i nieustalonego oznaczenia podatkowego.                                  |
+| Hero                      | „Wiesz już dużo. Ustal, co dalej.”                                                                 | Nowa propozycja copy na podstawie wskazanego poradnika i kontekstu firmy, nie zatwierdzona treść produkcyjna.                     |
+| CTA                       | „Zarezerwuj konsultację” → `https://cal.com`                                                       | Cel i tymczasowy URL ustalone 06.10.2026. Hero i cena w mockupie, jawna informacja o niepodłączonym kalendarzu; navbar → `#cena`. |
+| Zakres                    | Rozmowa o dostępnych wynikach, odżywianiu, codzienności i pierwszych zmianach                      | Bazowy zakres z zaakceptowanego homepage; rozwinięcie przebiegu i FAQ jest propozycją 07.10.2026.                                 |
+| Podsumowanie po spotkaniu | Nie obiecano PDF ani dodatkowej opieki                                                             | Zakres niepotwierdzony. Zadano pytanie w sesji 07.10.2026; bez odpowiedzi nie dopisywać świadczenia.                              |
+| Opinie                    | Pełne cytaty 4 i 6 z poprzedniego repo; anonimowy podpis o dotychczasowej współpracy               | Opinie potwierdzone 06.10.2026; dobór dwóch cytatów do nowego landingu jest propozycją, nie dowodem efektu jednej wizyty.         |
+| Link z homepage           | Przycisk w sekcji konsultacji → `consultation-3a.html`                                             | Wykonane lokalnie 07.10.2026; sekcyjna kotwica w nav/hero pozostaje.                                                              |
+
+Nie wykonano konfiguracji Content Lake, schematów ani rezerwacji. `service`
+wymaga ceny, waluty, czasu, booking URL i statusu; obecny `pricingSection`
+wymaga min. dwóch pakietów, więc jedna konsultacja potrzebuje osobnego
+kontrolowanego wariantu. Anonimowe opinie wymagają rozszerzenia `testimonial`.
+Przy wdrożeniu wspólna referencja usługi dla homepage, „O mnie” i landingu,
+HTML/Markdown z tych samych danych, osobne PL/EN i fixture każdego wariantu.
