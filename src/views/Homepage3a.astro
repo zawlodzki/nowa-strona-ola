@@ -126,7 +126,7 @@ const pl = lang === "pl";
   <Section id="dlaczego-ja">
     <Container class="home3a-why">
       <div>
-        <Heading class="home3a-break">{content.approach.title}</Heading>
+        <Heading>{content.approach.title}</Heading>
         {content.approach.lead && (
           <p class="ao-lead">{content.approach.lead}</p>
         )}
@@ -190,7 +190,7 @@ const pl = lang === "pl";
   <Section id="ebooki">
     <Container>
       <div class="home3a-section-head">
-        <Heading class="home3a-break">{content.ebooks.title}</Heading>
+        <Heading>{content.ebooks.title}</Heading>
         <p class="ao-lead">{content.ebooks.lead}</p>
       </div>
       <div class="home3a-books-toolbar">
@@ -256,9 +256,7 @@ const pl = lang === "pl";
   <Section id="konsultacje" spacing="compact">
     <Container>
       <SplitPanel labelledBy="consultation-title" id="konsultacje-panel">
-        <Heading id="consultation-title" class="home3a-break">
-          {content.consultation.title}
-        </Heading>
+        <Heading id="consultation-title">{content.consultation.title}</Heading>
         {content.consultation.body.map((paragraph) => (
           <p>{paragraph}</p>
         ))}
@@ -332,12 +330,6 @@ const pl = lang === "pl";
 </main>
 
 <style>
-  .home3a :global(.ao-hero--home .ao-heading) {
-    white-space: pre-line;
-  }
-  .home3a-break {
-    white-space: pre-line;
-  }
   .home3a-portrait {
     position: relative;
     height: 560px;

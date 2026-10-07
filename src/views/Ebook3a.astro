@@ -88,11 +88,10 @@ const jsonLd = {
     <Button slot="actions" as="a" href="#cena" arrow>
       {landing.primaryLabel}
     </Button>
-    <TextLink slot="actions" class="ebook3a-sample" href="#podglad">
+    <TextLink slot="actions" href="#podglad">
       {landing.secondaryLabel}
     </TextLink>
     <figure slot="media" class="ebook3a-product">
-      <div class="ebook3a-orbit" aria-hidden="true"></div>
       <BookCover
         title={content.title}
         subtitle={content.subtitle ?? ""}
@@ -100,13 +99,13 @@ const jsonLd = {
         topic={copy.coverTopic}
         tone={content.coverTone}
       >
-        <div slot="art" class="ebook3a-cover-art" aria-hidden="true">
+        <div slot="art" class="ao-book-decisions" aria-hidden="true">
           {copy.coverArt.map((label) => (
             <span>{label}</span>
           ))}
         </div>
       </BookCover>
-      <figcaption>{copy.coverCaption}</figcaption>
+      <figcaption class="ebook3a-caption">{copy.coverCaption}</figcaption>
     </figure>
   </Hero>
 
@@ -124,18 +123,18 @@ const jsonLd = {
       <div>
         <Heading>{landing.problemTitle}</Heading>
         {landing.problemParagraphs.map((paragraph, index) => (
-          <p class:list={[{ "ebook3a-strong": index === 1 }, "ebook3a-copy"]}>
-            {paragraph}
+          <p class="ebook3a-copy">
+            {index === 1 ? <strong>{paragraph}</strong> : paragraph}
           </p>
         ))}
       </div>
       <div class="ebook3a-shelf">
-        <div class="ebook3a-bottles" aria-hidden="true">
+        <p class="ebook3a-cloud" aria-hidden="true">
           {copy.bottleLabels.map((label) => (
-            <span class="ebook3a-bottle">{label}</span>
+            <span>{label}</span>
           ))}
-        </div>
-        <div class="ebook3a-questions">
+        </p>
+        <div class="ebook3a-copy">
           {landing.problemQuestions.map((question) => (
             <p>{question}</p>
           ))}
@@ -147,14 +146,16 @@ const jsonLd = {
 
   <Section id="dla-kogo" surface="soft">
     <Container>
-      <div class="ebook3a-audience-head">
+      <div>
         <Heading>{landing.audienceTitle}</Heading>
         <p class="ebook3a-copy">{landing.audienceLead}</p>
       </div>
       <div class="ebook3a-audience">
         {landing.audienceItems.map((item) => (
           <article>
-            <h3>{item.title}</h3>
+            <Heading as="h3" size="card">
+              {item.title}
+            </Heading>
             <p>{item.body}</p>
           </article>
         ))}
@@ -176,15 +177,14 @@ const jsonLd = {
           ))}
         </p>
       </div>
-      <div class="ebook3a-chapters">
+      <div>
         {chapters.map((chapter, index) => (
-          <details class="ebook3a-chapter" open={index === 0}>
-            <summary>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              {chapter.title}
-            </summary>
+          <FaqItem
+            question={`${String(index + 1).padStart(2, "0")} ${chapter.title}`}
+            open={index === 0}
+          >
             <p>{chapter.summary}</p>
-          </details>
+          </FaqItem>
         ))}
       </div>
     </Container>
@@ -194,7 +194,9 @@ const jsonLd = {
     <Container class="ebook3a-split">
       <div class="ebook3a-sheet">
         <p class="ebook3a-eyebrow">{copy.sampleKicker}</p>
-        <h3>{copy.sampleSheetTitle}</h3>
+        <Heading as="h3" size="card">
+          {copy.sampleSheetTitle}
+        </Heading>
         <p>{copy.sampleSheetLead}</p>
         <dl>
           {landing.sampleFields.map((label) => (
@@ -204,7 +206,7 @@ const jsonLd = {
             </div>
           ))}
         </dl>
-        <p class="ebook3a-sheet-foot">
+        <p class="ebook3a-caption ebook3a-sheet-foot">
           {copy.sampleSheetFooter.map((item) => (
             <span>{item}</span>
           ))}
@@ -226,7 +228,7 @@ const jsonLd = {
   <Section id="efekty">
     <Container>
       <Heading>{landing.outcomesTitle}</Heading>
-      <p class="ebook3a-copy ebook3a-copy--wide">{landing.outcomesLead}</p>
+      <p class="ebook3a-copy">{landing.outcomesLead}</p>
       <div class="ebook3a-compare">
         <div>
           <span class="ebook3a-eyebrow">{copy.beforeLabel}</span>
@@ -280,7 +282,7 @@ const jsonLd = {
       <div>
         <Heading>{landing.offerTitle}</Heading>
         <p class="ebook3a-copy">{landing.offerLead}</p>
-        <div class="ebook3a-mini" aria-hidden="true">
+        <div class="ebook3a-product" aria-hidden="true">
           <BookCover
             title={content.title}
             subtitle={content.subtitle ?? ""}
@@ -292,7 +294,9 @@ const jsonLd = {
       </div>
       <div class="ebook3a-offer">
         <p class="ebook3a-eyebrow">{copy.offerPackage}</p>
-        <h3>{content.title}</h3>
+        <Heading as="h3" size="card">
+          {content.title}
+        </Heading>
         {content.subtitle && <p class="ebook3a-muted">{content.subtitle}</p>}
         <p class="ebook3a-price">
           {content.priceGross}
@@ -306,7 +310,7 @@ const jsonLd = {
         </ul>
         {planned || !content.checkoutUrl ? (
           <details class="ebook3a-purchase">
-            <summary>{purchaseText}</summary>
+            <summary class="ao-button">{purchaseText}</summary>
             <div>
               <strong>{copy.purchasePreviewTitle}</strong>
               <p>{copy.purchasePreviewBody}</p>
@@ -358,305 +362,3 @@ const jsonLd = {
     </Container>
   </Section>
 </main>
-
-<style>
-  .ebook3a :global(.ao-heading),
-  .ebook3a h3,
-  .ebook3a-sheet h3 {
-    white-space: pre-line;
-  }
-  .ebook3a h3 {
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: -0.025em;
-  }
-  .ebook3a-eyebrow {
-    flex-basis: 100%;
-    margin: 0 0 var(--ao-space-12);
-    color: var(--ao-muted);
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .ebook3a-copy {
-    max-width: 48ch;
-    margin-top: var(--ao-space-16);
-    font-size: 18px;
-  }
-  .ebook3a-copy--wide {
-    max-width: 60ch;
-  }
-  .ebook3a-strong {
-    font-weight: 650;
-  }
-  .ebook3a-muted,
-  .ebook3a-note,
-  .ebook3a-caption {
-    color: var(--ao-muted);
-  }
-  .ebook3a-note,
-  .ebook3a-caption {
-    margin-top: var(--ao-space-16);
-    font-size: 14px;
-  }
-  .ebook3a-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--ao-space-80);
-    align-items: start;
-  }
-  .ebook3a-product {
-    position: relative;
-    margin: 0;
-    text-align: center;
-  }
-  .ebook3a-orbit {
-    position: absolute;
-    inset: 8% 12%;
-    border: 1px dashed color-mix(in srgb, var(--ao-primary) 35%, transparent);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .ebook3a-product :global(.ao-book-cover) {
-    position: relative;
-    margin-inline: auto;
-  }
-  .ebook3a-cover-art {
-    display: grid;
-    gap: 6px;
-    font-size: 11px;
-  }
-  .ebook3a-product figcaption,
-  .ebook3a-sheet-foot {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: var(--ao-space-8);
-    margin-top: var(--ao-space-16);
-    font-size: 14px;
-    color: var(--ao-muted);
-  }
-  .ebook3a-facts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--ao-space-24);
-    padding-block: var(--ao-space-32);
-    border-block: 1px solid var(--ao-line);
-  }
-  .ebook3a-facts p,
-  .ebook3a-facts strong,
-  .ebook3a-facts span {
-    display: grid;
-    margin: 0;
-  }
-  .ebook3a-facts span {
-    color: var(--ao-muted);
-    font-size: 14px;
-  }
-  .ebook3a-shelf {
-    padding: var(--ao-space-32);
-    border-radius: var(--ao-radius-image);
-    background: var(--ao-surface);
-    text-align: center;
-  }
-  .ebook3a-bottles {
-    display: flex;
-    justify-content: center;
-    gap: var(--ao-space-12);
-  }
-  .ebook3a-bottle {
-    display: grid;
-    place-items: end center;
-    width: 72px;
-    height: 120px;
-    padding-bottom: var(--ao-space-12);
-    border-radius: 12px 12px 8px 8px;
-    background: var(--ao-background);
-    border: 1px solid var(--ao-line);
-    font-size: 10px;
-    letter-spacing: 0.04em;
-  }
-  .ebook3a-questions {
-    display: grid;
-    gap: var(--ao-space-8);
-    margin-top: var(--ao-space-24);
-    font-size: 16px;
-  }
-  .ebook3a-audience-head {
-    max-width: 40ch;
-  }
-  .ebook3a-audience {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--ao-space-40) var(--ao-space-48);
-    margin-top: var(--ao-space-40);
-  }
-  .ebook3a-audience article {
-    padding-top: var(--ao-space-20);
-    border-top: 1px solid var(--ao-line);
-  }
-  .ebook3a-audience p {
-    margin-top: var(--ao-space-12);
-  }
-  .ebook3a-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--ao-space-8);
-    margin-top: var(--ao-space-24);
-  }
-  .ebook3a-cloud span {
-    padding: 6px 12px;
-    border: 1px solid var(--ao-line);
-    border-radius: 999px;
-    font-size: 13px;
-  }
-  .ebook3a-chapters {
-    display: grid;
-    gap: var(--ao-space-8);
-  }
-  .ebook3a-chapter {
-    border-bottom: 1px solid var(--ao-line);
-  }
-  .ebook3a-chapter summary {
-    display: flex;
-    gap: var(--ao-space-16);
-    align-items: baseline;
-    cursor: pointer;
-    padding-block: var(--ao-space-16);
-    font-weight: 650;
-  }
-  .ebook3a-chapter summary span {
-    color: var(--ao-muted);
-    font-variant-numeric: tabular-nums;
-  }
-  .ebook3a-chapter p {
-    margin: 0 0 var(--ao-space-16) 3.2rem;
-  }
-  .ebook3a-sheet {
-    padding: var(--ao-space-32);
-    border-radius: var(--ao-radius-image);
-    background: var(--ao-background);
-    box-shadow: 0 16px 40px color-mix(in srgb, var(--ao-ink) 8%, transparent);
-  }
-  .ebook3a-sheet dl {
-    display: grid;
-    gap: var(--ao-space-16);
-    margin: var(--ao-space-24) 0 0;
-  }
-  .ebook3a-sheet dt {
-    font-size: 13px;
-    color: var(--ao-muted);
-  }
-  .ebook3a-sheet dd {
-    margin: 4px 0 0;
-    letter-spacing: 0.08em;
-    color: var(--ao-line);
-  }
-  .ebook3a-materials {
-    display: grid;
-    gap: var(--ao-space-12);
-    margin: var(--ao-space-24) 0 0;
-    padding: 0;
-    list-style: none;
-  }
-  .ebook3a-materials li {
-    padding-top: var(--ao-space-12);
-    border-top: 1px solid var(--ao-line);
-  }
-  .ebook3a-compare {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--ao-space-32);
-    margin-top: var(--ao-space-40);
-  }
-  .ebook3a-compare p {
-    padding-top: var(--ao-space-16);
-    border-top: 1px solid var(--ao-line);
-  }
-  .ebook3a img {
-    width: 100%;
-    border-radius: var(--ao-radius-image);
-  }
-  .ebook3a-mini {
-    max-width: 220px;
-    margin-top: var(--ao-space-32);
-  }
-  .ebook3a-offer {
-    padding: var(--ao-space-40);
-    border-radius: var(--ao-radius-image);
-    background: var(--ao-surface);
-  }
-  .ebook3a-price {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 8px;
-    margin: var(--ao-space-16) 0 0;
-    font-size: 48px;
-    font-weight: 650;
-    letter-spacing: -0.04em;
-  }
-  .ebook3a-price span {
-    font-size: 20px;
-  }
-  .ebook3a-price small {
-    width: 100%;
-    color: var(--ao-muted);
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0;
-  }
-  .ebook3a-purchase summary {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--ao-space-8);
-    margin-top: var(--ao-space-24);
-    padding: 12px 20px;
-    border-radius: 999px;
-    background: var(--ao-primary);
-    color: var(--ao-on-primary);
-    font-weight: 650;
-    cursor: pointer;
-    list-style: none;
-  }
-  .ebook3a-purchase summary::-webkit-details-marker {
-    display: none;
-  }
-  .ebook3a-purchase div {
-    margin-top: var(--ao-space-16);
-    padding: var(--ao-space-16);
-    border-radius: var(--ao-radius-image);
-    background: var(--ao-background);
-  }
-  .ebook3a-reviews {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--ao-space-32);
-    margin-top: var(--ao-space-40);
-  }
-  @media (max-width: 900px) {
-    .ebook3a-split,
-    .ebook3a-facts,
-    .ebook3a-audience,
-    .ebook3a-compare,
-    .ebook3a-reviews {
-      grid-template-columns: 1fr;
-    }
-    .ebook3a-price {
-      font-size: 36px;
-    }
-  }
-  @media (max-width: 390px) {
-    .ebook3a-copy {
-      font-size: 16px;
-    }
-    .ebook3a-offer {
-      padding: var(--ao-space-24);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ebook3a-orbit {
-      display: none;
-    }
-  }
-</style>

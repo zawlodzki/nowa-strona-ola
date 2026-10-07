@@ -13,7 +13,7 @@ for (const name of assets) {
     sizes[type] += gzipSync(await readFile(`dist/_astro/${name}`)).length;
 }
 assert(sizes.js <= 25 * 1024, `JS budget exceeded: ${sizes.js} B gzip`);
-assert(sizes.css <= 22 * 1024, `CSS budget exceeded: ${sizes.css} B gzip`);
+assert(sizes.css <= 20 * 1024, `CSS budget exceeded: ${sizes.css} B gzip`);
 const woff2 = assets.filter((name) => name.endsWith(".woff2"));
 assert.equal(woff2.length, 1, `expected one woff2, got ${woff2.join(", ")}`);
 assert.equal(

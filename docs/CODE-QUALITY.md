@@ -67,14 +67,10 @@ Nie są jeszcze wdrożone — prototyp nie zawiera tych integracji.
 ## Wydajność i bezpieczeństwo
 
 Budżety prototypu: 25 KiB gzip łącznie dla wygenerowanych zewnętrznych plików JS
-oraz 22 KiB gzip CSS (suma osobnych plików `dist/_astro`, nie CSS jednej podstrony).
-Do pakietu 3 obowiązywał limit 20 KiB; suma po Consultation3a wynosiła 20155 B
-i nie mieściła kolejnego szablonu. 22 KiB pokrywa zmierzony landing Ebook3a
-po odchudzeniu reguł już obecnych w design systemie. To nadal kontrola regresji
-tej próby, nie docelowy budżet całej strony. Pomiar nie obejmuje inline JS, mediów
-ani nagłówków transportowych. Strona /static/ ma nie zawierać żadnego script.
-Docelowe budżety per szablon ustalić po wdrożeniu mediów, c15t i analityki;
-nie zwiększać limitu tylko po to, aby naprawić czerwone CI.
+oraz 20 KiB gzip CSS. To kontrola regresji tej próby, nie docelowy budżet całej strony.
+Pomiar nie obejmuje inline JS, mediów ani nagłówków transportowych. Strona /static/
+ma nie zawierać żadnego script. Docelowe budżety per szablon ustalić po wdrożeniu
+mediów, c15t i analityki; nie zwiększać ich tylko po to, aby naprawić czerwone CI.
 
 Lighthouse: cel z planu ≥95 przed tagami, osobny pomiar po zgodzie. Pomiar wykonać
 na reprezentatywnych gotowych szablonach, bez utożsamiania rozmiaru bundla z CWV.
