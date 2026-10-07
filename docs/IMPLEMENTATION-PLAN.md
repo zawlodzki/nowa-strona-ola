@@ -8,8 +8,9 @@ Próba komponentów: [UI-SPIKE-RESULTS.md](UI-SPIKE-RESULTS.md).
 ## 1. Cel i granice
 
 Nowa marka i domena: strona główna, landing page’e, blog i formularze leadowe.
-Pierwsza wersja dostarcza fundament techniczny i demonstracyjne szablony.
-Bez migracji, finalnego brandingu i finalnych treści. Zakładamy kilku redaktorów
+Fundament techniczny i demonstracyjne szablony są wykonane. Od 07.10.2026
+docelowy kierunek to zatwierdzony 3a; pełna migracja stron i finalnych treści
+pozostaje otwarta. Zakładamy kilku redaktorów
 i do około 500 stron łącznie w PL/EN. Demonstracja pozostaje chroniona i poza
 indeksem do przygotowania konfiguracji produkcyjnej.
 
@@ -55,25 +56,22 @@ Nie zakładamy istniejących kont, projektów ani sekretów.
 
 ## 4. Design system
 
-Obowiązuje [wonderful-design-system](../wonderful-design-system/README.md):
-[specyfikacja](../wonderful-design-system/DESIGN-SYSTEM.md),
-[tokeny](../wonderful-design-system/tokens.json),
-[katalog](../wonderful-design-system/index.html),
-[ruch](../wonderful-design-system/MOTION.md) i [QA](../wonderful-design-system/QA.md).
+Decyzja użytkownika 07.10.2026: docelowa strona realizuje **wariant 3a** oraz
+opracowane mockupy podstron po audycie. Warianty 01, 1a, 02, 2a i 03 porzucono.
+Dotychczasowy Wonderful zarchiwizowano; nie będzie implementowany.
 
-- Neutralna paleta, lekka typografia, przestrzeń, jasne i ciemne sekcje,
-  oszczędny pomarańczowy akcent.
-- Rekomendowane poprawki kontrastu, czytelności artykułów i mobile mają zastosowanie.
-- Tokeny w jednym źródle; sprawdzić i wykorzystać istniejący generator.
-  Nie tworzyć równoległej palety i skali odstępów.
-- Adaptować referencyjne CSS/JS do komponentów Astro, nie kopiować całego demonstratora.
+Obowiązuje [design system 3a](../design-system/README.md):
+[tokeny](../design-system/tokens.json), [specyfikacja](../design-system/SPECIFICATION.md),
+[komponenty](../design-system/COMPONENTS.md), [ruch](../design-system/MOTION.md)
+i [mapa Astro/Sanity](../design-system/ASTRO-INTEGRATION.md).
+
+- Jedno źródło tokenów 3a; globalne style i komponenty w `src/design-system`.
+- Białe tło, wiśniowa paleta, mocny Switzer i dwuliniowy wordmark z mockupów.
 - Treść widoczna bez JS; reduced motion pozostawia kompletny stan statyczny.
-  Pętle zatrzymują się poza ekranem i w ukrytej karcie.
-- ABC Favorit nie jest licencjonowany. Główny krój aplikacji to Switzer
-  (Fontshare, ITF FFL 2.0): self-host oficjalnego pliku, bez subsetowania.
-  Nie pobierać fontów ani materiałów Wonderful. Sprawdzić polskie znaki
-  i łamanie treści PL/EN.
-- Panel c15t i wszystkie stany formularzy także korzystają z design systemu.
+- Switzer Fontshare, ITF FFL: self-host oficjalnego pliku bez subsetowania.
+- Zachować działające poprawki dostępności, reflow oraz natywny trigger/fokus Safari.
+- Starsze etapy 3–4 poniżej opisują wykonany prototyp, nie migrację strony do 3a.
+  Alias `--wf-*` korzysta z nowych tokenów; usunąć go po migracji zastosowań.
 
 ## 5. CMS, komponenty i języki
 
@@ -528,3 +526,31 @@ Dokumentacja oraz mockup nie oznaczają wdrożenia kolekcji w CMS.
 [Mockup](../mockups/homepage/blog-3a.html),
 [instrukcja przyszłej konfiguracji](BLOG-CMS-CONFIG-3A.md#kolekcja-wszystkich-wpisów--07102026).
 Kontrole i ograniczenia tej sesji: [postęp](PROGRESS.md).
+
+## Audyt spójności podstron 3a — 2026-10-07
+
+- [x] Porównać osiem lokalnych widoków z homepage 3a: wspólne elementy,
+      desktop/mobile, palety, menu, newsletter, okładki i CSS.
+- [x] Zapisać [raport spójności](MOCKUPS-3A-CONSISTENCY-REVIEW.md) z dowodami
+      i rzeczywistymi wynikami, w tym nieudanymi kontrolami CSS zoom.
+- [x] Naprawić nagłówek przy CSS zoom 200% na pięciu widokach; nie ukrywać overflow.
+- [x] Ujednolicić okładkę produktu, cele/kolejność menu, header, newsletter,
+      ikony i stopkę według zaakceptowanego zakresu audytu.
+- [x] Po implementacji uruchomić pełne verify oraz odbiór wspólnych komponentów.
+
+Poprawki lokalnych mockupów wykonano na zlecenie użytkownika; verify PASS
+(57 unit, 57 E2E), szeroka kontrola trzech silników PASS. Ograniczenia odbioru
+w [postępie](PROGRESS.md). Nie oznacza to migracji Astro ani konfiguracji CMS.
+
+## Docelowy design system 3a — 2026-10-07
+
+- [x] Zapisać decyzję o realizacji 3a i porzuceniu pozostałych wariantów.
+- [x] Zarchiwizować Wonderful i odłączyć go od aktywnego runtime.
+- [x] Wyodrębnić jedno źródło tokenów 3a, globalne style i komponenty Astro.
+- [x] Dodać żywy katalog oraz specyfikację/API i mapę migracji szablonów.
+- [x] Zweryfikować nowy katalog i pełne verify; zapisać rzeczywiste wyniki.
+      PASS: 57 unit, 81 E2E; zakres i ograniczenia w PROGRESS.md.
+- [ ] Przenieść wszystkie szablony z mockupów do wspólnych komponentów 3a.
+- [ ] Wdrożyć wynik w modelach Sanity/rendererach/Markdown i wykonać odbiór stron.
+
+Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.

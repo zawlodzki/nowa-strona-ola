@@ -10,7 +10,7 @@ async function serveMockup(page: Page) {
     const allowed =
       path.startsWith("mockups/homepage/") ||
       path.startsWith("src/assets/") ||
-      path === "wonderful-design-system/tokens.css";
+      path === "design-system/tokens.css";
     if (!allowed) return route.abort();
     const types: Record<string, string> = {
       ".html": "text/html",

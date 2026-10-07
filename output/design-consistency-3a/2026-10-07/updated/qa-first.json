@@ -1,0 +1,3565 @@
+[
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "cls": "button",
+        "right": 426.328125
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 363.703125
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 363.703125
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 352.0364685058594
+      },
+      {
+        "tag": "A",
+        "cls": "button secondary",
+        "right": 426.328125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "cls": "button",
+        "right": 426.328125
+      },
+      {
+        "tag": "A",
+        "cls": "button secondary",
+        "right": 426.328125
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 511.515625
+      },
+      {
+        "tag": "DIV",
+        "cls": "carousel-controls",
+        "right": 501.484375
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "right": 501.484375
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "file": "cherry-white",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "cherry-white",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "file": "about-3a",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "about-3a",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 341.265625
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 329.5989685058594
+      },
+      {
+        "tag": "LI",
+        "cls": "",
+        "right": 346.953125
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 346.953125
+      },
+      {
+        "tag": "H3",
+        "cls": "",
+        "right": 346.953125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 464.546875
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 419.90625
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "file": "consultation-3a",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "consultation-3a",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "ebook-hero-copy",
+        "right": 356.59375
+      },
+      {
+        "tag": "P",
+        "cls": "eyebrow",
+        "right": 356.59375
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "right": 356.59375
+      },
+      {
+        "tag": "P",
+        "cls": "ebook-lead",
+        "right": 356.59375
+      },
+      {
+        "tag": "DIV",
+        "cls": "ebook-actions",
+        "right": 356.59375
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "contents-intro",
+        "right": 433.96875
+      },
+      {
+        "tag": "P",
+        "cls": "eyebrow",
+        "right": 433.96875
+      },
+      {
+        "tag": "H2",
+        "cls": "",
+        "right": 433.96875
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 433.96875
+      },
+      {
+        "tag": "DIV",
+        "cls": "ingredient-cloud",
+        "right": 433.96875
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "file": "ebook-3a",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "ebook-3a",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 512.109375
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 512.109375
+      },
+      {
+        "tag": "A",
+        "cls": "text-link",
+        "right": 512.109375
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 512.109375
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 502.109375
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 512.109375
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 512.109375
+      },
+      {
+        "tag": "A",
+        "cls": "text-link",
+        "right": 512.109375
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 512.109375
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 502.109375
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "file": "ebooks-3a",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "ebooks-3a",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "file": "blog-3a",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "blog-3a",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "file": "blog-3a-page-2",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "blog-3a-page-2",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "TABLE",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "CAPTION",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "TH",
+        "cls": "",
+        "right": 535.921875
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "TABLE",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "CAPTION",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "TH",
+        "cls": "",
+        "right": 535.921875
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "file": "article-3a",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "article-3a",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "chromium",
+    "errors": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "cls": "button",
+        "right": 426.25
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 363.6166687011719
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 363.6166687011719
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 353.2833557128906
+      },
+      {
+        "tag": "A",
+        "cls": "button secondary",
+        "right": 426.25
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "cls": "button",
+        "right": 409
+      },
+      {
+        "tag": "A",
+        "cls": "button secondary",
+        "right": 458.25
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 408.25
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 408.25
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 397.9166564941406
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 768,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 341.2166748046875
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 330.88331604003906
+      },
+      {
+        "tag": "LI",
+        "cls": "",
+        "right": 346.933349609375
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 346.93333435058594
+      },
+      {
+        "tag": "H3",
+        "cls": "",
+        "right": 346.93333435058594
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 464.53334045410156
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 427.8999938964844
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 803.2333221435547
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 863.3499755859375
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DD",
+        "cls": "",
+        "right": 1106.183364868164
+      },
+      {
+        "tag": "DD",
+        "cls": "",
+        "right": 1053.933364868164
+      },
+      {
+        "tag": "DD",
+        "cls": "",
+        "right": 1095.5166931152344
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 1031.3499755859375
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "ebook-hero-copy",
+        "right": 356.5333251953125
+      },
+      {
+        "tag": "P",
+        "cls": "eyebrow",
+        "right": 356.5333251953125
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "right": 356.5333251953125
+      },
+      {
+        "tag": "P",
+        "cls": "ebook-lead",
+        "right": 356.5333251953125
+      },
+      {
+        "tag": "DIV",
+        "cls": "ebook-actions",
+        "right": 356.5333251953125
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "ebook-hero-copy",
+        "right": 410.1333312988281
+      },
+      {
+        "tag": "P",
+        "cls": "eyebrow",
+        "right": 410.1333312988281
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "right": 410.1333312988281
+      },
+      {
+        "tag": "P",
+        "cls": "ebook-lead",
+        "right": 410.1333312988281
+      },
+      {
+        "tag": "DIV",
+        "cls": "ebook-actions",
+        "right": 410.1333312988281
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "supplement-bottle bottle-three",
+        "right": 769.6166687011719
+      },
+      {
+        "tag": "ARTICLE",
+        "cls": "",
+        "right": 814.8999633789062
+      },
+      {
+        "tag": "H3",
+        "cls": "",
+        "right": 814.8999786376953
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 814.8999786376953
+      },
+      {
+        "tag": "ARTICLE",
+        "cls": "",
+        "right": 814.8999633789062
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "offer-card",
+        "right": 1381.9500122070312
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 1301.9500122070312
+      },
+      {
+        "tag": "H3",
+        "cls": "",
+        "right": 1301.9500122070312
+      },
+      {
+        "tag": "P",
+        "cls": "offer-subtitle",
+        "right": 1301.9500122070312
+      },
+      {
+        "tag": "P",
+        "cls": "offer-price",
+        "right": 1301.9500122070312
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": false,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "offer-card",
+        "right": 1481.9500122070312
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 516.9833374023438
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 516.9833374023438
+      },
+      {
+        "tag": "A",
+        "cls": "text-link",
+        "right": 516.9833374023438
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 516.9833374023438
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 508.31666564941406
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 516.9833374023438
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 516.9833374023438
+      },
+      {
+        "tag": "A",
+        "cls": "text-link",
+        "right": 516.9833374023438
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 516.9833374023438
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 508.31666564941406
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "book-cover cover-2",
+        "right": 948
+      },
+      {
+        "tag": "SPAN",
+        "cls": "cover-author",
+        "right": 912
+      },
+      {
+        "tag": "STRONG",
+        "cls": "cover-title",
+        "right": 912
+      },
+      {
+        "tag": "SPAN",
+        "cls": "cover-subtitle",
+        "right": 818
+      },
+      {
+        "tag": "DIV",
+        "cls": "cover-art art-route",
+        "right": 912
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "TABLE",
+        "cls": "",
+        "right": 535.8999938964844
+      },
+      {
+        "tag": "CAPTION",
+        "cls": "",
+        "right": 535.8999938964844
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 535.8999938964844
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 535.8999938964844
+      },
+      {
+        "tag": "TH",
+        "cls": "",
+        "right": 535.8999786376953
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "TABLE",
+        "cls": "",
+        "right": 535.8999938964844
+      },
+      {
+        "tag": "CAPTION",
+        "cls": "",
+        "right": 535.8999938964844
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 535.8999938964844
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 535.8999938964844
+      },
+      {
+        "tag": "TH",
+        "cls": "",
+        "right": 535.8999786376953
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "TABLE",
+        "cls": "",
+        "right": 1027.9000244140625
+      },
+      {
+        "tag": "CAPTION",
+        "cls": "",
+        "right": 1027.9000244140625
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 1027.9000244140625
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 1027.9000244140625
+      },
+      {
+        "tag": "TH",
+        "cls": "",
+        "right": 1027.8999633789062
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "TABLE",
+        "cls": "",
+        "right": 1059.9000244140625
+      },
+      {
+        "tag": "CAPTION",
+        "cls": "",
+        "right": 1059.9000244140625
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 1059.9000244140625
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 1059.9000244140625
+      },
+      {
+        "tag": "TH",
+        "cls": "",
+        "right": 1059.8999633789062
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "firefox",
+    "errors": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "cls": "button",
+        "right": 426.328125
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 363.703125
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 363.703125
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 352.0364685058594
+      },
+      {
+        "tag": "A",
+        "cls": "button secondary",
+        "right": 426.328125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "cls": "button",
+        "right": 426.328125
+      },
+      {
+        "tag": "A",
+        "cls": "button secondary",
+        "right": 426.328125
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 511.53125
+      },
+      {
+        "tag": "DIV",
+        "cls": "carousel-controls",
+        "right": 501.484375
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "right": 501.484375
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 341.265625
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 329.5989685058594
+      },
+      {
+        "tag": "LI",
+        "cls": "",
+        "right": 346.953125
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 346.953125
+      },
+      {
+        "tag": "H3",
+        "cls": "",
+        "right": 346.953125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 464.546875
+      },
+      {
+        "tag": "SPAN",
+        "cls": "",
+        "right": 419.8870849609375
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "ebook-hero-copy",
+        "right": 356.59375
+      },
+      {
+        "tag": "P",
+        "cls": "eyebrow",
+        "right": 356.59375
+      },
+      {
+        "tag": "H1",
+        "cls": "",
+        "right": 356.59375
+      },
+      {
+        "tag": "P",
+        "cls": "ebook-lead",
+        "right": 356.59375
+      },
+      {
+        "tag": "DIV",
+        "cls": "ebook-actions",
+        "right": 356.59375
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "contents-intro",
+        "right": 433.96875
+      },
+      {
+        "tag": "P",
+        "cls": "eyebrow",
+        "right": 433.96875
+      },
+      {
+        "tag": "H2",
+        "cls": "",
+        "right": 433.96875
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 433.96875
+      },
+      {
+        "tag": "DIV",
+        "cls": "ingredient-cloud",
+        "right": 433.96875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 512.125
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 512.125
+      },
+      {
+        "tag": "A",
+        "cls": "text-link",
+        "right": 512.125
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 512.125
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 502.125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "right": 512.125
+      },
+      {
+        "tag": "P",
+        "cls": "",
+        "right": 512.125
+      },
+      {
+        "tag": "A",
+        "cls": "text-link",
+        "right": 512.125
+      },
+      {
+        "tag": "svg",
+        "cls": {},
+        "right": 512.125
+      },
+      {
+        "tag": "path",
+        "cls": {},
+        "right": 502.125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "TABLE",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "CAPTION",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "TH",
+        "cls": "",
+        "right": 535.921875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 2,
+    "overflow": true,
+    "menuVisible": true,
+    "offenders": [
+      {
+        "tag": "TABLE",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "CAPTION",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 535.921875
+      },
+      {
+        "tag": "TH",
+        "cls": "",
+        "right": 535.921875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "menuVisible": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "menuVisible": true,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "keyboard": {
+      "open": true,
+      "closed": true,
+      "focused": true
+    }
+  },
+  {
+    "browser": "webkit",
+    "errors": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "menuOpen": true
+  }
+]

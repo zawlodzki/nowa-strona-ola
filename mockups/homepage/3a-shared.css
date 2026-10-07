@@ -1,0 +1,253 @@
+/* Wspólne elementy zatwierdzonego 3a. Wartości: design-system/tokens.json. */
+.mockup-3a {
+  --bg: var(--ao-background);
+  --ink: var(--ao-ink);
+  --muted: var(--ao-muted);
+  --line: var(--ao-line);
+  --soft: var(--ao-surface);
+  --primary: var(--ao-primary);
+  --on-primary: var(--ao-on-primary);
+  --accent: var(--ao-primary);
+  --button-radius: var(--ao-radius-control);
+  --media-radius: var(--ao-radius-panel);
+}
+
+.mockup-3a .site-header .nav-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 290px) minmax(0, 1fr) auto;
+  gap: var(--wf-space-32);
+  min-height: 80px;
+  height: auto;
+  padding-block: var(--wf-space-12);
+}
+.mockup-3a .site-header .wordmark {
+  width: auto;
+  max-width: 100%;
+  font-size: 28px;
+}
+.mockup-3a .site-header .desktop-nav {
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: var(--wf-space-24);
+}
+.mockup-3a .site-header .header-cta {
+  gap: var(--wf-space-16);
+  white-space: normal;
+}
+.mockup-3a .desktop-nav [aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.mockup-3a .mobile-menu nav {
+  inset-block-start: 100%;
+}
+.mockup-3a .mobile-menu:not([open]) nav {
+  display: none;
+}
+.mockup-3a .mobile-menu nav [aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.mockup-3a .newsletter.section {
+  padding-block: var(--wf-section);
+}
+.mockup-3a .newsletter .newsletter-layout {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  gap: var(--wf-space-96);
+}
+.mockup-3a .newsletter .newsletter-copy h2 {
+  font-size: 64px;
+  font-weight: 650;
+  line-height: 1.07;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.mockup-3a .newsletter .email-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--wf-space-12);
+}
+.mockup-3a .newsletter .email-row input {
+  width: 100%;
+  flex: auto;
+}
+.mockup-3a .newsletter .button {
+  padding-inline: var(--wf-space-24);
+  gap: var(--wf-space-24);
+  white-space: normal;
+  max-width: 100%;
+}
+.mockup-3a .site-footer .wordmark {
+  width: auto;
+  max-width: 100%;
+  font-size: 28px;
+}
+.mockup-3a .footer-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wf-space-8) var(--wf-space-32);
+  margin-top: var(--wf-space-32);
+}
+.mockup-3a .footer-navigation a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+}
+.mockup-3a .footer-navigation a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.mockup-3a .site-footer .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--wf-space-12);
+}
+.mockup-3a .ui-icon {
+  flex-shrink: 0;
+}
+.mockup-3a .product-book .book-cover {
+  transform: none;
+}
+@container page (max-width: 1199px) {
+  .mockup-3a .site-header .nav-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--wf-space-16);
+  }
+  .mockup-3a .site-header .desktop-nav,
+  .mockup-3a .site-header .header-cta {
+    display: none;
+  }
+  .mockup-3a .site-header .mobile-menu {
+    display: block;
+    margin-inline-start: auto;
+  }
+  .mockup-3a .mobile-menu summary {
+    cursor: pointer;
+    list-style: none;
+    padding: var(--wf-space-12) 0;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .mockup-3a .mobile-menu summary::after {
+    content: " +";
+  }
+  .mockup-3a .mobile-menu[open] summary::after {
+    content: " −";
+  }
+  .mockup-3a .mobile-menu[open] nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-space-8);
+    position: absolute;
+    inset: 100% 0 auto;
+    background: var(--bg);
+    color: var(--ink);
+    padding: var(--wf-space-16) var(--wf-gutter) var(--wf-space-24);
+    z-index: 10;
+    border-bottom: 1px solid var(--line);
+  }
+  .mockup-3a .mobile-menu nav a {
+    padding-block: var(--wf-space-12);
+  }
+  .mockup-3a .newsletter .newsletter-copy h2 {
+    font-size: 52px;
+  }
+}
+@container page (max-width: 879px) {
+  .mockup-3a .newsletter .newsletter-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--wf-space-48);
+  }
+}
+@container page (max-width: 767px) {
+  .mockup-3a .newsletter .newsletter-copy h2 {
+    font-size: 42px;
+  }
+  .mockup-3a .newsletter.section {
+    padding-block: var(--wf-space-64);
+  }
+}
+@container page (max-width: 374px) {
+  .mockup-3a .site-header .wordmark {
+    font-size: 22px;
+  }
+  .mockup-3a .site-header .nav-inner {
+    gap: var(--wf-space-8);
+  }
+}
+@container page (max-width: 270px) {
+  .mockup-3a .site-header .wordmark {
+    font-size: 18px;
+  }
+}
+@container page (max-width: 270px) {
+  .mockup-3a .site-footer .wordmark {
+    font-size: 18px;
+  }
+}
+/* Reflow: zawijaj treść w dostępnej kolumnie zamiast rezerwować jej minimum. */
+.mockup-3a main :where(div, section, article, figure, form, li, details) {
+  min-width: 0;
+}
+.mockup-3a :where(p, a, span, h1, h2, h3, li, dt, dd) {
+  overflow-wrap: anywhere;
+}
+.mockup-3a a.button,
+.mockup-3a summary.button,
+.mockup-3a .text-link,
+.mockup-3a .sample-link {
+  white-space: normal;
+  max-width: 100%;
+}
+.mockup-3a .patient-count,
+.mockup-3a .expert-proof,
+.mockup-3a .carousel-heading {
+  flex-wrap: wrap;
+}
+.mockup-3a .article-table-wrap {
+  width: 100%;
+  max-width: 100%;
+}
+.mockup-3a .category-options label {
+  max-width: 100%;
+}
+@container page (max-width: 374px) {
+  .mockup-3a .patient-count > strong,
+  .mockup-3a .consult-price-value {
+    font-size: clamp(40px, 18cqi, 62px);
+  }
+  .mockup-3a .consult-price-value span {
+    margin-left: var(--wf-space-4);
+  }
+  .mockup-3a .process-steps li {
+    flex-wrap: wrap;
+  }
+  .mockup-3a .design-switcher {
+    grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+  }
+}
+.mockup-3a :where(strong, blockquote, summary) {
+  overflow-wrap: anywhere;
+}
+.mockup-3a .book-stage {
+  grid-template-columns: minmax(0, 1fr);
+}
+.mockup-3a .chapter summary {
+  grid-template-columns: 24px minmax(0, 1fr) 20px;
+}
+@container page (max-width: 374px) {
+  .mockup-3a .art-decisions > div {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--wf-space-4);
+  }
+}
+@container page (max-width: 767px) {
+  .mockup-3a .design-switcher {
+    grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+  }
+}

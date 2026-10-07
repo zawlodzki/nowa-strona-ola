@@ -54,7 +54,9 @@ const logoLabels: Record<LogoVariant, string> = {
     <section class="hero" aria-labelledby="catalog-title">
       <Container>
         <Eyebrow>
-          {pl ? "Etap 3 · design system" : "Stage 3 · design system"}
+          {pl
+            ? "Prototyp przejściowy · starsze komponenty"
+            : "Transitional prototype · earlier components"}
         </Eyebrow>
         <Heading tag="h1" id="catalog-title">
           {pl ? "Katalog komponentów" : "Component catalog"}
@@ -63,6 +65,11 @@ const logoLabels: Record<LogoVariant, string> = {
           {pl
             ? "Tokeny pochodzą z tokens.json. Nagłówki i treść używają Switzera. Poniżej fundamenty, potem wszystkie sekcje strony."
             : "Tokens come from tokens.json. Headings and body copy use Switzer. Foundations come first, then every page section."}
+        </p>
+        <p class="lead">
+          <a href="/design-system/">
+            {pl ? "Docelowy design system 3a" : "Target 3a design system"}
+          </a>
         </p>
         <p class="pangram">Zażółć gęślą jaźń ąćęłńóśźż</p>
       </Container>
@@ -239,7 +246,7 @@ const logoLabels: Record<LogoVariant, string> = {
     max-width: 32rem;
   }
   .catalog-inverse {
-    color: var(--wf-color-paper);
+    color: var(--wf-fg);
   }
   .logo-specimens {
     display: grid;

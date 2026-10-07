@@ -1,0 +1,3415 @@
+[
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "file": "cherry-white",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "cherry-white",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "file": "about-3a",
+    "theme": "light",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [["button[type=\"submit\"]"]]
+      }
+    ]
+  },
+  {
+    "file": "about-3a",
+    "theme": "dark",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [["button[type=\"submit\"]"]]
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 594,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoJak wyglą",
+        "right": 593.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 593.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoJak wygląda konsultacjaZ czym wyjdzie",
+        "right": 593.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 545.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 594,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoJak wyglą",
+        "right": 593.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 593.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoJak wygląda konsultacjaZ czym wyjdzie",
+        "right": 593.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 545.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoJak wygląda konsultacjaZ czym wyjdzie",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "file": "consultation-3a",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "consultation-3a",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "product-orbit",
+        "text": "",
+        "right": 384.4621353149414
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 570,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoZawartość",
+        "right": 569.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 569.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoZawartośćEfektyOpinieFAQE-book · 97 z",
+        "right": 569.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 521.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "product-orbit",
+        "text": "",
+        "right": 498.3271789550781
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 570,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoZawartość",
+        "right": 569.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 569.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoZawartośćEfektyOpinieFAQE-book · 97 z",
+        "right": 569.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 521.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoZawartośćEfektyOpinieFAQE-book · 97 z",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "file": "ebook-3a",
+    "theme": "light",
+    "axe": []
+  },
+  {
+    "file": "ebook-3a",
+    "theme": "dark",
+    "axe": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "file": "ebooks-3a",
+    "theme": "light",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [["button"]]
+      }
+    ]
+  },
+  {
+    "file": "ebooks-3a",
+    "theme": "dark",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [["button"]]
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter\n          ",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "file": "blog-3a",
+    "theme": "light",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [["button[type=\"submit\"]"]]
+      }
+    ]
+  },
+  {
+    "file": "blog-3a",
+    "theme": "dark",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [["button[type=\"submit\"]"]]
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter\n          ",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "file": "blog-3a-page-2",
+    "theme": "light",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [[".button"]]
+      }
+    ]
+  },
+  {
+    "file": "blog-3a-page-2",
+    "theme": "dark",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [[".button"]]
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "file": "article-3a",
+    "theme": "light",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [["button[type=\"submit\"]"]]
+      }
+    ]
+  },
+  {
+    "file": "article-3a",
+    "theme": "dark",
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [["button[type=\"submit\"]"]]
+      }
+    ]
+  },
+  {
+    "browser": "chromium",
+    "file": "cherry-white",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "chromium",
+    "file": "about-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "chromium",
+    "file": "consultation-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible"
+  },
+  {
+    "browser": "chromium",
+    "file": "ebook-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible"
+  },
+  {
+    "browser": "chromium",
+    "file": "ebooks-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "chromium",
+    "file": "blog-3a-page-2",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "chromium",
+    "file": "article-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 694,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 645.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 594,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoJak wyglą",
+        "right": 593.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 593.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoJak wygląda konsultacjaZ czym wyjdzie",
+        "right": 593.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 545.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 634,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoJak wyglą",
+        "right": 633.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 633.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoJak wygląda konsultacjaZ czym wyjdzie",
+        "right": 633.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 585.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "product-orbit",
+        "text": "",
+        "right": 384.4499969482422
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 570,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoZawartość",
+        "right": 569.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 569.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoZawartośćEfektyOpinieFAQE-book · 97 z",
+        "right": 569.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 521.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "product-orbit",
+        "text": "",
+        "right": 498.3166961669922
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 634,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoZawartość",
+        "right": 633.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 633.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoZawartośćEfektyOpinieFAQE-book · 97 z",
+        "right": 633.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 585.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "product-orbit",
+        "text": "",
+        "right": 1658.75
+      },
+      {
+        "tag": "DIV",
+        "class": "product-book",
+        "text": "Aleksandra OlesiewiczSuplementyw PCOSDecyzje,",
+        "right": 1487.7333374023438
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 694,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 645.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 694,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 520
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 520
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 693.8166656494141
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 645.8166656494141
+      }
+    ]
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "firefox",
+    "file": "cherry-white",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "firefox",
+    "file": "about-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "firefox",
+    "file": "consultation-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible"
+  },
+  {
+    "browser": "firefox",
+    "file": "ebook-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible"
+  },
+  {
+    "browser": "firefox",
+    "file": "ebooks-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "firefox",
+    "file": "blog-3a-page-2",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "firefox",
+    "file": "article-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 594,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoJak wyglą",
+        "right": 593.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 593.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoJak wygląda konsultacjaZ czym wyjdzie",
+        "right": 593.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 545.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 594,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoJak wyglą",
+        "right": 593.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 593.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoJak wygląda konsultacjaZ czym wyjdzie",
+        "right": 593.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 545.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoJak wygląda konsultacjaZ czym wyjdzie",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "product-orbit",
+        "text": "",
+        "right": 384.46214294433594
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 570,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoZawartość",
+        "right": 569.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 569.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoZawartośćEfektyOpinieFAQE-book · 97 z",
+        "right": 569.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 521.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "DIV",
+        "class": "product-orbit",
+        "text": "",
+        "right": 498.3271713256836
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 570,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 420
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 420
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            Dla kogoZawartość",
+        "right": 569.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 569.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoZawartośćEfektyOpinieFAQE-book · 97 z",
+        "right": 569.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "Dla kogo",
+        "right": 521.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "Dla kogoZawartośćEfektyOpinieFAQE-book · 97 z",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter\n          ",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieNewsletter\n          ",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 1,
+    "viewport": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 320,
+    "zoom": 2,
+    "viewport": 320,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 1,
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 390,
+    "zoom": 2,
+    "viewport": 390,
+    "scroll": 610,
+    "overflow": true,
+    "offenders": [
+      {
+        "tag": "A",
+        "class": "brand",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "wordmark wordmark-cherry",
+        "text": "aleksandraolesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "aleksandra",
+        "right": 460
+      },
+      {
+        "tag": "SPAN",
+        "class": "",
+        "text": "olesiewicz",
+        "right": 460
+      },
+      {
+        "tag": "DETAILS",
+        "class": "mobile-menu",
+        "text": "Menu\n          \n            E-bookiKonsultacj",
+        "right": 609.8125
+      },
+      {
+        "tag": "SUMMARY",
+        "class": "",
+        "text": "Menu",
+        "right": 609.8125
+      },
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 609.8125
+      },
+      {
+        "tag": "A",
+        "class": "",
+        "text": "E-booki",
+        "right": 561.8125
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 1,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": []
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "width": 1440,
+    "zoom": 2,
+    "viewport": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "NAV",
+        "class": "",
+        "text": "E-bookiKonsultacjeO mnieBlogNewsletter",
+        "right": 1514.1875
+      }
+    ]
+  },
+  {
+    "browser": "webkit",
+    "file": "cherry-white",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "webkit",
+    "file": "about-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "webkit",
+    "file": "consultation-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible"
+  },
+  {
+    "browser": "webkit",
+    "file": "ebook-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible"
+  },
+  {
+    "browser": "webkit",
+    "file": "ebooks-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "webkit",
+    "file": "blog-3a-page-2",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  },
+  {
+    "browser": "webkit",
+    "file": "article-3a",
+    "nojs": true,
+    "overflow": false,
+    "h1": 1,
+    "bodyVisible": "visible",
+    "newsletterDisabled": true
+  }
+]

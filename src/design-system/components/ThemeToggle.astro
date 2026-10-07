@@ -1,0 +1,49 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = "Ciemny motyw" } = Astro.props;
+---
+
+<button
+  class="ao-theme-toggle"
+  type="button"
+  aria-label={label}
+  aria-pressed="false"
+  hidden
+>
+  <svg
+    class="ao-icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M20.8 13A9 9 0 0 1 11 3.2 9 9 0 1 0 20.8 13Z" />
+  </svg>
+</button>
+<script>
+  const root = document.documentElement;
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const toggles =
+    document.querySelectorAll<HTMLButtonElement>(".ao-theme-toggle");
+  let manual = false;
+  const apply = (dark: boolean) => {
+    root.dataset.theme = dark ? "dark" : "light";
+    for (const button of toggles) {
+      button.hidden = false;
+      button.setAttribute("aria-pressed", String(dark));
+    }
+  };
+  apply(media.matches);
+  media.addEventListener("change", (event) => {
+    if (!manual) apply(event.matches);
+  });
+  for (const button of toggles)
+    button.addEventListener("click", () => {
+      manual = true;
+      apply(root.dataset.theme !== "dark");
+    });
+</script>

@@ -19,7 +19,9 @@ const mime = {
 const server = createServer(async (request, response) => {
   const path = new URL(request.url, `http://127.0.0.1:${port}`).pathname;
   if (path === "/") {
-    response.writeHead(302, { Location: "/mockups/homepage/index.html" });
+    response.writeHead(302, {
+      Location: "/mockups/homepage/cherry-white.html",
+    });
     response.end();
     return;
   }
@@ -28,7 +30,8 @@ const server = createServer(async (request, response) => {
     path.startsWith("/src/assets/portraits/") ||
     path.startsWith("/src/assets/brand/") ||
     path.startsWith("/src/assets/fonts/switzer/") ||
-    path === "/wonderful-design-system/tokens.css";
+    path === "/design-system/tokens.css" ||
+    path === "/archive/wonderful-design-system/tokens.css";
   if (
     !allowed ||
     !mime[extname(path)] ||

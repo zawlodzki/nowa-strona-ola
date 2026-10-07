@@ -1,0 +1,1233 @@
+[
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Wiesz, od czego zacząć.Rozumiesz, po co \""
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"E-booki o PCOSi perimenopauzie.\""
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.07em — \"Noc zaczynasię oosiemnastej\""
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Konsultacjedietetyczne online.\""
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "<section> \"newsletter\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Mniej sprzecznych rad.Więcej konkretów.\""
+  },
+  {
+    "antipattern": "gpt-thin-border-wide-shadow",
+    "name": "Hairline border with wide shadow",
+    "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/cherry-white.html",
+    "line": 0,
+    "snippet": "1px border + 24px shadow blur",
+    "advisory": true
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/about-3a.html",
+    "line": 0,
+    "snippet": "<section> \"newsletter\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.24x (need >=1.3)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.24x (need >=1.3)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "<section> \"consult-outcomes\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.13x (need >=1.3)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.03x (need >=1.3)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/consultation-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.24x (need >=1.3)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "Colored box-shadow glow (#70283f) on dark background"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "Colored box-shadow glow (#70283f) on dark background"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Zrób porządekz suplementami.\""
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.24x (need >=1.3)"
+  },
+  {
+    "antipattern": "tiny-text",
+    "name": "Tiny body text",
+    "description": "Body text below 12px is hard to read, especially on high-DPI screens. Use at least 14px for body content, 16px is ideal.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "10px body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<p>: children flush against border-left on left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<p>: children flush against border-left on left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<p>: children flush against border-left on left (no inset)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Kolejna kapsułka.To samo pytanie:„Czy to\""
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<div> \"supplement-bottle\": children flush against border+bg on right/left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<div> \"supplement-bottle\": children flush against border+bg on right/left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<div> \"supplement-bottle\": children flush against border+bg on right/left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<section> \"audience-section\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Brzmi znajomo?Jesteś w dobrym miejscu.\""
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Każdy rozdziałkończy się konkretem.\""
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"chapter\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"chapter\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"chapter\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"chapter\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"chapter\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"chapter\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"chapter\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<section> \"preview-section\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Jedna karta.Dobry początek.\""
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Mniej zgadywania.Więcej jasności.\""
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 45 chars of body text"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Dobra decyzjazaczyna się od „po co?”.\""
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<section> \"price-section\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Zanim kupiszkolejne opakowanie,zrób miej\""
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Jak pracuje się z Olą?\""
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Jeszczekilka odpowiedzi.\""
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"faq-item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"faq-item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"faq-item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"faq-item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"faq-item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "<details> \"faq-item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": ".product-book — inset box-shadow 7px stripe (left)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebook-3a.html",
+    "line": 0,
+    "snippet": "Colored box-shadow glow (#70283f) on dark page"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Więcej jasności.W Twoim tempie.\""
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.07em — \"Noc zaczynasię oosiemnastej\""
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "<section> \"newsletter\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "extreme-negative-tracking",
+    "name": "Crushed letter spacing",
+    "description": "Letter-spacing pulled tighter than the point where characters keep their own shapes costs legibility. Tighten display type optically, not destructively.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/ebooks-3a.html",
+    "line": 0,
+    "snippet": "letter-spacing: -0.06em — \"Mniej sprzecznych rad.Więcej konkretów.\""
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.24x (need >=1.3)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.12x (need >=1.3)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a.html",
+    "line": 0,
+    "snippet": "<div> \"collection-heading\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.20x (need >=1.3)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.20x (need >=1.3)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.20x (need >=1.3)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.20x (need >=1.3)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a.html",
+    "line": 0,
+    "snippet": "<section> \"newsletter\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a-page-2.html",
+    "line": 0,
+    "snippet": "line-height 1.24x (need >=1.3)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a-page-2.html",
+    "line": 0,
+    "snippet": "<div> \"collection-heading\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a-page-2.html",
+    "line": 0,
+    "snippet": "line-height 1.20x (need >=1.3)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/blog-3a-page-2.html",
+    "line": 0,
+    "snippet": "<section> \"newsletter\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "border-left: 4px"
+  },
+  {
+    "antipattern": "tight-leading",
+    "name": "Tight line height",
+    "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "line-height 1.24x (need >=1.3)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "<ol>: children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "<section> \"container\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "10px functional text \"Aleksandra Olesiewicz\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "8px functional text \"Praktyczny przewodnik dla kobiet\" (below 11px floor)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "<section> \"container\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "<div> \"article-faq-list\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/mockups/homepage/article-3a.html",
+    "line": 0,
+    "snippet": "<section> \"newsletter\": children flush against bg on all sides (no inset)"
+  }
+]

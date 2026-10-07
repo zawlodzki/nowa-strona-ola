@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+interface Props extends HTMLAttributes<"section"> {
+  surface?: "plain" | "soft";
+  spacing?: "normal" | "compact";
+}
+const {
+  surface = "plain",
+  spacing = "normal",
+  class: className,
+  ...attrs
+} = Astro.props;
+---
+
+<section
+  class:list={[
+    "ao-section",
+    `ao-section--${surface}`,
+    `ao-section--${spacing}`,
+    className,
+  ]}
+  {...attrs}
+>
+  <slot />
+</section>

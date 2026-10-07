@@ -23,16 +23,6 @@
 .about-page .mobile-menu:not([open]) nav {
   display: none;
 }
-.about-page .wordmark {
-  width: auto;
-  max-width: 100%;
-}
-.about-page .nav-inner {
-  min-height: 80px;
-  height: auto;
-  flex-wrap: wrap;
-  padding-block: var(--wf-space-16);
-}
 .about-hero-copy,
 .education-copy,
 .about-story-body,
@@ -45,7 +35,7 @@
   line-height: 1.02;
   letter-spacing: -0.04em;
 }
-.about-page h2 {
+.about-page main > :not(.newsletter) h2 {
   font-size: clamp(36px, 4vw, 58px);
   letter-spacing: -0.04em;
 }
@@ -364,7 +354,7 @@
   .about-page h1 {
     font-size: clamp(44px, 11vw, 70px);
   }
-  .about-page h2 {
+  .about-page main > :not(.newsletter) h2 {
     font-size: 38px;
   }
   .about-hero {
@@ -398,18 +388,11 @@
   }
 }
 @container page (max-width: 374px) {
-  .about-page h2 {
+  .about-page main > :not(.newsletter) h2 {
     font-size: 34px;
   }
   .about-experience {
     flex-wrap: wrap;
-  }
-  .about-page .wordmark {
-    width: 120px;
-    font-size: 22px;
-  }
-  .about-page .nav-inner {
-    gap: var(--wf-space-8);
   }
   .about-page .mobile-menu summary {
     padding-inline: 0;
@@ -432,10 +415,6 @@
   }
 }
 @container page (max-width: 270px) {
-  .about-page .wordmark {
-    width: 68px;
-    font-size: 14px;
-  }
   .about-page .mobile-menu summary {
     min-width: 44px;
     font-size: 12px;

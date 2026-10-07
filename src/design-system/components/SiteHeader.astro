@@ -1,0 +1,79 @@
+---
+import type { Locale, NavigationLink } from "../types";
+import Wordmark from "./Wordmark.astro";
+import ArrowIcon from "./ArrowIcon.astro";
+interface Props {
+  homeHref: string;
+  links: NavigationLink[];
+  cta?: NavigationLink;
+  lang?: Locale;
+}
+const { homeHref, links, cta, lang = "pl" } = Astro.props;
+const pl = lang === "pl";
+---
+
+<header class="ao-header">
+  <div class="ao-container ao-header__inner">
+    <Wordmark
+      href={homeHref}
+      label={
+        pl
+          ? "Aleksandra Olesiewicz — strona główna"
+          : "Aleksandra Olesiewicz — home"
+      }
+    />
+    <nav
+      class="ao-header__desktop"
+      aria-label={pl ? "Nawigacja główna" : "Primary navigation"}
+    >
+      {links.map((link) => (
+        <a href={link.href} aria-current={link.current ? "page" : undefined}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    {cta && (
+      <a class="ao-header__cta" href={cta.href}>
+        {cta.label}
+        <ArrowIcon />
+      </a>
+    )}
+    <details class="ao-mobile-menu">
+      <summary>{pl ? "Menu" : "Menu"}</summary>
+      <nav aria-label={pl ? "Nawigacja mobilna" : "Mobile navigation"}>
+        {[...links, ...(cta ? [cta] : [])].map((link) => (
+          <a href={link.href} aria-current={link.current ? "page" : undefined}>
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </details>
+  </div>
+</header>
+<script>
+  for (const menu of document.querySelectorAll<HTMLDetailsElement>(
+    ".ao-mobile-menu",
+  )) {
+    const trigger = menu.querySelector("summary");
+    const close = (focus: boolean) => {
+      menu.open = false;
+      if (focus) trigger?.focus();
+    };
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.open) {
+        event.preventDefault();
+        close(true);
+      }
+    });
+    for (const link of menu.querySelectorAll("a"))
+      link.addEventListener("click", () => close(true));
+    document.addEventListener("click", (event) => {
+      if (
+        menu.open &&
+        event.target instanceof Node &&
+        !menu.contains(event.target)
+      )
+        close(false);
+    });
+  }
+</script>

@@ -1,0 +1,26 @@
+---
+import Heading from "./Heading.astro";
+interface Props {
+  title: string;
+  description: string;
+  id?: string;
+  kind?: "home" | "about" | "service" | "product";
+}
+const { title, description, id, kind = "home" } = Astro.props;
+---
+
+<section class:list={["ao-container", "ao-hero", `ao-hero--${kind}`]} id={id}>
+  <div>
+    <Heading as="h1" size="display">
+      {title}
+    </Heading>
+    <p class="ao-lead">{description}</p>
+    <div class="ao-actions">
+      <slot name="actions" />
+    </div>
+    <slot />
+  </div>
+  <div class="ao-hero__media">
+    <slot name="media" />
+  </div>
+</section>

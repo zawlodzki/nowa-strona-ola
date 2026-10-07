@@ -14,7 +14,7 @@
       href="../../src/assets/brand/logo-monogram.svg"
       type="image/svg+xml"
     />
-    <link rel="stylesheet" href="../../wonderful-design-system/tokens.css" />
+    <link rel="stylesheet" href="../../design-system/tokens.css" />
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="cherry.css" />
     <link rel="stylesheet" href="wordmarks.css" />
@@ -22,8 +22,9 @@
     <link rel="stylesheet" href="ebooks-3a.css" />
     <script src="interactions.js" defer></script>
     <script src="ebooks-3a.js" defer></script>
+    <link rel="stylesheet" href="3a-shared.css" />
   </head>
-  <body class="cherry white-background collection-page">
+  <body class="cherry white-background collection-page mockup-3a">
     <a class="skip-link" href="#main">Przejdź do treści</a>
     <header class="site-header">
       <div class="container nav-inner">
@@ -36,9 +37,9 @@
           ></a
         >
         <nav class="desktop-nav" aria-label="Nawigacja główna">
-          <a href="#kolekcja">E-booki</a
+          <a href="ebooks-3a.html" aria-current="page">E-booki</a
           ><a href="consultation-3a.html">Konsultacje</a
-          ><a href="cherry-white.html#o-mnie">O mnie</a>
+          ><a href="about-3a.html">O mnie</a><a href="blog-3a.html">Blog</a>
         </nav>
         <a class="header-cta" href="#newsletter"
           >Newsletter
@@ -59,9 +60,9 @@
         <details class="mobile-menu">
           <summary>Menu</summary>
           <nav aria-label="Nawigacja mobilna">
-            <a href="#kolekcja">E-booki</a
+            <a href="ebooks-3a.html" aria-current="page">E-booki</a
             ><a href="consultation-3a.html">Konsultacje</a
-            ><a href="cherry-white.html#o-mnie">O mnie</a
+            ><a href="about-3a.html">O mnie</a><a href="blog-3a.html">Blog</a
             ><a href="#newsletter">Newsletter</a>
           </nav>
         </details>
@@ -516,7 +517,7 @@
     </main>
     <footer class="site-footer container">
       <div class="footer-top">
-        <a class="brand" href="#start"
+        <a class="brand" href="cherry-white.html"
           ><span
             class="wordmark wordmark-cherry"
             role="img"
@@ -574,14 +575,37 @@
           ></a>
         </nav>
       </div>
+      <nav class="footer-navigation" aria-label="Nawigacja w stopce">
+        <a href="ebooks-3a.html">E-booki</a
+        ><a href="consultation-3a.html">Konsultacje</a
+        ><a href="about-3a.html">O mnie</a><a href="blog-3a.html">Blog</a>
+      </nav>
       <div class="footer-bottom">
         <p>© 2026 Aleksandra Olesiewicz</p>
         <nav aria-label="Linki dodatkowe">
           <a href="podglad.html?strona=prywatnosc">Polityka prywatności</a
-          ><a href="podglad.html?strona=regulamin">Regulamin</a
-          ><a href="index.html">Porównaj kierunki</a>
+          ><a href="podglad.html?strona=regulamin">Regulamin</a>
         </nav>
-        <p>Projekt do wyboru estetyki</p>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Przełącz jasny i ciemny podgląd"
+          aria-pressed="false"
+        >
+          <svg
+            class="ui-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M7 17 17 7M7 7h10v10" />
+          </svg>
+        </button>
       </div>
     </footer>
   </body>

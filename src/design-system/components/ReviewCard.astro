@@ -1,0 +1,20 @@
+---
+interface Props {
+  author: string;
+  context?: string;
+}
+const { author, context } = Astro.props;
+---
+
+<figure class="ao-review">
+  <span class="ao-review__mark" aria-hidden="true">
+    “
+  </span>
+  <blockquote>
+    <slot />
+  </blockquote>
+  <figcaption>
+    <strong>{author}</strong>
+    {context && <span>{context}</span>}
+  </figcaption>
+</figure>

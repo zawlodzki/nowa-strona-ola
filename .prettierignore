@@ -5,7 +5,7 @@ node_modules/
 .wrangler/
 .agents/
 .claude/
-wonderful-design-system/
+archive/wonderful-design-system/
 package-lock.json
 skills-lock.json
 playwright-report/
@@ -17,3 +17,6 @@ coverage/
 .cursor/
 src/assets/fonts/switzer/FFL.txt
 src/assets/fonts/switzer/*.woff2
+
+# Wygenerowane tokeny mają własną kontrolę deterministyczności.
+design-system/tokens.css

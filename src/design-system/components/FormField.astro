@@ -1,0 +1,34 @@
+---
+import type { HTMLAttributes } from "astro/types";
+interface Props extends Omit<HTMLAttributes<"input">, "id"> {
+  id: string;
+  label: string;
+  hint?: string;
+  error?: string;
+}
+const { id, label, hint, error, class: className, ...attrs } = Astro.props;
+const description = [hint && `${id}-hint`, error && `${id}-error`]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class="ao-field">
+  <label for={id}>{label}</label>
+  <input
+    class:list={["ao-input", className]}
+    id={id}
+    {...attrs}
+    aria-invalid={error ? "true" : undefined}
+    aria-describedby={description || undefined}
+  />
+  {hint && (
+    <p class="ao-field__hint" id={`${id}-hint`}>
+      {hint}
+    </p>
+  )}
+  {error && (
+    <p class="ao-field__error" id={`${id}-error`}>
+      {error}
+    </p>
+  )}
+</div>

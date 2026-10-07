@@ -1,14 +1,8 @@
 /* Lokalny landing 3a: paleta z cherry.css, białe tło z white-background.css.
    DESIGN_VARIANCE 6 / MOTION_INTENSITY 3 / VISUAL_DENSITY 4.
    Switzer; powierzchnie 24px, CTA pill; natywne disclosures bez zależności. */
-.ebook-page .nav-inner {
-  gap: 24px;
-}
 .ebook-page .desktop-nav {
   gap: 24px;
-}
-.ebook-page .wordmark {
-  width: 250px;
 }
 .ebook-page .ebook-hero {
   display: grid;
@@ -80,67 +74,9 @@
 }
 .product-book {
   position: relative;
-  width: 292px;
-  min-height: 402px;
-  padding: 28px 27px 22px;
-  display: flex;
-  flex-direction: column;
-  color: #fff4f6;
-  background: #882f48;
-  border-radius: 3px 12px 12px 3px;
-  box-shadow:
-    12px 18px 30px #70283f26,
-    inset 7px 0 0 #70283f;
+  width: 252px;
+  max-width: 100%;
   transform: rotate(-8deg);
-}
-.product-book::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 5px -8px 5px auto;
-  width: 8px;
-  background: #fff4f6;
-  border-radius: 4px 10px 10px 4px;
-  box-shadow: inset -3px 0 0 #dac3cc;
-}
-.book-author {
-  font-size: 12px;
-}
-.product-title {
-  margin-top: 35px;
-  font-size: 44px;
-  font-weight: 650;
-  line-height: 1.03;
-  letter-spacing: -0.05em;
-}
-.product-subtitle {
-  margin-top: 14px;
-  font-size: 15px;
-}
-.decision-art {
-  display: grid;
-  gap: 8px;
-  margin-top: 28px;
-}
-.decision-art span {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 7px 11px;
-  border: 1px solid #edb8cb;
-  border-radius: 20px;
-  font-size: 12px;
-}
-.decision-art i {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #edb8cb;
-}
-.book-bottom {
-  margin-top: auto;
-  padding-top: 25px;
-  font-size: 10px;
 }
 .product-facts {
   display: grid;
@@ -547,29 +483,6 @@ details[open] > summary .disclosure-symbol {
 .price-book {
   padding: 55px 35px 0;
 }
-.price-book .product-book {
-  width: 225px;
-  min-height: 310px;
-  transform: rotate(7deg);
-  padding: 23px;
-}
-.price-book .product-title {
-  font-size: 34px;
-  margin-top: 20px;
-}
-.price-book .product-subtitle {
-  font-size: 12px;
-}
-.price-book .decision-art {
-  margin-top: 18px;
-}
-.price-book .book-bottom {
-  font-size: 9px;
-  padding-top: 20px;
-}
-.price-book .book-author {
-  font-size: 10px;
-}
 .offer-card {
   padding: 40px;
   background: var(--bg);
@@ -731,10 +644,6 @@ details[open] > summary .disclosure-symbol {
   .ebook-page .desktop-nav {
     gap: 16px;
   }
-  .ebook-page .wordmark {
-    width: 210px;
-    font-size: 25px;
-  }
   .problem-section,
   .contents-section,
   .preview-layout,
@@ -796,14 +705,6 @@ details[open] > summary .disclosure-symbol {
   .hero-product {
     padding-inline: 22px;
     min-height: 485px;
-  }
-  .product-book {
-    width: 240px;
-    min-height: 365px;
-    padding: 26px 22px 20px;
-  }
-  .product-title {
-    font-size: 38px;
   }
   .hero-product figcaption {
     font-size: 12px;
@@ -887,13 +788,6 @@ details[open] > summary .disclosure-symbol {
   .hero-product {
     min-height: 510px;
     padding-block: 40px 25px;
-  }
-  .product-book {
-    width: 265px;
-    min-height: 385px;
-  }
-  .product-title {
-    font-size: 42px;
   }
   .product-facts {
     grid-template-columns: 1fr;
@@ -980,13 +874,6 @@ details[open] > summary .disclosure-symbol {
   }
 }
 @container page (max-width: 374px) {
-  .ebook-page .nav-inner {
-    gap: 12px;
-  }
-  .ebook-page .wordmark {
-    width: 190px;
-    font-size: 24px;
-  }
   .ebook-page .ebook-actions .button {
     padding-inline: 18px;
     font-size: 13px;
@@ -995,15 +882,6 @@ details[open] > summary .disclosure-symbol {
   .hero-product {
     min-height: 465px;
     padding-inline: 18px;
-  }
-  .product-book {
-    width: 220px;
-    min-height: 350px;
-    padding: 22px;
-    transform: rotate(-5deg);
-  }
-  .product-title {
-    font-size: 37px;
   }
   .product-orbit {
     width: 370px;

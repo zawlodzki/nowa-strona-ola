@@ -38,7 +38,8 @@ for (const file of [
   "src/assets/brand/logo-monogram.svg",
   "src/assets/fonts/switzer/Switzer-Variable.woff2",
   "src/assets/fonts/switzer/FFL.txt",
-  "wonderful-design-system/tokens.css",
+  "archive/wonderful-design-system/tokens.css",
+  "design-system/tokens.css",
 ])
   files.add(file);
 
@@ -69,7 +70,7 @@ for (const file of files) {
 await writeFile(resolve(output, "robots.txt"), "User-agent: *\nDisallow: /\n");
 await writeFile(
   resolve(output, "_redirects"),
-  "/ /mockups/homepage/index.html 302\n/1a /mockups/homepage/wonderful-cherry.html 302\n",
+  "/ /mockups/homepage/cherry-white.html 302\n/1a /mockups/homepage/wonderful-cherry.html 302\n",
 );
 await writeFile(
   resolve(output, "_headers"),

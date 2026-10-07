@@ -1,0 +1,25 @@
+---
+import Heading from "./Heading.astro";
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+}
+const { id, title, description } = Astro.props;
+---
+
+<section
+  class="ao-section ao-section--soft ao-newsletter"
+  id={id}
+  aria-labelledby={`${id}-title`}
+>
+  <div class="ao-container ao-newsletter__layout">
+    <div>
+      <Heading id={`${id}-title`}>{title}</Heading>
+      <p>{description}</p>
+    </div>
+    <div>
+      <slot name="form" />
+    </div>
+  </div>
+</section>

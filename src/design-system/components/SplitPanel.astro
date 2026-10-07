@@ -1,0 +1,16 @@
+---
+interface Props {
+  id?: string;
+  labelledBy: string;
+}
+const { id, labelledBy } = Astro.props;
+---
+
+<section class="ao-split-panel" id={id} aria-labelledby={labelledBy}>
+  <div class="ao-split-panel__copy">
+    <slot />
+  </div>
+  <div class="ao-split-panel__media">
+    <slot name="media" />
+  </div>
+</section>
