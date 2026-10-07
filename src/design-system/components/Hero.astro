@@ -11,6 +11,7 @@ const { title, description, id, kind = "home" } = Astro.props;
 
 <section class:list={["ao-container", "ao-hero", `ao-hero--${kind}`]} id={id}>
   <div>
+    <slot name="kicker" />
     <Heading as="h1" size="display">
       {title}
     </Heading>

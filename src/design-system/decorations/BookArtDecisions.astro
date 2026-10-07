@@ -1,0 +1,29 @@
+---
+interface Props {
+  labels: readonly string[] | string[];
+}
+const { labels } = Astro.props;
+---
+
+<div class="ao-book-decisions" aria-hidden="true">
+  {labels.map((label, index) => (
+    <div>
+      <span>{label}</span>
+      <svg
+        viewBox="0 0 100 2"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <line
+          x1="0"
+          y1="1"
+          x2={index === 1 ? 70 : 100}
+          y2="1"
+          stroke="currentColor"
+          stroke-width="1"
+        ></line>
+      </svg>
+    </div>
+  ))}
+</div>

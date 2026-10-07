@@ -18,6 +18,7 @@ import Carousel from "../design-system/components/Carousel.astro";
 import Breadcrumbs from "../design-system/components/Breadcrumbs.astro";
 import ReviewCard from "../design-system/components/ReviewCard.astro";
 import Hero from "../design-system/components/Hero.astro";
+import BookArtDecisions from "../design-system/decorations/BookArtDecisions.astro";
 import heroPortrait from "../assets/portraits/hero.webp?url";
 import portrait from "../assets/portraits/contact.webp?url";
 const links = [
@@ -172,20 +173,10 @@ const colors = [
                 topic="PCOS / PRAKTYCZNY PRZEWODNIK"
                 tone={number === 2 ? "cherry" : "light"}
               >
-                <div slot="art" class="ao-book-decisions">
-                  <div>
-                    Cel
-                    <i />
-                  </div>
-                  <div>
-                    Dawka
-                    <i />
-                  </div>
-                  <div>
-                    Decyzja
-                    <i />
-                  </div>
-                </div>
+                <BookArtDecisions
+                  slot="art"
+                  labels={["Cel", "Dawka", "Decyzja"]}
+                />
               </BookCover>
               <span slot="price">Przykład ceny</span>
             </ContentCard>

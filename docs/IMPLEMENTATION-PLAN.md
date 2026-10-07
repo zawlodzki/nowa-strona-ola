@@ -311,8 +311,10 @@ Dla każdego pakietu stosować ten sam cykl odbioru:
    i chroniony, TypeGen, typy oraz mappery. Zachować kontrolowane warianty,
    kolejność i widoczność sekcji, bez dowolnego CSS w CMS.
 3. Wdrożyć wspólny renderer Astro oparty na Layout3a; odtworzyć mockup przez
-   istniejące komponenty i scoped CSS kompozycji. Równolegle dodać serializer
-   Markdown i przykład dla każdego nowego typu, z blokadą nieznanych bloków.
+   istniejące komponenty i scoped CSS kompozycji. Dekoracje 3a rysować jako SVG
+   w `src/design-system/decorations/`, bez gradientów, pseudo-elementów i
+   box-shadow udających kształty. Równolegle dodać serializer Markdown i
+   przykład dla każdego nowego typu, z blokadą nieznanych bloków.
 4. Przygotować powtarzalny import treści do szkiców Sanity: stabilne ID/klucze,
    referencje, przesłanie mediów z alt/kadrem, raport braków i mapowanie źródeł.
    Przed zapisem porównać obecne dokumenty, zachować zmiany redaktorów;

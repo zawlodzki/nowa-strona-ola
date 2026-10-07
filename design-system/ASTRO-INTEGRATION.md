@@ -12,6 +12,12 @@ Nazwy `ao-*` dotyczą systemu. Kompozycja szablonu ma własną klasę np.
 Komponenty przyjmujące HTML attrs przekazują class/rest na korzeń.
 Produkcja i chroniony preview mają importować te same komponenty i renderery.
 
+Dekoracje 3a rysujemy jako SVG, nie w CSS: bez gradientów, pseudo-elementów
+i `box-shadow` udających kształty. Miejsce kanoniczne to
+[`src/design-system/decorations/`](../src/design-system/decorations/)
+(osobne `.svg` albo komponenty Astro z inline SVG), żeby dało się je podmienić.
+Układ, typografia i tła paneli treści pozostają w CSS.
+
 ## Mapa mockupów na szablony
 
 | Referencja                         | Docelowy szablon  | Wspólne komponenty                                                                                       | Pozostaje w szablonie                                 |
