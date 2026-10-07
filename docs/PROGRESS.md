@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 2 etapu 4a: About3a i wspólny profil autora).
+Aktualizacja: 2026-10-07 (pakiet 3 etapu 4a: Consultation3a i wspólna usługa).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
@@ -8,13 +8,13 @@ Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiety 1–2 (Homepage3a, About3a, wspólny shell i profil autora) są w kodzie
+**Pakiety 1–3 (Homepage3a, About3a, Consultation3a, wspólny shell) są w kodzie
 i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były zlecone.**
 
-Publiczne `/`, `/en/`, `/o-mnie/` i `/en/about/` oraz preview `page` home/about
-renderują `SiteShell3a` + `Homepage3a` / `About3a` z fixture’ów. Blog, landingi
-i `/ui/` nadal używają wcześniejszego Layout. Etapy 5–7 oraz pakiety 3–7 etapu 4a
-pozostają otwarte.
+Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/` i
+`/en/consultations/` oraz preview tych stron renderują `SiteShell3a` z
+fixture’ów. Blog, landingi demo i `/ui/` nadal używają wcześniejszego Layout.
+Etapy 5–7 oraz pakiety 4–7 etapu 4a pozostają otwarte.
 
 ## Wykonane
 
@@ -1968,7 +1968,7 @@ i chronionym preview z prawdziwym datasetem. Bez publikacji.
 ## Pakiet 3 etapu 4a — 2026-10-07
 
 Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
-`cursor/consultation-3a-0940`, bez merge i push w tej sesji.
+`cursor/consultation-3a-0940`, draft PR, bez merge.
 
 - Inwentaryzacja: `consultation-3a.html` + [CONSULTATION-CMS-CONFIG-3A](CONSULTATION-CMS-CONFIG-3A.md).
   Cena 450 zł / 60 minut i tymczasowy `https://cal.com` z istniejącego
@@ -1998,14 +1998,16 @@ Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
   (limit 20480), **87 E2E PASS** (Chromium/Firefox/WebKit), w tym PL/EN
   konsultacji, natywne FAQ, brak POST i 404 `/en/konsultacje/`.
   Firefox i WebKit doinstalowane w tej sesji przez `npx playwright install`.
-- verify-ola `ola-consult-1`: przepis [consultation.md](../.cursor/skills/verify-ola/features/consultation.md)
-  przeszedł dosłownie. Zrzuty sekcji przy 1440/768/375/320 px (320 z reduced
-  motion), PL i EN: bez poziomego przewijania. Poprawiono linię nad notatką
-  w karcie ceny. axe WCAG 2.2 AA: 0 naruszeń PL/EN, jasna i ciemna paleta
-  (emulacja systemowa), 320 i 1440 px. CSS zoom 200% z reduced motion bez
-  przewijania w poziomie. Klawiatura: skip link → logo → kotwice → język → CTA
-  → rezerwacja → FAQ, każdy fokus z widocznym obrysem. Natywny zoom, czytnik
-  i urządzenie fizyczne niesprawdzone.
+- verify-ola `ola-1791391606`: doctor PASS na porcie 4340, Node 24.21.0.
+  Homepage „Poznaj konsultacje” ma `href=/konsultacje/` i otwiera H1 landingu.
+  Przepis [consultation.md](../.cursor/skills/verify-ola/features/consultation.md):
+  dwa Cal.com, CTA „Konsultacja · 450 zł” → `#cena`, `aria-current=page` na
+  „Konsultacje” w stopce, 6 FAQ `group`, `posts []`, EN H1 bez polskiego leadu,
+  `/en/konsultacje/` status 404. Treść i 450 zł bez JS. About nadal rezerwuje
+  przez Cal.com. Dowody: `/tmp/ola-verify-evidence/ola-1791391606/`.
+  Viewport CLI: 1280×900. Axe/overflow 320/390/1440 px w tym przebiegu nie
+  powtarzano (są w `npm run verify` / E2E). Natywny zoom, czytnik i urządzenie
+  fizyczne — niesprawdzone.
 
 Luki (nie blokują komponentów): URL płatnej rezerwacji, pisemne
 podsumowanie po spotkaniu, potwierdzenie zakresu i FAQ, copy EN, strona
