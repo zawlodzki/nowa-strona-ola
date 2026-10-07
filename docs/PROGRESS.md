@@ -2047,17 +2047,34 @@ Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
   przy limicie 20 KiB (20480). Pakiet 3 zostawił 20155 B. Osobny chunk
   `EbookPage` (około 1,4 KB gzip) nie mieścił się w 325 B zapasu, bo bramka
   sumuje rozłączne pliki (Tailwind prototypu, design system, szablony).
-  Zamiast podnosić limit: style landingu weszły do `global.css` Layout3a,
-  rozdziały używają `FaqItem`, a podgląd zakupu — `ao-button`. Powtórzone
-  `white-space: pre-line` na nagłówkach homepage, About i konsultacji
-  zastępuje jedna reguła `.ao-heading`. `npm run test:build` na Node 24.21.0:
-  PASS, JS 5770 B gzip, **CSS 20429 B gzip** (zapas 51 B). Testy jednostkowe
-  82/82 PASS. Pełne `npm run verify` i verify-ola w tej sesji nie doszły
-  do E2E: na VM cloud agenta brakuje bibliotek systemowych Playwright.
-  CI ma `npx playwright install --with-deps`. Zapas 51 B nie mieści pakietu 5.
+  Limit nie został podniesiony. Style landingu weszły do `global.css`
+  Layout3a; rozdziały używają `FaqItem`, podgląd zakupu — `summary.ao-button`.
+  Powtórzone `white-space: pre-line` na nagłówkach homepage, About i
+  konsultacji zastępuje jedna reguła `.ao-heading`. Dekoracyjne butelki
+  i orbita z mockupu nie weszły.
+- `npm run verify` na Node 24.21.0: PASS. Format, tokeny, ESLint, Astro/TS
+  (172 + 11 plików, 0 diagnostyki), 82 unit tests w 16 plikach, build
+  29 stron, Studio, Worker dry-run, budżety JS 5770 B / CSS **20429 B gzip**
+  (zapas 51 B). **90 E2E PASS** (Chromium/Firefox/WebKit), w tym PL/EN
+  landingu, karta homepage → `/ebooki/suplementy-w-pcos/`, natywne `details`
+  zakupu, brak POST i 404 `/en/ebooki/suplementy-w-pcos/`. Playwright deps
+  doinstalowane w tej sesji (`npx playwright install-deps`).
+- verify-ola `ola-1791399453`: doctor PASS na porcie 4340, Node 24.21.0.
+  ARIA homepage: oba linki karty „Suplementy w PCOS” mają
+  `href=/ebooki/suplementy-w-pcos/` (nie kotwica). Landing PL: H1 „Zrób
+  porządek z suplementami.”, CTA nagłówka „E-book · 97 zł” → `#cena`, cena
+  97 zł, `posts []`. EN H1 „Put your supplements in order.” bez polskiego
+  leadu. `/en/ebooki/suplementy-w-pcos/` status 404. Treść i 97 zł bez JS
+  (H1 matched, ARIA zawiera 97). `click --role button` na zakup nie trafia
+  (`summary` jako `group`); otwarcie potwierdzone w E2E. Dowody:
+  `/tmp/ola-verify-evidence/ola-1791399453/`. Viewport CLI: 1280×900.
+  Axe/overflow 320/390/1440 px w tym przebiegu nie powtarzano (są w
+  `npm run verify` / E2E). Natywny zoom, czytnik i urządzenie fizyczne —
+  niesprawdzone.
 
 Luki (nie blokują komponentów): checkout, płatny plik, finalne copy EN,
-kolekcja `/ebooki/` (pakiet 5), skan dyplomu, URL rezerwacji.
+kolekcja `/ebooki/` (pakiet 5), skan dyplomu, URL rezerwacji. Zapas CSS
+51 B nie mieści pakietu 5.
 
 Otwarte w pakiecie 4 (dane, nie kod): zapis szkiców e-booka do Content Lake
 po porównaniu, odbiór w Studio i chronionym preview z datasetem. Bez publikacji.

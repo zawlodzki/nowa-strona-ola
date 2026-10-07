@@ -42,8 +42,8 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading 
 ## Gotchas
 
 H1 łamie wiersze przez `\n` w danych. Playwright i verify-ola widzą złączony tekst „Zrób porządek z suplementami.”
-Karta homepage ma kilka linków o tej samej nazwie (okładka, tytuł, „Poznaj temat”). Pierwszy `click --role link --name "Suplementy w PCOS"` otwiera landing.
-Przycisk zakupu przy statusie `planned` to `summary` w `details`, nie link checkoutu. Harness może widzieć go jako button albo po tekście.
+Karta homepage ma dwa linki o nazwie „Suplementy w PCOS” (okładka i tytuł), oba z `href=/ebooki/suplementy-w-pcos/`. `expect --attribute` pada na strict mode; ARIA snapshot pokazuje oba URL. Kliknięcie tytułu otwiera landing w E2E (`#ebook-suplementy-w-pcos` → heading → link).
+Przycisk zakupu przy statusie `planned` to `summary.ao-button` w `details`, nie link checkoutu. W drzewie ARIA to `group` „Chcę ebook · 97 zł”; `click --role button` nie trafia. E2E otwiera go `getByText`. Zamknięte `details` trzyma „Sprzedaż nie jest uruchomiona” poza drzewem (hidden), bez potwierdzenia zakupu.
 Kotwice landingu są polskie także w EN (`#cena`, `#podglad`, `#dla-kogo`).
 Nie otwieraj Studio, podglądu 4322 ani Workera. Kolekcja `/ebooki/` to pakiet 5 i nie jest w tym przepisie.
 Natywny zoom, czytnik i urządzenie fizyczne nie są w tym przepisie.
