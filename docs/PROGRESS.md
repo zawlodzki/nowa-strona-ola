@@ -2112,6 +2112,12 @@ kontrolek z grupami/ledem, kadr zdjęć, kąty chmury pytań, strzałka w dół
 przy CTA konsultacji. FAQ zostaje przy wspólnym `FaqItem` (+/×), nie chevronie
 z makiety konsultacji — to wspólny komponent 3a.
 
+- `npm run verify` po dociągnięciu: **PASS**. CSS **23293 B gzip** / limit 32768
+  (zapas 9475 B), JS 5770 B, **90 E2E PASS**.
+- verify-ola `ola-1791402970`, port 4340, doctor PASS, `posts []`. ARIA homepage:
+  nawigacja „Temat e-booków”, pozycja `1–3 z 6`. Screenshoty desktop 1280×900
+  i mobile 390×844 obok makiet. Dowody: `/tmp/ola-verify-evidence/ola-1791402970/`.
+
 ## Następny krok
 
 Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty
