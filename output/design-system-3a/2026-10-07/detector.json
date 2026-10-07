@@ -1,0 +1,12 @@
+[
+  {
+    "antipattern": "side-tab",
+    "name": "Side-tab accent border",
+    "description": "Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/Mój dysk/AI projects/nowa strona ola/src/design-system/global.css",
+    "line": 546,
+    "snippet": "border-left: 4px solid var(--ao-cover-spine)"
+  }
+]

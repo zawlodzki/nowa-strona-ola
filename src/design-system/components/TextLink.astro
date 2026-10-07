@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import ArrowIcon from "./ArrowIcon.astro";
+interface Props extends HTMLAttributes<"a"> {
+  href: string;
+  arrow?: boolean;
+}
+const { arrow = true, class: className, ...attrs } = Astro.props;
+---
+
+<a class:list={["ao-text-link", className]} {...attrs}>
+  <slot />
+  {arrow && <ArrowIcon />}
+</a>

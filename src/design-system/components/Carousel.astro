@@ -1,0 +1,73 @@
+---
+import ArrowIcon from "./ArrowIcon.astro";
+interface Props {
+  id: string;
+  label: string;
+  columns?: 2 | 3;
+  lang?: "pl" | "en";
+}
+const { id, label, columns = 3, lang = "pl" } = Astro.props;
+---
+
+<div class="ao-carousel" data-carousel>
+  <div class="ao-carousel__controls" hidden>
+    <button
+      type="button"
+      aria-label={lang === "pl" ? "Poprzednie elementy" : "Previous items"}
+      aria-controls={id}
+      data-direction="-1"
+    >
+      <ArrowIcon direction="left" />
+    </button>
+    <button
+      type="button"
+      aria-label={lang === "pl" ? "Następne elementy" : "Next items"}
+      aria-controls={id}
+      data-direction="1"
+    >
+      <ArrowIcon direction="right" />
+    </button>
+  </div>
+  <div
+    class:list={["ao-carousel__track", `ao-carousel__track--${columns}`]}
+    id={id}
+    tabindex="0"
+    role="region"
+    aria-label={label}
+  >
+    <slot />
+  </div>
+</div>
+<script>
+  for (const carousel of document.querySelectorAll<HTMLElement>(
+    "[data-carousel]",
+  )) {
+    const track = carousel.querySelector<HTMLElement>(".ao-carousel__track");
+    const controls = carousel.querySelector<HTMLElement>(
+      ".ao-carousel__controls",
+    );
+    if (!track || !controls) continue;
+    const buttons = controls.querySelectorAll<HTMLButtonElement>("button");
+    const update = () => {
+      for (const button of buttons)
+        button.disabled =
+          button.dataset.direction === "-1"
+            ? track.scrollLeft < 2
+            : track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+    };
+    controls.hidden = false;
+    for (const button of buttons)
+      button.addEventListener("click", () =>
+        track.scrollBy({
+          left: Number(button.dataset.direction) * track.clientWidth,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "instant"
+            : "smooth",
+        }),
+      );
+    track.addEventListener("scroll", update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    update();
+  }
+</script>

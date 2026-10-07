@@ -6,25 +6,23 @@ import { generateTokensCss } from "../../scripts/tokens.mjs";
 import { alternatePath, catalogPath, homePath } from "../../src/lib/paths";
 
 const tokens = JSON.parse(
-  readFileSync("wonderful-design-system/tokens.json", "utf8"),
+  readFileSync("design-system/tokens.json", "utf8"),
 ) as {
-  font: { display: { value: string }; body: { value: string } };
+  tokens: { font: { value: string } };
 };
 
 describe("generateTokensCss", () => {
   const css = generateTokensCss(tokens);
 
   it("emits custom properties from tokens.json", () => {
-    expect(css).toContain("--wf-color-ink: #171719;");
-    expect(css).toContain("--wf-space-24: 24px;");
-    expect(css).toContain(
-      '--wf-font-display: "ABC Favorit Light", Arial, sans-serif;',
-    );
+    expect(css).toContain("--ao-ink: #70283f;");
+    expect(css).toContain("--wf-color-ink: var(--ao-ink);");
+    expect(css).toContain("--ao-space-24: 24px;");
+    expect(css).toContain('--ao-font: "Switzer", Arial, sans-serif;');
   });
 
   it("keeps documented Arial fallbacks in the source tokens", () => {
-    expect(tokens.font.display.value).toMatch(/Arial/);
-    expect(tokens.font.body.value).toMatch(/Arial/);
+    expect(tokens.tokens.font.value).toMatch(/Switzer.*Arial/);
   });
 });
 

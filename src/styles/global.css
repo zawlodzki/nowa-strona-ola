@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@import "../../wonderful-design-system/tokens.css";
+@import "../../design-system/tokens.css";
 @import "./fonts.css";
 @import "./sections.css";
-/* Site typeface is Switzer. Wonderful tokens still name ABC Favorit. */
+/* Przejściowy adapter istniejących szablonów; aktywne tokeny pochodzą z 3a. */
 :root {
   --wf-font-display: "Switzer", ui-sans-serif, system-ui, sans-serif;
   --wf-font-body: "Switzer", ui-sans-serif, system-ui, sans-serif;
@@ -74,7 +74,7 @@
     outline-offset: 4px;
   }
 }
-/* Component adaptations use the existing Wonderful tokens, not a second theme. */
+/* Starsze klasy migrują do src/design-system; --wf-* są tylko aliasami 3a. */
 [data-slot="button"],
 [data-slot="dialog-trigger"] {
   min-height: 44px;
@@ -228,4 +228,12 @@ form {
 [data-theme="dark"] {
   background: var(--wf-bg);
   color: var(--wf-fg);
+}
+
+/* Reflow adapter during migration to Layout3a. */
+main :where(div, section, article, figure, form, li, details) {
+  min-width: 0;
+}
+:where(h1, h2, h3, p, a, li, dt, dd, strong, blockquote) {
+  overflow-wrap: anywhere;
 }

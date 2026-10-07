@@ -29,7 +29,8 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "verify": "npm run format:check && npm run tokens:check && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e",
-    "test:build": "node scripts/check-build.mjs"
+    "test:build": "node scripts/check-build.mjs",
+    "tokens:generate": "node scripts/generate-tokens.mjs"
   },
   "dependencies": {
     "@data-slot/dialog": "^0.2.166",

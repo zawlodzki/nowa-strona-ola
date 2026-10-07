@@ -1,0 +1,44 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import ArrowIcon from "./ArrowIcon.astro";
+type Common = {
+  variant?: "primary" | "secondary";
+  arrow?: boolean;
+  loading?: boolean;
+};
+type Props = Common &
+  (
+    | (HTMLAttributes<"a"> & { href: string; as: "a"; disabled?: never })
+    | (HTMLAttributes<"button"> & { as?: "button"; href?: never })
+  );
+const {
+  as = "button",
+  variant = "primary",
+  arrow = false,
+  loading = false,
+  class: className,
+  ...attrs
+} = Astro.props;
+---
+
+{as === "a" ? (
+  <a
+    class:list={["ao-button", `ao-button--${variant}`, className]}
+    aria-busy={loading || undefined}
+    {...(attrs as HTMLAttributes<"a">)}
+  >
+    <slot />
+    {arrow && <ArrowIcon />}
+  </a>
+) : (
+  <button
+    type="button"
+    class:list={["ao-button", `ao-button--${variant}`, className]}
+    aria-busy={loading || undefined}
+    {...(attrs as HTMLAttributes<"button">)}
+    disabled={loading || (attrs as HTMLAttributes<"button">).disabled}
+  >
+    <slot />
+    {arrow && <ArrowIcon />}
+  </button>
+)}

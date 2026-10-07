@@ -7,15 +7,9 @@
 .consultation-page {
   scrollbar-color: var(--muted) var(--bg);
 }
-.consultation-page .nav-inner {
-  gap: 24px;
-}
 .consultation-page .desktop-nav {
   gap: 24px;
   flex-wrap: nowrap;
-}
-.consultation-page .wordmark {
-  width: 230px;
 }
 .consultation-page .header-cta {
   gap: 16px;
@@ -575,9 +569,6 @@
   font-size: 16px;
 }
 @container page (max-width: 1199px) {
-  .consultation-page .wordmark {
-    width: 205px;
-  }
   .consultation-page .desktop-nav {
     gap: 20px;
   }
@@ -706,9 +697,6 @@
   }
 }
 @container page (max-width: 767px) {
-  .consultation-page .wordmark {
-    width: 210px;
-  }
   .consult-hero {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -881,9 +869,6 @@
   }
 }
 @container page (max-width: 374px) {
-  .consultation-page .wordmark {
-    width: 190px;
-  }
   .consultation-page h1 {
     font-size: 38px;
   }

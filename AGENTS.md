@@ -29,9 +29,10 @@
 
 ## Wygląd i treści
 
-- Źródło zasad: [design system](wonderful-design-system/README.md), specyfikacja,
-  tokeny, katalog i MOTION.md. Stosuj rekomendowane poprawki dostępności.
-  Nie twórz równoległych tokenów ani nie kopiuj mediów Wonderful.
+- Docelowy kierunek zatwierdzony 07.10.2026: **3a**. Pozostałe warianty porzucone.
+  Źródło zasad: [design system 3a](design-system/README.md), tokeny, specyfikacja,
+  komponenty i MOTION.md; kod w `src/design-system`. Wonderful w `archive/`
+  jest historyczny i nie będzie implementowany. Nie tworzyć równoległych tokenów.
 - Główny krój to Switzer (Fontshare, ITF FFL): oficjalny plik, self-host,
   bez subsetowania i bez Astro `fontProviders`. Treść widoczna bez JS;
   reduced motion musi pozostawiać czytelny stan statyczny.

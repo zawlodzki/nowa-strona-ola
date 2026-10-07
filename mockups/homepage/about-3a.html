@@ -14,7 +14,7 @@
       href="../../src/assets/brand/logo-monogram.svg"
       type="image/svg+xml"
     />
-    <link rel="stylesheet" href="../../wonderful-design-system/tokens.css" />
+    <link rel="stylesheet" href="../../design-system/tokens.css" />
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="cherry.css" />
     <link rel="stylesheet" href="wordmarks.css" />
@@ -40,8 +40,9 @@
         }
       }
     </script>
+    <link rel="stylesheet" href="3a-shared.css" />
   </head>
-  <body class="cherry white-background copy-refined about-page">
+  <body class="cherry white-background copy-refined about-page mockup-3a">
     <a class="skip-link" href="#main">Przejdź do treści</a>
     <header class="site-header">
       <div class="container nav-inner">
@@ -54,9 +55,10 @@
           ></a
         >
         <nav class="desktop-nav" aria-label="Nawigacja główna">
-          <a href="cherry-white.html#ebooki">E-booki</a
-          ><a href="cherry-white.html#konsultacje">Konsultacje</a
-          ><a href="about-3a.html" aria-current="page">O mnie</a>
+          <a href="ebooks-3a.html">E-booki</a
+          ><a href="consultation-3a.html">Konsultacje</a
+          ><a href="about-3a.html" aria-current="page">O mnie</a
+          ><a href="blog-3a.html">Blog</a>
         </nav>
         <a class="header-cta" href="#newsletter"
           >Newsletter
@@ -77,10 +79,10 @@
         <details class="mobile-menu">
           <summary>Menu</summary>
           <nav aria-label="Nawigacja mobilna">
-            <a href="cherry-white.html#ebooki">E-booki</a
-            ><a href="cherry-white.html#konsultacje">Konsultacje</a
+            <a href="ebooks-3a.html">E-booki</a
+            ><a href="consultation-3a.html">Konsultacje</a
             ><a href="about-3a.html" aria-current="page">O mnie</a
-            ><a href="#newsletter">Newsletter</a>
+            ><a href="blog-3a.html">Blog</a><a href="#newsletter">Newsletter</a>
           </nav>
         </details>
       </div>
@@ -540,41 +542,37 @@
           ></a>
         </nav>
       </div>
+      <nav class="footer-navigation" aria-label="Nawigacja w stopce">
+        <a href="ebooks-3a.html">E-booki</a
+        ><a href="consultation-3a.html">Konsultacje</a
+        ><a href="about-3a.html">O mnie</a><a href="blog-3a.html">Blog</a>
+      </nav>
       <div class="footer-bottom">
         <p>© 2026 Aleksandra Olesiewicz</p>
         <nav aria-label="Linki dodatkowe">
           <a href="podglad.html?strona=prywatnosc">Polityka prywatności</a
-          ><a href="podglad.html?strona=regulamin">Regulamin</a
-          ><a href="index.html">Porównaj kierunki</a>
+          ><a href="podglad.html?strona=regulamin">Regulamin</a>
         </nav>
-        <div class="about-preview-tools">
-          <p>Mockup strony „O mnie”</p>
-          <button
-            class="theme-toggle"
-            type="button"
-            aria-label="Przełącz jasny i ciemny podgląd"
-            aria-pressed="false"
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Przełącz jasny i ciemny podgląd"
+          aria-pressed="false"
+        >
+          <svg
+            class="ui-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
           >
-            <svg
-              class="ui-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <circle cx="12" cy="12" r="8" />
-              <path
-                d="M12 4v16a8 8 0 0 0 0-16Z"
-                fill="currentColor"
-                stroke="none"
-              />
-            </svg>
-          </button>
-        </div>
+            <path d="M7 17 17 7M7 7h10v10" />
+          </svg>
+        </button>
       </div>
     </footer>
   </body>

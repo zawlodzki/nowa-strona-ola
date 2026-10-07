@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  author: string;
+  topic: string;
+  tone?: "light" | "cherry";
+}
+const { title, subtitle, author, topic, tone = "light" } = Astro.props;
+---
+
+<div
+  class:list={["ao-book-cover", `ao-book-cover--${tone}`]}
+  aria-hidden="true"
+>
+  <span class="ao-book-cover__author">{author}</span>
+  <strong>{title}</strong>
+  <span class="ao-book-cover__subtitle">{subtitle}</span>
+  <div class="ao-book-cover__art">
+    <slot name="art" />
+  </div>
+  <span class="ao-book-cover__topic">{topic}</span>
+</div>

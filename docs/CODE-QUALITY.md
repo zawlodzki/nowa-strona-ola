@@ -16,7 +16,7 @@ Przed pierwszym uruchomieniem: `npm ci` oraz `npx playwright install`.
 | -------------------- | ------------------------------------------------------------------------------------- |
 | npm run format:check | Prettier + plugin Astro: spójny format kodu i dokumentacji                            |
 | npm run format       | Jawne formatowanie podczas pracy; nigdy automatyczna naprawa w CI                     |
-| npm run tokens:check | Zgodność `tokens.css` z `tokens.json` oraz Arial w stosach Wonderful                  |
+| npm run tokens:check | Zgodność `tokens.css` z `tokens.json` oraz aktywne wartości i font Switzer w 3a       |
 | npm run lint         | ESLint 10, typescript-eslint, eslint-plugin-astro; zero ostrzeżeń, zakaz explicit any |
 | npm run check        | Astro check i TypeScript strict: komponenty, props, importy, kod i testy TS           |
 | npm test             | Vitest: logika i przypadki brzegowe (walidacja, Sanity, podgląd, webhook, tokeny)     |
@@ -36,7 +36,7 @@ reduced motion, brak overflow przy 320/390/1440 px i zoom CSS 200%.
 Axe sprawdza widok strony i otwarty dialog (tagi WCAG 2 A/AA, 2.1 AA, 2.2 AA).
 
 Axe nie dowodzi pełnej zgodności WCAG. Ręczny odbiór UI obejmuje porównanie
-z Wonderful, kolejność fokusu, sens etykiet, czytnik ekranu, realny zoom przeglądarki
+z zatwierdzonymi mockupami 3a, kolejność fokusu, sens etykiet, czytnik ekranu, realny zoom przeglądarki
 200% i urządzenia dotykowe. Automatyczny CSS zoom nie zastępuje wszystkich tych kontroli.
 Screenshoty są materiałem przeglądu; nie ma automatycznego zatwierdzania nowych
 baseline’ów. Testy wizualnej regresji dodać dopiero po zatwierdzeniu wyglądu.
@@ -92,6 +92,6 @@ Przy zmianie dokumentacji: format i odnośniki. Przy logice: lint, typy i powią
 unit tests. Przy UI: dodatkowo build i E2E. Przed przekazaniem zmiany aplikacji:
 pełne verify. Czerwonych testów nie wyciszamy; wyjaśniamy przyczynę i naprawiamy.
 
-Referencyjny wonderful-design-system, lokalne skills, zależności, raporty i dist
+Archiwalny archive/wonderful-design-system, lokalne skills, zależności, raporty i dist
 są wyłączone z formatowania/lintowania. Oceniany jest nasz kod w src, testach,
 skryptach i konfiguracji. Materiał referencyjny nie jest automatycznie przepisywany.

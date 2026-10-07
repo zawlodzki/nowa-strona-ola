@@ -1,0 +1,388 @@
+---
+import Layout3a from "../design-system/Layout3a.astro";
+import Container from "../design-system/components/Container.astro";
+import Section from "../design-system/components/Section.astro";
+import Heading from "../design-system/components/Heading.astro";
+import Button from "../design-system/components/Button.astro";
+import TextLink from "../design-system/components/TextLink.astro";
+import SiteHeader from "../design-system/components/SiteHeader.astro";
+import SiteFooter from "../design-system/components/SiteFooter.astro";
+import Newsletter from "../design-system/components/Newsletter.astro";
+import FormField from "../design-system/components/FormField.astro";
+import FaqItem from "../design-system/components/FaqItem.astro";
+import ContentCard from "../design-system/components/ContentCard.astro";
+import BookCover from "../design-system/components/BookCover.astro";
+import Pagination from "../design-system/components/Pagination.astro";
+import SplitPanel from "../design-system/components/SplitPanel.astro";
+import Carousel from "../design-system/components/Carousel.astro";
+import Breadcrumbs from "../design-system/components/Breadcrumbs.astro";
+import ReviewCard from "../design-system/components/ReviewCard.astro";
+import Hero from "../design-system/components/Hero.astro";
+import heroPortrait from "../assets/portraits/hero.webp?url";
+import portrait from "../assets/portraits/contact.webp?url";
+const links = [
+  { label: "Fundamenty", href: "#fundamentals" },
+  { label: "Komponenty", href: "#components" },
+  { label: "Materiały", href: "#cards" },
+  { label: "Czytanie", href: "#reading" },
+];
+const colors = [
+  "background",
+  "ink",
+  "muted",
+  "line",
+  "surface",
+  "primary",
+  "on-primary",
+];
+---
+
+<Layout3a
+  lang="pl"
+  title="Design system 3a — Aleksandra Olesiewicz"
+  description="Katalog zatwierdzonego systemu 3a: style globalne, tokeny i komponenty Astro."
+>
+  <SiteHeader
+    homeHref="/design-system/"
+    links={links}
+    cta={{ label: "Newsletter", href: "#newsletter" }}
+  />
+  <main id="main">
+    <Section spacing="compact" id="fundamentals" class="ds-fundamentals">
+      <Hero
+        title="Design system 3a"
+        description="Wybrany kierunek strony Aleksandry Olesiewicz. Białe tło, wiśniowa paleta i Switzer. Komponenty wynikają z ośmiu mockupów po audycie spójności."
+      >
+        <Button slot="actions" as="a" href="#components" arrow>
+          Zobacz komponenty
+        </Button>
+        <Button slot="actions" as="a" href="#cards" variant="secondary" arrow>
+          Zobacz karty
+        </Button>
+        <div slot="media" class="ds-portrait">
+          <div class="ds-portrait__backdrop"></div>
+          <img
+            src={heroPortrait}
+            alt="Aleksandra Olesiewicz"
+            width="1122"
+            height="1402"
+            fetchpriority="high"
+          />
+        </div>
+      </Hero>
+      <Container>
+        <Breadcrumbs
+          links={[{ label: "Katalog", href: "/design-system/", current: true }]}
+        />
+        <p class="ds-note">
+          Decyzja: 7 października 2026. Pozostałe warianty porzucone. Katalog
+          służy implementacji; treści poniżej są demonstracyjne.
+        </p>
+        <div class="ds-swatches">
+          {colors.map((color) => (
+            <div>
+              <div class="ds-swatch" style={`background:var(--ao-${color})`} />
+              <code>--ao-{color}</code>
+            </div>
+          ))}
+        </div>
+        <p class="ds-glyphs">
+          Zażółć gęślą jaźń ąćęłńóśźż · Switzer 400 / 650 / 750
+        </p>
+      </Container>
+    </Section>
+    <Section id="components" surface="soft">
+      <Container>
+        <Heading>Wspólne elementy</Heading>
+        <p class="ao-lead ds-intro">
+          Przyciski, linki, pola i pytania zachowują czytelność przy
+          powiększeniu.
+        </p>
+        <div class="ao-actions ds-block">
+          <Button as="a" href="#cards" arrow>
+            Poznaj materiały
+          </Button>
+          <Button as="a" href="#reading" variant="secondary" arrow>
+            Przeczytaj więcej
+          </Button>
+          <Button disabled>Niedostępne</Button>
+          <Button loading>Przetwarzanie</Button>
+        </div>
+        <TextLink href="#newsletter">Przejdź do newslettera</TextLink>
+        <div class="ds-grid ds-block">
+          <FormField
+            id="sample-email"
+            type="email"
+            label="Adres e-mail"
+            autocomplete="email"
+            placeholder="twoj@email.pl"
+            hint="Przykład pola z podpowiedzią."
+          />
+          <FormField
+            id="sample-error"
+            type="email"
+            label="E-mail — przykład błędu"
+            value="niepoprawny-adres"
+            error="Wpisz pełny adres e-mail, np. ola@example.com."
+          />
+        </div>
+        <div class="ds-block">
+          <FaqItem question="Czy te komponenty działają bez JavaScript?">
+            <p>
+              Treść, linki, FAQ i menu mobilne są renderowane w HTML. Skrypty
+              usprawniają obsługę menu, karuzeli i motywu.
+            </p>
+          </FaqItem>
+          <FaqItem question="Czy formularz wysyła dane?" open>
+            <p>
+              To katalog stanów. Wysłanie danych wymaga integracji formularza z
+              Workerem, kolejką i n8n.
+            </p>
+          </FaqItem>
+        </div>
+      </Container>
+    </Section>
+    <Section id="cards">
+      <Container>
+        <Heading>Materiały i karty</Heading>
+        <p class="ao-lead ds-intro">
+          Wspólny front produktu w kolekcji, karuzeli i na landingu. Slot art
+          zachowuje motyw konkretnego e-booka.
+        </p>
+        <Carousel id="ds-books" label="Przykłady kart produktów">
+          {[1, 2, 3, 4].map((number) => (
+            <ContentCard
+              title={
+                number === 1
+                  ? "Suplementy w PCOS"
+                  : `Materiał demonstracyjny ${number}`
+              }
+              href="#reading"
+              description="Przykład kompozycji okładki, metadanych i linku do produktu."
+              metadata="PCOS · e-book"
+              actionLabel="Zobacz e-book"
+            >
+              <BookCover
+                slot="media"
+                author="Aleksandra Olesiewicz"
+                title={
+                  number === 1 ? "Suplementy w PCOS" : "Odżywianie na co dzień"
+                }
+                subtitle="Jak wybrać to, co ma sens — bez szumu informacyjnego."
+                topic="PCOS / PRAKTYCZNY PRZEWODNIK"
+                tone={number === 2 ? "cherry" : "light"}
+              >
+                <div slot="art" class="ao-book-decisions">
+                  <div>
+                    Cel
+                    <i />
+                  </div>
+                  <div>
+                    Dawka
+                    <i />
+                  </div>
+                  <div>
+                    Decyzja
+                    <i />
+                  </div>
+                </div>
+              </BookCover>
+              <span slot="price">Przykład ceny</span>
+            </ContentCard>
+          ))}
+        </Carousel>
+        <div class="ds-block">
+          <ReviewCard
+            author="Przykładowa autorka"
+            context="Demonstracja układu opinii"
+          >
+            <p>
+              Wspólna typografia opinii i podpisu, bez przypisywania fikcyjnej
+              rekomendacji klientce.
+            </p>
+          </ReviewCard>
+        </div>
+        <Pagination
+          pages={[
+            { href: "#cards", page: 1, current: true },
+            { href: "#reading", page: 2 },
+          ]}
+        />
+      </Container>
+    </Section>
+    <Section spacing="compact">
+      <Container>
+        <SplitPanel labelledBy="panel-title">
+          <Heading id="panel-title">Rozmowa dopasowana do Ciebie.</Heading>
+          <p class="ao-lead">
+            Wspólny panel dla konsultacji i sekcji z portretem. Copy jest
+            przykładem układu.
+          </p>
+          <Button as="a" href="#newsletter" arrow>
+            Poznaj kolejne kroki
+          </Button>
+          <img
+            slot="media"
+            src={portrait}
+            alt="Aleksandra Olesiewicz"
+            width="1122"
+            height="1402"
+            loading="lazy"
+          />
+        </SplitPanel>
+      </Container>
+    </Section>
+    <Section id="reading">
+      <Container measure="reading">
+        <Heading size="article">
+          Treść, którą można spokojnie przeczytać.
+        </Heading>
+        <div class="ao-prose ds-block">
+          <p>
+            System rozdziela duże nagłówki marketingowe od treści artykułu.
+            Akapit ma większą interlinię, ograniczoną szerokość i linki z
+            podkreśleniem.
+          </p>
+          <h2>Najpierw czytelność</h2>
+          <p>
+            Dokumenty PL i EN korzystają z tych samych komponentów. Etykiety i
+            adresy przekazuje warstwa treści, bez fallbacku do innego języka.
+          </p>
+          <blockquote>
+            <p>Wyróżnienie wykorzystuje kolor powierzchni i odstępy systemu.</p>
+          </blockquote>
+          <div
+            class="ao-table-scroll"
+            role="region"
+            aria-label="Przykładowa tabela"
+            tabindex="0"
+          >
+            <table>
+              <caption>Przykładowa tabela w artykule</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Element</th>
+                  <th scope="col">Zachowanie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Tabela</th>
+                  <td>Przewija się lokalnie w wąskiej kolumnie.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Treść</th>
+                  <td>Pozostaje widoczna bez JavaScript.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </Container>
+    </Section>
+    <Newsletter
+      id="newsletter"
+      title="Mniej szumu. Więcej wiedzy."
+      description="Wspólny układ newslettera. Ten formularz demonstruje wygląd i nie wysyła danych."
+    >
+      <div slot="form" class="ao-form">
+        <FormField
+          id="newsletter-email"
+          type="email"
+          label="Twój adres e-mail"
+          autocomplete="email"
+          placeholder="twoj@email.pl"
+        />
+        <Button disabled arrow>
+          Zapisz się — przykład
+        </Button>
+        <label class="ao-checkbox">
+          <input type="checkbox" />
+          Przykład zgody na otrzymywanie newslettera.
+        </label>
+        <p class="ao-form-note">
+          Integracja wysyłki oraz finalna treść zgody wymagają osobnego
+          wdrożenia.
+        </p>
+      </div>
+    </Newsletter>
+  </main>
+  <SiteFooter
+    homeHref="/design-system/"
+    description="Odżywianie, które pasuje do Twojego życia."
+    links={links}
+    socialLinks={[]}
+    legalLinks={[]}
+    copyright="Design system 3a · katalog implementacyjny · 2026"
+  />
+</Layout3a>
+<style>
+  .ds-fundamentals {
+    padding-top: 0;
+  }
+  .ds-portrait {
+    position: relative;
+    height: 560px;
+  }
+  .ds-portrait__backdrop {
+    position: absolute;
+    inset: 24px 0 0;
+    border-radius: 160px 24px 24px 24px;
+    background: var(--ao-surface);
+  }
+  .ds-portrait img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+  @container page3a (max-width:767px) {
+    .ds-portrait {
+      height: 420px;
+    }
+    .ds-portrait__backdrop {
+      border-top-left-radius: 100px;
+    }
+  }
+  @container page3a (max-width:374px) {
+    .ds-portrait {
+      height: 350px;
+    }
+  }
+  .ds-intro {
+    margin-top: var(--ao-space-24);
+  }
+  .ds-note {
+    margin-top: var(--ao-space-24);
+    font-size: 13px;
+    color: var(--ao-muted);
+  }
+  .ds-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+    gap: var(--ao-space-24);
+    margin-block: var(--ao-space-48);
+  }
+  .ds-swatch {
+    height: 96px;
+    border: 1px solid var(--ao-line);
+    border-radius: var(--ao-radius-panel);
+    margin-bottom: var(--ao-space-12);
+  }
+  code {
+    font-family: var(--ao-font-mono);
+    font-size: 12px;
+  }
+  .ds-glyphs {
+    font-size: 24px;
+  }
+  .ds-block {
+    margin-top: var(--ao-space-32);
+  }
+  .ds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--ao-space-32);
+  }
+</style>

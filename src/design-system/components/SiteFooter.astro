@@ -1,0 +1,69 @@
+---
+import type { Locale, NavigationLink, SocialLink } from "../types";
+import Wordmark from "./Wordmark.astro";
+import ArrowIcon from "./ArrowIcon.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+interface Props {
+  homeHref: string;
+  description: string;
+  links: NavigationLink[];
+  socialLinks: SocialLink[];
+  legalLinks: NavigationLink[];
+  copyright: string;
+  lang?: Locale;
+}
+const {
+  homeHref,
+  description,
+  links,
+  socialLinks,
+  legalLinks,
+  copyright,
+  lang = "pl",
+} = Astro.props;
+const pl = lang === "pl";
+---
+
+<footer class="ao-footer">
+  <div class="ao-container">
+    <div class="ao-footer__top">
+      <Wordmark
+        href={homeHref}
+        label={
+          pl
+            ? "Aleksandra Olesiewicz — strona główna"
+            : "Aleksandra Olesiewicz — home"
+        }
+      />
+      <p>{description}</p>
+      <nav
+        class="ao-footer__social"
+        aria-label={pl ? "Profile społecznościowe" : "Social profiles"}
+      >
+        {socialLinks.map((link) => (
+          <a href={link.href}>
+            {link.label}
+            <ArrowIcon />
+          </a>
+        ))}
+      </nav>
+    </div>
+    <nav
+      class="ao-footer__navigation"
+      aria-label={pl ? "Nawigacja w stopce" : "Footer navigation"}
+    >
+      {links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+    <div class="ao-footer__bottom">
+      <p>{copyright}</p>
+      <nav aria-label={pl ? "Informacje prawne" : "Legal information"}>
+        {legalLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+      <ThemeToggle label={pl ? "Ciemny motyw" : "Dark theme"} />
+    </div>
+  </div>
+</footer>

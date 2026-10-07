@@ -9,7 +9,7 @@ export default [
       "**/.sanity/**",
       "**/.wrangler/**",
       "node_modules/**",
-      "wonderful-design-system/**",
+      "archive/wonderful-design-system/**",
       ".agents/**",
       ".claude/**",
       ".cursor/**",

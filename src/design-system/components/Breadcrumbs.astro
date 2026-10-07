@@ -1,0 +1,22 @@
+---
+import type { NavigationLink } from "../types";
+interface Props {
+  links: NavigationLink[];
+  label?: string;
+}
+const { links, label = "Ścieżka nawigacji" } = Astro.props;
+---
+
+<nav class="ao-breadcrumbs" aria-label={label}>
+  <ol>
+    {links.map((link) => (
+      <li>
+        {link.current ? (
+          <span aria-current="page">{link.label}</span>
+        ) : (
+          <a href={link.href}>{link.label}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

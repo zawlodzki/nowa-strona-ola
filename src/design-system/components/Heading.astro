@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+interface Props extends HTMLAttributes<"h1"> {
+  as?: "h1" | "h2" | "h3";
+  size?: "display" | "section" | "card" | "article";
+}
+const {
+  as: Tag = "h2",
+  size = "section",
+  class: className,
+  ...attrs
+} = Astro.props;
+---
+
+<Tag class:list={["ao-heading", `ao-heading--${size}`, className]} {...attrs}>
+  <slot />
+</Tag>

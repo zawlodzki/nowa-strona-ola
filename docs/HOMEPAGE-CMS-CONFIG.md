@@ -20,21 +20,21 @@ ani dokumentacji w deklarację wykonania. Nie kopiować sekretów i danych zgło
 
 ## Decyzje ustalone przez użytkownika
 
-| Obszar                  | Wartość obowiązująca                                                                        | Źródło / status                                                                                                   |
-| ----------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Wygląd                  | 3a: białe tło, wiśniowa paleta, Switzer i istniejące portrety                               | Wskazanie kierunku 06.10.2026; wdrożone w mockupie                                                                |
-| Usługa                  | Pojedyncze konsultacje dietetyczne online                                                   | Bezpośrednia decyzja 06.10.2026; nie przenosić mentoringu ani dawnych pakietów                                    |
-| Cena i czas konsultacji | 450 zł za 60 minut, waluta PLN                                                              | Bezpośrednia decyzja użytkownika 06.10.2026; konfiguracja płatnej rezerwacji niewykonana.                         |
-| Rezerwacja konsultacji  | CTA do kalendarza wyboru terminu i płatności; proponowana etykieta „Zarezerwuj konsultację” | Cel ustalony 06.10.2026; tymczasowo `https://cal.com` na polecenie użytkownika, właściwy link wydarzenia później. |
-| Wykształcenie Oli       | Ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym                            | Bezpośrednie potwierdzenie użytkownika 06.10.2026.                                                                |
-| Dyplom                  | Miejsce na skan w mockupie „O mnie”; docelowo rzeczywisty podgląd dokumentu                 | Bezpośrednie zlecenie użytkownika 06.10.2026; plik nie został dostarczony.                                        |
-| Cena e-booków           | Każdy z sześciu: 97 zł brutto, waluta PLN                                                   | Bezpośrednia decyzja 06.10.2026; nie oznacza gotowego sklepu                                                      |
-| Wskaźnik                | Wartość 450, przyrostek +, opis „kobiet rocznie, którym pomagają moje konsultacje”          | Bezpośrednia informacja 06.10.2026; nie zmieniać na sumę historyczną                                              |
-| Opinie                  | Sześć pełnych cytatów z `/Users/grzesiek/Github/ola-homepage/data/testimonials.js`          | Prawdziwość potwierdzona przez użytkownika 06.10.2026                                                             |
-| Podpis opinii           | „Opinia o dotychczasowej współpracy”; bez imion                                             | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                                               |
-| Marki                   | Belka widoczna: ALAB laboratoria, UNS, NORSAN, Norsa Pharma, OMNi-BiOTiC                    | Przywrócenie na polecenie użytkownika 06.10.2026                                                                  |
-| Social media            | Instagram, Facebook, TikTok widoczne                                                        | Przywrócenie na polecenie użytkownika 06.10.2026; docelowe URL pozostają do ustalenia                             |
-| Copy                    | Nowe copy 3a zachowane                                                                      | Zlecona aktualizacja; bieżąca treść poniżej                                                                       |
+| Obszar                  | Wartość obowiązująca                                                                        | Źródło / status                                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Wygląd                  | Docelowy 3a: białe tło, wiśniowa paleta, Switzer, wordmark i osiem opracowanych podstron    | Decyzja użytkownika 07.10.2026 o realizacji strony 3a; pozostałe warianty porzucone, Wonderful zarchiwizowany. Biblioteka wykonana, migracja stron/CMS otwarta. |
+| Usługa                  | Pojedyncze konsultacje dietetyczne online                                                   | Bezpośrednia decyzja 06.10.2026; nie przenosić mentoringu ani dawnych pakietów                                                                                  |
+| Cena i czas konsultacji | 450 zł za 60 minut, waluta PLN                                                              | Bezpośrednia decyzja użytkownika 06.10.2026; konfiguracja płatnej rezerwacji niewykonana.                                                                       |
+| Rezerwacja konsultacji  | CTA do kalendarza wyboru terminu i płatności; proponowana etykieta „Zarezerwuj konsultację” | Cel ustalony 06.10.2026; tymczasowo `https://cal.com` na polecenie użytkownika, właściwy link wydarzenia później.                                               |
+| Wykształcenie Oli       | Ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym                            | Bezpośrednie potwierdzenie użytkownika 06.10.2026.                                                                                                              |
+| Dyplom                  | Miejsce na skan w mockupie „O mnie”; docelowo rzeczywisty podgląd dokumentu                 | Bezpośrednie zlecenie użytkownika 06.10.2026; plik nie został dostarczony.                                                                                      |
+| Cena e-booków           | Każdy z sześciu: 97 zł brutto, waluta PLN                                                   | Bezpośrednia decyzja 06.10.2026; nie oznacza gotowego sklepu                                                                                                    |
+| Wskaźnik                | Wartość 450, przyrostek +, opis „kobiet rocznie, którym pomagają moje konsultacje”          | Bezpośrednia informacja 06.10.2026; nie zmieniać na sumę historyczną                                                                                            |
+| Opinie                  | Sześć pełnych cytatów z `/Users/grzesiek/Github/ola-homepage/data/testimonials.js`          | Prawdziwość potwierdzona przez użytkownika 06.10.2026                                                                                                           |
+| Podpis opinii           | „Opinia o dotychczasowej współpracy”; bez imion                                             | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                                                                                             |
+| Marki                   | Belka widoczna: ALAB laboratoria, UNS, NORSAN, Norsa Pharma, OMNi-BiOTiC                    | Przywrócenie na polecenie użytkownika 06.10.2026                                                                                                                |
+| Social media            | Instagram, Facebook, TikTok widoczne                                                        | Przywrócenie na polecenie użytkownika 06.10.2026; docelowe URL pozostają do ustalenia                                                                           |
+| Copy                    | Nowe copy 3a zachowane                                                                      | Zlecona aktualizacja; bieżąca treść poniżej                                                                                                                     |
 
 Specjalizacja w copy: PCOS i insulinooporność. Perimenopauza jest tematem
 materiałów; nie dopisywać doświadczenia klinicznego ani kwalifikacji ponad
@@ -461,3 +461,64 @@ jedynie waliduje dane i pokazuje demo; bez integracji i zapisu danych.
 Tytuły, opisy i daty kart są przykładami, a istniejące obrazy AI służą
 ocenie układu. Nie są finalnymi treściami publikacji.
 [Szczegóły przyszłej paginacji i pól](BLOG-CMS-CONFIG-3A.md#kolekcja-wszystkich-wpisów--07102026).
+
+## Audyt spójności 3a — 07.10.2026
+
+Źródło: zlecenie użytkownika z 07.10.2026 dotyczące weryfikacji całej serii,
+[raport](MOCKUPS-3A-CONSISTENCY-REVIEW.md). Użytkownik nie zatwierdził w tej sesji
+nowych celów menu, okładki, stopki ani widoczności sekcji. Bieżące ceny, oferta,
+copy i pozostałe ustalenia pozostają aktualne.
+
+| Obszar                      | Stan po audycie                                                                                            | Przyszłe mapowanie                                                                                                   |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Okładka „Suplementy w PCOS” | Dwa różne fronty; propozycja użycia jednego, wersja do uzgodnienia                                         | Jedna referencja produktu/okładki według EBOOK-CMS-CONFIG-3A.md; schemat produktu nadal do wdrożenia                 |
+| Globalne menu               | Propozycja stałych celów podstron i kolejności E-booki / Konsultacje / O mnie / Blog; bez wykonanej zmiany | Istniejące `siteSettings.navigation[]`; osobno wariant menu sekcji landingu                                          |
+| Newsletter                  | Propozycja jednego komponentu i wspólnego źródła treści; bez zmiany widoczności                            | Istniejąca referencja sekcji formularza; referencje ustawień bloga zgodnie z BLOG-CMS-CONFIG-3A.md nadal proponowane |
+| Stopka                      | Propozycja wspólnego rdzenia lub kontrolowanego wariantu dla obu landingów                                 | `siteSettings` dla wspólnych danych; wariant stopki do uzgodnienia i dopiero potem sprawdzenia/rozszerzenia schematu |
+| Header, logo, ikony, reflow | Zalecenia implementacyjne, w tym naprawa CSS zoom; nie ustawienia redaktora                                | Wspólne komponenty Astro i istniejące tokeny, bez dowolnego CSS w Sanity                                             |
+
+Nie zmieniono schematów, Content Lake ani aplikacji. Audyt i proponowane mapowanie
+nie oznaczają konfiguracji CMS ani akceptacji nowych decyzji projektowych.
+
+## Wykonane ujednolicenie mockupów 3a — 07.10.2026
+
+Źródło: polecenie użytkownika „zaktualizuj mockupy zgodnie z wynikami audytu”
+z 07.10.2026. Zlecenie autoryzuje wdrożenie zaleceń
+[raportu](MOCKUPS-3A-CONSISTENCY-REVIEW.md), zastępując wcześniejszy status
+„propozycja bez wykonanej zmiany” w zakresie lokalnych makiet.
+
+| Obszar                    | Bieżąca wartość w mockupach                                                                        | Źródło i mapowanie CMS                                                                                                          |
+| ------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Okładka Suplementy w PCOS | Jasny front z homepage: Cel / Dawka / Decyzja, także w hero i cenie landingu                       | Wybór implementacyjny w zatwierdzonym zakresie audytu; jedna przyszła referencja produktu/okładki według EBOOK-CMS-CONFIG-3A.md |
+| Globalne menu             | E-booki / Konsultacje / O mnie / Blog; cele: kolekcja, landing usługi, profil, indeks bloga        | Wdrożone w lokalnym HTML; docelowo `siteSettings.navigation[]`, z lokalizowanymi slugami PL/EN                                  |
+| Newsletter w menu         | CTA desktop, ostatni element menu mobilnego na stronach z formularzem                              | Wykonany wariant lokalny; referencja istniejącej sekcji formularza, proponowane referencje bloga nadal niewdrożone              |
+| Menu landingów            | Zachowane sekcje produktu/usługi oraz cena jako CTA                                                | Kontrolowany wariant nawigacji w kodzie; droga do reszty serwisu przez logo i wspólną stopkę                                    |
+| Stopka                    | Wspólny opis marki, Instagram/Facebook/TikTok, cztery globalne linki, prawo i przełącznik podglądu | Wykonane we wszystkich ośmiu widokach; docelowe wspólne dane `siteSettings`, bez nowych potwierdzonych URL profili              |
+| Newsletter                | Jedna typografia, odstępy i formularz z przyciskiem poniżej pola                                   | Wspólne style lokalne; copy zachowane. Nie dodano sekcji newslettera na landingach                                              |
+
+Ceny 97 zł brutto oraz 450 zł / 60 minut, oferta, status przygotowania materiałów,
+opinie i ich zastrzeżenia pozostają zgodne z wcześniejszymi ustaleniami.
+Header, SVG, reflow i styl komponentów należą do kodu, bez nowych pól dowolnego
+CSS dla redaktora. Zmiana lokalnych HTML nie oznacza wdrożenia Astro, schematu
+Sanity, konfiguracji Content Lake, płatności, formularzy lub publikacji.
+
+## Decyzja docelowego kierunku i systemu — 07.10.2026
+
+Źródło: polecenie użytkownika „przygotuj design system […] docelowej strony
+w astro” i „realizacji docelowej strony zgodnej z wariantem 3a, reszta wariantów
+jest porzucona”. Status: **ustalenie użytkownika**, zastępuje wcześniejszy etap
+wyboru estetyki.
+
+| Obszar             | Bieżąca wartość                                        | Mapowanie / status                                         |
+| ------------------ | ------------------------------------------------------ | ---------------------------------------------------------- |
+| Kierunek           | 3a, osiem ujednoliconych mockupów                      | Stała kodu/systemu; nie wybór CSS w Sanity                 |
+| Inne warianty      | 01, 1a, 02, 2a, 03 porzucone                           | Archiwalne referencje; nie opcje redaktora                 |
+| Wonderful          | Archiwum, nie będzie implementowany                    | `archive/wonderful-design-system`, brak aktywnego importu  |
+| Marka              | Dwuliniowy wordmark Switzer, wiśniowy tekst, białe tło | Komponent Wordmark; ustawienia marki/dane autora wspólne   |
+| Nawigacja / stopka | Wspólne globalne cele 3a; lokalne menu landingów       | Referencje ustawień; shell Astro                           |
+| Newsletter         | Wspólna prezentacja i referencja formularza            | Slot Newsletter; backend i konfiguracja Sanity niewykonane |
+
+Wykonane w kodzie: system/tokeny, style globalne, komponenty i katalog Astro.
+Treści, ceny, widoczność i kolejność sekcji pozostają według poprzednich ustaleń.
+Brak migracji wszystkich stron oraz zapisu do Content Lake; dokument nie jest
+dowodem konfiguracji Sanity.

@@ -1,0 +1,614 @@
+[
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "light",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "theme": "dark",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "chromium",
+    "errors": []
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "light",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "theme": "dark",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "\"Switzer\", Arial, sans-serif"
+  },
+  {
+    "browser": "firefox",
+    "errors": []
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "light",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(255, 255, 255)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 320,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 320,
+    "zoom": 2,
+    "overflow": true,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 390,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 390,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 768,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 768,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 1024,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 1024,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 1440,
+    "zoom": 1,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "theme": "dark",
+    "width": 1440,
+    "zoom": 2,
+    "overflow": false,
+    "h1": 1,
+    "background": "rgb(41, 26, 33)",
+    "font": "Switzer, Arial, sans-serif"
+  },
+  {
+    "browser": "webkit",
+    "errors": []
+  }
+]

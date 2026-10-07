@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (kolekcja e-booków 3a, przygotowanie PR). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-10-07 (design system 3a, przygotowanie PR). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -11,11 +11,10 @@ Etap 4 — Sanity i szablony PL/EN — kod zweryfikowany lokalnie; demonstracyjn
 treść jest w datasetcie `production`. Strony i artykuły są szkicami, żeby nie
 odpalać webhooków. Opublikowane `home` PL/EN nadal bez sekcji. Etapy 5–7 otwarte.
 
-Bieżące zlecenie: PR i scalenie lokalnego mockupu kolekcji wszystkich e-booków
-w wariancie 3a. [Kolekcja HTML](../mockups/homepage/ebooks-3a.html) zawiera sześć
-zapowiedzi z wyborem Wszystkie / PCOS / Perimenopauza. Cena 97 zł brutto
-zachowana. Filtry działają bez JS; URL i historia wymagają JS. Bez zmian CMS
-ani publikacji serwisu.
+Bieżące zlecenie: PR i scalenie ujednolicenia mockupów oraz docelowego design
+systemu 3a. Wybrano 3a, pozostałe warianty porzucono, Wonderful zarchiwizowano.
+Biblioteka Astro i katalog są zweryfikowane; migracja wszystkich stron i CMS
+pozostaje otwarta. Zmiany skillów oraz inne lokalne prace są poza tym zakresem.
 
 ## Wykonane
 
@@ -1695,15 +1694,149 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   objaśniających: zachowano oba zakresy. Kolejny krok: nowe kontrole Quality
   i scalenie bloga; bez publikacji.
 
+## Audyt spójności mockupów 3a — 2026-10-07
+
+- Zlecenie: zweryfikować niechciane różnice, kompatybilność i jednolitość serii.
+  Porównano homepage, „O mnie”, konsultację, produkt i kolekcję e-booków,
+  blog z drugą stroną oraz artykuł. Zastane zmiany użytkownika zachowano.
+- [Raport](MOCKUPS-3A-CONSISTENCY-REVIEW.md): wspólny Switzer, palety light/dark,
+  CTA i motywy paneli są zgodne. Sześć rozbieżności P2: dwie okładki tego samego
+  e-booka, cele/kolejność menu, geometria nagłówka/logo, newsletter, glify strzałek
+  landingu e-booka i stopki. P3: kolizja niescopowanej `.collection-heading`
+  przy przyszłym łączeniu CSS; obecne oddzielne HTML nie dowodzą tego błędu.
+- P1 potwierdzone: CSS zoom 200% przy 320/390 px wyprowadza header/menu poza ekran
+  na homepage, konsultacji, e-booku, kolekcji i artykule. Końcowe 72 kontrole
+  w Chromium/Firefox/WebKit: 42 PASS / 30 FAIL. Blog, druga strona i „O mnie”
+  przechodzą; wszystkie widoki przechodzą 1440 px z zoomem. Nie naprawiano kodu.
+- Normalne widoki 320/390/1440 px w trzech silnikach: 72/72 bez overflow.
+  24 kontrole bez JS/reduced motion: treść widoczna, jeden H1, bez overflow.
+  Dodatkowo Chromium 768 px i odczyt stylów, zrzuty desktop/mobile/light/dark.
+  Menu Enter/Escape/powrót fokusu Chromium: PASS dla ośmiu stron.
+- Axe po ustabilizowaniu strony, light/dark/reduced motion: 16/16 bez naruszeń.
+  Pierwsze 10 alarmów kontrastu nie odtworzyło się po ustabilizowaniu; zapisano
+  oba przebiegi. Pierwszy zrzut Menu kolekcji również zweryfikowano świeżym
+  odczytem i nowym zrzutem. Nie zgłoszono tych sygnałów jako wad produktu.
+- Impeccable: kontekst i wybrane kontrole audit; detektor 123 ostrzeżenia,
+  w tym powtórzenia wspólnego CSS. Nie wykonano pełnej procedury critique.
+  Artefakty: `output/design-consistency-3a/2026-10-07/`.
+- Serwer lokalny wymagał zezwolenia na port po EPERM; komenda podglądu
+  potwierdzona, istnieje już w README. Zatrzymano go po kontroli. Montaż przez
+  Pillow niedostępny; zestawienia wykonano w przeglądarce bez nowych zależności.
+- Zmiany wyłącznie dokumentacji i dowodów; bez implementacji, zapisu CMS,
+  commita, pusha i publikacji. `npm run verify` niewykonane (brak zmian aplikacji).
+  Natywny zoom, czytnik, fizyczny telefon i Lighthouse/CWV niewykonane.
+- Dokumentacja: Prettier i diff-check PASS; 99 lokalnych odnośników w czterech
+  dokumentach istnieje. Kontrola nie obejmowała zewnętrznych URL ani wszystkich
+  kotwic starszej dokumentacji.
+- Następny krok: poprawić P1 nagłówka, następnie uzgodnić i wykonać ujednolicenie
+  powtarzalnych komponentów; po zmianach pełne verify i przegląd wizualny.
+
+## Ujednolicenie mockupów po audycie 3a — 2026-10-07
+
+- Na polecenie „zaktualizuj mockupy zgodnie z wynikami audytu” poprawiono wszystkie
+  osiem widoków. Wspólny `3a-shared.css` obejmuje header/logo, newsletter, stopkę
+  i reflow; pozostałe kierunki nie korzystają z niego. Zachowano zastane zmiany.
+- Globalne menu ma jednakowe cele i kolejność, także Blog w kolekcji; landingi
+  zachowują nawigację po sekcjach. Stopka prowadzi do pełnych podstron, a motyw
+  ma jeden przełącznik. Okładka produktu jest zgodna z jasnym frontem homepage
+  i kolekcji. Glify strzałek zastąpiono istniejącym SVG; scoped CSS zapobiega
+  przyszłej kolizji `.collection-heading`.
+- Naprawiono P1 nagłówka przy CSS zoom 200% oraz dalsze źródła overflow ujawnione
+  po jego naprawie: przyciski, FAQ, siatka okładek i przełącznik kierunków.
+  Nie ukrywano overflow globalnie. Szczegóły w aktualizacji raportu audytu.
+- Końcowe QA: 307 zapisów bez nieudanych kontroli. 240 układów: osiem widoków,
+  320/390/768/1024/1440 px, zoom 100/200%, Chromium/Firefox/WebKit bez overflow.
+  24 kontrole klawiatury (Enter/Escape/powrót fokusu), 24 bez JS/reduced motion,
+  16 axe light/dark bez naruszeń; trzy listy błędów JS/zasobów puste.
+  Zrzuty desktop/mobile, okładki i newsletter obejrzano. Dowody:
+  `output/design-consistency-3a/2026-10-07/updated/`.
+- Nowe testy regresji dostępności Menu przy powiększeniu i przejść między stronami:
+  6/6 PASS w trzech silnikach. Początkowe nieudane przebiegi usunięto poprawkami
+  kodu, bez osłabiania asercji. Pełne `npm run verify`: PASS na Node 24,
+  57 unit i 57 E2E. Log: `/private/tmp/ola-3a-consistency-verify.log`.
+  Pierwsze verify zatrzymało się na formacie JSON dowodów audytu; sformatowano je
+  i wykonano pełny przebieg ponownie. Pakowanie feedbacku PASS: 47 plików.
+- Dokumentacja: Prettier i diff-check PASS; 164 lokalne odnośniki w sześciu
+  dokumentach istnieją. Nie sprawdzano zewnętrznych URL ani wszystkich kotwic.
+  Zlecono otwarcie lokalnego podglądu w panelu Codex (status queued).
+- Impeccable: zastosowano kontrole polish i craft floor, jednorazowy detektor
+  oraz przegląd zrzutów. Zachowano motywy i typografię zaakceptowanego 3a;
+  ostrzeżenia detektora nie są samodzielnym dowodem błędu.
+- Decyzje i wykonany zakres zapisano w HOMEPAGE-CMS-CONFIG.md. Nie wykonano
+  migracji Astro/Sanity/Markdown, konfiguracji Content Lake, commita, pusha
+  ani publikacji. Lokalne podglądy działają pod 127.0.0.1:8766.
+- Natywny zoom, czytnik ekranu, fizyczny telefon i Lighthouse/CWV niewykonane.
+  Następny krok: odbiór ujednoliconej serii i treści, następnie migracja wspólnych
+  komponentów do Astro i referencji Sanity zgodnie z planem.
+
+## Design system docelowej strony 3a — 2026-10-07
+
+- Decyzja użytkownika: realizujemy stronę zgodną z wariantem 3a i opracowanymi
+  podstronami. Warianty 01, 1a, 02, 2a i 03 porzucone. Zapisano bieżące wartości
+  w HOMEPAGE-CMS-CONFIG.md, DESIGN.md, planie, AGENTS.md i obu README.
+- Wonderful przeniesiono w całości do `archive/wonderful-design-system`, ze źródłami,
+  tokenami, katalogiem i dowodami. README oznacza go jako wycofany i nieprzeznaczony
+  do implementacji. Poprawiono odnośniki. Historyczne propozycje HTML pozostają
+  dostępne jako archiwum; usunięto wybór kierunku z aktywnego homepage/stopek 3a.
+- [Nowy system](../design-system/README.md): jedno źródło tokens.json z pochodzeniem,
+  generowany CSS, palety light/dark, Switzer, globalny CSS i Layout3a. Wykonano
+  21 komponentów Astro, typowane API, stany, responsywność i lokalne skrypty
+  menu/motywu/karuzeli. Żywy katalog `/design-system/` demonstruje system.
+- Specyfikacja, API komponentów, ruch i mapa ośmiu mockupów → szablony Astro
+  określają granice oraz kolejność migracji. Aktywna aplikacja i mockupy 3a nie
+  importują archiwum Wonderful. Aliasy `--wf-*` pochodzą z nowego JSON i utrzymują
+  działanie przejściowego prototypu; `/ui/` wskazuje katalog docelowy.
+- Końcowa kontrola katalogu: 60 układów w Chromium/Firefox/WebKit, 320/390/768/
+  1024/1440 px, light/dark, CSS zoom 100/200%, bez overflow; trzy listy błędów
+  JS/zasobów puste. Zrzuty desktop/mobile, obu palet i wspólnych sekcji obejrzano.
+  Artefakty: `output/design-system-3a/2026-10-07/` (QA i pierwsza runda).
+- Pełne `npm run verify` na Node 24: PASS, 57 unit i 81 E2E, w tym 24 nowe
+  przypadki katalogu. Axe 18 widoków katalogu bez naruszeń; menu/FAQ/karuzela/motyw,
+  brak JS/reduced motion i stary katalog przechodzą. Log końcowy:
+  `/private/tmp/ola-ds3a-verify-complete.log`. Budżety bez zwiększania limitów:
+  JS 4694 B gzip, CSS 16925 B gzip, statyczne primitives bez script.
+- Początkowe kontrole ujawniły min-content newslettera, ściskanie karuzeli,
+  kontrast zagnieżdżonego dark i zawijanie tekstu w starym katalogu po migracji
+  aliasów. Naprawiono kod i generator. Escape w Safari przeniesiono na document
+  zgodnie ze sprawdzonym zachowaniem mockupów. Zbyt długi zbiorczy test axe Firefox
+  rozdzielono na niezależne przypadki motywu/szerokości, bez zmiany timeoutów,
+  retry i asercji. Nie wyłączano czerwonych testów.
+- Sandbox blokował porty/przeglądarki i logi Wrangler (EPERM); końcowy pełny przebieg
+  wykonano z przyznanym zezwoleniem. Początkowy format-check wykrył sześć dłuższych
+  linków do przeniesionego archiwum; sformatowano pliki i powtórzono bramkę.
+- Impeccable extract: odczyt kontekstu/craft floor, wyodrębnienie z kodu i mockupów,
+  dwie rundy zrzutów oraz jeden detektor. Jeden sygnał side-tab dotyczy zachowanego
+  grzbietu okładki produktu, nie dekoracji karty; nie zmieniono zaakceptowanego frontu.
+- Dokumentacja: Prettier i diff-check PASS; 178 lokalnych odnośników w 15
+  dokumentach istnieje. Nie sprawdzano zewnętrznych URL ani wszystkich kotwic.
+- Pakowanie feedbacku PASS: 48 publicznych plików. Sprawdzone komendy katalogu
+  i generatora w README. Lokalny dev katalogu działa na 4322; ponownie uruchomiony
+  podgląd mockupów na 8766 obsługuje nowe tokeny. Zlecono otwarcie katalogu w Codex
+  (queued). Zachowano pozostałe lokalne zmiany użytkownika.
+- Nie przeniesiono jeszcze wszystkich docelowych stron, nie konfigurowano Sanity,
+  Content Lake, backendu formularzy ani serializerów nowych szablonów.
+  Bez commita, pusha i publikacji. Natywny zoom, czytnik, fizyczne urządzenie
+  i Lighthouse/CWV niewykonane; nie deklarujemy pełnej zgodności WCAG.
+- Następny etap: migracja homepage 3a do Layout3a/wspólnego shell i istniejących
+  modeli treści, potem pozostałe szablony według ASTRO-INTEGRATION.md.
+
 ## Następny krok
 
-Ocenić indeks bloga 3a; po akceptacji przenieść wspólny szablon do Astro/Sanity
-i Markdown według BLOG-CMS-CONFIG-3A.md.
+Docelowy 3a został zatwierdzony. System i wspólne komponenty Astro są wykonane
+i zweryfikowane. Przenieść homepage do Layout3a, następnie pozostałe szablony
+według design-system/ASTRO-INTEGRATION.md. Wonderful i inne warianty są archiwalne.
+Kontrole na urządzeniu, czytnikiem i z natywnym zoomem są otwarte.
 
-Ocenić lokalny mockup „O mnie” i nowe wejścia do podejścia/materiałów.
-Uzupełnić skan dyplomu, rzeczywisty kontakt/profile oraz link płatnego wydarzenia;
-uczelnia, kierunek i 450 zł/60 minut są ustalone. Po akceptacji przenieść
-szablon i wspólny profil autora do Astro/Sanity. Pozostałe prace:
+Indeks bloga 3a został scalony w PR #24. Ocenić najnowszy wpis, dwie kolumny,
+paginację i newsletter. Po akceptacji wdrożyć wybór kolekcji i wspólny szablon według
+BLOG-CMS-CONFIG-3A.md; przykładowych tytułów i dat nie publikować.
+
+Landing konsultacji został scalony w PR #21; dalszy krok to feedback do copy
+i zakresu oraz właściwy URL wydarzenia przed wdrożeniem Astro/Sanity.
+
+Ocenić lokalną kolekcję e-booków 3a, copy i wybór kategorii. Po akceptacji
+wdrożyć dokumenty produktów oraz szablon kolekcji w Astro/Sanity z serializerem
+Markdown zgodnie z EBOOK-CMS-CONFIG-3A.md. Publikacja wymaga osobnego zlecenia.
 
 Nowe zlecenie 07.10.2026: ocenić także lokalny landing pojedynczej konsultacji
 3a, jego copy i zakres. Uzupełnić URL wydarzenia oraz ustalić ewentualne pisemne
@@ -1711,13 +1844,18 @@ podsumowanie; cena 450 zł/60 minut i tymczasowy Cal.com pozostają ustalone.
 Po akceptacji wdrożyć wspólną referencję usługi i warianty według
 CONSULTATION-CMS-CONFIG-3A.md. Mockup nie oznacza konfiguracji Sanity ani płatności.
 
+Ocenić lokalny mockup „O mnie” i nowe wejścia do podejścia/materiałów.
+Uzupełnić skan dyplomu, rzeczywisty kontakt/profile oraz link płatnego wydarzenia;
+uczelnia, kierunek i 450 zł/60 minut są ustalone. Po akceptacji przenieść
+szablon i wspólny profil autora do Astro/Sanity. Pozostałe prace:
+
 Zebrać feedback do lokalnego 3a, artykułu blogowego i landingu ebooka.
 Zatwierdzić copy i finalny zakres produktu, potem wdrożyć osobną kolekcję według
 EBOOK-CMS-CONFIG-3A.md oraz wspólne referencje homepage/bloga.
 Po akceptacji bloga przenieść jego szablon do Astro oraz wdrożyć rozszerzenia
 z `BLOG-CMS-CONFIG-3A.md`; przykładowy artykuł zastąpić zaakceptowaną treścią. Kolejne decyzje zapisywać
-w HOMEPAGE-CMS-CONFIG.md. Na jej podstawie przygotować warianty i konfigurację
-Sanity po akceptacji kierunku. Ustalić dodatkowy zakres
+w HOMEPAGE-CMS-CONFIG.md. Na jej podstawie wdrażać wybrany 3a i konfigurację
+Sanity; kierunek został zaakceptowany 07.10.2026. Ustalić dodatkowy zakres
 pojedynczej konsultacji (cena 450 zł/60 minut ustalona), gotowość e-booków oraz współprace marek/profile.
 Po akceptacji przenieść copy i wygląd do Astro/Sanity. Publikacja publicznego
 mockupu wymaga zlecenia. Kroki techniczne odłożone:

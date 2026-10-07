@@ -24,8 +24,8 @@ Sprawdzony lokalny podgląd: `node scripts/preview-homepage-mockups.mjs`,
 - [Konfiguracja wdrożeń Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md)
 - [Wyniki próby Bejamas](docs/UI-SPIKE-RESULTS.md)
 - [Instrukcje pracy w repo](AGENTS.md)
-- [Design system](wonderful-design-system/README.md)
-- [Interaktywny katalog](wonderful-design-system/index.html)
+- [Docelowy design system 3a](design-system/README.md)
+- [Katalog komponentów 3a](src/pages/design-system.astro) — `/design-system/`
 
 ## Stan projektu
 
@@ -147,3 +147,26 @@ Mockup kolekcji e-booków 3a z wyborem kategorii:
 [otwórz kolekcję lokalnie](http://127.0.0.1:8766/mockups/homepage/ebooks-3a.html).
 Sześć zapowiedzi, Wszystkie / PCOS / Perimenopauza; ręczne filtrowanie działa
 również bez JS. [Opis](mockups/homepage/README.md#kolekcja-wszystkich-e-booków-3a--2026-10-07).
+
+## Ujednolicenie serii 3a — 2026-10-07
+
+Osiem lokalnych widoków współdzieli `mockups/homepage/3a-shared.css`:
+responsywny header, newsletter, stopkę i reguły reflow. Jasna okładka produktu
+jest używana także na jego landingu. Globalne menu i stopki prowadzą do pełnych
+podstron. Landingi zachowują menu sekcji oraz własne CTA.
+
+Sprawdzony podgląd z katalogu repo: `node scripts/preview-homepage-mockups.mjs`,
+adres `http://127.0.0.1:8766/mockups/homepage/cherry-white.html`.
+To aktualizacja lokalnych mockupów; publikacja i migracja Astro/Sanity są osobne.
+
+## Docelowy kierunek — 3a (07.10.2026)
+
+Zatwierdzono realizację 3a; pozostałe warianty są porzucone. Wonderful zachowano
+w [archiwum](archive/wonderful-design-system/README.md), nie będzie implementowany.
+Aktywne tokeny: `design-system/tokens.json`; `npm run tokens:generate` aktualizuje
+CSS, `npm run tokens:check` sprawdza zgodność. Komponenty i Layout3a są w
+`src/design-system`. Instrukcja migracji w [systemie](design-system/README.md).
+
+`npm run dev` lub po buildzie `npm run preview` udostępnia katalog pod
+`http://127.0.0.1:4321/design-system/`. Dotychczasowe `/ui/` i szablony aplikacji
+są przejściowe; sama biblioteka nie oznacza migracji wszystkich stron i Sanity.

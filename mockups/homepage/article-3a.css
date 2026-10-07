@@ -318,9 +318,6 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
-.article-page .newsletter-copy h2 {
-  letter-spacing: -0.04em;
-}
 @container page (max-width: 1199px) {
   .article-layout {
     grid-template-columns: 170px minmax(0, 1fr);

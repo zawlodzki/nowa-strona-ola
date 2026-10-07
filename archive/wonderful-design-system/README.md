@@ -1,3 +1,9 @@
+# ARCHIWUM — Wonderful
+
+**Wycofany 07.10.2026 decyzją użytkownika. Nie implementować.**
+Docelowa strona realizuje [design system 3a](../../design-system/README.md).
+Poniższa dokumentacja i pliki są zachowanym materiałem historycznym.
+
 # Wonderful — design system referencyjny
 
 Wersja 1.0 · analiza z 12 września 2026 · dokumentacja w języku polskim.

@@ -12,7 +12,7 @@ async function openArticle(page: Page) {
     if (
       !path.startsWith("mockups/homepage/") &&
       !path.startsWith("src/assets/") &&
-      path !== "wonderful-design-system/tokens.css"
+      path !== "design-system/tokens.css"
     )
       return route.abort();
     const types: Record<string, string> = {

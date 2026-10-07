@@ -1,3 +1,11 @@
+# Status: wybrany 3a — 07.10.2026
+
+Docelowa strona realizuje wariant **3a** i jego osiem ujednoliconych podstron.
+Pozostałe warianty (01, 1a, 02, 2a, 03) porzucone; pliki i porównanie pozostają
+wyłącznie historyczne. Aktywne mockupy czytają tokeny nowego
+[systemu 3a](../../design-system/README.md). Wycofane propozycje używają archiwalnych
+tokenów. Z homepage 3a i stopek usunięto wybór/porównanie kierunków.
+
 # Homepage Aleksandry Olesiewicz: trzy kierunki
 
 Samodzielne mockupy HTML przygotowane 2026-10-05 przed wyborem finalnej estetyki.
@@ -59,7 +67,7 @@ Wonderful są współdzielone przez ścieżki względne.
 Dwa alternatywne kierunki są celowo odseparowane w lokalnych CSS mockupów.
 Powstały na polecenie użytkownika z użyciem `design-taste-frontend`.
 Nie zmieniają tokenów Wonderful ani stylów produkcyjnych. Wariant 01 korzysta
-bezpośrednio z istniejącego `wonderful-design-system/tokens.css`.
+bezpośrednio z istniejącego `archive/wonderful-design-system/tokens.css`.
 Switzer pozostaje głównym krojem interfejsu wszystkich propozycji.
 Georgia w kierunku 02 jest dostępnym systemowo krojem redakcyjnym; nie dodano
 zewnętrznych fontów ani zależności.
@@ -324,3 +332,14 @@ Wejścia z indeksu i „Zobacz wszystkie e-booki” pod karuzelą homepage 3a.
 Suplementy w PCOS prowadzą do landingu; pozostałe tematy do ekranu makiety.
 [Decyzje i przyszłe mapowanie CMS](../../docs/HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026).
 Bez publikacji, zakupów i konfiguracji Sanity.
+
+## Ujednolicenie serii 3a — 2026-10-07
+
+Osiem lokalnych widoków współdzieli `mockups/homepage/3a-shared.css`:
+responsywny header, newsletter, stopkę i reguły reflow. Jasna okładka produktu
+jest używana także na jego landingu. Globalne menu i stopki prowadzą do pełnych
+podstron. Landingi zachowują menu sekcji oraz własne CTA.
+
+Sprawdzony podgląd z katalogu repo: `node scripts/preview-homepage-mockups.mjs`,
+adres `http://127.0.0.1:8766/mockups/homepage/cherry-white.html`.
+To aktualizacja lokalnych mockupów; publikacja i migracja Astro/Sanity są osobne.

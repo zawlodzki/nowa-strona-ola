@@ -1,0 +1,25 @@
+---
+interface PageLink {
+  href: string;
+  page: number;
+  current?: boolean;
+}
+interface Props {
+  pages: PageLink[];
+  label?: string;
+  pageLabel?: string;
+}
+const { pages, label = "Paginacja", pageLabel = "Strona" } = Astro.props;
+---
+
+<nav class="ao-pagination" aria-label={label}>
+  {pages.map((link) => (
+    <a
+      href={link.href}
+      aria-current={link.current ? "page" : undefined}
+      aria-label={`${pageLabel} ${link.page}`}
+    >
+      {link.page}
+    </a>
+  ))}
+</nav>

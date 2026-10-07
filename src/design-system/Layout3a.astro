@@ -1,0 +1,38 @@
+---
+import "./global.css";
+import fontUrl from "../assets/fonts/switzer/Switzer-Variable.woff2?url";
+import iconUrl from "../assets/brand/logo-monogram.svg?url";
+interface Props {
+  title: string;
+  lang: "pl" | "en";
+  description?: string;
+  noindex?: boolean;
+}
+const { title, lang, description, noindex = true } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link
+      rel="preload"
+      href={fontUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" href={iconUrl} type="image/svg+xml" />
+    <slot name="head" />
+  </head>
+  <body class="ao-site">
+    <a class="ao-skip" href="#main">
+      {lang === "pl" ? "Przejdź do treści" : "Skip to content"}
+    </a>
+    <slot />
+  </body>
+</html>
