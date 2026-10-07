@@ -113,7 +113,11 @@ const jsonLd = {
       </span>
     </p>
     {hero.secondary && (
-      <TextLink class="consult3a-secondary" href={hero.secondary.href}>
+      <TextLink
+        slot="actions"
+        class="consult3a-secondary"
+        href={hero.secondary.href}
+      >
         {hero.secondary.label}
       </TextLink>
     )}

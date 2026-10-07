@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 4 etapu 4a: Ebook3a, landing produktu).
+Aktualizacja: 2026-10-07 (pakiet 4 + wyrównanie makiet 3a / SVG).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
@@ -2043,15 +2043,11 @@ Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
 - Import: `npm run import:ebook` dry-run, 2 dokumenty
   (`ebook-suplementy-w-pcos-pl/en`), `write: false`, exit 0; `--write` exit 2.
   Porównanie Content Lake pominięte, brak tokenu w tej sesji.
-- Budżet CSS, 2026-10-07: Quality padało na `CSS budget exceeded: 21564 B gzip`
-  przy limicie 20 KiB (20480). Pakiet 3 zostawił 20155 B. Osobny chunk
-  `EbookPage` (około 1,4 KB gzip) nie mieścił się w 325 B zapasu, bo bramka
-  sumuje rozłączne pliki (Tailwind prototypu, design system, szablony).
-  Limit nie został podniesiony. Style landingu weszły do `global.css`
-  Layout3a; rozdziały używają `FaqItem`, podgląd zakupu — `summary.ao-button`.
-  Powtórzone `white-space: pre-line` na nagłówkach homepage, About i
-  konsultacji zastępuje jedna reguła `.ao-heading`. Dekoracyjne butelki
-  i orbita z mockupu nie weszły.
+- Budżet CSS, 2026-10-07 (pierwsza iteracja pakietu 4): Quality padało na
+  `CSS budget exceeded: 21564 B gzip` przy limicie 20 KiB. Butelki i orbita
+  wtedy nie weszły. Decyzja Grzesia z tej samej doby: nic nie może wypadać
+  z designu 3a; limit podniesiony tymczasowo do **32 KiB gzip** na etap 4a
+  (pakiety 5–7), bez optymalizacji teraz.
 - `npm run verify` na Node 24.21.0: PASS. Format, tokeny, ESLint, Astro/TS
   (172 + 11 plików, 0 diagnostyki), 82 unit tests w 16 plikach, build
   29 stron, Studio, Worker dry-run, budżety JS 5770 B / CSS **20429 B gzip**
@@ -2079,14 +2075,40 @@ kolekcja `/ebooki/` (pakiet 5), skan dyplomu, URL rezerwacji. Zapas CSS
 Otwarte w pakiecie 4 (dane, nie kod): zapis szkiców e-booka do Content Lake
 po porównaniu, odbiór w Studio i chronionym preview z datasetem. Bez publikacji.
 
+## Wyrównanie makiet 3a i SVG — 2026-10-07
+
+Decyzja Grzesia: dekoracje 3a jako SVG (nie CSS), kompletny design Ebook3a
+oraz przywrócenie pominięć pakietów 1–3. Draft PR #30, bez merge.
+
+- Limit CSS w `scripts/check-build.mjs`: **32 KiB gzip**, komentarz że
+  tymczasowy na etap 4a. `CODE-QUALITY.md` i `IMPLEMENTATION-PLAN.md`
+  zaktualizowane. Optymalizacji CSS nie robiono.
+- Zasada SVG: `design-system/ASTRO-INTEGRATION.md`, `COMPONENTS.md`,
+  kanoniczne miejsce `src/design-system/decorations/`.
+- Ebook3a 1:1 z `ebook-3a.html`: orbita i butelki SVG, scena produktu,
+  rozdziały z numerami, karta z cieniem SVG, porównanie, cena 88 px,
+  znaczniki, strzałki audience, zakup z `ArrowIcon`.
+- Pakiety 1–3: `StageBackdrop` zamiast `::before`/div tła, motywy okładek
+  SVG, `CheckMark` zamiast `::before`, ścieżka konsultacji jak w makiecie,
+  zasoby O mnie ze strzałką, układ wyników homepage jak cherry-white.
+- `npm run verify` Node 24.21.0: **PASS**. 180 + 11 plików Astro/TS,
+  82 unit, 29 stron, JS **5770 B**, CSS **22810 B gzip** (limit 32768,
+  zapas 9958 B). **90 E2E PASS**.
+- verify-ola `ola-1791401668`, port 4340, doctor PASS, `posts []`.
+  Screenshoty desktop 1280×900 i mobile 390×844: homepage, O mnie,
+  konsultacja, landing PL/EN, każda obok makiety. Dowody:
+  `/tmp/ola-verify-evidence/ola-1791401668/`. Viewport CLI verify-ola
+  to 1280×900; mobile z osobnego Chromium na tym samym `base`.
+  Axe/overflow 320/390/1440 px w E2E. Natywny zoom, czytnik i urządzenie
+  fizyczne — niesprawdzone.
+
 ## Następny krok
 
 Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty
-produktu, kategorie i filtrowanie. Suma CSS ma 51 B zapasu przy limicie
-20 KiB; nowy szablon wymaga odchudzenia albo świadomego budżetu per stronę,
-nie cichego podniesienia limitu. Import homepage/About/konsultacji/e-booka
-do szkiców Sanity dopiero na osobne zlecenie zapisu. Publikacja treści/strony
-wymaga osobnego zlecenia.
+produktu, kategorie i filtrowanie. Limit CSS jest tymczasowo 32 KiB;
+optymalizacja później. Import homepage/About/konsultacji/e-booka do szkiców
+Sanity dopiero na osobne zlecenie zapisu. Publikacja treści/strony wymaga
+osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
 axe/overflow About przy 320/390/1440 px, natywny zoom, czytnik i fizyczne
