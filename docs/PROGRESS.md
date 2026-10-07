@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-06 (landing e-booka i instrukcja kolekcji CMS). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+Aktualizacja: 2026-10-07 (kolekcja e-booków 3a, przygotowanie PR). Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
@@ -11,11 +11,11 @@ Etap 4 — Sanity i szablony PL/EN — kod zweryfikowany lokalnie; demonstracyjn
 treść jest w datasetcie `production`. Strony i artykuły są szkicami, żeby nie
 odpalać webhooków. Opublikowane `home` PL/EN nadal bez sekcji. Etapy 5–7 otwarte.
 
-Bieżące zlecenie: lokalny landing e-booka „Suplementy w PCOS” w palecie 3a
-oraz [instrukcja osobnej kolekcji CMS](EBOOK-CMS-CONFIG-3A.md). Mockup gotowy
-i zweryfikowany. Wcześniejsze decyzje o pojedynczych konsultacjach, cenie
-97 zł brutto i prawdziwości opinii współpracy pozostają aktualne.
-Brak zmian CMS i publikacji; dalsza implementacja Astro odłożona.
+Bieżące zlecenie: PR i scalenie lokalnego mockupu kolekcji wszystkich e-booków
+w wariancie 3a. [Kolekcja HTML](../mockups/homepage/ebooks-3a.html) zawiera sześć
+zapowiedzi z wyborem Wszystkie / PCOS / Perimenopauza. Cena 97 zł brutto
+zachowana. Filtry działają bez JS; URL i historia wymagają JS. Bez zmian CMS
+ani publikacji serwisu.
 
 ## Wykonane
 
@@ -1412,6 +1412,58 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 - Natywny zoom, czytnik, fizyczne urządzenie i Lighthouse/CWV niewykonane.
   Bez publikacji, commita, pusha i zmian rezerwacji. Następny krok: feedback
   do copy/zakresu, właściwy URL kalendarza, potem akceptowana migracja Astro/Sanity.
+
+## Kolekcja wszystkich e-booków 3a — 2026-10-07
+
+- Na zlecenie przygotowano `ebooks-3a.html`, odseparowane CSS i JS. Zachowano
+  paletę, Switzer, wordmark, sześć okładek/opisów, ceny 97 zł oraz status
+  przygotowania z homepage. Nowy wstęp jest propozycją copy.
+- Kolekcja to pełna siatka, domyślnie Wszystkie. Natywne radio wybiera PCOS lub
+  Perimenopauzę, pokazuje po trzy materiały i odpowiedni licznik. CSS działa
+  bez JS; parametr URL wymaga JS. Historia i odświeżenie przywracają kategorię,
+  nieznany parametr pokazuje całość. Nie dodano wyszukiwarki ani sortowania.
+- Linki z indeksu i „Zobacz wszystkie e-booki” pod karuzelą homepage 3a.
+  Produkt Suplementy w PCOS prowadzi do istniejącego landingu, pozostałe do
+  ekranu makiety. Newsletter pozostaje demonstracją bez wysyłania danych.
+- [Konfiguracja homepage](HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026)
+  i [instrukcja e-booków](EBOOK-CMS-CONFIG-3A.md) rozróżniają wykonany mockup,
+  decyzję użytkownika, propozycje UX/copy oraz niewykonany model CMS.
+- QA PASS: Chromium/Firefox/WebKit, 320/390/768/1024/1440 px, wszystkie filtry,
+  klawiatura radio i menu (Escape/fokus), URL/reload/historia, brak JS,
+  reduced motion, zoom CSS 200%, brak błędów JS i błędnych zasobów.
+  Axe w Chromium: 0 naruszeń dla każdej kategorii w jasnym/ciemnym motywie.
+  Dowody: `/private/tmp/ola-ebooks-3a-qa/`, raport i zrzuty desktop/mobile.
+- Pierwsza kontrola wykryła overflow przy CSS zoom. Poprawiono siatkę zależną
+  od dostępnego miejsca i newsletter; ponowna kontrola trzech silników PASS.
+  Błąd konfiguracji kontekstu w skrypcie axe również poprawiono przed kontrolą.
+- Użyto Impeccable i istniejącego 3a jako źródła wyglądu. Detektor uruchomiony
+  raz; ostrzeżenia dotyczą m.in. istniejącego grzbietu okładki, mocnego trackingu
+  i drobnych napisów okładek. Zachowano zatwierdzony styl 3a; poprawiono odstęp
+  newslettera. Nie ustanawiano nowej identyfikacji ani równoległych tokenów.
+- Dodano dwa testy zachowania kolekcji w trzech przeglądarkach: wybór klawiaturą,
+  URL/reload/historia/nieznana kategoria/zoom oraz ręczne filtrowanie bez JS.
+- Pierwsze `npm run verify` zatrzymało się na EPERM lokalnego serwera testów
+  w sandboxie; format, tokeny, lint, typy, unit i buildy przeszły. Uruchomienie
+  z dostępem do lokalnego serwera przeszło (57 unit, 51 E2E). Po dodaniu regresji
+  zoomu wystąpił timeout istniejącej rekomendacji artykułu w WebKit (50/51 E2E);
+  ponowienie miało błędy ENOENT artefaktów testów (29 PASS / 22 FAIL), więc nie
+  uznano tych przebiegów za sukces. Końcowe pełne `npm run verify` PASS na Node
+  24.21.0: format, tokeny, lint, typy, 57 unit, buildy Astro/Studio/preview,
+  dry-run Workera, artefakty oraz 51 E2E, w tym 6 nowych przypadków kolekcji.
+  Log: `/private/tmp/ola-ebooks-3a-verify-stable.log`.
+- Format i 230 lokalnych odnośników HTML/Markdown: PASS. Istniejące zmiany
+  użytkownika zachowano; nie wykonano commit/push/publikacji ani zapisu w CMS.
+- Niewykonane: natywny zoom przeglądarki, czytnik ekranu, fizyczny telefon,
+  wdrożenie pustych kolekcji/nowych kategorii, Astro/Sanity/Markdown.
+
+## Przygotowanie PR kolekcji e-booków — 2026-10-07
+
+- Na zlecenie „pr merge” wydzielono zmianę do osobnego worktree z `origin/main`.
+- Zakres: tylko kolekcja, dwa wejścia, testy i dokumentacja; inne lokalne prace
+  „O mnie”, indeksu bloga i skillów pozostają w dotychczasowym checkoutcie.
+- Nawigacja „O mnie” kolekcji prowadzi do istniejącej sekcji homepage, aby PR
+  nie zależał od odrębnego mockupu.
+- Kolejny krok: kontrola wydzielonego zakresu, PR, zielone CI i squash merge.
 
 ## Następny krok
 

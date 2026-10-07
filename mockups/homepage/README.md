@@ -280,3 +280,18 @@ Nie kopiowano mediów Wonderful ani nie dodawano bibliotek.
 
 Podgląd: istniejąca komenda `node scripts/preview-homepage-mockups.mjs`, adres
 `http://127.0.0.1:8766/mockups/homepage/ebook-3a.html`.
+
+## Kolekcja wszystkich e-booków 3a — 2026-10-07
+
+[Otwórz kolekcję](ebooks-3a.html). Sześć istniejących okładek i opisów z homepage,
+cena 97 zł brutto, siatka trzech/dwóch/jednej kolumny i filtry
+**Wszystkie / PCOS / Perimenopauza** z licznikami. Natywne radio i CSS działają
+bez JS. JavaScript dodaje adres kategorii, powrót przeglądarki i komunikat o
+wynikach; bez JS URL nie ustawia filtra. Newsletter korzysta z lokalnej demonstracji.
+
+Sprawdzony podgląd: `node scripts/preview-homepage-mockups.mjs`, następnie
+`http://127.0.0.1:8766/mockups/homepage/ebooks-3a.html`.
+Wejścia z indeksu i „Zobacz wszystkie e-booki” pod karuzelą homepage 3a.
+Suplementy w PCOS prowadzą do landingu; pozostałe tematy do ekranu makiety.
+[Decyzje i przyszłe mapowanie CMS](../../docs/HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026).
+Bez publikacji, zakupów i konfiguracji Sanity.

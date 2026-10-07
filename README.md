@@ -125,3 +125,9 @@ Mockup landingu e-booka 3a: `node scripts/preview-homepage-mockups.mjs`, następ
 Mockup pojedynczej konsultacji 3a: `node scripts/preview-homepage-mockups.mjs`, następnie
 `http://127.0.0.1:8766/mockups/homepage/consultation-3a.html`.
 [Copy, zakres i mapowanie CMS](docs/CONSULTATION-CMS-CONFIG-3A.md).
+
+Mockup kolekcji e-booków 3a z wyborem kategorii:
+`node scripts/preview-homepage-mockups.mjs`, następnie
+[otwórz kolekcję lokalnie](http://127.0.0.1:8766/mockups/homepage/ebooks-3a.html).
+Sześć zapowiedzi, Wszystkie / PCOS / Perimenopauza; ręczne filtrowanie działa
+również bez JS. [Opis](mockups/homepage/README.md#kolekcja-wszystkich-e-booków-3a--2026-10-07).

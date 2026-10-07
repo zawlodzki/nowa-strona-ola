@@ -471,3 +471,20 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
 [Mockup](../mockups/homepage/consultation-3a.html),
 [mapowanie CMS i copy](CONSULTATION-CMS-CONFIG-3A.md).
 Lokalny landing nie zamyka wdrożenia CMS ani kalendarza.
+
+## Kolekcja wszystkich e-booków 3a — 2026-10-07
+
+- [x] Przygotować pełną siatkę sześciu istniejących e-booków w estetyce 3a.
+- [x] Dodać wybór Wszystkie / PCOS / Perimenopauza, liczniki i stan w URL.
+- [x] Zachować ceny 97 zł brutto, opisy, okładki i status przygotowania.
+- [x] Połączyć kolekcję z indeksem oraz sekcją e-booków homepage 3a.
+- [x] Zapisać decyzję użytkownika i proponowane pola przyszłego CMS.
+- [x] Sprawdzić trzy przeglądarki, kategorie/URL/historię, brak JS, 320 px,
+      klawiaturę, zoom CSS 200%, reduced motion i axe light/dark.
+- [x] Potwierdzić końcowe `npm run verify`: 57 unit i 51 E2E PASS na Node 24.
+- [ ] Zatwierdzić copy i UX kolekcji przed przeniesieniem do Astro/Sanity.
+- [ ] Wdrożyć model produktów, renderer kolekcji i serializer Markdown.
+
+[Mockup](../mockups/homepage/ebooks-3a.html),
+[wartości i mapowanie CMS](HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026).
+Dokumentacja oraz mockup nie oznaczają wdrożenia kolekcji w CMS.
