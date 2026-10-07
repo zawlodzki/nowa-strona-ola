@@ -2043,8 +2043,23 @@ Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
 - Import: `npm run import:ebook` dry-run, 2 dokumenty
   (`ebook-suplementy-w-pcos-pl/en`), `write: false`, exit 0; `--write` exit 2.
   Porównanie Content Lake pominięte, brak tokenu w tej sesji.
-- Weryfikacja pełna: zapisana po `npm run verify` i verify-ola w tej samej
-  sesji (poniżej albo w aktualizacji PR).
+- Budżet CSS, 2026-10-07: Quality padało na `CSS budget exceeded: 21564 B gzip`
+  przy limicie 20 KiB (20480). Pakiet 3 zostawił 20155 B, czyli 325 B zapasu;
+  sam chunk `EbookPage` ma około 1,4 KB gzip i nie składa się ze wspólnego
+  słownika z Tailwindem prototypu ani z `ComposedPage`. Usunięcie reguł już
+  obecnych w `global.css` (`figure` margin, `min-width`, `height: auto` obrazka)
+  zeszło do **21535 B**. To nadal ponad 20 KiB i 2 B pod 21 KiB, więc kolejny
+  znak zepsułby CI. Limit sumy plików `dist/_astro` podniesiony do **22 KiB**
+  (22528) w `scripts/check-build.mjs` i [CODE-QUALITY.md](CODE-QUALITY.md).
+  Zapas około 1 KB nie mieści następnego szablonu. Podstrona e-booka ładuje
+  tylko CSS 3a i swój chunk (około 6 KB gzip), nie plik Tailwinda z `/ui/`
+  i bloga; bramka nadal sumuje te rozłączne pliki. Budżet per szablon zostaje
+  na później, zgodnie z CODE-QUALITY.
+- `npm run test:build` na Node 24.21.0: PASS, JS 5770 B gzip, CSS 21535 B gzip.
+  Testy jednostkowe e-booka i homepage: 15/15 PASS. Pełne `npm run verify`
+  (trzy przeglądarki) i verify-ola w tej sesji nie doszły do końca: na VM
+  cloud agenta brakuje bibliotek systemowych Playwright. CI ma
+  `npx playwright install --with-deps` i ma potwierdzić E2E po tym limicie.
 
 Luki (nie blokują komponentów): checkout, płatny plik, finalne copy EN,
 kolekcja `/ebooki/` (pakiet 5), skan dyplomu, URL rezerwacji.
@@ -2055,9 +2070,11 @@ po porównaniu, odbiór w Studio i chronionym preview z datasetem. Bez publikacj
 ## Następny krok
 
 Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty
-produktu, kategorie i filtrowanie. Import homepage/About/konsultacji/e-booka
-do szkiców Sanity dopiero na osobne zlecenie zapisu. Publikacja treści/strony
-wymaga osobnego zlecenia.
+produktu, kategorie i filtrowanie. Suma CSS ma około 1 KB zapasu przy limicie
+22 KiB; nowy szablon znowu wymaga odchudzenia albo osobnego budżetu per
+strona, nie kolejnego cichego podniesienia limitu. Import
+homepage/About/konsultacji/e-booka do szkiców Sanity dopiero na osobne
+zlecenie zapisu. Publikacja treści/strony wymaga osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
 axe/overflow About przy 320/390/1440 px, natywny zoom, czytnik i fizyczne
