@@ -26,7 +26,23 @@ Wykonane:
    fixture i fallback przy pustych tablicach.
 5. Nagłówek newslettera w seedzie homepage ma łamanie wiersza jak w makiecie.
 
-Kontrole i screenshoty — w tej samej sesji po `npm run verify`.
+Kontrole (Node 24.21.0): `npm run verify` **PASS** — 96 unit, 96 E2E
+(Chromium/Firefox/WebKit). CSS gzip `dist/_astro`: **24 706 B** (limit
+tymczasowy 32 KiB); JS gzip 5 770 B.
+
+verify-ola (`VERIFY_RUN_ID=ola-1791410509`, baza `http://127.0.0.1:4340`):
+`GET /` 200, `/en/ebooki/` 404, `browser posts` = `[]`. Zrzuty i porównania
+obok makiety: `/opt/cursor/artifacts/screenshots/`
+(`compare-collection-pl-desktop.png`, `compare-collection-pl-mobile.png`,
+`compare-collection-en-desktop.png`, `compare-collection-pcos.png`,
+`compare-collection-perimenopauza.png`, `collection-pl-nojs.png`,
+`compare-home-desktop.png`). `collection-empty.png` zostaje z wcześniejszego
+zrzutu pustej fixture; nie przebudowywano `dist/` w tej sesji.
+
+Pozostałe różnice względem makiety (nie ucięcie kolekcji): „English” /
+„Polski” w nagłówku (i18n), demonstracyjny tekst zgody zamiast copy z
+linkiem do polityki w checkboxie, ikona przełącznika motywu. Copy zgody
+zostaje demonstracyjne, żeby nie sugerować prawdziwej wysyłki.
 
 Do decyzji (brak prawdziwych adresów):
 
@@ -35,7 +51,7 @@ Do decyzji (brak prawdziwych adresów):
 - Strony prawne: `/polityka-prywatnosci/`, `/regulamin/` (EN `/en/privacy/`,
   `/en/terms/`) — brak dokumentów i treści.
 
-Następny krok po tej sesji: pakiet 6 BlogCollection3a, o ile verify przejdzie.
+Następny krok: pakiet 6 BlogCollection3a.
 
 ### Sesja pakietu 5 — kolekcja e-booków 3a — 07.10.2026
 
