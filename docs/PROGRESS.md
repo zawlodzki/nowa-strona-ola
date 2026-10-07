@@ -5,6 +5,38 @@ Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
 
+### Sesja dodatkowego akcentu — 07.10.2026
+
+Zakres PR wydzielono do osobnego checkoutu z aktualnego origin/main:
+4 dokumenty, README propozycji i 5 plansz. Pozostałe lokalne zmiany
+zachowano poza zakresem. Format, lokalne odnośniki oraz diff-check sprawdzono;
+bez zmiany kodu aplikacji i bez publikacji.
+
+Na zlecenie użytkownika przygotowano trzy rastrowe edycje wizualizacji katalogu
+3a: oliwka, morela i błękit. [Wyniki i prompty](../output/design-system-3a/2026-10-07/accent-proposals/README.md)
+zapisano w repo. Wszystkie obejrzano: zachowują biel i wiśnię jako bazę,
+pokazują dodatkowy przycisk, podkreślenie i jasne tło portretu. Są propozycjami,
+z drobnymi różnicami generowania; nie zmieniają aplikacji, tokenów ani CMS.
+Oliwka została następnie odrzucona przez użytkownika (07.10.2026).
+Na jego zlecenie przygotowano i obejrzano [wersję matcha](../output/design-system-3a/2026-10-07/accent-proposals/04-matcha.png):
+akcent #A8C686, tekst #354A2B, jasne tło #EEF4E7. To propozycja do oceny,
+bez zatwierdzenia odcienia, wdrożenia tokenów ani konfiguracji Sanity.
+
+Kontrole tej sesji: przegląd czterech obrazów, format dokumentacji i lokalne
+odnośniki. Nie uruchamiano verify ani odbioru interaktywnego UI, ponieważ
+zmieniono tylko materiały koncepcyjne i dokumentację. Kontrole desktop/mobile,
+320 px, klawiatury, zoomu 200% i reduced motion pozostają wymagane po wdrożeniu.
+Następnie użytkownik wybrał matchę z 1a (#53671B / #D8E78A) i ograniczył ją
+do subtelnych detali, m.in. białego secondary buttona z zieloną obwódką oraz
+elementów grafik. Wykluczył tło hero. Przygotowano i obejrzano
+[poprawioną planszę](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png)
+z różowym tłem portretu; zapisano reguły w specyfikacji i konfiguracji CMS.
+Wcześniejsza propozycja #A8C686 jest zastąpiona tą decyzją.
+Kontrole aktualizacji: przegląd obrazu, format i odnośniki dokumentacji.
+Kod, tokeny oraz Sanity nadal bez zmian, verify nie uruchamiano.
+Następny krok: ustalić mapę drobnych akcentów w konkretnych sekcjach,
+wdrożyć tokeny/komponenty i wykonać odbiór UI; etap pozostaje 4a.
+
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.

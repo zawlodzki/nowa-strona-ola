@@ -549,3 +549,35 @@ materiałem roboczym do zatwierdzenia; ustalenie procesu nie zmienia cen,
 oferty, dostępności produktów ani nie autoryzuje publikacji. Braki materiałów
 zapisywać w raporcie importu. Szczegółowa kolejność i kryteria: etap 4a
 [planu](IMPLEMENTATION-PLAN.md).
+
+## Dodatkowy akcent — próba matcha, 07.10.2026
+
+Źródło: bezpośrednie polecenie użytkownika „oliwka na pewno nie, spróbuj matcha”.
+Ustalenie: oliwka odrzucona. Matcha jest kierunkiem do wizualnej próby;
+konkretne wartości #A8C686 / #354A2B / #EEF4E7 są propozycją autora,
+nie zatwierdzoną paletą. [Wizualizacja](../output/design-system-3a/2026-10-07/accent-proposals/04-matcha.png).
+
+Mapowanie: design-system/tokens.json; w Sanity wyłącznie kontrolowane warianty
+sekcji, bez edytowalnych kodów kolorów. Nie ustalono nowego pola ani wariantu
+schematu. Tokeny, treść, kolejność, widoczność sekcji i konfiguracja CMS pozostają
+bez zmian; propozycję zastąpiła decyzja poniżej.
+
+## Matcha z 1a — decyzja 07.10.2026
+
+Źródło: bezpośrednie polecenie użytkownika „użyj tej z wariantu 1a”;
+„na pewno nie jako tło w hero”, „secondary button (…) kolor obwódki,
+ale w środku jest biały”, „jakieś elementy grafik”.
+
+Ustalenie: #53671B na jasnych powierzchniach, #D8E78A na wiśniowych/ciemnych.
+Oliwka i wcześniejsza propozycja matcha #A8C686 nie są paletą docelową.
+Hero i tło portretu zachowują dotychczasowe kolory. Matcha ma być drobnym
+akcentem obwódek i grafik. Pełne rozmieszczenie pozostaje do ustalenia.
+Tekst i strzałka secondary buttona w matcha to propozycja wizualizacji.
+
+Mapowanie wykonawcze: przyszłe tokeny `accent` i `accent-on-primary`
+w design-system/tokens.json oraz kontrolowany wariant secondary komponentu
+Button. Nazwy tokenów są propozycją, jeszcze niewdrożoną. CMS nie otrzymuje
+dowolnych kodów kolorów; styl przypisuje renderer do znaczenia akcji i wariantu
+sekcji. Grafiki wymagają osobnego doboru detali. Schematy i Content Lake
+nie zostały zmienione. [Zasady](../design-system/SPECIFICATION.md) i
+[plansza](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).
