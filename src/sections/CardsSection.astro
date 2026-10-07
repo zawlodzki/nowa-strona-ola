@@ -35,14 +35,16 @@ const { id, labelledby, content, previousLabel, nextLabel, scrollerLabel } =
   >
     {content.items.map((item) => (
       <a class="card-link" href={item.href}>
-        <div class="card-media">
-          <MediaFrame
-            label={item.media.label}
-            tone={item.media.tone}
-            src={item.media.src}
-            class="media-frame--card"
-          />
-        </div>
+        {item.media && (
+          <div class="card-media">
+            <MediaFrame
+              label={item.media.label}
+              tone={item.media.tone}
+              src={item.media.src}
+              class="media-frame--card"
+            />
+          </div>
+        )}
         <div class="card-copy">
           <h3>
             {item.title}{" "}

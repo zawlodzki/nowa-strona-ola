@@ -3,6 +3,7 @@ import type { Locale } from "@ola/shared";
 import {
   toCards,
   toComparison,
+  toCredentials,
   toCta,
   toEbooks,
   toExpert,
@@ -97,6 +98,7 @@ export function serializeSection(section: Section, language: Locale): string {
         ...content.items.flatMap((item) => [
           heading(3, item.title),
           item.body,
+          item.status,
           `[${item.title}](${item.href})`,
         ]),
       ].join("\n\n");
@@ -113,7 +115,10 @@ export function serializeSection(section: Section, language: Locale): string {
         heading(2, content.title),
         content.lead,
         ...content.steps.flatMap((step) => [heading(3, step.title), step.body]),
-      ].join("\n\n");
+        content.note,
+      ]
+        .filter(Boolean)
+        .join("\n\n");
     }
     case "metricsSection": {
       const content = toMetrics(section);
@@ -263,6 +268,22 @@ export function serializeSection(section: Section, language: Locale): string {
         bullet(content.facts),
         content.priceLabel,
         `[${content.action.label}](${content.action.href})`,
+        content.secondary
+          ? `[${content.secondary.label}](${content.secondary.href})`
+          : "",
+      ]
+        .filter(Boolean)
+        .join("\n\n");
+    }
+    case "credentialsSection": {
+      const content = toCredentials(section);
+      return [
+        heading(2, content.title),
+        paragraphs(content.body),
+        `- ${content.person.name}, ${content.person.role}`,
+        `- ${content.person.educationProgram}, ${content.person.educationInstitution}`,
+        content.person.diploma?.label,
+        content.diplomaCaption,
       ]
         .filter(Boolean)
         .join("\n\n");
@@ -306,4 +327,6 @@ export const sectionMarkdownExamples: Record<KnownSectionType, string> = {
   relatedSection: "## Powiązane",
   ebooksSection: "## E-booki\n\n### Suplementy w PCOS\n\n97 zł brutto",
   serviceOfferSection: "## Konsultacje\n\n450 zł / 60 minut",
+  credentialsSection:
+    "## Wiedza, którą możesz sprawdzić.\n\n- Dietetyka kliniczna, Śląski Uniwersytet Medyczny",
 };

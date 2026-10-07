@@ -84,6 +84,7 @@ export function slugField(options: {
   reserved?: readonly string[];
   description?: string;
   allowHome?: boolean;
+  allowedReserved?: readonly string[];
 }) {
   return defineField({
     name: "slug",
@@ -102,6 +103,7 @@ export function slugField(options: {
           return "Użyj małych liter, cyfr i myślników.";
         }
         if (options.allowHome && current === homeSlug) return true;
+        if (options.allowedReserved?.includes(current)) return true;
         if (options.reserved?.includes(current)) {
           return "Ten adres jest zarezerwowany.";
         }

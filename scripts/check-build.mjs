@@ -24,6 +24,8 @@ assert.equal(
 for (const path of [
   "index.html",
   "en/index.html",
+  "o-mnie/index.html",
+  "en/about/index.html",
   "ui/index.html",
   "en/ui/index.html",
   "static/index.html",

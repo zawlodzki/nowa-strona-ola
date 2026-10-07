@@ -46,9 +46,9 @@ const GAPS = [
   },
   {
     id: "about-consultation-collection-routes",
-    status: "deferred",
+    status: "open",
     detail:
-      "Podstrony /o-mnie/, /konsultacje/ i /ebooki/ powstaną w kolejnych pakietach. Nawigacja używa kotwic homepage.",
+      "Trasa /o-mnie/ i /en/about/ jest w kodzie pakietu 2. /konsultacje/ i /ebooki/ nadal czekają na pakiety 3 i 5. Nawigacja „O mnie” prowadzi do profilu.",
   },
 ];
 
@@ -326,7 +326,7 @@ function documents() {
         label: "Konsultacje",
         href: "/#konsultacje",
       },
-      { _key: "nav-about", label: "O mnie", href: "/#o-mnie" },
+      { _key: "nav-about", label: "O mnie", href: "/o-mnie/" },
       { _key: "nav-blog", label: "Blog", href: "/blog/" },
     ],
     headerCta: {
@@ -349,7 +349,7 @@ function documents() {
         label: "Consultations",
         href: "/en/#konsultacje",
       },
-      { _key: "nav-about", label: "About", href: "/en/#o-mnie" },
+      { _key: "nav-about", label: "About", href: "/en/about/" },
       { _key: "nav-blog", label: "Blog", href: "/en/blog/" },
     ],
     headerCta: {

@@ -1,6 +1,6 @@
 import type { Locale } from "@ola/shared";
 
-import { homeAnchor } from "@/lib/paths";
+import { aboutPath, homeAnchor } from "@/lib/paths";
 
 export const homepageMediaKeys = {
   hero: "hero",
@@ -144,7 +144,7 @@ export function homepageNavigation(language: Locale) {
     {
       _key: "nav-about",
       label: language === "pl" ? "O mnie" : "About",
-      href: homeAnchor(language, "o-mnie"),
+      href: aboutPath(language),
     },
     {
       _key: "nav-blog",

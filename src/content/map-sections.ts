@@ -6,6 +6,7 @@ import type {
   ActionLink,
   CardsContent,
   ComparisonContent,
+  CredentialsContent,
   CtaContent,
   EbookAvailability,
   EbookCardContent,
@@ -173,6 +174,7 @@ export function toLogos(section: {
 }
 
 export function toCards(section: {
+  variant?: string | null;
   eyebrow?: string | null;
   title?: string | null;
   lead?: string | null;
@@ -181,20 +183,30 @@ export function toCards(section: {
         title?: string | null;
         body?: string | null;
         href?: string | null;
+        status?: string | null;
         media?: MediaValue | null;
       }[]
     | null;
 }): CardsContent {
+  const variant = section.variant === "links" ? "links" : "media";
   return {
+    variant,
     eyebrow: section.eyebrow ?? undefined,
     title: required(section.title, "tytuł kart"),
     lead: required(section.lead, "lead kart"),
-    items: (section.items ?? []).map((item) => ({
-      title: required(item.title, "tytuł karty"),
-      body: required(item.body, "opis karty"),
-      href: required(item.href, "adres karty"),
-      media: toMedia(item.media),
-    })),
+    items: (section.items ?? []).map((item) => {
+      const hasMedia = Boolean(item.media?.alt || item.media?.label);
+      if (variant === "media" && !hasMedia) {
+        throw new Error("Karta z medium wymaga obrazu.");
+      }
+      return {
+        title: required(item.title, "tytuł karty"),
+        body: required(item.body, "opis karty"),
+        href: required(item.href, "adres karty"),
+        status: item.status ?? undefined,
+        media: hasMedia ? toMedia(item.media) : undefined,
+      };
+    }),
   };
 }
 
@@ -215,11 +227,13 @@ export function toList(section: {
 export function toProcess(section: {
   title?: string | null;
   lead?: string | null;
+  note?: string | null;
   steps?: { title?: string | null; body?: string | null }[] | null;
 }): ProcessContent {
   return {
     title: required(section.title, "tytuł procesu"),
     lead: required(section.lead, "lead procesu"),
+    note: section.note ?? undefined,
     steps: (section.steps ?? []).map((step) => ({
       title: required(step.title, "krok"),
       body: required(step.body, "opis kroku"),
@@ -584,6 +598,7 @@ export function toServiceOffer(
     body?: (string | null)[] | null;
     facts?: (string | null)[] | null;
     action?: LinkValue | null;
+    secondary?: LinkValue | null;
     media?: MediaValue | null;
     service?: {
       title?: string | null;
@@ -627,8 +642,49 @@ export function toServiceOffer(
       label: actionLabel,
       variant: section.action?.emphasis === "outline" ? "outline" : "default",
     },
+    secondary: section.secondary?.href
+      ? toAction(section.secondary)
+      : undefined,
     priceLabel: price,
     bookingStatus: service?.bookingStatus === "live" ? "live" : "placeholder",
+  };
+}
+
+export function toCredentials(section: {
+  title?: string | null;
+  body?: (string | null)[] | null;
+  diplomaCaption?: string | null;
+  person?: {
+    name?: string | null;
+    role?: string | null;
+    bio?: string | null;
+    educationInstitution?: string | null;
+    educationProgram?: string | null;
+    photo?: MediaValue | null;
+    diplomaScan?: MediaValue | null;
+  } | null;
+}): CredentialsContent {
+  const person = section.person;
+  if (!person) throw new Error("Kwalifikacje wymagają profilu autora.");
+  return {
+    title: required(section.title, "tytuł kwalifikacji"),
+    body: (section.body ?? []).filter((item): item is string => Boolean(item)),
+    diplomaCaption: section.diplomaCaption ?? undefined,
+    person: {
+      name: required(person.name, "imię autora"),
+      role: required(person.role, "rola autora"),
+      bio: person.bio ?? undefined,
+      educationInstitution: required(person.educationInstitution, "uczelnia"),
+      educationProgram: required(person.educationProgram, "kierunek"),
+      photo:
+        person.photo?.alt || person.photo?.label
+          ? toMedia(person.photo)
+          : undefined,
+      diploma:
+        person.diplomaScan?.alt || person.diplomaScan?.label
+          ? toMedia(person.diplomaScan)
+          : undefined,
+    },
   };
 }
 

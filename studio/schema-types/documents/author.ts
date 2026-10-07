@@ -51,6 +51,13 @@ export const authorType = defineType({
       type: "string",
       validation: (rule) => rule.max(160),
     }),
+    defineField({
+      name: "diplomaScan",
+      title: "Skan dyplomu",
+      description:
+        "Opcjonalny obraz dyplomu. Pusty kadr na stronie „O mnie” zostaje miejscem do uzupełnienia. Nie wgrywać fikcyjnego dokumentu.",
+      type: "mediaObject",
+    }),
   ],
   preview: {
     select: { title: "name", subtitle: "role", language: "language" },

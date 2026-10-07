@@ -84,6 +84,7 @@ const pl: CatalogCopy = {
     items: [],
   },
   cards: {
+    variant: "media",
     eyebrow: "Siatka",
     title: "Trzy karty. Jedna akcja każda.",
     lead: "Na desktopie siatka, na wąskim ekranie poziomy snap. Hover powiększa tylko medium.",
@@ -405,6 +406,7 @@ const en: CatalogCopy = {
     items: [],
   },
   cards: {
+    variant: "media",
     eyebrow: "Grid",
     title: "Three cards. One action each.",
     lead: "A grid on desktop, a snap row on a narrow screen. Hover scales the media only.",
