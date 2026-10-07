@@ -14,6 +14,7 @@ import ReviewCard from "@/design-system/components/ReviewCard.astro";
 import Section from "@/design-system/components/Section.astro";
 import SplitPanel from "@/design-system/components/SplitPanel.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
+import SiteImage from "@/design-system/components/SiteImage.astro";
 import BookCoverArt, {
   type CoverArtKind,
 } from "@/design-system/decorations/BookCoverArt.astro";
@@ -21,17 +22,9 @@ import CheckMark from "@/design-system/decorations/CheckMark.astro";
 import CoverStage from "@/design-system/decorations/CoverStage.astro";
 import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
 import { formatPriceGross, topicLabel } from "@/lib/offer";
+import { pickSiteImage } from "@/lib/site-images";
 import type { HomepageView } from "@/content/map-homepage";
 import type { LogoItem } from "@/sections/types";
-import heroPortrait from "@/assets/portraits/hero.webp?url";
-import aboutPortrait from "@/assets/portraits/about.webp?url";
-import contactPortrait from "@/assets/portraits/contact.webp?url";
-import foodEditorial from "@/assets/editorial/food-editorial.webp?url";
-import alabLogo from "@/assets/partners/alab.svg?url";
-import unsLogo from "@/assets/partners/uns.png?url";
-import norsanLogo from "@/assets/partners/norsan.png?url";
-import norsaLogo from "@/assets/partners/norsa.png?url";
-import omniLogo from "@/assets/partners/omni.png?url";
 
 export interface Props {
   lang: Locale;
@@ -39,30 +32,6 @@ export interface Props {
 }
 
 const { lang, content } = Astro.props;
-const localMedia: Record<string, string> = {
-  hero: heroPortrait,
-  about: aboutPortrait,
-  contact: contactPortrait,
-  food: foodEditorial,
-  alab: alabLogo,
-  uns: unsLogo,
-  norsan: norsanLogo,
-  norsa: norsaLogo,
-  omni: omniLogo,
-};
-
-function resolveSrc(src?: string) {
-  if (!src) return undefined;
-  return (
-    localMedia[src] ??
-    (src.startsWith("http") || src.startsWith("/") ? src : undefined)
-  );
-}
-
-const heroSrc = resolveSrc(content.hero.media?.src);
-const aboutSrc = resolveSrc(content.about.media.src);
-const foodSrc = resolveSrc(content.about.secondaryMedia?.src);
-const consultSrc = resolveSrc(content.consultation.media.src);
 const metric = content.approach.items[0];
 const firstPcos = content.ebooks.items.find((item) => item.topic === "pcos");
 const firstPeri = content.ebooks.items.find(
@@ -121,15 +90,15 @@ function coverLabels(kind: CoverArtKind): string[] {
     )}
     <div slot="media" class="home3a-portrait">
       <StageBackdrop />
-      {heroSrc && (
-        <img
-          src={heroSrc}
-          alt={content.hero.media?.label ?? ""}
-          width="1122"
-          height="1402"
-          fetchpriority="high"
-        />
-      )}
+      <SiteImage
+        src={content.hero.media?.src}
+        fallback="hero"
+        alt={content.hero.media?.label ?? ""}
+        width={1122}
+        height={1402}
+        loading="eager"
+        fetchpriority="high"
+      />
     </div>
   </Hero>
 
@@ -145,10 +114,20 @@ function coverLabels(kind: CoverArtKind): string[] {
           ? content.partners.items
           : content.partners.names.map((name): LogoItem => ({ name }))
         ).map((item) => {
-          const src = resolveSrc(item.media?.src);
+          const logo = pickSiteImage(item.media?.src);
           return (
             <li>
-              {src ? <img src={src} alt={item.name} height="43" /> : item.name}
+              {logo ? (
+                <SiteImage
+                  src={item.media?.src}
+                  alt={item.name}
+                  width={156}
+                  height={60}
+                  loading="lazy"
+                />
+              ) : (
+                item.name
+              )}
             </li>
           );
         })}
@@ -185,25 +164,23 @@ function coverLabels(kind: CoverArtKind): string[] {
   <Section id="o-mnie" class="home3a-about">
     <Container class="home3a-about__grid">
       <div class="home3a-about__media">
-        {aboutSrc && (
-          <img
-            src={aboutSrc}
-            alt={content.about.media.label}
-            width="1122"
-            height="1402"
-            loading="lazy"
-          />
-        )}
-        {foodSrc && (
-          <img
-            class="home3a-about__food"
-            src={foodSrc}
-            alt={content.about.secondaryMedia?.label ?? ""}
-            width="1536"
-            height="1024"
-            loading="lazy"
-          />
-        )}
+        <SiteImage
+          src={content.about.media.src}
+          fallback="about"
+          alt={content.about.media.label}
+          width={1122}
+          height={1402}
+          loading="lazy"
+        />
+        <SiteImage
+          class="home3a-about__food"
+          src={content.about.secondaryMedia?.src}
+          fallback="food"
+          alt={content.about.secondaryMedia?.label ?? ""}
+          width={1536}
+          height={1024}
+          loading="lazy"
+        />
       </div>
       <div>
         <Heading>{content.about.title}</Heading>
@@ -290,7 +267,11 @@ function coverLabels(kind: CoverArtKind): string[] {
                       slot="art"
                       kind={art.kind}
                       labels={coverLabels(art.kind)}
-                      imageSrc={art.kind === "nutrition" ? foodSrc : undefined}
+                      imageSrc={
+                        art.kind === "nutrition"
+                          ? content.about.secondaryMedia?.src
+                          : undefined
+                      }
                     />
                   </BookCover>
                 </CoverStage>
@@ -348,16 +329,15 @@ function coverLabels(kind: CoverArtKind): string[] {
               : "Temporary calendar address. The real booking event will be added later. This is not a booking confirmation."}
           </p>
         )}
-        {consultSrc && (
-          <img
-            slot="media"
-            src={consultSrc}
-            alt={content.consultation.media.label}
-            width="1536"
-            height="1024"
-            loading="lazy"
-          />
-        )}
+        <SiteImage
+          slot="media"
+          src={content.consultation.media.src}
+          fallback="contact"
+          alt={content.consultation.media.label}
+          width={1536}
+          height={1024}
+          loading="lazy"
+        />
       </SplitPanel>
     </Container>
   </Section>
@@ -404,7 +384,7 @@ function coverLabels(kind: CoverArtKind): string[] {
 <style>
   .home3a-portrait {
     position: relative;
-    height: 560px;
+    height: 550px;
   }
   .home3a-portrait img {
     position: relative;
@@ -534,19 +514,19 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   .home3a-about__media > img:first-child {
     width: 100%;
-    height: 540px;
+    height: 570px;
     object-fit: cover;
     border-radius: 24px;
   }
   .home3a-about__food {
     position: absolute;
-    right: 24px;
-    bottom: -32px;
+    right: -56px;
+    bottom: -24px;
     width: 220px;
-    height: 150px;
+    height: 156px;
     object-fit: cover;
+    border: 8px solid var(--ao-background);
     border-radius: 24px;
-    outline: 8px solid var(--ao-background);
   }
   .home3a-about :global(.ao-heading) {
     font-size: 64px;
@@ -630,9 +610,14 @@ function coverLabels(kind: CoverArtKind): string[] {
   .home3a :global(#konsultacje-panel img) {
     width: 100%;
     height: 100%;
-    min-height: 520px;
+    min-height: 540px;
     object-fit: cover;
     object-position: 70% center;
+  }
+  @container page3a (max-width: 1199px) {
+    .home3a-portrait {
+      height: 500px;
+    }
   }
   @container page3a (max-width: 879px) {
     .home3a-why,
@@ -652,22 +637,41 @@ function coverLabels(kind: CoverArtKind): string[] {
       grid-template-columns: 1fr;
     }
     .home3a-portrait {
-      height: 420px;
+      height: 450px;
     }
     .home3a-about__media > img:first-child {
-      height: auto;
-      aspect-ratio: 4 / 5;
+      height: 450px;
     }
     .home3a-about__food {
-      right: 8%;
-      bottom: -12%;
-      width: 46%;
-      height: auto;
+      right: -16px;
+      bottom: -20px;
+      width: 150px;
+      height: 112px;
+      border-width: 6px;
+    }
+    .home3a :global(#konsultacje-panel img) {
+      min-height: 0;
+      height: 390px;
+      object-position: 75% center;
+    }
+  }
+  @container page3a (max-width: 767px) {
+    .home3a-portrait {
+      height: 410px;
+    }
+    .home3a-about__media > img:first-child {
+      height: 470px;
+      object-position: center 25%;
+    }
+    .home3a-about__food {
+      right: 16px;
+      width: 180px;
+      height: 125px;
     }
   }
   @container page3a (max-width: 374px) {
     .home3a-portrait {
-      height: 350px;
+      height: 340px;
     }
     .home3a-count strong {
       font-size: 64px;

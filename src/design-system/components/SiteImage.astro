@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+import aboutPortrait from "@/assets/portraits/about.webp";
+import contactPortrait from "@/assets/portraits/contact.webp";
+import foodEditorial from "@/assets/editorial/food-editorial.webp";
+import heroPortrait from "@/assets/portraits/hero.webp";
+import norsanLogo from "@/assets/partners/norsan.png";
+import norsaLogo from "@/assets/partners/norsa.png";
+import omniLogo from "@/assets/partners/omni.png";
+import unsLogo from "@/assets/partners/uns.png";
+import alabLogo from "@/assets/partners/alab.svg?url";
+import { pickSiteImage, type SiteRasterKey } from "@/lib/site-images";
+
+interface Props {
+  src?: string;
+  fallback?: SiteRasterKey;
+  alt: string;
+  width: number;
+  height: number;
+  class?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const rasters: Record<SiteRasterKey, ImageMetadata> = {
+  hero: heroPortrait,
+  about: aboutPortrait,
+  contact: contactPortrait,
+  food: foodEditorial,
+  uns: unsLogo,
+  norsan: norsanLogo,
+  norsa: norsaLogo,
+  omni: omniLogo,
+};
+
+const {
+  src,
+  fallback,
+  alt,
+  width,
+  height,
+  class: className,
+  loading = "lazy",
+  fetchpriority,
+} = Astro.props;
+
+const picked = pickSiteImage(src, fallback);
+const eager = loading === "eager" || fetchpriority === "high";
+---
+
+{picked?.type === "svg" && (
+  <img
+    src={alabLogo}
+    alt={alt}
+    width={width}
+    height={height}
+    class={className}
+    loading={eager ? "eager" : "lazy"}
+    decoding="async"
+  />
+)}
+{picked?.type === "local" && (
+  <Image
+    src={rasters[picked.key]}
+    alt={alt}
+    width={width}
+    height={height}
+    class={className}
+    layout="none"
+    format="webp"
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={fetchpriority}
+    decoding="async"
+  />
+)}
+{picked?.type === "remote" && (
+  <Image
+    src={picked.src}
+    alt={alt}
+    width={width}
+    height={height}
+    class={className}
+    layout="none"
+    format="webp"
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={fetchpriority}
+    decoding="async"
+  />
+)}

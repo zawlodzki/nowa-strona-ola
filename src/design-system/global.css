@@ -513,7 +513,7 @@ body.ao-site {
 .ao-card__media:hover .ao-book-cover {
   transform: translateY(-5px);
 }
-.ao-card__media img {
+.ao-card__media > img {
   width: 100%;
   aspect-ratio: 1.5;
   object-fit: cover;

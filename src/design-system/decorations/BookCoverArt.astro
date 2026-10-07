@@ -1,4 +1,6 @@
 ---
+import SiteImage from "@/design-system/components/SiteImage.astro";
+
 export type CoverArtKind =
   "decisions" | "route" | "nutrition" | "observation" | "journal" | "evening";
 
@@ -53,9 +55,16 @@ const { kind, labels = [], imageSrc } = Astro.props;
     ))}
   </div>
 )}
-{kind === "nutrition" && imageSrc && (
+{kind === "nutrition" && (
   <div class="ao-book-art ao-book-art--nutrition" aria-hidden="true">
-    <img src={imageSrc} alt="" width="320" height="180" />
+    <SiteImage
+      src={imageSrc}
+      fallback="food"
+      alt=""
+      width={320}
+      height={180}
+      loading="lazy"
+    />
   </div>
 )}
 {kind === "observation" && (

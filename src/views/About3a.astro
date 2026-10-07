@@ -12,10 +12,10 @@ import ReviewCard from "@/design-system/components/ReviewCard.astro";
 import Section from "@/design-system/components/Section.astro";
 import SplitPanel from "@/design-system/components/SplitPanel.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
+import SiteImage from "@/design-system/components/SiteImage.astro";
 import { aboutCopy } from "@/content/about-seed";
 import type { AboutView } from "@/content/map-about";
-import aboutPortrait from "@/assets/portraits/about.webp?url";
-import contactPortrait from "@/assets/portraits/contact.webp?url";
+import { isRemoteImageSrc } from "@/lib/site-images";
 
 export interface Props {
   lang: Locale;
@@ -25,22 +25,8 @@ export interface Props {
 const { lang, content } = Astro.props;
 const copy = aboutCopy[lang];
 const pl = lang === "pl";
-const localMedia: Record<string, string> = {
-  about: aboutPortrait,
-  contact: contactPortrait,
-};
-
-function resolveSrc(src?: string) {
-  if (!src) return undefined;
-  return (
-    localMedia[src] ??
-    (src.startsWith("http") || src.startsWith("/") ? src : undefined)
-  );
-}
-
-const heroSrc = resolveSrc(content.hero.media?.src);
-const consultSrc = resolveSrc(content.consultation.media.src);
-const diplomaSrc = resolveSrc(content.credentials.person.diploma?.src);
+const diplomaSrc = content.credentials.person.diploma?.src;
+const diplomaRemote = diplomaSrc && isRemoteImageSrc(diplomaSrc);
 const person = content.credentials.person;
 const profileJsonLd = {
   "@context": "https://schema.org",
@@ -80,15 +66,15 @@ const profileJsonLd = {
       </TextLink>
     )}
     <figure slot="media" class="about3a-portrait">
-      {heroSrc && (
-        <img
-          src={heroSrc}
-          alt={content.hero.media?.label ?? ""}
-          width="1122"
-          height="1402"
-          fetchpriority="high"
-        />
-      )}
+      <SiteImage
+        src={content.hero.media?.src}
+        fallback="about"
+        alt={content.hero.media?.label ?? ""}
+        width={1122}
+        height={1402}
+        loading="eager"
+        fetchpriority="high"
+      />
       <figcaption>
         <span>{person.name}</span>
         <span>{person.role}</span>
@@ -137,12 +123,12 @@ const profileJsonLd = {
           </dl>
         </div>
         <figure class="about3a-diploma">
-          {diplomaSrc ? (
-            <img
+          {diplomaRemote ? (
+            <SiteImage
               src={diplomaSrc}
               alt={content.credentials.person.diploma?.label ?? ""}
-              width="680"
-              height="860"
+              width={680}
+              height={860}
               loading="lazy"
             />
           ) : (
@@ -268,16 +254,15 @@ const profileJsonLd = {
             {content.consultation.secondary.label}
           </TextLink>
         )}
-        {consultSrc && (
-          <img
-            slot="media"
-            src={consultSrc}
-            alt={content.consultation.media.label}
-            width="1536"
-            height="1024"
-            loading="lazy"
-          />
-        )}
+        <SiteImage
+          slot="media"
+          src={content.consultation.media.src}
+          fallback="contact"
+          alt={content.consultation.media.label}
+          width={1536}
+          height={1024}
+          loading="lazy"
+        />
       </SplitPanel>
     </Container>
   </Section>
@@ -549,6 +534,11 @@ const profileJsonLd = {
     margin-top: var(--ao-space-24);
     font-size: 14px;
   }
+  @container page3a (max-width: 1199px) {
+    .about3a-portrait img {
+      height: 500px;
+    }
+  }
   @container page3a (max-width: 879px) {
     .about3a-story__grid,
     .about3a-materials__grid,
@@ -563,6 +553,9 @@ const profileJsonLd = {
     }
     .about3a-story :global(.ao-heading) {
       max-width: 20ch;
+    }
+    .about3a :global(#konsultacja-panel img) {
+      height: 390px;
     }
   }
   @container page3a (max-width: 767px) {
@@ -582,6 +575,9 @@ const profileJsonLd = {
     }
     .about3a-count strong {
       font-size: 54px;
+    }
+    .about3a :global(#konsultacja-panel img) {
+      height: 280px;
     }
   }
   @media (prefers-reduced-motion: reduce) {

@@ -76,6 +76,13 @@ export function authorFixture(language: Locale) {
     educationInstitution: "Śląski Uniwersytet Medyczny",
     educationProgram:
       language === "pl" ? "Dietetyka kliniczna" : "Clinical dietetics",
+    photo: media(
+      homepageMediaKeys.about,
+      language === "pl"
+        ? "Aleksandra Olesiewicz, dietetyczka kliniczna"
+        : "Aleksandra Olesiewicz, clinical dietitian",
+      "portrait",
+    ),
   };
 }
 

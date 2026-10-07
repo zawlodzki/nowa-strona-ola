@@ -20,8 +20,7 @@ import ReviewCard from "../design-system/components/ReviewCard.astro";
 import Hero from "../design-system/components/Hero.astro";
 import BookArtDecisions from "../design-system/decorations/BookArtDecisions.astro";
 import CoverStage from "../design-system/decorations/CoverStage.astro";
-import heroPortrait from "../assets/portraits/hero.webp?url";
-import portrait from "../assets/portraits/contact.webp?url";
+import SiteImage from "../design-system/components/SiteImage.astro";
 const links = [
   { label: "Fundamenty", href: "#fundamentals" },
   { label: "Komponenty", href: "#components" },
@@ -63,11 +62,13 @@ const colors = [
         </Button>
         <div slot="media" class="ds-portrait">
           <div class="ds-portrait__backdrop"></div>
-          <img
-            src={heroPortrait}
+          <SiteImage
+            src="hero"
+            fallback="hero"
             alt="Aleksandra Olesiewicz"
-            width="1122"
-            height="1402"
+            width={1122}
+            height={1402}
+            loading="eager"
             fetchpriority="high"
           />
         </div>
@@ -220,12 +221,13 @@ const colors = [
           <Button as="a" href="#newsletter" arrow>
             Poznaj kolejne kroki
           </Button>
-          <img
+          <SiteImage
             slot="media"
-            src={portrait}
+            src="contact"
+            fallback="contact"
             alt="Aleksandra Olesiewicz"
-            width="1122"
-            height="1402"
+            width={1536}
+            height={1024}
             loading="lazy"
           />
         </SplitPanel>

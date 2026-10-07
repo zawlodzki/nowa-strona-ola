@@ -16,10 +16,10 @@ import CheckMark from "@/design-system/decorations/CheckMark.astro";
 import ProductOrbit from "@/design-system/decorations/ProductOrbit.astro";
 import SheetShadow from "@/design-system/decorations/SheetShadow.astro";
 import SupplementBottles from "@/design-system/decorations/SupplementBottles.astro";
+import SiteImage from "@/design-system/components/SiteImage.astro";
 import { ebookCopy } from "@/content/ebook-seed";
 import { canPurchase, type EbookView } from "@/content/map-ebook";
 import { schemaOfferAvailability } from "@/lib/offer";
-import aboutPortrait from "@/assets/portraits/about.webp?url";
 
 export interface Props {
   lang: Locale;
@@ -31,10 +31,6 @@ const copy = ebookCopy[lang];
 const { landing, author, chapters, materials } = content;
 const planned = !canPurchase(content.availability);
 const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${content.currencyLabel}`;
-const photoSrc =
-  author.photo?.src === "about" || !author.photo?.src?.startsWith("http")
-    ? aboutPortrait
-    : author.photo.src;
 const oneLine = (value: string) => value.replaceAll("\n", " ");
 const jsonLd = {
   "@context": "https://schema.org",
@@ -276,11 +272,12 @@ const jsonLd = {
   <Section id="autorka">
     <Container class="ebook3a-split ebook3a-author">
       <figure>
-        <img
-          src={photoSrc}
+        <SiteImage
+          src={author.photo?.src}
+          fallback="about"
           alt={author.photo?.label ?? author.name}
-          width="700"
-          height="900"
+          width={700}
+          height={900}
           loading="lazy"
         />
       </figure>

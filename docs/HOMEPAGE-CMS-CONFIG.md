@@ -271,8 +271,13 @@ Media do zaimportowania z zaakceptowanych lokalnych plików:
 [Hero](../src/assets/portraits/hero.webp),
 [O mnie](../src/assets/portraits/about.webp),
 [Konsultacje](../src/assets/portraits/contact.webp),
-[Posiłek](../mockups/homepage/assets/food-editorial.webp).
+[Posiłek](../src/assets/editorial/food-editorial.webp)
+(ten sam plik co [makieta](../mockups/homepage/assets/food-editorial.webp)).
 Logotypy i ich źródła: [README makiet](../mockups/homepage/README.md#materiały).
+Produkcja (07.10.2026): te pliki są fallbackiem i seedem kluczy `hero|about|contact|food`
+oraz logotypów, gdy `mediaObject.image` w CMS jest puste. Renderer idzie przez
+pipeline Astro (`SiteImage`), nie przez surowy `?url`. Skan dyplomu nadal nie jest
+w repo — kadr na „O mnie” zostaje miejscem do uzupełnienia, bez fikcyjnego dokumentu.
 Okładki e-booków są dziś kompozycją HTML/CSS; nie istnieją jako sześć gotowych
 plików obrazu. Zaplanować eksport zaakceptowanych okładek albo kontrolowany
 renderer, bez fikcyjnych ścieżek do obrazów w CMS.
