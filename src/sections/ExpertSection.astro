@@ -30,11 +30,13 @@ const { id, labelledby, content } = Astro.props as Props;
       </Heading>
       <h3>{content.role}</h3>
       <p>{content.body}</p>
-      <div class="actions">
-        <Button as="a" href={content.action.href}>
-          {content.action.label}
-        </Button>
-      </div>
+      {content.action && (
+        <div class="actions">
+          <Button as="a" href={content.action.href}>
+            {content.action.label}
+          </Button>
+        </div>
+      )}
     </div>
   </div>
 </Section>

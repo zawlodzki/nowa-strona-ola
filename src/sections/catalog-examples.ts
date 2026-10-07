@@ -65,6 +65,7 @@ const pl: CatalogCopy = {
     ],
   },
   textImage: {
+    variant: "photo",
     eyebrow: "Układ",
     title: "Obraz tłumaczy, tekst prowadzi.",
     body: [
@@ -386,6 +387,7 @@ const en: CatalogCopy = {
     ],
   },
   textImage: {
+    variant: "photo",
     eyebrow: "Layout",
     title: "The image explains. The copy leads.",
     body: [

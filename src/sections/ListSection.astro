@@ -17,7 +17,7 @@ const { id, labelledby, content } = Astro.props as Props;
     <Heading tag="h2" id={labelledby}>
       {content.title}
     </Heading>
-    <p class="lead section-lead">{content.lead}</p>
+    {content.lead && <p class="lead section-lead">{content.lead}</p>}
   </div>
   <ul class="plain-list" data-reveal>
     {content.items.map((item) => (

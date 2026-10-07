@@ -25,6 +25,7 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
   },
   _type == "textSection" => { eyebrow, title, body },
   _type == "textImageSection" => {
+    variant,
     eyebrow,
     title,
     lead,
@@ -32,7 +33,11 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     mediaPosition,
     "action": action${actionFields},
     "media": media${mediaFields},
-    "secondaryMedia": secondaryMedia${mediaFields}
+    "secondaryMedia": secondaryMedia${mediaFields},
+    prompts,
+    resolutionEyebrow,
+    resolutionTitle,
+    caption
   },
   _type == "logosSection" => {
     title,
@@ -56,14 +61,16 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
       href,
       status,
       "media": media${mediaFields}
-    }
+    },
+    closing
   },
   _type == "listSection" => { title, lead, items },
   _type == "processSection" => {
     title,
     lead,
     note,
-    steps[]{ _key, title, body }
+    steps[]{ _key, title, body },
+    "media": media${mediaFields}
   },
   _type == "metricsSection" => {
     variant,
@@ -99,10 +106,19 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
   },
   _type == "expertSection" => {
     title,
+    intro,
     body,
+    metric{ value, suffix, label },
     "action": action${actionFields},
     "media": media${mediaFields},
-    "person": person->{ name, role }
+    "person": person->{
+      name,
+      role,
+      bio,
+      educationInstitution,
+      educationProgram,
+      "photo": photo${mediaFields}
+    }
   },
   _type == "faqSection" => {
     title,
@@ -193,6 +209,7 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     title,
     body,
     facts,
+    note,
     "action": action${actionFields},
     "secondary": secondary${actionFields},
     "media": media${mediaFields},

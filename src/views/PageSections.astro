@@ -2,6 +2,7 @@
 import type { Locale } from "@ola/shared";
 
 import {
+  isTextCards,
   toCards,
   toComparison,
   toCta,
@@ -78,14 +79,17 @@ let formCount = 0;
           content={toText(section)}
         />
       );
-    case "textImageSection":
+    case "textImageSection": {
+      const content = toTextImage(section);
+      if (content.variant !== "photo") {
+        throw new Error(
+          "Mapa pytań jest renderowana przez szablon 3a. Zatrzymuję build PageSections.",
+        );
+      }
       return (
-        <TextImageSection
-          id={id}
-          labelledby={labelledby}
-          content={toTextImage(section)}
-        />
+        <TextImageSection id={id} labelledby={labelledby} content={content} />
       );
+    }
     case "logosSection":
       return (
         <LogosSection
@@ -94,17 +98,24 @@ let formCount = 0;
           content={toLogos(section)}
         />
       );
-    case "cardsSection":
+    case "cardsSection": {
+      const content = toCards(section);
+      if (isTextCards(content)) {
+        throw new Error(
+          `Karty ${content.variant} są renderowane przez szablon 3a. Zatrzymuję build PageSections.`,
+        );
+      }
       return (
         <CardsSection
           id={id}
           labelledby={labelledby}
-          content={toCards(section)}
+          content={content}
           previousLabel={pl ? "Poprzednie karty" : "Previous cards"}
           nextLabel={pl ? "Następne karty" : "Next cards"}
           scrollerLabel={pl ? "Karuzela kart" : "Card carousel"}
         />
       );
+    }
     case "listSection":
       return (
         <ListSection

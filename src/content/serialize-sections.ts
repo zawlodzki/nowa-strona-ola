@@ -1,6 +1,7 @@
 import type { Locale } from "@ola/shared";
 
 import {
+  isTextCards,
   toCards,
   toComparison,
   toCredentials,
@@ -67,6 +68,19 @@ export function serializeSection(section: Section, language: Locale): string {
     }
     case "textImageSection": {
       const content = toTextImage(section);
+      if (content.variant === "questions") {
+        return [
+          heading(2, content.title),
+          paragraphs(content.body),
+          bullet(content.prompts),
+          [content.resolution.eyebrow, content.resolution.title]
+            .filter(Boolean)
+            .join(" "),
+          content.caption,
+        ]
+          .filter(Boolean)
+          .join("\n\n");
+      }
       return [
         heading(2, content.title),
         content.lead,
@@ -92,6 +106,19 @@ export function serializeSection(section: Section, language: Locale): string {
     }
     case "cardsSection": {
       const content = toCards(section);
+      if (isTextCards(content)) {
+        return [
+          heading(2, content.title),
+          content.lead,
+          ...content.items.flatMap((item) => [
+            heading(3, item.title),
+            item.body,
+          ]),
+          content.closing,
+        ]
+          .filter(Boolean)
+          .join("\n\n");
+      }
       return [
         heading(2, content.title),
         content.lead,
@@ -115,6 +142,7 @@ export function serializeSection(section: Section, language: Locale): string {
         heading(2, content.title),
         content.lead,
         ...content.steps.flatMap((step) => [heading(3, step.title), step.body]),
+        content.media?.label,
         content.note,
       ]
         .filter(Boolean)
@@ -171,9 +199,17 @@ export function serializeSection(section: Section, language: Locale): string {
       return [
         heading(2, content.title),
         `${content.name}, ${content.role}`,
+        content.intro,
         content.body,
-        `[${content.action.label}](${content.action.href})`,
-      ].join("\n\n");
+        content.metric
+          ? `- ${content.metric.value}${content.metric.suffix} — ${content.metric.label}`
+          : "",
+        content.action
+          ? `[${content.action.label}](${content.action.href})`
+          : "",
+      ]
+        .filter(Boolean)
+        .join("\n\n");
     }
     case "faqSection": {
       const content = toFaq(section);
@@ -268,6 +304,7 @@ export function serializeSection(section: Section, language: Locale): string {
         bullet(content.facts),
         content.priceLabel,
         `[${content.action.label}](${content.action.href})`,
+        content.note,
         content.secondary
           ? `[${content.secondary.label}](${content.secondary.href})`
           : "",
