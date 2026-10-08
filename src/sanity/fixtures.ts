@@ -2,6 +2,7 @@ import type { Locale } from "@ola/shared";
 
 import { aboutPageFixture } from "./about-fixtures";
 import { consultationPageFixture } from "./consultation-fixtures";
+import { ebookCollectionPageFixture } from "./ebook-collection-fixtures";
 import {
   homepagePageFixture,
   homepageSettingsFixture,
@@ -405,6 +406,8 @@ export const demonstrationPages = {
   "en/about": aboutPageFixture("en"),
   "pl/konsultacje": consultationPageFixture("pl"),
   "en/consultations": consultationPageFixture("en"),
+  "pl/ebooki": ebookCollectionPageFixture("pl"),
+  "en/ebooks": ebookCollectionPageFixture("en"),
   "pl/warsztat": {
     id: "demo-workshop-pl",
     language: "pl" as const,

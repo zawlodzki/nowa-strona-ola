@@ -30,7 +30,9 @@ export const ebookType = defineType({
     }),
     slugField({
       documentType: "ebook",
-      description: "Adres strony produktu, unikalny w obrębie języka.",
+      reserved: ["kategoria", "category"],
+      description:
+        "Adres strony produktu, unikalny w obrębie języka. Nie używać kategoria/category — to filtry kolekcji.",
     }),
     translationField("ebook"),
     defineField({

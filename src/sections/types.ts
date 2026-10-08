@@ -262,6 +262,7 @@ export interface FormFieldCopy {
   name: string;
   input: FormInputKind;
   label: string;
+  placeholder?: string;
   errorMessage: string;
   required: boolean;
   options?: string[];
@@ -306,6 +307,20 @@ export interface EbooksContent {
   cardActionLabel: string;
   note?: string;
   collection?: ActionLink;
+  items: EbookCardContent[];
+}
+
+export interface EbookCollectionContent {
+  variant: "cherry3a";
+  title: string;
+  lead: string;
+  catalogTitle: string;
+  catalogLead: string;
+  findTopicLabel: string;
+  cardActionLabel: string;
+  note?: string;
+  emptyMessage: string;
+  emptyCategoryMessage: string;
   items: EbookCardContent[];
 }
 

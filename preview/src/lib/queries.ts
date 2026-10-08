@@ -3,6 +3,7 @@ import { defineQuery } from "groq";
 import {
   articleBodyProjection,
   articleCardProjection,
+  ebookCardProjection,
   ebookProjection,
   PAGE_SECTION_PROJECTION,
   siteSettingsProjection,
@@ -86,4 +87,13 @@ export const PREVIEW_EBOOK_QUERY = defineQuery(/* groq */ `
     language == $language &&
     slug.current == $slug
   ][0]{ ${ebookProjection} }
+`);
+
+export const PREVIEW_EBOOKS_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "ebook" &&
+    language == $language
+  ] | order(coalesce(sortOrder, 9999) asc, title asc) {
+    ${ebookCardProjection}
+  }
 `);

@@ -1,0 +1,18 @@
+---
+import { getPage, getSiteSettings, listEbooks } from "@/sanity/repository";
+import EbookCollectionPage from "@/views/EbookCollectionPage.astro";
+
+const lang = "pl" as const;
+const [page, settings, ebooks] = await Promise.all([
+  getPage(lang, "ebooki"),
+  getSiteSettings(lang),
+  listEbooks(lang),
+]);
+---
+
+<EbookCollectionPage
+  lang={lang}
+  page={page}
+  settings={settings}
+  ebooks={ebooks}
+/>

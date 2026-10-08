@@ -60,12 +60,19 @@ lub adres homepage z tą kotwicą na stronach bez formularza. To ustalenie
 z 07.10.2026 po ujednoliceniu mockupów, zastępujące wcześniejsze menu kotwicowe.
 Docelowe URL generować z rzeczywistych slugów i języka; landingi mają osobne
 menu lokalnych sekcji. Kotwice muszą istnieć w rendererze.
-Stan kodu 07.10.2026 (pakiet 3): fixture’y i dry-run `import:homepage` mają
-Konsultacje → `/konsultacje/` (EN `/en/consultations/`), O mnie → `/o-mnie/`
-(EN `/en/about/`), Blog → `/blog/`. E-booki nadal `#ebooki` do pakietu 5.
+Stan kodu 07.10.2026 (pakiet 5): fixture’y mają Konsultacje → `/konsultacje/`
+(EN `/en/consultations/`), O mnie → `/o-mnie/` (EN `/en/about/`),
+E-booki → `/ebooki/` (EN `/en/ebooks/`), Blog → `/blog/`.
 `siteSettings` w Content Lake nie zmieniono.
-Profile w `siteSettings.socialLinks`: nazwy ustalone, prawdziwe HTTPS URL do
-uzupełnienia. `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
+Profile w `siteSettings.socialLinks`: nazwy ustalone (Instagram, Facebook,
+TikTok). Fixture i fallback 07.10.2026 używają stron głównych platform
+(`https://www.instagram.com/`, `https://www.facebook.com/`,
+`https://www.tiktok.com/`) wyłącznie jako wartości makiety, żeby linki były
+widoczne. To **nie** są profile Oli. Prawdziwe HTTPS URL do decyzji.
+`podglad.html?...` nie jest adresem profilu ani produktu do CMS.
+Linki prawne w `siteSettings.legalLinks`: fixture PL `/polityka-prywatnosci/`
+i `/regulamin/`, EN `/en/privacy/` i `/en/terms/`. Stron jeszcze nie ma;
+treść i docelowe slugi do decyzji. Pola schematu już istniały.
 
 Tytuł i opis SEO w makiecie zawierają oznaczenie 3a i dłuższe teksty.
 Nie kopiować ich automatycznie do produkcji: `seo.title` ma limit 60 znaków,
@@ -107,14 +114,17 @@ Cena jako wartość liczbowa 97, waluta PLN i jawne oznaczenie brutto.
 Nie wyliczać VAT ani ceny netto bez osobnej konfiguracji. Format „97 zł brutto”
 generować z danych; nie powielać ceny w HTML, okładce i ręcznie wpisanym opisie.
 
-| Kolejność | Tytuł                         | Temat         | Cena         |
-| --------- | ----------------------------- | ------------- | ------------ |
-| 1         | Suplementy w PCOS             | PCOS          | 97 zł brutto |
-| 2         | Badania, które mają sens      | PCOS          | 97 zł brutto |
-| 3         | Szczupła, a jednak PCOS       | PCOS          | 97 zł brutto |
-| 4         | Waga Cię okłamuje             | Perimenopauza | 97 zł brutto |
-| 5         | Czy to już?                   | Perimenopauza | 97 zł brutto |
-| 6         | Noc zaczyna się o osiemnastej | Perimenopauza | 97 zł brutto |
+| Kolejność | Tytuł                         | Temat         | Cena         | Ton okładki (makieta 3a) |
+| --------- | ----------------------------- | ------------- | ------------ | ------------------------ |
+| 1         | Suplementy w PCOS             | PCOS          | 97 zł brutto | jasny                    |
+| 2         | Badania, które mają sens      | PCOS          | 97 zł brutto | wiśniowy                 |
+| 3         | Szczupła, a jednak PCOS       | PCOS          | 97 zł brutto | jasny                    |
+| 4         | Waga Cię okłamuje             | Perimenopauza | 97 zł brutto | jasny                    |
+| 5         | Czy to już?                   | Perimenopauza | 97 zł brutto | wiśniowy                 |
+| 6         | Noc zaczyna się o osiemnastej | Perimenopauza | 97 zł brutto | jasny                    |
+
+Tony 4–6 poprawiono 07.10.2026 do 1:1 z makietą (`cover-4` i `cover-6` jasne,
+`cover-5` ciemny). Fixture i seed są źródłem homepage, kolekcji i landingów.
 
 Homepage ma referencje do produktów w tej kolejności, a nie sześć kopii cen
 i opisów w osadzonych kartach. Wybranie grupy przewija do pierwszego produktu
@@ -246,7 +256,12 @@ Opinia o dotychczasowej współpracy
 
 ### newsletter
 
-**Mniej sprzecznych rad. Więcej konkretów.**
+**Mniej sprzecznych rad.**
+**Więcej konkretów.**
+
+Etykieta pola: Twój adres e-mail. Placeholder: `np. ola@przyklad.pl`.
+Przycisk „Chcę otrzymywać newsletter” ze strzałką, potem checkbox zgody.
+Układ wspólny 3a (07.10.2026, wyrównanie do makiety).
 
 Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.
 
@@ -429,9 +444,11 @@ HTML/Markdown z tych samych danych, osobne PL/EN i fixture każdego wariantu.
 
 Źródło: bezpośrednie zlecenie użytkownika 07.10.2026: mockup kolekcji wszystkich
 e-booków w wersji 3a, z możliwością wyboru kategorii.
-**Wykonane lokalnie:** [kolekcja HTML](../mockups/homepage/ebooks-3a.html),
-filtry i wejścia z porównania oraz sekcji e-booków homepage 3a.
-Nie zmieniono Sanity ani publicznego wdrożenia.
+**Kod (pakiet 5, 07.10.2026):** renderer `EbookCollection3a` na `/ebooki/`
+i `/en/ebooks/`, schemat `ebookCollectionSection`, GROQ, fixture, serializer
+i dry-run importu bez zapisu. Copy i UX kolekcji pozostają **propozycją**.
+Content Lake i publikacja nie były zapisywane.
+**Mockup:** [kolekcja HTML](../mockups/homepage/ebooks-3a.html).
 
 | Element            | Bieżąca wartość i status                                                                                   | Mapowanie do przyszłego CMS                                                                                                   |
 | ------------------ | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -440,19 +457,21 @@ Nie zmieniono Sanity ani publicznego wdrożenia.
 | Kategorie          | Wszystkie / PCOS / Perimenopauza, domyślnie Wszystkie — propozycja UX oparta na istniejących dwóch grupach | Proponowane `ebook.topic`: `pcos`, `perimenopause`; Wszystkie to stan filtra, nie kategoria produktu                          |
 | Cena i status      | 97 zł brutto; materiały w przygotowaniu — zachowane ustalenie 06.10.2026                                   | `ebook.priceGross = 97`, `currency = PLN`, `availability = planned`                                                           |
 | Układ              | Siatka 3 / 2 / 1 kolumna, filtry z liczbami i liczbą wyników — wykonana propozycja                         | Liczniki wyliczać z kolekcji; kontrolowany renderer, bez dowolnego CSS                                                        |
-| Copy               | „Więcej jasności. W Twoim tempie.” i krótki wstęp — propozycja dla mockupu                                 | Proponowany `ebookCollectionSection`: `title`, `lead`, `catalogTitle`, `catalogLead`; wariant `cherry3a`                      |
+| Copy               | „Więcej jasności. W Twoim tempie.” i krótki wstęp — **propozycja**, nie zatwierdzona treść                 | `ebookCollectionSection`: `title`, `lead`, `catalogTitle`, `catalogLead`; wariant `cherry3a` (kod; Content Lake bez zapisu)   |
 | CTA kart           | „Poznaj temat”; Suplementy w PCOS → lokalny landing, pozostałe → ekran objaśniający                        | Generować adres ze sluga `ebook`; nie modelować lokalnych ekranów makiety jako checkout                                       |
 | Wejście z homepage | „Zobacz wszystkie e-booki” pod karuzelą — wykonana propozycja                                              | Link sekcji biblioteki do proponowanego `/ebooki/`                                                                            |
-| Kategorie w URL    | `?kategoria=pcos` / `?kategoria=perimenopause`; powrót przywraca filtr                                     | Stan interfejsu, bez zapisu danych w CMS; canonical do pełnej kolekcji przy wdrożeniu                                         |
+| Kategorie w URL    | `?kategoria=pcos` oraz ścieżki `/ebooki/kategoria/pcos/` (EN `category`) — propozycja UX                   | Stan interfejsu, bez zapisu w CMS; canonical do `/ebooki/`; ścieżka działa bez JS, query z JS jak w makiecie                  |
 
-**Luki schematu:** `ebook`, `ebookCollectionSection` i `sortOrder` nadal nie istnieją.
+**Schemat w kodzie (pakiet 5):** `ebook`, `sortOrder` i `ebookCollectionSection` istnieją.
+Content Lake bez zapisu. Copy kolekcji jest propozycją.
 Obecny `category` dotyczy artykułów; nie przenosić jego referencji automatycznie
 na e-booki. Dwie kontrolowane wartości `topic` wystarczą dla obecnego zakresu.
 Rozszerzenie kategorii i użycie referencji wymaga osobnej decyzji, kiedy zakres
 kolekcji wzrośnie. Nie deklarować wykonania modelu na podstawie mockupu.
 
-Docelowe `/ebooki/` i `/en/ebooks/` są propozycją routingu. EN wymaga osobnego
-zaakceptowanego dokumentu i tłumaczeń produktów; bez polskiego fallbacku.
+Adresy `/ebooki/` i `/en/ebooks/` są w kodzie. EN wymaga osobnego
+zaakceptowanego dokumentu i tłumaczeń; bez polskiego fallbacku. Copy kolekcji
+pozostaje propozycją.
 Szczegóły produktu: [instrukcja kolekcji CMS](EBOOK-CMS-CONFIG-3A.md).
 
 ## Kolekcja wszystkich wpisów bloga 3a — 07.10.2026

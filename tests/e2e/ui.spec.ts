@@ -51,13 +51,17 @@ test("form validation, error recovery and no network submission", async ({
     exact: true,
   });
   await submit.click();
-  await expect(page.getByLabel("Adres e-mail", { exact: true })).toBeFocused();
+  await expect(
+    page.getByLabel("Twój adres e-mail", { exact: true }),
+  ).toBeFocused();
   await expect(page.locator("#email-error")).toBeVisible();
-  await page.getByLabel("Adres e-mail", { exact: true }).fill("wrong");
+  await page.getByLabel("Twój adres e-mail", { exact: true }).fill("wrong");
   await submit.click();
-  await expect(page.getByLabel("Adres e-mail", { exact: true })).toBeFocused();
+  await expect(
+    page.getByLabel("Twój adres e-mail", { exact: true }),
+  ).toBeFocused();
   await page
-    .getByLabel("Adres e-mail", { exact: true })
+    .getByLabel("Twój adres e-mail", { exact: true })
     .fill("test@example.com");
   await submit.click();
   await expect(
@@ -387,6 +391,110 @@ test("ebook landing Polish and English plus missing Polish under English slug", 
 
   const missingPolish = await page.goto("/en/ebooki/suplementy-w-pcos/");
   expect(missingPolish?.status()).toBe(404);
+});
+
+test("ebook collection Polish and English with categories, empty URL and no POST", async ({
+  page,
+}) => {
+  const posts: string[] = [];
+  page.on("request", (request) => {
+    if (request.method() === "POST") posts.push(request.url());
+  });
+
+  await page.goto("/");
+  await expect(
+    page.getByRole("link", { name: "Zobacz wszystkie e-booki" }),
+  ).toHaveAttribute("href", "/ebooki/");
+  await page.getByRole("link", { name: "Zobacz wszystkie e-booki" }).click();
+  await expect(page).toHaveURL(/\/ebooki\/$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /Więcej jasności\.\s*W Twoim tempie\./,
+  );
+  const cards = page.locator(".ebooks3a-grid .ebooks3a-card:visible");
+  await expect(cards).toHaveCount(6);
+  await expect(
+    page.getByRole("link", { name: "Suplementy w PCOS" }).first(),
+  ).toHaveAttribute("href", "/ebooki/suplementy-w-pcos/");
+  await expect(
+    page.getByRole("link", { name: "Badania, które mają sens" }).first(),
+  ).toHaveAttribute("href", "/ebooki/badania-ktore-maja-sens/");
+  await expect(page.getByText("97 zł").first()).toBeVisible();
+  await expect(page.getByText(/materiały są w przygotowaniu/i)).toBeVisible();
+  await expect(
+    page
+      .getByRole("navigation", { name: "Nawigacja w stopce" })
+      .getByRole("link", { name: "E-booki", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Profile społecznościowe" })
+      .getByRole("link", { name: "Instagram" }),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("navigation", { name: "Informacje prawne" })
+      .getByRole("link", { name: "Polityka prywatności" }),
+  ).toHaveAttribute("href", "/polityka-prywatnosci/");
+
+  const all = page.getByRole("radio", { name: /Wszystkie/ });
+  await all.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByRole("radio", { name: /PCOS/ })).toBeChecked();
+  await expect(cards).toHaveCount(3);
+  await expect(page).toHaveURL(/kategoria=pcos|\/kategoria\/pcos\//);
+  await page.getByRole("radio", { name: "Perimenopauza" }).check();
+  await expect(cards).toHaveCount(3);
+  await expect(
+    page.locator('.ebooks3a-card[data-book-topic="pcos"]:visible'),
+  ).toHaveCount(0);
+  await all.check();
+  await expect(cards).toHaveCount(6);
+  expect(posts).toEqual([]);
+
+  await page.goto("/ebooki/kategoria/pcos/");
+  await expect(page.getByRole("radio", { name: /PCOS/ })).toBeChecked();
+  await expect(cards).toHaveCount(3);
+
+  await page.goto("/en/ebooks/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /More clarity\./,
+  );
+  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
+    /Więcej jasności/,
+  );
+  await expect(
+    page.getByRole("link", { name: "Polski" }).first(),
+  ).toHaveAttribute("href", "/ebooki/");
+
+  const missing = await page.goto("/en/ebooki/");
+  expect(missing?.status()).toBe(404);
+});
+
+test("ebook collection categories work without JavaScript", async ({
+  browser,
+}) => {
+  const page = await browser.newPage({
+    javaScriptEnabled: false,
+    viewport: { width: 320, height: 900 },
+  });
+  await page.goto("/ebooki/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    /Więcej jasności/,
+  );
+  await expect(
+    page.locator(".ebooks3a-grid .ebooks3a-card:visible"),
+  ).toHaveCount(6);
+  await page.getByRole("radio", { name: "Perimenopauza" }).check();
+  await expect(
+    page.locator(".ebooks3a-grid .ebooks3a-card:visible"),
+  ).toHaveCount(3);
+  await expect(page.locator('[data-count="perimenopause"]')).toBeVisible();
+  await page.goto("/ebooki/kategoria/pcos/");
+  await expect(page.getByRole("radio", { name: /PCOS/ })).toBeChecked();
+  await expect(
+    page.locator(".ebooks3a-grid .ebooks3a-card:visible"),
+  ).toHaveCount(3);
+  await page.close();
 });
 
 test("landing pages, blog and missing English translation", async ({

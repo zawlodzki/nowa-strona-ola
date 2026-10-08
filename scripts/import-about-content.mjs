@@ -40,8 +40,7 @@ const GAPS = [
   {
     id: "ebook-collection-route",
     status: "deferred",
-    detail:
-      "Materiały e-booków prowadzą do homepage #ebooki do czasu pakietu 5.",
+    detail: "Materiały e-booków prowadzą do kolekcji /ebooki/ (pakiet 5).",
   },
 ];
 

@@ -172,6 +172,12 @@ export function fixtureEbooksWithLanding() {
   return [pcosEbookFixture("pl"), pcosEbookFixture("en")];
 }
 
+export function fixtureEbooksForLanguage(language: Locale) {
+  return [...ebookFixtures(language)].sort(
+    (left, right) => left.sortOrder - right.sortOrder,
+  );
+}
+
 export function pcosEbookHref(language: Locale) {
   return ebookPath(language, PCOS_SLUG[language]);
 }

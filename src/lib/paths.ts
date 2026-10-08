@@ -36,8 +36,39 @@ export function consultationPath(language: Locale): string {
   return language === "pl" ? "/konsultacje/" : "/en/consultations/";
 }
 
-export function ebookCollectionPath(language: Locale): string {
-  return language === "pl" ? "/ebooki/" : "/en/ebooks/";
+export const EBOOK_TOPICS = ["pcos", "perimenopause"] as const;
+export type EbookTopicFilter = (typeof EBOOK_TOPICS)[number];
+export type EbookCollectionFilter = "all" | EbookTopicFilter;
+
+export function parseEbookCollectionFilter(
+  value: string | null | undefined,
+): EbookCollectionFilter {
+  if (value === "pcos" || value === "perimenopause") return value;
+  return "all";
+}
+
+export function ebookCollectionFilterParam(
+  language: Locale,
+): "kategoria" | "category" {
+  return language === "pl" ? "kategoria" : "category";
+}
+
+export function ebookCollectionPath(
+  language: Locale,
+  filter: EbookCollectionFilter = "all",
+): string {
+  const base = language === "pl" ? "/ebooki/" : "/en/ebooks/";
+  if (filter === "all") return base;
+  const segment = language === "pl" ? "kategoria" : "category";
+  return `${base}${segment}/${filter}/`;
+}
+
+export function ebookCollectionQueryPath(
+  language: Locale,
+  filter: EbookCollectionFilter,
+): string {
+  if (filter === "all") return ebookCollectionPath(language);
+  return `${ebookCollectionPath(language)}?${ebookCollectionFilterParam(language)}=${filter}`;
 }
 
 export function ebookPath(language: Locale, slug: string): string {

@@ -25,6 +25,7 @@ import {
   toTextImage,
 } from "@/content/map-sections";
 import { assertKnownSections, type KnownSectionType } from "@/content/sections";
+import { toEbookCollection } from "@/content/map-ebook-collection";
 import { formatPriceGross, topicLabel } from "@/lib/offer";
 import type { PageContent } from "@/sanity/repository";
 
@@ -326,6 +327,19 @@ export function serializeSection(section: Section, language: Locale): string {
         .filter(Boolean)
         .join("\n\n");
     }
+    case "ebookCollectionSection": {
+      const content = toEbookCollection(section, []);
+      return [
+        heading(2, content.title),
+        content.lead,
+        heading(3, content.catalogTitle),
+        content.catalogLead,
+        content.note,
+        content.emptyMessage,
+      ]
+        .filter(Boolean)
+        .join("\n\n");
+    }
     default: {
       const unknownType = (section as { _type?: string })._type ?? "brak";
       return serializeUnknown(unknownType);
@@ -367,4 +381,6 @@ export const sectionMarkdownExamples: Record<KnownSectionType, string> = {
   serviceOfferSection: "## Konsultacje\n\n450 zł / 60 minut",
   credentialsSection:
     "## Wiedza, którą możesz sprawdzić.\n\n- Dietetyka kliniczna, Śląski Uniwersytet Medyczny",
+  ebookCollectionSection:
+    "## Więcej jasności. W Twoim tempie.\n\n## Wszystkie e-booki",
 };

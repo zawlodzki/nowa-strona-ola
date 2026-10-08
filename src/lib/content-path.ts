@@ -5,6 +5,11 @@ export type ContentRoute =
   | { kind: "page"; language: Locale; slug: string }
   | { kind: "article"; language: Locale; slug: string }
   | { kind: "ebook"; language: Locale; slug: string }
+  | {
+      kind: "ebookCollection";
+      language: Locale;
+      topic: "all" | "pcos" | "perimenopause";
+    }
   | { kind: "blogIndex"; language: Locale; page: number }
   | { kind: "blogCategory"; language: Locale; slug: string; page: number }
   | { kind: "unknown" };
@@ -41,8 +46,26 @@ function parseLocalized(segments: string[], language: Locale): ContentRoute {
   }
 
   const ebookRoot = language === "pl" ? "ebooki" : "ebooks";
-  if (segments[0] === ebookRoot && segments.length === 2 && segments[1]) {
-    return { kind: "ebook", language, slug: segments[1] };
+  const otherEbookRoot = language === "pl" ? "ebooks" : "ebooki";
+  if (segments[0] === otherEbookRoot) {
+    return { kind: "unknown" };
+  }
+  if (segments[0] === ebookRoot) {
+    const categoryWord = language === "pl" ? "kategoria" : "category";
+    if (segments.length === 1) {
+      return { kind: "ebookCollection", language, topic: "all" };
+    }
+    if (
+      segments.length === 3 &&
+      segments[1] === categoryWord &&
+      (segments[2] === "pcos" || segments[2] === "perimenopause")
+    ) {
+      return { kind: "ebookCollection", language, topic: segments[2] };
+    }
+    if (segments.length === 2 && segments[1]) {
+      return { kind: "ebook", language, slug: segments[1] };
+    }
+    return { kind: "unknown" };
   }
 
   if (segments.length === 1) {

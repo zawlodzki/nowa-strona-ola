@@ -1,5 +1,5 @@
 ---
-import type { FormCopy } from "@/sections/types";
+import type { FormCopy, FormFieldCopy } from "@/sections/types";
 import Button from "./Button.astro";
 
 interface Props {
@@ -9,6 +9,17 @@ interface Props {
 }
 
 const { content, idPrefix = "", lang } = Astro.props;
+const textFields = content.fields.filter((field) => field.input !== "checkbox");
+const checkboxFields = content.fields.filter(
+  (field) => field.input === "checkbox",
+);
+const emailPlaceholder =
+  lang === "pl" ? "np. ola@przyklad.pl" : "e.g. ola@example.com";
+
+function fieldIds(field: FormFieldCopy) {
+  const fieldId = `${idPrefix}${field.name}`;
+  return { fieldId, errorId: `${fieldId}-error` };
+}
 ---
 
 <form
@@ -19,46 +30,62 @@ const { content, idPrefix = "", lang } = Astro.props;
   data-demo-form
   data-success={content.success}
 >
-  {content.fields.map((field) => {
-    const fieldId = `${idPrefix}${field.name}`;
-    const errorId = `${fieldId}-error`;
-    if (field.input === "checkbox") {
-      return (
-        <div class="ao-field">
-          <label class="ao-checkbox">
-            <input
-              id={fieldId}
-              name={field.name}
-              type="checkbox"
-              value="on"
-              required={field.required}
-              aria-describedby={errorId}
-              data-input="checkbox"
-              data-required={field.required ? "true" : "false"}
-            />
-            <span>{field.label}</span>
-          </label>
-          <p id={errorId} class="ao-field__error" hidden>
-            {field.errorMessage}
-          </p>
-        </div>
-      );
-    }
+  {textFields.map((field) => {
+    const { fieldId, errorId } = fieldIds(field);
+    const isEmail = field.input === "email";
+    const input = (
+      <input
+        class="ao-input"
+        id={fieldId}
+        name={field.name}
+        type={isEmail ? "email" : "text"}
+        required={field.required}
+        autocomplete={isEmail ? "email" : undefined}
+        maxlength={isEmail ? 254 : 100}
+        placeholder={
+          field.placeholder ?? (isEmail ? emailPlaceholder : undefined)
+        }
+        aria-describedby={errorId}
+        data-input={field.input}
+        data-required={field.required ? "true" : "false"}
+      />
+    );
     return (
       <div class="ao-field">
         <label for={fieldId}>{field.label}</label>
-        <input
-          class="ao-input"
-          id={fieldId}
-          name={field.name}
-          type={field.input === "email" ? "email" : "text"}
-          required={field.required}
-          autocomplete={field.input === "email" ? "email" : undefined}
-          maxlength={field.input === "email" ? 254 : 100}
-          aria-describedby={errorId}
-          data-input={field.input}
-          data-required={field.required ? "true" : "false"}
-        />
+        {isEmail ? (
+          <div class="ao-form__row">
+            {input}
+            <Button as="button" type="submit" arrow disabled>
+              {content.submit}
+            </Button>
+          </div>
+        ) : (
+          input
+        )}
+        <p id={errorId} class="ao-field__error" hidden>
+          {field.errorMessage}
+        </p>
+      </div>
+    );
+  })}
+  {checkboxFields.map((field) => {
+    const { fieldId, errorId } = fieldIds(field);
+    return (
+      <div class="ao-field">
+        <label class="ao-checkbox">
+          <input
+            id={fieldId}
+            name={field.name}
+            type="checkbox"
+            value="on"
+            required={field.required}
+            aria-describedby={errorId}
+            data-input="checkbox"
+            data-required={field.required ? "true" : "false"}
+          />
+          <span>{field.label}</span>
+        </label>
         <p id={errorId} class="ao-field__error" hidden>
           {field.errorMessage}
         </p>
@@ -70,9 +97,11 @@ const { content, idPrefix = "", lang } = Astro.props;
       ? "Makieta formularza. Dane nie są zapisywane ani wysyłane."
       : "Demonstration form. Nothing is stored or sent."}
   </p>
-  <Button as="button" type="submit" disabled>
-    {content.submit}
-  </Button>
+  {!textFields.some((field) => field.input === "email") && (
+    <Button as="button" type="submit" arrow disabled>
+      {content.submit}
+    </Button>
+  )}
   <p class="status" role="status" aria-live="polite"></p>
   <noscript>
     <p>{content.noscript}</p>

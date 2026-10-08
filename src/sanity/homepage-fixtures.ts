@@ -4,6 +4,8 @@ import {
   DISPLAY_LABEL_COOPERATION,
   EBOOK_SEED,
   homepageCopy,
+  footerLegalLinks,
+  footerSocialLinks,
   homepageHeaderCta,
   homepageMediaKeys,
   homepageNavigation,
@@ -11,7 +13,7 @@ import {
   TESTIMONIAL_QUOTES_EN,
   TESTIMONIAL_QUOTES_PL,
 } from "@/content/homepage-seed";
-import { consultationPath } from "@/lib/paths";
+import { consultationPath, ebookCollectionPath } from "@/lib/paths";
 
 function media(
   key: string,
@@ -45,6 +47,7 @@ export function newsletterFormFixture(language: Locale) {
         name: "email",
         input: "email",
         label: copy.emailLabel,
+        placeholder: copy.emailPlaceholder,
         errorMessage: copy.emailError,
         required: "required",
         options: null,
@@ -158,8 +161,8 @@ export function homepageSettingsFixture(language: Locale) {
     defaultSeo: { title: copy.seoTitle, description: copy.seoDescription },
     navigation: homepageNavigation(language),
     headerCta: homepageHeaderCta(language),
-    legalLinks: [],
-    socialLinks: [],
+    legalLinks: footerLegalLinks(language),
+    socialLinks: footerSocialLinks(),
     translation: {
       language: language === "pl" ? ("en" as const) : ("pl" as const),
     },
@@ -269,7 +272,7 @@ export function homepageSections(language: Locale) {
       note: copy.ebooksNote,
       collection: {
         label: copy.ebooksCollection,
-        href: `#${ebookAnchor}`,
+        href: ebookCollectionPath(language),
         emphasis: "default",
       },
       items: ebooks,

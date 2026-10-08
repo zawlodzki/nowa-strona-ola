@@ -305,6 +305,22 @@ body.ao-site {
   grid-template-columns: minmax(0, 1fr);
   gap: var(--ao-space-12);
 }
+.ao-form__row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ao-space-12);
+}
+.ao-form__row .ao-input {
+  width: 100%;
+  flex: auto;
+}
+.ao-form__row .ao-button {
+  padding-inline: var(--ao-space-24);
+  gap: var(--ao-space-24);
+  white-space: normal;
+  max-width: 100%;
+}
 .ao-field {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -320,9 +336,17 @@ body.ao-site {
   padding: var(--ao-space-12) var(--ao-space-16);
   background: var(--ao-background);
   color: var(--ao-ink);
-  border: 1px solid var(--ao-muted);
-  border-radius: var(--ao-radius-control);
+  border: 1px solid var(--ao-line);
+  border-radius: var(--ao-radius-panel);
   font-size: 16px;
+}
+.ao-price {
+  font-size: 17px;
+}
+.ao-price small {
+  display: block;
+  color: var(--ao-muted);
+  font-size: 11px;
 }
 .ao-input::placeholder {
   color: var(--ao-muted);

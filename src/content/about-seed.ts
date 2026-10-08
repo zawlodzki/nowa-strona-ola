@@ -1,6 +1,6 @@
 import type { Locale } from "@ola/shared";
 
-import { blogPath, homePath } from "@/lib/paths";
+import { blogPath, ebookCollectionPath, homePath } from "@/lib/paths";
 
 export const aboutCopy = {
   pl: {
@@ -149,7 +149,7 @@ export function aboutMaterialsHref(
   kind: "ebooks" | "blog",
 ): string {
   if (kind === "blog") return blogPath(language);
-  return `${homePath(language)}#ebooki`;
+  return ebookCollectionPath(language);
 }
 
 export function aboutContactHref(language: Locale): string {

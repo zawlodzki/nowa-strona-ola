@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-import { mapHomepage } from "../../src/content/map-homepage";
+import { mapHomepage, shellLinks } from "../../src/content/map-homepage";
 import {
   serializePage,
   serializeSection,
@@ -11,7 +11,7 @@ import {
   knownSectionTypes,
 } from "../../src/content/sections";
 import { validateDemoField } from "../../src/lib/validate-demo";
-import { getPage } from "../../src/sanity/repository";
+import { getPage, getSiteSettings } from "../../src/sanity/repository";
 import { formatPriceGross, formatServicePrice } from "../../src/lib/offer";
 
 describe("homepage 3a fixtures", () => {
@@ -35,6 +35,7 @@ describe("homepage 3a fixtures", () => {
       true,
     );
     expect(view.ebooks.items[0]?.href).toBe("/ebooki/suplementy-w-pcos/");
+    expect(view.ebooks.collection?.href).toBe("/ebooki/");
     expect(view.ebooks.items[0]?.slug).toBe("suplementy-w-pcos");
     expect(view.consultation.action.href).toBe("https://cal.com");
     expect(view.consultation.priceLabel).toBe("450 zł / 60 minut");
@@ -43,6 +44,16 @@ describe("homepage 3a fixtures", () => {
     expect(view.newsletter.fields.map((field) => field.name)).toEqual([
       "email",
       "consent",
+    ]);
+    expect(view.newsletter.fields[0]?.label).toBe("Twój adres e-mail");
+    expect(view.newsletter.fields[0]?.placeholder).toBe("np. ola@przyklad.pl");
+    expect(view.ebooks.items.map((item) => item.coverTone)).toEqual([
+      "light",
+      "cherry",
+      "light",
+      "light",
+      "cherry",
+      "light",
     ]);
   });
 
@@ -75,6 +86,22 @@ describe("section serializers", () => {
     expect(() =>
       assertKnownSections([{ _key: "x", _type: "mysterySection" }]),
     ).toThrow("Nieznany typ sekcji");
+  });
+});
+
+describe("site chrome 3a fixtures", () => {
+  it("keeps mockup social and legal links in the shared footer", async () => {
+    const settings = await getSiteSettings("pl", { environment: {} });
+    const shell = shellLinks(settings);
+    expect(shell.socialLinks.map((link) => link.label)).toEqual([
+      "Instagram",
+      "Facebook",
+      "TikTok",
+    ]);
+    expect(shell.legalLinks.map((link) => link.label)).toEqual([
+      "Polityka prywatności",
+      "Regulamin",
+    ]);
   });
 });
 

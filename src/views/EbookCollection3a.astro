@@ -1,0 +1,591 @@
+---
+import type { Locale } from "@ola/shared";
+
+import BookCover from "@/design-system/components/BookCover.astro";
+import Breadcrumbs from "@/design-system/components/Breadcrumbs.astro";
+import Container from "@/design-system/components/Container.astro";
+import DemoForm from "@/design-system/components/DemoForm.astro";
+import Heading from "@/design-system/components/Heading.astro";
+import Newsletter from "@/design-system/components/Newsletter.astro";
+import PriceGross from "@/design-system/components/PriceGross.astro";
+import TextLink from "@/design-system/components/TextLink.astro";
+import BookCoverArt from "@/design-system/decorations/BookCoverArt.astro";
+import CoverStage from "@/design-system/decorations/CoverStage.astro";
+import {
+  ebookCollectionCopy,
+  ebookCountPhrase,
+  ebookFilterStatus,
+} from "@/content/ebook-collection-seed";
+import type { EbookCollectionView } from "@/content/map-ebook-collection";
+import { ebookCoverArt, ebookCoverLabels } from "@/lib/ebook-covers";
+import { currencyLabel, topicLabel } from "@/lib/offer";
+import {
+  ebookCollectionFilterParam,
+  ebookCollectionPath,
+  homePath,
+  type EbookCollectionFilter,
+} from "@/lib/paths";
+import { homepageMediaKeys } from "@/content/homepage-seed";
+
+export interface Props {
+  lang: Locale;
+  content: EbookCollectionView;
+}
+
+const { lang, content } = Astro.props;
+const copy = ebookCollectionCopy[lang];
+const pl = lang === "pl";
+const { collection, filter, counts, availableTopics, isEmpty } = content;
+const param = ebookCollectionFilterParam(lang);
+const topics: { value: EbookCollectionFilter; label: string; count: number }[] =
+  [
+    { value: "all", label: copy.allLabel, count: counts.all },
+    ...availableTopics.map((topic) => ({
+      value: topic,
+      label: topicLabel(topic, lang),
+      count: counts[topic],
+    })),
+  ];
+if (filter !== "all" && !topics.some((topic) => topic.value === filter)) {
+  topics.push({
+    value: filter,
+    label: topicLabel(filter, lang),
+    count: counts[filter],
+  });
+}
+const topicAnchor = {
+  pcos: collection.items.find((item) => item.topic === "pcos")?.slug,
+  perimenopause: collection.items.find((item) => item.topic === "perimenopause")
+    ?.slug,
+};
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      name: collection.title.replaceAll("\n", " "),
+      description: collection.lead,
+      url: content.href,
+    },
+    {
+      "@type": "ItemList",
+      itemListElement: content.visibleItems.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: item.href,
+        name: item.title,
+      })),
+    },
+  ],
+};
+---
+
+<main id="main" class="ebooks3a">
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(jsonLd)}
+  ></script>
+  <section class="ebooks3a-intro" id="start">
+    <Container>
+      <Breadcrumbs
+        label={pl ? "Ścieżka nawigacji" : "Breadcrumb"}
+        links={[
+          { href: homePath(lang), label: copy.breadcrumbHome },
+          {
+            href: content.href,
+            label: copy.breadcrumbCurrent,
+            current: true,
+          },
+        ]}
+      />
+      <div class="ebooks3a-heading">
+        <Heading as="h1" size="display">
+          {collection.title}
+        </Heading>
+        <div>
+          <p>{collection.lead}</p>
+          {!isEmpty && (
+            <TextLink href="#kolekcja" arrowDirection="down">
+              {collection.findTopicLabel}
+            </TextLink>
+          )}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section
+    class="ebooks3a-catalog"
+    id="kolekcja"
+    aria-labelledby="collection-title"
+    data-ebook-collection
+    data-base-path={ebookCollectionPath(lang)}
+    data-filter-param={param}
+  >
+    <Container>
+      <div class="ebooks3a-catalog-heading">
+        <Heading id="collection-title">{collection.catalogTitle}</Heading>
+        <p>{collection.catalogLead}</p>
+      </div>
+      {isEmpty ? (
+        <p class="ebooks3a-empty">{collection.emptyMessage}</p>
+      ) : (
+        <>
+          <div class="ebooks3a-toolbar">
+            <fieldset class="ebooks3a-filter">
+              <legend>{copy.filterLegend}</legend>
+              <div class="ebooks3a-options">
+                {topics.map((topic) => (
+                  <label>
+                    <input
+                      type="radio"
+                      name="category"
+                      value={topic.value}
+                      checked={filter === topic.value}
+                      aria-controls="ebook-grid"
+                    />
+                    <span>
+                      {topic.label}
+                      <small>{topic.count}</small>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <p class="ebooks3a-count">
+              <span data-count="all">{ebookCountPhrase(counts.all, lang)}</span>
+              {availableTopics.map((topic) => (
+                <span data-count={topic}>
+                  {ebookCountPhrase(
+                    counts[topic],
+                    lang,
+                    topicLabel(topic, lang),
+                  )}
+                </span>
+              ))}
+            </p>
+          </div>
+          <p
+            class="sr-only"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            id="filter-status"
+          >
+            {ebookFilterStatus(
+              filter === "all" ? counts.all : counts[filter],
+              lang,
+              filter === "all" ? undefined : topicLabel(filter, lang),
+            )}
+          </p>
+          <div class="ebooks3a-grid" id="ebook-grid">
+            {collection.items.map((item) => {
+              const art = ebookCoverArt(item.slug);
+              return (
+                <article
+                  class="ebooks3a-card"
+                  data-book-topic={item.topic}
+                  id={
+                    topicAnchor[item.topic] === item.slug
+                      ? `books-${item.topic}`
+                      : undefined
+                  }
+                >
+                  <a class="ebooks3a-cover-link" href={item.href}>
+                    <CoverStage variant={art.variant}>
+                      <BookCover
+                        title={item.title}
+                        subtitle={item.subtitle ?? ""}
+                        author={item.authorName}
+                        topic={copy.coverTopic}
+                        tone={item.coverTone}
+                      >
+                        <BookCoverArt
+                          slot="art"
+                          kind={art.kind}
+                          labels={ebookCoverLabels(art.kind, lang)}
+                          imageSrc={
+                            art.kind === "nutrition"
+                              ? homepageMediaKeys.food
+                              : undefined
+                          }
+                        />
+                      </BookCover>
+                    </CoverStage>
+                  </a>
+                  <div class="ebooks3a-meta">
+                    <span>{topicLabel(item.topic, lang)}</span>
+                    <span>E-book</span>
+                  </div>
+                  <h3>
+                    <a href={item.href}>{item.title}</a>
+                  </h3>
+                  <p>{item.description}</p>
+                  <div class="ebooks3a-action">
+                    <PriceGross
+                      class="ebooks3a-price"
+                      amount={item.priceGross}
+                      unit={currencyLabel(item.currency, lang)}
+                      note={pl ? "brutto" : "gross"}
+                    />
+                    <TextLink href={item.href}>
+                      {collection.cardActionLabel}
+                    </TextLink>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+          <p class="ebooks3a-empty ebooks3a-empty--category">
+            {collection.emptyCategoryMessage}
+          </p>
+          {collection.note && <p class="ebooks3a-note">{collection.note}</p>}
+        </>
+      )}
+    </Container>
+  </section>
+
+  <Newsletter
+    id="newsletter"
+    title={content.newsletter.title}
+    description={content.newsletter.lead}
+  >
+    <DemoForm slot="form" content={content.newsletter} lang={lang} />
+  </Newsletter>
+</main>
+
+<script>
+  const root = document.querySelector("[data-ebook-collection]");
+  if (root instanceof HTMLElement) {
+    const inputs = Array.from(
+      root.querySelectorAll<HTMLInputElement>('input[name="category"]'),
+    );
+    const status = document.querySelector("#filter-status");
+    const basePath = root.dataset.basePath ?? "/ebooki/";
+    const param = root.dataset.filterParam ?? "kategoria";
+
+    function pathFor(value: string) {
+      if (value === "all") return basePath;
+      const segment = param === "kategoria" ? "kategoria" : "category";
+      return `${basePath}${segment}/${value}/`;
+    }
+
+    function applyFromLocation() {
+      const url = new URL(window.location.href);
+      const fromQuery = url.searchParams.get(param);
+      const parts = url.pathname.split("/").filter(Boolean);
+      const segmentIndex = parts.findIndex(
+        (part) => part === "kategoria" || part === "category",
+      );
+      const fromPath = segmentIndex >= 0 ? parts[segmentIndex + 1] : undefined;
+      const value = fromPath || fromQuery || "all";
+      const selected =
+        inputs.find((input) => input.value === value) ?? inputs[0];
+      if (selected) selected.checked = true;
+      if (status && selected) {
+        const count = root?.querySelector(`[data-count="${selected.value}"]`);
+        status.textContent = count?.textContent ?? "";
+      }
+    }
+
+    for (const input of inputs) {
+      input.addEventListener("change", () => {
+        if (!input.checked) return;
+        const url = new URL(window.location.href);
+        url.pathname = pathFor(input.value);
+        if (input.value === "all") url.searchParams.delete(param);
+        else url.searchParams.set(param, input.value);
+        window.history.pushState(null, "", url);
+        const count = root.querySelector(`[data-count="${input.value}"]`);
+        if (status) status.textContent = count?.textContent ?? "";
+      });
+    }
+    applyFromLocation();
+    window.addEventListener("popstate", applyFromLocation);
+  }
+</script>
+
+<style>
+  .ebooks3a-intro {
+    padding-block: 32px 64px;
+  }
+  .ebooks3a-intro :global(.ao-breadcrumbs) {
+    font-size: 14px;
+    margin-bottom: 44px;
+  }
+  .ebooks3a-heading {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+  .ebooks3a-heading :global(.ao-heading--display) {
+    font-size: clamp(48px, 6.2vw, 88px);
+    letter-spacing: -0.055em;
+    line-height: 1.02;
+  }
+  .ebooks3a-heading p {
+    color: var(--ao-muted);
+    max-width: 42ch;
+    font-size: 18px;
+  }
+  .ebooks3a-heading :global(.ao-text-link) {
+    margin-top: 24px;
+  }
+  .ebooks3a-catalog {
+    padding-bottom: 96px;
+  }
+  .ebooks3a-catalog-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+  .ebooks3a-catalog-heading :global(.ao-heading) {
+    font-size: 32px;
+    letter-spacing: -0.035em;
+  }
+  .ebooks3a-catalog-heading p {
+    color: var(--ao-muted);
+    font-size: 15px;
+  }
+  .ebooks3a-toolbar {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 28px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--ao-line);
+  }
+  .ebooks3a-filter {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+  .ebooks3a-filter legend {
+    font-size: 14px;
+    color: var(--ao-muted);
+    margin-bottom: 12px;
+  }
+  .ebooks3a-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ebooks3a-options label {
+    position: relative;
+    cursor: pointer;
+  }
+  .ebooks3a-options input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+  }
+  .ebooks3a-options label > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    border: 1px solid var(--ao-line);
+    border-radius: var(--ao-radius-control);
+    min-height: 48px;
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+  .ebooks3a-options small {
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  .ebooks3a-options input:checked + span {
+    background: var(--ao-primary);
+    border-color: var(--ao-primary);
+    color: var(--ao-on-primary);
+  }
+  .ebooks3a-options input:focus-visible + span {
+    outline: 2px solid var(--ao-primary);
+    outline-offset: 4px;
+  }
+  .ebooks3a-options label:hover input:not(:checked) + span {
+    background: var(--ao-surface);
+    border-color: var(--ao-primary);
+  }
+  .ebooks3a-count {
+    font-size: 14px;
+    color: var(--ao-muted);
+    padding-bottom: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .ebooks3a-count [data-count]:not([data-count="all"]) {
+    display: none;
+  }
+  .ebooks3a-catalog:has(input[value="pcos"]:checked)
+    .ebooks3a-card:not([data-book-topic="pcos"]),
+  .ebooks3a-catalog:has(input[value="perimenopause"]:checked)
+    .ebooks3a-card:not([data-book-topic="perimenopause"]) {
+    display: none;
+  }
+  .ebooks3a-catalog:has(input[value="pcos"]:checked) [data-count="all"],
+  .ebooks3a-catalog:has(input[value="perimenopause"]:checked)
+    [data-count="all"] {
+    display: none;
+  }
+  .ebooks3a-catalog:has(input[value="pcos"]:checked) [data-count="pcos"],
+  .ebooks3a-catalog:has(input[value="perimenopause"]:checked)
+    [data-count="perimenopause"] {
+    display: inline;
+  }
+  .ebooks3a-catalog:has(input[value="pcos"]:checked):not(
+      :has(.ebooks3a-card[data-book-topic="pcos"])
+    )
+    .ebooks3a-empty--category,
+  .ebooks3a-catalog:has(input[value="perimenopause"]:checked):not(
+      :has(.ebooks3a-card[data-book-topic="perimenopause"])
+    )
+    .ebooks3a-empty--category {
+    display: block;
+  }
+  .ebooks3a-grid {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, max(280px, calc((100% - 56px) / 3))), 1fr)
+    );
+    gap: 56px 28px;
+  }
+  .ebooks3a-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .ebooks3a-cover-link {
+    display: block;
+  }
+  .ebooks3a-card h3 {
+    min-height: 0;
+    font-size: 24px;
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    margin-top: 8px;
+  }
+  .ebooks3a-card > p {
+    max-width: none;
+    min-height: 0;
+    margin-bottom: 24px;
+    margin-top: 8px;
+    font-size: 15px;
+    color: var(--ao-muted);
+  }
+  .ebooks3a-action {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--ao-line);
+  }
+  .ebooks3a-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--ao-muted);
+  }
+  .ebooks3a-price {
+    font-size: 17px;
+  }
+  .ebooks3a-price small {
+    font-size: 13px;
+  }
+  .ebooks3a-note {
+    margin-top: 36px;
+    max-width: 70ch;
+    font-size: 14px;
+    color: var(--ao-muted);
+  }
+  .ebooks3a-empty {
+    margin-top: 28px;
+    max-width: 50ch;
+    font-size: 16px;
+    color: var(--ao-muted);
+  }
+  .ebooks3a-empty--category {
+    display: none;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  @container page3a (max-width: 1000px) {
+    .ebooks3a-heading {
+      gap: 32px;
+    }
+    .ebooks3a-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @container page3a (max-width: 680px) {
+    .ebooks3a-intro {
+      padding-block: 20px 40px;
+    }
+    .ebooks3a-intro :global(.ao-breadcrumbs) {
+      margin-bottom: 32px;
+    }
+    .ebooks3a-heading {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .ebooks3a-heading :global(.ao-heading--display) {
+      font-size: clamp(44px, 10vw, 64px);
+    }
+    .ebooks3a-heading p {
+      font-size: 17px;
+    }
+    .ebooks3a-catalog-heading {
+      display: block;
+    }
+    .ebooks3a-catalog-heading p {
+      margin-top: 8px;
+    }
+    .ebooks3a-toolbar {
+      display: block;
+      padding-block: 24px;
+      margin-bottom: 24px;
+    }
+    .ebooks3a-options label > span {
+      padding-inline: 16px;
+      gap: 10px;
+    }
+    .ebooks3a-count {
+      padding: 0;
+      margin-top: 20px;
+    }
+    .ebooks3a-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .ebooks3a-card :global(.ao-cover-stage) {
+      min-height: 408px;
+      padding: 28px 16px;
+    }
+    .ebooks3a-catalog {
+      padding-bottom: 64px;
+    }
+  }
+</style>

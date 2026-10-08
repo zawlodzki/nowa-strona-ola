@@ -48,7 +48,7 @@ const GAPS = [
     id: "about-consultation-collection-routes",
     status: "open",
     detail:
-      "Trasy /o-mnie/ (pakiet 2) i /konsultacje/ (pakiet 3) są w kodzie. /ebooki/ nadal czeka na pakiet 5. Nawigacja „O mnie” i „Konsultacje” prowadzi do landingów.",
+      "Trasy /o-mnie/, /konsultacje/ i /ebooki/ są w kodzie. Nawigacja „E-booki” prowadzi do kolekcji.",
   },
 ];
 
@@ -207,7 +207,8 @@ function documents() {
         _key: "email",
         name: "email",
         input: "email",
-        label: "Adres e-mail",
+        label: "Twój adres e-mail",
+        placeholder: "np. ola@przyklad.pl",
         errorMessage: "Wpisz poprawny adres e-mail.",
         required: "required",
       },
@@ -237,7 +238,8 @@ function documents() {
         _key: "email",
         name: "email",
         input: "email",
-        label: "Email address",
+        label: "Your email address",
+        placeholder: "e.g. ola@example.com",
         errorMessage: "Enter a valid email address.",
         required: "required",
       },
@@ -280,7 +282,7 @@ function documents() {
     slug: { _type: "slug", current: slug },
     topic,
     cardDescription: title,
-    coverTone: sortOrder % 2 === 0 ? "cherry" : "light",
+    coverTone: sortOrder === 2 || sortOrder === 5 ? "cherry" : "light",
     availability: "planned",
     priceGross: 97,
     currency: "PLN",
@@ -300,7 +302,7 @@ function documents() {
     slug: { _type: "slug", current: slug },
     topic,
     cardDescription: `${title} — provisional English card copy.`,
-    coverTone: sortOrder % 2 === 0 ? "cherry" : "light",
+    coverTone: sortOrder === 2 || sortOrder === 5 ? "cherry" : "light",
     availability: "planned",
     priceGross: 97,
     currency: "PLN",
@@ -320,7 +322,7 @@ function documents() {
     siteTitle: "Aleksandra Olesiewicz",
     footerNote: "PCOS, insulinooporność i odżywianie dopasowane do życia.",
     navigation: [
-      { _key: "nav-ebooks", label: "E-booki", href: "/#ebooki" },
+      { _key: "nav-ebooks", label: "E-booki", href: "/ebooki/" },
       {
         _key: "nav-consultations",
         label: "Konsultacje",
@@ -335,6 +337,35 @@ function documents() {
       href: "/#newsletter",
       emphasis: "default",
     },
+    socialLinks: [
+      {
+        _key: "social-instagram",
+        label: "Instagram",
+        href: "https://www.instagram.com/",
+      },
+      {
+        _key: "social-facebook",
+        label: "Facebook",
+        href: "https://www.facebook.com/",
+      },
+      {
+        _key: "social-tiktok",
+        label: "TikTok",
+        href: "https://www.tiktok.com/",
+      },
+    ],
+    legalLinks: [
+      {
+        _key: "legal-privacy",
+        label: "Polityka prywatności",
+        href: "/polityka-prywatnosci/",
+      },
+      {
+        _key: "legal-terms",
+        label: "Regulamin",
+        href: "/regulamin/",
+      },
+    ],
     translation: { _type: "reference", _ref: "siteSettings-en" },
   };
   const settingsEn = {
@@ -343,7 +374,7 @@ function documents() {
     language: "en",
     footerNote: "PCOS, insulin resistance and nutrition that fits real life.",
     navigation: [
-      { _key: "nav-ebooks", label: "E-books", href: "/en/#ebooki" },
+      { _key: "nav-ebooks", label: "E-books", href: "/en/ebooks/" },
       {
         _key: "nav-consultations",
         label: "Consultations",
@@ -358,6 +389,18 @@ function documents() {
       href: "/en/#newsletter",
       emphasis: "default",
     },
+    legalLinks: [
+      {
+        _key: "legal-privacy",
+        label: "Privacy policy",
+        href: "/en/privacy/",
+      },
+      {
+        _key: "legal-terms",
+        label: "Terms",
+        href: "/en/terms/",
+      },
+    ],
     translation: { _type: "reference", _ref: settingsPl._id },
   };
 

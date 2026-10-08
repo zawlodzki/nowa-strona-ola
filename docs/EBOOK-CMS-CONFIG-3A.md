@@ -203,19 +203,24 @@ liczniki działają także bez JS przez natywne radio i CSS; JS dodaje odczyt UR
 historię przeglądarki i komunikat o wynikach. Bez JS adres nie ustawia filtra,
 ale ręczny wybór działa. Ceny, opisy i okładki zachowują wartości homepage.
 
-Proponowane rozszerzenie przyszłego modelu: `ebook.sortOrder` (liczba całkowita,
-≥0) i `ebookCollectionSection` z kontrolowanym wariantem `cherry3a`, polami
-`title`, `lead`, `catalogTitle`, `catalogLead`. Pełna kolekcja pobiera wszystkie
-opublikowane `ebook` w języku strony; nie utrzymywać drugiej tablicy produktów.
-Liczniki wyliczać z danych, puste kategorie pomijać. Dla pustej kolekcji renderer
-ma pokazać czytelny komunikat bez filtrów. Przyszłe testy muszą objąć puste
-kolekcje; obecny mockup demonstruje sześć produktów i dwie niepuste kategorie.
+W kodzie (pakiet 5): `ebook.sortOrder` (liczba całkowita, ≥0) oraz
+`ebookCollectionSection` z wariantem `cherry3a`, polami `title`, `lead`,
+`catalogTitle`, `catalogLead`, `findTopicLabel`, `cardActionLabel`, `note`,
+`emptyMessage`, `emptyCategoryMessage`. Copy tych pól jest **propozycją**.
+Pełna kolekcja pobiera wszystkie opublikowane `ebook` w języku strony; nie
+utrzymywać drugiej tablicy produktów.
+Liczniki wyliczać z danych, puste kategorie pomijać w chipach (z wyjątkiem
+aktualnie wybranej). Dla pustej kolekcji renderer pokazuje komunikat bez
+filtrów. Pusta kategoria ma komunikat i działa bez JS przez
+`/ebooki/kategoria/{pcos|perimenopause}/` (EN: `/en/ebooks/category/...`).
+Query `?kategoria=` / `?category=` wymaga JS. JSON-LD CollectionPage wskazuje
+pełną kolekcję; ItemList odzwierciedla widoczną listę. Makieta noindex nie
+deklaruje aktywnej sprzedaży.
 
-Proponowany adres `/ebooki/`, osobno `/en/ebooks/`. Markdown zawiera całą
-kolekcję w tym samym porządku, z kategoriami, cenami, statusem i linkami.
-Filtr pozostaje zachowaniem HTML, nie zmienia źródła danych Markdown.
-Przy wdrożeniu ustalić canonical dla adresów z filtrem i JSON-LD zgodne z
-widoczną listą; makieta noindex nie deklaruje aktywnej sprzedaży.
+Markdown zawiera całą kolekcję w tym samym porządku, z kategoriami, cenami,
+statusem i linkami. Filtr HTML nie zmienia źródła danych Markdown.
 
 [Bieżące wartości, źródła decyzji i mapowanie](HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026).
-Model produktu, kolekcja w Content Lake, Astro i serializery nadal niewykonane.
+Kod kolekcji (pakiet 5): renderer, schemat, GROQ, fixture, Markdown i dry-run
+importu bez zapisu. Copy i UX kolekcji pozostają propozycją. Content Lake
+bez dokumentów kolekcji.

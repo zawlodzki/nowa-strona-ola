@@ -8,6 +8,7 @@ import TextLink from "../design-system/components/TextLink.astro";
 import SiteHeader from "../design-system/components/SiteHeader.astro";
 import SiteFooter from "../design-system/components/SiteFooter.astro";
 import Newsletter from "../design-system/components/Newsletter.astro";
+import DemoForm from "../design-system/components/DemoForm.astro";
 import FormField from "../design-system/components/FormField.astro";
 import FaqItem from "../design-system/components/FaqItem.astro";
 import ContentCard from "../design-system/components/ContentCard.astro";
@@ -21,6 +22,7 @@ import Hero from "../design-system/components/Hero.astro";
 import BookArtDecisions from "../design-system/decorations/BookArtDecisions.astro";
 import CoverStage from "../design-system/decorations/CoverStage.astro";
 import SiteImage from "../design-system/components/SiteImage.astro";
+import { footerLegalLinks, footerSocialLinks } from "@/content/homepage-seed";
 const links = [
   { label: "Fundamenty", href: "#fundamentals" },
   { label: "Komponenty", href: "#components" },
@@ -118,7 +120,7 @@ const colors = [
             type="email"
             label="Adres e-mail"
             autocomplete="email"
-            placeholder="twoj@email.pl"
+            placeholder="np. ola@przyklad.pl"
             hint="Przykład pola z podpowiedzią."
           />
           <FormField
@@ -286,34 +288,44 @@ const colors = [
       title="Mniej szumu. Więcej wiedzy."
       description="Wspólny układ newslettera. Ten formularz demonstruje wygląd i nie wysyła danych."
     >
-      <div slot="form" class="ao-form">
-        <FormField
-          id="newsletter-email"
-          type="email"
-          label="Twój adres e-mail"
-          autocomplete="email"
-          placeholder="twoj@email.pl"
-        />
-        <Button disabled arrow>
-          Zapisz się — przykład
-        </Button>
-        <label class="ao-checkbox">
-          <input type="checkbox" />
-          Przykład zgody na otrzymywanie newslettera.
-        </label>
-        <p class="ao-form-note">
-          Integracja wysyłki oraz finalna treść zgody wymagają osobnego
-          wdrożenia.
-        </p>
-      </div>
+      <DemoForm
+        slot="form"
+        lang="pl"
+        idPrefix="ds-"
+        content={{
+          title: "Newsletter",
+          lead: "Przykład",
+          submit: "Chcę otrzymywać newsletter",
+          success: "Dane poprawne. Nic nie wysłano.",
+          noscript:
+            "Włącz JavaScript, aby sprawdzić formularz demonstracyjny. Dane nie są zapisywane ani wysyłane.",
+          fields: [
+            {
+              name: "email",
+              input: "email",
+              label: "Twój adres e-mail",
+              placeholder: "np. ola@przyklad.pl",
+              errorMessage: "Wpisz poprawny adres e-mail.",
+              required: true,
+            },
+            {
+              name: "consent",
+              input: "checkbox",
+              label: "Przykład zgody na otrzymywanie newslettera.",
+              errorMessage: "Zaznacz zgodę, aby sprawdzić formularz.",
+              required: true,
+            },
+          ],
+        }}
+      />
     </Newsletter>
   </main>
   <SiteFooter
     homeHref="/design-system/"
     description="Odżywianie, które pasuje do Twojego życia."
     links={links}
-    socialLinks={[]}
-    legalLinks={[]}
+    socialLinks={footerSocialLinks()}
+    legalLinks={footerLegalLinks("pl")}
     copyright="Design system 3a · katalog implementacyjny · 2026"
   />
 </Layout3a>

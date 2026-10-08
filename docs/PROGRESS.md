@@ -1,9 +1,109 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 4 + wyrównanie makiet 3a / SVG).
+Aktualizacja: 2026-10-07 (pakiet 5 — wyrównanie makiety kolekcji).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja poprawek makiety kolekcji — 07.10.2026
+
+Zakres: nic nie wypada względem `ebooks-3a.html` (zasada Grzesia). Poprawki
+na tym samym branchu co pakiet 5.
+
+Wykonane:
+
+1. Tony okładek 4–6 w `EBOOK_SEED`: „Waga Cię okłamuje” i „Noc zaczyna się o
+   osiemnastej” jasne, „Czy to już?” wiśniowa. Ten sam seed zasila homepage,
+   kolekcję i landing.
+2. Cena kart: „97 zł” + mniejsze „brutto” w nowej linii (`PriceGross` /
+   `.ao-price small { display: block }`), także na homepage.
+3. Newsletter 3a (`DemoForm` wszędzie tam, gdzie 3a go używa): etykieta
+   „Twój adres e-mail”, placeholder `np. ola@przyklad.pl`, zaokrąglone pole
+   (`--ao-radius-panel`), rząd e-mail + przycisk ze strzałką, checkbox po
+   przycisku.
+4. Stopka wspólna: Instagram / Facebook / TikTok ze strzałkami oraz Polityka
+   prywatności / Regulamin. Pola `siteSettings` już istniały; uzupełniono
+   fixture i fallback przy pustych tablicach.
+5. Nagłówek newslettera w seedzie homepage ma łamanie wiersza jak w makiecie.
+
+Kontrole (Node 24.21.0): `npm run verify` **PASS** — 96 unit, 96 E2E
+(Chromium/Firefox/WebKit). CSS gzip `dist/_astro`: **24 706 B** (limit
+tymczasowy 32 KiB); JS gzip 5 770 B.
+
+verify-ola (`VERIFY_RUN_ID=ola-1791410509`, baza `http://127.0.0.1:4340`):
+`GET /` 200, `/en/ebooki/` 404, `browser posts` = `[]`. Zrzuty i porównania
+obok makiety: `/opt/cursor/artifacts/screenshots/`
+(`compare-collection-pl-desktop.png`, `compare-collection-pl-mobile.png`,
+`compare-collection-en-desktop.png`, `compare-collection-pcos.png`,
+`compare-collection-perimenopauza.png`, `collection-pl-nojs.png`,
+`compare-home-desktop.png`). `collection-empty.png` zostaje z wcześniejszego
+zrzutu pustej fixture; nie przebudowywano `dist/` w tej sesji.
+
+Pozostałe różnice względem makiety (nie ucięcie kolekcji): „English” /
+„Polski” w nagłówku (i18n), demonstracyjny tekst zgody zamiast copy z
+linkiem do polityki w checkboxie, ikona przełącznika motywu. Copy zgody
+zostaje demonstracyjne, żeby nie sugerować prawdziwej wysyłki.
+
+Do decyzji (brak prawdziwych adresów):
+
+- Profile: Instagram, Facebook, TikTok Oli. Fixture używa stron głównych
+  platform, nie kont.
+- Strony prawne: `/polityka-prywatnosci/`, `/regulamin/` (EN `/en/privacy/`,
+  `/en/terms/`) — brak dokumentów i treści.
+
+Następny krok: pakiet 6 BlogCollection3a.
+
+### Sesja pakietu 5 — kolekcja e-booków 3a — 07.10.2026
+
+Zakres: `EbookCollection3a` na `/ebooki/` i `/en/ebooks/` według makiety
+`ebooks-3a.html`. Te same dokumenty `ebook` co homepage i landing (referencje,
+bez drugiej tablicy produktów). Kategorie Wszystkie / PCOS / Perimenopauza
+z licznikami, CSS `:has` bez JS, ścieżki `/ebooki/kategoria/{topic}/` oraz
+query `?kategoria=` z JS. Pusta kolekcja ukrywa filtry; pusta kategoria ma
+komunikat. Karty używają `ebookPath`; cena 97 zł brutto i status przygotowania
+jak w makiecie. Newsletter to `DemoForm` bez POST. Copy i UX kolekcji są
+**propozycją**.
+
+Kod: schemat `ebookCollectionSection` (cherry3a), GROQ publiczny i preview,
+TypeGen (19 kwerend, 67 typów schematu), mappery, serializer Markdown
+z przykładem, fixture, dry-run importu (`npm run import:ebook-collection`,
+`--write` kończy się kodem 2). Okładka „Szczupła, a jednak PCOS” używa
+`SiteImage` + `astro:assets` (`food` → `src/assets/editorial/food-editorial.webp`);
+pozostałe okładki to SVG w `src/design-system/decorations/` (`BookCoverArt`).
+Wyrównanie akcentów matcha z PR #31 jest poza tym pakietem.
+
+Kontrole tej sesji (Node 24.21.0):
+
+- `npm run verify` PASS: 95 unit, 96 E2E (Chromium/Firefox/WebKit).
+- CSS gzip `dist/_astro`: **24 636 B** (limit tymczasowy 32 KiB); JS gzip
+  5 770 B. Designu nie wycinano pod budżet.
+- Dry-run importu: 2 dokumenty `page`, 0 duplikatów `ebook`, bez zapisu.
+- verify-ola (`VERIFY_RUN_ID=ola-1791408926`, baza `http://127.0.0.1:4340`):
+  PL/EN, Wszystkie / PCOS / Perimenopauza, ścieżka `/ebooki/kategoria/pcos/`,
+  bez JS, desktop 1280 i mobile 390. `browser posts` = `[]`. `/en/ebooki/`
+  → 404. Dowody: `/tmp/ola-verify-evidence/ola-1791408926/`.
+- Porównanie z makietą: siatka, filtry, okładki, ceny 97 zł brutto i nota
+  przygotowania 1:1 w `<main>`. Różnice shella (Blog i English w menu,
+  DemoForm newslettera, stopka bez social z makiety) pochodzą ze wspólnego
+  `SiteShell3a` z pakietów 1–4, nie z ucięcia kolekcji.
+- Pusty stan kolekcji/kategorii: mapper + unit; fixture ma 6 e-booków, więc
+  zrzut pustej siatki nie istnieje na tym `dist/`.
+- Pięć kart poza Suplementami w PCOS ma prawdziwy `ebookPath`; landingi
+  tych slugów jeszcze nie istnieją (404 do kolejnych prac).
+- Playwright Chromium/Firefox/WebKit zainstalowano; `install-deps` nie
+  zawisł. Natywny zoom przeglądarki, czytnik i urządzenie fizyczne **nie
+  sprawdzone**.
+
+Tabela zdjęć z makiety:
+
+| Zdjęcie z makiety                                                     | Plik na produkcji                                                         | Sekcja                                                   | Status                                         |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------- |
+| `assets/food-editorial.webp` (CSS `.art-nutrition`)                   | `src/assets/editorial/food-editorial.webp` przez `SiteImage` klucz `food` | okładka „Szczupła, a jednak PCOS” / Slim, and still PCOS | na miejscu, ten sam kadr                       |
+| pozostałe 5 okładek (art-decisions/route/observation/journal/evening) | SVG `BookCoverArt` w `src/design-system/decorations/`                     | karty kolekcji                                           | SVG, bez rastrów — zgodnie z makietą           |
+| brak innych `<img>` w `ebooks-3a.html`                                | —                                                                         | —                                                        | nic nie brakuje; placeholderów nie podstawiano |
+
+Następny krok: pakiet 6 BlogCollection3a. Dane kolekcji w Content Lake
+i odbiór Studio/preview pozostają otwarte. Copy i UX kolekcji do zatwierdzenia.
 
 ### Sesja dodatkowego akcentu — 07.10.2026
 
@@ -40,15 +140,15 @@ wdrożyć tokeny/komponenty i wykonać odbiór UI; etap pozostaje 4a.
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiety 1–4 (Homepage3a, About3a, Consultation3a, Ebook3a, wspólny shell) są
-w kodzie i weryfikacji fixture’ów; zapis do Content Lake i publikacja nie były
-zlecone.**
+**Pakiety 1–5 (Homepage3a, About3a, Consultation3a, Ebook3a, EbookCollection3a,
+wspólny shell) są w kodzie i fixture’ach; zapis do Content Lake i publikacja
+nie były zlecone.**
 
 Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
-`/en/consultations/`, `/ebooki/<slug>/` i `/en/ebooks/<slug>/` oraz preview
-tych stron renderują `SiteShell3a` z fixture’ów. Blog, kolekcja e-booków
-i `/ui/` nadal używają wcześniejszego Layout albo czekają na pakiet 5.
-Etapy 5–7 oraz pakiety 5–7 etapu 4a pozostają otwarte.
+`/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/` i
+`/en/ebooks/<slug>/` oraz preview tych stron renderują `SiteShell3a`
+z fixture’ów. Blog i `/ui/` nadal używają wcześniejszego Layout albo czekają
+na pakiety 6–7. Etapy 5–7 oraz pakiety 6–7 etapu 4a pozostają otwarte.
 
 ## Wykonane
 
