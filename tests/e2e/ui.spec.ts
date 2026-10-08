@@ -582,17 +582,23 @@ for (const [path, instagramName] of [
     await page.goto(path);
     const social = page.locator("footer .ao-footer__social a");
     await expect(social).toHaveCount(3);
-    await expect(social).toHaveAttribute("rel", "noopener noreferrer");
-    await expect(social).toHaveAttribute("target", "_blank");
     expect(
       await social.evaluateAll((links) =>
-        links.map((link) => link.getAttribute("href")),
+        links.map((link) => ({
+          href: link.getAttribute("href"),
+          rel: link.getAttribute("rel"),
+          target: link.getAttribute("target"),
+        })),
       ),
-    ).toEqual([...FOOTER_SOCIAL_HREFS]);
+    ).toEqual(
+      FOOTER_SOCIAL_HREFS.map((href) => ({
+        href,
+        rel: "noopener noreferrer",
+        target: "_blank",
+      })),
+    );
     await expect(
       page.getByRole("link", { name: instagramName, exact: true }),
     ).toHaveAttribute("href", FOOTER_SOCIAL_HREFS[0]);
-    await expect(social.nth(1)).toHaveAttribute("href", FOOTER_SOCIAL_HREFS[1]);
-    await expect(social.nth(2)).toHaveAttribute("href", FOOTER_SOCIAL_HREFS[2]);
   });
 }
