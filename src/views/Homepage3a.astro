@@ -32,6 +32,14 @@ export interface Props {
   content: HomepageView;
 }
 
+const partnerLogoSize: Record<string, { width: number; height: number }> = {
+  alab: { width: 156, height: 60 },
+  uns: { width: 170, height: 39 },
+  norsan: { width: 171, height: 37 },
+  norsa: { width: 500, height: 53 },
+  omni: { width: 280, height: 200 },
+};
+
 const { lang, content } = Astro.props;
 const metric = content.approach.items[0];
 const firstPcos = content.ebooks.items.find((item) => item.topic === "pcos");
@@ -97,6 +105,7 @@ function coverLabels(kind: CoverArtKind): string[] {
         alt={content.hero.media?.label ?? ""}
         width={1122}
         height={1402}
+        fit="contain"
         loading="eager"
         fetchpriority="high"
       />
@@ -116,14 +125,19 @@ function coverLabels(kind: CoverArtKind): string[] {
           : content.partners.names.map((name): LogoItem => ({ name }))
         ).map((item) => {
           const logo = pickSiteImage(item.media?.src);
+          const size = partnerLogoSize[item.media?.src ?? ""] ?? {
+            width: 156,
+            height: 60,
+          };
           return (
             <li>
               {logo ? (
                 <SiteImage
                   src={item.media?.src}
                   alt={item.name}
-                  width={156}
-                  height={60}
+                  width={size.width}
+                  height={size.height}
+                  fit="contain"
                   loading="lazy"
                 />
               ) : (
@@ -390,7 +404,12 @@ function coverLabels(kind: CoverArtKind): string[] {
     position: relative;
     height: 550px;
   }
-  .home3a-portrait img {
+  .home3a :global(.ao-hero .ao-lead) {
+    max-width: 52ch;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .home3a-portrait :global(img) {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -418,7 +437,7 @@ function coverLabels(kind: CoverArtKind): string[] {
     list-style: none;
     border-block: 1px solid var(--ao-line);
   }
-  .home3a-partners img {
+  .home3a-partners :global(img) {
     width: auto;
     max-width: 160px;
     height: 43px;
@@ -427,19 +446,19 @@ function coverLabels(kind: CoverArtKind): string[] {
     opacity: 0.78;
     mix-blend-mode: multiply;
   }
-  .home3a-partners li:nth-child(2) img {
+  .home3a-partners li:nth-child(2) :global(img) {
     height: 40px;
     width: 82px;
   }
-  .home3a-partners li:nth-child(4) img {
+  .home3a-partners li:nth-child(4) :global(img) {
     height: 35px;
   }
-  :global([data-theme="dark"]) .home3a-partners img {
+  :global([data-theme="dark"]) .home3a-partners :global(img) {
     filter: grayscale(1) invert(1);
     mix-blend-mode: screen;
   }
   @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme="light"])) .home3a-partners img {
+    :global(:root:not([data-theme="light"])) .home3a-partners :global(img) {
       filter: grayscale(1) invert(1);
       mix-blend-mode: screen;
     }
@@ -516,13 +535,13 @@ function coverLabels(kind: CoverArtKind): string[] {
     position: relative;
     max-width: none;
   }
-  .home3a-about__media > img:first-child {
+  .home3a-about__media :global(img:not(.home3a-about__food)) {
     width: 100%;
     height: 570px;
     object-fit: cover;
     border-radius: 24px;
   }
-  .home3a-about__food {
+  :global(img.home3a-about__food) {
     position: absolute;
     right: -56px;
     bottom: -24px;
@@ -640,13 +659,20 @@ function coverLabels(kind: CoverArtKind): string[] {
       grid-column: auto;
       grid-template-columns: 1fr;
     }
+    .home3a :global(.ao-hero .ao-lead) {
+      font-size: 16px;
+    }
     .home3a-portrait {
       height: 450px;
     }
-    .home3a-about__media > img:first-child {
+    .home3a-partners :global(img) {
+      max-width: 130px;
+      height: 32px;
+    }
+    .home3a-about__media :global(img:not(.home3a-about__food)) {
       height: 450px;
     }
-    .home3a-about__food {
+    :global(img.home3a-about__food) {
       right: -16px;
       bottom: -20px;
       width: 150px;
@@ -663,11 +689,11 @@ function coverLabels(kind: CoverArtKind): string[] {
     .home3a-portrait {
       height: 410px;
     }
-    .home3a-about__media > img:first-child {
+    .home3a-about__media :global(img:not(.home3a-about__food)) {
       height: 470px;
       object-position: center 25%;
     }
-    .home3a-about__food {
+    :global(img.home3a-about__food) {
       right: 16px;
       width: 180px;
       height: 125px;

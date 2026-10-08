@@ -10,6 +10,7 @@ export const consultationCopy = {
     heroPrimary: "Zarezerwuj konsultację",
     heroSecondary: "Zobacz, jak wygląda spotkanie",
     portraitAlt: "Ola, Aleksandra Olesiewicz, dietetyczka kliniczna",
+    portraitName: "Ola Olesiewicz",
     portraitCaption: "Dietetyczka kliniczna. Też mam PCOS.",
     pathTitle: "Cel konsultacji",
     pathItems: ["Twoja sytuacja", "Twoje priorytety", "Twój pierwszy krok"],
@@ -153,8 +154,9 @@ export const consultationCopy = {
     preparationLabel: "Co przygotować?",
     goalsSheetTitle: "Twój punkt startu",
     goalsSheetCaption: "Trzy cele, które nadają kierunek naszej rozmowie.",
+    bookingEditorNote: "To nie jest potwierdzenie wizyty.",
     bookingPlaceholder:
-      "Podgląd oferty: przycisk prowadzi tymczasowo do Cal.com. Właściwy kalendarz tej konsultacji zostanie dodany później. To nie jest potwierdzenie wizyty.",
+      "Podgląd oferty: przycisk prowadzi tymczasowo do Cal.com. Właściwy kalendarz tej konsultacji zostanie dodany później.",
   },
   en: {
     pageTitle: "Consultations — Aleksandra Olesiewicz",
@@ -167,6 +169,7 @@ export const consultationCopy = {
     heroPrimary: "Book a consultation",
     heroSecondary: "See how the meeting works",
     portraitAlt: "Ola, Aleksandra Olesiewicz, clinical dietitian",
+    portraitName: "Ola Olesiewicz",
     portraitCaption: "Clinical dietitian. I have PCOS too.",
     pathTitle: "Purpose of the consultation",
     pathItems: ["Your situation", "Your priorities", "Your first step"],
@@ -310,7 +313,8 @@ export const consultationCopy = {
     preparationLabel: "What to prepare?",
     goalsSheetTitle: "Your starting point",
     goalsSheetCaption: "Three goals that give our conversation its direction.",
+    bookingEditorNote: "This is not a booking confirmation.",
     bookingPlaceholder:
-      "Offer preview: the button goes to Cal.com for now. The calendar for this consultation will be added later. This is not a booking confirmation.",
+      "Offer preview: the button goes to Cal.com for now. The calendar for this consultation will be added later.",
   },
 } as const;

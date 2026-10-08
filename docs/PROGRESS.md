@@ -63,15 +63,33 @@ bo CLI wymaga logowania. Wariant liczb na O mnie może mieć 0 albo 3 wyróżnie
 bo fixture ma pustą listę.
 
 `npm run test:content-lake` zbudował 54 strony z wygenerowanego NDJSON.
-CSS gzip 29 778 B, JS gzip 5 770 B.
+Po korekcie kadrów CSS gzip to 29 748 B, JS gzip 5 770 B.
 
-`npm run verify` zakończone kodem 0 na Node 24.21.0. Format, tokeny, lint,
-`astro check` (0 błędów), **126** testów jednostkowych (22 pliki), build
-fixture’ów, workspace’y, `check-build`, **147** E2E Chromium/Firefox/WebKit
-i budowa z wygenerowanych dokumentów. CSS gzip fixture’ów też 29 778 B.
+Korekta widoku po przeglądzie zrzutów. Style `img` w widokach 3a nie
+schodziły do `SiteImage`, więc portret wychodził z różowej karty, a loga
+zostawały w kolorze i w obciętym kadrze. Selektory są teraz `:global(img)`.
+Loga partnerów biorą wymiary pliku i `fit="contain"`. Lead strony głównej
+na wąskim kontenerze ma 16 px i interlinie 1,5, jak w makiecie.
+Podpis hero konsultacji to „Ola Olesiewicz”. Zdanie o Cal.com zostało pod
+ofertą, bez dopisku „To nie jest potwierdzenie wizyty.” Ten dopisek jest
+tylko w `bookingEditorNote`. Nagłówek 3a nie dokłada „English” ani „Polski”.
+Lista bloga nie ma rzędu filtrów kategorii. Adresy `/en/` i stron kategorii
+zostają.
 
-verify-ola `ola-1791457722` na `http://127.0.0.1:4340`, doctor zielony.
-Zestawienia makieta/treść, desktop 1280 i mobile 390:
+Inwentarz zdjęć z tego samego przebiegu leży w
+`/opt/cursor/artifacts/screenshots/photo-inventory.json`.
+Portret hero, loga, portret O mnie i zdjęcia konsultacji mają ten sam
+`object-fit`, pozycję i rząd wielkości co makieta.
+
+`npm run verify` po korekcie kadrów zakończone kodem 0 na Node 24.21.0.
+Format, tokeny, lint, `astro check` (0 błędów), **126** testów jednostkowych
+(22 pliki), build fixture’ów, workspace’y, `check-build`, **147** E2E
+Chromium/Firefox/WebKit i budowa z wygenerowanych dokumentów. CSS gzip
+fixture’ów i content-lake to 29 748 B.
+
+verify-ola `ola-1791460363` na `http://127.0.0.1:4340`, doctor zielony
+(treść z wygenerowanego NDJSON, bez przebudowy w trakcie sesji).
+Zestawienia mają makietę po lewej i build po prawej, desktop 1440 i mobile 390:
 
 - `/opt/cursor/artifacts/screenshots/homepage-desktop.png`
 - `/opt/cursor/artifacts/screenshots/homepage-mobile.png`

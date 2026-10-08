@@ -70,19 +70,6 @@ function readAria(item: BlogPostCard) {
       </Heading>
       <p class="blog3a-lead">{content.lead}</p>
       {content.note && <p class="blog3a-note">{content.note}</p>}
-      <nav
-        class="blog3a-categories"
-        aria-label={pl ? "Kategorie" : "Categories"}
-      >
-        {content.categories.map((category) => (
-          <a
-            href={category.href}
-            aria-current={category.current ? "page" : undefined}
-          >
-            {category.title}
-          </a>
-        ))}
-      </nav>
     </Container>
   </section>
 
@@ -302,22 +289,6 @@ function readAria(item: BlogPostCard) {
     margin-top: 16px;
     color: var(--ao-muted);
     font-size: 13px;
-  }
-  .blog3a-categories {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 20px;
-    margin-top: 24px;
-    font-size: 13px;
-  }
-  .blog3a-categories a {
-    color: var(--ao-muted);
-  }
-  .blog3a-categories a:hover,
-  .blog3a-categories a[aria-current] {
-    color: var(--ao-primary);
-    text-decoration: underline;
-    text-underline-offset: 4px;
   }
   .blog3a-section-title {
     font-size: 28px;

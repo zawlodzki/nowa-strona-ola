@@ -97,7 +97,6 @@ const jsonLd = {
     </p>
     {hero.secondary && (
       <TextLink
-        slot="actions"
         class="consult3a-secondary"
         href={hero.secondary.href}
         arrowDirection="down"
@@ -105,7 +104,6 @@ const jsonLd = {
         {hero.secondary.label}
       </TextLink>
     )}
-    {placeholder && <p class="consult3a-note">{copy.bookingPlaceholder}</p>}
     <figure slot="media" class="consult3a-portrait">
       <div class="consult3a-portrait__stage">
         <StageBackdrop wideTopLeft={150} />
@@ -115,12 +113,13 @@ const jsonLd = {
           alt={hero.media?.label ?? ""}
           width={1122}
           height={1402}
+          fit="contain"
           loading="eager"
           fetchpriority="high"
         />
       </div>
       <figcaption>
-        <strong>{expert.name}</strong>
+        <strong>{copy.portraitName}</strong>
         {hero.media?.caption && <span>{hero.media.caption}</span>}
       </figcaption>
     </figure>
@@ -454,7 +453,7 @@ const jsonLd = {
     isolation: isolate;
     height: 520px;
   }
-  .consult3a-portrait img {
+  .consult3a-portrait :global(img) {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -582,14 +581,14 @@ const jsonLd = {
     align-items: start;
     margin-top: var(--ao-space-48);
   }
-  .consult3a-process > figure img {
+  .consult3a-process > figure :global(img) {
     width: 100%;
     height: 460px;
     object-fit: cover;
     object-position: 72% center;
     border-radius: var(--ao-radius-image);
   }
-  .consult3a-expert img {
+  .consult3a-expert :global(img) {
     width: 100%;
     height: 520px;
     object-fit: cover;
@@ -768,10 +767,10 @@ const jsonLd = {
     .consult3a-portrait__stage {
       height: 430px;
     }
-    .consult3a-process > figure img {
+    .consult3a-process > figure :global(img) {
       height: 360px;
     }
-    .consult3a-expert img {
+    .consult3a-expert :global(img) {
       height: 470px;
     }
     .consult3a-offer__value {
@@ -819,11 +818,11 @@ const jsonLd = {
     .consult3a-map__answer strong {
       font-size: 24px;
     }
-    .consult3a-expert img {
+    .consult3a-expert :global(img) {
       height: 400px;
       object-position: center 24%;
     }
-    .consult3a-process > figure img {
+    .consult3a-process > figure :global(img) {
       height: 320px;
     }
     .consult3a-proof strong {
@@ -837,10 +836,10 @@ const jsonLd = {
     .consult3a-portrait__stage {
       height: 330px;
     }
-    .consult3a-process > figure img {
+    .consult3a-process > figure :global(img) {
       height: 280px;
     }
-    .consult3a-expert img {
+    .consult3a-expert :global(img) {
       height: 340px;
     }
   }
