@@ -30,7 +30,7 @@ const nutrition = nutritionCoverSize();
             y1="1"
             x2={index === 1 ? 70 : 100}
             y2="1"
-            stroke="currentColor"
+            stroke={index === 1 ? "var(--ao-deco-accent)" : "currentColor"}
             stroke-width="1"
           ></line>
         </svg>
@@ -84,7 +84,7 @@ const nutrition = nutritionCoverSize();
           width="18"
           height="23"
           fill="none"
-          stroke="currentColor"
+          stroke={index === 3 ? "var(--ao-deco-accent)" : "currentColor"}
           stroke-width="1"
         />
       ))}
@@ -131,6 +131,7 @@ const nutrition = nutritionCoverSize();
         stroke="currentColor"
         stroke-width="1"
       />
+      <circle cx="90" cy="14" r="2.2" fill="var(--ao-deco-accent)"></circle>
       {labels.slice(0, 3).map((label, index) => (
         <text
           x={index === 0 ? 0 : index === 1 ? 90 : 180}

@@ -1,4 +1,6 @@
 ---
+import CherryCoverAccent from "../decorations/CherryCoverAccent.astro";
+
 interface Props {
   title: string;
   subtitle: string;
@@ -20,4 +22,5 @@ const { title, subtitle, author, topic, tone = "light" } = Astro.props;
     <slot name="art" />
   </div>
   <span class="ao-book-cover__topic">{topic}</span>
+  {tone === "cherry" && <CherryCoverAccent />}
 </div>
