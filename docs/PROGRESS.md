@@ -24,9 +24,25 @@ Gdzie były linki i co czyta źródło:
 Stopka: `rel="noopener noreferrer"`, `target="_blank"`, `aria-label`
 „Instagram Aleksandry Olesiewicz” / EN „Instagram of Aleksandra Olesiewicz”.
 
-Kontrole i artefakty: uzupełnione po `npm run verify`.
+Kontrole (Node 24.21.0), draft PR **#37**, head `a652b6f`:
 
-Następny krok: odbiór draft PR; nie mergować. Content Lake poza zakresem.
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **116** unit,
+  build, workspaces, `check-build`, **126** E2E Chromium/Firefox/WebKit.
+  CSS gzip `dist/_astro`: **29 635 B** / 32 KiB; JS gzip **5 770 B**.
+- verify-ola: `ola-1791449846`, baza `http://127.0.0.1:4340`. Stopka `/` i
+  `/en/` ma trzy kanoniczne href. `browser posts` nie dotyczy (brak formularza).
+
+Artefakty:
+
+- `/opt/cursor/artifacts/screenshots/footer-pl-desktop.png`
+- `/opt/cursor/artifacts/screenshots/footer-pl-mobile.png`
+- `/opt/cursor/artifacts/screenshots/footer-en-desktop.png`
+- `/opt/cursor/artifacts/screenshots/footer-en-mobile.png`
+- Dowody verify-ola: `/tmp/ola-verify-evidence/ola-1791449846/`.
+
+Nietknięte: wygląd stopki, mockupy `podglad.html`, gałąź PR #36, Content Lake.
+
+Następny krok: odbiór draft PR **#37**; nie mergować. Content Lake poza zakresem.
 
 ### Sesja pakietu 7 — Article3a — 08.10.2026
 
