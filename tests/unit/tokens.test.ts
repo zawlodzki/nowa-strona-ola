@@ -44,9 +44,9 @@ describe("generateTokensCss", () => {
 
   it("keeps theme colors paired with a fallback and achromatic hues missing", () => {
     expect(css).toContain("@supports not (color: light-dark(white, black))");
-    expect(css).toContain(
-      `--ao-background: light-dark(${hexToOklch("#ffffff")}, ${hexToOklch("#291a21")});`,
-    );
+    expect(css).toContain(`--ao-background: light-dark(#ffffff, #291a21);`);
+    expect(css).toContain(`--ao-primary: light-dark(#882f48, #edb8cb);`);
+    // hexToOklch remains available for contrast tooling; achromatic still loses hue.
     expect(hexToOklch("#ffffff")).toMatch(/0 none\)$/);
     expect(hexToOklch("#000000")).toBe("oklch(0.000000000 0 none)");
   });

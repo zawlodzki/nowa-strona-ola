@@ -306,7 +306,7 @@ function readAria(item: BlogPostCard) {
     inline-size: 100%;
     max-inline-size: 100%;
     border-radius: var(--ao-radius-panel);
-    overflow: clip;
+    overflow: hidden;
     isolation: isolate;
     background: var(--ao-surface);
   }
@@ -314,7 +314,7 @@ function readAria(item: BlogPostCard) {
     display: grid;
     min-inline-size: 0;
     min-block-size: 400px;
-    overflow: clip;
+    overflow: hidden;
   }
   .blog3a-featured-image :global(img) {
     inline-size: 100%;
@@ -370,7 +370,7 @@ function readAria(item: BlogPostCard) {
   .blog3a-card-image {
     display: block;
     border-radius: var(--ao-radius-panel);
-    overflow: clip;
+    overflow: hidden;
     background: var(--ao-surface);
   }
   .blog3a-card-image :global(img) {
@@ -501,7 +501,7 @@ function readAria(item: BlogPostCard) {
       transform: none;
     }
   }
-  @container page3a (max-width: 62.4375rem) {
+  @container page3a (max-width: 999px) {
     .blog3a-featured-copy {
       padding: 32px;
     }
@@ -515,7 +515,7 @@ function readAria(item: BlogPostCard) {
       font-size: 1.5625rem;
     }
   }
-  @container page3a (max-width: 47.9375rem) {
+  @container page3a (max-width: 767px) {
     .blog3a-heading {
       padding-block: 24px 40px;
     }
@@ -579,7 +579,7 @@ function readAria(item: BlogPostCard) {
       gap: 6px;
     }
   }
-  @container page3a (max-width: 23.375rem) {
+  @container page3a (max-width: 374px) {
     .blog3a-pagination {
       gap: 8px;
     }
@@ -592,7 +592,7 @@ function readAria(item: BlogPostCard) {
       inline-size: 100%;
     }
   }
-  @container page3a (max-width: 16.875rem) {
+  @container page3a (max-width: 270px) {
     .blog3a-featured-copy {
       padding-inline: 16px;
     }

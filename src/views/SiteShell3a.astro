@@ -20,6 +20,7 @@ export interface Props {
   copyright: string;
   preview?: boolean;
   languageHref?: string | null;
+  legacyBase?: boolean;
 }
 
 const {
@@ -35,11 +36,17 @@ const {
   copyright,
   preview = false,
   languageHref = null,
+  legacyBase = false,
 } = Astro.props;
 const homeHref = homePath(lang);
 ---
 
-<Layout3a lang={lang} title={title} description={description}>
+<Layout3a
+  lang={lang}
+  title={title}
+  description={description}
+  legacyBase={legacyBase}
+>
   {preview && (
     <div class="preview-banner">
       <strong>

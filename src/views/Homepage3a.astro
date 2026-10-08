@@ -466,7 +466,7 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   .home3a-why {
     display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
+    grid-template-columns: 0.95fr 1.2fr;
     gap: 80px;
     align-items: start;
   }
@@ -475,13 +475,12 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   .home3a-count {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: var(--ao-space-24);
     margin-block-start: var(--ao-space-48);
   }
   .home3a-count strong {
-    font-size: 5.75rem;
+    font-size: 92px;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.07em;
@@ -492,11 +491,11 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   .home3a-count > span {
     max-inline-size: 180px;
-    font-size: 0.875rem;
+    font-size: 14px;
   }
   .home3a-results {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
   .home3a-results article {
@@ -507,7 +506,7 @@ function coverLabels(kind: CoverArtKind): string[] {
   .home3a-results article:first-child {
     grid-column: span 2;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
     column-gap: 40px;
     align-items: center;
   }
@@ -519,6 +518,7 @@ function coverLabels(kind: CoverArtKind): string[] {
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.03em;
+    line-height: 1.15;
   }
   .home3a-results p {
     margin-block-start: 10px;
@@ -530,7 +530,7 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   .home3a-about__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
   }
@@ -624,7 +624,7 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   .home3a-facts li {
     display: grid;
-    grid-template-columns: 16px minmax(0, 1fr);
+    grid-template-columns: 16px 1fr;
     align-items: center;
     gap: 12px;
   }
@@ -643,12 +643,12 @@ function coverLabels(kind: CoverArtKind): string[] {
     object-fit: cover;
     object-position: 70% center;
   }
-  @container page3a (max-width: 74.9375rem) {
+  @container page3a (max-width: 1199px) {
     .home3a-portrait {
       block-size: 500px;
     }
   }
-  @container page3a (max-width: 54.9375rem) {
+  @container page3a (max-width: 879px) {
     .home3a-why,
     .home3a-about__grid {
       grid-template-columns: minmax(0, 1fr);
@@ -656,14 +656,14 @@ function coverLabels(kind: CoverArtKind): string[] {
     }
     .home3a-why :global(.ao-heading),
     .home3a-about :global(.ao-heading) {
-      font-size: var(--ao-section-mobile);
+      font-size: clamp(2.25rem, 8vw, 3.25rem);
     }
     .home3a-results {
-      grid-template-columns: minmax(0, 1fr);
+      grid-template-columns: 1fr;
     }
     .home3a-results article:first-child {
       grid-column: auto;
-      grid-template-columns: minmax(0, 1fr);
+      grid-template-columns: 1fr;
     }
     .home3a :global(.ao-hero .ao-lead) {
       font-size: 1rem;
@@ -690,9 +690,9 @@ function coverLabels(kind: CoverArtKind): string[] {
       object-position: 75% center;
     }
   }
-  @container page3a (max-width: 47.9375rem) {
+  @container page3a (max-width: 767px) {
     .home3a-count strong {
-      font-size: 4.875rem;
+      font-size: 78px;
     }
     .home3a-portrait {
       block-size: 410px;
@@ -705,12 +705,12 @@ function coverLabels(kind: CoverArtKind): string[] {
       block-size: 280px;
     }
   }
-  @container page3a (max-width: 23.375rem) {
+  @container page3a (max-width: 374px) {
     .home3a-portrait {
       block-size: 340px;
     }
     .home3a-count strong {
-      font-size: 4rem;
+      font-size: 64px;
     }
   }
 </style>

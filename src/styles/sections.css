@@ -56,7 +56,7 @@
   inline-size: 100%;
   min-inline-size: 0;
   border-radius: var(--wf-radius-12);
-  overflow: clip;
+  overflow: hidden;
 }
 .media-frame--photo {
   aspect-ratio: 16 / 10;
@@ -131,7 +131,7 @@
   }
 }
 .card-media {
-  overflow: clip;
+  overflow: hidden;
   border-radius: var(--wf-radius-10);
 }
 
@@ -414,7 +414,7 @@
   block-size: 1px;
   padding: 0;
   margin: -1px;
-  overflow: clip;
+  overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;

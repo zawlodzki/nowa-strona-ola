@@ -24,10 +24,56 @@ body.ao-site {
     var(--ao-font);
   -webkit-font-smoothing: antialiased;
   scrollbar-color: var(--ao-muted) var(--ao-background);
+  /* Keep decorative transforms (tilted covers, orbits, sheet shadows) from
+     expanding document scrollWidth on narrow viewports / large root fonts. */
+  overflow-x: hidden;
 }
+
 .ao-site :where(h1, h2, h3, p, figure) {
   margin: 0;
 }
+/*
+ * Legacy parity: routes that rendered through src/layouts/Layout.astro on main
+ * (home, about, consultations, legal pages) inherited Tailwind preflight and
+ * the @layer base rules from src/styles/global.css. Those pages opt in with
+ * `legacyBase` so the CSS split stays visually neutral. Zero-specificity
+ * :where() keeps every component rule in charge, as the layered base did.
+ */
+.ao-site--legacy-base :where(button) {
+  padding: 0;
+}
+.ao-site--legacy-base :where(h1, h2, h3) {
+  font-family: var(--ao-font);
+  font-weight: 300;
+  text-wrap: balance;
+}
+.ao-site--legacy-base :where(h1) {
+  font-size: var(--ao-display);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  max-inline-size: 16ch;
+}
+.ao-site--legacy-base :where(h2) {
+  font-size: var(--ao-heading);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+.ao-site--legacy-base :where(h3) {
+  font-size: var(--ao-card-heading);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+.ao-site--legacy-base :where(p) {
+  max-inline-size: 68ch;
+  line-height: 1.6;
+}
+.ao-site--legacy-base :where(strong) {
+  overflow-wrap: anywhere;
+}
+.ao-site--legacy-base form {
+  max-inline-size: 520px;
+}
+
 .ao-site :where(a, button, input, summary) {
   -webkit-tap-highlight-color: transparent;
 }
@@ -68,6 +114,11 @@ body.ao-site {
   display: block;
   max-inline-size: 100%;
   block-size: auto;
+}
+/* Match Tailwind preflight: SVG defaults to inline and picks up a line-box strut. */
+.ao-site :where(svg) {
+  display: block;
+  vertical-align: middle;
 }
 .ao-site button {
   cursor: pointer;
@@ -388,6 +439,9 @@ body.ao-site {
   font-size: 0.75rem;
   color: var(--ao-muted);
 }
+.ao-site--legacy-base .status {
+  min-block-size: 28px;
+}
 .ao-field__error {
   font-size: 0.8125rem;
   color: var(--ao-error);
@@ -415,7 +469,7 @@ body.ao-site {
 }
 .ao-footer__top {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 0.8fr);
+  grid-template-columns: 1.4fr 1fr 0.8fr;
   gap: var(--ao-space-64);
   align-items: start;
 }
@@ -615,15 +669,15 @@ body.ao-site {
   position: relative;
   display: flex;
   flex-direction: column;
-  inline-size: 15.75rem;
+  inline-size: 252px;
   max-inline-size: 100%;
-  min-block-size: 22rem;
+  block-size: 22rem;
   padding: 22px;
   background: var(--ao-cover);
   color: var(--ao-cover-ink);
   border-inline-start: 4px solid var(--ao-cover-spine);
   box-shadow: var(--ao-book-shadow);
-  overflow: clip;
+  overflow: hidden;
   --ao-deco-accent: var(--ao-accent-on-light);
 }
 .ao-book-cover--cherry {
@@ -714,7 +768,7 @@ body.ao-site {
 }
 .ao-split-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: 1.1fr 1fr;
   background: var(--ao-surface);
   border-radius: var(--ao-radius-panel);
 }
@@ -726,7 +780,7 @@ body.ao-site {
 }
 .ao-split-panel__media {
   padding-block: var(--ao-space-24);
-  padding-inline: var(--ao-space-24) 0;
+  padding-inline: 0 var(--ao-space-24);
 }
 .ao-split-panel__media img {
   inline-size: 100%;
@@ -737,7 +791,6 @@ body.ao-site {
 }
 .ao-carousel__heading {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--ao-space-24);
@@ -818,7 +871,7 @@ body.ao-site {
 .ao-skip:focus {
   inset-block-start: var(--ao-space-12);
 }
-@container page3a (max-width:74.9375rem) {
+@container page3a (max-width:1199px) {
   .ao-header__inner {
     display: flex;
     flex-wrap: wrap;
@@ -839,7 +892,7 @@ body.ao-site {
     padding: var(--ao-space-40);
   }
 }
-@container page3a (max-width:54.9375rem) {
+@container page3a (max-width:879px) {
   .ao-newsletter__layout,
   .ao-split-panel {
     grid-template-columns: minmax(0, 1fr);
@@ -853,7 +906,7 @@ body.ao-site {
     padding-inline: var(--ao-space-24);
   }
   .ao-footer__top {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: var(--ao-space-32);
   }
   .ao-footer__social {
@@ -863,7 +916,7 @@ body.ao-site {
     --ao-carousel-card-width: calc((100% - 24px) / 2);
   }
 }
-@container page3a (max-width:47.9375rem) {
+@container page3a (max-width:767px) {
   .ao-heading--display {
     font-size: var(--ao-display-mobile);
   }
@@ -884,7 +937,7 @@ body.ao-site {
     --ao-carousel-card-width: 86%;
   }
 }
-@container page3a (max-width:23.375rem) {
+@container page3a (max-width:374px) {
   .ao-header .ao-wordmark {
     font-size: 1.375rem;
   }
@@ -892,7 +945,7 @@ body.ao-site {
     gap: var(--ao-space-8);
   }
 }
-@container page3a (max-width:16.875rem) {
+@container page3a (max-width:270px) {
   .ao-wordmark {
     font-size: 1.125rem;
   }
@@ -970,7 +1023,7 @@ body.ao-site {
 }
 .ao-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  grid-template-columns: 1.12fr 1fr;
   gap: var(--ao-space-64);
   align-items: center;
   padding-block: var(--ao-space-48) var(--ao-space-40);
@@ -997,12 +1050,12 @@ body.ao-site {
   line-height: 1.04;
   letter-spacing: -0.06em;
 }
-@container page3a (max-width:74.9375rem) {
+@container page3a (max-width:1199px) {
   .ao-hero {
     gap: var(--ao-space-40);
   }
 }
-@container page3a (max-width:47.9375rem) {
+@container page3a (max-width:767px) {
   .ao-hero {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--ao-space-24);

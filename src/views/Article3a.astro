@@ -909,7 +909,7 @@ const bodyHtml = markArticleIntro(html);
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
   }
-  @container page3a (max-width: 74.9375rem) {
+  @container page3a (max-width: 1199px) {
     .article-layout {
       grid-template-columns: 170px minmax(0, 1fr);
       gap: 40px;
@@ -930,7 +930,7 @@ const bodyHtml = markArticleIntro(html);
       grid-row: span 2;
     }
   }
-  @container page3a (max-width: 47.9375rem) {
+  @container page3a (max-width: 767px) {
     .article-heading {
       padding-block-start: 24px;
     }
@@ -1020,7 +1020,7 @@ const bodyHtml = markArticleIntro(html);
     inline-size: min(252px, 100%);
     min-inline-size: 0;
   }
-  @container page3a (min-width: 48rem) and (max-width: 62.4375rem) {
+  @container page3a (min-width: 768px) and (max-width: 999px) {
     .article3a :global(.ao-cover-stage) {
       padding-inline: 12px;
       min-block-size: 340px;
@@ -1149,7 +1149,7 @@ const bodyHtml = markArticleIntro(html);
     border-radius: 8px;
   }
   .article-recommendations {
-    overflow: clip;
+    overflow: hidden;
     margin-block-start: 32px;
     border-radius: 16px;
     background: var(--ao-background);
@@ -1294,16 +1294,16 @@ const bodyHtml = markArticleIntro(html);
   .article-faq-list details > p {
     max-inline-size: 65ch;
     padding-block: 0 28px;
-    padding-inline: 40px 0;
+    padding-inline: 0 40px;
     font-size: 1.0625rem;
     line-height: 1.8;
   }
-  @container page3a (max-width: 74.9375rem) {
+  @container page3a (max-width: 1199px) {
     .article-faq :global(.ao-container) {
       gap: 40px;
     }
   }
-  @container page3a (max-width: 47.9375rem) {
+  @container page3a (max-width: 767px) {
     .article-faq :global(.ao-container) {
       grid-template-columns: minmax(0, 1fr);
       gap: 32px;
@@ -1443,7 +1443,7 @@ const bodyHtml = markArticleIntro(html);
     object-position: 50% 50%;
     border-radius: 16px;
   }
-  @container page3a (max-width: 47.9375rem) {
+  @container page3a (max-width: 767px) {
     .article3a :global(.ao-breadcrumbs) {
       font-size: 0.75rem;
     }
@@ -1461,7 +1461,7 @@ const bodyHtml = markArticleIntro(html);
       min-block-size: 360px;
     }
   }
-  @container page3a (min-width: 48rem) and (max-width: 62.4375rem) {
+  @container page3a (min-width: 768px) and (max-width: 999px) {
     .article3a :global(.ao-cover-stage) {
       padding-inline: 12px;
       min-block-size: 340px;

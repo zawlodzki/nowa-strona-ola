@@ -458,7 +458,7 @@ const jsonLd = {
     margin: 0;
     padding-block: 40px 18px;
     padding-inline: 32px;
-    overflow: clip;
+    overflow: hidden;
     border-radius: 160px 24px 24px 24px;
     background: var(--ao-surface);
   }
@@ -620,7 +620,7 @@ const jsonLd = {
   }
   .ebook3a-chapter p {
     margin-block: 10px 0;
-    margin-inline: 34px 49px;
+    margin-inline: 49px 34px;
     color: var(--ao-muted);
   }
   .ebook3a-preview {
@@ -637,9 +637,9 @@ const jsonLd = {
     inset-block-end: -14px;
     inset-inline-start: 12px;
     display: block;
-    inline-size: 100%;
-    block-size: 100%;
-    color: color-mix(in oklch, var(--ao-ink) 9%, transparent);
+    inline-size: auto;
+    block-size: auto;
+    color: color-mix(in srgb, var(--ao-ink) 9%, transparent);
     pointer-events: none;
     z-index: 0;
   }
@@ -675,7 +675,7 @@ const jsonLd = {
   .ebook3a-sheet dd {
     margin-block: 4px 0;
     margin-inline: 0;
-    overflow: clip;
+    overflow: hidden;
     color: var(--ao-muted);
     white-space: nowrap;
   }
@@ -716,7 +716,7 @@ const jsonLd = {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
     margin-block-start: 40px;
-    overflow: clip;
+    overflow: hidden;
     border: 1px solid var(--ao-line);
     border-radius: var(--ao-radius-image);
   }
@@ -871,7 +871,7 @@ const jsonLd = {
   .ebook3a-faq :global(.ao-text-link) {
     margin-block-start: 20px;
   }
-  @container page3a (max-width: 74.9375rem) {
+  @container page3a (max-width: 1199px) {
     .ebook3a-split,
     .ebook3a-faq {
       gap: 50px;
@@ -880,7 +880,7 @@ const jsonLd = {
       gap: 40px;
     }
   }
-  @container page3a (max-width: 62.4375rem) {
+  @container page3a (max-width: 999px) {
     .ebook3a :global(.ao-hero--product) {
       gap: 24px;
     }
@@ -930,7 +930,7 @@ const jsonLd = {
       gap: 40px;
     }
   }
-  @container page3a (max-width: 47.9375rem) {
+  @container page3a (max-width: 767px) {
     .ebook3a :global(.ao-hero--product) {
       gap: 35px;
       padding-block: 32px 36px;
@@ -1012,7 +1012,7 @@ const jsonLd = {
       font-size: 1.4375rem;
     }
   }
-  @container page3a (max-width: 23.375rem) {
+  @container page3a (max-width: 374px) {
     .ebook3a-stage {
       min-block-size: 465px;
       padding-inline: 18px;

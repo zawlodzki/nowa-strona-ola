@@ -87,8 +87,10 @@ export function generateTokensCss(system) {
     ...Object.entries(system.tokens)
       .filter(([, value]) => /^#[\da-f]{6}$/i.test(tokenValue(value)))
       .map(([name, value]) => {
-        const light = hexToOklch(tokenValue(value));
-        return `  --ao-${name}: ${system.dark[name] ? `light-dark(${light}, ${hexToOklch(system.dark[name])})` : light};`;
+        // Keep HEX inside light-dark so computed sRGB matches the design tokens (±0).
+        // OKLCH round-trips can drift by more than 1/255 per channel in Chromium.
+        const light = tokenValue(value);
+        return `  --ao-${name}: ${system.dark[name] ? `light-dark(${light}, ${system.dark[name]})` : light};`;
       }),
     "}",
     "}",
