@@ -687,4 +687,12 @@ Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.
 - [x] Przygotować nowe skille pstack i symlinki agentów w osobnym PR.
 - [ ] Potwierdzić Quality i scalenie PR.
 
+## Weryfikacja w środowisku chmurowym, 2026-10-08
+
+- [x] Odtworzyć npm i Playwright 1.63.0, pobrać trzy przeglądarki oraz lokalne biblioteki.
+- [x] Wykonać pełną bramkę: 134 unit, 171 E2E bez powtórek, porównanie 13 stron PASS.
+      Jednorazowa opcja pomija kontrolę systemowego cache bibliotek;
+      warunki uruchomienia i log opisuje [postęp](PROGRESS.md).
+- [ ] Zainstalować biblioteki systemowo, aby uruchamiać verify bez tej opcji.
+
 Następny krok implementacji: pakiet 1 etapu 4a.

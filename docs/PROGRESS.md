@@ -6,6 +6,48 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Sesja odtworzenia Playwright w środowisku chmurowym, 08.10.2026
+
+Środowisko startowało bez `node_modules`, pobranych przeglądarek oraz
+`/workspace/playwright-env.sh` z poprzedniej sesji. `storage.googleapis.com`
+jest już dozwolone w polityce sieci; pobranie Chromium przez proxy przeszło.
+Odtworzono zależności przez `npm ci` (Node 24.19.0, npm 11.9.0),
+Playwright 1.63.0 oraz Chromium, Firefox i WebKit.
+
+Przeglądarki są w `/workspace/.cache/ms-playwright`. Brakujące biblioteki
+Debiana pobrano jako pakiety i rozpakowano lokalnie do
+`/workspace/.cache/playwright-deps/root`; biblioteki WebKit trafiły też do
+jego katalogów `sys/lib`, ponieważ launcher nadpisuje `LD_LIBRARY_PATH`.
+Plik `/workspace/playwright-env.sh` ustawia katalog przeglądarek, cache npm
+i ścieżkę lokalnych bibliotek. Nie zawiera opcji pomijania kontroli bibliotek.
+Profil powłoki pozostaje bez zmian.
+
+Firefox w ograniczonej powłoce zgłaszał brak folderu profilu; uruchomienie
+z rozszerzonymi uprawnieniami działa. WebKit szuka `libGLESv2.so.2` przez
+systemowy `ldconfig -p`, który nie uwzględnia lokalnych bibliotek.
+Brak uprawnień root uniemożliwia instalację systemową. Sprawdzono rzeczywiste
+uruchomienie i odczyt strony we wszystkich trzech przeglądarkach.
+
+Pełna bramka zakończyła się kodem 0 z jednorazową opcją w poleceniu,
+bez trwałego wyłączania kontroli w profilu ani skrypcie środowiska:
+
+```sh
+. /workspace/playwright-env.sh
+PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 npm run verify
+```
+
+Wynik: format, tokeny, lint, kontrola typów, **134** testy jednostkowe
+(23 pliki), buildy workspace’ów, kontrola artefaktów, **171** E2E
+Chromium/Firefox/WebKit bez retry i powtórek pojedynczo, budowa **60** stron
+z wygenerowanych dokumentów. Porównanie fixture z Content Lake:
+**13** stron, te same sekcje, zdjęcia i DOM. CSS gzip **29 804 B**,
+JS gzip **5 770 B**. Log: `/tmp/ola-verify-final.log`.
+
+Następny krok środowiskowy: instalacja bibliotek systemowo przez administratora,
+aby zwykłe `npm run verify` działało bez jednorazowej opcji. Pliki instalacji
+poza repo mogą wymagać odtworzenia po kolejnym starcie środowiska.
+Bez zmiany kodu aplikacji, zapisu do Sanity, push ani publikacji.
+
 ### Automatyczne aktualizacje i wdrożenia Studio — 08.10.2026
 
 - Potwierdzono merge PR #45 do `main` jako `82a66a3`; Studio w repo ma 6.18.0.
