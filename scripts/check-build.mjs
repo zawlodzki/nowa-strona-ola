@@ -39,9 +39,6 @@ for (const path of [
   "ui/index.html",
   "en/ui/index.html",
   "static/index.html",
-  "warsztat/index.html",
-  "en/workshop/index.html",
-  "tylko-pl/index.html",
   "blog/index.html",
   "blog/strona/2/index.html",
   "blog/kategoria/pcos/index.html",
@@ -64,6 +61,9 @@ for (const path of [
   if (path === "static/index.html")
     assert(!html.includes("<script"), "static primitives emit JS");
 }
+await assert.rejects(access("dist/warsztat/index.html"), /ENOENT/);
+await assert.rejects(access("dist/en/workshop/index.html"), /ENOENT/);
+await assert.rejects(access("dist/tylko-pl/index.html"), /ENOENT/);
 await assert.rejects(access("dist/en/tylko-pl/index.html"), /ENOENT/);
 await assert.rejects(access("dist/en/konsultacje/index.html"), /ENOENT/);
 await assert.rejects(
@@ -150,6 +150,14 @@ for (const [label, html] of [
     `${label}: placeholder Instagram homepage`,
   );
 }
+assert.match(homePl, /Zrozum swoje ciało/);
+assert.match(homeEn, /Understand your body/);
+const aboutHtml = await readFile("dist/o-mnie/index.html", "utf8");
+assert.match(aboutHtml, /Jestem Ola/);
+assert.match(aboutHtml, /diploma/);
+const consultationHtml = await readFile("dist/konsultacje/index.html", "utf8");
+assert.match(consultationHtml, /Konsultacje dietetyczne|60 minut/i);
+
 const articleEn = await readFile(
   "dist/en/blog/preparing-for-a-pcos-nutrition-consultation/index.html",
   "utf8",
