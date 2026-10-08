@@ -694,8 +694,8 @@ export const metricsSectionType = defineType({
           const parent = context.parent as { variant?: string } | undefined;
           if (parent?.variant !== "approach") return true;
           const count = Array.isArray(highlights) ? highlights.length : 0;
-          if (count < 3 || count > 3) {
-            return "Wariant podejścia wymaga dokładnie trzech wyróżnień.";
+          if (count !== 0 && count !== 3) {
+            return "Wariant podejścia wymaga trzech wyróżnień albo żadnego.";
           }
           return true;
         }),

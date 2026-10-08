@@ -5,7 +5,7 @@ const mediaFields = /* groq */ `{
   tone,
   caption,
   "label": alt,
-  "src": image.asset->url,
+  "src": coalesce(image.asset->url, rasterKey),
   "hotspot": image.hotspot{x, y, height, width}
 }`;
 

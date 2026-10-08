@@ -35,9 +35,18 @@ export const mediaObjectType = defineType({
       validation: (rule) => rule.max(200),
     }),
     defineField({
+      name: "rasterKey",
+      title: "Klucz kadru w serwisie",
+      description:
+        "Lokalny klucz obrazu, na przykład hero, about, food albo cover-suplementy-w-pcos. Renderer używa go, gdy nie ma pliku w Content Lake.",
+      type: "string",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
       name: "image",
       title: "Obraz",
-      description: "Bez pliku renderer zostawia kadr zastępczy z tekstem alt.",
+      description:
+        "Plik w Content Lake. Gdy jest ustawiony, ma pierwszeństwo przed kluczem kadru.",
       type: "image",
       options: { hotspot: true },
     }),
