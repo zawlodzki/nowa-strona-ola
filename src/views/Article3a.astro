@@ -231,7 +231,9 @@ const bodyHtml = markArticleIntro(html);
               <h2 id="author-title">{person.name}</h2>
               <p class="author-role">{person.role}</p>
               <p>{person.bio}</p>
-              <TextLink href={person.aboutHref}>{person.aboutLabel}</TextLink>
+              <TextLink href={person.aboutHref} arrow={false}>
+                {person.aboutLabel}
+              </TextLink>
             </div>
           </section>
         ))}
@@ -296,7 +298,7 @@ const bodyHtml = markArticleIntro(html);
             <h2 id="books-title">{content.ebooks.title}</h2>
             <p>{content.ebooks.lead}</p>
           </div>
-          <TextLink href={content.ebooks.allHref}>
+          <TextLink href={content.ebooks.allHref} arrow={false}>
             {content.ebooks.allLabel}
           </TextLink>
         </div>
@@ -1354,13 +1356,12 @@ const bodyHtml = markArticleIntro(html);
     text-decoration: underline;
   }
   .article-books .section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 24px 40px;
-    max-width: none;
-    width: 100%;
+    display: block;
+    max-width: 720px;
     margin-bottom: 40px;
+  }
+  .article-books .section-heading :global(.ao-text-link) {
+    margin-top: 8px;
   }
   .article-books .section-heading > div > p {
     margin-top: 24px;
