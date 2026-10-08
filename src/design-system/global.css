@@ -70,6 +70,14 @@ body.ao-site {
 .ao-site--legacy-base :where(strong) {
   overflow-wrap: anywhere;
 }
+/* Tailwind preflight: block SVG (no line-box strut) and unstyled lists. */
+.ao-site--legacy-base :where(svg) {
+  display: block;
+  vertical-align: middle;
+}
+.ao-site--legacy-base :where(ol, ul, menu) {
+  list-style: none;
+}
 .ao-site--legacy-base form {
   max-inline-size: 520px;
 }
@@ -114,11 +122,6 @@ body.ao-site {
   display: block;
   max-inline-size: 100%;
   block-size: auto;
-}
-/* Match Tailwind preflight: SVG defaults to inline and picks up a line-box strut. */
-.ao-site :where(svg) {
-  display: block;
-  vertical-align: middle;
 }
 .ao-site button {
   cursor: pointer;
