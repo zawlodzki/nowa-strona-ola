@@ -14,37 +14,40 @@ Zakres: produkcyjna strona artykułu w designie 3a według
 
 Zrobione w kodzie: `relatedEbooks` (0 albo 3), `faq`, `breadcrumbTitle`,
 `proposalNote`, GROQ `articleDetailProjection`, mapper `Article3aView`,
-Portable Text z TOC H2 `section-${_key}`, tabela `th scope=row`, fixture
-wyróżnionego wpisu z ciałem makiety, trzy e-booki, FAQ, rekomendacje 02/03,
-wspólny `DemoForm`, stopka 3a, dekoracje SVG, dry-run `import:article`.
-Biogram ramki autora to wspólne `author.bio` (krótsze niż w makiecie).
-Źródła w makiecie nie występują; pusta tablica ukrywa sekcję.
+Portable Text z TOC H2 (`#punkt-wyjscia`, fallback na slug/`_key`), tabela
+`th scope=row`, fixture wyróżnionego wpisu, trzy e-booki, FAQ, rekomendacje
+02/03, wspólny `DemoForm`, stopka 3a. Korekta dolnej połowy 08.10.2026:
+pre-crop okładki nutrition 1536×620 (`left bottom`, eager), `ao-section` i
+separatory jak w `article-3a.css`, meta kart `space-between`, FAQ
+`line-height: 1.12`, pełny biogram makiety w `author.bio`, byline 96×120
+żeby CSS `50% 25%` kroiło koło. Źródła: pusta tablica ukrywa sekcję.
 
-Kontrole (Node 24.21.0), draft PR **#34**, head `12ac471`:
+Kontrole (Node 24.21.0), draft PR **#34**, head `333af77`:
 
-- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **113** unit,
-  build, workspaces, `check-build`, **120** E2E Chromium/Firefox/WebKit
-  (`article-3a.spec.ts`, `article-3a-nojs.spec.ts`, `article-mockup.spec.ts`).
-  Każdy `img` w `main` artykułu ma `naturalWidth > 0` po `scrollIntoView`.
-- CSS gzip `dist/_astro`: **29 589 B** / 32 KiB; JS gzip **5 770 B**. Designu
-  nie wycinano pod budżet.
+- `npm run verify` **PASS** na `59d80c0`: format, tokeny, lint, `astro check`,
+  **114** unit, build, workspaces, `check-build`, **120** E2E Chromium/Firefox/WebKit.
+  Każdy `img` w `main` artykułu ma `naturalWidth > 0` **bez** `scrollIntoView`
+  (okładka nutrition włącznie).
+- CSS gzip `dist/_astro`: **29 635 B** / 32 KiB; JS gzip **5 770 B**.
 - Dry-run `import:article` kod 0; `--write` kod 2, bez zapisu Content Lake.
-- verify-ola: `ola-1791442082` (zbliżenia) i `ola-1791442291` (pełne strony
-  po poprawkach). `browser posts` = `[]` z JS i bez. Baza
-  `http://127.0.0.1:4340`. Dist z verify, bez przebudowy w trakcie jazdy.
+- verify-ola: `ola-1791443677`. `browser posts` = `[]` z JS i bez. Baza
+  `http://127.0.0.1:4340`. Zdjęcie trzeciej okładki: `naturalWidth=1536`,
+  `naturalHeight=620`, `complete=true`, `loading=eager` na pełnej stronie
+  desktop i mobile **bez** dociągnięcia scrolla. Obejrzane full-page: pasek
+  sałatki jest namalowany.
 
 Inwentaryzacja zdjęć (makieta → produkcja, desktop 1280):
 
-| Miejsce   | Makieta                                                                     | Produkcja                                                                             |
-| --------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Byline    | `about.webp` 1122×1402 → CSS 48×48, `object-position: 50% 25%`, radius 50%  | SiteImage `about` pre-crop 96×96, CSS 48×48, `50% 25%`, radius 50%                    |
-| Hero      | `food-editorial.webp` 1536×1024 → 1200×435, `50% 55%`, radius 24px          | to samo źródło, 1536×1024 w pliku, 1200×435, `50% 55%`, 24px                          |
-| Autor     | `about.webp` 1122×1402 → CSS 96×120, `50% 50%`, radius 16px                 | SiteImage 96×120 w pliku, CSS 96×120, `50% 50%`, 16px, `loading=eager`                |
-| Powiązane | brak miniatur (tytuł + kicker + strzałka)                                   | tak samo, bez zdjęć                                                                   |
-| E-booki   | dekoracje SVG/HTML na okładkach; „Szczupła…” ma `art-nutrition` bez `<img>` | `BookCover` + `BookCoverArt`; odżywianie wstawia `food-editorial` (dodatkowy `<img>`) |
-| Źródła    | brak sekcji                                                                 | renderer jest; pusta tablica ukrywa sekcję                                            |
+| Miejsce   | Makieta                                                            | Produkcja                                                               |
+| --------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Byline    | `about.webp` 1122×1402 → CSS 48×48, `center 25%`, radius 50%       | SiteImage 96×120 (portret), CSS 48×48 `50% 25%` — bez square-crop Sharp |
+| Hero      | `food-editorial.webp` 1536×1024 → 1200×435, `50% 55%`, radius 24px | to samo                                                                 |
+| Autor     | `about.webp` → 96×120, `50% 50%`, radius 16px                      | SiteImage 96×120, eager                                                 |
+| Powiązane | brak miniatur                                                      | bez zdjęć                                                               |
+| E-booki   | nutrition jako `background-image` 84px, `left bottom`              | `BookCoverArt` pre-crop 1536×620, eager, CSS 84px, bez `object-fit`     |
+| Źródła    | brak sekcji                                                        | renderer jest; pusta tablica ukrywa sekcję                              |
 
-Artefakty (wymagane nazwy):
+Artefakty:
 
 - `/opt/cursor/artifacts/screenshots/compare-article-desktop.png`
 - `/opt/cursor/artifacts/screenshots/compare-article-mobile.png`
@@ -57,24 +60,17 @@ Artefakty (wymagane nazwy):
 - `/opt/cursor/artifacts/screenshots/compare-close-related.png`
 - `/opt/cursor/artifacts/screenshots/compare-close-hero.png`
 - `/opt/cursor/artifacts/screenshots/compare-close-byline.png`
-- Dowody verify-ola: `/tmp/ola-verify-evidence/ola-1791442082/` i
-  `/tmp/ola-verify-evidence/ola-1791442291/`.
+- `/opt/cursor/artifacts/screenshots/compare-close-sections-spacing.png`
+- Dowody verify-ola: `/tmp/ola-verify-evidence/ola-1791443677/`.
 
 Porównane zbliżenia z makietą. Pozostałe różnice (lista nie jest pusta):
 
 - `English` / `Polski` w nagłówku — wspólny `SiteShell3a`.
 - Księżyc motywu obok strzałki w stopce — zlecone wcześniej (motyw zostaje).
 - Newsletter: zgoda demonstracyjna `DemoForm` (wspólna 3a).
-- Biogram ramki autora to wspólne `author.bio` (krótsze niż dłuższy akapit
-  makiety o własnym doświadczeniu). About zostaje przy tym samym tekście.
-- Byline: Sharp mapuje `50% 25%` na gravity `top`, więc kadr koła jest
-  nieco wyższy niż CSS `center 25%` na pełnym portrecie makiety. Twarz jest.
-- TOC i rekomendacje łamią linie ciaśniej (węższa kolumna `.ao-container`
-  vs makietowy `.container`).
-- Okładki e-booków idą przez wspólny `CoverStage`/`BookCover` (ten sam zestaw
-  3a); makieta rysuje je inline. Karta „Szczupła…” ma zdjęcie jedzenia
-  w produkcji, w makiecie sam dekoracyjny `art-nutrition`.
-- Kotwice H2 to `section-${_key}` (`#section-punkt-wyjscia`), nie `#punkt-wyjscia`.
+- TOC i rekomendacje łamią linie ciaśniej (węższa kolumna `.ao-container`).
+- Okładki e-booków idą przez wspólny `CoverStage`/`BookCover`; makieta rysuje
+  je inline. Karta „Szczupła…” ma `<img>` pre-crop, makieta `background-image`.
 - Źródła: brak w makiecie i w fixture; renderer czeka na dane.
 - Karty i CTA prowadzą do `blog/[slug]` / `ebooki/…`, nie `podglad.html`.
 - EN: brak makiety EN; ten sam układ, kadry i Shell 3a.
