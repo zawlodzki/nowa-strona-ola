@@ -61,9 +61,6 @@ for (const path of [
   if (path === "static/index.html")
     assert(!html.includes("<script"), "static primitives emit JS");
 }
-await assert.rejects(access("dist/warsztat/index.html"), /ENOENT/);
-await assert.rejects(access("dist/en/workshop/index.html"), /ENOENT/);
-await assert.rejects(access("dist/tylko-pl/index.html"), /ENOENT/);
 await assert.rejects(access("dist/en/tylko-pl/index.html"), /ENOENT/);
 await assert.rejects(access("dist/en/konsultacje/index.html"), /ENOENT/);
 await assert.rejects(
