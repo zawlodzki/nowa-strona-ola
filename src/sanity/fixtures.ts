@@ -21,20 +21,6 @@ export {
   fixtureArticlesForLanguage,
 };
 
-function block(
-  key: string,
-  text: string,
-  style: "normal" | "h2" | "h3" = "normal",
-) {
-  return {
-    _type: "block" as const,
-    _key: key,
-    style,
-    children: [{ _type: "span", text, marks: [] }],
-    markDefs: [],
-  };
-}
-
 const formFields = {
   pl: [
     {

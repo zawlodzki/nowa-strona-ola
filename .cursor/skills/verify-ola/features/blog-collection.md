@@ -22,14 +22,14 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading 
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wpisy 2–7 z 11"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path blog-p1.aria.txt
 node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path blog-p1.png
-node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "2" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /blog/strona/2/
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wpisy 8–11 z 11"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path blog-p2.png
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /blog/kategoria/pcos/
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role navigation --name "Ścieżka nawigacji"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path blog-category.png
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /blog/kategoria/perimenopauza/
-node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "W tej kategorii nie ma jeszcze wpisów"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "W tej kategorii nie ma jeszcze wpisów. Wybierz inną kategorię albo wróć do pełnej listy."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path blog-empty.png
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /en/blog/
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Blog. On your terms."
@@ -38,12 +38,12 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 node .cursor/skills/verify-ola/scripts/verify.mjs browser context --javascript false
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /blog/
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Blog. Po Twojemu."
-node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "2" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Strona 2"
 ```
 
 ## Gotchas
 
-- Najnowszy wpis jest tylko na stronie 1 i nie wraca w siatce. `--exact` na tytule wyróżnionego wpisu trafia w link H3, nie w obrazek (aria-label zaczyna się od „Przeczytaj artykuł:”).
+- Najnowszy wpis jest tylko na stronie 1 i nie wraca w siatce. `--exact` na tytule wyróżnionego wpisu trafia w link H3, nie w obrazek (aria-label zaczyna się od „Przeczytaj artykuł:”). Numer strony ma dostępne imię „Strona 2”, nie samą cyfrę.
 - Fixture ma 11 wpisów, więc `/blog/strona/2/` istnieje. Pusta kategoria to `perimenopauza`, nie brak trasy.
 - Copy indeksu jest propozycją. Nie traktować tytułów i dat z makiety jako publikacji.
 - Artykuł z karty nadal używa dotychczasowego ArticleView (pakiet 7).

@@ -23,9 +23,25 @@ makiety przez `SiteImage` + `astro:assets` (`food`, `about`, `contact`)
 z kadrami hotspot. Dekoracje paginacji to SVG `ArrowIcon` (chevron-left/right).
 Akcentów matcha z PR #31 nie wdrażano.
 
-Kontrole tej sesji: liczby `npm run verify` i CSS gzip — po pełnym przebiegu
-w tej samej sesji. Dry-run: 34 dokumenty, bez zapisu. Natywny zoom, czytnik
-i urządzenie fizyczne **nie sprawdzone**.
+Kontrole tej sesji (Node 24.21.0):
+
+- `npm run verify` **PASS**: 109 unit, 96 E2E (Chromium/Firefox/WebKit).
+- CSS gzip `dist/_astro`: **26 231 B** (limit tymczasowy 32 KiB); JS gzip
+  5 770 B. Designu nie wycinano pod budżet.
+- Dry-run importu: 34 dokumenty, `--write` kod 2, bez zapisu.
+- Playwright: `npx playwright install chromium firefox webkit` oraz
+  `install-deps` **nie zawisły**.
+- verify-ola (`VERIFY_RUN_ID=ola-1791426038`, baza `http://127.0.0.1:4340`):
+  `/blog/` 200, strona 2, kategoria PCOS, pusta perimenopauza, `/en/blog/`
+  bez polskiego H1, bez JS. `browser posts` = `[]`. Dowody:
+  `/tmp/ola-verify-evidence/ola-1791426038/`.
+- Porównania obok makiety: `/opt/cursor/artifacts/screenshots/`
+  (`compare-blog-p1-desktop.png`, `compare-blog-p1-mobile.png`,
+  `compare-blog-p2-desktop.png`, `compare-blog-p2-mobile.png`,
+  `compare-blog-category-desktop.png`, `blog-en-desktop.png`,
+  `blog-p1-nojs.png`, `blog-empty.png`).
+- Natywny zoom przeglądarki, czytnik i urządzenie fizyczne **nie
+  sprawdzone**.
 
 Tabela zdjęć z makiety:
 
