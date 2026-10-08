@@ -1,12 +1,25 @@
 import type { Locale } from "@ola/shared";
 
 import { aboutPageFixture } from "./about-fixtures";
+import {
+  demonstrationArticles,
+  demonstrationCategories,
+  fixtureArticle,
+  fixtureArticlesForLanguage,
+} from "./blog-collection-fixtures";
 import { consultationPageFixture } from "./consultation-fixtures";
 import { ebookCollectionPageFixture } from "./ebook-collection-fixtures";
 import {
   homepagePageFixture,
   homepageSettingsFixture,
 } from "./homepage-fixtures";
+
+export {
+  demonstrationArticles,
+  demonstrationCategories,
+  fixtureArticle,
+  fixtureArticlesForLanguage,
+};
 
 function block(
   key: string,
@@ -472,271 +485,9 @@ export const demonstrationPages = {
   },
 } as const;
 
-export const demonstrationCategories = {
-  pl: [
-    {
-      id: "cat-process-pl",
-      language: "pl" as const,
-      title: "Proces",
-      description: "Jak porządkować pracę zanim wejdzie narzędzie.",
-      slug: "proces",
-      translation: { language: "en" as const, slug: "process" },
-    },
-    {
-      id: "cat-people-pl",
-      language: "pl" as const,
-      title: "Ludzie",
-      description: "Zmiana, która zostaje w zespole.",
-      slug: "ludzie",
-      translation: { language: "en" as const, slug: "people" },
-    },
-  ],
-  en: [
-    {
-      id: "cat-process-en",
-      language: "en" as const,
-      title: "Process",
-      description: "How to order the work before a tool arrives.",
-      slug: "process",
-      translation: { language: "pl" as const, slug: "proces" },
-    },
-    {
-      id: "cat-people-en",
-      language: "en" as const,
-      title: "People",
-      description: "Change that stays with the team.",
-      slug: "people",
-      translation: { language: "pl" as const, slug: "ludzie" },
-    },
-  ],
-};
-
-const author = {
-  pl: {
-    name: "Aleksandra Olesiewicz",
-    role: "Strategia i wdrożenia",
-    slug: "ola",
-  },
-  en: {
-    name: "Aleksandra Olesiewicz",
-    role: "Strategy and implementation",
-    slug: "ola",
-  },
-};
-
-function articleBody(language: Locale, slug: string) {
-  const pl = language === "pl";
-  return [
-    block(`${slug}-h2a`, pl ? "Najpierw decyzje" : "Decisions first", "h2"),
-    block(
-      `${slug}-p1`,
-      pl
-        ? "Narzędzie nie naprawi niejasnego procesu. Ten wpis jest demonstracyjny i ma spis treści z nagłówków."
-        : "A tool will not fix an unclear process. This post is demonstrative and builds a table of contents from headings.",
-    ),
-    {
-      _type: "articleHighlight",
-      _key: `${slug}-hi`,
-      title: pl ? "Na skróty" : "In short",
-      body: pl
-        ? "Ustalcie właściciela decyzji, zanim kupicie kolejną licencję."
-        : "Name the decision owner before you buy another licence.",
-    },
-    block(
-      `${slug}-h2b`,
-      pl ? "Co zostaje po zmianie" : "What remains after the change",
-      "h2",
-    ),
-    block(
-      `${slug}-p2`,
-      pl
-        ? "Zespół powinien umieć utrzymać rytm bez stałej obecności wdrożeniowca."
-        : "The team should keep the rhythm without a permanent implementer in the room.",
-    ),
-    {
-      _type: "articleTable",
-      _key: `${slug}-table`,
-      caption: pl
-        ? "Sygnały, że proces działa"
-        : "Signals that the process works",
-      headers: pl ? ["Sygnał", "Skutek"] : ["Signal", "Effect"],
-      rows: [
-        {
-          cells: pl
-            ? ["Wspólna tablica decyzji", "Mniej wracania do slajdów"]
-            : ["A shared decision board", "Fewer returns to slides"],
-        },
-        {
-          cells: pl
-            ? ["Krótki przegląd tygodnia", "Szybsze korekty"]
-            : ["A short weekly review", "Faster corrections"],
-        },
-      ],
-    },
-    {
-      _type: "articleCta",
-      _key: `${slug}-cta`,
-      title: pl ? "Chcecie to przećwiczyć?" : "Want to rehearse this?",
-      lead: pl
-        ? "Warsztat demonstracyjny składa te same sekcje."
-        : "The demonstration workshop uses the same sections.",
-      action: {
-        href: pl ? "/warsztat/" : "/en/workshop/",
-        label: pl ? "Zobacz warsztat" : "See the workshop",
-      },
-    },
-  ];
-}
-
-export const demonstrationArticles = {
-  "pl/najpierw-proces": {
-    id: "art-process-pl",
-    language: "pl" as const,
-    slug: "najpierw-proces",
-    title: "Najpierw proces, potem CRM",
-    lead: "Narzędzie nie naprawi niejasnych decyzji.",
-    publishedAt: "2026-09-01T08:00:00.000Z",
-    updatedAt: "2026-09-02T08:00:00.000Z",
-    featured: "featured",
-    seo: { title: "Najpierw proces, potem CRM", description: null },
-    media: photo,
-    authors: [author.pl],
-    categories: [demonstrationCategories.pl[0]],
-    body: articleBody("pl", "proces"),
-    sources: [
-      {
-        _key: "src1",
-        title: "Strona warsztatu",
-        href: "https://www.zawlodzki.pl/szkolenie-i-wdrozenie-pipedrive",
-      },
-    ],
-    translation: { language: "en" as const, slug: "process-before-crm" },
-    related: [] as { title: string; slug: string }[],
-  },
-  "en/process-before-crm": {
-    id: "art-process-en",
-    language: "en" as const,
-    slug: "process-before-crm",
-    title: "Process first, then CRM",
-    lead: "A tool will not fix unclear decisions.",
-    publishedAt: "2026-09-01T08:00:00.000Z",
-    updatedAt: "2026-09-02T08:00:00.000Z",
-    featured: "featured",
-    seo: { title: "Process first, then CRM", description: null },
-    media: photo,
-    authors: [author.en],
-    categories: [demonstrationCategories.en[0]],
-    body: articleBody("en", "process"),
-    sources: [
-      {
-        _key: "src1",
-        title: "Workshop page",
-        href: "https://www.zawlodzki.pl/szkolenie-i-wdrozenie-pipedrive",
-      },
-    ],
-    translation: { language: "pl" as const, slug: "najpierw-proces" },
-    related: [] as { title: string; slug: string }[],
-  },
-  "pl/ludzie-w-srodku": {
-    id: "art-people-pl",
-    language: "pl" as const,
-    slug: "ludzie-w-srodku",
-    title: "Ludzie w środku zmiany",
-    lead: "Narzędzie działa, gdy zespół wie po co.",
-    publishedAt: "2026-08-20T08:00:00.000Z",
-    updatedAt: null,
-    featured: "standard",
-    seo: { title: "Ludzie w środku zmiany", description: null },
-    media: photo,
-    authors: [author.pl],
-    categories: [demonstrationCategories.pl[1]],
-    body: articleBody("pl", "ludzie"),
-    sources: [],
-    translation: { language: "en" as const, slug: "people-in-the-change" },
-    related: [] as { title: string; slug: string }[],
-  },
-  "en/people-in-the-change": {
-    id: "art-people-en",
-    language: "en" as const,
-    slug: "people-in-the-change",
-    title: "People in the middle of change",
-    lead: "A tool works when the team knows what it is for.",
-    publishedAt: "2026-08-20T08:00:00.000Z",
-    updatedAt: null,
-    featured: "standard",
-    seo: { title: "People in the middle of change", description: null },
-    media: photo,
-    authors: [author.en],
-    categories: [demonstrationCategories.en[1]],
-    body: articleBody("en", "people"),
-    sources: [],
-    translation: { language: "pl" as const, slug: "ludzie-w-srodku" },
-    related: [] as { title: string; slug: string }[],
-  },
-  "pl/maly-przeglad": {
-    id: "art-review-pl",
-    language: "pl" as const,
-    slug: "maly-przeglad",
-    title: "Mały przegląd zamiast wielkiego startu",
-    lead: "Rytm tygodnia utrzymuje zmianę lepiej niż jednorazowe szkolenie.",
-    publishedAt: "2026-08-05T08:00:00.000Z",
-    updatedAt: null,
-    featured: "standard",
-    seo: { title: "Mały przegląd zamiast wielkiego startu", description: null },
-    media: photo,
-    authors: [author.pl],
-    categories: [demonstrationCategories.pl[0]],
-    body: articleBody("pl", "przeglad"),
-    sources: [],
-    translation: { language: "en" as const, slug: "small-review" },
-    related: [] as { title: string; slug: string }[],
-  },
-  "en/small-review": {
-    id: "art-review-en",
-    language: "en" as const,
-    slug: "small-review",
-    title: "A small review instead of a big launch",
-    lead: "A weekly rhythm keeps the change better than a one-off training.",
-    publishedAt: "2026-08-05T08:00:00.000Z",
-    updatedAt: null,
-    featured: "standard",
-    seo: { title: "A small review instead of a big launch", description: null },
-    media: photo,
-    authors: [author.en],
-    categories: [demonstrationCategories.en[0]],
-    body: articleBody("en", "review"),
-    sources: [],
-    translation: { language: "pl" as const, slug: "maly-przeglad" },
-    related: [] as { title: string; slug: string }[],
-  },
-};
-
-function withRelated<T extends { language: Locale; slug: string }>(
-  articles: Record<string, T & { related: unknown[] }>,
-) {
-  const list = Object.values(articles);
-  for (const article of list) {
-    article.related = list
-      .filter(
-        (item) =>
-          item.language === article.language && item.slug !== article.slug,
-      )
-      .slice(0, 2);
-  }
-  return articles;
-}
-
-withRelated(demonstrationArticles);
-
 export function fixturePage(language: Locale, slug: string) {
   return demonstrationPages[
     `${language}/${slug}` as keyof typeof demonstrationPages
-  ];
-}
-
-export function fixtureArticle(language: Locale, slug: string) {
-  return demonstrationArticles[
-    `${language}/${slug}` as keyof typeof demonstrationArticles
   ];
 }
 
@@ -744,10 +495,4 @@ export function fixturePagesForLanguage(language: Locale) {
   return Object.values(demonstrationPages).filter(
     (page) => page.language === language,
   );
-}
-
-export function fixtureArticlesForLanguage(language: Locale) {
-  return Object.values(demonstrationArticles)
-    .filter((article) => article.language === language)
-    .sort((left, right) => right.publishedAt.localeCompare(left.publishedAt));
 }

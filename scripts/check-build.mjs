@@ -43,7 +43,12 @@ for (const path of [
   "en/workshop/index.html",
   "tylko-pl/index.html",
   "blog/index.html",
-  "blog/najpierw-proces/index.html",
+  "blog/strona/2/index.html",
+  "blog/kategoria/pcos/index.html",
+  "blog/kategoria/perimenopauza/index.html",
+  "en/blog/index.html",
+  "en/blog/page/2/index.html",
+  "blog/przygotowanie-do-konsultacji-pcos/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(
@@ -86,6 +91,27 @@ const ebookHtml = await readFile(
 assert.match(ebookHtml, /97/);
 assert.match(ebookHtml, /Zapowiedź oferty|Sprzedaż nie jest uruchomiona/);
 assert.doesNotMatch(ebookHtml, /potwierdzenie zakupu|płatność przyjęta/i);
+const blogHtml = await readFile("dist/blog/index.html", "utf8");
+assert.match(blogHtml, /Blog\. Po Twojemu\./);
+assert.match(blogHtml, /Najnowszy wpis/);
+assert.match(blogHtml, /Wpisy 2–7 z 11/);
+assert.match(blogHtml, /przygotowanie-do-konsultacji-pcos/);
+assert.match(blogHtml, /\/blog\/strona\/2\//);
+assert.doesNotMatch(
+  blogHtml.split('id="wpisy"')[1] ?? "",
+  /przygotowanie-do-konsultacji-pcos/,
+);
+const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
+assert.match(blogPage2, /Wpisy 8–11 z 11/);
+assert.doesNotMatch(blogPage2, /Najnowszy wpis/);
+const blogEmpty = await readFile(
+  "dist/blog/kategoria/perimenopauza/index.html",
+  "utf8",
+);
+assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
+const blogEn = await readFile("dist/en/blog/index.html", "utf8");
+assert.match(blogEn, /Blog\. On your terms\./);
+assert.doesNotMatch(blogEn, /Po Twojemu/);
 console.log(
   JSON.stringify({ gzipBytes: sizes, staticPrimitivesScripts: 0 }, null, 2),
 );

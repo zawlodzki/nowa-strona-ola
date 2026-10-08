@@ -92,6 +92,20 @@ export const siteSettingsType = defineType({
       validation: (rule) => rule.max(6),
     }),
     defineField({
+      name: "blogIndex",
+      title: "Indeks bloga",
+      description:
+        "Tytuł, lead i etykiety listy. Najnowszy wpis i paginacja wynikają z opublikowanych artykułów, bez flagi featured.",
+      type: "blogIndexSettings",
+    }),
+    defineField({
+      name: "blogNewsletter",
+      title: "Newsletter bloga",
+      description:
+        "Pełny formularz pod listą wpisów. Ta sama referencja formularza co homepage. Pola sidebaru są na artykuł (pakiet 7).",
+      type: "blogNewsletterSettings",
+    }),
+    defineField({
       name: "socialLinks",
       title: "Profile",
       type: "array",

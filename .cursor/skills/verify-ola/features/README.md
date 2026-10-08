@@ -41,5 +41,6 @@ Każdy plik ma H1, jeden akapit zachowania widocznego dla użytkownika i dokład
 - [Przełącznik języka](./language.md) prowadzi z PL na EN i z powrotem, w tym stronę bez tłumaczenia.
 - [Dialog katalogu](./catalog-dialog.md) otwiera i zamyka dialog „Jak pracujemy”.
 - [Katalog 3a](./design-system.md) otwiera `/design-system/`, motyw i karuzelę.
-- [Artykuł na blogu](./blog-article.md) wchodzi z listy bloga w artykuł, kategorię „Proces” i angielski odpowiednik.
+- [Kolekcja bloga](./blog-collection.md) otwiera `/blog/` i `/en/blog/`, paginację, kategorię i pustą kategorię, bez POST.
+- [Artykuł na blogu](./blog-article.md) wchodzi z listy bloga w artykuł i angielski odpowiednik.
 - [Strona bez skryptów](./static-page.md) sprawdza `/static/` przy wyłączonym JavaScript.

@@ -2,7 +2,11 @@ import { createClient } from "@sanity/client";
 import type { Locale } from "@ola/shared";
 
 import { ARTICLES_PER_PAGE } from "@/lib/paths";
-import { paginate } from "@/lib/pagination";
+import {
+  blogCollectionPageCount,
+  paginateBlogCollection,
+  sortByPublishedAt,
+} from "@/lib/pagination";
 import { assertKnownSections } from "@/content/sections";
 import { sanityApiVersion, readSanityPublicConfig } from "./config";
 import {
@@ -209,9 +213,13 @@ export async function listArticles(
   } = {},
 ): Promise<ArticleCard[]> {
   const client = resolveClient(options);
-  const articles = client
-    ? await client.fetch<ArticleCard[]>(PUBLISHED_ARTICLES_QUERY, { language })
-    : (fixtureArticlesForLanguage(language) as unknown as ArticleCard[]);
+  const articles = sortByPublishedAt(
+    client
+      ? await client.fetch<ArticleCard[]>(PUBLISHED_ARTICLES_QUERY, {
+          language,
+        })
+      : (fixtureArticlesForLanguage(language) as unknown as ArticleCard[]),
+  );
   if (!options.categorySlug) return articles;
   return articles.filter((article) =>
     article.categories?.some(
@@ -231,7 +239,7 @@ export async function getArticleIndex(
   } = {},
 ) {
   const articles = await listArticles(language, options);
-  const result = paginate(
+  const result = paginateBlogCollection(
     articles,
     page,
     options.pageSize ?? ARTICLES_PER_PAGE,
@@ -239,10 +247,7 @@ export async function getArticleIndex(
   if (!result) {
     throw new Error(`Brak strony ${page} indeksu bloga ${language}.`);
   }
-  return {
-    ...result,
-    featured: articles.filter((article) => article.featured === "featured"),
-  };
+  return result;
 }
 
 export async function listCategoryPageParams(
@@ -260,10 +265,7 @@ export async function listCategoryPageParams(
       ...options,
       categorySlug: category.slug,
     });
-    const totalPages = Math.max(
-      1,
-      Math.ceil(articles.length / ARTICLES_PER_PAGE),
-    );
+    const totalPages = blogCollectionPageCount(articles.length);
     for (let page = 2; page <= totalPages; page += 1) {
       params.push({ slug: category.slug, page: String(page) });
     }

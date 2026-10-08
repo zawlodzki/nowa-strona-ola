@@ -118,15 +118,15 @@ describe("localized paths", () => {
       language: "en",
       slug: "tylko-pl",
     });
-    expect(parseContentPath("blog/najpierw-proces")).toEqual({
+    expect(parseContentPath("blog/przygotowanie-do-konsultacji-pcos")).toEqual({
       kind: "article",
       language: "pl",
-      slug: "najpierw-proces",
+      slug: "przygotowanie-do-konsultacji-pcos",
     });
-    expect(parseContentPath("en/blog/category/process")).toEqual({
+    expect(parseContentPath("en/blog/category/pcos")).toEqual({
       kind: "blogCategory",
       language: "en",
-      slug: "process",
+      slug: "pcos",
       page: 1,
     });
   });
@@ -164,15 +164,20 @@ describe("demonstration templates", () => {
       environment: {},
       pageSize: 2,
     });
-    const article = await getArticle("pl", "najpierw-proces", {
-      environment: {},
-    });
-
-    expect(index.totalPages).toBe(2);
-    expect(index.featured.map((item) => item.slug)).toContain(
-      "najpierw-proces",
+    const article = await getArticle(
+      "pl",
+      "przygotowanie-do-konsultacji-pcos",
+      {
+        environment: {},
+      },
     );
-    expect(article.title).toBe("Najpierw proces, potem CRM");
+
+    expect(index.totalPages).toBe(5);
+    expect(index.latest?.slug).toBe("przygotowanie-do-konsultacji-pcos");
+    expect(index.items.map((item) => item.slug)).not.toContain(
+      "przygotowanie-do-konsultacji-pcos",
+    );
+    expect(article.title).toMatch(/konsultacji dietetycznej/);
     expect(article.related?.length).toBeGreaterThan(0);
     await expect(
       getArticleIndex("pl", 9, { environment: {}, pageSize: 2 }),

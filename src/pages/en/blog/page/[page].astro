@@ -1,21 +1,19 @@
 ---
 import type { GetStaticPaths } from "astro";
 
-import { ARTICLES_PER_PAGE, blogPath } from "@/lib/paths";
+import { blogCollectionPageCount } from "@/lib/pagination";
+import { blogPath } from "@/lib/paths";
 import {
   getArticleIndex,
   getSiteSettings,
   listArticles,
   listCategories,
 } from "@/sanity/repository";
-import BlogIndex from "@/views/BlogIndex.astro";
+import BlogCollectionPage from "@/views/BlogCollectionPage.astro";
 
 export const getStaticPaths = (async () => {
   const articles = await listArticles("en");
-  const totalPages = Math.max(
-    1,
-    Math.ceil(articles.length / ARTICLES_PER_PAGE),
-  );
+  const totalPages = blogCollectionPageCount(articles.length);
   return Array.from({ length: totalPages }, (_, index) => index + 1)
     .filter((page) => page > 1)
     .map((page) => ({ params: { page: String(page) } }));
@@ -30,16 +28,11 @@ const [index, settings, categories] = await Promise.all([
 ]);
 ---
 
-<BlogIndex
+<BlogCollectionPage
   lang={lang}
   settings={settings}
-  title="Blog"
-  lead="Demonstration posts. Each language has its own documents."
-  articles={index.items}
-  featured={index.featured}
+  index={index}
   categories={categories}
-  page={index.page}
-  totalPages={index.totalPages}
   pageHref={(pageNumber) => blogPath(lang, pageNumber)}
   alternateHref={blogPath("pl", page)}
 />

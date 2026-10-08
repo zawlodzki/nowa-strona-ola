@@ -5,7 +5,8 @@ const mediaFields = /* groq */ `{
   tone,
   caption,
   "label": alt,
-  "src": image.asset->url
+  "src": image.asset->url,
+  "hotspot": image.hotspot{x, y, height, width}
 }`;
 
 const actionFields = /* groq */ `{ label, href, emphasis }`;
@@ -295,6 +296,48 @@ export const siteSettingsProjection = /* groq */ `
   "headerCta": headerCta${actionFields},
   legalLinks[]{ _key, label, href },
   socialLinks[]{ _key, label, href },
+  blogIndex{
+    title,
+    lead,
+    note,
+    latestTitle,
+    collectionTitle,
+    readActionLabel,
+    allCategoriesLabel,
+    emptyMessage,
+    emptyCategoryMessage,
+    previousLabel,
+    nextLabel,
+    paginationLabel,
+    seoTitle,
+    seoDescription
+  },
+  blogNewsletter{
+    enabled,
+    title,
+    lead,
+    sidebarTitle,
+    sidebarLead,
+    sidebarActionLabel,
+    "form": form->{
+      "id": _id,
+      language,
+      title,
+      submitLabel,
+      successMessage,
+      noscriptMessage,
+      fields[]{
+        _key,
+        name,
+        input,
+        label,
+        placeholder,
+        errorMessage,
+        required,
+        options
+      }
+    }
+  },
   "translation": translation->{ language }
 `;
 
@@ -364,7 +407,7 @@ export const PUBLISHED_ARTICLES_QUERY = defineQuery(/* groq */ `
     _type == "article" &&
     !(_id in path("drafts.**")) &&
     language == $language
-  ] | order(publishedAt desc){ ${articleCardProjection} }
+  ] | order(publishedAt desc, _id asc){ ${articleCardProjection} }
 `);
 
 export const PUBLISHED_CATEGORY_QUERY = defineQuery(/* groq */ `
@@ -389,9 +432,12 @@ export const PUBLISHED_CATEGORIES_QUERY = defineQuery(/* groq */ `
     !(_id in path("drafts.**")) &&
     language == $language
   ] | order(title asc){
+    "id": _id,
     title,
+    description,
     "slug": slug.current,
-    language
+    language,
+    "translation": translation->{ language, "slug": slug.current }
   }
 `);
 

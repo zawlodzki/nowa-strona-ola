@@ -26,6 +26,10 @@ import {
   ebookMaterialType,
   ebookSourceType,
 } from "./objects/ebook-landing";
+import {
+  blogIndexSettingsType,
+  blogNewsletterSettingsType,
+} from "./objects/blog-index";
 import { mediaObjectType } from "./objects/media-object";
 import { seoType } from "./objects/seo";
 
@@ -33,6 +37,8 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   seoType,
   actionLinkType,
   mediaObjectType,
+  blogIndexSettingsType,
+  blogNewsletterSettingsType,
   articleImageType,
   articleHighlightType,
   articleCtaType,

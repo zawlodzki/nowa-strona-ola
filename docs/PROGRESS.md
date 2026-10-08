@@ -1,9 +1,51 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 5 — wyrównanie makiety kolekcji).
+Aktualizacja: 2026-10-08 (pakiet 6 — BlogCollection3a).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja pakietu 6 — kolekcja bloga 3a — 08.10.2026
+
+Zakres: `BlogCollection3a` na `/blog/` i `/en/blog/` według makiet
+`blog-3a.html` i `blog-3a-page-2.html`. Istniejące `article` i `category`;
+najnowszy wpis tylko na stronie 1, siatka dwóch kolumn, paginacja
+`/blog/strona/2/` i `/en/blog/page/2/`, sortowanie `publishedAt desc, _id asc`.
+Pełny newsletter `DemoForm` pod paginacją. Breadcrumb i filtry kategorii
+(Wszystkie + 5 kategorii; pusta `perimenopauza`). Copy, 11 wpisów i daty
+z makiety są **propozycją**. Trasy `blog/[slug]` zostają przy `ArticleView`.
+
+Kod: `siteSettings.blogIndex` / `blogNewsletter`, GROQ (hotspot, kolejność,
+projekcja kategorii), TypeGen, mappery, serializer Markdown z przykładem,
+fixture 11×2 artykułów i 5×2 kategorii, dry-run importu
+(`npm run import:blog-collection`, `--write` kończy się kodem 2). Zdjęcia
+makiety przez `SiteImage` + `astro:assets` (`food`, `about`, `contact`)
+z kadrami hotspot. Dekoracje paginacji to SVG `ArrowIcon` (chevron-left/right).
+Akcentów matcha z PR #31 nie wdrażano.
+
+Kontrole tej sesji: liczby `npm run verify` i CSS gzip — po pełnym przebiegu
+w tej samej sesji. Dry-run: 34 dokumenty, bez zapisu. Natywny zoom, czytnik
+i urządzenie fizyczne **nie sprawdzone**.
+
+Tabela zdjęć z makiety:
+
+| Zdjęcie z makiety                         | Plik na produkcji                                       | Sekcja                                                                                     | Status                   |
+| ----------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
+| `assets/food-editorial.webp`              | `src/assets/editorial/food-editorial.webp` klucz `food` | wyróżniony wpis; karty posiłków, suplementów, dzienniczka, zakupów                         | na miejscu, ten sam kadr |
+| `../../src/assets/portraits/contact.webp` | `src/assets/portraits/contact.webp` klucz `contact`     | pytania o PCOS, insulinooporność, sprzeczne rady (`portrait` / `portrait-close`, 15% góry) | na miejscu, ten sam kadr |
+| `../../src/assets/portraits/about.webp`   | `src/assets/portraits/about.webp` klucz `about`         | wyniki badań, cel konsultacji (`portrait`, 15% góry)                                       | na miejscu, ten sam kadr |
+
+Brakujących plików nie było; placeholderów nie podstawiano.
+
+Świadome różnice względem makiety (nie ucięcie kolekcji):
+
+- Filtry kategorii pod leadem — zlecone w pakiecie, makieta ich nie ma.
+- `aria-label` obrazka/karty używa etykiety CMS „Przeczytaj artykuł: …”, makieta ma krótsze „Przeczytaj: …”.
+- Shell: English/Polski, demonstracyjna zgoda newslettera, ikona motywu — wspólny `SiteShell3a`.
+- Linki kart prowadzą do `blog/[slug]` (ArticleView), nie do `podglad.html`.
+
+Następny krok: pakiet 7 Article3a. Dane indeksu w Content Lake i odbiór
+Studio/preview pozostają otwarte. Copy indeksu do zatwierdzenia.
 
 ### Sesja poprawek makiety kolekcji — 07.10.2026
 
@@ -51,7 +93,7 @@ Do decyzji (brak prawdziwych adresów):
 - Strony prawne: `/polityka-prywatnosci/`, `/regulamin/` (EN `/en/privacy/`,
   `/en/terms/`) — brak dokumentów i treści.
 
-Następny krok: pakiet 6 BlogCollection3a.
+Następny krok: pakiet 6 BlogCollection3a (wykonany 08.10.2026).
 
 ### Sesja pakietu 5 — kolekcja e-booków 3a — 07.10.2026
 
@@ -102,8 +144,9 @@ Tabela zdjęć z makiety:
 | pozostałe 5 okładek (art-decisions/route/observation/journal/evening) | SVG `BookCoverArt` w `src/design-system/decorations/`                     | karty kolekcji                                           | SVG, bez rastrów — zgodnie z makietą           |
 | brak innych `<img>` w `ebooks-3a.html`                                | —                                                                         | —                                                        | nic nie brakuje; placeholderów nie podstawiano |
 
-Następny krok: pakiet 6 BlogCollection3a. Dane kolekcji w Content Lake
-i odbiór Studio/preview pozostają otwarte. Copy i UX kolekcji do zatwierdzenia.
+Następny krok: pakiet 6 BlogCollection3a (wykonany 08.10.2026). Dane kolekcji
+e-booków w Content Lake i odbiór Studio/preview pozostają otwarte. Copy i UX
+kolekcji e-booków do zatwierdzenia.
 
 ### Sesja dodatkowego akcentu — 07.10.2026
 
@@ -140,15 +183,16 @@ wdrożyć tokeny/komponenty i wykonać odbiór UI; etap pozostaje 4a.
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiety 1–5 (Homepage3a, About3a, Consultation3a, Ebook3a, EbookCollection3a,
-wspólny shell) są w kodzie i fixture’ach; zapis do Content Lake i publikacja
-nie były zlecone.**
+**Pakiety 1–6 (Homepage3a, About3a, Consultation3a, Ebook3a, EbookCollection3a,
+BlogCollection3a, wspólny shell) są w kodzie i fixture’ach; zapis do Content
+Lake i publikacja nie były zlecone.**
 
 Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
-`/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/` i
-`/en/ebooks/<slug>/` oraz preview tych stron renderują `SiteShell3a`
-z fixture’ów. Blog i `/ui/` nadal używają wcześniejszego Layout albo czekają
-na pakiety 6–7. Etapy 5–7 oraz pakiety 6–7 etapu 4a pozostają otwarte.
+`/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/`,
+`/en/ebooks/<slug>/`, `/blog/` i `/en/blog/` oraz preview tych stron
+renderują `SiteShell3a` z fixture’ów. Trasy artykułu i `/ui/` czekają
+na pakiet 7 albo dalsze prace. Etapy 5–7 oraz pakiet 7 etapu 4a pozostają
+otwarte.
 
 ## Wykonane
 
@@ -2287,11 +2331,11 @@ niesprawdzone.
 
 ## Następny krok
 
-Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty
-produktu, kategorie i filtrowanie. Limit CSS jest tymczasowo 32 KiB;
-optymalizacja później. Import homepage/About/konsultacji/e-booka do szkiców
-Sanity dopiero na osobne zlecenie zapisu. Publikacja treści/strony wymaga
-osobnego zlecenia.
+Pakiet 7 etapu 4a: Article3a (`article-3a.html`), Portable Text, autor,
+źródła, related, e-booki, FAQ i newsletter. Limit CSS jest tymczasowo 32 KiB;
+optymalizacja później. Import homepage/About/konsultacji/e-booka/kolekcji
+bloga do szkiców Sanity dopiero na osobne zlecenie zapisu. Publikacja
+treści/strony wymaga osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
 axe/overflow About przy 320/390/1440 px, natywny zoom, czytnik i fizyczne

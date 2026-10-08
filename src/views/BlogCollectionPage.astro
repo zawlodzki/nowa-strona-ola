@@ -1,0 +1,75 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { mapBlogCollection } from "@/content/map-blog-collection";
+import { shellLinks } from "@/content/map-homepage";
+import { homepageCopyright } from "@/sanity/homepage-fixtures";
+import { blogPath } from "@/lib/paths";
+import type {
+  ArticleCard,
+  CategoryContent,
+  SiteSettings,
+} from "@/sanity/repository";
+import BlogCollection3a from "@/views/BlogCollection3a.astro";
+import SiteShell3a from "@/views/SiteShell3a.astro";
+
+export interface Props {
+  lang: Locale;
+  settings: SiteSettings;
+  index: {
+    latest: ArticleCard | null;
+    items: ArticleCard[];
+    page: number;
+    totalPages: number;
+    total: number;
+    rangeStart: number;
+    rangeEnd: number;
+    isEmpty: boolean;
+  };
+  categories: { title?: string | null; slug?: string | null }[];
+  category?: CategoryContent | null;
+  pageHref: (page: number) => string;
+  alternateHref?: string | null;
+  preview?: boolean;
+}
+
+const {
+  lang,
+  settings,
+  index,
+  categories,
+  category = null,
+  pageHref,
+  alternateHref,
+  preview = false,
+} = Astro.props;
+const content = mapBlogCollection(settings, index, categories, lang, {
+  category,
+  pageHref,
+});
+const shell = shellLinks(settings);
+const blogHref = blogPath(lang);
+const navigation = shell.navigation.map((item) => ({
+  ...item,
+  current: item.href === blogHref,
+}));
+const headerCta = shell.headerCta
+  ? { ...shell.headerCta, href: "#newsletter" }
+  : undefined;
+---
+
+<SiteShell3a
+  lang={lang}
+  title={content.seoTitle}
+  description={content.seoDescription}
+  preview={preview}
+  footerNote={settings.footerNote ?? ""}
+  copyright={homepageCopyright(lang)}
+  languageHref={alternateHref ?? content.alternateHref}
+  navigation={navigation}
+  headerCta={headerCta}
+  socialLinks={shell.socialLinks}
+  legalLinks={shell.legalLinks}
+>
+  <BlogCollection3a lang={lang} content={content} />
+</SiteShell3a>

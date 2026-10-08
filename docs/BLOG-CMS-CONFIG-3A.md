@@ -232,18 +232,22 @@ Podgląd i produkcja korzystają ze wspólnego szablonu, bez polskiego fallbacku
 pod EN. Karty korzystają z tytułu, leadu, daty, obrazu z alt/hotspot
 oraz referencji kategorii. Bez osobnej kolekcji duplikującej artykuły.
 
-Tytuł „Blog. Po Twojemu.” i lead są propozycją do oceny. Obecne `siteSettings`
-nie zawiera ustawień indeksu; proponowany lokalizowany obiekt `blogIndex`
-ma `title` i `lead`, bez pól szerokości czy CSS. Newsletter współdzieli wcześniej
-opisane `siteSettings.blogNewsletter` i referencję `form`; ta konfiguracja
-pozostaje propozycją, nie wdrożonym polem. Navbar/stopka z ustawień serwisu.
-HTML i Markdown mają korzystać z tego samego wyboru artykułów i linków stron.
+Tytuł „Blog. Po Twojemu.” i lead są propozycją do oceny. W pakiecie 6 (08.10.2026)
+schemat kodu ma lokalizowany obiekt `siteSettings.blogIndex` (`title`, `lead`,
+`note`, etykiety listy/paginacji, komunikaty pustych stanów, SEO) oraz
+`siteSettings.blogNewsletter` (`enabled`, `title`, `lead`, `form`, pola sidebaru
+na pakiet 7). To wdrożenie schematu i fixture’ów, nie konfiguracja Content Lake
+ani zatwierdzona treść publikacji. Navbar/stopka z ustawień serwisu.
+HTML i Markdown korzystają z tego samego wyboru artykułów i linków stron.
 
 - [x] Wykonać samodzielny HTML/CSS 3a z kolekcją, paginacją i newsletterem.
 - [x] Połączyć lokalne menu 3a i breadcrumb artykułu z indeksem.
 - [ ] Zatwierdzić copy indeksu oraz rzeczywiste tytuły, daty i obrazy wpisów.
-- [ ] Wdrożyć wybór najnowszego wpisu i paginację bez duplikatu w Astro/GROQ.
-- [ ] Dodać konfigurację indeksu/newslettera, TypeGen, mappery i Markdown.
-- [ ] Sprawdzić docelowe kolekcje 0/1/7/8/13/14 wpisów, remisy dat i brak EN.
+- [x] Wdrożyć wybór najnowszego wpisu i paginację bez duplikatu w Astro/GROQ
+      (kod i fixture; bez zapisu do Content Lake).
+- [x] Dodać konfigurację indeksu/newslettera, TypeGen, mappery i Markdown
+      (schemat w repo; Content Lake nie był zapisywany).
+- [x] Sprawdzić docelowe kolekcje 0/1/7/8/13/14 wpisów, remisy dat i brak EN
+      (testy jednostkowe).
 
-Makieta nie zamyka żadnego z powyższych kroków implementacji CMS ani Astro.
+Makieta nie zamyka zapisu do Content Lake ani odbioru Studio/preview.

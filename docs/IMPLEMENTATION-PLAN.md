@@ -269,19 +269,21 @@ Zlecenie 07.10.2026: dalszą implementację oprzeć na przygotowanych mockupach,
 nowym design systemie i przeniesieniu treści do Sanity. Etapy 3–4 pozostają
 zapisem wykonanych fundamentów; nie oznaczają ukończenia docelowych stron.
 
-Stan po pakiecie 5 (07.10.2026):
+Stan po pakiecie 6 (08.10.2026):
 
 - Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
-  `/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/` i
-  `/en/ebooks/<slug>/` oraz preview tych stron używają `SiteShell3a`/`Layout3a`
-  i `Homepage3a` / `About3a` / `Consultation3a` / `Ebook3a` /
-  `EbookCollection3a`. Blog i `/ui/` nadal importują wcześniejszy Layout albo
-  czekają na kolejne pakiety.
-- Sanity ma dokument `ebook` z `ebookLanding` (wariant `cherry3a`), rozdziałami,
-  materiałami i źródłami oraz `ebookCollectionSection` (cherry3a). Serializery
+  `/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/`,
+  `/en/ebooks/<slug>/`, `/blog/`, `/en/blog/` oraz preview tych stron używają
+  `SiteShell3a`/`Layout3a` i `Homepage3a` / `About3a` / `Consultation3a` /
+  `Ebook3a` / `EbookCollection3a` / `BlogCollection3a`. Trasy artykułu
+  `blog/[slug]` zostają przy `ArticleView` do pakietu 7. `/ui/` czeka na
+  dalsze prace.
+- Sanity ma `siteSettings.blogIndex` i `blogNewsletter` w schemacie kodu;
+  kolekcja korzysta z istniejących `article` i `category`. Serializery
   Markdown nowych typów są w kodzie; trasy `.md` i pełny eksport to etap 5.
-- Dry-run importu homepage, About, konsultacji, landingu e-booka i kolekcji
-  e-booków istnieje; Content Lake i publikacja nie były zapisywane.
+- Dry-run importu homepage, About, konsultacji, landingu e-booka, kolekcji
+  e-booków i kolekcji bloga istnieje; Content Lake i publikacja nie były
+  zapisywane.
 - Budżet CSS w `scripts/check-build.mjs` wynosi tymczasowo **32 KiB gzip**
   na etap 4a (pakiety 5–7). Nie jest to docelowy budżet; optymalizacja
   później. Decyzja 07.10.2026.
@@ -341,7 +343,9 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 - [x] Wdrożyć EbookCollection3a, kategorie i filtrowanie (kod i fixture;
       bez Content Lake). Copy i UX kolekcji są propozycją.
 - [ ] Dane kolekcji w Content Lake i odbiór Studio/preview.
-- [ ] Wdrożyć BlogCollection3a i rzeczywistą paginację.
+- [x] Wdrożyć BlogCollection3a i rzeczywistą paginację (kod i fixture;
+      bez Content Lake). Copy, tytuły, daty i kadry z makiety są propozycją.
+- [ ] Dane indeksu bloga w Content Lake i odbiór Studio/preview.
 - [ ] Wdrożyć Article3a, Portable Text i jego powiązane bloki.
 - [ ] Przygotować i sprawdzić import bez zapisu oraz kopię obecnych danych.
 - [ ] Przenieść treści i media do szkiców Content Lake; zapisać wyniki walidacji.

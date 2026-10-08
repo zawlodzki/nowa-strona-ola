@@ -35,6 +35,7 @@
     "import:consultation": "node scripts/import-consultation-content.mjs",
     "import:ebook": "node scripts/import-ebook-content.mjs",
     "import:ebook-collection": "node scripts/import-ebook-collection.mjs",
+    "import:blog-collection": "node scripts/import-blog-collection.mjs",
     "tokens:generate": "node scripts/generate-tokens.mjs"
   },
   "dependencies": {

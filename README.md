@@ -117,6 +117,7 @@ npm run verify
 npm run import:homepage
 npm run import:consultation
 npm run import:ebook
+npm run import:blog-collection
 ```
 
 Verify obejmuje format, zgodność tokenów, lint, typy wszystkich workspace’ów, build frontendu,
@@ -124,7 +125,10 @@ Studio i Workera, unit tests, budżety artefaktów i E2E w trzech przeglądarkac
 `npm run import:homepage` robi dry-run szkiców homepage 3a do `reports/` i nic
 nie zapisuje do Content Lake. `npm run import:consultation` robi to samo dla
 landingu konsultacji (`page-consultation-pl/en`); `npm run import:ebook` dla
-dokumentu `ebook-suplementy-w-pcos-*`. Flaga `--write` kończy się kodem 2.
+dokumentu `ebook-suplementy-w-pcos-*`. `npm run import:blog-collection` robi
+dry-run 34 dokumentów (`article`, `category`, `siteSettings.blogIndex` /
+`blogNewsletter`) do `reports/`; nic nie zapisuje. Flaga `--write` kończy się
+kodem 2.
 `npm run format` jawnie formatuje kod. Samo
 `npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane; wynik jego
 pierwszego uruchomienia na GitHub wymaga osobnego sprawdzenia.
