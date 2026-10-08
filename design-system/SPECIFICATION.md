@@ -16,15 +16,18 @@ stare logo Gambarino nie jest wordmarkiem docelowego 3a. Nie usuwać go z histor
 
 Wartości wykonawcze w [tokens.json](tokens.json).
 
-| Rola       | Light   | Dark    | Zastosowanie                   |
-| ---------- | ------- | ------- | ------------------------------ |
-| background | #ffffff | #291a21 | Tło strony, menu, pola         |
-| ink        | #70283f | #f3dce5 | Nagłówki, treść, znak          |
-| muted      | #785861 | #d1b1bd | Lead, metadane, opisy          |
-| line       | #dac3cc | #6c4655 | Linie, podziały, outline       |
-| surface    | #f2dce3 | #422a35 | Newsletter, panel, wyróżnienie |
-| primary    | #882f48 | #edb8cb | CTA, focus, aktywna paginacja  |
-| on-primary | #fff4f6 | #291a21 | Treść w CTA                    |
+| Rola              | Light   | Dark    | Zastosowanie                                      |
+| ----------------- | ------- | ------- | ------------------------------------------------- |
+| background        | #ffffff | #291a21 | Tło strony, menu, pola                            |
+| ink               | #70283f | #f3dce5 | Nagłówki, treść, znak                             |
+| muted             | #785861 | #d1b1bd | Lead, metadane, opisy                             |
+| line              | #dac3cc | #6c4655 | Linie, podziały, outline                          |
+| surface           | #f2dce3 | #422a35 | Newsletter, panel, wyróżnienie                    |
+| primary           | #882f48 | #edb8cb | CTA, focus, aktywna paginacja                     |
+| on-primary        | #fff4f6 | #291a21 | Treść w CTA                                       |
+| accent            | #53671B | #D8E78A | Secondary button, pojedyncze detale na tle strony |
+| accent-on-primary | #D8E78A | #D8E78A | Detale na wiśni (okładki cherry)                  |
+| accent-on-light   | #53671B | #53671B | Detale na jasnych okładkach, bez inwersji         |
 
 Light jest wyglądem referencyjnym 3a. Dark zachowuje istniejący wariant podglądu;
 bez JS reaguje na ustawienie systemowe. Jawne `data-theme="light|dark"` wygrywa.
@@ -40,9 +43,12 @@ Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
 [Wizualizacja zastosowań](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).
 
 - Secondary button: białe wnętrze, cienka obwódka matcha. Tekst i strzałka
-  matcha są propozycją pokazaną na planszy.
-- Drobne elementy grafik: pojedyncza linia, punkt, strzałka lub symbol.
-  Rozmieszczenie w konkretnych grafikach pozostaje do ustalenia.
+  matcha jak na planszy 05; wariant tylko tam, gdzie szablon używa Button
+  `secondary` (katalog, homepage). TextLink z makiet zostaje w ink.
+- Drobne elementy grafik (wdrożone 08.10.2026): jeden punkt na orbicie
+  produktu, jeden punkt na półce butelek, jedna kreska lub punkt na jasnej
+  okładce. Na okładce cherry: cienka pozioma strzałka i czytelna
+  czteroramienna iskierka w #D8E78A (`accent-on-primary`), jak na planszy 05. Nie przemalowywać reszty SVG.
 - Tło hero i portretu zachowuje dotychczasową paletę. Matcha nie służy
   do wypełniania dużych paneli ani secondary buttonów.
 - Nagłówki, logo, primary CTA i treść zachowują wiśniową hierarchię.
@@ -50,10 +56,10 @@ Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
 - Nie używać akcentu jako jedynego oznaczenia sukcesu, błędu lub aktywnego stanu.
   Na bieli stosować ciemny odcień, jasny zarezerwować dla ciemnej powierzchni.
 
-Status: decyzja o palecie i granicach użycia, wizualizacja rastrowa.
-Tokeny i CSS komponentów nie zostały jeszcze zmienione. Przy wdrożeniu
-dodać wartości do jednego źródła tokens.json, następnie wygenerować CSS.
-Pełna mapa zastosowań i odbiór UI pozostają do wykonania.
+Status: paleta i granice użycia zatwierdzone 07.10.2026. Tokeny `accent`,
+`accent-on-primary` i `accent-on-light` są w tokens.json. Secondary button
+ma białe wnętrze (`--ao-background`) i obwódkę matcha. Mapa zastosowań jest
+w opisie PR wdrożenia. Tło hero i portretu pozostaje wiśniowo-różowe.
 
 ## Typografia
 

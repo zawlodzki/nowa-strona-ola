@@ -7,6 +7,9 @@
   --ao-surface: #f2dce3;
   --ao-primary: #882f48;
   --ao-on-primary: #fff4f6;
+  --ao-accent: #53671B;
+  --ao-accent-on-primary: #D8E78A;
+  --ao-accent-on-light: #53671B;
   --ao-stage: #f2dce3;
   --ao-stage-alt: #e8c9d3;
   --ao-cover: #fff4f6;
@@ -121,6 +124,7 @@
   --ao-surface: #422a35;
   --ao-primary: #edb8cb;
   --ao-on-primary: #291a21;
+  --ao-accent: #D8E78A;
   --ao-stage: #573441;
   --ao-stage-alt: #704555;
   --ao-error: #ffecec;
@@ -182,6 +186,7 @@
   --ao-surface: #422a35;
   --ao-primary: #edb8cb;
   --ao-on-primary: #291a21;
+  --ao-accent: #D8E78A;
   --ao-stage: #573441;
   --ao-stage-alt: #704555;
   --ao-error: #ffecec;
