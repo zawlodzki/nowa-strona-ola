@@ -1,9 +1,96 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (scalenie main: social #37 `8bc80da`, wcześniej matcha #36; zdjęcie dyplomu zostaje).
+Aktualizacja: 2026-10-08 (import 3a do Content Lake, suchy przebieg).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja importu 3a, 08.10.2026
+
+Jeden skrypt `npm run import:3a` składa dokumenty 3a z fixture’ów i seedów.
+Domyślnie jest suchy przebieg. Zapis do Sanity wymaga
+`SANITY_API_WRITE_TOKEN` i `--dataset production`. W tej sesji tokenu nie było
+i nic nie zostało wysłane.
+
+Suchy przebieg, projekt `dyuqkn8c`, dataset niepodany, porównanie z datasetem
+pominięte:
+
+- delete: article 6, page 9, author 2, category 4, form 2, service 4,
+  testimonial 4, redirect 1, sanity.imageAsset 3 (razem 35)
+- createOrReplace: article 22, author 2, category 10, ebook 12, page 8,
+  service 2, siteSettings 2, testimonial 12 (razem 70)
+- pending: form 2 (etykieta zgody dłuższa niż limit 80), legalPage
+  (schemat z PR #39 nie jest na main)
+
+`siteSettings` bierze nawigację i indeks bloga z jednego fixture’a.
+Angielski slug ebooka PCOS to `supplements-in-pcos`.
+`cover.alt` i `cover.tone` pochodzą z fixture’ów.
+Klucz rastra zostaje w `rasterKey`, a zapytanie GROQ czyta
+`coalesce(image.asset->url, rasterKey)`.
+
+Artykuł 01 (`article-blog-01-pl/en`) ma treść z
+`src/content/article-featured.ts`. Pozostałe 10 par ma treść zastępczą z
+`articleBody` w `src/sanity/blog-collection-fixtures.ts` i pole
+`placeholderBody: true` (etykieta w Studio: „Treść zastępcza”).
+
+| klucz | PL | EN |
+|---|---|---|
+| 02 | codziennie-posilki-przy-pcos | everyday-meals-with-pcos |
+| 03 | pytania-o-pcos-przed-wizyta | sorting-pcos-questions-before-an-appointment |
+| 04 | wyniki-badan-na-konsultacje | lab-results-what-to-bring-to-a-consultation |
+| 05 | regularne-posilki | regular-meals-when-every-day-looks-different |
+| 06 | insulinoopornosc-rozmowa-o-odzywianiu | insulin-resistance-starting-the-nutrition-conversation |
+| 07 | suplementy-w-pcos-pytania | pcos-supplements-sort-questions-before-you-buy |
+| 08 | dzienniczek-posilkow | a-food-diary-without-the-pressure-of-perfection |
+| 09 | cel-konsultacji | naming-the-goal-of-a-consultation |
+| 10 | zakupy-spozywcze | grocery-shopping-that-fits-your-week |
+| 11 | sprzeczne-rady-o-pcos | conflicting-advice-on-pcos |
+
+Angielskie tytuły SEO skrócone do prefiksu istniejącego tytułu, bo przekraczały
+60 znaków. Widoczny tytuł zostaje pełny.
+
+- 06: `Insulin resistance: where to start the nutrition` (48)
+- 09: `What do you want to change? How to name the goal of a` (53)
+- 11: `Conflicting advice on PCOS: write down what you want to` (55)
+
+PR #39 jest otwarty i ma konflikty. Formularze i strony prawne wchodzą do
+transakcji dopiero, gdy limit etykiety i `legalPage` są na tym branchu.
+`--write` odmawia zapisu, dopóki formularze są w stanie pending.
+
+Walidacja offline `scripts/validate-content-lake.ts` (schemat repo, bez tokenu):
+70 dokumentów, 0 błędów. `sanity documents validate` nie było uruchomione,
+bo CLI wymaga logowania. Wariant liczb na O mnie może mieć 0 albo 3 wyróżnień,
+bo fixture ma pustą listę.
+
+`npm run test:content-lake` zbudował serwis z wygenerowanego NDJSON.
+CSS gzip 29 778 B, JS gzip 5 770 B. Test planu: 8/8. Pełne `npm run verify`
+jeszcze nie było uruchomione w tej sesji.
+
+verify-ola `ola-1791457722` na `http://127.0.0.1:4340`, doctor zielony.
+Zestawienia makieta/treść, desktop 1280 i mobile 390:
+
+- `/opt/cursor/artifacts/screenshots/homepage-desktop.png`
+- `/opt/cursor/artifacts/screenshots/homepage-mobile.png`
+- `/opt/cursor/artifacts/screenshots/about-desktop.png`
+- `/opt/cursor/artifacts/screenshots/about-mobile.png`
+- `/opt/cursor/artifacts/screenshots/consultation-desktop.png`
+- `/opt/cursor/artifacts/screenshots/consultation-mobile.png`
+- `/opt/cursor/artifacts/screenshots/ebook-desktop.png`
+- `/opt/cursor/artifacts/screenshots/ebook-mobile.png`
+- `/opt/cursor/artifacts/screenshots/ebooks-desktop.png`
+- `/opt/cursor/artifacts/screenshots/ebooks-mobile.png`
+- `/opt/cursor/artifacts/screenshots/blog-desktop.png`
+- `/opt/cursor/artifacts/screenshots/blog-mobile.png`
+- `/opt/cursor/artifacts/screenshots/article-placeholder-desktop.png`
+- `/opt/cursor/artifacts/screenshots/article-placeholder-mobile.png`
+
+Pełne strony z przeglądarki verify-ola (desktop 1280) leżą w
+`/tmp/ola-verify-evidence/ola-1791457722/`.
+
+Następny krok: odbiór PR, potem `--write` u koordynatora. Przed zapisem
+wyłączyć webhook produkcji. Drugi `--write` padnie, jeśli 35 identyfikatorów
+z listy już nie istnieje. Nie dotykać `system.*` ani szkicu
+`sanity.previewUrlSecret`.
 
 ### Sesja scalenia social #37 w PR #40, 08.10.2026
 
