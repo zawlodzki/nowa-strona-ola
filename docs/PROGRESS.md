@@ -6,6 +6,28 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### PR poprawek Sanity i bloga, 09.10.2026
+
+Na zlecenie użytkownika wypchnięto gałąź `codex/sanity-blog-consistency`
+i utworzono [PR #50](https://github.com/zawlodzki/nowa-strona-ola/pull/50).
+Baza zaktualizowana do main `7ceab3e`; zachowano aktualizację Sanity 6.18.0
+oraz automatyczne wdrożenia Studio. Konflikty dziennika rozwiązane z zachowaniem
+obu wpisów, typy ponownie wygenerowane (73 typy/22 zapytania).
+
+Pełny `npm run verify` po rebase **PASS**: 145 unit/26 plików, 171 E2E
+Chromium/Firefox/WebKit, wszystkie buildy (Studio z autoUpdates), Content Lake
+oraz porównanie 13 stron. JS 5760 B gzip, CSS 29804 B gzip.
+Log: `/tmp/ola-pr-verify.log`; opcje środowiska przeglądarek jak w poprzednim
+przebiegu. Lokalna kontrola formatu i diff-check również PASS.
+
+GitHub Quality dla pierwszego commita zakończył się błędem przed pierwszym
+krokiem: brak runnera i pusty wykaz kroków. Pobranie logu zwróciło 404;
+adnotacje nie są dostępne przez używane narzędzia. Przyczyna niepotwierdzona.
+[Przebieg CI](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/37851199076).
+Nie scalano PR, nie wdrażano i nie zapisywano migracji do Sanity.
+Następny krok: wyjaśnić start Quality, następnie review/scalenie na zlecenie
+oraz wdrożenie i odbiór migracji/webhooka.
+
 ### Verify-ola po poprawkach bloga, 08.10.2026
 
 Skill [verify-ola](../.cursor/skills/verify-ola/SKILL.md), przebieg
