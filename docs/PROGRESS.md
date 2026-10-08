@@ -20,11 +20,32 @@ wspólny `DemoForm`, stopka 3a, dekoracje SVG, dry-run `import:article`.
 Biogram ramki autora to wspólne `author.bio` (krótsze niż w makiecie).
 Źródła w makiecie nie występują; pusta tablica ukrywa sekcję.
 
-Kontrole i porównania wizualne: uzupełniane po `npm run verify` i
-verify-ola.
+Kontrole (Node 24.21.0), po zbudowanym `dist/`:
 
-Następny krok: odbiór Article3a (verify, zrzuty 1:1, Content Lake poza
-zakresem).
+- `npm run format:check`, `tokens:check`, `lint`, `astro check` i testy jednostkowe
+  w `npm run verify`: **113** testów jednostkowych zielonych. Pierwszy przebieg
+  E2E urwał się na `ENOENT` śladów Playwright i `connection refused` do
+  podglądu. Ponowny `npx playwright test`: **123** testy, Chromium, Firefox
+  i WebKit, w tym `article-3a.spec.ts` (nagłówek, lead, spis, udostępnianie,
+  próg rekomendacji, FAQ = JSON-LD, EN, brak JS) oraz `naturalWidth > 0`
+  dla każdego `img` w `main`.
+- `node scripts/check-build.mjs`: CSS gzip **29 602 B**, JS gzip **5 770 B**.
+  Budżet CSS 32 KiB nie został przekroczony. Projekt artykułu nie był cięty.
+- `node scripts/import-article.mjs` kończy się kodem 0. Ta sama komenda z
+  `--write` kończy się kodem 2 i nic nie zapisuje w Content Lake.
+- Nieporównane z makietą piksel w piksel: 320 px, 200% zoom, reduced motion,
+  czytnik i telefon. Identyfikatory H2 to `section-` plus `_key`
+  (`section-punkt-wyjscia`), a nie sam hash makiety `#punkt-wyjscia`.
+- Biogram w ramce autora jest krótszy niż w makiecie. Fixture używa wspólnego
+  `authorFixture.bio`: „Dietetyczka kliniczna. Specjalizuje się w PCOS
+  i insulinooporności.” Makieta ma dłuższy akapit o dopasowaniu kroków
+  i własnym doświadczeniu. About zostaje przy tym samym krótkim biogramie.
+- Kicker „Sprawdź również” dla dwóch wyróżnionych rekomendacji jest parą
+  z makiety (PCOS · Odżywianie, PCOS · Konsultacje). Dokument artykułu ma
+  jedną kategorię, więc para nie wynika z samego złączenia tytułów kategorii.
+
+Następny krok: odbiór wizualny Article3a na desktopie i mobile oraz szkice
+w Content Lake, dopiero na osobne zlecenie zapisu.
 
 ### Sesja poprawek wizualnych BlogCollection3a — 08.10.2026
 
