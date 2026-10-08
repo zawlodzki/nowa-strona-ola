@@ -16,7 +16,17 @@ i `src/pages/design-system.astro` zostawił URL profili i tokeny/swatche
 akcentu. Kod #36 (CherryCoverAccent, secondary button, tokeny) i kod #37
 (`social-profiles.ts`, SiteFooter, JSON-LD `sameAs`) bez skrótów.
 
-Kontrole i head: uzupełnione po `npm run verify`. Nie mergować.
+Kontrole (Node 24.21.0), PR **#37** (nie-draft), head po verify `3243de5`:
+
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **117** unit,
+  build, workspaces, `check-build`, **147** E2E Chromium/Firefox/WebKit
+  (w tym 7×3 `matcha-accent-3a.spec.ts` i stopka `/` + `/en/`).
+- CSS gzip **29 778 B** / 32 KiB; JS gzip **5 770 B**.
+- verify-ola `ola-1791451021`, baza `http://127.0.0.1:4340`. Stopka PL/EN
+  desktop+mobile bez zmiany układu (Instagram / Facebook / TikTok). Cherry
+  okładka: strzałka i iskierka `rgb(216, 231, 138)` (#D8E78A), sparkle ≥ 14 px.
+
+Nie mergować.
 
 ### Sesja — kanoniczne URL profili social — 08.10.2026
 
