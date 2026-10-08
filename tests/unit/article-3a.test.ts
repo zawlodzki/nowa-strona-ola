@@ -56,6 +56,14 @@ describe("Article3a mapper", () => {
     expect(
       view.jsonLd["@graph"].some((node) => node["@type"] === "FAQPage"),
     ).toBe(true);
+    const posting = view.jsonLd["@graph"].find(
+      (node) => node["@type"] === "BlogPosting",
+    ) as { author?: { sameAs?: string[] } } | undefined;
+    expect(posting?.author?.sameAs).toEqual([
+      "https://www.instagram.com/aleksandra_olesiewicz",
+      "https://www.facebook.com/dietetykolesiewicz/",
+      "https://www.tiktok.com/@aleksandra_olesiewicz",
+    ]);
   });
 
   it("maps the English featured article to /en/blog/", async () => {

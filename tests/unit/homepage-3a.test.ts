@@ -90,6 +90,12 @@ describe("section serializers", () => {
 });
 
 describe("site chrome 3a fixtures", () => {
+  const profileHrefs = [
+    "https://www.instagram.com/aleksandra_olesiewicz",
+    "https://www.facebook.com/dietetykolesiewicz/",
+    "https://www.tiktok.com/@aleksandra_olesiewicz",
+  ];
+
   it("keeps mockup social and legal links in the shared footer", async () => {
     const settings = await getSiteSettings("pl", { environment: {} });
     const shell = shellLinks(settings);
@@ -98,9 +104,21 @@ describe("site chrome 3a fixtures", () => {
       "Facebook",
       "TikTok",
     ]);
+    expect(shell.socialLinks.map((link) => link.href)).toEqual(profileHrefs);
     expect(shell.legalLinks.map((link) => link.label)).toEqual([
       "Polityka prywatności",
       "Regulamin",
+    ]);
+  });
+
+  it("uses the same live profile hrefs in English site settings", async () => {
+    const settings = await getSiteSettings("en", { environment: {} });
+    const shell = shellLinks(settings);
+    expect(shell.socialLinks.map((link) => link.href)).toEqual(profileHrefs);
+    expect(shell.socialLinks.map((link) => link.label)).toEqual([
+      "Instagram",
+      "Facebook",
+      "TikTok",
     ]);
   });
 });

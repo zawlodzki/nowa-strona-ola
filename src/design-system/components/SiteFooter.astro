@@ -22,6 +22,14 @@ const {
   lang = "pl",
 } = Astro.props;
 const pl = lang === "pl";
+function socialName(label: string) {
+  return pl
+    ? `${label} Aleksandry Olesiewicz`
+    : `${label} of Aleksandra Olesiewicz`;
+}
+function isHttpUrl(href: string) {
+  return /^https?:\/\//i.test(href);
+}
 ---
 
 <footer class="ao-footer">
@@ -41,7 +49,12 @@ const pl = lang === "pl";
         aria-label={pl ? "Profile społecznościowe" : "Social profiles"}
       >
         {socialLinks.map((link) => (
-          <a href={link.href}>
+          <a
+            href={link.href}
+            aria-label={socialName(link.label)}
+            rel={isHttpUrl(link.href) ? "noopener noreferrer" : undefined}
+            target={isHttpUrl(link.href) ? "_blank" : undefined}
+          >
             {link.label}
             <ArrowIcon />
           </a>
