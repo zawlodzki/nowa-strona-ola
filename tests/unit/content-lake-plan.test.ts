@@ -102,22 +102,22 @@ describe("content lake plan", () => {
     ).toHaveLength(3);
   });
 
-  it("merges navigation and the blog index into one settings document", () => {
+  it("stores the blog collection in a page and keeps shared article newsletter settings", () => {
     const settings = byId("siteSettings-pl");
     expect(Array.isArray(settings.navigation)).toBe(true);
     expect(settings.navigation).toHaveLength(4);
     expect(settings.headerCta).toMatchObject({ label: "Newsletter" });
-    expect(settings.blogIndex).toMatchObject({
-      _type: "blogIndexSettings",
-      title: "Blog. Po Twojemu.",
-    });
+    expect(settings.blogIndex).toBeUndefined();
+    expect(
+      sectionTitle(byId("page-blog-collection-pl"), "blog-collection"),
+    ).toBe("Blog. Po Twojemu.");
     expect(settings.blogNewsletter).toMatchObject({
       sidebarNote: "Możesz wypisać się w każdej chwili.",
       form: { _type: "reference", _ref: "newsletter-form-pl" },
     });
-    expect(byId("siteSettings-en").blogIndex).toMatchObject({
-      title: "Blog. On your terms.",
-    });
+    expect(
+      sectionTitle(byId("page-blog-collection-en"), "blog-collection"),
+    ).toBe("Blog. On your terms.");
   });
 
   it("keeps homepage copy and raster keys from the fixtures", () => {

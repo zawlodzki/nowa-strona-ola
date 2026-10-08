@@ -33,8 +33,11 @@ export const articleType = defineType({
       ...slugField({
         documentType: "article",
         reserved: reservedArticleSlugs,
+        description:
+          "Wpisz sam slug, np. jak-przygotowac-sie-do-konsultacji. Przycisk Generate tworzy go z tytułu. Pełny adres to /blog/<slug>/ (PL) albo /en/blog/<slug>/ (EN). Po publikacji zmiana sluga wymaga przekierowania ze starego adresu.",
       }),
-      group: "meta",
+      title: "Adres artykułu (slug)",
+      group: "content",
     },
     { ...translationField("article"), group: "meta" },
     defineField({
@@ -143,7 +146,18 @@ export const articleType = defineType({
       title: "Obraz wyróżniający",
       type: "mediaObject",
       group: "content",
-      validation: (rule) => rule.required(),
+      description:
+        "Wgraj plik obrazu i wpisz tekst alternatywny. Możesz też wybrać istniejący klucz kadru serwisu.",
+      validation: (rule) =>
+        rule.required().custom((value) => {
+          const media = value as
+            | { image?: { asset?: { _ref?: string } }; rasterKey?: string }
+            | undefined;
+          return (
+            Boolean(media?.image?.asset?._ref || media?.rasterKey?.trim()) ||
+            "Wgraj obraz albo podaj istniejący klucz kadru. Same opis i rodzaj kadru nie wystarczą."
+          );
+        }),
     }),
     defineField({
       name: "body",

@@ -29,6 +29,7 @@ export const pageType = defineType({
         reserved: reservedPageSlugs,
         allowHome: true,
         allowedReserved: [
+          "blog",
           "o-mnie",
           "about",
           "konsultacje",
@@ -36,12 +37,33 @@ export const pageType = defineType({
           "ebooki",
           "ebooks",
         ],
-        description: `Strona główna używa adresu „${homeSlug}”. Profil „O mnie” używa o-mnie (PL) i about (EN), landing konsultacji konsultacje (PL) i consultations (EN), kolekcja e-booków ebooki (PL) i ebooks (EN).`,
+        description: `Strona główna używa adresu „${homeSlug}”. Profil „O mnie” używa o-mnie (PL) i about (EN), landing konsultacji konsultacje (PL) i consultations (EN), kolekcja e-booków ebooki (PL) i ebooks (EN), blog używa blog (PL/EN).`,
       }),
       group: "content",
     },
     { ...translationField("page"), group: "content" },
-    { ...pageSectionsField, group: "content" },
+    {
+      ...pageSectionsField,
+      group: "content",
+      validation: (rule) =>
+        rule
+          .required()
+          .min(1)
+          .custom((sections, context) => {
+            const document = context.document as
+              { slug?: { current?: string } } | undefined;
+            if (document?.slug?.current !== "blog") return true;
+            if (!Array.isArray(sections)) return true;
+            const types = sections.map(
+              (section) => (section as { _type?: string })._type,
+            );
+            return types[0] === "blogCollectionSection" &&
+              types.length <= 2 &&
+              (types.length === 1 || types[1] === "formSection")
+              ? true
+              : "Blog wymaga najpierw Kolekcji bloga, a następnie opcjonalnego Formularza newslettera.";
+          }),
+    },
     defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" }),
   ],
   preview: {

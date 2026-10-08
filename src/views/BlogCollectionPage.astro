@@ -8,6 +8,7 @@ import { blogPath } from "@/lib/paths";
 import type {
   ArticleCard,
   CategoryContent,
+  PageContent,
   SiteSettings,
 } from "@/sanity/repository";
 import BlogCollection3a from "@/views/BlogCollection3a.astro";
@@ -16,6 +17,7 @@ import SiteShell3a from "@/views/SiteShell3a.astro";
 export interface Props {
   lang: Locale;
   settings: SiteSettings;
+  page: PageContent;
   index: {
     latest: ArticleCard | null;
     items: ArticleCard[];
@@ -36,6 +38,7 @@ export interface Props {
 const {
   lang,
   settings,
+  page,
   index,
   categories,
   category = null,
@@ -43,7 +46,7 @@ const {
   alternateHref,
   preview = false,
 } = Astro.props;
-const content = mapBlogCollection(settings, index, categories, lang, {
+const content = mapBlogCollection(page, index, categories, lang, {
   category,
   pageHref,
 });
@@ -65,7 +68,9 @@ const headerCta = shell.headerCta
   preview={preview}
   footerNote={settings.footerNote ?? ""}
   copyright={homepageCopyright(lang)}
-  languageHref={alternateHref ?? content.alternateHref}
+  languageHref={
+    content.alternateHref ? (alternateHref ?? content.alternateHref) : null
+  }
   navigation={navigation}
   headerCta={headerCta}
   socialLinks={shell.socialLinks}

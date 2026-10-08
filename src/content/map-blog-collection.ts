@@ -8,6 +8,7 @@ import {
   objectPositionFromMedia,
   type BlogCardFrame,
 } from "@/content/blog-collection-seed";
+import { assertKnownSections } from "@/content/sections";
 import { toFormCopy } from "@/content/map-sections";
 import { formatDate } from "@/lib/dates";
 import { articlePath, blogCategoryPath, blogPath, homePath } from "@/lib/paths";
@@ -15,7 +16,7 @@ import { isRemoteImageSrc, isSiteRasterKey } from "@/lib/site-images";
 import type {
   ArticleCard,
   CategoryContent,
-  SiteSettings,
+  PageContent,
 } from "@/sanity/repository";
 import type { FormCopy } from "@/sections/types";
 
@@ -79,30 +80,6 @@ export interface BlogCollectionView {
   isCategoryEmpty: boolean;
   category: { title: string; slug: string } | null;
 }
-
-type BlogIndexFields = {
-  title?: string | null;
-  lead?: string | null;
-  note?: string | null;
-  latestTitle?: string | null;
-  collectionTitle?: string | null;
-  readActionLabel?: string | null;
-  allCategoriesLabel?: string | null;
-  emptyMessage?: string | null;
-  emptyCategoryMessage?: string | null;
-  previousLabel?: string | null;
-  nextLabel?: string | null;
-  paginationLabel?: string | null;
-  seoTitle?: string | null;
-  seoDescription?: string | null;
-};
-
-type BlogNewsletterFields = {
-  enabled?: boolean | null;
-  title?: string | null;
-  lead?: string | null;
-  form?: Parameters<typeof toFormCopy>[0]["form"];
-};
 
 function required(value: string | null | undefined, name: string): string {
   const trimmed = value?.trim();
@@ -203,7 +180,7 @@ export function toBlogPostCard(
 }
 
 export function mapBlogCollection(
-  settings: SiteSettings,
+  page: PageContent,
   index: {
     latest: ArticleCard | null;
     items: ArticleCard[];
@@ -225,16 +202,33 @@ export function mapBlogCollection(
     pageHref: (page: number) => string;
   },
 ): BlogCollectionView {
-  if (settings.language && settings.language !== language) {
+  assertKnownSections(page.sections);
+  if (page.language !== language || page.slug !== "blog") {
     throw new Error(
-      `Ustawienia ${settings.language} nie pasują do indeksu bloga ${language}.`,
+      `Strona bloga ${language} ma nieprawidłowy język lub adres.`,
     );
   }
-  const indexFields = (settings as { blogIndex?: BlogIndexFields | null })
-    .blogIndex;
-  const newsletterFields = (
-    settings as { blogNewsletter?: BlogNewsletterFields | null }
-  ).blogNewsletter;
+  const indexFields = page.sections[0];
+  const newsletterFields = page.sections[1];
+  if (
+    indexFields?._type !== "blogCollectionSection" ||
+    (newsletterFields && newsletterFields._type !== "formSection") ||
+    page.sections.length > 2
+  ) {
+    throw new Error(
+      "Blog wymaga sekcji kolekcji i opcjonalnie formularza newslettera.",
+    );
+  }
+  const variant: string = indexFields.variant;
+  if (variant !== "cherry3a") {
+    throw new Error(`Nieznany wariant kolekcji bloga: ${variant}.`);
+  }
+  if (
+    newsletterFields?.form?.language &&
+    newsletterFields.form.language !== language
+  ) {
+    throw new Error(`Formularz newslettera bloga ma nieprawidłowy język.`);
+  }
   const title = required(indexFields?.title, "tytuł indeksu");
   const lead = required(indexFields?.lead, "lead indeksu");
   const readActionLabel = required(
@@ -271,7 +265,10 @@ export function mapBlogCollection(
           index.page,
         )
       : null
-    : blogPath(language === "pl" ? "en" : "pl", index.page);
+    : page.translation?.slug === "blog" &&
+        page.translation.language === (language === "pl" ? "en" : "pl")
+      ? blogPath(language === "pl" ? "en" : "pl", index.page)
+      : null;
   const pagination =
     index.totalPages > 1
       ? {
@@ -312,8 +309,8 @@ export function mapBlogCollection(
     language,
     href,
     alternateHref,
-    seoTitle: indexFields?.seoTitle?.trim() || copy.seoTitle,
-    seoDescription: indexFields?.seoDescription?.trim() || copy.seoDescription,
+    seoTitle: page.seo?.title?.trim() || copy.seoTitle,
+    seoDescription: page.seo?.description?.trim() || copy.seoDescription,
     title,
     lead,
     note: indexFields?.note?.trim() || undefined,
@@ -374,14 +371,13 @@ export function mapBlogCollection(
     ],
     breadcrumbs,
     pagination,
-    newsletter:
-      newsletterFields?.enabled === false
-        ? null
-        : toFormCopy({
-            title: required(newsletterFields?.title, "tytuł newslettera bloga"),
-            lead: required(newsletterFields?.lead, "lead newslettera bloga"),
-            form: newsletterFields?.form,
-          }),
+    newsletter: !newsletterFields
+      ? null
+      : toFormCopy({
+          title: required(newsletterFields?.title, "tytuł newslettera bloga"),
+          lead: required(newsletterFields?.lead, "lead newslettera bloga"),
+          form: newsletterFields?.form,
+        }),
     isEmpty: index.isEmpty && !category,
     isCategoryEmpty,
     category,

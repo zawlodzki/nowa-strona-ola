@@ -5,7 +5,9 @@ import { languageField, slugField, translationField } from "../shared/fields";
 
 export const serviceType = defineType({
   name: "service",
-  title: "Usługa",
+  title: "Oferta konsultacji",
+  description:
+    "Wspólne dane oferty używane na stronie głównej, O mnie i stronie konsultacji. Układ i tekst podstrony edytuj w Strony → Konsultacje.",
   type: "document",
   icon: CaseIcon,
   fields: [

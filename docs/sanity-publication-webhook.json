@@ -1,0 +1,10 @@
+{
+  "dataset": "production",
+  "triggerOnCreate": true,
+  "triggerOnUpdate": true,
+  "triggerOnDelete": true,
+  "includeDrafts": false,
+  "includeVersions": false,
+  "filter": "_type in [\"page\", \"article\", \"legalPage\", \"ebook\", \"category\", \"author\", \"service\", \"testimonial\", \"form\", \"siteSettings\", \"redirect\"] && !(_id in path(\"drafts.**\")) && !(_id in path(\"versions.**\"))",
+  "projection": "{\"documentId\": _id, \"documentType\": _type, \"operation\": delta::operation()}"
+}

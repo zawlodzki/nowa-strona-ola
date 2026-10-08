@@ -18,6 +18,7 @@ import { getArticleIndex } from "../../../src/sanity/repository";
 import { fixtureEbooksForLanguage } from "../../../src/sanity/ebook-fixtures";
 import {
   getPreviewArticle,
+  getPreviewBlogPage,
   getPreviewArticleIndex,
   getPreviewCategories,
   getPreviewCategory,
@@ -83,6 +84,10 @@ const collectionEbooks =
         fixtureEbooksForLanguage(language),
       )
     : [];
+const blogPage =
+  language && (route.kind === "blogIndex" || route.kind === "blogCategory")
+    ? await getPreviewBlogPage(language, environment)
+    : null;
 const blogIndex =
   route.kind === "blogIndex" && language
     ? await getPreviewArticleIndex(language, route.page, environment).catch(
@@ -150,20 +155,22 @@ const categories = language
     section={route.kind === "home" ? "home" : "page"}
     preview
   />
-) : blogIndex && language && settings ? (
+) : blogIndex && blogPage && language && settings ? (
   <BlogCollectionPage
     lang={language}
     settings={settings}
+    page={blogPage}
     index={blogIndex}
     categories={categories}
     pageHref={(pageNumber) => blogPath(language, pageNumber)}
     alternateHref={blogPath(language === "pl" ? "en" : "pl", blogIndex.page)}
     preview
   />
-) : blogCategory && language && settings ? (
+) : blogCategory && blogPage && language && settings ? (
   <BlogCollectionPage
     lang={language}
     settings={settings}
+    page={blogPage}
     index={blogCategory.index}
     categories={categories}
     category={blogCategory.category}

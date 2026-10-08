@@ -327,6 +327,19 @@ export function serializeSection(section: Section, language: Locale): string {
         .filter(Boolean)
         .join("\n\n");
     }
+    case "blogCollectionSection": {
+      if (section.variant !== "cherry3a")
+        throw new Error("Nieznany wariant kolekcji bloga.");
+      return [
+        heading(2, section.title ?? ""),
+        section.lead,
+        section.note,
+        heading(3, section.collectionTitle ?? ""),
+        section.emptyMessage,
+      ]
+        .filter(Boolean)
+        .join("\n\n");
+    }
     case "ebookCollectionSection": {
       const content = toEbookCollection(section, []);
       return [
@@ -381,6 +394,7 @@ export const sectionMarkdownExamples: Record<KnownSectionType, string> = {
   serviceOfferSection: "## Konsultacje\n\n450 zł / 60 minut",
   credentialsSection:
     "## Wiedza, którą możesz sprawdzić.\n\n- Dietetyka kliniczna, Śląski Uniwersytet Medyczny",
+  blogCollectionSection: "## Blog. Po Twojemu.\n\n### Wszystkie wpisy",
   ebookCollectionSection:
     "## Więcej jasności. W Twoim tempie.\n\n## Wszystkie e-booki",
 };

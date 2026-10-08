@@ -40,7 +40,8 @@
     "import:3a": "tsx scripts/import-3a.ts",
     "import:legal": "node scripts/import-legal.mjs",
     "test:content-lake": "tsx scripts/simulate-content-build.ts",
-    "tokens:generate": "node scripts/generate-tokens.mjs"
+    "tokens:generate": "node scripts/generate-tokens.mjs",
+    "migrate:blog-pages": "tsx scripts/migrate-blog-pages.ts"
   },
   "dependencies": {
     "@data-slot/dialog": "^0.2.166",

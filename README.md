@@ -144,14 +144,32 @@ i budowę z wygenerowanych dokumentów.
 nie zapisuje do Content Lake. `npm run import:consultation` robi to samo dla
 landingu konsultacji (`page-consultation-pl/en`); `npm run import:ebook` dla
 dokumentu `ebook-suplementy-w-pcos-*`. `npm run import:blog-collection` robi
-dry-run 34 dokumentów (`article`, `category`, `siteSettings.blogIndex` /
-`blogNewsletter`) do `reports/`; nic nie zapisuje.
+dry-run 34 dokumentów (`article`, `category`, strony Blog `page`) do
+`reports/`; nic nie zapisuje.
+Migracja istniejących ustawień bloga ma osobny skrypt. Sprawdzona komenda
+`npm run migrate:blog-pages -- --input /tmp/ola-blog-migration-source.ndjson`
+przyjmuje eksport NDJSON i generuje raport oraz nowe szkice bez zapisu.
+Źródło należy wyeksportować z własnego datasetu; szczegóły migracji, sluga
+i publikacji artykułu: [BLOG-PUBLISHING.md](docs/BLOG-PUBLISHING.md).
 `npm run import:legal` robi dry-run sześciu dokumentów `legalPage` (cztery PL
 ze źródła zawlodzki.pl i dwa EN z informacją o wiążącej wersji polskiej) do
 `reports/`; nic nie zapisuje. Flaga `--write` kończy się kodem 2.
 `npm run format` jawnie formatuje kod. Samo
 `npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane; wynik jego
 pierwszego uruchomienia na GitHub wymaga osobnego sprawdzenia.
+
+Weryfikacja bloga w Chromium przez [verify-ola](.cursor/skills/verify-ola/SKILL.md)
+(sprawdzone komendy, świeży build fixture’ów):
+
+```sh
+npm run build
+export VERIFY_RUN_ID="ola-blog-check"
+node .cursor/skills/verify-ola/scripts/verify.mjs launch
+node .cursor/skills/verify-ola/scripts/verify.mjs browser start
+node .cursor/skills/verify-ola/scripts/verify.mjs doctor
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /blog/
+node .cursor/skills/verify-ola/scripts/verify.mjs cleanup
+```
 
 n8n i self-hostowane c15t będą dostarczone poza repo. Tutaj powstaną integracje,
 formularze i panel zgód dopasowany do design systemu.

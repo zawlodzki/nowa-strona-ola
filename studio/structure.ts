@@ -9,7 +9,7 @@ import { UndoIcon } from "@sanity/icons/Undo";
 import { UserIcon } from "@sanity/icons/User";
 import type { StructureResolver } from "sanity/structure";
 
-const SINGLETON_TYPES = ["siteSettings"];
+export const SINGLETON_TYPES = ["siteSettings"];
 
 function settingsItem(S: Parameters<StructureResolver>[0]) {
   return S.listItem()
@@ -27,6 +27,7 @@ function settingsItem(S: Parameters<StructureResolver>[0]) {
               S.document()
                 .schemaType("siteSettings")
                 .documentId("siteSettings-pl")
+                .initialValueTemplate("siteSettings-pl")
                 .title("Ustawienia PL"),
             ),
           S.listItem()
@@ -37,6 +38,7 @@ function settingsItem(S: Parameters<StructureResolver>[0]) {
               S.document()
                 .schemaType("siteSettings")
                 .documentId("siteSettings-en")
+                .initialValueTemplate("siteSettings-en")
                 .title("Site settings EN"),
             ),
         ]),
@@ -60,7 +62,10 @@ function languageList(
               S.documentTypeList(schemaType)
                 .title(`${title} · PL`)
                 .filter('_type == $type && language == "pl"')
-                .params({ type: schemaType }),
+                .params({ type: schemaType })
+                .initialValueTemplates([
+                  S.initialValueTemplateItem(`${schemaType}-pl`),
+                ]),
             ),
           S.listItem()
             .title("English")
@@ -68,7 +73,10 @@ function languageList(
               S.documentTypeList(schemaType)
                 .title(`${title} · EN`)
                 .filter('_type == $type && language == "en"')
-                .params({ type: schemaType }),
+                .params({ type: schemaType })
+                .initialValueTemplates([
+                  S.initialValueTemplateItem(`${schemaType}-en`),
+                ]),
             ),
         ]),
     );
@@ -83,10 +91,10 @@ export const structure: StructureResolver = (S) =>
       languageList(S, "page", "Strony").icon(DocumentIcon),
       languageList(S, "article", "Artykuły").icon(DocumentTextIcon),
       languageList(S, "legalPage", "Strony prawne").icon(DocumentTextIcon),
-      languageList(S, "category", "Kategorie").icon(TagIcon),
+      languageList(S, "category", "Kategorie bloga").icon(TagIcon),
       languageList(S, "author", "Autorzy").icon(UserIcon),
       S.divider(),
-      languageList(S, "service", "Usługi").icon(CaseIcon),
+      languageList(S, "service", "Oferta konsultacji").icon(CaseIcon),
       languageList(S, "ebook", "E-booki").icon(DocumentTextIcon),
       languageList(S, "testimonial", "Opinie").icon(CommentIcon),
       languageList(S, "form", "Formularze").icon(EnvelopeIcon),

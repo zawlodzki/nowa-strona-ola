@@ -61,6 +61,12 @@ bez przygotowanego, odseparowanego workflow testowego w n8n.
 Webhook Sanity kieruje `POST` na `/webhooks/sanity`, nie uwzględnia draftów i ma
 filtr ograniczony do typów publicznej treści. Projekcja payloadu:
 
+Docelowy filtr, projekcja i zdarzenia są w
+[kontrakcie webhooka](sanity-publication-webhook.json). Obejmuje on także
+`article` i współdzielone treści; sam filtr `_type == "page"` nie uruchomi
+przebudowy po publikacji artykułu. Plik jest specyfikacją sprawdzoną testem,
+nie automatycznie zastosowaną konfiguracją Sanity.
+
 ```groq
 {
   "documentId": _id,

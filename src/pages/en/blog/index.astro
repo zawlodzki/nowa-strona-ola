@@ -2,22 +2,25 @@
 import { blogPath } from "@/lib/paths";
 import {
   getArticleIndex,
+  getBlogPage,
   getSiteSettings,
   listCategories,
 } from "@/sanity/repository";
 import BlogCollectionPage from "@/views/BlogCollectionPage.astro";
 
 const lang = "en" as const;
-const [index, settings, categories] = await Promise.all([
+const [index, settings, categories, blogPage] = await Promise.all([
   getArticleIndex(lang, 1),
   getSiteSettings(lang),
   listCategories(lang),
+  getBlogPage(lang),
 ]);
 ---
 
 <BlogCollectionPage
   lang={lang}
   settings={settings}
+  page={blogPage}
   index={index}
   categories={categories}
   pageHref={(page) => blogPath(lang, page)}

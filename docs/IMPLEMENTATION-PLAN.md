@@ -287,8 +287,11 @@ Stan po pakiecie 6 (08.10.2026):
   `SiteShell3a`/`Layout3a` i `Homepage3a` / `About3a` / `Consultation3a` /
   `Ebook3a` / `EbookCollection3a` / `BlogCollection3a` / `Article3a`.
   `/ui/` czeka na dalsze prace.
-- Sanity ma `siteSettings.blogIndex` i `blogNewsletter` w schemacie kodu;
-  kolekcja korzysta z istniejących `article` i `category`. Serializery
+- Kolekcja bloga ma w kodzie dokument `page` ze slugiem `blog`,
+  `blogCollectionSection` i opcjonalny `formSection`; lista korzysta
+  z istniejących `article` i `category`. Starsze `siteSettings.blogIndex`
+  pozostaje przejściowym źródłem do czasu migracji; `blogNewsletter`
+  obsługuje newsletter artykułów. Serializery
   Markdown nowych typów są w kodzie; trasy `.md` i pełny eksport to etap 5.
 - Dry-run importu homepage, About, konsultacji, landingu e-booka, kolekcji
   e-booków i kolekcji bloga istnieje; Content Lake i publikacja nie były
@@ -308,7 +311,7 @@ choć pełne landingi i kolekcje powstaną później.
 | 3         | Consultation3a, `consultation-3a.html`                   | Rozszerzenie `service` i referencja ze strony; zakres, proces, 450 PLN/60 minut, FAQ i rezerwacja                                                                              |
 | 4         | Ebook3a, `ebook-3a.html`                                 | Wspólny dokument produktu według EBOOK-CMS-CONFIG-3A; rozdziały, próbka, 97 PLN brutto, status, front i CTA                                                                    |
 | 5         | EbookCollection3a, `ebooks-3a.html`                      | Referencje tych samych produktów, kategorie, filtrowanie, stany pustej kolekcji i newsletter                                                                                   |
-| 6         | BlogCollection3a, `blog-3a.html` i `blog-3a-page-2.html` | Istniejący `article` i `category`, ustawienia indeksu; najnowszy wpis, stabilne sortowanie i paginacja bez duplikatów                                                          |
+| 6         | BlogCollection3a, `blog-3a.html` i `blog-3a-page-2.html` | `page` blog, `blogCollectionSection`, `article` i `category`; najnowszy wpis, stabilne sortowanie i paginacja bez duplikatów                                                   |
 | 7         | Article3a, `article-3a.html`                             | Portable Text, wspólny autor, źródła, related, referencje e-booków, FAQ i newsletter; TOC, rekomendacje i udostępnianie                                                        |
 
 Dla każdego pakietu stosować ten sam cykl odbioru:
@@ -355,6 +358,18 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 - [x] Wdrożyć BlogCollection3a i rzeczywistą paginację (kod i fixture;
       bez Content Lake). Copy, tytuły, daty i kadry z makiety są propozycją.
 - [ ] Dane indeksu bloga w Content Lake i odbiór Studio/preview.
+- [x] Zweryfikować odczytem konfigurację bloga i usług w produkcyjnym Sanity
+      (08.10.2026): ustawienia PL/EN, 22 wpisy i referencje ofert istnieją.
+      Odbiór edycji/preview oraz finalnych treści pozostaje otwarty.
+- [x] Ujednolicić w kodzie kolekcję bloga z e-bookami (`page`, sekcje, SEO),
+      mapowanie Presentation, szablony językowe i zabezpieczenia singletonów.
+- [x] Przygotować niedestrukcyjną migrację bloga do szkiców i wykonać dry-run
+      na odczycie bieżących danych (2 strony PL/EN, bez zapisu).
+- [x] Sprawdzić blog i artykuł PL/EN przez verify-ola, paginację bez JS
+      i newsletter bez POST (08.10.2026; fixture, bez Studio i publikacji).
+- [ ] Wdrożyć poprawki Studio/preview/strony i zapisać migrację szkiców bloga.
+- [ ] Potwierdzić filtr webhooka dla `article` i odebrać publikację nowego wpisu
+      od Studio przez GitHub Actions do listy bloga i strony artykułu.
 - [x] Wdrożyć Article3a, Portable Text i jego powiązane bloki (kod i fixture;
       bez Content Lake). Copy, daty i FAQ z makiety są propozycją.
 - [x] Przygotować i sprawdzić import artykułu bez zapisu (`import:article`).
