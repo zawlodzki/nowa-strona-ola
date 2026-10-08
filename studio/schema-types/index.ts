@@ -2,6 +2,7 @@ import type { SchemaTypeDefinition } from "sanity";
 
 import { pageSectionTypes } from "./blocks/page-sections";
 import { articleType } from "./documents/article";
+import { legalPageType } from "./documents/legal-page";
 import { authorType } from "./documents/author";
 import { categoryType } from "./documents/category";
 import { ebookType } from "./documents/ebook";
@@ -19,6 +20,7 @@ import {
   articleImageType,
   articleTableType,
 } from "./objects/article-body";
+import { legalBodyType } from "./objects/legal-body";
 import {
   ebookChapterType,
   ebookDeliveryType,
@@ -44,6 +46,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   articleCtaType,
   articleTableType,
   articleBodyType,
+  legalBodyType,
   ...pageSectionTypes,
   ebookChapterType,
   ebookMaterialType,
@@ -52,6 +55,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   ebookLandingType,
   pageType,
   articleType,
+  legalPageType,
   authorType,
   categoryType,
   serviceType,

@@ -75,9 +75,7 @@ function summarize(
     );
   }
   if (plan.pending.some((item) => item.kind === "legalPage")) {
-    console.log(
-      "pending legalPage (schemat legalPage nie jest na tym branchu)",
-    );
+    console.log("pending legalPage (brak schematu legalPage albo fixture’ów)");
   }
 }
 

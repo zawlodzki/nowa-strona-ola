@@ -82,6 +82,7 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
       languageList(S, "page", "Strony").icon(DocumentIcon),
       languageList(S, "article", "Artykuły").icon(DocumentTextIcon),
+      languageList(S, "legalPage", "Strony prawne").icon(DocumentTextIcon),
       languageList(S, "category", "Kategorie").icon(TagIcon),
       languageList(S, "author", "Autorzy").icon(UserIcon),
       S.divider(),
@@ -102,6 +103,7 @@ export const structure: StructureResolver = (S) =>
           ![
             "page",
             "article",
+            "legalPage",
             "category",
             "author",
             "service",

@@ -18,6 +18,10 @@ import {
   demonstrationCategories,
 } from "./fixtures";
 import {
+  fixtureLegalPage,
+  fixtureLegalPagesForLanguage,
+} from "./legal-fixtures";
+import {
   fixtureEbook,
   fixtureEbooksForLanguage,
   fixtureEbooksWithLanding,
@@ -31,6 +35,8 @@ import {
   PUBLISHED_EBOOK_PATHS_QUERY,
   PUBLISHED_EBOOK_QUERY,
   PUBLISHED_EBOOKS_QUERY,
+  PUBLISHED_LEGAL_PAGE_PATHS_QUERY,
+  PUBLISHED_LEGAL_PAGE_QUERY,
   PUBLISHED_PAGE_PATHS_QUERY,
   PUBLISHED_PAGE_QUERY,
   SITE_SETTINGS_QUERY,
@@ -44,6 +50,8 @@ import type {
   PUBLISHED_EBOOK_PATHS_QUERY_RESULT,
   PUBLISHED_EBOOK_QUERY_RESULT,
   PUBLISHED_EBOOKS_QUERY_RESULT,
+  PUBLISHED_LEGAL_PAGE_PATHS_QUERY_RESULT,
+  PUBLISHED_LEGAL_PAGE_QUERY_RESULT,
   PUBLISHED_PAGE_PATHS_QUERY_RESULT,
   PUBLISHED_PAGE_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
@@ -56,6 +64,7 @@ export type SiteSettings = NonNullable<SITE_SETTINGS_QUERY_RESULT>;
 export type CategoryContent = NonNullable<PUBLISHED_CATEGORY_QUERY_RESULT>;
 export type EbookContent = NonNullable<PUBLISHED_EBOOK_QUERY_RESULT>;
 export type EbookCard = PUBLISHED_EBOOKS_QUERY_RESULT[number];
+export type LegalPageContent = NonNullable<PUBLISHED_LEGAL_PAGE_QUERY_RESULT>;
 
 interface QueryClient {
   fetch: <T>(query: string, parameters?: Record<string, unknown>) => Promise<T>;
@@ -364,6 +373,68 @@ export async function getEbookPaths(
     }));
   }
   return client.fetch(PUBLISHED_EBOOK_PATHS_QUERY);
+}
+
+export async function getLegalPage(
+  language: Locale,
+  slug: string,
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+): Promise<LegalPageContent> {
+  const client = resolveClient(options);
+  const page = await findLegalPage(language, slug, options);
+  if (!page) {
+    throw new Error(
+      client
+        ? `Brak opublikowanej strony prawnej ${language}/${slug}.`
+        : `Brak demonstracyjnej strony prawnej ${language}/${slug}.`,
+    );
+  }
+  return page;
+}
+
+export async function findLegalPage(
+  language: Locale,
+  slug: string,
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+): Promise<LegalPageContent | null> {
+  const client = resolveClient(options);
+  if (!client) {
+    const fixture = fixtureLegalPage(language, slug);
+    return fixture ? (fixture as unknown as LegalPageContent) : null;
+  }
+  const page = await client.fetch<LegalPageContent | null>(
+    PUBLISHED_LEGAL_PAGE_QUERY,
+    { language, slug },
+  );
+  if (!page) return null;
+  if (page.language !== language || page.slug !== slug) {
+    throw new Error(
+      `Sanity zwróciło stronę prawną niezgodną z żądaniem ${language}/${slug}.`,
+    );
+  }
+  return page;
+}
+
+export async function getLegalPagePaths(
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+): Promise<PUBLISHED_LEGAL_PAGE_PATHS_QUERY_RESULT> {
+  const client = resolveClient(options);
+  if (!client) {
+    return [
+      ...fixtureLegalPagesForLanguage("pl"),
+      ...fixtureLegalPagesForLanguage("en"),
+    ].map((page) => ({ language: page.language, slug: page.slug }));
+  }
+  return client.fetch(PUBLISHED_LEGAL_PAGE_PATHS_QUERY);
 }
 
 export async function listEbooks(

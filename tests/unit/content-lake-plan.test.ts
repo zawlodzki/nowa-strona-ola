@@ -1,11 +1,16 @@
+import { readFileSync } from "node:fs";
+
 import { describe, expect, it } from "vitest";
 
 import { homepageCopy } from "../../src/content/homepage-seed";
 import { BLOG_ARTICLE_SEED } from "../../src/content/blog-collection-seed";
 import {
+  assertWritable,
   buildContentLakePlan,
   buildDataset,
   buildMutations,
+  formFieldLabelMax,
+  formSchemaKeepsPlaceholder,
   mergeWithExport,
   missingDeletionIds,
   OBSOLETE_DOCUMENT_IDS,
@@ -205,6 +210,30 @@ describe("content lake plan", () => {
     expect(
       open.documents.find((document) => document._id === "newsletter-form-pl"),
     ).toBeTruthy();
+  });
+
+  it("puts the live newsletter forms and legal pages in the transaction", async () => {
+    const root = new URL("../..", import.meta.url);
+    const formSource = readFileSync(
+      new URL("studio/schema-types/documents/form.ts", root),
+      "utf8",
+    );
+    const legal = (await import("../../src/sanity/legal-fixtures.ts"))
+      .demonstrationLegalPages;
+    const live = buildContentLakePlan({
+      formLabelMax: formFieldLabelMax(formSource),
+      keepPlaceholder: formSchemaKeepsPlaceholder(formSource),
+      legalPages: Object.values(legal) as never,
+    });
+    expect(formFieldLabelMax(formSource)).toBe(400);
+    expect(live.pending).toEqual([]);
+    expect(
+      live.documents.filter((document) => document._type === "form"),
+    ).toHaveLength(2);
+    expect(
+      live.documents.filter((document) => document._type === "legalPage"),
+    ).toHaveLength(6);
+    expect(() => assertWritable(live)).not.toThrow();
   });
 
   it("keeps export documents that the transaction does not replace", () => {

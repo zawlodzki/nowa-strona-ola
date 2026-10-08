@@ -1,7 +1,8 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (import 3a do Content Lake, suchy przebieg).
+Aktualizacja: 2026-10-08 (import 3a oraz strony prawne z main `d7ba6a1`).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
@@ -17,10 +18,12 @@ pominięte:
 
 - delete: article 6, page 9, author 2, category 4, form 2, service 4,
   testimonial 4, redirect 1, sanity.imageAsset 3 (razem 35)
-- createOrReplace: article 22, author 2, category 10, ebook 12, page 8,
-  service 2, siteSettings 2, testimonial 12 (razem 70)
-- pending: form 2 (etykieta zgody dłuższa niż limit 80), legalPage
-  (schemat z PR #39 nie jest na main)
+- createOrReplace: article 22, author 2, category 10, ebook 12, form 2,
+  legalPage 6, page 8, service 2, siteSettings 2, testimonial 12 (razem 78)
+- pending: brak. Po scaleniu `main` (`d7ba6a1`, PR #39) limit etykiety zgody
+  to 400, a schemat `legalPage` i fixture’y są na tej gałęzi. Dwa formularze
+  newslettera i sześć stron prawnych są w transakcji. `--write` nie jest
+  już blokowany przez stan pending.
 
 `siteSettings` bierze nawigację i indeks bloga z jednego fixture’a.
 Angielski slug ebooka PCOS to `supplements-in-pcos`.
@@ -53,12 +56,11 @@ Angielskie tytuły SEO skrócone do prefiksu istniejącego tytułu, bo przekracz
 - 09: `What do you want to change? How to name the goal of a` (53)
 - 11: `Conflicting advice on PCOS: write down what you want to` (55)
 
-PR #39 jest otwarty i ma konflikty. Formularze i strony prawne wchodzą do
-transakcji dopiero, gdy limit etykiety i `legalPage` są na tym branchu.
-`--write` odmawia zapisu, dopóki formularze są w stanie pending.
+PR #39 jest na `main` jako `d7ba6a1`. Ta gałąź wciąga go zwykłym merge.
+Walidacja offline obejmuje 78 dokumentów, w tym `form` i `legalPage`.
 
 Walidacja offline `scripts/validate-content-lake.ts` (schemat repo, bez tokenu):
-70 dokumentów, 0 błędów. `sanity documents validate` nie było uruchomione,
+78 dokumentów, 0 błędów. `sanity documents validate` nie było uruchomione,
 bo CLI wymaga logowania. Wariant liczb na O mnie może mieć 0 albo 3 wyróżnień,
 bo fixture ma pustą listę.
 
@@ -133,6 +135,80 @@ Następny krok: odbiór PR, potem `--write` u koordynatora. Przed zapisem
 wyłączyć webhook produkcji. Drugi `--write` padnie, jeśli 35 identyfikatorów
 z listy już nie istnieje. Nie dotykać `system.*` ani szkicu
 `sanity.previewUrlSecret`.
+
+### Sesja scalenia main w PR #39, 08.10.2026
+
+Scalenie `origin/main` (`ce5b675`: dyplom #40, social #37 `8bc80da`,
+matcha #36) w gałąź stron prawnych. Commit merge, bez rebase i bez force-push.
+Jedyny konflikt to `docs/PROGRESS.md`: zachowane sesje stron prawnych i sesje
+z main. Auto-merge `scripts/check-build.mjs` zostawił asercje stron prawnych i
+profili social. Auto-merge `scripts/import-homepage-content.mjs` i
+`src/content/homepage-seed.ts` zostawił linki zgody newslettera oraz
+`footerSocialLinks()` z `social-profiles.ts`. Auto-merge `tests/e2e/ui.spec.ts`
+zostawił regex zgody newslettera i testy dyplomu oraz stopki.
+
+Kontrole na Node 24.21.0: format, tokeny, lint, `astro check`, **124** testy
+jednostkowe (22 pliki), build, workspace’y, `check-build`, **171** E2E
+Chromium/Firefox/WebKit. CSS gzip `dist/_astro` **29 778 B** (limit 32 768 B).
+JS gzip **5 770 B**.
+
+### Sesja — strony prawne CMS — 08.10.2026
+
+Zakres: dokumenty `legalPage` edytowalne w Sanity, trasy 3a, treść PL 1:1 ze
+źródła zawlodzki.pl (ta sama spółka Wellbiz), bez redakcji B2C.
+
+Zrobione w kodzie: schemat `legalPage` / `legalBody` (H2/H3, listy, linki, kod,
+tabele `articleTable`), Studio (Strony prawne, Presentation), GROQ + TypeGen,
+mapper `mapLegalPage`, serializer Markdown, fixture’y, `import:legal` dry-run,
+`LegalPage` + `Legal3a` (SiteShell3a, typografia jak Article3a, TOC przy wielu
+H2). Trasy: `/polityka-prywatnosci/`, `/regulamin/`, `/lista-cookies-i-identyfikatorow/`,
+`/regulamin-newslettera/`, `/en/privacy/`, `/en/terms/` (przepięte z `page` na
+CMS). Stopka bez zmian (polityka + regulamin). Zgoda `DemoForm`: markdown-link
+do polityki i regulaminu newslettera. Sitemap `sitemap.xml` uwzględnia te URL.
+EN: krótka informacja, że wiążąca jest wersja PL, z linkiem — bez tłumaczenia
+maszynowego.
+
+Źródła HTML: `scripts/legal-sources/`. Konwersja: `scripts/convert-legal-html.py`.
+Przykłady MD: `src/content/examples/legal-*.md`.
+
+Kontrole (Node 24.21.0), draft PR **#39**, rebase na `main` po #36 i #38:
+
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **121** unit,
+  build, workspaces, `check-build`, **165** E2E Chromium/Firefox/WebKit
+  (w tym 8 przypadków `legal-pages.spec.ts` × 3 przeglądarki).
+- CSS gzip `dist/_astro`: **29 778 B** / 32 KiB; JS gzip **5 770 B**.
+- Dry-run `import:legal` kod 0; `--write` kod 2, bez zapisu Content Lake.
+- verify-ola: `ola-legal-1791451328`, baza `http://127.0.0.1:4340`.
+- Studio bez `SANITY_STUDIO_PROJECT_ID` (wartość `replace-me`) — zrzut
+  dokumentu w Studio niemożliwy lokalnie bez sekretów. `sanity build`
+  workspace przechodzi; `sanity dev` wymaga prawdziwego projectId.
+
+Otwarte decyzje:
+
+- EN dokumentów prawnych (brak źródła; fixture to notice + link do PL).
+- Redakcja B2C treści przeniesionej 1:1 z B2B zawlodzki.pl.
+- Zapis do Content Lake — dopiero na osobne zlecenie.
+
+Artefakty:
+
+- `/opt/cursor/artifacts/screenshots/privacy-desktop.png`
+- `/opt/cursor/artifacts/screenshots/privacy-mobile.png`
+- `/opt/cursor/artifacts/screenshots/cookies-desktop.png`
+- `/opt/cursor/artifacts/screenshots/cookies-mobile.png`
+- `/opt/cursor/artifacts/screenshots/terms-desktop.png`
+- `/opt/cursor/artifacts/screenshots/terms-mobile.png`
+- `/opt/cursor/artifacts/screenshots/newsletter-desktop.png`
+- `/opt/cursor/artifacts/screenshots/newsletter-mobile.png`
+- `/opt/cursor/artifacts/screenshots/privacy-en-desktop.png`
+- `/opt/cursor/artifacts/screenshots/privacy-en-mobile.png`
+- `/opt/cursor/artifacts/screenshots/newsletter-form-closeup.png`
+- Dowody verify-ola: `/tmp/ola-verify-evidence/ola-legal-1791451328/`.
+
+Niewykonane: natywny zoom, czytnik, urządzenie fizyczne. 320 px / 200% zoom
+stron prawnych — niewykonane jako osobne zrzuty 1:1. Studio bez sekretów.
+
+Następny krok: odbiór PR #39; redakcja B2C i zapis do Content Lake na zlecenie.
+Nie mergować bez zgody.
 
 ### Sesja scalenia social #37 w PR #40, 08.10.2026
 

@@ -18,6 +18,12 @@ const pages = [
   ["/ebooki/", "katalog e-booków"],
   ["/blog/", "blog"],
   ["/blog/codzienne-posilki-przy-pcos/", "artykuł"],
+  ["/polityka-prywatnosci/", "polityka prywatności"],
+  ["/lista-cookies-i-identyfikatorow/", "lista cookies"],
+  ["/regulamin/", "regulamin"],
+  ["/regulamin-newslettera/", "regulamin newslettera"],
+  ["/en/privacy/", "privacy"],
+  ["/en/terms/", "terms"],
 ];
 
 function serve(directory) {

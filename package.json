@@ -38,6 +38,7 @@
     "import:blog-collection": "node scripts/import-blog-collection.mjs",
     "import:article": "node scripts/import-article.mjs",
     "import:3a": "tsx scripts/import-3a.ts",
+    "import:legal": "node scripts/import-legal.mjs",
     "test:content-lake": "tsx scripts/simulate-content-build.ts",
     "tokens:generate": "node scripts/generate-tokens.mjs"
   },

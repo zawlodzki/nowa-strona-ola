@@ -316,6 +316,52 @@ export type Category = {
   description: string;
 };
 
+export type LegalPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "legalPage";
+};
+
+export type LegalPage = {
+  _id: string;
+  _type: "legalPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language: "pl" | "en";
+  title: string;
+  slug: Slug;
+  translation?: LegalPageReference;
+  effectiveFrom: string;
+  body: LegalBody;
+  seo?: Seo;
+};
+
+export type LegalBody = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h2" | "h3" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & ArticleTable)
+>;
+
 export type ArticleReference = {
   _ref: string;
   _type: "reference";
@@ -813,7 +859,7 @@ export type HeroSection = {
 
 export type ArticleTable = {
   _type: "articleTable";
-  caption: string;
+  caption?: string;
   headers: Array<string>;
   rows: Array<{
     cells: Array<string>;
@@ -1005,6 +1051,9 @@ export type AllSanitySchemaTypes =
   | Slug
   | CategoryReference
   | Category
+  | LegalPageReference
+  | LegalPage
+  | LegalBody
   | ArticleReference
   | Article
   | FaqSection
@@ -1700,7 +1749,7 @@ export type PREVIEW_ARTICLE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "articleTable";
-        caption: string;
+        caption?: string;
         headers: Array<string>;
         rows: Array<{
           cells: Array<string>;
@@ -2155,6 +2204,56 @@ export type PREVIEW_EBOOKS_QUERY_RESULT = Array<{
   };
   authorName: string;
 }>;
+
+// Source: ../preview/src/lib/queries.ts
+// Variable: PREVIEW_LEGAL_PAGE_QUERY
+// Query: *[    _type == "legalPage" &&    language == $language &&    slug.current == $slug  ][0]{   "id": _id,  language,  "slug": slug.current,  title,  effectiveFrom,  seo{title, description},  body[]{ _key, _type, ..., rows[]{ _key, cells } },  "translation": translation->{ language, "slug": slug.current } }
+export type PREVIEW_LEGAL_PAGE_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  effectiveFrom: string;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+  body: Array<
+    | {
+        _key: string;
+        _type: "articleTable";
+        caption?: string;
+        headers: Array<string>;
+        rows: Array<{
+          _key: string;
+          cells: Array<string>;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "block";
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        rows: null;
+      }
+  >;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+} | null;
 
 // Source: ../src/sanity/queries.ts
 // Variable: PUBLISHED_PAGE_QUERY
@@ -2891,7 +2990,7 @@ export type PUBLISHED_ARTICLE_QUERY_RESULT = {
     | {
         _key: string;
         _type: "articleTable";
-        caption: string;
+        caption?: string;
         headers: Array<string>;
         rows: Array<{
           cells: Array<string>;
@@ -3282,6 +3381,64 @@ export type PUBLISHED_EBOOKS_QUERY_RESULT = Array<{
   authorName: string;
 }>;
 
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_LEGAL_PAGE_QUERY
+// Query: *[    _type == "legalPage" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{   "id": _id,  language,  "slug": slug.current,  title,  effectiveFrom,  seo{title, description},  body[]{ _key, _type, ..., rows[]{ _key, cells } },  "translation": translation->{ language, "slug": slug.current } }
+export type PUBLISHED_LEGAL_PAGE_QUERY_RESULT = {
+  id: string;
+  language: "en" | "pl";
+  slug: string;
+  title: string;
+  effectiveFrom: string;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+  body: Array<
+    | {
+        _key: string;
+        _type: "articleTable";
+        caption?: string;
+        headers: Array<string>;
+        rows: Array<{
+          _key: string;
+          cells: Array<string>;
+        }>;
+      }
+    | {
+        _key: string;
+        _type: "block";
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        rows: null;
+      }
+  >;
+  translation: {
+    language: "en" | "pl";
+    slug: string;
+  } | null;
+} | null;
+
+// Source: ../src/sanity/queries.ts
+// Variable: PUBLISHED_LEGAL_PAGE_PATHS_QUERY
+// Query: *[    _type == "legalPage" &&    !(_id in path("drafts.**")) &&    defined(slug.current) &&    defined(language)  ]{ language, "slug": slug.current }
+export type PUBLISHED_LEGAL_PAGE_PATHS_QUERY_RESULT = Array<{
+  language: "en" | "pl";
+  slug: string;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -3295,6 +3452,7 @@ declare module "@sanity/client" {
     '\n  *[\n    _type == "ebook" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  reviewedAt,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "author": author->{\n    name,\n    role,\n    bio,\n    educationInstitution,\n    educationProgram,\n    "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  chapters[]{ _key, title, summary },\n  includedMaterials[]{ _key, title, description },\n  delivery{ description, timeline },\n  checkoutUrl,\n  sources[]{ _key, title, href, scope },\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  landing{\n    variant,\n    heroTitle,\n    heroLead,\n    primaryLabel,\n    secondaryLabel,\n    facts[]{ _key, title, detail },\n    problemTitle,\n    problemParagraphs,\n    problemQuestions,\n    "problemMedia": problemMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    audienceTitle,\n    audienceLead,\n    audienceItems[]{ _key, title, body },\n    educationNote,\n    contentsTitle,\n    contentsLead,\n    ingredients,\n    sampleTitle,\n    sampleLead,\n    "sampleMedia": sampleMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    sampleFields[]{ _key, label },\n    sampleCaption,\n    outcomesTitle,\n    outcomesLead,\n    comparisonItems[]{ _key, before, after },\n    outcomesNote,\n    authorTitle,\n    authorParagraphs,\n    offerTitle,\n    offerLead,\n    purchaseLabel,\n    offerNote,\n    testimonialsTitle,\n    testimonialsContext,\n    testimonialsScope,\n    testimonials[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    },\n    faq{\n      title,\n      lead,\n      items[]{ _key, question, answer }\n    }\n  }\n }\n': PREVIEW_EBOOK_QUERY_RESULT;
     '\n  *[\n    _type == "ebook" &&\n    language == $language\n  ] | order(coalesce(sortOrder, 9999) asc, title asc) {\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n\n  }\n': PREVIEW_EBOOKS_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    variant,\n    eyebrow,\n    title,\n    lead,\n    body,\n    mediaPosition,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "secondaryMedia": secondaryMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    prompts,\n    resolutionEyebrow,\n    resolutionTitle,\n    caption\n  },\n  _type == "logosSection" => {\n    title,\n    lead,\n    names,\n    items[]{\n      _key,\n      name,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "cardsSection" => {\n    variant,\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      status,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    },\n    closing\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    note,\n    steps[]{ _key, title, body },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  _type == "metricsSection" => {\n    variant,\n    title,\n    lead,\n    items[]{ _key, value, suffix, label },\n    highlights[]{ _key, title, body }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    lead,\n    items[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    }\n  },\n  _type == "expertSection" => {\n    title,\n    intro,\n    body,\n    metric{ value, suffix, label },\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "person": person->{\n      name,\n      role,\n      bio,\n      educationInstitution,\n      educationProgram,\n      "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "ebooksSection" => {\n    title,\n    lead,\n    cardActionLabel,\n    note,\n    "collection": collection{ label, href, emphasis },\n    items[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n }\n  },\n  _type == "ebookCollectionSection" => {\n    variant,\n    title,\n    lead,\n    catalogTitle,\n    catalogLead,\n    findTopicLabel,\n    cardActionLabel,\n    note,\n    emptyMessage,\n    emptyCategoryMessage\n  },\n  _type == "serviceOfferSection" => {\n    title,\n    body,\n    facts,\n    note,\n    "action": action{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "service": service->{\n      "id": _id,\n      title,\n      summary,\n      "slug": slug.current,\n      price,\n      currency,\n      durationMinutes,\n      bookingUrl,\n      bookingStatus\n    }\n  },\n  _type == "credentialsSection" => {\n    title,\n    body,\n    diplomaCaption,\n    "person": person->{\n      "id": _id,\n      name,\n      role,\n      bio,\n      educationInstitution,\n      educationProgram,\n      "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n      "diplomaScan": diplomaScan{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  }\n }\n }\n': PUBLISHED_PAGE_QUERY_RESULT;
+    '\n  *[\n    _type == "legalPage" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  effectiveFrom,\n  seo{title, description},\n  body[]{ _key, _type, ..., rows[]{ _key, cells } },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PREVIEW_LEGAL_PAGE_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_PAGE_PATHS_QUERY_RESULT;
     '\n  *[\n    _type == "siteSettings" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  "headerCta": headerCta{ label, href, emphasis },\n  legalLinks[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  blogIndex{\n    title,\n    lead,\n    note,\n    latestTitle,\n    collectionTitle,\n    readActionLabel,\n    allCategoriesLabel,\n    emptyMessage,\n    emptyCategoryMessage,\n    previousLabel,\n    nextLabel,\n    paginationLabel,\n    seoTitle,\n    seoDescription\n  },\n  blogNewsletter{\n    enabled,\n    title,\n    lead,\n    sidebarTitle,\n    sidebarLead,\n    sidebarActionLabel,\n    sidebarNote,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        placeholder,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  "translation": translation->{ language }\n }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n  breadcrumbTitle,\n  proposalNote,\n  updatedAt,\n  seo{title, description},\n  authors[]->{\n    name,\n    role,\n    bio,\n    "slug": slug.current,\n    "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url,\n    "hotspot": image.hotspot{x, y, height, width}\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n  sources[]{ _key, title, href },\n  related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n },\n  relatedEbooks[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n },\n  faq{\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  }\n\n  }\n': PUBLISHED_ARTICLE_QUERY_RESULT;
@@ -3305,5 +3463,7 @@ declare module "@sanity/client" {
     '\n  *[\n    _type == "ebook" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  reviewedAt,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "author": author->{\n    name,\n    role,\n    bio,\n    educationInstitution,\n    educationProgram,\n    "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  chapters[]{ _key, title, summary },\n  includedMaterials[]{ _key, title, description },\n  delivery{ description, timeline },\n  checkoutUrl,\n  sources[]{ _key, title, href, scope },\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  landing{\n    variant,\n    heroTitle,\n    heroLead,\n    primaryLabel,\n    secondaryLabel,\n    facts[]{ _key, title, detail },\n    problemTitle,\n    problemParagraphs,\n    problemQuestions,\n    "problemMedia": problemMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    audienceTitle,\n    audienceLead,\n    audienceItems[]{ _key, title, body },\n    educationNote,\n    contentsTitle,\n    contentsLead,\n    ingredients,\n    sampleTitle,\n    sampleLead,\n    "sampleMedia": sampleMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    sampleFields[]{ _key, label },\n    sampleCaption,\n    outcomesTitle,\n    outcomesLead,\n    comparisonItems[]{ _key, before, after },\n    outcomesNote,\n    authorTitle,\n    authorParagraphs,\n    offerTitle,\n    offerLead,\n    purchaseLabel,\n    offerNote,\n    testimonialsTitle,\n    testimonialsContext,\n    testimonialsScope,\n    testimonials[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    },\n    faq{\n      title,\n      lead,\n      items[]{ _key, question, answer }\n    }\n  }\n }\n': PUBLISHED_EBOOK_QUERY_RESULT;
     '\n  *[\n    _type == "ebook" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language) &&\n    defined(landing)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_EBOOK_PATHS_QUERY_RESULT;
     '\n  *[\n    _type == "ebook" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ] | order(coalesce(sortOrder, 9999) asc, title asc) {\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n\n  }\n': PUBLISHED_EBOOKS_QUERY_RESULT;
+    '\n  *[\n    _type == "legalPage" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  effectiveFrom,\n  seo{title, description},\n  body[]{ _key, _type, ..., rows[]{ _key, cells } },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PUBLISHED_LEGAL_PAGE_QUERY_RESULT;
+    '\n  *[\n    _type == "legalPage" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_LEGAL_PAGE_PATHS_QUERY_RESULT;
   }
 }

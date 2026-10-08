@@ -572,3 +572,32 @@ export const PUBLISHED_EBOOKS_QUERY = defineQuery(/* groq */ `
     ${ebookCardProjection}
   }
 `);
+
+export const legalPageProjection = /* groq */ `
+  "id": _id,
+  language,
+  "slug": slug.current,
+  title,
+  effectiveFrom,
+  seo{title, description},
+  body[]{ _key, _type, ..., rows[]{ _key, cells } },
+  "translation": translation->{ language, "slug": slug.current }
+`;
+
+export const PUBLISHED_LEGAL_PAGE_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "legalPage" &&
+    !(_id in path("drafts.**")) &&
+    language == $language &&
+    slug.current == $slug
+  ][0]{ ${legalPageProjection} }
+`);
+
+export const PUBLISHED_LEGAL_PAGE_PATHS_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "legalPage" &&
+    !(_id in path("drafts.**")) &&
+    defined(slug.current) &&
+    defined(language)
+  ]{ language, "slug": slug.current }
+`);

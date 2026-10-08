@@ -90,4 +90,33 @@ assert.match(placeholder, /Copy, daty i kadry pochodzą z makiety 3a/);
 const about = await readFile("dist/o-mnie/index.html", "utf8");
 assert.match(about, /diploma/);
 
+for (const path of [
+  "polityka-prywatnosci/index.html",
+  "lista-cookies-i-identyfikatorow/index.html",
+  "regulamin/index.html",
+  "regulamin-newslettera/index.html",
+  "en/privacy/index.html",
+  "en/terms/index.html",
+]) {
+  const html = await readFile(`dist/${path}`, "utf8");
+  assert.match(
+    html,
+    /noindex,nofollow/,
+    `${path}: prototype must remain noindex`,
+  );
+  assert.equal(
+    (html.match(/<h1[\s>]/g) ?? []).length,
+    1,
+    `${path}: exactly one h1`,
+  );
+  assert.match(html, /legal3a/);
+}
+const privacyHtml = await readFile(
+  "dist/polityka-prywatnosci/index.html",
+  "utf8",
+);
+assert.match(privacyHtml, /1\. Administrator danych/);
+const privacyEn = await readFile("dist/en/privacy/index.html", "utf8");
+assert.match(privacyEn, /The binding version is the Polish text/);
+
 console.log(JSON.stringify({ gzipBytes: sizes }, null, 2));

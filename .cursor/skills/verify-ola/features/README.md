@@ -43,4 +43,5 @@ Każdy plik ma H1, jeden akapit zachowania widocznego dla użytkownika i dokład
 - [Katalog 3a](./design-system.md) otwiera `/design-system/`, motyw i karuzelę.
 - [Kolekcja bloga](./blog-collection.md) otwiera `/blog/` i `/en/blog/`, paginację, kategorię i pustą kategorię, bez POST.
 - [Artykuł na blogu](./blog-article.md) wchodzi z listy bloga w artykuł i angielski odpowiednik.
+- [Strony prawne](./legal-pages.md) otwiera cztery dokumenty PL, informację EN i link zgody newslettera.
 - [Strona bez skryptów](./static-page.md) sprawdza `/static/` przy wyłączonym JavaScript.

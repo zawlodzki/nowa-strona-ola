@@ -238,7 +238,7 @@ export function assertWritable(plan: ContentLakePlan): void {
   const forms = plan.pending.filter((item) => item.kind === "form");
   if (forms.length > 0) {
     throw new Error(
-      "Formularze newslettera czekają na limit etykiety zgody z PR #39. --write nic nie wysyła.",
+      "Formularze newslettera nie mieszczą się w limicie etykiety zgody. --write nic nie wysyła.",
     );
   }
 }

@@ -2,29 +2,53 @@
 import type { GetStaticPaths } from "astro";
 
 import { HOME_SLUG, reservedPageSlugs } from "@/lib/paths";
-import { getPage, getPagePaths, getSiteSettings } from "@/sanity/repository";
+import {
+  findLegalPage,
+  getLegalPagePaths,
+  getPage,
+  getPagePaths,
+  getSiteSettings,
+} from "@/sanity/repository";
 import ComposedPage from "@/views/ComposedPage.astro";
+import LegalPage from "@/views/LegalPage.astro";
 
 export const getStaticPaths = (async () => {
-  const paths = await getPagePaths();
-  return paths
+  const [pages, legal] = await Promise.all([
+    getPagePaths(),
+    getLegalPagePaths(),
+  ]);
+  const legalSlugs = new Set(
+    legal
+      .filter((entry) => entry.language === "en" && entry.slug)
+      .map((entry) => entry.slug as string),
+  );
+  const pageSlugs = pages
     .filter(
       (entry) =>
         entry.language === "en" &&
         entry.slug &&
         entry.slug !== HOME_SLUG &&
-        !(reservedPageSlugs as readonly string[]).includes(entry.slug),
+        !(reservedPageSlugs as readonly string[]).includes(entry.slug) &&
+        !legalSlugs.has(entry.slug),
     )
-    .map((entry) => ({ params: { slug: entry.slug } }));
+    .map((entry) => entry.slug as string);
+  return [...new Set([...pageSlugs, ...legalSlugs])].map((slug) => ({
+    params: { slug },
+  }));
 }) satisfies GetStaticPaths;
 
 const lang = "en" as const;
 const slug = Astro.params.slug;
 if (!slug) throw new Error("Missing page slug.");
-const [page, settings] = await Promise.all([
-  getPage(lang, slug),
+const [legal, settings] = await Promise.all([
+  findLegalPage(lang, slug),
   getSiteSettings(lang),
 ]);
+const page = legal ? null : await getPage(lang, slug);
 ---
 
-<ComposedPage lang={lang} page={page} settings={settings} />
+{legal ? (
+  <LegalPage lang={lang} page={legal} settings={settings} />
+) : page ? (
+  <ComposedPage lang={lang} page={page} settings={settings} />
+) : null}
