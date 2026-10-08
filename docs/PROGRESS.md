@@ -18,7 +18,23 @@ Auto-merge `scripts/import-homepage-content.mjs` zostawił lukę dyplomu
 Auto-merge `tests/e2e/ui.spec.ts` zostawił `naturalWidth` dyplomu i testy
 stopki `/` + `/en/`.
 
-Kontrole po tym scaleniu: dopisane po `npm run verify`.
+Kontrole na `529ee61`, Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **118** testów jednostkowych (21 plików),
+build, workspace’y, `check-build`, **147** E2E Chromium/Firefox/WebKit
+(w tym 7×3 `matcha-accent-3a.spec.ts`, dyplom `naturalWidth > 0` i stopka
+`/` + `/en/`). CSS gzip `dist/_astro` **29 778 B** (limit 32 768 B).
+JS gzip **5 770 B**.
+
+verify-ola `ola-1791451993` na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791451993/`. Na `/o-mnie/` obraz dyplomu
+ma `naturalWidth` 1440, `naturalHeight` 1609, `complete`, promień 12 px
+i `object-fit: fill`. Na 1280 px pudełko 340×379,89 px; na 390 px 294×328,5 px.
+Porównanie pikseli z `diploma-production-desktop.png` i
+`diploma-production-mobile.png` daje MAD 0. Zrzuty bez odświeżenia.
+
+Następny krok: PR **#40** ready for review. Nie mergować. Wgranie pliku
+do Content Lake i adres płatnej rezerwacji zostają otwarte.
 
 ### Sesja scalenia main, 08.10.2026
 
