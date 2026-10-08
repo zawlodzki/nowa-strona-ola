@@ -15,6 +15,7 @@ import TextLink from "@/design-system/components/TextLink.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
 import { aboutCopy } from "@/content/about-seed";
 import type { AboutView } from "@/content/map-about";
+import { socialProfileSameAs } from "@/content/social-profiles";
 import { isRemoteImageSrc } from "@/lib/site-images";
 
 export interface Props {
@@ -41,6 +42,7 @@ const profileJsonLd = {
       "@type": "CollegeOrUniversity",
       name: person.educationInstitution,
     },
+    sameAs: socialProfileSameAs(),
   },
 };
 ---

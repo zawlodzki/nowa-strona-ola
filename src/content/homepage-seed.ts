@@ -167,25 +167,7 @@ export function homepageHeaderCta(language: Locale) {
   };
 }
 
-export function footerSocialLinks() {
-  return [
-    {
-      _key: "social-instagram",
-      label: "Instagram",
-      href: "https://www.instagram.com/",
-    },
-    {
-      _key: "social-facebook",
-      label: "Facebook",
-      href: "https://www.facebook.com/",
-    },
-    {
-      _key: "social-tiktok",
-      label: "TikTok",
-      href: "https://www.tiktok.com/",
-    },
-  ];
-}
+export { footerSocialLinks } from "@/content/social-profiles";
 
 export function footerLegalLinks(language: Locale) {
   return language === "pl"

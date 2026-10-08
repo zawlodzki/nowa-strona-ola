@@ -14,6 +14,7 @@ import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
 import { consultationCopy } from "@/content/consultation-seed";
 import type { ConsultationView } from "@/content/map-consultation";
+import { socialProfileSameAs } from "@/content/social-profiles";
 
 export interface Props {
   lang: Locale;
@@ -49,6 +50,7 @@ const jsonLd = {
         "@type": "Person",
         name: expert.name,
         jobTitle: expert.role,
+        sameAs: socialProfileSameAs(),
         ...(expert.education && {
           alumniOf: {
             "@type": "CollegeOrUniversity",

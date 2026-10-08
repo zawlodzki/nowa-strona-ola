@@ -567,3 +567,32 @@ test("landing pages, blog and missing English translation", async ({
   const missing = await page.goto("/en/tylko-pl/");
   expect(missing?.status()).toBe(404);
 });
+
+const FOOTER_SOCIAL_HREFS = [
+  "https://www.instagram.com/aleksandra_olesiewicz",
+  "https://www.facebook.com/dietetykolesiewicz/",
+  "https://www.tiktok.com/@aleksandra_olesiewicz",
+] as const;
+
+for (const [path, instagramName] of [
+  ["/", "Instagram Aleksandry Olesiewicz"],
+  ["/en/", "Instagram of Aleksandra Olesiewicz"],
+] as const) {
+  test(`footer social profiles on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const social = page.locator("footer .ao-footer__social a");
+    await expect(social).toHaveCount(3);
+    await expect(social).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(social).toHaveAttribute("target", "_blank");
+    expect(
+      await social.evaluateAll((links) =>
+        links.map((link) => link.getAttribute("href")),
+      ),
+    ).toEqual([...FOOTER_SOCIAL_HREFS]);
+    await expect(
+      page.getByRole("link", { name: instagramName, exact: true }),
+    ).toHaveAttribute("href", FOOTER_SOCIAL_HREFS[0]);
+    await expect(social.nth(1)).toHaveAttribute("href", FOOTER_SOCIAL_HREFS[1]);
+    await expect(social.nth(2)).toHaveAttribute("href", FOOTER_SOCIAL_HREFS[2]);
+  });
+}

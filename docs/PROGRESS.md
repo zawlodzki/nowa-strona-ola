@@ -1,9 +1,32 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (pakiet 7 — Article3a).
+Aktualizacja: 2026-10-08 (profile social w stopce 3a).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja — kanoniczne URL profili social — 08.10.2026
+
+Zakres: zastępcze strony główne Instagram / Facebook / TikTok w stopce 3a
+zamienione na prawdziwe profile Aleksandry Olesiewicz. Jedno źródło:
+`src/content/social-profiles.ts`. Wygląd stopki bez zmiany (widoczne etykiety
+zostają Instagram / Facebook / TikTok). Gałąź PR #36 (akcent matcha) nietknięta.
+
+Gdzie były linki i co czyta źródło:
+
+- fixture i fallback: `homepageSettingsFixture`, `shellLinks` → `footerSocialLinks()`
+- katalog 3a: `src/pages/design-system.astro`
+- seed/import: `scripts/import-homepage-content.mjs` (PL i EN przez spread PL)
+- JSON-LD `Person.sameAs`: About3a, Consultation3a, Ebook3a, `map-article`
+- Sanity: schemat `siteSettings.socialLinks` bez zmiany; Content Lake bez zapisu
+- mockupy HTML `podglad.html?strona=…` nietknięte (nie są serwisem)
+
+Stopka: `rel="noopener noreferrer"`, `target="_blank"`, `aria-label`
+„Instagram Aleksandry Olesiewicz” / EN „Instagram of Aleksandra Olesiewicz”.
+
+Kontrole i artefakty: uzupełnione po `npm run verify`.
+
+Następny krok: odbiór draft PR; nie mergować. Content Lake poza zakresem.
 
 ### Sesja pakietu 7 — Article3a — 08.10.2026
 

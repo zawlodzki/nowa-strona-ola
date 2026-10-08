@@ -8,6 +8,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { footerSocialLinks } from "../src/content/social-profiles.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -28,9 +29,9 @@ const GAPS = [
   },
   {
     id: "social-urls",
-    status: "open",
+    status: "resolved",
     detail:
-      "Instagram, Facebook i TikTok są ustalone jako nazwy, bez prawdziwych HTTPS URL.",
+      "Kanoniczne URL profili w src/content/social-profiles.ts (Instagram, Facebook, TikTok). Content Lake bez zapisu w tej sesji.",
   },
   {
     id: "ebook-files",
@@ -337,23 +338,7 @@ function documents() {
       href: "/#newsletter",
       emphasis: "default",
     },
-    socialLinks: [
-      {
-        _key: "social-instagram",
-        label: "Instagram",
-        href: "https://www.instagram.com/",
-      },
-      {
-        _key: "social-facebook",
-        label: "Facebook",
-        href: "https://www.facebook.com/",
-      },
-      {
-        _key: "social-tiktok",
-        label: "TikTok",
-        href: "https://www.tiktok.com/",
-      },
-    ],
+    socialLinks: footerSocialLinks(),
     legalLinks: [
       {
         _key: "legal-privacy",
