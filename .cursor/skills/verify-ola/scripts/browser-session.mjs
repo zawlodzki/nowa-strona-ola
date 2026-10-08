@@ -21,6 +21,7 @@ let context = await browser.newContext({
 context.setDefaultTimeout(15000);
 context.setDefaultNavigationTimeout(15000);
 let page = await context.newPage();
+let javascriptEnabled = true;
 const posts = [];
 
 function track(nextPage) {
@@ -74,15 +75,16 @@ async function run(body) {
       return `pressed ${body.key}`;
     case "context": {
       await context.close();
+      javascriptEnabled = body.javascript !== false;
       context = await browser.newContext({
         viewport: { width: 1280, height: 900 },
-        javaScriptEnabled: body.javascript !== false,
+        javaScriptEnabled: javascriptEnabled,
       });
       context.setDefaultTimeout(15000);
       context.setDefaultNavigationTimeout(15000);
       page = await context.newPage();
       track(page);
-      return `javascript ${body.javascript !== false}`;
+      return `javascript ${javascriptEnabled}`;
     }
     case "expect": {
       if (!body.role && body.text !== undefined) {
@@ -151,25 +153,41 @@ async function run(body) {
     case "screenshot": {
       const file = evidenceFile(body.path);
       await mkdir(path.dirname(file), { recursive: true });
-      await page.evaluate(async () => {
-        const step = Math.max(window.innerHeight / 2, 240);
-        const limit = Math.max(document.documentElement.scrollHeight, 1);
-        for (let y = 0; y < limit; y += step) {
-          window.scrollTo(0, y);
-          await new Promise((resolve) => requestAnimationFrame(resolve));
-        }
-        window.scrollTo(0, 0);
-        await Promise.all(
-          [...document.images].map((img) => {
-            if (img.complete && img.naturalWidth > 0) return undefined;
-            return new Promise((resolve) => {
-              img.addEventListener("load", () => resolve(), { once: true });
-              img.addEventListener("error", () => resolve(), { once: true });
-            });
+      if (javascriptEnabled) {
+        await Promise.race([
+          page.evaluate(async () => {
+            const wait = (ms) =>
+              new Promise((resolve) => setTimeout(resolve, ms));
+            const step = Math.max(window.innerHeight / 2, 240);
+            const limit = Math.max(document.documentElement.scrollHeight, 1);
+            for (let y = 0; y < limit; y += step) {
+              window.scrollTo(0, y);
+              await new Promise((resolve) => requestAnimationFrame(resolve));
+            }
+            window.scrollTo(0, 0);
+            await Promise.all(
+              [...document.images].map((img) => {
+                if (img.complete) return undefined;
+                return Promise.race([
+                  new Promise((resolve) => {
+                    img.addEventListener("load", () => resolve(), {
+                      once: true,
+                    });
+                    img.addEventListener("error", () => resolve(), {
+                      once: true,
+                    });
+                  }),
+                  wait(8000),
+                ]);
+              }),
+            );
+            if (document.fonts?.ready) {
+              await Promise.race([document.fonts.ready, wait(3000)]);
+            }
           }),
-        );
-        if (document.fonts?.ready) await document.fonts.ready;
-      });
+          new Promise((resolve) => setTimeout(resolve, 12000)),
+        ]);
+      }
       await page.screenshot({ path: file, fullPage: true });
       return file;
     }

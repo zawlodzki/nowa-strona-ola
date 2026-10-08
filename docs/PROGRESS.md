@@ -27,7 +27,8 @@ Różnica → poprawka:
 3. Miniatury wyższe niż w makiecie. `.ao-site img { height: auto }` plus atrybuty
    HTML portretu 1122×1402 wypierały `aspect-ratio: 1.8` na samym `img`. Poprawka:
    `aspect-ratio: 1.8` na ramce `.blog3a-card-image`, obraz
-   `width/height: 100%; object-fit: cover` (kadr 1:1 z makietą).
+   `width/height: 100%; min-height: 0; object-fit: cover` (kadr ze środka ramki,
+   nie obcięcie od góry).
 4. Wyróżniony wpis wyglądał na pas wychodzący do prawej, bez zaokrągleń. Układ
    siatki `1.08fr 1fr` i padding 44px już były; brakujący radius sprawiał wrażenie
    pełnej szerokości. Poprawka: karta w kontenerze, `border-radius: 24px`,
