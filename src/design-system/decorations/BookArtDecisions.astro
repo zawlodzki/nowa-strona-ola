@@ -20,7 +20,7 @@ const { labels } = Astro.props;
           y1="1"
           x2={index === 1 ? 70 : 100}
           y2="1"
-          stroke="currentColor"
+          stroke={index === 1 ? "var(--ao-deco-accent)" : "currentColor"}
           stroke-width="1"
         ></line>
       </svg>

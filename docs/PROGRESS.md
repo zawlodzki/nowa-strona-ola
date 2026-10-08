@@ -1,9 +1,42 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (zdjęcie ukończenia w slocie dyplomu).
+Aktualizacja: 2026-10-08 (scalenie main ze zdjęciem dyplomu; akcent matcha i cherry zostają).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja scalenia main, 08.10.2026
+
+Scalenie `origin/main` (`e016b9b`, squash PR #36 matcha i PR #38 good-css)
+z gałęzią zdjęcia dyplomu. Commit merge, bez rebase. Jedyny konflikt to
+`docs/PROGRESS.md`. Sesja dyplomu i sesje matcha oraz cherry zostały poniżej.
+Auto-merge `docs/IMPLEMENTATION-PLAN.md` zostawił checkbox dyplomu i checkboxy
+matcha. Auto-merge `docs/HOMEPAGE-CMS-CONFIG.md` zostawił decyzję zdjęcia
+dyplomu i zapis wykonania tokenów matcha. PR #37 (profile social) był otwarty
+i nie wchodził w to scalenie.
+
+Kontrole na Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **116** testów jednostkowych (20 plików),
+build, workspace’y, `check-build`, **141** E2E Chromium/Firefox/WebKit.
+CSS gzip `dist/_astro` **29 778 B** (limit 32 768 B). JS gzip **5 770 B**.
+Suma CSS jest taka sama jak po sesji cherry na main. `scripts/check-build.mjs`
+liczy gzip plików CSS w `dist/_astro`. Osobny gzip Workera (2,94 KiB) to inny
+artefakt.
+
+verify-ola `ola-1791451319` na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791451319/`. Na `/o-mnie/` i `/en/about/`
+obraz dyplomu ma `naturalWidth` 1440 i `naturalHeight` 1609, jest `complete`,
+ma promień 12 px i `object-fit: fill`. Na 1280 px obraz ma 340×380 px.
+Na 390 px ma 294×329 px.
+
+Porównanie pikseli z istniejącymi zrzutami
+`diploma-production-desktop.png` i `diploma-production-mobile.png`
+daje różnicę 0. Zrzuty w `/opt/cursor/artifacts/screenshots/` bez odświeżenia.
+Makieta w tym scaleniu nie była ruszana.
+
+Następny krok to odbiór PR #40. PR zostaje draftem. Wgranie pliku do
+Content Lake, adres płatnej rezerwacji i linki social z PR #37 zostają otwarte.
 
 ### Sesja zdjęcia dyplomu, 08.10.2026
 
@@ -58,6 +91,85 @@ fizycznego. Nie ma osobnych zrzutów sekcji przy 320 px i zoomie 200%.
 
 Następny krok to odbiór PR. Wgranie pliku do Content Lake i adres płatnej
 rezerwacji zostają otwarte.
+
+### Sesja wzmocnienia cherry — 08.10.2026
+
+Odbiór PR #36: iskierka na wiśniowych okładkach była za mała; brakowało
+poziomej strzałki z kafelka 3 planszy 05. SVG `CherryCoverAccent` w
+`src/design-system/decorations/`: cienka strzałka i czteroramienna
+iskierka w `accent-on-primary` (#D8E78A). Render tylko przy
+`tone="cherry"`. Temat okładki ma `max-width`, żeby nie nachodzić na
+znak. Zdjęcia, układ kart i pozostałe akcenty bez zmian.
+
+Draft PR **#36**, head po `npm run verify`: dopisany w commicie dokumentacji.
+Kontrole (Node 24.21.0):
+
+- `npm run verify` **PASS**: **115** unit, **141** E2E Chromium/Firefox/WebKit
+  (7 przypadków `matcha-accent-3a.spec.ts` × 3, w tym brak kolizji z tekstem
+  na homepage, kolekcji, kategorii PCOS, artykule, katalogu, EN, 1280 i 390).
+- CSS gzip **29 778 B** / 32 768 B; JS gzip **5 770 B**.
+- Kontrast `#D8E78A` na `cover-primary` **6,17** (≥ 3 dla grafiki).
+- verify-ola `ola-cherry-accent`, `browser posts` = `[]`.
+
+Artefakty: `closeup-ebooks-cherry-cover.png` (przed/po),
+`compare-board-05-secondary-decorations.png`,
+`compare-accent-ebooks-desktop-v2.png`,
+`compare-accent-home-desktop-v2.png`,
+`compare-accent-article-desktop-v2.png`,
+`compare-accent-ebooks-mobile-v2.png`.
+
+Następny krok: odbiór wzmocnionej cherry. Nie mergować bez zgody.
+
+### Sesja akcentu matcha 3a — 08.10.2026
+
+Zakres: wyrównanie produkcyjnych podstron 3a do decyzji z PR #31
+(matcha z 1a: #53671B / #D8E78A). Pakiety 1–7 etapu 4a są w main.
+
+Tokeny `accent`, `accent-on-primary` i `accent-on-light` w
+`design-system/tokens.json`. Secondary button: białe wnętrze
+(`--ao-background`), obwódka i etykieta matcha. Primary CTA, wordmark,
+hero i tło portretu bez zmian. Dekoracje zostają SVG.
+
+Detale grafik: punkt na orbicie produktu, punkt na półce butelek,
+jedna linia/kreska na jasnych okładkach, iskierka na okładkach cherry.
+Checkmarki, glify share/mail, TextLink i tła paneli bez matchy.
+
+Draft PR **#36**, head po weryfikacji `01faf31`, dokumentacja wyników w
+kolejnym commicie. Kontrole (Node 24.21.0):
+
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **115**
+  unit, build, workspaces, `check-build`, **138** E2E Chromium/Firefox/WebKit
+  (w tym 6 przypadków `matcha-accent-3a.spec.ts` × 3 przeglądarki).
+- CSS gzip `dist/_astro`: **29 758 B** / 32 768 B; JS gzip **5 770 B**.
+- Kontrast WCAG AA (obliczony z `tokens.mjs`): accent na bieli **6,32**;
+  accent dark na `#291a21` **12,43**; `#D8E78A` na wiśni primary **6,17**;
+  accent-on-light na okładce **5,87**.
+- Playwright computed style secondary: tło `rgb(255, 255, 255)`, tekst i
+  obwódka `rgb(83, 103, 27)` (#53671B). Dark: tło `rgb(41, 26, 33)`,
+  tekst i obwódka `rgb(216, 231, 138)` (#D8E78A). Primary i
+  `StageBackdrop` bez zmian (`#882F48` / `#F2DCE3`).
+- verify-ola: `ola-1791446513`, baza `http://127.0.0.1:4340`.
+  `browser posts` = `[]` z JS, bez JS i po udanym newsletterze
+  demonstracyjnym. Drugi start `ola-matcha-closeups` (bez przebudowy
+  `dist/`) do zbliżeń i dociągnięcia leniwych zdjęć.
+
+Zbliżenia vs plansza 05: secondary ma białe wnętrze i obwódkę matcha;
+orbita ma jeden punkt; jasna okładka — kreskę „Dawka”; cherry — iskierkę;
+półka butelek — punkt na linii. Pierwszy full-page konsultacji EN uciął
+portret w „60 minutes” (lazy `img`); recapture ze scrollem
+(`after-consultation-en-desktop-loaded.png`) pokazuje oba portrety.
+Kod `Consultation3a` nie był ruszany.
+
+Strony bez Button secondary (About, konsultacje, landing ebooka, blog)
+nie dostały zielonych CTA. Drugie CTA zostają TextLink w ink, zgodnie z
+makietami. Katalog dostał dwa swatche tokenów — jedyna zmiana układu
+(rząd palety). Zdjęcia i kadry bez zmian.
+
+Niewykonane: natywny zoom, czytnik, urządzenie fizyczne, 320 px i 200%
+jako osobne zrzuty 1:1 tej sesji (są w E2E katalogu). Dark orbit/butelki
+zostają na `#53671B` (okładki nie inwertują; otwarte pytanie).
+
+Następny krok: odbiór wizualny PR #36. Nie mergować bez zgody.
 
 ### Sesja pakietu 7 — Article3a — 08.10.2026
 
