@@ -119,11 +119,12 @@ test("ebook orbit keeps a single matcha dot on the existing rings", async ({
   const dots = page.locator(".ao-deco-orbit circle[fill]");
   await expect(dots).toHaveCount(1);
   expect(await dots.getAttribute("fill")).toBe("var(--ao-accent-on-light)");
-  const sparkle = page.locator(".ebook3a-book .ao-deco-sparkle");
-  await expect(sparkle).toHaveCount(1);
-  expect(await sparkle.evaluate((el) => getComputedStyle(el).display)).toBe(
-    "none",
+  const sparkles = page.locator(".ebook3a-book .ao-deco-sparkle");
+  await expect(sparkles).toHaveCount(2);
+  const displays = await sparkles.evaluateAll((nodes) =>
+    nodes.map((node) => getComputedStyle(node).display),
   );
+  expect(displays).toEqual(["none", "none"]);
 });
 
 test("cherry ebook cover shows the matcha sparkle", async ({ page }) => {
