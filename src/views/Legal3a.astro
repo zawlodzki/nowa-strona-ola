@@ -24,7 +24,7 @@ const { content } = Astro.props;
       />
       <h1>{content.title}</h1>
       <p class="legal-effective">
-        {content.effectiveCaption}
+        {content.effectiveCaption}{" "}
         <time datetime={content.effectiveFrom}>{content.effectiveLabel}</time>
       </p>
     </Container>

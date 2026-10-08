@@ -25,11 +25,17 @@ maszynowego.
 Źródła HTML: `scripts/legal-sources/`. Konwersja: `scripts/convert-legal-html.py`.
 Przykłady MD: `src/content/examples/legal-*.md`.
 
-Kontrole (do uzupełnienia po `npm run verify`):
+Kontrole (Node 24.21.0), draft PR **#39**, rebase na `main` po #36 i #38:
 
-- `import:legal` dry-run kod 0; `--write` kod 2, bez zapisu Content Lake.
-- Studio bez `SANITY_STUDIO_PROJECT_ID` (wartość `replace-me`) — zrzut dokumentu
-  w Studio niemożliwy lokalnie bez sekretów.
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **121** unit,
+  build, workspaces, `check-build`, **165** E2E Chromium/Firefox/WebKit
+  (w tym 8 przypadków `legal-pages.spec.ts` × 3 przeglądarki).
+- CSS gzip `dist/_astro`: **29 778 B** / 32 KiB; JS gzip **5 770 B**.
+- Dry-run `import:legal` kod 0; `--write` kod 2, bez zapisu Content Lake.
+- verify-ola: `ola-legal-1791451328`, baza `http://127.0.0.1:4340`.
+- Studio bez `SANITY_STUDIO_PROJECT_ID` (wartość `replace-me`) — zrzut
+  dokumentu w Studio niemożliwy lokalnie bez sekretów. `sanity build`
+  workspace przechodzi; `sanity dev` wymaga prawdziwego projectId.
 
 Otwarte decyzje:
 
@@ -37,11 +43,26 @@ Otwarte decyzje:
 - Redakcja B2C treści przeniesionej 1:1 z B2B zawlodzki.pl.
 - Zapis do Content Lake — dopiero na osobne zlecenie.
 
-Niewykonane: natywny zoom, czytnik, urządzenie fizyczne. 320 px / 200% zoom
-stron prawnych — niewykonane jako osobne zrzuty 1:1.
+Artefakty:
 
-Następny krok: dry-run importu do Content Lake na zlecenie; redakcja B2C
-w Studio.
+- `/opt/cursor/artifacts/screenshots/privacy-desktop.png`
+- `/opt/cursor/artifacts/screenshots/privacy-mobile.png`
+- `/opt/cursor/artifacts/screenshots/cookies-desktop.png`
+- `/opt/cursor/artifacts/screenshots/cookies-mobile.png`
+- `/opt/cursor/artifacts/screenshots/terms-desktop.png`
+- `/opt/cursor/artifacts/screenshots/terms-mobile.png`
+- `/opt/cursor/artifacts/screenshots/newsletter-desktop.png`
+- `/opt/cursor/artifacts/screenshots/newsletter-mobile.png`
+- `/opt/cursor/artifacts/screenshots/privacy-en-desktop.png`
+- `/opt/cursor/artifacts/screenshots/privacy-en-mobile.png`
+- `/opt/cursor/artifacts/screenshots/newsletter-form-closeup.png`
+- Dowody verify-ola: `/tmp/ola-verify-evidence/ola-legal-1791451328/`.
+
+Niewykonane: natywny zoom, czytnik, urządzenie fizyczne. 320 px / 200% zoom
+stron prawnych — niewykonane jako osobne zrzuty 1:1. Studio bez sekretów.
+
+Następny krok: odbiór PR #39; redakcja B2C i zapis do Content Lake na zlecenie.
+Nie mergować bez zgody.
 
 ### Sesja wzmocnienia cherry — 08.10.2026
 
