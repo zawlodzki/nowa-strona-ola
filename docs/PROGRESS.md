@@ -45,6 +45,8 @@ zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
 
 Artefakty:
 
+- `/opt/cursor/artifacts/screenshots/compare-diploma-desktop.png` (makieta | produkcja)
+- `/opt/cursor/artifacts/screenshots/compare-diploma-mobile.png` (makieta | produkcja)
 - `/opt/cursor/artifacts/screenshots/diploma-mockup-desktop.png`
 - `/opt/cursor/artifacts/screenshots/diploma-production-desktop.png`
 - `/opt/cursor/artifacts/screenshots/diploma-mockup-mobile.png`
