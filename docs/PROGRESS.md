@@ -43,8 +43,38 @@ Różnica → poprawka:
 `aria-label` „Przeczytaj artykuł: …”; English/Polski; zgoda newslettera; przycisk
 motywu obok strzałki; karty prowadzą do `blog/[slug]`, nie `podglad.html`.
 
-Kontrole: w tej samej sesji po commitcie — `npm run verify` i nowe porównania
-pod tymi samymi nazwami w `/opt/cursor/artifacts/screenshots/`.
+Kontrole (Node 24.21.0):
+
+- `npm run verify` **PASS**: 109 unit, 102 E2E (Chromium/Firefox/WebKit), w tym
+  `blog-collection-3a.spec.ts` (naturalWidth portretu, radius 24px, stosunek 1.8,
+  ramka = box obrazka, `#main` w stopce).
+- CSS gzip `dist/_astro`: **26 263 B** / 32 KiB; JS gzip 5 770 B.
+- verify-ola `VERIFY_RUN_ID=ola-1791428076`, baza `http://127.0.0.1:4340`,
+  `browser posts` = `[]`. Dowody: `/tmp/ola-verify-evidence/ola-1791428076/`.
+- Porównania nadpisane w `/opt/cursor/artifacts/screenshots/` pod tymi samymi
+  nazwami, po załadowaniu obrazów (scroll + `naturalWidth`).
+
+Zmierzony kadr desktop 1280: ramka karty 580×322,22 (1.8) makieta i produkcja;
+wyróżniony 1200×~416, radius 24px, w kontenerze. Portret „Wyniki badań”
+`naturalWidth` 1122 (`about.webp`). Mobile 390: featured 1.4, karty 1.8.
+
+Pozostałe różnice po porównaniu pikselowym (lista nie jest pusta):
+
+- Filtry kategorii pod leadem — zlecone w pakiecie; makieta ich nie ma. Przez to
+  wyróżniony wpis jest ~1 px wyższy, a CTA „Przeczytaj artykuł” łamie się na
+  dwie linie.
+- `English` / `Polski` w nagłówku — wspólny `SiteShell3a`.
+- Księżyc motywu obok strzałki powrotu — zlecone (motyw zostaje).
+- Newsletter: zgoda demonstracyjna `DemoForm` (wspólna 3a).
+- Mobile: szerokość treści 342 vs 350 px (gutter `.ao-container`, nie makietowy
+  `.container`).
+- Kategoria PCOS: brak makiety kategorii; najnowszy wpis kategorii jest
+  wyróżniony jak na indeksie.
+- EN: brak makiety EN; ten sam układ, zaokrąglenia, kadr i strzałka.
+- Bez JS: motyw ukryty, strzałka widoczna, zdjęcia eager nadal w HTML.
+- `aria-label` „Przeczytaj artykuł: …”; karty prowadzą do `blog/[slug]`.
+
+Natywny zoom, czytnik i urządzenie fizyczne **nie sprawdzone**.
 
 Następny krok: pakiet 7 Article3a, o ile odbiór tej poprawki przejdzie.
 
