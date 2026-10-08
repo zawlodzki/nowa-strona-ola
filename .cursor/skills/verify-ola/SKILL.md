@@ -55,9 +55,11 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path <pli
 node .cursor/skills/verify-ola/scripts/verify.mjs browser context --javascript false
 node .cursor/skills/verify-ola/scripts/verify.mjs browser script-count
 node .cursor/skills/verify-ola/scripts/verify.mjs browser press --key Escape
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --text "Chcę ebook · 97 zł"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Suplementy w PCOS" --nth 1 --attribute href --value /ebooki/suplementy-w-pcos/
 ```
 
-`browser context` otwiera nową stronę i kasuje poprzedni stan sesji. Domyślnie JavaScript jest włączony. `expect` z rolą czeka, aż locator będzie widoczny, chyba że podasz `--state`, `--text`, `--attribute` albo `--count`. Ścieżki `--path` przy snapshot i screenshot są względne wobec katalogu dowodów. Mapa funkcji jest w [features/README.md](features/README.md).
+`browser context` otwiera nową stronę i kasuje poprzedni stan sesji. Domyślnie JavaScript jest włączony. `expect` z rolą czeka, aż locator będzie widoczny, chyba że podasz `--state`, `--text`, `--attribute` albo `--count`. `--nth` to indeks od zera, gdy kilka elementów ma tę samą rolę i nazwę. `click --text` klika dokładny widoczny napis, gdy kontrolka nie ma nazwy w drzewie dostępności. Ścieżki `--path` przy snapshot i screenshot są względne wobec katalogu dowodów. Mapa funkcji jest w [features/README.md](features/README.md).
 
 ## Evidence
 

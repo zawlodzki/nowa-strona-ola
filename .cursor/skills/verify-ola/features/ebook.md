@@ -18,11 +18,11 @@ Ze strony głównej wybrać kartę „Suplementy w PCOS” albo „Poznaj temat�
 
 ```sh
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /
-node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Suplementy w PCOS" --attribute href --value /ebooki/suplementy-w-pcos/
-node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Suplementy w PCOS"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Suplementy w PCOS" --nth 1 --attribute href --value /ebooki/suplementy-w-pcos/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Suplementy w PCOS" --nth 1
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Zrób porządek z suplementami."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "E-book · 97 zł" --attribute href --value "#cena"
-node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Chcę ebook · 97 zł"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --text "Chcę ebook · 97 zł"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Sprzedaż nie jest uruchomiona"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path ebook-pl-aria.txt
@@ -42,8 +42,8 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading 
 ## Gotchas
 
 H1 łamie wiersze przez `\n` w danych. Playwright i verify-ola widzą złączony tekst „Zrób porządek z suplementami.”
-Karta homepage ma dwa linki o nazwie „Suplementy w PCOS” (okładka i tytuł), oba z `href=/ebooki/suplementy-w-pcos/`. `expect --attribute` pada na strict mode; ARIA snapshot pokazuje oba URL. Kliknięcie tytułu otwiera landing w E2E (`#ebook-suplementy-w-pcos` → heading → link).
-Przycisk zakupu przy statusie `planned` to `summary.ao-button` w `details`, nie link checkoutu. W drzewie ARIA to `group` „Chcę ebook · 97 zł”; `click --role button` nie trafia. E2E otwiera go `getByText`. Zamknięte `details` trzyma „Sprzedaż nie jest uruchomiona” poza drzewem (hidden), bez potwierdzenia zakupu.
+Karta homepage ma dwa linki o nazwie „Suplementy w PCOS” i tym samym `href=/ebooki/suplementy-w-pcos/`. Okładka jest `--nth 0` (`tabindex=-1`). Tytuł jest `--nth 1`. Bez indeksu strict mode odrzuca parę.
+Przycisk zakupu przy statusie `planned` to `summary` w `details` z `display: inline-flex`. Chromium nie wystawia roli button ani nazwy grupy, więc `click --role button` i `click --role group` nie trafiają. `click --text` klika widoczny napis i otwiera szczegóły. Zamknięte `details` trzyma „Sprzedaż nie jest uruchomiona” jako hidden, bez potwierdzenia zakupu.
 Kotwice landingu są polskie także w EN (`#cena`, `#podglad`, `#dla-kogo`).
-Nie otwieraj Studio, podglądu 4322 ani Workera. Kolekcja `/ebooki/` to pakiet 5 i nie jest w tym przepisie.
+Kolekcja `/ebooki/` ma osobny przepis. Nie otwieraj Studio, podglądu 4322 ani Workera.
 Natywny zoom, czytnik i urządzenie fizyczne nie są w tym przepisie.
