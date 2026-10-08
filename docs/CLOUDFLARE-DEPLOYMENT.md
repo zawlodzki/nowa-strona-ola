@@ -101,6 +101,52 @@ sekrety `CLOUDFLARE_ACCOUNT_ID` i `CLOUDFLARE_API_TOKEN` są ustawione. Token
 Actions to osobny API token Cloudflare (Workers Scripts), nie OAuth Wranglera.
 Pierwszy `repository_dispatch` `sanity-content-change` wdrożył staging.
 
+### Automatyczne aktualizacje i wdrożenia Studio
+
+`studio/sanity.cli.ts` włącza `deployment.autoUpdates: true` i zachowuje
+`appId` istniejącego Studio. Po pierwszym wdrożeniu nowego buildu rdzeń Sanity
+korzysta z automatycznych aktualizacji. Zmiany naszych schematów, konfiguracji
+i pluginów nadal wymagają nowego buildu. Niektóre aktualizacje głównej wersji
+również wymagają przebudowania i wdrożenia.
+[Zakres automatycznych aktualizacji](https://www.sanity.io/docs/studio/latest-version-of-sanity).
+
+Workflow `.github/workflows/deploy-studio.yml` (`Deploy Studio`) uruchamia się
+po udanym `Quality` dla zdarzenia `push` na `main` w tym repozytorium. Nie wdraża
+PR ani gałęzi roboczych. Pobiera dokładnie `head_sha` sprawdzonego przebiegu,
+buduje Studio i przed wdrożeniem porównuje commit z bieżącym `main`.
+Starszy wynik zostaje pominięty; wdrożenia są serializowane i nie przerywają
+trwającego uploadu. Błąd `Quality`, konfiguracji lub buildu blokuje deploy.
+
+Workflow używa środowiska GitHub **production**:
+
+- zmienne `PUBLIC_SANITY_PROJECT_ID=dyuqkn8c` i `PUBLIC_SANITY_DATASET=production`
+  są mapowane na zmienne builda Studio;
+- origin Presentation to `https://preview.aleksandraolesiewicz.com`;
+- sekrety `CLOUDFLARE_ACCOUNT_ID` i `CLOUDFLARE_API_TOKEN` służą wdrożeniu
+  `ola-website-studio-production` przez istniejącą konfigurację Wranglera;
+- dodatkowy sekret **`SANITY_AUTH_TOKEN`** służy wyłącznie rejestracji
+  zewnętrznego Studio i wdrożeniu schematów projektu `dyuqkn8c`. Ustawić go
+  w GitHub → Settings → Environments → production → Environment secrets.
+  Token musi mieć uprawnienia do tych operacji; token Viewer nie wystarczy.
+  Nie używać zmiennej `SANITY_STUDIO_*` do tokenu, nie zapisywać go w repo
+  ani nie przekazywać do buildu przeglądarkowego.
+
+Obecność wszystkich sekretów jest sprawdzana przed buildem i uploadem.
+Po uploadzie Cloudflare CLI Sanity rejestruje zewnętrzny adres oraz schematy
+z `--schema-required`. Błąd rejestracji oznacza czerwony przebieg, nawet jeśli
+upload Cloudflare już się udał. Po uzupełnieniu sekretów lub naprawie błędu
+ponowić job `Deploy Studio` w Actions; nie wymaga to sztucznego commita.
+Jeśli `main` zdążył się zmienić, trzeba poczekać na udany `Quality` nowego commita.
+Reguły ochrony środowiska `production` nadal obowiązują; jeśli wymagają akceptacji,
+workflow poczeka na nią przed rozpoczęciem pracy.
+
+Pierwsze wdrożenie nastąpi dopiero po scaleniu workflow i udanym `Quality` na
+`main`. Samo przygotowanie pliku nie oznacza wdrożenia. Build z `autoUpdates`
+wymaga dostępu do `sanity-cdn.com`. Stan rzeczywistej weryfikacji i wdrożenia:
+[postęp](PROGRESS.md).
+
+### Polecenia wdrożenia
+
 Token Cloudflare powinien mieć wyłącznie uprawnienia potrzebne do wdrożenia Worker
 Scripts na wskazanym koncie. Workflow nie używa Cloudflare Builds i nie tworzy
 sztucznych commitów. Pozostałe wdrożenia wykonywać osobno. Wszystkie używają Node z
@@ -137,7 +183,7 @@ JWT Access (`CF-Access-Jwt-Assertion`, audience aplikacji) za uprawnienie do
 treści szkicu; sekret Presentation nadal ustawia tryb edycji w Studio.
 Sesja aplikacji podglądu też jest `SameSite=None`. Studio jest statyczną SPA na
 `studio.aleksandraolesiewicz.com` (Sanity logowanie, bez Access). Po wrzuceniu
-plików zarejestrować je w Sanity: `npx sanity deploy --external --url https://studio.aleksandraolesiewicz.com --yes --no-build --schema-required`
+plików zarejestrować je w Sanity: `npx sanity deploy --external --url https://studio.aleksandraolesiewicz.com --yes --schema-required`
 z katalogu `studio/`. CORS origin z poświadczeniami:
 `https://studio.aleksandraolesiewicz.com`. Sekret podglądu `SANITY_STUDIO_URL`
 musi wskazywać ten adres.

@@ -103,6 +103,12 @@ Sanity Studio i Vision: 6.18.0; klient: 8.9.0; GROQ: 6.18.0.
 Wyniki aktualizacji, ograniczenia E2E i uzasadnienie pozostałych zgłoszeń audytu:
 [postęp z 08.10.2026](docs/PROGRESS.md#aktualizacja-sanity--08102026).
 
+Automatyczne aktualizacje Sanity są włączone w konfiguracji CLI. Workflow
+`Deploy Studio` wdraża sprawdzony commit po udanym `Quality` na `main`, następnie
+rejestruje zewnętrzny panel i schematy w Sanity. Pierwszy deploy wymaga scalenia
+workflow i kompletu sekretów środowiska `production`, w tym `SANITY_AUTH_TOKEN`.
+[Konfiguracja i ponawianie wdrożenia](docs/CLOUDFLARE-DEPLOYMENT.md#automatyczne-aktualizacje-i-wdrożenia-studio).
+
 Worker przyjmuje podpisane zdarzenia publikacji Sanity pod `/webhooks/sanity`,
 grupuje je w Cloudflare Queue i wyzwala jeden chroniony endpoint builda na batch.
 Lokalne nazwy sekretów znajdują się w `worker/.dev.vars.example`; szczegóły

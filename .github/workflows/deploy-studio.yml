@@ -1,0 +1,82 @@
+name: Deploy Studio
+
+on:
+  workflow_run:
+    workflows: [Quality]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: studio-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://studio.aleksandraolesiewicz.com
+    env:
+      SANITY_STUDIO_PROJECT_ID: ${{ vars.PUBLIC_SANITY_PROJECT_ID }}
+      SANITY_STUDIO_DATASET: ${{ vars.PUBLIC_SANITY_DATASET }}
+      SANITY_STUDIO_PREVIEW_ORIGIN: https://preview.aleksandraolesiewicz.com
+      SANITY_CLI_TELEMETRY_DISABLED: "1"
+      WRANGLER_SEND_METRICS: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Validate production configuration
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+        run: |
+          test "$SANITY_STUDIO_PROJECT_ID" = "dyuqkn8c"
+          test "$SANITY_STUDIO_DATASET" = "production"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$SANITY_AUTH_TOKEN"
+      - run: npm ci
+      - name: Build Studio
+        run: npm run build --workspace @ola/studio
+      - name: Skip an outdated Quality run
+        id: current
+        env:
+          VERIFIED_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          current_main=$(git ls-remote origin refs/heads/main | cut -f1)
+          if [ "$current_main" = "$VERIFIED_SHA" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "Main changed after Quality; waiting for its successful run."
+          fi
+      - name: Deploy Studio to Cloudflare
+        if: steps.current.outputs.deploy == 'true'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npm run deploy:studio
+      - name: Register external Studio and deploy schemas
+        if: steps.current.outputs.deploy == 'true'
+        working-directory: studio
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+        run: >-
+          npx sanity deploy --external
+          --url https://studio.aleksandraolesiewicz.com
+          --yes --schema-required

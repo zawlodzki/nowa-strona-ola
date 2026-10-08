@@ -1,10 +1,91 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (wdrożenie zaleceń audytu CSS; Sanity 6.18.0; import 3a oraz strony prawne).
+Aktualizacja: 2026-10-08 (wdrożenie zaleceń audytu CSS; Sanity 6.18.0; import 3a oraz strony prawne; automatyczne aktualizacje i wdrożenia Studio).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Sesja odtworzenia Playwright w środowisku chmurowym, 08.10.2026
+
+Środowisko startowało bez `node_modules`, pobranych przeglądarek oraz
+`/workspace/playwright-env.sh` z poprzedniej sesji. `storage.googleapis.com`
+jest już dozwolone w polityce sieci; pobranie Chromium przez proxy przeszło.
+Odtworzono zależności przez `npm ci` (Node 24.19.0, npm 11.9.0),
+Playwright 1.63.0 oraz Chromium, Firefox i WebKit.
+
+Przeglądarki są w `/workspace/.cache/ms-playwright`. Brakujące biblioteki
+Debiana pobrano jako pakiety i rozpakowano lokalnie do
+`/workspace/.cache/playwright-deps/root`; biblioteki WebKit trafiły też do
+jego katalogów `sys/lib`, ponieważ launcher nadpisuje `LD_LIBRARY_PATH`.
+Plik `/workspace/playwright-env.sh` ustawia katalog przeglądarek, cache npm
+i ścieżkę lokalnych bibliotek. Nie zawiera opcji pomijania kontroli bibliotek.
+Profil powłoki pozostaje bez zmian.
+
+Firefox w ograniczonej powłoce zgłaszał brak folderu profilu; uruchomienie
+z rozszerzonymi uprawnieniami działa. WebKit szuka `libGLESv2.so.2` przez
+systemowy `ldconfig -p`, który nie uwzględnia lokalnych bibliotek.
+Brak uprawnień root uniemożliwia instalację systemową. Sprawdzono rzeczywiste
+uruchomienie i odczyt strony we wszystkich trzech przeglądarkach.
+
+Pełna bramka zakończyła się kodem 0 z jednorazową opcją w poleceniu,
+bez trwałego wyłączania kontroli w profilu ani skrypcie środowiska:
+
+```sh
+. /workspace/playwright-env.sh
+PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 npm run verify
+```
+
+Wynik: format, tokeny, lint, kontrola typów, **134** testy jednostkowe
+(23 pliki), buildy workspace’ów, kontrola artefaktów, **171** E2E
+Chromium/Firefox/WebKit bez retry i powtórek pojedynczo, budowa **60** stron
+z wygenerowanych dokumentów. Porównanie fixture z Content Lake:
+**13** stron, te same sekcje, zdjęcia i DOM. CSS gzip **29 804 B**,
+JS gzip **5 770 B**. Log: `/tmp/ola-verify-final.log`.
+
+Następny krok środowiskowy: instalacja bibliotek systemowo przez administratora,
+aby zwykłe `npm run verify` działało bez jednorazowej opcji. Pliki instalacji
+poza repo mogą wymagać odtworzenia po kolejnym starcie środowiska.
+Bez zmiany kodu aplikacji, zapisu do Sanity, push ani publikacji.
+
+### Automatyczne aktualizacje i wdrożenia Studio — 08.10.2026
+
+- Potwierdzono merge PR #45 do `main` jako `82a66a3`; Studio w repo ma 6.18.0.
+  Wpis 5.31.2 w panelu Sanity był informacją o wcześniej zarejestrowanym
+  zewnętrznym Studio, nie o stanie gałęzi. Sam merge nie wdrażał panelu.
+- Na zlecenie użytkownika dodano `deployment.autoUpdates: true` przy istniejącym
+  `appId`, bez zmiany hostingu Cloudflare. Funkcja wymaga jednego nowego buildu
+  i wdrożenia, zanim zacznie działać dla redaktorów.
+- `Deploy Studio` (`.github/workflows/deploy-studio.yml`) reaguje na udany
+  `Quality` ze zdarzenia push na main w tym repo. Checkout dokładnego `head_sha`,
+  kontrola środowiska production, npm ci, build Studio, porównanie z aktualnym
+  main, upload Cloudflare i rejestracja zewnętrznego Studio/schematów w Sanity.
+  Starsze wyniki są pomijane, przebiegi serializowane. Sekrety są dostępne tylko
+  w krokach, które ich potrzebują; token Sanity nie trafia do buildu panelu.
+- Workflow wymaga `SANITY_AUTH_TOKEN` w GitHub environment production,
+  poza dotychczasowymi sekretami Cloudflare i zmiennymi projektu/datasetu.
+  Nie potwierdzono obecności sekretu: odczyt nazw przez GitHub CLI został
+  zablokowany przez API (403). Nie odczytywano wartości sekretów.
+  Instrukcja konfiguracji i ponawiania: [Cloudflare](CLOUDFLARE-DEPLOYMENT.md#automatyczne-aktualizacje-i-wdrożenia-studio).
+- `actionlint` **1.7.12**: wszystkie workflow PASS. Rzeczywisty skrypt kontroli
+  commita uruchomiony z atrapą git: bieżący commit → deploy; starszy i pusty
+  wynik → pominięcie; błąd git → zatrzymanie. **4 przypadki PASS**.
+  CLI `sanity deploy --help` potwierdza obsługę flag external/url/yes/schema-required.
+  Usunięto stare `--no-build` z instrukcji rejestracji: CLI 8 wyklucza tę flagę
+  w połączeniu z `--external`, a rejestracja zewnętrzna i tak nie buduje panelu.
+- `npm run verify` na Node 24.19.0/npm 11.9.0: format, tokeny, lint,
+  typy wszystkich workspace’ów, **134 unit / 23 pliki**, publiczny build
+  **65 stron**, build SSR preview i dry-run Workera PASS. Cała bramka kończy
+  się kodem 1 na workspace build: nowe autoUpdates potrzebuje
+  `https://sanity-cdn.com/v1/modules/by-app/...`, a środowisko odpowiada
+  **403**. Osobny build Studio z rzeczywistymi niesekretnymi wartościami
+  projektu, datasetu i preview zatrzymuje się na tej samej blokadzie.
+  E2E i test Content Lake nie zostały osiągnięte w tym przebiegu.
+- Nie wykonano uploadu Studio, rejestracji w Sanity, merge ani zapisu treści.
+  Zmiany przygotowane do push/PR na `codex/auto-deploy-studio`. Następny krok:
+  potwierdzić sekret, zielone Quality w CI, scalić PR i sprawdzić pierwszy
+  `Deploy Studio` oraz wersję/kanał aktualizacji w Sanity. Zabezpieczenia
+  środowiska production mogą wymagać akceptacji, jeśli tak je skonfigurowano.
 
 ### Wdrożenie zaleceń CSS według good-css, 08.10.2026
 

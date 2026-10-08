@@ -210,6 +210,11 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 
 ### Etap 2 — aplikacje i infrastruktura
 
+- [x] Włączyć autoUpdates Sanity i przygotować workflow wdrożenia Studio po
+      udanym Quality na main, z rejestracją zewnętrznego panelu i schematów.
+- [ ] Potwierdzić sekrety production, pierwszy automatyczny deploy Studio
+      i aktualną wersję w panelu Sanity (stan kontroli w PROGRESS.md).
+
 - [x] Zaktualizować Sanity/Vision do 6.18.0, klienta do 8.9.0 i GROQ do 6.18.0;
       sprawdzić TypeGen, typy, unit, buildy i audyt (08.10.2026).
 - [ ] Po aktualizacji zależności ponowić pełne verify z przeglądarkami Playwright;
@@ -692,5 +697,13 @@ Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.
 
 - [x] Przygotować nowe skille pstack i symlinki agentów w osobnym PR.
 - [ ] Potwierdzić Quality i scalenie PR.
+
+## Weryfikacja w środowisku chmurowym, 2026-10-08
+
+- [x] Odtworzyć npm i Playwright 1.63.0, pobrać trzy przeglądarki oraz lokalne biblioteki.
+- [x] Wykonać pełną bramkę: 134 unit, 171 E2E bez powtórek, porównanie 13 stron PASS.
+      Jednorazowa opcja pomija kontrolę systemowego cache bibliotek;
+      warunki uruchomienia i log opisuje [postęp](PROGRESS.md).
+- [ ] Zainstalować biblioteki systemowo, aby uruchamiać verify bez tej opcji.
 
 Następny krok implementacji: pakiet 1 etapu 4a.
