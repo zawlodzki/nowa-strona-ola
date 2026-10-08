@@ -1,4 +1,5 @@
 ---
+import { checkboxLabelHtml } from "@/lib/checkbox-label";
 import type { FormCopy, FormFieldCopy } from "@/sections/types";
 import Button from "./Button.astro";
 
@@ -84,7 +85,7 @@ function fieldIds(field: FormFieldCopy) {
             data-input="checkbox"
             data-required={field.required ? "true" : "false"}
           />
-          <span>{field.label}</span>
+          <span set:html={checkboxLabelHtml(field.label)} />
         </label>
         <p id={errorId} class="ao-field__error" hidden>
           {field.errorMessage}

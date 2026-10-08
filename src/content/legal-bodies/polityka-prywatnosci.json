@@ -1,0 +1,1434 @@
+{
+  "title": "Polityka prywatności www.zawlodzki.pl",
+  "effectiveFrom": "2026-08-24",
+  "effectiveLabel": "obowiązuje od 24.08.2026",
+  "seoDescription": "Niniejsza Polityka Prywatności określa zasady przetwarzania danych osobowych, które zostały pozyskane od klientów za pośrednictwem strony www.zawlodzki.pl",
+  "body": [
+    {
+      "_type": "block",
+      "_key": "1-administrator-danych",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0001",
+          "text": "1. Administrator danych",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0009",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0002",
+          "text": "Administratorem danych osobowych zbieranych za pośrednictwem strony internetowej dostępnej pod adresami www.zawlodzki.pl oraz www.zawlodzki.com, wraz z ich subdomenami („",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0003",
+          "text": "Strona",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0004",
+          "text": "”) jest ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0005",
+          "text": "Wellbiz sp. z o.o.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0006",
+          "text": " z siedzibą w Krakowie, ul. Lipowa 3D, 30-702 Kraków, KRS 0001158341, NIP 6793323800, REGON 541006624 („",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0007",
+          "text": "Administrator",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0008",
+          "text": "”).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0013",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0010",
+          "text": "Kontakt w sprawach danych osobowych: ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0011",
+          "text": "grzesiek@zawlodzki.pl",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0012",
+          "text": " lub pisemnie na adres siedziby.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0015",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0014",
+          "text": "Dane przetwarzamy zgodnie z RODO (rozporządzenie 2016/679), ustawą z 10 maja 2018 r. o ochronie danych osobowych oraz – w zakresie plików cookies i komunikacji marketingowej – ustawą z 12 lipca 2024 r. Prawo komunikacji elektronicznej.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "2-jakie-dane-przetwarzamy-po-co-i-jak-dlugo",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0016",
+          "text": "2. Jakie dane przetwarzamy, po co i jak długo",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "articleTable",
+      "_key": "t0035",
+      "headers": [
+        "Proces",
+        "Zakres danych",
+        "Cel i podstawa prawna",
+        "Okres przechowywania"
+      ],
+      "rows": [
+        {
+          "_type": "object",
+          "_key": "r0017",
+          "cells": [
+            "**Formularz kontaktowy / rezerwacja konsultacji w Cal.com**",
+            "imię, adres e-mail, numer telefonu (jeżeli wymagany), temat i treść wiadomości, wybrany termin, strefa czasowa oraz techniczne dane rezerwacji",
+            "obsługa zgłoszenia, rezerwacja i przeprowadzenie rozmowy – podjęcie działań przed zawarciem umowy (art. 6 ust. 1 lit. b RODO) oraz prawnie uzasadniony interes Administratora: komunikacja z osobami kontaktującymi się w imieniu firm (art. 6 ust. 1 lit. f)",
+            "do zakończenia obsługi zgłoszenia, a następnie do 2 lat od ostatniego kontaktu (obrona przed roszczeniami i historia relacji w CRM)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0018",
+          "cells": [
+            "**Atrybucja formularzy**",
+            "zawsze przy wysłaniu: nazwa formularza, czas konwersji, stan zgody analitycznej i marketingowej, identyfikator polityki zgód i wersja schematu; po zgodzie analitycznej: źródło, medium, kampania, treść kampanii, termin i identyfikator UTM, pierwsza i ostatnia strona wejścia, domena strony odsyłającej, czas pierwszego i ostatniego kontaktu, poprzednia i bieżąca podstrona, identyfikator CTA i liczba odsłon w sesji; po zgodzie marketingowej: identyfikatory kliknięć `gclid`, `gbraid`, `wbraid`, `msclkid`, `fbclid` i `li_fat_id`",
+            "techniczna obsługa formularza i udokumentowanie stanu zgód – podjęcie działań przed zawarciem umowy oraz prawnie uzasadniony interes Administratora w zapewnieniu rozliczalności i obsłudze zgłoszenia (art. 6 ust. 1 lit. b i f RODO); pomiar źródeł pozyskania, skuteczności strony i kampanii – zgoda (art. 6 ust. 1 lit. a RODO i art. 399 PKE)",
+            "w przeglądarce: dane analityczne i identyfikatory kliknięć do 90 dni, `li_fat_id` do 30 dni, dane nawigacji w aktywnej sesji do 30 minut bezczynności; cofnięcie odpowiedniej zgody usuwa daną grupę z pamięci przeglądarki i blokuje jej dalsze dołączanie; kopię przesłaną razem z formularzem przechowujemy z obsługiwanym zgłoszeniem, nie dłużej niż 2 lata od ostatniego kontaktu"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0019",
+          "cells": [
+            "**Newsletter i materiały bezpłatne**",
+            "adres e-mail, data, godzina i źródło zapisu, wersja komunikatu przy formularzu, status subskrypcji, data potwierdzenia (potwierdzenie zapisu klikasz w osobnej wiadomości) i rezygnacji, adres IP i identyfikator techniczny – jeżeli są zapisywane, statystyki dostarczeń, otwarć i kliknięć. Dane te przechowujemy na **własnym serwerze w Polsce**; zewnętrznemu dostawcy przekazujemy tylko wiadomość do doręczenia",
+            "dostarczanie zamówionego Newslettera i Materiałów (art. 6 ust. 1 lit. b RODO) oraz wysyłanie informacji handlowych na podstawie zgody (art. 6 ust. 1 lit. a RODO w zw. z art. 398–400 PKE)",
+            "do rezygnacji; następnie adres jest usuwany z aktywnej listy wysyłkowej, minimalny wpis blokujący zachowujemy przez okres prowadzenia tego rodzaju marketingu, a ograniczony dowód zapisu, jego treści, potwierdzenia i rezygnacji przez 3 lata w celu rozliczalności i obrony przed roszczeniami (art. 6 ust. 1 lit. f RODO)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0020",
+          "cells": [
+            "**Zakupy w sklepie (kurs, konsultacje)**",
+            "imię i nazwisko, adres e-mail, dane do faktury (firma, adres, NIP), informacje o zamówieniu i płatności",
+            "zawarcie i wykonanie umowy (art. 6 ust. 1 lit. b RODO); wystawianie i przechowywanie faktur – obowiązek prawny (art. 6 ust. 1 lit. c)",
+            "do upływu przedawnienia roszczeń z umowy; dokumenty księgowe – przez okres wymagany aktualnymi przepisami, obecnie co do zasady 5 lat liczonych od zdarzenia wskazanego we właściwym przepisie"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0021",
+          "cells": [
+            "**Konto i Kurs na platformie**",
+            "imię, adres e-mail, aktywność na Platformie, postępy, historia logowania oraz treści przekazane w zadaniach – jeżeli dana funkcja jest używana",
+            "wykonanie umowy o usługę cyfrową: zapewnienie konta, dostępu do Kursu, jego funkcjonalności i wsparcia (art. 6 ust. 1 lit. b RODO)",
+            "przez 12-miesięczny Okres Dostępu; następnie konto i dane aktywności są usuwane lub anonimizowane, z wyjątkiem danych niezbędnych do obsługi reklamacji i roszczeń, przechowywanych do ich przedawnienia"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0022",
+          "cells": [
+            "**Certyfikat ukończenia Kursu**",
+            "imię i nazwisko, adres e-mail, nazwa Kursu, data ukończenia lub wydania, unikalny identyfikator, status i ewentualna data ważności certyfikatu oraz informacje o jego doręczeniu, otwarciu, pobraniu lub udostępnieniu",
+            "wystawienie i doręczenie certyfikatu przewidzianego w opisie Kursu – wykonanie umowy (art. 6 ust. 1 lit. b RODO); utrzymanie minimalnego rejestru autentyczności, możliwość weryfikacji i ochrona przed fałszerstwem – nasz prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO). Certyfikat może mieć indywidualny link lub kod QR; nie publikujemy adresu e-mail ani publicznego katalogu uczestników, a decyzja o udostępnieniu certyfikatu w mediach społecznościowych należy do uczestnika",
+            "przez okres ważności certyfikatu; jeżeli nie ma daty wygaśnięcia – do jego unieważnienia, wycofania weryfikacji online albo ustania potrzeby potwierdzania ukończenia, z przeglądem potrzeby co najmniej raz w roku. Następnie pozostawiamy tylko minimalny dowód wydania lub unieważnienia, jeżeli jest potrzebny do ochrony przed roszczeniami"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0023",
+          "cells": [
+            "**Forum społecznościowe Kursu i programu kohortowego**",
+            "nazwa użytkownika, adres e-mail oraz — jeżeli go dodasz — awatar; **treści, które publikujesz**: posty, komentarze, polubienia i zakładki; historia Twojej aktywności i logowań, adres IP i logi serwera. **Forum nie ma wiadomości prywatnych** — wszystko, co napiszesz, widzą pozostali uczestnicy i prowadzący. **O tym, co napiszesz, decydujesz Ty.** Regulamin forum zabrania wklejania danych innych osób — w tym danych Twoich klientów z CRM, poczty i ofert — oraz publikowania informacji o zdrowiu i innych danych szczególnych kategorii; takie treści usuwamy. Pytanie o materiał roboczy zadaj na przykładzie: podmień nazwiska i nazwy firm, usuń adresy i kwoty",
+            "prowadzenie forum jako części usługi, do której masz dostęp (art. 6 ust. 1 lit. b RODO). **Jeżeli dostęp do Kursu kupiła dla Ciebie Twoja firma**, podstawą jest nasz prawnie uzasadniony interes polegający na wykonaniu umowy zawartej z Twoim pracodawcą przez udostępnienie Ci dostępu (art. 6 ust. 1 lit. f RODO); Twoje dane kontaktowe otrzymaliśmy wtedy od pracodawcy, a **tego, co piszesz na forum, mu nie raportujemy**. Odrębnie: moderacja, bezpieczeństwo forum, przeciwdziałanie nadużyciom i spamowi oraz rozpatrywanie zgłoszeń treści naruszających regulamin – nasz prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO)",
+            "konto i dostęp do forum – przez okres, w którym przysługuje Ci dostęp do Kursu, a następnie do 3 miesięcy na pobranie własnych treści; potem konto zostaje zanonimizowane. Logi i adresy IP – przez najkrótszy okres, jaki umożliwia system. **To, co dzieje się z Twoimi postami po odejściu z forum** (pozostają w wątkach bez wskazania autora albo zostają usunięte), opisuje regulamin forum"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0024",
+          "cells": [
+            "**Analityka Strony**",
+            "internetowe identyfikatory, w tym cookies, adres IP, informacje o urządzeniu i przeglądarce, źródło wejścia oraz aktywność na Stronie",
+            "pomiar korzystania ze Strony i ulepszanie jej na podstawie dobrowolnej zgody (art. 6 ust. 1 lit. a RODO); zapis informacji na urządzeniu lub dostęp do niej także wymaga zgody z art. 399 PKE",
+            "do cofnięcia zgody, nie dłużej niż okres działania danego identyfikatora wskazany w ustawieniach ciasteczek obsługiwanych przez c15t; zagregowane, anonimowe statystyki mogą być przechowywane dłużej"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0025",
+          "cells": [
+            "**Reklama i remarketing online**",
+            "internetowe identyfikatory, w tym cookies i identyfikatory reklamowe, adres IP, informacje o urządzeniu, aktywność na Stronie, dane o kampanii i konwersji",
+            "mierzenie skuteczności reklam, tworzenie grup odbiorców i remarketing na podstawie dobrowolnej zgody (art. 6 ust. 1 lit. a RODO); zapis informacji na urządzeniu lub dostęp do niej także wymaga zgody z art. 399 PKE",
+            "do cofnięcia zgody, nie dłużej niż okres działania danego identyfikatora wskazany w ustawieniach ciasteczek obsługiwanych przez c15t lub okres przechowywania danych w ustawieniach danego narzędzia"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0026",
+          "cells": [
+            "**Identyfikacja firm odwiedzających Stronę (Leadfeeder, Albacross)**",
+            "adres IP, cookies (`nQ_cookieId`, `nQ_userVisitId`) oraz dane o odwiedzinach i urządzeniu przypisywane do organizacji",
+            "analityka ruchu biznesowego na podstawie dobrowolnej zgody (art. 6 ust. 1 lit. a RODO i art. 399 PKE)",
+            "do cofnięcia zgody, nie dłużej niż 12 miesięcy"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0027",
+          "cells": [
+            "**CRM**",
+            "dane kontaktowe, historia korespondencji i współpracy",
+            "prawnie uzasadniony interes: zarządzanie relacjami z klientami i potencjalnymi klientami (art. 6 ust. 1 lit. f RODO)",
+            "do wniesienia skutecznego sprzeciwu w odpowiednim zakresie albo przez 3 lata od późniejszego z tych zdarzeń: zakończenia umowy lub ostatniego merytorycznego kontaktu"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0028",
+          "cells": [
+            "**Analiza skuteczności naszego marketingu i sprzedaży**",
+            "dane z naszego systemu CRM w zawężonym zakresie: identyfikator rekordu, firma i stanowisko, źródło pozyskania kontaktu, etapy i daty procesu sprzedaży, statusy i wartości transakcji oraz historia aktywności handlowej. Nie analizujemy w tym celu treści korespondencji ani notatek ze spotkań",
+            "nasz prawnie uzasadniony interes: sprawdzanie, które działania marketingowe i sprzedażowe są skuteczne, jak przebiega proces sprzedaży i jak planować dalsze działania (art. 6 ust. 1 lit. f RODO). **Analiza służy wyłącznie naszym celom wewnętrznym** – nie używamy jej do oceniania Cię, punktowania, różnicowania oferty ani ceny i nie podejmujemy na jej podstawie decyzji wobec Ciebie. **Możesz się jej osobno sprzeciwić** (art. 21 ust. 1 RODO), bez wpływu na obsługę Twojej sprawy i na umowę",
+            "do 3 lat od ostatniego zdarzenia handlowego dotyczącego Twojego rekordu, nie dłużej niż przechowujemy rekord w CRM, z przeglądem potrzeby raz w roku; po skutecznym sprzeciwie usuwamy Twój rekord z analizy wraz z wynikami pochodnymi. Nieodwracalnie anonimowe, zbiorcze wskaźniki możemy przechowywać dłużej"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0029",
+          "cells": [
+            "**Własny prospecting B2B Wellbiz**",
+            "imię i nazwisko, stanowisko, firma, służbowe dane kontaktowe, publiczne lub wskazane źródło i data pozyskania, przesłanka dopasowania do naszych usług oraz informacje o zgodzie lub sprzeciwie",
+            "nasz prawnie uzasadniony interes polegający na identyfikacji potencjalnych odbiorców własnych usług (art. 6 ust. 1 lit. f RODO); informację handlową e-mailem, telefonicznie, przez SMS lub komunikator przekazujemy wyłącznie po uprzedniej zgodzie na dany kanał zgodnie z art. 398 PKE",
+            "jeżeli nie dochodzi do kontaktu lub nie mamy zgody kanałowej — nie dłużej niż 12 miesięcy od pozyskania; po sprzeciwie lub wycofaniu zgody usuwamy dane z aktywnej bazy i zachowujemy minimalny wpis na liście wykluczeń przez okres prowadzenia danego rodzaju marketingu"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0030",
+          "cells": [
+            "**Nagrywanie konsultacji online** (jeżeli włączone)",
+            "wizerunek/głos, treść rozmowy, transkrypcja",
+            "prawnie uzasadniony interes: dokumentacja ustaleń, notatki i streszczenia (art. 6 ust. 1 lit. f RODO); o nagrywaniu informujemy najpóźniej na początku spotkania i można się sprzeciwić",
+            "do 12 miesięcy od spotkania"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0031",
+          "cells": [
+            "**Analiza treści własnych spotkań Wellbiz**",
+            "fragmenty wypowiedzi i transkrypcji, rola zawodowa, kontekst firmy oraz informacje o potrzebach, problemach i pytaniach poruszanych podczas spotkania",
+            "nasz prawnie uzasadniony interes: badanie potrzeb, rozwijanie usług oraz przygotowywanie odpersonalizowanych, zagregowanych materiałów edukacyjnych i marketingowych (art. 6 ust. 1 lit. f RODO); o tym celu informujemy przed spotkaniem i można się mu osobno sprzeciwić",
+            "dane identyfikowalne lub pseudonimowe do 3 lat, z corocznym przeglądem; nieodwracalnie anonimowe, zagregowane wnioski mogą być przechowywane dłużej"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0032",
+          "cells": [
+            "**Referencje i wizerunek klientów**",
+            "imię i nazwisko, firma, stanowisko, wypowiedź, zdjęcie, wizerunek lub głos – zależnie od zatwierdzonego materiału",
+            "publikacja referencji i promocja działalności na podstawie zgody (art. 6 ust. 1 lit. a RODO); wykorzystanie wizerunku i firmowego logo następuje dodatkowo na podstawie odrębnej zgody lub licencji",
+            "do cofnięcia zgody albo zakończenia publikacji; dowód zgody lub licencji możemy zachować do upływu przedawnienia roszczeń"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0033",
+          "cells": [
+            "**Logi techniczne, bezpieczeństwo i ochrona urządzeń roboczych**",
+            "adres IP, data i czas, żądany adres URL, kod odpowiedzi lub błędu, identyfikatory konta, sesji i urządzenia, typ urządzenia, system, przeglądarka i referrer; w telemetrii ochrony endpointu także nazwa hosta/użytkownika, nazwa lub ścieżka pliku, proces lub wiersz polecenia, dane DNS/sieci oraz informacja o detekcji albo kwarantannie – jeżeli dany identyfikator pojawi się na chronionym urządzeniu",
+            "zapewnienie bezpieczeństwa Strony, Platformy, kont, infrastruktury i urządzeń roboczych, zapobieganie malware i ransomware, diagnozowanie błędów, przeciwdziałanie nadużyciom oraz wykazanie zdarzeń – prawnie uzasadniony interes Administratora (art. 6 ust. 1 lit. f RODO)",
+            "standardowe logi techniczne do 30 dni; telemetria endpointu przez okres aktywnej ochrony i dostępny, skonfigurowany okres techniczny, podlegający okresowemu przeglądowi; po wyłączeniu usługi dostawca usuwa dane do 90 dni. Logi związane z awarią, nadużyciem lub incydentem – do zakończenia wyjaśniania sprawy, a następnie do upływu właściwego terminu przedawnienia roszczeń"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0034",
+          "cells": [
+            "**Ustalenie, dochodzenie i obrona roszczeń**",
+            "dane z powyższych procesów",
+            "prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO)",
+            "do upływu terminów przedawnienia"
+          ]
+        }
+      ],
+      "caption": "2. Jakie dane przetwarzamy, po co i jak długo"
+    },
+    {
+      "_type": "block",
+      "_key": "p0037",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0036",
+          "text": "Podanie danych jest dobrowolne, ale bez danych oznaczonych w formularzach jako wymagane nie odpowiemy na zgłoszenie, nie wyślemy newslettera ani nie zrealizujemy zamówienia.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0039",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0038",
+          "text": "Jeżeli nie otrzymaliśmy Twoich danych bezpośrednio od Ciebie, ich źródłem może być strona internetowa firmy, publiczny rejestr przedsiębiorców, zawodowy profil internetowy, wydarzenie biznesowe albo osoba, która przekazała nam kontakt. Informację wymaganą przez art. 14 RODO przekazujemy w rozsądnym terminie, najpóźniej w ciągu miesiąca od pozyskania danych. Jeżeli wcześniej się z Tobą komunikujemy, robimy to najpóźniej przy pierwszej komunikacji. Dokładne źródło dotyczące Twojego rekordu możesz uzyskać, pisząc na grzesiek@zawlodzki.pl.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "3-odbiorcy-danych",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0040",
+          "text": "3. Odbiorcy danych",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0042",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0041",
+          "text": "Dane przekazujemy wyłącznie podmiotom, które wspierają nas w prowadzeniu Strony, sprzedaży, realizacji usług i obowiązków administracyjnych – na podstawie umów powierzenia lub jako odrębnym administratorom w zakresie ich usług.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "31-jak-wskazujemy-odbiorcow",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0043",
+          "text": "3.1. Jak wskazujemy odbiorców",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0051",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0044",
+          "text": "Część odbiorców wskazujemy ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0045",
+          "text": "z nazwy",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0046",
+          "text": ", a część przez ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0047",
+          "text": "kategorię",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0048",
+          "text": ", do której należy dana usługa — zawsze razem z miejscem przetwarzania. RODO dopuszcza obie formy: art. 13 ust. 1 lit. e i art. 14 ust. 1 lit. e wymagają podania „odbiorców ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0049",
+          "text": "lub kategorii odbiorców",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0050",
+          "text": "”.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0054",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0052",
+          "text": "Z nazwy",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0053",
+          "text": " wskazujemy odbiorców wszędzie tam, gdzie nazwa i tak jest jawna — bo wynika z Regulaminu, z listy cookies albo z korzystania z usługi. Znajdziesz je w tabeli poniżej.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0057",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0055",
+          "text": "Kategorią",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0056",
+          "text": " posługujemy się wyłącznie tam, gdzie ujawnienie nazwy tworzyłoby realne ryzyko. Dotyczy to naszej obsługi finansowej i księgowej — publiczna lista wskazująca z nazwy biuro rachunkowe, bank i system fakturowania ułatwia ataki polegające na podszywaniu się pod te podmioty pod pozorem zmiany rachunku czy pilnej płatności. Dotyczy to także zaplecza technicznego, którego nazwa nic Ci nie mówi, a wskazuje wektor ataku na naszą infrastrukturę. Ograniczenie tej informacji chroni nie tylko nas, ale też bezpieczeństwo danych, które nam powierzasz (art. 32 RODO).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0060",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0058",
+          "text": "Nazwę konkretnego odbiorcy Twoich danych podamy Ci na żądanie.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0059",
+          "text": " Napisz na grzesiek@zawlodzki.pl – to Twoje uprawnienie z art. 15 ust. 1 lit. c RODO i realizujemy je bez ograniczania się do kategorii.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0067",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0061",
+          "text": "Osobno i ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0062",
+          "text": "z nazwy",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0063",
+          "text": " wskazujemy dostawców, którzy zapisują informacje na Twoim urządzeniu lub sięgają do nich – bez tego Twoja zgoda z art. 399 Prawa komunikacji elektronicznej nie byłaby świadoma. Ich pełny wykaz razem z nazwami plików cookies, okresami działania i celem znajdziesz w ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0065",
+          "text": "liście cookies i identyfikatorów",
+          "marks": ["l0064"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0066",
+          "text": " oraz w panelu zgód dostępnym na każdej podstronie.",
+          "marks": []
+        }
+      ],
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "l0064",
+          "href": "/lista-cookies-i-identyfikatorow/"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "32-kategorie-odbiorcow",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0068",
+          "text": "3.2. Kategorie odbiorców",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "articleTable",
+      "_key": "t0095",
+      "headers": ["Kategoria odbiorcy", "Czego dotyczy", "Gdzie przetwarzane"],
+      "rows": [
+        {
+          "_type": "object",
+          "_key": "r0069",
+          "cells": [
+            "dostawca hostingu Strony — **Webflow, Inc.**",
+            "utrzymanie i udostępnianie Strony",
+            "poza EOG (USA)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0070",
+          "cells": [
+            "dostawcy infrastruktury technicznej, DNS, warstwy bezpieczeństwa dostępu, ochrony urządzeń roboczych i repozytorium kodu",
+            "serwery, kontrola dostępu, kopie robocze oraz telemetria bezpieczeństwa endpointów; na serwerze w Polsce działa też **nasz własny system newsletterowy** — lista subskrybentów, statusy i dowody zgody oraz statystyki wysyłek",
+            "EOG (Polska/region UE) oraz poza EOG (USA)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0071",
+          "cells": [
+            "dostawca systemu CRM — **Pipedrive OÜ**",
+            "dane kontaktowe i historia relacji",
+            "EOG (Estonia), z możliwością operacji poza EOG"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0072",
+          "cells": [
+            "dostawca usługi doręczania wiadomości e-mail (serwer SMTP)",
+            "**wyłącznie doręczenie** Newslettera, zamówionych Materiałów i powiadomień: adres odbiorcy i treść wiadomości w chwili wysyłki oraz informacja o doręczeniu lub odrzuceniu. Lista subskrybentów i zapis Twojej zgody **nie są mu przekazywane** — prowadzimy je na własnej infrastrukturze",
+            "EOG, z możliwością operacji wsparcia poza EOG"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0073",
+          "cells": [
+            "dostawca platformy kursowej — **LearnHouse, Inc.**",
+            "konto i dostęp do Kursu",
+            "dane osobowe przechowywane w UE; podmiot z siedzibą poza EOG (USA)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0074",
+          "cells": [
+            "dostawca platformy certyfikatów — **Certifier sp. z o.o.**",
+            "wystawienie, wysłanie, przechowywanie i weryfikacja certyfikatu ukończenia Kursu oraz techniczne statystyki doręczenia i interakcji",
+            "EOG (Polska), z możliwym przetwarzaniem przez dostawców chmurowych w USA na podstawie właściwego mechanizmu transferowego"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0075",
+          "cells": [
+            "dostawca forum społecznościowego — **Discourse (Civilized Discourse Construction Kit, Inc.)**",
+            "konto na forum, treści, które publikujesz, oraz techniczna historia aktywności",
+            "forum prowadzimy w europejskim regionie usługi, ale **nie możemy zadeklarować, że wszystkie dane pozostają w EOG**: dostawca ma siedzibę w USA, a funkcje ochrony przed spamem, awatarów i powiadomień w aplikacji mobilnej obsługują dostawcy amerykańscy. Podstawą przekazania są **standardowe klauzule umowne** (pkt 4)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0076",
+          "cells": [
+            "dostawca usługi rezerwacji terminów — **Cal.com, Inc.**",
+            "rezerwacje i powiadomienia o nich",
+            "EOG albo poza EOG, zależnie od konfiguracji usługi"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0077",
+          "cells": [
+            "dostawca koszyka i checkoutu sklepu — **Easytools sp. z o.o.** (EasyCart)",
+            "przyjęcie i obsługa zamówienia: dane kupującego, dane do faktury oraz przedmiot i status zamówienia. **Nie przekazujemy mu danych Twojej karty płatniczej** – trafiają one bezpośrednio do operatora płatności",
+            "miejsce przetwarzania ustalane z dostawcą – podamy je na żądanie"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0078",
+          "cells": [
+            "operator płatności — **Stripe Payments Europe, Ltd.**",
+            "rozliczenie zamówienia; działa jako **odrębny administrator**",
+            "EOG (Irlandia) oraz poza EOG"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0079",
+          "cells": [
+            "dostawcy narzędzi do organizacji pracy, komunikacji zespołowej i materiałów warsztatowych",
+            "zadania i korespondencja w zakresie, w jakim dotyczą relacji z nami",
+            "EOG oraz poza EOG (USA)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0080",
+          "cells": [
+            "dostawca usługi nagrywania i transkrypcji spotkań",
+            "nagranie i transkrypcja, jeżeli funkcja jest włączona",
+            "poza EOG (USA)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0081",
+          "cells": [
+            "dostawcy modeli sztucznej inteligencji",
+            "analiza treści spotkań i przygotowanie materiałów, w konfiguracji, w której dane nie służą trenowaniu publicznie udostępnianych modeli",
+            "EOG oraz poza EOG"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0082",
+          "cells": [
+            "dostawca bazy danych",
+            "kopia zapasowa naszych własnych systemów oraz bazy naszych wewnętrznych aplikacji; nie trafiają tam dane powierzone nam przez klientów",
+            "EOG (Niemcy), z możliwością operacji poza EOG"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0083",
+          "cells": [
+            "dostawca platformy analitycznej",
+            "analiza skuteczności naszego marketingu i sprzedaży opisana w pkt 2; nie trafiają tam dane powierzone nam przez klientów",
+            "EOG (Niemcy), z możliwością operacji poza EOG"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0084",
+          "cells": [
+            "dostawca narzędzia synchronizacji danych",
+            "techniczne przenoszenie danych z naszego CRM do obu powyższych systemów",
+            "EOG (Niemcy), z możliwością operacji poza EOG"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0085",
+          "cells": [
+            "dostawca usługi podpisu elektronicznego",
+            "zawieranie i podpisywanie umów",
+            "do ustalenia w konfiguracji usługi; możliwe operacje poza EOG"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0086",
+          "cells": [
+            "dostawca kwalifikowanej usługi zaufania",
+            "podpis kwalifikowany; działa jako **odrębny administrator**",
+            "EOG (Polska)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0087",
+          "cells": [
+            "dostawca systemu do fakturowania",
+            "wystawianie i przechowywanie faktur",
+            "EOG (Polska)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0088",
+          "cells": [
+            "biuro rachunkowe",
+            "księgowość i rozliczenia; w zakresie własnych obowiązków ustawowych działa jako **odrębny administrator**",
+            "EOG (Polska)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0089",
+          "cells": [
+            "bank prowadzący nasz rachunek",
+            "rozliczenia i płatności; działa jako **odrębny administrator**",
+            "EOG (Polska)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0090",
+          "cells": [
+            "dostawcy usług analitycznych, reklamowych i identyfikacji firm odwiedzających Stronę",
+            "wyłącznie po Twojej zgodzie; **wskazani z nazwy** w liście cookies i w panelu zgód",
+            "EOG oraz poza EOG (USA)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0091",
+          "cells": [
+            "doradcy prawni",
+            "w razie potrzeby, w zakresie prowadzonej sprawy",
+            "EOG (Polska)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0092",
+          "cells": [
+            "operatorzy pocztowi i kurierzy",
+            "korespondencja tradycyjna",
+            "EOG (Polska)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0093",
+          "cells": [
+            "odbiorcy Strony i naszych kanałów promocyjnych",
+            "wyłącznie materiały opublikowane za zgodą: referencje, dane autora opinii, wizerunek",
+            "bez ograniczenia terytorialnego"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0094",
+          "cells": [
+            "organy publiczne",
+            "gdy obowiązek wynika z przepisów – m.in. dane z faktur trafiają do **Krajowego Systemu e-Faktur (KSeF)** prowadzonego przez Szefa Krajowej Administracji Skarbowej",
+            "EOG (Polska)"
+          ]
+        }
+      ],
+      "caption": "3. Odbiorcy danych"
+    },
+    {
+      "_type": "block",
+      "_key": "4-przekazywanie-danych-poza-eog",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0096",
+          "text": "4. Przekazywanie danych poza EOG",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0098",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0097",
+          "text": "Jak wynika z tabeli w pkt 3.2, część odbiorców przetwarza dane na serwerach w USA lub w innych państwach poza Europejskim Obszarem Gospodarczym.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0100",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0099",
+          "text": "Przekazywanie odbywa się:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0102",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0101",
+          "text": "na podstawie decyzji wykonawczej Komisji Europejskiej (UE) 2023/1795 z 10 lipca 2023 r. w sprawie EU–US Data Privacy Framework – wobec dostawców objętych tą decyzją;",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0104",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0103",
+          "text": "na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską (art. 46 ust. 2 RODO) – w pozostałych przypadkach, a gdy jest to wymagane, wraz z dodatkowymi zabezpieczeniami;",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0106",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0105",
+          "text": "na podstawie zatwierdzonych wiążących reguł korporacyjnych (art. 47 RODO) – jeżeli dany dostawca posługuje się tym mechanizmem.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0108",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0107",
+          "text": "Podstawę stosowaną wobec konkretnego odbiorcy oraz kopię właściwych zabezpieczeń udostępniamy na żądanie – napisz na grzesiek@zawlodzki.pl.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0115",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0109",
+          "text": "Forum społecznościowe.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0110",
+          "text": " Prowadzimy je w europejskim regionie usługi i tak konfigurujemy konto, ale nie deklarujemy, że wszystkie dane forum pozostają w EOG. Wybór regionu jest ustawieniem produktu, a nie zobowiązaniem umownym dostawcy, a niektóre funkcje – ochrona przed spamem i awatary – obsługują dostawcy amerykańscy niezależnie od wybranego regionu. Ochrona przed spamem sprawdza ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0111",
+          "text": "treść wpisu",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0112",
+          "text": ", więc to kolejny powód, żeby nie wklejać na forum danych swoich klientów. Przekazanie opiera się na ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0113",
+          "text": "standardowych klauzulach umownych",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0114",
+          "text": ", nie na decyzji o odpowiednim stopniu ochrony.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "5-twoje-prawa",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0116",
+          "text": "5. Twoje prawa",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0118",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0117",
+          "text": "Masz prawo do:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0120",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0119",
+          "text": "dostępu do danych i otrzymania ich kopii,",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0122",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0121",
+          "text": "sprostowania, usunięcia lub ograniczenia przetwarzania,",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0124",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0123",
+          "text": "przenoszenia danych,",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0127",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0125",
+          "text": "sprzeciwu wobec przetwarzania opartego na prawnie uzasadnionym interesie – w tym w każdej chwili wobec marketingu bezpośredniego",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0126",
+          "text": ",",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0129",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0128",
+          "text": "cofnięcia zgody w dowolnym momencie (bez wpływu na zgodność z prawem wcześniejszego przetwarzania),",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0131",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0130",
+          "text": "skargi do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa, uodo.gov.pl).",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0133",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0132",
+          "text": "Możesz osobno sprzeciwić się analizie treści spotkania na potrzeby badania potrzeb, rozwoju usług i materiałów. Taki sprzeciw nie uniemożliwia odbycia spotkania ani przygotowania zwykłej notatki lub podsumowania ustaleń.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0135",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0134",
+          "text": "Możesz też osobno sprzeciwić się analizie skuteczności naszego marketingu i sprzedaży opisanej w pkt 2. Taki sprzeciw usuwa Twój rekord z tej analizy i nie wpływa na obsługę Twojej sprawy, wykonanie umowy ani na naszą dalszą współpracę. Nie jest to równoznaczne z żądaniem usunięcia Twoich danych z CRM – jeżeli chcesz również tego, napisz to wprost.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0138",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0136",
+          "text": "Forum społecznościowe — o czym warto wiedzieć, zanim coś opublikujesz.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0137",
+          "text": " Twoje posty są częścią rozmowy z innymi uczestnikami, więc usunięcie konta nie zawsze oznacza usunięcie wszystkiego, co napisałeś lub napisałaś. Zasady opisuje regulamin forum: albo usuwamy treści, albo pozostawiamy je w wątkach bez wskazania autora. Na Twoje żądanie zawsze usuniemy albo ukryjemy konkretny post. Udostępniając Ci kopię danych z forum, zakrywamy wypowiedzi innych uczestników — masz prawo do swoich danych, a nie do cudzych postów.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0142",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0139",
+          "text": "Jeżeli dostęp do Kursu kupiła dla Ciebie firma, ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0140",
+          "text": "możesz sprzeciwić się przetwarzaniu Twoich danych na forum",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0141",
+          "text": " (art. 21 ust. 1 RODO) — opieramy je wtedy na prawnie uzasadnionym interesie. Skuteczny sprzeciw oznacza zamknięcie Twojego konta na forum i nie wpływa na Twój dostęp do samego Kursu.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0144",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0143",
+          "text": "Żeby skorzystać z praw, napisz na grzesiek@zawlodzki.pl.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "6-pliki-cookies-i-podobne-technologie",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0145",
+          "text": "6. Pliki cookies i podobne technologie",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0147",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0146",
+          "text": "Strona używa plików cookies i podobnych technologii. Zapisywanie informacji na Twoim urządzeniu lub uzyskiwanie do nich dostępu – poza plikami niezbędnymi do działania Strony – odbywa się wyłącznie za Twoją zgodą (art. 399 Prawa komunikacji elektronicznej). Jeżeli dane z technologii analitycznych lub marketingowych są danymi osobowymi, ich przetwarzanie opieramy również na Twojej zgodzie (art. 6 ust. 1 lit. a RODO), a nie na prawnie uzasadnionym interesie.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0149",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0148",
+          "text": "Zgodą zarządzasz w banerze wyświetlanym przy pierwszej wizycie oraz w każdej chwili później – przez przycisk „Ustawienia ciasteczek” na dole Strony (self-hosted c15t). Możesz zaakceptować wszystkie kategorie, odmówić albo wybrać tylko niektóre. Odmowa nie blokuje korzystania ze Strony.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0151",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0150",
+          "text": "Kategorie cookies:",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "articleTable",
+      "_key": "t0155",
+      "headers": ["Kategoria", "Narzędzia", "Cel", "Podstawa"],
+      "rows": [
+        {
+          "_type": "object",
+          "_key": "r0152",
+          "cells": [
+            "Niezbędne",
+            "Webflow, c15t",
+            "działanie Strony, zapamiętanie ustawień zgody",
+            "zwolnione z obowiązku zgody (art. 399 ust. 2 PKE)"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0153",
+          "cells": [
+            "Analityczne",
+            "Google Analytics 4, Microsoft Clarity, Leadfeeder, Albacross",
+            "statystyki odwiedzin, analiza sposobu korzystania ze Strony, identyfikacja firm",
+            "zgoda"
+          ]
+        },
+        {
+          "_type": "object",
+          "_key": "r0154",
+          "cells": [
+            "Marketingowe",
+            "Google Ads, piksel Meta",
+            "mierzenie skuteczności reklam, remarketing",
+            "zgoda"
+          ]
+        }
+      ],
+      "caption": "Kategorie cookies"
+    },
+    {
+      "_type": "block",
+      "_key": "p0157",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0156",
+          "text": "Google Consent Mode v2 działa w trybie Advanced. Przed dokonaniem wyboru tagi Google mogą zostać załadowane z domyślnym stanem zgody „odmowa” i przekazywać Google ograniczone sygnały bez cookies, w tym stan zgody oraz dane techniczne służące modelowaniu pomiarów. W tym stanie tagi Google nie zapisują ani nie odczytują analitycznych lub reklamowych plików cookies, nie służą do remarketingu ani wyświetlania spersonalizowanych reklam. Pełny pomiar analityczny i reklamowy uruchamiamy dopiero po zgodzie w odpowiedniej kategorii. Microsoft Clarity, Leadfeeder i Albacross pozostają zablokowane do czasu zgody analitycznej, a piksel Meta – do czasu zgody marketingowej.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1,
+      "listStart": 4
+    },
+    {
+      "_type": "block",
+      "_key": "p0159",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0158",
+          "text": "GTM dynamicznie dodaje do standardowych formularzy Webflow ukryte pola atrybucji. Pola techniczne potrzebne do obsługi wysyłki i wykazania stanu zgód są dołączane zawsze. Dane analityczne i identyfikatory reklamowe są dołączane wyłącznie po zgodzie w odpowiedniej kategorii. Cofnięcie zgody usuwa właściwą grupę z pamięci przeglądarki oraz z formularza przed jego kolejnym wysłaniem.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0164",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0160",
+          "text": "Aktualną ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0162",
+          "text": "„Listę cookies i identyfikatorów”",
+          "marks": ["l0161"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0163",
+          "text": " publikujemy na osobnej podstronie, do której odsyła też panel „Ustawienia prywatności\". Dla każdego identyfikatora wskazujemy nazwę, dostawcę, mechanizm, cel, kategorię i rzeczywisty okres działania zmierzony w przeglądarce. Dane analityczne lub reklamowe nie są przechowywane dłużej niż wynika to z tej listy i ustawień danego narzędzia.",
+          "marks": []
+        }
+      ],
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "l0161",
+          "href": "/lista-cookies-i-identyfikatorow/"
+        }
+      ],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0166",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0165",
+          "text": "Rejestrujemy wybór zgody i jej zmianę, aby wykazać, kiedy i dla jakich kategorii została udzielona lub cofnięta. Dowód decyzji przechowujemy przez 3 lata od jej zmiany; nie wykorzystujemy go do analityki ani reklamy.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0168",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0167",
+          "text": "Cookies możesz też usuwać i blokować w ustawieniach przeglądarki – może to jednak ograniczyć działanie niektórych funkcji Strony.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "7-profilowanie-i-zautomatyzowane-decyzje",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0169",
+          "text": "7. Profilowanie i zautomatyzowane decyzje",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0171",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0170",
+          "text": "Narzędzia analityczne i reklamowe mogą grupować użytkowników według aktywności na Stronie (np. w celu wyświetlania dopasowanych reklam). Nie podejmujemy wobec Ciebie decyzji opartych wyłącznie na zautomatyzowanym przetwarzaniu, które wywoływałyby skutki prawne lub w podobny sposób istotnie na Ciebie wpływały.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0173",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0172",
+          "text": "Dotyczy to również analizy skuteczności naszego marketingu i sprzedaży opisanej w pkt 2: patrzymy na to, jak działają nasze działania handlowe, a nie na to, jak ocenić konkretną osobę. Nie budujemy w tym celu profili osób, nie przypisujemy punktacji i nie różnicujemy na tej podstawie oferty ani ceny.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "8-zmiany-polityki",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0174",
+          "text": "8. Zmiany polityki",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p0176",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0175",
+          "text": "Politykę aktualizujemy, gdy zmieniają się przepisy, narzędzia lub zakres naszych usług. Aktualna wersja jest zawsze dostępna na Stronie wraz z datą obowiązywania.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    }
+  ]
+}

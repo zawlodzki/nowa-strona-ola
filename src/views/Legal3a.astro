@@ -1,0 +1,201 @@
+---
+import Breadcrumbs from "@/design-system/components/Breadcrumbs.astro";
+import Container from "@/design-system/components/Container.astro";
+import type { LegalPageView } from "@/content/map-legal";
+
+export interface Props {
+  content: LegalPageView;
+}
+
+const { content } = Astro.props;
+---
+
+<main id="main" class="legal3a">
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(content.jsonLd)}
+  ></script>
+  <div class="legal-heading" id="start">
+    <Container>
+      <Breadcrumbs
+        label={content.breadcrumbLabel}
+        links={content.breadcrumbs}
+      />
+      <h1>{content.title}</h1>
+      <p class="legal-effective">
+        {content.effectiveCaption}
+        <time datetime={content.effectiveFrom}>{content.effectiveLabel}</time>
+      </p>
+    </Container>
+  </div>
+  <Container>
+    <div class="legal-layout">
+      {content.toc.length > 1 && (
+        <nav class="legal-toc" aria-labelledby="toc-title">
+          <details open>
+            <summary id="toc-title">{content.tocLabel}</summary>
+            <ol>
+              {content.toc.map((entry) => (
+                <li>
+                  <a href={`#${entry.id}`}>{entry.text}</a>
+                </li>
+              ))}
+            </ol>
+          </details>
+        </nav>
+      )}
+      <div class="article-richtext" set:html={content.html} />
+    </div>
+  </Container>
+</main>
+
+<style>
+  .legal-heading {
+    padding-top: 32px;
+  }
+  .legal3a h1 {
+    max-width: 1000px;
+    margin: 40px 0 16px;
+    font-size: clamp(32px, 4.2vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+  .legal-effective {
+    color: var(--ao-muted);
+    font-size: 15px;
+    margin: 0 0 32px;
+  }
+  .legal-layout {
+    display: grid;
+    gap: 32px;
+    padding-bottom: 80px;
+  }
+  .legal-toc {
+    padding: 20px 24px;
+    border-radius: var(--ao-radius-panel);
+    background: var(--ao-surface);
+  }
+  .legal-toc summary {
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .legal-toc ol {
+    margin: 16px 0 0;
+    padding-left: 20px;
+  }
+  .legal-toc a:hover {
+    color: var(--ao-primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .article-richtext {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+  .article-richtext :global(p) {
+    margin-bottom: 24px;
+  }
+  .article-richtext :global(h2) {
+    margin: 56px 0 20px;
+    font-size: 34px;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    scroll-margin-top: 32px;
+  }
+  .article-richtext :global(h2:focus-visible) {
+    outline: 2px solid var(--ao-primary);
+    outline-offset: 8px;
+  }
+  .article-richtext :global(h3) {
+    font-size: 23px;
+    font-weight: 600;
+    margin: 32px 0 16px;
+  }
+  .article-richtext :global(ul),
+  .article-richtext :global(ol) {
+    padding-left: 24px;
+    margin: 20px 0 28px;
+  }
+  .article-richtext :global(li) {
+    padding-left: 8px;
+    margin: 12px 0;
+  }
+  .article-richtext :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .article-richtext :global(blockquote) {
+    margin: 40px 0;
+    padding: 32px 0;
+    border-block: 1px solid var(--ao-line);
+    font-size: 22px;
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+  .article-richtext :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    background: var(--ao-surface);
+    padding: 1px 5px;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+  }
+  .article-richtext :global(.article-table-wrap) {
+    overflow-x: auto;
+    margin: 28px 0;
+    scrollbar-color: var(--ao-primary) var(--ao-surface);
+  }
+  .article-richtext :global(.article-table-wrap:focus-visible) {
+    outline: 2px solid var(--ao-primary);
+    outline-offset: 4px;
+  }
+  .article-richtext :global(table) {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .article-richtext :global(caption) {
+    text-align: left;
+    font-size: 13px;
+    color: var(--ao-muted);
+    margin-bottom: 12px;
+  }
+  .article-richtext :global(th),
+  .article-richtext :global(td) {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--ao-line);
+    vertical-align: top;
+  }
+  .article-richtext :global(thead) {
+    background: var(--ao-surface);
+  }
+  .article-richtext :global(tbody th) {
+    font-weight: 500;
+    width: 28%;
+  }
+  @media (min-width: 960px) {
+    .legal-layout {
+      grid-template-columns: 260px minmax(0, 1fr);
+      align-items: start;
+    }
+    .legal-toc {
+      position: sticky;
+      top: 24px;
+    }
+    .legal-layout:not(:has(.legal-toc)) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 959px) {
+    .legal3a h1 {
+      font-size: clamp(28px, 8vw, 40px);
+    }
+    .article-richtext :global(h2) {
+      font-size: 26px;
+    }
+  }
+</style>

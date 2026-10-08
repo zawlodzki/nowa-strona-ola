@@ -20,6 +20,8 @@ export interface PortableTextBlock {
   _key?: string;
   style?: string;
   listItem?: string;
+  level?: number;
+  listStart?: number;
   children?: PortableSpan[];
   markDefs?: PortableMark[];
 }
@@ -101,6 +103,7 @@ function renderChildren(
       for (const mark of span.marks ?? []) {
         if (mark === "strong") html = `<strong>${html}</strong>`;
         else if (mark === "em") html = `<em>${html}</em>`;
+        else if (mark === "code") html = `<code>${html}</code>`;
         else {
           const def = marks?.find((item) => item._key === mark);
           if (def?.href) {
@@ -123,6 +126,7 @@ function markdownInline(
       for (const mark of span.marks ?? []) {
         if (mark === "strong") text = `**${text}**`;
         else if (mark === "em") text = `*${text}*`;
+        else if (mark === "code") text = `\`${text}\``;
         else {
           const def = marks?.find((item) => item._key === mark);
           if (def?.href) text = `[${text}](${def.href})`;
@@ -174,7 +178,35 @@ const PAGE_HEADING_IDS = new Set([
 ]);
 
 function isDomId(value: string): boolean {
-  return /^[A-Za-z][\w:-]*$/.test(value);
+  return /^[\w:-]+$/.test(value);
+}
+
+export function renderInlineMarkup(value: string): string {
+  const tokens = /(`[^`]+`|\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
+  const parts: string[] = [];
+  let cursor = 0;
+  for (const match of value.matchAll(tokens)) {
+    const index = match.index ?? 0;
+    parts.push(escapeHtml(value.slice(cursor, index)));
+    const token = match[0];
+    if (token.startsWith("`")) {
+      parts.push(`<code>${escapeHtml(token.slice(1, -1))}</code>`);
+    } else if (token.startsWith("**")) {
+      parts.push(`<strong>${escapeHtml(token.slice(2, -2))}</strong>`);
+    } else {
+      const link = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      if (link) {
+        parts.push(
+          `<a href="${escapeHtml(link[2])}">${escapeHtml(link[1])}</a>`,
+        );
+      } else {
+        parts.push(escapeHtml(token));
+      }
+    }
+    cursor = index + token.length;
+  }
+  parts.push(escapeHtml(value.slice(cursor)));
+  return parts.join("");
 }
 
 function headingId(
@@ -214,27 +246,46 @@ export function articleBodyToHtml(blocks: unknown): {
   const toc: TocEntry[] = [];
   const usedIds = new Set(PAGE_HEADING_IDS);
   const html: string[] = [];
-  let listType: string | null = null;
+  const listStack: { type: string; level: number }[] = [];
 
-  const closeList = () => {
-    if (listType) {
-      html.push(listType === "number" ? "</ol>" : "</ul>");
-      listType = null;
+  const closeListsTo = (level: number) => {
+    while (
+      listStack.length > 0 &&
+      listStack[listStack.length - 1]!.level > level
+    ) {
+      const frame = listStack.pop()!;
+      html.push(frame.type === "number" ? "</ol>" : "</ul>");
     }
+  };
+
+  const closeAllLists = () => closeListsTo(0);
+
+  const openList = (type: string, level: number, start?: number) => {
+    const startAttr =
+      type === "number" && start && start > 1 ? ` start="${start}"` : "";
+    html.push(type === "number" ? `<ol${startAttr}>` : "<ul>");
+    listStack.push({ type, level });
   };
 
   for (const block of parsed) {
     if (block._type === "block") {
       if (block.listItem) {
-        if (listType !== block.listItem) {
-          closeList();
-          html.push(block.listItem === "number" ? "<ol>" : "<ul>");
-          listType = block.listItem;
+        const level = block.level && block.level > 0 ? block.level : 1;
+        closeListsTo(level);
+        const top = listStack[listStack.length - 1];
+        if (!top || top.level < level) {
+          openList(block.listItem, level, block.listStart);
+        } else if (top.type !== block.listItem) {
+          closeListsTo(level - 1);
+          openList(block.listItem, level, block.listStart);
+        } else if (block.listStart && block.listStart > 1) {
+          closeListsTo(level - 1);
+          openList(block.listItem, level, block.listStart);
         }
         html.push(`<li>${renderChildren(block.children, block.markDefs)}</li>`);
         continue;
       }
-      closeList();
+      closeAllLists();
       const text = renderChildren(block.children, block.markDefs);
       if (block.style === "h2") {
         const plain = plainText(block.children);
@@ -255,7 +306,7 @@ export function articleBodyToHtml(blocks: unknown): {
       continue;
     }
 
-    closeList();
+    closeAllLists();
 
     if (block._type === "articleImage") {
       const alt = escapeHtml(block.alt ?? "");
@@ -309,19 +360,20 @@ export function articleBodyToHtml(blocks: unknown): {
           const cells = (row.cells ?? [])
             .map((cell, index) =>
               index === 0
-                ? `<th scope="row">${escapeHtml(cell ?? "")}</th>`
-                : `<td>${escapeHtml(cell ?? "")}</td>`,
+                ? `<th scope="row">${renderInlineMarkup(cell ?? "")}</th>`
+                : `<td>${renderInlineMarkup(cell ?? "")}</td>`,
             )
             .join("");
           return `<tr>${cells}</tr>`;
         })
         .join("");
+      const caption = block.caption?.trim() ?? "";
       html.push(
         `<div class="article-table-wrap" tabindex="0" role="region" aria-label="${escapeHtml(
-          block.caption ?? "Tabela",
-        )}"><table><caption>${escapeHtml(
-          block.caption ?? "",
-        )}</caption><thead><tr>${headerRow}</tr></thead><tbody>${body}</tbody></table></div>`,
+          caption || "Tabela",
+        )}"><table>${
+          caption ? `<caption>${escapeHtml(caption)}</caption>` : ""
+        }<thead><tr>${headerRow}</tr></thead><tbody>${body}</tbody></table></div>`,
       );
       continue;
     }
@@ -332,7 +384,7 @@ export function articleBodyToHtml(blocks: unknown): {
     );
   }
 
-  closeList();
+  closeAllLists();
   return { html: html.join("\n"), toc };
 }
 

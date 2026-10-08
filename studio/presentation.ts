@@ -36,6 +36,14 @@ export const presentationResolve = {
     },
     {
       route: "/:slug",
+      filter: `_type == "legalPage" && language == "pl" && slug.current == $slug`,
+    },
+    {
+      route: "/en/:slug",
+      filter: `_type == "legalPage" && language == "en" && slug.current == $slug`,
+    },
+    {
+      route: "/:slug",
       filter: `_type == "page" && language == "pl" && slug.current == $slug`,
     },
     {
@@ -73,6 +81,18 @@ export const presentationResolve = {
           language === "pl" ? `/ebooki/${slug}/` : `/en/ebooks/${slug}/`;
         return {
           locations: [{ title: document.title || "E-book", href }],
+        };
+      },
+    }),
+    legalPage: defineLocations({
+      select: { title: "title", slug: "slug.current", language: "language" },
+      resolve: (document) => {
+        const slug = document?.slug;
+        const language = document?.language;
+        if (!slug || (language !== "pl" && language !== "en")) return null;
+        const href = language === "pl" ? `/${slug}/` : `/en/${slug}/`;
+        return {
+          locations: [{ title: document.title || "Strona prawna", href }],
         };
       },
     }),

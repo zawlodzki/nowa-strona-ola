@@ -71,8 +71,17 @@ TikTok). Fixture i fallback 07.10.2026 używają stron głównych platform
 widoczne. To **nie** są profile Oli. Prawdziwe HTTPS URL do decyzji.
 `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
 Linki prawne w `siteSettings.legalLinks`: fixture PL `/polityka-prywatnosci/`
-i `/regulamin/`, EN `/en/privacy/` i `/en/terms/`. Stron jeszcze nie ma;
-treść i docelowe slugi do decyzji. Pola schematu już istniały.
+i `/regulamin/`, EN `/en/privacy/` i `/en/terms/` — bez zmiany makiety stopki
+(08.10.2026). Same dokumenty są typem `legalPage` (nie `page`); opis:
+[LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md). Fixture’y i trasy są w kodzie;
+Content Lake niezasiedlony. Lista cookies i regulamin newslettera nie są w
+stopce; cookies z polityki, newsletter z etykiety zgody formularza.
+Zgoda newslettera (fixture `form`, 08.10.2026): markdown
+`[Polityka prywatności](/polityka-prywatnosci/)` i
+`[regulamin newslettera](/regulamin-newslettera/)` w etykiecie checkboxa.
+EN: `[Privacy policy](/en/privacy/)` i `[newsletter terms](/regulamin-newslettera/)`
+(brak EN regulaminu newslettera — otwarta decyzja). Wygląd formularza bez zmian
+poza tymi odnośnikami.
 
 Tytuł i opis SEO w makiecie zawierają oznaczenie 3a i dłuższe teksty.
 Nie kopiować ich automatycznie do produkcji: `seo.title` ma limit 60 znaków,

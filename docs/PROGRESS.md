@@ -1,9 +1,47 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (akcent matcha na cherry: strzałka i większa iskierka).
+Aktualizacja: 2026-10-08 (strony prawne `legalPage`).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
+CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Sesja — strony prawne CMS — 08.10.2026
+
+Zakres: dokumenty `legalPage` edytowalne w Sanity, trasy 3a, treść PL 1:1 ze
+źródła zawlodzki.pl (ta sama spółka Wellbiz), bez redakcji B2C.
+
+Zrobione w kodzie: schemat `legalPage` / `legalBody` (H2/H3, listy, linki, kod,
+tabele `articleTable`), Studio (Strony prawne, Presentation), GROQ + TypeGen,
+mapper `mapLegalPage`, serializer Markdown, fixture’y, `import:legal` dry-run,
+`LegalPage` + `Legal3a` (SiteShell3a, typografia jak Article3a, TOC przy wielu
+H2). Trasy: `/polityka-prywatnosci/`, `/regulamin/`, `/lista-cookies-i-identyfikatorow/`,
+`/regulamin-newslettera/`, `/en/privacy/`, `/en/terms/` (przepięte z `page` na
+CMS). Stopka bez zmian (polityka + regulamin). Zgoda `DemoForm`: markdown-link
+do polityki i regulaminu newslettera. Sitemap `sitemap.xml` uwzględnia te URL.
+EN: krótka informacja, że wiążąca jest wersja PL, z linkiem — bez tłumaczenia
+maszynowego.
+
+Źródła HTML: `scripts/legal-sources/`. Konwersja: `scripts/convert-legal-html.py`.
+Przykłady MD: `src/content/examples/legal-*.md`.
+
+Kontrole (do uzupełnienia po `npm run verify`):
+
+- `import:legal` dry-run kod 0; `--write` kod 2, bez zapisu Content Lake.
+- Studio bez `SANITY_STUDIO_PROJECT_ID` (wartość `replace-me`) — zrzut dokumentu
+  w Studio niemożliwy lokalnie bez sekretów.
+
+Otwarte decyzje:
+
+- EN dokumentów prawnych (brak źródła; fixture to notice + link do PL).
+- Redakcja B2C treści przeniesionej 1:1 z B2B zawlodzki.pl.
+- Zapis do Content Lake — dopiero na osobne zlecenie.
+
+Niewykonane: natywny zoom, czytnik, urządzenie fizyczne. 320 px / 200% zoom
+stron prawnych — niewykonane jako osobne zrzuty 1:1.
+
+Następny krok: dry-run importu do Content Lake na zlecenie; redakcja B2C
+w Studio.
 
 ### Sesja wzmocnienia cherry — 08.10.2026
 

@@ -283,7 +283,7 @@ export const homepageCopy = {
     emailPlaceholder: "np. ola@przyklad.pl",
     emailError: "Wpisz poprawny adres e-mail.",
     consentLabel:
-      "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane.",
+      "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane. [Polityka prywatności](/polityka-prywatnosci/) i [regulamin newslettera](/regulamin-newslettera/).",
     consentError: "Zaznacz zgodę, aby sprawdzić formularz.",
     copyright: "Aleksandra Olesiewicz",
     serviceSummary:
@@ -356,7 +356,7 @@ export const homepageCopy = {
     emailPlaceholder: "e.g. ola@example.com",
     emailError: "Enter a valid email address.",
     consentLabel:
-      "I agree to receive the newsletter. This is a demonstration — nothing will be sent.",
+      "I agree to receive the newsletter. This is a demonstration — nothing will be sent. [Privacy policy](/en/privacy/) and [newsletter terms](/regulamin-newslettera/).",
     consentError: "Tick the consent box to check the form.",
     copyright: "Aleksandra Olesiewicz",
     serviceSummary:

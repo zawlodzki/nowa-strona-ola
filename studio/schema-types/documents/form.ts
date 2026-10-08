@@ -73,7 +73,9 @@ export const formType = defineType({
               name: "label",
               title: "Etykieta",
               type: "string",
-              validation: (rule) => rule.required().max(80),
+              description:
+                "Przy zgodzie można wstawić odnośniki w postaci [tekst](/adres/).",
+              validation: (rule) => rule.required().max(400),
             }),
             defineField({
               name: "errorMessage",
