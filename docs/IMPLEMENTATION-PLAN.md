@@ -210,6 +210,11 @@ Odbiór: kolejna sesja ustala stan i rozpoczyna etap 2 bez historii rozmowy.
 
 ### Etap 2 — aplikacje i infrastruktura
 
+- [x] Zaktualizować Sanity/Vision do 6.18.0, klienta do 8.9.0 i GROQ do 6.18.0;
+      sprawdzić TypeGen, typy, unit, buildy i audyt (08.10.2026).
+- [ ] Po aktualizacji zależności ponowić pełne verify z przeglądarkami Playwright;
+      pobieranie przeglądarek w środowisku chmurowym blokuje polityka sieciowa.
+
 - [x] Utworzyć lokalną próbę Astro/Bejamas PL/EN z jednym lockfile npm.
 - [x] Skonfigurować lint, format, typy, unit/E2E, axe, kontrolę buildu i workflow CI.
       Workflow czeka na pierwsze uruchomienie w GitHub; lokalna bramka przeszła.

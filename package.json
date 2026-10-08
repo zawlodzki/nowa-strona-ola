@@ -44,12 +44,12 @@
   },
   "dependencies": {
     "@data-slot/dialog": "^0.2.166",
-    "@sanity/client": "^8.6.1",
+    "@sanity/client": "^8.9.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "groq": "^6.13.2",
+    "groq": "^6.18.0",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3"
   },
@@ -58,16 +58,24 @@
     "@axe-core/playwright": "^4.13.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.63.0",
+    "@sanity/webhook": "^4.0.4",
     "@types/node": "^22.20.2",
     "eslint": "^10.10.0",
     "eslint-plugin-astro": "^3.1.0",
     "groq-js": "^2.0.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^1.0.0",
+    "sanity": "^6.18.0",
+    "sharp": "^0.35.5",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.70.0",
     "vitest": "^5.0.0"
+  },
+  "overrides": {
+    "@vercel/frameworks": {
+      "smol-toml": "1.9.0"
+    }
   },
   "allowScripts": {
     "esbuild@0.28.2": true,

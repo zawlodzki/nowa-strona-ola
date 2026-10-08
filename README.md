@@ -98,6 +98,11 @@ ustawienie tylko jednej wartości zatrzymuje build. Klient produkcyjnego buildu
 używa perspektywy `published`, bez CDN i bez tokenu. Po zmianie schematów lub GROQ
 uruchomić `npm run typegen --workspace @ola/studio`. Po zmianie
 `worker/wrangler.jsonc` ponownie wygenerować i zapisać typy Workera.
+
+Sanity Studio i Vision: 6.18.0; klient: 8.9.0; GROQ: 6.18.0.
+Wyniki aktualizacji, ograniczenia E2E i uzasadnienie pozostałych zgłoszeń audytu:
+[postęp z 08.10.2026](docs/PROGRESS.md#aktualizacja-sanity--08102026).
+
 Worker przyjmuje podpisane zdarzenia publikacji Sanity pod `/webhooks/sanity`,
 grupuje je w Cloudflare Queue i wyzwala jeden chroniony endpoint builda na batch.
 Lokalne nazwy sekretów znajdują się w `worker/.dev.vars.example`; szczegóły
