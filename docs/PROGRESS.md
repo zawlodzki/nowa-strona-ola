@@ -62,9 +62,13 @@ Walidacja offline `scripts/validate-content-lake.ts` (schemat repo, bez tokenu):
 bo CLI wymaga logowania. Wariant liczb na O mnie może mieć 0 albo 3 wyróżnień,
 bo fixture ma pustą listę.
 
-`npm run test:content-lake` zbudował serwis z wygenerowanego NDJSON.
-CSS gzip 29 778 B, JS gzip 5 770 B. Test planu: 8/8. Pełne `npm run verify`
-jeszcze nie było uruchomione w tej sesji.
+`npm run test:content-lake` zbudował 54 strony z wygenerowanego NDJSON.
+CSS gzip 29 778 B, JS gzip 5 770 B.
+
+`npm run verify` zakończone kodem 0 na Node 24.21.0. Format, tokeny, lint,
+`astro check` (0 błędów), **126** testów jednostkowych (22 pliki), build
+fixture’ów, workspace’y, `check-build`, **147** E2E Chromium/Firefox/WebKit
+i budowa z wygenerowanych dokumentów. CSS gzip fixture’ów też 29 778 B.
 
 verify-ola `ola-1791457722` na `http://127.0.0.1:4340`, doctor zielony.
 Zestawienia makieta/treść, desktop 1280 i mobile 390:
