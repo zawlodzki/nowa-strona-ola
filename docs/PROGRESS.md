@@ -94,20 +94,26 @@ konsultacji 520 px (na 390 px jest 280 px). Dyplom na O mnie zostaje.
 
 `npm run test:content-lake` buduje fixture do `.cache/dist-fixture`, potem
 content-lake do `dist`, i uruchamia `scripts/compare-fixture-lake.mjs`.
-Skrypt pada, gdy na którejkolwiek z 7 stron sekcja fixture ma inne zdjęcia
-(liczba, plik, `object-fit`, `naturalWidth`) albo inny szkielet DOM niż
-content-lake. Ostatni wynik to 7 stron bez różnic.
+Skrypt pada, gdy sekcja fixture ma inne zdjęcia (liczba, plik, `object-fit`,
+`naturalWidth`) albo inny szkielet DOM niż content-lake. Obejmuje 7 stron
+makiety i 6 stron prawnych. Ostatni wynik to 13 stron bez różnic.
 
 Inwentarz zdjęć z tego samego przebiegu leży w
 `/opt/cursor/artifacts/screenshots/photo-inventory.json`.
 Portret hero, loga, portret O mnie, nakładka jedzenia i zdjęcia konsultacji
 mają ten sam `object-fit`, pozycję i rozmiar co makieta (różnica boku do 12 px).
 
-`npm run verify` po korekcie kadrów zakończone kodem 0 na Node 24.21.0.
-Format, tokeny, lint, `astro check` (0 błędów), **126** testów jednostkowych
-(22 pliki), build fixture’ów, workspace’y, `check-build`, **147** E2E
-Chromium/Firefox/WebKit i budowa z wygenerowanych dokumentów. CSS gzip
-fixture’ów i content-lake to 29 748 B.
+`npm run verify` po scaleniu stron prawnych zakończone kodem 0 na Node 24.21.0.
+Format, tokeny, lint, `astro check` (0 błędów), **133** testy jednostkowe
+(23 pliki), build, workspace’y, `check-build`, **171** E2E
+Chromium/Firefox/WebKit i budowa z wygenerowanych dokumentów. Porównanie
+fixture z content-lake: 13 stron, te same sekcje, zdjęcia i DOM. CSS gzip
+w tamtym przebiegu to 29 823 B, JS gzip 5 770 B.
+
+Potem „450+” na 390 px dostało 78 px, jak w makiecie cherry, i zostaje w
+jednej linii obok podpisu. Pomiar obu stron: wysokość 78 px, `sameRow`.
+Testy layoutu 320/390/1440 na Chromium, Firefox i WebKit przeszły.
+CSS gzip po tej korekcie to 29 804 B.
 
 verify-ola `ola-1791460363` na `http://127.0.0.1:4340`, doctor zielony
 (treść z wygenerowanego NDJSON, bez przebudowy w trakcie sesji).

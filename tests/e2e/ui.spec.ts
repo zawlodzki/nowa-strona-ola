@@ -164,20 +164,6 @@ for (const width of [320, 390, 1440]) {
       });
     expect(metric.text).toBe("450+");
     expect(metric.oneLine).toBe(true);
-    if (width === 390 || width === 320) {
-      const labelBelow = await page
-        .locator(".home3a-count")
-        .evaluate((element) => {
-          const strong = element.querySelector("strong");
-          const label = element.querySelector(":scope > span");
-          if (!strong || !label) return false;
-          return (
-            label.getBoundingClientRect().top >=
-            strong.getBoundingClientRect().bottom - 2
-          );
-        });
-      expect(labelBelow).toBe(true);
-    }
     await expectDecodedWidth(page.locator(".home3a-about__food"), 1536);
     await expectDecodedWidth(page.locator("#konsultacje-panel img"), 1536);
     expect(
