@@ -151,6 +151,25 @@ async function run(body) {
     case "screenshot": {
       const file = evidenceFile(body.path);
       await mkdir(path.dirname(file), { recursive: true });
+      await page.evaluate(async () => {
+        const step = Math.max(window.innerHeight / 2, 240);
+        const limit = Math.max(document.documentElement.scrollHeight, 1);
+        for (let y = 0; y < limit; y += step) {
+          window.scrollTo(0, y);
+          await new Promise((resolve) => requestAnimationFrame(resolve));
+        }
+        window.scrollTo(0, 0);
+        await Promise.all(
+          [...document.images].map((img) => {
+            if (img.complete && img.naturalWidth > 0) return undefined;
+            return new Promise((resolve) => {
+              img.addEventListener("load", () => resolve(), { once: true });
+              img.addEventListener("error", () => resolve(), { once: true });
+            });
+          }),
+        );
+        if (document.fonts?.ready) await document.fonts.ready;
+      });
       await page.screenshot({ path: file, fullPage: true });
       return file;
     }

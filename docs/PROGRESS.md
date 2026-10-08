@@ -1,9 +1,51 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (pakiet 6 — BlogCollection3a).
+Aktualizacja: 2026-10-08 (pakiet 6 — poprawki 1:1 kolekcji bloga).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja poprawek wizualnych BlogCollection3a — 08.10.2026
+
+Zasada Grzesia: nic nie wypada i nic się nie upraszcza. Odbiór
+`compare-blog-p1-desktop.png` / `compare-blog-p2-desktop.png` odrzucił pustą
+listę różnic. Poprawki na tym samym branchu `cursor/blog-collection-3a-1697`.
+
+Różnica → poprawka:
+
+1. Karta „Wyniki badań” (strona 1, rząd 2, lewa) — pusty różowy prostokąt zamiast
+   portretu `about.webp`. To nie błąd danych ani kadru: seed ma `imageKey: about`,
+   1122×1402, hotspot 15% góry, a HTML zawiera `/_astro/about.*.webp`. Tło ramki
+   `--ao-surface` było widać, bo `loading="lazy"` nie ładował obrazu poza pierwszym
+   viewportem przy `fullPage`. Poprawka: miniatury kolekcji `loading="eager"`;
+   `verify.mjs browser screenshot` przewija stronę i czeka na `naturalWidth` oraz
+   fonty.
+2. Kanciaste rogi miniatur i zdjęcia wyróżnionego wpisu. Makieta używa
+   `--media-radius` = `--ao-radius-panel` (24px). Produkcja ustawiała
+   nieistniejące `--ao-radius-media` (computed 0). Poprawka: `--ao-radius-panel`,
+   `overflow: hidden`, `isolation: isolate`.
+3. Miniatury wyższe niż w makiecie. `.ao-site img { height: auto }` plus atrybuty
+   HTML portretu 1122×1402 wypierały `aspect-ratio: 1.8` na samym `img`. Poprawka:
+   `aspect-ratio: 1.8` na ramce `.blog3a-card-image`, obraz
+   `width/height: 100%; object-fit: cover` (kadr 1:1 z makietą).
+4. Wyróżniony wpis wyglądał na pas wychodzący do prawej, bez zaokrągleń. Układ
+   siatki `1.08fr 1fr` i padding 44px już były; brakujący radius sprawiał wrażenie
+   pełnej szerokości. Poprawka: karta w kontenerze, `border-radius: 24px`,
+   `align-items: stretch`, lewa kolumna `display: grid` wypełnia wysokość zdjęciem.
+5. Stopka, prawy dolny róg: makieta ma strzałkę up-right (klasa `theme-toggle`),
+   produkcja miała tylko księżyc motywu. Przycisk motywu zostaje; dodany link
+   `#main` z `ArrowIcon` (ścieżka `M7 17 17 7M7 7h10v10`) we wspólnym
+   `SiteFooter` 3a — na wszystkich stronach 3a.
+6. Mobile, kategoria PCOS i EN: te same radius, kadr 1.8 i strzałka w stopce.
+
+Świadome różnice (nie ucięcie): filtry kategorii (zlecone, makieta ich nie ma);
+`aria-label` „Przeczytaj artykuł: …”; English/Polski; zgoda newslettera; przycisk
+motywu obok strzałki; karty prowadzą do `blog/[slug]`, nie `podglad.html`.
+
+Kontrole: w tej samej sesji po commitcie — `npm run verify` i nowe porównania
+pod tymi samymi nazwami w `/opt/cursor/artifacts/screenshots/`.
+
+Następny krok: pakiet 7 Article3a, o ile odbiór tej poprawki przejdzie.
 
 ### Sesja pakietu 6 — kolekcja bloga 3a — 08.10.2026
 
