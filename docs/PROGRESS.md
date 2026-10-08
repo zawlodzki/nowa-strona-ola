@@ -40,6 +40,9 @@ Kontrole (Node 24.21.0), po zbudowanym `dist/`:
   `authorFixture.bio`: „Dietetyczka kliniczna. Specjalizuje się w PCOS
   i insulinooporności.” Makieta ma dłuższy akapit o dopasowaniu kroków
   i własnym doświadczeniu. About zostaje przy tym samym krótkim biogramie.
+- Kadr byline to `50% 25%` (96×96 w pliku, 48×48 w CSS). Ramka autora
+  jest `96×120` z kadrem `50% 50%`, bo makieta nie powtarza tam kadru
+  `center 25%` z awatara.
 - Kicker „Sprawdź również” dla dwóch wyróżnionych rekomendacji jest parą
   z makiety (PCOS · Odżywianie, PCOS · Konsultacje). Dokument artykułu ma
   jedną kategorię, więc para nie wynika z samego złączenia tytułów kategorii.
