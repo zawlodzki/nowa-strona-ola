@@ -551,7 +551,7 @@ test("landing pages, blog and missing English translation", async ({
     }),
   ).toBeVisible();
   await expect(
-    page.getByRole("navigation", { name: "Spis treści" }),
+    page.getByRole("navigation", { name: "W tym artykule" }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
     "href",

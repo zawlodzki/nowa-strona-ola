@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+  plusClass?: string;
+}
+const { class: className, plusClass = "faq-plus" } = Astro.props;
+---
+
+<svg
+  class:list={[className]}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  aria-hidden="true"
+>
+  <path d="M5 12h14"></path>
+  <path class={plusClass} d="M12 5v14"></path>
+</svg>

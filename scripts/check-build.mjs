@@ -112,6 +112,28 @@ assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
 const blogEn = await readFile("dist/en/blog/index.html", "utf8");
 assert.match(blogEn, /Blog\. On your terms\./);
 assert.doesNotMatch(blogEn, /Po Twojemu/);
+const articleHtml = await readFile(
+  "dist/blog/przygotowanie-do-konsultacji-pcos/index.html",
+  "utf8",
+);
+assert.match(articleHtml, /article3a/);
+assert.match(
+  articleHtml,
+  /Jak przygotować się do konsultacji dietetycznej przy PCOS\?/,
+);
+assert.match(articleHtml, /W tym artykule/);
+assert.match(articleHtml, /article-faq-schema/);
+const articleEn = await readFile(
+  "dist/en/blog/preparing-for-a-pcos-nutrition-consultation/index.html",
+  "utf8",
+);
+assert.match(articleEn, /article3a/);
+assert.match(
+  articleEn,
+  /How to prepare for a nutrition consultation with PCOS\?/,
+);
+assert.match(articleEn, /In this article/);
+assert.doesNotMatch(articleEn, /W tym artykule/);
 console.log(
   JSON.stringify({ gzipBytes: sizes, staticPrimitivesScripts: 0 }, null, 2),
 );

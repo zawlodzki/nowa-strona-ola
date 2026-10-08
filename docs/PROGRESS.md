@@ -1,9 +1,32 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (pakiet 6 — poprawki 1:1 kolekcji bloga).
+Aktualizacja: 2026-10-08 (pakiet 7 — Article3a).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja pakietu 7 — Article3a — 08.10.2026
+
+Zakres: produkcyjna strona artykułu w designie 3a według
+`mockups/homepage/article-3a.html`. Trasy `/blog/[slug]/` i
+`/en/blog/[slug]/` oraz preview używają `ArticlePage` → `SiteShell3a` +
+`Article3a`. Linki z `BlogCollection3a` prowadzą na ten szablon.
+
+Zrobione w kodzie: `relatedEbooks` (0 albo 3), `faq`, `breadcrumbTitle`,
+`proposalNote`, GROQ `articleDetailProjection`, mapper `Article3aView`,
+Portable Text z TOC H2 `section-${_key}`, tabela `th scope=row`, fixture
+wyróżnionego wpisu z ciałem makiety, trzy e-booki, FAQ, rekomendacje 02/03,
+wspólny `DemoForm`, stopka 3a, dekoracje SVG, dry-run `import:article`.
+Biogram ramki autora to wspólne `author.bio` (krótsze niż w makiecie).
+Źródła w makiecie nie występują; pusta tablica ukrywa sekcję.
+
+Kontrole i porównania wizualne: uzupełniane po `npm run verify` i
+verify-ola.
+
+Następny krok: odbiór Article3a (verify, zrzuty 1:1, Content Lake poza
+zakresem).
+
+### Sesja poprawek wizualnych BlogCollection3a — 08.10.2026
 
 ### Sesja poprawek wizualnych BlogCollection3a — 08.10.2026
 
