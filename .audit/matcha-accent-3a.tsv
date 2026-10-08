@@ -6,3 +6,4 @@ ts	phase	decision	why	evidence	result
 2026-10-08T07:49:43Z	impl	tokens accent accent-on-primary accent-on-light plus secondary button CSS	one source of truth, white fill matcha stroke, covers do not invert	design-system/tokens.json src/design-system/global.css	coded
 2026-10-08T07:49:43Z	impl	SVG details on orbit bottles light cover strokes cherry sparkle	board 05 single green details, keep existing shapes	src/design-system/decorations/	coded
 2026-10-08T07:49:43Z	impl	leave About Consultation Ebook TextLinks in ink	spec forbids matcha on every link, those CTAs are text links in mockups	src/views/About3a.astro Consultation3a.astro Ebook3a.astro	open for review
+2026-10-08T07:53:29Z	verify	eslint no-undef on screenshot scripts	scripts lint as node, evaluate callbacks look like document	scripts/compare-accent-pages.mjs	fixed

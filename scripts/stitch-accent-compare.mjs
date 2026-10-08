@@ -42,9 +42,12 @@ figcaption{padding:8px 12px}
   await page.setContent(html, { waitUntil: "load" });
   await page.waitForSelector("img");
   await page.evaluate(async () => {
-    await Promise.all([...document.images].map((img) => img.decode()));
+    const images = [...globalThis.document.images];
+    await Promise.all(images.map((img) => img.decode()));
   });
-  const height = await page.evaluate(() => document.body.scrollHeight);
+  const height = await page.evaluate(
+    () => globalThis.document.body.scrollHeight,
+  );
   await page.setViewportSize({
     width: 1600,
     height: Math.min(Math.max(height, 400), 20000),

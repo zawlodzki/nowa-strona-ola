@@ -47,9 +47,9 @@ for (const viewport of VIEWPORTS) {
   });
   const page = await context.newPage();
   for (const entry of PAGES) {
-    const url = new URL(entry.path, base).href;
+    const url = `${base.replace(/\/$/, "")}${entry.path}`;
     const response = await page.goto(url, { waitUntil: "networkidle" });
-    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => globalThis.document.fonts.ready);
     const file = join(outDir, `${mode}-${entry.id}-${viewport.id}.png`);
     await mkdir(dirname(file), { recursive: true });
     await page.screenshot({ path: file, fullPage: true });
