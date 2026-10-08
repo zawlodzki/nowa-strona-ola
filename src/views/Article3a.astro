@@ -225,6 +225,7 @@ const bodyHtml = markArticleIntro(html);
               width={person.photo.width}
               height={person.photo.height}
               objectPosition={person.photo.objectPosition}
+              loading="eager"
               decoding="sync"
             />
             <div>
@@ -958,9 +959,6 @@ const bodyHtml = markArticleIntro(html);
     .breadcrumbs {
       font-size: 12px;
     }
-    .breadcrumbs li:last-child {
-      display: none;
-    }
     .article3a h1 {
       margin-top: 32px;
       text-align: left;
@@ -1456,7 +1454,7 @@ const bodyHtml = markArticleIntro(html);
     .article3a :global(.ao-breadcrumbs) {
       font-size: 12px;
     }
-    .article3a :global(.ao-breadcrumbs) li:last-child {
+    .article3a :global(.ao-breadcrumbs li:last-child) {
       display: none;
     }
     .article3a .article-main-image :global(img) {
