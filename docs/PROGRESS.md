@@ -1,9 +1,61 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (pakiet 7 — Article3a).
+Aktualizacja: 2026-10-08 (zdjęcie ukończenia w slocie dyplomu).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja zdjęcia dyplomu, 08.10.2026
+
+Na About3a (`/o-mnie/` i `/en/about/`) slot dyplomu pokazuje zdjęcie
+ukończenia Aleksandry. Pozycja, szerokość do 340 px, podpis i ramka 12 px
+zostają jak w makiecie. Puste `diplomaScan` nadal rysuje ramkę ze SVG.
+
+Źródło to JPEG 1440×1920 z drugiego kadru karuzeli
+[Instagram](https://www.instagram.com/p/DOMPRWmjXWX/), plik
+`src/assets/portraits/diploma.jpg`. `SiteImage` kroi go przy budowaniu do
+1440×1609 (`diplomaSlotSize`, proporcja slotu 340/380). Grawitacja Sharp to
+`top`, z `diplomaCropPosition` `50% 0%`. Dół kadru (buty i kostka) schodzi,
+tabliczki wydziału, twarz, różowa teczka i róże zostają. CSS `object-fit`
+zostaje `fill`.
+
+Polski alt to „Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia
+Publicznego ŚUM w Bytomiu”. Angielski alt to „Aleksandra Olesiewicz with her
+diploma outside the Faculty of Public Health, Medical University of Silesia
+in Bytom”.
+
+`aboutCopy.diplomaAlt` trafia do `aboutAuthorFixture`, potem do `diplomaScan`
+i istniejącego `toCredentials`. Klucz lokalny to `diploma`. Asset w Content
+Lake jest niewgrany.
+
+Kontrole na `3b4905e`, Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **115** testów jednostkowych (20 plików),
+build, workspace’y, `check-build`, **120** E2E Chromium/Firefox/WebKit.
+E2E na `/o-mnie/` i `/en/about/` czyta `naturalWidth` 1440 i `naturalHeight` 1609. CSS gzip `dist/_astro` **29 635 B** (limit 32 KiB). JS gzip **5 770 B**.
+Suma gzip plików CSS w `dist/_astro` jest identyczna jak w pakiecie 7, bo
+zmiana selektora nie powiększyła skompresowanego arkusza.
+
+`:global(img)` w `.about3a-diploma` sprawia, że `border-radius: 12px` dochodzi
+do img z `SiteImage`. Chromium na 1280 px i 390 px podaje promień 12 px i
+`object-fit: fill`. Na desktopie obraz ma 340×380 px.
+
+verify-ola `ola-1791450522` działa na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791450522/`.
+
+Artefakty:
+
+- `/opt/cursor/artifacts/screenshots/diploma-mockup-desktop.png`
+- `/opt/cursor/artifacts/screenshots/diploma-production-desktop.png`
+- `/opt/cursor/artifacts/screenshots/diploma-mockup-mobile.png`
+- `/opt/cursor/artifacts/screenshots/diploma-production-mobile.png`
+- `/opt/cursor/artifacts/screenshots/about-pl-desktop-full.png`
+
+Nie sprawdzono natywnego zoomu przeglądarki, czytnika ani urządzenia
+fizycznego. Nie ma osobnych zrzutów sekcji przy 320 px i zoomie 200%.
+
+Następny krok to odbiór PR. Wgranie pliku do Content Lake i adres płatnej
+rezerwacji zostają otwarte.
 
 ### Sesja pakietu 7 — Article3a — 08.10.2026
 
