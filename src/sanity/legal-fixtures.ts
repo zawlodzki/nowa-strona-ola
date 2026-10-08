@@ -1,15 +1,10 @@
-import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-
 import type { Locale } from "@ola/shared";
 
 import type { PortableBlock } from "@/content/portable-text";
-
-const bodiesDir = join(
-  dirname(fileURLToPath(import.meta.url)),
-  "../content/legal-bodies",
-);
+import cookiesSource from "@/content/legal-bodies/lista-cookies-i-identyfikatorow.json";
+import newsletterSource from "@/content/legal-bodies/regulamin-newslettera.json";
+import privacySource from "@/content/legal-bodies/polityka-prywatnosci.json";
+import termsSource from "@/content/legal-bodies/regulamin.json";
 
 interface LegalSourceFile {
   title: string;
@@ -19,11 +14,10 @@ interface LegalSourceFile {
   body: PortableBlock[];
 }
 
-function loadBody(slug: string): LegalSourceFile {
-  return JSON.parse(
-    readFileSync(join(bodiesDir, `${slug}.json`), "utf8"),
-  ) as LegalSourceFile;
-}
+const privacy = privacySource as LegalSourceFile;
+const cookies = cookiesSource as LegalSourceFile;
+const terms = termsSource as LegalSourceFile;
+const newsletter = newsletterSource as LegalSourceFile;
 
 function noticeBody(href: string, linkLabel: string): PortableBlock[] {
   return [
@@ -55,11 +49,6 @@ function noticeBody(href: string, linkLabel: string): PortableBlock[] {
     },
   ];
 }
-
-const privacy = loadBody("polityka-prywatnosci");
-const cookies = loadBody("lista-cookies-i-identyfikatorow");
-const terms = loadBody("regulamin");
-const newsletter = loadBody("regulamin-newslettera");
 
 export const demonstrationLegalPages = {
   "pl/polityka-prywatnosci": {
