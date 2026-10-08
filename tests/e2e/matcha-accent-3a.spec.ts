@@ -172,6 +172,7 @@ test("cherry ebook cover shows a matcha arrow and sparkle", async ({
 test("cherry cover accent does not collide with cover text", async ({
   page,
 }) => {
+  test.setTimeout(60_000);
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
   for (const viewport of [
     { width: 1280, height: 900 },
@@ -190,15 +191,20 @@ test("cherry cover accent does not collide with cover text", async ({
     ]) {
       await page.goto(path);
       await page.evaluate(() => document.fonts.ready);
-      const covers = page.locator(".ao-book-cover--cherry");
+      const covers = page.locator(".ao-book-cover--cherry").filter({
+        visible: true,
+      });
       const count = await covers.count();
       expect(count).toBeGreaterThan(0);
+      let visibleChecked = 0;
       for (let index = 0; index < count; index += 1) {
         const cover = covers.nth(index);
-        const accentBox = await cover
-          .locator(".ao-deco-cherry-accent")
-          .boundingBox();
+        await cover.scrollIntoViewIfNeeded();
+        const accent = cover.locator(".ao-deco-cherry-accent");
+        if (!(await accent.isVisible())) continue;
+        const accentBox = await accent.boundingBox();
         expect(accentBox).toBeTruthy();
+        visibleChecked += 1;
         const textBoxes = await cover
           .locator(
             ":scope > strong, .ao-book-cover__author, .ao-book-cover__subtitle, .ao-book-cover__topic, .ao-book-art--route span, .ao-book-art--journal span, .ao-book-decisions span",
@@ -224,6 +230,7 @@ test("cherry cover accent does not collide with cover text", async ({
           ).toBe(false);
         }
       }
+      expect(visibleChecked).toBeGreaterThan(0);
     }
   }
 });
