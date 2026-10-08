@@ -198,12 +198,15 @@ export const articleType = defineType({
         }),
       ],
       validation: (rule) =>
-        rule.max(3).unique().custom((value) => {
-          if (!Array.isArray(value) || value.length === 0) return true;
-          return value.length === 3
-            ? true
-            : "Wybierz dokładnie 3 e-booki albo zostaw pole puste.";
-        }),
+        rule
+          .max(3)
+          .unique()
+          .custom((value) => {
+            if (!Array.isArray(value) || value.length === 0) return true;
+            return value.length === 3
+              ? true
+              : "Wybierz dokładnie 3 e-booki albo zostaw pole puste.";
+          }),
     }),
     defineField({
       name: "faq",
