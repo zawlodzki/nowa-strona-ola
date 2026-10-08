@@ -14,12 +14,14 @@ listę różnic. Poprawki na tym samym branchu `cursor/blog-collection-3a-1697`.
 Różnica → poprawka:
 
 1. Karta „Wyniki badań” (strona 1, rząd 2, lewa) — pusty różowy prostokąt zamiast
-   portretu `about.webp`. To nie błąd danych ani kadru: seed ma `imageKey: about`,
-   1122×1402, hotspot 15% góry, a HTML zawiera `/_astro/about.*.webp`. Tło ramki
-   `--ao-surface` było widać, bo `loading="lazy"` nie ładował obrazu poza pierwszym
-   viewportem przy `fullPage`. Poprawka: miniatury kolekcji `loading="eager"`;
-   `verify.mjs browser screenshot` przewija stronę i czeka na `naturalWidth` oraz
-   fonty.
+   portretu `about.webp`. `<img>` jest w HTML (`/_astro/about.BuXypYA__3fPCY.webp`,
+   1122×1402, `naturalWidth` 1122, opacity 1). Sąsiedni `food` i `contact` (1536×1024)
+   malują się. Chromium nie maluje `object-fit: cover` + `object-position: 50% 15%`
+   poza viewportem, gdy `img` ma preferred AR `auto 1122 / 1402` (ramka `display: grid`
+   - `height: 100%`). Makieta ma `aspect-ratio: 1.8` na `img` i `height: auto`.
+     Poprawka: ten sam układ co `.post-image img` w `blog-3a.css`. Test E2E sprawdza
+     każdą miniaturę: `naturalWidth > 0`, niezerowy box i kontrast pikseli (nie samo
+     tło `--ao-surface`).
 2. Kanciaste rogi miniatur i zdjęcia wyróżnionego wpisu. Makieta używa
    `--media-radius` = `--ao-radius-panel` (24px). Produkcja ustawiała
    nieistniejące `--ao-radius-media` (computed 0). Poprawka: `--ao-radius-panel`,

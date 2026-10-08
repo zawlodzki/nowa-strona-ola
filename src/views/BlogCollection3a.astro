@@ -395,18 +395,15 @@ function readAria(item: BlogPostCard) {
     gap: 56px 40px;
   }
   .blog3a-card-image {
-    display: grid;
-    aspect-ratio: 1.8;
+    display: block;
     border-radius: var(--ao-radius-panel);
     overflow: hidden;
-    isolation: isolate;
     background: var(--ao-surface);
   }
   .blog3a-card-image :global(img) {
     width: 100%;
-    height: 100%;
-    min-height: 0;
-    max-width: none;
+    height: auto;
+    aspect-ratio: 1.8;
     object-fit: cover;
   }
   .blog3a-card-image--food-close :global(img) {
