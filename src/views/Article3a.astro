@@ -27,9 +27,10 @@ import { currencyLabel, topicLabel } from "@/lib/offer";
 
 export interface Props {
   content: Article3aView;
+  preview?: boolean;
 }
 
-const { content } = Astro.props;
+const { content, preview = false } = Astro.props;
 const lang = content.language;
 const pl = lang === "pl";
 const { html } = articleBodyToHtml(content.body);
@@ -116,75 +117,77 @@ const bodyHtml = markArticleIntro(html);
             </details>
           </nav>
         )}
-        <div
-          class="article-share"
-          data-share-path={content.share.canonicalUrl}
-          data-share-title={content.share.title}
-          data-copied={content.share.copied}
-          data-failed={content.share.copyFailed}
-        >
-          <button
-            class="share-trigger"
-            type="button"
-            aria-expanded="false"
-            aria-controls="share-options"
-            disabled
-          >
-            <ShareNetwork />
-            {content.share.trigger}
-          </button>
+        {!preview && (
           <div
-            id="share-options"
-            class="share-options"
-            popover="auto"
-            role="dialog"
-            aria-label={content.share.dialog}
+            class="article-share"
+            data-share-path={content.share.canonicalUrl}
+            data-share-title={content.share.title}
+            data-copied={content.share.copied}
+            data-failed={content.share.copyFailed}
           >
-            <div class="share-options-heading">
-              <strong>{content.share.dialog}</strong>
-              <button
-                class="share-close"
-                type="button"
-                aria-label={content.share.close}
-              >
-                <CloseGlyph />
-              </button>
-            </div>
-            <div class="share-actions">
-              <button class="share-option" type="button" data-share="copy">
-                <LinkGlyph />
-                <span>{content.share.copy}</span>
-              </button>
-              <a class="share-option" data-share="email">
-                <MailGlyph />
-                <span>{content.share.email}</span>
-              </a>
-              <a
-                class="share-option"
-                data-share="facebook"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FacebookGlyph />
-                <span>{content.share.facebook}</span>
-              </a>
-              <a
-                class="share-option"
-                data-share="whatsapp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <WhatsAppGlyph />
-                <span>{content.share.whatsapp}</span>
-              </a>
-            </div>
-            <p class="share-status" role="status" aria-live="polite"></p>
-            <div class="share-copy-fallback" hidden>
-              <label for="share-url">{content.share.manual}</label>
-              <input id="share-url" type="url" readonly />
+            <button
+              class="share-trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="share-options"
+              disabled
+            >
+              <ShareNetwork />
+              {content.share.trigger}
+            </button>
+            <div
+              id="share-options"
+              class="share-options"
+              popover="auto"
+              role="dialog"
+              aria-label={content.share.dialog}
+            >
+              <div class="share-options-heading">
+                <strong>{content.share.dialog}</strong>
+                <button
+                  class="share-close"
+                  type="button"
+                  aria-label={content.share.close}
+                >
+                  <CloseGlyph />
+                </button>
+              </div>
+              <div class="share-actions">
+                <button class="share-option" type="button" data-share="copy">
+                  <LinkGlyph />
+                  <span>{content.share.copy}</span>
+                </button>
+                <a class="share-option" data-share="email">
+                  <MailGlyph />
+                  <span>{content.share.email}</span>
+                </a>
+                <a
+                  class="share-option"
+                  data-share="facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookGlyph />
+                  <span>{content.share.facebook}</span>
+                </a>
+                <a
+                  class="share-option"
+                  data-share="whatsapp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WhatsAppGlyph />
+                  <span>{content.share.whatsapp}</span>
+                </a>
+              </div>
+              <p class="share-status" role="status" aria-live="polite"></p>
+              <div class="share-copy-fallback" hidden>
+                <label for="share-url">{content.share.manual}</label>
+                <input id="share-url" type="url" readonly />
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </aside>
       <div class="article-center">
         <article
@@ -893,6 +896,7 @@ const bodyHtml = markArticleIntro(html);
     width: 96px;
     height: 120px;
     object-fit: cover;
+    object-position: 50% 50%;
     border-radius: 16px;
   }
   .article3a .author-box h2 {
@@ -1444,6 +1448,7 @@ const bodyHtml = markArticleIntro(html);
     width: 96px;
     height: 120px;
     object-fit: cover;
+    object-position: 50% 50%;
     border-radius: 16px;
   }
   @container page3a (max-width: 767px) {

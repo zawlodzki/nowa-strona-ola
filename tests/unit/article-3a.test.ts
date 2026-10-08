@@ -48,6 +48,7 @@ describe("Article3a mapper", () => {
     expect(view.sources).toEqual([]);
     expect(view.hero.objectPosition).toBe("50% 55%");
     expect(view.byline.photo.objectPosition).toBe("50% 25%");
+    expect(view.authors[0]?.photo.objectPosition).toBe("50% 50%");
     expect(
       view.jsonLd["@graph"].some((node) => node["@type"] === "FAQPage"),
     ).toBe(true);

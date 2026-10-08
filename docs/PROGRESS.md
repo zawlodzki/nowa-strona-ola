@@ -28,8 +28,6 @@ zakresem).
 
 ### Sesja poprawek wizualnych BlogCollection3a — 08.10.2026
 
-### Sesja poprawek wizualnych BlogCollection3a — 08.10.2026
-
 Zasada Grzesia: nic nie wypada i nic się nie upraszcza. Odbiór
 `compare-blog-p1-desktop.png` / `compare-blog-p2-desktop.png` odrzucił pustą
 listę różnic. Poprawki na tym samym branchu `cursor/blog-collection-3a-1697`.

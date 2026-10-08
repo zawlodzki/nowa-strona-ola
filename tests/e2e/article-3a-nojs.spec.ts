@@ -20,5 +20,8 @@ test("article remains readable without JavaScript and does not POST", async ({
   await expect(page.locator(".article-recommendations")).toBeVisible();
   await expect(page.locator("#faq")).toBeVisible();
   await expect(page.locator("#newsletter")).toBeVisible();
+  const form = page.locator("#newsletter form");
+  await expect(form).not.toHaveAttribute("method", "post");
+  await expect(form.locator('button[type="submit"]')).toBeDisabled();
   expect(posts).toEqual([]);
 });

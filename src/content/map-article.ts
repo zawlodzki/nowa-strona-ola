@@ -348,7 +348,7 @@ export function mapArticle(
     author.photo?.alt?.trim() || author.name,
     96,
     120,
-    "50% 25%",
+    "50% 50%",
   );
   const graph: Record<string, unknown>[] = [
     {

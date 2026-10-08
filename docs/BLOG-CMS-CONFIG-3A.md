@@ -156,8 +156,9 @@ pokazać zaznaczony URL do ręcznego skopiowania. Linki społecznościowe otwier
 narzędzie udostępniania dopiero po akcji czytelnika, bez wcześniejszych połączeń
 z Facebook/WhatsApp. E-mail otwiera klienta poczty; nic nie jest wysyłane automatycznie.
 
-- [ ] Przenieść interakcje do szablonu Astro, wykorzystując opublikowane dane
-      `related[]` i canonical. Sprawdzić próg, brak referencji i chroniony preview.
+- [x] Przenieść interakcje do szablonu Astro, wykorzystując opublikowane dane
+      `related[]` i canonical (kod i fixture). Podgląd szkicu nie renderuje
+      przycisku udostępniania. Content Lake nie był zapisywany.
 
 ## FAQ między e-bookami a newsletterem — 2026-10-06
 
@@ -166,19 +167,17 @@ Dodano cztery przykładowe pytania o przygotowanie do konsultacji. Natywne
 rozwinięta. FAQ jest poza rich textem, nie trafia do lewego spisu ani obliczenia
 połowy tekstu. Kolejność szablonu: e-booki → FAQ → newsletter.
 
-Proponowane nowe pole `article.faq` typu istniejącego `faqSection`:
-`title`, `lead`, `items[].question`, `items[].answer`. Nie tworzyć równoległego
-modelu pytań. To pole jeszcze nie jest wdrożone w artykule; istniejący typ
-[FAQ](../studio/schema-types/blocks/page-sections.ts) i
-[renderer Astro](../src/sections/FaqSection.astro) są punktem wyjścia.
-Pole opcjonalne: bez danych pominąć sekcję i jej dane strukturalne. Zachować
-istniejące walidacje typu oraz dodać kontrolę powtarzających się pytań.
+Proponowane pole `article.faq` typu istniejącego `faqSection` jest w schemacie
+kodu od 08.10.2026: `title`, `lead`, `items[].question`, `items[].answer`.
+Nie powstał równoległy model pytań. Pole jest opcjonalne. Pusta wartość pomija
+sekcję i węzeł `FAQPage` w grafie JSON-LD. Treść fixture’a jest propozycją
+redakcyjną, nie zapisem w Content Lake. HTML, Markdown i JSON-LD biorą te same
+pytania i odpowiedzi. Graf strony zawiera `BlogPosting`, `BreadcrumbList`
+i `FAQPage`, gdy FAQ jest wypełnione.
 
-Mockup zawiera `FAQPage` JSON-LD dokładnie z czterema widocznymi pytaniami
-oraz pełnymi odpowiedziami. Docelowo HTML, Markdown i JSON-LD generować z tego
-samego `article.faq`, bez ręcznie powielanych odpowiedzi. Dane włączyć do grafu
-strony i artykułu, z identyfikatorami z canonical; nie tworzyć drugiego sprzecznego
-grafu. Przykładowe odpowiedzi wymagają akceptacji redakcyjnej przed publikacją.
+- [x] Dodać `article.faq`, GROQ/TypeGen/mapper oraz JSON-LD z widocznych odpowiedzi
+      (kod i fixture; bez zapisu do Content Lake).
+- [ ] Zweryfikować w Studio brak FAQ, powtórzone pytania i nieopublikowany szkic.
 
 `FAQPage` opisuje znaczenie treści zgodnie ze
 [Schema.org](https://schema.org/FAQPage). Nie traktować go jako obietnicy efektu
@@ -186,9 +185,6 @@ SEO: Google usunął wyświetlanie FAQ rich results od 7 maja 2026,
 [aktualizacja dokumentacji](https://developers.google.com/search/updates#may-2026).
 Wartość tej sekcji to dostępne odpowiedzi na pytania czytelniczek; makieta nadal
 ma `noindex`.
-
-- [ ] Dodać `article.faq`, GROQ/TypeGen/mapper, wspólny renderer oraz serializer
-      Markdown i JSON-LD; zweryfikować brak FAQ i zgodność pełnych odpowiedzi.
 
 ### Położenie rekomendacji — korekta 2026-10-06
 

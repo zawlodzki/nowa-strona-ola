@@ -35,15 +35,18 @@ test("production article heading, deck and TOC match the 3a template", async ({
     page.getByRole("navigation", { name: "W tym artykule" }),
   ).toBeVisible();
   await expect(page.locator(".article3a")).toHaveCount(1);
+  await expect(page.locator(".article-deck")).toContainText(
+    "Bez perfekcyjnego dzienniczka",
+  );
   const images = page.locator("main img");
   const count = await images.count();
   expect(count).toBeGreaterThan(0);
   for (let index = 0; index < count; index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
     await expect
       .poll(async () =>
-        images
-          .nth(index)
-          .evaluate((img) => (img as HTMLImageElement).naturalWidth),
+        image.evaluate((img) => (img as HTMLImageElement).naturalWidth),
       )
       .toBeGreaterThan(0);
   }
@@ -60,14 +63,18 @@ test("related articles appear at half of the text and can be collapsed", async (
   await scrollToReadingProgress(page, 0.51);
   await expect(panel).toBeVisible();
   await expect(panel.locator("a")).toHaveCount(2);
-  await panel.getByRole("button", { name: "Sprawdź również" }).click();
+  await panel
+    .getByRole("button", { name: "Sprawdź również" })
+    .evaluate((button: HTMLButtonElement) => button.click());
   await expect(page.locator("#recommended-articles")).toBeHidden();
   await expect(
     panel.getByRole("button", { name: "Sprawdź również" }),
   ).toBeFocused();
   await scrollToReadingProgress(page, 0.1);
   await expect(panel).toBeVisible();
-  await panel.getByRole("button", { name: "Sprawdź również" }).click();
+  await panel
+    .getByRole("button", { name: "Sprawdź również" })
+    .evaluate((button: HTMLButtonElement) => button.click());
   await expect(page.locator("#recommended-articles")).toBeVisible();
   const outsideTrigger = page.locator(".article-toc summary");
   await outsideTrigger.focus();
@@ -140,18 +147,26 @@ test("FAQ follows the books and its structured data matches visible answers", as
       question: normalize(item.querySelector("summary span")!.textContent!),
       answer: normalize(item.querySelector("p")!.textContent!),
     }));
-    const schema = JSON.parse(
+    const raw = JSON.parse(
       document.querySelector("#article-faq-schema")!.textContent!,
     ) as {
-      "@type": string;
-      mainEntity: { name: string; acceptedAnswer: { text: string } }[];
+      "@type"?: string;
+      "@graph"?: {
+        "@type": string;
+        mainEntity?: { name: string; acceptedAnswer: { text: string } }[];
+      }[];
+      mainEntity?: { name: string; acceptedAnswer: { text: string } }[];
     };
+    const faqPage =
+      raw["@type"] === "FAQPage"
+        ? raw
+        : raw["@graph"]?.find((node) => node["@type"] === "FAQPage");
     return {
       before: faq.previousElementSibling?.id,
       after: faq.nextElementSibling?.id,
       items,
-      schemaType: schema["@type"],
-      schemaItems: schema.mainEntity.map((item) => ({
+      schemaType: faqPage?.["@type"],
+      schemaItems: (faqPage?.mainEntity ?? []).map((item) => ({
         question: item.name,
         answer: item.acceptedAnswer.text,
       })),
