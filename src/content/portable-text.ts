@@ -366,13 +366,22 @@ export function articleBodyToMarkdown(blocks: unknown): string {
     }
     if (block._type === "articleTable") {
       const headers = (block.headers ?? []).map((header) => header ?? "");
-      lines.push(`| ${headers.join(" | ")} |`);
-      lines.push(`| ${headers.map(() => "---").join(" | ")} |`);
-      for (const row of block.rows ?? []) {
-        lines.push(
-          `| ${(row.cells ?? []).map((cell) => cell ?? "").join(" | ")} |`,
-        );
-      }
+      const rows = (block.rows ?? []).map((row) =>
+        (row.cells ?? []).map((cell) => cell ?? ""),
+      );
+      const widths = headers.map((header, index) =>
+        Math.max(
+          header.length,
+          ...rows.map((row) => (row[index] ?? "").length),
+        ),
+      );
+      const format = (cells: string[]) =>
+        `| ${cells
+          .map((cell, index) => (cell ?? "").padEnd(widths[index] ?? 0))
+          .join(" | ")} |`;
+      lines.push(format(headers));
+      lines.push(`| ${widths.map((width) => "-".repeat(width)).join(" | ")} |`);
+      for (const row of rows) lines.push(format(row));
       if (block.caption) lines.push("", block.caption);
       lines.push("");
       continue;

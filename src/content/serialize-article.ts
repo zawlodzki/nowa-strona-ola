@@ -29,7 +29,7 @@ export function serializeArticle(view: Article3aView): string {
     }
   }
   if (view.ebooks) {
-    parts.push("", heading(2, view.ebooks.title), "", view.ebooks.lead);
+    parts.push("", heading(2, view.ebooks.title), "", view.ebooks.lead, "");
     for (const ebook of view.ebooks.items) {
       parts.push(`- [${ebook.title}](${ebook.href})`);
     }
