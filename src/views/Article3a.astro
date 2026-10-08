@@ -384,21 +384,14 @@ const bodyHtml = markArticleIntro(html);
 </main>
 
 <script>
-  const shareRoot = document.querySelector(".article-share");
-  const shareTrigger = document.querySelector(".share-trigger");
-  const sharePanel = document.querySelector("#share-options");
-  const copyAction = document.querySelector('[data-share="copy"]');
-  const shareStatus = document.querySelector(".share-status");
-  const shareFallback = document.querySelector(".share-copy-fallback");
-  const shareInput = document.querySelector("#share-url");
-  if (
-    shareRoot instanceof HTMLElement &&
-    shareTrigger instanceof HTMLButtonElement &&
-    sharePanel instanceof HTMLElement &&
-    copyAction instanceof HTMLButtonElement &&
-    shareStatus instanceof HTMLElement &&
-    shareFallback instanceof HTMLElement &&
-    shareInput instanceof HTMLInputElement
+  function enhanceShare(
+    shareRoot: HTMLElement,
+    shareTrigger: HTMLButtonElement,
+    sharePanel: HTMLElement,
+    copyAction: HTMLButtonElement,
+    shareStatus: HTMLElement,
+    shareFallback: HTMLElement,
+    shareInput: HTMLInputElement,
   ) {
     const shareUrl = new URL(
       shareRoot.dataset.sharePath || window.location.pathname,
@@ -422,7 +415,7 @@ const bodyHtml = markArticleIntro(html);
     }
     shareInput.value = shareUrl.href;
     shareTrigger.disabled = false;
-    let closeTimer;
+    let closeTimer: number | undefined;
     let sharePinned = false;
     const shareOpen = () => sharePanel.matches(":popover-open");
     function positionShare() {
@@ -525,17 +518,11 @@ const bodyHtml = markArticleIntro(html);
     window.addEventListener("resize", positionShare);
   }
 
-  const recommendations = document.querySelector(".article-recommendations");
-  const recommendationsTrigger = document.querySelector(
-    ".recommendations-trigger",
-  );
-  const recommendationsList = document.querySelector("#recommended-articles");
-  const articleBody = document.querySelector(".article-richtext");
-  if (
-    recommendations instanceof HTMLElement &&
-    recommendationsTrigger instanceof HTMLButtonElement &&
-    recommendationsList instanceof HTMLElement &&
-    articleBody instanceof HTMLElement
+  function enhanceRecommendations(
+    recommendations: HTMLElement,
+    recommendationsTrigger: HTMLButtonElement,
+    recommendationsList: HTMLElement,
+    articleBody: HTMLElement,
   ) {
     recommendations.hidden = true;
     recommendations.dataset.enhanced = "true";
@@ -566,6 +553,53 @@ const bodyHtml = markArticleIntro(html);
     new ResizeObserver(queueReadingProgress).observe(articleBody);
     document.fonts.ready.then(queueReadingProgress);
     updateReadingProgress();
+  }
+
+  const shareRoot = document.querySelector(".article-share");
+  const shareTrigger = document.querySelector(".share-trigger");
+  const sharePanel = document.querySelector("#share-options");
+  const copyAction = document.querySelector('[data-share="copy"]');
+  const shareStatus = document.querySelector(".share-status");
+  const shareFallback = document.querySelector(".share-copy-fallback");
+  const shareInput = document.querySelector("#share-url");
+  if (
+    shareRoot instanceof HTMLElement &&
+    shareTrigger instanceof HTMLButtonElement &&
+    sharePanel instanceof HTMLElement &&
+    copyAction instanceof HTMLButtonElement &&
+    shareStatus instanceof HTMLElement &&
+    shareFallback instanceof HTMLElement &&
+    shareInput instanceof HTMLInputElement
+  ) {
+    enhanceShare(
+      shareRoot,
+      shareTrigger,
+      sharePanel,
+      copyAction,
+      shareStatus,
+      shareFallback,
+      shareInput,
+    );
+  }
+
+  const recommendations = document.querySelector(".article-recommendations");
+  const recommendationsTrigger = document.querySelector(
+    ".recommendations-trigger",
+  );
+  const recommendationsList = document.querySelector("#recommended-articles");
+  const articleBody = document.querySelector(".article-richtext");
+  if (
+    recommendations instanceof HTMLElement &&
+    recommendationsTrigger instanceof HTMLButtonElement &&
+    recommendationsList instanceof HTMLElement &&
+    articleBody instanceof HTMLElement
+  ) {
+    enhanceRecommendations(
+      recommendations,
+      recommendationsTrigger,
+      recommendationsList,
+      articleBody,
+    );
   }
 </script>
 
