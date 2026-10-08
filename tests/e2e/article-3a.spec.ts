@@ -191,9 +191,7 @@ test("FAQ follows the books and its structured data matches visible answers", as
   expect(content.schemaItems).toEqual(content.items);
 });
 
-test("English article keeps the 3a shell and translation link", async ({
-  page,
-}) => {
+test("English article keeps the 3a shell", async ({ page }) => {
   await openArticle(
     page,
     "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
@@ -204,8 +202,14 @@ test("English article keeps the 3a shell and translation link", async ({
   await expect(
     page.getByRole("navigation", { name: "In this article" }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Polski" })).toHaveAttribute(
-    "href",
-    "/blog/przygotowanie-do-konsultacji-pcos/",
-  );
+  await expect(
+    page
+      .getByRole("navigation", { name: "Primary navigation" })
+      .getByRole("link", { name: "Polski" }),
+  ).toHaveCount(0);
+  await expect(
+    page
+      .getByRole("navigation", { name: "Primary navigation" })
+      .getByRole("link", { name: "E-books" }),
+  ).toBeVisible();
 });

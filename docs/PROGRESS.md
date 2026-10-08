@@ -1,10 +1,146 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (strony prawne `legalPage`; scalenie main: dyplom #40 `ce5b675`, social #37 `8bc80da`, matcha #36).
+Aktualizacja: 2026-10-08 (import 3a oraz strony prawne z main `d7ba6a1`).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Sesja importu 3a, 08.10.2026
+
+Jeden skrypt `npm run import:3a` składa dokumenty 3a z fixture’ów i seedów.
+Domyślnie jest suchy przebieg. Zapis do Sanity wymaga
+`SANITY_API_WRITE_TOKEN` i `--dataset production`. W tej sesji tokenu nie było
+i nic nie zostało wysłane.
+
+Suchy przebieg, projekt `dyuqkn8c`, dataset niepodany, porównanie z datasetem
+pominięte:
+
+- delete: article 6, page 9, author 2, category 4, form 2, service 4,
+  testimonial 4, redirect 1, sanity.imageAsset 3 (razem 35)
+- createOrReplace: article 22, author 2, category 10, ebook 12, form 2,
+  legalPage 6, page 8, service 2, siteSettings 2, testimonial 12 (razem 78)
+- pending: brak. Po scaleniu `main` (`d7ba6a1`, PR #39) limit etykiety zgody
+  to 400, a schemat `legalPage` i fixture’y są na tej gałęzi. Dwa formularze
+  newslettera i sześć stron prawnych są w transakcji. `--write` nie jest
+  już blokowany przez stan pending.
+
+`siteSettings` bierze nawigację i indeks bloga z jednego fixture’a.
+Angielski slug ebooka PCOS to `supplements-in-pcos`.
+`cover.alt` i `cover.tone` pochodzą z fixture’ów.
+Klucz rastra zostaje w `rasterKey`, a zapytanie GROQ czyta
+`coalesce(image.asset->url, rasterKey)`.
+
+Artykuł 01 (`article-blog-01-pl/en`) ma treść z
+`src/content/article-featured.ts`. Pozostałe 10 par ma treść zastępczą z
+`articleBody` w `src/sanity/blog-collection-fixtures.ts` i pole
+`placeholderBody: true` (etykieta w Studio: „Treść zastępcza”).
+
+| klucz | PL                                    | EN                                                     |
+| ----- | ------------------------------------- | ------------------------------------------------------ |
+| 02    | codziennie-posilki-przy-pcos          | everyday-meals-with-pcos                               |
+| 03    | pytania-o-pcos-przed-wizyta           | sorting-pcos-questions-before-an-appointment           |
+| 04    | wyniki-badan-na-konsultacje           | lab-results-what-to-bring-to-a-consultation            |
+| 05    | regularne-posilki                     | regular-meals-when-every-day-looks-different           |
+| 06    | insulinoopornosc-rozmowa-o-odzywianiu | insulin-resistance-starting-the-nutrition-conversation |
+| 07    | suplementy-w-pcos-pytania             | pcos-supplements-sort-questions-before-you-buy         |
+| 08    | dzienniczek-posilkow                  | a-food-diary-without-the-pressure-of-perfection        |
+| 09    | cel-konsultacji                       | naming-the-goal-of-a-consultation                      |
+| 10    | zakupy-spozywcze                      | grocery-shopping-that-fits-your-week                   |
+| 11    | sprzeczne-rady-o-pcos                 | conflicting-advice-on-pcos                             |
+
+Angielskie tytuły SEO skrócone do prefiksu istniejącego tytułu, bo przekraczały
+60 znaków. Widoczny tytuł zostaje pełny.
+
+- 06: `Insulin resistance: where to start the nutrition` (48)
+- 09: `What do you want to change? How to name the goal of a` (53)
+- 11: `Conflicting advice on PCOS: write down what you want to` (55)
+
+PR #39 jest na `main` jako `d7ba6a1`. Ta gałąź wciąga go zwykłym merge.
+Walidacja offline obejmuje 78 dokumentów, w tym `form` i `legalPage`.
+
+Walidacja offline `scripts/validate-content-lake.ts` (schemat repo, bez tokenu):
+78 dokumentów, 0 błędów. `sanity documents validate` nie było uruchomione,
+bo CLI wymaga logowania. Wariant liczb na O mnie może mieć 0 albo 3 wyróżnień,
+bo fixture ma pustą listę.
+
+`npm run test:content-lake` zbudował 54 strony z wygenerowanego NDJSON.
+Po korekcie kadrów CSS gzip to 29 797 B, JS gzip 5 770 B.
+
+Korekta widoku po przeglądzie zrzutów. Style `img` w widokach 3a nie
+schodziły do `SiteImage`, więc portret wychodził z różowej karty, a loga
+zostawały w kolorze i w obciętym kadrze. Selektory są teraz `:global(img)`.
+Loga partnerów biorą wymiary pliku i `fit="contain"`. Lead strony głównej
+na wąskim kontenerze ma 16 px i interlinie 1,5, jak w makiecie.
+Podpis hero konsultacji to „Ola Olesiewicz”. Zdanie o Cal.com zostało pod
+ofertą, bez dopisku „To nie jest potwierdzenie wizyty.” Ten dopisek jest
+tylko w `bookingEditorNote`. Nagłówek 3a nie dokłada „English” ani „Polski”.
+Lista bloga nie ma rzędu filtrów kategorii. Adresy `/en/` i stron kategorii
+zostają.
+
+Pełne strony, nie sam pierwszy ekran. Zdjęcia niżej (nakładka jedzenia,
+portret przy konsultacji na stronie głównej i na O mnie, zdjęcie przebiegu
+konsultacji) są w HTML-u. Poprzedni zrzut `fullPage` robił je, zanim
+`loading="lazy"` zdążyło je zdekodować, więc karta wyglądała na pustą.
+Nowy przebieg przewija każde `img` i czeka na `decode`.
+
+„450+” łamało się w „45” i „0+”, bo `overflow-wrap: anywhere` obejmowało
+`strong`. Selektor jest jak w makiecie, bez `strong`, a liczba ma
+`white-space: nowrap`. Sekcja „Zaczynam od Ciebie” używa tej samej siatki
+kart co `.cherry .results` (pierwsza karta na dwie kolumny, dwie kolejne
+obok siebie). Kadry strony głównej biorą wysokości z makiety cherry.
+Portret „Jestem Ola.” ma 540 px, nakładka jedzenia 220×150, zdjęcie
+konsultacji 520 px (na 390 px jest 280 px). Dyplom na O mnie zostaje.
+
+`npm run test:content-lake` buduje fixture do `.cache/dist-fixture`, potem
+content-lake do `dist`, i uruchamia `scripts/compare-fixture-lake.mjs`.
+Skrypt pada, gdy sekcja fixture ma inne zdjęcia (liczba, plik, `object-fit`,
+`naturalWidth`) albo inny szkielet DOM niż content-lake. Obejmuje 7 stron
+makiety i 6 stron prawnych. Ostatni wynik to 13 stron bez różnic.
+
+Inwentarz zdjęć z tego samego przebiegu leży w
+`/opt/cursor/artifacts/screenshots/photo-inventory.json`.
+Portret hero, loga, portret O mnie, nakładka jedzenia i zdjęcia konsultacji
+mają ten sam `object-fit`, pozycję i rozmiar co makieta (różnica boku do 12 px).
+
+`npm run verify` po scaleniu stron prawnych zakończone kodem 0 na Node 24.21.0.
+Format, tokeny, lint, `astro check` (0 błędów), **133** testy jednostkowe
+(23 pliki), build, workspace’y, `check-build`, **171** E2E
+Chromium/Firefox/WebKit i budowa z wygenerowanych dokumentów. Porównanie
+fixture z content-lake: 13 stron, te same sekcje, zdjęcia i DOM. CSS gzip
+w tamtym przebiegu to 29 823 B, JS gzip 5 770 B.
+
+Potem „450+” na 390 px dostało 78 px, jak w makiecie cherry, i zostaje w
+jednej linii obok podpisu. Pomiar obu stron: wysokość 78 px, `sameRow`.
+Testy layoutu 320/390/1440 na Chromium, Firefox i WebKit przeszły.
+CSS gzip po tej korekcie to 29 804 B.
+
+verify-ola `ola-1791460363` na `http://127.0.0.1:4340`, doctor zielony
+(treść z wygenerowanego NDJSON, bez przebudowy w trakcie sesji).
+Zestawienia mają makietę po lewej i build po prawej, desktop 1440 i mobile 390:
+
+- `/opt/cursor/artifacts/screenshots/homepage-desktop.png`
+- `/opt/cursor/artifacts/screenshots/homepage-mobile.png`
+- `/opt/cursor/artifacts/screenshots/about-desktop.png`
+- `/opt/cursor/artifacts/screenshots/about-mobile.png`
+- `/opt/cursor/artifacts/screenshots/consultation-desktop.png`
+- `/opt/cursor/artifacts/screenshots/consultation-mobile.png`
+- `/opt/cursor/artifacts/screenshots/ebook-desktop.png`
+- `/opt/cursor/artifacts/screenshots/ebook-mobile.png`
+- `/opt/cursor/artifacts/screenshots/ebooks-desktop.png`
+- `/opt/cursor/artifacts/screenshots/ebooks-mobile.png`
+- `/opt/cursor/artifacts/screenshots/blog-desktop.png`
+- `/opt/cursor/artifacts/screenshots/blog-mobile.png`
+- `/opt/cursor/artifacts/screenshots/article-placeholder-desktop.png`
+- `/opt/cursor/artifacts/screenshots/article-placeholder-mobile.png`
+
+Pełne strony z przeglądarki verify-ola (desktop 1280) leżą w
+`/tmp/ola-verify-evidence/ola-1791457722/`.
+
+Następny krok: odbiór PR, potem `--write` u koordynatora. Przed zapisem
+wyłączyć webhook produkcji. Drugi `--write` padnie, jeśli 35 identyfikatorów
+z listy już nie istnieje. Nie dotykać `system.*` ani szkicu
+`sanity.previewUrlSecret`.
 
 ### Sesja scalenia main w PR #39, 08.10.2026
 

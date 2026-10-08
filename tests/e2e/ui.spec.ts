@@ -1,5 +1,23 @@
-import { test, expect } from "@playwright/test";
+import { expect, test, type Locator } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+
+async function expectDecodedWidth(locator: Locator, width: number) {
+  await locator.scrollIntoViewIfNeeded();
+  await expect
+    .poll(async () =>
+      locator.evaluate(async (img: HTMLImageElement) => {
+        if (!img.complete || img.naturalWidth === 0) {
+          try {
+            await img.decode();
+          } catch {
+            return 0;
+          }
+        }
+        return img.naturalWidth;
+      }),
+    )
+    .toBe(width);
+}
 
 for (const [path, openName, closeName] of [
   ["/ui/", "Jak pracujemy", "Zamknij"],
@@ -43,9 +61,11 @@ test("form validation, error recovery and no network submission", async ({
     if (request.method() === "POST") requests.push(request.url());
   });
   await page.goto("/");
-  await expect(
-    page.getByRole("link", { name: "English", exact: true }).first(),
-  ).toHaveAttribute("href", "/en/");
+  const primaryNav = page.getByRole("navigation", { name: "Nawigacja główna" });
+  await expect(primaryNav.getByRole("link", { name: "E-booki" })).toBeVisible();
+  await expect(primaryNav.getByRole("link", { name: "English" })).toHaveCount(
+    0,
+  );
   const submit = page.getByRole("button", {
     name: "Chcę otrzymywać newsletter",
     exact: true,
@@ -98,6 +118,54 @@ for (const width of [320, 390, 1440]) {
           ).length,
       );
     expect(visibleLogos).toBe(1);
+    const heroImage = page.locator(".home3a-portrait img");
+    const heroBox = await heroImage.evaluate((img) => {
+      const style = getComputedStyle(img);
+      const lead = document.querySelector(".home3a .ao-hero .ao-lead");
+      const leadStyle = lead ? getComputedStyle(lead) : null;
+      const logo = document.querySelector(".home3a-partners img");
+      const logoStyle = logo ? getComputedStyle(logo) : null;
+      return {
+        fit: style.objectFit,
+        position: style.objectPosition,
+        height: Math.round(img.getBoundingClientRect().height),
+        leadSize: leadStyle?.fontSize ?? "",
+        leadLine: leadStyle ? parseFloat(leadStyle.lineHeight) : 0,
+        logoFilter: logoStyle?.filter ?? "",
+        logoHeight: logo ? Math.round(logo.getBoundingClientRect().height) : 0,
+      };
+    });
+    expect(heroBox.fit).toBe("contain");
+    expect(heroBox.position).toBe("50% 100%");
+    if (width === 1440) {
+      expect(heroBox.height).toBe(550);
+      expect(heroBox.leadSize).toBe("18px");
+      expect(heroBox.leadLine).toBe(27);
+      expect(heroBox.logoHeight).toBe(43);
+    }
+    if (width === 390 || width === 320) {
+      expect(heroBox.leadSize).toBe("16px");
+      expect(heroBox.leadLine).toBe(24);
+    }
+    if (width === 390) {
+      expect(heroBox.height).toBe(410);
+      expect(heroBox.logoHeight).toBe(32);
+    }
+    expect(heroBox.logoFilter).toContain("grayscale");
+    const metric = await page
+      .locator(".home3a-count strong")
+      .evaluate((element) => {
+        const style = getComputedStyle(element);
+        const fontSize = parseFloat(style.fontSize);
+        return {
+          text: (element.textContent ?? "").replace(/\s+/g, ""),
+          oneLine: element.getBoundingClientRect().height <= fontSize * 1.25,
+        };
+      });
+    expect(metric.text).toBe("450+");
+    expect(metric.oneLine).toBe(true);
+    await expectDecodedWidth(page.locator(".home3a-about__food"), 1536);
+    await expectDecodedWidth(page.locator("#konsultacje-panel img"), 1536);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -243,6 +311,32 @@ test("about page Polish and English plus missing Polish under English slug", asy
 }) => {
   await page.goto("/o-mnie/");
   await expect(page.getByRole("heading", { name: /Jestem Ola/ })).toBeVisible();
+  const aboutPortrait = page.locator(".about3a-portrait img");
+  await expect(aboutPortrait).toHaveCSS("object-fit", "cover");
+  await expect(aboutPortrait).toHaveCSS("border-radius", "24px");
+  await expect(aboutPortrait).toHaveCSS("height", "540px");
+  const approachGrid = await page
+    .locator(".about3a-panels")
+    .evaluate((element) => {
+      const articles = [...element.querySelectorAll(":scope > article")];
+      const grid = element.getBoundingClientRect();
+      const boxes = articles.map((article) => article.getBoundingClientRect());
+      const [first, second, third] = boxes;
+      return {
+        count: articles.length,
+        firstFillsRow:
+          first !== undefined && Math.abs(first.width - grid.width) < 4,
+        pairSharesRow:
+          second !== undefined &&
+          third !== undefined &&
+          Math.abs(second.top - third.top) < 2 &&
+          third.left >= second.right - 1,
+      };
+    });
+  expect(approachGrid.count).toBeGreaterThanOrEqual(3);
+  expect(approachGrid.firstFillsRow).toBe(true);
+  expect(approachGrid.pairSharesRow).toBe(true);
+  await expectDecodedWidth(page.locator("#konsultacja-panel img"), 1536);
   await expect(
     page.getByRole("heading", { name: "Wiedza, którą możesz sprawdzić." }),
   ).toBeVisible();
@@ -281,8 +375,12 @@ test("about page Polish and English plus missing Polish under English slug", asy
       }),
   ).toHaveAttribute("aria-current", "page");
   await expect(
-    page.getByRole("link", { name: "English" }).first(),
-  ).toHaveAttribute("href", "/en/about/");
+    page
+      .getByRole("navigation", { name: "Nawigacja główna" })
+      .getByRole("link", {
+        name: "English",
+      }),
+  ).toHaveCount(0);
 
   const posts: string[] = [];
   page.on("request", (request) => {
@@ -311,8 +409,12 @@ test("about page Polish and English plus missing Polish under English slug", asy
     .toBeGreaterThan(0);
   await expect(page.getByText("Space for the diploma scan")).toHaveCount(0);
   await expect(
-    page.getByRole("link", { name: "Polski" }).first(),
-  ).toHaveAttribute("href", "/o-mnie/");
+    page
+      .getByRole("navigation", { name: "Primary navigation" })
+      .getByRole("link", {
+        name: "Polski",
+      }),
+  ).toHaveCount(0);
 
   const missing = await page.goto("/en/o-mnie/");
   expect(missing?.status()).toBe(404);
@@ -335,9 +437,23 @@ test("consultation page Polish and English plus missing Polish under English slu
   for (const link of await booking.all()) {
     await expect(link).toHaveAttribute("href", "https://cal.com");
   }
-  await expect(
-    page.getByText(/To nie jest potwierdzenie wizyty\./).first(),
-  ).toBeVisible();
+  await expect(page.locator(".ao-hero")).not.toContainText("Podgląd oferty");
+  await expect(page.locator("#cena")).toContainText(
+    "Podgląd oferty: przycisk prowadzi tymczasowo do Cal.com. Właściwy kalendarz tej konsultacji zostanie dodany później.",
+  );
+  await expect(page.getByText("To nie jest potwierdzenie wizyty.")).toHaveCount(
+    0,
+  );
+  await expect(page.locator(".consult3a-portrait strong")).toHaveText(
+    "Ola Olesiewicz",
+  );
+  await expect(page.locator(".consult3a-portrait img")).toHaveCSS(
+    "object-fit",
+    "contain",
+  );
+  const processImage = page.locator(".consult3a-process img");
+  await expect(processImage).toHaveCSS("object-fit", "cover");
+  await expectDecodedWidth(processImage, 1536);
   await expect(
     page.getByRole("link", { name: "Konsultacja · 450 zł" }),
   ).toHaveAttribute("href", "#cena");
@@ -349,8 +465,12 @@ test("consultation page Polish and English plus missing Polish under English slu
       .getByRole("link", { name: "Konsultacje", exact: true }),
   ).toHaveAttribute("aria-current", "page");
   await expect(
-    page.getByRole("link", { name: "English" }).first(),
-  ).toHaveAttribute("href", "/en/consultations/");
+    page
+      .getByRole("navigation", { name: "Nawigacja główna" })
+      .getByRole("link", {
+        name: "English",
+      }),
+  ).toHaveCount(0);
 
   const answer = page.getByText(/Konsultacja nie zobowiązuje Cię do pakietu/);
   await expect(answer).toBeHidden();
@@ -367,8 +487,10 @@ test("consultation page Polish and English plus missing Polish under English slu
   );
   await expect(page.locator("#cena")).toContainText("450 PLN");
   await expect(
-    page.getByRole("link", { name: "Polski" }).first(),
-  ).toHaveAttribute("href", "/konsultacje/");
+    page
+      .getByRole("navigation", { name: "Primary navigation" })
+      .getByRole("link", { name: "Polski" }),
+  ).toHaveCount(0);
 
   const missing = await page.goto("/en/konsultacje/");
   expect(missing?.status()).toBe(404);
@@ -405,8 +527,12 @@ test("ebook landing Polish and English plus missing Polish under English slug", 
     page.getByText(/nie pobiera płatności i nie potwierdza zakupu/),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "English" }).first(),
-  ).toHaveAttribute("href", "/en/ebooks/supplements-in-pcos/");
+    page
+      .getByRole("navigation", { name: "Nawigacja główna" })
+      .getByRole("link", {
+        name: "English",
+      }),
+  ).toHaveCount(0);
   expect(posts).toEqual([]);
 
   await page.goto("/en/ebooks/supplements-in-pcos/");
@@ -419,8 +545,10 @@ test("ebook landing Polish and English plus missing Polish under English slug", 
   await expect(page.locator("#cena")).toContainText("97");
   await expect(page.locator("#cena")).toContainText("PLN");
   await expect(
-    page.getByRole("link", { name: "Polski" }).first(),
-  ).toHaveAttribute("href", "/ebooki/suplementy-w-pcos/");
+    page
+      .getByRole("navigation", { name: "Primary navigation" })
+      .getByRole("link", { name: "Polski" }),
+  ).toHaveCount(0);
 
   const missingPolish = await page.goto("/en/ebooki/suplementy-w-pcos/");
   expect(missingPolish?.status()).toBe(404);
@@ -496,8 +624,10 @@ test("ebook collection Polish and English with categories, empty URL and no POST
     /Więcej jasności/,
   );
   await expect(
-    page.getByRole("link", { name: "Polski" }).first(),
-  ).toHaveAttribute("href", "/ebooki/");
+    page
+      .getByRole("navigation", { name: "Primary navigation" })
+      .getByRole("link", { name: "Polski" }),
+  ).toHaveCount(0);
 
   const missing = await page.goto("/en/ebooki/");
   expect(missing?.status()).toBe(404);
@@ -556,6 +686,9 @@ test("landing pages, blog and missing English translation", async ({
   await expect(
     page.getByRole("heading", { name: "Blog. Po Twojemu." }),
   ).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Kategorie" })).toHaveCount(
+    0,
+  );
   await expect(page.getByText("Wpisy 2–7 z 11")).toBeVisible();
   await page.goto("/blog/strona/2/");
   await expect(page.getByText("Wpisy 8–11 z 11")).toBeVisible();
@@ -586,10 +719,13 @@ test("landing pages, blog and missing English translation", async ({
   await expect(
     page.getByRole("navigation", { name: "W tym artykule" }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
-    "href",
-    "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
-  );
+  await expect(
+    page
+      .getByRole("navigation", { name: "Nawigacja główna" })
+      .getByRole("link", {
+        name: "English",
+      }),
+  ).toHaveCount(0);
 
   await page.goto("/tylko-pl/");
   await expect(

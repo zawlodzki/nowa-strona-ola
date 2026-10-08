@@ -28,7 +28,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "verify": "npm run format:check && npm run tokens:check && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e",
+    "verify": "npm run format:check && npm run tokens:check && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e && npm run test:content-lake",
     "test:build": "node scripts/check-build.mjs",
     "import:homepage": "node scripts/import-homepage-content.mjs",
     "import:about": "node scripts/import-about-content.mjs",
@@ -37,7 +37,9 @@
     "import:ebook-collection": "node scripts/import-ebook-collection.mjs",
     "import:blog-collection": "node scripts/import-blog-collection.mjs",
     "import:article": "node scripts/import-article.mjs",
+    "import:3a": "tsx scripts/import-3a.ts",
     "import:legal": "node scripts/import-legal.mjs",
+    "test:content-lake": "tsx scripts/simulate-content-build.ts",
     "tokens:generate": "node scripts/generate-tokens.mjs"
   },
   "dependencies": {
@@ -59,8 +61,10 @@
     "@types/node": "^22.20.2",
     "eslint": "^10.10.0",
     "eslint-plugin-astro": "^3.1.0",
+    "groq-js": "^2.0.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^1.0.0",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.70.0",
     "vitest": "^5.0.0"

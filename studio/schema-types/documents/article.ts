@@ -65,6 +65,15 @@ export const articleType = defineType({
       validation: (rule) => rule.max(240),
     }),
     defineField({
+      name: "placeholderBody",
+      title: "Treść zastępcza",
+      description:
+        "Zaznaczone, gdy treść jest tymczasowym tekstem z makiety 3a i ma zostać zastąpiona.",
+      type: "boolean",
+      group: "content",
+      initialValue: false,
+    }),
+    defineField({
       name: "publishedAt",
       title: "Data publikacji",
       type: "datetime",

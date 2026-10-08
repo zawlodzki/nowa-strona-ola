@@ -121,8 +121,14 @@ npm run import:blog-collection
 npm run import:legal
 ```
 
+`npm run import:3a` buduje pełne dokumenty 3a z fixture’ów i zapisuje transakcję
+do `reports/content-lake-3a-transaction.json`. Domyślnie nic nie wysyła.
+`npm run import:3a -- --write --dataset production` wymaga
+`SANITY_API_WRITE_TOKEN`. `npm run test:content-lake` buduje serwis z tych
+dokumentów przez lokalny klient GROQ i sprawdza budżet CSS.
 Verify obejmuje format, zgodność tokenów, lint, typy wszystkich workspace’ów, build frontendu,
-Studio i Workera, unit tests, budżety artefaktów i E2E w trzech przeglądarkach.
+Studio i Workera, unit tests, budżety artefaktów, E2E w trzech przeglądarkach
+i budowę z wygenerowanych dokumentów.
 `npm run import:homepage` robi dry-run szkiców homepage 3a do `reports/` i nic
 nie zapisuje do Content Lake. `npm run import:consultation` robi to samo dla
 landingu konsultacji (`page-consultation-pl/en`); `npm run import:ebook` dla

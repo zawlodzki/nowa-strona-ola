@@ -5,6 +5,7 @@ export default [
   {
     ignores: [
       "**/dist/**",
+      "**/.cache/**",
       "**/.astro/**",
       "**/.sanity/**",
       "**/.wrangler/**",
