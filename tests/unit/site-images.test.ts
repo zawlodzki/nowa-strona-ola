@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { pickSiteImage } from "../../src/lib/site-images";
+import { imageCropPosition, pickSiteImage } from "../../src/lib/site-images";
 
 describe("pickSiteImage", () => {
   it("maps mockup keys to local raster files", () => {
@@ -42,5 +42,14 @@ describe("pickSiteImage", () => {
   it("does not invent a file when there is no fallback", () => {
     expect(pickSiteImage(undefined)).toBeUndefined();
     expect(pickSiteImage("diploma")).toBeUndefined();
+  });
+});
+
+describe("imageCropPosition", () => {
+  it("maps CSS hotspot percentages to Sharp gravity", () => {
+    expect(imageCropPosition("50% 15%")).toBe("top");
+    expect(imageCropPosition("75% 70%")).toBe("right bottom");
+    expect(imageCropPosition("50% 50%")).toBe("centre");
+    expect(imageCropPosition()).toBeUndefined();
   });
 });

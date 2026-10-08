@@ -10,6 +10,7 @@ import Newsletter from "@/design-system/components/Newsletter.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
 import ArrowIcon from "@/design-system/components/ArrowIcon.astro";
+import { blogCardThumbSize } from "@/content/blog-collection-seed";
 import type {
   BlogCollectionView,
   BlogPostCard,
@@ -184,9 +185,10 @@ function readAria(item: BlogPostCard) {
                       src={item.imageSrc}
                       alt={item.imageAlt}
                       width={item.imageWidth}
-                      height={item.imageHeight}
+                      height={blogCardThumbSize(item.imageWidth).height}
                       objectPosition={item.objectPosition}
                       loading="eager"
+                      decoding="sync"
                     />
                   </a>
                   <p class="blog3a-meta">

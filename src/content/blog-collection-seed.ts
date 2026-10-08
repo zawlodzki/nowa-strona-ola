@@ -491,6 +491,16 @@ export function blogCardArt(slug: string): BlogCardArt {
   return art;
 }
 
+/** Landscape 1.8 thumb so Chromium paints cover+hotspot off-viewport. */
+export const BLOG_CARD_THUMB_RATIO = 1.8;
+
+export function blogCardThumbSize(sourceWidth: number) {
+  return {
+    width: sourceWidth,
+    height: Math.max(1, Math.round(sourceWidth / BLOG_CARD_THUMB_RATIO)),
+  };
+}
+
 export function objectPositionFromMedia(
   hotspot?: {
     x?: number | null;

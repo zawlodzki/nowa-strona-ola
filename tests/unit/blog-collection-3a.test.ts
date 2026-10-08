@@ -3,7 +3,10 @@ import { describe, expect, it } from "vitest";
 
 import { mapBlogCollection } from "../../src/content/map-blog-collection";
 import { serializeBlogCollection } from "../../src/content/serialize-blog-collection";
-import { blogCardArt } from "../../src/content/blog-collection-seed";
+import {
+  blogCardArt,
+  blogCardThumbSize,
+} from "../../src/content/blog-collection-seed";
 import { parseContentPath } from "../../src/lib/content-path";
 import {
   blogCollectionPageCount,
@@ -268,6 +271,10 @@ describe("blog collection images", () => {
     expect(blogCardArt("regularne-posilki").frame).toBe("food-close");
     expect(blogCardArt("pytania-o-pcos-przed-wizyta").src).toBe("contact");
     expect(blogCardArt("wyniki-badan-na-konsultacje").src).toBe("about");
+    expect(blogCardArt("wyniki-badan-na-konsultacje").width).toBe(1122);
+    expect(blogCardArt("wyniki-badan-na-konsultacje").height).toBe(1402);
+    expect(blogCardThumbSize(1122)).toEqual({ width: 1122, height: 623 });
+    expect(blogCardThumbSize(1536)).toEqual({ width: 1536, height: 853 });
     expect(() => blogCardArt("unknown-slug")).toThrow(
       "Brak mapowania obrazu artykułu",
     );
