@@ -47,4 +47,4 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --n
 - Fixture ma 11 wpisów, więc `/blog/strona/2/` istnieje. Pusta kategoria to `perimenopauza`, nie brak trasy.
 - Copy indeksu jest propozycją. Nie traktować tytułów i dat z makiety jako publikacji.
 - Artykuł z karty nadal używa dotychczasowego ArticleView (pakiet 7).
-- Screenshoty kolekcji muszą poczekać na załadowanie obrazów (`verify.mjs browser screenshot` przewija stronę i czeka na `naturalWidth`). Pusty różowy prostokąt na karcie to tło ramki, nie brak pliku.
+- Screenshoty kolekcji muszą poczekać na załadowanie obrazów (`verify.mjs browser screenshot` przewija stronę i czeka na `naturalWidth`). Miniatury są kadrowane do pejzażu 1.8 w pliku (`about` 1122×623), żeby Chromium malował je poza viewportem. Różowy prostokąt to tło `--ao-surface` przy wycieku portretowego pliku, nie brak `<img>`.

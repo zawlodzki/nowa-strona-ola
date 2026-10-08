@@ -13,24 +13,30 @@ listę różnic. Poprawki na tym samym branchu `cursor/blog-collection-3a-1697`.
 
 Różnica → poprawka:
 
-1. Karta „Wyniki badań” (strona 1, rząd 2, lewa) — pusty różowy prostokąt zamiast
-   portretu `about.webp`. `<img>` jest w HTML (`/_astro/about.BuXypYA__3fPCY.webp`,
-   1122×1402, `naturalWidth` 1122, opacity 1). Sąsiedni `food` i `contact` (1536×1024)
-   malują się. Chromium nie maluje `object-fit: cover` + `object-position: 50% 15%`
-   poza viewportem, gdy `img` ma preferred AR `auto 1122 / 1402` (ramka `display: grid`
-   - `height: 100%`). Makieta ma `aspect-ratio: 1.8` na `img` i `height: auto`.
-     Poprawka: ten sam układ co `.post-image img` w `blog-3a.css`. Test E2E sprawdza
-     każdą miniaturę: `naturalWidth > 0`, niezerowy box i kontrast pikseli (nie samo
-     tło `--ao-surface`).
+1. Karta „Wyniki badań” (seed `04`, `imageKey: "about"`, `frame: "portrait"`) —
+   pusty różowy prostokąt. Diagnoza zbudowanego `/blog/`: `<img>` istnieje,
+   `src="/_astro/about.*.webp"`, plik w `dist/` (najpierw VP8 1122×1402). Computed
+   jak u działającej „Insulinooporność” (`contact`, też portrait): `opacity: 1`,
+   `visibility: visible`, `height: 322.22px`, `object-position: 50% 15%`,
+   `object-fit: cover`. Różnica: `about` miał atrybuty HTML 1122×1402 (portret),
+   `contact` 1536×1024 (pejzaż). Chromium nie maluje `cover` + `50% 15%` na
+   intrynsecznym portrecie poza viewportem — widać tło `--ao-surface`. Sąsiedni
+   `food` i CSS 1:1 z makietą tego nie naprawiają na zrzucie `fullPage`.
+   Poprawka: miniatura dostaje kadr 1.8 **w pliku** (`blogCardThumbSize`, Sharp
+   `fit=cover`, gravity z hotspota → `about` 1122×623, `decoding="sync"`).
+   CSS ramki zostaje jak `.post-image img`. E2E: każda miniatura na `/blog/` i
+   `/blog/strona/2/` ma `img`, `naturalWidth > 0`, widoczny box; karta badań ma
+   pejzażowy plik i kontrast pikseli także ze zrzutu `fullPage` bez
+   `scrollIntoView`. Wycinek z `compare-blog-p1-desktop.png` po poprawce pokazuje
+   twarz, nie różowy prostokąt.
 2. Kanciaste rogi miniatur i zdjęcia wyróżnionego wpisu. Makieta używa
    `--media-radius` = `--ao-radius-panel` (24px). Produkcja ustawiała
    nieistniejące `--ao-radius-media` (computed 0). Poprawka: `--ao-radius-panel`,
    `overflow: hidden`, `isolation: isolate`.
 3. Miniatury wyższe niż w makiecie. `.ao-site img { height: auto }` plus atrybuty
    HTML portretu 1122×1402 wypierały `aspect-ratio: 1.8` na samym `img`. Poprawka:
-   `aspect-ratio: 1.8` na ramce `.blog3a-card-image`, obraz
-   `width/height: 100%; min-height: 0; object-fit: cover` (kadr ze środka ramki,
-   nie obcięcie od góry).
+   ten sam układ co makieta (`.post-image img`: `width: 100%`, `height: auto`,
+   `aspect-ratio: 1.8`, `object-fit: cover`) oraz pejzażowe atrybuty HTML 1.8.
 4. Wyróżniony wpis wyglądał na pas wychodzący do prawej, bez zaokrągleń. Układ
    siatki `1.08fr 1fr` i padding 44px już były; brakujący radius sprawiał wrażenie
    pełnej szerokości. Poprawka: karta w kontenerze, `border-radius: 24px`,
@@ -47,18 +53,23 @@ motywu obok strzałki; karty prowadzą do `blog/[slug]`, nie `podglad.html`.
 
 Kontrole (Node 24.21.0):
 
-- `npm run verify` **PASS**: 109 unit, 102 E2E (Chromium/Firefox/WebKit), w tym
-  `blog-collection-3a.spec.ts` (naturalWidth portretu, radius 24px, stosunek 1.8,
-  ramka = box obrazka, `#main` w stopce).
-- CSS gzip `dist/_astro`: **26 263 B** / 32 KiB; JS gzip 5 770 B.
-- verify-ola `VERIFY_RUN_ID=ola-1791428076`, baza `http://127.0.0.1:4340`,
-  `browser posts` = `[]`. Dowody: `/tmp/ola-verify-evidence/ola-1791428076/`.
+- `npm run verify` **PASS**: 110 unit, 102 E2E (Chromium/Firefox/WebKit), w tym
+  `blog-collection-3a.spec.ts` (src `about.*.webp`, HTML 1122×623 pejzaż,
+  `naturalWidth > naturalHeight`, opacity/visibility jak u `contact`, radius 24px,
+  stosunek 1.8, ramka = box obrazka, luma `fullPage`, każda miniatura na stronie
+  1 i 2, `#main` w stopce).
+- CSS gzip `dist/_astro`: **26 274 B** / 32 KiB; JS gzip 5 770 B.
+- verify-ola `VERIFY_RUN_ID=ola-1791429898`, baza `http://127.0.0.1:4340`,
+  `browser posts` = `[]` (z JS i bez). Dist z `npm run verify`, bez przebudowy
+  w trakcie sesji. Dowody: `/tmp/ola-verify-evidence/ola-1791429898/`.
 - Porównania nadpisane w `/opt/cursor/artifacts/screenshots/` pod tymi samymi
-  nazwami, po załadowaniu obrazów (scroll + `naturalWidth`).
+  nazwami. Wycinek karty „Wyniki badań” z `compare-blog-p1-desktop.png`
+  obejrzany: twarz, kadr 1.8, radius 24px, nie tło `--ao-surface`.
 
 Zmierzony kadr desktop 1280: ramka karty 580×322,22 (1.8) makieta i produkcja;
-wyróżniony 1200×~416, radius 24px, w kontenerze. Portret „Wyniki badań”
-`naturalWidth` 1122 (`about.webp`). Mobile 390: featured 1.4, karty 1.8.
+wyróżniony 1200×~416, radius 24px, w kontenerze. Miniatura „Wyniki badań”
+`naturalWidth` 1122 × `naturalHeight` 623 (`about.BuXypYA__Z7qD5w.webp`).
+Mobile 390: featured 1.4, karty 1.8.
 
 Pozostałe różnice po porównaniu pikselowym (lista nie jest pusta):
 
