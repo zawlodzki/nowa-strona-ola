@@ -105,6 +105,7 @@ async function fetchIds(
     apiVersion: "2026-09-01",
     token,
     useCdn: false,
+    perspective: "raw",
   });
   const found = await client.fetch<string[] | null>("*[_id in $ids]._id", {
     ids,

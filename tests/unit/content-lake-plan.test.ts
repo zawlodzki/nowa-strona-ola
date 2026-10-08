@@ -52,6 +52,15 @@ function sectionTitle(document: SanityDocument, key: string): string {
   return section.title;
 }
 
+describe("import-3a client", () => {
+  it("looks up draft deletions with the raw perspective", () => {
+    const source = readFileSync("scripts/import-3a.ts", "utf8");
+    const start = source.indexOf("async function fetchIds");
+    const lookup = source.slice(start, source.indexOf("client.fetch", start));
+    expect(lookup).toContain('perspective: "raw"');
+  });
+});
+
 describe("content lake plan", () => {
   it("deletes exactly the obsolete prototype ids", () => {
     expect(plan.deletions).toEqual([...OBSOLETE_DOCUMENT_IDS]);
