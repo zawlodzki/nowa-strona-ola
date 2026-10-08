@@ -1,9 +1,24 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (scalenie main ze zdjęciem dyplomu; akcent matcha i cherry zostają).
+Aktualizacja: 2026-10-08 (scalenie main: social #37 `8bc80da`, wcześniej matcha #36; zdjęcie dyplomu zostaje).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja scalenia social #37 w PR #40, 08.10.2026
+
+Drugie scalenie `origin/main` (`8bc80da`, squash PR #37 — kanoniczne URL
+profili) w gałąź zdjęcia dyplomu. Commit merge, bez rebase i bez force-push.
+Konflikty: `docs/PROGRESS.md`, `docs/HOMEPAGE-CMS-CONFIG.md`,
+`src/views/About3a.astro`. Zostawione obie strony: zdjęcie dyplomu
+(`pickSiteImage`, kadr 1440×1609) oraz `sameAs: socialProfileSameAs()`.
+W tabeli CMS wiersz dyplomu z tej gałęzi i kanoniczne URL z #37.
+Auto-merge `scripts/import-homepage-content.mjs` zostawił lukę dyplomu
+(fixture ma klucz, Content Lake bez pliku) i `social-urls: resolved`.
+Auto-merge `tests/e2e/ui.spec.ts` zostawił `naturalWidth` dyplomu i testy
+stopki `/` + `/en/`.
+
+Kontrole po tym scaleniu: dopisane po `npm run verify`.
 
 ### Sesja scalenia main, 08.10.2026
 
@@ -91,6 +106,68 @@ fizycznego. Nie ma osobnych zrzutów sekcji przy 320 px i zoomie 200%.
 
 Następny krok to odbiór PR. Wgranie pliku do Content Lake i adres płatnej
 rezerwacji zostają otwarte.
+
+### Sesja — merge origin/main w PR #37 — 08.10.2026
+
+`origin/main` (squash #36 `aab7928` + chore skills #38) wlany merge-committem
+w `cursor/social-profile-links-1a17`. Bez rebase i bez force-push.
+
+Konflikt tylko w `docs/PROGRESS.md`: zachowane obie historie (sesja social
+#37 oraz sesje cherry/matcha #36). Auto-merge `docs/HOMEPAGE-CMS-CONFIG.md`
+i `src/pages/design-system.astro` zostawił URL profili i tokeny/swatche
+akcentu. Kod #36 (CherryCoverAccent, secondary button, tokeny) i kod #37
+(`social-profiles.ts`, SiteFooter, JSON-LD `sameAs`) bez skrótów.
+
+Kontrole (Node 24.21.0), PR **#37** (nie-draft), head po verify `3243de5`:
+
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **117** unit,
+  build, workspaces, `check-build`, **147** E2E Chromium/Firefox/WebKit
+  (w tym 7×3 `matcha-accent-3a.spec.ts` i stopka `/` + `/en/`).
+- CSS gzip **29 778 B** / 32 KiB; JS gzip **5 770 B**.
+- verify-ola `ola-1791451021`, baza `http://127.0.0.1:4340`. Stopka PL/EN
+  desktop+mobile bez zmiany układu (Instagram / Facebook / TikTok). Cherry
+  okładka: strzałka i iskierka `rgb(216, 231, 138)` (#D8E78A), sparkle ≥ 14 px.
+
+Nie mergować.
+
+### Sesja — kanoniczne URL profili social — 08.10.2026
+
+Zakres: zastępcze strony główne Instagram / Facebook / TikTok w stopce 3a
+zamienione na prawdziwe profile Aleksandry Olesiewicz. Jedno źródło:
+`src/content/social-profiles.ts`. Wygląd stopki bez zmiany (widoczne etykiety
+zostają Instagram / Facebook / TikTok). Gałąź PR #36 (akcent matcha) nietknięta.
+
+Gdzie były linki i co czyta źródło:
+
+- fixture i fallback: `homepageSettingsFixture`, `shellLinks` → `footerSocialLinks()`
+- katalog 3a: `src/pages/design-system.astro`
+- seed/import: `scripts/import-homepage-content.mjs` (PL i EN przez spread PL)
+- JSON-LD `Person.sameAs`: About3a, Consultation3a, Ebook3a, `map-article`
+- Sanity: schemat `siteSettings.socialLinks` bez zmiany; Content Lake bez zapisu
+- mockupy HTML `podglad.html?strona=…` nietknięte (nie są serwisem)
+
+Stopka: `rel="noopener noreferrer"`, `target="_blank"`, `aria-label`
+„Instagram Aleksandry Olesiewicz” / EN „Instagram of Aleksandra Olesiewicz”.
+
+Kontrole (Node 24.21.0), draft PR **#37**, head `a652b6f`:
+
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **116** unit,
+  build, workspaces, `check-build`, **126** E2E Chromium/Firefox/WebKit.
+  CSS gzip `dist/_astro`: **29 635 B** / 32 KiB; JS gzip **5 770 B**.
+- verify-ola: `ola-1791449846`, baza `http://127.0.0.1:4340`. Stopka `/` i
+  `/en/` ma trzy kanoniczne href. `browser posts` nie dotyczy (brak formularza).
+
+Artefakty:
+
+- `/opt/cursor/artifacts/screenshots/footer-pl-desktop.png`
+- `/opt/cursor/artifacts/screenshots/footer-pl-mobile.png`
+- `/opt/cursor/artifacts/screenshots/footer-en-desktop.png`
+- `/opt/cursor/artifacts/screenshots/footer-en-mobile.png`
+- Dowody verify-ola: `/tmp/ola-verify-evidence/ola-1791449846/`.
+
+Nietknięte: wygląd stopki, mockupy `podglad.html`, gałąź PR #36, Content Lake.
+
+Następny krok: odbiór draft PR **#37**; nie mergować. Content Lake poza zakresem.
 
 ### Sesja wzmocnienia cherry — 08.10.2026
 

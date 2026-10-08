@@ -1,6 +1,7 @@
 import type { Locale } from "@ola/shared";
 
-import { footerLegalLinks, footerSocialLinks } from "@/content/homepage-seed";
+import { footerLegalLinks } from "@/content/homepage-seed";
+import { footerSocialLinks } from "@/content/social-profiles";
 import type { PageContent } from "@/sanity/repository";
 
 type PageSection = NonNullable<PageContent["sections"]>[number];

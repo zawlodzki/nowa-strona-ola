@@ -19,6 +19,7 @@ import {
   diplomaSlotSize,
 } from "@/content/about-seed";
 import type { AboutView } from "@/content/map-about";
+import { socialProfileSameAs } from "@/content/social-profiles";
 import { pickSiteImage } from "@/lib/site-images";
 
 export interface Props {
@@ -46,6 +47,7 @@ const profileJsonLd = {
       "@type": "CollegeOrUniversity",
       name: person.educationInstitution,
     },
+    sameAs: socialProfileSameAs(),
   },
 };
 ---

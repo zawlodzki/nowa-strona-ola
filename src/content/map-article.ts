@@ -8,6 +8,7 @@ import {
 } from "@/content/portable-text";
 import { toEbookCard, toFaq, toFormCopy } from "@/content/map-sections";
 import { objectPositionFromMedia } from "@/content/blog-collection-seed";
+import { socialProfileSameAs } from "@/content/social-profiles";
 import { formatDate, toDatetime } from "@/lib/dates";
 import {
   aboutPath,
@@ -363,6 +364,7 @@ export function mapArticle(
         "@type": "Person",
         name: author.name,
         jobTitle: author.role,
+        sameAs: socialProfileSameAs(),
       },
       mainEntityOfPage: href,
     },

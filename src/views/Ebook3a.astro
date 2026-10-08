@@ -18,6 +18,7 @@ import SheetShadow from "@/design-system/decorations/SheetShadow.astro";
 import SupplementBottles from "@/design-system/decorations/SupplementBottles.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
 import { ebookCopy } from "@/content/ebook-seed";
+import { socialProfileSameAs } from "@/content/social-profiles";
 import { canPurchase, type EbookView } from "@/content/map-ebook";
 import { schemaOfferAvailability } from "@/lib/offer";
 
@@ -51,6 +52,7 @@ const jsonLd = {
         "@type": "Person",
         name: author.name,
         jobTitle: author.role,
+        sameAs: socialProfileSameAs(),
       },
       offers: {
         "@type": "Offer",
