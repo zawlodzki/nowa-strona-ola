@@ -17,7 +17,7 @@ const GAPS = [
     id: "diploma-scan",
     status: "open",
     detail:
-      "Brak skanu dyplomu. author.diplomaScan jest puste; renderer pokazuje miejsce do uzupełnienia, bez fikcyjnego pliku.",
+      "Fixture O mnie ma zdjęcie ukończenia (klucz diploma). Ten import nie wgrywa pliku do Content Lake. Puste diplomaScan nadal pokazuje ramkę.",
   },
   {
     id: "booking-url",

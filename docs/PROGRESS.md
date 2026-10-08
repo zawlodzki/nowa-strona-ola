@@ -1,10 +1,26 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (strony prawne `legalPage`).
+Aktualizacja: 2026-10-08 (strony prawne `legalPage`; scalenie main: dyplom #40 `ce5b675`, social #37 `8bc80da`, matcha #36).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Sesja scalenia main w PR #39, 08.10.2026
+
+Scalenie `origin/main` (`ce5b675`: dyplom #40, social #37 `8bc80da`,
+matcha #36) w gałąź stron prawnych. Commit merge, bez rebase i bez force-push.
+Jedyny konflikt to `docs/PROGRESS.md`: zachowane sesje stron prawnych i sesje
+z main. Auto-merge `scripts/check-build.mjs` zostawił asercje stron prawnych i
+profili social. Auto-merge `scripts/import-homepage-content.mjs` i
+`src/content/homepage-seed.ts` zostawił linki zgody newslettera oraz
+`footerSocialLinks()` z `social-profiles.ts`. Auto-merge `tests/e2e/ui.spec.ts`
+zostawił regex zgody newslettera i testy dyplomu oraz stopki.
+
+Kontrole na Node 24.21.0: format, tokeny, lint, `astro check`, **124** testy
+jednostkowe (22 pliki), build, workspace’y, `check-build`, **171** E2E
+Chromium/Firefox/WebKit. CSS gzip `dist/_astro` **29 778 B** (limit 32 768 B).
+JS gzip **5 770 B**.
 
 ### Sesja — strony prawne CMS — 08.10.2026
 
@@ -63,6 +79,186 @@ stron prawnych — niewykonane jako osobne zrzuty 1:1. Studio bez sekretów.
 
 Następny krok: odbiór PR #39; redakcja B2C i zapis do Content Lake na zlecenie.
 Nie mergować bez zgody.
+
+### Sesja scalenia social #37 w PR #40, 08.10.2026
+
+Drugie scalenie `origin/main` (`8bc80da`, squash PR #37 — kanoniczne URL
+profili) w gałąź zdjęcia dyplomu. Commit merge, bez rebase i bez force-push.
+Konflikty: `docs/PROGRESS.md`, `docs/HOMEPAGE-CMS-CONFIG.md`,
+`src/views/About3a.astro`. Zostawione obie strony: zdjęcie dyplomu
+(`pickSiteImage`, kadr 1440×1609) oraz `sameAs: socialProfileSameAs()`.
+W tabeli CMS wiersz dyplomu z tej gałęzi i kanoniczne URL z #37.
+Auto-merge `scripts/import-homepage-content.mjs` zostawił lukę dyplomu
+(fixture ma klucz, Content Lake bez pliku) i `social-urls: resolved`.
+Auto-merge `tests/e2e/ui.spec.ts` zostawił `naturalWidth` dyplomu i testy
+stopki `/` + `/en/`.
+
+Kontrole na `529ee61`, Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **118** testów jednostkowych (21 plików),
+build, workspace’y, `check-build`, **147** E2E Chromium/Firefox/WebKit
+(w tym 7×3 `matcha-accent-3a.spec.ts`, dyplom `naturalWidth > 0` i stopka
+`/` + `/en/`). CSS gzip `dist/_astro` **29 778 B** (limit 32 768 B).
+JS gzip **5 770 B**.
+
+verify-ola `ola-1791451993` na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791451993/`. Na `/o-mnie/` obraz dyplomu
+ma `naturalWidth` 1440, `naturalHeight` 1609, `complete`, promień 12 px
+i `object-fit: fill`. Na 1280 px pudełko 340×379,89 px; na 390 px 294×328,5 px.
+Porównanie pikseli z `diploma-production-desktop.png` i
+`diploma-production-mobile.png` daje MAD 0. Zrzuty bez odświeżenia.
+
+Następny krok: PR **#40** ready for review. Nie mergować. Wgranie pliku
+do Content Lake i adres płatnej rezerwacji zostają otwarte.
+
+### Sesja scalenia main, 08.10.2026
+
+Scalenie `origin/main` (`e016b9b`, squash PR #36 matcha i PR #38 good-css)
+z gałęzią zdjęcia dyplomu. Commit merge, bez rebase. Jedyny konflikt to
+`docs/PROGRESS.md`. Sesja dyplomu i sesje matcha oraz cherry zostały poniżej.
+Auto-merge `docs/IMPLEMENTATION-PLAN.md` zostawił checkbox dyplomu i checkboxy
+matcha. Auto-merge `docs/HOMEPAGE-CMS-CONFIG.md` zostawił decyzję zdjęcia
+dyplomu i zapis wykonania tokenów matcha. PR #37 (profile social) był otwarty
+i nie wchodził w to scalenie.
+
+Kontrole na Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **116** testów jednostkowych (20 plików),
+build, workspace’y, `check-build`, **141** E2E Chromium/Firefox/WebKit.
+CSS gzip `dist/_astro` **29 778 B** (limit 32 768 B). JS gzip **5 770 B**.
+Suma CSS jest taka sama jak po sesji cherry na main. `scripts/check-build.mjs`
+liczy gzip plików CSS w `dist/_astro`. Osobny gzip Workera (2,94 KiB) to inny
+artefakt.
+
+verify-ola `ola-1791451319` na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791451319/`. Na `/o-mnie/` i `/en/about/`
+obraz dyplomu ma `naturalWidth` 1440 i `naturalHeight` 1609, jest `complete`,
+ma promień 12 px i `object-fit: fill`. Na 1280 px obraz ma 340×380 px.
+Na 390 px ma 294×329 px.
+
+Porównanie pikseli z istniejącymi zrzutami
+`diploma-production-desktop.png` i `diploma-production-mobile.png`
+daje różnicę 0. Zrzuty w `/opt/cursor/artifacts/screenshots/` bez odświeżenia.
+Makieta w tym scaleniu nie była ruszana.
+
+Następny krok to odbiór PR #40. PR zostaje draftem. Wgranie pliku do
+Content Lake, adres płatnej rezerwacji i linki social z PR #37 zostają otwarte.
+
+### Sesja zdjęcia dyplomu, 08.10.2026
+
+Na About3a (`/o-mnie/` i `/en/about/`) slot dyplomu pokazuje zdjęcie
+ukończenia Aleksandry. Pozycja, szerokość do 340 px, podpis i ramka 12 px
+zostają jak w makiecie. Puste `diplomaScan` nadal rysuje ramkę ze SVG.
+
+Źródło to JPEG 1440×1920 z drugiego kadru karuzeli
+[Instagram](https://www.instagram.com/p/DOMPRWmjXWX/), plik
+`src/assets/portraits/diploma.jpg`. `SiteImage` kroi go przy budowaniu do
+1440×1609 (`diplomaSlotSize`, proporcja slotu 340/380). Grawitacja Sharp to
+`top`, z `diplomaCropPosition` `50% 0%`. Dół kadru (buty i kostka) schodzi,
+tabliczki wydziału, twarz, różowa teczka i róże zostają. CSS `object-fit`
+zostaje `fill`.
+
+Polski alt to „Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia
+Publicznego ŚUM w Bytomiu”. Angielski alt to „Aleksandra Olesiewicz with her
+diploma outside the Faculty of Public Health, Medical University of Silesia
+in Bytom”.
+
+`aboutCopy.diplomaAlt` trafia do `aboutAuthorFixture`, potem do `diplomaScan`
+i istniejącego `toCredentials`. Klucz lokalny to `diploma`. Asset w Content
+Lake jest niewgrany.
+
+Kontrole na `3b4905e`, Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **115** testów jednostkowych (20 plików),
+build, workspace’y, `check-build`, **120** E2E Chromium/Firefox/WebKit.
+E2E na `/o-mnie/` i `/en/about/` czyta `naturalWidth` 1440 i `naturalHeight` 1609. CSS gzip `dist/_astro` **29 635 B** (limit 32 KiB). JS gzip **5 770 B**.
+Suma gzip plików CSS w `dist/_astro` jest identyczna jak w pakiecie 7, bo
+zmiana selektora nie powiększyła skompresowanego arkusza.
+
+`:global(img)` w `.about3a-diploma` sprawia, że `border-radius: 12px` dochodzi
+do img z `SiteImage`. Chromium na 1280 px i 390 px podaje promień 12 px i
+`object-fit: fill`. Na desktopie obraz ma 340×380 px.
+
+verify-ola `ola-1791450522` działa na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791450522/`.
+
+Artefakty:
+
+- `/opt/cursor/artifacts/screenshots/compare-diploma-desktop.png` (makieta | produkcja)
+- `/opt/cursor/artifacts/screenshots/compare-diploma-mobile.png` (makieta | produkcja)
+- `/opt/cursor/artifacts/screenshots/diploma-mockup-desktop.png`
+- `/opt/cursor/artifacts/screenshots/diploma-production-desktop.png`
+- `/opt/cursor/artifacts/screenshots/diploma-mockup-mobile.png`
+- `/opt/cursor/artifacts/screenshots/diploma-production-mobile.png`
+- `/opt/cursor/artifacts/screenshots/about-pl-desktop-full.png`
+
+Nie sprawdzono natywnego zoomu przeglądarki, czytnika ani urządzenia
+fizycznego. Nie ma osobnych zrzutów sekcji przy 320 px i zoomie 200%.
+
+Następny krok to odbiór PR. Wgranie pliku do Content Lake i adres płatnej
+rezerwacji zostają otwarte.
+
+### Sesja — merge origin/main w PR #37 — 08.10.2026
+
+`origin/main` (squash #36 `aab7928` + chore skills #38) wlany merge-committem
+w `cursor/social-profile-links-1a17`. Bez rebase i bez force-push.
+
+Konflikt tylko w `docs/PROGRESS.md`: zachowane obie historie (sesja social
+#37 oraz sesje cherry/matcha #36). Auto-merge `docs/HOMEPAGE-CMS-CONFIG.md`
+i `src/pages/design-system.astro` zostawił URL profili i tokeny/swatche
+akcentu. Kod #36 (CherryCoverAccent, secondary button, tokeny) i kod #37
+(`social-profiles.ts`, SiteFooter, JSON-LD `sameAs`) bez skrótów.
+
+Kontrole (Node 24.21.0), PR **#37** (nie-draft), head po verify `3243de5`:
+
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **117** unit,
+  build, workspaces, `check-build`, **147** E2E Chromium/Firefox/WebKit
+  (w tym 7×3 `matcha-accent-3a.spec.ts` i stopka `/` + `/en/`).
+- CSS gzip **29 778 B** / 32 KiB; JS gzip **5 770 B**.
+- verify-ola `ola-1791451021`, baza `http://127.0.0.1:4340`. Stopka PL/EN
+  desktop+mobile bez zmiany układu (Instagram / Facebook / TikTok). Cherry
+  okładka: strzałka i iskierka `rgb(216, 231, 138)` (#D8E78A), sparkle ≥ 14 px.
+
+Nie mergować.
+
+### Sesja — kanoniczne URL profili social — 08.10.2026
+
+Zakres: zastępcze strony główne Instagram / Facebook / TikTok w stopce 3a
+zamienione na prawdziwe profile Aleksandry Olesiewicz. Jedno źródło:
+`src/content/social-profiles.ts`. Wygląd stopki bez zmiany (widoczne etykiety
+zostają Instagram / Facebook / TikTok). Gałąź PR #36 (akcent matcha) nietknięta.
+
+Gdzie były linki i co czyta źródło:
+
+- fixture i fallback: `homepageSettingsFixture`, `shellLinks` → `footerSocialLinks()`
+- katalog 3a: `src/pages/design-system.astro`
+- seed/import: `scripts/import-homepage-content.mjs` (PL i EN przez spread PL)
+- JSON-LD `Person.sameAs`: About3a, Consultation3a, Ebook3a, `map-article`
+- Sanity: schemat `siteSettings.socialLinks` bez zmiany; Content Lake bez zapisu
+- mockupy HTML `podglad.html?strona=…` nietknięte (nie są serwisem)
+
+Stopka: `rel="noopener noreferrer"`, `target="_blank"`, `aria-label`
+„Instagram Aleksandry Olesiewicz” / EN „Instagram of Aleksandra Olesiewicz”.
+
+Kontrole (Node 24.21.0), draft PR **#37**, head `a652b6f`:
+
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **116** unit,
+  build, workspaces, `check-build`, **126** E2E Chromium/Firefox/WebKit.
+  CSS gzip `dist/_astro`: **29 635 B** / 32 KiB; JS gzip **5 770 B**.
+- verify-ola: `ola-1791449846`, baza `http://127.0.0.1:4340`. Stopka `/` i
+  `/en/` ma trzy kanoniczne href. `browser posts` nie dotyczy (brak formularza).
+
+Artefakty:
+
+- `/opt/cursor/artifacts/screenshots/footer-pl-desktop.png`
+- `/opt/cursor/artifacts/screenshots/footer-pl-mobile.png`
+- `/opt/cursor/artifacts/screenshots/footer-en-desktop.png`
+- `/opt/cursor/artifacts/screenshots/footer-en-mobile.png`
+- Dowody verify-ola: `/tmp/ola-verify-evidence/ola-1791449846/`.
+
+Nietknięte: wygląd stopki, mockupy `podglad.html`, gałąź PR #36, Content Lake.
+
+Następny krok: odbiór draft PR **#37**; nie mergować. Content Lake poza zakresem.
 
 ### Sesja wzmocnienia cherry — 08.10.2026
 

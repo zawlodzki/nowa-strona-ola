@@ -246,7 +246,29 @@ test("about page Polish and English plus missing Polish under English slug", asy
   await expect(
     page.getByRole("heading", { name: "Wiedza, którą możesz sprawdzić." }),
   ).toBeVisible();
-  await expect(page.getByText("Miejsce na skan dyplomu")).toBeVisible();
+  const diplomaPl = page.locator("#wyksztalcenie img");
+  await expect(diplomaPl).toHaveCount(1);
+  await expect(diplomaPl).toHaveAttribute(
+    "alt",
+    "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
+  );
+  await expect
+    .poll(async () =>
+      diplomaPl.evaluate((img) => (img as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  const diplomaPlSize = await diplomaPl.evaluate((img) => {
+    const el = img as HTMLImageElement;
+    return { width: el.naturalWidth, height: el.naturalHeight };
+  });
+  expect(diplomaPlSize.height).toBeGreaterThan(0);
+  expect(
+    Math.abs(diplomaPlSize.width / diplomaPlSize.height - 340 / 380),
+  ).toBeLessThan(0.02);
+  await expect(page.getByText("Miejsce na skan dyplomu")).toHaveCount(0);
+  await expect(page.locator("#wyksztalcenie figcaption")).toContainText(
+    "Dyplom ukończenia dietetyki klinicznej",
+  );
   await expect(
     page.getByRole("link", { name: "Zarezerwuj konsultację" }),
   ).toHaveAttribute("href", "https://cal.com");
@@ -276,7 +298,18 @@ test("about page Polish and English plus missing Polish under English slug", asy
   await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
     /Jestem Ola/,
   );
-  await expect(page.getByText("Space for the diploma scan")).toBeVisible();
+  const diplomaEn = page.locator("#wyksztalcenie img");
+  await expect(diplomaEn).toHaveCount(1);
+  await expect(diplomaEn).toHaveAttribute(
+    "alt",
+    "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom",
+  );
+  await expect
+    .poll(async () =>
+      diplomaEn.evaluate((img) => (img as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await expect(page.getByText("Space for the diploma scan")).toHaveCount(0);
   await expect(
     page.getByRole("link", { name: "Polski" }).first(),
   ).toHaveAttribute("href", "/o-mnie/");
@@ -567,3 +600,38 @@ test("landing pages, blog and missing English translation", async ({
   const missing = await page.goto("/en/tylko-pl/");
   expect(missing?.status()).toBe(404);
 });
+
+const FOOTER_SOCIAL_HREFS = [
+  "https://www.instagram.com/aleksandra_olesiewicz",
+  "https://www.facebook.com/dietetykolesiewicz/",
+  "https://www.tiktok.com/@aleksandra_olesiewicz",
+] as const;
+
+for (const [path, instagramName] of [
+  ["/", "Instagram Aleksandry Olesiewicz"],
+  ["/en/", "Instagram of Aleksandra Olesiewicz"],
+] as const) {
+  test(`footer social profiles on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const social = page.locator("footer .ao-footer__social a");
+    await expect(social).toHaveCount(3);
+    expect(
+      await social.evaluateAll((links) =>
+        links.map((link) => ({
+          href: link.getAttribute("href"),
+          rel: link.getAttribute("rel"),
+          target: link.getAttribute("target"),
+        })),
+      ),
+    ).toEqual(
+      FOOTER_SOCIAL_HREFS.map((href) => ({
+        href,
+        rel: "noopener noreferrer",
+        target: "_blank",
+      })),
+    );
+    await expect(
+      page.getByRole("link", { name: instagramName, exact: true }),
+    ).toHaveAttribute("href", FOOTER_SOCIAL_HREFS[0]);
+  });
+}

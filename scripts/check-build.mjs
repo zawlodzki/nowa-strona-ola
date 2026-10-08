@@ -123,6 +123,33 @@ assert.match(
 );
 assert.match(articleHtml, /W tym artykule/);
 assert.match(articleHtml, /article-faq-schema/);
+const homePl = await readFile("dist/index.html", "utf8");
+const homeEn = await readFile("dist/en/index.html", "utf8");
+for (const [label, html] of [
+  ["/", homePl],
+  ["/en/", homeEn],
+]) {
+  assert.match(
+    html,
+    /href="https:\/\/www\.instagram\.com\/aleksandra_olesiewicz"/,
+    `${label}: Instagram profile`,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/www\.facebook\.com\/dietetykolesiewicz\/"/,
+    `${label}: Facebook profile`,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/www\.tiktok\.com\/@aleksandra_olesiewicz"/,
+    `${label}: TikTok profile`,
+  );
+  assert.doesNotMatch(
+    html,
+    /href="https:\/\/www\.instagram\.com\/"/,
+    `${label}: placeholder Instagram homepage`,
+  );
+}
 const articleEn = await readFile(
   "dist/en/blog/preparing-for-a-pcos-nutrition-consultation/index.html",
   "utf8",

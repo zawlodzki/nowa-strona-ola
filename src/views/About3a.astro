@@ -13,9 +13,14 @@ import Section from "@/design-system/components/Section.astro";
 import SplitPanel from "@/design-system/components/SplitPanel.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
-import { aboutCopy } from "@/content/about-seed";
+import {
+  aboutCopy,
+  diplomaCropPosition,
+  diplomaSlotSize,
+} from "@/content/about-seed";
 import type { AboutView } from "@/content/map-about";
-import { isRemoteImageSrc } from "@/lib/site-images";
+import { socialProfileSameAs } from "@/content/social-profiles";
+import { pickSiteImage } from "@/lib/site-images";
 
 export interface Props {
   lang: Locale;
@@ -26,7 +31,8 @@ const { lang, content } = Astro.props;
 const copy = aboutCopy[lang];
 const pl = lang === "pl";
 const diplomaSrc = content.credentials.person.diploma?.src;
-const diplomaRemote = diplomaSrc && isRemoteImageSrc(diplomaSrc);
+const diplomaImage = pickSiteImage(diplomaSrc);
+const diplomaFrame = diplomaSlotSize();
 const person = content.credentials.person;
 const profileJsonLd = {
   "@context": "https://schema.org",
@@ -41,6 +47,7 @@ const profileJsonLd = {
       "@type": "CollegeOrUniversity",
       name: person.educationInstitution,
     },
+    sameAs: socialProfileSameAs(),
   },
 };
 ---
@@ -123,13 +130,15 @@ const profileJsonLd = {
           </dl>
         </div>
         <figure class="about3a-diploma">
-          {diplomaRemote ? (
+          {diplomaImage ? (
             <SiteImage
               src={diplomaSrc}
               alt={content.credentials.person.diploma?.label ?? ""}
-              width={680}
-              height={860}
-              loading="lazy"
+              width={diplomaFrame.width}
+              height={diplomaFrame.height}
+              objectPosition={diplomaCropPosition}
+              loading="eager"
+              decoding="sync"
             />
           ) : (
             <div class="about3a-diploma__slot">
@@ -384,7 +393,7 @@ const profileJsonLd = {
     justify-self: center;
     margin: 0;
   }
-  .about3a-diploma img {
+  .about3a-diploma :global(img) {
     width: 100%;
     height: auto;
     border-radius: 12px;

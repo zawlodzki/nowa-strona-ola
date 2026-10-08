@@ -1,6 +1,6 @@
 # Homepage 3a — konfiguracja treści CMS
 
-Aktualizacja: 2026-10-07. Status: specyfikacja do konfiguracji Sanity,
+Aktualizacja: 2026-10-08. Status: specyfikacja do konfiguracji Sanity,
 nie wykonana migracja. Obowiązuje dla polskiej strony głównej.
 
 ## Źródła i sposób aktualizacji
@@ -20,21 +20,21 @@ ani dokumentacji w deklarację wykonania. Nie kopiować sekretów i danych zgło
 
 ## Decyzje ustalone przez użytkownika
 
-| Obszar                  | Wartość obowiązująca                                                                        | Źródło / status                                                                                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Wygląd                  | Docelowy 3a: białe tło, wiśniowa paleta, Switzer, wordmark i osiem opracowanych podstron    | Decyzja użytkownika 07.10.2026 o realizacji strony 3a; pozostałe warianty porzucone, Wonderful zarchiwizowany. Biblioteka wykonana, migracja stron/CMS otwarta. |
-| Usługa                  | Pojedyncze konsultacje dietetyczne online                                                   | Bezpośrednia decyzja 06.10.2026; nie przenosić mentoringu ani dawnych pakietów                                                                                  |
-| Cena i czas konsultacji | 450 zł za 60 minut, waluta PLN                                                              | Bezpośrednia decyzja użytkownika 06.10.2026; konfiguracja płatnej rezerwacji niewykonana.                                                                       |
-| Rezerwacja konsultacji  | CTA do kalendarza wyboru terminu i płatności; proponowana etykieta „Zarezerwuj konsultację” | Cel ustalony 06.10.2026; tymczasowo `https://cal.com` na polecenie użytkownika, właściwy link wydarzenia później.                                               |
-| Wykształcenie Oli       | Ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym                            | Bezpośrednie potwierdzenie użytkownika 06.10.2026.                                                                                                              |
-| Dyplom                  | Miejsce na skan w mockupie „O mnie”; docelowo rzeczywisty podgląd dokumentu                 | Bezpośrednie zlecenie użytkownika 06.10.2026; plik nie został dostarczony.                                                                                      |
-| Cena e-booków           | Każdy z sześciu: 97 zł brutto, waluta PLN                                                   | Bezpośrednia decyzja 06.10.2026; nie oznacza gotowego sklepu                                                                                                    |
-| Wskaźnik                | Wartość 450, przyrostek +, opis „kobiet rocznie, którym pomagają moje konsultacje”          | Bezpośrednia informacja 06.10.2026; nie zmieniać na sumę historyczną                                                                                            |
-| Opinie                  | Sześć pełnych cytatów z `/Users/grzesiek/Github/ola-homepage/data/testimonials.js`          | Prawdziwość potwierdzona przez użytkownika 06.10.2026                                                                                                           |
-| Podpis opinii           | „Opinia o dotychczasowej współpracy”; bez imion                                             | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                                                                                             |
-| Marki                   | Belka widoczna: ALAB laboratoria, UNS, NORSAN, Norsa Pharma, OMNi-BiOTiC                    | Przywrócenie na polecenie użytkownika 06.10.2026                                                                                                                |
-| Social media            | Instagram, Facebook, TikTok widoczne                                                        | Przywrócenie na polecenie użytkownika 06.10.2026; docelowe URL pozostają do ustalenia                                                                           |
-| Copy                    | Nowe copy 3a zachowane                                                                      | Zlecona aktualizacja; bieżąca treść poniżej                                                                                                                     |
+| Obszar                  | Wartość obowiązująca                                                                                                                               | Źródło / status                                                                                                                                                                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Wygląd                  | Docelowy 3a: białe tło, wiśniowa paleta, Switzer, wordmark i osiem opracowanych podstron                                                           | Decyzja użytkownika 07.10.2026 o realizacji strony 3a; pozostałe warianty porzucone, Wonderful zarchiwizowany. Biblioteka wykonana, migracja stron/CMS otwarta.                                                                                  |
+| Usługa                  | Pojedyncze konsultacje dietetyczne online                                                                                                          | Bezpośrednia decyzja 06.10.2026; nie przenosić mentoringu ani dawnych pakietów                                                                                                                                                                   |
+| Cena i czas konsultacji | 450 zł za 60 minut, waluta PLN                                                                                                                     | Bezpośrednia decyzja użytkownika 06.10.2026; konfiguracja płatnej rezerwacji niewykonana.                                                                                                                                                        |
+| Rezerwacja konsultacji  | CTA do kalendarza wyboru terminu i płatności; proponowana etykieta „Zarezerwuj konsultację”                                                        | Cel ustalony 06.10.2026; tymczasowo `https://cal.com` na polecenie użytkownika, właściwy link wydarzenia później.                                                                                                                                |
+| Wykształcenie Oli       | Ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym                                                                                   | Bezpośrednie potwierdzenie użytkownika 06.10.2026.                                                                                                                                                                                               |
+| Dyplom                  | Zdjęcie ukończenia w slocie „O mnie”: klucz `diploma`, alt PL „Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu” | Zlecenie 08.10.2026. Fixture i renderer wykonane. Asset w Content Lake niewgrany. Puste `diplomaScan` zostawia ramkę.                                                                                                                            |
+| Cena e-booków           | Każdy z sześciu: 97 zł brutto, waluta PLN                                                                                                          | Bezpośrednia decyzja 06.10.2026; nie oznacza gotowego sklepu                                                                                                                                                                                     |
+| Wskaźnik                | Wartość 450, przyrostek +, opis „kobiet rocznie, którym pomagają moje konsultacje”                                                                 | Bezpośrednia informacja 06.10.2026; nie zmieniać na sumę historyczną                                                                                                                                                                             |
+| Opinie                  | Sześć pełnych cytatów z `/Users/grzesiek/Github/ola-homepage/data/testimonials.js`                                                                 | Prawdziwość potwierdzona przez użytkownika 06.10.2026                                                                                                                                                                                            |
+| Podpis opinii           | „Opinia o dotychczasowej współpracy”; bez imion                                                                                                    | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                                                                                                                                                                              |
+| Marki                   | Belka widoczna: ALAB laboratoria, UNS, NORSAN, Norsa Pharma, OMNi-BiOTiC                                                                           | Przywrócenie na polecenie użytkownika 06.10.2026                                                                                                                                                                                                 |
+| Social media            | Instagram, Facebook, TikTok; kanoniczne URL profili                                                                                                | Decyzja użytkownika 08.10.2026: `https://www.instagram.com/aleksandra_olesiewicz`, `https://www.facebook.com/dietetykolesiewicz/`, `https://www.tiktok.com/@aleksandra_olesiewicz`. Ustalenie 06.10.2026 (widoczność trzech platform) pozostaje. |
+| Copy                    | Nowe copy 3a zachowane                                                                                                                             | Zlecona aktualizacja; bieżąca treść poniżej                                                                                                                                                                                                      |
 
 Specjalizacja w copy: PCOS i insulinooporność. Perimenopauza jest tematem
 materiałów; nie dopisywać doświadczenia klinicznego ani kwalifikacji ponad
@@ -65,10 +65,14 @@ Stan kodu 07.10.2026 (pakiet 5): fixture’y mają Konsultacje → `/konsultacje
 E-booki → `/ebooki/` (EN `/en/ebooks/`), Blog → `/blog/`.
 `siteSettings` w Content Lake nie zmieniono.
 Profile w `siteSettings.socialLinks`: nazwy ustalone (Instagram, Facebook,
-TikTok). Fixture i fallback 07.10.2026 używają stron głównych platform
-(`https://www.instagram.com/`, `https://www.facebook.com/`,
-`https://www.tiktok.com/`) wyłącznie jako wartości makiety, żeby linki były
-widoczne. To **nie** są profile Oli. Prawdziwe HTTPS URL do decyzji.
+TikTok). Kanoniczne HTTPS URL od 08.10.2026 (decyzja użytkownika) żyją w
+`src/content/social-profiles.ts` — fixture, fallback, import homepage i JSON-LD
+`sameAs` osoby biorą stąd te same trzy adresy:
+`https://www.instagram.com/aleksandra_olesiewicz`,
+`https://www.facebook.com/dietetykolesiewicz/`,
+`https://www.tiktok.com/@aleksandra_olesiewicz`. Widoczna etykieta w stopce
+zostaje „Instagram” / „Facebook” / „TikTok”. Content Lake nie zapisano;
+schemat `socialLinks` bez zmiany.
 `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
 Linki prawne w `siteSettings.legalLinks`: fixture PL `/polityka-prywatnosci/`
 i `/regulamin/`, EN `/en/privacy/` i `/en/terms/` — bez zmiany makiety stopki
@@ -352,27 +356,28 @@ uwzględnić E-E-A-T i wykonać mockup. **Wykonane:** [mockup](../mockups/homepa
 [ocena E-E-A-T](ABOUT-EEAT-3A.md), szablon About3a, trasy `/o-mnie/` i `/en/about/`,
 wejścia z homepage. **Niewykonane:** dokumenty w Content Lake i publikacja.
 
-| Obszar                  | Bieżąca wartość / mapowanie                                                                                               | Status i źródło                                                                                                                |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Wygląd podstrony        | 3a: białe tło, wiśniowa paleta, Switzer, istniejące portrety                                                              | Ustalone w zleceniu 06.10.2026.                                                                                                |
-| Adres                   | Fixture i trasy Astro: `page.language = pl`, `slug.current = o-mnie` → `/o-mnie/`; EN `about` → `/en/about/`              | Kod 07.10.2026 (pakiet 2). Dokument w Content Lake nieutworzony; bez publikacji.                                               |
-| Kolejność               | Hero → osobisty kontekst z 450+ → wykształcenie i dyplom → podejście → dwie opinie → materiały → konsultacja → newsletter | Wykonane w lokalnym mockupie 07.10.2026; bez konfiguracji CMS.                                                                 |
-| H1                      | „Jestem Ola. Znam PCOS od środka.” → `heroSection.title`                                                                  | Propozycja redakcyjna wykonana lokalnie; bez akceptacji finalnego copy i konfiguracji CMS.                                     |
-| Specjalizacja           | Dietetyczka kliniczna; PCOS i insulinooporność                                                                            | Istniejący kontekst marki i zatwierdzone copy homepage.                                                                        |
-| Wskaźnik                | 450, przyrostek +, „kobiet rocznie, którym pomagają moje konsultacje”; pod osobistym kontekstem                           | Wartość ustalona wcześniej, umieszczenie wykonane w mockupie 07.10.2026.                                                       |
-| CTA główne w hero       | „Zobacz, jak pracuję” → `#jak-pracuje`                                                                                    | Korekta zakresu użytkownika 07.10.2026; konkretna etykieta wykonana jako propozycja w mockupie.                                |
-| CTA pomocnicze w hero   | „Poznaj moje materiały” → `#materialy`                                                                                    | Wykonane lokalnie 07.10.2026; dodatkowe wejścia do e-booków i bloga.                                                           |
-| CTA konsultacji         | „Zarezerwuj konsultację” → `https://cal.com`; 450 zł / 60 minut                                                           | Wcześniejsze decyzje o cenie i rezerwacji zachowane; tylko blok konsultacji ma ten cel.                                        |
-| Opinie                  | Dwa pełne cytaty: o zrozumieniu PCOS oraz gotowaniu dla rodziny; referencje `testimonialsSection.items`                   | Prawdziwość zestawu ustalona wcześniej; dobór dwóch i wariant statyczny są propozycją. Pełne teksty w planie.                  |
-| Portrety                | `about.webp` w hero, `contact.webp` w panelu konsultacji                                                                  | Istniejący zaakceptowany zestaw; rozmieszczenie proponowane.                                                                   |
-| Historia i kwalifikacje | Własne doświadczenie PCOS oraz ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym; miejsce na skan dyplomu  | Uczelnia, kierunek i ramka potwierdzone 06.10.2026. Stopień, daty, dodatkowe certyfikaty i szczegółowa historia nie są podane. |
-| Newsletter              | Tekst, formularz i status demonstracji jak w homepage 3a                                                                  | Propozycja ponownego użycia, bez zmiany zgód i bez integracji.                                                                 |
+| Obszar                  | Bieżąca wartość / mapowanie                                                                                                          | Status i źródło                                                                                               |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Wygląd podstrony        | 3a: białe tło, wiśniowa paleta, Switzer, istniejące portrety                                                                         | Ustalone w zleceniu 06.10.2026.                                                                               |
+| Adres                   | Fixture i trasy Astro: `page.language = pl`, `slug.current = o-mnie` → `/o-mnie/`; EN `about` → `/en/about/`                         | Kod 07.10.2026 (pakiet 2). Dokument w Content Lake nieutworzony; bez publikacji.                              |
+| Kolejność               | Hero → osobisty kontekst z 450+ → wykształcenie i dyplom → podejście → dwie opinie → materiały → konsultacja → newsletter            | Wykonane w lokalnym mockupie 07.10.2026; bez konfiguracji CMS.                                                |
+| H1                      | „Jestem Ola. Znam PCOS od środka.” → `heroSection.title`                                                                             | Propozycja redakcyjna wykonana lokalnie; bez akceptacji finalnego copy i konfiguracji CMS.                    |
+| Specjalizacja           | Dietetyczka kliniczna; PCOS i insulinooporność                                                                                       | Istniejący kontekst marki i zatwierdzone copy homepage.                                                       |
+| Wskaźnik                | 450, przyrostek +, „kobiet rocznie, którym pomagają moje konsultacje”; pod osobistym kontekstem                                      | Wartość ustalona wcześniej, umieszczenie wykonane w mockupie 07.10.2026.                                      |
+| CTA główne w hero       | „Zobacz, jak pracuję” → `#jak-pracuje`                                                                                               | Korekta zakresu użytkownika 07.10.2026; konkretna etykieta wykonana jako propozycja w mockupie.               |
+| CTA pomocnicze w hero   | „Poznaj moje materiały” → `#materialy`                                                                                               | Wykonane lokalnie 07.10.2026; dodatkowe wejścia do e-booków i bloga.                                          |
+| CTA konsultacji         | „Zarezerwuj konsultację” → `https://cal.com`; 450 zł / 60 minut                                                                      | Wcześniejsze decyzje o cenie i rezerwacji zachowane; tylko blok konsultacji ma ten cel.                       |
+| Opinie                  | Dwa pełne cytaty: o zrozumieniu PCOS oraz gotowaniu dla rodziny; referencje `testimonialsSection.items`                              | Prawdziwość zestawu ustalona wcześniej; dobór dwóch i wariant statyczny są propozycją. Pełne teksty w planie. |
+| Portrety                | `about.webp` w hero, `contact.webp` w panelu konsultacji                                                                             | Istniejący zaakceptowany zestaw; rozmieszczenie proponowane.                                                  |
+| Historia i kwalifikacje | Własne doświadczenie PCOS oraz ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym; zdjęcie ukończenia w slocie dyplomu | Uczelnia i kierunek 06.10.2026. Zdjęcie 08.10.2026. Stopień, daty i certyfikaty nie są podane.                |
+| Newsletter              | Tekst, formularz i status demonstracji jak w homepage 3a                                                                             | Propozycja ponownego użycia, bez zmiany zgód i bez integracji.                                                |
 
-Luki danych, nie schematu: skan dyplomu (pole `author.diplomaScan` puste),
-URL płatnej rezerwacji, strona kontaktu. W kodzie Studio są już
+Luki danych, nie schematu: asset dyplomu w Content Lake (fixture ma klucz
+`diploma`), URL płatnej rezerwacji, strona kontaktu. W kodzie Studio są już
 `author.educationInstitution`/`educationProgram`/`diplomaScan` oraz sekcja
 `credentialsSection` z referencją autora; to nie jest konfiguracja Content Lake.
-Obraz korzysta z `mediaObject`; osobny PDF nie został dodany, bo pliku nie ma.
+Obraz korzysta z `mediaObject`. Osobny PDF nie wchodzi do modelu. Puste
+`diplomaScan` zostawia ramkę.
 `author` przechowuje wspólne bio, rolę i portret; długa historia należy
 do `page.sections`. Biogram ramki artykułu (makieta article-3a, decyzja
 08.10.2026) to pełny akapit o specjalizacji, kolejnych krokach i własnym

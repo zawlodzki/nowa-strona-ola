@@ -9,7 +9,6 @@ import {
   EBOOK_SEED,
   homepageCopy,
   footerLegalLinks,
-  footerSocialLinks,
   homepageHeaderCta,
   homepageMediaKeys,
   homepageNavigation,
@@ -17,6 +16,7 @@ import {
   TESTIMONIAL_QUOTES_EN,
   TESTIMONIAL_QUOTES_PL,
 } from "@/content/homepage-seed";
+import { footerSocialLinks } from "@/content/social-profiles";
 import { consultationPath, ebookCollectionPath } from "@/lib/paths";
 
 function media(
