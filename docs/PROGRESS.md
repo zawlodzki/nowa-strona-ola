@@ -33,18 +33,18 @@ Artykuł 01 (`article-blog-01-pl/en`) ma treść z
 `articleBody` w `src/sanity/blog-collection-fixtures.ts` i pole
 `placeholderBody: true` (etykieta w Studio: „Treść zastępcza”).
 
-| klucz | PL | EN |
-|---|---|---|
-| 02 | codziennie-posilki-przy-pcos | everyday-meals-with-pcos |
-| 03 | pytania-o-pcos-przed-wizyta | sorting-pcos-questions-before-an-appointment |
-| 04 | wyniki-badan-na-konsultacje | lab-results-what-to-bring-to-a-consultation |
-| 05 | regularne-posilki | regular-meals-when-every-day-looks-different |
-| 06 | insulinoopornosc-rozmowa-o-odzywianiu | insulin-resistance-starting-the-nutrition-conversation |
-| 07 | suplementy-w-pcos-pytania | pcos-supplements-sort-questions-before-you-buy |
-| 08 | dzienniczek-posilkow | a-food-diary-without-the-pressure-of-perfection |
-| 09 | cel-konsultacji | naming-the-goal-of-a-consultation |
-| 10 | zakupy-spozywcze | grocery-shopping-that-fits-your-week |
-| 11 | sprzeczne-rady-o-pcos | conflicting-advice-on-pcos |
+| klucz | PL                                    | EN                                                     |
+| ----- | ------------------------------------- | ------------------------------------------------------ |
+| 02    | codziennie-posilki-przy-pcos          | everyday-meals-with-pcos                               |
+| 03    | pytania-o-pcos-przed-wizyta           | sorting-pcos-questions-before-an-appointment           |
+| 04    | wyniki-badan-na-konsultacje           | lab-results-what-to-bring-to-a-consultation            |
+| 05    | regularne-posilki                     | regular-meals-when-every-day-looks-different           |
+| 06    | insulinoopornosc-rozmowa-o-odzywianiu | insulin-resistance-starting-the-nutrition-conversation |
+| 07    | suplementy-w-pcos-pytania             | pcos-supplements-sort-questions-before-you-buy         |
+| 08    | dzienniczek-posilkow                  | a-food-diary-without-the-pressure-of-perfection        |
+| 09    | cel-konsultacji                       | naming-the-goal-of-a-consultation                      |
+| 10    | zakupy-spozywcze                      | grocery-shopping-that-fits-your-week                   |
+| 11    | sprzeczne-rady-o-pcos                 | conflicting-advice-on-pcos                             |
 
 Angielskie tytuły SEO skrócone do prefiksu istniejącego tytułu, bo przekraczały
 60 znaków. Widoczny tytuł zostaje pełny.
