@@ -1,5 +1,6 @@
 ---
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { nutritionCoverSize } from "@/lib/ebook-covers";
 
 export type CoverArtKind =
   "decisions" | "route" | "nutrition" | "observation" | "journal" | "evening";
@@ -10,6 +11,7 @@ interface Props {
   imageSrc?: string;
 }
 const { kind, labels = [], imageSrc } = Astro.props;
+const nutrition = nutritionCoverSize();
 ---
 
 {kind === "decisions" && (
@@ -61,9 +63,11 @@ const { kind, labels = [], imageSrc } = Astro.props;
       src={imageSrc}
       fallback="food"
       alt=""
-      width={320}
-      height={180}
-      loading="lazy"
+      width={nutrition.width}
+      height={nutrition.height}
+      objectPosition="left bottom"
+      loading="eager"
+      decoding="sync"
     />
   </div>
 )}
@@ -173,12 +177,16 @@ const { kind, labels = [], imageSrc } = Astro.props;
     width: 12px;
     height: 12px;
   }
-  .ao-book-art--nutrition,
-  .ao-book-art--nutrition img {
+  .ao-book-art--nutrition {
+    height: 84px;
+    overflow: hidden;
+    border-radius: var(--ao-radius-small);
+  }
+  .ao-book-art--nutrition :global(img) {
+    display: block;
     width: 100%;
     height: 84px;
-    object-fit: cover;
-    object-position: right center;
+    max-width: none;
   }
   .ao-book-art--observation {
     display: grid;

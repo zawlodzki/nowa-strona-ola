@@ -124,13 +124,18 @@ export function blogNewsletterSettingsFixture(language: Locale, form: unknown) {
     enabled: true,
     title: copy.newsletterTitle,
     lead: copy.newsletterLead,
-    sidebarTitle: language === "pl" ? "Zostań w kontakcie" : "Stay in touch",
+    sidebarTitle:
+      language === "pl" ? "Zostańmy w kontakcie." : "Let’s stay in touch.",
     sidebarLead:
       language === "pl"
-        ? "Krótka notatka, gdy pojawi się nowy materiał."
-        : "A short note when new material appears.",
+        ? "PCOS, odżywianie i więcej jasności w codziennych wyborach. Prosto do Twojej skrzynki."
+        : "PCOS, nutrition and more clarity in everyday choices. Straight to your inbox.",
     sidebarActionLabel:
-      language === "pl" ? "Do newslettera" : "To the newsletter",
+      language === "pl" ? "Chcę czytać więcej" : "I want to read more",
+    sidebarNote:
+      language === "pl"
+        ? "Możesz wypisać się w każdej chwili."
+        : "You can unsubscribe at any time.",
     form,
   };
 }

@@ -6,7 +6,7 @@ import {
   getArticlePaths,
   getSiteSettings,
 } from "@/sanity/repository";
-import ArticleView from "@/views/ArticleView.astro";
+import ArticlePage from "@/views/ArticlePage.astro";
 
 export const getStaticPaths = (async () => {
   const paths = await getArticlePaths();
@@ -24,4 +24,4 @@ const [article, settings] = await Promise.all([
 ]);
 ---
 
-<ArticleView lang={lang} article={article} settings={settings} />
+<ArticlePage lang={lang} article={article} settings={settings} />

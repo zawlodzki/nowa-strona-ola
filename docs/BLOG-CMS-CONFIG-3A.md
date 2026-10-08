@@ -1,7 +1,7 @@
 # Artykuł blogowy 3a — konfiguracja Sanity
 
-Data: 2026-10-06. Status: instrukcja przyszłego wdrożenia, bez zmian schematów,
-Content Lake i produkcyjnego szablonu Astro.
+Data: 2026-10-08. Status: schemat, GROQ, fixture i szablon Article3a są w kodzie.
+Content Lake i publikacja przykładowego tekstu makiety pozostają otwarte.
 
 [Mockup artykułu](../mockups/homepage/article-3a.html) rozszerza
 [homepage 3a](../mockups/homepage/cherry-white.html). Treść i daty artykułu są
@@ -54,7 +54,7 @@ spisu. Przy braku H2 pomijać cały panel spisu. Markdown zachowuje tę samą hi
 nagłówków; nie musi powielać nawigacji spisu. Makieta zawiera pięć odnośników
 odpowiadających pięciu H2 treści; jest statycznym HTML, bez połączenia z Portable Text.
 
-## Pola do dodania — jeszcze nie istnieją
+## Pola dodane w kodzie (08.10.2026) — bez zapisu Content Lake
 
 ### Trzy e-booki
 
@@ -70,9 +70,9 @@ slug, temat, opis karty, okładka z alt, dostępność, adres szczegółów, cen
 liczbowa i waluta. Cena wszystkich sześciu koncepcji ustalona przez użytkownika:
 **97 PLN brutto**. Dostępność nadal do potwierdzenia. Nie tworzyć fikcyjnego zakupu.
 
-Dodać `article.relatedEbooks[]`: uporządkowana tablica referencji do `ebook`,
-walidacja `required`, dokładnie 3 pozycje, unikalność referencji, zgodność języka
-oraz publikacja wszystkich produktów przed publikacją artykułu. Temat wybrać
+`article.relatedEbooks[]` jest w schemacie: uporządkowana tablica referencji do `ebook`,
+pusta ukrywa sekcję, wypełniona musi mieć dokładnie 3 unikalne pozycje, zgodność języka.
+Publikacja wszystkich produktów przed publikacją artykułu pozostaje walidacją redakcyjną. Temat wybrać
 redakcyjnie; nie losować produktów podczas builda. Walidacja klienta i zaufanego
 builda powinna odrzucać brakujące lub nieopublikowane referencje, zamiast pokazywać
 puste karty. Pole `article.related` oznacza powiązane wpisy, nie e-booki.
@@ -89,10 +89,9 @@ z jednego dokumentu produktu dla homepage i artykułu.
 
 ### Newsletter
 
-Proponowane `siteSettings.blogNewsletter` jako obiekt wspólnej konfiguracji
-PL/EN: `enabled`, `sidebarTitle`, `sidebarLead`, `sidebarActionLabel`,
-`title`, `lead`, `form` (referencja do istniejącego dokumentu `form`). To propozycja,
-a nie obecna struktura. Dostosować do sposobu lokalizacji ustawień serwisu.
+`siteSettings.blogNewsletter` jest w schemacie: `enabled`, `sidebarTitle`,
+`sidebarLead`, `sidebarActionLabel`, `sidebarNote`, `title`, `lead`, `form`.
+Indeks kolekcji nie wyświetla pól sidebar*. Content Lake nadal bez zapisu.
 
 CTA w prawej kolumnie prowadzi do `#newsletter`; nie dodawać drugiego formularza
 z konkurującymi identyfikatorami i stanami. Dolny formularz korzysta z konfiguracji
@@ -108,11 +107,12 @@ waliduje dane lokalnie; bez JS jest wyłączony, a po poprawnej walidacji inform
 
 ## Kolejność wdrożenia
 
-- [ ] Dodać model `ebook`, referencje artykułu i wspólną konfigurację newslettera.
-- [ ] Rozszerzyć GROQ, TypeGen, typy i mappery; nie pobierać szkiców w produkcji.
-- [ ] Przenieść szablon do wspólnych komponentów Astro dla statycznej strony i SSR.
-- [ ] Zapewnić renderery HTML, serializery Markdown i przykłady dla rozszerzeń;
-      nieznany blok Portable Text ma blokować build.
+- [x] Dodać referencje e-booków artykułu, FAQ i wspólną konfigurację newslettera
+      (schemat w kodzie; model `ebook` powstał wcześniej).
+- [x] Rozszerzyć GROQ, TypeGen, typy i mappery; nie pobierać szkiców w produkcji.
+- [x] Przenieść szablon do Article3a / SiteShell3a dla statycznej strony i SSR.
+- [x] Zapewnić renderery HTML, serializery Markdown i przykłady;
+      nieznany blok Portable Text blokuje build.
 - [ ] Utworzyć szkic artykułu z rzeczywistą treścią, datami, mediami i trzema
       opublikowanymi produktami. Nie publikować przykładowego tekstu makiety.
 - [ ] Zweryfikować H2, powtarzające się nagłówki, brak H2, długie tytuły,
@@ -156,8 +156,9 @@ pokazać zaznaczony URL do ręcznego skopiowania. Linki społecznościowe otwier
 narzędzie udostępniania dopiero po akcji czytelnika, bez wcześniejszych połączeń
 z Facebook/WhatsApp. E-mail otwiera klienta poczty; nic nie jest wysyłane automatycznie.
 
-- [ ] Przenieść interakcje do szablonu Astro, wykorzystując opublikowane dane
-      `related[]` i canonical. Sprawdzić próg, brak referencji i chroniony preview.
+- [x] Przenieść interakcje do szablonu Astro, wykorzystując opublikowane dane
+      `related[]` i canonical (kod i fixture). Podgląd szkicu nie renderuje
+      przycisku udostępniania. Content Lake nie był zapisywany.
 
 ## FAQ między e-bookami a newsletterem — 2026-10-06
 
@@ -166,19 +167,17 @@ Dodano cztery przykładowe pytania o przygotowanie do konsultacji. Natywne
 rozwinięta. FAQ jest poza rich textem, nie trafia do lewego spisu ani obliczenia
 połowy tekstu. Kolejność szablonu: e-booki → FAQ → newsletter.
 
-Proponowane nowe pole `article.faq` typu istniejącego `faqSection`:
-`title`, `lead`, `items[].question`, `items[].answer`. Nie tworzyć równoległego
-modelu pytań. To pole jeszcze nie jest wdrożone w artykule; istniejący typ
-[FAQ](../studio/schema-types/blocks/page-sections.ts) i
-[renderer Astro](../src/sections/FaqSection.astro) są punktem wyjścia.
-Pole opcjonalne: bez danych pominąć sekcję i jej dane strukturalne. Zachować
-istniejące walidacje typu oraz dodać kontrolę powtarzających się pytań.
+Proponowane pole `article.faq` typu istniejącego `faqSection` jest w schemacie
+kodu od 08.10.2026: `title`, `lead`, `items[].question`, `items[].answer`.
+Nie powstał równoległy model pytań. Pole jest opcjonalne. Pusta wartość pomija
+sekcję i węzeł `FAQPage` w grafie JSON-LD. Treść fixture’a jest propozycją
+redakcyjną, nie zapisem w Content Lake. HTML, Markdown i JSON-LD biorą te same
+pytania i odpowiedzi. Graf strony zawiera `BlogPosting`, `BreadcrumbList`
+i `FAQPage`, gdy FAQ jest wypełnione.
 
-Mockup zawiera `FAQPage` JSON-LD dokładnie z czterema widocznymi pytaniami
-oraz pełnymi odpowiedziami. Docelowo HTML, Markdown i JSON-LD generować z tego
-samego `article.faq`, bez ręcznie powielanych odpowiedzi. Dane włączyć do grafu
-strony i artykułu, z identyfikatorami z canonical; nie tworzyć drugiego sprzecznego
-grafu. Przykładowe odpowiedzi wymagają akceptacji redakcyjnej przed publikacją.
+- [x] Dodać `article.faq`, GROQ/TypeGen/mapper oraz JSON-LD z widocznych odpowiedzi
+      (kod i fixture; bez zapisu do Content Lake).
+- [ ] Zweryfikować w Studio brak FAQ, powtórzone pytania i nieopublikowany szkic.
 
 `FAQPage` opisuje znaczenie treści zgodnie ze
 [Schema.org](https://schema.org/FAQPage). Nie traktować go jako obietnicy efektu
@@ -186,9 +185,6 @@ SEO: Google usunął wyświetlanie FAQ rich results od 7 maja 2026,
 [aktualizacja dokumentacji](https://developers.google.com/search/updates#may-2026).
 Wartość tej sekcji to dostępne odpowiedzi na pytania czytelniczek; makieta nadal
 ma `noindex`.
-
-- [ ] Dodać `article.faq`, GROQ/TypeGen/mapper, wspólny renderer oraz serializer
-      Markdown i JSON-LD; zweryfikować brak FAQ i zgodność pełnych odpowiedzi.
 
 ### Położenie rekomendacji — korekta 2026-10-06
 

@@ -78,8 +78,8 @@ export function authorFixture(language: Locale) {
     role: language === "pl" ? "Dietetyczka kliniczna" : "Clinical dietitian",
     bio:
       language === "pl"
-        ? "Dietetyczka kliniczna. Specjalizuje się w PCOS i insulinooporności."
-        : "Clinical dietitian. Specialises in PCOS and insulin resistance.",
+        ? "Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Znam PCOS także z własnego doświadczenia."
+        : "I specialise in PCOS and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also know PCOS from my own experience.",
     educationInstitution: "Śląski Uniwersytet Medyczny",
     educationProgram:
       language === "pl" ? "Dietetyka kliniczna" : "Clinical dietetics",

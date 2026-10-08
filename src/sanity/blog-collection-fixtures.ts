@@ -1,12 +1,19 @@
 import type { Locale } from "@ola/shared";
 
 import {
+  FEATURED_ARTICLE_SLUGS,
+  FEATURED_EBOOK_SLUGS,
+  FEATURED_RELATED_SLUGS,
+  featuredArticleExtras,
+} from "@/content/article-featured";
+import {
   BLOG_ARTICLE_SEED,
   BLOG_CATEGORY_SEED,
   type BlogCategoryKey,
 } from "@/content/blog-collection-seed";
+import type { PortableBlock } from "@/content/portable-text";
 import { sortByPublishedAt } from "@/lib/pagination";
-import { authorFixture } from "@/sanity/homepage-fixtures";
+import { authorFixture, ebookFixtures } from "@/sanity/homepage-fixtures";
 
 function block(
   key: string,
@@ -101,7 +108,7 @@ function articleMedia(
     label: copy.alt,
     tone: (seed.imageKey === "food" ? "photo" : "portrait") as
       "photo" | "portrait",
-    caption: null,
+    caption: null as string | null,
     src: seed.imageKey,
     hotspot: seed.hotspot
       ? { x: seed.hotspot.x, y: seed.hotspot.y, height: 1, width: 1 }
@@ -131,12 +138,22 @@ function articleRecord(
       {
         name: author.name,
         role: author.role,
+        bio: author.bio,
         slug: author.slug,
+        photo: author.photo,
       },
     ],
     categories: [categoryFor(language, seed.category)],
-    body: articleBody(language, copy.slug),
-    sources: [],
+    body: articleBody(language, copy.slug) as PortableBlock[],
+    sources: [] as { title: string; href: string }[],
+    breadcrumbTitle: null as string | null,
+    proposalNote: null as string | null,
+    relatedEbooks: [] as ReturnType<typeof ebookFixtures>,
+    faq: null as null | {
+      title: string;
+      lead: string;
+      items: { _key: string; question: string; answer: string }[];
+    },
     translation: {
       language: language === "pl" ? ("en" as const) : ("pl" as const),
       slug: translation.slug,
@@ -170,6 +187,44 @@ function withRelated(articles: Record<string, BlogArticleFixture>) {
 }
 
 withRelated(demonstrationArticles);
+
+function applyFeaturedArticle(language: Locale) {
+  const slug = FEATURED_ARTICLE_SLUGS[language];
+  const article = demonstrationArticles[`${language}/${slug}`];
+  if (!article) {
+    throw new Error(`Brak wyróżnionego artykułu ${language}/${slug}.`);
+  }
+  const extras = featuredArticleExtras(language);
+  const ebooks = ebookFixtures(language);
+  const relatedEbooks = FEATURED_EBOOK_SLUGS[language].map((ebookSlug) => {
+    const ebook = ebooks.find((item) => item.slug === ebookSlug);
+    if (!ebook) {
+      throw new Error(`Brak e-booka ${language}/${ebookSlug} dla artykułu.`);
+    }
+    return ebook;
+  });
+  article.updatedAt = extras.updatedAt;
+  article.breadcrumbTitle = extras.breadcrumbTitle;
+  article.proposalNote = extras.proposalNote;
+  article.body = extras.body as PortableBlock[];
+  article.media = { ...article.media, caption: extras.heroCaption };
+  article.faq = {
+    title: extras.faq.title,
+    lead: extras.faq.lead,
+    items: extras.faq.items.map((item) => ({ ...item })),
+  };
+  article.relatedEbooks = relatedEbooks;
+  article.related = FEATURED_RELATED_SLUGS[language].map((relatedSlug) => {
+    const related = demonstrationArticles[`${language}/${relatedSlug}`];
+    if (!related) {
+      throw new Error(`Brak powiązanego artykułu ${language}/${relatedSlug}.`);
+    }
+    return related;
+  });
+}
+
+applyFeaturedArticle("pl");
+applyFeaturedArticle("en");
 
 export function fixtureArticle(language: Locale, slug: string) {
   return demonstrationArticles[`${language}/${slug}`];

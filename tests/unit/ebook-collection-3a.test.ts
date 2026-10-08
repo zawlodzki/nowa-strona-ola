@@ -5,7 +5,7 @@ import { mapEbookCollection } from "../../src/content/map-ebook-collection";
 import { serializeEbookCollection } from "../../src/content/serialize-ebook-collection";
 import { knownSectionTypes } from "../../src/content/sections";
 import { parseContentPath } from "../../src/lib/content-path";
-import { ebookCoverArt } from "../../src/lib/ebook-covers";
+import { ebookCoverArt, nutritionCoverSize } from "../../src/lib/ebook-covers";
 import { ebookCollectionPath, ebookPath } from "../../src/lib/paths";
 import { getPage, listEbooks } from "../../src/sanity/repository";
 
@@ -138,5 +138,6 @@ describe("ebook collection covers", () => {
     expect(() => ebookCoverArt("unknown-slug")).toThrow(
       "Brak mapowania okładki",
     );
+    expect(nutritionCoverSize(1536)).toEqual({ width: 1536, height: 620 });
   });
 });

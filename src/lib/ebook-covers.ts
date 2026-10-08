@@ -21,6 +21,16 @@ export const EBOOK_COVER_ART: Record<
   "night-starts-at-six": { kind: "evening", variant: "default" },
 };
 
+/** Inner cover 208×84 from mockup `.cover-art` (252px cover, 22px pad). */
+export const NUTRITION_COVER_RATIO = 208 / 84;
+
+export function nutritionCoverSize(sourceWidth = 1536) {
+  return {
+    width: sourceWidth,
+    height: Math.max(1, Math.round(sourceWidth / NUTRITION_COVER_RATIO)),
+  };
+}
+
 export function ebookCoverArt(slug: string): {
   kind: EbookCoverArtKind;
   variant: "default" | "alt";

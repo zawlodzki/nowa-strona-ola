@@ -1,8 +1,8 @@
 import { defineQuery } from "groq";
 
 import {
-  articleBodyProjection,
   articleCardProjection,
+  articleDetailProjection,
   ebookCardProjection,
   ebookProjection,
   PAGE_SECTION_PROJECTION,
@@ -31,13 +31,7 @@ export const PREVIEW_ARTICLE_QUERY = defineQuery(/* groq */ `
     language == $language &&
     slug.current == $slug
   ][0]{
-    ${articleCardProjection},
-    updatedAt,
-    seo{title, description},
-    authors[]->{ name, role, "slug": slug.current },
-    body[]{ ${articleBodyProjection} },
-    sources[]{ _key, title, href },
-    related[]->{ ${articleCardProjection} }
+    ${articleDetailProjection}
   }
 `);
 

@@ -319,6 +319,7 @@ export const siteSettingsProjection = /* groq */ `
     sidebarTitle,
     sidebarLead,
     sidebarActionLabel,
+    sidebarNote,
     "form": form->{
       "id": _id,
       language,
@@ -367,12 +368,37 @@ export const articleBodyProjection = /* groq */ `
   _type == "articleImage" => {
     alt,
     caption,
-    "src": image.asset->url
+    "src": image.asset->url,
+    "hotspot": image.hotspot{x, y, height, width}
   },
   _type == "articleCta" => {
     title,
     lead,
     "action": action${actionFields}
+  }
+`;
+
+export const articleDetailProjection = /* groq */ `
+  ${articleCardProjection},
+  breadcrumbTitle,
+  proposalNote,
+  updatedAt,
+  seo{title, description},
+  authors[]->{
+    name,
+    role,
+    bio,
+    "slug": slug.current,
+    "photo": photo${mediaFields}
+  },
+  body[]{ ${articleBodyProjection} },
+  sources[]{ _key, title, href },
+  related[]->{ ${articleCardProjection} },
+  relatedEbooks[]->{ ${ebookCardProjection} },
+  faq{
+    title,
+    lead,
+    items[]{ _key, question, answer }
   }
 `;
 
@@ -383,13 +409,7 @@ export const PUBLISHED_ARTICLE_QUERY = defineQuery(/* groq */ `
     language == $language &&
     slug.current == $slug
   ][0]{
-    ${articleCardProjection},
-    updatedAt,
-    seo{title, description},
-    authors[]->{ name, role, "slug": slug.current },
-    body[]{ ${articleBodyProjection} },
-    sources[]{ _key, title, href },
-    related[]->{ ${articleCardProjection} }
+    ${articleDetailProjection}
   }
 `);
 

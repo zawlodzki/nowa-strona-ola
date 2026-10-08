@@ -275,9 +275,8 @@ Stan po pakiecie 6 (08.10.2026):
   `/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/`,
   `/en/ebooks/<slug>/`, `/blog/`, `/en/blog/` oraz preview tych stron używają
   `SiteShell3a`/`Layout3a` i `Homepage3a` / `About3a` / `Consultation3a` /
-  `Ebook3a` / `EbookCollection3a` / `BlogCollection3a`. Trasy artykułu
-  `blog/[slug]` zostają przy `ArticleView` do pakietu 7. `/ui/` czeka na
-  dalsze prace.
+  `Ebook3a` / `EbookCollection3a` / `BlogCollection3a` / `Article3a`.
+  `/ui/` czeka na dalsze prace.
 - Sanity ma `siteSettings.blogIndex` i `blogNewsletter` w schemacie kodu;
   kolekcja korzysta z istniejących `article` i `category`. Serializery
   Markdown nowych typów są w kodzie; trasy `.md` i pełny eksport to etap 5.
@@ -346,8 +345,9 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 - [x] Wdrożyć BlogCollection3a i rzeczywistą paginację (kod i fixture;
       bez Content Lake). Copy, tytuły, daty i kadry z makiety są propozycją.
 - [ ] Dane indeksu bloga w Content Lake i odbiór Studio/preview.
-- [ ] Wdrożyć Article3a, Portable Text i jego powiązane bloki.
-- [ ] Przygotować i sprawdzić import bez zapisu oraz kopię obecnych danych.
+- [x] Wdrożyć Article3a, Portable Text i jego powiązane bloki (kod i fixture;
+      bez Content Lake). Copy, daty i FAQ z makiety są propozycją.
+- [x] Przygotować i sprawdzić import artykułu bez zapisu (`import:article`).
 - [ ] Przenieść treści i media do szkiców Content Lake; zapisać wyniki walidacji.
 - [ ] Odebrać edycję i chroniony podgląd wszystkich szablonów z Sanity.
 - [ ] Po zastąpieniu zastosowań usunąć dawną prezentację i aliasy `--wf-*`.
@@ -527,7 +527,8 @@ zależności; źródła nie zastępują wyników testów w projekcie.
 - [x] Sprawdzić Chromium/Firefox/WebKit, 320/390/768/1440 px, CSS zoom 200%,
       klawiaturę, reduced motion, brak JS i lokalny formularz; axe Chromium light/dark.
 - [x] Opisać istniejące pola i wymagane rozszerzenia Sanity.
-- [ ] Przenieść zaakceptowany szablon do Astro i wdrożyć rozszerzenia CMS.
+- [x] Przenieść zaakceptowany szablon do Astro i wdrożyć rozszerzenia CMS
+      (kod i fixture; bez Content Lake i publikacji przykładowego tekstu).
 - [ ] Uzupełnić rzeczywisty artykuł, daty i media po akceptacji redakcyjnej.
 
 [Mockup](../mockups/homepage/article-3a.html),
@@ -544,7 +545,7 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
       i ochronę szkiców przy przyszłym przeniesieniu do Astro.
 - [x] Sprawdzić oba panele na desktop/mobile i w trzech przeglądarkach;
       pełne verify: 57 unit i 42 E2E PASS, w tym regresje progu/schowka/fokusu.
-- [ ] Powiązać panel z dwoma rzeczywistymi opublikowanymi wpisami w CMS.
+- [x] Powiązać panel z dwoma wpisami fixture (seed 02 i 03). Publikacja CMS otwarta.
 
 ## FAQ artykułu 3a — 2026-10-06
 
@@ -553,7 +554,7 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
 - [x] Dodać JSON-LD FAQPage zgodne z pełnymi widocznymi odpowiedziami.
 - [x] Opisać wykorzystanie istniejącego typu FAQ w przyszłym polu artykułu,
       wspólny HTML/Markdown/JSON-LD i aktualny status Google FAQ rich results.
-- [ ] Wdrożyć pole `article.faq`, pobieranie i renderer w Astro/Sanity.
+- [x] Wdrożyć pole `article.faq`, pobieranie i renderer (kod i fixture; bez Content Lake).
 
 ## Korekta prawej kolumny artykułu 3a — 2026-10-06
 

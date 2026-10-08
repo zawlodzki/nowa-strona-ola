@@ -46,6 +46,25 @@ export const articleType = defineType({
       validation: (rule) => rule.required().max(320),
     }),
     defineField({
+      name: "breadcrumbTitle",
+      title: "Krótki tytuł w ścieżce",
+      description:
+        "Opcjonalny podpis okruszka. Puste pole używa pełnego tytułu.",
+      type: "string",
+      group: "content",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
+      name: "proposalNote",
+      title: "Nota przykładowa",
+      description:
+        "Widoczna nad pierwszym akapitem, gdy wpis jest propozycją redakcyjną. Puste pole ukrywa notę.",
+      type: "text",
+      rows: 3,
+      group: "content",
+      validation: (rule) => rule.max(240),
+    }),
+    defineField({
       name: "publishedAt",
       title: "Data publikacji",
       type: "datetime",
@@ -162,7 +181,38 @@ export const articleType = defineType({
           options: relatedArticleFilter(),
         }),
       ],
-      validation: (rule) => rule.max(4),
+      validation: (rule) => rule.max(4).unique(),
+    }),
+    defineField({
+      name: "relatedEbooks",
+      title: "Powiązane e-booki",
+      description:
+        "Puste pole ukrywa sekcję. Wypełnione musi mieć dokładnie 3 unikalne e-booki w tym samym języku.",
+      type: "array",
+      group: "content",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "ebook" }],
+          options: sameLanguageFilter("ebook"),
+        }),
+      ],
+      validation: (rule) =>
+        rule
+          .max(3)
+          .unique()
+          .custom((value) => {
+            if (!Array.isArray(value) || value.length === 0) return true;
+            return value.length === 3
+              ? true
+              : "Wybierz dokładnie 3 e-booki albo zostaw pole puste.";
+          }),
+    }),
+    defineField({
+      name: "faq",
+      title: "FAQ",
+      type: "faqSection",
+      group: "content",
     }),
     defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" }),
   ],

@@ -1,0 +1,46 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { mapArticle } from "@/content/map-article";
+import { shellLinks } from "@/content/map-homepage";
+import { homepageCopyright } from "@/sanity/homepage-fixtures";
+import { blogPath } from "@/lib/paths";
+import type { ArticleContent, SiteSettings } from "@/sanity/repository";
+import Article3a from "@/views/Article3a.astro";
+import SiteShell3a from "@/views/SiteShell3a.astro";
+
+export interface Props {
+  lang: Locale;
+  article: ArticleContent;
+  settings: SiteSettings;
+  preview?: boolean;
+}
+
+const { lang, article, settings, preview = false } = Astro.props;
+const content = mapArticle(article, settings);
+const shell = shellLinks(settings);
+const blogHref = blogPath(lang);
+const navigation = shell.navigation.map((item) => ({
+  ...item,
+  current: item.href === blogHref,
+}));
+const headerCta = shell.headerCta
+  ? { ...shell.headerCta, href: "#newsletter" }
+  : undefined;
+---
+
+<SiteShell3a
+  lang={lang}
+  title={content.seoTitle}
+  description={content.seoDescription}
+  preview={preview}
+  footerNote={settings.footerNote ?? ""}
+  copyright={homepageCopyright(lang)}
+  languageHref={content.alternateHref}
+  navigation={navigation}
+  headerCta={headerCta}
+  socialLinks={shell.socialLinks}
+  legalLinks={shell.legalLinks}
+>
+  <Article3a content={content} preview={preview} />
+</SiteShell3a>

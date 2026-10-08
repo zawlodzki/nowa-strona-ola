@@ -2,7 +2,7 @@
 import { env } from "cloudflare:workers";
 import type { Locale } from "@ola/shared";
 
-import ArticleView from "../../../src/views/ArticleView.astro";
+import ArticlePage from "../../../src/views/ArticlePage.astro";
 import BlogCollectionPage from "../../../src/views/BlogCollectionPage.astro";
 import ComposedPage from "../../../src/views/ComposedPage.astro";
 import EbookCollectionPage from "../../../src/views/EbookCollectionPage.astro";
@@ -116,7 +116,7 @@ const categories = language
 ---
 
 {article && language && settings ? (
-  <ArticleView lang={language} article={article} settings={settings} />
+  <ArticlePage lang={language} article={article} settings={settings} preview />
 ) : ebook && language && settings ? (
   <EbookPage lang={language} ebook={ebook} settings={settings} preview />
 ) : collectionPage &&

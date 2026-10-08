@@ -46,5 +46,5 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --n
 - Najnowszy wpis jest tylko na stronie 1 i nie wraca w siatce. `--exact` na tytule wyróżnionego wpisu trafia w link H3, nie w obrazek (aria-label zaczyna się od „Przeczytaj artykuł:”). Numer strony ma dostępne imię „Strona 2”, nie samą cyfrę.
 - Fixture ma 11 wpisów, więc `/blog/strona/2/` istnieje. Pusta kategoria to `perimenopauza`, nie brak trasy.
 - Copy indeksu jest propozycją. Nie traktować tytułów i dat z makiety jako publikacji.
-- Artykuł z karty nadal używa dotychczasowego ArticleView (pakiet 7).
+- Artykuł z karty otwiera Article3a pod `blog/[slug]`.
 - Screenshoty kolekcji muszą poczekać na załadowanie obrazów (`verify.mjs browser screenshot` przewija stronę i czeka na `naturalWidth`). Miniatury są kadrowane do pejzażu 1.8 w pliku (`about` 1122×623), żeby Chromium malował je poza viewportem. Różowy prostokąt to tło `--ao-surface` przy wycieku portretowego pliku, nie brak `<img>`.
