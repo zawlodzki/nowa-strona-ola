@@ -35,7 +35,9 @@ function locatorFor(body) {
   const options = {};
   if (body.name !== undefined) options.name = body.name;
   if (body.exact === true) options.exact = true;
-  return page.getByRole(body.role, options);
+  let locator = page.getByRole(body.role, options);
+  if (body.nth !== undefined) locator = locator.nth(body.nth);
+  return locator;
 }
 
 function evidenceFile(relativePath) {
@@ -65,6 +67,10 @@ async function run(body) {
       return `status ${response?.status() ?? "none"} ${target.pathname}`;
     }
     case "click":
+      if (body.text !== undefined && !body.role) {
+        await page.getByText(body.text, { exact: true }).click();
+        return `clicked text ${body.text}`;
+      }
       await locatorFor(body).click();
       return `clicked ${body.role} ${body.name ?? ""}`.trim();
     case "fill":

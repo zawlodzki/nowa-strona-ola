@@ -341,6 +341,13 @@ async function browserCommand(argv) {
   if (named.text !== undefined) body.text = named.text;
   if (named.attribute) body.attribute = named.attribute;
   if (named.count !== undefined) body.count = Number(named.count);
+  if (named.nth !== undefined) {
+    const index = Number(named.nth);
+    if (!Number.isInteger(index) || index < 0) {
+      fail("--nth must be a non-negative integer.");
+    }
+    body.nth = index;
+  }
   if (named.javascript === "false") body.javascript = false;
   if (command === "context" && named.javascript === undefined) {
     body.javascript = true;

@@ -26,7 +26,7 @@ Preconditions:
 - **Brak skryptów.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser script-count`. Wynik to `scripts 0`.
 - **Link powrotu.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Wróć do przykładu" --exact --attribute href --value "/"`. Atrybut to `/`.
 - **Dowód.** Na `/static/` uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path static-page/page.aria.txt` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path static-page/page.png`.
-- **Powrót.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Wróć do przykładu" --exact`. Następny dokument to strona główna: `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Dobry pomysł. Przemyślana realizacja." --exact`.
+- **Powrót.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Wróć do przykładu" --exact`. Następny dokument to strona główna: `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Zrozum swoje ciało. Zacznij od odżywiania." --exact`.
 
 ## Gotchas
 
