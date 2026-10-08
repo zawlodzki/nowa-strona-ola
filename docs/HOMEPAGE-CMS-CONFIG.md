@@ -604,10 +604,9 @@ Hero i tło portretu zachowują dotychczasowe kolory. Matcha ma być drobnym
 akcentem obwódek i grafik. Pełne rozmieszczenie pozostaje do ustalenia.
 Tekst i strzałka secondary buttona w matcha to propozycja wizualizacji.
 
-Mapowanie wykonawcze: przyszłe tokeny `accent` i `accent-on-primary`
-w design-system/tokens.json oraz kontrolowany wariant secondary komponentu
-Button. Nazwy tokenów są propozycją, jeszcze niewdrożoną. CMS nie otrzymuje
-dowolnych kodów kolorów; styl przypisuje renderer do znaczenia akcji i wariantu
-sekcji. Grafiki wymagają osobnego doboru detali. Schematy i Content Lake
+Mapowanie wykonawcze: tokeny `accent`, `accent-on-primary` i `accent-on-light`
+w design-system/tokens.json oraz wariant `secondary` komponentu Button
+(białe wnętrze, obwódka matcha). CMS nie otrzymuje dowolnych kodów kolorów;
+styl przypisuje renderer do znaczenia akcji. Schematy i Content Lake
 nie zostały zmienione. [Zasady](../design-system/SPECIFICATION.md) i
 [plansza](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).

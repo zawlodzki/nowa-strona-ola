@@ -1,9 +1,28 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (pakiet 7 — Article3a).
+Aktualizacja: 2026-10-08 (akcent matcha z PR #31 na stronach 3a).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja akcentu matcha 3a — 08.10.2026
+
+Zakres: wyrównanie produkcyjnych podstron 3a do decyzji z PR #31
+(matcha z 1a: #53671B / #D8E78A). Pakiety 1–7 etapu 4a są w main.
+
+Tokeny `accent`, `accent-on-primary` i `accent-on-light` w
+`design-system/tokens.json`. Secondary button: białe wnętrze
+(`--ao-background`), obwódka i etykieta matcha. Primary CTA, wordmark,
+hero i tło portretu bez zmian. Dekoracje zostają SVG.
+
+Detale grafik: punkt na orbicie produktu, punkt na półce butelek,
+jedna linia/kreska na jasnych okładkach, iskierka na okładkach cherry.
+Checkmarki, glify share/mail, TextLink i tła paneli bez matchy.
+
+Mapa zastosowań i liczby testów są w opisie PR. Kontrole tej sesji
+dopisuję po `npm run verify` i zrzutach przed/po.
+
+Następny krok: odbiór wizualny akcentu. Nie mergować bez zgody.
 
 ### Sesja pakietu 7 — Article3a — 08.10.2026
 

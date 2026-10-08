@@ -1,0 +1,8 @@
+ts	phase	decision	why	evidence	result
+2026-10-08T07:44:00Z	start	start run matcha accent 3a	figure-it-out on settled palette from SPECIFICATION and board 05	origin/main cfb9abe PR34	open
+2026-10-08T07:44:00Z	frame	predicate: every 3a page shows matcha only as secondary button and single SVG details, cherry palette otherwise unchanged, WCAG AA on interactive accent, verify green	user closed 4a packages 1-7, this PR is accent only	design-system/SPECIFICATION.md:35	framed
+2026-10-08T07:44:00Z	frame	skip architect and arena	palette and usage bounds already decided in PR 31 and board 05	docs/HOMEPAGE-CMS-CONFIG.md Matcha z 1a	skip architect
+2026-10-08T07:44:00Z	frame	one owner, serialize tokens.css Button decorations	shared CSS and SVG, not independent worktrees	src/design-system/global.css	one owner
+2026-10-08T07:49:43Z	impl	tokens accent accent-on-primary accent-on-light plus secondary button CSS	one source of truth, white fill matcha stroke, covers do not invert	design-system/tokens.json src/design-system/global.css	coded
+2026-10-08T07:49:43Z	impl	SVG details on orbit bottles light cover strokes cherry sparkle	board 05 single green details, keep existing shapes	src/design-system/decorations/	coded
+2026-10-08T07:49:43Z	impl	leave About Consultation Ebook TextLinks in ink	spec forbids matcha on every link, those CTAs are text links in mockups	src/views/About3a.astro Consultation3a.astro Ebook3a.astro	open for review

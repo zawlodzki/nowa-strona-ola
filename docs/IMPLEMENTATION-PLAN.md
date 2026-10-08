@@ -664,5 +664,5 @@ Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.
       [materiale porównawczym](../output/design-system-3a/2026-10-07/accent-proposals/README.md).
 - [x] Wybrać matchę z 1a: #53671B / #D8E78A; delikatny akcent bez tła hero.
 - [x] Pokazać biały secondary button z obwódką oraz drobne elementy grafik.
-- [ ] Ustalić pełną mapę zastosowań w sekcjach i grafikach.
-- [ ] Po wyborze wdrożyć go w jednym źródle tokenów i wykonać odbiór UI.
+- [x] Wdrożyć tokeny matcha i secondary button w jednym źródle tokens.json.
+- [x] Dodać pojedyncze detale SVG na grafikach 3a; mapa zastosowań w PR.

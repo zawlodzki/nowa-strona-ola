@@ -168,8 +168,9 @@ body.ao-site {
     opacity var(--ao-motion-hover);
 }
 .ao-button--secondary {
-  background: transparent;
-  color: var(--ao-ink) !important;
+  background: var(--ao-background);
+  color: var(--ao-accent) !important;
+  border-color: var(--ao-accent);
 }
 .ao-button:hover {
   opacity: 0.85;
@@ -587,11 +588,13 @@ body.ao-site {
   border-left: 4px solid var(--ao-cover-spine);
   box-shadow: var(--ao-book-shadow);
   overflow: hidden;
+  --ao-deco-accent: var(--ao-accent-on-light);
 }
 .ao-book-cover--cherry {
   background: var(--ao-cover-primary);
   color: var(--ao-cover);
   border-color: var(--ao-cover-primary-spine);
+  --ao-deco-accent: var(--ao-accent-on-primary);
 }
 .ao-book-cover__author {
   font-size: 10px;
@@ -610,6 +613,7 @@ body.ao-site {
   max-width: 165px;
 }
 .ao-book-cover__art {
+  position: relative;
   margin-top: auto;
   height: 84px;
   min-height: 64px;
@@ -617,6 +621,17 @@ body.ao-site {
   border-top: 1px solid currentColor;
   font-size: 12px;
   line-height: 1.3;
+}
+.ao-deco-sparkle {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+}
+.ao-book-cover--cherry .ao-deco-sparkle {
+  display: block;
 }
 .ao-book-cover__art:has(.ao-book-art--nutrition) {
   padding-top: 0;

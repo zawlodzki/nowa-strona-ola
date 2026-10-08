@@ -1,6 +1,6 @@
 # Dodatkowy akcent systemu 3a
 
-Data: 07.10.2026. Status: wybrana matcha z 1a (#53671B / #D8E78A); wdrożenie w kodzie otwarte.
+Data: 07.10.2026. Status: wybrana matcha z 1a (#53671B / #D8E78A); tokeny i CSS wdrożone w kodzie 3a.
 
 Wizualizacje powstały w narzędziu image_gen na podstawie istniejącego katalogu
 [3a](../catalog-light-1440.png). Są koncepcjami rastrowymi; tokeny i aplikacja
@@ -61,7 +61,8 @@ Użytkownik wskazał historyczne #53671B / #D8E78A. Wcześniejsza propozycja
 #A8C686 została zastąpiona. Hero zachowuje różowe tło portretu; secondary
 button ma białe wnętrze i zieloną obwódkę. Drobne detale grafik pokazano
 w pasku zastosowań. [Nowa plansza](05-matcha-1a-subtle.png) została obejrzana.
-Kod i tokeny pozostają bez zmian. Pełna mapa użycia wymaga opracowania.
+Tokeny i CSS secondary buttona są w kodzie. Mapę zastosowań na podstronach 3a
+zawiera opis PR wdrożenia.
 
 ### Prompt: delikatna matcha z 1a
 
