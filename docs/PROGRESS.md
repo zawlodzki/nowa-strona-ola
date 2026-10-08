@@ -1,9 +1,37 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (akcent matcha z PR #31 na stronach 3a).
+Aktualizacja: 2026-10-08 (akcent matcha na cherry: strzałka i większa iskierka).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja wzmocnienia cherry — 08.10.2026
+
+Odbiór PR #36: iskierka na wiśniowych okładkach była za mała; brakowało
+poziomej strzałki z kafelka 3 planszy 05. SVG `CherryCoverAccent` w
+`src/design-system/decorations/`: cienka strzałka i czteroramienna
+iskierka w `accent-on-primary` (#D8E78A). Render tylko przy
+`tone="cherry"`. Temat okładki ma `max-width`, żeby nie nachodzić na
+znak. Zdjęcia, układ kart i pozostałe akcenty bez zmian.
+
+Draft PR **#36**, head po `npm run verify`: dopisany w commicie dokumentacji.
+Kontrole (Node 24.21.0):
+
+- `npm run verify` **PASS**: **115** unit, **141** E2E Chromium/Firefox/WebKit
+  (7 przypadków `matcha-accent-3a.spec.ts` × 3, w tym brak kolizji z tekstem
+  na homepage, kolekcji, kategorii PCOS, artykule, katalogu, EN, 1280 i 390).
+- CSS gzip **29 778 B** / 32 768 B; JS gzip **5 770 B**.
+- Kontrast `#D8E78A` na `cover-primary` **6,17** (≥ 3 dla grafiki).
+- verify-ola `ola-cherry-accent`, `browser posts` = `[]`.
+
+Artefakty: `closeup-ebooks-cherry-cover.png` (przed/po),
+`compare-board-05-secondary-decorations.png`,
+`compare-accent-ebooks-desktop-v2.png`,
+`compare-accent-home-desktop-v2.png`,
+`compare-accent-article-desktop-v2.png`,
+`compare-accent-ebooks-mobile-v2.png`.
+
+Następny krok: odbiór wzmocnionej cherry. Nie mergować bez zgody.
 
 ### Sesja akcentu matcha 3a — 08.10.2026
 
