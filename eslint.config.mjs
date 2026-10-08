@@ -33,5 +33,15 @@ export default [
   },
   ...tseslint.configs.recommended,
   ...astro.configs.recommended,
+  {
+    files: ["src/sanity.types.ts"],
+    rules: {
+      // TypeGen 6 tworzy interfejs zgodności ze starszym klientem Sanity.
+      "@typescript-eslint/no-empty-object-type": [
+        "error",
+        { allowInterfaces: "with-single-extends" },
+      ],
+    },
+  },
   { rules: { "@typescript-eslint/no-explicit-any": "error" } },
 ];

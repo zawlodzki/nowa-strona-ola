@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (wdrożenie zaleceń audytu CSS).
+Aktualizacja: 2026-10-08 (wdrożenie zaleceń audytu CSS; Sanity 6.18.0; import 3a oraz strony prawne).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
@@ -60,6 +60,59 @@ Format trzech zmienionych dokumentów i lokalne odnośniki raportu: PASS.
 Następny krok: izolacja zależności CSS szablonów i pomiar per strona,
 następnie poprawki typografii i interakcji z pełnym verify/odbiorem 3a.
 Audyt nie zmienia stanu wdrożenia CMS ani publikacji.
+
+### Aktualizacja Sanity — 08.10.2026
+
+- Sanity i Vision 5.31.2 → **6.18.0** (stabilny tag `latest` w npm),
+  GROQ 6.13.2 → **6.18.0**, klient 8.6.1 → **8.9.0** w stronie i preview,
+  ikony 5.2.2 → **5.2.3**. Preview URL Secret 4.1.5 i Webhook 4.0.4
+  już były aktualne. React 19.3.0 i Node 24 spełniają wymagania.
+- Przejrzano changelog v6: projekt nie używa usuniętych `auth.mode`
+  ani `enableLegacySearch`; Vite 8 i React Strict Mode nie wymagają zmian
+  w obecnej konfiguracji. Nie zmieniono wersji API Content Lake.
+- Jawne dev dependencies w root: `sanity` dla walidatora dokumentów,
+  `@sanity/webhook` dla testów podpisu. Wcześniej importy zależały od hoistingu.
+  TypeGen: **72 schematy, 22 zapytania**; nowy rejestr globalny typów oraz
+  interfejs zgodności klienta. ESLint dopuszcza pojedyncze dziedziczenie
+  interfejsu wyłącznie w wygenerowanym `src/sanity.types.ts`.
+- Jeden lockfile npm. Poprawki zgodne z zakresami wersji: m.in. Wrangler
+  4.131.1 → **4.148.0**, Vite 8.3.0 → **8.3.4**, devalue 5.9.4,
+  DOMPurify 3.4.16, brace-expansion 5.0.12, fast-uri 3.1.8,
+  http-cache-semantics 4.3.0. Jawny Sharp **0.35.5** zabezpiecza build
+  obrazów Astro. Override `@vercel/frameworks` → `smol-toml` **1.9.0**
+  usuwa podatny parser TOML z CLI Sanity. Nie użyto `audit fix --force`.
+- Czyste `npm ci` **PASS** (1294 pakiety); `npm ls` potwierdza nowe wersje
+  Sanity/Vision/klienta i Sharp po odtworzeniu instalacji z lockfile.
+- Node **24.19.0**, npm **11.9.0**: format, tokeny, lint, typy
+  (233 + 11 plików Astro, Studio/Worker/shared), **134 unit / 23 pliki**,
+  build Astro (**65 stron**), Studio, SSR preview, dry-run Workera i kontrola
+  artefaktów **PASS**. JS **5760 B**, CSS **29804 B gzip**.
+- `npm run verify` nie jest zielone: E2E nie uruchamiają przeglądarek,
+  bo `npx playwright install chromium firefox webkit` kończy się
+  `403 Domain forbidden` dla `cdn.playwright.dev`. To blokada środowiska;
+  testów nie wyłączono. `npm run test:content-lake` osobno: generacja
+  78 dokumentów, fixture build, build Content Lake (**60 stron**) i budżety
+  PASS; porównanie DOM/zdjęć blokuje ten sam brak Chromium.
+  Walidacja offline `npx tsx scripts/validate-content-lake.ts`:
+  **78 dokumentów, 0 błędów**.
+- `npm audit`: **22 zgłoszenia (13 high, 9 moderate), 0 critical** po
+  poprawkach (początkowo 28). Pozostałe źródła i granice ekspozycji:
+  `braces` 3.0.3 (brak nowszej stabilnej wersji; wzorce lokalnych plików
+  w CLI/codegen/linterze), `js-yaml` 3.13.1 i `sprintf-js` w detekcji
+  frameworków/argumentach CLI (zaufane pliki repo i argumenty), `uuid` 10
+  w `typeid-js` (używa v7; zgłoszenie dotyczy v3/v5/v6 z buforem),
+  Sharp 0.35.4 przypięty przez Miniflare (lokalny emulator; preview używa
+  `imageService: "compile"`, brak przetwarzania obrazów Miniflare na produkcji).
+  Sanity/Vision/Wrangler są też raportowane jako zależności tych pakietów.
+  Uzasadnienie braku ekspozycji dotyczy obecnej architektury i zaufanych
+  wejść narzędzi lokalnych, nie publicznego przetwarzania dowolnych plików.
+  Nie wymuszono niezgodnych majorów parserów ani proponowanego przez audyt
+  downgrade’u Sanity. Przy zmianie sposobu użycia narzędzi ponowić ocenę.
+- Na zlecenie użytkownika zmiany przygotowano do push i PR na gałęzi
+  `codex/update-sanity-6.18.0`. Bez zapisu do datasetu i merge. Następny krok tej
+  aktualizacji: pełne verify w CI/środowisku z dostępem do przeglądarek oraz
+  kontrola Studio/Presentation z rzeczywistym logowaniem; potem wrócić do
+  prac etapu 4a opisanych niżej.
 
 ### Sesja importu 3a, 08.10.2026
 
@@ -3052,3 +3105,17 @@ sekretów.
 Po sesji uaktualniać ten plik i checklisty: oznaczać tylko wykonane i zweryfikowane
 zadania, podawać rzeczywiste wyniki i niewykonane kontrole. Istotne zmiany decyzji
 odnotować z datą i powodem. Nie przechowywać sekretów.
+
+## Nowe skille pstack, 2026-10-08
+
+- Zlecono PR i scalenie 52 lokalnie zainstalowanych skillów pstack.
+  PR zawiera różnice względem origin/main oraz symlinki Claude/Pi.
+- Kontrole: 52 pliki SKILL.md, JSON lockfile i 103 symlinków poprawne.
+  Hashy instalatora i zewnętrznych odnośników nie sprawdzano.
+- Zachowano pozostałe wpisy lockfile i lokalne zmiany poza zakresem PR.
+- Pełna kontrola aplikacji pozostaje zadaniem CI Quality przed scaleniem.
+- Następny krok: pakiet 1 etapu 4a.
+
+- Format dokumentacji i 61 lokalnych odnośników poprawne. Diff-check wskazał
+  jedną pustą linię na końcu importowanego automate-me/SKILL.md; zachowano źródło.
+- Pierwsza próba podpisu 1Password nie powiodła się, commit nie powstał.
