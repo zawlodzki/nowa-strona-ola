@@ -2997,3 +2997,17 @@ sekretów.
 Po sesji uaktualniać ten plik i checklisty: oznaczać tylko wykonane i zweryfikowane
 zadania, podawać rzeczywiste wyniki i niewykonane kontrole. Istotne zmiany decyzji
 odnotować z datą i powodem. Nie przechowywać sekretów.
+
+## Nowe skille pstack, 2026-10-08
+
+- Zlecono PR i scalenie 52 lokalnie zainstalowanych skillów pstack.
+  PR zawiera różnice względem origin/main oraz symlinki Claude/Pi.
+- Kontrole: 52 pliki SKILL.md, JSON lockfile i 103 symlinków poprawne.
+  Hashy instalatora i zewnętrznych odnośników nie sprawdzano.
+- Zachowano pozostałe wpisy lockfile i lokalne zmiany poza zakresem PR.
+- Pełna kontrola aplikacji pozostaje zadaniem CI Quality przed scaleniem.
+- Następny krok: pakiet 1 etapu 4a.
+
+- Format dokumentacji i 61 lokalnych odnośników poprawne. Diff-check wskazał
+  jedną pustą linię na końcu importowanego automate-me/SKILL.md; zachowano źródło.
+- Pierwsza próba podpisu 1Password nie powiodła się, commit nie powstał.
