@@ -671,3 +671,10 @@ Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.
 - [x] Pokazać biały secondary button z obwódką oraz drobne elementy grafik.
 - [x] Wdrożyć tokeny matcha i secondary button w jednym źródle tokens.json.
 - [x] Dodać pojedyncze detale SVG na grafikach 3a; mapa zastosowań w PR.
+
+## Utrzymanie skillów, 2026-10-08
+
+- [x] Przygotować nowe skille pstack i symlinki agentów w osobnym PR.
+- [ ] Potwierdzić Quality i scalenie PR.
+
+Następny krok implementacji: pakiet 1 etapu 4a.
