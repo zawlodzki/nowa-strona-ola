@@ -13,6 +13,7 @@ import type {
   CategoryContent,
   EbookCard,
   EbookContent,
+  LegalPageContent,
   PageContent,
   SiteSettings,
 } from "../../../src/sanity/repository";
@@ -25,6 +26,7 @@ import {
   PREVIEW_CATEGORY_QUERY,
   PREVIEW_EBOOK_QUERY,
   PREVIEW_EBOOKS_QUERY,
+  PREVIEW_LEGAL_PAGE_QUERY,
   PREVIEW_PAGE_QUERY,
   PREVIEW_SITE_SETTINGS_QUERY,
 } from "./queries";
@@ -90,6 +92,22 @@ export async function getPreviewArticle(
     throw new Error(`Brak artykułu podglądu ${language}/${slug}.`);
   }
   return article;
+}
+
+export async function getPreviewLegalPage(
+  language: Locale,
+  slug: string,
+  environment: PreviewEnvironment,
+  client = createPreviewContentClient(environment),
+): Promise<LegalPageContent> {
+  const page = await client.fetch<LegalPageContent | null>(
+    PREVIEW_LEGAL_PAGE_QUERY,
+    { language, slug },
+  );
+  if (!page) {
+    throw new Error(`Brak strony prawnej podglądu ${language}/${slug}.`);
+  }
+  return page;
 }
 
 export async function getPreviewEbook(

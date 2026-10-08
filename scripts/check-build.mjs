@@ -161,6 +161,57 @@ assert.match(
 );
 assert.match(articleEn, /In this article/);
 assert.doesNotMatch(articleEn, /W tym artykule/);
+for (const path of [
+  "polityka-prywatnosci/index.html",
+  "lista-cookies-i-identyfikatorow/index.html",
+  "regulamin/index.html",
+  "regulamin-newslettera/index.html",
+  "en/privacy/index.html",
+  "en/terms/index.html",
+]) {
+  const html = await readFile(`dist/${path}`, "utf8");
+  assert.match(
+    html,
+    /noindex,nofollow/,
+    `${path}: prototype must remain noindex`,
+  );
+  assert.equal(
+    (html.match(/<h1[\s>]/g) ?? []).length,
+    1,
+    `${path}: exactly one h1`,
+  );
+  assert.match(html, /legal3a/);
+}
+const privacyHtml = await readFile(
+  "dist/polityka-prywatnosci/index.html",
+  "utf8",
+);
+assert.match(privacyHtml, /Polityka prywatności www\.zawlodzki\.pl/);
+assert.match(privacyHtml, /obowiązuje od/);
+assert.match(privacyHtml, /24\.08\.2026/);
+assert.match(privacyHtml, /1\. Administrator danych/);
+assert.match(privacyHtml, /\/lista-cookies-i-identyfikatorow\//);
+const cookiesHtml = await readFile(
+  "dist/lista-cookies-i-identyfikatorow/index.html",
+  "utf8",
+);
+assert.match(cookiesHtml, /Przed dokonaniem wyboru/);
+assert.match(cookiesHtml, /\/polityka-prywatnosci\//);
+const privacyEn = await readFile("dist/en/privacy/index.html", "utf8");
+assert.match(privacyEn, /The binding version is the Polish text/);
+assert.match(privacyEn, /\/polityka-prywatnosci\//);
+assert.doesNotMatch(privacyEn, /Administratorem danych osobowych/);
+const sitemap = await readFile("dist/sitemap.xml", "utf8");
+for (const loc of [
+  "https://aleksandraolesiewicz.com/polityka-prywatnosci/",
+  "https://aleksandraolesiewicz.com/lista-cookies-i-identyfikatorow/",
+  "https://aleksandraolesiewicz.com/regulamin/",
+  "https://aleksandraolesiewicz.com/regulamin-newslettera/",
+  "https://aleksandraolesiewicz.com/en/privacy/",
+  "https://aleksandraolesiewicz.com/en/terms/",
+]) {
+  assert.match(sitemap, new RegExp(loc.replaceAll("/", "\\/")));
+}
 console.log(
   JSON.stringify({ gzipBytes: sizes, staticPrimitivesScripts: 0 }, null, 2),
 );

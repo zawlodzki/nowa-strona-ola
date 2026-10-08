@@ -69,7 +69,7 @@ test("form validation, error recovery and no network submission", async ({
   ).toBeVisible();
   await page
     .getByRole("checkbox", {
-      name: "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane.",
+      name: /Wyrażam zgodę na otrzymywanie newslettera/,
     })
     .check();
   await submit.click();

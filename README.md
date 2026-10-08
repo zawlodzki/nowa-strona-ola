@@ -118,6 +118,7 @@ npm run import:homepage
 npm run import:consultation
 npm run import:ebook
 npm run import:blog-collection
+npm run import:legal
 ```
 
 Verify obejmuje format, zgodność tokenów, lint, typy wszystkich workspace’ów, build frontendu,
@@ -127,8 +128,10 @@ nie zapisuje do Content Lake. `npm run import:consultation` robi to samo dla
 landingu konsultacji (`page-consultation-pl/en`); `npm run import:ebook` dla
 dokumentu `ebook-suplementy-w-pcos-*`. `npm run import:blog-collection` robi
 dry-run 34 dokumentów (`article`, `category`, `siteSettings.blogIndex` /
-`blogNewsletter`) do `reports/`; nic nie zapisuje. Flaga `--write` kończy się
-kodem 2.
+`blogNewsletter`) do `reports/`; nic nie zapisuje.
+`npm run import:legal` robi dry-run sześciu dokumentów `legalPage` (cztery PL
+ze źródła zawlodzki.pl i dwa EN z informacją o wiążącej wersji polskiej) do
+`reports/`; nic nie zapisuje. Flaga `--write` kończy się kodem 2.
 `npm run format` jawnie formatuje kod. Samo
 `npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane; wynik jego
 pierwszego uruchomienia na GitHub wymaga osobnego sprawdzenia.

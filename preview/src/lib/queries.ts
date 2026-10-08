@@ -5,6 +5,7 @@ import {
   articleDetailProjection,
   ebookCardProjection,
   ebookProjection,
+  legalPageProjection,
   PAGE_SECTION_PROJECTION,
   siteSettingsProjection,
 } from "../../../src/sanity/queries";
@@ -93,4 +94,12 @@ export const PREVIEW_EBOOKS_QUERY = defineQuery(/* groq */ `
   ] | order(coalesce(sortOrder, 9999) asc, title asc) {
     ${ebookCardProjection}
   }
+`);
+
+export const PREVIEW_LEGAL_PAGE_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "legalPage" &&
+    language == $language &&
+    slug.current == $slug
+  ][0]{ ${legalPageProjection} }
 `);

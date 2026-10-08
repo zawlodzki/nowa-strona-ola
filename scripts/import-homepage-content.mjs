@@ -219,7 +219,7 @@ function documents() {
         name: "consent",
         input: "checkbox",
         label:
-          "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane.",
+          "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane. [Polityka prywatności](/polityka-prywatnosci/) i [regulamin newslettera](/regulamin-newslettera/).",
         errorMessage: "Zaznacz zgodę, aby sprawdzić formularz.",
         required: "required",
       },
@@ -250,7 +250,7 @@ function documents() {
         name: "consent",
         input: "checkbox",
         label:
-          "I agree to receive the newsletter. This is a demonstration — nothing will be sent.",
+          "I agree to receive the newsletter. This is a demonstration — nothing will be sent. [Privacy policy](/en/privacy/) and [newsletter terms](/regulamin-newslettera/).",
         errorMessage: "Tick the consent box to check the form.",
         required: "required",
       },

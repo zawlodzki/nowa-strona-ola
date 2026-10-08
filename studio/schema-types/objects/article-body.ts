@@ -139,14 +139,14 @@ export const articleTableType = defineType({
       name: "caption",
       title: "Podpis",
       type: "string",
-      validation: (rule) => rule.required().max(160),
+      validation: (rule) => rule.max(160),
     }),
     defineField({
       name: "headers",
       title: "Nagłówki kolumn",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
-      validation: (rule) => rule.required().min(2).max(6),
+      validation: (rule) => rule.required().min(1).max(8),
     }),
     defineField({
       name: "rows",
@@ -161,7 +161,7 @@ export const articleTableType = defineType({
               title: "Komórki",
               type: "array",
               of: [defineArrayMember({ type: "string" })],
-              validation: (rule) => rule.required().min(2).max(6),
+              validation: (rule) => rule.required().min(1).max(8),
             }),
           ],
           preview: {

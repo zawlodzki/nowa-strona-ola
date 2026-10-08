@@ -7,6 +7,7 @@ import BlogCollectionPage from "../../../src/views/BlogCollectionPage.astro";
 import ComposedPage from "../../../src/views/ComposedPage.astro";
 import EbookCollectionPage from "../../../src/views/EbookCollectionPage.astro";
 import EbookPage from "../../../src/views/EbookPage.astro";
+import LegalPage from "../../../src/views/LegalPage.astro";
 import { parseContentPath } from "../../../src/lib/content-path";
 import { blogCategoryPath, blogPath } from "../../../src/lib/paths";
 import {
@@ -22,9 +23,11 @@ import {
   getPreviewCategory,
   getPreviewEbook,
   getPreviewEbooks,
+  getPreviewLegalPage,
   getPreviewPage,
   getPreviewSiteSettings,
 } from "../lib/content";
+import { findLegalPage } from "../../../src/sanity/repository";
 
 const route = parseContentPath(Astro.params.locale);
 const environment = {
@@ -46,10 +49,16 @@ const settings = language
       () => demonstrationSettings[language],
     )
   : null;
+const legal =
+  route.kind === "page"
+    ? await getPreviewLegalPage(route.language, route.slug, environment).catch(
+        () => findLegalPage(route.language, route.slug, { environment: {} }),
+      )
+    : null;
 const page =
   route.kind === "home"
     ? await getPreviewPage(route.language, "home", environment)
-    : route.kind === "page"
+    : route.kind === "page" && !legal
       ? await getPreviewPage(route.language, route.slug, environment)
       : null;
 const article =
@@ -117,6 +126,8 @@ const categories = language
 
 {article && language && settings ? (
   <ArticlePage lang={language} article={article} settings={settings} preview />
+) : legal && language && settings ? (
+  <LegalPage lang={language} page={legal} settings={settings} preview />
 ) : ebook && language && settings ? (
   <EbookPage lang={language} ebook={ebook} settings={settings} preview />
 ) : collectionPage &&

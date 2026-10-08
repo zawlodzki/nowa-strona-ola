@@ -3,6 +3,15 @@ export const languageOptions = [
   { title: "English", value: "en" },
 ] as const;
 
+export const reservedLegalSlugs = [
+  "polityka-prywatnosci",
+  "regulamin",
+  "lista-cookies-i-identyfikatorow",
+  "regulamin-newslettera",
+  "privacy",
+  "terms",
+] as const;
+
 export const reservedPageSlugs = [
   "blog",
   "en",
@@ -15,6 +24,7 @@ export const reservedPageSlugs = [
   "about",
   "konsultacje",
   "consultations",
+  ...reservedLegalSlugs,
 ] as const;
 
 export const reservedArticleSlugs = [

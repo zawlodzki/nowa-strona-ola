@@ -348,6 +348,9 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 - [x] Wdrożyć Article3a, Portable Text i jego powiązane bloki (kod i fixture;
       bez Content Lake). Copy, daty i FAQ z makiety są propozycją.
 - [x] Przygotować i sprawdzić import artykułu bez zapisu (`import:article`).
+- [x] Wdrożyć strony prawne `legalPage` (schemat, trasy 3a, fixture 1:1 ze
+      źródła B2B, import dry-run `import:legal`; bez Content Lake i bez
+      tłumaczenia maszynowego EN).
 - [ ] Przenieść treści i media do szkiców Content Lake; zapisać wyniki walidacji.
 - [ ] Odebrać edycję i chroniony podgląd wszystkich szablonów z Sanity.
 - [ ] Po zastąpieniu zastosowań usunąć dawną prezentację i aliasy `--wf-*`.
