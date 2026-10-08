@@ -121,6 +121,18 @@ npm run import:blog-collection
 npm run import:legal
 ```
 
+Jeśli środowisko ma systemowe Chromium, można użyć go bez pobierania nowego:
+
+```sh
+PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:e2e -- --project=chromium --workers=2
+```
+
+Sprawdzone w audycie CSS 08.10.2026. To kontrola Chromium; pełne `verify`
+nadal wymaga Firefox i WebKit. `PLAYWRIGHT_WORKERS=2` ogranicza równoległość
+Playwright również przy uruchomieniu verify. Porównanie fixture/Content Lake
+honoruje ten sam wybór Chromium. Serwery developerskie działają dla
+oddzielnych tras legal i legacy: `npm run dev:web -- --port 4330`.
+
 `npm run import:3a` buduje pełne dokumenty 3a z fixture’ów i zapisuje transakcję
 do `reports/content-lake-3a-transaction.json`. Domyślnie nic nie wysyła.
 `npm run import:3a -- --write --dataset production` wymaga

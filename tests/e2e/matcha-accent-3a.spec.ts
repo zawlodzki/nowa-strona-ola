@@ -1,5 +1,7 @@
 import { expect, test, type Locator } from "@playwright/test";
 
+import { renderedColor } from "./helpers/color";
+
 const MATCHA_LIGHT = "rgb(83, 103, 27)";
 const MATCHA_DARK = "rgb(216, 231, 138)";
 const WHITE = "rgb(255, 255, 255)";
@@ -9,14 +11,12 @@ const DARK_BG = "rgb(41, 26, 33)";
 const INK = "rgb(112, 40, 63)";
 
 async function buttonColors(locator: Locator) {
-  return locator.evaluate((el) => {
-    const styles = getComputedStyle(el);
-    return {
-      background: styles.backgroundColor,
-      color: styles.color,
-      border: styles.borderTopColor,
-    };
-  });
+  const [background, color, border] = await Promise.all([
+    renderedColor(locator, "background-color"),
+    renderedColor(locator, "color"),
+    renderedColor(locator, "border-top-color"),
+  ]);
+  return { background, color, border };
 }
 
 test("catalog secondary button is white with matcha stroke", async ({
@@ -46,9 +46,7 @@ test("catalog secondary button is white with matcha stroke", async ({
     border: CHERRY_FILL,
   });
   const stage = page.locator(".ds-portrait__backdrop");
-  expect(
-    await stage.evaluate((el) => getComputedStyle(el).backgroundColor),
-  ).toBe(SURFACE);
+  expect(await renderedColor(stage, "background-color")).toBe(SURFACE);
 });
 
 test("homepage secondary CTA follows the same matcha outline", async ({
@@ -68,9 +66,7 @@ test("homepage secondary CTA follows the same matcha outline", async ({
     border: MATCHA_LIGHT,
   });
   const stage = page.locator(".ao-deco-stage").first();
-  expect(await stage.evaluate((el) => getComputedStyle(el).color)).toBe(
-    SURFACE,
-  );
+  expect(await renderedColor(stage, "color")).toBe(SURFACE);
 });
 
 test("about secondary stays an ink text link, not a matcha button", async ({
@@ -86,9 +82,7 @@ test("about secondary stays an ink text link, not a matcha button", async ({
   });
   await expect(secondary).toBeVisible();
   await expect(secondary).not.toHaveClass(/ao-button/);
-  expect(await secondary.evaluate((el) => getComputedStyle(el).color)).toBe(
-    INK,
-  );
+  expect(await renderedColor(secondary, "color")).toBe(INK);
 });
 
 test("dark catalog secondary uses light matcha on the dark canvas", async ({
@@ -155,9 +149,7 @@ test("cherry ebook cover shows a matcha arrow and sparkle", async ({
   expect(
     await accent.locator(".ao-deco-cherry-arrow-shaft").getAttribute("stroke"),
   ).toBe("var(--ao-accent-on-primary)");
-  expect(await sparkle.evaluate((el) => getComputedStyle(el).fill)).toBe(
-    MATCHA_DARK,
-  );
+  expect(await renderedColor(sparkle, "fill")).toBe(MATCHA_DARK);
   const sparkleBox = await sparkle.evaluate((el) => {
     const box = el.getBoundingClientRect();
     return { width: box.width, height: box.height };

@@ -20,6 +20,7 @@ src/assets/fonts/switzer/*.woff2
 
 # Wygenerowane tokeny mają własną kontrolę deterministyczności.
 design-system/tokens.css
+design-system/legacy-tokens.css
 
 # Pobrane HTML źródeł prawnych — bez reformatowania.
 scripts/legal-sources/*.html

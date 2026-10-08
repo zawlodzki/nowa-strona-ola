@@ -16,7 +16,8 @@ test("mockup initializes reviews when the book layout is not ready", async ({
     const allowed =
       path.startsWith("mockups/homepage/") ||
       path.startsWith("src/assets/") ||
-      path === "design-system/tokens.css";
+      path === "design-system/tokens.css" ||
+      path === "design-system/legacy-tokens.css";
     if (!allowed) return route.abort();
     const types: Record<string, string> = {
       ".html": "text/html",

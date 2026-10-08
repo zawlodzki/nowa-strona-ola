@@ -269,80 +269,80 @@ function readAria(item: BlogPostCard) {
 
 <style>
   .blog3a :global(.ao-breadcrumbs) {
-    margin-bottom: 40px;
+    margin-block-end: 40px;
   }
   .blog3a-heading {
     padding-block: 32px 56px;
   }
   .blog3a-title {
-    font-size: clamp(42px, 6vw, 84px);
+    font-size: var(--ao-blog-heading);
     line-height: 1.05;
     letter-spacing: -0.04em;
   }
   .blog3a-lead {
-    max-width: 650px;
-    margin-top: 24px;
+    max-inline-size: 650px;
+    margin-block-start: 24px;
     color: var(--ao-muted);
-    font-size: 20px;
+    font-size: 1.25rem;
   }
   .blog3a-note {
-    margin-top: 16px;
+    margin-block-start: 16px;
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .blog3a-section-title {
-    font-size: 28px;
+    font-size: 1.75rem;
     line-height: 1.2;
     letter-spacing: -0.03em;
     font-weight: 650;
   }
   .blog3a-featured :global(.ao-container) > .blog3a-section-title {
-    margin-bottom: 24px;
+    margin-block-end: 24px;
   }
   .blog3a-featured-post {
     display: grid;
-    grid-template-columns: 1.08fr 1fr;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
     align-items: stretch;
-    width: 100%;
-    max-width: 100%;
+    inline-size: 100%;
+    max-inline-size: 100%;
     border-radius: var(--ao-radius-panel);
-    overflow: hidden;
+    overflow: clip;
     isolation: isolate;
     background: var(--ao-surface);
   }
   .blog3a-featured-image {
     display: grid;
-    min-width: 0;
-    min-height: 400px;
-    overflow: hidden;
+    min-inline-size: 0;
+    min-block-size: 400px;
+    overflow: clip;
   }
   .blog3a-featured-image :global(img) {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    max-width: none;
+    inline-size: 100%;
+    block-size: 100%;
+    min-block-size: 0;
+    max-inline-size: none;
     object-fit: cover;
   }
   .blog3a-featured-copy {
-    min-width: 0;
+    min-inline-size: 0;
     padding: 44px;
     align-self: center;
   }
   .blog3a-featured-copy h3 {
-    margin-top: 24px;
-    font-size: clamp(28px, 3.1vw, 44px);
+    margin-block-start: 24px;
+    font-size: var(--ao-featured-heading);
     line-height: 1.12;
     font-weight: 650;
     letter-spacing: -0.03em;
-    max-width: none;
+    max-inline-size: none;
   }
   .blog3a-featured-copy :global(.ao-button) {
     padding-inline: 16px;
     gap: 12px;
-    max-width: 100%;
-    margin-top: 28px;
+    max-inline-size: 100%;
+    margin-block-start: 28px;
     white-space: normal;
-    text-align: left;
+    text-align: start;
   }
   .blog3a-collection {
     padding-block: 64px 80px;
@@ -354,12 +354,12 @@ function readAria(item: BlogPostCard) {
     flex-wrap: wrap;
     gap: 16px;
     padding-block: 24px;
-    border-top: 1px solid var(--ao-line);
+    border-block-start: 1px solid var(--ao-line);
   }
   .blog3a-collection-heading > p,
   .blog3a-page-status {
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-variant-numeric: tabular-nums;
   }
   .blog3a-grid {
@@ -370,12 +370,12 @@ function readAria(item: BlogPostCard) {
   .blog3a-card-image {
     display: block;
     border-radius: var(--ao-radius-panel);
-    overflow: hidden;
+    overflow: clip;
     background: var(--ao-surface);
   }
   .blog3a-card-image :global(img) {
-    width: 100%;
-    height: auto;
+    inline-size: 100%;
+    block-size: auto;
     aspect-ratio: 1.8;
     object-fit: cover;
   }
@@ -391,46 +391,48 @@ function readAria(item: BlogPostCard) {
     flex-wrap: wrap;
     gap: 8px 20px;
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .blog3a-meta > span {
     color: var(--ao-primary);
     font-weight: 600;
   }
   .blog3a-card .blog3a-meta {
-    margin-top: 24px;
+    margin-block-start: 24px;
   }
   .blog3a-card h3 {
-    max-width: 29ch;
-    margin-top: 12px;
-    font-size: 29px;
+    max-inline-size: 29ch;
+    margin-block-start: 12px;
+    font-size: 1.8125rem;
     line-height: 1.2;
     font-weight: 600;
     letter-spacing: -0.03em;
   }
   .blog3a-description {
-    max-width: 58ch;
-    margin-top: 16px;
+    max-inline-size: 58ch;
+    margin-block-start: 16px;
     color: var(--ao-muted);
-    font-size: 17px;
+    font-size: 1.0625rem;
   }
   .blog3a-card :global(.ao-text-link) {
-    margin-top: 20px;
+    margin-block-start: 20px;
   }
-  .blog3a-card h3 a:hover,
-  .blog3a-featured-copy h3 a:hover {
-    text-decoration: underline;
-    text-underline-offset: 5px;
+  @media (hover: hover) and (pointer: fine) {
+    .blog3a-card h3 a:hover,
+    .blog3a-featured-copy h3 a:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
   }
   .blog3a-card-image:focus-visible,
   .blog3a-featured-image:focus-visible {
     outline-offset: -6px;
   }
   .blog3a-empty {
-    margin-top: 24px;
+    margin-block-start: 24px;
     color: var(--ao-muted);
-    font-size: 17px;
-    max-width: 46ch;
+    font-size: 1.0625rem;
+    max-inline-size: 46ch;
   }
   .blog3a-pagination {
     display: flex;
@@ -438,20 +440,21 @@ function readAria(item: BlogPostCard) {
     align-items: center;
     flex-wrap: wrap;
     gap: 16px 32px;
-    margin-top: 64px;
-    padding-top: 32px;
-    border-top: 1px solid var(--ao-line);
+    margin-block-start: 64px;
+    padding-block-start: 32px;
+    border-block-start: 1px solid var(--ao-line);
   }
   .blog3a-direction {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    min-height: 48px;
-    padding: 12px 16px;
+    min-block-size: 48px;
+    padding-block: 12px;
+    padding-inline: 16px;
     border: 1px solid var(--ao-line);
     border-radius: var(--ao-radius-control);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .blog3a-page-numbers {
     display: flex;
@@ -460,8 +463,8 @@ function readAria(item: BlogPostCard) {
   .blog3a-page-number {
     display: grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
+    inline-size: 48px;
+    block-size: 48px;
     border: 1px solid var(--ao-line);
     border-radius: 50%;
     font-variant-numeric: tabular-nums;
@@ -471,21 +474,25 @@ function readAria(item: BlogPostCard) {
     background: var(--ao-primary);
     color: var(--ao-on-primary);
   }
-  .blog3a-direction:hover,
-  .blog3a-page-number:not([aria-current]):hover {
-    border-color: var(--ao-primary);
-    background: var(--ao-surface);
+  @media (hover: hover) and (pointer: fine) {
+    .blog3a-direction:hover,
+    .blog3a-page-number:not([aria-current]):hover {
+      border-color: var(--ao-primary);
+      background: var(--ao-surface);
+    }
   }
   .is-disabled {
     color: var(--ao-muted);
     border-color: transparent;
   }
-  .blog3a-direction.is-disabled:hover {
-    background: transparent;
-    border-color: transparent;
+  @media (hover: hover) and (pointer: fine) {
+    .blog3a-direction.is-disabled:hover {
+      background: transparent;
+      border-color: transparent;
+    }
   }
   .blog3a-page-status {
-    margin-top: 16px;
+    margin-block-start: 16px;
     text-align: center;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -494,48 +501,49 @@ function readAria(item: BlogPostCard) {
       transform: none;
     }
   }
-  @container page3a (max-width: 999px) {
+  @container page3a (max-width: 62.4375rem) {
     .blog3a-featured-copy {
       padding: 32px;
     }
     .blog3a-featured-image {
-      min-height: 360px;
+      min-block-size: 360px;
     }
     .blog3a-grid {
       gap: 48px 28px;
     }
     .blog3a-card h3 {
-      font-size: 25px;
+      font-size: 1.5625rem;
     }
   }
-  @container page3a (max-width: 767px) {
+  @container page3a (max-width: 47.9375rem) {
     .blog3a-heading {
       padding-block: 24px 40px;
     }
     .blog3a :global(.ao-breadcrumbs) {
-      margin-bottom: 28px;
+      margin-block-end: 28px;
     }
     .blog3a-lead {
-      font-size: 18px;
+      font-size: 1.125rem;
     }
     .blog3a-section-title {
-      font-size: 25px;
+      font-size: 1.5625rem;
     }
     .blog3a-featured-post,
     .blog3a-grid {
       grid-template-columns: minmax(0, 1fr);
     }
     .blog3a-featured-image {
-      min-height: 0;
-      height: auto;
+      min-block-size: 0;
+      block-size: auto;
       aspect-ratio: 1.4;
     }
     .blog3a-featured-copy {
-      padding: 28px 24px;
+      padding-block: 28px;
+      padding-inline: 24px;
     }
     .blog3a-featured-copy h3 {
-      font-size: 29px;
-      margin-top: 20px;
+      font-size: 1.8125rem;
+      margin-block-start: 20px;
     }
     .blog3a-collection {
       padding-block: 48px;
@@ -544,34 +552,34 @@ function readAria(item: BlogPostCard) {
       gap: 40px;
     }
     .blog3a-card h3 {
-      font-size: 26px;
+      font-size: 1.625rem;
     }
     .blog3a-card .blog3a-meta {
-      margin-top: 20px;
+      margin-block-start: 20px;
     }
     .blog3a-pagination {
       gap: 12px;
-      margin-top: 40px;
-      padding-top: 24px;
+      margin-block-start: 40px;
+      padding-block-start: 24px;
     }
     .blog3a-direction {
-      font-size: 13px;
+      font-size: 0.8125rem;
       padding-inline: 12px;
       gap: 6px;
     }
     .blog3a-direction :global(.ao-icon) {
-      width: 18px;
-      height: 18px;
+      inline-size: 18px;
+      block-size: 18px;
     }
     .blog3a-page-number {
-      width: 44px;
-      height: 44px;
+      inline-size: 44px;
+      block-size: 44px;
     }
     .blog3a-page-numbers {
       gap: 6px;
     }
   }
-  @container page3a (max-width: 374px) {
+  @container page3a (max-width: 23.375rem) {
     .blog3a-pagination {
       gap: 8px;
     }
@@ -581,10 +589,10 @@ function readAria(item: BlogPostCard) {
     .blog3a-page-numbers {
       order: -1;
       justify-content: center;
-      width: 100%;
+      inline-size: 100%;
     }
   }
-  @container page3a (max-width: 270px) {
+  @container page3a (max-width: 16.875rem) {
     .blog3a-featured-copy {
       padding-inline: 16px;
     }

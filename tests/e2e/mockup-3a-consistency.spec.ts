@@ -19,7 +19,8 @@ async function serveMockups(page: Page) {
     if (
       !path.startsWith("mockups/homepage/") &&
       !path.startsWith("src/assets/") &&
-      path !== "design-system/tokens.css"
+      path !== "design-system/tokens.css" &&
+      path !== "design-system/legacy-tokens.css"
     )
       return route.abort();
     const types: Record<string, string> = {

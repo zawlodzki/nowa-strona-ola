@@ -77,13 +77,14 @@ const homeHref = homePath(lang);
     flex-wrap: wrap;
     justify-content: space-between;
     gap: var(--ao-space-16);
-    padding: var(--ao-space-12) var(--ao-space-24);
+    padding-block: var(--ao-space-12);
+    padding-inline: var(--ao-space-24);
     background: var(--ao-surface);
-    border-bottom: 1px solid var(--ao-line);
-    font-size: 14px;
+    border-block-end: 1px solid var(--ao-line);
+    font-size: 0.875rem;
   }
   .preview-banner button {
-    min-height: var(--ao-target-min);
+    min-block-size: var(--ao-target-min);
     padding-inline: var(--ao-space-16);
     border: 1px solid var(--ao-line);
     background: transparent;

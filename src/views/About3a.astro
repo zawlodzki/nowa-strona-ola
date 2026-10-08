@@ -287,20 +287,20 @@ const profileJsonLd = {
 
 <style>
   .about3a :global(.ao-hero .ao-text-link) {
-    width: fit-content;
+    inline-size: fit-content;
     justify-content: flex-start;
     gap: 14px;
-    border-bottom: 0;
+    border-block-end: 0;
     text-decoration: underline;
     text-underline-offset: 6px;
   }
   .about3a-portrait {
     margin: 0;
-    min-width: 0;
+    min-inline-size: 0;
   }
   .about3a-portrait :global(img) {
-    width: 100%;
-    height: 540px;
+    inline-size: 100%;
+    block-size: 540px;
     object-fit: cover;
     border-radius: 24px;
   }
@@ -309,28 +309,28 @@ const profileJsonLd = {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: var(--ao-space-8);
-    margin-top: var(--ao-space-16);
-    font-size: 14px;
+    margin-block-start: var(--ao-space-16);
+    font-size: 0.875rem;
   }
   .about3a-credit {
-    margin-top: var(--ao-space-8);
+    margin-block-start: var(--ao-space-8);
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .about3a-story__grid,
   .about3a-materials__grid {
     display: grid;
-    grid-template-columns: 0.95fr 1.2fr;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
     column-gap: var(--ao-space-96);
   }
   .about3a-story :global(.ao-heading) {
-    max-width: 13ch;
+    max-inline-size: 13ch;
   }
   .about3a-story p + p {
-    margin-top: var(--ao-space-24);
+    margin-block-start: var(--ao-space-24);
   }
   .about3a-large {
-    font-size: 26px;
+    font-size: 1.625rem;
     line-height: 1.35;
     font-weight: 500;
     letter-spacing: -0.02em;
@@ -340,12 +340,12 @@ const profileJsonLd = {
     flex-wrap: wrap;
     align-items: center;
     gap: var(--ao-space-24);
-    margin-top: var(--ao-space-32);
-    padding-top: var(--ao-space-24);
-    border-top: 1px solid var(--ao-line);
+    margin-block-start: var(--ao-space-32);
+    padding-block-start: var(--ao-space-24);
+    border-block-start: 1px solid var(--ao-line);
   }
   .about3a-count strong {
-    font-size: 64px;
+    font-size: 4rem;
     line-height: 1;
     letter-spacing: -0.04em;
     font-weight: 650;
@@ -356,13 +356,13 @@ const profileJsonLd = {
     color: var(--ao-primary);
   }
   .about3a-count p {
-    max-width: 24ch;
-    font-size: 15px;
+    max-inline-size: 24ch;
+    font-size: 0.9375rem;
     color: var(--ao-muted);
   }
   .about3a-education {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     gap: var(--ao-space-64);
     align-items: center;
     padding: var(--ao-space-48);
@@ -370,36 +370,38 @@ const profileJsonLd = {
     background: var(--ao-surface);
   }
   .about3a-education > div > p {
-    margin-top: var(--ao-space-24);
+    margin-block-start: var(--ao-space-24);
   }
   .about3a-education dl {
-    margin: var(--ao-space-32) 0 0;
+    margin-block: var(--ao-space-32) 0;
+    margin-inline: 0;
   }
   .about3a-education dl div {
     padding-block: var(--ao-space-16);
-    border-top: 1px solid var(--ao-line);
+    border-block-start: 1px solid var(--ao-line);
   }
   .about3a-education dt {
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--ao-muted);
   }
   .about3a-education dd {
-    margin: 4px 0 0;
+    margin-block: 4px 0;
+    margin-inline: 0;
     font-weight: 550;
   }
   .about3a-diploma {
-    width: 100%;
-    max-width: 340px;
+    inline-size: 100%;
+    max-inline-size: 340px;
     justify-self: center;
     margin: 0;
   }
   .about3a-diploma :global(img) {
-    width: 100%;
-    height: auto;
+    inline-size: 100%;
+    block-size: auto;
     border-radius: 12px;
   }
   .about3a-diploma__slot {
-    min-height: 380px;
+    min-block-size: 380px;
     padding: var(--ao-space-32);
     display: flex;
     flex-direction: column;
@@ -411,44 +413,44 @@ const profileJsonLd = {
     background: var(--ao-background);
   }
   .about3a-diploma__slot svg {
-    width: 48px;
-    height: 56px;
-    margin-bottom: var(--ao-space-24);
+    inline-size: 48px;
+    block-size: 56px;
+    margin-block-end: var(--ao-space-24);
   }
   .about3a-diploma__slot p {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 550;
   }
   .about3a-diploma__slot span,
   .about3a-diploma figcaption {
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--ao-muted);
   }
   .about3a-diploma__slot span {
-    margin-top: var(--ao-space-8);
+    margin-block-start: var(--ao-space-8);
   }
   .about3a-diploma figcaption {
-    margin-top: var(--ao-space-16);
+    margin-block-start: var(--ao-space-16);
     text-align: center;
   }
   .about3a-approach-head {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     align-items: end;
     gap: var(--ao-space-64);
-    margin-bottom: var(--ao-space-32);
+    margin-block-end: var(--ao-space-32);
   }
   .about3a-approach-head p {
-    max-width: 52ch;
+    max-inline-size: 52ch;
     color: var(--ao-muted);
   }
   .about3a-panels {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 20px;
   }
   .about3a-panels article {
-    min-width: 0;
+    min-inline-size: 0;
     padding: 28px;
     border-radius: 24px;
     background: var(--ao-surface);
@@ -456,7 +458,7 @@ const profileJsonLd = {
   .about3a-panels article:first-child {
     grid-column: span 2;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     column-gap: 40px;
     align-items: center;
   }
@@ -465,29 +467,29 @@ const profileJsonLd = {
     border: 1px solid var(--ao-line);
   }
   .about3a-panels h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.03em;
   }
   .about3a-panels p {
-    margin-top: 10px;
+    margin-block-start: 10px;
     color: var(--ao-muted);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .about3a-panels article:first-child p {
     margin: 0;
   }
   .about3a-note {
-    margin-top: var(--ao-space-24);
+    margin-block-start: var(--ao-space-24);
     color: var(--ao-muted);
-    font-size: 14px;
-    max-width: 80ch;
+    font-size: 0.875rem;
+    max-inline-size: 80ch;
   }
   .about3a-reviews {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--ao-space-48);
-    margin-top: var(--ao-space-32);
+    margin-block-start: var(--ao-space-32);
   }
   .about3a-reviews :global(.ao-review) {
     padding-inline: 0;
@@ -497,8 +499,8 @@ const profileJsonLd = {
   }
   .about3a-materials > :global(.ao-container) p,
   .about3a-materials__grid > div > p {
-    margin-top: var(--ao-space-24);
-    max-width: 48ch;
+    margin-block-start: var(--ao-space-24);
+    max-inline-size: 48ch;
     color: var(--ao-muted);
   }
   .about3a-resource {
@@ -507,39 +509,45 @@ const profileJsonLd = {
     justify-content: space-between;
     gap: var(--ao-space-24);
     padding-block: var(--ao-space-24);
-    border-top: 1px solid var(--ao-line);
+    border-block-start: 1px solid var(--ao-line);
     color: inherit;
     text-decoration: none;
   }
   .about3a-resource:last-child {
-    border-bottom: 1px solid var(--ao-line);
+    border-block-end: 1px solid var(--ao-line);
   }
   .about3a-resource :global(.ao-icon) {
     flex: 0 0 22px;
-    width: 22px;
-    height: 22px;
-    margin-top: 4px;
-    transition: transform var(--ao-motion-hover);
+    inline-size: 22px;
+    block-size: 22px;
+    margin-block-start: 4px;
   }
-  .about3a-resource:hover :global(.ao-icon) {
-    transform: translate(3px, -3px);
+  @media (prefers-reduced-motion: no-preference) {
+    .about3a-resource :global(.ao-icon) {
+      transition: transform var(--ao-motion-hover) var(--ao-ease-out);
+    }
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .about3a-resource:hover :global(.ao-icon) {
+      transform: translate(3px, -3px);
+    }
   }
   .about3a-resource p {
-    margin-top: var(--ao-space-12);
+    margin-block-start: var(--ao-space-12);
     color: var(--ao-muted);
   }
   .about3a-status {
     display: block;
-    margin-top: var(--ao-space-12);
+    margin-block-start: var(--ao-space-12);
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .about3a-resource__action {
     display: block;
-    margin-top: var(--ao-space-16);
+    margin-block-start: var(--ao-space-16);
     text-decoration: underline;
     text-underline-offset: 6px;
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
   .about3a-price {
     display: flex;
@@ -548,21 +556,21 @@ const profileJsonLd = {
     gap: var(--ao-space-16);
   }
   .about3a-price strong {
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: 650;
     letter-spacing: -0.025em;
     font-variant-numeric: tabular-nums;
   }
   .about3a-price span {
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
   .about3a-contact {
-    margin-top: var(--ao-space-24);
-    font-size: 14px;
+    margin-block-start: var(--ao-space-24);
+    font-size: 0.875rem;
   }
-  @container page3a (max-width: 1199px) {
+  @container page3a (max-width: 74.9375rem) {
     .about3a-portrait :global(img) {
-      height: 500px;
+      block-size: 500px;
     }
     .about3a-panels article {
       padding: 24px;
@@ -571,17 +579,17 @@ const profileJsonLd = {
       display: block;
     }
     .about3a-panels article:first-child p {
-      margin-top: 12px;
+      margin-block-start: 12px;
     }
   }
-  @container page3a (max-width: 879px) {
+  @container page3a (max-width: 54.9375rem) {
     .about3a-story__grid,
     .about3a-materials__grid,
     .about3a-approach-head,
     .about3a-education,
     .about3a-panels {
       gap: var(--ao-space-32);
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .about3a-panels {
       gap: 20px;
@@ -590,41 +598,36 @@ const profileJsonLd = {
       grid-column: auto;
     }
     .about3a-portrait :global(img) {
-      height: auto;
+      block-size: auto;
       aspect-ratio: 4 / 5;
     }
     .about3a-story :global(.ao-heading) {
-      max-width: 20ch;
+      max-inline-size: 20ch;
     }
     .about3a :global(#konsultacja-panel img) {
-      height: 390px;
+      block-size: 390px;
     }
   }
-  @container page3a (max-width: 767px) {
+  @container page3a (max-width: 47.9375rem) {
     .about3a-large {
-      font-size: 23px;
+      font-size: 1.4375rem;
     }
     .about3a-education {
       padding: var(--ao-space-24);
     }
     .about3a-diploma__slot {
-      min-height: 300px;
+      min-block-size: 300px;
       padding: var(--ao-space-24);
     }
     .about3a-reviews {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--ao-space-24);
     }
     .about3a-count strong {
-      font-size: 54px;
+      font-size: 3.375rem;
     }
     .about3a :global(#konsultacja-panel img) {
-      height: 280px;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .about3a-resource {
-      transition: none;
+      block-size: 280px;
     }
   }
 </style>

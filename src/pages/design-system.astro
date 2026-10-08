@@ -334,44 +334,47 @@ const colors = [
 </Layout3a>
 <style>
   .ds-fundamentals {
-    padding-top: 0;
+    padding-block-start: 0;
   }
   .ds-portrait {
     position: relative;
-    height: 560px;
+    block-size: 560px;
   }
   .ds-portrait__backdrop {
     position: absolute;
-    inset: 24px 0 0;
+    inset-block-start: 24px;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     border-radius: 160px 24px 24px 24px;
     background: var(--ao-surface);
   }
   .ds-portrait img {
     position: relative;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     object-fit: contain;
     object-position: center bottom;
   }
-  @container page3a (max-width:767px) {
+  @container page3a (max-width:47.9375rem) {
     .ds-portrait {
-      height: 420px;
+      block-size: 420px;
     }
     .ds-portrait__backdrop {
-      border-top-left-radius: 100px;
+      border-block-start-left-radius: 100px;
     }
   }
-  @container page3a (max-width:374px) {
+  @container page3a (max-width:23.375rem) {
     .ds-portrait {
-      height: 350px;
+      block-size: 350px;
     }
   }
   .ds-intro {
-    margin-top: var(--ao-space-24);
+    margin-block-start: var(--ao-space-24);
   }
   .ds-note {
-    margin-top: var(--ao-space-24);
-    font-size: 13px;
+    margin-block-start: var(--ao-space-24);
+    font-size: 0.8125rem;
     color: var(--ao-muted);
   }
   .ds-swatches {
@@ -381,20 +384,20 @@ const colors = [
     margin-block: var(--ao-space-48);
   }
   .ds-swatch {
-    height: 96px;
+    block-size: 96px;
     border: 1px solid var(--ao-line);
     border-radius: var(--ao-radius-panel);
-    margin-bottom: var(--ao-space-12);
+    margin-block-end: var(--ao-space-12);
   }
   code {
     font-family: var(--ao-font-mono);
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   .ds-glyphs {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
   .ds-block {
-    margin-top: var(--ao-space-32);
+    margin-block-start: var(--ao-space-32);
   }
   .ds-grid {
     display: grid;

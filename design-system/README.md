@@ -15,6 +15,7 @@ nie oznaczają migracji wszystkich stron ani konfiguracji Sanity.
 | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | Wartości, pochodzenie, paleta dark, aliasy migracyjne | [tokens.json](tokens.json)                                                                          |
 | Wygenerowane custom properties                        | [tokens.css](tokens.css)                                                                            |
+| Adapter dawnych klas, tylko dla legacy                | [legacy-tokens.css](legacy-tokens.css)                                                              |
 | Reset, typografia, layout, stany, responsywność       | [global.css](../src/design-system/global.css)                                                       |
 | Powłoka Astro, font, skip link, head                  | [Layout3a.astro](../src/design-system/Layout3a.astro)                                               |
 | Wspólne komponenty                                    | [COMPONENTS.md](COMPONENTS.md)                                                                      |
@@ -51,10 +52,29 @@ React, hydratacji ani zewnętrznej biblioteki UI.
 
 ## Granica migracji
 
-Aktywna aplikacja i mockupy 3a już czytają nowe tokeny. Alias `--wf-*` w tym samym
-wygenerowanym pliku jest adapterem dla dawnych klas, bez drugiego źródła wartości.
+Aktywna aplikacja i mockupy 3a już czytają nowe tokeny. Aliasy `--wf-*` w osobnym
+generowanym `legacy-tokens.css` są adapterem dla dawnych klas, bez drugiego źródła wartości.
 Istniejące `src/ui`, `src/sections`, `src/styles/global.css` i katalog `/ui/`
 są prototypem przejściowym. Nie odwzorowują jeszcze gotowych stron 3a; przy migracji
 zastępuj ich prezentację komponentami `src/design-system` i `Layout3a`.
 Usuń aliasy dopiero po usunięciu ich ostatnich zastosowań. Archiwalne propozycje
 HTML mają zamrożone tokeny Wonderful i nie są objęte migracją do produkcji.
+Makiety 3a nadal używają aliasów i podłączają `legacy-tokens.css` obok tokenów.
+
+## CSS po audycie 08.10.2026
+
+Home/About/Consultation mają osobne wejścia Astro; strony prawne własne
+`getStaticPaths`, a legacy wyklucza ich slugi. Nie łączyć ich z powrotem
+warunkowym renderowaniem statycznie importowanych widoków. Chroniony podgląd
+wybiera te same komponenty przez ComposedPage; nie tworzy osobnych styli.
+
+Typografia używa `rem`, a płynne wielkości wspólnych tokenów `rem + vw/cqi`,
+skalibrowanych do 3a przy bazie 16 px. Query kontenerowe mają progi w `rem`.
+Powiększony font może przełączyć układ wcześniej i zwiększyć wysokość okładki.
+Hover jest ograniczony do myszy, ruch do `no-preference`, a press feedback
+pozostaje także w reduced motion. Kontrolki mają obrys w forced colors.
+
+Kolory źródłowe pozostają zatwierdzonym HEX w `tokens.json` dla obliczeń kontrastu.
+Generator emituje równoważne OKLCH i pary `light-dark()`; dla Safari <17.5,
+Chrome <123 i Firefox <120 działa fallback HEX/dark w `@supports not`.
+Nie edytować żadnego generowanego arkusza ręcznie.

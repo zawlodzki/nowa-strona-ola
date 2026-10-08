@@ -311,30 +311,30 @@ const jsonLd = {
     padding-block: 32px 64px;
   }
   .ebooks3a-intro :global(.ao-breadcrumbs) {
-    font-size: 14px;
-    margin-bottom: 44px;
+    font-size: 0.875rem;
+    margin-block-end: 44px;
   }
   .ebooks3a-heading {
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
     gap: 64px;
     align-items: end;
   }
   .ebooks3a-heading :global(.ao-heading--display) {
-    font-size: clamp(48px, 6.2vw, 88px);
+    font-size: var(--ao-collection-heading);
     letter-spacing: -0.055em;
     line-height: 1.02;
   }
   .ebooks3a-heading p {
     color: var(--ao-muted);
-    max-width: 42ch;
-    font-size: 18px;
+    max-inline-size: 42ch;
+    font-size: 1.125rem;
   }
   .ebooks3a-heading :global(.ao-text-link) {
-    margin-top: 24px;
+    margin-block-start: 24px;
   }
   .ebooks3a-catalog {
-    padding-bottom: 96px;
+    padding-block-end: 96px;
   }
   .ebooks3a-catalog-heading {
     display: flex;
@@ -343,12 +343,12 @@ const jsonLd = {
     gap: 24px;
   }
   .ebooks3a-catalog-heading :global(.ao-heading) {
-    font-size: 32px;
+    font-size: 2rem;
     letter-spacing: -0.035em;
   }
   .ebooks3a-catalog-heading p {
     color: var(--ao-muted);
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
   .ebooks3a-toolbar {
     display: flex;
@@ -356,19 +356,19 @@ const jsonLd = {
     justify-content: space-between;
     gap: 24px;
     padding-block: 28px;
-    margin-bottom: 28px;
-    border-bottom: 1px solid var(--ao-line);
+    margin-block-end: 28px;
+    border-block-end: 1px solid var(--ao-line);
   }
   .ebooks3a-filter {
     border: 0;
     padding: 0;
     margin: 0;
-    min-width: 0;
+    min-inline-size: 0;
   }
   .ebooks3a-filter legend {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: var(--ao-muted);
-    margin-bottom: 12px;
+    margin-block-end: 12px;
   }
   .ebooks3a-options {
     display: flex;
@@ -383,8 +383,8 @@ const jsonLd = {
     position: absolute;
     opacity: 0;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     margin: 0;
     cursor: pointer;
   }
@@ -395,12 +395,13 @@ const jsonLd = {
     gap: 14px;
     border: 1px solid var(--ao-line);
     border-radius: var(--ao-radius-control);
-    min-height: 48px;
-    padding: 10px 20px;
-    font-size: 15px;
+    min-block-size: 48px;
+    padding-block: 10px;
+    padding-inline: 20px;
+    font-size: 0.9375rem;
   }
   .ebooks3a-options small {
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-variant-numeric: tabular-nums;
   }
   .ebooks3a-options input:checked + span {
@@ -412,14 +413,16 @@ const jsonLd = {
     outline: 2px solid var(--ao-primary);
     outline-offset: 4px;
   }
-  .ebooks3a-options label:hover input:not(:checked) + span {
-    background: var(--ao-surface);
-    border-color: var(--ao-primary);
+  @media (hover: hover) and (pointer: fine) {
+    .ebooks3a-options label:hover input:not(:checked) + span {
+      background: var(--ao-surface);
+      border-color: var(--ao-primary);
+    }
   }
   .ebooks3a-count {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: var(--ao-muted);
-    padding-bottom: 14px;
+    padding-block-end: 14px;
     font-variant-numeric: tabular-nums;
   }
   .ebooks3a-count [data-count]:not([data-count="all"]) {
@@ -462,24 +465,24 @@ const jsonLd = {
   .ebooks3a-card {
     display: flex;
     flex-direction: column;
-    min-width: 0;
+    min-inline-size: 0;
   }
   .ebooks3a-cover-link {
     display: block;
   }
   .ebooks3a-card h3 {
-    min-height: 0;
-    font-size: 24px;
+    min-block-size: 0;
+    font-size: 1.5rem;
     font-weight: 650;
     letter-spacing: -0.03em;
-    margin-top: 8px;
+    margin-block-start: 8px;
   }
   .ebooks3a-card > p {
-    max-width: none;
-    min-height: 0;
-    margin-bottom: 24px;
-    margin-top: 8px;
-    font-size: 15px;
+    max-inline-size: none;
+    min-block-size: 0;
+    margin-block-end: 24px;
+    margin-block-start: 8px;
+    font-size: 0.9375rem;
     color: var(--ao-muted);
   }
   .ebooks3a-action {
@@ -488,34 +491,34 @@ const jsonLd = {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px solid var(--ao-line);
+    margin-block-start: auto;
+    padding-block-start: 16px;
+    border-block-start: 1px solid var(--ao-line);
   }
   .ebooks3a-meta {
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 24px;
-    font-size: 13px;
+    margin-block-start: 24px;
+    font-size: 0.8125rem;
     color: var(--ao-muted);
   }
   .ebooks3a-price {
-    font-size: 17px;
+    font-size: 1.0625rem;
   }
   .ebooks3a-price small {
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .ebooks3a-note {
-    margin-top: 36px;
-    max-width: 70ch;
-    font-size: 14px;
+    margin-block-start: 36px;
+    max-inline-size: 70ch;
+    font-size: 0.875rem;
     color: var(--ao-muted);
   }
   .ebooks3a-empty {
-    margin-top: 28px;
-    max-width: 50ch;
-    font-size: 16px;
+    margin-block-start: 28px;
+    max-inline-size: 50ch;
+    font-size: 1rem;
     color: var(--ao-muted);
   }
   .ebooks3a-empty--category {
@@ -523,8 +526,8 @@ const jsonLd = {
   }
   .sr-only {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    inline-size: 1px;
+    block-size: 1px;
     padding: 0;
     margin: -1px;
     overflow: hidden;
@@ -532,7 +535,7 @@ const jsonLd = {
     white-space: nowrap;
     border: 0;
   }
-  @container page3a (max-width: 1000px) {
+  @container page3a (max-width: 62.5rem) {
     .ebooks3a-heading {
       gap: 32px;
     }
@@ -540,33 +543,33 @@ const jsonLd = {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  @container page3a (max-width: 680px) {
+  @container page3a (max-width: 42.5rem) {
     .ebooks3a-intro {
       padding-block: 20px 40px;
     }
     .ebooks3a-intro :global(.ao-breadcrumbs) {
-      margin-bottom: 32px;
+      margin-block-end: 32px;
     }
     .ebooks3a-heading {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 24px;
     }
     .ebooks3a-heading :global(.ao-heading--display) {
-      font-size: clamp(44px, 10vw, 64px);
+      font-size: var(--ao-collection-mobile);
     }
     .ebooks3a-heading p {
-      font-size: 17px;
+      font-size: 1.0625rem;
     }
     .ebooks3a-catalog-heading {
       display: block;
     }
     .ebooks3a-catalog-heading p {
-      margin-top: 8px;
+      margin-block-start: 8px;
     }
     .ebooks3a-toolbar {
       display: block;
       padding-block: 24px;
-      margin-bottom: 24px;
+      margin-block-end: 24px;
     }
     .ebooks3a-options label > span {
       padding-inline: 16px;
@@ -574,18 +577,19 @@ const jsonLd = {
     }
     .ebooks3a-count {
       padding: 0;
-      margin-top: 20px;
+      margin-block-start: 20px;
     }
     .ebooks3a-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 40px;
     }
     .ebooks3a-card :global(.ao-cover-stage) {
-      min-height: 408px;
-      padding: 28px 16px;
+      min-block-size: 408px;
+      padding-block: 28px;
+      padding-inline: 16px;
     }
     .ebooks3a-catalog {
-      padding-bottom: 64px;
+      padding-block-end: 64px;
     }
   }
 </style>

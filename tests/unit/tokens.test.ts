@@ -2,7 +2,12 @@ import { readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vitest";
 
-import { contrastRatio, generateTokensCss } from "../../scripts/tokens.mjs";
+import {
+  contrastRatio,
+  generateTokensCss,
+  generateLegacyAliasesCss,
+  hexToOklch,
+} from "../../scripts/tokens.mjs";
 import { alternatePath, catalogPath, homePath } from "../../src/lib/paths";
 
 const tokens = JSON.parse(
@@ -24,7 +29,10 @@ describe("generateTokensCss", () => {
 
   it("emits custom properties from tokens.json", () => {
     expect(css).toContain("--ao-ink: #70283f;");
-    expect(css).toContain("--wf-color-ink: var(--ao-ink);");
+    expect(css).not.toContain("--wf-");
+    expect(generateLegacyAliasesCss(tokens)).toContain(
+      "--wf-color-ink: var(--ao-ink);",
+    );
     expect(css).toContain("--ao-space-24: 24px;");
     expect(css).toContain('--ao-font: "Switzer", Arial, sans-serif;');
     expect(css).toContain("--ao-accent: #53671B;");
@@ -32,6 +40,15 @@ describe("generateTokensCss", () => {
     expect(css).toContain("--ao-accent-on-light: #53671B;");
     expect(css).toContain('[data-theme="dark"]');
     expect(css).toMatch(/\[data-theme="dark"\][\s\S]*--ao-accent: #D8E78A;/);
+  });
+
+  it("keeps theme colors paired with a fallback and achromatic hues missing", () => {
+    expect(css).toContain("@supports not (color: light-dark(white, black))");
+    expect(css).toContain(
+      `--ao-background: light-dark(${hexToOklch("#ffffff")}, ${hexToOklch("#291a21")});`,
+    );
+    expect(hexToOklch("#ffffff")).toMatch(/0 none\)$/);
+    expect(hexToOklch("#000000")).toBe("oklch(0.000000000 0 none)");
   });
 
   it("keeps interactive matcha at WCAG AA against its canvas", () => {

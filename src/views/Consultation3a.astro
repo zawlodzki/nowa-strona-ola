@@ -394,7 +394,7 @@ const jsonLd = {
     white-space: pre-line;
   }
   .consult3a h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.025em;
   }
@@ -403,18 +403,18 @@ const jsonLd = {
     color: var(--ao-muted);
   }
   .consult3a-intro {
-    max-width: 50ch;
-    margin-top: var(--ao-space-24);
-    font-size: 18px;
+    max-inline-size: 50ch;
+    margin-block-start: var(--ao-space-24);
+    font-size: 1.125rem;
   }
   .consult3a-small {
-    margin-top: var(--ao-space-16);
-    font-size: 14px;
+    margin-block-start: var(--ao-space-16);
+    font-size: 0.875rem;
   }
   .consult3a-note {
-    margin-top: var(--ao-space-16);
+    margin-block-start: var(--ao-space-16);
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .consult3a figure {
     margin: 0;
@@ -426,38 +426,38 @@ const jsonLd = {
   }
   .consult3a-split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--ao-space-96);
     align-items: center;
   }
   .consult3a-split > *,
   .consult3a-process > * {
-    min-width: 0;
+    min-inline-size: 0;
   }
   .consult3a-hero-price {
     display: grid;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .consult3a-hero-price strong {
-    font-size: 21px;
+    font-size: 1.3125rem;
     font-weight: 650;
   }
   .consult3a-hero-price span {
     color: var(--ao-muted);
   }
   .consult3a-secondary {
-    margin-top: var(--ao-space-16);
+    margin-block-start: var(--ao-space-16);
   }
   .consult3a-portrait__stage {
     position: relative;
     isolation: isolate;
-    height: 520px;
+    block-size: 520px;
   }
   .consult3a-portrait :global(img) {
     position: relative;
     z-index: 1;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     object-fit: contain;
     object-position: center bottom;
   }
@@ -466,8 +466,8 @@ const jsonLd = {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: var(--ao-space-8) var(--ao-space-16);
-    margin-top: var(--ao-space-16);
-    font-size: 14px;
+    margin-block-start: var(--ao-space-16);
+    font-size: 0.875rem;
   }
   .consult3a-portrait figcaption span {
     color: var(--ao-muted);
@@ -478,19 +478,21 @@ const jsonLd = {
     align-items: center;
     gap: 32px;
     margin: 0;
-    padding: var(--ao-space-32) 0;
+    padding-block: var(--ao-space-32);
+    padding-inline: 0;
     border-block: 1px solid var(--ao-line);
-    font-size: 18px;
+    font-size: 1.125rem;
   }
   .consult3a-path svg {
-    width: 100%;
-    height: 24px;
+    inline-size: 100%;
+    block-size: 24px;
   }
   .consult3a-path strong {
     font-weight: 650;
   }
   .consult3a-map {
-    padding: var(--ao-space-48) var(--ao-space-32) var(--ao-space-32);
+    padding-block: var(--ao-space-48) var(--ao-space-32);
+    padding-inline: var(--ao-space-32);
     border-radius: var(--ao-radius-image);
     background: var(--ao-surface);
     text-align: center;
@@ -505,11 +507,12 @@ const jsonLd = {
     list-style: none;
   }
   .consult3a-map li {
-    padding: var(--ao-space-12) 18px;
+    padding-block: var(--ao-space-12);
+    padding-inline: 18px;
     border: 1px solid var(--ao-muted);
     border-radius: var(--ao-radius-image);
     background: var(--ao-background);
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
   .consult3a-map li:nth-child(1) {
     rotate: -5deg;
@@ -525,72 +528,74 @@ const jsonLd = {
   }
   .consult3a-map svg {
     display: block;
-    width: 70%;
-    height: 90px;
-    margin: var(--ao-space-16) auto var(--ao-space-8);
+    inline-size: 70%;
+    block-size: 90px;
+    margin-block: var(--ao-space-16) var(--ao-space-8);
+    margin-inline: auto;
   }
   .consult3a-map__answer {
     display: grid;
     gap: var(--ao-space-4);
-    padding: var(--ao-space-24) var(--ao-space-20);
+    padding-block: var(--ao-space-24);
+    padding-inline: var(--ao-space-20);
     border-radius: var(--ao-radius-image);
     background: var(--ao-primary);
     color: var(--ao-on-primary);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .consult3a-map__answer strong {
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: 600;
     letter-spacing: -0.03em;
   }
   .consult3a-map figcaption {
     justify-content: center;
-    margin-top: var(--ao-space-24);
+    margin-block-start: var(--ao-space-24);
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .consult3a-audience {
     display: grid;
-    grid-template-columns: 0.8fr 1.6fr;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
     gap: var(--ao-space-80);
-    margin-top: var(--ao-space-40);
+    margin-block-start: var(--ao-space-40);
   }
   .consult3a-audience .consult3a-intro {
-    margin-top: 0;
-    max-width: 26ch;
-    font-size: 20px;
+    margin-block-start: 0;
+    max-inline-size: 26ch;
+    font-size: 1.25rem;
   }
   .consult3a-audience__list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--ao-space-40) var(--ao-space-48);
   }
   .consult3a-audience__list article,
   .consult3a-sheet dl > div {
-    padding-top: var(--ao-space-20);
-    border-top: 1px solid var(--ao-line);
+    padding-block-start: var(--ao-space-20);
+    border-block-start: 1px solid var(--ao-line);
   }
   .consult3a-audience__list p,
   .consult3a-steps p {
-    margin-top: var(--ao-space-12);
+    margin-block-start: var(--ao-space-12);
   }
   .consult3a-process {
     display: grid;
-    grid-template-columns: 1.15fr 1fr;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: var(--ao-space-64);
     align-items: start;
-    margin-top: var(--ao-space-48);
+    margin-block-start: var(--ao-space-48);
   }
   .consult3a-process > figure :global(img) {
-    width: 100%;
-    height: 460px;
+    inline-size: 100%;
+    block-size: 460px;
     object-fit: cover;
     object-position: 72% center;
     border-radius: var(--ao-radius-image);
   }
   .consult3a-expert :global(img) {
-    width: 100%;
-    height: 520px;
+    inline-size: 100%;
+    block-size: 520px;
     object-fit: cover;
     object-position: center 28%;
     border-radius: var(--ao-radius-image);
@@ -610,39 +615,40 @@ const jsonLd = {
     display: grid;
     flex: 0 0 48px;
     place-items: center;
-    height: 48px;
+    block-size: 48px;
     border-radius: 50%;
     background: var(--ao-surface);
-    font-size: 22px;
+    font-size: 1.375rem;
     font-weight: 600;
   }
   .consult3a-prep {
     display: grid;
-    grid-template-columns: 0.5fr 2fr;
+    grid-template-columns: minmax(0, 0.5fr) minmax(0, 2fr);
     gap: var(--ao-space-24);
-    margin-top: var(--ao-space-40);
+    margin-block-start: var(--ao-space-40);
     padding-block: var(--ao-space-24);
   }
   .consult3a-closing {
-    margin-top: var(--ao-space-40);
-    max-width: 32ch;
-    font-size: 22px;
+    margin-block-start: var(--ao-space-40);
+    max-inline-size: 32ch;
+    font-size: 1.375rem;
     font-weight: 550;
   }
   .consult3a-sheet {
     background: var(--ao-background);
   }
   .consult3a-sheet h3 {
-    font-size: 30px;
+    font-size: 1.875rem;
   }
   .consult3a-sheet dl {
-    margin: var(--ao-space-24) 0 0;
+    margin-block: var(--ao-space-24) 0;
+    margin-inline: 0;
   }
   .consult3a-sheet dl > div {
     display: grid;
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 110px minmax(0, 1fr);
     gap: var(--ao-space-24);
-    padding-bottom: var(--ao-space-20);
+    padding-block-end: var(--ao-space-20);
   }
   .consult3a-sheet dt {
     font-weight: 650;
@@ -651,147 +657,149 @@ const jsonLd = {
     margin: 0;
   }
   .consult3a-expert {
-    grid-template-columns: 0.9fr 1.15fr;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.15fr);
   }
   .consult3a-expert .consult3a-closing {
-    margin-top: var(--ao-space-24);
+    margin-block-start: var(--ao-space-24);
   }
   .consult3a-proof {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--ao-space-24);
-    margin-top: var(--ao-space-24);
-    padding-top: var(--ao-space-24);
-    border-top: 1px solid var(--ao-line);
-    font-size: 14px;
+    margin-block-start: var(--ao-space-24);
+    padding-block-start: var(--ao-space-24);
+    border-block-start: 1px solid var(--ao-line);
+    font-size: 0.875rem;
   }
   .consult3a-proof strong {
-    font-size: 62px;
+    font-size: 3.875rem;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.04em;
     font-variant-numeric: tabular-nums;
   }
   .consult3a-proof > span {
-    max-width: 25ch;
+    max-inline-size: 25ch;
   }
   .consult3a-art {
     display: block;
-    width: 100%;
-    max-width: 330px;
-    height: auto;
-    margin-top: var(--ao-space-32);
+    inline-size: 100%;
+    max-inline-size: 330px;
+    block-size: auto;
+    margin-block-start: var(--ao-space-32);
   }
   .consult3a-offer h3 {
-    font-size: 22px;
+    font-size: 1.375rem;
   }
   .consult3a-offer__value {
-    margin-top: var(--ao-space-32);
-    font-size: 100px;
+    margin-block-start: var(--ao-space-32);
+    font-size: 6.25rem;
     font-weight: 750;
     line-height: 1;
     letter-spacing: -0.04em;
     font-variant-numeric: tabular-nums;
   }
   .consult3a-offer__value span {
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: 550;
     letter-spacing: -0.02em;
   }
   .consult3a-offer__value + p {
-    margin-top: var(--ao-space-12);
+    margin-block-start: var(--ao-space-12);
   }
   .consult3a-offer ul {
     display: grid;
     gap: var(--ao-space-12);
-    margin: var(--ao-space-28) 0;
+    margin-block: var(--ao-space-28);
+    margin-inline: 0;
     padding: 0;
     list-style: none;
   }
   .consult3a-offer li {
     display: grid;
-    grid-template-columns: 20px 1fr;
+    grid-template-columns: 20px minmax(0, 1fr);
     gap: var(--ao-space-12);
     align-items: start;
   }
   .consult3a-offer :global(.ao-deco-check) {
-    width: 12px;
-    height: 12px;
-    margin-top: 4px;
+    inline-size: 12px;
+    block-size: 12px;
+    margin-block-start: 4px;
     color: var(--ao-primary);
   }
   .consult3a-offer :global(.ao-button) {
-    width: 100%;
+    inline-size: 100%;
   }
   .consult3a-offer .consult3a-note {
-    max-width: none;
-    margin-top: var(--ao-space-24);
-    padding-top: var(--ao-space-20);
-    border-top: 1px solid var(--ao-line);
+    max-inline-size: none;
+    margin-block-start: var(--ao-space-24);
+    padding-block-start: var(--ao-space-20);
+    border-block-start: 1px solid var(--ao-line);
   }
   .consult3a-reviews {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--ao-space-64);
-    margin-top: var(--ao-space-48);
+    margin-block-start: var(--ao-space-48);
   }
   .consult3a-reviews :global(.ao-review) {
-    padding: 32px 0 0;
+    padding-block: 32px 0;
+    padding-inline: 0;
   }
   .consult3a-reviews :global(.ao-review__mark) {
-    margin-bottom: var(--ao-space-8);
+    margin-block-end: var(--ao-space-8);
   }
   .consult3a-reviews :global(.ao-review figcaption) {
-    margin-top: var(--ao-space-24);
+    margin-block-start: var(--ao-space-24);
   }
   .consult3a-faq {
-    grid-template-columns: 0.7fr 1.3fr;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
     align-items: start;
   }
-  @container page3a (max-width: 1199px) {
+  @container page3a (max-width: 74.9375rem) {
     .consult3a-split,
     .consult3a-audience,
     .consult3a-process {
       gap: var(--ao-space-48);
     }
     .consult3a-portrait__stage {
-      height: 480px;
+      block-size: 480px;
     }
   }
-  @container page3a (max-width: 879px) {
+  @container page3a (max-width: 54.9375rem) {
     .consult3a-audience,
     .consult3a-process {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .consult3a-portrait__stage {
-      height: 430px;
+      block-size: 430px;
     }
     .consult3a-process > figure :global(img) {
-      height: 360px;
+      block-size: 360px;
     }
     .consult3a-expert :global(img) {
-      height: 470px;
+      block-size: 470px;
     }
     .consult3a-offer__value {
-      font-size: 84px;
+      font-size: 5.25rem;
     }
     .consult3a-panel {
       padding: var(--ao-space-28);
     }
     .consult3a-sheet dl > div {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--ao-space-8);
     }
   }
-  @container page3a (max-width: 767px) {
+  @container page3a (max-width: 47.9375rem) {
     .consult3a-split,
     .consult3a-expert,
     .consult3a-faq,
     .consult3a-audience__list,
     .consult3a-reviews,
     .consult3a-prep {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--ao-space-32);
     }
     .consult3a-hero-price {
@@ -801,46 +809,47 @@ const jsonLd = {
       gap: var(--ao-space-12);
     }
     .consult3a-portrait__stage {
-      height: 400px;
+      block-size: 400px;
     }
     .consult3a-path {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--ao-space-12);
       padding-block: var(--ao-space-24);
     }
     .consult3a-path svg {
-      width: 40px;
-      height: 12px;
+      inline-size: 40px;
+      block-size: 12px;
     }
     .consult3a-map {
-      padding: var(--ao-space-32) var(--ao-space-20);
+      padding-block: var(--ao-space-32);
+      padding-inline: var(--ao-space-20);
     }
     .consult3a-map__answer strong {
-      font-size: 24px;
+      font-size: 1.5rem;
     }
     .consult3a-expert :global(img) {
-      height: 400px;
+      block-size: 400px;
       object-position: center 24%;
     }
     .consult3a-process > figure :global(img) {
-      height: 320px;
+      block-size: 320px;
     }
     .consult3a-proof strong {
-      font-size: 54px;
+      font-size: 3.375rem;
     }
     .consult3a-prep {
       gap: var(--ao-space-12);
     }
   }
-  @container page3a (max-width: 374px) {
+  @container page3a (max-width: 23.375rem) {
     .consult3a-portrait__stage {
-      height: 330px;
+      block-size: 330px;
     }
     .consult3a-process > figure :global(img) {
-      height: 280px;
+      block-size: 280px;
     }
     .consult3a-expert :global(img) {
-      height: 340px;
+      block-size: 340px;
     }
   }
 </style>

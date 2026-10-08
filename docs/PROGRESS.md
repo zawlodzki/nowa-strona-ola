@@ -1,10 +1,65 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (import 3a oraz strony prawne z main `d7ba6a1`).
+Aktualizacja: 2026-10-08 (wdrożenie zaleceń audytu CSS).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Wdrożenie zaleceń CSS według good-css, 08.10.2026
+
+Na zlecenie użytkownika wdrożono zalecenia [raportu CSS](CSS-REVIEW-2026-10-08.md):
+oddzielne zależności szablonów i legacy, budżety per szablon z inline CSS,
+typografię `rem`/płynne tokeny, hover tylko dla myszy i feedback na dotyku,
+outline w forced colors, ruch opt-in, właściwości logiczne, overflow oraz
+usunięcie martwych reguł Article3a. Generator emituje OKLCH/`light-dark()`
+z fallbackiem HEX i oddzielnym arkuszem aliasów legacy. Tailwind skanuje `src`.
+Makiety 3a podłączają arkusz aliasów, aby zachować poprawne odstępy w podglądzie.
+
+Homepage: **7 383 B gzip zewnętrznego CSS**, wcześniej 21 055 B (**−64,9%**).
+About 7 468 B, konsultacja 7 685 B, polityka prywatności 5 797 B.
+Cała pula CSS: **30 103 B gzip** / limit 32 KiB; JS 5 770 B.
+Pełna tabela i zakres w raporcie. Nowe regresje pilnują skalowania tekstu
+20/32 px na ośmiu szablonach przy 320/1440 px oraz interakcji i dostępności.
+
+Node 24.19.0: format, tokens:check, lint, typy, **135 unit**, build **65 stron**,
+Studio/preview/Worker dry-run, test:build i **61 E2E Chromium: PASS**.
+Po poprawce importów aliasów makiet ich **8 E2E ponownie PASS**;
+końcowe lint, format i `git diff --check`: PASS.
+`test:content-lake`: PASS, zgodność sekcji/zdjęć/DOM na 13 stronach.
+Ogląd zrzutów Home/About/Consultation/e-booka przy 390/1440 px wykonany;
+porównano z makietami 3a, dowody `/tmp/ola-css-evidence/`.
+
+Pełne `npm run verify` uruchomiono, ale nie uzyskało PASS: **122 przypadki
+Firefox/WebKit nie wystartowały**, ponieważ środowisko nie zawiera tych
+przeglądarek, a pobranie blokuje HTTP 403 z polityki sieciowej.
+Systemowy Chromium działa przez opcjonalne `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`.
+Worker dry-run używał zapisywalnego `XDG_CONFIG_HOME=/tmp/ola-css-config`;
+nie wykonano deployu ani zapisu CMS. Test Content Lake uruchomiono osobno,
+ponieważ verify zakończyło się na E2E.
+
+Następny krok: pełne verify z Firefox/WebKit i ręczny odbiór wszystkich sekcji,
+natywnego zoomu oraz czytnika/urządzenia. Coverage i Lighthouse niewykonane.
+
+### Audyt CSS według good-css, 08.10.2026
+
+Wykonano [audyt CSS](CSS-REVIEW-2026-10-08.md) na `3143c24`, bez zmian
+aplikacji. Potwierdzono pobieranie CSS Home/About/Consultation i legacy przez
+te same trasy: 21 055 B gzip zewnętrznego CSS dla homepage i stron prawnych.
+Wszystkie zewnętrzne pliki CSS razem: 29 804 B gzip; budżet pomija CSS inline.
+Raport opisuje skalowanie fontów, hover/active, forced colors starszych kontrolek,
+martwe selektory, właściwości logiczne, overflow i tokeny motywu.
+
+Kontrole na Node 24.19.0: tokens:check PASS, 9 unit w 3 plikach PASS,
+build 65 stron PASS, test:build PASS (CSS 29 804 B, JS 5 770 B gzip).
+E2E, coverage i Lighthouse niewykonane: pobranie Chromium blokuje polityka
+sieciowa (HTTP 403 dla cdn.playwright.dev). Brak nowych kontroli wizualnych,
+dotyku, zoomu, font size i forced colors. Pełnego verify nie uruchamiano.
+Format trzech zmienionych dokumentów i lokalne odnośniki raportu: PASS.
+
+Następny krok: izolacja zależności CSS szablonów i pomiar per strona,
+następnie poprawki typografii i interakcji z pełnym verify/odbiorem 3a.
+Audyt nie zmienia stanu wdrożenia CMS ani publikacji.
 
 ### Sesja importu 3a, 08.10.2026
 

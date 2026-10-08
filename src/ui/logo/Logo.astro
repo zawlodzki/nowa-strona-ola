@@ -46,23 +46,23 @@ const svg = prepareLogoSvg(markup[variant], variant, decorative);
   }
   .site-logo :global(svg) {
     display: block;
-    width: auto;
-    height: 1.375rem;
-    max-width: 100%;
+    inline-size: auto;
+    block-size: 1.375rem;
+    max-inline-size: 100%;
     fill: currentColor;
   }
   .site-logo--stacked :global(svg) {
-    height: 2.25rem;
+    block-size: 2.25rem;
   }
   .site-logo--monogram :global(svg) {
-    height: 2rem;
+    block-size: 2rem;
   }
   .site-logo--display :global(svg) {
-    height: auto;
-    width: min(100%, 18rem);
+    block-size: auto;
+    inline-size: min(100%, 18rem);
   }
   .site-logo--display.site-logo--monogram :global(svg) {
-    width: min(100%, 6.5rem);
+    inline-size: min(100%, 6.5rem);
   }
   .site-brand__narrow {
     display: none;
