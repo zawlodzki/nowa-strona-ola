@@ -55,7 +55,7 @@ export const authorType = defineType({
       name: "diplomaScan",
       title: "Skan dyplomu",
       description:
-        "Opcjonalny obraz dyplomu. Pusty kadr na stronie „O mnie” zostaje miejscem do uzupełnienia. Nie wgrywać fikcyjnego dokumentu.",
+        "Zdjęcie ukończenia studiów. Puste pole zostawia ramkę „Miejsce na skan dyplomu”. Nie wgrywać fikcyjnego dokumentu.",
       type: "mediaObject",
     }),
   ],

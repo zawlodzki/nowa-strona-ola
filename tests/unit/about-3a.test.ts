@@ -32,7 +32,12 @@ describe("about 3a fixtures", () => {
     expect(view.credentials.person.educationProgram).toBe(
       "Dietetyka kliniczna",
     );
-    expect(view.credentials.person.diploma).toBeUndefined();
+    expect(view.credentials.person.diploma).toMatchObject({
+      src: "diploma",
+      tone: "photo",
+      label:
+        "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
+    });
     expect(view.approach.steps).toHaveLength(3);
     expect(view.approach.note).toMatch(/Nie zastępuje/);
     expect(view.testimonials.items).toHaveLength(2);
@@ -51,6 +56,9 @@ describe("about 3a fixtures", () => {
     expect(view.hero.title).toContain("I am Ola");
     expect(view.hero.lead).not.toMatch(/Jestem Ola/);
     expect(view.credentials.person.educationProgram).toBe("Clinical dietetics");
+    expect(view.credentials.person.diploma?.label).toBe(
+      "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom",
+    );
     expect(view.newsletter.submit).toBe("I want the newsletter");
   });
 });
@@ -61,6 +69,9 @@ describe("about serializers", () => {
     const markdown = serializePage(page, "pl");
     expect(markdown).toContain("Śląski Uniwersytet Medyczny");
     expect(markdown).toContain("Dietetyka kliniczna");
+    expect(markdown).toContain(
+      "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
+    );
     expect(markdown).toContain("450+");
     expect(markdown).toContain("https://cal.com");
     expect(markdown).not.toMatch(/fikcyjny dyplom/i);

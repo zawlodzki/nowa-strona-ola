@@ -31,6 +31,8 @@ export const aboutCopy = {
     ],
     diplomaCaption:
       "Dyplom ukończenia dietetyki klinicznej, Śląski Uniwersytet Medyczny",
+    diplomaAlt:
+      "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
     diplomaPlaceholderTitle: "Miejsce na skan dyplomu",
     diplomaPlaceholderNote: "Dokument do uzupełnienia",
     approachTitle: "Zaczynam od Ciebie i Twojej codzienności.",
@@ -101,6 +103,8 @@ export const aboutCopy = {
     ],
     diplomaCaption:
       "Diploma in clinical dietetics, Medical University of Silesia",
+    diplomaAlt:
+      "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom",
     diplomaPlaceholderTitle: "Space for the diploma scan",
     diplomaPlaceholderNote: "Document still to be added",
     approachTitle: "I start with you and your everyday life.",
@@ -143,6 +147,20 @@ export const aboutCopy = {
     contactAlt: "Aleksandra Olesiewicz working at a laptop",
   },
 } as const;
+
+const diplomaSlotWidth = 340;
+const diplomaSlotMinHeight = 380;
+
+export const DIPLOMA_SLOT_RATIO = diplomaSlotWidth / diplomaSlotMinHeight;
+
+export function diplomaSlotSize(sourceWidth = 1440) {
+  return {
+    width: sourceWidth,
+    height: Math.max(1, Math.round(sourceWidth / DIPLOMA_SLOT_RATIO)),
+  };
+}
+
+export const diplomaCropPosition = "50% 0%";
 
 export function aboutMaterialsHref(
   language: Locale,

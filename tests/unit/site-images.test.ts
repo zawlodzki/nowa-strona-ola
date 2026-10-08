@@ -41,7 +41,11 @@ describe("pickSiteImage", () => {
 
   it("does not invent a file when there is no fallback", () => {
     expect(pickSiteImage(undefined)).toBeUndefined();
-    expect(pickSiteImage("diploma")).toBeUndefined();
+    expect(pickSiteImage("missing-scan")).toBeUndefined();
+  });
+
+  it("maps the graduation photo to the local diploma file", () => {
+    expect(pickSiteImage("diploma")).toEqual({ type: "local", key: "diploma" });
   });
 });
 
@@ -51,6 +55,7 @@ describe("imageCropPosition", () => {
     expect(imageCropPosition("50% 25%")).toBe("top");
     expect(imageCropPosition("0% 100%")).toBe("left bottom");
     expect(imageCropPosition("75% 70%")).toBe("right bottom");
+    expect(imageCropPosition("50% 0%")).toBe("top");
     expect(imageCropPosition("50% 50%")).toBe("centre");
     expect(imageCropPosition()).toBeUndefined();
   });
