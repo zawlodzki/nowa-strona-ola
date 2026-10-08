@@ -445,7 +445,13 @@ body.ao-site {
   align-items: center;
   min-height: var(--ao-target-min);
 }
-.ao-theme-toggle {
+.ao-footer__tools {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.ao-theme-toggle,
+.ao-back-to-top {
   display: inline-grid;
   place-items: center;
   min-width: var(--ao-target-min);

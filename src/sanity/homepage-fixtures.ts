@@ -1,6 +1,10 @@
 import type { Locale } from "@ola/shared";
 
 import {
+  blogIndexSettingsFixture,
+  blogNewsletterSettingsFixture,
+} from "@/content/blog-collection-seed";
+import {
   DISPLAY_LABEL_COOPERATION,
   EBOOK_SEED,
   homepageCopy,
@@ -163,6 +167,11 @@ export function homepageSettingsFixture(language: Locale) {
     headerCta: homepageHeaderCta(language),
     legalLinks: footerLegalLinks(language),
     socialLinks: footerSocialLinks(),
+    blogIndex: blogIndexSettingsFixture(language),
+    blogNewsletter: blogNewsletterSettingsFixture(
+      language,
+      newsletterFormFixture(language),
+    ),
     translation: {
       language: language === "pl" ? ("en" as const) : ("pl" as const),
     },

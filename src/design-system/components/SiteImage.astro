@@ -11,7 +11,11 @@ import norsaLogo from "@/assets/partners/norsa.png";
 import omniLogo from "@/assets/partners/omni.png";
 import unsLogo from "@/assets/partners/uns.png";
 import alabLogo from "@/assets/partners/alab.svg?url";
-import { pickSiteImage, type SiteRasterKey } from "@/lib/site-images";
+import {
+  imageCropPosition,
+  pickSiteImage,
+  type SiteRasterKey,
+} from "@/lib/site-images";
 
 interface Props {
   src?: string;
@@ -21,7 +25,10 @@ interface Props {
   height: number;
   class?: string;
   loading?: "eager" | "lazy";
+  decoding?: "async" | "sync" | "auto";
   fetchpriority?: "high" | "low" | "auto";
+  objectPosition?: string;
+  fit?: "cover" | "contain" | "fill" | "none" | "scale-down";
 }
 
 const rasters: Record<SiteRasterKey, ImageMetadata> = {
@@ -43,8 +50,15 @@ const {
   height,
   class: className,
   loading = "lazy",
+  decoding = "async",
   fetchpriority,
+  objectPosition,
+  fit = "cover",
 } = Astro.props;
+const imageStyle = objectPosition
+  ? `object-position: ${objectPosition}`
+  : undefined;
+const cropPosition = imageCropPosition(objectPosition);
 
 const picked = pickSiteImage(src, fallback);
 const eager = loading === "eager" || fetchpriority === "high";
@@ -57,8 +71,9 @@ const eager = loading === "eager" || fetchpriority === "high";
     width={width}
     height={height}
     class={className}
+    style={imageStyle}
     loading={eager ? "eager" : "lazy"}
-    decoding="async"
+    decoding={decoding}
   />
 )}
 {picked?.type === "local" && (
@@ -68,11 +83,14 @@ const eager = loading === "eager" || fetchpriority === "high";
     width={width}
     height={height}
     class={className}
+    style={imageStyle}
     layout="none"
     format="webp"
+    fit={fit}
+    position={cropPosition}
     loading={eager ? "eager" : "lazy"}
     fetchpriority={fetchpriority}
-    decoding="async"
+    decoding={decoding}
   />
 )}
 {picked?.type === "remote" && (
@@ -82,10 +100,13 @@ const eager = loading === "eager" || fetchpriority === "high";
     width={width}
     height={height}
     class={className}
+    style={imageStyle}
     layout="none"
     format="webp"
+    fit={fit}
+    position={cropPosition}
     loading={eager ? "eager" : "lazy"}
     fetchpriority={fetchpriority}
-    decoding="async"
+    decoding={decoding}
   />
 )}

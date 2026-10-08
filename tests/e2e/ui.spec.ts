@@ -521,21 +521,41 @@ test("landing pages, blog and missing English translation", async ({
 
   await page.goto("/blog/");
   await expect(
-    page.getByRole("heading", { name: "Blog", exact: true }),
+    page.getByRole("heading", { name: "Blog. Po Twojemu." }),
   ).toBeVisible();
+  await expect(page.getByText("Wpisy 2–7 z 11")).toBeVisible();
+  await page.goto("/blog/strona/2/");
+  await expect(page.getByText("Wpisy 8–11 z 11")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Najnowszy wpis" }),
+  ).toHaveCount(0);
+  await page.goto("/blog/kategoria/perimenopauza/");
+  await expect(
+    page.getByText("W tej kategorii nie ma jeszcze wpisów"),
+  ).toBeVisible();
+  await page.goto("/en/blog/");
+  await expect(
+    page.getByRole("heading", { name: "Blog. On your terms." }),
+  ).toBeVisible();
+  await page.goto("/blog/");
   await page
-    .getByRole("link", { name: "Najpierw proces, potem CRM" })
+    .getByRole("link", {
+      name: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+      exact: true,
+    })
     .first()
     .click();
   await expect(
-    page.getByRole("heading", { name: "Najpierw proces, potem CRM" }),
+    page.getByRole("heading", {
+      name: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+    }),
   ).toBeVisible();
   await expect(
     page.getByRole("navigation", { name: "Spis treści" }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
     "href",
-    "/en/blog/process-before-crm/",
+    "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
   );
 
   await page.goto("/tylko-pl/");

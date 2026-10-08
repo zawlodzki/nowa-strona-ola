@@ -106,6 +106,9 @@ test("3a catalog without JavaScript preserves native navigation and content", as
     }),
   ).toBeVisible();
   await expect(page.locator(".ao-theme-toggle")).toBeHidden();
+  await expect(
+    page.getByRole("link", { name: "Powrót na górę", exact: true }),
+  ).toBeVisible();
   await expect(page.locator(".ao-carousel__controls")).toBeHidden();
   await expect(page.locator("#ds-books article")).toHaveCount(4);
   expect(

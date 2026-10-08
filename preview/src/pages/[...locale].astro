@@ -3,13 +3,17 @@ import { env } from "cloudflare:workers";
 import type { Locale } from "@ola/shared";
 
 import ArticleView from "../../../src/views/ArticleView.astro";
-import BlogIndex from "../../../src/views/BlogIndex.astro";
+import BlogCollectionPage from "../../../src/views/BlogCollectionPage.astro";
 import ComposedPage from "../../../src/views/ComposedPage.astro";
 import EbookCollectionPage from "../../../src/views/EbookCollectionPage.astro";
 import EbookPage from "../../../src/views/EbookPage.astro";
 import { parseContentPath } from "../../../src/lib/content-path";
 import { blogCategoryPath, blogPath } from "../../../src/lib/paths";
-import { demonstrationSettings } from "../../../src/sanity/fixtures";
+import {
+  demonstrationCategories,
+  demonstrationSettings,
+} from "../../../src/sanity/fixtures";
+import { getArticleIndex } from "../../../src/sanity/repository";
 import { fixtureEbooksForLanguage } from "../../../src/sanity/ebook-fixtures";
 import {
   getPreviewArticle,
@@ -72,19 +76,42 @@ const collectionEbooks =
     : [];
 const blogIndex =
   route.kind === "blogIndex" && language
-    ? await getPreviewArticleIndex(language, route.page, environment)
+    ? await getPreviewArticleIndex(language, route.page, environment).catch(
+        () => getArticleIndex(language, route.page, { environment: {} }),
+      )
     : null;
 const blogCategory =
   route.kind === "blogCategory" && language
     ? {
-        category: await getPreviewCategory(language, route.slug, environment),
+        category: await getPreviewCategory(
+          language,
+          route.slug,
+          environment,
+        ).catch(() => {
+          const match = demonstrationCategories[language].find(
+            (item) => item.slug === route.slug,
+          );
+          if (!match) {
+            throw new Error(
+              `Brak kategorii podglądu ${language}/${route.slug}.`,
+            );
+          }
+          return match;
+        }),
         index: await getPreviewArticleIndex(language, route.page, environment, {
           categorySlug: route.slug,
-        }),
+        }).catch(() =>
+          getArticleIndex(language, route.page, {
+            environment: {},
+            categorySlug: route.slug,
+          }),
+        ),
       }
     : null;
 const categories = language
-  ? await getPreviewCategories(language, environment)
+  ? await getPreviewCategories(language, environment).catch(
+      () => demonstrationCategories[language],
+    )
   : [];
 ---
 
@@ -113,34 +140,21 @@ const categories = language
     preview
   />
 ) : blogIndex && language && settings ? (
-  <BlogIndex
+  <BlogCollectionPage
     lang={language}
     settings={settings}
-    title="Blog"
-    lead={
-      language === "pl"
-        ? "Wpisy demonstracyjne. Każdy język ma osobne dokumenty."
-        : "Demonstration posts. Each language has its own documents."
-    }
-    articles={blogIndex.items}
-    featured={blogIndex.featured}
+    index={blogIndex}
     categories={categories}
-    page={blogIndex.page}
-    totalPages={blogIndex.totalPages}
     pageHref={(pageNumber) => blogPath(language, pageNumber)}
     alternateHref={blogPath(language === "pl" ? "en" : "pl", blogIndex.page)}
+    preview
   />
 ) : blogCategory && language && settings ? (
-  <BlogIndex
+  <BlogCollectionPage
     lang={language}
     settings={settings}
-    title={blogCategory.category.title ?? blogCategory.category.slug ?? ""}
-    lead={blogCategory.category.description ?? ""}
-    articles={blogCategory.index.items}
-    featured={blogCategory.index.featured}
+    index={blogCategory.index}
     categories={categories}
-    page={blogCategory.index.page}
-    totalPages={blogCategory.index.totalPages}
     category={blogCategory.category}
     pageHref={(pageNumber) =>
       blogCategoryPath(language, blogCategory.category.slug ?? "", pageNumber)
@@ -154,6 +168,7 @@ const categories = language
           )
         : null
     }
+    preview
   />
 ) : (
   <p>Nie znaleziono strony podglądu.</p>

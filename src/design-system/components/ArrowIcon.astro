@@ -1,6 +1,7 @@
 ---
 interface Props {
-  direction?: "up-right" | "left" | "right" | "down";
+  direction?:
+    "up-right" | "left" | "right" | "down" | "chevron-left" | "chevron-right";
 }
 const { direction = "up-right" } = Astro.props;
 const paths = {
@@ -8,6 +9,8 @@ const paths = {
   left: "M19 12H5m7-7-7 7 7 7",
   right: "M5 12h14m-7-7 7 7-7 7",
   down: "M12 5v14m-7-7 7 7 7-7",
+  "chevron-left": "m14 6-6 6 6 6",
+  "chevron-right": "m10 6 6 6-6 6",
 };
 ---
 

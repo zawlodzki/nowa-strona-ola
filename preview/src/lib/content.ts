@@ -3,7 +3,10 @@ import type { Locale } from "@ola/shared";
 
 import { assertKnownSections } from "../../../src/content/sections";
 import { ARTICLES_PER_PAGE } from "../../../src/lib/paths";
-import { paginate } from "../../../src/lib/pagination";
+import {
+  paginateBlogCollection,
+  sortByPublishedAt,
+} from "../../../src/lib/pagination";
 import type {
   ArticleCard,
   ArticleContent,
@@ -138,14 +141,16 @@ export async function getPreviewArticleIndex(
   const articles = await client.fetch<ArticleCard[]>(PREVIEW_ARTICLES_QUERY, {
     language,
   });
-  const filtered = options.categorySlug
-    ? articles.filter((article) =>
-        article.categories?.some(
-          (category) => category?.slug === options.categorySlug,
-        ),
-      )
-    : articles;
-  const result = paginate(
+  const filtered = sortByPublishedAt(
+    options.categorySlug
+      ? articles.filter((article) =>
+          article.categories?.some(
+            (category) => category?.slug === options.categorySlug,
+          ),
+        )
+      : articles,
+  );
+  const result = paginateBlogCollection(
     filtered,
     page,
     options.pageSize ?? ARTICLES_PER_PAGE,
@@ -153,10 +158,7 @@ export async function getPreviewArticleIndex(
   if (!result) {
     throw new Error(`Brak strony ${page} indeksu podglądu ${language}.`);
   }
-  return {
-    ...result,
-    featured: filtered.filter((article) => article.featured === "featured"),
-  };
+  return result;
 }
 
 export async function getPreviewCategories(

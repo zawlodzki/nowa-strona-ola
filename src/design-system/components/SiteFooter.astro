@@ -65,7 +65,16 @@ const pl = lang === "pl";
           <a href={link.href}>{link.label}</a>
         ))}
       </nav>
-      <ThemeToggle label={pl ? "Ciemny motyw" : "Dark theme"} />
+      <div class="ao-footer__tools">
+        <ThemeToggle label={pl ? "Ciemny motyw" : "Dark theme"} />
+        <a
+          class="ao-back-to-top"
+          href="#main"
+          aria-label={pl ? "Powrót na górę" : "Back to top"}
+        >
+          <ArrowIcon />
+        </a>
+      </div>
     </div>
   </div>
 </footer>

@@ -1,9 +1,153 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-07 (pakiet 5 — wyrównanie makiety kolekcji).
+Aktualizacja: 2026-10-08 (pakiet 6 — poprawki 1:1 kolekcji bloga).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja poprawek wizualnych BlogCollection3a — 08.10.2026
+
+Zasada Grzesia: nic nie wypada i nic się nie upraszcza. Odbiór
+`compare-blog-p1-desktop.png` / `compare-blog-p2-desktop.png` odrzucił pustą
+listę różnic. Poprawki na tym samym branchu `cursor/blog-collection-3a-1697`.
+
+Różnica → poprawka:
+
+1. Karta „Wyniki badań” (seed `04`, `imageKey: "about"`, `frame: "portrait"`) —
+   pusty różowy prostokąt. Diagnoza zbudowanego `/blog/`: `<img>` istnieje,
+   `src="/_astro/about.*.webp"`, plik w `dist/` (najpierw VP8 1122×1402). Computed
+   jak u działającej „Insulinooporność” (`contact`, też portrait): `opacity: 1`,
+   `visibility: visible`, `height: 322.22px`, `object-position: 50% 15%`,
+   `object-fit: cover`. Różnica: `about` miał atrybuty HTML 1122×1402 (portret),
+   `contact` 1536×1024 (pejzaż). Chromium nie maluje `cover` + `50% 15%` na
+   intrynsecznym portrecie poza viewportem — widać tło `--ao-surface`. Sąsiedni
+   `food` i CSS 1:1 z makietą tego nie naprawiają na zrzucie `fullPage`.
+   Poprawka: miniatura dostaje kadr 1.8 **w pliku** (`blogCardThumbSize`, Sharp
+   `fit=cover`, gravity z hotspota → `about` 1122×623, `decoding="sync"`).
+   CSS ramki zostaje jak `.post-image img`. E2E: każda miniatura na `/blog/` i
+   `/blog/strona/2/` ma `img`, `naturalWidth > 0`, widoczny box; karta badań ma
+   pejzażowy plik i kontrast pikseli także ze zrzutu `fullPage` bez
+   `scrollIntoView`. Wycinek z `compare-blog-p1-desktop.png` po poprawce pokazuje
+   twarz, nie różowy prostokąt.
+2. Kanciaste rogi miniatur i zdjęcia wyróżnionego wpisu. Makieta używa
+   `--media-radius` = `--ao-radius-panel` (24px). Produkcja ustawiała
+   nieistniejące `--ao-radius-media` (computed 0). Poprawka: `--ao-radius-panel`,
+   `overflow: hidden`, `isolation: isolate`.
+3. Miniatury wyższe niż w makiecie. `.ao-site img { height: auto }` plus atrybuty
+   HTML portretu 1122×1402 wypierały `aspect-ratio: 1.8` na samym `img`. Poprawka:
+   ten sam układ co makieta (`.post-image img`: `width: 100%`, `height: auto`,
+   `aspect-ratio: 1.8`, `object-fit: cover`) oraz pejzażowe atrybuty HTML 1.8.
+4. Wyróżniony wpis wyglądał na pas wychodzący do prawej, bez zaokrągleń. Układ
+   siatki `1.08fr 1fr` i padding 44px już były; brakujący radius sprawiał wrażenie
+   pełnej szerokości. Poprawka: karta w kontenerze, `border-radius: 24px`,
+   `align-items: stretch`, lewa kolumna `display: grid` wypełnia wysokość zdjęciem.
+5. Stopka, prawy dolny róg: makieta ma strzałkę up-right (klasa `theme-toggle`),
+   produkcja miała tylko księżyc motywu. Przycisk motywu zostaje; dodany link
+   `#main` z `ArrowIcon` (ścieżka `M7 17 17 7M7 7h10v10`) we wspólnym
+   `SiteFooter` 3a — na wszystkich stronach 3a.
+6. Mobile, kategoria PCOS i EN: te same radius, kadr 1.8 i strzałka w stopce.
+
+Świadome różnice (nie ucięcie): filtry kategorii (zlecone, makieta ich nie ma);
+`aria-label` „Przeczytaj artykuł: …”; English/Polski; zgoda newslettera; przycisk
+motywu obok strzałki; karty prowadzą do `blog/[slug]`, nie `podglad.html`.
+
+Kontrole (Node 24.21.0):
+
+- `npm run verify` **PASS**: 110 unit, 102 E2E (Chromium/Firefox/WebKit), w tym
+  `blog-collection-3a.spec.ts` (src `about.*.webp`, HTML 1122×623 pejzaż,
+  `naturalWidth > naturalHeight`, opacity/visibility jak u `contact`, radius 24px,
+  stosunek 1.8, ramka = box obrazka, luma `fullPage`, każda miniatura na stronie
+  1 i 2, `#main` w stopce).
+- CSS gzip `dist/_astro`: **26 274 B** / 32 KiB; JS gzip 5 770 B.
+- verify-ola `VERIFY_RUN_ID=ola-1791429898`, baza `http://127.0.0.1:4340`,
+  `browser posts` = `[]` (z JS i bez). Dist z `npm run verify`, bez przebudowy
+  w trakcie sesji. Dowody: `/tmp/ola-verify-evidence/ola-1791429898/`.
+- Porównania nadpisane w `/opt/cursor/artifacts/screenshots/` pod tymi samymi
+  nazwami. Wycinek karty „Wyniki badań” z `compare-blog-p1-desktop.png`
+  obejrzany: twarz, kadr 1.8, radius 24px, nie tło `--ao-surface`.
+
+Zmierzony kadr desktop 1280: ramka karty 580×322,22 (1.8) makieta i produkcja;
+wyróżniony 1200×~416, radius 24px, w kontenerze. Miniatura „Wyniki badań”
+`naturalWidth` 1122 × `naturalHeight` 623 (`about.BuXypYA__Z7qD5w.webp`).
+Mobile 390: featured 1.4, karty 1.8.
+
+Pozostałe różnice po porównaniu pikselowym (lista nie jest pusta):
+
+- Filtry kategorii pod leadem — zlecone w pakiecie; makieta ich nie ma. Przez to
+  wyróżniony wpis jest ~1 px wyższy, a CTA „Przeczytaj artykuł” łamie się na
+  dwie linie.
+- `English` / `Polski` w nagłówku — wspólny `SiteShell3a`.
+- Księżyc motywu obok strzałki powrotu — zlecone (motyw zostaje).
+- Newsletter: zgoda demonstracyjna `DemoForm` (wspólna 3a).
+- Mobile: szerokość treści 342 vs 350 px (gutter `.ao-container`, nie makietowy
+  `.container`).
+- Kategoria PCOS: brak makiety kategorii; najnowszy wpis kategorii jest
+  wyróżniony jak na indeksie.
+- EN: brak makiety EN; ten sam układ, zaokrąglenia, kadr i strzałka.
+- Bez JS: motyw ukryty, strzałka widoczna, zdjęcia eager nadal w HTML.
+- `aria-label` „Przeczytaj artykuł: …”; karty prowadzą do `blog/[slug]`.
+
+Natywny zoom, czytnik i urządzenie fizyczne **nie sprawdzone**.
+
+Następny krok: pakiet 7 Article3a, o ile odbiór tej poprawki przejdzie.
+
+### Sesja pakietu 6 — kolekcja bloga 3a — 08.10.2026
+
+Zakres: `BlogCollection3a` na `/blog/` i `/en/blog/` według makiet
+`blog-3a.html` i `blog-3a-page-2.html`. Istniejące `article` i `category`;
+najnowszy wpis tylko na stronie 1, siatka dwóch kolumn, paginacja
+`/blog/strona/2/` i `/en/blog/page/2/`, sortowanie `publishedAt desc, _id asc`.
+Pełny newsletter `DemoForm` pod paginacją. Breadcrumb i filtry kategorii
+(Wszystkie + 5 kategorii; pusta `perimenopauza`). Copy, 11 wpisów i daty
+z makiety są **propozycją**. Trasy `blog/[slug]` zostają przy `ArticleView`.
+
+Kod: `siteSettings.blogIndex` / `blogNewsletter`, GROQ (hotspot, kolejność,
+projekcja kategorii), TypeGen, mappery, serializer Markdown z przykładem,
+fixture 11×2 artykułów i 5×2 kategorii, dry-run importu
+(`npm run import:blog-collection`, `--write` kończy się kodem 2). Zdjęcia
+makiety przez `SiteImage` + `astro:assets` (`food`, `about`, `contact`)
+z kadrami hotspot. Dekoracje paginacji to SVG `ArrowIcon` (chevron-left/right).
+Akcentów matcha z PR #31 nie wdrażano.
+
+Kontrole tej sesji (Node 24.21.0):
+
+- `npm run verify` **PASS**: 109 unit, 96 E2E (Chromium/Firefox/WebKit).
+- CSS gzip `dist/_astro`: **26 231 B** (limit tymczasowy 32 KiB); JS gzip
+  5 770 B. Designu nie wycinano pod budżet.
+- Dry-run importu: 34 dokumenty, `--write` kod 2, bez zapisu.
+- Playwright: `npx playwright install chromium firefox webkit` oraz
+  `install-deps` **nie zawisły**.
+- verify-ola (`VERIFY_RUN_ID=ola-1791426038`, baza `http://127.0.0.1:4340`):
+  `/blog/` 200, strona 2, kategoria PCOS, pusta perimenopauza, `/en/blog/`
+  bez polskiego H1, bez JS. `browser posts` = `[]`. Dowody:
+  `/tmp/ola-verify-evidence/ola-1791426038/`.
+- Porównania obok makiety: `/opt/cursor/artifacts/screenshots/`
+  (`compare-blog-p1-desktop.png`, `compare-blog-p1-mobile.png`,
+  `compare-blog-p2-desktop.png`, `compare-blog-p2-mobile.png`,
+  `compare-blog-category-desktop.png`, `blog-en-desktop.png`,
+  `blog-p1-nojs.png`, `blog-empty.png`).
+- Natywny zoom przeglądarki, czytnik i urządzenie fizyczne **nie
+  sprawdzone**.
+
+Tabela zdjęć z makiety:
+
+| Zdjęcie z makiety                         | Plik na produkcji                                       | Sekcja                                                                                     | Status                   |
+| ----------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
+| `assets/food-editorial.webp`              | `src/assets/editorial/food-editorial.webp` klucz `food` | wyróżniony wpis; karty posiłków, suplementów, dzienniczka, zakupów                         | na miejscu, ten sam kadr |
+| `../../src/assets/portraits/contact.webp` | `src/assets/portraits/contact.webp` klucz `contact`     | pytania o PCOS, insulinooporność, sprzeczne rady (`portrait` / `portrait-close`, 15% góry) | na miejscu, ten sam kadr |
+| `../../src/assets/portraits/about.webp`   | `src/assets/portraits/about.webp` klucz `about`         | wyniki badań, cel konsultacji (`portrait`, 15% góry)                                       | na miejscu, ten sam kadr |
+
+Brakujących plików nie było; placeholderów nie podstawiano.
+
+Świadome różnice względem makiety (nie ucięcie kolekcji):
+
+- Filtry kategorii pod leadem — zlecone w pakiecie, makieta ich nie ma.
+- `aria-label` obrazka/karty używa etykiety CMS „Przeczytaj artykuł: …”, makieta ma krótsze „Przeczytaj: …”.
+- Shell: English/Polski, demonstracyjna zgoda newslettera, ikona motywu — wspólny `SiteShell3a`.
+- Linki kart prowadzą do `blog/[slug]` (ArticleView), nie do `podglad.html`.
+
+Następny krok: pakiet 7 Article3a. Dane indeksu w Content Lake i odbiór
+Studio/preview pozostają otwarte. Copy indeksu do zatwierdzenia.
 
 ### Sesja poprawek makiety kolekcji — 07.10.2026
 
@@ -51,7 +195,7 @@ Do decyzji (brak prawdziwych adresów):
 - Strony prawne: `/polityka-prywatnosci/`, `/regulamin/` (EN `/en/privacy/`,
   `/en/terms/`) — brak dokumentów i treści.
 
-Następny krok: pakiet 6 BlogCollection3a.
+Następny krok: pakiet 6 BlogCollection3a (wykonany 08.10.2026).
 
 ### Sesja pakietu 5 — kolekcja e-booków 3a — 07.10.2026
 
@@ -102,8 +246,9 @@ Tabela zdjęć z makiety:
 | pozostałe 5 okładek (art-decisions/route/observation/journal/evening) | SVG `BookCoverArt` w `src/design-system/decorations/`                     | karty kolekcji                                           | SVG, bez rastrów — zgodnie z makietą           |
 | brak innych `<img>` w `ebooks-3a.html`                                | —                                                                         | —                                                        | nic nie brakuje; placeholderów nie podstawiano |
 
-Następny krok: pakiet 6 BlogCollection3a. Dane kolekcji w Content Lake
-i odbiór Studio/preview pozostają otwarte. Copy i UX kolekcji do zatwierdzenia.
+Następny krok: pakiet 6 BlogCollection3a (wykonany 08.10.2026). Dane kolekcji
+e-booków w Content Lake i odbiór Studio/preview pozostają otwarte. Copy i UX
+kolekcji e-booków do zatwierdzenia.
 
 ### Sesja dodatkowego akcentu — 07.10.2026
 
@@ -140,15 +285,16 @@ wdrożyć tokeny/komponenty i wykonać odbiór UI; etap pozostaje 4a.
 Etapy 1–2 — fundament repo i infrastruktury — mają zapisany wcześniejszy odbiór.
 Etapy 3–4 opisują wcześniejszy prototyp; design system 3a jest w `src/design-system`.
 Bieżący etap to **4a — docelowe strony 3a i treści z mockupów w Sanity**.
-**Pakiety 1–5 (Homepage3a, About3a, Consultation3a, Ebook3a, EbookCollection3a,
-wspólny shell) są w kodzie i fixture’ach; zapis do Content Lake i publikacja
-nie były zlecone.**
+**Pakiety 1–6 (Homepage3a, About3a, Consultation3a, Ebook3a, EbookCollection3a,
+BlogCollection3a, wspólny shell) są w kodzie i fixture’ach; zapis do Content
+Lake i publikacja nie były zlecone.**
 
 Publiczne `/`, `/en/`, `/o-mnie/`, `/en/about/`, `/konsultacje/`,
-`/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/` i
-`/en/ebooks/<slug>/` oraz preview tych stron renderują `SiteShell3a`
-z fixture’ów. Blog i `/ui/` nadal używają wcześniejszego Layout albo czekają
-na pakiety 6–7. Etapy 5–7 oraz pakiety 6–7 etapu 4a pozostają otwarte.
+`/en/consultations/`, `/ebooki/`, `/en/ebooks/`, `/ebooki/<slug>/`,
+`/en/ebooks/<slug>/`, `/blog/` i `/en/blog/` oraz preview tych stron
+renderują `SiteShell3a` z fixture’ów. Trasy artykułu i `/ui/` czekają
+na pakiet 7 albo dalsze prace. Etapy 5–7 oraz pakiet 7 etapu 4a pozostają
+otwarte.
 
 ## Wykonane
 
@@ -2287,11 +2433,11 @@ niesprawdzone.
 
 ## Następny krok
 
-Pakiet 5 etapu 4a: EbookCollection3a (`ebooks-3a.html`), te same dokumenty
-produktu, kategorie i filtrowanie. Limit CSS jest tymczasowo 32 KiB;
-optymalizacja później. Import homepage/About/konsultacji/e-booka do szkiców
-Sanity dopiero na osobne zlecenie zapisu. Publikacja treści/strony wymaga
-osobnego zlecenia.
+Pakiet 7 etapu 4a: Article3a (`article-3a.html`), Portable Text, autor,
+źródła, related, e-booki, FAQ i newsletter. Limit CSS jest tymczasowo 32 KiB;
+optymalizacja później. Import homepage/About/konsultacji/e-booka/kolekcji
+bloga do szkiców Sanity dopiero na osobne zlecenie zapisu. Publikacja
+treści/strony wymaga osobnego zlecenia.
 
 Otwarte kontrole: handshake Presentation/Access, drugi administrator Sanity,
 axe/overflow About przy 320/390/1440 px, natywny zoom, czytnik i fizyczne

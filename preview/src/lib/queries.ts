@@ -52,7 +52,7 @@ export const PREVIEW_ARTICLES_QUERY = defineQuery(/* groq */ `
   *[
     _type == "article" &&
     language == $language
-  ] | order(publishedAt desc){ ${articleCardProjection} }
+  ] | order(publishedAt desc, _id asc){ ${articleCardProjection} }
 `);
 
 export const PREVIEW_CATEGORIES_QUERY = defineQuery(/* groq */ `
@@ -60,9 +60,12 @@ export const PREVIEW_CATEGORIES_QUERY = defineQuery(/* groq */ `
     _type == "category" &&
     language == $language
   ] | order(title asc){
+    "id": _id,
     title,
+    description,
     "slug": slug.current,
-    language
+    language,
+    "translation": translation->{ language, "slug": slug.current }
   }
 `);
 
