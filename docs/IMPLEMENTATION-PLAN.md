@@ -488,7 +488,9 @@ polecenie użytkownika; nie zmieniono tokenów Wonderful ani styli aplikacji.
 - [x] Zapisać cenę 450 zł/60 minut, CTA do płatnego kalendarza oraz wykształcenie
       i miejsce na skan dyplomu, zgodnie z decyzją użytkownika 06.10.2026.
 - [x] Zapisać tymczasowy cel CTA `https://cal.com`; użytkownik uzupełni link wydarzenia później.
-- [ ] Uzupełnić adres wydarzenia płatnej konsultacji i rzeczywisty skan dyplomu.
+- [ ] Uzupełnić adres wydarzenia płatnej konsultacji.
+- [x] Wstawić zdjęcie ukończenia w slot dyplomu na `/o-mnie/` i `/en/about/`
+      (fixture, 08.10.2026). Asset w Content Lake nadal niewgrany.
 - [x] Wykonać lokalny mockup i podłączyć wejście „Poznaj moją historię” z 3a
       oraz biogram artykułu i indeks.
 - [x] Uwzględnić korektę CTA i dobre praktyki E-E-A-T: profil, kwalifikacje,

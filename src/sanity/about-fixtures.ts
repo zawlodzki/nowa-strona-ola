@@ -29,9 +29,10 @@ function media(
 }
 
 export function aboutAuthorFixture(language: Locale) {
+  const copy = aboutCopy[language];
   return {
     ...authorFixture(language),
-    diplomaScan: null,
+    diplomaScan: media("diploma", copy.diplomaAlt, "photo"),
   };
 }
 

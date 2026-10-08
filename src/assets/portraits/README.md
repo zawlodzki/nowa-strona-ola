@@ -39,4 +39,13 @@ Druga seria korzystała z czterech rzeczywistych referencji Aleksandry:
 - [Neutralny portret](https://www.instagram.com/p/CnKb2oWqhNr/) — spokojna mimika i ułożenie włosów.
 - [Nagranie zawodowe](https://www.instagram.com/p/DO8FbZZDTee/) — wycięty zrzut pojedynczej klatki odtwarzania z twarzą i górą sylwetki.
 
-Źródłowych prywatnych zdjęć ani klatek z Instagrama nie dodano do repo.
+Źródłowych prywatnych zdjęć ani klatek z Instagrama nie dodano do zestawu AI powyżej.
+
+## Zdjęcie ukończenia
+
+[diploma.jpg](diploma.jpg) to kadr 1440×1920 z karuzeli
+[Instagram](https://www.instagram.com/p/DOMPRWmjXWX/), drugie zdjęcie.
+Aleksandra stoi przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu, z różową
+teczką dyplomu i czerwonymi różami. Plik jest pełnym kadrem. `SiteImage`
+przycina go przy budowaniu do slotu 340×380, od góry, żeby zostały tabliczki
+wydziału.

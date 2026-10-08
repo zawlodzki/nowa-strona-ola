@@ -1,9 +1,127 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (merge main: matcha #36 + profile social #37).
+Aktualizacja: 2026-10-08 (scalenie main: social #37 `8bc80da`, wcześniej matcha #36; zdjęcie dyplomu zostaje).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 
 ## Aktualny etap
+
+### Sesja scalenia social #37 w PR #40, 08.10.2026
+
+Drugie scalenie `origin/main` (`8bc80da`, squash PR #37 — kanoniczne URL
+profili) w gałąź zdjęcia dyplomu. Commit merge, bez rebase i bez force-push.
+Konflikty: `docs/PROGRESS.md`, `docs/HOMEPAGE-CMS-CONFIG.md`,
+`src/views/About3a.astro`. Zostawione obie strony: zdjęcie dyplomu
+(`pickSiteImage`, kadr 1440×1609) oraz `sameAs: socialProfileSameAs()`.
+W tabeli CMS wiersz dyplomu z tej gałęzi i kanoniczne URL z #37.
+Auto-merge `scripts/import-homepage-content.mjs` zostawił lukę dyplomu
+(fixture ma klucz, Content Lake bez pliku) i `social-urls: resolved`.
+Auto-merge `tests/e2e/ui.spec.ts` zostawił `naturalWidth` dyplomu i testy
+stopki `/` + `/en/`.
+
+Kontrole na `529ee61`, Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **118** testów jednostkowych (21 plików),
+build, workspace’y, `check-build`, **147** E2E Chromium/Firefox/WebKit
+(w tym 7×3 `matcha-accent-3a.spec.ts`, dyplom `naturalWidth > 0` i stopka
+`/` + `/en/`). CSS gzip `dist/_astro` **29 778 B** (limit 32 768 B).
+JS gzip **5 770 B**.
+
+verify-ola `ola-1791451993` na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791451993/`. Na `/o-mnie/` obraz dyplomu
+ma `naturalWidth` 1440, `naturalHeight` 1609, `complete`, promień 12 px
+i `object-fit: fill`. Na 1280 px pudełko 340×379,89 px; na 390 px 294×328,5 px.
+Porównanie pikseli z `diploma-production-desktop.png` i
+`diploma-production-mobile.png` daje MAD 0. Zrzuty bez odświeżenia.
+
+Następny krok: PR **#40** ready for review. Nie mergować. Wgranie pliku
+do Content Lake i adres płatnej rezerwacji zostają otwarte.
+
+### Sesja scalenia main, 08.10.2026
+
+Scalenie `origin/main` (`e016b9b`, squash PR #36 matcha i PR #38 good-css)
+z gałęzią zdjęcia dyplomu. Commit merge, bez rebase. Jedyny konflikt to
+`docs/PROGRESS.md`. Sesja dyplomu i sesje matcha oraz cherry zostały poniżej.
+Auto-merge `docs/IMPLEMENTATION-PLAN.md` zostawił checkbox dyplomu i checkboxy
+matcha. Auto-merge `docs/HOMEPAGE-CMS-CONFIG.md` zostawił decyzję zdjęcia
+dyplomu i zapis wykonania tokenów matcha. PR #37 (profile social) był otwarty
+i nie wchodził w to scalenie.
+
+Kontrole na Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **116** testów jednostkowych (20 plików),
+build, workspace’y, `check-build`, **141** E2E Chromium/Firefox/WebKit.
+CSS gzip `dist/_astro` **29 778 B** (limit 32 768 B). JS gzip **5 770 B**.
+Suma CSS jest taka sama jak po sesji cherry na main. `scripts/check-build.mjs`
+liczy gzip plików CSS w `dist/_astro`. Osobny gzip Workera (2,94 KiB) to inny
+artefakt.
+
+verify-ola `ola-1791451319` na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791451319/`. Na `/o-mnie/` i `/en/about/`
+obraz dyplomu ma `naturalWidth` 1440 i `naturalHeight` 1609, jest `complete`,
+ma promień 12 px i `object-fit: fill`. Na 1280 px obraz ma 340×380 px.
+Na 390 px ma 294×329 px.
+
+Porównanie pikseli z istniejącymi zrzutami
+`diploma-production-desktop.png` i `diploma-production-mobile.png`
+daje różnicę 0. Zrzuty w `/opt/cursor/artifacts/screenshots/` bez odświeżenia.
+Makieta w tym scaleniu nie była ruszana.
+
+Następny krok to odbiór PR #40. PR zostaje draftem. Wgranie pliku do
+Content Lake, adres płatnej rezerwacji i linki social z PR #37 zostają otwarte.
+
+### Sesja zdjęcia dyplomu, 08.10.2026
+
+Na About3a (`/o-mnie/` i `/en/about/`) slot dyplomu pokazuje zdjęcie
+ukończenia Aleksandry. Pozycja, szerokość do 340 px, podpis i ramka 12 px
+zostają jak w makiecie. Puste `diplomaScan` nadal rysuje ramkę ze SVG.
+
+Źródło to JPEG 1440×1920 z drugiego kadru karuzeli
+[Instagram](https://www.instagram.com/p/DOMPRWmjXWX/), plik
+`src/assets/portraits/diploma.jpg`. `SiteImage` kroi go przy budowaniu do
+1440×1609 (`diplomaSlotSize`, proporcja slotu 340/380). Grawitacja Sharp to
+`top`, z `diplomaCropPosition` `50% 0%`. Dół kadru (buty i kostka) schodzi,
+tabliczki wydziału, twarz, różowa teczka i róże zostają. CSS `object-fit`
+zostaje `fill`.
+
+Polski alt to „Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia
+Publicznego ŚUM w Bytomiu”. Angielski alt to „Aleksandra Olesiewicz with her
+diploma outside the Faculty of Public Health, Medical University of Silesia
+in Bytom”.
+
+`aboutCopy.diplomaAlt` trafia do `aboutAuthorFixture`, potem do `diplomaScan`
+i istniejącego `toCredentials`. Klucz lokalny to `diploma`. Asset w Content
+Lake jest niewgrany.
+
+Kontrole na `3b4905e`, Node 24.21.0. `npm run verify` zakończone kodem 0.
+Format, tokeny, lint, `astro check`, **115** testów jednostkowych (20 plików),
+build, workspace’y, `check-build`, **120** E2E Chromium/Firefox/WebKit.
+E2E na `/o-mnie/` i `/en/about/` czyta `naturalWidth` 1440 i `naturalHeight` 1609. CSS gzip `dist/_astro` **29 635 B** (limit 32 KiB). JS gzip **5 770 B**.
+Suma gzip plików CSS w `dist/_astro` jest identyczna jak w pakiecie 7, bo
+zmiana selektora nie powiększyła skompresowanego arkusza.
+
+`:global(img)` w `.about3a-diploma` sprawia, że `border-radius: 12px` dochodzi
+do img z `SiteImage`. Chromium na 1280 px i 390 px podaje promień 12 px i
+`object-fit: fill`. Na desktopie obraz ma 340×380 px.
+
+verify-ola `ola-1791450522` działa na `http://127.0.0.1:4340`. `browser posts`
+zwraca `[]` po newsletterze PL i na EN. Dowody leżą w
+`/tmp/ola-verify-evidence/ola-1791450522/`.
+
+Artefakty:
+
+- `/opt/cursor/artifacts/screenshots/compare-diploma-desktop.png` (makieta | produkcja)
+- `/opt/cursor/artifacts/screenshots/compare-diploma-mobile.png` (makieta | produkcja)
+- `/opt/cursor/artifacts/screenshots/diploma-mockup-desktop.png`
+- `/opt/cursor/artifacts/screenshots/diploma-production-desktop.png`
+- `/opt/cursor/artifacts/screenshots/diploma-mockup-mobile.png`
+- `/opt/cursor/artifacts/screenshots/diploma-production-mobile.png`
+- `/opt/cursor/artifacts/screenshots/about-pl-desktop-full.png`
+
+Nie sprawdzono natywnego zoomu przeglądarki, czytnika ani urządzenia
+fizycznego. Nie ma osobnych zrzutów sekcji przy 320 px i zoomie 200%.
+
+Następny krok to odbiór PR. Wgranie pliku do Content Lake i adres płatnej
+rezerwacji zostają otwarte.
 
 ### Sesja — merge origin/main w PR #37 — 08.10.2026
 

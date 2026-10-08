@@ -25,7 +25,8 @@ const GAPS = [
   {
     id: "diploma-scan",
     status: "open",
-    detail: "Brak skanu dyplomu; pole autora ma uczelnię i kierunek bez pliku.",
+    detail:
+      "Fixture strony O mnie ma zdjęcie ukończenia (klucz diploma). Ten import nie wgrywa pliku do Content Lake.",
   },
   {
     id: "social-urls",
