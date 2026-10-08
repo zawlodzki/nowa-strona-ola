@@ -1,4 +1,6 @@
 ---
+import CherryCoverAccent from "../decorations/CherryCoverAccent.astro";
+
 interface Props {
   title: string;
   subtitle: string;
@@ -18,17 +20,7 @@ const { title, subtitle, author, topic, tone = "light" } = Astro.props;
   <span class="ao-book-cover__subtitle">{subtitle}</span>
   <div class="ao-book-cover__art">
     <slot name="art" />
-    <svg
-      class="ao-deco-sparkle"
-      viewBox="0 0 12 12"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path
-        fill="var(--ao-deco-accent)"
-        d="M6 1.1 6.9 4.7 10.6 5.5 6.9 6.3 6 9.9 5.1 6.3 1.4 5.5 5.1 4.7Z"
-      ></path>
-    </svg>
   </div>
   <span class="ao-book-cover__topic">{topic}</span>
+  {tone === "cherry" && <CherryCoverAccent />}
 </div>

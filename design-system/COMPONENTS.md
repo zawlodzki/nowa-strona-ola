@@ -28,8 +28,9 @@ Nie wpisywać testowych profili i niezatwierdzonych URL w komponentach.
 | Pagination  | `pages: {href,page,current}[]`, `label`, `pageLabel`                                                          | Prawdziwe adresy, bez zależności od JS                             |
 | SplitPanel  | `labelledBy`, `id`, slots default/media                                                                       | Panel konsultacji i tekst–zdjęcie                                  |
 
-Dekoracje 3a (orbita, butelki, tło sceny, motywy okładek, znacznik, cień karty)
-są w [`src/design-system/decorations/`](../src/design-system/decorations/),
+Dekoracje 3a (orbita, butelki, tło sceny, motywy okładek, strzałka i
+iskierka cherry, znacznik, cień karty) są w
+[`src/design-system/decorations/`](../src/design-system/decorations/),
 jako SVG, nie jako kształty CSS. Hero ma opcjonalny slot `kicker` przed H1.
 
 `NavigationLink` i `SocialLink`: [types.ts](../src/design-system/types.ts).

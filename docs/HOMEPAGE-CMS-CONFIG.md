@@ -607,7 +607,7 @@ buttona w matcha są na zatwierdzonej planszy 05.
 Wykonane w kodzie (08.10.2026, PR #36): tokeny `accent`, `accent-on-primary`
 i `accent-on-light`; Button `secondary` (białe wnętrze, obwódka i etykieta
 matcha); pojedyncze detale SVG (orbita, półka butelek, kreska jasnych
-okładek, iskierka cherry). Button secondary jest tylko tam, gdzie makieta
+okładek, na cherry strzałka i iskierka #D8E78A). Button secondary jest tylko tam, gdzie makieta
 ma ten wariant (katalog, homepage). About, konsultacje i landing ebooka
 zostają przy TextLink w ink. CMS nie otrzymał pól kolorów; schematy i
 Content Lake bez zmian. Mapa strona → element → kolor jest w opisie PR.

@@ -47,7 +47,8 @@ Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
   `secondary` (katalog, homepage). TextLink z makiet zostaje w ink.
 - Drobne elementy grafik (wdrożone 08.10.2026): jeden punkt na orbicie
   produktu, jeden punkt na półce butelek, jedna kreska lub punkt na jasnej
-  okładce, iskierka na okładce cherry. Nie przemalowywać reszty SVG.
+  okładce. Na okładce cherry: cienka pozioma strzałka i czytelna
+  czteroramienna iskierka w #D8E78A (`accent-on-primary`), jak na planszy 05. Nie przemalowywać reszty SVG.
 - Tło hero i portretu zachowuje dotychczasową paletę. Matcha nie służy
   do wypełniania dużych paneli ani secondary buttonów.
 - Nagłówki, logo, primary CTA i treść zachowują wiśniową hierarchię.

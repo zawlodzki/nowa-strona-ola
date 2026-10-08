@@ -577,6 +577,7 @@ body.ao-site {
   gap: var(--ao-space-16);
 }
 .ao-book-cover {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 252px;
@@ -622,16 +623,16 @@ body.ao-site {
   font-size: 12px;
   line-height: 1.3;
 }
-.ao-deco-sparkle {
-  display: none;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 12px;
-  height: 12px;
+.ao-book-cover--cherry .ao-book-cover__topic {
+  max-width: calc(100% - 80px);
 }
-.ao-book-cover--cherry .ao-deco-sparkle {
-  display: block;
+.ao-deco-cherry-accent {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: min(72px, 36%);
+  height: auto;
+  pointer-events: none;
 }
 .ao-book-cover__art:has(.ao-book-art--nutrition) {
   padding-top: 0;

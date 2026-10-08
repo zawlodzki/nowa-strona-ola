@@ -14,3 +14,4 @@ ts	phase	decision	why	evidence	result
 2026-10-08T08:10:00Z	frame	About Consultation Ebook secondary stay TextLink ink	mockups use linear links; spec forbids matcha on every link	src/views/About3a.astro	keep
 2026-10-08T08:10:00Z	verify	catalog gained two token swatches, layout shifts by one row	documents accent in the living catalog, not a production landing	src/pages/design-system.astro	keep
 2026-10-08T08:12:00Z	close	do not merge; visual review of PR 36	predicate met: matcha only on secondary button and single SVG details	https://github.com/zawlodzki/nowa-strona-ola/pull/36	open for review
+2026-10-08T08:40:00Z	impl	enlarge cherry sparkle and add horizontal #D8E78A arrow as SVG	Grzesiek: board 05 tile 3, sparkle was a dot, add arrow beside it	src/design-system/decorations/CherryCoverAccent.astro	coded

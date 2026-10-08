@@ -119,24 +119,111 @@ test("ebook orbit keeps a single matcha dot on the existing rings", async ({
   const dots = page.locator(".ao-deco-orbit circle[fill]");
   await expect(dots).toHaveCount(1);
   expect(await dots.getAttribute("fill")).toBe("var(--ao-accent-on-light)");
-  const sparkles = page.locator(".ebook3a-book .ao-deco-sparkle");
-  await expect(sparkles).toHaveCount(2);
-  const displays = await sparkles.evaluateAll((nodes) =>
-    nodes.map((node) => getComputedStyle(node).display),
-  );
-  expect(displays).toEqual(["none", "none"]);
+  await expect(
+    page.locator(".ebook3a-book .ao-deco-cherry-accent"),
+  ).toHaveCount(0);
 });
 
-test("cherry ebook cover shows the matcha sparkle", async ({ page }) => {
+function rectsOverlap(
+  a: { x: number; y: number; width: number; height: number },
+  b: { x: number; y: number; width: number; height: number },
+  slack = 1,
+) {
+  return !(
+    a.x + a.width <= b.x + slack ||
+    b.x + b.width <= a.x + slack ||
+    a.y + a.height <= b.y + slack ||
+    b.y + b.height <= a.y + slack
+  );
+}
+
+test("cherry ebook cover shows a matcha arrow and sparkle", async ({
+  page,
+}) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/ebooki/");
   await page.evaluate(() => document.fonts.ready);
-  const cherry = page
-    .locator(".ao-book-cover--cherry .ao-deco-sparkle")
-    .first();
-  await expect(cherry).toHaveCount(1);
-  expect(await cherry.evaluate((el) => getComputedStyle(el).display)).toBe(
-    "block",
+  const cherry = page.locator(".ao-book-cover--cherry").first();
+  const accent = cherry.locator(".ao-deco-cherry-accent");
+  await expect(accent).toBeVisible();
+  expect(await accent.getAttribute("viewBox")).toBe("0 0 72 20");
+  const sparkle = accent.locator(".ao-deco-sparkle");
+  expect(await sparkle.getAttribute("fill")).toBe(
+    "var(--ao-accent-on-primary)",
   );
+  expect(
+    await accent.locator(".ao-deco-cherry-arrow-shaft").getAttribute("stroke"),
+  ).toBe("var(--ao-accent-on-primary)");
+  expect(await sparkle.evaluate((el) => getComputedStyle(el).fill)).toBe(
+    MATCHA_DARK,
+  );
+  const sparkleBox = await sparkle.evaluate((el) => {
+    const box = el.getBoundingClientRect();
+    return { width: box.width, height: box.height };
+  });
+  expect(sparkleBox.width).toBeGreaterThanOrEqual(14);
+  expect(sparkleBox.height).toBeGreaterThanOrEqual(14);
+  const accentBox = await accent.boundingBox();
+  expect(accentBox).toBeTruthy();
+  expect(accentBox!.width).toBeGreaterThanOrEqual(48);
+});
+
+test("cherry cover accent does not collide with cover text", async ({
+  page,
+}) => {
+  await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
+  for (const viewport of [
+    { width: 1280, height: 900 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    for (const path of [
+      "/",
+      "/en/",
+      "/ebooki/",
+      "/en/ebooks/",
+      "/ebooki/kategoria/pcos/",
+      "/blog/przygotowanie-do-konsultacji-pcos/",
+      "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
+      "/design-system/",
+    ]) {
+      await page.goto(path);
+      await page.evaluate(() => document.fonts.ready);
+      const covers = page.locator(".ao-book-cover--cherry");
+      const count = await covers.count();
+      expect(count).toBeGreaterThan(0);
+      for (let index = 0; index < count; index += 1) {
+        const cover = covers.nth(index);
+        const accentBox = await cover
+          .locator(".ao-deco-cherry-accent")
+          .boundingBox();
+        expect(accentBox).toBeTruthy();
+        const textBoxes = await cover
+          .locator(
+            ":scope > strong, .ao-book-cover__author, .ao-book-cover__subtitle, .ao-book-cover__topic, .ao-book-art--route span, .ao-book-art--journal span, .ao-book-decisions span",
+          )
+          .evaluateAll((nodes) =>
+            nodes
+              .filter((node) => node.textContent?.trim())
+              .map((node) => {
+                const box = node.getBoundingClientRect();
+                return {
+                  x: box.x,
+                  y: box.y,
+                  width: box.width,
+                  height: box.height,
+                  text: node.textContent?.trim() ?? "",
+                };
+              }),
+          );
+        for (const text of textBoxes) {
+          expect(
+            rectsOverlap(accentBox!, text),
+            `${path} ${viewport.width}px overlap with “${text.text}”`,
+          ).toBe(false);
+        }
+      }
+    }
+  }
 });

@@ -14,6 +14,7 @@ const tokens = JSON.parse(
     "accent-on-primary": { value: string };
     "accent-on-light": { value: string };
     background: { value: string };
+    "cover-primary": { value: string };
   };
   dark: { accent: string; background: string };
 };
@@ -43,6 +44,12 @@ describe("generateTokensCss", () => {
     expect(tokens.tokens["accent-on-light"].value).toBe(
       tokens.tokens.accent.value,
     );
+    expect(
+      contrastRatio(
+        tokens.tokens["accent-on-primary"].value,
+        tokens.tokens["cover-primary"].value,
+      ),
+    ).toBeGreaterThanOrEqual(3);
   });
 
   it("keeps documented Arial fallbacks in the source tokens", () => {
