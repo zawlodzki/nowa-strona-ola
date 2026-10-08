@@ -861,7 +861,7 @@ const bodyHtml = markArticleIntro(html);
     border-radius: var(--ao-radius-panel);
     background: var(--ao-surface);
   }
-  .mail-icon {
+  .sidebar-panel :global(.mail-icon) {
     width: 48px;
     height: 48px;
     margin-bottom: 24px;
@@ -1141,7 +1141,7 @@ const bodyHtml = markArticleIntro(html);
     line-height: 1.4;
     cursor: pointer;
   }
-  .article-share .share-option .ui-icon {
+  .article-share .share-option :global(.ui-icon) {
     width: 24px;
     height: 24px;
   }
@@ -1203,7 +1203,7 @@ const bodyHtml = markArticleIntro(html);
     font-size: 16px;
     font-weight: 550;
   }
-  .recommendations-trigger[aria-expanded="true"] .recommendation-plus {
+  .recommendations-trigger[aria-expanded="true"] :global(.recommendation-plus) {
     display: none;
   }
   #recommended-articles {
@@ -1297,12 +1297,12 @@ const bodyHtml = markArticleIntro(html);
   .article-faq-list summary::-webkit-details-marker {
     display: none;
   }
-  .faq-toggle {
+  .article-faq-list :global(.faq-toggle) {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
   }
-  .article-faq-list details[open] .faq-plus {
+  .article-faq-list details[open] :global(.faq-plus) {
     display: none;
   }
   .article-faq-list details > p {
