@@ -63,7 +63,7 @@ bo CLI wymaga logowania. Wariant liczb na O mnie może mieć 0 albo 3 wyróżnie
 bo fixture ma pustą listę.
 
 `npm run test:content-lake` zbudował 54 strony z wygenerowanego NDJSON.
-Po korekcie kadrów CSS gzip to 29 748 B, JS gzip 5 770 B.
+Po korekcie kadrów CSS gzip to 29 797 B, JS gzip 5 770 B.
 
 Korekta widoku po przeglądzie zrzutów. Style `img` w widokach 3a nie
 schodziły do `SiteImage`, więc portret wychodził z różowej karty, a loga
@@ -76,10 +76,30 @@ tylko w `bookingEditorNote`. Nagłówek 3a nie dokłada „English” ani „Pol
 Lista bloga nie ma rzędu filtrów kategorii. Adresy `/en/` i stron kategorii
 zostają.
 
+Pełne strony, nie sam pierwszy ekran. Zdjęcia niżej (nakładka jedzenia,
+portret przy konsultacji na stronie głównej i na O mnie, zdjęcie przebiegu
+konsultacji) są w HTML-u. Poprzedni zrzut `fullPage` robił je, zanim
+`loading="lazy"` zdążyło je zdekodować, więc karta wyglądała na pustą.
+Nowy przebieg przewija każde `img` i czeka na `decode`.
+
+„450+” łamało się w „45” i „0+”, bo `overflow-wrap: anywhere` obejmowało
+`strong`. Selektor jest jak w makiecie, bez `strong`, a liczba ma
+`white-space: nowrap`. Sekcja „Zaczynam od Ciebie” używa tej samej siatki
+kart co `.cherry .results` (pierwsza karta na dwie kolumny, dwie kolejne
+obok siebie). Kadry strony głównej biorą wysokości z makiety cherry.
+Portret „Jestem Ola.” ma 540 px, nakładka jedzenia 220×150, zdjęcie
+konsultacji 520 px (na 390 px jest 280 px). Dyplom na O mnie zostaje.
+
+`npm run test:content-lake` buduje fixture do `.cache/dist-fixture`, potem
+content-lake do `dist`, i uruchamia `scripts/compare-fixture-lake.mjs`.
+Skrypt pada, gdy na którejkolwiek z 7 stron sekcja fixture ma inne zdjęcia
+(liczba, plik, `object-fit`, `naturalWidth`) albo inny szkielet DOM niż
+content-lake. Ostatni wynik to 7 stron bez różnic.
+
 Inwentarz zdjęć z tego samego przebiegu leży w
 `/opt/cursor/artifacts/screenshots/photo-inventory.json`.
-Portret hero, loga, portret O mnie i zdjęcia konsultacji mają ten sam
-`object-fit`, pozycję i rząd wielkości co makieta.
+Portret hero, loga, portret O mnie, nakładka jedzenia i zdjęcia konsultacji
+mają ten sam `object-fit`, pozycję i rozmiar co makieta (różnica boku do 12 px).
 
 `npm run verify` po korekcie kadrów zakończone kodem 0 na Node 24.21.0.
 Format, tokeny, lint, `astro check` (0 błędów), **126** testów jednostkowych

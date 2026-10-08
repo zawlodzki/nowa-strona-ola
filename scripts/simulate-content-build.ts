@@ -17,6 +17,10 @@ function run(command: string, args: string[], env: NodeJS.ProcessEnv): void {
   }
 }
 
+run("npx", ["astro", "build", "--config", "astro.fixture-dist.config.mjs"], {
+  ...process.env,
+  ASTRO_TELEMETRY_DISABLED: "1",
+});
 run("npx", ["tsx", "scripts/import-3a.ts"], process.env);
 run("npx", ["astro", "build", "--config", "astro.sim.config.mjs"], {
   ...process.env,
@@ -26,3 +30,4 @@ run("npx", ["astro", "build", "--config", "astro.sim.config.mjs"], {
   ASTRO_TELEMETRY_DISABLED: "1",
 });
 run("node", ["scripts/check-content-lake-build.mjs"], process.env);
+run("node", ["scripts/compare-fixture-lake.mjs"], process.env);

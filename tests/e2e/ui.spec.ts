@@ -1,5 +1,23 @@
-import { test, expect } from "@playwright/test";
+import { expect, test, type Locator } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+
+async function expectDecodedWidth(locator: Locator, width: number) {
+  await locator.scrollIntoViewIfNeeded();
+  await expect
+    .poll(async () =>
+      locator.evaluate(async (img: HTMLImageElement) => {
+        if (!img.complete || img.naturalWidth === 0) {
+          try {
+            await img.decode();
+          } catch {
+            return 0;
+          }
+        }
+        return img.naturalWidth;
+      }),
+    )
+    .toBe(width);
+}
 
 for (const [path, openName, closeName] of [
   ["/ui/", "Jak pracujemy", "Zamknij"],
@@ -134,6 +152,34 @@ for (const width of [320, 390, 1440]) {
       expect(heroBox.logoHeight).toBe(32);
     }
     expect(heroBox.logoFilter).toContain("grayscale");
+    const metric = await page
+      .locator(".home3a-count strong")
+      .evaluate((element) => {
+        const style = getComputedStyle(element);
+        const fontSize = parseFloat(style.fontSize);
+        return {
+          text: (element.textContent ?? "").replace(/\s+/g, ""),
+          oneLine: element.getBoundingClientRect().height <= fontSize * 1.25,
+        };
+      });
+    expect(metric.text).toBe("450+");
+    expect(metric.oneLine).toBe(true);
+    if (width === 390 || width === 320) {
+      const labelBelow = await page
+        .locator(".home3a-count")
+        .evaluate((element) => {
+          const strong = element.querySelector("strong");
+          const label = element.querySelector(":scope > span");
+          if (!strong || !label) return false;
+          return (
+            label.getBoundingClientRect().top >=
+            strong.getBoundingClientRect().bottom - 2
+          );
+        });
+      expect(labelBelow).toBe(true);
+    }
+    await expectDecodedWidth(page.locator(".home3a-about__food"), 1536);
+    await expectDecodedWidth(page.locator("#konsultacje-panel img"), 1536);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -283,6 +329,28 @@ test("about page Polish and English plus missing Polish under English slug", asy
   await expect(aboutPortrait).toHaveCSS("object-fit", "cover");
   await expect(aboutPortrait).toHaveCSS("border-radius", "24px");
   await expect(aboutPortrait).toHaveCSS("height", "540px");
+  const approachGrid = await page
+    .locator(".about3a-panels")
+    .evaluate((element) => {
+      const articles = [...element.querySelectorAll(":scope > article")];
+      const grid = element.getBoundingClientRect();
+      const boxes = articles.map((article) => article.getBoundingClientRect());
+      const [first, second, third] = boxes;
+      return {
+        count: articles.length,
+        firstFillsRow:
+          first !== undefined && Math.abs(first.width - grid.width) < 4,
+        pairSharesRow:
+          second !== undefined &&
+          third !== undefined &&
+          Math.abs(second.top - third.top) < 2 &&
+          third.left >= second.right - 1,
+      };
+    });
+  expect(approachGrid.count).toBeGreaterThanOrEqual(3);
+  expect(approachGrid.firstFillsRow).toBe(true);
+  expect(approachGrid.pairSharesRow).toBe(true);
+  await expectDecodedWidth(page.locator("#konsultacja-panel img"), 1536);
   await expect(
     page.getByRole("heading", { name: "Wiedza, którą możesz sprawdzić." }),
   ).toBeVisible();
@@ -397,6 +465,9 @@ test("consultation page Polish and English plus missing Polish under English slu
     "object-fit",
     "contain",
   );
+  const processImage = page.locator(".consult3a-process img");
+  await expect(processImage).toHaveCSS("object-fit", "cover");
+  await expectDecodedWidth(processImage, 1536);
   await expect(
     page.getByRole("link", { name: "Konsultacja · 450 zł" }),
   ).toHaveAttribute("href", "#cena");

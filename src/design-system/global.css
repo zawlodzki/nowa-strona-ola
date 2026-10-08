@@ -48,8 +48,7 @@ body.ao-site {
   outline: 2px solid var(--ao-primary);
   outline-offset: 5px;
 }
-.ao-site
-  :where(p, a, span, h1, h2, h3, li, dt, dd, strong, blockquote, summary) {
+.ao-site :where(p, a, span, h1, h2, h3, li, dt, dd, blockquote, summary) {
   overflow-wrap: anywhere;
 }
 .ao-site :where(div, section, article, figure, form, li, details) {
