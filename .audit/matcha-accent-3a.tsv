@@ -9,3 +9,8 @@ ts	phase	decision	why	evidence	result
 2026-10-08T07:53:29Z	verify	eslint no-undef on screenshot scripts	scripts lint as node, evaluate callbacks look like document	scripts/compare-accent-pages.mjs	fixed
 2026-10-08T07:56:55Z	verify	ebook landing has two BookCover sparkles, both hidden on light	hero and offer share BookCover	tests/e2e/matcha-accent-3a.spec.ts	fixed
 2026-10-08T07:56:55Z	verify	webkit article-mockup related articles flake on first verify	passed on rerun, mockup not production CSS	tests/e2e/article-mockup.spec.ts	flake rerun pass
+2026-10-08T08:10:00Z	verify	npm run verify PASS 115 unit 138 e2e CSS gzip 29758 JS gzip 5770	computed secondary rgb(83,103,27) on white; contrast 6.32/12.43	tests/e2e/matcha-accent-3a.spec.ts	keep
+2026-10-08T08:10:00Z	verify	consultation EN first full-page missed lazy portrait	Consultation3a untouched; recapture after-consultation-en-desktop-loaded.png shows both portraits	/opt/cursor/artifacts/screenshots/after-consultation-en-desktop-loaded.png	capture artifact
+2026-10-08T08:10:00Z	frame	About Consultation Ebook secondary stay TextLink ink	mockups use linear links; spec forbids matcha on every link	src/views/About3a.astro	keep
+2026-10-08T08:10:00Z	verify	catalog gained two token swatches, layout shifts by one row	documents accent in the living catalog, not a production landing	src/pages/design-system.astro	keep
+2026-10-08T08:12:00Z	close	do not merge; visual review of PR 36	predicate met: matcha only on secondary button and single SVG details	https://github.com/zawlodzki/nowa-strona-ola/pull/36	open for review

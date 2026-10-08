@@ -43,9 +43,11 @@ Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
 [Wizualizacja zastosowań](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).
 
 - Secondary button: białe wnętrze, cienka obwódka matcha. Tekst i strzałka
-  matcha są propozycją pokazaną na planszy.
-- Drobne elementy grafik: pojedyncza linia, punkt, strzałka lub symbol.
-  Rozmieszczenie w konkretnych grafikach pozostaje do ustalenia.
+  matcha jak na planszy 05; wariant tylko tam, gdzie szablon używa Button
+  `secondary` (katalog, homepage). TextLink z makiet zostaje w ink.
+- Drobne elementy grafik (wdrożone 08.10.2026): jeden punkt na orbicie
+  produktu, jeden punkt na półce butelek, jedna kreska lub punkt na jasnej
+  okładce, iskierka na okładce cherry. Nie przemalowywać reszty SVG.
 - Tło hero i portretu zachowuje dotychczasową paletę. Matcha nie służy
   do wypełniania dużych paneli ani secondary buttonów.
 - Nagłówki, logo, primary CTA i treść zachowują wiśniową hierarchię.

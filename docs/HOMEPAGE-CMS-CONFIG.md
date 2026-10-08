@@ -598,15 +598,18 @@ bez zmian; propozycję zastąpiła decyzja poniżej.
 „na pewno nie jako tło w hero”, „secondary button (…) kolor obwódki,
 ale w środku jest biały”, „jakieś elementy grafik”.
 
-Ustalenie: #53671B na jasnych powierzchniach, #D8E78A na wiśniowych/ciemnych.
-Oliwka i wcześniejsza propozycja matcha #A8C686 nie są paletą docelową.
-Hero i tło portretu zachowują dotychczasowe kolory. Matcha ma być drobnym
-akcentem obwódek i grafik. Pełne rozmieszczenie pozostaje do ustalenia.
-Tekst i strzałka secondary buttona w matcha to propozycja wizualizacji.
+Ustalenie (07.10.2026): #53671B na jasnych powierzchniach, #D8E78A na
+wiśniowych/ciemnych. Oliwka i wcześniejsza propozycja matcha #A8C686 nie są
+paletą docelową. Hero i tło portretu zachowują dotychczasowe kolory. Matcha
+ma być drobnym akcentem obwódek i grafik. Tekst i strzałka secondary
+buttona w matcha są na zatwierdzonej planszy 05.
 
-Mapowanie wykonawcze: tokeny `accent`, `accent-on-primary` i `accent-on-light`
-w design-system/tokens.json oraz wariant `secondary` komponentu Button
-(białe wnętrze, obwódka matcha). CMS nie otrzymuje dowolnych kodów kolorów;
-styl przypisuje renderer do znaczenia akcji. Schematy i Content Lake
-nie zostały zmienione. [Zasady](../design-system/SPECIFICATION.md) i
+Wykonane w kodzie (08.10.2026, PR #36): tokeny `accent`, `accent-on-primary`
+i `accent-on-light`; Button `secondary` (białe wnętrze, obwódka i etykieta
+matcha); pojedyncze detale SVG (orbita, półka butelek, kreska jasnych
+okładek, iskierka cherry). Button secondary jest tylko tam, gdzie makieta
+ma ten wariant (katalog, homepage). About, konsultacje i landing ebooka
+zostają przy TextLink w ink. CMS nie otrzymał pól kolorów; schematy i
+Content Lake bez zmian. Mapa strona → element → kolor jest w opisie PR.
+[Zasady](../design-system/SPECIFICATION.md) i
 [plansza](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).

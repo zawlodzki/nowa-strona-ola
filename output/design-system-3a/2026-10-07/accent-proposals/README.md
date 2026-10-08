@@ -3,8 +3,9 @@
 Data: 07.10.2026. Status: wybrana matcha z 1a (#53671B / #D8E78A); tokeny i CSS wdrożone w kodzie 3a.
 
 Wizualizacje powstały w narzędziu image_gen na podstawie istniejącego katalogu
-[3a](../catalog-light-1440.png). Są koncepcjami rastrowymi; tokeny i aplikacja
-nie zostały zmienione. Wiśnia pozostaje kolorem głównym.
+[3a](../catalog-light-1440.png). Są koncepcjami rastrowymi. Tokeny, CSS
+secondary i detale SVG są w kodzie od 08.10.2026 (PR #36); rastrowy katalog
+w tym folderze nie jest zrzutem produkcji. Wiśnia pozostaje kolorem głównym.
 
 | Wariant | Akcent  | Ciemny tekst | Jasne tło | Wizualizacja          |
 | ------- | ------- | ------------ | --------- | --------------------- |

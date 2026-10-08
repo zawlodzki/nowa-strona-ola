@@ -19,10 +19,42 @@ Detale grafik: punkt na orbicie produktu, punkt na półce butelek,
 jedna linia/kreska na jasnych okładkach, iskierka na okładkach cherry.
 Checkmarki, glify share/mail, TextLink i tła paneli bez matchy.
 
-Mapa zastosowań i liczby testów są w opisie PR. Kontrole tej sesji
-dopisuję po `npm run verify` i zrzutach przed/po.
+Draft PR **#36**, head po weryfikacji `01faf31`, dokumentacja wyników w
+kolejnym commicie. Kontrole (Node 24.21.0):
 
-Następny krok: odbiór wizualny akcentu. Nie mergować bez zgody.
+- `npm run verify` **PASS**: format, tokeny, lint, `astro check`, **115**
+  unit, build, workspaces, `check-build`, **138** E2E Chromium/Firefox/WebKit
+  (w tym 6 przypadków `matcha-accent-3a.spec.ts` × 3 przeglądarki).
+- CSS gzip `dist/_astro`: **29 758 B** / 32 768 B; JS gzip **5 770 B**.
+- Kontrast WCAG AA (obliczony z `tokens.mjs`): accent na bieli **6,32**;
+  accent dark na `#291a21` **12,43**; `#D8E78A` na wiśni primary **6,17**;
+  accent-on-light na okładce **5,87**.
+- Playwright computed style secondary: tło `rgb(255, 255, 255)`, tekst i
+  obwódka `rgb(83, 103, 27)` (#53671B). Dark: tło `rgb(41, 26, 33)`,
+  tekst i obwódka `rgb(216, 231, 138)` (#D8E78A). Primary i
+  `StageBackdrop` bez zmian (`#882F48` / `#F2DCE3`).
+- verify-ola: `ola-1791446513`, baza `http://127.0.0.1:4340`.
+  `browser posts` = `[]` z JS, bez JS i po udanym newsletterze
+  demonstracyjnym. Drugi start `ola-matcha-closeups` (bez przebudowy
+  `dist/`) do zbliżeń i dociągnięcia leniwych zdjęć.
+
+Zbliżenia vs plansza 05: secondary ma białe wnętrze i obwódkę matcha;
+orbita ma jeden punkt; jasna okładka — kreskę „Dawka”; cherry — iskierkę;
+półka butelek — punkt na linii. Pierwszy full-page konsultacji EN uciął
+portret w „60 minutes” (lazy `img`); recapture ze scrollem
+(`after-consultation-en-desktop-loaded.png`) pokazuje oba portrety.
+Kod `Consultation3a` nie był ruszany.
+
+Strony bez Button secondary (About, konsultacje, landing ebooka, blog)
+nie dostały zielonych CTA. Drugie CTA zostają TextLink w ink, zgodnie z
+makietami. Katalog dostał dwa swatche tokenów — jedyna zmiana układu
+(rząd palety). Zdjęcia i kadry bez zmian.
+
+Niewykonane: natywny zoom, czytnik, urządzenie fizyczne, 320 px i 200%
+jako osobne zrzuty 1:1 tej sesji (są w E2E katalogu). Dark orbit/butelki
+zostają na `#53671B` (okładki nie inwertują; otwarte pytanie).
+
+Następny krok: odbiór wizualny PR #36. Nie mergować bez zgody.
 
 ### Sesja pakietu 7 — Article3a — 08.10.2026
 
