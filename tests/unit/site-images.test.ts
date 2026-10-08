@@ -48,6 +48,8 @@ describe("pickSiteImage", () => {
 describe("imageCropPosition", () => {
   it("maps CSS hotspot percentages to Sharp gravity", () => {
     expect(imageCropPosition("50% 15%")).toBe("top");
+    expect(imageCropPosition("50% 25%")).toBe("top");
+    expect(imageCropPosition("0% 100%")).toBe("left bottom");
     expect(imageCropPosition("75% 70%")).toBe("right bottom");
     expect(imageCropPosition("50% 50%")).toBe("centre");
     expect(imageCropPosition()).toBeUndefined();

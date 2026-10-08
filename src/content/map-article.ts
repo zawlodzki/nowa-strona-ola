@@ -342,7 +342,8 @@ export function mapArticle(
       : null;
   const heroPosition =
     objectPositionFromMedia(article.media?.hotspot) ?? "50% 55%";
-  const bylinePhoto = photoSpec(author.photo, "", 96, 96, "50% 25%");
+  // Portrait file so CSS `50% 25%` can crop the circle; Sharp has no %-gravity.
+  const bylinePhoto = photoSpec(author.photo, "", 96, 120, "50% 25%");
   const authorPhoto = photoSpec(
     author.photo,
     author.photo?.alt?.trim() || author.name,

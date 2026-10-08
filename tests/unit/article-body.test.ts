@@ -23,8 +23,8 @@ describe("article body", () => {
       },
     ]);
 
-    expect(toc).toEqual([{ id: "section-h2", text: "Najpierw decyzje" }]);
-    expect(html).toContain('id="section-h2"');
+    expect(toc).toEqual([{ id: "h2", text: "Najpierw decyzje" }]);
+    expect(html).toContain('id="h2"');
     expect(html).not.toContain("<h3");
     const withSubheading = articleBodyToHtml([
       {
@@ -41,7 +41,7 @@ describe("article body", () => {
       },
     ]);
     expect(withSubheading.toc).toEqual([
-      { id: "section-h2", text: "Najpierw decyzje" },
+      { id: "h2", text: "Najpierw decyzje" },
     ]);
     expect(withSubheading.html).toContain("<h3>Szczegół</h3>");
     expect(withSubheading.html).not.toContain('id="section-h3"');
@@ -61,6 +61,34 @@ describe("article body", () => {
     expect(() => articleBodyToMarkdown([{ _type: "mystery" }])).toThrow(
       "Nieznany blok artykułu",
     );
+  });
+
+  it("uses mockup heading keys and falls back on collisions", () => {
+    const { toc } = articleBodyToHtml([
+      {
+        _type: "block",
+        _key: "punkt-wyjscia",
+        style: "h2",
+        children: [{ _type: "span", text: "Zacznij od tego", marks: [] }],
+      },
+      {
+        _type: "block",
+        _key: "punkt-wyjscia",
+        style: "h2",
+        children: [{ _type: "span", text: "Inny naglowek", marks: [] }],
+      },
+      {
+        _type: "block",
+        _key: "faq",
+        style: "h2",
+        children: [{ _type: "span", text: "Pytania w tekście", marks: [] }],
+      },
+    ]);
+    expect(toc.map((entry) => entry.id)).toEqual([
+      "punkt-wyjscia",
+      "inny-naglowek",
+      "pytania-w-tekscie",
+    ]);
   });
 });
 

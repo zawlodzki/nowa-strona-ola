@@ -158,19 +158,49 @@ export function parsePortableBlocks(value: unknown): PortableBlock[] {
   });
 }
 
+const PAGE_HEADING_IDS = new Set([
+  "main",
+  "start",
+  "autor",
+  "ebooki",
+  "faq",
+  "newsletter",
+  "recommended-articles",
+  "toc-title",
+  "books-title",
+  "faq-title",
+  "sidebar-title",
+  "author-title",
+]);
+
+function isDomId(value: string): boolean {
+  return /^[A-Za-z][\w:-]*$/.test(value);
+}
+
 function headingId(
   block: PortableTextBlock,
   plain: string,
   usedIds: Set<string>,
 ): string {
-  const base = block._key
-    ? `section-${block._key}`
-    : slugify(plain) || "section";
-  let id = base;
+  const key = block._key?.trim() ?? "";
+  const slug = slugify(plain);
+  const fromKey = key && isDomId(key) ? key : "";
+  const preferred = fromKey || slug || "section";
+  const fallback = fromKey && fromKey !== preferred ? fromKey : slug;
+  let id = preferred;
+  if (
+    usedIds.has(id) &&
+    fallback &&
+    fallback !== id &&
+    !usedIds.has(fallback)
+  ) {
+    id = fallback;
+  }
+  const root = id;
   let suffix = 1;
   while (usedIds.has(id)) {
     suffix += 1;
-    id = `${base}-${suffix}`;
+    id = `${root}-${suffix}`;
   }
   usedIds.add(id);
   return id;
@@ -182,7 +212,7 @@ export function articleBodyToHtml(blocks: unknown): {
 } {
   const parsed = parsePortableBlocks(blocks);
   const toc: TocEntry[] = [];
-  const usedIds = new Set<string>();
+  const usedIds = new Set(PAGE_HEADING_IDS);
   const html: string[] = [];
   let listType: string | null = null;
 

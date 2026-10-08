@@ -364,8 +364,11 @@ URL płatnej rezerwacji, strona kontaktu. W kodzie Studio są już
 `author.educationInstitution`/`educationProgram`/`diplomaScan` oraz sekcja
 `credentialsSection` z referencją autora; to nie jest konfiguracja Content Lake.
 Obraz korzysta z `mediaObject`; osobny PDF nie został dodany, bo pliku nie ma.
-`author` przechowuje wspólne krótkie bio, rolę i portret; długa historia należy
-do `page.sections`.
+`author` przechowuje wspólne bio, rolę i portret; długa historia należy
+do `page.sections`. Biogram ramki artykułu (makieta article-3a, decyzja
+08.10.2026) to pełny akapit o specjalizacji, kolejnych krokach i własnym
+doświadczeniu PCOS — w limicie 400 znaków pola `author.bio`. Nie skracać
+do samego zdania o roli.
 
 Homepage 3a CTA „Poznaj moją historię” oraz nawigacja „O mnie” prowadzą w
 fixture’ach do `/o-mnie/` (EN `/en/about/`). Mockup `about-3a.html` pozostaje

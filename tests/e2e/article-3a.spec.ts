@@ -38,18 +38,30 @@ test("production article heading, deck and TOC match the 3a template", async ({
   await expect(page.locator(".article-deck")).toContainText(
     "Bez perfekcyjnego dzienniczka",
   );
+  await expect(
+    page.locator('.article-toc a[href="#punkt-wyjscia"]'),
+  ).toBeVisible();
   const images = page.locator("main img");
   const count = await images.count();
-  expect(count).toBeGreaterThan(0);
+  expect(count).toBeGreaterThan(3);
   for (let index = 0; index < count; index += 1) {
     const image = images.nth(index);
-    await image.scrollIntoViewIfNeeded();
     await expect
       .poll(async () =>
         image.evaluate((img) => (img as HTMLImageElement).naturalWidth),
       )
       .toBeGreaterThan(0);
   }
+  const nutritionCover = page.locator(".ao-book-art--nutrition img");
+  await expect(nutritionCover).toHaveCount(1);
+  await expect
+    .poll(async () =>
+      nutritionCover.evaluate((img) => (img as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  const nutritionBox = await nutritionCover.boundingBox();
+  expect(nutritionBox?.height).toBeGreaterThan(60);
+  expect(nutritionBox?.height).toBeLessThan(100);
 });
 
 test("related articles appear at half of the text and can be collapsed", async ({

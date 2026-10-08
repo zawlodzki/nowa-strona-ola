@@ -22,12 +22,15 @@ describe("Article3a mapper", () => {
     );
     expect(view.toc).toHaveLength(5);
     expect(view.toc.map((entry) => entry.id)).toEqual([
-      "section-punkt-wyjscia",
-      "section-codziennosc",
-      "section-notatki",
-      "section-pytania",
-      "section-po-rozmowie",
+      "punkt-wyjscia",
+      "codziennosc",
+      "notatki",
+      "pytania",
+      "po-rozmowie",
     ]);
+    expect(view.authors[0]?.bio).toContain(
+      "Znam PCOS także z własnego doświadczenia.",
+    );
     expect(view.ebooks?.items).toHaveLength(3);
     expect(view.ebooks?.items.map((item) => item.slug)).toEqual([
       "suplementy-w-pcos",
@@ -48,6 +51,7 @@ describe("Article3a mapper", () => {
     expect(view.sources).toEqual([]);
     expect(view.hero.objectPosition).toBe("50% 55%");
     expect(view.byline.photo.objectPosition).toBe("50% 25%");
+    expect(view.byline.photo).toMatchObject({ width: 96, height: 120 });
     expect(view.authors[0]?.photo.objectPosition).toBe("50% 50%");
     expect(
       view.jsonLd["@graph"].some((node) => node["@type"] === "FAQPage"),

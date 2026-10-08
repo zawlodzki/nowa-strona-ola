@@ -57,7 +57,7 @@ function documents() {
     name: "Aleksandra Olesiewicz",
     slug: { _type: "slug", current: "aleksandra-olesiewicz" },
     role: "Dietetyczka kliniczna",
-    bio: "Dietetyczka kliniczna. Specjalizuje się w PCOS i insulinooporności.",
+    bio: "Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Znam PCOS także z własnego doświadczenia.",
     educationInstitution: "Śląski Uniwersytet Medyczny",
     educationProgram: "Dietetyka kliniczna",
     translation: { _type: "reference", _ref: "author-ola-en" },
@@ -67,7 +67,7 @@ function documents() {
     _id: "author-ola-en",
     language: "en",
     role: "Clinical dietitian",
-    bio: "Clinical dietitian. Specialises in PCOS and insulin resistance.",
+    bio: "I specialise in PCOS and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also know PCOS from my own experience.",
     educationProgram: "Clinical dietetics",
     translation: { _type: "reference", _ref: authorPl._id },
   };
