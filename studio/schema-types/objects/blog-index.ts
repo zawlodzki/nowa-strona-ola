@@ -156,5 +156,11 @@ export const blogNewsletterSettingsType = defineType({
       type: "string",
       validation: (rule) => rule.max(40),
     }),
+    defineField({
+      name: "sidebarNote",
+      title: "Nota pod CTA w kolumnie artykułu",
+      type: "string",
+      validation: (rule) => rule.max(120),
+    }),
   ],
 });

@@ -76,6 +76,7 @@ export type BlogNewsletterSettings = {
   sidebarTitle?: string;
   sidebarLead?: string;
   sidebarActionLabel?: string;
+  sidebarNote?: string;
 };
 
 export type BlogIndexSettings = {
@@ -332,6 +333,8 @@ export type Article = {
   slug: Slug;
   translation?: ArticleReference;
   lead: string;
+  breadcrumbTitle?: string;
+  proposalNote?: string;
   publishedAt: string;
   updatedAt?: string;
   featured?: "standard" | "featured";
@@ -357,7 +360,24 @@ export type Article = {
       _key: string;
     } & ArticleReference
   >;
+  relatedEbooks?: Array<
+    {
+      _key: string;
+    } & EbookReference
+  >;
+  faq?: FaqSection;
   seo?: Seo;
+};
+
+export type FaqSection = {
+  _type: "faqSection";
+  title: string;
+  lead: string;
+  items: Array<{
+    question: string;
+    answer: string;
+    _key: string;
+  }>;
 };
 
 export type ArticleBody = Array<
@@ -479,17 +499,6 @@ export type Page = {
       } & EbookCollectionSection)
   >;
   seo?: Seo;
-};
-
-export type FaqSection = {
-  _type: "faqSection";
-  title: string;
-  lead: string;
-  items: Array<{
-    question: string;
-    answer: string;
-    _key: string;
-  }>;
 };
 
 export type EbookSource = {
@@ -996,10 +1005,10 @@ export type AllSanitySchemaTypes =
   | Category
   | ArticleReference
   | Article
+  | FaqSection
   | ArticleBody
   | PageReference
   | Page
-  | FaqSection
   | EbookSource
   | EbookMaterial
   | EbookChapter
@@ -1591,7 +1600,7 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
 
 // Source: ../preview/src/lib/queries.ts
 // Variable: PREVIEW_ARTICLE_QUERY
-// Query: *[    _type == "article" &&    language == $language &&    slug.current == $slug  ][0]{      "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current },    updatedAt,    seo{title, description},    authors[]->{ name, role, "slug": slug.current },    body[]{   ...,  _type == "articleImage" => {    alt,    caption,    "src": image.asset->url  },  _type == "articleCta" => {    title,    lead,    "action": action{ label, href, emphasis }  } },    sources[]{ _key, title, href },    related[]->{   "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current } }  }
+// Query: *[    _type == "article" &&    language == $language &&    slug.current == $slug  ][0]{        "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current },  breadcrumbTitle,  proposalNote,  updatedAt,  seo{title, description},  authors[]->{    name,    role,    bio,    "slug": slug.current,    "photo": photo{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}}  },  body[]{   ...,  _type == "articleImage" => {    alt,    caption,    "src": image.asset->url,    "hotspot": image.hotspot{x, y, height, width}  },  _type == "articleCta" => {    title,    lead,    "action": action{ label, href, emphasis }  } },  sources[]{ _key, title, href },  related[]->{   "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current } },  relatedEbooks[]->{   "id": _id,  language,  "slug": slug.current,  title,  subtitle,  topic,  cardDescription,  coverTone,  availability,  priceGross,  currency,  format,  sortOrder,  "cover": cover{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  "authorName": author->name },  faq{    title,    lead,    items[]{ _key, question, answer }  }  }
 export type PREVIEW_ARTICLE_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
@@ -1622,6 +1631,8 @@ export type PREVIEW_ARTICLE_QUERY_RESULT = {
     language: "en" | "pl";
     slug: string;
   } | null;
+  breadcrumbTitle: string | null;
+  proposalNote: string | null;
   updatedAt: string | null;
   seo: {
     title: string | null;
@@ -1630,7 +1641,21 @@ export type PREVIEW_ARTICLE_QUERY_RESULT = {
   authors: Array<{
     name: string;
     role: string;
+    bio: string;
     slug: string;
+    photo: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+      hotspot: {
+        x: number;
+        y: number;
+        height: number;
+        width: number;
+      } | null;
+    } | null;
   }>;
   body: Array<
     | {
@@ -1663,6 +1688,12 @@ export type PREVIEW_ARTICLE_QUERY_RESULT = {
         alt: string;
         caption: string | null;
         src: string | null;
+        hotspot: {
+          x: number;
+          y: number;
+          height: number;
+          width: number;
+        } | null;
       }
     | {
         _key: string;
@@ -1729,11 +1760,49 @@ export type PREVIEW_ARTICLE_QUERY_RESULT = {
       slug: string;
     } | null;
   }> | null;
+  relatedEbooks: Array<{
+    id: string;
+    language: "en" | "pl";
+    slug: string;
+    title: string;
+    subtitle: string | null;
+    topic: "pcos" | "perimenopause";
+    cardDescription: string;
+    coverTone: "cherry" | "light";
+    availability: "available" | "paused" | "planned" | "presale";
+    priceGross: number;
+    currency: "PLN";
+    format: "pdf" | null;
+    sortOrder: number | null;
+    cover: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+      hotspot: {
+        x: number;
+        y: number;
+        height: number;
+        width: number;
+      } | null;
+    };
+    authorName: string;
+  }> | null;
+  faq: {
+    title: string;
+    lead: string;
+    items: Array<{
+      _key: string;
+      question: string;
+      answer: string;
+    }>;
+  } | null;
 } | null;
 
 // Source: ../preview/src/lib/queries.ts
 // Variable: PREVIEW_SITE_SETTINGS_QUERY
-// Query: *[    _type == "siteSettings" &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  "headerCta": headerCta{ label, href, emphasis },  legalLinks[]{ _key, label, href },  socialLinks[]{ _key, label, href },  blogIndex{    title,    lead,    note,    latestTitle,    collectionTitle,    readActionLabel,    allCategoriesLabel,    emptyMessage,    emptyCategoryMessage,    previousLabel,    nextLabel,    paginationLabel,    seoTitle,    seoDescription  },  blogNewsletter{    enabled,    title,    lead,    sidebarTitle,    sidebarLead,    sidebarActionLabel,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        placeholder,        errorMessage,        required,        options      }    }  },  "translation": translation->{ language } }
+// Query: *[    _type == "siteSettings" &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  "headerCta": headerCta{ label, href, emphasis },  legalLinks[]{ _key, label, href },  socialLinks[]{ _key, label, href },  blogIndex{    title,    lead,    note,    latestTitle,    collectionTitle,    readActionLabel,    allCategoriesLabel,    emptyMessage,    emptyCategoryMessage,    previousLabel,    nextLabel,    paginationLabel,    seoTitle,    seoDescription  },  blogNewsletter{    enabled,    title,    lead,    sidebarTitle,    sidebarLead,    sidebarActionLabel,    sidebarNote,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        placeholder,        errorMessage,        required,        options      }    }  },  "translation": translation->{ language } }
 export type PREVIEW_SITE_SETTINGS_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
@@ -1787,6 +1856,7 @@ export type PREVIEW_SITE_SETTINGS_QUERY_RESULT = {
     sidebarTitle: string | null;
     sidebarLead: string | null;
     sidebarActionLabel: string | null;
+    sidebarNote: string | null;
     form: {
       id: string;
       language: "en" | "pl";
@@ -2640,7 +2710,7 @@ export type PUBLISHED_PAGE_PATHS_QUERY_RESULT = Array<{
 
 // Source: ../src/sanity/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[    _type == "siteSettings" &&    !(_id in path("drafts.**")) &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  "headerCta": headerCta{ label, href, emphasis },  legalLinks[]{ _key, label, href },  socialLinks[]{ _key, label, href },  blogIndex{    title,    lead,    note,    latestTitle,    collectionTitle,    readActionLabel,    allCategoriesLabel,    emptyMessage,    emptyCategoryMessage,    previousLabel,    nextLabel,    paginationLabel,    seoTitle,    seoDescription  },  blogNewsletter{    enabled,    title,    lead,    sidebarTitle,    sidebarLead,    sidebarActionLabel,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        placeholder,        errorMessage,        required,        options      }    }  },  "translation": translation->{ language } }
+// Query: *[    _type == "siteSettings" &&    !(_id in path("drafts.**")) &&    language == $language  ][0]{   "id": _id,  language,  siteTitle,  contactEmail,  footerNote,  defaultSeo{title, description},  navigation[]{ _key, label, href },  "headerCta": headerCta{ label, href, emphasis },  legalLinks[]{ _key, label, href },  socialLinks[]{ _key, label, href },  blogIndex{    title,    lead,    note,    latestTitle,    collectionTitle,    readActionLabel,    allCategoriesLabel,    emptyMessage,    emptyCategoryMessage,    previousLabel,    nextLabel,    paginationLabel,    seoTitle,    seoDescription  },  blogNewsletter{    enabled,    title,    lead,    sidebarTitle,    sidebarLead,    sidebarActionLabel,    sidebarNote,    "form": form->{      "id": _id,      language,      title,      submitLabel,      successMessage,      noscriptMessage,      fields[]{        _key,        name,        input,        label,        placeholder,        errorMessage,        required,        options      }    }  },  "translation": translation->{ language } }
 export type SITE_SETTINGS_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
@@ -2694,6 +2764,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     sidebarTitle: string | null;
     sidebarLead: string | null;
     sidebarActionLabel: string | null;
+    sidebarNote: string | null;
     form: {
       id: string;
       language: "en" | "pl";
@@ -2720,7 +2791,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 
 // Source: ../src/sanity/queries.ts
 // Variable: PUBLISHED_ARTICLE_QUERY
-// Query: *[    _type == "article" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{      "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current },    updatedAt,    seo{title, description},    authors[]->{ name, role, "slug": slug.current },    body[]{   ...,  _type == "articleImage" => {    alt,    caption,    "src": image.asset->url  },  _type == "articleCta" => {    title,    lead,    "action": action{ label, href, emphasis }  } },    sources[]{ _key, title, href },    related[]->{   "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current } }  }
+// Query: *[    _type == "article" &&    !(_id in path("drafts.**")) &&    language == $language &&    slug.current == $slug  ][0]{        "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current },  breadcrumbTitle,  proposalNote,  updatedAt,  seo{title, description},  authors[]->{    name,    role,    bio,    "slug": slug.current,    "photo": photo{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}}  },  body[]{   ...,  _type == "articleImage" => {    alt,    caption,    "src": image.asset->url,    "hotspot": image.hotspot{x, y, height, width}  },  _type == "articleCta" => {    title,    lead,    "action": action{ label, href, emphasis }  } },  sources[]{ _key, title, href },  related[]->{   "id": _id,  language,  "slug": slug.current,  title,  lead,  publishedAt,  featured,  "media": image{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  categories[]->{ title, "slug": slug.current, language },  "translation": translation->{ language, "slug": slug.current } },  relatedEbooks[]->{   "id": _id,  language,  "slug": slug.current,  title,  subtitle,  topic,  cardDescription,  coverTone,  availability,  priceGross,  currency,  format,  sortOrder,  "cover": cover{  alt,  tone,  caption,  "label": alt,  "src": image.asset->url,  "hotspot": image.hotspot{x, y, height, width}},  "authorName": author->name },  faq{    title,    lead,    items[]{ _key, question, answer }  }  }
 export type PUBLISHED_ARTICLE_QUERY_RESULT = {
   id: string;
   language: "en" | "pl";
@@ -2751,6 +2822,8 @@ export type PUBLISHED_ARTICLE_QUERY_RESULT = {
     language: "en" | "pl";
     slug: string;
   } | null;
+  breadcrumbTitle: string | null;
+  proposalNote: string | null;
   updatedAt: string | null;
   seo: {
     title: string | null;
@@ -2759,7 +2832,21 @@ export type PUBLISHED_ARTICLE_QUERY_RESULT = {
   authors: Array<{
     name: string;
     role: string;
+    bio: string;
     slug: string;
+    photo: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+      hotspot: {
+        x: number;
+        y: number;
+        height: number;
+        width: number;
+      } | null;
+    } | null;
   }>;
   body: Array<
     | {
@@ -2792,6 +2879,12 @@ export type PUBLISHED_ARTICLE_QUERY_RESULT = {
         alt: string;
         caption: string | null;
         src: string | null;
+        hotspot: {
+          x: number;
+          y: number;
+          height: number;
+          width: number;
+        } | null;
       }
     | {
         _key: string;
@@ -2858,6 +2951,44 @@ export type PUBLISHED_ARTICLE_QUERY_RESULT = {
       slug: string;
     } | null;
   }> | null;
+  relatedEbooks: Array<{
+    id: string;
+    language: "en" | "pl";
+    slug: string;
+    title: string;
+    subtitle: string | null;
+    topic: "pcos" | "perimenopause";
+    cardDescription: string;
+    coverTone: "cherry" | "light";
+    availability: "available" | "paused" | "planned" | "presale";
+    priceGross: number;
+    currency: "PLN";
+    format: "pdf" | null;
+    sortOrder: number | null;
+    cover: {
+      alt: string;
+      tone: "diagram" | "photo" | "portrait";
+      caption: string | null;
+      label: string;
+      src: string | null;
+      hotspot: {
+        x: number;
+        y: number;
+        height: number;
+        width: number;
+      } | null;
+    };
+    authorName: string;
+  }> | null;
+  faq: {
+    title: string;
+    lead: string;
+    items: Array<{
+      _key: string;
+      question: string;
+      answer: string;
+    }>;
+  } | null;
 } | null;
 
 // Source: ../src/sanity/queries.ts
@@ -3154,8 +3285,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[\n    _type == "page" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    "slug": slug.current,\n    title,\n    seo{title, description},\n    "translation": translation->{ language, "slug": slug.current },\n    sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    variant,\n    eyebrow,\n    title,\n    lead,\n    body,\n    mediaPosition,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "secondaryMedia": secondaryMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    prompts,\n    resolutionEyebrow,\n    resolutionTitle,\n    caption\n  },\n  _type == "logosSection" => {\n    title,\n    lead,\n    names,\n    items[]{\n      _key,\n      name,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "cardsSection" => {\n    variant,\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      status,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    },\n    closing\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    note,\n    steps[]{ _key, title, body },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  _type == "metricsSection" => {\n    variant,\n    title,\n    lead,\n    items[]{ _key, value, suffix, label },\n    highlights[]{ _key, title, body }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    lead,\n    items[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    }\n  },\n  _type == "expertSection" => {\n    title,\n    intro,\n    body,\n    metric{ value, suffix, label },\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "person": person->{\n      name,\n      role,\n      bio,\n      educationInstitution,\n      educationProgram,\n      "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "ebooksSection" => {\n    title,\n    lead,\n    cardActionLabel,\n    note,\n    "collection": collection{ label, href, emphasis },\n    items[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n }\n  },\n  _type == "ebookCollectionSection" => {\n    variant,\n    title,\n    lead,\n    catalogTitle,\n    catalogLead,\n    findTopicLabel,\n    cardActionLabel,\n    note,\n    emptyMessage,\n    emptyCategoryMessage\n  },\n  _type == "serviceOfferSection" => {\n    title,\n    body,\n    facts,\n    note,\n    "action": action{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "service": service->{\n      "id": _id,\n      title,\n      summary,\n      "slug": slug.current,\n      price,\n      currency,\n      durationMinutes,\n      bookingUrl,\n      bookingStatus\n    }\n  },\n  _type == "credentialsSection" => {\n    title,\n    body,\n    diplomaCaption,\n    "person": person->{\n      "id": _id,\n      name,\n      role,\n      bio,\n      educationInstitution,\n      educationProgram,\n      "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n      "diplomaScan": diplomaScan{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  }\n }\n  }\n': PREVIEW_PAGE_QUERY_RESULT;
-    '\n  *[\n    _type == "article" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n    updatedAt,\n    seo{title, description},\n    authors[]->{ name, role, "slug": slug.current },\n    body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n    sources[]{ _key, title, href },\n    related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n  }\n': PREVIEW_ARTICLE_QUERY_RESULT;
-    '\n  *[\n    _type == "siteSettings" &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  "headerCta": headerCta{ label, href, emphasis },\n  legalLinks[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  blogIndex{\n    title,\n    lead,\n    note,\n    latestTitle,\n    collectionTitle,\n    readActionLabel,\n    allCategoriesLabel,\n    emptyMessage,\n    emptyCategoryMessage,\n    previousLabel,\n    nextLabel,\n    paginationLabel,\n    seoTitle,\n    seoDescription\n  },\n  blogNewsletter{\n    enabled,\n    title,\n    lead,\n    sidebarTitle,\n    sidebarLead,\n    sidebarActionLabel,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        placeholder,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  "translation": translation->{ language }\n }\n': PREVIEW_SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[\n    _type == "article" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n  breadcrumbTitle,\n  proposalNote,\n  updatedAt,\n  seo{title, description},\n  authors[]->{\n    name,\n    role,\n    bio,\n    "slug": slug.current,\n    "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url,\n    "hotspot": image.hotspot{x, y, height, width}\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n  sources[]{ _key, title, href },\n  related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n },\n  relatedEbooks[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n },\n  faq{\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  }\n\n  }\n': PREVIEW_ARTICLE_QUERY_RESULT;
+    '\n  *[\n    _type == "siteSettings" &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  "headerCta": headerCta{ label, href, emphasis },\n  legalLinks[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  blogIndex{\n    title,\n    lead,\n    note,\n    latestTitle,\n    collectionTitle,\n    readActionLabel,\n    allCategoriesLabel,\n    emptyMessage,\n    emptyCategoryMessage,\n    previousLabel,\n    nextLabel,\n    paginationLabel,\n    seoTitle,\n    seoDescription\n  },\n  blogNewsletter{\n    enabled,\n    title,\n    lead,\n    sidebarTitle,\n    sidebarLead,\n    sidebarActionLabel,\n    sidebarNote,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        placeholder,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  "translation": translation->{ language }\n }\n': PREVIEW_SITE_SETTINGS_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    language == $language\n  ] | order(publishedAt desc, _id asc){ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PREVIEW_ARTICLES_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    language == $language\n  ] | order(title asc){\n    "id": _id,\n    title,\n    description,\n    "slug": slug.current,\n    language,\n    "translation": translation->{ language, "slug": slug.current }\n  }\n': PREVIEW_CATEGORIES_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    title,\n    description,\n    "slug": slug.current,\n    "translation": translation->{ language, "slug": slug.current }\n  }\n': PREVIEW_CATEGORY_QUERY_RESULT;
@@ -3163,8 +3294,8 @@ declare module "@sanity/client" {
     '\n  *[\n    _type == "ebook" &&\n    language == $language\n  ] | order(coalesce(sortOrder, 9999) asc, title asc) {\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n\n  }\n': PREVIEW_EBOOKS_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  seo{title, description},\n  "translation": translation->{ language, "slug": slug.current },\n  sections[]{ \n  _key,\n  _type,\n  _type == "heroSection" => {\n    variant,\n    theme,\n    eyebrow,\n    title,\n    lead,\n    "primary": primary{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  _type == "textSection" => { eyebrow, title, body },\n  _type == "textImageSection" => {\n    variant,\n    eyebrow,\n    title,\n    lead,\n    body,\n    mediaPosition,\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "secondaryMedia": secondaryMedia{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    prompts,\n    resolutionEyebrow,\n    resolutionTitle,\n    caption\n  },\n  _type == "logosSection" => {\n    title,\n    lead,\n    names,\n    items[]{\n      _key,\n      name,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "cardsSection" => {\n    variant,\n    eyebrow,\n    title,\n    lead,\n    items[]{\n      _key,\n      title,\n      body,\n      href,\n      status,\n      "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    },\n    closing\n  },\n  _type == "listSection" => { title, lead, items },\n  _type == "processSection" => {\n    title,\n    lead,\n    note,\n    steps[]{ _key, title, body },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  _type == "metricsSection" => {\n    variant,\n    title,\n    lead,\n    items[]{ _key, value, suffix, label },\n    highlights[]{ _key, title, body }\n  },\n  _type == "pricingSection" => {\n    title,\n    lead,\n    plans[]{\n      _key,\n      name,\n      price,\n      summary,\n      emphasis,\n      features,\n      "action": action{ label, href, emphasis }\n    }\n  },\n  _type == "testimonialsSection" => {\n    title,\n    lead,\n    items[]->{\n      quote,\n      name,\n      role,\n      anonymous,\n      displayLabel,\n      scope\n    }\n  },\n  _type == "expertSection" => {\n    title,\n    intro,\n    body,\n    metric{ value, suffix, label },\n    "action": action{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "person": person->{\n      name,\n      role,\n      bio,\n      educationInstitution,\n      educationProgram,\n      "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "faqSection" => {\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  },\n  _type == "comparisonSection" => {\n    title,\n    lead,\n    caption,\n    rowHeading,\n    columns,\n    rows[]{ _key, feature, values }\n  },\n  _type == "quoteSection" => { theme, heading, quote, attribution },\n  _type == "ctaSection" => {\n    theme,\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  },\n  _type == "formSection" => {\n    eyebrow,\n    title,\n    lead,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  _type == "mediaSection" => {\n    title,\n    lead,\n    "image": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    videoTitle,\n    videoUrl,\n    videoPlatform\n  },\n  _type == "relatedSection" => {\n    title,\n    items[]->{\n      title,\n      "excerpt": lead,\n      "slug": slug.current,\n      language,\n      publishedAt,\n      "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  },\n  _type == "ebooksSection" => {\n    title,\n    lead,\n    cardActionLabel,\n    note,\n    "collection": collection{ label, href, emphasis },\n    items[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n }\n  },\n  _type == "ebookCollectionSection" => {\n    variant,\n    title,\n    lead,\n    catalogTitle,\n    catalogLead,\n    findTopicLabel,\n    cardActionLabel,\n    note,\n    emptyMessage,\n    emptyCategoryMessage\n  },\n  _type == "serviceOfferSection" => {\n    title,\n    body,\n    facts,\n    note,\n    "action": action{ label, href, emphasis },\n    "secondary": secondary{ label, href, emphasis },\n    "media": media{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n    "service": service->{\n      "id": _id,\n      title,\n      summary,\n      "slug": slug.current,\n      price,\n      currency,\n      durationMinutes,\n      bookingUrl,\n      bookingStatus\n    }\n  },\n  _type == "credentialsSection" => {\n    title,\n    body,\n    diplomaCaption,\n    "person": person->{\n      "id": _id,\n      name,\n      role,\n      bio,\n      educationInstitution,\n      educationProgram,\n      "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n      "diplomaScan": diplomaScan{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n    }\n  }\n }\n }\n': PUBLISHED_PAGE_QUERY_RESULT;
     '\n  *[\n    _type == "page" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_PAGE_PATHS_QUERY_RESULT;
-    '\n  *[\n    _type == "siteSettings" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  "headerCta": headerCta{ label, href, emphasis },\n  legalLinks[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  blogIndex{\n    title,\n    lead,\n    note,\n    latestTitle,\n    collectionTitle,\n    readActionLabel,\n    allCategoriesLabel,\n    emptyMessage,\n    emptyCategoryMessage,\n    previousLabel,\n    nextLabel,\n    paginationLabel,\n    seoTitle,\n    seoDescription\n  },\n  blogNewsletter{\n    enabled,\n    title,\n    lead,\n    sidebarTitle,\n    sidebarLead,\n    sidebarActionLabel,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        placeholder,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  "translation": translation->{ language }\n }\n': SITE_SETTINGS_QUERY_RESULT;
-    '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n    updatedAt,\n    seo{title, description},\n    authors[]->{ name, role, "slug": slug.current },\n    body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n    sources[]{ _key, title, href },\n    related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n  }\n': PUBLISHED_ARTICLE_QUERY_RESULT;
+    '\n  *[\n    _type == "siteSettings" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ][0]{ \n  "id": _id,\n  language,\n  siteTitle,\n  contactEmail,\n  footerNote,\n  defaultSeo{title, description},\n  navigation[]{ _key, label, href },\n  "headerCta": headerCta{ label, href, emphasis },\n  legalLinks[]{ _key, label, href },\n  socialLinks[]{ _key, label, href },\n  blogIndex{\n    title,\n    lead,\n    note,\n    latestTitle,\n    collectionTitle,\n    readActionLabel,\n    allCategoriesLabel,\n    emptyMessage,\n    emptyCategoryMessage,\n    previousLabel,\n    nextLabel,\n    paginationLabel,\n    seoTitle,\n    seoDescription\n  },\n  blogNewsletter{\n    enabled,\n    title,\n    lead,\n    sidebarTitle,\n    sidebarLead,\n    sidebarActionLabel,\n    sidebarNote,\n    "form": form->{\n      "id": _id,\n      language,\n      title,\n      submitLabel,\n      successMessage,\n      noscriptMessage,\n      fields[]{\n        _key,\n        name,\n        input,\n        label,\n        placeholder,\n        errorMessage,\n        required,\n        options\n      }\n    }\n  },\n  "translation": translation->{ language }\n }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    \n  \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n,\n  breadcrumbTitle,\n  proposalNote,\n  updatedAt,\n  seo{title, description},\n  authors[]->{\n    name,\n    role,\n    bio,\n    "slug": slug.current,\n    "photo": photo{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n}\n  },\n  body[]{ \n  ...,\n  _type == "articleImage" => {\n    alt,\n    caption,\n    "src": image.asset->url,\n    "hotspot": image.hotspot{x, y, height, width}\n  },\n  _type == "articleCta" => {\n    title,\n    lead,\n    "action": action{ label, href, emphasis }\n  }\n },\n  sources[]{ _key, title, href },\n  related[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n },\n  relatedEbooks[]->{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  subtitle,\n  topic,\n  cardDescription,\n  coverTone,\n  availability,\n  priceGross,\n  currency,\n  format,\n  sortOrder,\n  "cover": cover{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  "authorName": author->name\n },\n  faq{\n    title,\n    lead,\n    items[]{ _key, question, answer }\n  }\n\n  }\n': PUBLISHED_ARTICLE_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_ARTICLE_PATHS_QUERY_RESULT;
     '\n  *[\n    _type == "article" &&\n    !(_id in path("drafts.**")) &&\n    language == $language\n  ] | order(publishedAt desc, _id asc){ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  lead,\n  publishedAt,\n  featured,\n  "media": image{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": image.asset->url,\n  "hotspot": image.hotspot{x, y, height, width}\n},\n  categories[]->{ title, "slug": slug.current, language },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PUBLISHED_ARTICLES_QUERY_RESULT;
     '\n  *[\n    _type == "category" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{\n    "id": _id,\n    language,\n    title,\n    description,\n    "slug": slug.current,\n    "translation": translation->{ language, "slug": slug.current }\n  }\n': PUBLISHED_CATEGORY_QUERY_RESULT;
