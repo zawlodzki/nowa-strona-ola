@@ -11,10 +11,10 @@ Nie wpisywać testowych profili i niezatwierdzonych URL w komponentach.
 | Heading     | `as: h1/h2/h3`, `size: display/section/card/article`, HTML attrs                                              | Rozdziela semantykę od wielkości                                   |
 | Hero        | `title`, `description`, `kind: home/about/service/product`, `id`; slots `kicker`, `actions`, `media`, default | Wspólny szkielet hero; kadry pozostają w szablonie                 |
 | Button      | `as: a` + `href` lub native button, `variant: primary/secondary`, `arrow`, `loading`, HTML attrs              | CTA; secondary: białe wnętrze i obwódka matcha; type=submit jawnie |
-| TextLink    | `href`, `arrow`, `arrowDirection`, HTML attrs                                                                 | Link liniowy z SVG                                                 |
+| TextLink    | `href`, `arrow`, `arrowDirection`, HTML attrs                                                                 | Link liniowy matcha z podkreśleniem i SVG                          |
 | ArrowIcon   | `direction: up-right/left/right/down`                                                                         | Jednolita dekoracyjna strzałka                                     |
 | Wordmark    | `href`, `label`, HTML attrs                                                                                   | Znak Switzer z dostępną nazwą linku                                |
-| SiteHeader  | `homeHref`, `links`, opcjonalne `cta`, `lang`                                                                 | Jeden header; globalne lub lokalne linki landingu                  |
+| SiteHeader  | `homeHref`, `links`, opcjonalne `cta`, `lang`                                                                 | Sticky header; globalne lub lokalne linki landingu                 |
 | SiteFooter  | `homeHref`, `description`, `links`, `socialLinks`, `legalLinks`, `copyright`, `lang`                          | Wspólna stopka; `links[].current` daje `aria-current`              |
 | ThemeToggle | `label`                                                                                                       | Używany raz przez footer; systemowy motyw bez JS                   |
 | Breadcrumbs | `links: {href,label,current}[]`, `label`                                                                      | Ścieżka; ostatnia pozycja jest tekstem                             |

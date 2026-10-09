@@ -1,10 +1,72 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-09 (kontakt 3a, PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-09 (sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### PR navbaru i akcentów matcha, 09.10.2026
+
+Na zlecenie „pr push” przygotowano gałąź `codex/sticky-navbar-matcha`.
+Rebase na main `d3ae6e2` zachowuje kontakt 3a, poprawki dokumentów prawnych,
+nawigacji stopki oraz sticky kolumny artykułu. Konflikty dokumentacji
+rozwiązano z zachowaniem wpisów obu sesji.
+
+Test kolumny artykułu z main oczekiwał 32 px od górnej krawędzi ekranu.
+Po dodaniu navbaru sprawdza odstęp od nagłówka, rzeczywiste kolejne przewinięcie
+i stałą pozycję kolumny. Zachowano sprawdzenie widoczności polecanych wpisów.
+Pierwszy przebieg po rebase: 213 E2E PASS, sześć nieaktualnych oczekiwań
+pozycji FAIL. Po korekcie: sześć regresji PL/EN w trzech silnikach PASS.
+
+Końcowe pełne `npm run verify` **PASS**: **181 unit / 29 plików**,
+**219 E2E** w Chromium/Firefox/WebKit, wszystkie buildy i kontrola artefaktów,
+symulacja Content Lake oraz zgodność sekcji, zdjęć i DOM **15 stron**.
+Log: `/tmp/ola-visual-pr-final-verify.log`; środowisko przeglądarek
+jak w przebiegu wizualnym poniżej. Przegląd diff i komentarzy bez uwag.
+Nie scalano ani nie publikowano strony. Następny krok: review PR i wynik CI.
+
+### Stały navbar, linki i akcenty matcha, 09.10.2026
+
+Na podstawie bieżącego polecenia użytkownika przygotowano poprawki wyglądu
+w kodzie, korzystając ze skilli `poteto-mode` i `verify-ola`.
+[Mapa ośmiu podstron i decyzje](VISUAL-REFINEMENTS-2026-10-09.md).
+
+- Navbar 3a jest natywnie sticky z nieprzezroczystym tłem motywu.
+  `overflow-x: clip` nie blokuje sticky. Menu mobilne ma własny scroll.
+  Kotwice i sticky spisy treści/sidebar uwzględniają nagłówek.
+- TextLink używa istniejącej matcha dla tekstu, strzałki i podkreślenia.
+  Hero zachowuje primary cherry, secondary z obwódką matcha i pille.
+  Dodano matcha w sufiksach wskaźników, drobnych oznaczeniach procesu
+  oraz checkmarkach oferty. Bez zmian treści, cen, tokenów i schematów CMS.
+- Odtworzono znikający header: y=0 przed, y=-900 po scrollu 900 px.
+  Nowe regresje wykryły również problemy Firefox z breakpointami `px`
+  przy zoom CSS 200% i WebKit z root `rem` po zwiększeniu fontu.
+  Nagłówek ma własny kontener i progi `rem`; root scroll-padding używa `em`.
+- Pełne `npm run verify` **PASS**: format, tokeny, lint, typy, **146 unit**
+  w 26 plikach, wszystkie buildy, **204 E2E** w Chromium/Firefox/WebKit
+  oraz symulacja Content Lake i porównanie 13 stron. Osobne regresje
+  sticky/matcha: **39/39 PASS** w tych samych trzech przeglądarkach.
+  Logi: `/tmp/ola-visual-verify.log`, `/tmp/ola-visual-tests.log`.
+- Przeglądarki pobrano do `/tmp/ola-playwright`, biblioteki Debiana lokalnie
+  do `/tmp/ola-browser-deps/root`; biblioteki WebKit również do jego `sys/lib`.
+  Weryfikacja wymagała `LD_LIBRARY_PATH` do lokalnych bibliotek,
+  `PLAYWRIGHT_BROWSERS_PATH=/tmp/ola-playwright`, 3 workers oraz jednorazowego
+  `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1`. To obejście preflight
+  systemowego ldconfig; rzeczywiste testy wszystkich silników wykonano.
+- `verify-ola`, przebieg `ola-visual-20261009`, Node 24.19.0, port 4340,
+  doctor PASS, świeży build fixture’ów. Otworzono osiem szablonów PL i home EN,
+  zapisano screenshoty/ARIA; kliknięto „Poznaj moją historię” z homepage
+  do O mnie z JS i bez JS. Odczyty POST: `[]`. Dowody i transcript:
+  `/tmp/ola-verify-evidence/ola-visual-20261009/`.
+  Obejrzano końcowe zrzuty zielonego plusa, linku i menu podczas przewijania.
+
+Staging nie był dostępny: proxy odrzuciło połączenie z domeną workers.dev
+(CONNECT 403). Wyniki dotyczą lokalnego kodu i fixture’ów, nie opublikowanego
+stagingu ani zdalnego Content Lake. Nie wykonano commitów, push ani publikacji.
+Natywny zoom, czytnik i fizyczne urządzenie pozostają niesprawdzone.
+Następny krok: odbiór zmian wyglądu i publikacja poprzez istniejący proces
+wdrożeniowy po uzyskaniu dostępu do stagingu.
 
 ### PR podstrony kontaktu 3a — 09.10.2026
 

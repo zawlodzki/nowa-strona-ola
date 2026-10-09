@@ -9,6 +9,10 @@
 }
 html {
   font-synthesis: none;
+  --ao-header-clearance: max(var(--ao-header-min), 5.5rem);
+  --ao-sticky-offset: calc(var(--ao-header-clearance) + 24px);
+  /* Root em follows enlarged text in WebKit, which caches root rem here. */
+  scroll-padding-block-start: calc(max(var(--ao-header-min), 5.5em) + 24px);
 }
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -260,6 +264,9 @@ body.ao-site {
   font-size: 0.9375rem;
   font-weight: 500;
 }
+.ao-site .ao-text-link {
+  color: var(--ao-accent);
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .ao-text-link .ao-icon {
@@ -288,7 +295,11 @@ body.ao-site {
   margin-block-start: 2px;
 }
 .ao-header {
-  position: relative;
+  container: header3a / inline-size;
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 15;
+  background: var(--ao-background);
 }
 .ao-header__inner {
   display: grid;
@@ -368,6 +379,9 @@ body.ao-site {
   background: var(--ao-background);
   color: var(--ao-ink);
   border-block-end: 1px solid var(--ao-line);
+  max-block-size: calc(100dvh - var(--ao-header-clearance));
+  overflow-y: auto;
+  overscroll-behavior-block: contain;
 }
 .ao-mobile-menu nav a {
   padding-block: var(--ao-space-12);
@@ -877,7 +891,7 @@ body.ao-site {
 .ao-skip:focus {
   inset-block-start: var(--ao-space-12);
 }
-@container page3a (max-width:1199px) {
+@container header3a (max-width:74.9375rem) {
   .ao-header__inner {
     display: flex;
     flex-wrap: wrap;
@@ -891,6 +905,8 @@ body.ao-site {
     display: block;
     margin-inline-start: auto;
   }
+}
+@container page3a (max-width:1199px) {
   .ao-heading--section {
     font-size: 3.25rem;
   }
@@ -946,7 +962,7 @@ body.ao-site {
     --ao-carousel-card-width: 86%;
   }
 }
-@container page3a (max-width:374px) {
+@container header3a (max-width:23.375rem) {
   .ao-header .ao-wordmark {
     font-size: 1.375rem;
   }
