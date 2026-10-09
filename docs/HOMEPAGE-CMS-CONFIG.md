@@ -656,7 +656,7 @@ miejscach używających tego zdjęcia. Użytkownik dopuścił upscale, kadrowani
 i poprawę tła, jeśli będą potrzebne.
 
 **Wykonane lokalnie:** podmieniono `src/assets/portraits/about.webp`
-i `originals/about.png`. Źródło ma 1440 × 1800 px; zachowano pełny kadr i tło
+(źródłowego PNG nie trzymamy w repo). Źródło ma 1440 × 1800 px; zachowano pełny kadr i tło
 bez upscalingu ani retuszu. WebP ma jakość 90. Wspólny plik obejmuje 13 obrazów
 w 12 mockupach HTML, w tym profil, homepage, e-book, konsultacje, blog i artykuł.
 Wymiary dużych obrazów zaktualizowano, małe awatary zachowują rozmiar widoku.

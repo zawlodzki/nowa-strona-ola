@@ -737,7 +737,7 @@ Następny krok implementacji: pakiet 1 etapu 4a.
 ## Zmiana portretu „O mnie”, 2026-10-09
 
 - [x] Pobrać rzeczywiste zdjęcie wskazane przez użytkownika i ocenić jakość.
-- [x] Podmienić współdzielony PNG/WebP i wszystkie 13 zastosowań w 12 mockupach.
+- [x] Podmienić współdzielony WebP i wszystkie 13 zastosowań w 12 mockupach.
 - [x] Zaktualizować wymiary, pochodzenie, opisy PL/EN i decyzję do przyszłego CMS.
 - [x] Sprawdzić pełne verify oraz kadry desktop/mobile, 320 px i stany dostępności.
       PASS: 57 unit, 81 E2E i 63 kontrole zdjęcia. Natywny zoom, czytnik

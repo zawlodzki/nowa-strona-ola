@@ -12,8 +12,7 @@ Na polecenie użytkownika zastąpiono portret „O mnie C” rzeczywistym
 [zdjęciem z Instagrama](https://www.instagram.com/p/CvUc_R0o9Kn/). Zmiana
 wspólnego `about.webp` obejmuje 13 obrazów w 12 lokalnych mockupach, w tym
 homepage, profil, konsultacje, e-book, indeks bloga i oba biogramy artykułu.
-Źródłowy JPEG ma 1440 × 1800 px. PNG zachowuje identyczne zdekodowane piksele,
-a WebP wyeksportowano z jakością 90. Nie upscalowano ani nie retuszowano zdjęcia.
+Źródłowy JPEG ma 1440 × 1800 px; w repo jest tylko WebP wyeksportowany z jakością 90. Nie upscalowano ani nie retuszowano zdjęcia.
 W profilu, sekcji „O mnie” i przy e-booku przesunięto punkt kadru CSS na
 `center 15%`, aby zachować górę włosów w szerokich ramkach. Zaktualizowano
 wymiary dużych obrazów; małe awatary zachowują swój rozmiar wyświetlania.
@@ -30,8 +29,8 @@ Bramka początkowego checkoutu `npm run verify` PASS na Node 24.21.0: format, to
 i 81 E2E. Dodatkowo 63 kontrole zdjęcia przy 320/390/1440 px w Chromium,
 Firefox i WebKit PASS: obraz 1440 × 1800 px załadowany, bez overflow.
 Profil przeszedł klawiaturę, CSS zoom 200%, reduced motion i brak JS w trzech
-silnikach. Potwierdzono identyczność pikseli JPEG/PNG; obejrzano kadry
-na desktopie i mobile. [Dowody i zakres](../output/portraits/2026-10-09/README.md).
+silnikach. Obejrzano kadry na desktopie i mobile. Zrzuty z przeglądu
+i źródłowy PNG nie trafiły do repo (tylko WebP).
 Format, lokalne odnośniki i `git diff --check` PASS. Natywny zoom 200%,
 czytnik ekranu i urządzenie fizyczne pozostają niesprawdzone.
 PR na aktualnym main obejmuje również wspólny import `SiteImage`, nowe kadry

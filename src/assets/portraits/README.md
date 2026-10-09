@@ -8,7 +8,7 @@ na polecenie użytkownika. Zmiana obejmuje wszystkie zastosowania `about.webp`.
 | Sekcja    | Plik do strony               | Oryginał                             | Rozmiar        | Tło           |
 | --------- | ---------------------------- | ------------------------------------ | -------------- | ------------- |
 | Hero A    | [hero.webp](hero.webp)       | [hero.png](originals/hero.png)       | 1122 × 1402 px | Przezroczyste |
-| O mnie    | [about.webp](about.webp)     | [about.png](originals/about.png)     | 1440 × 1800 px | Wnętrze       |
+| O mnie    | [about.webp](about.webp)     | — (tylko WebP w repo)                | 1440 × 1800 px | Wnętrze       |
 | Kontakt C | [contact.webp](contact.webp) | [contact.png](originals/contact.png) | 1536 × 1024 px | Jasne wnętrze |
 
 [selection.json](selection.json) zawiera mapowanie wybranych wariantów, wymiary,
@@ -21,8 +21,8 @@ Porównano zdekodowane piksele PNG i WebP: wszystkie widoczne piksele i kanał a
 są identyczne. Enkoder pomija część niewidocznych wartości RGB tam, gdzie alfa
 wynosi zero; nie zmienia to wyglądu. Oryginały pozostają źródłem dalszych eksportów.
 
-Portret „O mnie” pobrano jako JPEG 1440 × 1800 px. `originals/about.png`
-zachowuje jego zdekodowane piksele, a `about.webp` jest eksportem z jakością 90.
+Portret „O mnie” pobrano jako JPEG 1440 × 1800 px; `about.webp` jest jego eksportem
+z jakością 90. Źródłowego JPEG/PNG nie trzymamy w repo — źródłem jest post na Instagramie.
 Nie zmieniano rozdzielczości, kadru, twarzy ani tła; upscaling nie był potrzebny.
 Różne kadry w sekcjach i awatarach wynikają z istniejącego `object-fit` w CSS.
 Poprzedni wygenerowany portret pozostaje w historii Git.
@@ -47,7 +47,7 @@ Druga seria korzystała z czterech rzeczywistych referencji Aleksandry:
 - [Nagranie zawodowe](https://www.instagram.com/p/DO8FbZZDTee/) — wycięty zrzut pojedynczej klatki odtwarzania z twarzą i górą sylwetki.
 
 Pozostałych źródłowych zdjęć ani klatek z Instagrama nie dodano do repo.
-Wyjątkiem jest wybrany 2026-10-09 portret „O mnie”, zapisany jako PNG i WebP.
+Wyjątkiem jest wybrany 2026-10-09 portret „O mnie”, zapisany tylko jako WebP.
 
 ## Zdjęcie ukończenia
 
