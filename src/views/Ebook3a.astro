@@ -404,28 +404,29 @@ const jsonLd = {
     padding-block: 44px 52px;
   }
   .ebook3a :global(.ao-hero--product .ao-lead) {
-    max-width: 480px;
-    font-size: 20px;
+    max-inline-size: 480px;
+    font-size: 1.25rem;
   }
   .ebook3a :global(.ao-text-link) {
-    width: fit-content;
+    inline-size: fit-content;
     justify-content: flex-start;
     gap: 14px;
-    border-bottom: 0;
+    border-block-end: 0;
     text-decoration: underline;
     text-underline-offset: 6px;
   }
   .ebook3a-eyebrow {
-    margin: 0 0 var(--ao-space-12);
+    margin-block: 0 var(--ao-space-12);
+    margin-inline: 0;
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
     letter-spacing: 0.07em;
     text-transform: uppercase;
   }
   .ebook3a-copy {
-    max-width: 48ch;
-    margin-top: 22px;
-    font-size: 18px;
+    max-inline-size: 48ch;
+    margin-block-start: 22px;
+    font-size: 1.125rem;
     color: var(--ao-muted);
   }
   .ebook3a-copy strong {
@@ -436,15 +437,15 @@ const jsonLd = {
   .ebook3a-note,
   .ebook3a-caption {
     color: var(--ao-muted);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .ebook3a-note,
   .ebook3a-caption {
-    margin-top: 24px;
+    margin-block-start: 24px;
   }
   .ebook3a-split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 100px;
     align-items: center;
   }
@@ -452,39 +453,40 @@ const jsonLd = {
     position: relative;
     display: grid;
     place-items: center;
-    min-width: 0;
-    min-height: 540px;
+    min-inline-size: 0;
+    min-block-size: 540px;
     margin: 0;
-    padding: 40px 32px 18px;
+    padding-block: 40px 18px;
+    padding-inline: 32px;
     overflow: hidden;
     border-radius: 160px 24px 24px 24px;
     background: var(--ao-surface);
   }
   .ebook3a-orbit {
     position: absolute;
-    width: min(500px, 120%);
+    inline-size: min(500px, 120%);
     pointer-events: none;
   }
   .ebook3a-orbit :global(svg) {
     display: block;
-    width: 100%;
-    height: auto;
+    inline-size: 100%;
+    block-size: auto;
     color: var(--ao-line);
     transform: rotate(-20deg) scaleY(0.8);
   }
   .ebook3a-book {
     position: relative;
-    width: 252px;
-    max-width: 100%;
+    inline-size: 252px;
+    max-inline-size: 100%;
     transform: rotate(-8deg);
   }
   .ebook3a-stage .ebook3a-caption {
     position: relative;
-    margin-top: 30px;
+    margin-block-start: 30px;
   }
   .ebook3a-facts {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     padding-block: 24px;
     border-block: 1px solid var(--ao-line);
   }
@@ -492,113 +494,116 @@ const jsonLd = {
     display: grid;
     gap: 2px;
     padding-inline: 24px;
-    border-left: 1px solid var(--ao-line);
+    border-inline-start: 1px solid var(--ao-line);
   }
   .ebook3a-facts p:first-child {
-    padding-left: 0;
-    border-left: 0;
+    padding-inline-start: 0;
+    border-inline-start: 0;
   }
   .ebook3a-facts strong {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 600;
   }
   .ebook3a-facts span {
     color: var(--ao-muted);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .ebook3a-shelf {
-    min-width: 0;
-    padding: 32px 36px;
+    min-inline-size: 0;
+    padding-block: 32px;
+    padding-inline: 36px;
     border-radius: var(--ao-radius-image);
     background: var(--ao-surface);
   }
   .ebook3a-shelf :global(.ao-deco-bottles) {
     display: block;
-    width: 100%;
-    height: auto;
+    inline-size: 100%;
+    block-size: auto;
   }
   .ebook3a-questions {
     display: grid;
     gap: 8px;
-    margin-top: 22px;
+    margin-block-start: 22px;
   }
   .ebook3a-questions p {
-    width: fit-content;
-    padding: 8px 15px;
+    inline-size: fit-content;
+    padding-block: 8px;
+    padding-inline: 15px;
     border: 1px solid var(--ao-line);
     border-radius: 999px;
     background: var(--ao-background);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .ebook3a-questions p:nth-child(2) {
-    margin-left: auto;
+    margin-inline-start: auto;
   }
   .ebook3a-audience-head {
-    max-width: 700px;
+    max-inline-size: 700px;
   }
   .ebook3a-audience {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     column-gap: 80px;
     row-gap: 35px;
-    margin-top: 48px;
+    margin-block-start: 48px;
   }
   .ebook3a-audience article {
     position: relative;
-    padding-left: 48px;
+    padding-inline-start: 48px;
   }
   .ebook3a-mark {
     position: absolute;
-    left: 0;
-    top: -4px;
+    inset-inline-start: 0;
+    inset-block-start: -4px;
     display: grid;
     color: var(--ao-ink);
   }
   .ebook3a-audience p {
-    margin-top: 12px;
-    max-width: 420px;
+    margin-block-start: 12px;
+    max-inline-size: 420px;
     color: var(--ao-muted);
   }
   .ebook3a-audience-note {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--ao-line);
+    margin-block-start: 40px;
+    padding-block-start: 20px;
+    border-block-start: 1px solid var(--ao-line);
   }
   .ebook3a-contents {
     align-items: start;
   }
   .ebook3a-contents :global(.ao-text-link) {
-    margin-top: 20px;
+    margin-block-start: 20px;
   }
   .ebook3a-cloud {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    max-width: 360px;
-    margin-top: 32px;
+    max-inline-size: 360px;
+    margin-block-start: 32px;
   }
   .ebook3a-cloud span {
-    padding: 6px 14px;
+    padding-block: 6px;
+    padding-inline: 14px;
     border-radius: 999px;
     background: var(--ao-surface);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .ebook3a-chapter {
     padding-block: 19px;
-    border-bottom: 1px solid var(--ao-line);
+    border-block-end: 1px solid var(--ao-line);
   }
   .ebook3a-chapter:first-child {
-    padding-top: 0;
+    padding-block-start: 0;
   }
   .ebook3a-chapter summary {
     display: grid;
-    grid-template-columns: 35px 1fr 20px;
+    grid-template-columns: 35px minmax(0, 1fr) 20px;
     gap: 14px;
     align-items: baseline;
-    min-height: 44px;
+    min-block-size: 44px;
     cursor: pointer;
     list-style: none;
-    font-size: 21px;
+    font-size: 1.3125rem;
     font-weight: 550;
     line-height: 1.3;
   }
@@ -607,14 +612,15 @@ const jsonLd = {
   }
   .ebook3a-chapter-num {
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 400;
   }
   .ebook3a-chapter[open] summary :global(.ao-icon) {
     transform: rotate(45deg);
   }
   .ebook3a-chapter p {
-    margin: 10px 34px 0 49px;
+    margin-block: 10px 0;
+    margin-inline: 49px 34px;
     color: var(--ao-muted);
   }
   .ebook3a-preview {
@@ -626,10 +632,13 @@ const jsonLd = {
   }
   .ebook3a-sheet-wrap :global(.ao-deco-sheet-shadow) {
     position: absolute;
-    inset: 14px -12px -14px 12px;
+    inset-block-start: 14px;
+    inset-inline-end: -12px;
+    inset-block-end: -14px;
+    inset-inline-start: 12px;
     display: block;
-    width: auto;
-    height: auto;
+    inline-size: auto;
+    block-size: auto;
     color: color-mix(in srgb, var(--ao-ink) 9%, transparent);
     pointer-events: none;
     z-index: 0;
@@ -642,28 +651,30 @@ const jsonLd = {
     background: var(--ao-background);
   }
   .ebook3a-sheet :global(.ao-heading--card) {
-    margin-top: 25px;
-    font-size: 36px;
+    margin-block-start: 25px;
+    font-size: 2.25rem;
     font-weight: 600;
     line-height: 1.1;
   }
   .ebook3a-sheet > p:not(.ebook3a-eyebrow):not(.ebook3a-caption) {
-    margin-top: 15px;
+    margin-block-start: 15px;
     color: var(--ao-muted);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .ebook3a-sheet dl {
-    margin: 24px 0;
+    margin-block: 24px;
+    margin-inline: 0;
   }
   .ebook3a-sheet dl div {
     padding-block: 10px;
   }
   .ebook3a-sheet dt {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 550;
   }
   .ebook3a-sheet dd {
-    margin: 4px 0 0;
+    margin-block: 4px 0;
+    margin-inline: 0;
     overflow: hidden;
     color: var(--ao-muted);
     white-space: nowrap;
@@ -673,37 +684,38 @@ const jsonLd = {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 0;
-    padding-top: 15px;
-    border-top: 1px solid var(--ao-line);
-    font-size: 11px;
+    margin-block-start: 0;
+    padding-block-start: 15px;
+    border-block-start: 1px solid var(--ao-line);
+    font-size: 0.6875rem;
   }
   .ebook3a-materials {
     display: grid;
     gap: 10px;
-    margin: 25px 0 0;
+    margin-block: 25px 0;
+    margin-inline: 0;
     padding: 0;
     list-style: none;
   }
   .ebook3a-materials li {
     display: grid;
-    grid-template-columns: 16px 1fr;
+    grid-template-columns: 16px minmax(0, 1fr);
     gap: 12px;
     align-items: start;
   }
   .ebook3a-materials :global(.ao-deco-check) {
-    width: 12px;
-    height: 12px;
-    margin-top: 4px;
+    inline-size: 12px;
+    block-size: 12px;
+    margin-block-start: 4px;
     color: var(--ao-primary);
   }
   .ebook3a-outcomes-lead {
-    max-width: 650px;
+    max-inline-size: 650px;
   }
   .ebook3a-compare {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    margin-top: 40px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    margin-block-start: 40px;
     overflow: hidden;
     border: 1px solid var(--ao-line);
     border-radius: var(--ao-radius-image);
@@ -716,13 +728,13 @@ const jsonLd = {
   }
   .ebook3a-compare .ebook3a-eyebrow {
     display: block;
-    margin-bottom: 24px;
+    margin-block-end: 24px;
     text-transform: none;
     letter-spacing: 0;
   }
   .ebook3a-compare p {
-    margin-top: 22px;
-    font-size: 27px;
+    margin-block-start: 22px;
+    font-size: 1.6875rem;
     line-height: 1.25;
     letter-spacing: -0.025em;
   }
@@ -737,8 +749,8 @@ const jsonLd = {
     padding-block: 0;
   }
   .ebook3a-author :global(img) {
-    width: 100%;
-    height: 420px;
+    inline-size: 100%;
+    block-size: 420px;
     object-fit: cover;
     object-position: center 35%;
     border-radius: 100px 24px 24px 24px;
@@ -748,16 +760,17 @@ const jsonLd = {
     line-height: 1.6;
   }
   .ebook3a-author :global(.ao-text-link) {
-    margin-top: 22px;
-    font-size: 13px;
+    margin-block-start: 22px;
+    font-size: 0.8125rem;
   }
   .ebook3a-price-layout {
     align-items: start;
     gap: 70px;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   }
   .ebook3a-price-book {
-    padding: 55px 35px 0;
+    padding-block: 55px 0;
+    padding-inline: 35px;
   }
   .ebook3a-offer {
     padding: 40px;
@@ -765,39 +778,39 @@ const jsonLd = {
     background: var(--ao-background);
   }
   .ebook3a-offer :global(.ao-heading--card) {
-    margin-top: 8px;
-    font-size: 31px;
+    margin-block-start: 8px;
+    font-size: 1.9375rem;
     font-weight: 650;
   }
   .ebook3a-muted {
-    margin-top: 8px;
+    margin-block-start: 8px;
   }
   .ebook3a-price {
-    margin-top: 30px;
-    font-size: 88px;
+    margin-block-start: 30px;
+    font-size: 5.5rem;
     font-weight: 650;
     line-height: 1;
     letter-spacing: -0.06em;
   }
   .ebook3a-price span {
-    font-size: 38px;
+    font-size: 2.375rem;
     letter-spacing: -0.03em;
   }
   .ebook3a-price small {
     display: block;
-    margin-top: 10px;
+    margin-block-start: 10px;
     color: var(--ao-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 400;
     letter-spacing: 0;
   }
   .ebook3a-offer .ebook3a-materials {
     margin-block: 30px;
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
   .ebook3a-purchase summary {
-    width: 100%;
-    margin-top: 0;
+    inline-size: 100%;
+    margin-block-start: 0;
     cursor: pointer;
     list-style: none;
   }
@@ -805,56 +818,58 @@ const jsonLd = {
     display: none;
   }
   .ebook3a-purchase div {
-    margin-top: 16px;
+    margin-block-start: 16px;
     padding: 18px;
     border: 1px solid var(--ao-line);
     border-radius: 12px;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .ebook3a-purchase p {
-    margin-top: 8px;
+    margin-block-start: 8px;
     color: var(--ao-muted);
   }
   .ebook3a-offer .ebook3a-note {
-    margin-top: 18px;
-    font-size: 12px;
+    margin-block-start: 18px;
+    font-size: 0.75rem;
   }
   .ebook3a-reviews {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 50px;
-    margin-top: 40px;
+    margin-block-start: 40px;
   }
   .ebook3a-reviews :global(.ao-review) {
-    padding: 28px 32px;
+    padding-block: 28px;
+    padding-inline: 32px;
     border: 0;
     border-radius: var(--ao-radius-image);
     background: var(--ao-surface);
   }
   .ebook3a-reviews :global(.ao-review__mark) {
-    margin-bottom: 4px;
-    font-size: 60px;
+    margin-block-end: 4px;
+    font-size: 3.75rem;
     font-weight: 400;
     line-height: 1;
     color: inherit;
   }
   .ebook3a-reviews :global(.ao-review blockquote) {
-    max-width: none;
-    margin: 4px 0 25px;
-    font-size: 24px;
+    max-inline-size: none;
+    margin-block: 4px 25px;
+    margin-inline: 0;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.4;
   }
   .ebook3a-faq {
     align-items: start;
     gap: 90px;
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   }
   .ebook3a-faq .ebook3a-copy {
-    max-width: 290px;
+    max-inline-size: 290px;
   }
   .ebook3a-faq :global(.ao-text-link) {
-    margin-top: 20px;
+    margin-block-start: 20px;
   }
   @container page3a (max-width: 1199px) {
     .ebook3a-split,
@@ -870,7 +885,7 @@ const jsonLd = {
       gap: 24px;
     }
     .ebook3a-stage {
-      min-height: 485px;
+      min-block-size: 485px;
       padding-inline: 22px;
     }
     .ebook3a-split.ebook3a-problem,
@@ -878,10 +893,11 @@ const jsonLd = {
       gap: 35px;
     }
     .ebook3a-shelf {
-      padding: 25px 20px;
+      padding-block: 25px;
+      padding-inline: 20px;
     }
     .ebook3a-chapter summary {
-      font-size: 18px;
+      font-size: 1.125rem;
     }
     .ebook3a-sheet {
       padding: 25px;
@@ -893,7 +909,7 @@ const jsonLd = {
       padding: 30px;
     }
     .ebook3a-compare p {
-      font-size: 23px;
+      font-size: 1.4375rem;
     }
     .ebook3a-author {
       gap: 40px;
@@ -908,7 +924,7 @@ const jsonLd = {
       gap: 25px;
     }
     .ebook3a-reviews :global(.ao-review blockquote) {
-      font-size: 21px;
+      font-size: 1.3125rem;
     }
     .ebook3a-faq {
       gap: 40px;
@@ -920,46 +936,48 @@ const jsonLd = {
       padding-block: 32px 36px;
     }
     .ebook3a :global(.ao-hero--product .ao-lead) {
-      font-size: 18px;
+      font-size: 1.125rem;
     }
     .ebook3a-stage {
-      min-height: 510px;
+      min-block-size: 510px;
       padding-block: 40px 25px;
     }
     .ebook3a-facts {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 16px;
     }
     .ebook3a-facts p,
     .ebook3a-facts p:first-child {
-      grid-template-columns: 1fr 1.1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
       align-items: center;
       gap: 16px;
       padding: 0;
       border: 0;
     }
     .ebook3a-facts strong {
-      font-size: 17px;
+      font-size: 1.0625rem;
     }
     .ebook3a-facts span {
-      font-size: 12px;
+      font-size: 0.75rem;
     }
     .ebook3a-split,
     .ebook3a-price-layout,
     .ebook3a-faq {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 40px;
     }
     .ebook3a-audience {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       row-gap: 28px;
-      margin-top: 35px;
+      margin-block-start: 35px;
     }
     .ebook3a-cloud {
-      max-width: none;
+      max-inline-size: none;
     }
     .ebook3a-sheet-wrap {
-      margin: 10px 8px;
+      margin-block: 10px;
+      margin-inline: 8px;
+      max-inline-size: calc(100% - 16px);
     }
     .ebook3a-sheet {
       padding: 30px;
@@ -972,14 +990,14 @@ const jsonLd = {
       flex-direction: column;
     }
     .ebook3a-compare {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .ebook3a-compare p {
-      font-size: 25px;
+      font-size: 1.5625rem;
     }
     .ebook3a-author :global(img) {
-      height: 390px;
-      max-width: 470px;
+      block-size: 390px;
+      max-inline-size: 470px;
     }
     .ebook3a-price-book {
       display: none;
@@ -988,19 +1006,19 @@ const jsonLd = {
       padding: 30px;
     }
     .ebook3a-reviews {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .ebook3a-reviews :global(.ao-review blockquote) {
-      font-size: 23px;
+      font-size: 1.4375rem;
     }
   }
   @container page3a (max-width: 374px) {
     .ebook3a-stage {
-      min-height: 465px;
+      min-block-size: 465px;
       padding-inline: 18px;
     }
     .ebook3a-orbit {
-      width: 370px;
+      inline-size: 370px;
     }
     .ebook3a-sheet-wrap {
       transform: none;
@@ -1009,15 +1027,15 @@ const jsonLd = {
       padding: 22px;
     }
     .ebook3a-sheet :global(.ao-heading--card) {
-      font-size: 32px;
+      font-size: 2rem;
     }
     .ebook3a-chapter p {
       margin-inline: 0;
     }
     .ebook3a-chapter summary {
-      grid-template-columns: 24px 1fr 16px;
+      grid-template-columns: 24px minmax(0, 1fr) 16px;
       gap: 10px;
-      font-size: 18px;
+      font-size: 1.125rem;
     }
     .ebook3a-offer {
       padding: 24px;

@@ -1,0 +1,24 @@
+---
+import type { GetStaticPaths } from "astro";
+import {
+  getLegalPagePaths,
+  getLegalPage,
+  getSiteSettings,
+} from "@/sanity/repository";
+import LegalPage from "@/views/LegalPage.astro";
+export const getStaticPaths = (async () => {
+  const pages = await getLegalPagePaths();
+  return pages
+    .filter((p) => p.language === "en" && p.slug)
+    .map((p) => ({ params: { legalSlug: p.slug as string } }));
+}) satisfies GetStaticPaths;
+const lang = "en" as const;
+const slug = Astro.params.legalSlug;
+if (!slug) throw new Error("Missing legal page slug.");
+const [page, settings] = await Promise.all([
+  getLegalPage(lang, slug),
+  getSiteSettings(lang),
+]);
+---
+
+<LegalPage lang={lang} page={page} settings={settings} />

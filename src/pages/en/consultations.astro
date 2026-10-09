@@ -1,6 +1,6 @@
 ---
 import { getPage, getSiteSettings } from "@/sanity/repository";
-import ComposedPage from "@/views/ComposedPage.astro";
+import ConsultationPage from "@/views/ConsultationPage.astro";
 
 const lang = "en" as const;
 const [page, settings] = await Promise.all([
@@ -9,4 +9,4 @@ const [page, settings] = await Promise.all([
 ]);
 ---
 
-<ComposedPage lang={lang} page={page} settings={settings} />
+<ConsultationPage lang={lang} page={page} settings={settings} />

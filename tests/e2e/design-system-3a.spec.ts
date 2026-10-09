@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { renderedColor } from "./helpers/color";
 import AxeBuilder from "@axe-core/playwright";
 
 for (const colorScheme of ["light", "dark"] as const) {
@@ -14,9 +15,7 @@ for (const colorScheme of ["light", "dark"] as const) {
         "Design system 3a",
       );
       expect(
-        await page.evaluate(
-          () => getComputedStyle(document.body).backgroundColor,
-        ),
+        await renderedColor(page.locator("body"), "background-color"),
       ).toBe(
         colorScheme === "light" ? "rgb(255, 255, 255)" : "rgb(41, 26, 33)",
       );
@@ -75,9 +74,9 @@ test("3a menu, FAQ, carousel and theme provide working controls", async ({
   const theme = page.getByRole("button", { name: "Ciemny motyw", exact: true });
   await theme.click();
   await expect(theme).toHaveAttribute("aria-pressed", "true");
-  expect(
-    await page.evaluate(() => getComputedStyle(document.body).backgroundColor),
-  ).toBe("rgb(41, 26, 33)");
+  expect(await renderedColor(page.locator("body"), "background-color")).toBe(
+    "rgb(41, 26, 33)",
+  );
 });
 
 test("3a catalog without JavaScript preserves native navigation and content", async ({
@@ -111,9 +110,9 @@ test("3a catalog without JavaScript preserves native navigation and content", as
   ).toBeVisible();
   await expect(page.locator(".ao-carousel__controls")).toBeHidden();
   await expect(page.locator("#ds-books article")).toHaveCount(4);
-  expect(
-    await page.evaluate(() => getComputedStyle(document.body).backgroundColor),
-  ).toBe("rgb(41, 26, 33)");
+  expect(await renderedColor(page.locator("body"), "background-color")).toBe(
+    "rgb(41, 26, 33)",
+  );
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth + 1,

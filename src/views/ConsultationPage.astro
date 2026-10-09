@@ -1,0 +1,52 @@
+---
+import type { Locale } from "@ola/shared";
+import { shellLinks } from "@/content/map-homepage";
+import { homepageCopyright } from "@/sanity/homepage-fixtures";
+import { pagePath } from "@/lib/paths";
+import type { PageContent, SiteSettings } from "@/sanity/repository";
+import SiteShell3a from "@/views/SiteShell3a.astro";
+import { consultationCopy } from "@/content/consultation-seed";
+import { mapConsultation } from "@/content/map-consultation";
+import Consultation3a from "@/views/Consultation3a.astro";
+export interface Props {
+  lang: Locale;
+  page: PageContent;
+  settings: SiteSettings;
+  preview?: boolean;
+}
+const { lang, page, settings, preview = false } = Astro.props;
+const alternateHref = page.translation?.slug
+  ? pagePath(
+      page.translation.language === "en" ? "en" : "pl",
+      page.translation.slug,
+    )
+  : null;
+const shell = shellLinks(settings);
+const navigation = shell.navigation.map((item) => ({
+  ...item,
+  current: item.href === pagePath(lang, page.slug),
+}));
+const consultation = mapConsultation(page, lang);
+const consultationLabels = consultationCopy[lang];
+---
+
+<SiteShell3a
+  legacyBase
+  lang={lang}
+  title={page.seo?.title ?? page.title}
+  description={page.seo?.description ?? undefined}
+  preview={preview}
+  footerNote={settings.footerNote ?? ""}
+  copyright={homepageCopyright(lang)}
+  languageHref={alternateHref}
+  navigation={[...consultationLabels.navigation]}
+  footerLinks={navigation}
+  headerCta={{
+    label: `${consultationLabels.headerCtaPrefix} · ${consultation.price.price} ${consultation.price.currencyLabel}`,
+    href: "#cena",
+  }}
+  socialLinks={shell.socialLinks}
+  legalLinks={shell.legalLinks}
+>
+  <Consultation3a lang={lang} content={consultation} />
+</SiteShell3a>

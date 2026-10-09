@@ -52,27 +52,30 @@ const { content } = Astro.props;
 
 <style>
   .legal-heading {
-    padding-top: 32px;
+    padding-block-start: 32px;
   }
   .legal3a h1 {
-    max-width: 1000px;
-    margin: 40px 0 16px;
-    font-size: clamp(32px, 4.2vw, 56px);
+    max-inline-size: 1000px;
+    margin-block: 40px 16px;
+    margin-inline: 0;
+    font-size: var(--ao-legal-heading);
     line-height: 1.08;
     letter-spacing: -0.04em;
   }
   .legal-effective {
     color: var(--ao-muted);
-    font-size: 15px;
-    margin: 0 0 32px;
+    font-size: 0.9375rem;
+    margin-block: 0 32px;
+    margin-inline: 0;
   }
   .legal-layout {
     display: grid;
     gap: 32px;
-    padding-bottom: 80px;
+    padding-block-end: 80px;
   }
   .legal-toc {
-    padding: 20px 24px;
+    padding-block: 20px;
+    padding-inline: 24px;
     border-radius: var(--ao-radius-panel);
     background: var(--ao-surface);
   }
@@ -81,55 +84,69 @@ const { content } = Astro.props;
     cursor: pointer;
   }
   .legal-toc ol {
-    margin: 16px 0 0;
-    padding-left: 20px;
+    margin-block: 16px 0;
+    margin-inline: 0;
+    padding-inline-start: 20px;
   }
-  .legal-toc a:hover {
-    color: var(--ao-primary);
-    text-decoration: underline;
-    text-underline-offset: 4px;
+  @media (hover: hover) and (pointer: fine) {
+    .legal-toc a:hover {
+      color: var(--ao-primary);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
   }
   .article-richtext {
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 1.8;
   }
   .article-richtext :global(p) {
-    margin-bottom: 24px;
+    margin-block-end: 24px;
   }
   .article-richtext :global(h2) {
-    margin: 56px 0 20px;
-    font-size: 34px;
+    margin-block: 56px 20px;
+    margin-inline: 0;
+    font-size: 2.125rem;
     letter-spacing: -0.03em;
     line-height: 1.15;
-    scroll-margin-top: 32px;
+    scroll-margin-block-start: 32px;
   }
   .article-richtext :global(h2:focus-visible) {
     outline: 2px solid var(--ao-primary);
     outline-offset: 8px;
   }
   .article-richtext :global(h3) {
-    font-size: 23px;
+    font-size: 1.4375rem;
     font-weight: 600;
-    margin: 32px 0 16px;
+    margin-block: 32px 16px;
+    margin-inline: 0;
   }
   .article-richtext :global(ul),
   .article-richtext :global(ol) {
-    padding-left: 24px;
-    margin: 20px 0 28px;
+    padding-inline-start: 24px;
+    margin-block: 20px 28px;
+    margin-inline: 0;
+  }
+  /* Legacy base (Tailwind preflight) hides list markers; legal clauses need
+     their numbers, as in the article-3a richtext mockup (nested too). */
+  .article-richtext :global(ol) {
+    list-style: decimal;
   }
   .article-richtext :global(li) {
-    padding-left: 8px;
-    margin: 12px 0;
+    padding-inline-start: 8px;
+    margin-block: 12px;
+    margin-inline: 0;
   }
   .article-richtext :global(a) {
     text-decoration: underline;
     text-underline-offset: 4px;
   }
   .article-richtext :global(blockquote) {
-    margin: 40px 0;
-    padding: 32px 0;
+    margin-block: 40px;
+    margin-inline: 0;
+    padding-block: 32px;
+    padding-inline: 0;
     border-block: 1px solid var(--ao-line);
-    font-size: 22px;
+    font-size: 1.375rem;
     line-height: 1.45;
     letter-spacing: -0.02em;
     font-weight: 500;
@@ -138,13 +155,15 @@ const { content } = Astro.props;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.9em;
     background: var(--ao-surface);
-    padding: 1px 5px;
+    padding-block: 1px;
+    padding-inline: 5px;
     border-radius: 4px;
     overflow-wrap: anywhere;
   }
   .article-richtext :global(.article-table-wrap) {
     overflow-x: auto;
-    margin: 28px 0;
+    margin-block: 28px;
+    margin-inline: 0;
     scrollbar-color: var(--ao-primary) var(--ao-surface);
   }
   .article-richtext :global(.article-table-wrap:focus-visible) {
@@ -153,21 +172,21 @@ const { content } = Astro.props;
   }
   .article-richtext :global(table) {
     border-collapse: collapse;
-    width: 100%;
-    font-size: 15px;
+    inline-size: 100%;
+    font-size: 0.9375rem;
     line-height: 1.6;
   }
   .article-richtext :global(caption) {
-    text-align: left;
-    font-size: 13px;
+    text-align: start;
+    font-size: 0.8125rem;
     color: var(--ao-muted);
-    margin-bottom: 12px;
+    margin-block-end: 12px;
   }
   .article-richtext :global(th),
   .article-richtext :global(td) {
     padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--ao-line);
+    text-align: start;
+    border-block-end: 1px solid var(--ao-line);
     vertical-align: top;
   }
   .article-richtext :global(thead) {
@@ -175,7 +194,7 @@ const { content } = Astro.props;
   }
   .article-richtext :global(tbody th) {
     font-weight: 500;
-    width: 28%;
+    inline-size: 28%;
   }
   @media (min-width: 960px) {
     .legal-layout {
@@ -184,7 +203,7 @@ const { content } = Astro.props;
     }
     .legal-toc {
       position: sticky;
-      top: 24px;
+      inset-block-start: 24px;
     }
     .legal-layout:not(:has(.legal-toc)) {
       grid-template-columns: minmax(0, 1fr);
@@ -192,10 +211,10 @@ const { content } = Astro.props;
   }
   @media (max-width: 959px) {
     .legal3a h1 {
-      font-size: clamp(28px, 8vw, 40px);
+      font-size: var(--ao-legal-mobile);
     }
     .article-richtext :global(h2) {
-      font-size: 26px;
+      font-size: 1.625rem;
     }
   }
 </style>

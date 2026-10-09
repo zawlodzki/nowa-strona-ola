@@ -1,0 +1,35 @@
+---
+import type { Locale } from "@ola/shared";
+import { pagePath } from "@/lib/paths";
+import type { PageContent, SiteSettings } from "@/sanity/repository";
+import Layout from "@/layouts/Layout.astro";
+import SiteFooter from "@/ui/site-footer/SiteFooter.astro";
+import SiteHeader from "@/ui/site-header/SiteHeader.astro";
+import PageSections from "@/views/PageSections.astro";
+export interface Props {
+  lang: Locale;
+  page: PageContent;
+  settings: SiteSettings;
+  section?: "home" | "page";
+}
+const { lang, page, settings, section = "page" } = Astro.props;
+const alternateHref = page.translation?.slug
+  ? pagePath(
+      page.translation.language === "en" ? "en" : "pl",
+      page.translation.slug,
+    )
+  : null;
+---
+
+<Layout lang={lang} title={page.seo?.title ?? page.title}>
+  <SiteHeader
+    lang={lang}
+    section={section}
+    alternateHref={alternateHref}
+    navigation={settings.navigation}
+  />
+  <main id="main">
+    <PageSections lang={lang} sections={page.sections} />
+  </main>
+  <SiteFooter lang={lang} note={settings.footerNote ?? undefined} />
+</Layout>

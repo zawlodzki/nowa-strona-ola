@@ -92,3 +92,24 @@ test("newsletter consent links to privacy and newsletter terms", async ({
     consent.getByRole("link", { name: "regulamin newslettera" }),
   ).toHaveAttribute("href", "/regulamin-newslettera/");
 });
+
+test("legal content ordered lists show numbers, TOC and nav stay unstyled", async ({
+  page,
+}) => {
+  await page.goto("/regulamin/");
+  const styles = await page.evaluate(() => ({
+    content: [...document.querySelectorAll(".article-richtext ol")].map(
+      (el) => getComputedStyle(el).listStyleType,
+    ),
+    toc: [...document.querySelectorAll(".legal-toc ol")].map(
+      (el) => getComputedStyle(el).listStyleType,
+    ),
+    breadcrumbs: [...document.querySelectorAll("nav[aria-label] ol")]
+      .filter((el) => !el.closest(".legal-toc"))
+      .map((el) => getComputedStyle(el).listStyleType),
+  }));
+  expect(styles.content.length).toBeGreaterThan(0);
+  expect(new Set(styles.content)).toEqual(new Set(["decimal"]));
+  expect(styles.toc.every((type) => type === "none")).toBe(true);
+  expect(styles.breadcrumbs.every((type) => type === "none")).toBe(true);
+});

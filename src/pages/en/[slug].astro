@@ -1,54 +1,39 @@
 ---
 import type { GetStaticPaths } from "astro";
-
 import { HOME_SLUG, reservedPageSlugs } from "@/lib/paths";
 import {
-  findLegalPage,
   getLegalPagePaths,
   getPage,
   getPagePaths,
   getSiteSettings,
 } from "@/sanity/repository";
-import ComposedPage from "@/views/ComposedPage.astro";
-import LegalPage from "@/views/LegalPage.astro";
-
+import LegacyPage from "@/views/LegacyPage.astro";
 export const getStaticPaths = (async () => {
   const [pages, legal] = await Promise.all([
     getPagePaths(),
     getLegalPagePaths(),
   ]);
   const legalSlugs = new Set(
-    legal
-      .filter((entry) => entry.language === "en" && entry.slug)
-      .map((entry) => entry.slug as string),
+    legal.filter((p) => p.language === "en").map((p) => p.slug),
   );
-  const pageSlugs = pages
+  return pages
     .filter(
-      (entry) =>
-        entry.language === "en" &&
-        entry.slug &&
-        entry.slug !== HOME_SLUG &&
-        !(reservedPageSlugs as readonly string[]).includes(entry.slug) &&
-        !legalSlugs.has(entry.slug),
+      (p) =>
+        p.language === "en" &&
+        p.slug &&
+        p.slug !== HOME_SLUG &&
+        !(reservedPageSlugs as readonly string[]).includes(p.slug) &&
+        !legalSlugs.has(p.slug),
     )
-    .map((entry) => entry.slug as string);
-  return [...new Set([...pageSlugs, ...legalSlugs])].map((slug) => ({
-    params: { slug },
-  }));
+    .map((p) => ({ params: { slug: p.slug as string } }));
 }) satisfies GetStaticPaths;
-
 const lang = "en" as const;
 const slug = Astro.params.slug;
 if (!slug) throw new Error("Missing page slug.");
-const [legal, settings] = await Promise.all([
-  findLegalPage(lang, slug),
+const [page, settings] = await Promise.all([
+  getPage(lang, slug),
   getSiteSettings(lang),
 ]);
-const page = legal ? null : await getPage(lang, slug);
 ---
 
-{legal ? (
-  <LegalPage lang={lang} page={legal} settings={settings} />
-) : page ? (
-  <ComposedPage lang={lang} page={page} settings={settings} />
-) : null}
+<LegacyPage lang={lang} page={page} settings={settings} />

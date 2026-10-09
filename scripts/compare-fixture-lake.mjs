@@ -120,7 +120,10 @@ async function inventory(page) {
 
 const fixture = await serve(fixtureRoot);
 const lake = await serve(lakeRoot);
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+});
 const failures = [];
 
 try {

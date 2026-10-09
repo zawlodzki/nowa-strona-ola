@@ -300,6 +300,17 @@ Stan po pakiecie 6 (08.10.2026):
   na etap 4a (pakiety 5–7). Nie jest to docelowy budżet; optymalizacja
   później. Decyzja 07.10.2026.
 
+Audyt optymalizacji CSS, 08.10.2026:
+
+- [x] Zweryfikować aktywny CSS według lokalnego good-css i zmierzyć build;
+      [wyniki i ograniczenia](CSS-REVIEW-2026-10-08.md).
+- [x] Odizolować CSS szablonów 3a od legacy i niewykorzystywanych widoków;
+      mierzyć koszt CSS per szablon, także inline.
+- [x] Poprawić skalowanie fontów, interakcje, tokeny i porządki CSS wskazane
+      w audycie; dodać regresje większego tekstu, dotyku i forced colors.
+- [ ] Dokończyć odbiór we wszystkich trzech silnikach oraz ręczny odbiór UI;
+      wyniki i ograniczenia bieżącej sesji zapisać w PROGRESS.md.
+
 Kolejność wynika z [mapy integracji](../design-system/ASTRO-INTEGRATION.md).
 Modele współdzielone potrzebne homepage wprowadzić już w pierwszym pakiecie,
 choć pełne landingi i kolekcje powstaną później.
