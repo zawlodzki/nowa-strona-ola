@@ -932,6 +932,9 @@ body.ao-site {
   .ao-footer__top {
     grid-template-columns: minmax(0, 1fr);
   }
+  .ao-footer__navigation {
+    column-gap: var(--ao-space-12);
+  }
   .ao-split-panel__copy {
     padding-block: var(--ao-space-32);
     padding-inline: var(--ao-space-24);
@@ -946,6 +949,9 @@ body.ao-site {
   }
   .ao-header__inner {
     gap: var(--ao-space-8);
+  }
+  .ao-footer__navigation {
+    column-gap: var(--ao-space-8);
   }
 }
 @container page3a (max-width:270px) {
