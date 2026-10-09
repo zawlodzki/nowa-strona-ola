@@ -296,15 +296,20 @@ export const textImageSectionType = defineType({
   preview: sectionPreview("Tekst i obraz"),
 });
 
-export const logosSectionType = defineType({
-  name: "logosSection",
-  title: "Logotypy",
+export const audienceIconOptions = [
+  { title: "Strzałka", value: "arrow" },
+  { title: "Znacznik", value: "check" },
+] as const;
+
+export const audienceSectionType = defineType({
+  name: "audienceSection",
+  title: "Z kim pracuję",
   type: "object",
   icon: UsersIcon,
   fields: [
     defineField({
       name: "title",
-      title: "Tytuł",
+      title: "Nagłówek",
       type: "string",
       validation: requiredString,
     }),
@@ -316,49 +321,46 @@ export const logosSectionType = defineType({
       validation: (rule) => rule.max(240),
     }),
     defineField({
-      name: "names",
-      title: "Nazwy",
-      description: "Używane, gdy brak osobnych logotypów z mediami.",
-      type: "array",
-      of: [defineArrayMember({ type: "string" })],
-      validation: (rule) => rule.max(8),
-    }),
-    defineField({
       name: "items",
-      title: "Logotypy",
+      title: "Karty",
+      description: "Od 4 do 6 kart: dla kogo jest współpraca.",
       type: "array",
       of: [
         defineArrayMember({
           type: "object",
           fields: [
             defineField({
-              name: "name",
-              title: "Nazwa",
+              name: "title",
+              title: "Tytuł",
               type: "string",
-              validation: (rule) => rule.required().max(80),
+              validation: (rule) => rule.required().max(60),
             }),
             defineField({
-              name: "media",
-              title: "Znak",
-              type: "mediaObject",
+              name: "body",
+              title: "Krótki opis",
+              type: "text",
+              rows: 3,
+              validation: (rule) => rule.required().max(200),
+            }),
+            defineField({
+              name: "icon",
+              title: "Ikona",
+              description: "Opcjonalny znak SVG z zestawu serwisu.",
+              type: "string",
+              options: {
+                list: [...audienceIconOptions],
+                layout: "radio",
+                direction: "horizontal",
+              },
             }),
           ],
-          preview: { select: { title: "name" } },
+          preview: { select: { title: "title", subtitle: "body" } },
         }),
       ],
-      validation: (rule) =>
-        rule.max(8).custom((items, context) => {
-          const parent = context.parent as { names?: string[] } | undefined;
-          const named = (parent?.names ?? []).filter(Boolean);
-          const listed = Array.isArray(items) ? items.length : 0;
-          if (named.length + listed < 2) {
-            return "Podaj co najmniej dwa logotypy (nazwy albo znaki).";
-          }
-          return true;
-        }),
+      validation: (rule) => rule.required().min(4).max(6),
     }),
   ],
-  preview: sectionPreview("Logotypy"),
+  preview: sectionPreview("Z kim pracuję"),
 });
 
 export const cardsSectionType = defineType({
@@ -1492,7 +1494,7 @@ export const pageSectionTypes = [
   heroSectionType,
   textSectionType,
   textImageSectionType,
-  logosSectionType,
+  audienceSectionType,
   cardsSectionType,
   listSectionType,
   processSectionType,

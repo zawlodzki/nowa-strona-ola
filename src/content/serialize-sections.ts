@@ -2,6 +2,7 @@ import type { Locale } from "@ola/shared";
 
 import {
   isTextCards,
+  toAudience,
   toCards,
   toComparison,
   toCredentials,
@@ -12,7 +13,6 @@ import {
   toFormCopy,
   toHero,
   toList,
-  toLogos,
   toMediaSection,
   toMetrics,
   toPricing,
@@ -95,13 +95,13 @@ export function serializeSection(section: Section, language: Locale): string {
         .filter(Boolean)
         .join("\n\n");
     }
-    case "logosSection": {
-      const content = toLogos(section);
-      const names =
-        content.items.length > 0
-          ? content.items.map((item) => item.name)
-          : content.names;
-      return [heading(2, content.title), content.lead, bullet(names)]
+    case "audienceSection": {
+      const content = toAudience(section);
+      return [
+        heading(2, content.title),
+        content.lead,
+        ...content.items.flatMap((item) => [heading(3, item.title), item.body]),
+      ]
         .filter(Boolean)
         .join("\n\n");
     }
@@ -375,7 +375,7 @@ export const sectionMarkdownExamples: Record<KnownSectionType, string> = {
   heroSection: "## Tytuł hero\n\nLead hero.",
   textSection: "## Tekst\n\nAkapit.",
   textImageSection: "## O mnie\n\nLead.\n\nAkapit.",
-  logosSection: "## Marki\n\n- ALAB laboratoria",
+  audienceSection: "## Z kim pracuję\n\n### PCOS\n\nOpis.",
   cardsSection: "## Karty\n\n### Karta\n\nOpis.",
   listSection: "## Lista\n\n- Punkt",
   processSection: "## Proces\n\n### Krok\n\nOpis.",

@@ -21,20 +21,20 @@ function sectionOf<T extends PageSection["_type"]>(
 }
 import { assertKnownSections } from "@/content/sections";
 import {
+  toAudience,
   toEbooks,
   toFormCopy,
   toHero,
-  toLogos,
   toMetrics,
   toServiceOffer,
   toTestimonials,
   toTextImage,
 } from "@/content/map-sections";
 import type {
+  AudienceContent,
   EbooksContent,
   FormCopy,
   HeroContent,
-  LogosContent,
   MediaSpec,
   MetricsContent,
   ServiceOfferContent,
@@ -44,7 +44,7 @@ import type {
 
 export interface HomepageView {
   hero: HeroContent;
-  partners: LogosContent;
+  audience: AudienceContent;
   approach: MetricsContent;
   about: TextImageContent;
   ebooks: EbooksContent;
@@ -55,7 +55,7 @@ export interface HomepageView {
 
 const expectedTypes = [
   "heroSection",
-  "logosSection",
+  "audienceSection",
   "metricsSection",
   "textImageSection",
   "ebooksSection",
@@ -73,7 +73,9 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
     );
   }
   const hero = toHero(sectionOf(sections[0], "heroSection", language, 0));
-  const partners = toLogos(sectionOf(sections[1], "logosSection", language, 1));
+  const audience = toAudience(
+    sectionOf(sections[1], "audienceSection", language, 1),
+  );
   const approach = toMetrics(
     sectionOf(sections[2], "metricsSection", language, 2),
   );
@@ -115,7 +117,7 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
 
   return {
     hero,
-    partners,
+    audience,
     approach,
     about,
     ebooks,

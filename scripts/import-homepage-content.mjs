@@ -79,36 +79,6 @@ const MEDIA = [
     source: "src/assets/editorial/food-editorial.webp",
     alt: "Kolorowy posiłek z warzywami i pieczywem",
   },
-  {
-    id: "logo-alab",
-    role: "partner",
-    source: "src/assets/partners/alab.svg",
-    alt: "ALAB laboratoria",
-  },
-  {
-    id: "logo-uns",
-    role: "partner",
-    source: "src/assets/partners/uns.png",
-    alt: "UNS",
-  },
-  {
-    id: "logo-norsan",
-    role: "partner",
-    source: "src/assets/partners/norsan.png",
-    alt: "NORSAN",
-  },
-  {
-    id: "logo-norsa",
-    role: "partner",
-    source: "src/assets/partners/norsa.png",
-    alt: "Norsa Pharma",
-  },
-  {
-    id: "logo-omni",
-    role: "partner",
-    source: "src/assets/partners/omni.png",
-    alt: "OMNi-BiOTiC",
-  },
 ];
 
 function documentId(type, language, slug) {
@@ -408,7 +378,7 @@ function documents() {
       _createdNote: created,
       sections: [
         { _key: "home-hero", _type: "heroSection", variant: "split" },
-        { _key: "home-logos", _type: "logosSection" },
+        { _key: "home-audience", _type: "audienceSection" },
         { _key: "home-approach", _type: "metricsSection", variant: "approach" },
         { _key: "home-about", _type: "textImageSection" },
         {

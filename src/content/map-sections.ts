@@ -4,6 +4,8 @@ import { articlePath, ebookPath } from "@/lib/paths";
 import { formatDate, toDatetime } from "@/lib/dates";
 import type {
   ActionLink,
+  AudienceContent,
+  AudienceIconKey,
   CardsContent,
   ComparisonContent,
   CredentialsContent,
@@ -19,7 +21,6 @@ import type {
   FormInputKind,
   HeroContent,
   ListContent,
-  LogosContent,
   MediaContent,
   MediaSpec,
   MetricItem,
@@ -36,6 +37,7 @@ import type {
   TextContent,
   TextImageContent,
 } from "@/sections/types";
+import { AUDIENCE_ICON_KEYS } from "@/sections/types";
 import { formatServicePrice } from "@/lib/offer";
 
 interface LinkValue {
@@ -177,29 +179,40 @@ export function toTextImage(section: {
   };
 }
 
-export function toLogos(section: {
+const audienceIconKeys = new Set<string>(AUDIENCE_ICON_KEYS);
+
+function toAudienceIcon(value?: string | null): AudienceIconKey | undefined {
+  if (!value) return undefined;
+  if (!audienceIconKeys.has(value)) {
+    throw new Error(`Nieznana ikona karty „Z kim pracuję”: ${value}.`);
+  }
+  return value as AudienceIconKey;
+}
+
+export function toAudience(section: {
   title?: string | null;
   lead?: string | null;
-  names?: (string | null)[] | null;
-  items?: { name?: string | null; media?: MediaValue | null }[] | null;
-}): LogosContent {
-  const items = (section.items ?? [])
-    .filter((item) => item?.name)
-    .map((item) => ({
-      name: required(item.name, "nazwa logotypu"),
-      media:
-        item.media?.alt || item.media?.label ? toMedia(item.media) : undefined,
-    }));
-  const names = (section.names ?? []).filter((item): item is string =>
-    Boolean(item),
-  );
-  if (items.length + names.length < 2) {
-    throw new Error("Logotypy wymagają co najmniej dwóch pozycji.");
+  items?:
+    | {
+        title?: string | null;
+        body?: string | null;
+        icon?: string | null;
+      }[]
+    | null;
+}): AudienceContent {
+  const items = (section.items ?? []).map((item) => ({
+    title: required(item.title, "tytuł karty odbiorczyń"),
+    body: required(item.body, "opis karty odbiorczyń"),
+    icon: toAudienceIcon(item.icon),
+  }));
+  if (items.length < 4 || items.length > 6) {
+    throw new Error(
+      `Sekcja „Z kim pracuję” wymaga od 4 do 6 kart, jest ${items.length}.`,
+    );
   }
   return {
-    title: required(section.title, "tytuł logotypów"),
+    title: required(section.title, "nagłówek sekcji Z kim pracuję"),
     lead: section.lead ?? undefined,
-    names,
     items,
   };
 }

@@ -2,7 +2,6 @@ export const catalogSectionIds = [
   "hero",
   "text",
   "text-image",
-  "logos",
   "cards",
   "list",
   "process",
@@ -71,16 +70,20 @@ export interface QuestionMapContent extends TextContent {
   caption?: string;
 }
 
-export interface LogoItem {
-  name: string;
-  media?: MediaSpec;
+export const AUDIENCE_ICON_KEYS = ["arrow", "check"] as const;
+
+export type AudienceIconKey = (typeof AUDIENCE_ICON_KEYS)[number];
+
+export interface AudienceItem {
+  title: string;
+  body: string;
+  icon?: AudienceIconKey;
 }
 
-export interface LogosContent {
+export interface AudienceContent {
   title: string;
   lead?: string;
-  names: string[];
-  items: LogoItem[];
+  items: AudienceItem[];
 }
 
 export interface CardItem {
@@ -369,7 +372,6 @@ export interface CatalogCopy {
   heroSplit: HeroContent;
   text: TextContent;
   textImage: TextImageContent;
-  logos: LogosContent;
   cards: CardsContent;
   list: ListContent;
   process: ProcessContent;
