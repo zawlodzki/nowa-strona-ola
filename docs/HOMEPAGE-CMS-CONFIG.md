@@ -633,10 +633,26 @@ i `accent-on-light`; Button `secondary` (białe wnętrze, obwódka i etykieta
 matcha); pojedyncze detale SVG (orbita, półka butelek, kreska jasnych
 okładek, na cherry strzałka i iskierka #D8E78A). Button secondary jest tylko tam, gdzie makieta
 ma ten wariant (katalog, homepage). About, konsultacje i landing ebooka
-zostają przy TextLink w ink. CMS nie otrzymał pól kolorów; schematy i
+korzystały wtedy z TextLink w ink. CMS nie otrzymał pól kolorów; schematy i
 Content Lake bez zmian. Mapa strona → element → kolor jest w opisie PR.
 [Zasady](../design-system/SPECIFICATION.md) i
 [plansza](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).
+
+### Rozszerzenie akcentów i czytelności linków, 09.10.2026
+
+Źródło: bieżące polecenie użytkownika o navbarze widocznym przy przewijaniu,
+subtelnych akcentach matcha, kolorowym `+` w `450+` oraz czytelniejszych
+linkach wewnętrznych. Użytkownik wskazał, że podobają mu się kształt i kolory
+przycisków hero.
+
+Decyzja implementacyjna: wspólny TextLink używa istniejącego `accent`
+dla tekstu, podkreślenia i strzałki. Button primary/secondary zachowuje
+dotychczasową hierarchię i kształt tabletki. Sufiksy wskaźników oraz drobne
+oznaczenia etapów są dodatkowymi miejscami dla matcha. Navbar jest sticky.
+To reguły rendererów 3a, nie nowe ustawienia kolorów w Sanity.
+Mapowanie treści pozostaje bez zmian: `metricsSection.items[].suffix`
+na homepage i O mnie oraz `expertSection.metric.suffix` konsultacji zachowują
+wartości z CMS; wygląd określają szablony. Nie zapisano zmian do Content Lake.
 
 ## Podstrona kontaktu — 09.10.2026
 

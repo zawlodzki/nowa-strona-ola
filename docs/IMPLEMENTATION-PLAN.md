@@ -721,8 +721,6 @@ Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.
       warunki uruchomienia i log opisuje [postęp](PROGRESS.md).
 - [ ] Zainstalować biblioteki systemowo, aby uruchamiać verify bez tej opcji.
 
-Następny krok implementacji: pakiet 1 etapu 4a.
-
 ## Podstrona kontaktu 3a — 09.10.2026
 
 - [x] Zapisać plan, wymagane dane i mapowanie istniejących sekcji Sanity.
@@ -749,3 +747,17 @@ Następny krok implementacji: pakiet 1 etapu 4a.
 
 Wybrane [zdjęcie](../src/assets/portraits/README.md) zastępuje „O mnie C”
 z 04.10.2026. Hero i Kontakt zachowują wcześniejszy wybór.
+
+## Stały navbar i akcenty matcha, 09.10.2026
+
+- [x] Odtworzyć znikający nagłówek i wdrożyć natywny sticky navbar 3a.
+- [x] Dostosować menu mobilne, kotwice i sticky TOC/sidebar do nagłówka.
+- [x] Ujednolicić TextLink w matcha, zachowując podkreślenie oraz pille hero.
+- [x] Przejrzeć osiem szablonów i wdrożyć drobne akcenty według
+      [mapy podstron](VISUAL-REFINEMENTS-2026-10-09.md).
+- [x] Sprawdzić trzy silniki, 320 px, większy tekst, CSS zoom 200%, dark,
+      brak JS i menu po scrollu. Pełne verify: 146 unit, 204 E2E PASS.
+- [x] Przejść podstrony przez verify-ola, zachować ARIA, screenshoty i POST `[]`.
+- [ ] Odebrać opublikowany staging po publikacji. Lokalny proxy blokuje domenę.
+
+Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.

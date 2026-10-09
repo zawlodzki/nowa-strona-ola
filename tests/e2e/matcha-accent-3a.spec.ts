@@ -8,7 +8,6 @@ const WHITE = "rgb(255, 255, 255)";
 const CHERRY_FILL = "rgb(136, 47, 72)";
 const SURFACE = "rgb(242, 220, 227)";
 const DARK_BG = "rgb(41, 26, 33)";
-const INK = "rgb(112, 40, 63)";
 
 async function buttonColors(locator: Locator) {
   const [background, color, border] = await Promise.all([
@@ -69,9 +68,7 @@ test("homepage secondary CTA follows the same matcha outline", async ({
   expect(await renderedColor(stage, "color")).toBe(SURFACE);
 });
 
-test("about secondary stays an ink text link, not a matcha button", async ({
-  page,
-}) => {
+test("about secondary uses a matcha text link", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/o-mnie/");
@@ -82,7 +79,7 @@ test("about secondary stays an ink text link, not a matcha button", async ({
   });
   await expect(secondary).toBeVisible();
   await expect(secondary).not.toHaveClass(/ao-button/);
-  expect(await renderedColor(secondary, "color")).toBe(INK);
+  expect(await renderedColor(secondary, "color")).toBe(MATCHA_LIGHT);
 });
 
 test("dark catalog secondary uses light matcha on the dark canvas", async ({

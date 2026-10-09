@@ -236,9 +236,19 @@ for (const { path, label } of [
       await page.evaluate(() => getComputedStyle(document.body).overflowY),
     ).toBe("visible");
     await expect(newsletter).toBeInViewport();
+    const header = await page.locator(".ao-header").boundingBox();
     await expect
-      .poll(async () => Math.round((await sidebar.boundingBox())!.y))
-      .toBe(32);
+      .poll(async () => (await sidebar.boundingBox())!.y)
+      .toBeGreaterThanOrEqual(header!.y + header!.height + 24);
+    const sidebarTop = (await sidebar.boundingBox())!.y;
+    const scrollTop = await page.evaluate(() => window.scrollY);
+    await page.mouse.wheel(0, 150);
+    await expect
+      .poll(() => page.evaluate(() => window.scrollY))
+      .toBeGreaterThan(scrollTop + 100);
+    await expect
+      .poll(async () => (await sidebar.boundingBox())!.y)
+      .toBe(sidebarTop);
     await expect(panel).toBeInViewport();
     await expect(panel.getByRole("button", { name: label })).toBeInViewport();
     await expect(panel.locator("a").first()).toBeInViewport();

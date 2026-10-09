@@ -44,7 +44,14 @@ Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
 
 - Secondary button: białe wnętrze, cienka obwódka matcha. Tekst i strzałka
   matcha jak na planszy 05; wariant tylko tam, gdzie szablon używa Button
-  `secondary` (katalog, homepage). TextLink z makiet zostaje w ink.
+  `secondary` (katalog, homepage). Primary pozostaje wiśniowy; oba warianty
+  zachowują kształt tabletki.
+- Aktualizacja 09.10.2026 na podstawie prośby o czytelniejsze linki i akcenty:
+  wspólny TextLink używa `accent` dla tekstu, strzałki i podkreślenia.
+  Podkreślenie pozostaje widoczne bez hover, więc kolor nie jest jedynym
+  wyróżnikiem linku. Link liniowy jest lżejszą akcją niż Button.
+- Sufiks wskaźnika `450+` i drobne oznaczenia etapów mogą korzystać z `accent`.
+  Liczba, nagłówki oraz duże powierzchnie zachowują wiśniową hierarchię.
 - Drobne elementy grafik (wdrożone 08.10.2026): jeden punkt na orbicie
   produktu, jeden punkt na półce butelek, jedna kreska lub punkt na jasnej
   okładce. Na okładce cherry: cienka pozioma strzałka i czytelna
@@ -52,7 +59,8 @@ Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
 - Tło hero i portretu zachowuje dotychczasową paletę. Matcha nie służy
   do wypełniania dużych paneli ani secondary buttonów.
 - Nagłówki, logo, primary CTA i treść zachowują wiśniową hierarchię.
-  Nie stosować matchy automatycznie do wszystkich ikon i linków.
+  Matcha w linkach dotyczy wspólnego TextLink, nie wszystkich odnośników
+  nawigacji, filtrów, stopki ani wszystkich ikon.
 - Nie używać akcentu jako jedynego oznaczenia sukcesu, błędu lub aktywnego stanu.
   Na bieli stosować ciemny odcień, jasny zarezerwować dla ciemnej powierzchni.
 
