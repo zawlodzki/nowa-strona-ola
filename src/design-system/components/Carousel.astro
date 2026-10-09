@@ -98,12 +98,53 @@ const positionLabel =
     const reduced = () =>
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const children = () => [...track.children] as HTMLElement[];
+    // Snap points come from the rendered cards, so padding, gap and the
+    // responsive card width are always included. Steps never rely on the
+    // browser re-snapping a programmatic scroll (iOS Safari does not).
+    const maxScroll = () => track.scrollWidth - track.clientWidth;
+    const snaps = () => {
+      const origin =
+        track.getBoundingClientRect().left +
+        track.clientLeft -
+        track.scrollLeft;
+      return children().map((item) => {
+        const left = item.getBoundingClientRect().left - origin;
+        return { left, right: left + item.offsetWidth };
+      });
+    };
+    const clampScroll = (left: number) =>
+      Math.min(Math.max(left, 0), maxScroll());
+    const stepTarget = (direction: number) => {
+      const items = snaps();
+      if (!items.length) return track.scrollLeft;
+      const start = track.scrollLeft;
+      const end = start + track.clientWidth;
+      if (direction > 0) {
+        // Next page starts at the first card that is not fully visible.
+        const next = items.find(
+          (item) => item.right > end + 1 && item.left > start + 1,
+        );
+        return clampScroll(next ? next.left : maxScroll());
+      }
+      // Previous page: the first fully visible card becomes the first one
+      // cut off on the right.
+      const first = items.find((item) => item.left >= start - 1) ?? items[0];
+      const candidates = items.filter(
+        (item) =>
+          item.left < start - 1 && item.left + track.clientWidth < first.right,
+      );
+      const previous = candidates.at(-1) ?? items[0];
+      return clampScroll(previous.left);
+    };
     const update = () => {
+      const points = snaps();
+      const firstSnap = clampScroll(points[0]?.left ?? 0);
+      const lastSnap = clampScroll(points.at(-1)?.left ?? maxScroll());
       for (const button of buttons)
         button.disabled =
           button.dataset.direction === "-1"
-            ? track.scrollLeft < 2
-            : track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+            ? track.scrollLeft <= firstSnap + 1
+            : track.scrollLeft >= lastSnap - 1;
       const items = children();
       if (position && items.length) {
         const first = items.findIndex(
@@ -145,8 +186,8 @@ const positionLabel =
     controls.hidden = false;
     for (const button of buttons)
       button.addEventListener("click", () =>
-        track.scrollBy({
-          left: Number(button.dataset.direction) * track.clientWidth,
+        track.scrollTo({
+          left: stepTarget(Number(button.dataset.direction)),
           behavior: reduced() ? "instant" : "smooth",
         }),
       );
@@ -157,8 +198,11 @@ const positionLabel =
         const target = track.querySelector<HTMLElement>(selector);
         if (!target) return;
         event.preventDefault();
+        const index = children().findIndex(
+          (item) => item === target || item.contains(target),
+        );
         track.scrollTo({
-          left: target.offsetLeft,
+          left: clampScroll(snaps()[index]?.left ?? 0),
           behavior: reduced() ? "instant" : "smooth",
         });
       });
