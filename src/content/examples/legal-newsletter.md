@@ -45,28 +45,28 @@ obowiązuje od 01.08.2026
 1. Usługodawca ma obowiązek dostarczyć Newsletter i Materiały zgodne z umową. Odpowiada za zgodność Newslettera przez cały okres jego dostarczania, a za brak zgodności jednorazowego Materiału istniejący w chwili dostarczenia i ujawniony w ciągu dwóch lat od tej chwili.
 2. W razie braku zgodności konsument lub przedsiębiorca na prawach konsumenta może zażądać doprowadzenia świadczenia do zgodności. Usługodawca może odmówić, jeżeli jest to niemożliwe albo wymagałoby nadmiernych kosztów.
 3. Usługodawca doprowadza świadczenie do zgodności w rozsądnym czasie, bezpłatnie i bez nadmiernych niedogodności, z uwzględnieniem jego charakteru i celu.
-4. Uprawniony może odstąpić od umowy, gdy:doprowadzenie do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,Usługodawca nie doprowadził świadczenia do zgodności zgodnie z ust. 3,brak zgodności występuje nadal mimo próby jego usunięcia,brak zgodności jest na tyle istotny, że uzasadnia natychmiastowe odstąpienie, alboz oświadczenia Usługodawcy lub okoliczności wyraźnie wynika, że nie doprowadzi świadczenia do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.
-5. doprowadzenie do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,
-6. Usługodawca nie doprowadził świadczenia do zgodności zgodnie z ust. 3,
-7. brak zgodności występuje nadal mimo próby jego usunięcia,
-8. brak zgodności jest na tyle istotny, że uzasadnia natychmiastowe odstąpienie, albo
-9. z oświadczenia Usługodawcy lub okoliczności wyraźnie wynika, że nie doprowadzi świadczenia do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.
-10. Odstąpienie nie przysługuje, jeżeli brak zgodności jest nieistotny; domniemywa się, że brak zgodności jest istotny. Ponieważ Newsletter i Materiały są dostarczane bez zapłaty ceny, obniżenie ceny nie znajduje zastosowania.
-11. Po odstąpieniu subskrybent zaprzestaje korzystania z niezgodnego Materiału i udostępniania go osobom trzecim. Usługodawca może uniemożliwić dalszy dostęp do pliku lub linku, z poszanowaniem ustawowych praw subskrybenta do treści innych niż dane osobowe, które sam dostarczył lub wytworzył.
-12. Jeżeli jest to konieczne do ustalenia przyczyny braku zgodności, subskrybent współpracuje z Usługodawcą w rozsądnym zakresie i przy zastosowaniu najmniej uciążliwych środków technicznych. Brak współpracy po uzasadnionym wezwaniu może wpłynąć na ustawowy rozkład ciężaru dowodu tylko wtedy, gdy przed zawarciem umowy subskrybent został jasno poinformowany o tym obowiązku.
-13. Reklamacje można składać na grzesiek@zawlodzki.pl, najlepiej podając adres użyty przy zapisie i opis problemu. Usługodawca odpowiada w terminie 14 dni; brak odpowiedzi w tym terminie oznacza uznanie reklamacji.
+4. Uprawniony może odstąpić od umowy, gdy:
+   1. doprowadzenie do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,
+   2. Usługodawca nie doprowadził świadczenia do zgodności zgodnie z ust. 3,
+   3. brak zgodności występuje nadal mimo próby jego usunięcia,
+   4. brak zgodności jest na tyle istotny, że uzasadnia natychmiastowe odstąpienie, albo
+   5. z oświadczenia Usługodawcy lub okoliczności wyraźnie wynika, że nie doprowadzi świadczenia do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.
+5. Odstąpienie nie przysługuje, jeżeli brak zgodności jest nieistotny; domniemywa się, że brak zgodności jest istotny. Ponieważ Newsletter i Materiały są dostarczane bez zapłaty ceny, obniżenie ceny nie znajduje zastosowania.
+6. Po odstąpieniu subskrybent zaprzestaje korzystania z niezgodnego Materiału i udostępniania go osobom trzecim. Usługodawca może uniemożliwić dalszy dostęp do pliku lub linku, z poszanowaniem ustawowych praw subskrybenta do treści innych niż dane osobowe, które sam dostarczył lub wytworzył.
+7. Jeżeli jest to konieczne do ustalenia przyczyny braku zgodności, subskrybent współpracuje z Usługodawcą w rozsądnym zakresie i przy zastosowaniu najmniej uciążliwych środków technicznych. Brak współpracy po uzasadnionym wezwaniu może wpłynąć na ustawowy rozkład ciężaru dowodu tylko wtedy, gdy przed zawarciem umowy subskrybent został jasno poinformowany o tym obowiązku.
+8. Reklamacje można składać na grzesiek@zawlodzki.pl, najlepiej podając adres użyty przy zapisie i opis problemu. Usługodawca odpowiada w terminie 14 dni; brak odpowiedzi w tym terminie oznacza uznanie reklamacji.
 
 ## § 8. Aktualizacje i zmiany Newslettera
 
 1. Usługodawca dostarcza aktualizacje niezbędne do zachowania zgodności Newslettera i Materiałów z umową oraz informuje o nich, jeżeli są wymagane.
-2. Usługodawca może zmienić Newsletter ponad zakres niezbędny do zachowania zgodności wyłącznie bez dodatkowych kosztów i z ważnych przyczyn:zmiany prawa lub decyzji organu,zmiany bezpieczeństwa, technologii albo dostawcy wysyłki,zmiany częstotliwości, formatu lub tematyki, która nie zmienia głównego charakteru Newslettera,zakończenia albo zastąpienia określonego cyklu treści.
-3. zmiany prawa lub decyzji organu,
-4. zmiany bezpieczeństwa, technologii albo dostawcy wysyłki,
-5. zmiany częstotliwości, formatu lub tematyki, która nie zmienia głównego charakteru Newslettera,
-6. zakończenia albo zastąpienia określonego cyklu treści.
-7. O zmianie Usługodawca informuje w sposób jasny. Jeżeli zmiana istotnie i negatywnie wpływa na dostęp lub korzystanie, informację o jej rodzaju, terminie i prawie wypowiedzenia przekazuje e-mailem z odpowiednim wyprzedzeniem.
-8. W przypadku zmiany opisanej w ust. 3 subskrybent może wypowiedzieć umowę bez zachowania terminu w ciągu 30 dni od zmiany albo otrzymania informacji, jeżeli nastąpiło później. Prawo nie przysługuje, gdy negatywny wpływ jest nieistotny albo Usługodawca zapewnia bez dodatkowych kosztów korzystanie z niezmienionej wersji.
-9. Usługodawca może zakończyć Newsletter z ważnych powodów organizacyjnych lub ekonomicznych, informując subskrybentów e-mailem co najmniej 14 dni wcześniej. Subskrybent nie ponosi z tego tytułu kosztów.
+2. Usługodawca może zmienić Newsletter ponad zakres niezbędny do zachowania zgodności wyłącznie bez dodatkowych kosztów i z ważnych przyczyn:
+   1. zmiany prawa lub decyzji organu,
+   2. zmiany bezpieczeństwa, technologii albo dostawcy wysyłki,
+   3. zmiany częstotliwości, formatu lub tematyki, która nie zmienia głównego charakteru Newslettera,
+   4. zakończenia albo zastąpienia określonego cyklu treści.
+3. O zmianie Usługodawca informuje w sposób jasny. Jeżeli zmiana istotnie i negatywnie wpływa na dostęp lub korzystanie, informację o jej rodzaju, terminie i prawie wypowiedzenia przekazuje e-mailem z odpowiednim wyprzedzeniem.
+4. W przypadku zmiany opisanej w ust. 3 subskrybent może wypowiedzieć umowę bez zachowania terminu w ciągu 30 dni od zmiany albo otrzymania informacji, jeżeli nastąpiło później. Prawo nie przysługuje, gdy negatywny wpływ jest nieistotny albo Usługodawca zapewnia bez dodatkowych kosztów korzystanie z niezmienionej wersji.
+5. Usługodawca może zakończyć Newsletter z ważnych powodów organizacyjnych lub ekonomicznych, informując subskrybentów e-mailem co najmniej 14 dni wcześniej. Subskrybent nie ponosi z tego tytułu kosztów.
 
 ## § 9. Prawa autorskie
 
