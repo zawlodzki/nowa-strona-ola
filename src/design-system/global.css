@@ -1037,7 +1037,7 @@ body.ao-site {
   font-size: 4.5rem;
   font-weight: 650;
   line-height: 0.8;
-  color: var(--ao-primary);
+  color: var(--ao-accent);
 }
 .ao-review blockquote {
   margin: 0;
