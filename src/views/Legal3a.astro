@@ -126,6 +126,11 @@ const { content } = Astro.props;
     margin-block: 20px 28px;
     margin-inline: 0;
   }
+  /* Legacy base (Tailwind preflight) hides list markers; legal clauses need
+     their numbers, as in the article-3a richtext mockup (nested too). */
+  .article-richtext :global(ol) {
+    list-style: decimal;
+  }
   .article-richtext :global(li) {
     padding-inline-start: 8px;
     margin-block: 12px;
