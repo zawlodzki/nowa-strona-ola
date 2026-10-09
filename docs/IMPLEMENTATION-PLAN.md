@@ -733,3 +733,19 @@ Następny krok implementacji: pakiet 1 etapu 4a.
 - [ ] W etapie 6 uruchomić kontakt i newsletter przez Worker/Queues/n8n.
 
 [Plan i konfiguracja](CONTACT-CMS-CONFIG-3A.md). Bez zapisu do CMS i publikacji.
+
+## Zmiana portretu „O mnie”, 2026-10-09
+
+- [x] Pobrać rzeczywiste zdjęcie wskazane przez użytkownika i ocenić jakość.
+- [x] Podmienić współdzielony PNG/WebP i wszystkie 13 zastosowań w 12 mockupach.
+- [x] Zaktualizować wymiary, pochodzenie, opisy PL/EN i decyzję do przyszłego CMS.
+- [x] Sprawdzić pełne verify oraz kadry desktop/mobile, 320 px i stany dostępności.
+      PASS: 57 unit, 81 E2E i 63 kontrole zdjęcia. Natywny zoom, czytnik
+      i urządzenie fizyczne pozostają niesprawdzone.
+- [x] Przenieść zmianę na aktualny main do wspólnego SiteImage i fixture PL/EN.
+      Końcowe verify PR PASS: 181 unit, 201 E2E, 84 dokumenty CMS bez błędów
+      i zgodność 15 stron między fixture a symulacją Content Lake.
+- [ ] Podczas migracji 3a zaimportować zdjęcie do wspólnych pól/referencji Sanity.
+
+Wybrane [zdjęcie](../src/assets/portraits/README.md) zastępuje „O mnie C”
+z 04.10.2026. Hero i Kontakt zachowują wcześniejszy wybór.

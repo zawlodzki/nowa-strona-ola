@@ -55,3 +55,11 @@ oraz pełna lokalna bramka jakości są odnotowane w [postępie](PROGRESS.md).
 Po akceptacji mockupu uzupełnić materiały i realne adresy, przenieść profil
 do Astro/Sanity, powiązać wszystkie biogramy autora oraz utrzymywać zgodne dane
 w widocznej treści, HTML/Markdown i JSON-LD.
+
+## Aktualizacja portretu, 09.10.2026
+
+Na polecenie użytkownika zastąpiono portret AI rzeczywistym
+[zdjęciem z Instagrama](https://www.instagram.com/p/CvUc_R0o9Kn/), bez retuszu.
+Usunięto podpis o AI przy portrecie „O mnie”; opis audytu powyżej przedstawia
+stan z 07.10.2026. Pozostałe portrety Hero i Kontakt nadal pochodzą z image_gen.
+Zmiana jest lokalna; import do Sanity i publikacja nie zostały wykonane.

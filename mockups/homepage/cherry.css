@@ -132,6 +132,7 @@
 }
 .cherry .about-media > img:first-child {
   height: 540px;
+  object-position: center 15%;
   border-radius: 24px;
 }
 .cherry .about-media .food-inset {

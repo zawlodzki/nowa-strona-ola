@@ -14,7 +14,7 @@ export const aboutCopy = {
     heroPrimary: "Zobacz, jak pracuję",
     heroSecondary: "Poznaj moje materiały",
     portraitAlt: "Portret Aleksandry Olesiewicz",
-    portraitCredit: "Portret opracowany z pomocą AI.",
+    portraitCredit: "",
     storyTitle: "Chcę, żebyś czuła się wysłuchana.",
     storyBody: [
       "Znam PCOS także z własnego doświadczenia.",
@@ -86,7 +86,7 @@ export const aboutCopy = {
     heroPrimary: "See how I work",
     heroSecondary: "See my materials",
     portraitAlt: "Portrait of Aleksandra Olesiewicz",
-    portraitCredit: "Portrait prepared with help from AI.",
+    portraitCredit: "",
     storyTitle: "I want you to feel heard.",
     storyBody: [
       "I also know PCOS from my own experience.",

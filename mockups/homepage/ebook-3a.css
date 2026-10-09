@@ -445,7 +445,7 @@ details[open] > summary .disclosure-symbol {
   width: 100%;
   height: 420px;
   object-fit: cover;
-  object-position: center 35%;
+  object-position: center 15%;
   border-radius: 100px 24px 24px 24px;
   background: var(--soft);
 }

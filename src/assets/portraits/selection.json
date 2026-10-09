@@ -1,7 +1,7 @@
 {
-  "selectedAt": "2026-10-04",
-  "generation": "image_gen",
-  "revision": 2,
+  "selectedAt": "2026-10-09",
+  "generation": "mixed",
+  "revision": 3,
   "portraits": [
     {
       "role": "hero",
@@ -15,21 +15,26 @@
       "alt": {
         "pl": "Aleksandra Olesiewicz w jasnej marynarce, z uśmiechem pokazującym zęby.",
         "en": "Aleksandra Olesiewicz in an ivory blazer, smiling with visible teeth."
-      }
+      },
+      "sourceType": "image_gen",
+      "selectedAt": "2026-10-04"
     },
     {
       "role": "about",
-      "selectedVariant": "O mnie C",
-      "sourceProposal": "about-c-v2.png",
+      "selectedVariant": "Fotografia z Instagrama, lipiec 2023",
       "original": "originals/about.png",
       "web": "about.webp",
-      "width": 1122,
-      "height": 1402,
+      "width": 1440,
+      "height": 1800,
       "transparent": false,
       "alt": {
-        "pl": "Aleksandra Olesiewicz w malinowej bluzce, ze spokojnym spojrzeniem poza obiektyw.",
-        "en": "Aleksandra Olesiewicz in a raspberry blouse, looking thoughtfully off camera."
-      }
+        "pl": "Aleksandra Olesiewicz w różowej marynarce, z kręconymi włosami, uśmiecha się do obiektywu.",
+        "en": "Aleksandra Olesiewicz in a pink blazer, with curly hair, smiling at the camera."
+      },
+      "sourceUrl": "https://www.instagram.com/p/CvUc_R0o9Kn/",
+      "sourceType": "photograph",
+      "selectedAt": "2026-10-09",
+      "processing": "WebP quality 90; bez skalowania, kadrowania i retuszu"
     },
     {
       "role": "contact",
@@ -43,7 +48,9 @@
       "alt": {
         "pl": "Aleksandra Olesiewicz uśmiecha się i gestykuluje podczas rozmowy.",
         "en": "Aleksandra Olesiewicz smiling and gesturing during a conversation."
-      }
+      },
+      "sourceType": "image_gen",
+      "selectedAt": "2026-10-04"
     }
   ]
 }

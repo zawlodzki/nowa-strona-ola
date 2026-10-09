@@ -378,7 +378,7 @@ wejścia z homepage. **Niewykonane:** dokumenty w Content Lake i publikacja.
 | CTA pomocnicze w hero   | „Poznaj moje materiały” → `#materialy`                                                                                               | Wykonane lokalnie 07.10.2026; dodatkowe wejścia do e-booków i bloga.                                          |
 | CTA konsultacji         | „Zarezerwuj konsultację” → `https://cal.com`; 450 zł / 60 minut                                                                      | Wcześniejsze decyzje o cenie i rezerwacji zachowane; tylko blok konsultacji ma ten cel.                       |
 | Opinie                  | Dwa pełne cytaty: o zrozumieniu PCOS oraz gotowaniu dla rodziny; referencje `testimonialsSection.items`                              | Prawdziwość zestawu ustalona wcześniej; dobór dwóch i wariant statyczny są propozycją. Pełne teksty w planie. |
-| Portrety                | `about.webp` w hero, `contact.webp` w panelu konsultacji                                                                             | Istniejący zaakceptowany zestaw; rozmieszczenie proponowane.                                                  |
+| Portrety                | `about.webp` w hero, `contact.webp` w panelu konsultacji                                                                             | `about.webp`: rzeczywiste zdjęcie z Instagrama wybrane 09.10.2026; `contact.webp`: zaakceptowany portret AI.  |
 | Historia i kwalifikacje | Własne doświadczenie PCOS oraz ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym; zdjęcie ukończenia w slocie dyplomu | Uczelnia i kierunek 06.10.2026. Zdjęcie 08.10.2026. Stopień, daty i certyfikaty nie są podane.                |
 | Newsletter              | Tekst, formularz i status demonstracji jak w homepage 3a                                                                             | Propozycja ponownego użycia, bez zmiany zgód i bez integracji.                                                |
 
@@ -647,3 +647,35 @@ zdjęciem i logami social mediów pod nim, bezpośrednim e-mailem
 Bieżące wartości, źródła, propozycje copy i mapowanie istniejących sekcji:
 [Kontakt CMS 3a](CONTACT-CMS-CONFIG-3A.md). Kontakt dodany do nawigacji fixture
 PL/EN. Kod i fixture nie oznaczają zapisu do Sanity ani działającej wysyłki.
+
+## Zmiana zdjęcia „O mnie”, 09.10.2026
+
+**Ustalone przez użytkownika:** zastąpić poprzedni portret „O mnie” rzeczywistym
+[zdjęciem z Instagrama](https://www.instagram.com/p/CvUc_R0o9Kn/) we wszystkich
+miejscach używających tego zdjęcia. Użytkownik dopuścił upscale, kadrowanie
+i poprawę tła, jeśli będą potrzebne.
+
+**Wykonane lokalnie:** podmieniono `src/assets/portraits/about.webp`
+i `originals/about.png`. Źródło ma 1440 × 1800 px; zachowano pełny kadr i tło
+bez upscalingu ani retuszu. WebP ma jakość 90. Wspólny plik obejmuje 13 obrazów
+w 12 mockupach HTML, w tym profil, homepage, e-book, konsultacje, blog i artykuł.
+Wymiary dużych obrazów zaktualizowano, małe awatary zachowują rozmiar widoku.
+W profilu, sekcji „O mnie” i przy e-booku ustawiono punkt kadru CSS
+`center 15%`, aby nie ucinać góry włosów w szerokich ramkach.
+Usunięto nieaktualny podpis o AI przy tym zdjęciu na stronie „O mnie”.
+Hero i Kontakt pozostają wcześniejszymi materiałami image_gen.
+
+**Mapowanie CMS:** `textImageSection.media` w sekcji „O mnie” homepage,
+`heroSection.media` strony profilu oraz wspólne `author.photo` dla biogramów
+i powiązanych szablonów. Docelowe przypisanie profilu autora do nowych wariantów
+3a pozostaje częścią etapu 4a. Alt PL/EN i źródło zapisano w
+[selection.json](../src/assets/portraits/selection.json).
+
+**Status Sanity:** nowego pliku nie przesłano do Content Lake ani nie zmieniono
+dokumentów CMS. Import i wspólne referencje pozostają do wykonania podczas
+migracji 3a. Nie publikowano strony ani publicznego podglądu.
+
+Przy przygotowaniu PR na aktualnym main uwzględniono również renderer Astro:
+`SiteImage` współdzieli nowy plik; About3a, Homepage3a i Ebook3a mają punkt
+kadru 50%/15%. Podpis o AI usunięto z fixture profilu PL/EN. Istniejące
+adresy obrazów w Content Lake nie zostały zmienione.
