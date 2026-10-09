@@ -213,3 +213,34 @@ test("English article keeps the 3a shell", async ({ page }) => {
       .getByRole("link", { name: "E-books" }),
   ).toBeVisible();
 });
+
+for (const { path, label } of [
+  { path: articlePath, label: "Sprawdź również" },
+  {
+    path: "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
+    label: "See also",
+  },
+]) {
+  test(`sidebar stays sticky and shows related posts at 60% (${path})`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await openArticle(page, path);
+    const sidebar = page.locator(".article-sidebar");
+    const newsletter = sidebar.locator(".article-newsletter");
+    const panel = page.locator(".article-recommendations");
+    await scrollToReadingProgress(page, 0.6);
+    // Body must not become a scroll container (overflow-x: hidden + container
+    // containment did that and silently disabled position: sticky).
+    expect(
+      await page.evaluate(() => getComputedStyle(document.body).overflowY),
+    ).toBe("visible");
+    await expect(newsletter).toBeInViewport();
+    await expect
+      .poll(async () => Math.round((await sidebar.boundingBox())!.y))
+      .toBe(32);
+    await expect(panel).toBeInViewport();
+    await expect(panel.getByRole("button", { name: label })).toBeInViewport();
+    await expect(panel.locator("a").first()).toBeInViewport();
+  });
+}

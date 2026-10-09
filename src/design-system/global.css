@@ -25,8 +25,11 @@ body.ao-site {
   -webkit-font-smoothing: antialiased;
   scrollbar-color: var(--ao-muted) var(--ao-background);
   /* Keep decorative transforms (tilted covers, orbits, sheet shadows) from
-     expanding document scrollWidth on narrow viewports / large root fonts. */
-  overflow-x: hidden;
+     expanding document scrollWidth on narrow viewports / large root fonts.
+     `clip`, not `hidden`: the container query adds layout containment, so
+     body overflow is not propagated to the viewport, and `hidden` would make
+     body a scroll container and break position: sticky (article sidebar). */
+  overflow-x: clip;
 }
 
 .ao-site :where(h1, h2, h3, p, figure) {
