@@ -138,3 +138,53 @@ test("text links and small accents share matcha while main CTAs stay cherry", as
     }
   }
 });
+
+for (const width of [1440, 390]) {
+  test(`tabbing through the sticky header keeps the scroll position at ${width}px`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width, height: 800 });
+    for (const path of ["/", articlePath]) {
+      await page.goto(path);
+      await page.evaluate(() => document.fonts.ready);
+      await page.evaluate(() =>
+        window.scrollTo(
+          0,
+          Math.round(
+            (document.documentElement.scrollHeight - window.innerHeight) / 2,
+          ),
+        ),
+      );
+      const start = await page.evaluate(() => window.scrollY);
+      expect(start).toBeGreaterThan(1000);
+
+      await page.keyboard.press("Tab");
+      await expect(page.locator(".ao-skip")).toBeFocused();
+      await expect(page.locator(".ao-skip")).toBeInViewport();
+
+      const visited: string[] = [];
+      for (let step = 0; step < 20; step++) {
+        const state = await page.evaluate(() => {
+          const active = document.activeElement as HTMLElement | null;
+          return {
+            inHeader: Boolean(
+              active?.matches(".ao-skip") || active?.closest(".ao-header"),
+            ),
+            label: active?.textContent?.trim().slice(0, 30) ?? "",
+            scrollY: window.scrollY,
+          };
+        });
+        if (!state.inHeader) break;
+        visited.push(state.label);
+        expect(
+          Math.abs(state.scrollY - start),
+          `${path} ${width}px: "${state.label}"`,
+        ).toBeLessThanOrEqual(1);
+        await page.keyboard.press("Tab");
+      }
+      // Skip link, wordmark and at least the menu or one nav link.
+      expect(visited.length).toBeGreaterThanOrEqual(3);
+    }
+  });
+}

@@ -880,7 +880,7 @@ body.ao-site {
   flex-shrink: 0;
 }
 .ao-skip {
-  position: absolute;
+  position: fixed;
   z-index: 20;
   inset-inline-start: var(--ao-space-24);
   inset-block-start: -100px;
@@ -890,6 +890,16 @@ body.ao-site {
 }
 .ao-skip:focus {
   inset-block-start: var(--ao-space-12);
+}
+/* Root scroll-padding reserves room under the sticky header; items that live
+   in it are always on screen, so focusing them with Tab must not scroll. */
+.ao-skip,
+.ao-header :is(a, summary, button) {
+  scroll-margin-block-start: calc(-1 * var(--ao-sticky-offset));
+}
+/* The menu panel scrolls on its own; matching padding cancels the margin there. */
+.ao-mobile-menu nav {
+  scroll-padding-block-start: var(--ao-sticky-offset);
 }
 @container header3a (max-width:74.9375rem) {
   .ao-header__inner {
