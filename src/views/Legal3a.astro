@@ -203,7 +203,10 @@ const { content } = Astro.props;
     }
     .legal-toc {
       position: sticky;
-      inset-block-start: 24px;
+      inset-block-start: var(--ao-sticky-offset);
+      max-block-size: calc(100dvh - var(--ao-sticky-offset) - 24px);
+      overflow-y: auto;
+      scrollbar-width: thin;
     }
     .legal-layout:not(:has(.legal-toc)) {
       grid-template-columns: minmax(0, 1fr);

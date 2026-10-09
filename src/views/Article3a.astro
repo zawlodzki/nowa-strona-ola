@@ -695,10 +695,11 @@ const bodyHtml = markArticleIntro(html);
   .article-toc,
   .article-sidebar {
     position: sticky;
-    inset-block-start: 32px;
+    inset-block-start: var(--ao-sticky-offset);
   }
+  .article-toc,
   .article-sidebar {
-    max-block-size: calc(100dvh - 64px);
+    max-block-size: calc(100dvh - var(--ao-sticky-offset) - 24px);
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--ao-line) transparent;
@@ -966,6 +967,8 @@ const bodyHtml = markArticleIntro(html);
     }
     .article-toc {
       position: static;
+      max-block-size: none;
+      overflow: visible;
     }
     .article-richtext {
       font-size: 1.0625rem;
