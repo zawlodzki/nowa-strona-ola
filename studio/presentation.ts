@@ -11,6 +11,38 @@ export const presentationResolve = {
       filter: `_type == "page" && language == "en" && slug.current == "home"`,
     },
     {
+      route: "/blog",
+      filter: `_type == "page" && language == "pl" && slug.current == "blog"`,
+    },
+    {
+      route: "/en/blog",
+      filter: `_type == "page" && language == "en" && slug.current == "blog"`,
+    },
+    {
+      route: "/blog/strona/:page",
+      filter: `_type == "page" && language == "pl" && slug.current == "blog"`,
+    },
+    {
+      route: "/en/blog/page/:page",
+      filter: `_type == "page" && language == "en" && slug.current == "blog"`,
+    },
+    {
+      route: "/blog/kategoria/:slug",
+      filter: `_type == "page" && language == "pl" && slug.current == "blog"`,
+    },
+    {
+      route: "/en/blog/category/:slug",
+      filter: `_type == "page" && language == "en" && slug.current == "blog"`,
+    },
+    {
+      route: "/blog/kategoria/:slug/strona/:page",
+      filter: `_type == "page" && language == "pl" && slug.current == "blog"`,
+    },
+    {
+      route: "/en/blog/category/:slug/page/:page",
+      filter: `_type == "page" && language == "en" && slug.current == "blog"`,
+    },
+    {
       route: "/blog/:slug",
       filter: `_type == "article" && language == "pl" && slug.current == $slug`,
     },
@@ -115,7 +147,8 @@ export const presentationResolve = {
       },
     }),
     siteSettings: defineLocations({
-      message: "Te ustawienia wpływają na nawigację i stopkę wszystkich stron.",
+      message:
+        "Te ustawienia wpływają na nawigację, stopkę i newsletter artykułów. Listę bloga edytuj w Strony → Blog.",
       tone: "caution",
     }),
   },

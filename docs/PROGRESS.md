@@ -1,10 +1,142 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-08 (wdrożenie zaleceń audytu CSS; Sanity 6.18.0; import 3a oraz strony prawne; automatyczne aktualizacje i wdrożenia Studio).
+Aktualizacja: 2026-10-09 (PR poprawek Sanity i bloga; bez wdrożenia); 2026-10-08 (wdrożenie zaleceń audytu CSS; Sanity 6.18.0; import 3a oraz strony prawne; automatyczne aktualizacje i wdrożenia Studio).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### PR poprawek Sanity i bloga, 09.10.2026
+
+Na zlecenie użytkownika wypchnięto gałąź `codex/sanity-blog-consistency`
+i utworzono [PR #50](https://github.com/zawlodzki/nowa-strona-ola/pull/50).
+Baza zaktualizowana do main `7ceab3e`; zachowano aktualizację Sanity 6.18.0
+oraz automatyczne wdrożenia Studio. Konflikty dziennika rozwiązane z zachowaniem
+obu wpisów, typy ponownie wygenerowane (73 typy/22 zapytania).
+
+Pełny `npm run verify` po rebase **PASS**: 145 unit/26 plików, 171 E2E
+Chromium/Firefox/WebKit, wszystkie buildy (Studio z autoUpdates), Content Lake
+oraz porównanie 13 stron. JS 5760 B gzip, CSS 29804 B gzip.
+Log: `/tmp/ola-pr-verify.log`; opcje środowiska przeglądarek jak w poprzednim
+przebiegu. Lokalna kontrola formatu i diff-check również PASS.
+
+GitHub Quality dla pierwszego commita zakończył się błędem przed pierwszym
+krokiem: brak runnera i pusty wykaz kroków. Pobranie logu zwróciło 404;
+adnotacje nie są dostępne przez używane narzędzia. Przyczyna niepotwierdzona.
+[Przebieg CI](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/37851199076).
+Nie scalano PR, nie wdrażano i nie zapisywano migracji do Sanity.
+Następny krok: wyjaśnić start Quality, następnie review/scalenie na zlecenie
+oraz wdrożenie i odbiór migracji/webhooka.
+
+### Verify-ola po poprawkach bloga, 08.10.2026
+
+Skill [verify-ola](../.cursor/skills/verify-ola/SKILL.md), przebieg
+`ola-blog-audit-20261008`, Node 24.19.0, własny port 4340, doctor PASS.
+Świeży build fixture’ów, bez konfiguracji Sanity. Sprawdzono:
+
+- Blog PL/EN, stronę 2 („Wpisy 8–11 z 11”), kategorię PCOS i pustą
+  perimenopauzę: HTTP 200 i oczekiwane nagłówki/komunikaty.
+- Kliknięcie artykułu z listy PL, H1 i spis treści, bezpośredni adres EN.
+  Historyczny przepis przełącznika „English” zatrzymał się na braku linku.
+  Nagłówek 3a celowo go nie renderuje; poprawiono przepis skilla.
+  Bezpośredni adres EN nie jest dowodem przełączania języka.
+- Newsletter bloga: błędny pusty e-mail, brak zgody, poprawne dane
+  i status „Dane poprawne. Nic nie wysłano.”; odczyty `browser posts`: `[]`.
+- Bez JS: blog PL i kliknięcie „Strona 2” działają.
+- Dowody ARIA, screenshoty i transcript:
+  `/tmp/ola-verify-evidence/ola-blog-audit-20261008/`.
+  Obejrzano pełny screenshot bloga PL (desktop 1280×900).
+
+Przebieg nie obejmuje Studio, preview, danych zdalnego Sanity ani publikacji.
+Mobile/axe/zoom/reduced motion mają wcześniejszy wynik E2E; nie powtarzano
+ich w tym przebiegu. Natywny zoom, czytnik i fizyczne urządzenie niesprawdzone.
+Następny krok pozostaje taki sam: wdrożenie, migracja szkiców i odbiór webhooka.
+
+### Poprawki po audycie Sanity, 08.10.2026
+
+Na zlecenie użytkownika przygotowano kod, bez zdalnych zapisów i publikacji.
+
+- Blog PL/EN ma model `page` (`slug: blog`) z `blogCollectionSection`,
+  opcjonalnym newsletterem `formSection`, SEO i powiązaniem tłumaczeń.
+  Renderer publiczny, preview, Presentation, Markdown, fixture i TypeGen
+  korzystają z tego modelu. Do publikacji nowej strony pozostaje odczyt
+  starszych ustawień; migracja nie nadpisuje istniejących danych.
+- Studio: „Oferta konsultacji” i „Kategorie bloga”, właściwe szablony
+  językowe również dla e-booków i stron prawnych, blokada tworzenia,
+  duplikowania i usuwania singletonów oraz odczyt ustawień po stałym ID.
+  Pole sluga artykułu przeniesione z Metadane do Treść; doprecyzowano
+  etykietę, generowanie adresu i wymaganie rzeczywistego obrazu.
+- Migracja bieżących ustawień z eksportu produkcyjnego: dry-run **2 szkice**
+  (PL/EN), bez zapisów. Zachowane teksty, SEO, formularze, widoczność
+  newslettera i tłumaczenia. Ponowne uruchomienie pomija istniejące strony.
+- [Instrukcja publikacji](BLOG-PUBLISHING.md) wyjaśnia slug, listę i osobną
+  trasę artykułu, datę sortowania oraz przebudowę po webhooku.
+  Kontrakt webhooka obejmuje `article` i publiczne dokumenty zależne;
+  test GROQ potwierdza pomijanie szkiców i wersji wydań. Dostępne CLI
+  potwierdza istnienie dwóch webhooków, lecz nie pokazuje ich filtrów.
+- Kontrole: TypeGen 73 typy/22 zapytania, 145 testów jednostkowych PASS.
+  Porównanie fixture i Content Lake: 13 stron, te same sekcje, zdjęcia i DOM.
+  Pełne `npm run verify` **PASS**: format, tokeny, lint, typy, build strony/
+  Studio/preview/Workera, 145 unit i **171 E2E** w Chromium/Firefox/WebKit,
+  build z 80 dokumentów Content Lake i porównanie 13 stron. Budżety:
+  JS **5770 B gzip**, CSS **29804 B gzip**.
+- Środowisko E2E wymagało bibliotek przeglądarek rozpakowanych pod `/tmp`
+  i uruchomienia poza ograniczeniem filesystemu dla sandboxa Firefox.
+  `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1` omija wyłącznie preflight
+  instalacji systemowej; testy wszystkich trzech przeglądarek pozostają aktywne.
+
+Następny krok: wdrożyć Studio, stronę i preview, zapisać/przejrzeć szkice
+migracji oraz opublikować je na osobne zlecenie. Porównać rzeczywiste filtry
+webhooków z kontraktem i odebrać przepływ publikacji testowego artykułu.
+Zdalnego webhook → GitHub Actions → Cloudflare nie sprawdzano.
+Natywny zoom, czytnik i urządzenie fizyczne pozostają niesprawdzone.
+
+### Audyt konfiguracji Sanity, 08.10.2026
+
+Odczyt przez konektor Sanity, bez zmian danych, schematu i publikacji.
+Projekt `dyuqkn8c`, dataset `production`, workspace `default`.
+Sprawdzono kod Studio, schemat wdrożony z aplikacji Studio oraz dane
+w perspektywach `raw` i `published`.
+
+- Brak dokumentu Blog w „Strony” jest zamierzony: `/blog/` i `/en/blog/`
+  składają listę z `article`, `category` oraz `siteSettings.blogIndex`
+  i `blogNewsletter`. Slug `blog` jest zarezerwowany dla tej trasy.
+  Edycja: Ustawienia witryny → Polski/English → Indeks bloga / Newsletter bloga.
+- Opublikowane ustawienia istnieją dokładnie raz dla każdego języka.
+  Nawigacja prowadzi do właściwych indeksów. Istnieje po 11 opublikowanych
+  artykułów PL/EN. Kontrola tytułu, sluga, daty, niepustej treści, autorów
+  i referencji kategorii nie wykazała braków w sprawdzonym zbiorze.
+  Po 10 artykułów w każdym języku ma `placeholderBody: true`; poprawność
+  konfiguracji nie oznacza gotowości tych tekstów do publikacji docelowej.
+- „Usługi” to współdzielone dane oferty, nie kategorie blogowe ani strony.
+  `service-consultation-pl/en` mają 450 PLN, 60 minut oraz
+  `bookingStatus: placeholder`. W każdym języku referencja rozwiązuje się
+  na homepage, O mnie i konsultacjach. Strony mają niepuste sekcje.
+- Wdrożone schematy `page`, `service`, `siteSettings` zawierają pola
+  wymagane przez sprawdzony przepływ. Ustawienia bloga nie zniknęły ze schematu.
+  Dataset jest publiczny; CORS zawiera domeny Studio i produkcyjnego preview.
+  Repo pobiera publiczne dane z `perspective: published`, `useCdn: false`.
+- Luka redakcyjna: menu nie ma osobnej pozycji Blog, a nazwa Usługi
+  nie wyjaśnia współdzielenia oferty. Zalecenie: dodać wejście Blog do
+  istniejących ustawień, wpisów i kategorii oraz doprecyzować nazwę oferty.
+- Luka Presentation w kodzie: brak `mainDocuments` dla `/blog/`
+  i `/en/blog/`, a lokalizacje `siteSettings` opisują tylko nawigację/stopkę.
+  Zalecenie: jawnie powiązać indeks z ustawieniami danego języka.
+- Dalsze zabezpieczenie: `siteSettings` pozostaje w ogólnych szablonach
+  tworzenia dokumentów; brak blokady duplikowania singletonów. Duplikatów
+  obecnie nie ma, lecz zapytanie ustawień wybiera pierwszy dokument języka.
+  Szablony językowe nie obejmują `ebook` i `legalPage`; przy tworzeniu
+  dokumentu język trzeba wybrać ręcznie, niezależnie od otwartej listy.
+
+Weryfikacja: odczyty Sanity i przegląd kodu. Nie uruchamiano builda ani
+testów aplikacji (audyt bez zmian kodu, brak zainstalowanych zależności).
+Nie sprawdzono ręcznej edycji Studio, handshake Presentation/Access,
+sekretów GitHub ani przebudowy strony po publikacji. Odczyt schematu nie
+potwierdza wersji bundla pod własną domeną Studio.
+
+Następny krok: uporządkować wejście Blog i etykietę oferty w Studio,
+uzupełnić mapowanie Presentation i zabezpieczenia singletonów; następnie
+odebrać edycję oraz chroniony podgląd. Ten audyt nie wdraża tych zmian.
 
 ### Sesja odtworzenia Playwright w środowisku chmurowym, 08.10.2026
 

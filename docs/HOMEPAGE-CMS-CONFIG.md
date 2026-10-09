@@ -5,6 +5,16 @@ nie wykonana migracja. Obowiązuje dla polskiej strony głównej.
 
 ## Źródła i sposób aktualizacji
 
+Decyzja użytkownika z 08.10.2026 po audycie Sanity: ujednolicić kolekcje.
+Blog, tak jak E-booki, ma być dokumentem `page` w **Strony** (PL/EN),
+z sekcją `blogCollectionSection`, opcjonalnym `formSection` i własnym `seo`.
+Artykuły i kategorie pozostają osobnymi dokumentami. `siteSettings` przechowuje
+ustawienia wspólne; dawny `blogIndex` pozostaje tylko do odczytu na czas migracji.
+Oferta `service` nadal współdzieli cenę, czas i rezerwację konsultacji między
+homepage, O mnie i konsultacjami; etykieta panelu: **Oferta konsultacji**.
+To wykonana zmiana kodu, nie deklaracja zapisu danych ani wdrożenia Studio.
+Ścieżka edycji i migracji: [Blog — publikacja](BLOG-PUBLISHING.md).
+
 Najnowsza bezpośrednia decyzja użytkownika ma pierwszeństwo przed wcześniejszą
 propozycją, dokumentami FIRMA i demonstracyjnymi danymi CMS. Aktualny układ
 oraz copy: [mockup 3a](../mockups/homepage/cherry-white.html).

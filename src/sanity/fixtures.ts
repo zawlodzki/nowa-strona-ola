@@ -1,3 +1,4 @@
+import { blogCollectionPageFixture } from "./blog-page";
 import type { Locale } from "@ola/shared";
 
 import { aboutPageFixture } from "./about-fixtures";
@@ -405,6 +406,8 @@ export const demonstrationPages = {
   "en/about": aboutPageFixture("en"),
   "pl/konsultacje": consultationPageFixture("pl"),
   "en/consultations": consultationPageFixture("en"),
+  "pl/blog": blogCollectionPageFixture("pl"),
+  "en/blog": blogCollectionPageFixture("en"),
   "pl/ebooki": ebookCollectionPageFixture("pl"),
   "en/ebooks": ebookCollectionPageFixture("en"),
   "pl/warsztat": {

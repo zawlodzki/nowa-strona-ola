@@ -379,7 +379,38 @@ function articleDocuments() {
   });
 }
 
-function settingsDocument(language) {
+function collectionPageDocument(language) {
+  const old = legacySettingsDocument(language);
+  const { seoTitle, seoDescription, ...collection } = old.blogIndex;
+  return {
+    _id: `page-blog-collection-${language}`,
+    _type: "page",
+    language,
+    title: seoTitle,
+    slug: { _type: "slug", current: "blog" },
+    seo: { _type: "seo", title: seoTitle, description: seoDescription },
+    translation: reference(
+      `page-blog-collection-${language === "pl" ? "en" : "pl"}`,
+    ),
+    sections: [
+      {
+        ...collection,
+        _type: "blogCollectionSection",
+        _key: "blog-collection",
+        variant: "cherry3a",
+      },
+      {
+        _type: "formSection",
+        _key: "blog-newsletter",
+        title: old.blogNewsletter.title,
+        lead: old.blogNewsletter.lead,
+        form: reference(`newsletter-form-${language}`),
+      },
+    ],
+  };
+}
+
+function legacySettingsDocument(language) {
   const pl = language === "pl";
   return {
     _id: `siteSettings-${language}`,
@@ -438,8 +469,8 @@ function settingsDocument(language) {
 
 function documents() {
   return [
-    settingsDocument("pl"),
-    settingsDocument("en"),
+    collectionPageDocument("pl"),
+    collectionPageDocument("en"),
     ...categoryDocuments(),
     ...articleDocuments(),
   ];
@@ -501,8 +532,8 @@ const report = {
   documentCount: docs.length,
   stableIds: docs.map((doc) => ({ id: doc._id, type: doc._type })),
   references: [
-    "form-newsletter-pl",
-    "form-newsletter-en",
+    "newsletter-form-pl",
+    "newsletter-form-en",
     "author-ola-pl",
     "author-ola-en",
   ],
@@ -510,7 +541,7 @@ const report = {
   duplicatedCollection: false,
   gaps: GAPS,
   comparison,
-  note: "Kolekcja nie duplikuje artykułów w osobnym dokumencie strony. Renderer pobiera opublikowane article danego języka, sortuje publishedAt desc, _id asc i paginuje po odjęciu najnowszego wpisu. Copy i przykładowe daty są propozycją.",
+  note: "Dokument strony zawiera teksty kolekcji, SEO i newsletter; nie duplikuje artykułów. Renderer pobiera opublikowane article danego języka, sortuje publishedAt desc, _id asc i paginuje po odjęciu najnowszego wpisu. Copy i przykładowe daty są propozycją.",
 };
 
 const outDir = join(root, "reports");

@@ -4,6 +4,7 @@ import type { GetStaticPaths } from "astro";
 import { blogCategoryPath } from "@/lib/paths";
 import {
   getArticleIndex,
+  getBlogPage,
   getCategory,
   getSiteSettings,
   listCategories,
@@ -20,17 +21,19 @@ const lang = "en" as const;
 const slug = Astro.params.slug;
 const page = Number(Astro.params.page);
 if (!slug) throw new Error("Missing category slug.");
-const [category, index, settings, categories] = await Promise.all([
+const [category, index, settings, categories, blogPage] = await Promise.all([
   getCategory(lang, slug),
   getArticleIndex(lang, page, { categorySlug: slug }),
   getSiteSettings(lang),
   listCategories(lang),
+  getBlogPage(lang),
 ]);
 ---
 
 <BlogCollectionPage
   lang={lang}
   settings={settings}
+  page={blogPage}
   index={index}
   categories={categories}
   category={category}

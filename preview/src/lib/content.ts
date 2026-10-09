@@ -1,3 +1,4 @@
+import { blogPageFromLegacySettings } from "../../../src/sanity/blog-page";
 import { createClient } from "@sanity/client";
 import type { Locale } from "@ola/shared";
 
@@ -61,6 +62,25 @@ export function createPreviewContentClient(
     token: environment.SANITY_API_READ_TOKEN,
     useCdn: false,
   });
+}
+
+export async function getPreviewBlogPage(
+  language: Locale,
+  environment: PreviewEnvironment,
+  client = createPreviewContentClient(environment),
+): Promise<PageContent> {
+  const page = await client.fetch<PageContent | null>(PREVIEW_PAGE_QUERY, {
+    language,
+    slug: "blog",
+  });
+  if (page) {
+    assertKnownSections(page.sections);
+    return page;
+  }
+  return blogPageFromLegacySettings(
+    await getPreviewSiteSettings(language, environment, client),
+    language,
+  );
 }
 
 export async function getPreviewPage(
@@ -141,7 +161,7 @@ export async function getPreviewSiteSettings(
 ): Promise<SiteSettings> {
   const settings = await client.fetch<SiteSettings | null>(
     PREVIEW_SITE_SETTINGS_QUERY,
-    { language },
+    { language, id: `siteSettings-${language}` },
   );
   if (!settings) {
     throw new Error(`Brak ustawień podglądu ${language}.`);

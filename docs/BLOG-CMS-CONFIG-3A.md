@@ -1,5 +1,10 @@
 # Artykuł blogowy 3a — konfiguracja Sanity
 
+Instrukcja utworzenia artykułu, sluga i publikacji oraz nowy dokument strony
+kolekcji: [Blog — edycja i publikacja](BLOG-PUBLISHING.md). Decyzja użytkownika
+08.10.2026: kolekcja bloga przeniesiona z ustawień do `page` w kodzie.
+Wspólny newsletter artykułów pozostaje w `siteSettings.blogNewsletter`.
+
 Data: 2026-10-08. Status: schemat, GROQ, fixture i szablon Article3a są w kodzie.
 Content Lake i publikacja przykładowego tekstu makiety pozostają otwarte.
 

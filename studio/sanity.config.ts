@@ -6,9 +6,12 @@ import { visionTool } from "@sanity/vision";
 import { previewOrigin, sanityEnvironment } from "./sanity.env";
 import { presentationResolve } from "./presentation";
 import { schemaTypes } from "./schema-types";
-import { structure } from "./structure";
+import { SINGLETON_TYPES, structure } from "./structure";
 
 const localizedTypes = [
+  "siteSettings",
+  "ebook",
+  "legalPage",
   "page",
   "article",
   "author",
@@ -48,6 +51,23 @@ export default defineConfig({
     }),
     visionTool(),
   ],
+  document: {
+    newDocumentOptions: (previous) =>
+      previous.filter(
+        (option) =>
+          !SINGLETON_TYPES.some(
+            (type) =>
+              option.templateId === type ||
+              option.templateId.startsWith(`${type}-`),
+          ),
+      ),
+    actions: (previous, { schemaType }) =>
+      SINGLETON_TYPES.includes(schemaType)
+        ? previous.filter(
+            ({ action }) => action !== "delete" && action !== "duplicate",
+          )
+        : previous,
+  },
   schema: {
     types: schemaTypes,
     templates: (previous) => [

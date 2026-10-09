@@ -1,3 +1,4 @@
+import { blogPageFromLegacySettings } from "./blog-page";
 import { createClient } from "@sanity/client";
 import type { Locale } from "@ola/shared";
 
@@ -94,6 +95,30 @@ function resolveClient(
   return options.client ?? createPublishedContentClient(config!);
 }
 
+export async function getBlogPage(
+  language: Locale,
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+): Promise<PageContent> {
+  const client = resolveClient(options);
+  if (!client) return getPage(language, "blog", options);
+  const page = await client.fetch<PageContent | null>(PUBLISHED_PAGE_QUERY, {
+    language,
+    slug: "blog",
+  });
+  if (page) {
+    assertKnownSections(page.sections);
+    return page;
+  }
+  // Preserve published content until the collection page has been migrated.
+  return blogPageFromLegacySettings(
+    await getSiteSettings(language, { ...options, client }),
+    language,
+  );
+}
+
 export async function getPage(
   language: Locale,
   slug: string,
@@ -159,7 +184,7 @@ export async function getSiteSettings(
   if (!client) return demonstrationSettings[language] as SiteSettings;
   const settings = await client.fetch<SiteSettings | null>(
     SITE_SETTINGS_QUERY,
-    { language },
+    { language, id: `siteSettings-${language}` },
   );
   if (!settings) {
     throw new Error(`Brak opublikowanych ustawień ${language}.`);

@@ -208,6 +208,11 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     "collection": collection${actionFields},
     items[]->{ ${ebookCardProjection} }
   },
+  _type == "blogCollectionSection" => {
+    variant, title, lead, note, latestTitle, collectionTitle, readActionLabel,
+    allCategoriesLabel, emptyMessage, emptyCategoryMessage,
+    previousLabel, nextLabel, paginationLabel
+  },
   _type == "ebookCollectionSection" => {
     variant,
     title,
@@ -345,7 +350,7 @@ export const siteSettingsProjection = /* groq */ `
 export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
   *[
     _type == "siteSettings" &&
-    !(_id in path("drafts.**")) &&
+    _id == $id &&
     language == $language
   ][0]{ ${siteSettingsProjection} }
 `);

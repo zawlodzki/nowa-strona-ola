@@ -4,7 +4,7 @@ import {
   mapBlogCollection,
   type BlogCollectionView,
 } from "@/content/map-blog-collection";
-import type { CategoryContent, SiteSettings } from "@/sanity/repository";
+import type { CategoryContent, PageContent } from "@/sanity/repository";
 
 function heading(level: 1 | 2 | 3, value: string) {
   return `${"#".repeat(level)} ${value.replaceAll("\n", " ").trim()}`;
@@ -56,7 +56,7 @@ export function serializeBlogCollectionView(view: BlogCollectionView): string {
 }
 
 export function serializeBlogCollection(
-  settings: SiteSettings,
+  page: PageContent,
   index: Parameters<typeof mapBlogCollection>[1],
   categories: Parameters<typeof mapBlogCollection>[2],
   language: Locale,
@@ -66,6 +66,6 @@ export function serializeBlogCollection(
   },
 ): string {
   return serializeBlogCollectionView(
-    mapBlogCollection(settings, index, categories, language, options),
+    mapBlogCollection(page, index, categories, language, options),
   );
 }

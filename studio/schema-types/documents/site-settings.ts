@@ -9,7 +9,18 @@ export const siteSettingsType = defineType({
   type: "document",
   icon: CogIcon,
   fields: [
-    languageField,
+    {
+      ...languageField,
+      readOnly: ({ document }) => Boolean(document?._id),
+      validation: (rule) =>
+        rule.required().custom((value, context) => {
+          const id = context.document?._id?.replace(/^drafts\./, "");
+          return (
+            id === `siteSettings-${value}` ||
+            "Ustawienia mają stały dokument PL/EN. Otwórz go przez Ustawienia witryny."
+          );
+        }),
+    },
     translationField("siteSettings"),
     defineField({
       name: "siteTitle",
@@ -93,16 +104,22 @@ export const siteSettingsType = defineType({
     }),
     defineField({
       name: "blogIndex",
-      title: "Indeks bloga",
+      title: "Indeks bloga — poprzednia konfiguracja",
+      deprecated: {
+        reason:
+          "Edytuj Strony → Blog. Pole pozostaje jako źródło migracji istniejącej treści.",
+      },
+      readOnly: true,
+      hidden: ({ value }) => value === undefined,
       description:
         "Tytuł, lead i etykiety listy. Najnowszy wpis i paginacja wynikają z opublikowanych artykułów, bez flagi featured.",
       type: "blogIndexSettings",
     }),
     defineField({
       name: "blogNewsletter",
-      title: "Newsletter bloga",
+      title: "Newsletter w artykułach",
       description:
-        "Pełny formularz pod listą wpisów. Ta sama referencja formularza co homepage. Pola sidebaru są na artykuł (pakiet 7).",
+        "Wspólna sekcja i kolumna newslettera w artykułach. Newsletter listy wpisów edytuj w Strony → Blog → Formularz.",
       type: "blogNewsletterSettings",
     }),
     defineField({

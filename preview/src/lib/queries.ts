@@ -39,6 +39,7 @@ export const PREVIEW_ARTICLE_QUERY = defineQuery(/* groq */ `
 export const PREVIEW_SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
   *[
     _type == "siteSettings" &&
+    _id == $id &&
     language == $language
   ][0]{ ${siteSettingsProjection} }
 `);

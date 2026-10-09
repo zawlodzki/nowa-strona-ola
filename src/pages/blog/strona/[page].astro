@@ -5,6 +5,7 @@ import { blogCollectionPageCount } from "@/lib/pagination";
 import { blogPath } from "@/lib/paths";
 import {
   getArticleIndex,
+  getBlogPage,
   getSiteSettings,
   listArticles,
   listCategories,
@@ -21,16 +22,18 @@ export const getStaticPaths = (async () => {
 
 const lang = "pl" as const;
 const page = Number(Astro.params.page);
-const [index, settings, categories] = await Promise.all([
+const [index, settings, categories, blogPage] = await Promise.all([
   getArticleIndex(lang, page),
   getSiteSettings(lang),
   listCategories(lang),
+  getBlogPage(lang),
 ]);
 ---
 
 <BlogCollectionPage
   lang={lang}
   settings={settings}
+  page={blogPage}
   index={index}
   categories={categories}
   pageHref={(pageNumber) => blogPath(lang, pageNumber)}

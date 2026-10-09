@@ -17,7 +17,7 @@ import { articlePath, blogCategoryPath, blogPath } from "../../src/lib/paths";
 import {
   getArticle,
   getArticleIndex,
-  getSiteSettings,
+  getBlogPage,
   listArticles,
   listCategories,
 } from "../../src/sanity/repository";
@@ -83,7 +83,7 @@ describe("blog collection 3a fixtures", () => {
   it("maps eleven mockup posts with the newest only on page 1", async () => {
     const [index, settings, categories] = await Promise.all([
       getArticleIndex("pl", 1, { environment: {} }),
-      getSiteSettings("pl", { environment: {} }),
+      getBlogPage("pl", { environment: {} }),
       listCategories("pl", { environment: {} }),
     ]);
     const view = mapBlogCollection(settings, index, categories, "pl", {
@@ -109,7 +109,7 @@ describe("blog collection 3a fixtures", () => {
   it("keeps page 2 without the latest post and with four older cards", async () => {
     const [index, settings, categories] = await Promise.all([
       getArticleIndex("pl", 2, { environment: {} }),
-      getSiteSettings("pl", { environment: {} }),
+      getBlogPage("pl", { environment: {} }),
       listCategories("pl", { environment: {} }),
     ]);
     const view = mapBlogCollection(settings, index, categories, "pl", {
@@ -126,7 +126,7 @@ describe("blog collection 3a fixtures", () => {
   it("does not use Polish copy under the English collection", async () => {
     const [index, settings, categories] = await Promise.all([
       getArticleIndex("en", 1, { environment: {} }),
-      getSiteSettings("en", { environment: {} }),
+      getBlogPage("en", { environment: {} }),
       listCategories("en", { environment: {} }),
     ]);
     const view = mapBlogCollection(settings, index, categories, "en", {
@@ -142,7 +142,7 @@ describe("blog collection 3a fixtures", () => {
   });
 
   it("shows empty collection and empty category states", async () => {
-    const settings = await getSiteSettings("pl", { environment: {} });
+    const settings = await getBlogPage("pl", { environment: {} });
     const categories = await listCategories("pl", { environment: {} });
     const empty = mapBlogCollection(
       settings,
@@ -205,7 +205,7 @@ describe("blog collection serializers", () => {
   it("serializes the first page with latest post, range and newsletter", async () => {
     const [index, settings, categories] = await Promise.all([
       getArticleIndex("pl", 1, { environment: {} }),
-      getSiteSettings("pl", { environment: {} }),
+      getBlogPage("pl", { environment: {} }),
       listCategories("pl", { environment: {} }),
     ]);
     const markdown = serializeBlogCollection(
@@ -231,7 +231,7 @@ describe("blog collection serializers", () => {
     ).trim();
     const [index, settings, categories] = await Promise.all([
       getArticleIndex("pl", 1, { environment: {} }),
-      getSiteSettings("pl", { environment: {} }),
+      getBlogPage("pl", { environment: {} }),
       listCategories("pl", { environment: {} }),
     ]);
     expect(

@@ -1,3 +1,4 @@
+import { blogCollectionPageFixture } from "./blog-page";
 import { homepageCopy } from "@/content/homepage-seed";
 import { BLOG_ARTICLE_SEED } from "@/content/blog-collection-seed";
 import {
@@ -460,13 +461,14 @@ export function buildContentLakePlan(gate: ContentLakeGate): ContentLakePlan {
       toDocument("service", serviceFixture(language), keepPlaceholder),
       toDocument(
         "siteSettings",
-        homepageSettingsFixture(language),
+        { ...homepageSettingsFixture(language), blogIndex: undefined },
         keepPlaceholder,
       ),
       toDocument("page", homepagePageFixture(language), keepPlaceholder),
       toDocument("page", aboutPageFixture(language), keepPlaceholder),
       toDocument("page", consultationPageFixture(language), keepPlaceholder),
       toDocument("page", ebookCollectionPageFixture(language), keepPlaceholder),
+      toDocument("page", blogCollectionPageFixture(language), keepPlaceholder),
     );
     for (const category of demonstrationCategories[language]) {
       documents.push(toDocument("category", category, keepPlaceholder));

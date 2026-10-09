@@ -26,6 +26,8 @@ import {
 
 import { sameLanguageFilter, themeField } from "../shared/fields";
 
+import { blogIndexSettingsType } from "../objects/blog-index";
+
 const requiredString = (rule: StringRule) => rule.required().max(120);
 
 function sectionPreview(subtitle: string) {
@@ -1463,6 +1465,29 @@ export const ebookCollectionSectionType = defineType({
   preview: sectionPreview("Kolekcja e-booków"),
 });
 
+export const blogCollectionSectionType = defineType({
+  name: "blogCollectionSection",
+  title: "Kolekcja bloga",
+  type: "object",
+  icon: BookIcon,
+  description:
+    "Lista korzysta z artykułów i kategorii w języku strony. Najnowszy wpis oraz paginacja powstają automatycznie.",
+  fields: [
+    defineField({
+      name: "variant",
+      title: "Wariant",
+      type: "string",
+      options: { list: [{ title: "Cherry 3a", value: "cherry3a" }] },
+      initialValue: "cherry3a",
+      validation: (rule) => rule.required(),
+    }),
+    ...blogIndexSettingsType.fields.filter(
+      (field) => !["seoTitle", "seoDescription"].includes(field.name),
+    ),
+  ],
+  preview: sectionPreview("Kolekcja bloga"),
+});
+
 export const pageSectionTypes = [
   heroSectionType,
   textSectionType,
@@ -1486,6 +1511,7 @@ export const pageSectionTypes = [
   serviceOfferSectionType,
   credentialsSectionType,
   ebookCollectionSectionType,
+  blogCollectionSectionType,
 ];
 
 export const pageSectionsField = defineField({
