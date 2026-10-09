@@ -6,6 +6,47 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Zmiana zdjęcia „O mnie”, 09.10.2026
+
+Na polecenie użytkownika zastąpiono portret „O mnie C” rzeczywistym
+[zdjęciem z Instagrama](https://www.instagram.com/p/CvUc_R0o9Kn/). Zmiana
+wspólnego `about.webp` obejmuje 13 obrazów w 12 lokalnych mockupach, w tym
+homepage, profil, konsultacje, e-book, indeks bloga i oba biogramy artykułu.
+Źródłowy JPEG ma 1440 × 1800 px; w repo jest tylko WebP wyeksportowany z jakością 90. Nie upscalowano ani nie retuszowano zdjęcia.
+W profilu, sekcji „O mnie” i przy e-booku przesunięto punkt kadru CSS na
+`center 15%`, aby zachować górę włosów w szerokich ramkach. Zaktualizowano
+wymiary dużych obrazów; małe awatary zachowują swój rozmiar wyświetlania.
+Usunięto nieaktualny podpis o AI i jego nieużywany styl.
+
+Zapisano źródło, opis PL/EN i decyzję do przyszłej konfiguracji CMS. Mapowanie
+zweryfikowano w aktualnych schematach: `textImageSection.media`,
+`heroSection.media`, `author.photo`. Hero i Kontakt zachowują wcześniejszy
+wybór. Dotychczasowe lokalne zmiany użytkownika zachowano. Na zlecenie „pr push”
+przygotowano osobny checkout z aktualnego main i gałąź `codex/about-instagram-photo`.
+
+Bramka początkowego checkoutu `npm run verify` PASS na Node 24.21.0: format, tokeny, lint, typy,
+57 testów jednostkowych, buildy wszystkich workspace’ów, kontrola artefaktów
+i 81 E2E. Dodatkowo 63 kontrole zdjęcia przy 320/390/1440 px w Chromium,
+Firefox i WebKit PASS: obraz 1440 × 1800 px załadowany, bez overflow.
+Profil przeszedł klawiaturę, CSS zoom 200%, reduced motion i brak JS w trzech
+silnikach. Obejrzano kadry na desktopie i mobile. Zrzuty z przeglądu
+i źródłowy PNG nie trafiły do repo (tylko WebP).
+Format, lokalne odnośniki i `git diff --check` PASS. Natywny zoom 200%,
+czytnik ekranu i urządzenie fizyczne pozostają niesprawdzone.
+PR na aktualnym main obejmuje również wspólny import `SiteImage`, nowe kadry
+w About3a/Homepage3a/Ebook3a i usunięcie podpisu AI z fixture PL/EN. Wspólny
+plik podmienia także portrety konsultacji, autorów i indeksu bloga w Astro.
+Import nowego pliku do Sanity i publikacja nie były częścią sesji.
+Końcowe verify wydzielonej gałęzi na main `d3ae6e2` PASS: 181 unit w 29 plikach,
+201 E2E, buildy wszystkich workspace’ów, budżety i symulacja Content Lake.
+Walidacja offline: 84 dokumenty, 0 błędów; 62 strony; porównanie sekcji, zdjęć
+i DOM na 15 stronach zgodne. Obejrzenie świeżego builda Astro przy 1440/390 px
+potwierdziło nowe zdjęcie i brak podpisu o AI. Log lokalny:
+`/private/tmp/ola-photo-pr-verify.log`.
+
+Następny krok: review PR; przed publikacją z CMS przesłać nowy plik
+do Content Lake i przypisać do sekcji oraz wspólnego autora.
+
 ### PR navbaru i akcentów matcha, 09.10.2026
 
 Na zlecenie „pr push” przygotowano gałąź `codex/sticky-navbar-matcha`.

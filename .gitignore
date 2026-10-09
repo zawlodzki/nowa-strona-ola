@@ -10,6 +10,8 @@ build/
 .sanity/
 .wrangler/
 .cache/
+# Local review captures (portrait checks are not kept in the repo)
+output/portraits/
 .turbo/
 coverage/
 playwright-report/

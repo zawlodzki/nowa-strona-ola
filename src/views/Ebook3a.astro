@@ -276,6 +276,7 @@ const jsonLd = {
       <figure>
         <SiteImage
           src={author.photo?.src}
+          objectPosition="50% 15%"
           fallback="about"
           alt={author.photo?.label ?? author.name}
           width={700}
@@ -752,7 +753,7 @@ const jsonLd = {
     inline-size: 100%;
     block-size: 420px;
     object-fit: cover;
-    object-position: center 35%;
+    object-position: center 15%;
     border-radius: 100px 24px 24px 24px;
     background: var(--ao-surface);
   }

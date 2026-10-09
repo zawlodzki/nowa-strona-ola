@@ -1,13 +1,14 @@
 # Wybrane fotografie Aleksandry
 
-Zestaw zaakceptowany przez użytkownika 2026-10-04: **Hero A, O mnie C, Kontakt C**
-z drugiej serii propozycji. Fotografie wygenerowano wbudowanym image_gen.
-Nie są dokumentacją rzeczywistej sesji fotograficznej.
+Hero A i Kontakt C pochodzą z drugiej serii image_gen, zaakceptowanej 2026-10-04.
+Nie dokumentują rzeczywistej sesji fotograficznej. Portret „O mnie” zastąpiono
+2026-10-09 rzeczywistym [zdjęciem z Instagrama](https://www.instagram.com/p/CvUc_R0o9Kn/)
+na polecenie użytkownika. Zmiana obejmuje wszystkie zastosowania `about.webp`.
 
 | Sekcja    | Plik do strony               | Oryginał                             | Rozmiar        | Tło           |
 | --------- | ---------------------------- | ------------------------------------ | -------------- | ------------- |
 | Hero A    | [hero.webp](hero.webp)       | [hero.png](originals/hero.png)       | 1122 × 1402 px | Przezroczyste |
-| O mnie C  | [about.webp](about.webp)     | [about.png](originals/about.png)     | 1122 × 1402 px | Neutralne     |
+| O mnie    | [about.webp](about.webp)     | — (tylko WebP w repo)                | 1440 × 1800 px | Wnętrze       |
 | Kontakt C | [contact.webp](contact.webp) | [contact.png](originals/contact.png) | 1536 × 1024 px | Jasne wnętrze |
 
 [selection.json](selection.json) zawiera mapowanie wybranych wariantów, wymiary,
@@ -15,10 +16,16 @@ informację o przezroczystości i proponowane opisy alternatywne PL/EN.
 
 ## Eksport i użycie
 
-WebP jest bezstratny, bez zmiany rozdzielczości, kadrowania lub retuszu.
+Hero i Kontakt mają bezstratny WebP, bez zmiany rozdzielczości, kadrowania lub retuszu.
 Porównano zdekodowane piksele PNG i WebP: wszystkie widoczne piksele i kanał alfa
 są identyczne. Enkoder pomija część niewidocznych wartości RGB tam, gdzie alfa
 wynosi zero; nie zmienia to wyglądu. Oryginały pozostają źródłem dalszych eksportów.
+
+Portret „O mnie” pobrano jako JPEG 1440 × 1800 px; `about.webp` jest jego eksportem
+z jakością 90. Źródłowego JPEG/PNG nie trzymamy w repo — źródłem jest post na Instagramie.
+Nie zmieniano rozdzielczości, kadru, twarzy ani tła; upscaling nie był potrzebny.
+Różne kadry w sekcjach i awatarach wynikają z istniejącego `object-fit` w CSS.
+Poprzedni wygenerowany portret pozostaje w historii Git.
 
 Hero należy wyświetlać jako całą sylwetkę, z zachowaniem proporcji, np. przez
 `object-fit: contain`. Kolor za postacią powinien pochodzić z sekcji strony.
@@ -27,7 +34,7 @@ oddzielnie, a portret wykadrować do prawej części zdjęcia. Finalne kadry zal
 od docelowego układu sekcji. Przed publikacją sprawdzić krawędzie loków na jej tle.
 
 Pliki są przygotowane do importu przez Astro lub przesłania do Sanity.
-Ten PR zapisuje materiały; podłączenie do sekcji CMS pozostaje osobnym krokiem.
+Podłączenie do sekcji CMS pozostaje osobnym krokiem.
 Lokalna galeria z pozostałymi wariantami nie jest częścią repozytorium.
 
 ## Pochodzenie
@@ -39,7 +46,8 @@ Druga seria korzystała z czterech rzeczywistych referencji Aleksandry:
 - [Neutralny portret](https://www.instagram.com/p/CnKb2oWqhNr/) — spokojna mimika i ułożenie włosów.
 - [Nagranie zawodowe](https://www.instagram.com/p/DO8FbZZDTee/) — wycięty zrzut pojedynczej klatki odtwarzania z twarzą i górą sylwetki.
 
-Źródłowych prywatnych zdjęć ani klatek z Instagrama nie dodano do zestawu AI powyżej.
+Pozostałych źródłowych zdjęć ani klatek z Instagrama nie dodano do repo.
+Wyjątkiem jest wybrany 2026-10-09 portret „O mnie”, zapisany tylko jako WebP.
 
 ## Zdjęcie ukończenia
 
