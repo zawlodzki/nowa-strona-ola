@@ -1,12 +1,20 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { contrastRatio, generateTokensCss } from "./tokens.mjs";
+import {
+  contrastRatio,
+  generateTokensCss,
+  generateLegacyAliasesCss,
+} from "./tokens.mjs";
 const tokens = JSON.parse(await readFile("design-system/tokens.json", "utf8"));
 const css = await readFile("design-system/tokens.css", "utf8");
 assert.equal(
   css,
   generateTokensCss(tokens),
   "Uruchom npm run tokens:generate: CSS odbiega od tokens.json.",
+);
+assert.equal(
+  await readFile("design-system/legacy-tokens.css", "utf8"),
+  generateLegacyAliasesCss(tokens),
 );
 assert.equal(tokens.meta.direction, "3a");
 assert.match(tokens.tokens.font.value, /Switzer/);

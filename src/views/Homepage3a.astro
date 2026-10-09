@@ -402,18 +402,18 @@ function coverLabels(kind: CoverArtKind): string[] {
 <style>
   .home3a-portrait {
     position: relative;
-    height: 550px;
+    block-size: 550px;
   }
   .home3a :global(.ao-hero .ao-lead) {
-    max-width: 52ch;
-    font-size: 18px;
+    max-inline-size: 52ch;
+    font-size: 1.125rem;
     line-height: 1.5;
   }
   .home3a-portrait :global(img) {
     position: relative;
     z-index: 1;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     object-fit: contain;
     object-position: center bottom;
   }
@@ -422,9 +422,9 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   .home3a-partners p {
     text-align: center;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--ao-muted);
-    margin-bottom: var(--ao-space-32);
+    margin-block-end: var(--ao-space-32);
   }
   .home3a-partners ul {
     display: flex;
@@ -433,25 +433,26 @@ function coverLabels(kind: CoverArtKind): string[] {
     align-items: center;
     gap: 36px;
     margin: 0;
-    padding: 28px 0;
+    padding-block: 28px;
+    padding-inline: 0;
     list-style: none;
     border-block: 1px solid var(--ao-line);
   }
   .home3a-partners :global(img) {
-    width: auto;
-    max-width: 160px;
-    height: 43px;
+    inline-size: auto;
+    max-inline-size: 160px;
+    block-size: 43px;
     object-fit: contain;
     filter: grayscale(1);
     opacity: 0.78;
     mix-blend-mode: multiply;
   }
   .home3a-partners li:nth-child(2) :global(img) {
-    height: 40px;
-    width: 82px;
+    block-size: 40px;
+    inline-size: 82px;
   }
   .home3a-partners li:nth-child(4) :global(img) {
-    height: 35px;
+    block-size: 35px;
   }
   :global([data-theme="dark"]) .home3a-partners :global(img) {
     filter: grayscale(1) invert(1);
@@ -470,13 +471,13 @@ function coverLabels(kind: CoverArtKind): string[] {
     align-items: start;
   }
   .home3a-why :global(.ao-heading) {
-    font-size: 56px;
+    font-size: 3.5rem;
   }
   .home3a-count {
     display: flex;
     align-items: center;
     gap: var(--ao-space-24);
-    margin-top: var(--ao-space-48);
+    margin-block-start: var(--ao-space-48);
   }
   .home3a-count strong {
     font-size: 92px;
@@ -489,7 +490,7 @@ function coverLabels(kind: CoverArtKind): string[] {
     color: var(--ao-primary);
   }
   .home3a-count > span {
-    max-width: 180px;
+    max-inline-size: 180px;
     font-size: 14px;
   }
   .home3a-results {
@@ -514,14 +515,15 @@ function coverLabels(kind: CoverArtKind): string[] {
     border: 1px solid var(--ao-line);
   }
   .home3a-results h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.03em;
+    line-height: 1.15;
   }
   .home3a-results p {
-    margin-top: 10px;
+    margin-block-start: 10px;
     color: var(--ao-muted);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .home3a-results article:first-child p {
     margin: 0;
@@ -534,52 +536,53 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   .home3a-about__media {
     position: relative;
-    max-width: none;
+    max-inline-size: none;
   }
   .home3a-about__media :global(img:not(.home3a-about__food)) {
-    width: 100%;
-    height: 540px;
+    inline-size: 100%;
+    block-size: 540px;
     object-fit: cover;
     border-radius: 24px;
   }
   :global(img.home3a-about__food) {
     position: absolute;
-    right: 24px;
-    bottom: -32px;
-    width: 220px;
-    height: 150px;
+    inset-inline-end: 24px;
+    inset-block-end: -32px;
+    inline-size: 220px;
+    block-size: 150px;
     object-fit: cover;
     border: 8px solid var(--ao-background);
     border-radius: 24px;
   }
   .home3a-about :global(.ao-heading) {
-    font-size: 64px;
+    font-size: 4rem;
   }
   .home3a-large {
-    margin-top: var(--ao-space-24);
-    font-size: 25px;
+    margin-block-start: var(--ao-space-24);
+    font-size: 1.5625rem;
     font-weight: 500;
   }
   .home3a-about p + p,
   .home3a-about .ao-text-link {
-    margin-top: var(--ao-space-24);
+    margin-block-start: var(--ao-space-24);
     display: inline-flex;
   }
   .home3a-section-head {
-    max-width: 720px;
-    margin-bottom: var(--ao-space-40);
+    max-inline-size: 720px;
+    margin-block-end: var(--ao-space-40);
   }
   .home3a-groups {
     display: flex;
     flex-wrap: wrap;
     gap: var(--ao-space-8);
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .home3a-groups a {
     display: inline-flex;
     align-items: center;
-    min-height: var(--ao-target-min);
-    padding: 10px 16px;
+    min-block-size: var(--ao-target-min);
+    padding-block: 10px;
+    padding-inline: 16px;
     border: 1px solid var(--ao-line);
     border-radius: 999px;
   }
@@ -588,21 +591,23 @@ function coverLabels(kind: CoverArtKind): string[] {
     border-color: var(--ao-primary);
     color: var(--ao-on-primary);
   }
-  .home3a-groups a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
+  @media (hover: hover) and (pointer: fine) {
+    .home3a-groups a:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
   }
   .home3a-reviews-lead {
     margin: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: var(--ao-muted);
   }
   .home3a-collection {
-    margin-top: var(--ao-space-32);
+    margin-block-start: var(--ao-space-32);
   }
   .home3a-note {
-    margin-top: var(--ao-space-16);
-    font-size: 12px;
+    margin-block-start: var(--ao-space-16);
+    font-size: 0.75rem;
     color: var(--ao-muted);
   }
   .home3a :global(.ao-carousel__footer) .home3a-note {
@@ -611,10 +616,11 @@ function coverLabels(kind: CoverArtKind): string[] {
   .home3a-facts {
     display: grid;
     gap: 12px;
-    margin: var(--ao-space-32) 0;
+    margin-block: var(--ao-space-32);
+    margin-inline: 0;
     padding: 0;
     list-style: none;
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .home3a-facts li {
     display: grid;
@@ -623,23 +629,23 @@ function coverLabels(kind: CoverArtKind): string[] {
     gap: 12px;
   }
   .home3a-facts :global(.ao-deco-check) {
-    width: 12px;
-    height: 12px;
+    inline-size: 12px;
+    block-size: 12px;
     color: var(--ao-primary);
   }
   .home3a-price {
-    font-size: 18px;
-    margin-bottom: var(--ao-space-24);
+    font-size: 1.125rem;
+    margin-block-end: var(--ao-space-24);
   }
   .home3a :global(#konsultacje-panel img) {
-    width: 100%;
-    height: 520px;
+    inline-size: 100%;
+    block-size: 520px;
     object-fit: cover;
     object-position: 70% center;
   }
   @container page3a (max-width: 1199px) {
     .home3a-portrait {
-      height: 500px;
+      block-size: 500px;
     }
   }
   @container page3a (max-width: 879px) {
@@ -650,7 +656,7 @@ function coverLabels(kind: CoverArtKind): string[] {
     }
     .home3a-why :global(.ao-heading),
     .home3a-about :global(.ao-heading) {
-      font-size: clamp(36px, 8vw, 52px);
+      font-size: clamp(2.25rem, 8vw, 3.25rem);
     }
     .home3a-results {
       grid-template-columns: 1fr;
@@ -660,27 +666,27 @@ function coverLabels(kind: CoverArtKind): string[] {
       grid-template-columns: 1fr;
     }
     .home3a :global(.ao-hero .ao-lead) {
-      font-size: 16px;
+      font-size: 1rem;
     }
     .home3a-portrait {
-      height: 450px;
+      block-size: 450px;
     }
     .home3a-partners :global(img) {
-      max-width: 130px;
-      height: 32px;
+      max-inline-size: 130px;
+      block-size: 32px;
     }
     .home3a-about__media :global(img:not(.home3a-about__food)) {
-      height: 440px;
+      block-size: 440px;
     }
     :global(img.home3a-about__food) {
-      right: 16px;
-      bottom: -20px;
-      width: 176px;
-      height: 125px;
+      inset-inline-end: 16px;
+      inset-block-end: -20px;
+      inline-size: 176px;
+      block-size: 125px;
       border-width: 6px;
     }
     .home3a :global(#konsultacje-panel img) {
-      height: 390px;
+      block-size: 390px;
       object-position: 75% center;
     }
   }
@@ -689,19 +695,19 @@ function coverLabels(kind: CoverArtKind): string[] {
       font-size: 78px;
     }
     .home3a-portrait {
-      height: 410px;
+      block-size: 410px;
     }
     .home3a-about__media :global(img:not(.home3a-about__food)) {
-      height: 440px;
+      block-size: 440px;
       object-position: center 25%;
     }
     .home3a :global(#konsultacje-panel img) {
-      height: 280px;
+      block-size: 280px;
     }
   }
   @container page3a (max-width: 374px) {
     .home3a-portrait {
-      height: 340px;
+      block-size: 340px;
     }
     .home3a-count strong {
       font-size: 64px;

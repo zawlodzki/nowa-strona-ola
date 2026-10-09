@@ -20,9 +20,10 @@ const { variant = "default", class: className } = Astro.props;
     position: relative;
     display: grid;
     place-items: center;
-    width: 100%;
-    min-height: 440px;
-    padding: 36px var(--ao-space-24);
+    inline-size: 100%;
+    min-block-size: 440px;
+    padding-block: 36px;
+    padding-inline: var(--ao-space-24);
     color: var(--ao-stage);
   }
   .ao-cover-stage--alt {
@@ -32,8 +33,8 @@ const { variant = "default", class: className } = Astro.props;
     position: absolute;
     inset: 0;
     display: block;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     pointer-events: none;
   }
   .ao-cover-stage__content {

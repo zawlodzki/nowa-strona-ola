@@ -10,7 +10,8 @@ async function serveMockup(page: Page) {
     const allowed =
       path.startsWith("mockups/homepage/") ||
       path.startsWith("src/assets/") ||
-      path === "design-system/tokens.css";
+      path === "design-system/tokens.css" ||
+      path === "design-system/legacy-tokens.css";
     if (!allowed) return route.abort();
     const types: Record<string, string> = {
       ".html": "text/html",
@@ -32,7 +33,9 @@ test("ebook categories support keyboard, URL reload and browser history", async 
   page,
 }) => {
   await serveMockup(page);
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(collectionPath);
+  await expect(page.locator(".nav-inner")).toHaveCSS("width", "1320px");
   const cards = page.locator(".ebook-grid .book-card:visible");
   await expect(cards).toHaveCount(6);
   const all = page.getByRole("radio", { name: "Wszystkie" });

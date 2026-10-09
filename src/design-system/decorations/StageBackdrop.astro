@@ -40,10 +40,13 @@ function stagePath(topLeft: number) {
 <style>
   .ao-deco-stage {
     position: absolute;
-    inset: 24px 0 0;
+    inset-block-start: 24px;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     display: block;
-    width: 100%;
-    height: calc(100% - 24px);
+    inline-size: 100%;
+    block-size: calc(100% - 24px);
     color: var(--ao-surface);
     pointer-events: none;
     z-index: 0;

@@ -7,8 +7,16 @@ interface Props {
   lang: "pl" | "en";
   description?: string;
   noindex?: boolean;
+  /** Keep legacy Layout base metrics for routes migrated from it (visual parity). */
+  legacyBase?: boolean;
 }
-const { title, lang, description, noindex = true } = Astro.props;
+const {
+  title,
+  lang,
+  description,
+  noindex = true,
+  legacyBase = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -16,6 +24,7 @@ const { title, lang, description, noindex = true } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {noindex && <meta name="robots" content="noindex,nofollow" />}
@@ -29,7 +38,7 @@ const { title, lang, description, noindex = true } = Astro.props;
     <link rel="icon" href={iconUrl} type="image/svg+xml" />
     <slot name="head" />
   </head>
-  <body class="ao-site">
+  <body class:list={["ao-site", legacyBase && "ao-site--legacy-base"]}>
     <a class="ao-skip" href="#main">
       {lang === "pl" ? "Przejdź do treści" : "Skip to content"}
     </a>

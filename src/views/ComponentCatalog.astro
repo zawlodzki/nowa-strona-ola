@@ -218,17 +218,18 @@ const logoLabels: Record<LogoVariant, string> = {
     grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
     gap: var(--wf-space-16);
     padding: 0;
-    margin: var(--wf-space-32) 0 0;
+    margin-block: var(--wf-space-32) 0;
+    margin-inline: 0;
     list-style: none;
   }
   .swatches li {
     display: grid;
     gap: var(--wf-space-8);
-    min-width: 0;
+    min-inline-size: 0;
   }
   .swatch {
     display: block;
-    width: 100%;
+    inline-size: 100%;
     aspect-ratio: 1;
     border: 1px solid var(--wf-color-line);
     border-radius: var(--wf-radius-8);
@@ -239,11 +240,11 @@ const logoLabels: Record<LogoVariant, string> = {
     font-weight: 300;
     letter-spacing: -0.04em;
     line-height: 1.15;
-    max-width: 20ch;
+    max-inline-size: 20ch;
   }
   .catalog-field {
-    margin-top: var(--wf-space-32);
-    max-width: 32rem;
+    margin-block-start: var(--wf-space-32);
+    max-inline-size: 32rem;
   }
   .catalog-inverse {
     color: var(--wf-fg);
@@ -252,13 +253,14 @@ const logoLabels: Record<LogoVariant, string> = {
     display: grid;
     gap: var(--wf-space-32);
     padding: 0;
-    margin: var(--wf-space-32) 0 0;
+    margin-block: var(--wf-space-32) 0;
+    margin-inline: 0;
     list-style: none;
   }
   .logo-specimens li {
     display: grid;
     gap: var(--wf-space-12);
-    min-width: 0;
+    min-inline-size: 0;
     padding: var(--wf-space-24);
     border: 1px solid var(--wf-color-line);
     border-radius: var(--wf-radius-12);
@@ -268,7 +270,7 @@ const logoLabels: Record<LogoVariant, string> = {
     display: grid;
     gap: var(--wf-space-4);
     margin: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: var(--wf-color-body);
   }
 </style>

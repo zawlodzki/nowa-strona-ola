@@ -74,6 +74,14 @@ mediów ani nagłówków transportowych. Strona /static/ ma nie zawierać żadne
 script. Docelowe budżety per szablon ustalić po wdrożeniu mediów, c15t i
 analityki.
 
+`test:build` kontroluje także osiem szablonów 3a w PL/EN przez
+`scripts/check-css-budgets.mjs`: gzip ich linkowanych zasobów CSS oraz rozmiar
+inline CSS przed kompresją. Limity zewnętrznego CSS: 8 KiB Home/About,
+9 KiB Consultation, 8 KiB kolekcje/blog, 10 KiB produkt/artykuł, 6 KiB legal.
+Inline: 4 KiB, legal 6 KiB. Te dwa pomiary są osobne: inline CSS jest częścią
+HTML, a nie dodatkowym żądaniem. Kontrola blokuje również dołączenie legacy
+lub styli innego szablonu do strony 3a.
+
 Lighthouse: cel z planu ≥95 przed tagami, osobny pomiar po zgodzie. Pomiar wykonać
 na reprezentatywnych gotowych szablonach, bez utożsamiania rozmiaru bundla z CWV.
 

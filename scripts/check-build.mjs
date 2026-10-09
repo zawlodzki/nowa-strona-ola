@@ -1,6 +1,7 @@
 import { access, readFile, readdir } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
+import { checkCssBudgets } from "./check-css-budgets.mjs";
 const assets = await readdir("dist/_astro");
 const sizes = { js: 0, css: 0 };
 for (const name of assets) {
@@ -218,5 +219,13 @@ for (const loc of [
   assert.match(sitemap, new RegExp(loc.replaceAll("/", "\\/")));
 }
 console.log(
-  JSON.stringify({ gzipBytes: sizes, staticPrimitivesScripts: 0 }, null, 2),
+  JSON.stringify(
+    {
+      gzipBytes: sizes,
+      cssByTemplate: await checkCssBudgets(),
+      staticPrimitivesScripts: 0,
+    },
+    null,
+    2,
+  ),
 );
