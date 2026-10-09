@@ -33,26 +33,42 @@ def markdown_inline(block: dict) -> str:
 
 def article_body_to_markdown(blocks: list[dict]) -> str:
     lines: list[str] = []
-    list_type: str | None = None
-    list_index = 0
+    # One frame per list level (mirrors articleBodyToMarkdown).
+    stack: list[dict] = []
 
     def close_list() -> None:
-        nonlocal list_type, list_index
-        if list_type:
+        nonlocal stack
+        if stack:
             lines.append("")
-            list_type = None
-            list_index = 0
+            stack = []
 
     for block in blocks:
         kind = block.get("_type")
         if kind == "block":
             if block.get("listItem"):
-                if list_type != block["listItem"]:
-                    close_list()
-                    list_type = block["listItem"]
-                list_index += 1
-                marker = f"{list_index}." if block["listItem"] == "number" else "-"
-                lines.append(f"{marker} {markdown_inline(block)}")
+                level = block.get("level") or 1
+                if len(stack) > level:
+                    stack = stack[:level]
+                if len(stack) == level and stack[level - 1]["type"] != block["listItem"]:
+                    if level == 1:
+                        close_list()
+                    else:
+                        stack = stack[: level - 1]
+                while len(stack) < level:
+                    parent = stack[-1] if stack else None
+                    stack.append(
+                        {
+                            "type": block["listItem"],
+                            "index": 0,
+                            "indent": parent["indent"] + parent["width"] if parent else 0,
+                            "width": 0,
+                        }
+                    )
+                frame = stack[level - 1]
+                frame["index"] += 1
+                marker = f"{frame['index']}." if block["listItem"] == "number" else "-"
+                frame["width"] = len(marker) + 1
+                lines.append(f"{' ' * frame['indent']}{marker} {markdown_inline(block)}")
                 continue
             close_list()
             text = markdown_inline(block)

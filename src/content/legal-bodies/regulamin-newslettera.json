@@ -508,43 +508,13 @@
     },
     {
       "_type": "block",
-      "_key": "p0066",
+      "_key": "p0061",
       "style": "normal",
       "children": [
         {
           "_type": "span",
           "_key": "s0060",
           "text": "Uprawniony może odstąpić od umowy, gdy:",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0061",
-          "text": "doprowadzenie do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0062",
-          "text": "Usługodawca nie doprowadził świadczenia do zgodności zgodnie z ust. 3,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0063",
-          "text": "brak zgodności występuje nadal mimo próby jego usunięcia,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0064",
-          "text": "brak zgodności jest na tyle istotny, że uzasadnia natychmiastowe odstąpienie, albo",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0065",
-          "text": "z oświadczenia Usługodawcy lub okoliczności wyraźnie wynika, że nie doprowadzi świadczenia do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.",
           "marks": []
         }
       ],
@@ -554,12 +524,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0068",
+      "_key": "p0063",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0067",
+          "_key": "s0062",
           "text": "doprowadzenie do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,",
           "marks": []
         }
@@ -570,12 +540,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0070",
+      "_key": "p0065",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0069",
+          "_key": "s0064",
           "text": "Usługodawca nie doprowadził świadczenia do zgodności zgodnie z ust. 3,",
           "marks": []
         }
@@ -586,12 +556,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0072",
+      "_key": "p0067",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0071",
+          "_key": "s0066",
           "text": "brak zgodności występuje nadal mimo próby jego usunięcia,",
           "marks": []
         }
@@ -602,12 +572,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0074",
+      "_key": "p0069",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0073",
+          "_key": "s0068",
           "text": "brak zgodności jest na tyle istotny, że uzasadnia natychmiastowe odstąpienie, albo",
           "marks": []
         }
@@ -618,12 +588,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0076",
+      "_key": "p0071",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0075",
+          "_key": "s0070",
           "text": "z oświadczenia Usługodawcy lub okoliczności wyraźnie wynika, że nie doprowadzi świadczenia do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.",
           "marks": []
         }
@@ -634,12 +604,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0078",
+      "_key": "p0073",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0077",
+          "_key": "s0072",
           "text": "Odstąpienie nie przysługuje, jeżeli brak zgodności jest nieistotny; domniemywa się, że brak zgodności jest istotny. Ponieważ Newsletter i Materiały są dostarczane bez zapłaty ceny, obniżenie ceny nie znajduje zastosowania.",
           "marks": []
         }
@@ -650,12 +620,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0080",
+      "_key": "p0075",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0079",
+          "_key": "s0074",
           "text": "Po odstąpieniu subskrybent zaprzestaje korzystania z niezgodnego Materiału i udostępniania go osobom trzecim. Usługodawca może uniemożliwić dalszy dostęp do pliku lub linku, z poszanowaniem ustawowych praw subskrybenta do treści innych niż dane osobowe, które sam dostarczył lub wytworzył.",
           "marks": []
         }
@@ -666,12 +636,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0082",
+      "_key": "p0077",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0081",
+          "_key": "s0076",
           "text": "Jeżeli jest to konieczne do ustalenia przyczyny braku zgodności, subskrybent współpracuje z Usługodawcą w rozsądnym zakresie i przy zastosowaniu najmniej uciążliwych środków technicznych. Brak współpracy po uzasadnionym wezwaniu może wpłynąć na ustawowy rozkład ciężaru dowodu tylko wtedy, gdy przed zawarciem umowy subskrybent został jasno poinformowany o tym obowiązku.",
           "marks": []
         }
@@ -682,12 +652,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0084",
+      "_key": "p0079",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0083",
+          "_key": "s0078",
           "text": "Reklamacje można składać na grzesiek@zawlodzki.pl, najlepiej podając adres użyty przy zapisie i opis problemu. Usługodawca odpowiada w terminie 14 dni; brak odpowiedzi w tym terminie oznacza uznanie reklamacji.",
           "marks": []
         }
@@ -703,7 +673,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0085",
+          "_key": "s0080",
           "text": "§ 8. Aktualizacje i zmiany Newslettera",
           "marks": []
         }
@@ -712,12 +682,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0087",
+      "_key": "p0082",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0086",
+          "_key": "s0081",
           "text": "Usługodawca dostarcza aktualizacje niezbędne do zachowania zgodności Newslettera i Materiałów z umową oraz informuje o nich, jeżeli są wymagane.",
           "marks": []
         }
@@ -728,37 +698,13 @@
     },
     {
       "_type": "block",
-      "_key": "p0093",
+      "_key": "p0084",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0088",
+          "_key": "s0083",
           "text": "Usługodawca może zmienić Newsletter ponad zakres niezbędny do zachowania zgodności wyłącznie bez dodatkowych kosztów i z ważnych przyczyn:",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0089",
-          "text": "zmiany prawa lub decyzji organu,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0090",
-          "text": "zmiany bezpieczeństwa, technologii albo dostawcy wysyłki,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0091",
-          "text": "zmiany częstotliwości, formatu lub tematyki, która nie zmienia głównego charakteru Newslettera,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0092",
-          "text": "zakończenia albo zastąpienia określonego cyklu treści.",
           "marks": []
         }
       ],
@@ -768,12 +714,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0095",
+      "_key": "p0086",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0094",
+          "_key": "s0085",
           "text": "zmiany prawa lub decyzji organu,",
           "marks": []
         }
@@ -784,12 +730,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0097",
+      "_key": "p0088",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0096",
+          "_key": "s0087",
           "text": "zmiany bezpieczeństwa, technologii albo dostawcy wysyłki,",
           "marks": []
         }
@@ -800,12 +746,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0099",
+      "_key": "p0090",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0098",
+          "_key": "s0089",
           "text": "zmiany częstotliwości, formatu lub tematyki, która nie zmienia głównego charakteru Newslettera,",
           "marks": []
         }
@@ -816,12 +762,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0101",
+      "_key": "p0092",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0100",
+          "_key": "s0091",
           "text": "zakończenia albo zastąpienia określonego cyklu treści.",
           "marks": []
         }
@@ -832,12 +778,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0103",
+      "_key": "p0094",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0102",
+          "_key": "s0093",
           "text": "O zmianie Usługodawca informuje w sposób jasny. Jeżeli zmiana istotnie i negatywnie wpływa na dostęp lub korzystanie, informację o jej rodzaju, terminie i prawie wypowiedzenia przekazuje e-mailem z odpowiednim wyprzedzeniem.",
           "marks": []
         }
@@ -848,12 +794,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0105",
+      "_key": "p0096",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0104",
+          "_key": "s0095",
           "text": "W przypadku zmiany opisanej w ust. 3 subskrybent może wypowiedzieć umowę bez zachowania terminu w ciągu 30 dni od zmiany albo otrzymania informacji, jeżeli nastąpiło później. Prawo nie przysługuje, gdy negatywny wpływ jest nieistotny albo Usługodawca zapewnia bez dodatkowych kosztów korzystanie z niezmienionej wersji.",
           "marks": []
         }
@@ -864,12 +810,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0107",
+      "_key": "p0098",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0106",
+          "_key": "s0097",
           "text": "Usługodawca może zakończyć Newsletter z ważnych powodów organizacyjnych lub ekonomicznych, informując subskrybentów e-mailem co najmniej 14 dni wcześniej. Subskrybent nie ponosi z tego tytułu kosztów.",
           "marks": []
         }
@@ -885,7 +831,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0108",
+          "_key": "s0099",
           "text": "§ 9. Prawa autorskie",
           "marks": []
         }
@@ -894,12 +840,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0110",
+      "_key": "p0101",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0109",
+          "_key": "s0100",
           "text": "Newsletter i Materiały są chronione prawem autorskim. Subskrybent może korzystać z nich na własne potrzeby; ich dalsze rozpowszechnianie, odsprzedaż lub wykorzystywanie w usługach oferowanych osobom trzecim wymaga zgody Usługodawcy.",
           "marks": []
         }
@@ -913,7 +859,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0111",
+          "_key": "s0102",
           "text": "§ 10. Dane osobowe",
           "marks": []
         }
@@ -922,12 +868,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0113",
+      "_key": "p0104",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0112",
+          "_key": "s0103",
           "text": "Administratorem danych subskrybentów jest Usługodawca. Zasady przetwarzania, w tym okres przechowywania dowodów udzielenia i cofnięcia zgody, opisuje Polityka prywatności dostępna na stronie www.zawlodzki.pl.",
           "marks": []
         }
@@ -941,7 +887,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0114",
+          "_key": "s0105",
           "text": "§ 11. Postanowienia końcowe",
           "marks": []
         }
@@ -950,12 +896,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0116",
+      "_key": "p0107",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0115",
+          "_key": "s0106",
           "text": "Regulamin obowiązuje od 01.08.2026. Do umów zawartych przed zmianą stosuje się wersję przekazaną subskrybentowi, chyba że nowa wersja jest dla niego korzystniejsza.",
           "marks": []
         }
@@ -966,12 +912,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0118",
+      "_key": "p0109",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0117",
+          "_key": "s0108",
           "text": "Regulamin nie ogranicza praw konsumenta ani przedsiębiorcy na prawach konsumenta wynikających z bezwzględnie obowiązujących przepisów.",
           "marks": []
         }
@@ -982,12 +928,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0120",
+      "_key": "p0111",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0119",
+          "_key": "s0110",
           "text": "Archiwalne wersje Regulaminu są dostępne u Usługodawcy na żądanie.",
           "marks": []
         }
@@ -1003,7 +949,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0121",
+          "_key": "s0112",
           "text": "Załącznik – wzór formularza odstąpienia od umowy",
           "marks": []
         }
@@ -1012,12 +958,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0123",
+      "_key": "p0114",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0122",
+          "_key": "s0113",
           "text": "(formularz należy wypełnić i odesłać tylko w przypadku chęci odstąpienia)",
           "marks": []
         }
@@ -1026,12 +972,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0125",
+      "_key": "p0116",
       "style": "blockquote",
       "children": [
         {
           "_type": "span",
-          "_key": "s0124",
+          "_key": "s0115",
           "text": "Adresat: Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, e-mail: grzesiek@zawlodzki.plJa, niżej podpisana/y ……………………………… informuję o odstąpieniu od umowy o Newsletter / dostarczenie Materiału bezpłatnego: ………………………………Data zawarcia umowy: ………………………………Adres e-mail użyty przy zapisie: ……………………………… Imię i nazwisko: ……………………………… Data: ……………………………… Podpis (tylko dla formularza papierowego): ………………………………",
           "marks": []
         }

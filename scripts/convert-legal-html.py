@@ -6,6 +6,7 @@ from __future__ import annotations
 import html as html_lib
 import json
 import re
+import sys
 import unicodedata
 from html.parser import HTMLParser
 from pathlib import Path
@@ -345,7 +346,8 @@ def find_table(node: Node) -> Node | None:
     return None
 
 
-def clone_without_tables(node: Node) -> Node:
+def clone_without_tables(node: Node, *, skip_lists: bool = False) -> Node:
+    """Copy inline content; tables (and, for list items, nested lists) are emitted separately."""
     copy = Node(node.tag, dict(node.attrs))
     for child in node.children:
         if isinstance(child, str):
@@ -354,9 +356,24 @@ def clone_without_tables(node: Node) -> Node:
             child.tag == "div" and "zw-legal__scroll" in class_names(child)
         ):
             continue
+        elif skip_lists and child.tag in {"ul", "ol"}:
+            continue
         else:
-            copy.append(clone_without_tables(child))
+            copy.append(clone_without_tables(child, skip_lists=skip_lists))
     return copy
+
+
+def nested_lists_of(node: Node) -> list[Node]:
+    """Lists nested in a list item (at any depth, but not inside a deeper list)."""
+    found: list[Node] = []
+    for child in node.children:
+        if not isinstance(child, Node):
+            continue
+        if child.tag in {"ul", "ol"}:
+            found.append(child)
+        elif child.tag != "table":
+            found.extend(nested_lists_of(child))
+    return found
 
 
 def convert_list(node: Node, keygen: Keygen, blocks: list[dict], level: int) -> None:
@@ -373,12 +390,10 @@ def convert_list(node: Node, keygen: Keygen, blocks: list[dict], level: int) -> 
         index += 1
         number += 1
         has_table = node_has_table(child)
-        nested_lists = [
-            c
-            for c in child.children
-            if isinstance(c, Node) and c.tag in {"ul", "ol"}
-        ]
-        inline_node = clone_without_tables(child)
+        # Nested lists become their own level+1 blocks right after this item;
+        # their text must not also be glued into the parent item's spans.
+        nested_lists = nested_lists_of(child)
+        inline_node = clone_without_tables(child, skip_lists=True)
         if alpha:
             letter = chr(ord("a") + index - 1)
             prefix = Node("span", {})
@@ -546,7 +561,20 @@ def convert_file(path: Path) -> dict:
     }
 
 
+def convert_fragment(fragment: str) -> list[dict]:
+    """Convert an HTML fragment of zw-legal content to Portable Text blocks (used by tests)."""
+    parser = TreeParser()
+    parser.feed(f"<root>{fragment}</root>")
+    parser.close()
+    blocks: list[dict] = []
+    convert_children(parser.root.children, Keygen(), blocks, [])
+    return blocks
+
+
 def main() -> None:
+    if "--fragment" in sys.argv:
+        print(json.dumps(convert_fragment(sys.stdin.read()), ensure_ascii=False))
+        return
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     mapping = {
         "polityka-prywatnosci": "polityka-prywatnosci.html",

@@ -1216,7 +1216,7 @@
     },
     {
       "_type": "block",
-      "_key": "p0173",
+      "_key": "p0163",
       "style": "normal",
       "children": [
         {
@@ -1236,66 +1236,6 @@
           "_key": "s0162",
           "text": ":",
           "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0163",
-          "text": "informacji o zdrowiu, życiu seksualnym, orientacji seksualnej, pochodzeniu, przekonaniach religijnych lub światopoglądowych, poglądach politycznych, przynależności związkowej ani danych genetycznych i biometrycznych — ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0164",
-          "text": "także własnych",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0165",
-          "text": ";",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0166",
-          "text": "danych osobowych innych osób, w szczególności klientów, kontrahentów, pracowników i członków rodziny Uczestnika, w tym opisów pozwalających taką osobę zidentyfikować. ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0167",
-          "text": "Dotyczy to także danych wklejanych z systemów Uczestnika",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0168",
-          "text": " — z CRM, poczty, ofert i notatek handlowych. Zadając pytanie o materiał roboczy, Uczestnik ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0169",
-          "text": "najpierw go anonimizuje",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0170",
-          "text": ": podmienia imiona, nazwiska i nazwy firm, usuwa adresy e-mail, numery telefonów, adresy pocztowe i kwoty. Przykład zamiast danych rzeczywistych jest wystarczający, żeby otrzymać odpowiedź;",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0171",
-          "text": "treści bezprawnych, naruszających prawa osób trzecich, obraźliwych, nawołujących do nienawiści ani reklamowych bez zgody Sprzedawcy;",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0172",
-          "text": "materiałów Kursu ani ich fragmentów w sposób wykraczający poza licencję z § 7.",
-          "marks": []
         }
       ],
       "markDefs": [],
@@ -1304,31 +1244,121 @@
     },
     {
       "_type": "block",
-      "_key": "p0178",
+      "_key": "p0168",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0174",
+          "_key": "s0164",
           "text": "a) ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0175",
+          "_key": "s0165",
           "text": "informacji o zdrowiu, życiu seksualnym, orientacji seksualnej, pochodzeniu, przekonaniach religijnych lub światopoglądowych, poglądach politycznych, przynależności związkowej ani danych genetycznych i biometrycznych — ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0176",
+          "_key": "s0166",
           "text": "także własnych",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0177",
+          "_key": "s0167",
           "text": ";",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 2
+    },
+    {
+      "_type": "block",
+      "_key": "p0175",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0169",
+          "text": "b) ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0170",
+          "text": "danych osobowych innych osób, w szczególności klientów, kontrahentów, pracowników i członków rodziny Uczestnika, w tym opisów pozwalających taką osobę zidentyfikować. ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0171",
+          "text": "Dotyczy to także danych wklejanych z systemów Uczestnika",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0172",
+          "text": " — z CRM, poczty, ofert i notatek handlowych. Zadając pytanie o materiał roboczy, Uczestnik ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0173",
+          "text": "najpierw go anonimizuje",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0174",
+          "text": ": podmienia imiona, nazwiska i nazwy firm, usuwa adresy e-mail, numery telefonów, adresy pocztowe i kwoty. Przykład zamiast danych rzeczywistych jest wystarczający, żeby otrzymać odpowiedź;",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 2
+    },
+    {
+      "_type": "block",
+      "_key": "p0178",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0176",
+          "text": "c) ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0177",
+          "text": "treści bezprawnych, naruszających prawa osób trzecich, obraźliwych, nawołujących do nienawiści ani reklamowych bez zgody Sprzedawcy;",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "bullet",
+      "level": 2
+    },
+    {
+      "_type": "block",
+      "_key": "p0181",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0179",
+          "text": "d) ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0180",
+          "text": "materiałów Kursu ani ich fragmentów w sposób wykraczający poza licencję z § 7.",
           "marks": []
         }
       ],
@@ -1343,44 +1373,26 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0179",
-          "text": "b) ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0180",
-          "text": "danych osobowych innych osób, w szczególności klientów, kontrahentów, pracowników i członków rodziny Uczestnika, w tym opisów pozwalających taką osobę zidentyfikować. ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0181",
-          "text": "Dotyczy to także danych wklejanych z systemów Uczestnika",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
           "_key": "s0182",
-          "text": " — z CRM, poczty, ofert i notatek handlowych. Zadając pytanie o materiał roboczy, Uczestnik ",
+          "text": "Zakaz z ust. 4 lit. a i b chroni Uczestnika i osoby trzecie: Sprzedawca ",
           "marks": []
         },
         {
           "_type": "span",
           "_key": "s0183",
-          "text": "najpierw go anonimizuje",
+          "text": "nie ma podstawy prawnej do przetwarzania danych szczególnych kategorii",
           "marks": ["strong"]
         },
         {
           "_type": "span",
           "_key": "s0184",
-          "text": ": podmienia imiona, nazwiska i nazwy firm, usuwa adresy e-mail, numery telefonów, adresy pocztowe i kwoty. Przykład zamiast danych rzeczywistych jest wystarczający, żeby otrzymać odpowiedź;",
+          "text": " na Forum. Treści naruszające ten zakaz Sprzedawca usuwa niezwłocznie po ich stwierdzeniu, także bez zgłoszenia i bez uprzedzenia Uczestnika. Usunięcie takiej treści nie jest karą i nie wpływa na prawo Uczestnika do korzystania z Kursu.",
           "marks": []
         }
       ],
       "markDefs": [],
-      "listItem": "bullet",
-      "level": 2
+      "listItem": "number",
+      "level": 1
     },
     {
       "_type": "block",
@@ -1390,63 +1402,47 @@
         {
           "_type": "span",
           "_key": "s0186",
-          "text": "c) ",
-          "marks": []
+          "text": "Zgłaszanie treści.",
+          "marks": ["strong"]
         },
         {
           "_type": "span",
           "_key": "s0187",
-          "text": "treści bezprawnych, naruszających prawa osób trzecich, obraźliwych, nawołujących do nienawiści ani reklamowych bez zgody Sprzedawcy;",
+          "text": " Każdy — Uczestnik i osoba spoza Forum — może zgłosić treść, którą uważa za bezprawną albo naruszającą ust. 4, przez funkcję zgłoszenia dostępną przy każdym wpisie albo wiadomością na grzesiek@zawlodzki.pl. Zgłoszenie powinno wskazywać konkretny wpis, powód zgłoszenia oraz dane kontaktowe zgłaszającego, jeżeli oczekuje on odpowiedzi. Sprzedawca rozpatruje zgłoszenia bez zbędnej zwłoki, w sposób niearbitralny i obiektywny.",
           "marks": []
         }
       ],
       "markDefs": [],
-      "listItem": "bullet",
-      "level": 2
+      "listItem": "number",
+      "level": 1
     },
     {
       "_type": "block",
-      "_key": "p0191",
+      "_key": "p0193",
       "style": "normal",
       "children": [
         {
           "_type": "span",
           "_key": "s0189",
-          "text": "d) ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0190",
-          "text": "materiałów Kursu ani ich fragmentów w sposób wykraczający poza licencję z § 7.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "bullet",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0195",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0192",
-          "text": "Zakaz z ust. 4 lit. a i b chroni Uczestnika i osoby trzecie: Sprzedawca ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0193",
-          "text": "nie ma podstawy prawnej do przetwarzania danych szczególnych kategorii",
+          "text": "Decyzje moderacyjne.",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0194",
-          "text": " na Forum. Treści naruszające ten zakaz Sprzedawca usuwa niezwłocznie po ich stwierdzeniu, także bez zgłoszenia i bez uprzedzenia Uczestnika. Usunięcie takiej treści nie jest karą i nie wpływa na prawo Uczestnika do korzystania z Kursu.",
+          "_key": "s0190",
+          "text": " Sprzedawca może usunąć albo ukryć wpis, ograniczyć dostęp Uczestnika do Forum albo — przy poważnym lub powtarzającym się naruszeniu — zawiesić jego konto na Forum. O decyzji dotyczącej własnego wpisu Uczestnik jest informowany wraz z jej uzasadnieniem i pouczeniem o możliwości odwołania na adres grzesiek@zawlodzki.pl. Zawieszenie dostępu do Forum ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s0191",
+          "text": "nie pozbawia dostępu do Kursu",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s0192",
+          "text": " ani nie zwalnia Sprzedawcy z obowiązku jego dostarczenia.",
           "marks": []
         }
       ],
@@ -1461,81 +1457,25 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0196",
-          "text": "Zgłaszanie treści.",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0197",
-          "text": " Każdy — Uczestnik i osoba spoza Forum — może zgłosić treść, którą uważa za bezprawną albo naruszającą ust. 4, przez funkcję zgłoszenia dostępną przy każdym wpisie albo wiadomością na grzesiek@zawlodzki.pl. Zgłoszenie powinno wskazywać konkretny wpis, powód zgłoszenia oraz dane kontaktowe zgłaszającego, jeżeli oczekuje on odpowiedzi. Sprzedawca rozpatruje zgłoszenia bez zbędnej zwłoki, w sposób niearbitralny i obiektywny.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0203",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0199",
-          "text": "Decyzje moderacyjne.",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0200",
-          "text": " Sprzedawca może usunąć albo ukryć wpis, ograniczyć dostęp Uczestnika do Forum albo — przy poważnym lub powtarzającym się naruszeniu — zawiesić jego konto na Forum. O decyzji dotyczącej własnego wpisu Uczestnik jest informowany wraz z jej uzasadnieniem i pouczeniem o możliwości odwołania na adres grzesiek@zawlodzki.pl. Zawieszenie dostępu do Forum ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0201",
-          "text": "nie pozbawia dostępu do Kursu",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0202",
-          "text": " ani nie zwalnia Sprzedawcy z obowiązku jego dostarczenia.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0208",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0204",
+          "_key": "s0194",
           "text": "Brak wiadomości prywatnych.",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0205",
+          "_key": "s0195",
           "text": " Forum ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0206",
+          "_key": "s0196",
           "text": "nie udostępnia funkcji wiadomości prywatnych",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0207",
+          "_key": "s0197",
           "text": " między Uczestnikami — jest ona wyłączona. Wszystkie wpisy na Forum są widoczne dla pozostałych Uczestników i dla prowadzących. Gdyby Sprzedawca zdecydował się tę funkcję udostępnić, poinformuje o tym Uczestników w trybie zmiany Regulaminu i wskaże zasady wglądu w taką korespondencję.",
           "marks": []
         }
@@ -1546,42 +1486,42 @@
     },
     {
       "_type": "block",
-      "_key": "p0215",
+      "_key": "p0205",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0209",
+          "_key": "s0199",
           "text": "Los treści po zakończeniu udziału.",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0210",
+          "_key": "s0200",
           "text": " Po zakończeniu dostępu Uczestnika do Forum jego konto zostaje ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0211",
+          "_key": "s0201",
           "text": "zanonimizowane",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0212",
+          "_key": "s0202",
           "text": ": nazwa użytkownika i adres e-mail przestają być z nim powiązane, a ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0213",
+          "_key": "s0203",
           "text": "opublikowane wpisy pozostają w wątkach bez wskazania autora",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0214",
+          "_key": "s0204",
           "text": ". Rozwiązanie to zachowuje czytelność rozmów dla pozostałych Uczestników. Niezależnie od tego Uczestnik może w każdej chwili żądać usunięcia albo ukrycia konkretnego własnego wpisu, a także skorzystać z uprawnień opisanych w Polityce prywatności, w tym prawa do usunięcia danych.",
           "marks": []
         }
@@ -1592,24 +1532,24 @@
     },
     {
       "_type": "block",
-      "_key": "p0219",
+      "_key": "p0209",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0216",
+          "_key": "s0206",
           "text": "Z Forum mogą korzystać wyłącznie osoby, które ukończyły ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0217",
+          "_key": "s0207",
           "text": "18 lat",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0218",
+          "_key": "s0208",
           "text": ".",
           "marks": []
         }
@@ -1620,12 +1560,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0221",
+      "_key": "p0211",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0220",
+          "_key": "s0210",
           "text": "Zasady przetwarzania danych osobowych na Forum, w tym treści wpisów, opisuje Polityka prywatności. Uczestnik, dla którego dostęp nabył Kupujący będący przedsiębiorcą, znajdzie tam odrębną podstawę przetwarzania i przysługujące mu prawo sprzeciwu.",
           "marks": []
         }
@@ -1641,7 +1581,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0222",
+          "_key": "s0212",
           "text": "§ 7. Licencja i własność intelektualna",
           "marks": []
         }
@@ -1650,24 +1590,24 @@
     },
     {
       "_type": "block",
-      "_key": "p0226",
+      "_key": "p0216",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0223",
+          "_key": "s0213",
           "text": "Kurs oraz wszystkie materiały udostępniane w jego ramach (w tym wideo, teksty, szablony, grafiki – „",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0224",
+          "_key": "s0214",
           "text": "Materiały",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0225",
+          "_key": "s0215",
           "text": "”) stanowią przedmiot praw autorskich i know-how Sprzedawcy lub jego licencjodawców. Zakup Kursu nie przenosi praw autorskich.",
           "marks": []
         }
@@ -1678,31 +1618,13 @@
     },
     {
       "_type": "block",
-      "_key": "p0231",
+      "_key": "p0218",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0227",
+          "_key": "s0217",
           "text": "Z chwilą dostarczenia Kursu i zapłaty ceny Sprzedawca udziela Kupującemu licencji niewyłącznej, nieprzenoszalnej, bez prawa sublicencji, uprawniającej do korzystania z Materiałów wyłącznie na własne potrzeby Kupującego – w przypadku przedsiębiorców: na własne wewnętrzne potrzeby przedsiębiorstwa – na następujących polach eksploatacji:",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0228",
-          "text": "wyświetlanie i odtwarzanie Materiałów na Platformie w Okresie Dostępu,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0229",
-          "text": "utrwalanie i zwielokrotnianie techniką cyfrową oraz wprowadzanie do pamięci komputera Materiałów oznaczonych jako przeznaczone do pobrania,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0230",
-          "text": "w przypadku przedsiębiorców – udostępnienie Materiałów pobranych zgodnie z pkt 2 użytkownikowi Konta, o którym mowa w § 6 ust. 9.",
           "marks": []
         }
       ],
@@ -1712,12 +1634,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0233",
+      "_key": "p0220",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0232",
+          "_key": "s0219",
           "text": "wyświetlanie i odtwarzanie Materiałów na Platformie w Okresie Dostępu,",
           "marks": []
         }
@@ -1728,12 +1650,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0235",
+      "_key": "p0222",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0234",
+          "_key": "s0221",
           "text": "utrwalanie i zwielokrotnianie techniką cyfrową oraz wprowadzanie do pamięci komputera Materiałów oznaczonych jako przeznaczone do pobrania,",
           "marks": []
         }
@@ -1744,12 +1666,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0237",
+      "_key": "p0224",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0236",
+          "_key": "s0223",
           "text": "w przypadku przedsiębiorców – udostępnienie Materiałów pobranych zgodnie z pkt 2 użytkownikowi Konta, o którym mowa w § 6 ust. 9.",
           "marks": []
         }
@@ -1760,12 +1682,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0239",
+      "_key": "p0226",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0238",
+          "_key": "s0225",
           "text": "Licencja na Materiały pobrane zgodnie z ust. 2 pkt 2 obejmuje prawo sporządzania ich opracowań (adaptacji, modyfikacji) i korzystania z nich wyłącznie w zakresie i na polach wskazanych w ust. 2, również po upływie Okresu Dostępu.",
           "marks": []
         }
@@ -1776,12 +1698,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0241",
+      "_key": "p0228",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0240",
+          "_key": "s0227",
           "text": "Kupujący nie jest uprawniony do: udostępniania Materiałów ani danych logowania osobom trzecim, publikowania lub rozpowszechniania Materiałów, ich odsprzedaży, wykorzystywania ich w produktach lub usługach oferowanych osobom trzecim, prowadzenia na ich podstawie szkoleń lub kursów ani oferowania na ich podstawie usług tożsamych lub podobnych do usług Sprzedawcy. Wykorzystanie Materiałów w celu świadczenia usług na rzecz osób trzecich wymaga odrębnej umowy licencyjnej i odrębnego wynagrodzenia.",
           "marks": []
         }
@@ -1792,12 +1714,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0243",
+      "_key": "p0230",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0242",
+          "_key": "s0229",
           "text": "Wynagrodzenie z tytułu licencji jest zawarte w cenie Kursu.",
           "marks": []
         }
@@ -1808,12 +1730,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0245",
+      "_key": "p0232",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0244",
+          "_key": "s0231",
           "text": "Sprzedawca może wypowiedzieć licencję i zablokować Konto wyłącznie z ważnych powodów: w przypadku istotnego naruszenia przez Kupującego warunków licencji (w szczególności udostępnienia Materiałów lub danych logowania osobom trzecim), po bezskutecznym wezwaniu do zaniechania naruszenia w terminie nie krótszym niż 14 dni. Postanowienie to nie ogranicza uprawnień Konsumenta i Przedsiębiorcy na prawach konsumenta wynikających z przepisów.",
           "marks": []
         }
@@ -1829,7 +1751,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0246",
+          "_key": "s0233",
           "text": "§ 8. Konsultacje",
           "marks": []
         }
@@ -1838,12 +1760,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0248",
+      "_key": "p0235",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0247",
+          "_key": "s0234",
           "text": "Po zakupie Konsultacji Sprzedawca – w terminie 2 dni roboczych od zaksięgowania płatności – wysyła Kupującemu link do kalendarza Cal.com umożliwiającego wybór terminu.",
           "marks": []
         }
@@ -1854,12 +1776,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0250",
+      "_key": "p0237",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0249",
+          "_key": "s0236",
           "text": "Kupujący może bezpłatnie zmienić termin Konsultacji najpóźniej 48 godzin przed jej rozpoczęciem, a odwołać ją najpóźniej 72 godziny przed rozpoczęciem.",
           "marks": []
         }
@@ -1870,12 +1792,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0252",
+      "_key": "p0239",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0251",
+          "_key": "s0238",
           "text": "Jeżeli Konsultacja nie odbędzie się z przyczyn leżących po stronie Sprzedawcy, Kupujący może wybrać nowy termin albo odstąpić od Umowy w tym zakresie i otrzymać zwrot ceny.",
           "marks": []
         }
@@ -1891,7 +1813,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0253",
+          "_key": "s0240",
           "text": "§ 9. Zgodność z umową i reklamacje",
           "marks": []
         }
@@ -1900,12 +1822,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0255",
+      "_key": "p0242",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0254",
+          "_key": "s0241",
           "text": "Sprzedawca ma obowiązek świadczyć Kurs zgodnie z Umową i ponosi wobec Konsumenta oraz Przedsiębiorcy na prawach konsumenta odpowiedzialność za brak zgodności usługi cyfrowej z Umową na zasadach określonych w rozdziale 5b ustawy z dnia 30 maja 2014 r. o prawach konsumenta – przez cały okres świadczenia Kursu (Okres Dostępu).",
           "marks": []
         }
@@ -1916,12 +1838,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0257",
+      "_key": "p0244",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0256",
+          "_key": "s0243",
           "text": "Jeżeli Kurs jest niezgodny z Umową, Kupujący, o którym mowa w ust. 1, może żądać doprowadzenia Kursu do zgodności z Umową. Sprzedawca może odmówić, jeżeli doprowadzenie do zgodności jest niemożliwe albo wymagałoby nadmiernych kosztów.",
           "marks": []
         }
@@ -1932,13 +1854,157 @@
     },
     {
       "_type": "block",
-      "_key": "p0259",
+      "_key": "p0246",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0258",
+          "_key": "s0245",
           "text": "Sprzedawca doprowadza Kurs do zgodności z Umową w rozsądnym czasie od chwili poinformowania go o braku zgodności, bezpłatnie i bez nadmiernych niedogodności dla Kupującego, z uwzględnieniem charakteru i celu Kursu.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0248",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0247",
+          "text": "Kupujący może złożyć oświadczenie o obniżeniu ceny albo odstąpieniu od Umowy, gdy:",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0250",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0249",
+          "text": "doprowadzenie Kursu do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 2
+    },
+    {
+      "_type": "block",
+      "_key": "p0252",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0251",
+          "text": "Sprzedawca nie doprowadził Kursu do zgodności w rozsądnym czasie, bezpłatnie i bez nadmiernych niedogodności,",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 2
+    },
+    {
+      "_type": "block",
+      "_key": "p0254",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0253",
+          "text": "brak zgodności występuje nadal mimo próby doprowadzenia Kursu do zgodności,",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 2
+    },
+    {
+      "_type": "block",
+      "_key": "p0256",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0255",
+          "text": "brak zgodności jest na tyle istotny, że uzasadnia obniżenie ceny albo odstąpienie bez wcześniejszego żądania doprowadzenia do zgodności,",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 2
+    },
+    {
+      "_type": "block",
+      "_key": "p0258",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0257",
+          "text": "z oświadczenia Sprzedawcy lub okoliczności wyraźnie wynika, że nie doprowadzi Kursu do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 2
+    },
+    {
+      "_type": "block",
+      "_key": "p0260",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0259",
+          "text": "Obniżona cena pozostaje w takiej proporcji do ceny wynikającej z Umowy, w jakiej wartość Kursu niezgodnego z Umową pozostaje do wartości Kursu zgodnego z Umową. Kupujący nie może odstąpić od Umowy, jeżeli brak zgodności jest nieistotny; domniemywa się, że brak zgodności jest istotny.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0262",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0261",
+          "text": "Sprzedawca zwraca kwoty należne wskutek obniżenia ceny albo odstąpienia niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, przy użyciu takiego samego sposobu zapłaty, chyba że Kupujący wyraźnie zgodzi się na inny bezkosztowy sposób.",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "listItem": "number",
+      "level": 1
+    },
+    {
+      "_type": "block",
+      "_key": "p0264",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0263",
+          "text": "Po odstąpieniu od Umowy z powodu niezgodności Kursu Kupujący zaprzestaje korzystania z Kursu i udostępniania go osobom trzecim. Sprzedawca może zablokować dalszy dostęp do Konta, z poszanowaniem ustawowych praw Kupującego do treści innych niż dane osobowe, które Kupujący dostarczył lub wytworzył podczas korzystania z Kursu.",
           "marks": []
         }
       ],
@@ -1953,38 +2019,8 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0260",
-          "text": "Kupujący może złożyć oświadczenie o obniżeniu ceny albo odstąpieniu od Umowy, gdy:",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0261",
-          "text": "doprowadzenie Kursu do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0262",
-          "text": "Sprzedawca nie doprowadził Kursu do zgodności w rozsądnym czasie, bezpłatnie i bez nadmiernych niedogodności,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0263",
-          "text": "brak zgodności występuje nadal mimo próby doprowadzenia Kursu do zgodności,",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0264",
-          "text": "brak zgodności jest na tyle istotny, że uzasadnia obniżenie ceny albo odstąpienie bez wcześniejszego żądania doprowadzenia do zgodności,",
-          "marks": []
-        },
-        {
-          "_type": "span",
           "_key": "s0265",
-          "text": "z oświadczenia Sprzedawcy lub okoliczności wyraźnie wynika, że nie doprowadzi Kursu do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.",
+          "text": "Jeżeli jest to konieczne do ustalenia przyczyny braku zgodności, Kupujący współpracuje ze Sprzedawcą w rozsądnym zakresie i przy zastosowaniu najmniej uciążliwych środków technicznych. Jeżeli Sprzedawca przed zawarciem Umowy jasno poinformował o tym obowiązku, brak współpracy po uzasadnionym wezwaniu może wpłynąć na ustawowy rozkład ciężaru dowodu dotyczącego środowiska cyfrowego Kupującego.",
           "marks": []
         }
       ],
@@ -2000,150 +2036,6 @@
         {
           "_type": "span",
           "_key": "s0267",
-          "text": "doprowadzenie Kursu do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0270",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0269",
-          "text": "Sprzedawca nie doprowadził Kursu do zgodności w rozsądnym czasie, bezpłatnie i bez nadmiernych niedogodności,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0272",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0271",
-          "text": "brak zgodności występuje nadal mimo próby doprowadzenia Kursu do zgodności,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0274",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0273",
-          "text": "brak zgodności jest na tyle istotny, że uzasadnia obniżenie ceny albo odstąpienie bez wcześniejszego żądania doprowadzenia do zgodności,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0276",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0275",
-          "text": "z oświadczenia Sprzedawcy lub okoliczności wyraźnie wynika, że nie doprowadzi Kursu do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0278",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0277",
-          "text": "Obniżona cena pozostaje w takiej proporcji do ceny wynikającej z Umowy, w jakiej wartość Kursu niezgodnego z Umową pozostaje do wartości Kursu zgodnego z Umową. Kupujący nie może odstąpić od Umowy, jeżeli brak zgodności jest nieistotny; domniemywa się, że brak zgodności jest istotny.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0280",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0279",
-          "text": "Sprzedawca zwraca kwoty należne wskutek obniżenia ceny albo odstąpienia niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, przy użyciu takiego samego sposobu zapłaty, chyba że Kupujący wyraźnie zgodzi się na inny bezkosztowy sposób.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0282",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0281",
-          "text": "Po odstąpieniu od Umowy z powodu niezgodności Kursu Kupujący zaprzestaje korzystania z Kursu i udostępniania go osobom trzecim. Sprzedawca może zablokować dalszy dostęp do Konta, z poszanowaniem ustawowych praw Kupującego do treści innych niż dane osobowe, które Kupujący dostarczył lub wytworzył podczas korzystania z Kursu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0284",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0283",
-          "text": "Jeżeli jest to konieczne do ustalenia przyczyny braku zgodności, Kupujący współpracuje ze Sprzedawcą w rozsądnym zakresie i przy zastosowaniu najmniej uciążliwych środków technicznych. Jeżeli Sprzedawca przed zawarciem Umowy jasno poinformował o tym obowiązku, brak współpracy po uzasadnionym wezwaniu może wpłynąć na ustawowy rozkład ciężaru dowodu dotyczącego środowiska cyfrowego Kupującego.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0286",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0285",
           "text": "Do odpowiedzialności za Konsultacje wobec osób, o których mowa w ust. 1, stosuje się przepisy o niewykonaniu lub nienależytym wykonaniu zobowiązania.",
           "marks": []
         }
@@ -2154,12 +2046,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0288",
+      "_key": "p0270",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0287",
+          "_key": "s0269",
           "text": "Reklamacje należy składać e-mailem na adres grzesiek@zawlodzki.pl lub pisemnie na adres siedziby Sprzedawcy, w miarę możliwości z opisem problemu i danymi kontaktowymi. Sprzedawca odpowiada w terminie 14 dni od otrzymania reklamacji; brak odpowiedzi w tym terminie oznacza uznanie reklamacji.",
           "marks": []
         }
@@ -2170,12 +2062,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0290",
+      "_key": "p0272",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0289",
+          "_key": "s0271",
           "text": "Wobec Kupujących innych niż wskazani w ust. 1 odpowiedzialność Sprzedawcy z tytułu rękojmi jest wyłączona, a odpowiedzialność odszkodowawcza ograniczona do zapłaconej ceny i nie obejmuje utraconych korzyści; ograniczenia nie dotyczą szkody wyrządzonej umyślnie.",
           "marks": []
         }
@@ -2191,7 +2083,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0291",
+          "_key": "s0273",
           "text": "§ 10. Odstąpienie od umowy",
           "marks": []
         }
@@ -2200,12 +2092,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0293",
+      "_key": "p0275",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0292",
+          "_key": "s0274",
           "text": "Konsument oraz Przedsiębiorca na prawach konsumenta może odstąpić od Umowy zawartej na odległość w terminie 14 dni bez podania przyczyny, składając oświadczenie e-mailem na adres grzesiek@zawlodzki.pl lub pisemnie. Można skorzystać z formularza stanowiącego załącznik do Regulaminu; skorzystanie z niego nie jest obowiązkowe.",
           "marks": []
         }
@@ -2216,12 +2108,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0295",
+      "_key": "p0277",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0294",
+          "_key": "s0276",
           "text": "Z zastrzeżeniem ust. 3 Sprzedawca zwraca płatności niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, tym samym sposobem zapłaty, jakiego użył Kupujący, chyba że Kupujący wyraźnie zgodził się na inny sposób zwrotu niewiążący się dla niego z kosztami.",
           "marks": []
         }
@@ -2232,12 +2124,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0297",
+      "_key": "p0279",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0296",
+          "_key": "s0278",
           "text": "Jeżeli Kupujący chce, aby świadczenie Kursu lub Konsultacji rozpoczęło się przed upływem 14 dni, składa w koszyku wyraźne żądanie rozpoczęcia świadczenia przed upływem terminu odstąpienia. Rozpoczęcie świadczenia nie pozbawia Kupującego prawa odstąpienia w pozostałej części tego terminu.",
           "marks": []
         }
@@ -2248,12 +2140,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0299",
+      "_key": "p0281",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0298",
+          "_key": "s0280",
           "text": "Jeżeli Kupujący odstąpi od Umowy po złożeniu żądania, o którym mowa w ust. 3, płaci za świadczenia spełnione do chwili odstąpienia. Kwotę oblicza się proporcjonalnie do zakresu spełnionego świadczenia, z uwzględnieniem ceny określonej w Umowie; jeżeli cena jest nadmierna, podstawą jest wartość rynkowa spełnionego świadczenia.",
           "marks": []
         }
@@ -2264,12 +2156,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0301",
+      "_key": "p0283",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0300",
+          "_key": "s0282",
           "text": "Kupujący nie ponosi kosztów świadczeń spełnionych przed odstąpieniem, jeżeli nie został prawidłowo poinformowany o prawie odstąpienia i obowiązku zapłaty proporcjonalnej albo nie złożył wyraźnego żądania rozpoczęcia świadczenia.",
           "marks": []
         }
@@ -2280,18 +2172,18 @@
     },
     {
       "_type": "block",
-      "_key": "p0304",
+      "_key": "p0286",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0302",
+          "_key": "s0284",
           "text": "Prawo odstąpienia nie przysługuje po pełnym wykonaniu Konsultacji",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0303",
+          "_key": "s0285",
           "text": ", jeżeli Sprzedawca rozpoczął świadczenie za wyraźną i uprzednią zgodą Kupującego, który przed rozpoczęciem został poinformowany, że po pełnym wykonaniu utraci prawo odstąpienia, i przyjął to do wiadomości.",
           "marks": []
         }
@@ -2307,7 +2199,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0305",
+          "_key": "s0287",
           "text": "§ 11. Dane osobowe",
           "marks": []
         }
@@ -2316,12 +2208,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0307",
+      "_key": "p0289",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0306",
+          "_key": "s0288",
           "text": "Administratorem danych osobowych Kupujących jest Sprzedawca. Zasady przetwarzania danych oraz wykorzystywania plików cookies określa Polityka prywatności dostępna na stronie Sklepu.",
           "marks": []
         }
@@ -2335,7 +2227,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0308",
+          "_key": "s0290",
           "text": "§ 12. Opinie, referencje i logotypy klientów",
           "marks": []
         }
@@ -2344,12 +2236,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0310",
+      "_key": "p0292",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0309",
+          "_key": "s0291",
           "text": "Jeżeli w Sklepie publikowane są opinie klientów, Sprzedawca zamieszcza wyłącznie opinie pochodzące od osób, które faktycznie korzystały z jego usług lub nabyły produkt, i weryfikuje to na podstawie własnej dokumentacji współpracy (korespondencja, umowy, zamówienia). Sprzedawca nie publikuje opinii sponsorowanych ani nie modyfikuje ich treści. Bezpośrednio przy opiniach Sprzedawca zamieszcza krótką informację, że opinie są weryfikowane w opisany wyżej sposób. Imię, stanowisko, wizerunek, treść referencji i logotyp klienta publikuje w zakresie objętym udokumentowaną zgodą lub licencją.",
           "marks": []
         }
@@ -2363,7 +2255,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0311",
+          "_key": "s0293",
           "text": "§ 13. Pozasądowe rozwiązywanie sporów",
           "marks": []
         }
@@ -2372,12 +2264,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0313",
+      "_key": "p0295",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0312",
+          "_key": "s0294",
           "text": "Konsument może skorzystać z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia roszczeń, w szczególności: zwrócić się do wojewódzkiego inspektora Inspekcji Handlowej z wnioskiem o wszczęcie postępowania w sprawie pozasądowego rozwiązania sporu, do stałego sądu polubownego działającego przy Inspekcji Handlowej albo skorzystać z pomocy powiatowego (miejskiego) rzecznika konsumentów. Szczegółowe informacje dostępne są na stronie www.uokik.gov.pl.",
           "marks": []
         }
@@ -2388,12 +2280,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0315",
+      "_key": "p0297",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0314",
+          "_key": "s0296",
           "text": "Skorzystanie z pozasądowych sposobów rozwiązywania sporów jest dobrowolne dla obu stron.",
           "marks": []
         }
@@ -2409,7 +2301,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0316",
+          "_key": "s0298",
           "text": "§ 14. Zmiana Regulaminu",
           "marks": []
         }
@@ -2418,12 +2310,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0318",
+      "_key": "p0300",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0317",
+          "_key": "s0299",
           "text": "Sprzedawca może zmienić Regulamin z ważnych przyczyn: zmiany przepisów prawa, zmiany zakresu lub sposobu świadczenia usług, zmiany dostawców (w tym Platformy, dostawcy koszyka, platformy certyfikatów lub operatora płatności), zmian organizacyjnych lub technologicznych po stronie Sprzedawcy.",
           "marks": []
         }
@@ -2434,12 +2326,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0320",
+      "_key": "p0302",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0319",
+          "_key": "s0301",
           "text": "O zmianie Sprzedawca informuje Kupujących posiadających aktywny Okres Dostępu e-mailem, co najmniej 14 dni przed wejściem zmiany w życie. Kupujący, który nie akceptuje zmiany, może w tym terminie wypowiedzieć umowę o prowadzenie Konta; do końca Okresu Dostępu wynikającego z zawartych Umów stosuje się wówczas Regulamin dotychczasowy.",
           "marks": []
         }
@@ -2450,12 +2342,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0322",
+      "_key": "p0304",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0321",
+          "_key": "s0303",
           "text": "Zmiany Regulaminu nie naruszają praw nabytych: do Umów zawartych przed zmianą stosuje się Regulamin obowiązujący w dniu zawarcia Umowy, chyba że nowy Regulamin jest dla Kupującego korzystniejszy.",
           "marks": []
         }
@@ -2466,12 +2358,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0324",
+      "_key": "p0306",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0323",
+          "_key": "s0305",
           "text": "Archiwalne wersje Regulaminu są dostępne u Sprzedawcy na żądanie.",
           "marks": []
         }
@@ -2487,7 +2379,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0325",
+          "_key": "s0307",
           "text": "§ 15. Postanowienia końcowe",
           "marks": []
         }
@@ -2496,12 +2388,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0327",
+      "_key": "p0309",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0326",
+          "_key": "s0308",
           "text": "Prawem właściwym jest prawo polskie. W sprawach nieuregulowanych stosuje się w szczególności Kodeks cywilny, ustawę o prawach konsumenta oraz ustawę o prawie autorskim i prawach pokrewnych.",
           "marks": []
         }
@@ -2512,12 +2404,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0329",
+      "_key": "p0311",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0328",
+          "_key": "s0310",
           "text": "Regulamin nie wyłącza ani nie ogranicza żadnych uprawnień Konsumenta oraz Przedsiębiorcy na prawach konsumenta, które przysługują im na mocy bezwzględnie obowiązujących przepisów prawa; w razie sprzeczności pierwszeństwo mają te przepisy.",
           "marks": []
         }
@@ -2528,12 +2420,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0331",
+      "_key": "p0313",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0330",
+          "_key": "s0312",
           "text": "Spory z Kupującymi niebędącymi Konsumentami ani Przedsiębiorcami na prawach konsumenta rozstrzyga sąd właściwy dla siedziby Sprzedawcy.",
           "marks": []
         }
@@ -2544,12 +2436,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0333",
+      "_key": "p0315",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0332",
+          "_key": "s0314",
           "text": "Regulamin wchodzi w życie z dniem 24.08.2026.",
           "marks": []
         }
@@ -2565,7 +2457,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0334",
+          "_key": "s0316",
           "text": "Załącznik – wzór formularza odstąpienia od umowy",
           "marks": []
         }
@@ -2574,12 +2466,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0336",
+      "_key": "p0318",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0335",
+          "_key": "s0317",
           "text": "(formularz ten należy wypełnić i odesłać tylko w przypadku chęci odstąpienia od umowy)",
           "marks": []
         }
@@ -2588,12 +2480,12 @@
     },
     {
       "_type": "block",
-      "_key": "p0338",
+      "_key": "p0320",
       "style": "blockquote",
       "children": [
         {
           "_type": "span",
-          "_key": "s0337",
+          "_key": "s0319",
           "text": "Adresat: Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, e-mail: grzesiek@zawlodzki.plJa, niżej podpisana/y ……………………………… niniejszym informuję o moim odstąpieniu od umowy o świadczenie następującej usługi cyfrowej / o świadczenie następującej konsultacji: ………………………………Data zawarcia umowy: ………………………………Imię i nazwisko: ……………………………… Adres e-mail podany przy zakupie: ……………………………… Data: ……………………………… Podpis (tylko jeżeli formularz jest przesyłany w wersji papierowej): ………………………………",
           "marks": []
         }
