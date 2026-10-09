@@ -51,11 +51,30 @@ hrefy bez zmian. HTML źródłowy: `scripts/legal-sources/`. Konwersja:
 ## Jak zaimportować
 
 ```sh
-npm run import:legal
+python3 scripts/convert-legal-html.py   # HTML źródłowy -> src/content/legal-bodies/*.json
+python3 scripts/generate-legal-examples.py
+npm run import:legal                    # dry-run, bez porównania z datasetem
+npm run import:legal -- --dataset production   # dry-run + porównanie z Content Lake
 ```
 
-Zapisuje raport i NDJSON do `reports/`. Nic nie idzie do Content Lake.
-`--write` kończy się kodem 2.
+Dry-run zapisuje raport i NDJSON do `reports/` i pokazuje dla każdego z 6
+dokumentów `create` / `replace (pola)` / `unchanged`. Z tokenem (zapisu albo
+odczytu) porównuje perspektywę `raw` i wypisuje istniejące drafty, które zapis
+pomija.
+
+Zapis (tylko po osobnej zgodzie):
+
+```sh
+SANITY_API_WRITE_TOKEN=… npm run import:legal -- --write --dataset production
+```
+
+Jedna transakcja `createOrReplace` dla dokładnie sześciu id `legal-*`
+(`legalPage`); nic innego nie jest tworzone, łatane ani usuwane. Bez
+`--dataset` albo tokenu skrypt kończy się kodem 2. Token nie jest wypisywany.
+
+Listy zagnieżdżone (`<li>…<ol>…</ol></li>`) trafiają do Portable Text jako
+osobne pozycje `level: 2` zaraz po rodzicu; ich tekst nie jest doklejany do
+rodzica. Listy `zw-legal__alpha` są punktowane z prefiksem „a) ”, „b) ”…
 
 Po osobnym zleceniu publikacji redaktor poprawia treść B2C (nazwy serwisu,
 adresy, narzędzia) bezpośrednio w Studio.

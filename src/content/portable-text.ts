@@ -246,15 +246,28 @@ export function articleBodyToHtml(blocks: unknown): {
   const toc: TocEntry[] = [];
   const usedIds = new Set(PAGE_HEADING_IDS);
   const html: string[] = [];
-  const listStack: { type: string; level: number }[] = [];
+  // A nested list (level + 1) is rendered inside the still-open parent <li>,
+  // so items stay valid HTML (<li>parent<ol>…</ol></li>), not <ol><ol>.
+  const listStack: { type: string; level: number; itemOpen: boolean }[] = [];
+
+  // Close the open item on the same output line ("<li>text</li>"), so flat
+  // lists render exactly as before.
+  const closeItem = () => {
+    html[html.length - 1] += "</li>";
+  };
+
+  const closeTop = () => {
+    const frame = listStack.pop()!;
+    if (frame.itemOpen) closeItem();
+    html.push(frame.type === "number" ? "</ol>" : "</ul>");
+  };
 
   const closeListsTo = (level: number) => {
     while (
       listStack.length > 0 &&
       listStack[listStack.length - 1]!.level > level
     ) {
-      const frame = listStack.pop()!;
-      html.push(frame.type === "number" ? "</ol>" : "</ul>");
+      closeTop();
     }
   };
 
@@ -264,7 +277,7 @@ export function articleBodyToHtml(blocks: unknown): {
     const startAttr =
       type === "number" && start && start > 1 ? ` start="${start}"` : "";
     html.push(type === "number" ? `<ol${startAttr}>` : "<ul>");
-    listStack.push({ type, level });
+    listStack.push({ type, level, itemOpen: false });
   };
 
   for (const block of parsed) {
@@ -275,14 +288,18 @@ export function articleBodyToHtml(blocks: unknown): {
         const top = listStack[listStack.length - 1];
         if (!top || top.level < level) {
           openList(block.listItem, level, block.listStart);
-        } else if (top.type !== block.listItem) {
-          closeListsTo(level - 1);
+        } else if (
+          top.type !== block.listItem ||
+          (block.listStart && block.listStart > 1)
+        ) {
+          closeTop();
           openList(block.listItem, level, block.listStart);
-        } else if (block.listStart && block.listStart > 1) {
-          closeListsTo(level - 1);
-          openList(block.listItem, level, block.listStart);
+        } else if (top.itemOpen) {
+          closeItem();
+          top.itemOpen = false;
         }
-        html.push(`<li>${renderChildren(block.children, block.markDefs)}</li>`);
+        html.push(`<li>${renderChildren(block.children, block.markDefs)}`);
+        listStack[listStack.length - 1]!.itemOpen = true;
         continue;
       }
       closeAllLists();
@@ -395,28 +412,49 @@ export function markArticleIntro(html: string): string {
 export function articleBodyToMarkdown(blocks: unknown): string {
   const parsed = parsePortableBlocks(blocks);
   const lines: string[] = [];
-  let listType: string | null = null;
-  let listIndex = 0;
+  // One frame per list level; nested items are indented under the parent's
+  // text and numbered on their own (flat lists render exactly as before).
+  let listStack: {
+    type: string;
+    index: number;
+    indent: number;
+    width: number;
+  }[] = [];
 
   const closeList = () => {
-    if (listType) {
+    if (listStack.length > 0) {
       lines.push("");
-      listType = null;
-      listIndex = 0;
+      listStack = [];
     }
   };
 
   for (const block of parsed) {
     if (block._type === "block") {
       if (block.listItem) {
-        if (listType !== block.listItem) {
-          closeList();
-          listType = block.listItem;
+        const level = block.level && block.level > 0 ? block.level : 1;
+        if (listStack.length > level) listStack = listStack.slice(0, level);
+        if (
+          listStack.length === level &&
+          listStack[level - 1]!.type !== block.listItem
+        ) {
+          if (level === 1) closeList();
+          else listStack = listStack.slice(0, level - 1);
         }
-        listIndex += 1;
-        const marker = block.listItem === "number" ? `${listIndex}.` : "-";
+        while (listStack.length < level) {
+          const parent = listStack[listStack.length - 1];
+          listStack.push({
+            type: block.listItem,
+            index: 0,
+            indent: parent ? parent.indent + parent.width : 0,
+            width: 0,
+          });
+        }
+        const frame = listStack[level - 1]!;
+        frame.index += 1;
+        const marker = block.listItem === "number" ? `${frame.index}.` : "-";
+        frame.width = marker.length + 1;
         lines.push(
-          `${marker} ${markdownInline(block.children, block.markDefs)}`,
+          `${" ".repeat(frame.indent)}${marker} ${markdownInline(block.children, block.markDefs)}`,
         );
         continue;
       }
