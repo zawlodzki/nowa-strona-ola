@@ -223,3 +223,34 @@ test("cherry cover accent does not collide with cover text", async ({
     }
   }
 });
+
+test("decorative quote marks in reviews use the matcha accent", async ({
+  page,
+}) => {
+  for (const colorScheme of ["light", "dark"] as const) {
+    await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
+    const matcha = colorScheme === "light" ? MATCHA_LIGHT : MATCHA_DARK;
+    for (const path of [
+      "/",
+      "/o-mnie/",
+      "/konsultacje/",
+      "/ebooki/suplementy-w-pcos/",
+      "/en/ebooks/supplements-in-pcos/",
+    ]) {
+      await page.goto(path);
+      const marks = page.locator(".ao-review__mark");
+      expect(await marks.count(), path).toBeGreaterThan(0);
+      for (const mark of await marks.all()) {
+        await expect(mark).toHaveAttribute("aria-hidden", "true");
+        expect(await renderedColor(mark, "color"), path).toBe(matcha);
+      }
+      // The quote itself keeps the regular ink colour.
+      expect(
+        await renderedColor(
+          page.locator(".ao-review blockquote").first(),
+          "color",
+        ),
+      ).not.toBe(matcha);
+    }
+  }
+});
