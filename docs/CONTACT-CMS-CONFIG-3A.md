@@ -67,3 +67,22 @@ Turnstile i limity oraz finalna informacja o przetwarzaniu danych kontaktowych.
 Potwierdzenie przyjęcia dopiero po kolejce. Nie dodano czwartego pola ani zgody
 marketingowej do kontaktu. Dane firmy nie oznaczają adresu gabinetu ani zaproszenia
 na wizytę stacjonarną. Rzeczywista obsługa zapisów newslettera też wymaga etapu 6.
+
+## Import do Content Lake (`npm run import:contact`)
+
+Celowany skrypt zamiast całego `import:3a`. Zapisuje wyłącznie:
+
+- `page-contact-pl` i `page-contact-en` oraz `form-contact-pl` i
+  `form-contact-en` — `createIfNotExists`; istniejący dokument z inną treścią
+  jest raportowany jako konflikt i nadpisywany tylko z `--force`;
+- pozycję `nav-contact` w `siteSettings-pl/en` — patch `insert` po `nav-blog`
+  (albo na końcu, jeśli `nav-blog` usunięto), z `ifRevisionID`; pozostałe pola
+  ustawień zostają bez zmian, a ponowne uruchomienie pomija istniejącą pozycję.
+
+Domyślnie dry-run. `--dataset production` porównuje z datasetem (z tokenem w
+perspektywie raw, więc widać szkice), sprawdza `_key`, typy, id, referencje
+(formularze, tłumaczenia, zdjęcie, linki zgód, adres w menu) i zapisuje
+`reports/contact-import-transaction.json`. `--simulate <plik.ndjson>` zapisuje
+opublikowany dataset po zastosowaniu planu do builda z `astro.sim.config.mjs`.
+`--write --dataset production` wymaga `SANITY_API_WRITE_TOKEN` i wysyła wszystko
+jedną transakcją. Token nie jest wypisywany.
