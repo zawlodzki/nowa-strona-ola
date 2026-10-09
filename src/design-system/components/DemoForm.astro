@@ -7,9 +7,10 @@ interface Props {
   content: FormCopy;
   idPrefix?: string;
   lang: "pl" | "en";
+  layout?: "inline" | "stacked";
 }
 
-const { content, idPrefix = "", lang } = Astro.props;
+const { content, idPrefix = "", lang, layout = "inline" } = Astro.props;
 const textFields = content.fields.filter((field) => field.input !== "checkbox");
 const checkboxFields = content.fields.filter(
   (field) => field.input === "checkbox",
@@ -39,10 +40,12 @@ function fieldIds(field: FormFieldCopy) {
         class="ao-input"
         id={fieldId}
         name={field.name}
-        type={isEmail ? "email" : "text"}
+        type={isEmail ? "email" : field.input === "tel" ? "tel" : "text"}
         required={field.required}
-        autocomplete={isEmail ? "email" : undefined}
-        maxlength={isEmail ? 254 : 100}
+        autocomplete={
+          isEmail ? "email" : field.input === "tel" ? "tel" : undefined
+        }
+        maxlength={isEmail ? 254 : field.input === "tel" ? 40 : 100}
         placeholder={
           field.placeholder ?? (isEmail ? emailPlaceholder : undefined)
         }
@@ -54,7 +57,7 @@ function fieldIds(field: FormFieldCopy) {
     return (
       <div class="ao-field">
         <label for={fieldId}>{field.label}</label>
-        {isEmail ? (
+        {isEmail && layout === "inline" ? (
           <div class="ao-form__row">
             {input}
             <Button as="button" type="submit" arrow disabled>
@@ -98,7 +101,8 @@ function fieldIds(field: FormFieldCopy) {
       ? "Makieta formularza. Dane nie są zapisywane ani wysyłane."
       : "Demonstration form. Nothing is stored or sent."}
   </p>
-  {!textFields.some((field) => field.input === "email") && (
+  {(layout === "stacked" ||
+    !textFields.some((field) => field.input === "email")) && (
     <Button as="button" type="submit" arrow disabled>
       {content.submit}
     </Button>

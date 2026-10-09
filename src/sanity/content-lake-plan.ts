@@ -1,4 +1,8 @@
 import { blogCollectionPageFixture } from "./blog-page";
+import {
+  contactPageFixture,
+  contactFormFixture,
+} from "@/sanity/contact-fixtures";
 import { homepageCopy } from "@/content/homepage-seed";
 import { BLOG_ARTICLE_SEED } from "@/content/blog-collection-seed";
 import {
@@ -466,6 +470,8 @@ export function buildContentLakePlan(gate: ContentLakeGate): ContentLakePlan {
       ),
       toDocument("page", homepagePageFixture(language), keepPlaceholder),
       toDocument("page", aboutPageFixture(language), keepPlaceholder),
+      toDocument("page", contactPageFixture(language), keepPlaceholder),
+      toDocument("form", contactFormFixture(language), keepPlaceholder),
       toDocument("page", consultationPageFixture(language), keepPlaceholder),
       toDocument("page", ebookCollectionPageFixture(language), keepPlaceholder),
       toDocument("page", blogCollectionPageFixture(language), keepPlaceholder),

@@ -22,6 +22,7 @@ run("npx", ["astro", "build", "--config", "astro.fixture-dist.config.mjs"], {
   ASTRO_TELEMETRY_DISABLED: "1",
 });
 run("npx", ["tsx", "scripts/import-3a.ts"], process.env);
+run("npx", ["tsx", "scripts/validate-content-lake.ts"], process.env);
 run("npx", ["astro", "build", "--config", "astro.sim.config.mjs"], {
   ...process.env,
   PUBLIC_SANITY_PROJECT_ID: "dyuqkn8c",

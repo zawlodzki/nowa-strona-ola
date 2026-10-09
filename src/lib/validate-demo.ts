@@ -24,6 +24,14 @@ export function validateDemoField(
   if (!required && trimmed.length === 0) return false;
   if (input === "email") return isInvalidEmail(value);
   if (input === "text") return trimmed.length < 2 || value.length > 100;
-  if (input === "tel") return trimmed.length < 6;
+  if (input === "tel") {
+    const digits = trimmed.replace(/\D/g, "");
+    return (
+      value.length > 40 ||
+      !/^\+?[\d\s().-]+$/.test(trimmed) ||
+      digits.length < 6 ||
+      digits.length > 15
+    );
+  }
   return false;
 }

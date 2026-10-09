@@ -33,6 +33,8 @@ Każdy plik ma H1, jeden akapit zachowania widocznego dla użytkownika i dokład
 
 ## Features
 
+- [Kontakt 3a](./contact.md) sprawdza trzy pola, niezależny newsletter, dane firmy i brak POST.
+
 - [Formularz demonstracyjny](./home-form.md) sprawdza walidację na stronie głównej i brak wysyłki.
 - [Strona O mnie](./about.md) otwiera `/o-mnie/` i `/en/about/`, ramkę dyplomu i newsletter bez POST.
 - [Landing konsultacji](./consultation.md) otwiera `/konsultacje/` i `/en/consultations/`, cenę z usługi, Cal.com jako placeholder i FAQ bez POST.

@@ -231,3 +231,8 @@ CSS, `npm run tokens:check` sprawdza zgodność. Komponenty i Layout3a są w
 `npm run dev` lub po buildzie `npm run preview` udostępnia katalog pod
 `http://127.0.0.1:4321/design-system/`. Dotychczasowe `/ui/` i szablony aplikacji
 są przejściowe; sama biblioteka nie oznacza migracji wszystkich stron i Sanity.
+
+Podstrona kontaktu 3a: `/kontakt/` i `/en/contact/`. Plan i stan integracji:
+[Kontakt CMS](docs/CONTACT-CMS-CONFIG-3A.md). Po zbudowaniu fixture lokalny
+podgląd i kontrola użytkowa: `node .cursor/skills/verify-ola/scripts/verify.mjs launch`
+(z ustawionym `VERIFY_RUN_ID`), następnie `browser start` i `doctor`.

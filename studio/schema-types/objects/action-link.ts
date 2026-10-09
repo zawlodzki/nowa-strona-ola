@@ -1,6 +1,16 @@
 import { LinkIcon } from "@sanity/icons/Link";
 import { defineField, defineType } from "sanity";
 
+export function isValidActionHref(value: string): boolean {
+  return (
+    value.startsWith("/") ||
+    value.startsWith("#") ||
+    value.startsWith("https://") ||
+    value.startsWith("http://") ||
+    /^mailto:[^\s@?]+@[^\s@?]+\.[^\s@?]+$/.test(value)
+  );
+}
+
 export const actionLinkType = defineType({
   name: "actionLink",
   title: "Odnośnik",
@@ -16,20 +26,14 @@ export const actionLinkType = defineType({
     defineField({
       name: "href",
       title: "Adres",
-      description: "Ścieżka wewnętrzna (/kontakt/) albo pełny adres https://.",
+      description:
+        "Ścieżka wewnętrzna (/kontakt/), adres https:// albo mailto:adres@domena.pl.",
       type: "string",
       validation: (rule) =>
         rule.required().custom((value) => {
           if (!value) return "Podaj adres.";
-          if (
-            value.startsWith("/") ||
-            value.startsWith("#") ||
-            value.startsWith("https://") ||
-            value.startsWith("http://")
-          ) {
-            return true;
-          }
-          return "Użyj ścieżki zaczynającej się od / albo adresu http(s).";
+          if (isValidActionHref(value)) return true;
+          return "Użyj ścieżki /, adresu http(s) albo mailto z poprawnym adresem e-mail.";
         }),
     }),
     defineField({

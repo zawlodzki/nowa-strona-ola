@@ -17,7 +17,9 @@ const { default: Page } =
       ? await import("./AboutPage.astro")
       : page.slug === "konsultacje" || page.slug === "consultations"
         ? await import("./ConsultationPage.astro")
-        : await import("./LegacyPage.astro");
+        : page.slug === "kontakt" || page.slug === "contact"
+          ? await import("./ContactPage.astro")
+          : await import("./LegacyPage.astro");
 ---
 
 <Page {...Astro.props} />

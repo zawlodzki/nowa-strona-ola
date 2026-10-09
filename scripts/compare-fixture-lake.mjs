@@ -13,6 +13,8 @@ const lakeRoot = path.join(root, "dist");
 const pages = [
   ["/", "strona główna"],
   ["/o-mnie/", "o mnie"],
+  ["/kontakt/", "kontakt"],
+  ["/en/contact/", "contact"],
   ["/konsultacje/", "konsultacje"],
   ["/ebooki/suplementy-w-pcos/", "ebook"],
   ["/ebooki/", "katalog e-booków"],

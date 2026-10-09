@@ -24,6 +24,8 @@ export const reservedPageSlugs = [
   "about",
   "konsultacje",
   "consultations",
+  "kontakt",
+  "contact",
   ...reservedLegalSlugs,
 ] as const;
 

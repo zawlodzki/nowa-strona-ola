@@ -637,3 +637,13 @@ zostają przy TextLink w ink. CMS nie otrzymał pól kolorów; schematy i
 Content Lake bez zmian. Mapa strona → element → kolor jest w opisie PR.
 [Zasady](../design-system/SPECIFICATION.md) i
 [plansza](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).
+
+## Podstrona kontaktu — 09.10.2026
+
+Użytkownik zlecił kontakt z trzema polami (e-mail, telefon, temat rozmowy),
+zdjęciem i logami social mediów pod nim, bezpośrednim e-mailem
+`ola@aleksandraolesiewicz.com`, danymi Wellbiz sp. z o.o., ul. Lipowa 3d,
+30-702 Kraków, NIP 6793323800, oraz zapisem do newslettera.
+Bieżące wartości, źródła, propozycje copy i mapowanie istniejących sekcji:
+[Kontakt CMS 3a](CONTACT-CMS-CONFIG-3A.md). Kontakt dodany do nawigacji fixture
+PL/EN. Kod i fixture nie oznaczają zapisu do Sanity ani działającej wysyłki.

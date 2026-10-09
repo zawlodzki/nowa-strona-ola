@@ -1,10 +1,89 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-09 (PR poprawek Sanity i bloga; bez wdrożenia); 2026-10-08 (wdrożenie zaleceń audytu CSS; Sanity 6.18.0; import 3a oraz strony prawne; automatyczne aktualizacje i wdrożenia Studio).
+Aktualizacja: 2026-10-09 (kontakt 3a, PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### PR podstrony kontaktu 3a — 09.10.2026
+
+Na zlecenie „pr push” wypchnięto gałąź `codex/contact-page-3a`
+i utworzono [PR #53](https://github.com/zawlodzki/nowa-strona-ola/pull/53).
+Rebase na main `9a6c80e` zachowuje aktualizacje Sanity, bloga, dokumentów
+prawnych oraz izolację CSS. Kontakt ma osobny `ContactPage.astro`, jawne trasy
+PL/EN i dynamiczny import w preview; slugi kontaktu są zarezerwowane.
+TypeGen: **73 typy, 22 zapytania**, bez zmian wygenerowanego pliku.
+
+Pełny `npm run verify` po rebase **PASS**: **168 unit / 27 plików**,
+**195 E2E** w Chromium/Firefox/WebKit, wszystkie buildy i kontrola artefaktów.
+Symulacja CMS: **84 dokumenty, 0 błędów**, **62 strony**, zgodność sekcji,
+zdjęć i DOM **15 stron**. JS gzip **5811 B**, CSS gzip **29314 B**.
+Kontakt: zewnętrzny CSS **5491 B**, inline **3374 B**, poniżej budżetów 8/4 KiB.
+Log: `/tmp/ola-contact-pr-verify-final.log`.
+
+Pierwszy przebieg z czterema workerami miał dwa timeouty istniejących testów
+WebKit. Całą bramkę powtórzono z `PLAYWRIGHT_WORKERS=1`: bez błędów i retries,
+bez zmian limitów czasu ani testów. Opcje bibliotek i przeglądarek jak poniżej.
+Po bramce `/verify-ola`: `ola-contact-pr`, port 4340, doctor PASS, cleanup;
+obejrzano desktop 1440 i mobile 390 na świeżym buildzie symulacji CMS.
+Zrzuty: `/tmp/ola-contact-pr-desktop.png`, `/tmp/ola-contact-pr-mobile.png`.
+
+Następny krok: review PR i wynik GitHub Quality; obsługa wysyłki w etapie 6.
+Bez zapisu do Sanity, scalenia i publikacji.
+
+### Podstrona kontaktu 3a — 09.10.2026
+
+Zlecenie użytkownika: zaplanować i utworzyć kontakt z trzema polami, zdjęciem
+z logami social mediów pod nim, bezpośrednim e-mailem, danymi firmy i newsletterem.
+[Plan i konfiguracja CMS](CONTACT-CMS-CONFIG-3A.md) zapisują dokładne wartości,
+źródła i mapowanie; decyzja jest też w HOMEPAGE-CMS-CONFIG.md.
+
+- Utworzono `/kontakt/` i `/en/contact/` w powłoce 3a, z tym samym rendererem
+  dla produkcji i preview. Formularz: e-mail, telefon opcjonalny, temat rozmowy.
+  E-mail `ola@aleksandraolesiewicz.com`, Wellbiz sp. z o.o., ul. Lipowa 3d,
+  30-702 Kraków, NIP 6793323800. Wybrany portret `contact`; loga i odnośniki
+  Instagram/Facebook/TikTok z istniejących profili. Newsletter ze wspólną zgodą.
+- Istniejące sekcje Sanity, mapper kontrolujący kontrakt strony, wspólny
+  DemoForm z układem pionowym i natywnym `type=tel`, walidacja telefonu.
+  Oddzielne ID i statusy kontaktu/newslettera. Nawigacja fixture PL/EN,
+  istniejący eksport Markdown oraz plan importu stron i formularzy.
+- Offline walidacja wykryła brak obsługi mailto w `actionLink.href`.
+  Dodano walidację poprawnego adresu e-mail oraz testy odrzucenia błędnych
+  adresów i niedozwolonych schematów. **82 dokumenty, 0 błędów**.
+  Walidacja dokumentów jest teraz częścią `test:content-lake` i pełnego verify.
+  TypeGen: **72 schematy, 22 zapytania**, bez zmiany wygenerowanych typów.
+- Formularze są demonstracyjne: walidacja lokalna, bez zapisu i wysyłki.
+  Bez JS przyciski wyłączone, bezpośredni e-mail dostępny. Nie dodano pola
+  wiadomości ani zgody marketingowej do kontaktu.
+- `/verify-ola`: `ola-contact-20261009`, port 4340, doctor PASS; błędny
+  i poprawny formularz, status, EN bez JS, ARIA i pełny screenshot.
+  `browser posts` = `[]` z JS i bez JS. Dowody zachowane po cleanup:
+  `/tmp/ola-verify-evidence/ola-contact-20261009/`.
+- Obejrzano desktop 1280, mobile 390 i dark 1440. Dodatkowe zrzuty:
+  `/tmp/ola-contact-mobile.png`, `/tmp/ola-contact-dark.png`.
+  E2E nowego widoku: PL/EN, fokus i Tab, błędy i opcjonalny telefon,
+  niezależność formularzy, axe light/dark, 320 px, CSS zoom 200%, reduced motion
+  i brak JS w Chromium/Firefox/WebKit — **9/9 PASS**.
+- `npm run verify` na Node 24.19.0 / npm 11.9.0: **PASS**, **156 unit / 24 pliki**,
+  **180 E2E**, buildy wszystkich workspace’ów i kontrola artefaktów.
+  Symulacja CMS: **82 dokumenty**, **62 strony**, zgodność sekcji, zdjęć i DOM
+  **15 stron**, w tym kontakt PL/EN. JS gzip **5811 B**, CSS gzip **30132 B**.
+  Log: `/tmp/ola-contact-verify-final.log`. Format i diff check PASS;
+  kontrola **141 lokalnych odnośników** dokumentacji i stron: **0 braków**.
+- Środowisko odtworzono: npm cache i przeglądarki w `/workspace/.cache`, brakujące
+  biblioteki Debian rozpakowane lokalnie. Firefox wymagał uruchomienia poza
+  sandboxem (wewnątrz nie widział profilu). Wszystkie trzy silniki rzeczywiście
+  uruchomiono przed testami. Jednorazowe `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1`
+  pomija detekcję systemowego cache bibliotek, nie testy; jak w poprzedniej sesji.
+  `LD_LIBRARY_PATH` wskazywał lokalne biblioteki, XDG_CACHE_HOME i XDG_CONFIG_HOME
+  katalogi `/workspace`. Bez zmian skryptów bramki, profilu systemowego i lockfile.
+
+Otwarte: natywny zoom przeglądarki, czytnik ekranu i fizyczne urządzenie dotykowe.
+Następny krok: podłączyć docelową obsługę kontaktu i newslettera w etapie 6
+(Worker → Queues → n8n, Turnstile, limity i finalna informacja o danych).
+Na etapie tworzenia widoku nie zapisywano do Sanity, nie wykonywano push,
+nie tworzono PR ani nie publikowano strony.
 
 ### PR poprawek Sanity i bloga, 09.10.2026
 
