@@ -49,6 +49,9 @@ Wykorzystujemy istniejące schematy — bez nowego typu sekcji. Walidator
 Mapper pilnuje kolejności, trzech typów pól, zdjęcia, mailto i wymaganej zgody
 newslettera. Renderer korzysta ze wspólnych komponentów 3a. Istniejący serializer
 sekcji eksportuje te same dane do Markdown. Preview korzysta z tego samego widoku.
+Jawne trasy PL/EN używają `ContactPage.astro`, a `ComposedPage.astro` ładuje go
+dynamicznie w preview. Zachowuje to izolację CSS poszczególnych podstron;
+kontakt ma osobny budżet 8 KiB zewnętrznego CSS i 4 KiB inline.
 Plan importu `import:3a` uwzględnia oba dokumenty strony i oba formularze;
 nie uruchomiono zapisu. Import całego planu nie jest poleceniem publikacji.
 

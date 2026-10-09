@@ -6,6 +6,32 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### PR podstrony kontaktu 3a — 09.10.2026
+
+Na zlecenie „pr push” wypchnięto gałąź `codex/contact-page-3a`
+i utworzono [PR #53](https://github.com/zawlodzki/nowa-strona-ola/pull/53).
+Rebase na main `9a6c80e` zachowuje aktualizacje Sanity, bloga, dokumentów
+prawnych oraz izolację CSS. Kontakt ma osobny `ContactPage.astro`, jawne trasy
+PL/EN i dynamiczny import w preview; slugi kontaktu są zarezerwowane.
+TypeGen: **73 typy, 22 zapytania**, bez zmian wygenerowanego pliku.
+
+Pełny `npm run verify` po rebase **PASS**: **168 unit / 27 plików**,
+**195 E2E** w Chromium/Firefox/WebKit, wszystkie buildy i kontrola artefaktów.
+Symulacja CMS: **84 dokumenty, 0 błędów**, **62 strony**, zgodność sekcji,
+zdjęć i DOM **15 stron**. JS gzip **5811 B**, CSS gzip **29314 B**.
+Kontakt: zewnętrzny CSS **5491 B**, inline **3374 B**, poniżej budżetów 8/4 KiB.
+Log: `/tmp/ola-contact-pr-verify-final.log`.
+
+Pierwszy przebieg z czterema workerami miał dwa timeouty istniejących testów
+WebKit. Całą bramkę powtórzono z `PLAYWRIGHT_WORKERS=1`: bez błędów i retries,
+bez zmian limitów czasu ani testów. Opcje bibliotek i przeglądarek jak poniżej.
+Po bramce `/verify-ola`: `ola-contact-pr`, port 4340, doctor PASS, cleanup;
+obejrzano desktop 1440 i mobile 390 na świeżym buildzie symulacji CMS.
+Zrzuty: `/tmp/ola-contact-pr-desktop.png`, `/tmp/ola-contact-pr-mobile.png`.
+
+Następny krok: review PR i wynik GitHub Quality; obsługa wysyłki w etapie 6.
+Bez zapisu do Sanity, scalenia i publikacji.
+
 ### Podstrona kontaktu 3a — 09.10.2026
 
 Zlecenie użytkownika: zaplanować i utworzyć kontakt z trzema polami, zdjęciem
@@ -56,7 +82,8 @@ z logami social mediów pod nim, bezpośrednim e-mailem, danymi firmy i newslett
 Otwarte: natywny zoom przeglądarki, czytnik ekranu i fizyczne urządzenie dotykowe.
 Następny krok: podłączyć docelową obsługę kontaktu i newslettera w etapie 6
 (Worker → Queues → n8n, Turnstile, limity i finalna informacja o danych).
-Bez zapisu do Sanity, push, PR i publikacji w tej sesji.
+Na etapie tworzenia widoku nie zapisywano do Sanity, nie wykonywano push,
+nie tworzono PR ani nie publikowano strony.
 
 ### PR poprawek Sanity i bloga, 09.10.2026
 
