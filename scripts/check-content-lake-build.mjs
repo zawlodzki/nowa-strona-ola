@@ -21,6 +21,8 @@ const pages = [
   "index.html",
   "en/index.html",
   "o-mnie/index.html",
+  "kontakt/index.html",
+  "en/contact/index.html",
   "en/about/index.html",
   "konsultacje/index.html",
   "en/consultations/index.html",

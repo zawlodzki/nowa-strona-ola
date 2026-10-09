@@ -105,7 +105,7 @@ describe("content lake plan", () => {
   it("stores the blog collection in a page and keeps shared article newsletter settings", () => {
     const settings = byId("siteSettings-pl");
     expect(Array.isArray(settings.navigation)).toBe(true);
-    expect(settings.navigation).toHaveLength(4);
+    expect(settings.navigation).toHaveLength(5);
     expect(settings.headerCta).toMatchObject({ label: "Newsletter" });
     expect(settings.blogIndex).toBeUndefined();
     expect(
@@ -174,9 +174,11 @@ describe("content lake plan", () => {
   });
 
   it("holds newsletter forms until the consent label fits", () => {
-    expect(plan.documents.some((document) => document._type === "form")).toBe(
-      false,
-    );
+    expect(
+      plan.documents.some((document) =>
+        document._id.startsWith("newsletter-form-"),
+      ),
+    ).toBe(false);
     expect(plan.pending).toContainEqual({ kind: "legalPage" });
     const form = plan.pending.find((item) => item.kind === "form");
     if (!form || form.kind !== "form") throw new Error("Brak formularza.");
@@ -237,7 +239,9 @@ describe("content lake plan", () => {
     expect(formFieldLabelMax(formSource)).toBe(400);
     expect(live.pending).toEqual([]);
     expect(
-      live.documents.filter((document) => document._type === "form"),
+      live.documents.filter((document) =>
+        document._id.startsWith("newsletter-form-"),
+      ),
     ).toHaveLength(2);
     expect(
       live.documents.filter((document) => document._type === "legalPage"),

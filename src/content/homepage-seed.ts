@@ -156,6 +156,11 @@ export function homepageNavigation(language: Locale) {
       label: "Blog",
       href: language === "pl" ? "/blog/" : "/en/blog/",
     },
+    {
+      _key: "nav-contact",
+      label: language === "pl" ? "Kontakt" : "Contact",
+      href: language === "pl" ? "/kontakt/" : "/en/contact/",
+    },
   ];
 }
 

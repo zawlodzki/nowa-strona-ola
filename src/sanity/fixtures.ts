@@ -1,4 +1,5 @@
 import { blogCollectionPageFixture } from "./blog-page";
+import { contactPageFixture } from "./contact-fixtures";
 import type { Locale } from "@ola/shared";
 
 import { aboutPageFixture } from "./about-fixtures";
@@ -400,6 +401,8 @@ const implementationSections = {
 };
 
 export const demonstrationPages = {
+  "pl/kontakt": contactPageFixture("pl"),
+  "en/contact": contactPageFixture("en"),
   "pl/home": homepagePageFixture("pl"),
   "en/home": homepagePageFixture("en"),
   "pl/o-mnie": aboutPageFixture("pl"),

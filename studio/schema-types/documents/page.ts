@@ -34,6 +34,8 @@ export const pageType = defineType({
           "about",
           "konsultacje",
           "consultations",
+          "kontakt",
+          "contact",
           "ebooki",
           "ebooks",
         ],

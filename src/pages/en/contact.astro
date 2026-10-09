@@ -1,0 +1,12 @@
+---
+import { getPage, getSiteSettings } from "@/sanity/repository";
+import ContactPage from "@/views/ContactPage.astro";
+
+const lang = "en" as const;
+const [page, settings] = await Promise.all([
+  getPage(lang, "contact"),
+  getSiteSettings(lang),
+]);
+---
+
+<ContactPage lang={lang} page={page} settings={settings} />

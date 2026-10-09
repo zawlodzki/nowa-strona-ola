@@ -722,3 +722,14 @@ Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.
 - [ ] Zainstalować biblioteki systemowo, aby uruchamiać verify bez tej opcji.
 
 Następny krok implementacji: pakiet 1 etapu 4a.
+
+## Podstrona kontaktu 3a — 09.10.2026
+
+- [x] Zapisać plan, wymagane dane i mapowanie istniejących sekcji Sanity.
+- [x] Utworzyć widok 3a i fixture PL/EN: trzy pola, zdjęcie, loga social,
+      bezpośredni e-mail, dane firmy, newsletter.
+- [x] Podłączyć wspólną nawigację, Markdown i plan importu Content Lake.
+- [x] Zweryfikować pełną bramkę oraz przeglądarki; wyniki w PROGRESS.md.
+- [ ] W etapie 6 uruchomić kontakt i newsletter przez Worker/Queues/n8n.
+
+[Plan i konfiguracja](CONTACT-CMS-CONFIG-3A.md). Bez zapisu do CMS i publikacji.

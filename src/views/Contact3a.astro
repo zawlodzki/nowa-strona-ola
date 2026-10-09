@@ -1,0 +1,225 @@
+---
+import type { Locale } from "@ola/shared";
+import type { ContactView } from "@/content/map-contact";
+import Container from "@/design-system/components/Container.astro";
+import DemoForm from "@/design-system/components/DemoForm.astro";
+import Heading from "@/design-system/components/Heading.astro";
+import Newsletter from "@/design-system/components/Newsletter.astro";
+import Section from "@/design-system/components/Section.astro";
+import SiteImage from "@/design-system/components/SiteImage.astro";
+import SocialLogo from "@/design-system/components/SocialLogo.astro";
+
+interface Props {
+  lang: Locale;
+  content: ContactView;
+}
+const { lang, content } = Astro.props;
+const pl = lang === "pl";
+---
+
+<main id="main" class="contact3a">
+  <Section class="contact3a-intro" aria-labelledby="contact-title">
+    <Container>
+      <p class="contact3a-eyebrow">{content.hero.eyebrow}</p>
+      <Heading as="h1" size="display" id="contact-title">
+        {content.hero.title}
+      </Heading>
+      <p class="contact3a-lead">{content.hero.lead}</p>
+      <div class="contact3a-grid">
+        <div>
+          <Heading size="card" id="contact-form-title">
+            {content.form.title}
+          </Heading>
+          <p class="contact3a-form-lead">{content.form.lead}</p>
+          <DemoForm
+            content={content.form}
+            lang={lang}
+            idPrefix="contact-"
+            layout="stacked"
+          />
+          <div class="contact3a-direct">
+            <h2>
+              {pl
+                ? "Wolisz napisać bezpośrednio?"
+                : "Prefer to email directly?"}
+            </h2>
+            <a href={content.hero.primary.href}>{content.hero.primary.label}</a>
+          </div>
+        </div>
+        <div class="contact3a-profile">
+          <figure>
+            <SiteImage
+              src={content.hero.media.src}
+              fallback="contact"
+              alt={content.hero.media.label}
+              width={1536}
+              height={1024}
+              loading="eager"
+              fetchpriority="high"
+            />
+            {content.hero.media.caption && (
+              <figcaption>{content.hero.media.caption}</figcaption>
+            )}
+          </figure>
+          <nav class="contact3a-social" aria-label={content.social.title}>
+            <p>{content.social.title}</p>
+            <div>
+              {content.social.items.map((item) => (
+                <a
+                  href={item.href}
+                  aria-label={item.title}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SocialLogo name={item.title} />
+                  <span>{item.title}</span>
+                </a>
+              ))}
+            </div>
+          </nav>
+        </div>
+      </div>
+      <section class="contact3a-company" aria-labelledby="company-title">
+        <Heading size="card" id="company-title">
+          {content.company.title}
+        </Heading>
+        <div>
+          {content.company.body.map((line) => (
+            <p>{line}</p>
+          ))}
+        </div>
+      </section>
+    </Container>
+  </Section>
+  <Newsletter
+    id="newsletter"
+    title={content.newsletter.title}
+    description={content.newsletter.lead}
+  >
+    <DemoForm
+      slot="form"
+      content={content.newsletter}
+      lang={lang}
+      idPrefix="newsletter-"
+    />
+  </Newsletter>
+</main>
+<style>
+  .contact3a-intro {
+    padding-top: var(--ao-space-64);
+  }
+  .contact3a-eyebrow {
+    color: var(--ao-primary);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: var(--ao-space-16);
+  }
+  .contact3a-lead {
+    max-width: 52ch;
+    color: var(--ao-muted);
+    font-size: 20px;
+    margin-top: var(--ao-space-24);
+  }
+  .contact3a-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ao-space-96);
+    margin-top: var(--ao-space-48);
+    align-items: start;
+  }
+  .contact3a-grid > div {
+    min-width: 0;
+  }
+  .contact3a-form-lead {
+    margin-block: var(--ao-space-16) var(--ao-space-24);
+    color: var(--ao-muted);
+    font-size: 14px;
+    max-width: 48ch;
+  }
+  .contact3a-direct {
+    margin-top: var(--ao-space-32);
+    padding-top: var(--ao-space-24);
+    border-top: 1px solid var(--ao-line);
+  }
+  .contact3a-direct h2 {
+    font-size: 16px;
+    font-weight: 550;
+    margin-bottom: var(--ao-space-8);
+  }
+  .contact3a-direct a {
+    color: var(--ao-primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    overflow-wrap: anywhere;
+  }
+  .contact3a-profile figure {
+    margin: 0;
+  }
+  .contact3a-profile :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: 75% center;
+    border-radius: 24px;
+  }
+  .contact3a-profile figcaption {
+    color: var(--ao-muted);
+    font-size: 13px;
+    margin-top: var(--ao-space-8);
+  }
+  .contact3a-social {
+    margin-top: var(--ao-space-24);
+  }
+  .contact3a-social p {
+    color: var(--ao-muted);
+    font-size: 14px;
+    margin-bottom: var(--ao-space-12);
+  }
+  .contact3a-social > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ao-space-16);
+  }
+  .contact3a-social a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ao-space-8);
+    min-height: var(--ao-target-min);
+    color: var(--ao-ink);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .contact3a-social a:hover {
+    color: var(--ao-primary);
+  }
+  .contact3a-company {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ao-space-96);
+    padding-top: var(--ao-space-32);
+    margin-top: var(--ao-space-48);
+    border-top: 1px solid var(--ao-line);
+  }
+  .contact3a-company p {
+    line-height: 1.7;
+  }
+  @container page3a (max-width: 879px) {
+    .contact3a-grid,
+    .contact3a-company {
+      grid-template-columns: 1fr;
+      gap: var(--ao-space-32);
+    }
+  }
+  @container page3a (max-width: 767px) {
+    .contact3a-intro {
+      padding-top: var(--ao-space-32);
+    }
+    .contact3a-lead {
+      font-size: 17px;
+    }
+    .contact3a-grid {
+      margin-top: var(--ao-space-32);
+    }
+  }
+</style>

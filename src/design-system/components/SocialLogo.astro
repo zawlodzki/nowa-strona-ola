@@ -1,0 +1,45 @@
+---
+interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 24 24"
+  width="24"
+  height="24"
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+>
+  {name === "Instagram" ? (
+    <>
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="4"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+      />
+      <circle cx="17.5" cy="6.5" r="1.2" />
+    </>
+  ) : name === "Facebook" ? (
+    <path d="M14 22v-9h3l.5-3H14V8c0-.9.3-1.5 1.7-1.5H18V3.2c-.4-.1-1.8-.2-3.3-.2C11.5 3 10 4.9 10 7.8V10H7v3h3v9z" />
+  ) : name === "TikTok" ? (
+    <path d="M16 2h-3v13.2a3.2 3.2 0 1 1-2.8-3.2V9a6.2 6.2 0 1 0 5.8 6.2V7.5A9.2 9.2 0 0 0 21 9V6a5 5 0 0 1-5-4z" />
+  ) : (
+    <path d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3ZM3 5h7v2H5v12h12v-5h2v7H3V5Z" />
+  )}
+</svg>
