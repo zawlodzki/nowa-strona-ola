@@ -225,8 +225,8 @@ export const homepageCopy = {
       },
       {
         key: "audience-lean-pcos",
-        title: "Szczupła, a jednak PCOS",
-        body: "Gdy Twoim celem nie jest odchudzanie, a chcesz jeść regularnie, sycąco i lepiej poznać potrzeby swojego ciała.",
+        title: "Starania o ciążę",
+        body: "Gdy planujesz ciążę albo już się starasz i chcesz spokojnie zadbać o odżywianie, w porozumieniu z lekarzem prowadzącym.",
         icon: "arrow",
       },
       {
@@ -326,8 +326,8 @@ export const homepageCopy = {
       },
       {
         key: "audience-lean-pcos",
-        title: "Slim, and still PCOS",
-        body: "When weight loss is not your goal and you want regular, satisfying meals and a better sense of what your body needs.",
+        title: "Trying to conceive",
+        body: "When you are planning a pregnancy or already trying, and want to look after your nutrition calmly, alongside your doctor's care.",
         icon: "arrow",
       },
       {

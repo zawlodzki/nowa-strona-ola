@@ -4,12 +4,7 @@ const pages = [
   {
     path: "/",
     heading: "Z kim pracuję",
-    titles: [
-      "PCOS",
-      "Insulinooporność",
-      "Szczupła, a jednak PCOS",
-      "Perimenopauza",
-    ],
+    titles: ["PCOS", "Insulinooporność", "Starania o ciążę", "Perimenopauza"],
   },
   {
     path: "/en/",
@@ -17,7 +12,7 @@ const pages = [
     titles: [
       "PCOS",
       "Insulin resistance",
-      "Slim, and still PCOS",
+      "Trying to conceive",
       "Perimenopause",
     ],
   },

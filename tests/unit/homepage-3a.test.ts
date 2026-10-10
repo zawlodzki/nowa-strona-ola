@@ -33,7 +33,7 @@ describe("homepage 3a fixtures", () => {
     expect(view.audience.items.map((item) => item.title)).toEqual([
       "PCOS",
       "Insulinooporność",
-      "Szczupła, a jednak PCOS",
+      "Starania o ciążę",
       "Perimenopauza",
     ]);
     expect(view.audience.items.every((item) => item.icon === "arrow")).toBe(
@@ -76,7 +76,7 @@ describe("homepage 3a fixtures", () => {
     expect(view.audience.items.map((item) => item.title)).toEqual([
       "PCOS",
       "Insulin resistance",
-      "Slim, and still PCOS",
+      "Trying to conceive",
       "Perimenopause",
     ]);
     expect(view.newsletter.submit).toBe("I want the newsletter");
@@ -93,7 +93,7 @@ describe("section serializers", () => {
     expect(markdown).toContain("Opinia o dotychczasowej współpracy");
     expect(markdown).toContain("Zarezerwuj konsultację");
     expect(markdown).toContain("## Z kim pracuję");
-    expect(markdown).toContain("### Szczupła, a jednak PCOS");
+    expect(markdown).toContain("### Starania o ciążę");
   });
 
   it("drops the retired logo strip from known sections", () => {

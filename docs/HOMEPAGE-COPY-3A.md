@@ -11,16 +11,17 @@ Użytkownik wskazał 3a jako kierunek dalszej pracy.
 Decyzja użytkownika („Opcja 4”): pas logotypów zlikwidowany na stronie i w CMS.
 W tym samym miejscu, zaraz po hero, jest sekcja `audienceSection`. Copy jest
 **szkicem do akceptacji Oli**, zbudowanym wyłącznie z tematów już obecnych
-w serwisie. Bez obietnic efektów, twierdzeń medycznych i nazw marek. Starania
-o ciążę pominięto: serwis wspomina ciążę tylko jako sytuację wymagającą
-indywidualnych zaleceń.
+w serwisie. Bez obietnic efektów, twierdzeń medycznych i nazw marek. Karta 3
+(pierwotnie „Szczupła, a jednak PCOS”) zastąpiona 10.10.2026 zatwierdzonym przez
+użytkownika copy „Starania o ciążę” / „Trying to conceive”; `_key` karty
+(`audience-lean-pcos`) pozostał bez zmian, zgodnie z Content Lake.
 
 PL — **Z kim pracuję**. Pracuję z kobietami, które chcą spokojnie uporządkować
 odżywianie i dopasować je do swojej codzienności.
 
 1. **PCOS** — Gdy chcesz zrozumieć, jak jedzenie może wspierać Twoją codzienność z PCOS, i wybrać pierwszy krok, który ma sens dla Ciebie.
 2. **Insulinooporność** — Gdy po diagnozie masz wiele pytań i chcesz ułożyć posiłki tak, by pasowały do Twojego dnia, bez listy zakazów.
-3. **Szczupła, a jednak PCOS** — Gdy Twoim celem nie jest odchudzanie, a chcesz jeść regularnie, sycąco i lepiej poznać potrzeby swojego ciała.
+3. **Starania o ciążę** — Gdy planujesz ciążę albo już się starasz i chcesz spokojnie zadbać o odżywianie, w porozumieniu z lekarzem prowadzącym.
 4. **Perimenopauza** — Gdy zauważasz zmiany w ciele i codziennych nawykach i chcesz przyjrzeć się im spokojnie, krok po kroku.
 
 EN — **Who I work with**. I work with women who want to sort out their
@@ -28,7 +29,7 @@ nutrition calmly and fit it into their everyday life.
 
 1. **PCOS** — When you want to understand how food can support your everyday life with PCOS, and choose a first step that makes sense for you.
 2. **Insulin resistance** — When a diagnosis leaves you with many questions and you want meals that fit your day, without a list of bans.
-3. **Slim, and still PCOS** — When weight loss is not your goal and you want regular, satisfying meals and a better sense of what your body needs.
+3. **Trying to conceive** — When you are planning a pregnancy or already trying, and want to look after your nutrition calmly, alongside your doctor's care.
 4. **Perimenopause** — When you notice changes in your body and daily habits and want to look at them calmly, step by step.
 
 Ta decyzja zastępuje wcześniejsze przywrócenie belki marek (06.10.2026) i
