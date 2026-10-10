@@ -6,6 +6,28 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Merge PR #63 i zapis do Content Lake, 10.10.2026
+
+- PR [#63](https://github.com/zawlodzki/nowa-strona-ola/pull/63) scalony
+  (squash `743b012`) po zielonym CI (dwie kontrole Quality).
+- Zapis do Content Lake (projekt `dyuqkn8c`, `production`) jedną transakcją
+  `sanity documents create --replace` z konta właściciela, tylko dokumenty z PR:
+  5 formularzy (`formKey`, `version` 2.3), `form-withdrawal-pl`,
+  `page-withdrawal-pl`, 6 dokumentów prawnych z datą 10.10.2026 (regulamin 2.3),
+  w `siteSettings-pl` linki prawne, copyright i informacja pod opiniami (reszta
+  bez zmian), usługi konsultacji z `https://cal.com/dietetyk/konsultacja`.
+  Pełnego `import:3a` nie uruchamiano. Kopia poprzednich wersji:
+  `/private/tmp/claude-501/lake-write/backup-before.json`.
+- Pierwszy build z webhooka (staging) padł: strony główna, O mnie i konsultacje
+  w Lake miały przyciski do `https://cal.com`, a mapper wymaga zgodności z
+  `service.bookingUrl`. Przyczyna: przed zapisem nie zbudowano strony na danych
+  z Lake, tylko na fixture’ach. Poprawka łatkami MCP: 8 linków i odpowiedź FAQ
+  „Jak zarezerwować termin?” (PL/EN), opublikowane na polecenie właściciela.
+  Lokalny build `main` na danych z Lake: PASS (34 strony, brak śladów B2B,
+  `/odstapienie/`, regulamin 2.3, newsletter bez checkboxa, link Cal.com).
+- Wniosek: przed każdym zapisem do Lake budować `main` z
+  `PUBLIC_SANITY_PROJECT_ID`/`PUBLIC_SANITY_DATASET` na danych po zmianie.
+
 ### Krok 1 dokumentacji prawnej — integracja, 10.10.2026
 
 - `main` zsynchronizowany z `origin/main` `8d39131` (fast-forward o 38 commitów).
