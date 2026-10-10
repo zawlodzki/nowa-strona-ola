@@ -44,6 +44,7 @@ ani dokumentacji w deklarację wykonania. Nie kopiować sekretów i danych zgło
 | Podpis opinii           | „Opinia o dotychczasowej współpracy”; bez imion                                                                                                    | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                                                                                                                                                                              |
 | Z kim pracuję           | Sekcja `audienceSection` po hero: nagłówek, lead i 4 karty (PCOS, insulinooporność, starania o ciążę, perimenopauza)                               | Decyzja użytkownika 09.10.2026 („Opcja 4”): pas logotypów zlikwidowany na stronie i w CMS. Copy jest szkicem do akceptacji Oli.                                                                                                                  |
 | Social media            | Instagram, Facebook, TikTok; kanoniczne URL profili                                                                                                | Decyzja użytkownika 08.10.2026: `https://www.instagram.com/aleksandra_olesiewicz`, `https://www.facebook.com/dietetykolesiewicz/`, `https://www.tiktok.com/@aleksandra_olesiewicz`. Ustalenie 06.10.2026 (widoczność trzech platform) pozostaje. |
+| Newsletter              | Przycisk „Zapisuję się”, bez checkboxa, informacja Z6 pod przyciskiem (brzmienie zgody 2.3 §7), double opt-in w n8n/Listmonk                       | Decyzja właściciela 10.10.2026. Kod i fixture wykonane; Content Lake niezaktualizowany.                                                                                                                                                          |
 | Copy                    | Nowe copy 3a zachowane                                                                                                                             | Zlecona aktualizacja; bieżąca treść poniżej                                                                                                                                                                                                      |
 
 Specjalizacja w copy: PCOS i insulinooporność. Perimenopauza jest tematem
@@ -120,7 +121,7 @@ Poniższa tabela rozróżnia istniejące pola od wymagań do wdrożenia.
 | E-booki          | `cardsSection` ma tytuł, opis, adres i medium karty                                                                                                                  | Nie ma dokumentu produktu, ceny, kategorii ani grupowanej karuzeli. Dodać model produktu i sekcję z referencjami.                                                                                                   |
 | Konsultacje      | `service` ma `title`, `summary`, `slug`; `textImageSection` częściowo opisuje wygląd                                                                                 | Brak pełnego wariantu z faktami i CTA do konsultacji oraz pól `service.price`, `currency`, `durationMinutes` i `bookingUrl`. Nie wkładać treści poza limit `service.summary` 240 znaków.                            |
 | Opinie           | `testimonialsSection.items` referencje do `testimonial`                                                                                                              | Cytaty mieszczą się w limicie 320; model i mapper wymagają `name` oraz `role`. Obsłużyć anonimowy podpis, bez fikcyjnego imienia. Obecny renderer nie odpowiada karuzeli 3a.                                        |
-| Newsletter       | `formSection` + referencja `form`                                                                                                                                    | Nadtytuł wymagany; 3a nie ma nadtytułu. Docelowo formularz tylko z e-mailem i zgodą: sprawdzić mapper, który obecnie oczekuje także pola imienia. Integracja pozostaje etapem 6.                                    |
+| Newsletter       | `formSection` + referencja `form` (`formKey`, `version`, `notice`, `noticeConsentId`, `errorMessage`)                                                                | Wdrożone 10.10.2026: tylko e-mail, bez checkboxa, informacja Z6 pod przyciskiem, wysyłka do webhooka n8n. Dokument `form` w Content Lake do aktualizacji.                                                           |
 | Kotwice          | `PageSections.astro` generuje identyfikatory sekcji                                                                                                                  | Dopasować kontrolowane identyfikatory do nawigacji 3a; nie wstawiać niedziałających kotwic.                                                                                                                         |
 
 Przy zmianie typu sekcji obowiązuje schema + renderer HTML + serializer
@@ -289,28 +290,42 @@ Opinia o dotychczasowej współpracy
 **Mniej sprzecznych rad.**
 **Więcej konkretów.**
 
-Etykieta pola: Twój adres e-mail. Placeholder: `np. ola@przyklad.pl`.
-Przycisk „Chcę otrzymywać newsletter” ze strzałką, potem checkbox zgody.
-Układ wspólny 3a (07.10.2026, wyrównanie do makiety).
+Nagłówek i lead bez zmian. Etykieta pola: Twój adres e-mail. Placeholder:
+`np. ola@przyklad.pl`. Przycisk „Zapisuję się” ze strzałką, **bez checkboxa**.
+Pod przyciskiem informacja (zgoda Z6 wyrażana wysłaniem):
+
+> Zapisując się, zamawiasz newsletter Wellbiz sp. z o.o. i zgadzasz się na otrzymywanie e-maili z wiedzą o żywieniu oraz informacjami o e-bookach i konsultacjach. Wypiszesz się jednym kliknięciem — link jest w każdej wiadomości. Newsletter jest dla osób pełnoletnich. [Regulamin newslettera](/regulamin-newslettera/) · [Polityka prywatności](/polityka-prywatnosci/)
 
 Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.
 
-Wpisz poprawny adres e-mail.
+Błąd pola: Wpisz poprawny adres e-mail.
 
-Zaznacz zgodę, aby sprawdzić formularz.
+Sukces (po odpowiedzi 2xx): Sprawdź skrzynkę. Wysłaliśmy e-mail z linkiem
+potwierdzającym. Zapis będzie aktywny dopiero po kliknięciu w link.
 
-Makieta formularza. Dane nie są zapisywane ani wysyłane.
+Błąd wysyłki: Nie udało się zapisać. Sprawdź połączenie i spróbuj ponownie —
+wpisany adres został w formularzu.
+
+Bez JS: Zapis do newslettera wymaga włączonego JavaScriptu. Możesz też napisać
+na ola@aleksandraolesiewicz.com.
+
+Źródło i data: decyzja właściciela 10.10.2026, brzmienie z
+„Zgody i formularze” wersja 2.3, §7. Mapowanie do dokumentu `form`:
+`formKey` = `newsletter`, `version` = `2.3`, `submitLabel`, `notice`,
+`noticeConsentId` = `Z6`, `successMessage`, `errorMessage`, `noscriptMessage`,
+jedno pole `email`. Stan: schemat, fixture i renderer wykonane w kodzie;
+dokument w Content Lake niezaktualizowany. Double opt-in realizuje n8n/Listmonk.
 
 ## CTA i media
 
-| Miejsce      | Etykieta                   | Adres docelowy / status                                                                                                                                                        |
-| ------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Hero: główne | Poznaj e-booki             | `#ebooki`                                                                                                                                                                      |
-| Hero: drugie | Poznaj konsultacje         | Fixture i kod: `/konsultacje/` (EN `/en/consultations/`), pakiet 3 07.10.2026. Dokument `page` w Content Lake nieutworzony.                                                    |
-| O mnie       | Poznaj moją historię       | Fixture i kod: `/o-mnie/` (EN `/en/about/`). Dokument `page` w Content Lake nieutworzony.                                                                                      |
-| E-booki      | Poznaj temat               | Podstrona danego produktu; docelowe slugi do ustalenia                                                                                                                         |
-| Konsultacja  | Zarezerwuj konsultację     | Kalendarz rezerwacji płatnej konsultacji: 450 zł / 60 minut; tymczasowo `https://cal.com`, właściwy URL wydarzenia później. Decyzja 06.10.2026, HTML jeszcze bez aktualizacji. |
-| Newsletter   | Chcę otrzymywać newsletter | Zapis po faktycznym przyjęciu przez backend; w makiecie tylko demonstracja                                                                                                     |
+| Miejsce      | Etykieta               | Adres docelowy / status                                                                                                                                                        |
+| ------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Hero: główne | Poznaj e-booki         | `#ebooki`                                                                                                                                                                      |
+| Hero: drugie | Poznaj konsultacje     | Fixture i kod: `/konsultacje/` (EN `/en/consultations/`), pakiet 3 07.10.2026. Dokument `page` w Content Lake nieutworzony.                                                    |
+| O mnie       | Poznaj moją historię   | Fixture i kod: `/o-mnie/` (EN `/en/about/`). Dokument `page` w Content Lake nieutworzony.                                                                                      |
+| E-booki      | Poznaj temat           | Podstrona danego produktu; docelowe slugi do ustalenia                                                                                                                         |
+| Konsultacja  | Zarezerwuj konsultację | Kalendarz rezerwacji płatnej konsultacji: 450 zł / 60 minut; tymczasowo `https://cal.com`, właściwy URL wydarzenia później. Decyzja 06.10.2026, HTML jeszcze bez aktualizacji. |
+| Newsletter   | Zapisuję się           | POST JSON bezpośrednio do webhooka n8n (decyzja 10.10.2026); sukces po 2xx, aktywacja po potwierdzeniu e-mailem                                                                |
 
 Media do zaimportowania z zaakceptowanych lokalnych plików:
 [Hero](../src/assets/portraits/hero.webp),
@@ -701,3 +716,20 @@ Przy przygotowaniu PR na aktualnym main uwzględniono również renderer Astro:
 `SiteImage` współdzieli nowy plik; About3a, Homepage3a i Ebook3a mają punkt
 kadru 50%/15%. Podpis o AI usunięto z fixture profilu PL/EN. Istniejące
 adresy obrazów w Content Lake nie zostały zmienione.
+
+## Formularz odstąpienia od umowy — 10.10.2026
+
+Decyzja właściciela 10.10.2026, źródło: „Zgody i formularze” 2.3 §10,
+wzór formularza 2.0 i pouczenie. Strona `/odstapienie/` tylko PL (dokument
+`page-withdrawal-pl`, slug zarezerwowany), sekcje `textSection` (wstęp z
+odnośnikami do e-maila i `/regulamin/#pouczenie`) i `formSection` →
+`form-withdrawal-pl` (`formKey` `withdrawal`, `version` `2.3`). Pola: imię
+i nazwisko, e-mail użyty przy zakupie, „Czego dotyczy odstąpienie” (E-book /
+Konsultacja lub usługa dodatkowa), tytuł e-booka albo data usługi, data zakupu
+(`date`), treść oświadczenia (`textarea` z edytowalnym `defaultValue`). Przycisk
+„Wysyłam oświadczenie o odstąpieniu”. Po 2xx ekran pokazuje treść oświadczenia,
+datę i godzinę wysłania oraz informację o potwierdzeniu e-mailem i zwrocie w
+14 dni. Bez logowania i CAPTCHA. Potwierdzenie e-mailem (szablon E7) wysyła n8n.
+Stan: kod, fixture i plan importu `import:3a`; Content Lake nieutworzony.
+Propozycja do akceptacji: copy wstępu i komunikatów, brak informacji o
+administratorze danych pod formularzem (§10 jej nie określa).

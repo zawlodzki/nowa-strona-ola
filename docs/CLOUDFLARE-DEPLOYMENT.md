@@ -45,18 +45,28 @@ budować z `SANITY_STUDIO_PREVIEW_ORIGIN=https://preview.aleksandraolesiewicz.co
 i `CLOUDFLARE_ACCOUNT_ID` należą wyłącznie do sekretów środowisk GitHub Actions,
 nigdy do pliku konfiguracyjnego.
 
+Formularze strony od 10.10.2026 (decyzja właściciela) wysyłają `POST` JSON
+z przeglądarki bezpośrednio na webhook n8n; adres jest stałą w
+`src/lib/lead-endpoint.ts`, a build może go nadpisać zmienną
+`PUBLIC_LEAD_WEBHOOK_URL` (tylko `https://`). Webhook odpowiada na preflight CORS
+originem strony. Ścieżka Worker → Queues → n8n jest odłożona. Ryzyka: adres jest
+publiczny, nie ma Turnstile ani limitu częstotliwości, więc n8n musi walidować
+payload, deduplikować po `submissionId` i odrzucać zgłoszenia z wypełnionym
+`hp_website`. Wartości pól nie trafiają do logów ani analityki.
+
 Worker integracyjny wymaga `SANITY_WEBHOOK_SECRET`, `BUILD_TRIGGER_URL` oraz
-`BUILD_TRIGGER_TOKEN`. `N8N_LEAD_WEBHOOK_URL` jest zarezerwowany na formularze
-i nie jest wymagany przy deployu, dopóki `/api/leads` zwraca 501. Nie wpisywać
+`BUILD_TRIGGER_TOKEN`. `N8N_LEAD_WEBHOOK_URL` jest zarezerwowany na odłożoną
+ścieżkę `/api/leads` i nie jest wymagany przy deployu, dopóki zwraca ona 501. Nie wpisywać
 produkcyjnego webhooka n8n do stagingu. `BUILD_TRIGGER_URL` wskazuje endpoint
 GitHub Repository Dispatch
 `https://api.github.com/repos/zawlodzki/nowa-strona-ola/dispatches`. Token musi
 mieć minimalne uprawnienie `Contents: write` do tego prywatnego repozytorium.
 Token służy wyłącznie do utworzenia zdarzenia i pozostaje sekretem Workera.
 Lokalny zestaw nazw znajduje się w `worker/.dev.vars.example`.
-Rzeczywisty adres n8n jest zapisany tylko w ignorowanym `worker/.dev.vars`, ponieważ
-unikalny identyfikator w ścieżce jest daną dostępową. Nie wykonywać testowego POST
-bez przygotowanego, odseparowanego workflow testowego w n8n.
+Adres webhooka formularzy jest jawny w kodzie i w bundlu JS strony. Nie wykonywać
+testowego POST bez przygotowanego, odseparowanego workflow testowego w n8n;
+testy Playwright przechwytują `flows.zawlodzki.com` i failują przy próbie
+prawdziwego żądania.
 
 Webhook Sanity kieruje `POST` na `/webhooks/sanity`, nie uwzględnia draftów i ma
 filtr ograniczony do typów publicznej treści. Projekcja payloadu:

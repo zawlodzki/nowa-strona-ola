@@ -30,8 +30,8 @@ prowadzi na `/{slug}/` albo `/en/{slug}/`.
 | `/regulamin-newslettera/`           | —              |
 
 Stopka 3a linkuje tylko politykę i regulamin (jak w makietach). Lista cookies
-jest w treści polityki. Regulamin newslettera jest w etykiecie zgody `DemoForm`
-jako `[regulamin newslettera](/regulamin-newslettera/)`.
+jest w treści polityki. Regulamin newslettera jest w informacji pod przyciskiem `LeadForm`
+jako `[Regulamin newslettera](/regulamin-newslettera/)` (zgody 2.3 §7).
 
 ## Źródło treści (1:1)
 

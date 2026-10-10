@@ -142,21 +142,34 @@ nie gwarantują pozycji, rich results ani cytowania przez AI.
 ## 7. Formularze i n8n
 
 CMS zarządza kolejnością, wymaganiami i etykietami pól text, email, tel, textarea,
-select i checkbox, zgodami oraz komunikatami PL/EN. Bez załączników i warunków v1.
+select, checkbox i date, informacją pod przyciskiem, zgodą wyrażaną wysłaniem
+oraz komunikatami. Każdy dokument `form` ma stały `formKey` (`newsletter`,
+`contact`, `withdrawal`) i `version` dokumentu „Zgody i formularze”. Bez
+załączników i warunków v1.
 
-POST /api/leads przyjmuje identyfikator i wersję formularza, identyfikator
-zgłoszenia, język, źródło, dane pól i zgody. Backend waliduje względem opublikowanej
-konfiguracji, limituje rozmiar i częstotliwość, sprawdza Turnstile i honeypot.
-Sukces dopiero po przyjęciu do kolejki.
+**Stan od 10.10.2026 (decyzja właściciela):** wszystkie formularze wysyłają
+z przeglądarki `POST` JSON bezpośrednio na webhook n8n. Adres jest jedną stałą
+w `src/lib/lead-endpoint.ts` z opcjonalnym nadpisaniem `PUBLIC_LEAD_WEBHOOK_URL`
+podczas builda. Ścieżka Worker → Queues → n8n i `/api/leads` (501) są odłożone.
+Treść żądania to `LeadSubmission` w wersji 2 z `packages/shared`:
+`schemaVersion`, `submissionId` (UUID, ten sam przy ponowieniu po błędzie),
+`formKey`, `formVersion`, `language`, `source` (adres bez query), `submittedAt`,
+`fields` oraz `consents[]` z `id`, `version` i `acceptedAt` (zaznaczone
+checkboxy, których identyfikatorem jest nazwa pola, oraz `noticeConsentId`).
+Sukces dopiero po odpowiedzi 2xx; błąd zostawia dane do ponowienia. Honeypot
+`hp_website` pokazuje sukces bez wysyłki. Bez JS formularz nie wysyła niczego.
 
-Konsument wysyła do uwierzytelnionego webhooka n8n z ponawianiem i kolejką błędów.
-Wersjonowany kontrakt zawiera czas i wersje zaakceptowanych zgód. n8n deduplikuje
-po identyfikatorze, obsługuje CRM, e-maile i dostarczanie lead magnetów. Sukces
-formularza oznacza przyjęcie do obsługi, nie zakończenie wszystkich automatyzacji.
+Ryzyka obecnego wariantu: publiczny adres webhooka, brak Turnstile i limitu
+częstotliwości. n8n musi sam walidować payload (formKey, wersje, długości pól),
+deduplikować po `submissionId`, odrzucać zgłoszenia z wypełnionym honeypotem
+i nie logować wartości pól. Dane zgłoszeń nie trafiają do Sanity, publicznego
+buildu, GA4 ani logów aplikacji; kod przeglądarki nie loguje wartości pól.
 
-Webhook i sekrety tylko na serwerze. Dane leadów nie trafiają do Sanity,
-publicznego buildu, GA4 ani logów aplikacji. Procedura utrzymania określi
-retencję kolejki, obsługę wiadomości błędnych i usuwanie zgłoszeń.
+Docelowo (odłożone): `/api/leads` waliduje względem opublikowanej konfiguracji,
+limituje rozmiar i częstotliwość, sprawdza Turnstile i honeypot, odpowiada
+sukcesem po przyjęciu do kolejki, a konsument wysyła do uwierzytelnionego
+webhooka n8n z ponawianiem i kolejką błędów. Procedura utrzymania określi
+retencję, obsługę wiadomości błędnych i usuwanie zgłoszeń.
 
 ## 8. c15t i analityka
 

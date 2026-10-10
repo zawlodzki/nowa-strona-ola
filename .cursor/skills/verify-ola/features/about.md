@@ -20,7 +20,7 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /o-mnie/
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Jestem Ola. Znam PCOS od środka."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role img --name "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Śląski Uniwersytet Medyczny"
-node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Chcę otrzymywać newsletter" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Zapisuję się" --exact
 node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path about-pl-aria.txt
 node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path about-pl.png
