@@ -86,6 +86,16 @@ Użytkownik podał docelową liczbę: **450+ kobiet rocznie, którym pomagają m
 konsultacje**. W 3a zastępuje ona blok „1:1”. Źródłem tej liczby jest
 bezpośrednia informacja użytkownika; nie obliczano jej z dokumentacji FIRMA.
 
+## 450+ godzin szkoleń — 2026-10-10
+
+Decyzja użytkownika: liczba 450+ zostaje, ale opis wskaźnika zmienia się
+z „kobiet rocznie, którym pomagają moje konsultacje” na **„godzin szkoleń”**
+(EN „hours of training”). Dotyczy strony głównej, O mnie i konsultacji.
+Tytuł sekcji wskaźnika w O mnie (widoczny w Studio i Markdown):
+„Doświadczenie konsultacji” → „Wiedza i szkolenia” (EN „Consultation
+experience” → „Knowledge and training”). Otaczające teksty nie mówią o liczbie
+kobiet, więc zostają bez zmian.
+
 ## Wniosek i hierarchia źródeł
 
 Zachować estetykę i bibliotekę PCOS / Perimenopauza z aktualnego briefu.

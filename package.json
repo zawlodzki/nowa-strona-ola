@@ -43,7 +43,8 @@
     "tokens:generate": "node scripts/generate-tokens.mjs",
     "migrate:blog-pages": "tsx scripts/migrate-blog-pages.ts",
     "import:contact": "tsx scripts/import-contact.ts",
-    "import:audience": "tsx scripts/import-audience.ts"
+    "import:audience": "tsx scripts/import-audience.ts",
+    "import:training-metric": "tsx scripts/import-training-metric.ts"
   },
   "dependencies": {
     "@data-slot/dialog": "^0.2.166",

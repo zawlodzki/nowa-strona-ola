@@ -253,7 +253,7 @@ opublikowana na subdomenie. Formularz, linki do produktów i konsultacji nadal s
 Na polecenie użytkownika z 2026-10-06 przywrócono belkę pięciu marek oraz
 Facebook/TikTok. Cena każdej zapowiedzi e-booka: **97 zł brutto**.
 Po kolejnej decyzji użytkownika wyróżnienie przy opisie podejścia:
-**450+ — kobiet rocznie, którym pomagają moje konsultacje**.
+**450+ — godzin szkoleń**.
 Nowe copy i sześć opinii zachowano. Linki nadal prowadzą do ekranów makiety.
 
 ## Artykuł blogowy 3a — 2026-10-06

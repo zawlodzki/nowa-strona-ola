@@ -22,8 +22,8 @@ export const aboutCopy = {
       "Jeśli gubisz się w sprzecznych poradach o diecie, badaniach i suplementach, możemy zacząć od ich uporządkowania. Przyjrzeć się temu, co już robisz, i ustalić, czemu warto poświęcić uwagę w pierwszej kolejności.",
       "Zależy mi, żebyś po rozmowie rozumiała kolejne kroki i wiedziała, jak odnieść je do swoich posiłków, pracy i codziennych obowiązków.",
     ],
-    metricTitle: "Doświadczenie konsultacji",
-    metricLabel: "kobiet rocznie, którym pomagają moje konsultacje",
+    metricTitle: "Wiedza i szkolenia",
+    metricLabel: "godzin szkoleń",
     credentialsTitle: "Wiedza, którą możesz sprawdzić.",
     credentialsBody: [
       "Ukończyłam dietetykę kliniczną na Śląskim Uniwersytecie Medycznym.",
@@ -94,8 +94,8 @@ export const aboutCopy = {
       "If conflicting advice about diet, tests and supplements leaves you lost, we can start by putting it in order. Look at what you already do, and decide what deserves attention first.",
       "I want you to leave the conversation knowing the next steps and how they fit your meals, work and daily duties.",
     ],
-    metricTitle: "Consultation experience",
-    metricLabel: "women a year helped by my consultations",
+    metricTitle: "Knowledge and training",
+    metricLabel: "hours of training",
     credentialsTitle: "Knowledge you can check.",
     credentialsBody: [
       "I completed clinical dietetics at the Medical University of Silesia.",
