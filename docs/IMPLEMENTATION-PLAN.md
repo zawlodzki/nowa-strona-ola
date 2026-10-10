@@ -110,6 +110,32 @@ Osobne dokumenty językowe i lokalizowane slugi, powiązania tłumaczeń.
 Brak tłumaczenia oznacza brak strony i linku przełącznika, bez polskiego fallbacku.
 Hreflang wyłącznie dla opublikowanych odpowiedników.
 
+**Decyzja właścicielki z 10.10.2026: wersja angielska publicznej strony jest
+na razie wyłączona.** Build (`dist/`) nie zawiera stron `/en/`. Żaden link,
+przełącznik języka, `hreflang`, wpis sitemap ani JSON-LD nie wskazuje `/en/`.
+Adresy `/en/…` zwracają 404. Kod EN, schematy, fixture’y, treści EN w Sanity
+i aplikacja podglądu (`preview/`) zostają bez zmian.
+
+Mechanizm:
+
+- Trasy EN leżą w `src/pages/_en/`. Astro pomija katalogi z prefiksem `_`,
+  więc nie generuje tych stron.
+- Flaga `enabledLocales` w `src/lib/paths.ts` (obecnie `["pl"]`) steruje
+  przełącznikiem języka w `src/ui/site-header/SiteHeader.astro` i sitemapą
+  (`src/pages/sitemap.xml.ts`). Nagłówek 3a nie renderuje przełącznika.
+- `scripts/check-disabled-locales.mjs` (wołany z `npm run test:build`
+  i `npm run test:content-lake`) blokuje build z katalogiem `dist/en/`
+  albo z odnośnikiem, `hreflang`, adresem JSON-LD lub `<loc>` do `/en/`.
+  `tests/e2e/english-disabled.spec.ts` sprawdza 404 i brak linków w przeglądarce.
+
+Ponowne włączenie EN:
+
+1. `git mv src/pages/_en src/pages/en`.
+2. W `src/lib/paths.ts` ustaw `enabledLocales` na `["pl", "en"]`.
+3. Usuń wywołania `assertEnglishDisabled()` z `scripts/check-build.mjs`
+   i `scripts/check-content-lake-build.mjs` oraz `tests/e2e/english-disabled.spec.ts`.
+   Przywróć asercje i testy e2e stron EN z historii git (commit wyłączający EN).
+
 ## 6. SEO, GEO, AEO i Markdown
 
 - HTML i Markdown z tych samych opublikowanych danych jednego builda.

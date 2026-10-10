@@ -5,7 +5,9 @@ import {
   blogPath,
   ebookCollectionPath,
   ebookPath,
+  enabledLocales,
   homePath,
+  isLocaleEnabled,
   pagePath,
 } from "@/lib/paths";
 import {
@@ -28,28 +30,35 @@ export const GET: APIRoute = async () => {
     getEbookPaths(),
     getLegalPagePaths(),
   ]);
-  const urls = new Set<string>([
-    loc(homePath("pl")),
-    loc(homePath("en")),
-    loc(blogPath("pl")),
-    loc(blogPath("en")),
-    loc(ebookCollectionPath("pl")),
-    loc(ebookCollectionPath("en")),
-  ]);
+  const urls = new Set<string>(
+    enabledLocales.flatMap((language) => [
+      loc(homePath(language)),
+      loc(blogPath(language)),
+      loc(ebookCollectionPath(language)),
+    ]),
+  );
   for (const page of pages) {
-    if (!page.slug || !page.language) continue;
+    if (!page.slug || !page.language || !isLocaleEnabled(page.language))
+      continue;
     urls.add(loc(pagePath(page.language, page.slug)));
   }
   for (const article of articles) {
-    if (!article.slug || !article.language) continue;
+    if (
+      !article.slug ||
+      !article.language ||
+      !isLocaleEnabled(article.language)
+    )
+      continue;
     urls.add(loc(articlePath(article.language, article.slug)));
   }
   for (const ebook of ebooks) {
-    if (!ebook.slug || !ebook.language) continue;
+    if (!ebook.slug || !ebook.language || !isLocaleEnabled(ebook.language))
+      continue;
     urls.add(loc(ebookPath(ebook.language, ebook.slug)));
   }
   for (const page of legal) {
-    if (!page.slug || !page.language) continue;
+    if (!page.slug || !page.language || !isLocaleEnabled(page.language))
+      continue;
     urls.add(loc(pagePath(page.language, page.slug)));
   }
   const body = `<?xml version="1.0" encoding="UTF-8"?>

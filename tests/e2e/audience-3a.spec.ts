@@ -6,16 +6,6 @@ const pages = [
     heading: "Z kim pracuję",
     titles: ["PCOS", "Insulinooporność", "Starania o ciążę", "Perimenopauza"],
   },
-  {
-    path: "/en/",
-    heading: "Who I work with",
-    titles: [
-      "PCOS",
-      "Insulin resistance",
-      "Trying to conceive",
-      "Perimenopause",
-    ],
-  },
 ] as const;
 
 type Rgba = [number, number, number, number];

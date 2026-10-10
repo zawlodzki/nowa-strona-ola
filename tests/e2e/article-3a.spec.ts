@@ -191,35 +191,8 @@ test("FAQ follows the books and its structured data matches visible answers", as
   expect(content.schemaItems).toEqual(content.items);
 });
 
-test("English article keeps the 3a shell", async ({ page }) => {
-  await openArticle(
-    page,
-    "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
-  );
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "How to prepare for a nutrition consultation with PCOS?",
-  );
-  await expect(
-    page.getByRole("navigation", { name: "In this article" }),
-  ).toBeVisible();
-  await expect(
-    page
-      .getByRole("navigation", { name: "Primary navigation" })
-      .getByRole("link", { name: "Polski" }),
-  ).toHaveCount(0);
-  await expect(
-    page
-      .getByRole("navigation", { name: "Primary navigation" })
-      .getByRole("link", { name: "E-books" }),
-  ).toBeVisible();
-});
-
 for (const { path, label } of [
   { path: articlePath, label: "Sprawdź również" },
-  {
-    path: "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
-    label: "See also",
-  },
 ]) {
   test(`sidebar stays sticky and shows related posts at 60% (${path})`, async ({
     page,

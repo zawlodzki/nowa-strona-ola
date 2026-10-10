@@ -170,12 +170,9 @@ test("cherry cover accent does not collide with cover text", async ({
     await page.setViewportSize(viewport);
     for (const path of [
       "/",
-      "/en/",
       "/ebooki/",
-      "/en/ebooks/",
       "/ebooki/kategoria/pcos/",
       "/blog/przygotowanie-do-konsultacji-pcos/",
-      "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
       "/design-system/",
     ]) {
       await page.goto(path);
@@ -235,7 +232,6 @@ test("decorative quote marks in reviews use the matcha accent", async ({
       "/o-mnie/",
       "/konsultacje/",
       "/ebooki/suplementy-w-pcos/",
-      "/en/ebooks/supplements-in-pcos/",
     ]) {
       await page.goto(path);
       const marks = page.locator(".ao-review__mark");

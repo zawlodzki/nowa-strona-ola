@@ -4,25 +4,15 @@ import { chromium } from "@playwright/test";
 
 const PAGES = [
   { id: "home", path: "/" },
-  { id: "home-en", path: "/en/" },
   { id: "about", path: "/o-mnie/" },
-  { id: "about-en", path: "/en/about/" },
   { id: "consultation", path: "/konsultacje/" },
-  { id: "consultation-en", path: "/en/consultations/" },
   { id: "ebook", path: "/ebooki/suplementy-w-pcos/" },
-  { id: "ebook-en", path: "/en/ebooks/supplements-in-pcos/" },
   { id: "ebooks", path: "/ebooki/" },
   { id: "ebooks-pcos", path: "/ebooki/kategoria/pcos/" },
-  { id: "ebooks-en", path: "/en/ebooks/" },
   { id: "blog", path: "/blog/" },
   { id: "blog-p2", path: "/blog/strona/2/" },
   { id: "blog-pcos", path: "/blog/kategoria/pcos/" },
-  { id: "blog-en", path: "/en/blog/" },
   { id: "article", path: "/blog/przygotowanie-do-konsultacji-pcos/" },
-  {
-    id: "article-en",
-    path: "/en/blog/preparing-for-a-pcos-nutrition-consultation/",
-  },
   { id: "catalog", path: "/design-system/" },
 ];
 
