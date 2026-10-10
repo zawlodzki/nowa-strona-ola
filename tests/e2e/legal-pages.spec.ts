@@ -4,27 +4,27 @@ const pages = [
   {
     path: "/polityka-prywatnosci/",
     title: "Polityka prywatności aleksandraolesiewicz.com",
-    version: "Wersja 2.1 · data wejścia w życie do ustalenia",
+    version: "Wersja 2.1 · obowiązuje od 10.10.2026",
     heading: "1. Kto jest administratorem Twoich danych",
   },
   {
     path: "/lista-cookies-i-identyfikatorow/",
     title: "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
-    version: "Wersja 2.0 · data wejścia w życie do ustalenia",
+    version: "Wersja 2.1 · obowiązuje od 10.10.2026",
     heading: "Przed dokonaniem wyboru",
   },
   {
     path: "/regulamin/",
     title:
       "Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com",
-    version: "Wersja 2.2 · data wejścia w życie do ustalenia",
+    version: "Wersja 2.3 · obowiązuje od 10.10.2026",
     heading: "§ 1. Postanowienia ogólne",
   },
   {
     path: "/regulamin-newslettera/",
     title:
       "Regulamin newslettera i materiałów bezpłatnych — aleksandraolesiewicz.com",
-    version: "Wersja 2.1 · data wejścia w życie do ustalenia",
+    version: "Wersja 2.1 · obowiązuje od 10.10.2026",
     heading: "§ 1. Kto wysyła newsletter",
   },
 ] as const;

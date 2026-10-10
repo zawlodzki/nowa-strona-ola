@@ -1,6 +1,6 @@
 # Polityka prywatności aleksandraolesiewicz.com
 
-Wersja 2.1 · data wejścia w życie do ustalenia
+Wersja 2.1 · obowiązuje od 10.10.2026
 
 ## 1. Kto jest administratorem Twoich danych
 
@@ -92,7 +92,7 @@ Masz prawo do: dostępu do danych i otrzymania ich kopii, sprostowania, usunięc
 
 ## 9. Linki do partnerów
 
-W naszych mediach społecznościowych publikujemy oznaczone jako reklama kody i linki partnerów afiliacyjnych (na stronie, w e-bookach i w newsletterze ich nie ma). Po kliknięciu przechodzisz na stronę partnera, który może stosować własne pliki cookies i przetwarza Twoje dane jako odrębny administrator, według swojej polityki prywatności. Od partnerów otrzymujemy wyłącznie zbiorcze informacje o sprzedaży `{{DO_POTWIERDZENIA_W_UMOWACH_AFILIACYJNYCH}}`.
+W naszych mediach społecznościowych publikujemy oznaczone jako reklama kody i linki partnerów afiliacyjnych (na stronie, w e-bookach i w newsletterze ich nie ma). Po kliknięciu przechodzisz na stronę partnera, który może stosować własne pliki cookies i przetwarza Twoje dane jako odrębny administrator, według swojej polityki prywatności. Od partnerów otrzymujemy wyłącznie zbiorcze informacje o sprzedaży.
 
 ## 10. Profilowanie i decyzje automatyczne
 

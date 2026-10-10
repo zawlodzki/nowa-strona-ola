@@ -1,7 +1,7 @@
 {
   "title": "Regulamin newslettera i materiałów bezpłatnych — aleksandraolesiewicz.com",
   "version": "2.1",
-  "effectiveFrom": null,
+  "effectiveFrom": "2026-10-10",
   "seoDescription": "Zasady newslettera i materiałów bezpłatnych: zapis, rezygnacja, odstąpienie od umowy i reklamacje.",
   "body": [
     {
@@ -1018,7 +1018,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Regulamin obowiązuje od {{DATA_WEJSCIA_W_ZYCIE}}. Do umów zawartych przed zmianą stosuje się wersję przekazaną subskrybentowi, chyba że nowa wersja jest dla niego korzystniejsza.",
+          "text": "Regulamin obowiązuje od 10.10.2026. Do umów zawartych przed zmianą stosuje się wersję przekazaną subskrybentowi, chyba że nowa wersja jest dla niego korzystniejsza.",
           "marks": []
         }
       ],

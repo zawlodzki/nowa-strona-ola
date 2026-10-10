@@ -236,7 +236,7 @@ describe("content lake plan", () => {
     ).toBeTruthy();
   });
 
-  it("puts the live newsletter forms in the transaction and holds draft legal pages", async () => {
+  it("puts the live newsletter forms in the transaction and publishes the dated legal pages", async () => {
     const root = new URL("../..", import.meta.url);
     const formSource = readFileSync(
       new URL("studio/schema-types/documents/form.ts", root),
@@ -255,14 +255,10 @@ describe("content lake plan", () => {
         document._id.startsWith("newsletter-form-"),
       ),
     ).toHaveLength(2);
-    // The B2C drafts have no effective date and contain {{placeholders}}:
-    // they stay out of the published transaction.
     expect(
-      live.documents.filter((document) => document._type === "legalPage"),
-    ).toEqual([]);
-    expect(
-      live.pending
-        .flatMap((item) => (item.document ? [item.document._id] : []))
+      live.documents
+        .filter((document) => document._type === "legalPage")
+        .map((document) => document._id)
         .sort(),
     ).toEqual([
       "legal-cookies-pl",
@@ -272,6 +268,7 @@ describe("content lake plan", () => {
       "legal-terms-en",
       "legal-terms-pl",
     ]);
+    expect(live.pending).toEqual([]);
     expect(() => assertWritable(live)).not.toThrow();
   });
 

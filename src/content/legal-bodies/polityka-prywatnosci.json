@@ -1,7 +1,7 @@
 {
   "title": "Polityka prywatności aleksandraolesiewicz.com",
   "version": "2.1",
-  "effectiveFrom": null,
+  "effectiveFrom": "2026-10-10",
   "seoDescription": "Jak Wellbiz sp. z o.o. przetwarza dane osobowe, w tym dane o zdrowiu, przy konsultacjach dietetycznych, e-bookach i newsletterze.",
   "body": [
     {
@@ -1039,19 +1039,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "W naszych mediach społecznościowych publikujemy oznaczone jako reklama kody i linki partnerów afiliacyjnych (na stronie, w e-bookach i w newsletterze ich nie ma). Po kliknięciu przechodzisz na stronę partnera, który może stosować własne pliki cookies i przetwarza Twoje dane jako odrębny administrator, według swojej polityki prywatności. Od partnerów otrzymujemy wyłącznie zbiorcze informacje o sprzedaży ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s1",
-          "text": "{{DO_POTWIERDZENIA_W_UMOWACH_AFILIACYJNYCH}}",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s2",
-          "text": ".",
+          "text": "W naszych mediach społecznościowych publikujemy oznaczone jako reklama kody i linki partnerów afiliacyjnych (na stronie, w e-bookach i w newsletterze ich nie ma). Po kliknięciu przechodzisz na stronę partnera, który może stosować własne pliki cookies i przetwarza Twoje dane jako odrębny administrator, według swojej polityki prywatności. Od partnerów otrzymujemy wyłącznie zbiorcze informacje o sprzedaży.",
           "marks": []
         }
       ],

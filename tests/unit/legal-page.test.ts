@@ -16,7 +16,7 @@ import {
 } from "../../src/sanity/repository";
 
 describe("legal page mapper", () => {
-  it("maps the Polish privacy policy draft without an effective date", async () => {
+  it("maps the Polish privacy policy with its effective date", async () => {
     const [page, settings] = await Promise.all([
       getLegalPage("pl", "polityka-prywatnosci", { environment: {} }),
       getSiteSettings("pl", { environment: {} }),
@@ -25,43 +25,40 @@ describe("legal page mapper", () => {
     expect(view.href).toBe("/polityka-prywatnosci/");
     expect(view.title).toBe("Polityka prywatności aleksandraolesiewicz.com");
     expect(view.versionLabel).toBe("Wersja 2.1");
-    expect(view.effective).toBeNull();
-    expect(view.versionLine).toBe(
-      "Wersja 2.1 · data wejścia w życie do ustalenia",
-    );
+    expect(view.effective).toEqual({
+      datetime: "2026-10-10",
+      label: "10.10.2026",
+    });
+    expect(view.versionLine).toBe("Wersja 2.1 · obowiązuje od 10.10.2026");
     expect(view.toc[0]?.text).toBe("1. Kto jest administratorem Twoich danych");
     expect(view.html).toContain('href="/lista-cookies-i-identyfikatorow/"');
     expect(view.html).toContain("<table>");
     expect(view.html).not.toContain("Metryka dokumentu");
     expect(view.html).not.toContain("Historia wersji");
-    expect(view.jsonLd["@graph"][0]).toMatchObject({ version: "2.1" });
-    expect(view.jsonLd["@graph"][0]).not.toHaveProperty("datePublished");
+    expect(view.jsonLd["@graph"][0]).toMatchObject({
+      version: "2.1",
+      datePublished: "2026-10-10",
+    });
     expect(serializeLegalPage(view)).toBe(
       readFileSync("src/content/examples/legal-privacy.md", "utf8"),
     );
   });
 
-  it("renders the effective date once it is set", async () => {
+  it("shows a pending effective date when the date is missing", async () => {
     const [page, settings] = await Promise.all([
       getLegalPage("pl", "regulamin", { environment: {} }),
       getSiteSettings("pl", { environment: {} }),
     ]);
-    const view = mapLegalPage(
-      { ...page, effectiveFrom: "2026-11-01" },
-      settings,
+    const view = mapLegalPage({ ...page, effectiveFrom: null }, settings);
+    expect(view.effective).toBeNull();
+    expect(view.versionLine).toBe(
+      "Wersja 2.3 · data wejścia w życie do ustalenia",
     );
-    expect(view.effective).toEqual({
-      datetime: "2026-11-01",
-      label: "01.11.2026",
-    });
-    expect(view.versionLine).toBe("Wersja 2.2 · obowiązuje od 01.11.2026");
     expect(serializeLegalPage(view).split("\n")[2]).toBe(
-      "Wersja 2.2 · obowiązuje od 01.11.2026",
+      "Wersja 2.3 · data wejścia w życie do ustalenia",
     );
-    expect(view.jsonLd["@graph"][0]).toMatchObject({
-      version: "2.2",
-      datePublished: "2026-11-01",
-    });
+    expect(view.jsonLd["@graph"][0]).toMatchObject({ version: "2.3" });
+    expect(view.jsonLd["@graph"][0]).not.toHaveProperty("datePublished");
   });
 
   it("puts the withdrawal notice and form on the terms page under stable anchors", async () => {
@@ -114,7 +111,7 @@ describe("legal page mapper", () => {
       '<a href="/polityka-prywatnosci/">Politykę prywatności</a>',
     );
     expect(cookies.toc[0]?.text).toBe("Przed dokonaniem wyboru");
-    expect(cookies.versionLabel).toBe("Wersja 2.0");
+    expect(cookies.versionLabel).toBe("Wersja 2.1");
     expect(serializeLegalPage(cookies)).toBe(
       readFileSync("src/content/examples/legal-cookies.md", "utf8"),
     );
@@ -141,9 +138,7 @@ describe("legal page mapper", () => {
     expect(view.html).toContain("binding version is the Polish text");
     expect(view.html).toContain('href="/polityka-prywatnosci/"');
     expect(view.html).not.toContain("Administratorem danych osobowych");
-    expect(view.versionLine).toBe(
-      "Version 2.1 · effective date to be confirmed",
-    );
+    expect(view.versionLine).toBe("Version 2.1 · effective from 10.10.2026");
     expect(serializeLegalPage(view)).toBe(
       readFileSync("src/content/examples/legal-privacy-en.md", "utf8"),
     );

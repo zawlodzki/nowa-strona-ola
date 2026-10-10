@@ -1,6 +1,6 @@
 # Regulamin newslettera i materiałów bezpłatnych — aleksandraolesiewicz.com
 
-Wersja 2.1 · data wejścia w życie do ustalenia
+Wersja 2.1 · obowiązuje od 10.10.2026
 
 ## § 1. Kto wysyła newsletter
 
@@ -81,7 +81,7 @@ Administratorem danych subskrybentów jest Usługodawca. Zasady przetwarzania, w
 
 ## § 11. Postanowienia końcowe
 
-1. Regulamin obowiązuje od {{DATA_WEJSCIA_W_ZYCIE}}. Do umów zawartych przed zmianą stosuje się wersję przekazaną subskrybentowi, chyba że nowa wersja jest dla niego korzystniejsza.
+1. Regulamin obowiązuje od 10.10.2026. Do umów zawartych przed zmianą stosuje się wersję przekazaną subskrybentowi, chyba że nowa wersja jest dla niego korzystniejsza.
 2. Regulamin nie ogranicza praw konsumenta ani przedsiębiorcy na prawach konsumenta wynikających z bezwzględnie obowiązujących przepisów.
 3. Archiwalne wersje Regulaminu są dostępne u Usługodawcy na żądanie.
 

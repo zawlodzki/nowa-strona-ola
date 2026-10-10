@@ -1,6 +1,6 @@
 # Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com
 
-Wersja 2.2 · data wejścia w życie do ustalenia
+Wersja 2.3 · obowiązuje od 10.10.2026
 
 ## § 1. Postanowienia ogólne
 
@@ -35,7 +35,7 @@ Wersja 2.2 · data wejścia w życie do ustalenia
 3. Usługi Dietetyczne są świadczeniem starannego działania. **Nie gwarantujemy określonego efektu**, w szczególności zmiany masy ciała, wyników badań lub objawów; efekty zależą od indywidualnych okoliczności i stosowania zaleceń.
 4. Klient przekazuje w Ankiecie i podczas Konsultacji **prawdziwe i kompletne informacje** istotne dla zaleceń, w szczególności o rozpoznaniach, przyjmowanych lekach i suplementach, alergiach, nietolerancjach, ciąży lub karmieniu piersią. Informacje te są potrzebne do bezpiecznego przygotowania zaleceń.
 5. **Przeciwwskazania.** Usługi Dietetyczne nie są przeznaczone dla osób:
-   1. w ciąży lub karmiących piersią — {{DECYZJA_DIETETYCZKI: wyłączenie albo świadczenie po potwierdzeniu konsultacji z lekarzem}},
+   1. w ciąży lub karmiących piersią — Usługi Dietetyczne świadczymy wyłącznie po potwierdzeniu konsultacji z lekarzem,
    2. z rozpoznanymi lub podejrzewanymi zaburzeniami odżywiania (np. anoreksja, bulimia, kompulsywne objadanie się),
    3. z cukrzycą leczoną insuliną, przewlekłą chorobą nerek lub wątroby w stadium zaawansowanym, chorobą nowotworową w trakcie leczenia, po niedawnej operacji bariatrycznej lub w innym stanie wymagającym diety pod stałym nadzorem lekarza,
    4. które nie ukończyły 18 lat.
@@ -82,7 +82,7 @@ Wersja 2.2 · data wejścia w życie do ustalenia
 
 ## § 8. Dostarczenie E-booka
 
-1. E-book dostarczamy niezwłocznie po zawarciu Umowy, wysyłając na adres e-mail Klienta link do pobrania pliku. Link jest ważny przez **7 dni** i pozwala na **{{MAKS_POBRAŃ}}** pobrań.
+1. E-book dostarczamy niezwłocznie po zawarciu Umowy, wysyłając na adres e-mail Klienta link do pobrania pliku. Link jest ważny przez **7 dni** i pozwala na **3** pobrań.
 2. Jeżeli link wygaśnie albo Klient utraci plik, na prośbę przesłaną w ciągu **2 lat** od zakupu przesyłamy nowy link bez dodatkowej opłaty.
 3. Jeżeli Klient nie otrzymał wiadomości z linkiem, powinien sprawdzić folder spam, a następnie wezwać nas do dostarczenia E-booka e-mailem. Jeżeli nie dostarczymy go niezwłocznie lub w dodatkowym, wyraźnie uzgodnionym terminie, Konsument może odstąpić od Umowy (art. 43j ust. 4 ustawy o prawach konsumenta).
 
@@ -113,12 +113,12 @@ Wersja 2.2 · data wejścia w życie do ustalenia
 
 ## § 12. Usługi Dodatkowe
 
-Postanowienia tego paragrafu stosuje się do Usługi Dodatkowej, jeżeli jest ona aktualnie oferowana na Stronie; jej cenę i parametry określa opis na Stronie (`{{CENY_I_PARAMETRY_PAKIETÓW}}`).
+Postanowienia tego paragrafu stosuje się do Usługi Dodatkowej, jeżeli jest ona aktualnie oferowana na Stronie; jej cenę i parametry określa opis na Stronie (opis usługi „Pakiet współpracy”).
 
 1. **Pakiet** – określona w opisie liczba Konsultacji lub Wizyt Kontrolnych do wykorzystania w okresie ważności wskazanym w opisie. Terminy rezerwuje się na zasadach § 6 i § 11. Na prośbę zgłoszoną przed końcem okresu ważności przedłużamy go jednorazowo o 3 miesiące. Za Konsultacje niewykorzystane w okresie ważności (wraz z przedłużeniem) **zwracamy część ceny proporcjonalną** do liczby niewykorzystanych spotkań.
-2. **Wizyta Kontrolna** – krótsze spotkanie online (`{{CZAS_WIZYTY_KONTROLNEJ}}`) dostępne dla Klientów po Konsultacji, służące omówieniu realizacji zaleceń i ich korekcie.
-3. **Kontakt Mailowy** – możliwość zadawania Dietetyczce pytań dotyczących zaleceń przez okres `{{OKRES_KONTAKTU_MAILOWEGO}}`, z odpowiedzią w ciągu 3 dni roboczych. Kontakt Mailowy nie obejmuje nowych zagadnień wymagających Konsultacji ani pomocy w nagłych sytuacjach (§ 3 ust. 7).
-4. **Jadłospis** – indywidualny plan żywieniowy przygotowany na podstawie Ankiety i Konsultacji, dostarczany w formacie PDF w terminie `{{TERMIN_JADŁOSPISU}}`, z jedną rundą poprawek zgłoszonych w ciągu 7 dni od otrzymania. Jadłospis jest przygotowywany dla Klienta osobiście i stosuje się do niego § 9 ust. 1–3 odpowiednio.
+2. **Wizyta Kontrolna** – krótsze spotkanie online (30 minut) dostępne dla Klientów po Konsultacji, służące omówieniu realizacji zaleceń i ich korekcie.
+3. **Kontakt Mailowy** – możliwość zadawania Dietetyczce pytań dotyczących zaleceń przez okres 30 dni, z odpowiedzią w ciągu 3 dni roboczych. Kontakt Mailowy nie obejmuje nowych zagadnień wymagających Konsultacji ani pomocy w nagłych sytuacjach (§ 3 ust. 7).
+4. **Jadłospis** – indywidualny plan żywieniowy przygotowany na podstawie Ankiety i Konsultacji, dostarczany w formacie PDF w terminie 7 dni, z jedną rundą poprawek zgłoszonych w ciągu 7 dni od otrzymania. Jadłospis jest przygotowywany dla Klienta osobiście i stosuje się do niego § 9 ust. 1–3 odpowiednio.
 5. Przy Pakiecie i opiece ciągłej odstąpienie od Umowy lub cofnięcie Zgody Zdrowotnej w trakcie jej trwania rozlicza się według § 13 ust. 3 i § 15.
 
 ## § 13. Dane o zdrowiu i cofnięcie Zgody Zdrowotnej
@@ -176,7 +176,7 @@ Administratorem danych osobowych jest Wellbiz. Zasady przetwarzania danych, w ty
 
 1. Prawem właściwym jest prawo polskie. Wybór prawa nie pozbawia Konsumenta ochrony wynikającej z bezwzględnie obowiązujących przepisów prawa państwa jego zwykłego pobytu.
 2. Regulamin nie wyłącza ani nie ogranicza uprawnień Konsumenta i Przedsiębiorcy na prawach konsumenta wynikających z bezwzględnie obowiązujących przepisów; w razie sprzeczności pierwszeństwo mają te przepisy.
-3. Regulamin wchodzi w życie z dniem {{DATA_WEJSCIA_W_ZYCIE}}.
+3. Regulamin wchodzi w życie z dniem 10.10.2026.
 
 ## Załączniki
 
@@ -185,7 +185,7 @@ Administratorem danych osobowych jest Wellbiz. Zasady przetwarzania danych, w ty
 
 ## Pouczenie o prawie odstąpienia od umowy
 
-Załącznik nr 1 do Regulaminu aleksandraolesiewicz.com · wersja 2.0 · obowiązuje od {{DATA_WEJSCIA_W_ZYCIE}}
+Załącznik nr 1 do Regulaminu aleksandraolesiewicz.com · wersja 2.0 · obowiązuje od 10.10.2026
 
 Dotyczy umów zawieranych przez konsumentów oraz przedsiębiorców na prawach konsumenta: o świadczenie usług dietetycznych (konsultacje i usługi dodatkowe) oraz o dostarczenie e-booków.
 

@@ -37,6 +37,14 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   `submissionId`, honeypot `hp_website`, e-mail E7, double opt-in.
 - Korekta 10.10.2026: dane spółki usunięte ze stopki (`siteSettings.company`
   usunięte); pełne dane zostają na `/kontakt/` i w dokumentach prawnych.
+- PR [#63](https://github.com/zawlodzki/nowa-strona-ola/pull/63). Decyzja 10.10.2026:
+  dokumenty B2C wchodzą w życie 10.10.2026, przed opinią radcy. Placeholdery
+  uzupełnione w `projekt prawny ola` (commit `0b626ff`: regulamin 2.3 — 3 pobrania,
+  ciąża po konsultacji z lekarzem, Pakiet współpracy, wizyta 30 min, kontakt 30 dni,
+  jadłospis 7 dni; lista cookies 2.1 — `olesiewicz-consent` 365 dni, Cal.com bez
+  cookies, Clarity 30 dni). Fixture’y przegenerowane konwerterem.
+- Zapis Content Lake: tylko dokumenty z PR (formularze, `page-withdrawal-pl`,
+  `siteSettings-pl`, usługa, dokumenty prawne), bez pełnego `import:3a`.
 - Następny krok: przegląd gałęzi przez właściciela, push/PR na zlecenie, potem
   c15t i GTM (właściciel) oraz decyzje R1–R11 z przeglądu komunikacji.
 

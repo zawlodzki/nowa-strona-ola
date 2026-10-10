@@ -1,7 +1,7 @@
 {
   "title": "Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com",
-  "version": "2.2",
-  "effectiveFrom": null,
+  "version": "2.3",
+  "effectiveFrom": "2026-10-10",
   "seoDescription": "Regulamin sprzedaży e-booków i konsultacji dietetycznych online, z pouczeniem i wzorem formularza odstąpienia od umowy.",
   "body": [
     {
@@ -714,7 +714,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "w ciąży lub karmiących piersią — {{DECYZJA_DIETETYCZKI: wyłączenie albo świadczenie po potwierdzeniu konsultacji z lekarzem}},",
+          "text": "w ciąży lub karmiących piersią — Usługi Dietetyczne świadczymy wyłącznie po potwierdzeniu konsultacji z lekarzem,",
           "marks": []
         }
       ],
@@ -1416,7 +1416,7 @@
         {
           "_type": "span",
           "_key": "s3",
-          "text": "{{MAKS_POBRAŃ}}",
+          "text": "3",
           "marks": ["strong"]
         },
         {
@@ -1984,19 +1984,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Postanowienia tego paragrafu stosuje się do Usługi Dodatkowej, jeżeli jest ona aktualnie oferowana na Stronie; jej cenę i parametry określa opis na Stronie (",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s1",
-          "text": "{{CENY_I_PARAMETRY_PAKIETÓW}}",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s2",
-          "text": ").",
+          "text": "Postanowienia tego paragrafu stosuje się do Usługi Dodatkowej, jeżeli jest ona aktualnie oferowana na Stronie; jej cenę i parametry określa opis na Stronie (opis usługi „Pakiet współpracy”).",
           "marks": []
         }
       ],
@@ -2052,19 +2040,7 @@
         {
           "_type": "span",
           "_key": "s1",
-          "text": " – krótsze spotkanie online (",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s2",
-          "text": "{{CZAS_WIZYTY_KONTROLNEJ}}",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s3",
-          "text": ") dostępne dla Klientów po Konsultacji, służące omówieniu realizacji zaleceń i ich korekcie.",
+          "text": " – krótsze spotkanie online (30 minut) dostępne dla Klientów po Konsultacji, służące omówieniu realizacji zaleceń i ich korekcie.",
           "marks": []
         }
       ],
@@ -2086,19 +2062,7 @@
         {
           "_type": "span",
           "_key": "s1",
-          "text": " – możliwość zadawania Dietetyczce pytań dotyczących zaleceń przez okres ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s2",
-          "text": "{{OKRES_KONTAKTU_MAILOWEGO}}",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s3",
-          "text": ", z odpowiedzią w ciągu 3 dni roboczych. Kontakt Mailowy nie obejmuje nowych zagadnień wymagających Konsultacji ani pomocy w nagłych sytuacjach (§ 3 ust. 7).",
+          "text": " – możliwość zadawania Dietetyczce pytań dotyczących zaleceń przez okres 30 dni, z odpowiedzią w ciągu 3 dni roboczych. Kontakt Mailowy nie obejmuje nowych zagadnień wymagających Konsultacji ani pomocy w nagłych sytuacjach (§ 3 ust. 7).",
           "marks": []
         }
       ],
@@ -2120,19 +2084,7 @@
         {
           "_type": "span",
           "_key": "s1",
-          "text": " – indywidualny plan żywieniowy przygotowany na podstawie Ankiety i Konsultacji, dostarczany w formacie PDF w terminie ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s2",
-          "text": "{{TERMIN_JADŁOSPISU}}",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s3",
-          "text": ", z jedną rundą poprawek zgłoszonych w ciągu 7 dni od otrzymania. Jadłospis jest przygotowywany dla Klienta osobiście i stosuje się do niego § 9 ust. 1–3 odpowiednio.",
+          "text": " – indywidualny plan żywieniowy przygotowany na podstawie Ankiety i Konsultacji, dostarczany w formacie PDF w terminie 7 dni, z jedną rundą poprawek zgłoszonych w ciągu 7 dni od otrzymania. Jadłospis jest przygotowywany dla Klienta osobiście i stosuje się do niego § 9 ust. 1–3 odpowiednio.",
           "marks": []
         }
       ],
@@ -2950,7 +2902,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Regulamin wchodzi w życie z dniem {{DATA_WEJSCIA_W_ZYCIE}}.",
+          "text": "Regulamin wchodzi w życie z dniem 10.10.2026.",
           "marks": []
         }
       ],
@@ -3036,7 +2988,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Załącznik nr 1 do Regulaminu aleksandraolesiewicz.com · wersja 2.0 · obowiązuje od {{DATA_WEJSCIA_W_ZYCIE}}",
+          "text": "Załącznik nr 1 do Regulaminu aleksandraolesiewicz.com · wersja 2.0 · obowiązuje od 10.10.2026",
           "marks": []
         }
       ],
