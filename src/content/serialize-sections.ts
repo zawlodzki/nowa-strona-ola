@@ -380,7 +380,7 @@ export const sectionMarkdownExamples: Record<KnownSectionType, string> = {
   cardsSection: "## Karty\n\n### Karta\n\nOpis.",
   listSection: "## Lista\n\n- Punkt",
   processSection: "## Proces\n\n### Krok\n\nOpis.",
-  metricsSection: "## Podejście\n\n- 450+ — kobiet rocznie",
+  metricsSection: "## Podejście\n\n- 450+ — godzin szkoleń",
   pricingSection: "## Pakiety\n\n### Plan\n\nCena",
   testimonialsSection: "## Opinie\n\n> Cytat",
   expertSection: "## Ekspert\n\nOla, dieta",

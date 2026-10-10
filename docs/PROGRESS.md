@@ -1,10 +1,20 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-10 (formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Wskaźnik 450+: godziny szkoleń, 10.10.2026
+
+- Opis wskaźnika 450+ na stronie głównej, w O mnie i w konsultacjach:
+  „kobiet rocznie, którym pomagają moje konsultacje” → „godzin szkoleń”
+  (EN „women a year helped by my consultations” → „hours of training”).
+- Tytuł sekcji wskaźnika O mnie: „Doświadczenie konsultacji” → „Wiedza
+  i szkolenia” (EN „Consultation experience” → „Knowledge and training”).
+- `npm run import:training-metric` przygotowuje celowany patch Content Lake
+  (kopia, ifRevisionID, jedna transakcja, domyślnie dry run).
 
 ### Krok 1 dokumentacji prawnej — integracja, 10.10.2026
 
