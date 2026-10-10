@@ -84,12 +84,27 @@ TikTok). Kanoniczne HTTPS URL od 08.10.2026 (decyzja użytkownika) żyją w
 zostaje „Instagram” / „Facebook” / „TikTok”. Content Lake nie zapisano;
 schemat `socialLinks` bez zmiany.
 `podglad.html?...` nie jest adresem profilu ani produktu do CMS.
-Linki prawne w `siteSettings.legalLinks`: fixture PL `/polityka-prywatnosci/`
-i `/regulamin/`, EN `/en/privacy/` i `/en/terms/` — bez zmiany makiety stopki
-(08.10.2026). Same dokumenty są typem `legalPage` (nie `page`); opis:
-[LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md). Fixture’y i trasy są w kodzie;
-Content Lake niezasiedlony. Lista cookies i regulamin newslettera nie są w
-stopce; cookies z polityki, newsletter z etykiety zgody formularza.
+Stopka prawna (ustalenie z 10.10.2026, źródło: `zgody-i-formularze.md` §1 i §8
+w `projekt prawny ola/www-prawne`). Wykonane w kodzie i fixture’ach; Content Lake
+niezmieniony:
+
+- `siteSettings.legalLinks` PL w tej kolejności: Regulamin `/regulamin/`,
+  Polityka prywatności `/polityka-prywatnosci/`, Lista cookies
+  `/lista-cookies-i-identyfikatorow/`, Regulamin newslettera
+  `/regulamin-newslettera/`, Odstąpienie od umowy `/odstapienie/` (stronę
+  buduje osobny etap formularzy). EN bez zmian: `/en/privacy/`, `/en/terms/`.
+  „Ustawienia cookies” dojdzie razem z c15t — celowo brak.
+- `siteSettings.company` (nowy obiekt): Wellbiz sp. z o.o., ul. Lipowa 3D,
+  30-702 Kraków, KRS 0001158341, NIP 6793323800, REGON 541006624, kapitał
+  zakładowy 5 000 zł, ola@aleksandraolesiewicz.com, +48 530 005 133. Stopka
+  pokazuje je w jednej linii.
+- `siteSettings.copyright` (nowe): „© 2026 Wellbiz sp. z o.o. · Treści:
+  Aleksandra Olesiewicz-Zawłodzka”.
+- `siteSettings.testimonialsDisclosure` (nowe): tekst pod każdą sekcją opinii
+  (Home, O mnie, Konsultacje, E-book).
+
+Puste pola w Content Lake = fallback do `src/content/site-legal.ts`. Same
+dokumenty prawne są typem `legalPage`; opis: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 Zgoda newslettera (fixture `form`, 08.10.2026): markdown
 `[Polityka prywatności](/polityka-prywatnosci/)` i
 `[regulamin newslettera](/regulamin-newslettera/)` w etykiecie checkboxa.

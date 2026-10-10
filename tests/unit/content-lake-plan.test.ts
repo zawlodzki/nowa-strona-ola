@@ -198,6 +198,7 @@ describe("content lake plan", () => {
           language: "pl",
           slug: "polityka-prywatnosci",
           title: "Polityka",
+          version: "1.0",
           effectiveFrom: "2026-01-01",
           seo: { title: "Polityka", description: "Opis" },
           body: [
@@ -223,7 +224,7 @@ describe("content lake plan", () => {
     ).toBeTruthy();
   });
 
-  it("puts the live newsletter forms and legal pages in the transaction", async () => {
+  it("puts the live newsletter forms in the transaction and holds draft legal pages", async () => {
     const root = new URL("../..", import.meta.url);
     const formSource = readFileSync(
       new URL("studio/schema-types/documents/form.ts", root),
@@ -237,15 +238,28 @@ describe("content lake plan", () => {
       legalPages: Object.values(legal) as never,
     });
     expect(formFieldLabelMax(formSource)).toBe(400);
-    expect(live.pending).toEqual([]);
     expect(
       live.documents.filter((document) =>
         document._id.startsWith("newsletter-form-"),
       ),
     ).toHaveLength(2);
+    // The B2C drafts have no effective date and contain {{placeholders}}:
+    // they stay out of the published transaction.
     expect(
       live.documents.filter((document) => document._type === "legalPage"),
-    ).toHaveLength(6);
+    ).toEqual([]);
+    expect(
+      live.pending
+        .flatMap((item) => (item.document ? [item.document._id] : []))
+        .sort(),
+    ).toEqual([
+      "legal-cookies-pl",
+      "legal-newsletter-pl",
+      "legal-privacy-en",
+      "legal-privacy-pl",
+      "legal-terms-en",
+      "legal-terms-pl",
+    ]);
     expect(() => assertWritable(live)).not.toThrow();
   });
 

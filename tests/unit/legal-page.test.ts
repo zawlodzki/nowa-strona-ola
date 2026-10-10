@@ -4,7 +4,11 @@ import { describe, expect, it } from "vitest";
 
 import { mapLegalPage } from "../../src/content/map-legal";
 import { serializeLegalPage } from "../../src/content/serialize-legal";
-import { articleBodyToHtml } from "../../src/content/portable-text";
+import {
+  articleBodyToHtml,
+  articleBodyToMarkdown,
+} from "../../src/content/portable-text";
+import { unpublishableLegalText } from "../../studio/schema-types/shared/legal-publication";
 import { checkboxLabelHtml } from "../../src/lib/checkbox-label";
 import {
   getLegalPage,
@@ -13,28 +17,91 @@ import {
 } from "../../src/sanity/repository";
 
 describe("legal page mapper", () => {
-  it("maps the Polish privacy policy from the Zawlodzki source", async () => {
+  it("maps the Polish privacy policy draft without an effective date", async () => {
     const [page, settings] = await Promise.all([
       getLegalPage("pl", "polityka-prywatnosci", { environment: {} }),
       getSiteSettings("pl", { environment: {} }),
     ]);
     const view = mapLegalPage(page, settings);
     expect(view.href).toBe("/polityka-prywatnosci/");
-    expect(view.alternateHref).toBe("/en/privacy/");
-    expect(view.title).toBe("Polityka prywatności www.zawlodzki.pl");
-    expect(view.effectiveFrom).toBe("2026-08-24");
-    expect(view.effectiveLabel).toBe("24.08.2026");
-    expect(view.toc[0]?.text).toBe("1. Administrator danych");
-    expect(view.html).toContain("1. Administrator danych");
+    expect(view.title).toBe("Polityka prywatności aleksandraolesiewicz.com");
+    expect(view.versionLabel).toBe("Wersja 2.1");
+    expect(view.effective).toBeNull();
+    expect(view.versionLine).toBe(
+      "Wersja 2.1 · data wejścia w życie do ustalenia",
+    );
+    expect(view.toc[0]?.text).toBe("1. Kto jest administratorem Twoich danych");
     expect(view.html).toContain('href="/lista-cookies-i-identyfikatorow/"');
     expect(view.html).toContain("<table>");
-    expect(serializeLegalPage(view)).toContain("## 1. Administrator danych");
+    expect(view.html).not.toContain("Metryka dokumentu");
+    expect(view.html).not.toContain("Historia wersji");
+    expect(view.jsonLd["@graph"][0]).toMatchObject({ version: "2.1" });
+    expect(view.jsonLd["@graph"][0]).not.toHaveProperty("datePublished");
     expect(serializeLegalPage(view)).toBe(
       readFileSync("src/content/examples/legal-privacy.md", "utf8"),
     );
   });
 
-  it("maps cookies, terms and newsletter without rewriting non-legal links", async () => {
+  it("renders the effective date once it is set", async () => {
+    const [page, settings] = await Promise.all([
+      getLegalPage("pl", "regulamin", { environment: {} }),
+      getSiteSettings("pl", { environment: {} }),
+    ]);
+    const view = mapLegalPage(
+      { ...page, effectiveFrom: "2026-11-01" },
+      settings,
+    );
+    expect(view.effective).toEqual({
+      datetime: "2026-11-01",
+      label: "01.11.2026",
+    });
+    expect(view.versionLine).toBe("Wersja 2.2 · obowiązuje od 01.11.2026");
+    expect(serializeLegalPage(view).split("\n")[2]).toBe(
+      "Wersja 2.2 · obowiązuje od 01.11.2026",
+    );
+    expect(view.jsonLd["@graph"][0]).toMatchObject({
+      version: "2.2",
+      datePublished: "2026-11-01",
+    });
+  });
+
+  it("puts the withdrawal notice and form on the terms page under stable anchors", async () => {
+    const settings = await getSiteSettings("pl", { environment: {} });
+    const terms = mapLegalPage(
+      await getLegalPage("pl", "regulamin", { environment: {} }),
+      settings,
+    );
+    expect(terms.title).toBe(
+      "Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com",
+    );
+    expect(terms.toc[0]).toEqual({
+      id: "1-postanowienia-ogolne",
+      text: "§ 1. Postanowienia ogólne",
+    });
+    expect(terms.toc.slice(-3)).toEqual([
+      { id: "zalaczniki", text: "Załączniki" },
+      { id: "pouczenie", text: "Pouczenie o prawie odstąpienia od umowy" },
+      {
+        id: "formularz-odstapienia",
+        text: "Wzór formularza odstąpienia od umowy",
+      },
+    ]);
+    expect(terms.html).toContain(
+      '<a href="/regulamin/#pouczenie">Pouczenie o prawie odstąpienia od umowy</a>',
+    );
+    expect(terms.html).toContain(
+      '<a href="/regulamin/#formularz-odstapienia">wzoru formularza</a>',
+    );
+    expect(terms.html).toContain("<h3>Skutki odstąpienia od umowy</h3>");
+    expect(terms.html).toContain(
+      "<p>Data zawarcia umowy: ………………………………</p>\n<p>Imię i nazwisko konsumenta(-ów): ………………………………</p>",
+    );
+    expect(serializeLegalPage(terms)).toBe(
+      readFileSync("src/content/examples/legal-terms.md", "utf8"),
+    );
+  });
+
+  it("maps cookies and newsletter terms with links between documents", async () => {
     const settings = await getSiteSettings("pl", { environment: {} });
     const cookies = mapLegalPage(
       await getLegalPage("pl", "lista-cookies-i-identyfikatorow", {
@@ -44,18 +111,13 @@ describe("legal page mapper", () => {
     );
     expect(cookies.href).toBe("/lista-cookies-i-identyfikatorow/");
     expect(cookies.alternateHref).toBeNull();
-    expect(cookies.html).toContain('href="/polityka-prywatnosci/"');
-    expect(cookies.toc[0]?.text).toBe("Przed dokonaniem wyboru");
-    expect(cookies.effectiveLabel).toBe("26.07.2026");
-
-    const terms = mapLegalPage(
-      await getLegalPage("pl", "regulamin", { environment: {} }),
-      settings,
+    expect(cookies.html).toContain(
+      '<a href="/polityka-prywatnosci/">Politykę prywatności</a>',
     );
-    expect(terms.title).toContain("Regulamin sklepu");
-    expect(terms.toc[0]?.text).toBe("§ 1. Postanowienia ogólne");
-    expect(serializeLegalPage(terms)).toBe(
-      readFileSync("src/content/examples/legal-terms.md", "utf8"),
+    expect(cookies.toc[0]?.text).toBe("Przed dokonaniem wyboru");
+    expect(cookies.versionLabel).toBe("Wersja 2.0");
+    expect(serializeLegalPage(cookies)).toBe(
+      readFileSync("src/content/examples/legal-cookies.md", "utf8"),
     );
 
     const newsletter = mapLegalPage(
@@ -63,7 +125,7 @@ describe("legal page mapper", () => {
       settings,
     );
     expect(newsletter.toc[0]?.text).toBe("§ 1. Kto wysyła newsletter");
-    expect(newsletter.effectiveLabel).toBe("01.08.2026");
+    expect(newsletter.versionLabel).toBe("Wersja 2.1");
     expect(serializeLegalPage(newsletter)).toBe(
       readFileSync("src/content/examples/legal-newsletter.md", "utf8"),
     );
@@ -80,6 +142,9 @@ describe("legal page mapper", () => {
     expect(view.html).toContain("binding version is the Polish text");
     expect(view.html).toContain('href="/polityka-prywatnosci/"');
     expect(view.html).not.toContain("Administratorem danych osobowych");
+    expect(view.versionLine).toBe(
+      "Version 2.1 · effective date to be confirmed",
+    );
     expect(serializeLegalPage(view)).toBe(
       readFileSync("src/content/examples/legal-privacy-en.md", "utf8"),
     );
@@ -125,6 +190,66 @@ describe("legal portable text", () => {
     expect(html).toContain("<ol>");
     expect(html).toContain('<ol start="2">');
     expect(html).toContain("<code>x</code>");
+  });
+});
+
+describe("legal blockquotes", () => {
+  it("joins consecutive quote paragraphs into one quotation", () => {
+    const quote = (text: string) => ({
+      _type: "block",
+      style: "blockquote",
+      children: [{ _type: "span", text, marks: [] }],
+    });
+    const blocks = [
+      quote("Adresat: Wellbiz"),
+      quote("(*) Niepotrzebne skreślić."),
+      {
+        _type: "block",
+        style: "normal",
+        children: [{ _type: "span", text: "Po", marks: [] }],
+      },
+    ];
+    expect(articleBodyToHtml(blocks).html).toBe(
+      "<blockquote>\n<p>Adresat: Wellbiz</p>\n<p>(*) Niepotrzebne skreślić.</p>\n</blockquote>\n<p>Po</p>",
+    );
+    expect(articleBodyToMarkdown(blocks)).toBe(
+      "> Adresat: Wellbiz\n>\n> (\\*) Niepotrzebne skreślić.\n\nPo",
+    );
+  });
+});
+
+describe("legal publication guard", () => {
+  it("lists placeholders and review notes anywhere in the body", () => {
+    expect(
+      unpublishableLegalText([
+        {
+          _type: "block",
+          _key: "a",
+          children: [
+            { _type: "span", _key: "s", text: "Wchodzi w życie {{DATA}}." },
+          ],
+          markDefs: [{ _type: "link", _key: "l", href: "/{{x}}" }],
+        },
+        {
+          _type: "articleTable",
+          _key: "t",
+          headers: ["Cel"],
+          rows: [{ _key: "r", cells: ["okres [do sprawdzenia: GA4]"] }],
+        },
+      ]),
+    ).toEqual(["{{DATA}}.", "{{x}}", "[do sprawdzenia: GA4]"]);
+  });
+
+  it("accepts a body without placeholders", () => {
+    expect(
+      unpublishableLegalText([
+        {
+          _type: "block",
+          _key: "a",
+          children: [{ _type: "span", _key: "s", text: "Gotowy tekst." }],
+        },
+      ]),
+    ).toEqual([]);
   });
 });
 

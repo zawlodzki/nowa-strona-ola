@@ -25,9 +25,10 @@ import { schemaOfferAvailability } from "@/lib/offer";
 export interface Props {
   lang: Locale;
   content: EbookView;
+  reviewsDisclosure: string;
 }
 
-const { lang, content } = Astro.props;
+const { lang, content, reviewsDisclosure } = Astro.props;
 const copy = ebookCopy[lang];
 const { landing, author, chapters, materials } = content;
 const planned = !canPurchase(content.availability);
@@ -378,6 +379,7 @@ const jsonLd = {
           </ReviewCard>
         ))}
       </div>
+      <p class="ao-review-disclosure">{reviewsDisclosure}</p>
     </Container>
   </Section>
 

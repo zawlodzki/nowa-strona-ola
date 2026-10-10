@@ -166,34 +166,6 @@ export function homepageHeaderCta(language: Locale) {
 
 export { footerSocialLinks } from "@/content/social-profiles";
 
-export function footerLegalLinks(language: Locale) {
-  return language === "pl"
-    ? [
-        {
-          _key: "legal-privacy",
-          label: "Polityka prywatności",
-          href: "/polityka-prywatnosci/",
-        },
-        {
-          _key: "legal-terms",
-          label: "Regulamin",
-          href: "/regulamin/",
-        },
-      ]
-    : [
-        {
-          _key: "legal-privacy",
-          label: "Privacy policy",
-          href: "/en/privacy/",
-        },
-        {
-          _key: "legal-terms",
-          label: "Terms",
-          href: "/en/terms/",
-        },
-      ];
-}
-
 export const homepageCopy = {
   pl: {
     siteTitle: "Aleksandra Olesiewicz",
@@ -292,7 +264,6 @@ export const homepageCopy = {
     consentLabel:
       "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane. [Polityka prywatności](/polityka-prywatnosci/) i [regulamin newslettera](/regulamin-newslettera/).",
     consentError: "Zaznacz zgodę, aby sprawdzić formularz.",
-    copyright: "Aleksandra Olesiewicz",
     serviceSummary:
       "Pojedyncza konsultacja dietetyczna online: wyniki, odżywianie, codzienność i pierwsze zmiany.",
   },
@@ -393,7 +364,6 @@ export const homepageCopy = {
     consentLabel:
       "I agree to receive the newsletter. This is a demonstration — nothing will be sent. [Privacy policy](/en/privacy/) and [newsletter terms](/regulamin-newslettera/).",
     consentError: "Tick the consent box to check the form.",
-    copyright: "Aleksandra Olesiewicz",
     serviceSummary:
       "A single online dietetic consultation: results, nutrition, daily life and first changes.",
   },

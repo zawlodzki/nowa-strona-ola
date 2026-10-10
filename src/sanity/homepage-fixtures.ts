@@ -8,13 +8,17 @@ import {
   DISPLAY_LABEL_COOPERATION,
   EBOOK_SEED,
   homepageCopy,
-  footerLegalLinks,
   homepageHeaderCta,
   homepageMediaKeys,
   homepageNavigation,
   TESTIMONIAL_QUOTES_EN,
   TESTIMONIAL_QUOTES_PL,
 } from "@/content/homepage-seed";
+import {
+  footerLegalLinks,
+  sellerCompany,
+  siteLegalCopy,
+} from "@/content/site-legal";
 import { footerSocialLinks } from "@/content/social-profiles";
 import { consultationPath, ebookCollectionPath } from "@/lib/paths";
 
@@ -165,6 +169,8 @@ export function homepageSettingsFixture(language: Locale) {
     navigation: homepageNavigation(language),
     headerCta: homepageHeaderCta(language),
     legalLinks: footerLegalLinks(language),
+    company: sellerCompany,
+    ...siteLegalCopy[language],
     socialLinks: footerSocialLinks(),
     blogIndex: blogIndexSettingsFixture(language),
     blogNewsletter: blogNewsletterSettingsFixture(
@@ -337,11 +343,4 @@ export function homepagePageFixture(language: Locale) {
     },
     sections: homepageSections(language),
   };
-}
-
-export function homepageCopyright(language: Locale) {
-  const year = 2026;
-  return language === "pl"
-    ? `© ${year} ${homepageCopy.pl.copyright}`
-    : `© ${year} ${homepageCopy.en.copyright}`;
 }

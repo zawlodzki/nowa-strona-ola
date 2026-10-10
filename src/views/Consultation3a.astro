@@ -19,9 +19,10 @@ import { socialProfileSameAs } from "@/content/social-profiles";
 export interface Props {
   lang: Locale;
   content: ConsultationView;
+  reviewsDisclosure: string;
 }
 
-const { lang, content } = Astro.props;
+const { lang, content, reviewsDisclosure } = Astro.props;
 const copy = consultationCopy[lang];
 const { hero, path, problem, audience, process, outcomes, expert } = content;
 const { offer, testimonials, faq, price } = content;
@@ -368,6 +369,7 @@ const jsonLd = {
           </ReviewCard>
         ))}
       </div>
+      <p class="ao-review-disclosure">{reviewsDisclosure}</p>
     </Container>
   </Section>
 

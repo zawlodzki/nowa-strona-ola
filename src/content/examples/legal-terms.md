@@ -1,165 +1,249 @@
-# Regulamin sklepu www.zawlodzki.pl
+# Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com
 
-obowiązuje od 24.08.2026
+Wersja 2.2 · data wejścia w życie do ustalenia
 
 ## § 1. Postanowienia ogólne
 
-1. Regulamin określa zasady sprzedaży prowadzonej za pośrednictwem strony internetowej Sprzedawcy dostępnej pod adresami www.zawlodzki.pl oraz www.zawlodzki.com, wraz z ich subdomenami („**Sklep**”), w tym zasady zakupu dostępu do kursów online i usług konsultacyjnych, świadczenia usług cyfrowych, reklamacji oraz odstąpienia od umowy.
-2. Sprzedawcą jest **Wellbiz spółka z ograniczoną odpowiedzialnością** z siedzibą w Krakowie, ul. Lipowa 3D, 30-702 Kraków, wpisana do rejestru przedsiębiorców KRS pod numerem 0001158341 (Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie, XI Wydział Gospodarczy KRS), NIP: 6793323800, REGON: 541006624, kapitał zakładowy 5 000,00 zł („**Sprzedawca**”).
-3. Kontakt ze Sprzedawcą: e-mail grzesiek@zawlodzki.pl, telefon +48 571 088 338, korespondencyjnie na adres siedziby.
-4. Złożenie Zamówienia wymaga akceptacji Regulaminu. Regulamin jest udostępniany nieodpłatnie na stronie Sklepu w sposób umożliwiający jego pobranie, utrwalenie i wydrukowanie.
+1. Regulamin określa zasady sprzedaży e-booków oraz świadczenia konsultacji dietetycznych online i usług z nimi związanych za pośrednictwem strony internetowej **aleksandraolesiewicz.com** wraz z podstronami („**Strona**”), w tym zasady zawierania umów, płatności, dostarczania, reklamacji i odstąpienia od umowy.
+2. Sprzedawcą i usługodawcą jest **Wellbiz spółka z ograniczoną odpowiedzialnością** z siedzibą w Krakowie, ul. Lipowa 3D, 30-702 Kraków, wpisana do rejestru przedsiębiorców Krajowego Rejestru Sądowego pod numerem KRS 0001158341 (Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie, XI Wydział Gospodarczy KRS), NIP 6793323800, REGON 541006624, kapitał zakładowy 5 000,00 zł („**Wellbiz**”, „**my**”).
+3. Konsultacje i usługi dietetyczne w imieniu Wellbiz prowadzi **Aleksandra Olesiewicz-Zawłodzka**, dietetyczka, prokurentka Wellbiz („**Dietetyczka**”). Autorką e-booków jest Aleksandra Olesiewicz-Zawłodzka.
+4. Kontakt z Wellbiz: e-mail **ola@aleksandraolesiewicz.com**, telefon **+48 530 005 133**, korespondencyjnie na adres siedziby. Ten sam adres e-mail służy do składania reklamacji i oświadczeń o odstąpieniu od umowy.
+5. Regulamin jest dostępny nieodpłatnie na Stronie w formie umożliwiającej jego pobranie, utrwalenie i wydrukowanie. Przed zawarciem umowy wymagana jest jego akceptacja.
+6. Oferta jest skierowana do **osób pełnoletnich** (które ukończyły 18 lat) i mających pełną zdolność do czynności prawnych.
 
 ## § 2. Definicje
 
-1. **Konsument** – osoba fizyczna dokonująca zakupu niezwiązanego bezpośrednio z jej działalnością gospodarczą lub zawodową.
-2. **Przedsiębiorca na prawach konsumenta** – osoba fizyczna zawierająca umowę bezpośrednio związaną z jej działalnością gospodarczą, gdy z treści umowy wynika, że nie ma ona dla niej charakteru zawodowego, wynikającego w szczególności z przedmiotu działalności ujawnionego w CEIDG.
-3. **Kupujący** – osoba fizyczna posiadająca pełną zdolność do czynności prawnych, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej, która zawiera Umowę ze Sprzedawcą.
-4. **Kurs** – usługa cyfrowa w rozumieniu ustawy o prawach konsumenta, polegająca na zapewnianiu przez Okres Dostępu ciągłego dostępu do Platformy, jej funkcjonalności oraz materiałów szkoleniowych (w szczególności wideo, tekstów, zadań i szablonów).
-5. **Platforma** – platforma kursowa LearnHouse, dostępna pod adresem wskazanym w wiadomości z dostępem do Kursu, prowadzona przez zewnętrznego dostawcę (LearnHouse, Inc. – learnhouse.app), za pośrednictwem której Sprzedawca dostarcza Kurs.
-6. **Konto** – indywidualne, imienne konto Kupującego na Platformie, umożliwiające korzystanie z Kursu.
-7. **Certyfikat** – elektroniczne, imienne potwierdzenie ukończenia Kursu, wystawiane za pośrednictwem Certifier (Certifier sp. z o.o.), jeżeli opis danego Kursu przewiduje jego wydanie i Kupujący spełni wskazane tam kryteria.
-8. **Okres Dostępu** – okres 12 miesięcy od dnia dostarczenia Kursu, w którym Kupujący ma dostęp do Kursu w ramach zapłaconej ceny.
-9. **Konsultacja** – usługa świadczona przez Sprzedawcę online w terminie uzgodnionym z Kupującym.
-10. **Zamówienie** – oświadczenie woli Kupującego zmierzające do zawarcia Umowy, składane za pośrednictwem koszyka obsługiwanego przez zewnętrznego dostawcę (EasyCart – Easytools sp. z o.o.), w którym płatność realizuje operator płatności Stripe.
-11. **Umowa** – umowa o świadczenie usługi cyfrowej (Kurs) lub umowa o świadczenie usługi (Konsultacja), zawierana na odległość między Sprzedawcą a Kupującym.
-12. **Forum** – forum społecznościowe prowadzone przez Sprzedawcę za pośrednictwem zewnętrznego dostawcy Discourse (Civilized Discourse Construction Kit, Inc.), dostępne pod adresem wskazanym w wiadomości z dostępem, służące **zadawaniu pytań dotyczących treści lekcji** — prowadzącym i innym Uczestnikom. Forum jest dostępne **wyłącznie po zalogowaniu**; jego treści nie są publicznie dostępne ani indeksowane przez wyszukiwarki. Forum **nie udostępnia wiadomości prywatnych** między Uczestnikami.
-13. **Uczestnik** – osoba fizyczna, której Sprzedawca udostępnił dostęp do Forum: Kupujący korzystający z Kursu albo z Programu kohortowego **albo pracownik lub współpracownik wskazany przez Kupującego** zgodnie z § 5 ust. 9. Uczestnik niebędący Kupującym nie jest stroną Umowy; przysługują mu prawa i obowiązki określone w § 6a oraz uprawnienia wynikające z przepisów o ochronie danych osobowych. Sprzedawca **nie raportuje Kupującemu treści publikowanych przez wskazanego przez niego Uczestnika**.
-14. **Program kohortowy** – usługa polegająca na prowadzeniu przez Sprzedawcę grupowego programu wdrożeniowego dla zespołów sprzedaży, obejmująca: **osiem cotygodniowych spotkań online po 120 minut** prowadzonych na żywo w grupie kilku firm, dwie godziny konsultacji indywidualnych, przegląd CRM i ankietę gotowości na starcie oraz **pełny dostęp do Kursu przez Okres Dostępu**. W Programie po stronie jednego Kupującego może uczestniczyć **do trzech osób** wskazanych zgodnie z § 5 ust. 9. Szczegółowy zakres, termin rozpoczęcia i cenę określa opis Programu w Sklepie.
+1. **Klient** – osoba fizyczna, która zawiera z Wellbiz Umowę; w Regulaminie słowo „Klient” obejmuje każdą osobę niezależnie od płci.
+2. **Konsument** – Klient zawierający Umowę niezwiązaną bezpośrednio z jego działalnością gospodarczą lub zawodową.
+3. **Przedsiębiorca na prawach konsumenta** – osoba fizyczna zawierająca Umowę bezpośrednio związaną z jej działalnością gospodarczą, gdy z treści Umowy wynika, że nie ma ona dla niej charakteru zawodowego; ma ona uprawnienia Konsumenta w zakresie wskazanym w ustawie o prawach konsumenta.
+4. **E-book** – publikacja elektroniczna w formacie PDF, stanowiąca treść cyfrową w rozumieniu ustawy o prawach konsumenta, dostarczana przez udostępnienie linku do pobrania.
+5. **Konsultacja** – indywidualne spotkanie online z Dietetyczką przez Google Meet, o czasie trwania wskazanym w opisie usługi na Stronie (w dniu sporządzenia Regulaminu — 60 minut), wraz z przygotowaniem na podstawie Ankiety i Podsumowaniem.
+6. **Ankieta** – formularz online wypełniany przez Klienta przed Konsultacją, zawierający informacje o stanie zdrowia, stylu życia i nawykach żywieniowych.
+7. **Podsumowanie** – przesyłane e-mailem po Konsultacji pisemne podsumowanie ustaleń i zaleceń żywieniowych.
+8. **Usługi Dodatkowe** – Pakiet, Wizyta Kontrolna, Kontakt Mailowy i Jadłospis (§ 12), dostępne, jeżeli są aktualnie oferowane na Stronie.
+9. **Usługa Dietetyczna** – Konsultacja lub Usługa Dodatkowa.
+10. **Zamówienie** – oświadczenie woli Klienta zmierzające do zawarcia Umowy o dostarczenie E-booka, składane na Stronie.
+11. **Rezerwacja** – oświadczenie woli Klienta zmierzające do zawarcia Umowy o Usługę Dietetyczną, składane w kalendarzu rezerwacji Cal.com dostępnym ze Strony.
+12. **Umowa** – umowa o dostarczenie E-booka albo umowa o świadczenie Usługi Dietetycznej, zawierana na odległość między Wellbiz a Klientem.
+13. **Zgoda Zdrowotna** – wyraźna zgoda Klienta na przetwarzanie danych dotyczących jego zdrowia w celu świadczenia Usług Dietetycznych, wyrażana w Ankiecie (art. 9 ust. 2 lit. a RODO).
+14. **Partner** – podmiot, z którym Wellbiz współpracuje w ramach programu afiliacyjnego i którego kody rabatowe lub linki mogą być publikowane w mediach społecznościowych prowadzonych przez Dietetyczkę (§ 16).
 
-## § 3. Usługi elektroniczne i wymagania techniczne
+## § 3. Charakter Usług Dietetycznych i ich granice
 
-1. Sprzedawca świadczy nieodpłatnie usługę elektroniczną polegającą na umożliwieniu składania Zamówień oraz – po zakupie Kursu – na prowadzeniu Konta na Platformie przez Okres Dostępu.
-2. Do korzystania ze Sklepu i Kursu niezbędne są: urządzenie z dostępem do internetu, aktualna przeglądarka internetowa z włączoną obsługą JavaScript i plików cookies oraz aktywne konto e-mail. Do udziału w Konsultacji dodatkowo: mikrofon oraz możliwość korzystania z Google Meet.
-3. Kurs jest udostępniany w formie streamingu wideo i materiałów do odczytu lub pobrania na Platformie; nie jest objęty zabezpieczeniami DRM wymagającymi dodatkowego oprogramowania. Informacje o funkcjonalności, kompatybilności i interoperacyjności danego Kursu są podane w jego opisie w Sklepie.
-4. Kupującego obowiązuje zakaz dostarczania treści o charakterze bezprawnym oraz korzystania ze Sklepu i Platformy w sposób zakłócający ich działanie.
-5. Korzystanie z usług elektronicznych wiąże się z typowymi zagrożeniami internetowymi, w szczególności z próbami wyłudzenia danych, przejęcia Konta, złośliwym oprogramowaniem i nieuprawnionym dostępem. Kupujący powinien korzystać z aktualnego oprogramowania, chronić dane logowania i weryfikować nadawcę wiadomości. Sprzedawca nie wprowadza do urządzenia Kupującego oprogramowania ani danych poza informacjami niezbędnymi do działania Strony, Platformy i cookies opisanymi w Polityce prywatności.
-6. Kupujący może zażądać usunięcia Konta przed upływem Okresu Dostępu, wysyłając wiadomość na grzesiek@zawlodzki.pl. Usunięcie Konta na żądanie uniemożliwi dalsze korzystanie z Kursu, ale samo w sobie nie oznacza odstąpienia od Umowy ani nie tworzy prawa do zwrotu ceny. Nie ogranicza to ustawowych uprawnień Kupującego związanych z odstąpieniem, niezgodnością Kursu lub danymi osobowymi.
-7. Reklamacje dotyczące działania Sklepu można składać na adres grzesiek@zawlodzki.pl; Sprzedawca odpowiada w terminie 14 dni.
+1. Usługi Dietetyczne to **poradnictwo żywieniowe i edukacja żywieniowa**: analiza sposobu odżywiania i stylu życia Klienta, wyjaśnienie zależności między żywieniem a samopoczuciem oraz zalecenia dotyczące żywienia i nawyków.
+2. W ramach Usług Dietetycznych **nie stawiamy diagnoz, nie leczymy chorób, nie zlecamy badań i nie zmieniamy leczenia**. Dietetyczka może omówić rozpoznanie postawione przez lekarza i dostępne wyniki badań w kontekście żywienia; decyzje diagnostyczne i terapeutyczne, w tym dotyczące leków i ich dawkowania, należą do lekarza. Usługi Dietetyczne nie zastępują wizyty lekarskiej.
+3. Usługi Dietetyczne są świadczeniem starannego działania. **Nie gwarantujemy określonego efektu**, w szczególności zmiany masy ciała, wyników badań lub objawów; efekty zależą od indywidualnych okoliczności i stosowania zaleceń.
+4. Klient przekazuje w Ankiecie i podczas Konsultacji **prawdziwe i kompletne informacje** istotne dla zaleceń, w szczególności o rozpoznaniach, przyjmowanych lekach i suplementach, alergiach, nietolerancjach, ciąży lub karmieniu piersią. Informacje te są potrzebne do bezpiecznego przygotowania zaleceń.
+5. **Przeciwwskazania.** Usługi Dietetyczne nie są przeznaczone dla osób:
+   1. w ciąży lub karmiących piersią — {{DECYZJA_DIETETYCZKI: wyłączenie albo świadczenie po potwierdzeniu konsultacji z lekarzem}},
+   2. z rozpoznanymi lub podejrzewanymi zaburzeniami odżywiania (np. anoreksja, bulimia, kompulsywne objadanie się),
+   3. z cukrzycą leczoną insuliną, przewlekłą chorobą nerek lub wątroby w stadium zaawansowanym, chorobą nowotworową w trakcie leczenia, po niedawnej operacji bariatrycznej lub w innym stanie wymagającym diety pod stałym nadzorem lekarza,
+   4. które nie ukończyły 18 lat.
+6. Jeżeli z Ankiety lub przebiegu Konsultacji wynika przeciwwskazanie albo potrzeba pilnej konsultacji lekarskiej, Dietetyczka może odmówić świadczenia lub je przerwać i wskazać potrzebę kontaktu z lekarzem. W takim przypadku **zwracamy cenę** niewykonanej części usługi, a za usługę przerwaną w trakcie — całą cenę, chyba że Klient zataił okoliczność wskazaną w ust. 4, o którą był pytany w Ankiecie; wtedy rozliczamy część wykonaną proporcjonalnie.
+7. W stanie nagłym Klient powinien skontaktować się z numerem alarmowym 112 lub lekarzem. Kanały kontaktu z Wellbiz nie służą do pomocy w nagłych sytuacjach zdrowotnych.
 
-## § 4. Zamówienia i zawarcie Umowy
+## § 4. Usługi elektroniczne i wymagania techniczne
 
-1. Zamówienie składa się, wybierając produkt w Sklepie i przechodząc do koszyka obsługiwanego przez EasyCart, gdzie Kupujący podaje dane niezbędne do realizacji Zamówienia (co najmniej: imię i nazwisko, adres e-mail; w przypadku żądania faktury na firmę – także dane firmy i NIP), a następnie dokonuje płatności u operatora płatności Stripe. Dostawca koszyka nie jest stroną Umowy ani operatorem płatności; Sprzedawcą pozostaje Wellbiz sp. z o.o., a rozliczenie płatności prowadzi Stripe.
-2. Bezpośrednio przed złożeniem Zamówienia Kupujący otrzymuje podsumowanie obejmujące co najmniej główne cechy świadczenia, łączną cenę, wybraną metodę płatności oraz – w przypadku Kursu – Okres Dostępu.
-3. Warunkiem złożenia Zamówienia jest akceptacja Regulaminu, potwierdzana w koszyku przed płatnością. Przycisk finalizujący Zamówienie jest oznaczony „Kupuję i płacę”, „Zapłać” albo innym jednoznacznym sformułowaniem informującym o obowiązku zapłaty.
-4. Umowa zostaje zawarta z chwilą otrzymania przez Kupującego, na podany adres e-mail, potwierdzenia przyjęcia Zamówienia przez Sprzedawcę. Potwierdzenie obejmuje istotne warunki Umowy i jest przekazywane na trwałym nośniku. Sprzedawca przesyła w treści wiadomości lub w niezmiennym, wersjonowanym załączniku PDF Regulamin obowiązujący w dniu zawarcia Umowy; sam link do podstrony z Regulaminem nie zastępuje przekazania go na trwałym nośniku.
-5. Sprzedawca może odmówić przyjęcia Zamówienia zawierającego dane niekompletne lub nieprawdziwe, uniemożliwiające jego realizację; wpłacona cena podlega wówczas zwrotowi.
+1. Wellbiz świadczy nieodpłatnie drogą elektroniczną usługi polegające na: udostępnianiu treści Strony, umożliwianiu składania Zamówień i Rezerwacji, udostępnianiu formularza Ankiety oraz formularza odstąpienia od umowy. Newsletter jest świadczony na podstawie odrębnego [regulaminu newslettera](/regulamin-newslettera/).
+2. Do korzystania ze Strony, składania Zamówień i Rezerwacji potrzebne są: urządzenie z dostępem do internetu, aktualna przeglądarka z włączoną obsługą JavaScript i plików cookies niezbędnych do działania Strony oraz aktywny adres e-mail.
+3. Do udziału w Konsultacji potrzebne są dodatkowo: mikrofon i głośnik lub słuchawki, możliwość połączenia przez Google Meet w przeglądarce (bez konieczności zakładania konta Google) lub w aplikacji; kamera jest zalecana, ale nie wymagana.
+4. Do odczytu E-booka potrzebne jest oprogramowanie obsługujące format PDF. E-book nie jest zabezpieczony systemem DRM. Informacje o liczbie stron, języku i zakresie E-booka podajemy w jego opisie na Stronie.
+5. Korzystanie z usług elektronicznych wiąże się z typowymi zagrożeniami internetowymi (np. wyłudzanie danych, złośliwe oprogramowanie). Zalecamy korzystanie z aktualnego oprogramowania i weryfikowanie nadawcy wiadomości — wiadomości od nas wysyłamy wyłącznie z domeny **aleksandraolesiewicz.com**.
+6. Zakazane jest dostarczanie treści o charakterze bezprawnym.
+7. Reklamacje dotyczące działania Strony można składać na adres e-mail z § 1 ust. 4; odpowiadamy w terminie 14 dni.
 
-## § 5. Ceny i płatności
+## § 5. Zamówienie E-booka i zawarcie Umowy
 
-1. Ceny w Sklepie są cenami brutto (zawierają VAT) i są wyrażone w złotych polskich, chyba że przy produkcie wskazano inną walutę. Wiążąca jest cena widoczna w koszyku w chwili składania Zamówienia.
-2. Płatności obsługuje **Stripe** (Stripe Payments Europe, Ltd. z siedzibą w Irlandii) metodami udostępnionymi w koszyku (w szczególności karta płatnicza, BLIK, Przelewy24). Koszyk **EasyCart** (Easytools sp. z o.o. z siedzibą w Warszawie, KRS 0001002028) pełni wyłącznie funkcję techniczną – przyjmuje dane Zamówienia i kieruje płatność do Stripe. Ani Sprzedawca, ani dostawca koszyka nie przechowują danych kart płatniczych.
-3. W przypadku ogłoszenia obniżki ceny Sprzedawca uwidacznia obok informacji o obniżce najniższą cenę produktu obowiązującą w okresie 30 dni przed wprowadzeniem obniżki.
-4. Sprzedawca dokumentuje sprzedaż fakturą. Faktury dla Kupujących będących przedsiębiorcami wystawiane są jako faktury ustrukturyzowane w Krajowym Systemie e-Faktur (KSeF); ich wizualizacja przesyłana jest na adres e-mail Kupującego. Faktury dla Konsumentów przesyłane są elektronicznie na adres e-mail, na co Kupujący wyraża zgodę, składając Zamówienie.
+1. Aby złożyć Zamówienie, Klient wybiera E-book, przechodzi do podsumowania zamówienia na Stronie i podaje imię, nazwisko i adres e-mail.
+2. Bezpośrednio przed złożeniem Zamówienia Klient widzi podsumowanie zawierające główne cechy E-booka, łączną cenę z podatkami, sposób dostarczenia i informację o prawie odstąpienia, a następnie:
+   1. akceptuje Regulamin i potwierdza, że ukończył 18 lat (pole obowiązkowe),
+   2. wyraża zgodę na dostarczenie E-booka przed upływem terminu do odstąpienia od umowy i przyjmuje do wiadomości, że z chwilą dostarczenia traci prawo odstąpienia (pole dobrowolne — § 15 ust. 4),
+   3. klika przycisk **„Zamawiam z obowiązkiem zapłaty”**.
+3. Po kliknięciu przycisku Klient jest przekierowywany do strony płatności operatora Stripe w celu zapłaty ceny.
+4. Umowa zostaje zawarta z chwilą otrzymania przez Klienta, na podany adres e-mail, potwierdzenia przyjęcia Zamówienia, wysyłanego po zaksięgowaniu płatności. Potwierdzenie zawiera istotne warunki Umowy, informację o wyrażonej zgodzie z ust. 2 pkt 2 (jeżeli została wyrażona), Regulamin w niezmiennym pliku PDF w wersji obowiązującej w dniu zawarcia Umowy oraz pouczenie o prawie odstąpienia i wzór formularza odstąpienia — na trwałym nośniku.
+5. Jeżeli płatność nie zostanie dokonana w ciągu 60 minut od złożenia Zamówienia, Zamówienie wygasa, a Umowa nie zostaje zawarta.
 
-## § 6. Rozpoczęcie świadczenia Kursu i Okres Dostępu
+## § 6. Rezerwacja Usługi Dietetycznej i zawarcie Umowy
 
-1. Jeżeli Kupujący zażąda rozpoczęcia świadczenia Kursu przed upływem terminu odstąpienia zgodnie z § 10 ust. 3, Sprzedawca rozpoczyna świadczenie niezwłocznie po zawarciu Umowy, nie później niż w terminie 24 godzin od zaksięgowania płatności. W przeciwnym razie Sprzedawca rozpoczyna świadczenie po upływie 14 dni od zawarcia Umowy, nie później niż w ciągu kolejnych 24 godzin.
-2. Rozpoczęcie świadczenia następuje przez wysłanie na adres e-mail Kupującego zaproszenia do utworzenia Konta lub danych dostępowych oraz zapewnienie faktycznej możliwości zalogowania się do Platformy.
-3. Dostęp do Kursu przysługuje przez **Okres Dostępu (12 miesięcy)** od dnia rozpoczęcia świadczenia. Po upływie Okresu Dostępu dostęp do Kursu wygasa; nie wpływa to na materiały pobrane przez Kupującego w Okresie Dostępu zgodnie z § 7.
-4. W Okresie Dostępu Sprzedawca dostarcza aktualizacje niezbędne do zachowania zgodności Kursu z Umową i informuje o nich Kupującego.
-5. Sprzedawca może rozwijać, poprawiać i aktualizować treść Kursu oraz zmienić dostawcę Platformy lub jej adres, o ile nie zmniejsza to funkcjonalności ani zakresu Kursu; o zmianie Platformy Kupujący zostanie poinformowany e-mailem, a dostęp zostanie zapewniony w sposób ciągły przez pozostałą część Okresu Dostępu.
-6. Jeżeli zmiana Kursu wykracza poza aktualizacje niezbędne do zachowania zgodności z Umową i istotnie oraz negatywnie wpływa na dostęp do Kursu lub korzystanie z niego, Sprzedawca informuje Kupującego na trwałym nośniku z odpowiednim wyprzedzeniem o rodzaju i terminie zmiany oraz prawie do wypowiedzenia Umowy bez zachowania terminu w ciągu 30 dni. Prawo to nie przysługuje, jeżeli negatywny wpływ jest nieistotny albo Sprzedawca zapewni możliwość zachowania Kursu w niezmienionej wersji bez dodatkowych kosztów.
-7. Jeżeli Sprzedawca nie rozpocznie świadczenia Kursu w terminie określonym w ust. 1, Kupujący może wezwać go do rozpoczęcia świadczenia. Jeżeli Sprzedawca nie zrobi tego niezwłocznie lub w dodatkowym terminie wyraźnie uzgodnionym z Kupującym, Kupujący może odstąpić od Umowy.
-8. Kupujący może odstąpić od Umowy bez uprzedniego wezwania, jeżeli Sprzedawca oświadczył lub z okoliczności jednoznacznie wynika, że nie rozpocznie świadczenia Kursu, albo gdy uzgodniony termin miał dla Kupującego istotne znaczenie, a Sprzedawca go nie dotrzymał.
-9. Konto jest imienne i przypisane do jednego użytkownika. Zakup przez przedsiębiorcę na rzecz pracownika lub współpracownika wymaga wskazania adresu e-mail tej osoby jako użytkownika Konta. Zakup Kursu uprawnia do jednego Konta; **zakup Programu kohortowego uprawnia do trzech Kont** dla osób wskazanych przez Kupującego. Kupujący wskazuje te osoby przed rozpoczęciem świadczenia i informuje je, że ich dane zostaną przekazane Sprzedawcy w celu założenia Konta i dostępu do Forum.
-10. Jeżeli opis Kursu przewiduje Certyfikat, Sprzedawca wystawia go po spełnieniu kryteriów ukończenia wskazanych w opisie Kursu. Sam upływ Okresu Dostępu albo dokonanie zakupu nie oznacza automatycznie spełnienia tych kryteriów.
-11. Certyfikat jest wysyłany na adres e-mail użytkownika Konta za pośrednictwem Certifier i może być dostępny pod indywidualnym linkiem weryfikacyjnym lub przez kod QR oraz możliwy do pobrania w formacie PDF.
-12. Sprzedawca nie publikuje adresu e-mail ani publicznego katalogu uczestników. Uczestnik sam decyduje, czy udostępni Certyfikat lub jego link osobom trzecim, w szczególności w serwisach społecznościowych. Zasady przetwarzania danych, widoczności i weryfikacji opisuje Polityka prywatności.
-13. Certyfikat potwierdza ukończenie Kursu w zakresie wskazanym w jego treści. Nie jest dyplomem ukończenia studiów, świadectwem państwowym ani dokumentem nadającym kwalifikacje regulowane, chyba że opis konkretnego Kursu wyraźnie stanowi inaczej i wskazuje podstawę takiego uprawnienia.
+1. Rezerwacji dokonuje się w kalendarzu Cal.com dostępnym ze Strony: Klient wybiera usługę i dostępny termin oraz podaje imię, nazwisko, adres e-mail i — opcjonalnie — numer telefonu. **W formularzu Rezerwacji nie podaje się informacji o zdrowiu**; służy do tego wyłącznie Ankieta.
+2. Bezpośrednio przed dokonaniem Rezerwacji Klient widzi podsumowanie zawierające opis usługi, termin, łączną cenę z podatkami i informację o prawie odstąpienia, a następnie:
+   1. akceptuje Regulamin i potwierdza, że ukończył 18 lat (pole obowiązkowe),
+   2. jeżeli termin Konsultacji przypada przed upływem 14 dni od Rezerwacji — **żąda rozpoczęcia świadczenia przed upływem terminu do odstąpienia od umowy** i przyjmuje do wiadomości, że po pełnym wykonaniu usługi utraci prawo odstąpienia (pole obowiązkowe dla takich terminów — § 15 ust. 5),
+   3. klika przycisk oznaczony **„Rezerwuję z obowiązkiem zapłaty”** albo równoważnym jednoznacznym sformułowaniem i dokonuje płatności przez Stripe.
+3. Umowa zostaje zawarta z chwilą otrzymania przez Klienta, na podany adres e-mail, potwierdzenia Rezerwacji, wysyłanego po zaksięgowaniu płatności. Potwierdzenie zawiera istotne warunki Umowy, termin, informację o żądaniu z ust. 2 pkt 2 (jeżeli zostało złożone), Regulamin w pliku PDF, pouczenie o prawie odstąpienia, wzór formularza odstąpienia oraz link do Ankiety — na trwałym nośniku, przed rozpoczęciem świadczenia.
+4. Jeżeli płatność nie zostanie dokonana w czasie wskazanym w kalendarzu, Rezerwacja wygasa, a termin zostaje zwolniony.
 
-## § 6a. Forum społecznościowe
+## § 7. Ceny i płatności
 
-1. Sprzedawca udostępnia Uczestnikowi dostęp do Forum **na czas trwania Okresu Dostępu** — również wtedy, gdy Uczestnik nabył Program kohortowy, w którego cenie zawarty jest dostęp do Kursu. Dostęp do Forum jest nieodpłatny i stanowi element świadczenia objętego ceną.
-2. **Forum służy zadawaniu pytań dotyczących treści lekcji** — prowadzącym i innym Uczestnikom — oraz odpowiadaniu na nie. Sprzedawca **nie gwarantuje odpowiedzi na każdy wpis** ani ciągłej obecności prowadzących; wsparcie merytoryczne w zakresie opisanym dla danego Kursu lub Programu świadczone jest niezależnie od Forum. Forum **nie udostępnia wiadomości prywatnych** między Uczestnikami; korespondencja prywatna między nimi nie powstaje i Sprzedawca nie ma do niej dostępu.
-3. **Treści publikowane przez Uczestnika pochodzą od niego i on za nie odpowiada.** Sprzedawca nie monitoruje ich w sposób ciągły i nie sprawdza z góry każdego wpisu.
-4. Na Forum **nie wolno publikować**:
-   - a) informacji o zdrowiu, życiu seksualnym, orientacji seksualnej, pochodzeniu, przekonaniach religijnych lub światopoglądowych, poglądach politycznych, przynależności związkowej ani danych genetycznych i biometrycznych — **także własnych**;
-   - b) danych osobowych innych osób, w szczególności klientów, kontrahentów, pracowników i członków rodziny Uczestnika, w tym opisów pozwalających taką osobę zidentyfikować. **Dotyczy to także danych wklejanych z systemów Uczestnika** — z CRM, poczty, ofert i notatek handlowych. Zadając pytanie o materiał roboczy, Uczestnik **najpierw go anonimizuje**: podmienia imiona, nazwiska i nazwy firm, usuwa adresy e-mail, numery telefonów, adresy pocztowe i kwoty. Przykład zamiast danych rzeczywistych jest wystarczający, żeby otrzymać odpowiedź;
-   - c) treści bezprawnych, naruszających prawa osób trzecich, obraźliwych, nawołujących do nienawiści ani reklamowych bez zgody Sprzedawcy;
-   - d) materiałów Kursu ani ich fragmentów w sposób wykraczający poza licencję z § 7.
-5. Zakaz z ust. 4 lit. a i b chroni Uczestnika i osoby trzecie: Sprzedawca **nie ma podstawy prawnej do przetwarzania danych szczególnych kategorii** na Forum. Treści naruszające ten zakaz Sprzedawca usuwa niezwłocznie po ich stwierdzeniu, także bez zgłoszenia i bez uprzedzenia Uczestnika. Usunięcie takiej treści nie jest karą i nie wpływa na prawo Uczestnika do korzystania z Kursu.
-6. **Zgłaszanie treści.** Każdy — Uczestnik i osoba spoza Forum — może zgłosić treść, którą uważa za bezprawną albo naruszającą ust. 4, przez funkcję zgłoszenia dostępną przy każdym wpisie albo wiadomością na grzesiek@zawlodzki.pl. Zgłoszenie powinno wskazywać konkretny wpis, powód zgłoszenia oraz dane kontaktowe zgłaszającego, jeżeli oczekuje on odpowiedzi. Sprzedawca rozpatruje zgłoszenia bez zbędnej zwłoki, w sposób niearbitralny i obiektywny.
-7. **Decyzje moderacyjne.** Sprzedawca może usunąć albo ukryć wpis, ograniczyć dostęp Uczestnika do Forum albo — przy poważnym lub powtarzającym się naruszeniu — zawiesić jego konto na Forum. O decyzji dotyczącej własnego wpisu Uczestnik jest informowany wraz z jej uzasadnieniem i pouczeniem o możliwości odwołania na adres grzesiek@zawlodzki.pl. Zawieszenie dostępu do Forum **nie pozbawia dostępu do Kursu** ani nie zwalnia Sprzedawcy z obowiązku jego dostarczenia.
-8. **Brak wiadomości prywatnych.** Forum **nie udostępnia funkcji wiadomości prywatnych** między Uczestnikami — jest ona wyłączona. Wszystkie wpisy na Forum są widoczne dla pozostałych Uczestników i dla prowadzących. Gdyby Sprzedawca zdecydował się tę funkcję udostępnić, poinformuje o tym Uczestników w trybie zmiany Regulaminu i wskaże zasady wglądu w taką korespondencję.
-9. **Los treści po zakończeniu udziału.** Po zakończeniu dostępu Uczestnika do Forum jego konto zostaje **zanonimizowane**: nazwa użytkownika i adres e-mail przestają być z nim powiązane, a **opublikowane wpisy pozostają w wątkach bez wskazania autora**. Rozwiązanie to zachowuje czytelność rozmów dla pozostałych Uczestników. Niezależnie od tego Uczestnik może w każdej chwili żądać usunięcia albo ukrycia konkretnego własnego wpisu, a także skorzystać z uprawnień opisanych w Polityce prywatności, w tym prawa do usunięcia danych.
-10. Z Forum mogą korzystać wyłącznie osoby, które ukończyły **18 lat**.
-11. Zasady przetwarzania danych osobowych na Forum, w tym treści wpisów, opisuje Polityka prywatności. Uczestnik, dla którego dostęp nabył Kupujący będący przedsiębiorcą, znajdzie tam odrębną podstawę przetwarzania i przysługujące mu prawo sprzeciwu.
+1. Ceny na Stronie są cenami brutto (zawierają VAT) w złotych polskich. Wiążąca jest cena widoczna w podsumowaniu w chwili złożenia Zamówienia lub Rezerwacji.
+2. Płatności obsługuje **Stripe** (podmiot wskazany na stronie płatności) metodami udostępnionymi na stronie płatności. Wellbiz nie przechowuje danych kart płatniczych.
+3. Przy ogłoszeniu obniżki ceny podajemy obok informacji o obniżce najniższą cenę obowiązującą w okresie 30 dni przed jej wprowadzeniem.
+4. Na żądanie Klienta zgłoszone przy zakupie lub e-mailem wystawiamy fakturę i przesyłamy ją elektronicznie na adres e-mail Klienta. Na fakturze i w potwierdzeniu płatności usługa jest opisana ogólnie (np. „konsultacja dietetyczna”, „e-book”), bez informacji o zdrowiu.
 
-## § 7. Licencja i własność intelektualna
+## § 8. Dostarczenie E-booka
 
-1. Kurs oraz wszystkie materiały udostępniane w jego ramach (w tym wideo, teksty, szablony, grafiki – „**Materiały**”) stanowią przedmiot praw autorskich i know-how Sprzedawcy lub jego licencjodawców. Zakup Kursu nie przenosi praw autorskich.
-2. Z chwilą dostarczenia Kursu i zapłaty ceny Sprzedawca udziela Kupującemu licencji niewyłącznej, nieprzenoszalnej, bez prawa sublicencji, uprawniającej do korzystania z Materiałów wyłącznie na własne potrzeby Kupującego – w przypadku przedsiębiorców: na własne wewnętrzne potrzeby przedsiębiorstwa – na następujących polach eksploatacji:
-   1. wyświetlanie i odtwarzanie Materiałów na Platformie w Okresie Dostępu,
-   2. utrwalanie i zwielokrotnianie techniką cyfrową oraz wprowadzanie do pamięci komputera Materiałów oznaczonych jako przeznaczone do pobrania,
-   3. w przypadku przedsiębiorców – udostępnienie Materiałów pobranych zgodnie z pkt 2 użytkownikowi Konta, o którym mowa w § 6 ust. 9.
-3. Licencja na Materiały pobrane zgodnie z ust. 2 pkt 2 obejmuje prawo sporządzania ich opracowań (adaptacji, modyfikacji) i korzystania z nich wyłącznie w zakresie i na polach wskazanych w ust. 2, również po upływie Okresu Dostępu.
-4. Kupujący nie jest uprawniony do: udostępniania Materiałów ani danych logowania osobom trzecim, publikowania lub rozpowszechniania Materiałów, ich odsprzedaży, wykorzystywania ich w produktach lub usługach oferowanych osobom trzecim, prowadzenia na ich podstawie szkoleń lub kursów ani oferowania na ich podstawie usług tożsamych lub podobnych do usług Sprzedawcy. Wykorzystanie Materiałów w celu świadczenia usług na rzecz osób trzecich wymaga odrębnej umowy licencyjnej i odrębnego wynagrodzenia.
-5. Wynagrodzenie z tytułu licencji jest zawarte w cenie Kursu.
-6. Sprzedawca może wypowiedzieć licencję i zablokować Konto wyłącznie z ważnych powodów: w przypadku istotnego naruszenia przez Kupującego warunków licencji (w szczególności udostępnienia Materiałów lub danych logowania osobom trzecim), po bezskutecznym wezwaniu do zaniechania naruszenia w terminie nie krótszym niż 14 dni. Postanowienie to nie ogranicza uprawnień Konsumenta i Przedsiębiorcy na prawach konsumenta wynikających z przepisów.
+1. E-book dostarczamy niezwłocznie po zawarciu Umowy, wysyłając na adres e-mail Klienta link do pobrania pliku. Link jest ważny przez **7 dni** i pozwala na **{{MAKS_POBRAŃ}}** pobrań.
+2. Jeżeli link wygaśnie albo Klient utraci plik, na prośbę przesłaną w ciągu **2 lat** od zakupu przesyłamy nowy link bez dodatkowej opłaty.
+3. Jeżeli Klient nie otrzymał wiadomości z linkiem, powinien sprawdzić folder spam, a następnie wezwać nas do dostarczenia E-booka e-mailem. Jeżeli nie dostarczymy go niezwłocznie lub w dodatkowym, wyraźnie uzgodnionym terminie, Konsument może odstąpić od Umowy (art. 43j ust. 4 ustawy o prawach konsumenta).
 
-## § 8. Konsultacje
+## § 9. Licencja na E-book
 
-1. Po zakupie Konsultacji Sprzedawca – w terminie 2 dni roboczych od zaksięgowania płatności – wysyła Kupującemu link do kalendarza Cal.com umożliwiającego wybór terminu.
-2. Kupujący może bezpłatnie zmienić termin Konsultacji najpóźniej 48 godzin przed jej rozpoczęciem, a odwołać ją najpóźniej 72 godziny przed rozpoczęciem.
-3. Jeżeli Konsultacja nie odbędzie się z przyczyn leżących po stronie Sprzedawcy, Kupujący może wybrać nowy termin albo odstąpić od Umowy w tym zakresie i otrzymać zwrot ceny.
+1. E-book jest utworem chronionym prawem autorskim. Zakup nie przenosi praw autorskich.
+2. Z chwilą dostarczenia E-booka Wellbiz udziela Klientowi niewyłącznej, nieprzenoszalnej, nieograniczonej w czasie licencji na korzystanie z E-booka **na własny użytek osobisty**: odczyt na dowolnych własnych urządzeniach, zapisanie kopii zapasowych, wydruk na własne potrzeby. Wynagrodzenie za licencję jest zawarte w cenie.
+3. Bez odrębnej zgody nie wolno udostępniać E-booka lub linku do pobrania innym osobom, publikować go w całości lub w części, sprzedawać ani wykorzystywać do prowadzenia własnej działalności (np. szkoleń lub porad dla innych osób). Nie ogranicza to prawa do przytaczania fragmentów w granicach dozwolonego użytku.
+4. Treści E-booka mają charakter edukacyjny i nie stanowią indywidualnych zaleceń. **E-book nie zawiera linków ani kodów afiliacyjnych** (§ 16).
 
-## § 9. Zgodność z umową i reklamacje
+## § 10. Przebieg Konsultacji
 
-1. Sprzedawca ma obowiązek świadczyć Kurs zgodnie z Umową i ponosi wobec Konsumenta oraz Przedsiębiorcy na prawach konsumenta odpowiedzialność za brak zgodności usługi cyfrowej z Umową na zasadach określonych w rozdziale 5b ustawy z dnia 30 maja 2014 r. o prawach konsumenta – przez cały okres świadczenia Kursu (Okres Dostępu).
-2. Jeżeli Kurs jest niezgodny z Umową, Kupujący, o którym mowa w ust. 1, może żądać doprowadzenia Kursu do zgodności z Umową. Sprzedawca może odmówić, jeżeli doprowadzenie do zgodności jest niemożliwe albo wymagałoby nadmiernych kosztów.
-3. Sprzedawca doprowadza Kurs do zgodności z Umową w rozsądnym czasie od chwili poinformowania go o braku zgodności, bezpłatnie i bez nadmiernych niedogodności dla Kupującego, z uwzględnieniem charakteru i celu Kursu.
-4. Kupujący może złożyć oświadczenie o obniżeniu ceny albo odstąpieniu od Umowy, gdy:
-   1. doprowadzenie Kursu do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,
-   2. Sprzedawca nie doprowadził Kursu do zgodności w rozsądnym czasie, bezpłatnie i bez nadmiernych niedogodności,
-   3. brak zgodności występuje nadal mimo próby doprowadzenia Kursu do zgodności,
-   4. brak zgodności jest na tyle istotny, że uzasadnia obniżenie ceny albo odstąpienie bez wcześniejszego żądania doprowadzenia do zgodności,
-   5. z oświadczenia Sprzedawcy lub okoliczności wyraźnie wynika, że nie doprowadzi Kursu do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.
-5. Obniżona cena pozostaje w takiej proporcji do ceny wynikającej z Umowy, w jakiej wartość Kursu niezgodnego z Umową pozostaje do wartości Kursu zgodnego z Umową. Kupujący nie może odstąpić od Umowy, jeżeli brak zgodności jest nieistotny; domniemywa się, że brak zgodności jest istotny.
-6. Sprzedawca zwraca kwoty należne wskutek obniżenia ceny albo odstąpienia niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, przy użyciu takiego samego sposobu zapłaty, chyba że Kupujący wyraźnie zgodzi się na inny bezkosztowy sposób.
-7. Po odstąpieniu od Umowy z powodu niezgodności Kursu Kupujący zaprzestaje korzystania z Kursu i udostępniania go osobom trzecim. Sprzedawca może zablokować dalszy dostęp do Konta, z poszanowaniem ustawowych praw Kupującego do treści innych niż dane osobowe, które Kupujący dostarczył lub wytworzył podczas korzystania z Kursu.
-8. Jeżeli jest to konieczne do ustalenia przyczyny braku zgodności, Kupujący współpracuje ze Sprzedawcą w rozsądnym zakresie i przy zastosowaniu najmniej uciążliwych środków technicznych. Jeżeli Sprzedawca przed zawarciem Umowy jasno poinformował o tym obowiązku, brak współpracy po uzasadnionym wezwaniu może wpłynąć na ustawowy rozkład ciężaru dowodu dotyczącego środowiska cyfrowego Kupującego.
-9. Do odpowiedzialności za Konsultacje wobec osób, o których mowa w ust. 1, stosuje się przepisy o niewykonaniu lub nienależytym wykonaniu zobowiązania.
-10. Reklamacje należy składać e-mailem na adres grzesiek@zawlodzki.pl lub pisemnie na adres siedziby Sprzedawcy, w miarę możliwości z opisem problemu i danymi kontaktowymi. Sprzedawca odpowiada w terminie 14 dni od otrzymania reklamacji; brak odpowiedzi w tym terminie oznacza uznanie reklamacji.
-11. Wobec Kupujących innych niż wskazani w ust. 1 odpowiedzialność Sprzedawcy z tytułu rękojmi jest wyłączona, a odpowiedzialność odszkodowawcza ograniczona do zapłaconej ceny i nie obejmuje utraconych korzyści; ograniczenia nie dotyczą szkody wyrządzonej umyślnie.
+1. Po zawarciu Umowy Klient otrzymuje link do Ankiety. Ankietę należy wypełnić najpóźniej **48 godzin** przed Konsultacją; w Ankiecie Klient wyraża Zgodę Zdrowotną. Bez Zgody Zdrowotnej Konsultacja nie może się odbyć — w takim przypadku Klient może odwołać Konsultację ze zwrotem ceny na zasadach § 11 ust. 1 bez względu na termin.
+2. Wyniki badań, które Klient chce omówić, przesyła **w odpowiedzi** na wiadomość e-mail otrzymaną od Dietetyczki z adresu ola@aleksandraolesiewicz.com. Prosimy nie przesyłać wyników innymi kanałami (np. przez media społecznościowe).
+3. Link do spotkania w Google Meet wysyłamy e-mailem. Konsultacja trwa czas wskazany w opisie usługi i kończy się o zaplanowanej godzinie.
+4. **Nagrywanie i transkrypcja.** Za odrębną, dobrowolną zgodą Klienta wyrażoną w Ankiecie Konsultacja może być nagrywana i transkrybowana, a notatki mogą być sporządzane przy pomocy narzędzia AI (Gemini w Google Workspace), wyłącznie w celu przygotowania Podsumowania. Przed rozpoczęciem nagrywania Google Meet prosi uczestników o zgodę. Klient może odmówić lub cofnąć tę zgodę w każdej chwili; **Konsultacja odbywa się wtedy bez nagrania, na tych samych warunkach**. Każde Podsumowanie przygotowuje i sprawdza Dietetyczka. Zasady przetwarzania nagrań opisuje Polityka prywatności.
+5. Podsumowanie wysyłamy e-mailem w terminie **5 dni roboczych** od Konsultacji. Pytania wyjaśniające do Podsumowania Klient może zadać e-mailem w ciągu **7 dni** od jego otrzymania; odpowiadamy w ciągu 3 dni roboczych.
+6. Podsumowania i zalecenia **nie zawierają linków ani kodów afiliacyjnych**. Jeżeli w trakcie Konsultacji pojawi się produkt Partnera, Dietetyczka informuje o współpracy i — jeżeli to możliwe — wskazuje rozwiązanie niezwiązane z Partnerem.
 
-## § 10. Odstąpienie od umowy
+## § 11. Zmiana terminu, odwołanie, spóźnienie
 
-1. Konsument oraz Przedsiębiorca na prawach konsumenta może odstąpić od Umowy zawartej na odległość w terminie 14 dni bez podania przyczyny, składając oświadczenie e-mailem na adres grzesiek@zawlodzki.pl lub pisemnie. Można skorzystać z formularza stanowiącego załącznik do Regulaminu; skorzystanie z niego nie jest obowiązkowe.
-2. Z zastrzeżeniem ust. 3 Sprzedawca zwraca płatności niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, tym samym sposobem zapłaty, jakiego użył Kupujący, chyba że Kupujący wyraźnie zgodził się na inny sposób zwrotu niewiążący się dla niego z kosztami.
-3. Jeżeli Kupujący chce, aby świadczenie Kursu lub Konsultacji rozpoczęło się przed upływem 14 dni, składa w koszyku wyraźne żądanie rozpoczęcia świadczenia przed upływem terminu odstąpienia. Rozpoczęcie świadczenia nie pozbawia Kupującego prawa odstąpienia w pozostałej części tego terminu.
-4. Jeżeli Kupujący odstąpi od Umowy po złożeniu żądania, o którym mowa w ust. 3, płaci za świadczenia spełnione do chwili odstąpienia. Kwotę oblicza się proporcjonalnie do zakresu spełnionego świadczenia, z uwzględnieniem ceny określonej w Umowie; jeżeli cena jest nadmierna, podstawą jest wartość rynkowa spełnionego świadczenia.
-5. Kupujący nie ponosi kosztów świadczeń spełnionych przed odstąpieniem, jeżeli nie został prawidłowo poinformowany o prawie odstąpienia i obowiązku zapłaty proporcjonalnej albo nie złożył wyraźnego żądania rozpoczęcia świadczenia.
-6. **Prawo odstąpienia nie przysługuje po pełnym wykonaniu Konsultacji**, jeżeli Sprzedawca rozpoczął świadczenie za wyraźną i uprzednią zgodą Kupującego, który przed rozpoczęciem został poinformowany, że po pełnym wykonaniu utraci prawo odstąpienia, i przyjął to do wiadomości.
+1. Klient może **bezpłatnie zmienić termin albo odwołać Konsultację** najpóźniej **24 godziny** przed jej rozpoczęciem — przez link w potwierdzeniu Rezerwacji albo e-mailem. Przy odwołaniu zwracamy całą cenę w terminie 14 dni.
+2. Przy odwołaniu lub zmianie terminu później niż 24 godziny przed Konsultacją albo nieobecności Klienta zatrzymujemy **50% ceny** Konsultacji jako zryczałtowane wynagrodzenie za zarezerwowany termin i przygotowanie, a **pozostałe 50% zwracamy** w terminie 14 dni. Przy Konsultacji w ramach Pakietu rozliczamy w ten sposób część ceny Pakietu przypadającą na jedno spotkanie. Postanowienie nie ogranicza uprawnień z ust. 3 i § 15.
+3. **Jeden raz** w ramach danej Umowy Klient może zmienić termin później niż 24 godziny przed Konsultacją bez żadnej opłaty, jeżeli przyczyną jest nagła choroba, wypadek lub inne zdarzenie losowe, o którym poinformuje nas przed godziną rozpoczęcia.
+4. Spóźnienie Klienta nie przedłuża Konsultacji. Brak połączenia ze strony Klienta przez **20 minut** od rozpoczęcia, bez kontaktu z nami, oznacza nieobecność w rozumieniu ust. 2.
+5. Jeżeli Konsultacja nie odbędzie się albo zostanie przerwana **z przyczyn leżących po naszej stronie** (w tym z powodu problemów technicznych po naszej stronie lub choroby Dietetyczki), Klient wybiera nowy termin albo otrzymuje zwrot całej ceny. Jeżeli odwołamy Konsultację później niż 24 godziny przed jej rozpoczęciem z innej przyczyny niż choroba Dietetyczki lub zdarzenie losowe po naszej stronie, Klient — niezależnie od wyboru nowego terminu — otrzymuje **bezpłatną Wizytę Kontrolną** (§ 12 ust. 2), a jeżeli Wizyty Kontrolne nie są aktualnie oferowane — bezpłatne przedłużenie nowej Konsultacji o 30 minut; Klient może też zamiast tego zażądać zwrotu całej ceny.
+6. Przy problemach technicznych po stronie Klienta uniemożliwiających połączenie proponujemy kontynuację telefoniczną w zaplanowanym czasie.
 
-## § 11. Dane osobowe
+## § 12. Usługi Dodatkowe
 
-Administratorem danych osobowych Kupujących jest Sprzedawca. Zasady przetwarzania danych oraz wykorzystywania plików cookies określa Polityka prywatności dostępna na stronie Sklepu.
+Postanowienia tego paragrafu stosuje się do Usługi Dodatkowej, jeżeli jest ona aktualnie oferowana na Stronie; jej cenę i parametry określa opis na Stronie (`{{CENY_I_PARAMETRY_PAKIETÓW}}`).
 
-## § 12. Opinie, referencje i logotypy klientów
+1. **Pakiet** – określona w opisie liczba Konsultacji lub Wizyt Kontrolnych do wykorzystania w okresie ważności wskazanym w opisie. Terminy rezerwuje się na zasadach § 6 i § 11. Na prośbę zgłoszoną przed końcem okresu ważności przedłużamy go jednorazowo o 3 miesiące. Za Konsultacje niewykorzystane w okresie ważności (wraz z przedłużeniem) **zwracamy część ceny proporcjonalną** do liczby niewykorzystanych spotkań.
+2. **Wizyta Kontrolna** – krótsze spotkanie online (`{{CZAS_WIZYTY_KONTROLNEJ}}`) dostępne dla Klientów po Konsultacji, służące omówieniu realizacji zaleceń i ich korekcie.
+3. **Kontakt Mailowy** – możliwość zadawania Dietetyczce pytań dotyczących zaleceń przez okres `{{OKRES_KONTAKTU_MAILOWEGO}}`, z odpowiedzią w ciągu 3 dni roboczych. Kontakt Mailowy nie obejmuje nowych zagadnień wymagających Konsultacji ani pomocy w nagłych sytuacjach (§ 3 ust. 7).
+4. **Jadłospis** – indywidualny plan żywieniowy przygotowany na podstawie Ankiety i Konsultacji, dostarczany w formacie PDF w terminie `{{TERMIN_JADŁOSPISU}}`, z jedną rundą poprawek zgłoszonych w ciągu 7 dni od otrzymania. Jadłospis jest przygotowywany dla Klienta osobiście i stosuje się do niego § 9 ust. 1–3 odpowiednio.
+5. Przy Pakiecie i opiece ciągłej odstąpienie od Umowy lub cofnięcie Zgody Zdrowotnej w trakcie jej trwania rozlicza się według § 13 ust. 3 i § 15.
 
-Jeżeli w Sklepie publikowane są opinie klientów, Sprzedawca zamieszcza wyłącznie opinie pochodzące od osób, które faktycznie korzystały z jego usług lub nabyły produkt, i weryfikuje to na podstawie własnej dokumentacji współpracy (korespondencja, umowy, zamówienia). Sprzedawca nie publikuje opinii sponsorowanych ani nie modyfikuje ich treści. Bezpośrednio przy opiniach Sprzedawca zamieszcza krótką informację, że opinie są weryfikowane w opisany wyżej sposób. Imię, stanowisko, wizerunek, treść referencji i logotyp klienta publikuje w zakresie objętym udokumentowaną zgodą lub licencją.
+## § 13. Dane o zdrowiu i cofnięcie Zgody Zdrowotnej
 
-## § 13. Pozasądowe rozwiązywanie sporów
+1. Dane o zdrowiu przetwarzamy wyłącznie w celu świadczenia Usług Dietetycznych, na podstawie Zgody Zdrowotnej, w zakresie i przez okres opisany w Polityce prywatności. Nie wykorzystujemy ich do marketingu ani analityki.
+2. Klient może w każdej chwili **cofnąć Zgodę Zdrowotną** e-mailem na adres z § 1 ust. 4. Cofnięcie nie wpływa na zgodność z prawem przetwarzania dokonanego przed cofnięciem.
+3. Po cofnięciu Zgody Zdrowotnej nie możemy dalej świadczyć Usług Dietetycznych wymagających danych o zdrowiu. **Zwracamy cenę za opłacone, a niewykonane usługi** w terminie 14 dni; usługi wykonane do chwili cofnięcia nie podlegają rozliczeniu zwrotnemu. Cofnięcie zgody nie wiąże się z żadną opłatą.
 
-1. Konsument może skorzystać z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia roszczeń, w szczególności: zwrócić się do wojewódzkiego inspektora Inspekcji Handlowej z wnioskiem o wszczęcie postępowania w sprawie pozasądowego rozwiązania sporu, do stałego sądu polubownego działającego przy Inspekcji Handlowej albo skorzystać z pomocy powiatowego (miejskiego) rzecznika konsumentów. Szczegółowe informacje dostępne są na stronie www.uokik.gov.pl.
+## § 14. Zgodność z Umową i reklamacje
+
+1. **E-book.** Odpowiadamy wobec Konsumenta i Przedsiębiorcy na prawach konsumenta za brak zgodności E-booka z Umową na zasadach rozdziału 5b ustawy o prawach konsumenta — za brak zgodności istniejący w chwili dostarczenia i ujawniony w ciągu **dwóch lat** od tej chwili. Brak zgodności ujawniony przed upływem roku od dostarczenia uważa się za istniejący w chwili dostarczenia, dopóki nie udowodnimy, że było inaczej.
+2. W razie braku zgodności E-booka z Umową Klient może żądać doprowadzenia go do zgodności (np. dostarczenia poprawnego pliku), a w przypadkach wskazanych w ustawie — złożyć oświadczenie o obniżeniu ceny albo odstąpieniu od Umowy. Kwoty należne zwracamy w terminie 14 dni, tym samym sposobem zapłaty, chyba że Klient zgodzi się na inny bezkosztowy sposób.
+3. **Usługi Dietetyczne.** Odpowiadamy za niewykonanie lub nienależyte wykonanie Usługi Dietetycznej na zasadach ogólnych Kodeksu cywilnego. Regulamin nie wyłącza ani nie ogranicza tej odpowiedzialności wobec Konsumenta.
+4. Reklamacje można składać e-mailem na adres z § 1 ust. 4 lub pisemnie na adres siedziby, w miarę możliwości z opisem problemu i datą zakupu. **Odpowiadamy w terminie 14 dni** od otrzymania reklamacji, na trwałym nośniku; brak odpowiedzi w tym terminie oznacza uznanie reklamacji.
+
+## § 15. Odstąpienie od Umowy
+
+1. Konsument oraz Przedsiębiorca na prawach konsumenta może odstąpić od Umowy w terminie **14 dni od dnia jej zawarcia** bez podania przyczyny, z zastrzeżeniem ust. 4 i 6.
+2. Oświadczenie o odstąpieniu można złożyć e-mailem na adres z § 1 ust. 4, pisemnie na adres siedziby albo przez formularz odstąpienia na Stronie (**/odstapienie**). Można skorzystać z [wzoru formularza](/regulamin/#formularz-odstapienia); nie jest to obowiązkowe. Po otrzymaniu oświadczenia przez formularz na Stronie niezwłocznie przesyłamy potwierdzenie jego otrzymania e-mailem. Do zachowania terminu wystarczy wysłanie oświadczenia przed jego upływem.
+3. Zwracamy wszystkie płatności niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, tym samym sposobem zapłaty, chyba że Klient wyraźnie zgodzi się na inny bezkosztowy sposób; z zastrzeżeniem ust. 5.
+4. **E-book.** Prawo odstąpienia **nie przysługuje**, jeżeli dostarczyliśmy E-book za wyraźną i uprzednią zgodą Klienta, który przed dostarczeniem został poinformowany, że po jego dostarczeniu utraci prawo odstąpienia, i przyjął to do wiadomości, a my przekazaliśmy potwierdzenie tej zgody na trwałym nośniku (§ 5 ust. 2 pkt 2 i ust. 4). Jeżeli Klient nie wyrazi tej zgody, E-book dostarczamy **po upływie 14 dni** od zawarcia Umowy, chyba że Klient wcześniej wyrazi zgodę e-mailem.
+5. **Usługi Dietetyczne.** Jeżeli Klient zażądał rozpoczęcia świadczenia przed upływem terminu do odstąpienia (§ 6 ust. 2 pkt 2), a następnie odstąpi od Umowy, płaci za świadczenia spełnione do chwili odstąpienia — kwotę proporcjonalną do zakresu spełnionego świadczenia, obliczoną według ceny z Umowy (np. przy Pakiecie: za odbyte spotkania). Jeżeli cena jest nadmierna, podstawą jest wartość rynkowa spełnionego świadczenia.
+6. Prawo odstąpienia od Umowy o Usługę Dietetyczną **nie przysługuje po pełnym wykonaniu usługi**, jeżeli rozpoczęliśmy ją za wyraźną i uprzednią zgodą Klienta, który przed rozpoczęciem został poinformowany, że po pełnym wykonaniu utraci prawo odstąpienia, i przyjął to do wiadomości.
+7. Klient nie ponosi kosztów świadczeń spełnionych przed odstąpieniem, jeżeli nie został prawidłowo poinformowany o prawie odstąpienia i obowiązku zapłaty proporcjonalnej albo nie złożył żądania z § 6 ust. 2 pkt 2.
+8. Pełne pouczenie o prawie odstąpienia: [pouczenie](/regulamin/#pouczenie) — przekazywane także w potwierdzeniu zawarcia Umowy.
+
+## § 16. Współprace afiliacyjne
+
+1. Kody rabatowe i linki Partnerów mogą być publikowane **wyłącznie w mediach społecznościowych** prowadzonych przez Dietetyczkę, w treściach oznaczonych jako reklama, ze wskazaniem Partnera. Wellbiz może otrzymywać prowizję od zakupów dokonanych z ich użyciem.
+2. Zakup u Partnera jest odrębną umową między Klientem a Partnerem, na warunkach Partnera. Wellbiz nie jest stroną tej umowy i nie odpowiada za produkty ani usługi Partnera.
+3. Strona, E-booki, newsletter, Podsumowania i zalecenia nie zawierają linków ani kodów Partnerów, a skorzystanie z oferty Partnera nie jest warunkiem żadnej Usługi Dietetycznej. Kody i linki Partnerów nie są przekazywane w trakcie Konsultacji.
+
+## § 17. Opinie
+
+1. Publikujemy wyłącznie opinie osób, które skorzystały z naszych usług lub kupiły E-book, weryfikując to na podstawie korespondencji i historii zamówień. Nie publikujemy opinii sponsorowanych i nie zmieniamy ich treści, poza skróceniem za zgodą autora. Informację o sposobie weryfikacji zamieszczamy przy opiniach.
+2. Opinie zawierające informacje o zdrowiu publikujemy wyłącznie za wyraźną zgodą autora, w zakresie przez niego zaakceptowanym, i usuwamy po cofnięciu zgody.
+
+## § 18. Dane osobowe
+
+Administratorem danych osobowych jest Wellbiz. Zasady przetwarzania danych, w tym danych o zdrowiu, nagrań i plików cookies, opisuje [Polityka prywatności](/polityka-prywatnosci/).
+
+## § 19. Pozasądowe rozwiązywanie sporów
+
+1. Konsument może skorzystać z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia roszczeń, w szczególności zwrócić się do wojewódzkiego inspektora Inspekcji Handlowej z wnioskiem o wszczęcie postępowania w sprawie pozasądowego rozwiązania sporu, do stałego sądu polubownego działającego przy Inspekcji Handlowej albo skorzystać z pomocy powiatowego (miejskiego) rzecznika konsumentów. Informacje: www.uokik.gov.pl.
 2. Skorzystanie z pozasądowych sposobów rozwiązywania sporów jest dobrowolne dla obu stron.
 
-## § 14. Zmiana Regulaminu
+## § 20. Zmiana Regulaminu
 
-1. Sprzedawca może zmienić Regulamin z ważnych przyczyn: zmiany przepisów prawa, zmiany zakresu lub sposobu świadczenia usług, zmiany dostawców (w tym Platformy, dostawcy koszyka, platformy certyfikatów lub operatora płatności), zmian organizacyjnych lub technologicznych po stronie Sprzedawcy.
-2. O zmianie Sprzedawca informuje Kupujących posiadających aktywny Okres Dostępu e-mailem, co najmniej 14 dni przed wejściem zmiany w życie. Kupujący, który nie akceptuje zmiany, może w tym terminie wypowiedzieć umowę o prowadzenie Konta; do końca Okresu Dostępu wynikającego z zawartych Umów stosuje się wówczas Regulamin dotychczasowy.
-3. Zmiany Regulaminu nie naruszają praw nabytych: do Umów zawartych przed zmianą stosuje się Regulamin obowiązujący w dniu zawarcia Umowy, chyba że nowy Regulamin jest dla Kupującego korzystniejszy.
-4. Archiwalne wersje Regulaminu są dostępne u Sprzedawcy na żądanie.
+1. Możemy zmienić Regulamin z ważnych przyczyn: zmiany przepisów, zmiany zakresu lub sposobu świadczenia usług, zmiany dostawców usług technicznych (np. płatności, rezerwacji, wideokonferencji), zmian organizacyjnych lub technologicznych.
+2. Do Umów zawartych przed zmianą stosuje się Regulamin obowiązujący w dniu zawarcia Umowy.
+3. Klientów z niewykorzystanym Pakietem lub trwającą usługą ciągłą informujemy o zmianie e-mailem co najmniej 14 dni przed jej wejściem w życie. Klient, który nie akceptuje zmiany, może przed jej wejściem w życie wypowiedzieć Umowę i otrzymać zwrot ceny za niewykorzystaną część; do tego czasu stosuje się Regulamin dotychczasowy.
+4. Archiwalne wersje Regulaminu udostępniamy na żądanie.
 
-## § 15. Postanowienia końcowe
+## § 21. Postanowienia końcowe
 
-1. Prawem właściwym jest prawo polskie. W sprawach nieuregulowanych stosuje się w szczególności Kodeks cywilny, ustawę o prawach konsumenta oraz ustawę o prawie autorskim i prawach pokrewnych.
-2. Regulamin nie wyłącza ani nie ogranicza żadnych uprawnień Konsumenta oraz Przedsiębiorcy na prawach konsumenta, które przysługują im na mocy bezwzględnie obowiązujących przepisów prawa; w razie sprzeczności pierwszeństwo mają te przepisy.
-3. Spory z Kupującymi niebędącymi Konsumentami ani Przedsiębiorcami na prawach konsumenta rozstrzyga sąd właściwy dla siedziby Sprzedawcy.
-4. Regulamin wchodzi w życie z dniem 24.08.2026.
+1. Prawem właściwym jest prawo polskie. Wybór prawa nie pozbawia Konsumenta ochrony wynikającej z bezwzględnie obowiązujących przepisów prawa państwa jego zwykłego pobytu.
+2. Regulamin nie wyłącza ani nie ogranicza uprawnień Konsumenta i Przedsiębiorcy na prawach konsumenta wynikających z bezwzględnie obowiązujących przepisów; w razie sprzeczności pierwszeństwo mają te przepisy.
+3. Regulamin wchodzi w życie z dniem {{DATA_WEJSCIA_W_ZYCIE}}.
 
-## Załącznik – wzór formularza odstąpienia od umowy
+## Załączniki
 
-(formularz ten należy wypełnić i odesłać tylko w przypadku chęci odstąpienia od umowy)
+1. [Pouczenie o prawie odstąpienia od umowy](/regulamin/#pouczenie)
+2. [Wzór formularza odstąpienia od umowy](/regulamin/#formularz-odstapienia)
 
-> Adresat: Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, e-mail: grzesiek@zawlodzki.plJa, niżej podpisana/y ……………………………… niniejszym informuję o moim odstąpieniu od umowy o świadczenie następującej usługi cyfrowej / o świadczenie następującej konsultacji: ………………………………Data zawarcia umowy: ………………………………Imię i nazwisko: ……………………………… Adres e-mail podany przy zakupie: ……………………………… Data: ……………………………… Podpis (tylko jeżeli formularz jest przesyłany w wersji papierowej): ………………………………
+## Pouczenie o prawie odstąpienia od umowy
+
+Załącznik nr 1 do Regulaminu aleksandraolesiewicz.com · wersja 2.0 · obowiązuje od {{DATA_WEJSCIA_W_ZYCIE}}
+
+Dotyczy umów zawieranych przez konsumentów oraz przedsiębiorców na prawach konsumenta: o świadczenie usług dietetycznych (konsultacje i usługi dodatkowe) oraz o dostarczenie e-booków.
+
+### Prawo odstąpienia od umowy
+
+Mają Państwo prawo odstąpić od niniejszej umowy w terminie 14 dni bez podania jakiejkolwiek przyczyny.
+
+Termin do odstąpienia od umowy wygasa po upływie 14 dni od dnia zawarcia umowy.
+
+Aby skorzystać z prawa odstąpienia od umowy, muszą Państwo poinformować nas:
+
+> **Wellbiz sp. z o.o.**, ul. Lipowa 3D, 30-702 Kraków tel. +48 530 005 133, e-mail: ola@aleksandraolesiewicz.com
+
+o swojej decyzji o odstąpieniu od niniejszej umowy w drodze jednoznacznego oświadczenia (na przykład pismo wysłane pocztą lub pocztą elektroniczną).
+
+Mogą Państwo skorzystać z wzoru formularza odstąpienia od umowy, jednak nie jest to obowiązkowe. Mogą Państwo również wypełnić i przesłać formularz odstąpienia od umowy lub jakiekolwiek inne jednoznaczne oświadczenie drogą elektroniczną na naszej stronie internetowej **aleksandraolesiewicz.com/odstapienie**. Jeżeli skorzystają Państwo z tej możliwości, prześlemy Państwu niezwłocznie potwierdzenie otrzymania informacji o odstąpieniu od umowy na trwałym nośniku (np. pocztą elektroniczną).
+
+Aby zachować termin do odstąpienia od umowy, wystarczy, aby wysłali Państwo informację dotyczącą wykonania przysługującego Państwu prawa odstąpienia od umowy przed upływem terminu do odstąpienia od umowy.
+
+### Skutki odstąpienia od umowy
+
+W przypadku odstąpienia od niniejszej umowy zwracamy Państwu wszystkie otrzymane od Państwa płatności niezwłocznie, a w każdym przypadku nie później niż 14 dni od dnia, w którym zostaliśmy poinformowani o Państwa decyzji o wykonaniu prawa odstąpienia od niniejszej umowy. Zwrotu płatności dokonamy przy użyciu takich samych sposobów płatności, jakie zostały przez Państwa użyte w pierwotnej transakcji, chyba że wyraźnie zgodziliście się Państwo na inne rozwiązanie; w każdym przypadku nie poniosą Państwo żadnych opłat w związku z tym zwrotem.
+
+Jeżeli zażądali Państwo rozpoczęcia świadczenia usług przed upływem terminu do odstąpienia od umowy, zapłacą nam Państwo kwotę proporcjonalną do zakresu świadczeń spełnionych do chwili, w której poinformowali nas Państwo o odstąpieniu od niniejszej umowy.
+
+### Kiedy prawo odstąpienia nie przysługuje
+
+Prawo odstąpienia od umowy nie przysługuje:
+
+1. **przy e-booku** — jeżeli dostarczyliśmy e-book za Państwa wyraźną i uprzednią zgodą, po poinformowaniu Państwa przed dostarczeniem, że po jego dostarczeniu utracą Państwo prawo odstąpienia od umowy, i przyjęciu tego przez Państwa do wiadomości, a my przekazaliśmy Państwu potwierdzenie tej zgody na trwałym nośniku (art. 38 ust. 1 pkt 13 ustawy o prawach konsumenta);
+2. **przy usłudze dietetycznej** — jeżeli wykonaliśmy usługę w pełni za Państwa wyraźną i uprzednią zgodą, a przed rozpoczęciem świadczenia zostali Państwo poinformowani, że po spełnieniu świadczenia utracą Państwo prawo odstąpienia od umowy, i przyjęli to Państwo do wiadomości (art. 38 ust. 1 pkt 1 ustawy o prawach konsumenta).
+
+Zgodę i oświadczenia, o których mowa wyżej, odbieramy w podsumowaniu zamówienia lub rezerwacji, a ich treść potwierdzamy w wiadomości e-mail potwierdzającej zawarcie umowy.
+
+_Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, KRS 0001158341, NIP 6793323800._
+
+## Wzór formularza odstąpienia od umowy
+
+Załącznik nr 2 do Regulaminu aleksandraolesiewicz.com · wersja 2.0
+
+_(formularz ten należy wypełnić i odesłać tylko w przypadku chęci odstąpienia od umowy)_
+
+> **Adresat:** Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, e-mail: ola@aleksandraolesiewicz.com
+>
+> Ja/My(\*) niniejszym informuję/informujemy(\*) o moim/naszym odstąpieniu od umowy o świadczenie następującej usługi(\*) / o dostarczenie następującej treści cyfrowej (e-booka)(\*):
+>
+> ………………………………………………………………………………
+>
+> Data zawarcia umowy: ………………………………
+>
+> Imię i nazwisko konsumenta(-ów): ………………………………
+>
+> Adres konsumenta(-ów): ………………………………
+>
+> Adres e-mail podany przy zakupie (ułatwia identyfikację zamówienia): ………………………………
+>
+> Podpis konsumenta(-ów) (tylko jeżeli formularz jest przesyłany w wersji papierowej): ………………………………
+>
+> Data: ………………………………
+>
+> (\*) Niepotrzebne skreślić.

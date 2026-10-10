@@ -387,6 +387,11 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 - [x] Wdrożyć strony prawne `legalPage` (schemat, trasy 3a, fixture 1:1 ze
       źródła B2B, import dry-run `import:legal`; bez Content Lake i bez
       tłumaczenia maszynowego EN).
+- [x] Zastąpić treści B2B szkicami B2C z `www-prawne` (konwerter Markdown,
+      `version`, blokada publikacji placeholderów, stopka z danymi sprzedawcy
+      i informacja pod opiniami; bez Content Lake).
+- [ ] Po przeglądzie radcy prawnego: daty wejścia w życie, usunięcie
+      placeholderów, ponowna konwersja i import `legalPage`.
 - [ ] Przenieść treści i media do szkiców Content Lake; zapisać wyniki walidacji.
 - [ ] Odebrać edycję i chroniony podgląd wszystkich szablonów z Sanity.
 - [ ] Po zastąpieniu zastosowań usunąć dawną prezentację i aliasy `--wf-*`.

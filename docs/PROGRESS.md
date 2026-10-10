@@ -6,6 +6,32 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Dokumenty prawne B2C, wersjonowanie i stopka, 10.10.2026
+
+- Treści B2B z zawlodzki.pl usunięte (HTML, konwerter Python, fixture’y).
+  Nowe źródło: szkice `projekt prawny ola/www-prawne/*.md`; konwerter
+  `scripts/convert-legal-md.mjs` (z `--check`), przykłady Markdown
+  `scripts/generate-legal-examples.ts`. Pouczenie i formularz odstąpienia są
+  załącznikami `/regulamin/#pouczenie` i `#formularz-odstapienia`.
+- `legalPage`: `version` (wymagane), `effectiveFrom` opcjonalne; publikację
+  blokuje brak daty albo `{{`/`[do sprawdzenia` w treści. Ta sama reguła
+  blokuje `import:legal --write` i legal w `import:3a`. Pod H1: „Wersja X ·
+  obowiązuje od …” albo „… · data wejścia w życie do ustalenia”.
+- `siteSettings`: `company`, `copyright`, `testimonialsDisclosure`; pięć linków
+  prawnych PL w stopce, linia danych sprzedawcy, informacja pod opiniami (Home,
+  O mnie, Konsultacje, E-book). Szczegóły: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
+- Kontrole: format, lint, check, `npm test` (201), build, `test:build`,
+  Playwright `legal-pages` (45/45) oraz consistency, contact, carousel
+  (łącznie 63/63) — na osobnym porcie 4391, bo 4321 zajmował inny worktree.
+  `ui.spec` i `sticky-navigation` mają adresy `127.0.0.1:4321` na sztywno
+  (nie dało się ich uruchomić izolowanie); dwa testy tabulacji WebKit padają
+  też na main 8d39131 w tym środowisku.
+- Nie zrobione: migracja bloku „Dane firmy” kontaktu do `siteSettings.company`
+  (zmiana kontraktu sekcji i eksportu Markdown); fixture czyta już
+  `site-legal.ts`. Zapis do Content Lake: brak. Następny krok: przegląd
+  radcy prawnego, daty wejścia w życie i usunięcie placeholderów w źródle,
+  potem `convert-legal-md.mjs` i import.
+
 ### Ikony tematów w „Z kim pracuję”, 10.10.2026
 
 - Każda karta ma własną ikonę liniową (24 × 24, kreska 1,6, `currentColor`):

@@ -3,58 +3,120 @@ import { expect, test } from "@playwright/test";
 const pages = [
   {
     path: "/polityka-prywatnosci/",
-    title: "Polityka prywatności www.zawlodzki.pl",
-    date: "24.08.2026",
-    heading: "1. Administrator danych",
+    title: "Polityka prywatności aleksandraolesiewicz.com",
+    version: "Wersja 2.1 · data wejścia w życie do ustalenia",
+    heading: "1. Kto jest administratorem Twoich danych",
   },
   {
     path: "/lista-cookies-i-identyfikatorow/",
-    title: "Lista cookies i identyfikatorów",
-    date: "26.07.2026",
+    title: "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
+    version: "Wersja 2.0 · data wejścia w życie do ustalenia",
     heading: "Przed dokonaniem wyboru",
   },
   {
     path: "/regulamin/",
-    title: "Regulamin sklepu www.zawlodzki.pl",
-    date: "24.08.2026",
+    title:
+      "Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com",
+    version: "Wersja 2.2 · data wejścia w życie do ustalenia",
     heading: "§ 1. Postanowienia ogólne",
   },
   {
     path: "/regulamin-newslettera/",
-    title: "Regulamin newslettera i materiałów bezpłatnych",
-    date: "01.08.2026",
+    title:
+      "Regulamin newslettera i materiałów bezpłatnych — aleksandraolesiewicz.com",
+    version: "Wersja 2.1 · data wejścia w życie do ustalenia",
     heading: "§ 1. Kto wysyła newsletter",
   },
 ] as const;
 
 for (const entry of pages) {
-  test(`${entry.path} renders title, date and first heading`, async ({
+  test(`${entry.path} renders title, version and first heading`, async ({
     page,
   }) => {
     await page.goto(entry.path);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       entry.title,
     );
-    await expect(page.locator(".legal-effective")).toContainText(entry.date);
+    await expect(page.locator(".legal-effective")).toHaveText(entry.version);
     await expect(
       page.getByRole("heading", { level: 2, name: entry.heading }),
     ).toBeVisible();
+    await expect(page.locator("main")).not.toContainText("Metryka dokumentu");
+    await expect(page.locator("main")).not.toContainText("Historia wersji");
   });
 }
 
 test("privacy and cookies link to each other", async ({ page }) => {
   await page.goto("/polityka-prywatnosci/");
   await page
-    .getByRole("link", { name: "liście cookies i identyfikatorów" })
+    .getByRole("link", { name: "Lista cookies i identyfikatorów" })
     .first()
     .click();
   await expect(page).toHaveURL(/\/lista-cookies-i-identyfikatorow\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Lista cookies i identyfikatorów",
+    "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
   );
   await page.getByRole("link", { name: "Politykę prywatności" }).click();
   await expect(page).toHaveURL(/\/polityka-prywatnosci\/$/);
 });
+
+test("terms appendices open at their anchors", async ({ page }) => {
+  await page.goto("/regulamin/");
+  await page
+    .locator(".article-richtext")
+    .getByRole("link", { name: "Pouczenie o prawie odstąpienia od umowy" })
+    .click();
+  await expect(page).toHaveURL(/\/regulamin\/#pouczenie$/);
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: "Pouczenie o prawie odstąpienia od umowy",
+    }),
+  ).toHaveAttribute("id", "pouczenie");
+  await expect(page.locator("#pouczenie")).toBeInViewport();
+  await expect(page.locator("#formularz-odstapienia")).toHaveText(
+    "Wzór formularza odstąpienia od umowy",
+  );
+  await expect(
+    page.locator(".article-richtext blockquote").last(),
+  ).toContainText("(*) Niepotrzebne skreślić.");
+});
+
+test("footer lists legal documents and seller data", async ({ page }) => {
+  await page.goto("/regulamin/");
+  const legal = page.getByRole("navigation", { name: "Informacje prawne" });
+  await expect(legal.getByRole("link")).toHaveText([
+    "Regulamin",
+    "Polityka prywatności",
+    "Lista cookies",
+    "Regulamin newslettera",
+    "Odstąpienie od umowy",
+  ]);
+  await expect(
+    legal.getByRole("link", { name: "Odstąpienie od umowy" }),
+  ).toHaveAttribute("href", "/odstapienie/");
+  await expect(page.locator(".ao-footer__seller")).toHaveText(
+    "Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków · KRS 0001158341 · NIP 6793323800 · REGON 541006624 · kapitał zakładowy 5 000 zł · ola@aleksandraolesiewicz.com · +48 530 005 133",
+  );
+  await expect(page.locator(".ao-footer__bottom")).toContainText(
+    "© 2026 Wellbiz sp. z o.o. · Treści: Aleksandra Olesiewicz-Zawłodzka",
+  );
+});
+
+const reviewPages = [
+  "/",
+  "/konsultacje/",
+  "/o-mnie/",
+  "/ebooki/suplementy-w-pcos/",
+];
+for (const path of reviewPages) {
+  test(`${path} explains how reviews are verified`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator("#opinie .ao-review-disclosure")).toHaveText(
+      "Publikujemy wyłącznie opinie osób, które skorzystały z konsultacji lub kupiły e-book — sprawdzamy to w naszej korespondencji i historii zamówień. Nie płacimy za opinie i nie zmieniamy ich treści. Efekty są indywidualne i nie są gwarantowane.",
+    );
+  });
+}
 
 test("English privacy shows the Polish-binding notice", async ({ page }) => {
   await page.goto("/en/privacy/");

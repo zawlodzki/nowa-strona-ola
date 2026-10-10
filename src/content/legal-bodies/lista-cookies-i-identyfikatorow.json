@@ -1,37 +1,37 @@
 {
-  "title": "Lista cookies i identyfikatorów",
-  "effectiveFrom": "2026-07-26",
-  "effectiveLabel": "obowiązuje od 26.07.2026",
-  "seoDescription": "Lista cookies i identyfikatorów www.zawlodzki.pl",
+  "title": "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
+  "version": "2.0",
+  "effectiveFrom": null,
+  "seoDescription": "Pliki cookies i identyfikatory na aleksandraolesiewicz.com: niezbędne, analityczne i marketingowe, z dostawcą i okresem działania.",
   "body": [
     {
       "_type": "block",
-      "_key": "p0005",
+      "_key": "b0",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0001",
-          "text": "Ta lista uzupełnia ",
+          "_key": "s0",
+          "text": "Lista uzupełnia ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0003",
+          "_key": "s1",
           "text": "Politykę prywatności",
-          "marks": ["l0002"]
+          "marks": ["l0"]
         },
         {
           "_type": "span",
-          "_key": "s0004",
-          "text": " i opisuje cookies, wpisy pamięci przeglądarki oraz podobne identyfikatory używane na www.zawlodzki.pl.",
+          "_key": "s2",
+          "text": " i opisuje pliki cookies, wpisy pamięci przeglądarki i podobne identyfikatory używane na aleksandraolesiewicz.com.",
           "marks": []
         }
       ],
       "markDefs": [
         {
           "_type": "link",
-          "_key": "l0002",
+          "_key": "l0",
           "href": "/polityka-prywatnosci/"
         }
       ]
@@ -43,7 +43,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0006",
+          "_key": "s0",
           "text": "Przed dokonaniem wyboru",
           "marks": []
         }
@@ -52,61 +52,53 @@
     },
     {
       "_type": "block",
-      "_key": "p0016",
+      "_key": "b2",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0007",
-          "text": "Przed dokonaniem wyboru na urządzeniu nie zapisujemy żadnych opcjonalnych plików cookies. Tagi Google (GTM ",
+          "_key": "s0",
+          "text": "Przed Twoim wyborem w banerze zapisujemy wyłącznie identyfikatory niezbędne. Tagi Google nie są ładowane (Google Consent Mode w trybie podstawowym), a Microsoft Clarity i piksel Meta pozostają zablokowane.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "gdzie-narzedzia-opcjonalne-nigdy-nie-dzialaja",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Gdzie narzędzia opcjonalne nigdy nie działają",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b4",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Niezależnie od zgody ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0008",
-          "text": "GTM-P5V3CJ5",
-          "marks": ["code"]
+          "_key": "s1",
+          "text": "piksel Meta i Microsoft Clarity nie działają",
+          "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0009",
-          "text": ", GA4 ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0010",
-          "text": "G-FPQCV0H550",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0011",
-          "text": ") działają w trybie Google Consent Mode v2 Advanced z domyślnym stanem „odmowa” dla analityki i reklamy i mogą wysyłać ograniczone, bezciasteczkowe sygnały (",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0012",
-          "text": "gcs=G100",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0013",
-          "text": ", ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0014",
-          "text": "npa=1",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0015",
-          "text": ").",
+          "_key": "s2",
+          "text": ", a Google Analytics nie przekazuje nazw produktów, na: stronach konsultacji i e-booków, w podsumowaniu zamówienia, na stronach potwierdzeń i na stronie formularza odstąpienia. Ankieta przed konsultacją działa poza Stroną (Formularze Google) i nie zawiera naszych tagów.",
           "marks": []
         }
       ],
@@ -119,7 +111,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0017",
+          "_key": "s0",
           "text": "Niezbędne — zawsze aktywne",
           "marks": []
         }
@@ -128,7 +120,7 @@
     },
     {
       "_type": "articleTable",
-      "_key": "t0019",
+      "_key": "b6",
       "headers": [
         "Identyfikator",
         "Dostawca",
@@ -138,18 +130,46 @@
       ],
       "rows": [
         {
-          "_type": "object",
-          "_key": "r0018",
+          "_key": "r0",
           "cells": [
-            "`zawlodzki-consent`",
-            "self-hosted c15t (`consent.zawlodzki.com`)",
-            "cookie first-party na `zawlodzki.pl`, Secure, SameSite=Lax; ta sama wartość w `localStorage`",
-            "zapis decyzji o zgodzie: wybrane kategorie, znacznik czasu, identyfikator podmiotu (`subjectId`) i odcisk wersji polityki",
-            "cookie: 365 dni; wpis w `localStorage`: do zmiany lub cofnięcia zgody"
+            "`{{NAZWA_COOKIE_ZGODY}}`",
+            "c15t (self-hosted, serwer OVH w Warszawie)",
+            "cookie first-party na `aleksandraolesiewicz.com`",
+            "zapis Twojej decyzji o zgodzie: kategorie, data, identyfikator zgody, wersja",
+            "`{{OKRES}}` (B2B: 365 dni)"
+          ]
+        },
+        {
+          "_key": "r1",
+          "cells": [
+            "`__cf_bm`",
+            "Cloudflare",
+            "cookie first-party",
+            "ochrona przed ruchem botów",
+            "30 minut `{{DO_POTWIERDZENIA_SKANEM}}`"
+          ]
+        },
+        {
+          "_key": "r2",
+          "cells": [
+            "`__stripe_mid`, `__stripe_sid`",
+            "Stripe",
+            "cookies na `checkout.stripe.com` (strona płatności)",
+            "zapobieganie oszustwom w płatnościach",
+            "odpowiednio ok. 1 rok i 30 minut — ustawiane przez Stripe na jego stronie"
+          ]
+        },
+        {
+          "_key": "r3",
+          "cells": [
+            "`{{COOKIES_CAL_COM}}`",
+            "Cal.com",
+            "wg sposobu osadzenia kalendarza (osadzenie na Stronie albo przekierowanie do cal.com)",
+            "działanie kalendarza rezerwacji",
+            "`{{DO_POTWIERDZENIA_SKANEM}}`"
           ]
         }
-      ],
-      "caption": "Niezbędne — zawsze aktywne"
+      ]
     },
     {
       "_type": "block",
@@ -158,7 +178,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0020",
+          "_key": "s0",
           "text": "Analityczne — po zgodzie na analitykę",
           "marks": []
         }
@@ -167,7 +187,7 @@
     },
     {
       "_type": "articleTable",
-      "_key": "t0026",
+      "_key": "b8",
       "headers": [
         "Identyfikator",
         "Dostawca",
@@ -177,109 +197,62 @@
       ],
       "rows": [
         {
-          "_type": "object",
-          "_key": "r0021",
+          "_key": "r0",
           "cells": [
             "`_ga`",
             "Google Analytics 4",
-            "cookie first-party na `zawlodzki.pl`, SameSite=Lax",
+            "cookie first-party",
             "rozróżnianie użytkowników",
-            "ok. 13 miesięcy, około 400 dni"
+            "ok. 13 miesięcy `{{DO_POTWIERDZENIA_SKANEM}}`"
           ]
         },
         {
-          "_type": "object",
-          "_key": "r0022",
+          "_key": "r1",
           "cells": [
-            "`_ga_FPQCV0H550`",
-            "Google Analytics 4, usługa `G-FPQCV0H550`",
-            "cookie first-party na `zawlodzki.pl`, SameSite=Lax",
-            "utrzymanie stanu sesji GA4",
-            "ok. 13 miesięcy, około 400 dni"
+            "`_ga_{{ID_USŁUGI}}`",
+            "Google Analytics 4",
+            "cookie first-party",
+            "utrzymanie stanu sesji",
+            "ok. 13 miesięcy `{{DO_POTWIERDZENIA_SKANEM}}`"
           ]
         },
         {
-          "_type": "object",
-          "_key": "r0023",
+          "_key": "r2",
           "cells": [
-            "`zaw_attribution_measurement_v1`",
-            "Wellbiz, skrypt atrybucji w GTM",
-            "wpis first-party w `localStorage`",
-            "pierwsze i ostatnie źródło wizyty: source, medium, campaign, content, landing page, referrer domain, timestamp, `utm_id` i `utm_term`",
-            "90 dni od ostatniej aktualizacji; usuwany po cofnięciu zgody analitycznej"
-          ]
-        },
-        {
-          "_type": "object",
-          "_key": "r0024",
-          "cells": [
-            "`zaw_attribution_session_v1`",
-            "Wellbiz, skrypt atrybucji w GTM",
-            "wpis first-party w `sessionStorage`",
-            "poprzednia i bieżąca podstrona, liczba odsłon w sesji oraz `cta_id` linku prowadzącego do `/kontakt`",
-            "aktywna sesja do 30 minut bezczynności; wpis może pozostać do zamknięcia karty, ale po tym czasie jest ignorowany i zastępowany; usuwany po cofnięciu zgody analitycznej"
-          ]
-        },
-        {
-          "_type": "object",
-          "_key": "r0025",
-          "cells": [
+            "`_clck`, `_clsk`",
             "Microsoft Clarity",
-            "Microsoft (`clarity.ms`, projekt `gjd8ua7x7t`)",
-            "skrypt third-party",
-            "analiza sposobu korzystania ze Strony: nagrania sesji i mapy kliknięć",
-            "w skanie nie zapisał odczytywalnych cookies first-party; ewentualne identyfikatory pojawiają się dopiero po przekazaniu sygnału zgody"
+            "cookies first-party",
+            "rozpoznanie przeglądarki i sesji na potrzeby map kliknięć i nagrań sesji z maskowaniem",
+            "`_clck` ok. 1 rok, `_clsk` ok. 1 dzień `{{DO_POTWIERDZENIA_SKANEM}}`"
           ]
         }
-      ],
-      "caption": "Analityczne — po zgodzie na analitykę"
+      ]
     },
     {
-      "_type": "articleTable",
-      "_key": "t0030",
-      "headers": [
-        "Identyfikator",
-        "Dostawca",
-        "Mechanizm i domena",
-        "Cel",
-        "Okres działania"
-      ],
-      "rows": [
+      "_type": "block",
+      "_key": "b9",
+      "style": "normal",
+      "children": [
         {
-          "_type": "object",
-          "_key": "r0027",
-          "cells": [
-            "`nQ_cookieId`",
-            "Albacross (`serve.albacross.com`, `new-collect.albacross.com`)",
-            "cookie first-party na `zawlodzki.pl`, SameSite=Lax",
-            "rozpoznanie firmy, z której korzysta odwiedzający",
-            "365 dni"
-          ]
+          "_type": "span",
+          "_key": "s0",
+          "text": "Dane GA4 na poziomie użytkownika przechowujemy 2 miesiące. Okres przechowywania nagrań Clarity: ",
+          "marks": []
         },
         {
-          "_type": "object",
-          "_key": "r0028",
-          "cells": [
-            "`nQ_userVisitId`",
-            "Albacross",
-            "cookie first-party na `zawlodzki.pl`, SameSite=Lax",
-            "powiązanie pojedynczej wizyty",
-            "ok. 30 minut"
-          ]
+          "_type": "span",
+          "_key": "s1",
+          "text": "{{OKRES_CLARITY}}",
+          "marks": ["code"]
         },
         {
-          "_type": "object",
-          "_key": "r0029",
-          "cells": [
-            "Leadfeeder (Dealfront)",
-            "Dealfront (`sc.lfeeder.com`)",
-            "skrypt third-party",
-            "identyfikacja firm odwiedzających Stronę",
-            "tracker ładował się, ale w skanie nie zapisał odczytywalnego cookie first-party; nie zaobserwowano `_lfa`"
-          ]
+          "_type": "span",
+          "_key": "s2",
+          "text": ".",
+          "marks": []
         }
       ],
-      "caption": "Analityczne — po zgodzie na analitykę"
+      "markDefs": []
     },
     {
       "_type": "block",
@@ -288,7 +261,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0031",
+          "_key": "s0",
           "text": "Marketingowe — po zgodzie na marketing",
           "marks": []
         }
@@ -297,7 +270,7 @@
     },
     {
       "_type": "articleTable",
-      "_key": "t0036",
+      "_key": "b11",
       "headers": [
         "Identyfikator",
         "Dostawca",
@@ -307,121 +280,38 @@
       ],
       "rows": [
         {
-          "_type": "object",
-          "_key": "r0032",
-          "cells": [
-            "`_gcl_au`",
-            "Google Ads / Google Tag",
-            "cookie first-party na `zawlodzki.pl`, SameSite=Lax",
-            "atrybucja kliknięć i konwersji reklamowych",
-            "ok. 90 dni"
-          ]
-        },
-        {
-          "_type": "object",
-          "_key": "r0033",
-          "cells": [
-            "`_gcl_ls`",
-            "Google Ads / Google Tag",
-            "wpis w `localStorage`",
-            "dane pomocnicze linkera konwersji",
-            "do usunięcia danych przeglądarki lub cofnięcia zgody"
-          ]
-        },
-        {
-          "_type": "object",
-          "_key": "r0034",
+          "_key": "r0",
           "cells": [
             "`_fbp`",
-            "Meta, piksel Meta",
-            "cookie first-party na `zawlodzki.pl`, SameSite=Lax",
-            "identyfikacja przeglądarki na potrzeby pomiaru reklam i remarketingu",
-            "ok. 90 dni"
-          ]
-        },
-        {
-          "_type": "object",
-          "_key": "r0035",
-          "cells": [
-            "`zaw_attribution_marketing_v1`",
-            "Wellbiz, skrypt atrybucji w GTM",
-            "wpis first-party w `localStorage`",
-            "identyfikatory kliknięć `gclid`, `gbraid`, `wbraid`, `msclkid`, `fbclid` i `li_fat_id`, używane do przypisania zgłoszenia do kampanii",
-            "do 90 dni, `li_fat_id` do 30 dni; wpis usuwany po cofnięciu zgody marketingowej"
+            "Meta (piksel Meta)",
+            "cookie first-party — **tylko na stronach bez tematyki zdrowotnej** (strona główna, „O mnie”, wybrane wpisy)",
+            "pomiar skuteczności reklam",
+            "ok. 90 dni `{{DO_POTWIERDZENIA_SKANEM}}`"
           ]
         }
-      ],
-      "caption": "Marketingowe — po zgodzie na marketing"
+      ]
     },
     {
       "_type": "block",
-      "_key": "p0048",
+      "_key": "b12",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0037",
-          "text": "Google/DoubleClick (",
+          "_key": "s0",
+          "text": "Meta może dodatkowo zapisywać pliki cookies we własnych domenach (",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0038",
-          "text": "doubleclick.net",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0039",
-          "text": ", ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0040",
-          "text": "google.com",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0041",
-          "text": ", ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0042",
-          "text": "googlesyndication.com",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0043",
-          "text": ") oraz Meta (",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0044",
+          "_key": "s1",
           "text": "facebook.com",
           "marks": ["code"]
         },
         {
           "_type": "span",
-          "_key": "s0045",
-          "text": ", ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0046",
-          "text": "connect.facebook.net",
-          "marks": ["code"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0047",
-          "text": ") mogą dodatkowo zapisywać cookies we własnych domenach. Strona nie może ich bezpośrednio odczytać, a ich okresy działania określa dany dostawca.",
+          "_key": "s2",
+          "text": "); Strona nie ma do nich dostępu, a okres ich działania określa Meta.",
           "marks": []
         }
       ],
@@ -434,7 +324,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0049",
+          "_key": "s0",
           "text": "Zmiana zgody",
           "marks": []
         }
@@ -443,13 +333,13 @@
     },
     {
       "_type": "block",
-      "_key": "p0051",
+      "_key": "b14",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0050",
-          "text": "Wybór możesz zmienić w każdej chwili przyciskiem „Zarządzaj zgodami” w stopce Strony. Cofnięcie zgody zatrzymuje właściwe tagi i usuwa odpowiadającą jej grupę danych atrybucyjnych z pamięci przeglądarki. Cookies możesz również usunąć w ustawieniach przeglądarki.",
+          "_key": "s0",
+          "text": "Wybór zmienisz w każdej chwili przez link „Ustawienia cookies” w stopce Strony. Cofnięcie zgody zatrzymuje właściwe tagi. Pliki cookies możesz też usunąć w ustawieniach przeglądarki.",
           "marks": []
         }
       ],

@@ -1,15 +1,16 @@
 import type { Locale } from "@ola/shared";
 
 import { homepageCopy } from "@/content/homepage-seed";
+import { sellerCompany } from "@/content/site-legal";
 import { SOCIAL_PROFILES } from "@/content/social-profiles";
 import { newsletterFormFixture } from "./homepage-fixtures";
 
-export const contactEmail = "ola@aleksandraolesiewicz.com";
+export const contactEmail = sellerCompany.email;
 export const companyDetails = [
-  "Wellbiz sp. z o.o.",
-  "ul. Lipowa 3d",
-  "30-702 Kraków",
-  "NIP: 6793323800",
+  sellerCompany.name,
+  sellerCompany.street,
+  `${sellerCompany.postalCode} ${sellerCompany.city}`,
+  `NIP: ${sellerCompany.nip}`,
 ];
 
 export function contactFormFixture(language: Locale) {

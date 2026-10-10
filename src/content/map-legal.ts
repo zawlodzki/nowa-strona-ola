@@ -19,9 +19,11 @@ export interface LegalPageView {
   breadcrumbLabel: string;
   breadcrumbs: { href: string; label: string; current?: boolean }[];
   title: string;
-  effectiveFrom: string;
-  effectiveLabel: string;
+  versionLabel: string;
+  effective: { datetime: string; label: string } | null;
   effectiveCaption: string;
+  pendingCaption: string;
+  versionLine: string;
   tocLabel: string;
   toc: { id: string; text: string }[];
   body: PortableBlock[];
@@ -37,13 +39,17 @@ const copy = {
     home: "Strona główna",
     breadcrumbLabel: "Ścieżka nawigacji",
     toc: "W tym dokumencie",
+    version: "Wersja",
     effective: "obowiązuje od",
+    pending: "data wejścia w życie do ustalenia",
   },
   en: {
     home: "Home",
     breadcrumbLabel: "Breadcrumb",
     toc: "In this document",
-    effective: "Effective from",
+    version: "Version",
+    effective: "effective from",
+    pending: "effective date to be confirmed",
   },
 } as const;
 
@@ -65,12 +71,10 @@ export function mapLegalPage(
   if (!slug) throw new Error("Strona prawna nie ma adresu. Zatrzymuję build.");
   const title = page.title?.trim();
   if (!title) throw new Error("Strona prawna nie ma tytułu. Zatrzymuję build.");
-  const effectiveFrom = page.effectiveFrom?.trim();
-  if (!effectiveFrom) {
-    throw new Error(
-      "Strona prawna nie ma daty obowiązywania. Zatrzymuję build.",
-    );
-  }
+  const version = page.version?.trim();
+  if (!version)
+    throw new Error("Strona prawna nie ma wersji. Zatrzymuję build.");
+  const effectiveFrom = page.effectiveFrom?.trim() || null;
   const href = pagePath(language, slug);
   const translationSlug = page.translation?.slug?.trim() || null;
   const alternateHref = translationSlug
@@ -83,6 +87,13 @@ export function mapLegalPage(
   const body = parsePortableBlocks(page.body);
   const { html, toc } = articleBodyToHtml(body);
   const labels = copy[language];
+  const versionLabel = `${labels.version} ${version}`;
+  const effective = effectiveFrom
+    ? {
+        datetime: toDatetime(effectiveFrom),
+        label: formatEffectiveNumeric(effectiveFrom),
+      }
+    : null;
   const origin = "https://aleksandraolesiewicz.com";
   const graph: Record<string, unknown>[] = [
     {
@@ -91,7 +102,8 @@ export function mapLegalPage(
       url: `${origin}${href}`,
       name: title,
       inLanguage: language === "pl" ? "pl-PL" : "en-GB",
-      datePublished: toDatetime(effectiveFrom),
+      version,
+      ...(effective ? { datePublished: effective.datetime } : {}),
       isPartOf: { "@id": `${origin}/#website` },
     },
     {
@@ -128,9 +140,13 @@ export function mapLegalPage(
       { href, label: title, current: true },
     ],
     title,
-    effectiveFrom: toDatetime(effectiveFrom),
-    effectiveLabel: formatEffectiveNumeric(effectiveFrom),
+    versionLabel,
+    effective,
     effectiveCaption: labels.effective,
+    pendingCaption: labels.pending,
+    versionLine: effective
+      ? `${versionLabel} · ${labels.effective} ${effective.label}`
+      : `${versionLabel} · ${labels.pending}`,
     tocLabel: labels.toc,
     toc,
     body,
