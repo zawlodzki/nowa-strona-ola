@@ -99,6 +99,6 @@ const privacyHtml = await readFile(
   "dist/polityka-prywatnosci/index.html",
   "utf8",
 );
-assert.match(privacyHtml, /1\. Administrator danych/);
+assert.match(privacyHtml, /1\. Kto jest administratorem Twoich danych/);
 
 console.log(JSON.stringify({ gzipBytes: sizes, filesWithoutEnglish }, null, 2));
