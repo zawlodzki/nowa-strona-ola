@@ -12,6 +12,8 @@ import {
   HOME_SECTION_ORDER,
   applyMutations,
   buildAudienceItems,
+  buildIconMutations,
+  buildIconPatch,
   buildMutations,
   buildSectionPatch,
   findLogoSections,
@@ -171,5 +173,50 @@ describe("audience import", () => {
     const doc = home("pl");
     (doc.sections as unknown[]).splice(2, 0, items.pl);
     expect(() => buildSectionPatch(doc, items.pl)).toThrow("ręcznej decyzji");
+  });
+
+  it("syncs only card icons once the section exists", () => {
+    const dataset = [home("pl"), home("en")];
+    const after = applyMutations(
+      dataset,
+      buildMutations(patchesFor(dataset), []),
+    );
+    // Simulate the live lake: arrows everywhere and a Studio-edited title.
+    const live = after.map((doc) => {
+      const copy = structuredClone(doc);
+      const section = (
+        copy.sections as { _key: string; items?: unknown }[]
+      ).find((entry) => entry._key === "home-audience")!;
+      const cards = section.items as { icon?: string; title: string }[];
+      cards.forEach((card) => (card.icon = "arrow"));
+      cards[0]!.title = "Edytowane w Studio";
+      return { ...copy, _rev: `live-${copy._id}` };
+    });
+    const pl = buildIconPatch(live[0], items.pl)!;
+    expect(pl.ifRevisionID).toBe("live-page-home-pl");
+    expect(pl.changes.map((change) => [change.cardKey, change.to])).toEqual([
+      ["audience-pcos", "flower"],
+      ["audience-insulin", "drop-wave"],
+      ["audience-lean-pcos", "sprout"],
+      ["audience-perimenopause", "sun-horizon"],
+    ]);
+    const mutations = buildIconMutations([pl]);
+    expect(
+      Object.keys((mutations[0] as { patch: { set: object } }).patch.set),
+    ).toEqual([
+      'sections[_key=="home-audience"].items[_key=="audience-pcos"].icon',
+      'sections[_key=="home-audience"].items[_key=="audience-insulin"].icon',
+      'sections[_key=="home-audience"].items[_key=="audience-lean-pcos"].icon',
+      'sections[_key=="home-audience"].items[_key=="audience-perimenopause"].icon',
+    ]);
+    const synced = applyMutations(live, mutations);
+    const cards = (
+      synced[0]!.sections as { _key: string; items?: unknown }[]
+    ).find((entry) => entry._key === "home-audience")!.items as {
+      icon: string;
+      title: string;
+    }[];
+    expect(cards[0]!.title).toBe("Edytowane w Studio");
+    expect(buildIconPatch(synced[0], items.pl)).toBeNull();
   });
 });

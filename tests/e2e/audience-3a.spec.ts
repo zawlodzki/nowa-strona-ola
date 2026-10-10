@@ -118,6 +118,12 @@ for (const entry of pages) {
       await expect(icon.locator("img")).toHaveCount(0);
     }
     await expect(section.locator("img")).toHaveCount(0);
+    // Each topic has its own icon; no card falls back to the arrow.
+    const paths = await section
+      .locator(".home3a-audience__icon svg path")
+      .evaluateAll((elements) => elements.map((el) => el.getAttribute("d")));
+    expect(new Set(paths).size).toBe(entry.titles.length);
+    expect(paths).not.toContain("M7 17 17 7M7 7h10v10");
   });
 }
 

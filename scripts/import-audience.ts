@@ -14,7 +14,9 @@
  * Dry run by default. Every patch carries ifRevisionID; everything is sent as
  * one transaction. Before a write the affected documents are backed up to
  * --backup-dir (default reports/sanity-backup). Drafts of the home pages that
- * still contain the logo strip are patched too. The token is never printed.
+ * still contain the logo strip are patched too. When the audience section is
+ * already in place, only card icons that differ from the fixture are set (by
+ * card `_key`); titles and texts are never touched. The token is never printed.
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -31,6 +33,8 @@ import {
   HOME_IDS,
   applyMutations,
   buildAudienceItems,
+  buildIconMutations,
+  buildIconPatch,
   buildMutations,
   buildSectionPatch,
   findLogoSections,
@@ -132,7 +136,15 @@ async function main() {
     return buildSectionPatch(byId.get(id), items[language]);
   });
   const deletions = planDeletions(allDocuments, patches);
-  const mutations = buildMutations(patches, deletions);
+  const iconPatches = targets.flatMap((id) => {
+    const language = id.endsWith("-en") ? "en" : "pl";
+    const patch = buildIconPatch(byId.get(id), items[language]);
+    return patch ? [patch] : [];
+  });
+  const mutations = [
+    ...buildMutations(patches, deletions),
+    ...buildIconMutations(iconPatches),
+  ];
   const datasetAfter = applyMutations(allDocuments, mutations);
   const problems = findProblems(
     datasetAfter.filter((doc) => !doc._id.startsWith("drafts.")),
@@ -148,6 +160,13 @@ async function main() {
     );
     console.log(`  przed: ${sectionLine(patch.before)}`);
     console.log(`  po:    ${sectionLine(patch.after)}`);
+  }
+  for (const patch of iconPatches) {
+    console.log(
+      `patch page ${patch.id}: set icon ifRevisionID=${patch.ifRevisionID ?? "-"}`,
+    );
+    for (const change of patch.changes)
+      console.log(`  ${change.path}: ${change.from ?? "-"} → ${change.to}`);
   }
   if (deletions.length) {
     for (const deletion of deletions)
@@ -176,7 +195,7 @@ async function main() {
   );
   writeFileSync(
     transactionFile,
-    `${JSON.stringify({ projectId, dataset, dryRun: !write, readMode, patches, deletions, problems, mutations }, null, 2)}\n`,
+    `${JSON.stringify({ projectId, dataset, dryRun: !write, readMode, patches, iconPatches, deletions, problems, mutations }, null, 2)}\n`,
   );
   console.log(`transakcja: ${path.relative(root, transactionFile)}`);
   if (simulateOut) {
@@ -202,8 +221,9 @@ async function main() {
     ...patches
       .filter((patch) => patch.action !== "skip")
       .map((patch) => patch.id),
+    ...iconPatches.map((patch) => patch.id),
     ...deletions.map((deletion) => deletion.id),
-  ];
+  ].filter((id, index, all) => all.indexOf(id) === index);
   mkdirSync(backupDir, { recursive: true });
   const backupFile = path.join(
     backupDir,

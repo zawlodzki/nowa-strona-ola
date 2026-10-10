@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { toAudience } from "../../src/content/map-sections";
 import { audienceIconOptions } from "../../studio/schema-types/blocks/page-sections";
 import { AUDIENCE_ICON_KEYS } from "../../src/sections/types";
+import { topicIconPaths } from "../../src/design-system/decorations/topic-icons";
 
 const card = (title: string, icon?: string) => ({
   title,
@@ -51,5 +52,19 @@ describe("audience section mapper", () => {
     expect(audienceIconOptions.map((option) => option.value)).toEqual([
       ...AUDIENCE_ICON_KEYS,
     ]);
+  });
+});
+
+describe("audience topic icons", () => {
+  it("has an original 24px path for every topic key", () => {
+    const topicKeys = AUDIENCE_ICON_KEYS.filter(
+      (key) => key !== "arrow" && key !== "check",
+    );
+    expect(Object.keys(topicIconPaths).sort()).toEqual([...topicKeys].sort());
+    for (const path of Object.values(topicIconPaths)) {
+      expect(path).toMatch(/^M/);
+      const numbers = path.match(/-?\d*\.?\d+/g)!.map(Number);
+      expect(Math.max(...numbers)).toBeLessThanOrEqual(24);
+    }
   });
 });
