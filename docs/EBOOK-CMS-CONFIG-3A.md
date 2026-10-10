@@ -63,6 +63,7 @@ Użyć istniejących `languageField`, `translationField("ebook")`,
 | `author`                          | Wymagana referencja → `author`, ten sam język                             | Istniejąca Aleksandra; portret i rola z referencji                               |
 | `availability`                    | Enum `planned`, `presale`, `available`, `paused`; domyślnie `planned`     | `planned`; nie ustawiać `available` na podstawie makiety                         |
 | `priceGross`                      | Number, wymagany, finite, ≥0, maks. 2 miejsca po przecinku                | 97                                                                               |
+| `lowestPrice30Days`               | Number, opcjonalny, >0, maks. 2 miejsca; ostrzeżenie, gdy < `priceGross`  | Puste (brak obniżki); w kodzie i fixture’ach od 10.10.2026                       |
 | `currency`                        | Enum ISO, początkowo tylko `PLN`                                          | PLN                                                                              |
 | `format`                          | Kontrolowana lista formatów, np. `pdf`                                    | PDF jest propozycją                                                              |
 | `chapters[]`                      | Obiekty z `_key`, `title`, `summary`; 1–20 pozycji, wymagane treści       | 7 rozdziałów z mockupu; kolejność redakcyjna                                     |
@@ -78,6 +79,32 @@ lub `public/`. Publiczne mogą być tylko okładka i osobny bezpłatny fragment.
 Dostarczanie zakupionego pliku i autoryzacja pozostają po stronie zatwierdzonego
 systemu sprzedaży. Sekrety płatności, dane zamówienia i dostęp do pliku nie
 należą do tego dokumentu ani publicznego bundla.
+
+### Najniższa cena z 30 dni przed obniżką (decyzja 10.10.2026)
+
+Decyzja właścicielki z 10.10.2026: podczas obniżki ceny strona e-booka pokazuje
+najniższą cenę z 30 dni przed obniżką. Podstawa: art. 4 ust. 2 ustawy
+o informowaniu o cenach towarów i usług.
+
+- Pole `lowestPrice30Days` (zakładka Oferta, PLN brutto) wypełnia się **tylko
+  na czas ogłoszonej obniżki**. Poza obniżką pole zostaje puste. Wypełnione
+  pole oznacza aktywną obniżkę; osobnego przełącznika nie ma.
+- Walidacja: wartość dodatnia, maks. 2 miejsca po przecinku. Studio ostrzega
+  (nie blokuje), gdy wartość jest niższa od `priceGross`.
+- Mapper (`src/content/map-ebook.ts`) przerywa build, gdy wartość nie jest
+  dodatnią liczbą. Landing (`src/views/Ebook3a.astro`) pod ceną w sekcji `#cena`
+  i serializer Markdown pokazują ten sam tekst, np.
+  „97 zł · najniższa cena z 30 dni przed obniżką: 129.9 zł”. Bez przekreślenia
+  i bez informacji przekazywanej wyłącznie kolorem.
+- Fixture’y i import mają pole puste. Test jednostkowy
+  (`tests/unit/ebook-3a.test.ts`) ustawia wartość na kopii fixture’u.
+- Liczby są wypisywane tak jak `priceGross` (kropka dziesiętna). Polski format
+  „129,90 zł” wymaga osobnej zmiany formatowania wszystkich cen.
+- Zakup nadal idzie przez `checkoutUrl` (link płatności Stripe dla danego
+  e-booka, bez koszyka). Akceptację regulaminu i zgodę na utratę prawa
+  odstąpienia zbiera Stripe, nie strona.
+- Stan CMS: pole jest w schemacie w repo. Wdrożenie schematu do Sanity i wpisy
+  w Content Lake nie zostały wykonane.
 
 ## Landing jako stały szablon
 

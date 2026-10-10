@@ -2,7 +2,11 @@ import type { Locale } from "@ola/shared";
 
 import { ebookCopy } from "@/content/ebook-seed";
 import { toEbookAvailability, toFaq, toMedia } from "@/content/map-sections";
-import { currencyLabel, formatPriceGross } from "@/lib/offer";
+import {
+  currencyLabel,
+  formatLowestPriceNote,
+  formatPriceGross,
+} from "@/lib/offer";
 import { ebookPath } from "@/lib/paths";
 import type {
   EbookAvailability,
@@ -64,6 +68,8 @@ export interface EbookView {
   currency: "PLN";
   currencyLabel: string;
   priceLabel: string;
+  /** Obecne tylko podczas obniżki (art. 4 ust. 2 ustawy o informowaniu o cenach). */
+  lowestPriceNote?: string;
   format: string;
   seoTitle: string;
   seoDescription?: string;
@@ -121,6 +127,7 @@ type RawEbook = {
   topic?: string | null;
   availability?: string | null;
   priceGross?: number | null;
+  lowestPrice30Days?: number | null;
   currency?: string | null;
   format?: string | null;
   seo?: { title?: string | null; description?: string | null } | null;
@@ -255,6 +262,15 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
   if (ebook.currency !== "PLN") {
     throw new Error(`E-book ${slug} wymaga waluty PLN.`);
   }
+  const lowestPrice30Days = ebook.lowestPrice30Days ?? undefined;
+  if (
+    lowestPrice30Days !== undefined &&
+    !(Number.isFinite(lowestPrice30Days) && lowestPrice30Days > 0)
+  ) {
+    throw new Error(
+      `E-book ${slug}: najniższa cena z 30 dni musi być dodatnią liczbą.`,
+    );
+  }
   const checkoutUrl = ebook.checkoutUrl ?? undefined;
   if (canPurchase(availability) && !checkoutUrl) {
     throw new Error(`E-book ${slug} w sprzedaży wymaga checkoutUrl HTTPS.`);
@@ -347,6 +363,15 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
     currency: "PLN",
     currencyLabel: currencyLabel("PLN", language),
     priceLabel: formatPriceGross(ebook.priceGross, "PLN", language),
+    lowestPriceNote:
+      lowestPrice30Days === undefined
+        ? undefined
+        : formatLowestPriceNote(
+            ebook.priceGross,
+            lowestPrice30Days,
+            "PLN",
+            language,
+          ),
     format: ebook.format === "pdf" ? "pdf" : required(ebook.format, "format"),
     seoTitle: ebook.seo?.title ?? required(ebook.title, "tytuł"),
     seoDescription: ebook.seo?.description ?? undefined,

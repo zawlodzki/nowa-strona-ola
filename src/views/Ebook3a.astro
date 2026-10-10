@@ -333,6 +333,9 @@ const jsonLd = {
           <span>{content.currencyLabel}</span>
           <small>{copy.offerPriceNote}</small>
         </p>
+        {content.lowestPriceNote && (
+          <p class="ebook3a-lowest-price">{content.lowestPriceNote}</p>
+        )}
         <ul class="ebook3a-materials">
           {copy.offerIncludes.map((item) => (
             <li>
@@ -804,6 +807,11 @@ const jsonLd = {
     font-size: 0.8125rem;
     font-weight: 400;
     letter-spacing: 0;
+  }
+  .ebook3a-lowest-price {
+    margin-block-start: 12px;
+    color: var(--ao-ink);
+    font-size: 0.875rem;
   }
   .ebook3a-offer .ebook3a-materials {
     margin-block: 30px;

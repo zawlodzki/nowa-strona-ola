@@ -53,6 +53,7 @@ export function serializeEbookView(view: EbookView, language: Locale): string {
     heading(2, landing.offerTitle),
     landing.offerLead,
     view.priceLabel,
+    view.lowestPriceNote,
     bullets(view.materials.map((item) => item.title)),
     landing.offerNote,
     heading(2, landing.testimonials.title),
