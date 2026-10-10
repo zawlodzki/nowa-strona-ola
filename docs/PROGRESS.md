@@ -6,6 +6,38 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Krok 1 dokumentacji prawnej — integracja, 10.10.2026
+
+- `main` zsynchronizowany z `origin/main` `8d39131` (fast-forward o 38 commitów).
+  Lokalne zmiany z checkoutu użytkownika miały nowsze odpowiedniki upstream;
+  przyjęto wersje upstream. Kopia: ref `refs/backup/pre-sync-2026-10-10`, stash
+  „local changes pre-sync 2026-10-10” i pliki w `/private/tmp/claude-501/sync-backup/`.
+- Decyzje właściciela i zakres: [LEGAL-IMPLEMENTATION-PLAN.md](LEGAL-IMPLEMENTATION-PLAN.md)
+  (W1–W13: bez `/wspolprace` i logotypów, newsletter bez checkboxa, formularze na
+  webhook n8n, zgody zakupowe w Stripe/Cal.com, Omnibus na stronie e-booka,
+  Cal.com `live`, EN wyłączone; GTM i c15t wdraża właściciel).
+- Gałąź `feat/legal-step-1` scala trzy podpisane gałęzie: dokumenty B2C i stopka,
+  formularze i `/odstapienie/`, wyłączenie EN + `lowestPrice30Days` + Cal.com.
+  Poprawki po scaleniu: tryb demo `LeadForm` w `/ui/` i `/design-system/` (brak
+  wysyłki z katalogu), nagłówek polityki w `check-content-lake-build.mjs`.
+  AGENTS.md: nowa ścieżka formularzy i wyłączone EN.
+- Kontrole na gałęzi integracyjnej (Node 26.11, brak Node 24 lokalnie): format,
+  tokeny, lint, check, vitest 216/216, build, build:workspaces, test:build — PASS;
+  Playwright 322/324; test:content-lake PASS (uruchomiony osobno, bo verify
+  zatrzymuje się na e2e). Grep `dist`: brak `/en/`, hreflang i śladów B2B;
+  `/odstapienie/` jest; kotwice `#pouczenie`, `#formularz-odstapienia`; 25 formularzy
+  newslettera bez checkboxa; link Cal.com na `/konsultacje/`.
+- Znany błąd do rozwiązania po tej sesji: WebKit, `tests/e2e/sticky-navigation-3a.spec.ts`
+  „tabbing through the sticky header keeps the scroll position” (1440 i 390 px) —
+  failuje też na czystym `8d39131`.
+- Bramki przed merge do `main`: zapis do Content Lake (`form` z `formKey`, `version`,
+  `errorMessage`; strona `page-withdrawal-pl`; dokumenty prawne) razem z merge,
+  bo build z Sanity wymaga nowych pól. Publikacja dokumentów prawnych po akceptacji
+  radcy (walidacja blokuje placeholdery). Workflow n8n: walidacja, deduplikacja po
+  `submissionId`, honeypot `hp_website`, e-mail E7, double opt-in.
+- Następny krok: przegląd gałęzi przez właściciela, push/PR na zlecenie, potem
+  c15t i GTM (właściciel) oraz decyzje R1–R11 z przeglądu komunikacji.
+
 ### Formularze wysyłają do webhooka n8n, 10.10.2026
 
 Decyzja właściciela: formularze wysyłają z przeglądarki POST JSON bezpośrednio
