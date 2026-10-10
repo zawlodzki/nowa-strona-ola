@@ -10,6 +10,7 @@ interface Props {
   socialLinks: SocialLink[];
   legalLinks: NavigationLink[];
   copyright: string;
+  sellerLine?: string;
   lang?: Locale;
 }
 const {
@@ -19,6 +20,7 @@ const {
   socialLinks,
   legalLinks,
   copyright,
+  sellerLine,
   lang = "pl",
 } = Astro.props;
 const pl = lang === "pl";
@@ -72,6 +74,7 @@ function isHttpUrl(href: string) {
       ))}
     </nav>
     <div class="ao-footer__bottom">
+      {sellerLine && <p class="ao-footer__seller">{sellerLine}</p>}
       <p>{copyright}</p>
       <nav aria-label={pl ? "Informacje prawne" : "Legal information"}>
         {legalLinks.map((link) => (

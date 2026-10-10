@@ -1,6 +1,10 @@
 import type { Locale } from "@ola/shared";
 
-import { footerLegalLinks } from "@/content/homepage-seed";
+import {
+  footerLegalLinks,
+  sellerCompany,
+  siteLegalCopy,
+} from "@/content/site-legal";
 import { footerSocialLinks } from "@/content/social-profiles";
 import type { PageContent } from "@/sanity/repository";
 
@@ -127,7 +131,9 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
   };
 }
 
-export function shellLinks(settings: {
+type SellerCompany = typeof sellerCompany;
+
+interface ShellSettings {
   language?: string | null;
   navigation?:
     ({ label?: string | null; href?: string | null } | null)[] | null;
@@ -136,8 +142,36 @@ export function shellLinks(settings: {
     ({ label?: string | null; href?: string | null } | null)[] | null;
   legalLinks?:
     ({ label?: string | null; href?: string | null } | null)[] | null;
-}) {
-  const language = settings.language === "en" ? "en" : "pl";
+  company?: SellerCompany | null;
+  copyright?: string | null;
+  testimonialsDisclosure?: string | null;
+}
+
+function settingsLanguage(settings: ShellSettings): Locale {
+  return settings.language === "en" ? "en" : "pl";
+}
+
+export function sellerLine(company: SellerCompany, language: Locale): string {
+  return [
+    `${company.name}, ${company.street}, ${company.postalCode} ${company.city}`,
+    `KRS ${company.krs}`,
+    `NIP ${company.nip}`,
+    `REGON ${company.regon}`,
+    `${language === "pl" ? "kapitał zakładowy" : "share capital"} ${company.shareCapital}`,
+    company.email,
+    company.phone,
+  ].join(" · ");
+}
+
+export function testimonialsDisclosure(settings: ShellSettings): string {
+  return (
+    settings.testimonialsDisclosure?.trim() ||
+    siteLegalCopy[settingsLanguage(settings)].testimonialsDisclosure
+  );
+}
+
+export function shellLinks(settings: ShellSettings) {
+  const language = settingsLanguage(settings);
   const socialLinks = (settings.socialLinks ?? []).flatMap((item) =>
     item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
   );
@@ -154,5 +188,7 @@ export function shellLinks(settings: {
         : undefined,
     socialLinks: socialLinks.length > 0 ? socialLinks : footerSocialLinks(),
     legalLinks: legalLinks.length > 0 ? legalLinks : footerLegalLinks(language),
+    sellerLine: sellerLine(settings.company ?? sellerCompany, language),
+    copyright: settings.copyright?.trim() || siteLegalCopy[language].copyright,
   };
 }

@@ -8,6 +8,11 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  footerLegalLinks,
+  sellerCompany,
+  siteLegalCopy,
+} from "../src/content/site-legal.ts";
 import { footerSocialLinks } from "../src/content/social-profiles.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -310,18 +315,9 @@ function documents() {
       emphasis: "default",
     },
     socialLinks: footerSocialLinks(),
-    legalLinks: [
-      {
-        _key: "legal-privacy",
-        label: "Polityka prywatności",
-        href: "/polityka-prywatnosci/",
-      },
-      {
-        _key: "legal-terms",
-        label: "Regulamin",
-        href: "/regulamin/",
-      },
-    ],
+    legalLinks: footerLegalLinks("pl"),
+    company: sellerCompany,
+    ...siteLegalCopy.pl,
     translation: { _type: "reference", _ref: "siteSettings-en" },
   };
   const settingsEn = {
@@ -345,18 +341,8 @@ function documents() {
       href: "/en/#newsletter",
       emphasis: "default",
     },
-    legalLinks: [
-      {
-        _key: "legal-privacy",
-        label: "Privacy policy",
-        href: "/en/privacy/",
-      },
-      {
-        _key: "legal-terms",
-        label: "Terms",
-        href: "/en/terms/",
-      },
-    ],
+    legalLinks: footerLegalLinks("en"),
+    ...siteLegalCopy.en,
     translation: { _type: "reference", _ref: settingsPl._id },
   };
 

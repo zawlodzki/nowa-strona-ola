@@ -1,7 +1,6 @@
 ---
 import type { Locale } from "@ola/shared";
-import { shellLinks } from "@/content/map-homepage";
-import { homepageCopyright } from "@/sanity/homepage-fixtures";
+import { shellLinks, testimonialsDisclosure } from "@/content/map-homepage";
 import { pagePath } from "@/lib/paths";
 import type { PageContent, SiteSettings } from "@/sanity/repository";
 import SiteShell3a from "@/views/SiteShell3a.astro";
@@ -37,7 +36,8 @@ const consultationLabels = consultationCopy[lang];
   description={page.seo?.description ?? undefined}
   preview={preview}
   footerNote={settings.footerNote ?? ""}
-  copyright={homepageCopyright(lang)}
+  copyright={shell.copyright}
+  sellerLine={shell.sellerLine}
   languageHref={alternateHref}
   navigation={[...consultationLabels.navigation]}
   footerLinks={navigation}
@@ -48,5 +48,9 @@ const consultationLabels = consultationCopy[lang];
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
 >
-  <Consultation3a lang={lang} content={consultation} />
+  <Consultation3a
+    lang={lang}
+    content={consultation}
+    reviewsDisclosure={testimonialsDisclosure(settings)}
+  />
 </SiteShell3a>

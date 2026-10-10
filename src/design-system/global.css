@@ -540,6 +540,18 @@ body.ao-site {
   color: var(--ao-muted);
   font-size: 0.6875rem;
 }
+.ao-review-disclosure {
+  max-inline-size: var(--ao-reading);
+  margin-block-start: var(--ao-space-24);
+  color: var(--ao-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.ao-footer__seller {
+  flex-basis: 100%;
+  max-inline-size: none;
+  overflow-wrap: anywhere;
+}
 .ao-footer__bottom nav {
   display: flex;
   flex-wrap: wrap;

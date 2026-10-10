@@ -3,7 +3,6 @@ import type { Locale } from "@ola/shared";
 
 import { mapLegalPage } from "@/content/map-legal";
 import { shellLinks } from "@/content/map-homepage";
-import { homepageCopyright } from "@/sanity/homepage-fixtures";
 import type { LegalPageContent, SiteSettings } from "@/sanity/repository";
 import Legal3a from "@/views/Legal3a.astro";
 import SiteShell3a from "@/views/SiteShell3a.astro";
@@ -27,7 +26,8 @@ const shell = shellLinks(settings);
   description={content.seoDescription}
   preview={preview}
   footerNote={settings.footerNote ?? ""}
-  copyright={homepageCopyright(lang)}
+  copyright={shell.copyright}
+  sellerLine={shell.sellerLine}
   languageHref={content.alternateHref}
   navigation={shell.navigation}
   headerCta={shell.headerCta}

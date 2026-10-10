@@ -1,7 +1,6 @@
 ---
 import type { Locale } from "@ola/shared";
-import { shellLinks } from "@/content/map-homepage";
-import { homepageCopyright } from "@/sanity/homepage-fixtures";
+import { shellLinks, testimonialsDisclosure } from "@/content/map-homepage";
 import { pagePath } from "@/lib/paths";
 import type { PageContent, SiteSettings } from "@/sanity/repository";
 import SiteShell3a from "@/views/SiteShell3a.astro";
@@ -37,12 +36,17 @@ const headerCta = shell.headerCta
   description={page.seo?.description ?? undefined}
   preview={preview}
   footerNote={settings.footerNote ?? ""}
-  copyright={homepageCopyright(lang)}
+  copyright={shell.copyright}
+  sellerLine={shell.sellerLine}
   languageHref={alternateHref}
   navigation={navigation}
   headerCta={headerCta}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
 >
-  <About3a lang={lang} content={mapAbout(page, lang)} />
+  <About3a
+    lang={lang}
+    content={mapAbout(page, lang)}
+    reviewsDisclosure={testimonialsDisclosure(settings)}
+  />
 </SiteShell3a>

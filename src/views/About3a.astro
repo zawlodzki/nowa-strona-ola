@@ -25,9 +25,10 @@ import { pickSiteImage } from "@/lib/site-images";
 export interface Props {
   lang: Locale;
   content: AboutView;
+  reviewsDisclosure: string;
 }
 
-const { lang, content } = Astro.props;
+const { lang, content, reviewsDisclosure } = Astro.props;
 const copy = aboutCopy[lang];
 const pl = lang === "pl";
 const diplomaSrc = content.credentials.person.diploma?.src;
@@ -200,6 +201,7 @@ const profileJsonLd = {
           </ReviewCard>
         ))}
       </div>
+      <p class="ao-review-disclosure">{reviewsDisclosure}</p>
     </Container>
   </Section>
 

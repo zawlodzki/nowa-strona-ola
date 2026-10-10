@@ -30,9 +30,10 @@ import type { HomepageView } from "@/content/map-homepage";
 export interface Props {
   lang: Locale;
   content: HomepageView;
+  reviewsDisclosure: string;
 }
 
-const { lang, content } = Astro.props;
+const { lang, content, reviewsDisclosure } = Astro.props;
 const metric = content.approach.items[0];
 const firstPcos = content.ebooks.items.find((item) => item.topic === "pcos");
 const firstPeri = content.ebooks.items.find(
@@ -377,6 +378,7 @@ function coverLabels(kind: CoverArtKind): string[] {
           </ReviewCard>
         ))}
       </Carousel>
+      <p class="ao-review-disclosure">{reviewsDisclosure}</p>
     </Container>
   </Section>
 
