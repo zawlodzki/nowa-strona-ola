@@ -148,36 +148,18 @@ describe("site chrome 3a fixtures", () => {
       { label: "Regulamin newslettera", href: "/regulamin-newslettera/" },
       { label: "Odstąpienie od umowy", href: "/odstapienie/" },
     ]);
-    expect(shell.sellerLine).toBe(
-      "Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków · KRS 0001158341 · NIP 6793323800 · REGON 541006624 · kapitał zakładowy 5 000 zł · ola@aleksandraolesiewicz.com · +48 530 005 133",
-    );
     expect(shell.copyright).toBe(
       "© 2026 Wellbiz sp. z o.o. · Treści: Aleksandra Olesiewicz-Zawłodzka",
     );
   });
 
-  it("formats seller data and disclosure from CMS settings, not the seed", () => {
+  it("takes copyright and disclosure from CMS settings, not the seed", () => {
     const settings = {
       language: "pl",
-      company: {
-        name: "Przykład sp. z o.o.",
-        street: "ul. Krótka 1",
-        postalCode: "00-001",
-        city: "Warszawa",
-        krs: "0000000001",
-        nip: "1111111111",
-        regon: "222222222",
-        shareCapital: "10 000 zł",
-        email: "biuro@example.com",
-        phone: "+48 600 000 000",
-      },
       copyright: "© 2027 Przykład",
       testimonialsDisclosure: "Opinie weryfikujemy.",
     };
     const shell = shellLinks(settings);
-    expect(shell.sellerLine).toBe(
-      "Przykład sp. z o.o., ul. Krótka 1, 00-001 Warszawa · KRS 0000000001 · NIP 1111111111 · REGON 222222222 · kapitał zakładowy 10 000 zł · biuro@example.com · +48 600 000 000",
-    );
     expect(shell.copyright).toBe("© 2027 Przykład");
     expect(testimonialsDisclosure(settings)).toBe("Opinie weryfikujemy.");
     expect(testimonialsDisclosure({ language: "pl" })).toBe(

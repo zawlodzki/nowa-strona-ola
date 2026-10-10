@@ -95,10 +95,9 @@ niezmieniony:
   `/regulamin-newslettera/`, Odstąpienie od umowy `/odstapienie/` (stronę
   buduje osobny etap formularzy). EN bez zmian: `/en/privacy/`, `/en/terms/`.
   „Ustawienia cookies” dojdzie razem z c15t — celowo brak.
-- `siteSettings.company` (nowy obiekt): Wellbiz sp. z o.o., ul. Lipowa 3D,
-  30-702 Kraków, KRS 0001158341, NIP 6793323800, REGON 541006624, kapitał
-  zakładowy 5 000 zł, ola@aleksandraolesiewicz.com, +48 530 005 133. Stopka
-  pokazuje je w jednej linii.
+- Dane spółki **nie** trafiają do stopki (decyzja właściciela 10.10.2026):
+  pełne dane są na `/kontakt/` i w dokumentach prawnych. Pole
+  `siteSettings.company` usunięte.
 - `siteSettings.copyright` (nowe): „© 2026 Wellbiz sp. z o.o. · Treści:
   Aleksandra Olesiewicz-Zawłodzka”.
 - `siteSettings.testimonialsDisclosure` (nowe): tekst pod każdą sekcją opinii

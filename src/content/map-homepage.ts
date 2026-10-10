@@ -1,10 +1,6 @@
 import type { Locale } from "@ola/shared";
 
-import {
-  footerLegalLinks,
-  sellerCompany,
-  siteLegalCopy,
-} from "@/content/site-legal";
+import { footerLegalLinks, siteLegalCopy } from "@/content/site-legal";
 import { footerSocialLinks } from "@/content/social-profiles";
 import type { PageContent } from "@/sanity/repository";
 
@@ -131,8 +127,6 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
   };
 }
 
-type SellerCompany = typeof sellerCompany;
-
 interface ShellSettings {
   language?: string | null;
   navigation?:
@@ -142,25 +136,12 @@ interface ShellSettings {
     ({ label?: string | null; href?: string | null } | null)[] | null;
   legalLinks?:
     ({ label?: string | null; href?: string | null } | null)[] | null;
-  company?: SellerCompany | null;
   copyright?: string | null;
   testimonialsDisclosure?: string | null;
 }
 
 function settingsLanguage(settings: ShellSettings): Locale {
   return settings.language === "en" ? "en" : "pl";
-}
-
-export function sellerLine(company: SellerCompany, language: Locale): string {
-  return [
-    `${company.name}, ${company.street}, ${company.postalCode} ${company.city}`,
-    `KRS ${company.krs}`,
-    `NIP ${company.nip}`,
-    `REGON ${company.regon}`,
-    `${language === "pl" ? "kapitał zakładowy" : "share capital"} ${company.shareCapital}`,
-    company.email,
-    company.phone,
-  ].join(" · ");
 }
 
 export function testimonialsDisclosure(settings: ShellSettings): string {
@@ -188,7 +169,6 @@ export function shellLinks(settings: ShellSettings) {
         : undefined,
     socialLinks: socialLinks.length > 0 ? socialLinks : footerSocialLinks(),
     legalLinks: legalLinks.length > 0 ? legalLinks : footerLegalLinks(language),
-    sellerLine: sellerLine(settings.company ?? sellerCompany, language),
     copyright: settings.copyright?.trim() || siteLegalCopy[language].copyright,
   };
 }

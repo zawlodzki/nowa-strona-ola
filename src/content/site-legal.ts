@@ -1,9 +1,9 @@
 import type { Locale } from "@ola/shared";
 
 /**
- * Seller data and legal footer copy from the legal drafts
- * (zgody-i-formularze.md, sections 1 and 8). Fixtures and the siteSettings
- * import read this; Sanity siteSettings overrides it once filled in.
+ * Seller data for the contact page and legal footer copy from the legal drafts
+ * (zgody-i-formularze.md, sections 1 and 8). Sanity siteSettings overrides the
+ * copy once filled in.
  */
 export const sellerCompany = {
   name: "Wellbiz sp. z o.o.",

@@ -35,6 +35,8 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   bo build z Sanity wymaga nowych pól. Publikacja dokumentów prawnych po akceptacji
   radcy (walidacja blokuje placeholdery). Workflow n8n: walidacja, deduplikacja po
   `submissionId`, honeypot `hp_website`, e-mail E7, double opt-in.
+- Korekta 10.10.2026: dane spółki usunięte ze stopki (`siteSettings.company`
+  usunięte); pełne dane zostają na `/kontakt/` i w dokumentach prawnych.
 - Następny krok: przegląd gałęzi przez właściciela, push/PR na zlecenie, potem
   c15t i GTM (właściciel) oraz decyzje R1–R11 z przeglądu komunikacji.
 

@@ -309,7 +309,6 @@ export const siteSettingsProjection = /* groq */ `
   navigation[]{ _key, label, href },
   "headerCta": headerCta${actionFields},
   legalLinks[]{ _key, label, href },
-  company{ name, street, postalCode, city, krs, nip, regon, shareCapital, email, phone },
   copyright,
   testimonialsDisclosure,
   socialLinks[]{ _key, label, href },

@@ -105,16 +105,18 @@ Tę samą regułę (`studio/schema-types/shared/legal-publication.ts`) stosują
 (dokument trafia do `pending`, nie do transakcji). Oba skrypty zapisują
 dokumenty opublikowane, więc nie mogą obchodzić walidacji Studio.
 
-## Stopka i dane sprzedawcy
+## Stopka
 
 `siteSettings` (decyzje: [HOMEPAGE-CMS-CONFIG.md](HOMEPAGE-CMS-CONFIG.md)):
 
 | Pole                     | Wartość w fixture’ach                                                                                         |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| `company`                | Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, KRS, NIP, REGON, kapitał, e-mail, telefon — jedna linia     |
 | `legalLinks` (PL)        | Regulamin, Polityka prywatności, Lista cookies, Regulamin newslettera, Odstąpienie od umowy (`/odstapienie/`) |
 | `copyright`              | © 2026 Wellbiz sp. z o.o. · Treści: Aleksandra Olesiewicz-Zawłodzka                                           |
 | `testimonialsDisclosure` | Informacja pod opiniami z `zgody-i-formularze.md` §8                                                          |
+
+Stopka nie pokazuje danych spółki (decyzja 10.10.2026): pełne dane są na
+`/kontakt/` i w dokumentach prawnych.
 
 Wartości domyślne: `src/content/site-legal.ts` (czytają go fixture’y i
 `scripts/import-homepage-content.mjs`). Puste pola w Content Lake = te wartości.

@@ -14,11 +14,7 @@ import {
   TESTIMONIAL_QUOTES_EN,
   TESTIMONIAL_QUOTES_PL,
 } from "@/content/homepage-seed";
-import {
-  footerLegalLinks,
-  sellerCompany,
-  siteLegalCopy,
-} from "@/content/site-legal";
+import { footerLegalLinks, siteLegalCopy } from "@/content/site-legal";
 import { footerSocialLinks } from "@/content/social-profiles";
 import { consultationPath, ebookCollectionPath } from "@/lib/paths";
 
@@ -165,7 +161,6 @@ export function homepageSettingsFixture(language: Locale) {
     navigation: homepageNavigation(language),
     headerCta: homepageHeaderCta(language),
     legalLinks: footerLegalLinks(language),
-    company: sellerCompany,
     ...siteLegalCopy[language],
     socialLinks: footerSocialLinks(),
     blogIndex: blogIndexSettingsFixture(language),

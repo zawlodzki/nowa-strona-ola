@@ -82,7 +82,7 @@ test("terms appendices open at their anchors", async ({ page }) => {
   ).toContainText("(*) Niepotrzebne skreślić.");
 });
 
-test("footer lists legal documents and seller data", async ({ page }) => {
+test("footer lists legal documents without seller data", async ({ page }) => {
   await page.goto("/regulamin/");
   const legal = page.getByRole("navigation", { name: "Informacje prawne" });
   await expect(legal.getByRole("link")).toHaveText([
@@ -95,9 +95,7 @@ test("footer lists legal documents and seller data", async ({ page }) => {
   await expect(
     legal.getByRole("link", { name: "Odstąpienie od umowy" }),
   ).toHaveAttribute("href", "/odstapienie/");
-  await expect(page.locator(".ao-footer__seller")).toHaveText(
-    "Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków · KRS 0001158341 · NIP 6793323800 · REGON 541006624 · kapitał zakładowy 5 000 zł · ola@aleksandraolesiewicz.com · +48 530 005 133",
-  );
+  await expect(page.locator(".ao-footer__seller")).toHaveCount(0);
   await expect(page.locator(".ao-footer__bottom")).toContainText(
     "© 2026 Wellbiz sp. z o.o. · Treści: Aleksandra Olesiewicz-Zawłodzka",
   );

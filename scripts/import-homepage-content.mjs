@@ -8,11 +8,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import {
-  footerLegalLinks,
-  sellerCompany,
-  siteLegalCopy,
-} from "../src/content/site-legal.ts";
+import { footerLegalLinks, siteLegalCopy } from "../src/content/site-legal.ts";
 import { footerSocialLinks } from "../src/content/social-profiles.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -304,7 +300,6 @@ function documents() {
     },
     socialLinks: footerSocialLinks(),
     legalLinks: footerLegalLinks("pl"),
-    company: sellerCompany,
     ...siteLegalCopy.pl,
     translation: { _type: "reference", _ref: "siteSettings-en" },
   };

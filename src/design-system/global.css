@@ -585,11 +585,6 @@ body.ao-site {
   font-size: 0.875rem;
   line-height: 1.6;
 }
-.ao-footer__seller {
-  flex-basis: 100%;
-  max-inline-size: none;
-  overflow-wrap: anywhere;
-}
 .ao-footer__bottom nav {
   display: flex;
   flex-wrap: wrap;

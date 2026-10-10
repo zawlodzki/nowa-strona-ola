@@ -18,7 +18,6 @@ export interface Props {
   socialLinks?: SocialLink[];
   legalLinks?: NavigationLink[];
   copyright: string;
-  sellerLine?: string;
   preview?: boolean;
   languageHref?: string | null;
   legacyBase?: boolean;
@@ -35,7 +34,6 @@ const {
   socialLinks = [],
   legalLinks = [],
   copyright,
-  sellerLine,
   preview = false,
   languageHref = null,
   legacyBase = false,
@@ -76,7 +74,6 @@ const homeHref = homePath(lang);
     socialLinks={socialLinks}
     legalLinks={legalLinks}
     copyright={copyright}
-    sellerLine={sellerLine}
     lang={lang}
   />
 </Layout3a>
