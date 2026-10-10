@@ -438,6 +438,13 @@ konkretnej płatnej usługi. Nie podano operatora płatności; historyczny Cal.c
 i nie jest właściwym celem. Podłączenie rzeczywistej rezerwacji wymaga URL wydarzenia, a dostępność terminów
 wynika z faktycznej konfiguracji kalendarza.
 
+**Aktualizacja 10.10.2026 (decyzja właścicielki):** URL wydarzenia to
+`https://cal.com/dietetyk/konsultacja`, `bookingStatus: "live"`. Wartość mieszka w jednym
+dokumencie `service` (`serviceFixture()` w kodzie); CTA homepage, „O mnie”
+i `/konsultacje/` czytają ją z referencji usługi. Szczegóły:
+[CONSULTATION-CMS-CONFIG-3A.md](CONSULTATION-CMS-CONFIG-3A.md). Zapisu do
+Content Lake nie wykonano.
+
 Wykształcenie wyróżnić już w leadzie „O mnie” i w osobnej sekcji z miejscem
 na skan. Copy: „Ukończyłam dietetykę kliniczną na Śląskim Uniwersytecie Medycznym”.
 Ramka w mockupie: „Miejsce na skan dyplomu”. Po dodaniu dokumentu miniatura

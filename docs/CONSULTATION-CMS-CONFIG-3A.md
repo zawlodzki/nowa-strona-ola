@@ -11,8 +11,18 @@ rezerwacja i publikacja nie są wykonane. Bieżące decyzje wspólne:
 
 - Zlecenie 07.10.2026: landing sprzedażowy pojedynczej konsultacji, kolorystyka
   3a, atrakcyjna oprawa wizualna i dziesięć wskazanych części.
-- Cena 450 zł, 60 minut, online oraz tymczasowy URL `https://cal.com`: decyzje
-  użytkownika 06.10.2026. Nie określono rozliczenia podatkowego.
+- Cena 450 zł, 60 minut, online: decyzje użytkownika 06.10.2026. Nie określono
+  rozliczenia podatkowego. Tymczasowy URL `https://cal.com` z 06.10.2026
+  zastąpiony decyzją z 10.10.2026 (niżej).
+- **Decyzja właścicielki z 10.10.2026: rezerwacja konsultacji startuje.**
+  Adres rezerwacji: `https://cal.com/dietetyk/konsultacja`. W kodzie `serviceFixture()`
+  (`src/sanity/homepage-fixtures.ts`) ma `bookingUrl` = ten adres i
+  `bookingStatus: "live"`. Hero i cena na `/konsultacje/` oraz CTA konsultacji
+  na homepage i „O mnie” biorą adres z tej jednej usługi; komunikaty
+  o tymczasowym kalendarzu znikają. FAQ „Jak zarezerwować termin?” mówi
+  o wyborze i opłaceniu terminu w Cal.com. Zgody zakupowe (regulamin,
+  płatność) zbiera Cal.com/Stripe, nie strona. Stan CMS: skrypty importu
+  i fixture’y zaktualizowane w repo; zapisu do Content Lake nie wykonano.
 - Zakres bazowy z zaakceptowanego homepage: rozmowa o dostępnych wynikach,
   odżywianiu, codzienności, priorytetach i pierwszych zmianach. Nowe sformułowania,
   przebieg i FAQ są propozycją do oceny, nie potwierdzonym regulaminem usługi.
@@ -53,9 +63,10 @@ Dodatkowy blok prowadzącej wzmacnia zaufanie do osoby świadczącej usługę.
 
 Pełne propozycje akapitów i sześciu odpowiedzi FAQ są w linkowanym HTML.
 Przy przenoszeniu zachować je jako dane, nie tekst ukryty w CSS.
-Wszystkie główne CTA: **„Zarezerwuj konsultację” → `https://cal.com`**.
-Navbar przewija do ceny. Hero i cena prowadzą do tymczasowego celu wskazanego
-przez użytkownika. Przy cenie i w FAQ jawny status niepodłączonego kalendarza.
+Wszystkie główne CTA: **„Zarezerwuj konsultację” → `https://cal.com/dietetyk/konsultacja`**
+(decyzja 10.10.2026). Navbar przewija do ceny. Hero i cena prowadzą do
+wydarzenia Cal.com. Komunikat o niepodłączonym kalendarzu pokazuje się tylko
+przy `bookingStatus: "placeholder"`; obecnie status to `live`.
 
 Zastosowanie zasad poradnika: mały pierwszy krok zamiast pakietu; jasno pokazany
 cel spotkania; zdjęcie i prawdziwy kontekst Oli; uznanie tego, co odbiorczyni już

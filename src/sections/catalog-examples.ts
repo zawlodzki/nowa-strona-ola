@@ -214,7 +214,7 @@ const pl: CatalogCopy = {
       {
         question: "Gdzie jest wersja angielska?",
         answer:
-          "Pod /en/ui/. Brak tłumaczenia oznacza brak strony, bez polskiego fallbacku.",
+          "Na razie nie ma. Wersja angielska jest wyłączona, bez polskiego fallbacku.",
       },
       {
         question: "Czy formularz coś wysyła?",

@@ -5,61 +5,55 @@ import { gzipSync } from "node:zlib";
 
 const templates = [
   {
-    paths: ["kontakt/index.html", "en/contact/index.html"],
+    paths: ["kontakt/index.html"],
     view: ".contact3a",
     external: 8 * 1024,
     inline: 4 * 1024,
   },
   {
-    paths: ["index.html", "en/index.html"],
+    paths: ["index.html"],
     view: ".home3a",
     external: 8 * 1024,
     inline: 4 * 1024,
   },
   {
-    paths: ["o-mnie/index.html", "en/about/index.html"],
+    paths: ["o-mnie/index.html"],
     view: ".about3a",
     external: 8 * 1024,
     inline: 4 * 1024,
   },
   {
-    paths: ["konsultacje/index.html", "en/consultations/index.html"],
+    paths: ["konsultacje/index.html"],
     view: ".consult3a",
     external: 9 * 1024,
     inline: 4 * 1024,
   },
   {
-    paths: ["ebooki/index.html", "en/ebooks/index.html"],
+    paths: ["ebooki/index.html"],
     view: ".ebooks3a",
     external: 8 * 1024,
     inline: 4 * 1024,
   },
   {
-    paths: [
-      "ebooki/suplementy-w-pcos/index.html",
-      "en/ebooks/supplements-in-pcos/index.html",
-    ],
+    paths: ["ebooki/suplementy-w-pcos/index.html"],
     view: ".ebook3a",
     external: 10 * 1024,
     inline: 4 * 1024,
   },
   {
-    paths: ["blog/index.html", "en/blog/index.html"],
+    paths: ["blog/index.html"],
     view: ".blog3a",
     external: 8 * 1024,
     inline: 4 * 1024,
   },
   {
-    paths: [
-      "blog/przygotowanie-do-konsultacji-pcos/index.html",
-      "en/blog/preparing-for-a-pcos-nutrition-consultation/index.html",
-    ],
+    paths: ["blog/przygotowanie-do-konsultacji-pcos/index.html"],
     view: ".article3a",
     external: 10 * 1024,
     inline: 4 * 1024,
   },
   {
-    paths: ["polityka-prywatnosci/index.html", "en/privacy/index.html"],
+    paths: ["polityka-prywatnosci/index.html"],
     view: ".legal3a",
     external: 6 * 1024,
     inline: 6 * 1024,

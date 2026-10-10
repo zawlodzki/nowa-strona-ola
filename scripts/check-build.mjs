@@ -1,7 +1,8 @@
-import { access, readFile, readdir } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
 import { checkCssBudgets } from "./check-css-budgets.mjs";
+import { assertEnglishDisabled } from "./check-disabled-locales.mjs";
 const assets = await readdir("dist/_astro");
 const sizes = { js: 0, css: 0 };
 for (const name of assets) {
@@ -26,26 +27,17 @@ assert.equal(
 );
 for (const path of [
   "index.html",
-  "en/index.html",
   "o-mnie/index.html",
-  "en/about/index.html",
   "konsultacje/index.html",
-  "en/consultations/index.html",
   "ebooki/index.html",
   "ebooki/kategoria/pcos/index.html",
   "ebooki/suplementy-w-pcos/index.html",
-  "en/ebooks/index.html",
-  "en/ebooks/category/pcos/index.html",
-  "en/ebooks/supplements-in-pcos/index.html",
   "ui/index.html",
-  "en/ui/index.html",
   "static/index.html",
   "blog/index.html",
   "blog/strona/2/index.html",
   "blog/kategoria/pcos/index.html",
   "blog/kategoria/perimenopauza/index.html",
-  "en/blog/index.html",
-  "en/blog/page/2/index.html",
   "blog/przygotowanie-do-konsultacji-pcos/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
@@ -62,13 +54,7 @@ for (const path of [
   if (path === "static/index.html")
     assert(!html.includes("<script"), "static primitives emit JS");
 }
-await assert.rejects(access("dist/en/tylko-pl/index.html"), /ENOENT/);
-await assert.rejects(access("dist/en/konsultacje/index.html"), /ENOENT/);
-await assert.rejects(
-  access("dist/en/ebooki/suplementy-w-pcos/index.html"),
-  /ENOENT/,
-);
-await assert.rejects(access("dist/en/ebooki/index.html"), /ENOENT/);
+const filesWithoutEnglish = await assertEnglishDisabled();
 const collectionHtml = await readFile("dist/ebooki/index.html", "utf8");
 assert.match(collectionHtml, /Więcej jasności/);
 assert.match(collectionHtml, /97/);
@@ -107,9 +93,6 @@ const blogEmpty = await readFile(
   "utf8",
 );
 assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
-const blogEn = await readFile("dist/en/blog/index.html", "utf8");
-assert.match(blogEn, /Blog\. On your terms\./);
-assert.doesNotMatch(blogEn, /Po Twojemu/);
 const articleHtml = await readFile(
   "dist/blog/przygotowanie-do-konsultacji-pcos/index.html",
   "utf8",
@@ -122,11 +105,7 @@ assert.match(
 assert.match(articleHtml, /W tym artykule/);
 assert.match(articleHtml, /article-faq-schema/);
 const homePl = await readFile("dist/index.html", "utf8");
-const homeEn = await readFile("dist/en/index.html", "utf8");
-for (const [label, html] of [
-  ["/", homePl],
-  ["/en/", homeEn],
-]) {
+for (const [label, html] of [["/", homePl]]) {
   assert.match(
     html,
     /href="https:\/\/www\.instagram\.com\/aleksandra_olesiewicz"/,
@@ -149,31 +128,17 @@ for (const [label, html] of [
   );
 }
 assert.match(homePl, /Zrozum swoje ciało/);
-assert.match(homeEn, /Understand your body/);
 const aboutHtml = await readFile("dist/o-mnie/index.html", "utf8");
 assert.match(aboutHtml, /Jestem Ola/);
 assert.match(aboutHtml, /diploma/);
 const consultationHtml = await readFile("dist/konsultacje/index.html", "utf8");
 assert.match(consultationHtml, /Konsultacje dietetyczne|60 minut/i);
 
-const articleEn = await readFile(
-  "dist/en/blog/preparing-for-a-pcos-nutrition-consultation/index.html",
-  "utf8",
-);
-assert.match(articleEn, /article3a/);
-assert.match(
-  articleEn,
-  /How to prepare for a nutrition consultation with PCOS\?/,
-);
-assert.match(articleEn, /In this article/);
-assert.doesNotMatch(articleEn, /W tym artykule/);
 for (const path of [
   "polityka-prywatnosci/index.html",
   "lista-cookies-i-identyfikatorow/index.html",
   "regulamin/index.html",
   "regulamin-newslettera/index.html",
-  "en/privacy/index.html",
-  "en/terms/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(
@@ -206,18 +171,12 @@ const cookiesHtml = await readFile(
 );
 assert.match(cookiesHtml, /Przed dokonaniem wyboru/);
 assert.match(cookiesHtml, /\/polityka-prywatnosci\//);
-const privacyEn = await readFile("dist/en/privacy/index.html", "utf8");
-assert.match(privacyEn, /The binding version is the Polish text/);
-assert.match(privacyEn, /\/polityka-prywatnosci\//);
-assert.doesNotMatch(privacyEn, /Administratorem danych osobowych/);
 const sitemap = await readFile("dist/sitemap.xml", "utf8");
 for (const loc of [
   "https://aleksandraolesiewicz.com/polityka-prywatnosci/",
   "https://aleksandraolesiewicz.com/lista-cookies-i-identyfikatorow/",
   "https://aleksandraolesiewicz.com/regulamin/",
   "https://aleksandraolesiewicz.com/regulamin-newslettera/",
-  "https://aleksandraolesiewicz.com/en/privacy/",
-  "https://aleksandraolesiewicz.com/en/terms/",
 ]) {
   assert.match(sitemap, new RegExp(loc.replaceAll("/", "\\/")));
 }
@@ -227,6 +186,7 @@ console.log(
       gzipBytes: sizes,
       cssByTemplate: await checkCssBudgets(),
       staticPrimitivesScripts: 0,
+      filesWithoutEnglish,
     },
     null,
     2,

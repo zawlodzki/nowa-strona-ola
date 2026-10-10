@@ -480,6 +480,7 @@ export const ebookProjection = /* groq */ `
   coverTone,
   availability,
   priceGross,
+  lowestPrice30Days,
   currency,
   format,
   sortOrder,

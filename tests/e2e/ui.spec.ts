@@ -21,7 +21,6 @@ async function expectDecodedWidth(locator: Locator, width: number) {
 
 for (const [path, openName, closeName] of [
   ["/ui/", "Jak pracujemy", "Zamknij"],
-  ["/en/ui/", "How we work", "Close"],
 ]) {
   test(`dialog keyboard and focus ${path}`, async ({ page }) => {
     await page.goto(path);
@@ -228,10 +227,7 @@ test("catalog shows tokens, Polish glyphs and Switzer", async ({ page }) => {
     page.getByRole("heading", { name: "Katalog komponentów" }),
   ).toBeVisible();
   await expect(page.getByText("Zażółć gęślą jaźń ąćęłńóśźż")).toBeVisible();
-  await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
-    "href",
-    "/en/ui/",
-  );
+  await expect(page.getByRole("link", { name: "English" })).toHaveCount(0);
   await expect(
     page.getByRole("heading", { name: "Logo", exact: true }),
   ).toBeVisible();
@@ -275,17 +271,6 @@ test("catalog shows tokens, Polish glyphs and Switzer", async ({ page }) => {
   await expect(
     page.getByText("Nie. To demonstracyjny układ sekcji", { exact: false }),
   ).toBeVisible();
-  await page.goto("/en/ui/");
-  await expect(
-    page.getByRole("heading", { name: "Component catalog" }),
-  ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Polski" })).toHaveAttribute(
-    "href",
-    "/ui/",
-  );
-  await expect(
-    page.getByRole("heading", { name: "Questions that return" }),
-  ).toBeVisible();
 });
 
 test("static primitives emit no scripts; no console errors on interactive page", async ({
@@ -301,9 +286,7 @@ test("static primitives emit no scripts; no console errors on interactive page",
   expect(errors).toEqual([]);
 });
 
-test("about page Polish and English plus missing Polish under English slug", async ({
-  page,
-}) => {
+test("about page without an English version", async ({ page }) => {
   await page.goto("/o-mnie/");
   await expect(page.getByRole("heading", { name: /Jestem Ola/ })).toBeVisible();
   const aboutPortrait = page.locator(".about3a-portrait img");
@@ -360,7 +343,7 @@ test("about page Polish and English plus missing Polish under English slug", asy
   );
   await expect(
     page.getByRole("link", { name: "Zarezerwuj konsultację" }),
-  ).toHaveAttribute("href", "https://cal.com");
+  ).toHaveAttribute("href", "https://cal.com/dietetyk/konsultacja");
   await expect(
     page
       .getByRole("navigation", { name: "Nawigacja główna" })
@@ -386,42 +369,23 @@ test("about page Polish and English plus missing Polish under English slug", asy
     .click();
   expect(posts).toEqual([]);
 
-  await page.goto("/en/about/");
-  await expect(page.getByRole("heading", { name: /I am Ola/ })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
-    /Jestem Ola/,
-  );
-  const diplomaEn = page.locator("#wyksztalcenie img");
-  await expect(diplomaEn).toHaveCount(1);
-  await expect(diplomaEn).toHaveAttribute(
-    "alt",
-    "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom",
-  );
-  await expect
-    .poll(async () =>
-      diplomaEn.evaluate((img) => (img as HTMLImageElement).naturalWidth),
-    )
-    .toBeGreaterThan(0);
-  await expect(page.getByText("Space for the diploma scan")).toHaveCount(0);
-  await expect(
-    page
-      .getByRole("navigation", { name: "Primary navigation" })
-      .getByRole("link", {
-        name: "Polski",
-      }),
-  ).toHaveCount(0);
-
   const missing = await page.goto("/en/o-mnie/");
   expect(missing?.status()).toBe(404);
 });
 
-test("consultation page Polish and English plus missing Polish under English slug", async ({
-  page,
-}) => {
+test("consultation page without an English version", async ({ page }) => {
   const posts: string[] = [];
   page.on("request", (request) => {
     if (request.method() === "POST") posts.push(request.url());
   });
+
+  await page.goto("/");
+  await expect(
+    page.locator("#konsultacje").getByRole("link", {
+      name: "Zarezerwuj konsultację",
+    }),
+  ).toHaveAttribute("href", "https://cal.com/dietetyk/konsultacja");
+  await expect(page.getByText(/Tymczasowy adres kalendarza/)).toHaveCount(0);
 
   await page.goto("/konsultacje/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
@@ -430,12 +394,13 @@ test("consultation page Polish and English plus missing Polish under English slu
   const booking = page.getByRole("link", { name: "Zarezerwuj konsultację" });
   await expect(booking).toHaveCount(2);
   for (const link of await booking.all()) {
-    await expect(link).toHaveAttribute("href", "https://cal.com");
+    await expect(link).toHaveAttribute(
+      "href",
+      "https://cal.com/dietetyk/konsultacja",
+    );
   }
-  await expect(page.locator(".ao-hero")).not.toContainText("Podgląd oferty");
-  await expect(page.locator("#cena")).toContainText(
-    "Podgląd oferty: przycisk prowadzi tymczasowo do Cal.com. Właściwy kalendarz tej konsultacji zostanie dodany później.",
-  );
+  await expect(page.locator("#cena")).toContainText("450 zł");
+  await expect(page.getByText(/Podgląd oferty/)).toHaveCount(0);
   await expect(page.getByText("To nie jest potwierdzenie wizyty.")).toHaveCount(
     0,
   );
@@ -473,27 +438,11 @@ test("consultation page Polish and English plus missing Polish under English slu
   await expect(answer).toBeVisible();
   expect(posts).toEqual([]);
 
-  await page.goto("/en/consultations/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    /You already know a lot\./,
-  );
-  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
-    /Wiesz już dużo/,
-  );
-  await expect(page.locator("#cena")).toContainText("450 PLN");
-  await expect(
-    page
-      .getByRole("navigation", { name: "Primary navigation" })
-      .getByRole("link", { name: "Polski" }),
-  ).toHaveCount(0);
-
   const missing = await page.goto("/en/konsultacje/");
   expect(missing?.status()).toBe(404);
 });
 
-test("ebook landing Polish and English plus missing Polish under English slug", async ({
-  page,
-}) => {
+test("ebook landing without an English version", async ({ page }) => {
   const posts: string[] = [];
   page.on("request", (request) => {
     if (request.method() === "POST") posts.push(request.url());
@@ -530,26 +479,11 @@ test("ebook landing Polish and English plus missing Polish under English slug", 
   ).toHaveCount(0);
   expect(posts).toEqual([]);
 
-  await page.goto("/en/ebooks/supplements-in-pcos/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    /Put your supplements/,
-  );
-  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
-    /Zrób porządek/,
-  );
-  await expect(page.locator("#cena")).toContainText("97");
-  await expect(page.locator("#cena")).toContainText("PLN");
-  await expect(
-    page
-      .getByRole("navigation", { name: "Primary navigation" })
-      .getByRole("link", { name: "Polski" }),
-  ).toHaveCount(0);
-
   const missingPolish = await page.goto("/en/ebooki/suplementy-w-pcos/");
   expect(missingPolish?.status()).toBe(404);
 });
 
-test("ebook collection Polish and English with categories, empty URL and no POST", async ({
+test("ebook collection with categories, empty URL and no POST", async ({
   page,
 }) => {
   const posts: string[] = [];
@@ -611,19 +545,6 @@ test("ebook collection Polish and English with categories, empty URL and no POST
   await expect(page.getByRole("radio", { name: /PCOS/ })).toBeChecked();
   await expect(cards).toHaveCount(3);
 
-  await page.goto("/en/ebooks/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    /More clarity\./,
-  );
-  await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(
-    /Więcej jasności/,
-  );
-  await expect(
-    page
-      .getByRole("navigation", { name: "Primary navigation" })
-      .getByRole("link", { name: "Polski" }),
-  ).toHaveCount(0);
-
   const missing = await page.goto("/en/ebooki/");
   expect(missing?.status()).toBe(404);
 });
@@ -662,20 +583,7 @@ test("landing pages, blog and missing English translation", async ({
   await expect(
     page.getByRole("heading", { name: "Jeden dzień na wspólny porządek." }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
-    "href",
-    "/en/workshop/",
-  );
-  await page.goto("/en/workshop/");
-  await expect(
-    page.getByRole("heading", {
-      name: "One day to put the work in order.",
-    }),
-  ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Polski" })).toHaveAttribute(
-    "href",
-    "/warsztat/",
-  );
+  await expect(page.getByRole("link", { name: "English" })).toHaveCount(0);
 
   await page.goto("/blog/");
   await expect(
@@ -693,10 +601,6 @@ test("landing pages, blog and missing English translation", async ({
   await page.goto("/blog/kategoria/perimenopauza/");
   await expect(
     page.getByText("W tej kategorii nie ma jeszcze wpisów"),
-  ).toBeVisible();
-  await page.goto("/en/blog/");
-  await expect(
-    page.getByRole("heading", { name: "Blog. On your terms." }),
   ).toBeVisible();
   await page.goto("/blog/");
   await page
@@ -740,7 +644,6 @@ const FOOTER_SOCIAL_HREFS = [
 
 for (const [path, instagramName] of [
   ["/", "Instagram Aleksandry Olesiewicz"],
-  ["/en/", "Instagram of Aleksandra Olesiewicz"],
 ] as const) {
   test(`footer social profiles on ${path}`, async ({ page }) => {
     await page.goto(path);

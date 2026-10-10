@@ -118,30 +118,6 @@ for (const path of reviewPages) {
   });
 }
 
-test("English privacy shows the Polish-binding notice", async ({ page }) => {
-  await page.goto("/en/privacy/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Privacy policy",
-  );
-  await expect(page.locator("main")).toContainText(
-    "The binding version is the Polish text",
-  );
-  await page
-    .getByRole("link", { name: "Read the Polish privacy policy" })
-    .click();
-  await expect(page).toHaveURL(/\/polityka-prywatnosci\/$/);
-});
-
-test("English terms shows the Polish-binding notice", async ({ page }) => {
-  await page.goto("/en/terms/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Terms");
-  await expect(page.locator("main")).toContainText(
-    "The binding version is the Polish text",
-  );
-  await page.getByRole("link", { name: "Read the Polish terms" }).click();
-  await expect(page).toHaveURL(/\/regulamin\/$/);
-});
-
 test("newsletter consent links to privacy and newsletter terms", async ({
   page,
 }) => {

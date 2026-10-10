@@ -244,17 +244,4 @@ test("blog collection EN, category and mobile keep the same crop and footer arro
   const category = (await cardMetrics(categoryCard)) as CardMetrics;
   expect(category.radius).toBe(24);
   expect(category.naturalWidth).toBeGreaterThan(0);
-
-  await page.goto("/en/blog/");
-  await expect(
-    page.getByRole("heading", { name: "Blog. On your terms." }),
-  ).toBeVisible();
-  const enCard = page.locator(".blog3a-card-image").first();
-  const en = (await cardMetrics(enCard)) as CardMetrics;
-  expect(en.radius).toBe(24);
-  expect(["1.8", "1.8/1"]).toContain(en.aspectRatio);
-  expect(en.naturalWidth).toBeGreaterThan(0);
-  await expect(
-    page.getByRole("link", { name: "Back to top", exact: true }),
-  ).toHaveAttribute("href", "#main");
 });

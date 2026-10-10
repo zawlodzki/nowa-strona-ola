@@ -156,7 +156,7 @@ export function aboutSections(language: Locale) {
       facts: [...copy.consultationFacts],
       action: {
         label: copy.consultationAction,
-        href: "https://cal.com",
+        href: service.bookingUrl,
         emphasis: "default",
       },
       secondary: {

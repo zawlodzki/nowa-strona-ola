@@ -14,7 +14,6 @@ const pages = [
   ["/", "strona główna"],
   ["/o-mnie/", "o mnie"],
   ["/kontakt/", "kontakt"],
-  ["/en/contact/", "contact"],
   ["/konsultacje/", "konsultacje"],
   ["/ebooki/suplementy-w-pcos/", "ebook"],
   ["/ebooki/", "katalog e-booków"],
@@ -24,8 +23,6 @@ const pages = [
   ["/lista-cookies-i-identyfikatorow/", "lista cookies"],
   ["/regulamin/", "regulamin"],
   ["/regulamin-newslettera/", "regulamin newslettera"],
-  ["/en/privacy/", "privacy"],
-  ["/en/terms/", "terms"],
 ];
 
 function serve(directory) {

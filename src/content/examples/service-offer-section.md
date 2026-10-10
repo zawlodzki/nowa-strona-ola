@@ -8,4 +8,4 @@ Podczas pojedynczej konsultacji przyjrzymy się Twoim wynikom badań.
 
 450 zł / 60 minut
 
-[Zarezerwuj konsultację](https://cal.com)
+[Zarezerwuj konsultację](https://cal.com/dietetyk/konsultacja)

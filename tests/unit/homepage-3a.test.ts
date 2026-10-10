@@ -54,7 +54,10 @@ describe("homepage 3a fixtures", () => {
     expect(view.ebooks.items[0]?.href).toBe("/ebooki/suplementy-w-pcos/");
     expect(view.ebooks.collection?.href).toBe("/ebooki/");
     expect(view.ebooks.items[0]?.slug).toBe("suplementy-w-pcos");
-    expect(view.consultation.action.href).toBe("https://cal.com");
+    expect(view.consultation.action.href).toBe(
+      "https://cal.com/dietetyk/konsultacja",
+    );
+    expect(view.consultation.bookingStatus).toBe("live");
     expect(view.consultation.priceLabel).toBe("450 zł / 60 minut");
     expect(view.testimonials.items).toHaveLength(6);
     expect(view.testimonials.items.every((item) => item.anonymous)).toBe(true);

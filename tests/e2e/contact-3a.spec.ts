@@ -10,14 +10,6 @@ for (const entry of [
     phone: "Telefon (opcjonalnie)",
     success: "Dane poprawne. Nic nie wysłano.",
   },
-  {
-    path: "/en/contact/",
-    title: "Let’s talk.",
-    button: "Check form",
-    topic: "Conversation topic",
-    phone: "Phone (optional)",
-    success: "Details are valid. Nothing was sent.",
-  },
 ]) {
   test(`${entry.path} validates three fields and keeps newsletter independent without sending data`, async ({
     page,
