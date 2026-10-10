@@ -70,7 +70,14 @@ export interface QuestionMapContent extends TextContent {
   caption?: string;
 }
 
-export const AUDIENCE_ICON_KEYS = ["arrow", "check"] as const;
+export const AUDIENCE_ICON_KEYS = [
+  "arrow",
+  "check",
+  "flower",
+  "drop-wave",
+  "sprout",
+  "sun-horizon",
+] as const;
 
 export type AudienceIconKey = (typeof AUDIENCE_ICON_KEYS)[number];
 

@@ -836,7 +836,8 @@ export type AudienceSection = {
   items: Array<{
     title: string;
     body: string;
-    icon?: "arrow" | "check";
+    icon?:
+      "arrow" | "check" | "flower" | "drop-wave" | "sprout" | "sun-horizon";
     _key: string;
   }>;
 };
@@ -1150,7 +1151,14 @@ export type PREVIEW_PAGE_QUERY_RESULT = {
           _key: string;
           title: string;
           body: string;
-          icon: "arrow" | "check" | null;
+          icon:
+            | "arrow"
+            | "check"
+            | "drop-wave"
+            | "flower"
+            | "sprout"
+            | "sun-horizon"
+            | null;
         }>;
       }
     | {
@@ -2307,7 +2315,14 @@ export type PUBLISHED_PAGE_QUERY_RESULT = {
           _key: string;
           title: string;
           body: string;
-          icon: "arrow" | "check" | null;
+          icon:
+            | "arrow"
+            | "check"
+            | "drop-wave"
+            | "flower"
+            | "sprout"
+            | "sun-horizon"
+            | null;
         }>;
       }
     | {

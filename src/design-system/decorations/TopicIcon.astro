@@ -1,0 +1,25 @@
+---
+import {
+  topicIconPaths,
+  type TopicIconKey,
+} from "@/design-system/decorations/topic-icons";
+
+interface Props {
+  name: TopicIconKey;
+}
+const { name } = Astro.props;
+---
+
+<svg
+  class="ao-icon"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d={topicIconPaths[name]} />
+</svg>

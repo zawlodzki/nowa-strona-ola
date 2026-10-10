@@ -1,10 +1,23 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-10 (ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Ikony tematów w „Z kim pracuję”, 10.10.2026
+
+- Każda karta ma własną ikonę liniową (24 × 24, kreska 1,6, `currentColor`):
+  PCOS — `flower`, insulinooporność — `drop-wave`, starania o ciążę —
+  `sprout`, perimenopauza — `sun-horizon`. Oryginalne ścieżki projektu
+  (`src/design-system/decorations/topic-icons.ts`), bez zewnętrznego zestawu.
+- Studio: nowe opcje ikon z polskimi etykietami; `arrow` i `check` zostają.
+- `npm run import:audience` ustawia tylko pole `icon` kart po `_key`
+  (ifRevisionID, jedna transakcja); tytuły i opisy nie są ruszane.
+- Kolejność wdrożenia: najpierw merge kodu, potem zapis w Sanity. Stary build
+  odrzuca nieznane klucze ikon (`Nieznana ikona karty`), więc zapis przed
+  mergem zatrzymałby publikację.
 
 ### „Z kim pracuję” zamiast pasa logotypów, 09.10.2026
 

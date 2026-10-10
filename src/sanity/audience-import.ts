@@ -63,7 +63,69 @@ export type Mutation =
           | { after: string; items: Section[] };
       };
     }
+  | {
+      patch: { id: string; ifRevisionID?: string; set: Record<string, string> };
+    }
   | { delete: { id: string } };
+
+export interface IconPatchPlan {
+  id: string;
+  ifRevisionID: string | null;
+  changes: { cardKey: string; path: string; from: string | null; to: string }[];
+}
+
+/**
+ * Field-level icon sync for an existing audience section: sets only `icon` on
+ * cards (matched by `_key`) whose icon differs from the fixture. Titles and
+ * texts edited in Studio are never touched.
+ */
+export function buildIconPatch(
+  doc: SanityDocument | undefined,
+  item: Section,
+): IconPatchPlan | null {
+  if (!doc) throw new Error("Brak dokumentu strony głównej.");
+  const section = sectionsOf(doc).find(
+    (entry) => entry._key === item._key && entry._type === AUDIENCE_TYPE,
+  );
+  if (!section) return null;
+  const live = Array.isArray(section.items)
+    ? (section.items as { _key: string; icon?: string | null }[])
+    : [];
+  const planned = (item.items as { _key: string; icon?: string }[]) ?? [];
+  const changes: IconPatchPlan["changes"] = [];
+  for (const card of planned) {
+    if (!card.icon) continue;
+    const current = live.find((entry) => entry._key === card._key);
+    if (!current) {
+      throw new Error(`${doc._id}: brak karty ${card._key}; zatrzymuję.`);
+    }
+    if (current.icon === card.icon) continue;
+    changes.push({
+      cardKey: card._key,
+      path: `sections[_key=="${item._key}"].items[_key=="${card._key}"].icon`,
+      from: current.icon ?? null,
+      to: card.icon,
+    });
+  }
+  if (!changes.length) return null;
+  return {
+    id: doc._id,
+    ifRevisionID: typeof doc._rev === "string" ? doc._rev : null,
+    changes,
+  };
+}
+
+export function buildIconMutations(patches: IconPatchPlan[]): Mutation[] {
+  return patches.map((patch) => ({
+    patch: {
+      id: patch.id,
+      ...(patch.ifRevisionID ? { ifRevisionID: patch.ifRevisionID } : {}),
+      set: Object.fromEntries(
+        patch.changes.map((change) => [change.path, change.to]),
+      ),
+    },
+  }));
+}
 
 export interface DeletionPlan {
   id: string;
@@ -275,13 +337,30 @@ export function applyMutations(
       byId.delete(mutation.delete.id);
       continue;
     }
-    const { id, ifRevisionID, insert } = mutation.patch;
+    const { id, ifRevisionID } = mutation.patch;
     const doc = byId.get(id);
     if (!doc) throw new Error(`patch: brak dokumentu ${id}.`);
     if (ifRevisionID && doc._rev !== ifRevisionID) {
       throw new Error(`patch: ${id} zmienił się (rewizja).`);
     }
     const sections = sectionsOf(doc);
+    if ("set" in mutation.patch) {
+      for (const [path, value] of Object.entries(mutation.patch.set)) {
+        const match =
+          /^sections\[_key=="(.+)"\]\.items\[_key=="(.+)"\]\.icon$/.exec(path);
+        if (!match) throw new Error(`patch: nieobsługiwana ścieżka ${path}.`);
+        const section = sections.find((entry) => entry._key === match[1]);
+        const cards = Array.isArray(section?.items)
+          ? (section.items as Record<string, unknown>[])
+          : [];
+        const card = cards.find((entry) => entry._key === match[2]);
+        if (!card) throw new Error(`patch: brak ${path}.`);
+        card.icon = value;
+      }
+      doc.sections = sections;
+      continue;
+    }
+    const { insert } = mutation.patch;
     const selector = "replace" in insert ? insert.replace : insert.after;
     const match = /^sections\[_key=="(.+)"\]$/.exec(selector);
     if (!match) throw new Error(`patch: nieobsługiwany selektor ${selector}.`);

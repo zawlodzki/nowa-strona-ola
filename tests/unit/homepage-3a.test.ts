@@ -36,9 +36,12 @@ describe("homepage 3a fixtures", () => {
       "Starania o ciążę",
       "Perimenopauza",
     ]);
-    expect(view.audience.items.every((item) => item.icon === "arrow")).toBe(
-      true,
-    );
+    expect(view.audience.items.map((item) => item.icon)).toEqual([
+      "flower",
+      "drop-wave",
+      "sprout",
+      "sun-horizon",
+    ]);
     expect(view.approach.items[0]?.value).toBe(450);
     expect(view.ebooks.items).toHaveLength(6);
     expect(view.ebooks.items.every((item) => item.priceGross === 97)).toBe(

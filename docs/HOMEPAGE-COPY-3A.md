@@ -14,7 +14,10 @@ W tym samym miejscu, zaraz po hero, jest sekcja `audienceSection`. Copy jest
 w serwisie. Bez obietnic efektów, twierdzeń medycznych i nazw marek. Karta 3
 (pierwotnie „Szczupła, a jednak PCOS”) zastąpiona 10.10.2026 zatwierdzonym przez
 użytkownika copy „Starania o ciążę” / „Trying to conceive”; `_key` karty
-(`audience-lean-pcos`) pozostał bez zmian, zgodnie z Content Lake.
+(`audience-lean-pcos`) pozostał bez zmian, zgodnie z Content Lake. Od 10.10.2026 każda karta ma
+własną ikonę (decyzja użytkownika): PCOS — kwiat, insulinooporność — kropla
+z falą, starania o ciążę — kiełek, perimenopauza — słońce nad horyzontem.
+Ikony są oryginalnymi ścieżkami SVG projektu (bez zewnętrznego zestawu).
 
 PL — **Z kim pracuję**. Pracuję z kobietami, które chcą spokojnie uporządkować
 odżywianie i dopasować je do swojej codzienności.

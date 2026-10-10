@@ -23,6 +23,7 @@ import BookCoverArt, {
 import CheckMark from "@/design-system/decorations/CheckMark.astro";
 import CoverStage from "@/design-system/decorations/CoverStage.astro";
 import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
+import TopicIcon from "@/design-system/decorations/TopicIcon.astro";
 import { currencyLabel, topicLabel } from "@/lib/offer";
 import type { HomepageView } from "@/content/map-homepage";
 
@@ -121,7 +122,13 @@ function coverLabels(kind: CoverArtKind): string[] {
           <li>
             {item.icon && (
               <span class="home3a-audience__icon" aria-hidden="true">
-                {item.icon === "check" ? <CheckMark /> : <ArrowIcon />}
+                {item.icon === "check" ? (
+                  <CheckMark />
+                ) : item.icon === "arrow" ? (
+                  <ArrowIcon />
+                ) : (
+                  <TopicIcon name={item.icon} />
+                )}
               </span>
             )}
             <h3>{item.title}</h3>

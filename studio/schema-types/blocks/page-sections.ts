@@ -299,6 +299,10 @@ export const textImageSectionType = defineType({
 export const audienceIconOptions = [
   { title: "Strzałka", value: "arrow" },
   { title: "Znacznik", value: "check" },
+  { title: "Kwiat (PCOS)", value: "flower" },
+  { title: "Kropla z falą (insulinooporność)", value: "drop-wave" },
+  { title: "Kiełek (starania o ciążę)", value: "sprout" },
+  { title: "Słońce nad horyzontem (perimenopauza)", value: "sun-horizon" },
 ] as const;
 
 export const audienceSectionType = defineType({
@@ -350,7 +354,6 @@ export const audienceSectionType = defineType({
               options: {
                 list: [...audienceIconOptions],
                 layout: "radio",
-                direction: "horizontal",
               },
             }),
           ],
