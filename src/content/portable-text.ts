@@ -122,10 +122,14 @@ function markdownInline(
 ): string {
   return (children ?? [])
     .map((span) => {
-      let text = span.text ?? "";
+      const raw = span.text ?? "";
+      // A literal "*" (e.g. "(*) Niepotrzebne skreślić") must not open emphasis.
+      let text = span.marks?.includes("code")
+        ? raw
+        : raw.replaceAll("*", "\\*");
       for (const mark of span.marks ?? []) {
         if (mark === "strong") text = `**${text}**`;
-        else if (mark === "em") text = `*${text}*`;
+        else if (mark === "em") text = `_${text}_`;
         else if (mark === "code") text = `\`${text}\``;
         else {
           const def = marks?.find((item) => item._key === mark);
@@ -273,6 +277,13 @@ export function articleBodyToHtml(blocks: unknown): {
 
   const closeAllLists = () => closeListsTo(0);
 
+  // Consecutive blockquote blocks are paragraphs of one quotation.
+  let quoteOpen = false;
+  const closeQuote = () => {
+    if (quoteOpen) html.push("</blockquote>");
+    quoteOpen = false;
+  };
+
   const openList = (type: string, level: number, start?: number) => {
     const startAttr =
       type === "number" && start && start > 1 ? ` start="${start}"` : "";
@@ -281,6 +292,12 @@ export function articleBodyToHtml(blocks: unknown): {
   };
 
   for (const block of parsed) {
+    if (
+      !(block._type === "block" && block.style === "blockquote") ||
+      block.listItem
+    ) {
+      closeQuote();
+    }
     if (block._type === "block") {
       if (block.listItem) {
         const level = block.level && block.level > 0 ? block.level : 1;
@@ -316,7 +333,9 @@ export function articleBodyToHtml(blocks: unknown): {
         continue;
       }
       if (block.style === "blockquote") {
-        html.push(`<blockquote><p>${text}</p></blockquote>`);
+        if (!quoteOpen) html.push("<blockquote>");
+        quoteOpen = true;
+        html.push(`<p>${text}</p>`);
         continue;
       }
       html.push(`<p>${text}</p>`);
@@ -401,6 +420,7 @@ export function articleBodyToHtml(blocks: unknown): {
     );
   }
 
+  closeQuote();
   closeAllLists();
   return { html: html.join("\n"), toc };
 }
@@ -427,8 +447,15 @@ export function articleBodyToMarkdown(blocks: unknown): string {
       listStack = [];
     }
   };
+  let previousQuote = false;
 
   for (const block of parsed) {
+    const isQuote =
+      block._type === "block" &&
+      block.style === "blockquote" &&
+      !block.listItem;
+    const continuesQuote = previousQuote && isQuote;
+    previousQuote = isQuote;
     if (block._type === "block") {
       if (block.listItem) {
         const level = block.level && block.level > 0 ? block.level : 1;
@@ -462,8 +489,10 @@ export function articleBodyToMarkdown(blocks: unknown): string {
       const text = markdownInline(block.children, block.markDefs);
       if (block.style === "h2") lines.push(`## ${text}`, "");
       else if (block.style === "h3") lines.push(`### ${text}`, "");
-      else if (block.style === "blockquote") lines.push(`> ${text}`, "");
-      else lines.push(text, "");
+      else if (block.style === "blockquote") {
+        if (continuesQuote) lines[lines.length - 1] = ">";
+        lines.push(`> ${text}`, "");
+      } else lines.push(text, "");
       continue;
     }
     closeList();

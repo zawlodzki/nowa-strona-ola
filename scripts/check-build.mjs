@@ -192,11 +192,14 @@ const privacyHtml = await readFile(
   "dist/polityka-prywatnosci/index.html",
   "utf8",
 );
-assert.match(privacyHtml, /Polityka prywatności www\.zawlodzki\.pl/);
-assert.match(privacyHtml, /obowiązuje od/);
-assert.match(privacyHtml, /24\.08\.2026/);
-assert.match(privacyHtml, /1\. Administrator danych/);
+assert.match(privacyHtml, /Polityka prywatności aleksandraolesiewicz\.com/);
+assert.match(privacyHtml, /Wersja 2\.1 · data wejścia w życie do ustalenia/);
+assert.match(privacyHtml, /1\. Kto jest administratorem Twoich danych/);
 assert.match(privacyHtml, /\/lista-cookies-i-identyfikatorow\//);
+const termsHtml = await readFile("dist/regulamin/index.html", "utf8");
+assert.match(termsHtml, /<h2 id="pouczenie"/);
+assert.match(termsHtml, /<h2 id="formularz-odstapienia"/);
+assert.match(termsHtml, /href="\/regulamin\/#pouczenie"/);
 const cookiesHtml = await readFile(
   "dist/lista-cookies-i-identyfikatorow/index.html",
   "utf8",

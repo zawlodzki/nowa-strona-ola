@@ -74,8 +74,17 @@ function summarize(
       `pending form ${forms.length} (etykieta zgody jest dłuższa niż limit schematu)`,
     );
   }
-  if (plan.pending.some((item) => item.kind === "legalPage")) {
+  const legal = plan.pending.filter((item) => item.kind === "legalPage");
+  if (legal.some((item) => !item.document)) {
     console.log("pending legalPage (brak schematu legalPage albo fixture’ów)");
+  }
+  const blocked = legal.flatMap((item) =>
+    item.document ? [item.document._id] : [],
+  );
+  if (blocked.length > 0) {
+    console.log(
+      `pending legalPage ${blocked.length} (brak daty wejścia w życie albo placeholdery): ${blocked.join(", ")}`,
+    );
   }
 }
 

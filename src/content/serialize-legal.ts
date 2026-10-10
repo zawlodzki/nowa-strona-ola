@@ -8,7 +8,7 @@ export function serializeLegalPage(view: LegalPageView): string {
   const parts = [
     `# ${view.title.replaceAll("\n", " ").trim()}`,
     "",
-    `${view.effectiveCaption} ${view.effectiveLabel}`,
+    view.versionLine,
     "",
     articleBodyToMarkdown(view.body as PortableBlock[]),
   ];

@@ -24,8 +24,17 @@ const { content } = Astro.props;
       />
       <h1>{content.title}</h1>
       <p class="legal-effective">
-        {content.effectiveCaption}{" "}
-        <time datetime={content.effectiveFrom}>{content.effectiveLabel}</time>
+        {content.versionLabel} ·{" "}
+        {content.effective ? (
+          <>
+            {content.effectiveCaption}{" "}
+            <time datetime={content.effective.datetime}>
+              {content.effective.label}
+            </time>
+          </>
+        ) : (
+          content.pendingCaption
+        )}
       </p>
     </Container>
   </div>
@@ -140,16 +149,20 @@ const { content } = Astro.props;
     text-decoration: underline;
     text-underline-offset: 4px;
   }
+  /* Legal quotations are forms and addresses to copy, not pull quotes. */
   .article-richtext :global(blockquote) {
-    margin-block: 40px;
+    margin-block: 28px;
     margin-inline: 0;
-    padding-block: 32px;
-    padding-inline: 0;
-    border-block: 1px solid var(--ao-line);
-    font-size: 1.375rem;
-    line-height: 1.45;
-    letter-spacing: -0.02em;
-    font-weight: 500;
+    padding-block: 24px;
+    padding-inline: 24px;
+    border-radius: var(--ao-radius-panel);
+    background: var(--ao-surface);
+  }
+  .article-richtext :global(blockquote p) {
+    margin-block-end: 12px;
+  }
+  .article-richtext :global(blockquote p:last-child) {
+    margin-block-end: 0;
   }
   .article-richtext :global(code) {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;

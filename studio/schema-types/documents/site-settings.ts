@@ -103,6 +103,98 @@ export const siteSettingsType = defineType({
       validation: (rule) => rule.max(6),
     }),
     defineField({
+      name: "company",
+      title: "Dane sprzedawcy",
+      description:
+        "Jedno źródło danych spółki dla linii sprzedawcy w stopce. Zmieniaj razem z regulaminem i polityką prywatności.",
+      type: "object",
+      fields: [
+        defineField({
+          name: "name",
+          title: "Nazwa",
+          type: "string",
+          validation: (rule) => rule.required().max(80),
+        }),
+        defineField({
+          name: "street",
+          title: "Ulica i numer",
+          type: "string",
+          validation: (rule) => rule.required().max(80),
+        }),
+        defineField({
+          name: "postalCode",
+          title: "Kod pocztowy",
+          type: "string",
+          validation: (rule) =>
+            rule.required().regex(/^\d{2}-\d{3}$/, { name: "00-000" }),
+        }),
+        defineField({
+          name: "city",
+          title: "Miasto",
+          type: "string",
+          validation: (rule) => rule.required().max(60),
+        }),
+        defineField({
+          name: "krs",
+          title: "KRS",
+          type: "string",
+          validation: (rule) =>
+            rule.required().regex(/^\d{10}$/, { name: "10 cyfr" }),
+        }),
+        defineField({
+          name: "nip",
+          title: "NIP",
+          type: "string",
+          validation: (rule) =>
+            rule.required().regex(/^\d{10}$/, { name: "10 cyfr" }),
+        }),
+        defineField({
+          name: "regon",
+          title: "REGON",
+          type: "string",
+          validation: (rule) =>
+            rule.required().regex(/^(\d{9}|\d{14})$/, {
+              name: "9 albo 14 cyfr",
+            }),
+        }),
+        defineField({
+          name: "shareCapital",
+          title: "Kapitał zakładowy",
+          type: "string",
+          description: "Np. 5 000 zł.",
+          validation: (rule) => rule.required().max(40),
+        }),
+        defineField({
+          name: "email",
+          title: "E-mail",
+          type: "string",
+          validation: (rule) => rule.required().email(),
+        }),
+        defineField({
+          name: "phone",
+          title: "Telefon",
+          type: "string",
+          validation: (rule) => rule.required().max(30),
+        }),
+      ],
+    }),
+    defineField({
+      name: "copyright",
+      title: "Prawa autorskie w stopce",
+      type: "string",
+      description: "Np. © 2026 Wellbiz sp. z o.o. · Treści: …",
+      validation: (rule) => rule.max(120),
+    }),
+    defineField({
+      name: "testimonialsDisclosure",
+      title: "Informacja pod opiniami",
+      description:
+        "Wyświetlana pod każdą sekcją opinii: jak weryfikujemy opinie i że efekty nie są gwarantowane.",
+      type: "text",
+      rows: 3,
+      validation: (rule) => rule.max(400),
+    }),
+    defineField({
       name: "blogIndex",
       title: "Indeks bloga — poprzednia konfiguracja",
       deprecated: {
