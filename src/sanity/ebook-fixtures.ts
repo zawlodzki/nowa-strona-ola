@@ -54,6 +54,7 @@ export function pcosEbookFixture(language: Locale) {
     coverTone: seed.coverTone,
     availability: "planned" as const,
     priceGross: 97,
+    lowestPrice30Days: null,
     currency: "PLN" as const,
     format: "pdf",
     sortOrder: seed.sortOrder,

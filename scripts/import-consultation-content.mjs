@@ -14,12 +14,6 @@ const compare = !process.argv.includes("--skip-compare");
 
 const GAPS = [
   {
-    id: "booking-url",
-    status: "open",
-    detail:
-      "Właściwy URL płatnej rezerwacji nieustalony. service.bookingUrl to tymczasowe https://cal.com z bookingStatus=placeholder; strona pokazuje jawną informację, nie potwierdzenie wizyty.",
-  },
-  {
     id: "written-summary",
     status: "open",
     detail:

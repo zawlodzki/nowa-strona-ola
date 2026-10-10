@@ -41,5 +41,5 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /en/konsul
 H1 łamie wiersze przez `\n` w danych. Playwright i verify-ola widzą złączony tekst „Wiesz już dużo. Ustal, co dalej.”
 Pytania FAQ są w `details` bez nazwy dostępnej. Harness nie otwiera ich przez `--role group`, jak w [katalogu 3a](./design-system.md). Otwarcie natywnego pytania sprawdza test `npx playwright test -g "consultation page"`.
 Kotwice landingu są polskie także w EN (`#cena`, `#przebieg`), jak na stronie O mnie.
-„Zarezerwuj konsultację” prowadzi do ogólnego `https://cal.com`. Nie klikaj go w przepisie; wyjście poza origin przerywa sesję. Brak potwierdzenia rezerwacji jest zamierzony.
+„Zarezerwuj konsultację” prowadzi do `https://cal.com/dietetyk/konsultacja` (decyzja 10.10.2026). Nie klikaj go w przepisie; wyjście poza origin przerywa sesję. Brak potwierdzenia rezerwacji na stronie jest zamierzony; rezerwację i płatność obsługuje Cal.com.
 Nie otwieraj Studio, podglądu 4322 ani Workera. Natywny zoom, czytnik i urządzenie fizyczne nie są w tym przepisie.

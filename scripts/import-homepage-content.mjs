@@ -8,6 +8,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { footerLegalLinks, siteLegalCopy } from "../src/content/site-legal.ts";
 import { footerSocialLinks } from "../src/content/social-profiles.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -16,12 +17,6 @@ const write = process.argv.includes("--write");
 const compare = !process.argv.includes("--skip-compare");
 
 const GAPS = [
-  {
-    id: "booking-url",
-    status: "open",
-    detail:
-      "Właściwy URL płatnej rezerwacji nieustalony; fixture używa tymczasowego https://cal.com.",
-  },
   {
     id: "diploma-scan",
     status: "open",
@@ -149,8 +144,8 @@ function documents() {
     price: 450,
     currency: "PLN",
     durationMinutes: 60,
-    bookingUrl: "https://cal.com",
-    bookingStatus: "placeholder",
+    bookingUrl: "https://cal.com/dietetyk/konsultacja",
+    bookingStatus: "live",
     translation: { _type: "reference", _ref: "service-consultation-en" },
   };
   const serviceEn = {
@@ -168,11 +163,19 @@ function documents() {
     _id: "form-newsletter-pl",
     _type: "form",
     language: "pl",
-    title: "Newsletter demonstracyjny",
-    submitLabel: "Chcę otrzymywać newsletter",
-    successMessage: "Dane poprawne. Nic nie wysłano.",
+    title: "Newsletter",
+    formKey: "newsletter",
+    version: "2.3",
+    submitLabel: "Zapisuję się",
+    notice:
+      "Zapisując się, zamawiasz newsletter Wellbiz sp. z o.o. i zgadzasz się na otrzymywanie e-maili z wiedzą o żywieniu oraz informacjami o e-bookach i konsultacjach. Wypiszesz się jednym kliknięciem — link jest w każdej wiadomości. Newsletter jest dla osób pełnoletnich. [Regulamin newslettera](/regulamin-newslettera/) · [Polityka prywatności](/polityka-prywatnosci/)",
+    noticeConsentId: "Z6",
+    successMessage:
+      "Sprawdź skrzynkę. Wysłaliśmy e-mail z linkiem potwierdzającym. Zapis będzie aktywny dopiero po kliknięciu w link.",
+    errorMessage:
+      "Nie udało się zapisać. Sprawdź połączenie i spróbuj ponownie — wpisany adres został w formularzu.",
     noscriptMessage:
-      "Włącz JavaScript, aby sprawdzić formularz demonstracyjny. Dane nie są zapisywane ani wysyłane.",
+      "Zapis do newslettera wymaga włączonego JavaScriptu. Możesz też napisać na ola@aleksandraolesiewicz.com.",
     translation: { _type: "reference", _ref: "form-newsletter-en" },
     fields: [
       {
@@ -184,26 +187,21 @@ function documents() {
         errorMessage: "Wpisz poprawny adres e-mail.",
         required: "required",
       },
-      {
-        _key: "consent",
-        name: "consent",
-        input: "checkbox",
-        label:
-          "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane. [Polityka prywatności](/polityka-prywatnosci/) i [regulamin newslettera](/regulamin-newslettera/).",
-        errorMessage: "Zaznacz zgodę, aby sprawdzić formularz.",
-        required: "required",
-      },
     ],
   };
   const formEn = {
     ...formPl,
     _id: "form-newsletter-en",
     language: "en",
-    title: "Demonstration newsletter",
-    submitLabel: "I want the newsletter",
-    successMessage: "The details look correct. Nothing was sent.",
+    submitLabel: "Subscribe",
+    notice:
+      "By subscribing, you order the Wellbiz sp. z o.o. newsletter and agree to receive emails with nutrition knowledge and information about e-books and consultations. Unsubscribe with one click — the link is in every email. The newsletter is for adults. [Newsletter terms](/regulamin-newslettera/) · [Privacy policy](/en/privacy/)",
+    successMessage:
+      "Check your inbox. We sent a confirmation link. The subscription becomes active only after you click it.",
+    errorMessage:
+      "We could not subscribe you. Check your connection and try again — your address is still in the form.",
     noscriptMessage:
-      "Turn on JavaScript to check the demonstration form. Nothing is stored or sent.",
+      "Subscribing requires JavaScript. You can also email ola@aleksandraolesiewicz.com.",
     translation: { _type: "reference", _ref: formPl._id },
     fields: [
       {
@@ -213,15 +211,6 @@ function documents() {
         label: "Your email address",
         placeholder: "e.g. ola@example.com",
         errorMessage: "Enter a valid email address.",
-        required: "required",
-      },
-      {
-        _key: "consent",
-        name: "consent",
-        input: "checkbox",
-        label:
-          "I agree to receive the newsletter. This is a demonstration — nothing will be sent. [Privacy policy](/en/privacy/) and [newsletter terms](/regulamin-newslettera/).",
-        errorMessage: "Tick the consent box to check the form.",
         required: "required",
       },
     ],
@@ -310,18 +299,8 @@ function documents() {
       emphasis: "default",
     },
     socialLinks: footerSocialLinks(),
-    legalLinks: [
-      {
-        _key: "legal-privacy",
-        label: "Polityka prywatności",
-        href: "/polityka-prywatnosci/",
-      },
-      {
-        _key: "legal-terms",
-        label: "Regulamin",
-        href: "/regulamin/",
-      },
-    ],
+    legalLinks: footerLegalLinks("pl"),
+    ...siteLegalCopy.pl,
     translation: { _type: "reference", _ref: "siteSettings-en" },
   };
   const settingsEn = {
@@ -345,18 +324,8 @@ function documents() {
       href: "/en/#newsletter",
       emphasis: "default",
     },
-    legalLinks: [
-      {
-        _key: "legal-privacy",
-        label: "Privacy policy",
-        href: "/en/privacy/",
-      },
-      {
-        _key: "legal-terms",
-        label: "Terms",
-        href: "/en/terms/",
-      },
-    ],
+    legalLinks: footerLegalLinks("en"),
+    ...siteLegalCopy.en,
     translation: { _type: "reference", _ref: settingsPl._id },
   };
 

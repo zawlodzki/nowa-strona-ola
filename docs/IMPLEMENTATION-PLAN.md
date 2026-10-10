@@ -110,6 +110,32 @@ Osobne dokumenty językowe i lokalizowane slugi, powiązania tłumaczeń.
 Brak tłumaczenia oznacza brak strony i linku przełącznika, bez polskiego fallbacku.
 Hreflang wyłącznie dla opublikowanych odpowiedników.
 
+**Decyzja właścicielki z 10.10.2026: wersja angielska publicznej strony jest
+na razie wyłączona.** Build (`dist/`) nie zawiera stron `/en/`. Żaden link,
+przełącznik języka, `hreflang`, wpis sitemap ani JSON-LD nie wskazuje `/en/`.
+Adresy `/en/…` zwracają 404. Kod EN, schematy, fixture’y, treści EN w Sanity
+i aplikacja podglądu (`preview/`) zostają bez zmian.
+
+Mechanizm:
+
+- Trasy EN leżą w `src/pages/_en/`. Astro pomija katalogi z prefiksem `_`,
+  więc nie generuje tych stron.
+- Flaga `enabledLocales` w `src/lib/paths.ts` (obecnie `["pl"]`) steruje
+  przełącznikiem języka w `src/ui/site-header/SiteHeader.astro` i sitemapą
+  (`src/pages/sitemap.xml.ts`). Nagłówek 3a nie renderuje przełącznika.
+- `scripts/check-disabled-locales.mjs` (wołany z `npm run test:build`
+  i `npm run test:content-lake`) blokuje build z katalogiem `dist/en/`
+  albo z odnośnikiem, `hreflang`, adresem JSON-LD lub `<loc>` do `/en/`.
+  `tests/e2e/english-disabled.spec.ts` sprawdza 404 i brak linków w przeglądarce.
+
+Ponowne włączenie EN:
+
+1. `git mv src/pages/_en src/pages/en`.
+2. W `src/lib/paths.ts` ustaw `enabledLocales` na `["pl", "en"]`.
+3. Usuń wywołania `assertEnglishDisabled()` z `scripts/check-build.mjs`
+   i `scripts/check-content-lake-build.mjs` oraz `tests/e2e/english-disabled.spec.ts`.
+   Przywróć asercje i testy e2e stron EN z historii git (commit wyłączający EN).
+
 ## 6. SEO, GEO, AEO i Markdown
 
 - HTML i Markdown z tych samych opublikowanych danych jednego builda.
@@ -142,21 +168,34 @@ nie gwarantują pozycji, rich results ani cytowania przez AI.
 ## 7. Formularze i n8n
 
 CMS zarządza kolejnością, wymaganiami i etykietami pól text, email, tel, textarea,
-select i checkbox, zgodami oraz komunikatami PL/EN. Bez załączników i warunków v1.
+select, checkbox i date, informacją pod przyciskiem, zgodą wyrażaną wysłaniem
+oraz komunikatami. Każdy dokument `form` ma stały `formKey` (`newsletter`,
+`contact`, `withdrawal`) i `version` dokumentu „Zgody i formularze”. Bez
+załączników i warunków v1.
 
-POST /api/leads przyjmuje identyfikator i wersję formularza, identyfikator
-zgłoszenia, język, źródło, dane pól i zgody. Backend waliduje względem opublikowanej
-konfiguracji, limituje rozmiar i częstotliwość, sprawdza Turnstile i honeypot.
-Sukces dopiero po przyjęciu do kolejki.
+**Stan od 10.10.2026 (decyzja właściciela):** wszystkie formularze wysyłają
+z przeglądarki `POST` JSON bezpośrednio na webhook n8n. Adres jest jedną stałą
+w `src/lib/lead-endpoint.ts` z opcjonalnym nadpisaniem `PUBLIC_LEAD_WEBHOOK_URL`
+podczas builda. Ścieżka Worker → Queues → n8n i `/api/leads` (501) są odłożone.
+Treść żądania to `LeadSubmission` w wersji 2 z `packages/shared`:
+`schemaVersion`, `submissionId` (UUID, ten sam przy ponowieniu po błędzie),
+`formKey`, `formVersion`, `language`, `source` (adres bez query), `submittedAt`,
+`fields` oraz `consents[]` z `id`, `version` i `acceptedAt` (zaznaczone
+checkboxy, których identyfikatorem jest nazwa pola, oraz `noticeConsentId`).
+Sukces dopiero po odpowiedzi 2xx; błąd zostawia dane do ponowienia. Honeypot
+`hp_website` pokazuje sukces bez wysyłki. Bez JS formularz nie wysyła niczego.
 
-Konsument wysyła do uwierzytelnionego webhooka n8n z ponawianiem i kolejką błędów.
-Wersjonowany kontrakt zawiera czas i wersje zaakceptowanych zgód. n8n deduplikuje
-po identyfikatorze, obsługuje CRM, e-maile i dostarczanie lead magnetów. Sukces
-formularza oznacza przyjęcie do obsługi, nie zakończenie wszystkich automatyzacji.
+Ryzyka obecnego wariantu: publiczny adres webhooka, brak Turnstile i limitu
+częstotliwości. n8n musi sam walidować payload (formKey, wersje, długości pól),
+deduplikować po `submissionId`, odrzucać zgłoszenia z wypełnionym honeypotem
+i nie logować wartości pól. Dane zgłoszeń nie trafiają do Sanity, publicznego
+buildu, GA4 ani logów aplikacji; kod przeglądarki nie loguje wartości pól.
 
-Webhook i sekrety tylko na serwerze. Dane leadów nie trafiają do Sanity,
-publicznego buildu, GA4 ani logów aplikacji. Procedura utrzymania określi
-retencję kolejki, obsługę wiadomości błędnych i usuwanie zgłoszeń.
+Docelowo (odłożone): `/api/leads` waliduje względem opublikowanej konfiguracji,
+limituje rozmiar i częstotliwość, sprawdza Turnstile i honeypot, odpowiada
+sukcesem po przyjęciu do kolejki, a konsument wysyła do uwierzytelnionego
+webhooka n8n z ponawianiem i kolejką błędów. Procedura utrzymania określi
+retencję, obsługę wiadomości błędnych i usuwanie zgłoszeń.
 
 ## 8. c15t i analityka
 
@@ -387,6 +426,11 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 - [x] Wdrożyć strony prawne `legalPage` (schemat, trasy 3a, fixture 1:1 ze
       źródła B2B, import dry-run `import:legal`; bez Content Lake i bez
       tłumaczenia maszynowego EN).
+- [x] Zastąpić treści B2B szkicami B2C z `www-prawne` (konwerter Markdown,
+      `version`, blokada publikacji placeholderów, stopka z danymi sprzedawcy
+      i informacja pod opiniami; bez Content Lake).
+- [ ] Po przeglądzie radcy prawnego: daty wejścia w życie, usunięcie
+      placeholderów, ponowna konwersja i import `legalPage`.
 - [ ] Przenieść treści i media do szkiców Content Lake; zapisać wyniki walidacji.
 - [ ] Odebrać edycję i chroniony podgląd wszystkich szablonów z Sanity.
 - [ ] Po zastąpieniu zastosowań usunąć dawną prezentację i aliasy `--wf-*`.

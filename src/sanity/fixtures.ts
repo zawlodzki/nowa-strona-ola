@@ -1,5 +1,6 @@
 import { blogCollectionPageFixture } from "./blog-page";
 import { contactPageFixture } from "./contact-fixtures";
+import { withdrawalPageFixture } from "./withdrawal-fixtures";
 import type { Locale } from "@ola/shared";
 
 import { aboutPageFixture } from "./about-fixtures";
@@ -71,19 +72,28 @@ const forms = {
     id: "demo-form-pl",
     language: "pl" as const,
     title: "Kontakt demonstracyjny",
-    submitLabel: "Sprawdź formularz",
-    successMessage: "Dane poprawne. Nic nie wysłano.",
-    noscriptMessage:
-      "Włącz JavaScript, aby sprawdzić formularz demonstracyjny.",
+    formKey: "contact",
+    version: "2.3",
+    submitLabel: "Wyślij wiadomość",
+    notice: null,
+    noticeConsentId: null,
+    successMessage: "Dziękujemy, wiadomość dotarła.",
+    errorMessage: "Nie udało się wysłać wiadomości. Spróbuj ponownie.",
+    noscriptMessage: "Formularz wymaga włączonego JavaScriptu.",
     fields: formFields.pl,
   },
   en: {
     id: "demo-form-en",
     language: "en" as const,
     title: "Demonstration contact",
-    submitLabel: "Check the form",
-    successMessage: "The details look correct. Nothing was sent.",
-    noscriptMessage: "Turn on JavaScript to check the demonstration form.",
+    formKey: "contact",
+    version: "2.3",
+    submitLabel: "Send message",
+    notice: null,
+    noticeConsentId: null,
+    successMessage: "Thank you, your message has arrived.",
+    errorMessage: "We could not send your message. Try again.",
+    noscriptMessage: "This form requires JavaScript.",
     fields: formFields.en,
   },
 };
@@ -403,6 +413,7 @@ const implementationSections = {
 export const demonstrationPages = {
   "pl/kontakt": contactPageFixture("pl"),
   "en/contact": contactPageFixture("en"),
+  "pl/odstapienie": withdrawalPageFixture(),
   "pl/home": homepagePageFixture("pl"),
   "en/home": homepagePageFixture("en"),
   "pl/o-mnie": aboutPageFixture("pl"),

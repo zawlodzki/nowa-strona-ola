@@ -8,13 +8,13 @@ import {
   DISPLAY_LABEL_COOPERATION,
   EBOOK_SEED,
   homepageCopy,
-  footerLegalLinks,
   homepageHeaderCta,
   homepageMediaKeys,
   homepageNavigation,
   TESTIMONIAL_QUOTES_EN,
   TESTIMONIAL_QUOTES_PL,
 } from "@/content/homepage-seed";
+import { footerLegalLinks, siteLegalCopy } from "@/content/site-legal";
 import { footerSocialLinks } from "@/content/social-profiles";
 import { consultationPath, ebookCollectionPath } from "@/lib/paths";
 
@@ -32,17 +32,22 @@ function media(
   };
 }
 
+export const NEWSLETTER_FORM_VERSION = "2.3";
+export const NEWSLETTER_CONSENT_ID = "Z6";
+
 export function newsletterFormFixture(language: Locale) {
   const copy = homepageCopy[language];
   return {
     id: `newsletter-form-${language}`,
     language,
-    title:
-      language === "pl"
-        ? "Newsletter demonstracyjny"
-        : "Demonstration newsletter",
+    title: "Newsletter",
+    formKey: "newsletter",
+    version: NEWSLETTER_FORM_VERSION,
     submitLabel: copy.newsletterSubmit,
+    notice: copy.newsletterNotice,
+    noticeConsentId: NEWSLETTER_CONSENT_ID,
     successMessage: copy.newsletterSuccess,
+    errorMessage: copy.newsletterError,
     noscriptMessage: copy.newsletterNoscript,
     fields: [
       {
@@ -52,15 +57,6 @@ export function newsletterFormFixture(language: Locale) {
         label: copy.emailLabel,
         placeholder: copy.emailPlaceholder,
         errorMessage: copy.emailError,
-        required: "required",
-        options: null,
-      },
-      {
-        _key: "consent",
-        name: "consent",
-        input: "checkbox",
-        label: copy.consentLabel,
-        errorMessage: copy.consentError,
         required: "required",
         options: null,
       },
@@ -106,8 +102,8 @@ export function serviceFixture(language: Locale) {
     price: 450,
     currency: "PLN",
     durationMinutes: 60,
-    bookingUrl: "https://cal.com",
-    bookingStatus: "placeholder",
+    bookingUrl: "https://cal.com/dietetyk/konsultacja",
+    bookingStatus: "live",
   };
 }
 
@@ -165,6 +161,7 @@ export function homepageSettingsFixture(language: Locale) {
     navigation: homepageNavigation(language),
     headerCta: homepageHeaderCta(language),
     legalLinks: footerLegalLinks(language),
+    ...siteLegalCopy[language],
     socialLinks: footerSocialLinks(),
     blogIndex: blogIndexSettingsFixture(language),
     blogNewsletter: blogNewsletterSettingsFixture(
@@ -293,7 +290,7 @@ export function homepageSections(language: Locale) {
       facts: [...copy.consultationFacts],
       action: {
         label: copy.consultationAction,
-        href: "https://cal.com",
+        href: service.bookingUrl,
         emphasis: "default",
       },
       media: media(
@@ -337,11 +334,4 @@ export function homepagePageFixture(language: Locale) {
     },
     sections: homepageSections(language),
   };
-}
-
-export function homepageCopyright(language: Locale) {
-  const year = 2026;
-  return language === "pl"
-    ? `© ${year} ${homepageCopy.pl.copyright}`
-    : `© ${year} ${homepageCopy.en.copyright}`;
 }

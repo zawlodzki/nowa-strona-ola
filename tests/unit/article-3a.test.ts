@@ -44,9 +44,7 @@ describe("Article3a mapper", () => {
     expect(
       view.newsletter?.fields.some((field) => field.input === "email"),
     ).toBe(true);
-    expect(
-      view.newsletter?.fields.some((field) => field.input === "checkbox"),
-    ).toBe(true);
+    expect(view.newsletter?.formKey).toBe("newsletter");
     expect(view.sidebar?.title).toBe("Zostańmy w kontakcie.");
     expect(view.sources).toEqual([]);
     expect(view.hero.objectPosition).toBe("50% 55%");

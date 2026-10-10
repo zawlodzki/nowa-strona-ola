@@ -9,6 +9,7 @@ Ten katalog jest źródłem weryfikacji zachowania, które widzi użytkownik pub
 - `verify.mjs doctor` musi potwierdzić pid, port i znacznik `Aleksandra Olesiewicz — strona główna`.
 - Nie prowadź instancji, której nie uruchomił ten przebieg. Porty 4321 i 4322 są poza tym skillen.
 - Równoległe przebiegi dostają osobne `VERIFY_RUN_ID` i osobne porty. Wspólny jest tylko odczyt `dist/`.
+- Wersja EN jest wyłączona od 10.10.2026 (`language.md`). Kroki przepisów prowadzące pod `/en/…` pomijaj; te adresy zwracają 404. Wrócą po ponownym włączeniu EN.
 
 ## Driving conventions
 

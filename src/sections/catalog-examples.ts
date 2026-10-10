@@ -214,7 +214,7 @@ const pl: CatalogCopy = {
       {
         question: "Gdzie jest wersja angielska?",
         answer:
-          "Pod /en/ui/. Brak tłumaczenia oznacza brak strony, bez polskiego fallbacku.",
+          "Na razie nie ma. Wersja angielska jest wyłączona, bez polskiego fallbacku.",
       },
       {
         question: "Czy formularz coś wysyła?",
@@ -251,14 +251,13 @@ const pl: CatalogCopy = {
   form: {
     eyebrow: "Kontakt demonstracyjny",
     title: "Co chcesz zmienić?",
-    lead: "Dane zostają w przeglądarce. Nic nie jest wysyłane.",
-    nameLabel: "Imię",
-    nameError: "Wpisz imię (od 2 do 100 znaków).",
-    emailLabel: "E-mail",
-    emailError: "Wpisz poprawny adres e-mail.",
-    submit: "Sprawdź formularz",
-    success: "Dane poprawne. Nic nie wysłano.",
-    noscript: "Włącz JavaScript, aby sprawdzić formularz demonstracyjny.",
+    lead: "Ten sam formularz co na stronach. W katalogu nic nie jest wysyłane.",
+    formKey: "contact",
+    version: "2.3",
+    submit: "Wyślij wiadomość",
+    success: "Dziękujemy, wiadomość dotarła.",
+    error: "Nie udało się wysłać wiadomości. Spróbuj ponownie.",
+    noscript: "Formularz wymaga włączonego JavaScriptu.",
     fields: [
       {
         name: "name",
@@ -569,14 +568,13 @@ const en: CatalogCopy = {
   form: {
     eyebrow: "Demonstration contact",
     title: "What would you like to change?",
-    lead: "Your details stay in the browser. Nothing is sent.",
-    nameLabel: "Name",
-    nameError: "Enter a name (2 to 100 characters).",
-    emailLabel: "E-mail",
-    emailError: "Enter a valid email address.",
-    submit: "Check the form",
-    success: "Details valid. Nothing was sent.",
-    noscript: "Enable JavaScript to try the demonstration form.",
+    lead: "The same form as on the pages. Nothing is sent from the catalog.",
+    formKey: "contact",
+    version: "2.3",
+    submit: "Send message",
+    success: "Thank you, your message has arrived.",
+    error: "We could not send your message. Try again.",
+    noscript: "This form requires JavaScript.",
     fields: [
       {
         name: "name",

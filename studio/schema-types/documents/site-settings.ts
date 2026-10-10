@@ -103,6 +103,22 @@ export const siteSettingsType = defineType({
       validation: (rule) => rule.max(6),
     }),
     defineField({
+      name: "copyright",
+      title: "Prawa autorskie w stopce",
+      type: "string",
+      description: "Np. © 2026 Wellbiz sp. z o.o. · Treści: …",
+      validation: (rule) => rule.max(120),
+    }),
+    defineField({
+      name: "testimonialsDisclosure",
+      title: "Informacja pod opiniami",
+      description:
+        "Wyświetlana pod każdą sekcją opinii: jak weryfikujemy opinie i że efekty nie są gwarantowane.",
+      type: "text",
+      rows: 3,
+      validation: (rule) => rule.max(400),
+    }),
+    defineField({
       name: "blogIndex",
       title: "Indeks bloga — poprzednia konfiguracja",
       deprecated: {

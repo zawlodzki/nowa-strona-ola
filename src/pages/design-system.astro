@@ -8,7 +8,7 @@ import TextLink from "../design-system/components/TextLink.astro";
 import SiteHeader from "../design-system/components/SiteHeader.astro";
 import SiteFooter from "../design-system/components/SiteFooter.astro";
 import Newsletter from "../design-system/components/Newsletter.astro";
-import DemoForm from "../design-system/components/DemoForm.astro";
+import LeadForm from "../design-system/components/LeadForm.astro";
 import FormField from "../design-system/components/FormField.astro";
 import FaqItem from "../design-system/components/FaqItem.astro";
 import ContentCard from "../design-system/components/ContentCard.astro";
@@ -22,7 +22,9 @@ import Hero from "../design-system/components/Hero.astro";
 import BookArtDecisions from "../design-system/decorations/BookArtDecisions.astro";
 import CoverStage from "../design-system/decorations/CoverStage.astro";
 import SiteImage from "../design-system/components/SiteImage.astro";
-import { footerLegalLinks } from "@/content/homepage-seed";
+import { footerLegalLinks } from "@/content/site-legal";
+import { toFormCopy } from "@/content/map-sections";
+import { newsletterFormFixture } from "@/sanity/homepage-fixtures";
 import { footerSocialLinks } from "@/content/social-profiles";
 const links = [
   { label: "Fundamenty", href: "#fundamentals" },
@@ -289,37 +291,18 @@ const colors = [
     <Newsletter
       id="newsletter"
       title="Mniej szumu. Więcej wiedzy."
-      description="Wspólny układ newslettera. Ten formularz demonstruje wygląd i nie wysyła danych."
+      description="Wspólny układ newslettera z tym samym formularzem co na stronach. W katalogu formularz niczego nie wysyła."
     >
-      <DemoForm
+      <LeadForm
         slot="form"
         lang="pl"
         idPrefix="ds-"
-        content={{
+        demo
+        content={toFormCopy({
           title: "Newsletter",
           lead: "Przykład",
-          submit: "Chcę otrzymywać newsletter",
-          success: "Dane poprawne. Nic nie wysłano.",
-          noscript:
-            "Włącz JavaScript, aby sprawdzić formularz demonstracyjny. Dane nie są zapisywane ani wysyłane.",
-          fields: [
-            {
-              name: "email",
-              input: "email",
-              label: "Twój adres e-mail",
-              placeholder: "np. ola@przyklad.pl",
-              errorMessage: "Wpisz poprawny adres e-mail.",
-              required: true,
-            },
-            {
-              name: "consent",
-              input: "checkbox",
-              label: "Przykład zgody na otrzymywanie newslettera.",
-              errorMessage: "Zaznacz zgodę, aby sprawdzić formularz.",
-              required: true,
-            },
-          ],
-        }}
+          form: newsletterFormFixture("pl"),
+        })}
       />
     </Newsletter>
   </main>

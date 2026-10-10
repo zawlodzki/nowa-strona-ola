@@ -1,6 +1,7 @@
 import { access, readFile, readdir } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
+import { assertEnglishDisabled } from "./check-disabled-locales.mjs";
 
 const assets = await readdir("dist/_astro");
 const sizes = { js: 0, css: 0 };
@@ -19,23 +20,15 @@ assert(sizes.css <= 32 * 1024, `CSS budget exceeded: ${sizes.css} B gzip`);
 
 const pages = [
   "index.html",
-  "en/index.html",
   "o-mnie/index.html",
   "kontakt/index.html",
-  "en/contact/index.html",
-  "en/about/index.html",
   "konsultacje/index.html",
-  "en/consultations/index.html",
   "ebooki/index.html",
   "ebooki/suplementy-w-pcos/index.html",
-  "en/ebooks/index.html",
-  "en/ebooks/supplements-in-pcos/index.html",
   "blog/index.html",
   "blog/strona/2/index.html",
-  "en/blog/index.html",
   "blog/przygotowanie-do-konsultacji-pcos/index.html",
   "blog/codzienne-posilki-przy-pcos/index.html",
-  "en/blog/everyday-meals-with-pcos/index.html",
 ];
 for (const page of pages) {
   const html = await readFile(`dist/${page}`, "utf8");
@@ -52,12 +45,8 @@ for (const page of pages) {
 }
 
 await assert.rejects(access("dist/warsztat/index.html"), /ENOENT/);
-await assert.rejects(access("dist/en/workshop/index.html"), /ENOENT/);
 await assert.rejects(access("dist/tylko-pl/index.html"), /ENOENT/);
-await assert.rejects(
-  access("dist/en/ebooks/suplementy-w-pcos/index.html"),
-  /ENOENT/,
-);
+const filesWithoutEnglish = await assertEnglishDisabled();
 
 const home = await readFile("dist/index.html", "utf8");
 assert.match(
@@ -71,11 +60,6 @@ const ebook = await readFile(
   "utf8",
 );
 assert.match(ebook, /97/);
-const englishEbook = await readFile(
-  "dist/en/ebooks/supplements-in-pcos/index.html",
-  "utf8",
-);
-assert.match(englishEbook, /Supplements in PCOS/);
 const featured = await readFile(
   "dist/blog/przygotowanie-do-konsultacji-pcos/index.html",
   "utf8",
@@ -97,8 +81,6 @@ for (const path of [
   "lista-cookies-i-identyfikatorow/index.html",
   "regulamin/index.html",
   "regulamin-newslettera/index.html",
-  "en/privacy/index.html",
-  "en/terms/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(
@@ -117,8 +99,6 @@ const privacyHtml = await readFile(
   "dist/polityka-prywatnosci/index.html",
   "utf8",
 );
-assert.match(privacyHtml, /1\. Administrator danych/);
-const privacyEn = await readFile("dist/en/privacy/index.html", "utf8");
-assert.match(privacyEn, /The binding version is the Polish text/);
+assert.match(privacyHtml, /1\. Kto jest administratorem Twoich danych/);
 
-console.log(JSON.stringify({ gzipBytes: sizes }, null, 2));
+console.log(JSON.stringify({ gzipBytes: sizes, filesWithoutEnglish }, null, 2));

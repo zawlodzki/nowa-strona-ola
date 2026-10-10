@@ -94,7 +94,10 @@ Studio odczytuje `SANITY_STUDIO_PROJECT_ID` i opcjonalne
 `SANITY_STUDIO_DATASET` zgodnie z `studio/.env.example`. Wartość zastępcza służy
 wyłącznie do lokalnej kontroli buildu. Frontend odczytuje parę
 `PUBLIC_SANITY_PROJECT_ID` i `PUBLIC_SANITY_DATASET` zgodnie z `.env.example`;
-ustawienie tylko jednej wartości zatrzymuje build. Klient produkcyjnego buildu
+ustawienie tylko jednej wartości zatrzymuje build. Formularze wysyłają POST JSON
+na produkcyjny webhook n8n; opcjonalne `PUBLIC_LEAD_WEBHOOK_URL` (https) zmienia
+go podczas builda. Lokalnie nie wysyłaj poprawnych danych bez osobnego webhooka
+testowego. Klient produkcyjnego buildu
 używa perspektywy `published`, bez CDN i bez tokenu. Po zmianie schematów lub GROQ
 uruchomić `npm run typegen --workspace @ola/studio`. Po zmianie
 `worker/wrangler.jsonc` ponownie wygenerować i zapisać typy Workera.
@@ -164,8 +167,12 @@ przyjmuje eksport NDJSON i generuje raport oraz nowe szkice bez zapisu.
 Źródło należy wyeksportować z własnego datasetu; szczegóły migracji, sluga
 i publikacji artykułu: [BLOG-PUBLISHING.md](docs/BLOG-PUBLISHING.md).
 `npm run import:legal` robi dry-run sześciu dokumentów `legalPage` (cztery PL
-ze źródła zawlodzki.pl i dwa EN z informacją o wiążącej wersji polskiej) do
-`reports/`; nic nie zapisuje. Flaga `--write` kończy się kodem 2.
+ze szkiców B2C `projekt prawny ola/www-prawne` i dwa EN z informacją o wiążącej
+wersji polskiej) do `reports/`; nic nie zapisuje. `--write` jest zablokowany
+(kod 2), dopóki dokument nie ma daty wejścia w życie albo ma placeholdery.
+Fixture’y regeneruje `node scripts/convert-legal-md.mjs <katalog www-prawne>`
+(`--check` tylko porównuje), a przykłady Markdown
+`npx tsx scripts/generate-legal-examples.ts`.
 `npm run format` jawnie formatuje kod. Samo
 `npm run test:e2e` wymaga aktualnego buildu. CI jest skonfigurowane; wynik jego
 pierwszego uruchomienia na GitHub wymaga osobnego sprawdzenia.

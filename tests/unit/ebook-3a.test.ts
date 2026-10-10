@@ -58,6 +58,31 @@ describe("ebook 3a fixtures", () => {
     expect(() => mapEbook(ebook, "pl")).toThrow("Nieznany wariant landingu");
   });
 
+  it("shows the lowest 30-day price only while a discount is set", async () => {
+    const ebook = structuredClone(
+      await getEbook("pl", "suplementy-w-pcos", { environment: {} }),
+    );
+    expect(mapEbook(ebook, "pl").lowestPriceNote).toBeUndefined();
+    expect(serializeEbook(ebook, "pl")).not.toContain("najniższa cena");
+    ebook.lowestPrice30Days = 129.9;
+    expect(mapEbook(ebook, "pl").lowestPriceNote).toBe(
+      "97 zł · najniższa cena z 30 dni przed obniżką: 129.9 zł",
+    );
+    expect(serializeEbook(ebook, "pl")).toContain(
+      "97 zł · najniższa cena z 30 dni przed obniżką: 129.9 zł",
+    );
+  });
+
+  it("rejects a non-positive lowest 30-day price", async () => {
+    const ebook = structuredClone(
+      await getEbook("pl", "suplementy-w-pcos", { environment: {} }),
+    );
+    ebook.lowestPrice30Days = 0;
+    expect(() => mapEbook(ebook, "pl")).toThrow(
+      "najniższa cena z 30 dni musi być dodatnią liczbą",
+    );
+  });
+
   it("does not expose checkout for a planned ebook even if a URL is present", async () => {
     const ebook = structuredClone(
       await getEbook("pl", "suplementy-w-pcos", { environment: {} }),

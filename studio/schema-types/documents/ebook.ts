@@ -130,6 +130,32 @@ export const ebookType = defineType({
           }),
     }),
     defineField({
+      name: "lowestPrice30Days",
+      title: "Najniższa cena z 30 dni przed obniżką (brutto, zł)",
+      description:
+        "Wypełnij tylko na czas ogłoszonej obniżki ceny. Poza obniżką zostaw puste. Wypełnione pole oznacza aktywną obniżkę: strona pokaże tę cenę obok ceny brutto (art. 4 ust. 2 ustawy o informowaniu o cenach).",
+      type: "number",
+      group: "offer",
+      validation: (rule) => [
+        rule.positive().precision(2),
+        rule
+          .custom((value, context) => {
+            const price = (
+              context.document as { priceGross?: unknown } | undefined
+            )?.priceGross;
+            if (
+              typeof value === "number" &&
+              typeof price === "number" &&
+              value < price
+            ) {
+              return "Najniższa cena z 30 dni jest niższa od obecnej ceny brutto. Sprawdź, czy to na pewno obniżka.";
+            }
+            return true;
+          })
+          .warning(),
+      ],
+    }),
+    defineField({
       name: "currency",
       title: "Waluta",
       type: "string",

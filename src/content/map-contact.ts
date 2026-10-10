@@ -47,10 +47,10 @@ export function mapContact(page: PageContent, language: Locale) {
   if (isTextCards(profiles) || profiles.items.length === 0) {
     throw new Error("Kontakt wymaga odnośników do profili społecznościowych.");
   }
-  if (
-    !signup.fields.some((field) => field.input === "checkbox" && field.required)
-  ) {
-    throw new Error("Newsletter kontaktu wymaga zgody.");
+  if (contact.formKey !== "contact" || signup.formKey !== "newsletter") {
+    throw new Error(
+      "Kontakt wymaga formularza kontaktowego i formularza newslettera.",
+    );
   }
   return {
     hero: { ...heading, media: heading.media },

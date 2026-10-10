@@ -120,8 +120,8 @@ export function mapAbout(page: PageContent, language: Locale): AboutView {
   if (!consultation.media) {
     throw new Error("About 3a wymaga fotografii przy ofercie konsultacji.");
   }
-  if (newsletter.fields.some((field) => field.input === "checkbox") === false) {
-    throw new Error("Newsletter strony O mnie wymaga zgody (checkbox).");
+  if (newsletter.formKey !== "newsletter") {
+    throw new Error("Newsletter strony O mnie wymaga formularza newslettera.");
   }
 
   return {

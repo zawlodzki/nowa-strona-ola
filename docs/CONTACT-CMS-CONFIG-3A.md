@@ -10,7 +10,7 @@ ani publikacji. Strony: `/kontakt/`, `/en/contact/`.
 2. Dwie kolumny: formularz po lewej, wybrane zdjęcie kontaktowe po prawej.
    Pod zdjęciem loga Instagram, Facebook i TikTok jako nazwane linki.
 3. Bezpośredni e-mail pod formularzem, następnie dane firmy w osobnym bloku.
-4. Wspólny newsletter z odrębnym formularzem i zgodą, następnie stopka 3a.
+4. Wspólny newsletter z odrębnym formularzem (bez checkboxa, informacja Z6), następnie stopka 3a.
 
 Na mobile kolumny układają się w kolejności formularz → e-mail → zdjęcie →
 social media → dane firmy → newsletter. Switzer, tokeny, odstępy, fokus i dark
@@ -29,7 +29,9 @@ mode pochodzą z istniejącego design systemu. Kontakt dodany do wspólnej nawig
 | NIP         | 6793323800                                                       | Polecenie użytkownika 09.10.2026                     |
 | Zdjęcie     | `contact` → `src/assets/portraits/contact.webp`                  | Wcześniej wybrany portret Kontakt C                  |
 | Profile     | Istniejące Instagram, Facebook i TikTok                          | `src/content/social-profiles.ts`; wspólne z homepage |
-| Newsletter  | Istniejące copy i referencja formularza newslettera              | Bez zmian treści zgody                               |
+| Newsletter  | Wspólny formularz newslettera: „Zapisuję się”, informacja Z6     | Decyzja właściciela 10.10.2026, zgody 2.3 §7         |
+| Przycisk    | „Wyślij wiadomość”; wysyłka do webhooka n8n, `formKey` `contact` | Decyzja właściciela 10.10.2026                       |
+| Informacja  | „Odpowiemy na Twoje pytanie. **Nie opisuj tu szczegółów…**”      | Zgody 2.3 §6 dosłownie, pole `notice`, bez zgody     |
 | H1 i lead   | „Porozmawiajmy.” / pytanie o konsultację, e-booki lub współpracę | Propozycja copy, fixture                             |
 
 ## Mapowanie Sanity
@@ -46,8 +48,8 @@ Wykorzystujemy istniejące schematy — bez nowego typu sekcji. Walidator
 | `textSection`                   | title „Dane firmy”, body (cztery linie danych) |
 | `formSection`                   | title, lead, form → `newsletter-form-pl/en`    |
 
-Mapper pilnuje kolejności, trzech typów pól, zdjęcia, mailto i wymaganej zgody
-newslettera. Renderer korzysta ze wspólnych komponentów 3a. Istniejący serializer
+Mapper pilnuje kolejności, trzech typów pól, zdjęcia, mailto oraz `formKey`
+(`contact` i `newsletter`). Renderer korzysta ze wspólnych komponentów 3a. Istniejący serializer
 sekcji eksportuje te same dane do Markdown. Preview korzysta z tego samego widoku.
 Jawne trasy PL/EN używają `ContactPage.astro`, a `ComposedPage.astro` ładuje go
 dynamicznie w preview. Zachowuje to izolację CSS poszczególnych podstron;

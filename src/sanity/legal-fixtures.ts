@@ -8,8 +8,8 @@ import termsSource from "@/content/legal-bodies/regulamin.json";
 
 interface LegalSourceFile {
   title: string;
-  effectiveFrom: string;
-  effectiveLabel: string;
+  version: string;
+  effectiveFrom: string | null;
   seoDescription: string;
   body: PortableBlock[];
 }
@@ -56,6 +56,7 @@ export const demonstrationLegalPages = {
     language: "pl" as const,
     slug: "polityka-prywatnosci",
     title: privacy.title,
+    version: privacy.version,
     effectiveFrom: privacy.effectiveFrom,
     seo: {
       title: "Polityka prywatności",
@@ -69,6 +70,7 @@ export const demonstrationLegalPages = {
     language: "en" as const,
     slug: "privacy",
     title: "Privacy policy",
+    version: privacy.version,
     effectiveFrom: privacy.effectiveFrom,
     seo: {
       title: "Privacy policy",
@@ -86,6 +88,7 @@ export const demonstrationLegalPages = {
     language: "pl" as const,
     slug: "regulamin",
     title: terms.title,
+    version: terms.version,
     effectiveFrom: terms.effectiveFrom,
     seo: {
       title: "Regulamin",
@@ -99,6 +102,7 @@ export const demonstrationLegalPages = {
     language: "en" as const,
     slug: "terms",
     title: "Terms",
+    version: terms.version,
     effectiveFrom: terms.effectiveFrom,
     seo: {
       title: "Terms",
@@ -112,6 +116,7 @@ export const demonstrationLegalPages = {
     language: "pl" as const,
     slug: "lista-cookies-i-identyfikatorow",
     title: cookies.title,
+    version: cookies.version,
     effectiveFrom: cookies.effectiveFrom,
     seo: {
       title: "Lista cookies i identyfikatorów",
@@ -125,6 +130,7 @@ export const demonstrationLegalPages = {
     language: "pl" as const,
     slug: "regulamin-newslettera",
     title: newsletter.title,
+    version: newsletter.version,
     effectiveFrom: newsletter.effectiveFrom,
     seo: {
       title: "Regulamin newslettera",

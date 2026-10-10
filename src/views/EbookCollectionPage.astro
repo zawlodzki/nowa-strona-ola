@@ -3,7 +3,6 @@ import type { Locale } from "@ola/shared";
 
 import { mapEbookCollection } from "@/content/map-ebook-collection";
 import { shellLinks } from "@/content/map-homepage";
-import { homepageCopyright } from "@/sanity/homepage-fixtures";
 import { ebookCollectionPath } from "@/lib/paths";
 import type { EbookCard, PageContent, SiteSettings } from "@/sanity/repository";
 import EbookCollection3a from "@/views/EbookCollection3a.astro";
@@ -44,7 +43,7 @@ const headerCta = shell.headerCta
   description={content.seoDescription}
   preview={preview}
   footerNote={settings.footerNote ?? ""}
-  copyright={homepageCopyright(lang)}
+  copyright={shell.copyright}
   languageHref={content.alternateHref}
   navigation={navigation}
   headerCta={headerCta}

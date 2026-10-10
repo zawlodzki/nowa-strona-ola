@@ -1,7 +1,12 @@
 ---
 import type { Locale } from "@ola/shared";
 
-import { catalogPath, homePath, type SiteSection } from "@/lib/paths";
+import {
+  catalogPath,
+  homePath,
+  isLocaleEnabled,
+  type SiteSection,
+} from "@/lib/paths";
 import Container from "@/ui/container/Container.astro";
 import Logo from "@/ui/logo/Logo.astro";
 import TextLink from "@/ui/text-link/TextLink.astro";
@@ -26,11 +31,13 @@ const {
 } = Astro.props as Props;
 const pl = lang === "pl";
 const homeHref = homePath(lang);
-const languageHref =
-  alternateHref === undefined
+const otherLanguage: Locale = pl ? "en" : "pl";
+const languageHref = !isLocaleEnabled(otherLanguage)
+  ? null
+  : alternateHref === undefined
     ? section === "catalog"
-      ? catalogPath(pl ? "en" : "pl")
-      : homePath(pl ? "en" : "pl")
+      ? catalogPath(otherLanguage)
+      : homePath(otherLanguage)
     : alternateHref;
 const links = navigation?.length
   ? navigation

@@ -1,7 +1,6 @@
 ---
 import type { Locale } from "@ola/shared";
 import { shellLinks } from "@/content/map-homepage";
-import { homepageCopyright } from "@/sanity/homepage-fixtures";
 import { pagePath } from "@/lib/paths";
 import type { PageContent, SiteSettings } from "@/sanity/repository";
 import SiteShell3a from "@/views/SiteShell3a.astro";
@@ -37,7 +36,7 @@ const headerCta = shell.headerCta
   description={page.seo?.description ?? undefined}
   preview={preview}
   footerNote={settings.footerNote ?? ""}
-  copyright={homepageCopyright(lang)}
+  copyright={shell.copyright}
   languageHref={alternateHref}
   navigation={navigation}
   headerCta={headerCta}

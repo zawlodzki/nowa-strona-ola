@@ -1,0 +1,354 @@
+---
+import type { Locale } from "@ola/shared";
+
+import { inlineMarkdownHtml } from "@/lib/inline-markdown";
+import { fieldMaxLength, type LeadFormSpec } from "@/lib/lead-form";
+import type { FormCopy, FormFieldCopy } from "@/sections/types";
+import Button from "./Button.astro";
+
+interface Props {
+  content: FormCopy;
+  idPrefix?: string;
+  lang: Locale;
+  layout?: "inline" | "stacked";
+  /** Catalog and demo pages: validate, then show a note instead of sending. */
+  demo?: boolean;
+}
+
+const {
+  content,
+  idPrefix = "",
+  lang,
+  layout = "inline",
+  demo = false,
+} = Astro.props;
+const pl = lang === "pl";
+const checkboxFields = content.fields.filter(
+  (field) => field.input === "checkbox",
+);
+const controlFields = content.fields.filter(
+  (field) => field.input !== "checkbox",
+);
+const inlineSubmit =
+  layout === "inline" && controlFields.some((field) => field.input === "email");
+const spec: LeadFormSpec = {
+  formKey: content.formKey,
+  version: content.version,
+  language: lang,
+  noticeConsentId: content.noticeConsentId,
+  fields: content.fields.map(({ name, input, required, options }) => ({
+    name,
+    input,
+    required,
+    options,
+  })),
+};
+const showsReceipt = content.formKey === "withdrawal";
+const formId = `${idPrefix}lead-form`;
+const copy = pl
+  ? {
+      emailPlaceholder: "np. ola@przyklad.pl",
+      choose: "Wybierz…",
+      honeypot: "Zostaw to pole puste",
+      receiptTitle: "Potwierdzenie wysłania",
+      sentAt: "Data i godzina wysłania",
+      demoNote:
+        "Przykład z katalogu: formularz sprawdza pola i niczego nie wysyła.",
+      demoSuccess: "Dane poprawne. Nic nie wysłano.",
+    }
+  : {
+      emailPlaceholder: "e.g. ola@example.com",
+      choose: "Choose…",
+      honeypot: "Leave this field empty",
+      receiptTitle: "Sending confirmation",
+      sentAt: "Date and time sent",
+      demoNote:
+        "Catalog example: the form checks the fields and sends nothing.",
+      demoSuccess: "Details valid. Nothing was sent.",
+    };
+
+function fieldIds(field: FormFieldCopy) {
+  const fieldId = `${idPrefix}${field.name}`;
+  return { fieldId, errorId: `${fieldId}-error` };
+}
+
+const autocomplete: Partial<Record<FormFieldCopy["input"], string>> = {
+  email: "email",
+  tel: "tel",
+};
+---
+
+<form
+  id={formId}
+  class="ao-form"
+  lang={lang}
+  novalidate
+  data-lead-form={JSON.stringify(spec)}
+  data-success={demo ? copy.demoSuccess : content.success}
+  data-error={content.error}
+  data-demo={demo || undefined}
+>
+  {controlFields.map((field) => {
+    const { fieldId, errorId } = fieldIds(field);
+    const shared = {
+      id: fieldId,
+      name: field.name,
+      required: field.required,
+      "aria-describedby": errorId,
+    };
+    const control =
+      field.input === "textarea" ? (
+        <textarea
+          class="ao-input ao-input--multiline"
+          rows="6"
+          maxlength={fieldMaxLength("textarea")}
+          set:text={field.defaultValue ?? ""}
+          {...shared}
+        ></textarea>
+      ) : field.input === "select" ? (
+        <select class="ao-input" {...shared}>
+          <option value="">{copy.choose}</option>
+          {(field.options ?? []).map((option) => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
+      ) : field.input === "date" ? (
+        <input class="ao-input" type="date" {...shared} />
+      ) : (
+        <input
+          class="ao-input"
+          type={field.input}
+          autocomplete={autocomplete[field.input]}
+          maxlength={fieldMaxLength(field.input)}
+          placeholder={
+            field.placeholder ??
+            (field.input === "email" ? copy.emailPlaceholder : undefined)
+          }
+          {...shared}
+        />
+      );
+    return (
+      <div class="ao-field">
+        <label for={fieldId}>{field.label}</label>
+        {inlineSubmit && field.input === "email" ? (
+          <div class="ao-form__row">
+            {control}
+            <Button as="button" type="submit" arrow disabled>
+              {content.submit}
+            </Button>
+          </div>
+        ) : (
+          control
+        )}
+        <p id={errorId} class="ao-field__error" hidden>
+          {field.errorMessage}
+        </p>
+      </div>
+    );
+  })}
+  {checkboxFields.map((field) => {
+    const { fieldId, errorId } = fieldIds(field);
+    return (
+      <div class="ao-field">
+        <label class="ao-checkbox">
+          <input
+            id={fieldId}
+            name={field.name}
+            type="checkbox"
+            value="on"
+            required={field.required}
+            aria-describedby={errorId}
+          />
+          <span set:html={inlineMarkdownHtml(field.label)} />
+        </label>
+        <p id={errorId} class="ao-field__error" hidden>
+          {field.errorMessage}
+        </p>
+      </div>
+    );
+  })}
+  <div class="ao-form__honeypot" aria-hidden="true">
+    <label for={`${idPrefix}hp-website`}>{copy.honeypot}</label>
+    <input
+      id={`${idPrefix}hp-website`}
+      name="hp_website"
+      type="text"
+      tabindex="-1"
+      autocomplete="off"
+      data-honeypot
+    />
+  </div>
+  {!inlineSubmit && (
+    <Button as="button" type="submit" arrow disabled>
+      {content.submit}
+    </Button>
+  )}
+  {content.notice && (
+    <p class="ao-form-note" set:html={inlineMarkdownHtml(content.notice)} />
+  )}
+  {demo && <p class="ao-form-note">{copy.demoNote}</p>}
+  <p class="ao-field__error" role="alert" data-form-error></p>
+  <p class="status" role="status" aria-live="polite"></p>
+  {showsReceipt && (
+    <div class="ao-form-receipt" data-receipt hidden>
+      <p class="ao-form-receipt__title">{copy.receiptTitle}</p>
+      <dl>
+        {controlFields
+          .filter((field) => field.input === "textarea")
+          .map((field) => (
+            <>
+              <dt>{field.label}</dt>
+              <dd data-receipt-field={field.name} />
+            </>
+          ))}
+        <dt>{copy.sentAt}</dt>
+        <dd>
+          <time data-receipt-time />
+        </dd>
+      </dl>
+    </div>
+  )}
+  <noscript>
+    <p>{content.noscript}</p>
+  </noscript>
+</form>
+
+<script>
+  import {
+    buildLeadSubmission,
+    CHECKED,
+    invalidFieldNames,
+    postLeadSubmission,
+    type FieldValues,
+    type LeadFormSpec,
+  } from "@/lib/lead-form";
+  import { leadWebhookUrl } from "@/lib/lead-endpoint";
+
+  type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
+  function controlOf(form: HTMLFormElement, name: string): Control | null {
+    const element = form.elements.namedItem(name);
+    return element instanceof HTMLInputElement ||
+      element instanceof HTMLSelectElement ||
+      element instanceof HTMLTextAreaElement
+      ? element
+      : null;
+  }
+
+  function readValues(form: HTMLFormElement, spec: LeadFormSpec): FieldValues {
+    const values: Record<string, string> = {};
+    for (const field of spec.fields) {
+      const control = controlOf(form, field.name);
+      if (!control) continue;
+      values[field.name] =
+        control instanceof HTMLInputElement && control.type === "checkbox"
+          ? control.checked
+            ? CHECKED
+            : ""
+          : control.value;
+    }
+    return values;
+  }
+
+  function markErrors(
+    form: HTMLFormElement,
+    spec: LeadFormSpec,
+    invalid: readonly string[],
+  ): Control | undefined {
+    let first: Control | undefined;
+    for (const field of spec.fields) {
+      const control = controlOf(form, field.name);
+      if (!control) continue;
+      const isInvalid = invalid.includes(field.name);
+      control.setAttribute("aria-invalid", String(isInvalid));
+      const error = form.querySelector<HTMLElement>(
+        `#${CSS.escape(`${control.id}-error`)}`,
+      );
+      if (error) error.hidden = !isInvalid;
+      if (isInvalid && !first) first = control;
+    }
+    return first;
+  }
+
+  function showReceipt(
+    form: HTMLFormElement,
+    values: FieldValues,
+    sentAt: Date,
+  ) {
+    const receipt = form.querySelector<HTMLElement>("[data-receipt]");
+    if (!receipt) return;
+    for (const cell of receipt.querySelectorAll<HTMLElement>(
+      "[data-receipt-field]",
+    )) {
+      cell.textContent = values[cell.dataset.receiptField ?? ""] ?? "";
+    }
+    const time = receipt.querySelector<HTMLTimeElement>("[data-receipt-time]");
+    if (time) {
+      time.dateTime = sentAt.toISOString();
+      time.textContent = new Intl.DateTimeFormat(
+        form.lang === "en" ? "en-GB" : "pl-PL",
+        { dateStyle: "long", timeStyle: "short" },
+      ).format(sentAt);
+    }
+    receipt.hidden = false;
+  }
+
+  for (const form of document.querySelectorAll<HTMLFormElement>(
+    "[data-lead-form]",
+  )) {
+    const spec = JSON.parse(form.dataset.leadForm ?? "") as LeadFormSpec;
+    const button = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]',
+    );
+    const status = form.querySelector<HTMLElement>('[role="status"]');
+    const failure = form.querySelector<HTMLElement>("[data-form-error]");
+    const honeypot = form.querySelector<HTMLInputElement>("[data-honeypot]");
+    let submissionId = crypto.randomUUID();
+    let sending = false;
+    if (button) button.disabled = false;
+
+    const succeed = (values: FieldValues, sentAt: Date) => {
+      if (status) status.textContent = form.dataset.success ?? "";
+      showReceipt(form, values, sentAt);
+      form.reset();
+      submissionId = crypto.randomUUID();
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      if (status) status.textContent = "";
+      if (failure) failure.textContent = "";
+      const values = readValues(form, spec);
+      const first = markErrors(form, spec, invalidFieldNames(spec, values));
+      if (first) {
+        first.focus();
+        return;
+      }
+      const sentAt = new Date();
+      if (form.dataset.demo !== undefined || honeypot?.value) {
+        succeed(values, sentAt);
+        return;
+      }
+      sending = true;
+      form.setAttribute("aria-busy", "true");
+      if (button) button.disabled = true;
+      const sent = await postLeadSubmission(
+        leadWebhookUrl,
+        buildLeadSubmission(spec, values, {
+          submissionId,
+          submittedAt: sentAt.toISOString(),
+          href: location.href,
+        }),
+      );
+      sending = false;
+      form.removeAttribute("aria-busy");
+      if (button) button.disabled = false;
+      if (sent) {
+        succeed(values, sentAt);
+      } else if (failure) {
+        failure.textContent = form.dataset.error ?? "";
+      }
+    });
+  }
+</script>

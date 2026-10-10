@@ -1,9 +1,13 @@
+import { unpublishableLegalText } from "../../studio/schema-types/shared/legal-publication";
+import {
+  withdrawalFormFixture,
+  withdrawalPageFixture,
+} from "./withdrawal-fixtures";
 import { blogCollectionPageFixture } from "./blog-page";
 import {
   contactPageFixture,
   contactFormFixture,
 } from "@/sanity/contact-fixtures";
-import { homepageCopy } from "@/content/homepage-seed";
 import { BLOG_ARTICLE_SEED } from "@/content/blog-collection-seed";
 import {
   demonstrationCategories,
@@ -31,7 +35,8 @@ export interface SanityDocument {
 }
 
 export type PendingItem =
-  { kind: "form"; document: SanityDocument } | { kind: "legalPage" };
+  | { kind: "form"; document: SanityDocument }
+  | { kind: "legalPage"; document?: SanityDocument };
 
 export interface ContentLakeGate {
   formLabelMax: number;
@@ -197,7 +202,7 @@ export function missingDeletionIds(presentIds: readonly string[]): string[] {
 
 export function buildDataset(plan: ContentLakePlan): SanityDocument[] {
   const pending = plan.pending.flatMap((item) =>
-    item.kind === "form" ? [item.document] : [],
+    item.document ? [item.document] : [],
   );
   return [...plan.documents, ...pending];
 }
@@ -234,8 +239,10 @@ export function buildMutations(plan: ContentLakePlan): ContentLakeMutation[] {
 }
 
 export function formsFitLabelMax(formLabelMax: number): boolean {
-  return (["pl", "en"] as const).every(
-    (language) => homepageCopy[language].consentLabel.length <= formLabelMax,
+  return (["pl", "en"] as const).every((language) =>
+    newsletterFormFixture(language).fields.every(
+      (field) => field.label.length <= formLabelMax,
+    ),
   );
 }
 
@@ -243,7 +250,7 @@ export function assertWritable(plan: ContentLakePlan): void {
   const forms = plan.pending.filter((item) => item.kind === "form");
   if (forms.length > 0) {
     throw new Error(
-      "Formularze newslettera nie mieszczą się w limicie etykiety zgody. --write nic nie wysyła.",
+      "Formularze newslettera nie mieszczą się w limicie etykiety pola. --write nic nie wysyła.",
     );
   }
 }
@@ -476,6 +483,12 @@ export function buildContentLakePlan(gate: ContentLakeGate): ContentLakePlan {
       toDocument("page", ebookCollectionPageFixture(language), keepPlaceholder),
       toDocument("page", blogCollectionPageFixture(language), keepPlaceholder),
     );
+    if (language === "pl") {
+      documents.push(
+        toDocument("page", withdrawalPageFixture(), keepPlaceholder),
+        toDocument("form", withdrawalFormFixture(), keepPlaceholder),
+      );
+    }
     for (const category of demonstrationCategories[language]) {
       documents.push(toDocument("category", category, keepPlaceholder));
     }
@@ -504,7 +517,13 @@ export function buildContentLakePlan(gate: ContentLakeGate): ContentLakePlan {
 
   if (gate.legalPages) {
     for (const page of gate.legalPages) {
-      documents.push(toDocument("legalPage", page, keepPlaceholder));
+      const document = toDocument("legalPage", page, keepPlaceholder);
+      // Same guard as the Studio validation: these writes are published.
+      const publishable =
+        Boolean(document.effectiveFrom) &&
+        unpublishableLegalText(document.body).length === 0;
+      if (publishable) documents.push(document);
+      else pending.push({ kind: "legalPage", document });
     }
   } else {
     pending.push({ kind: "legalPage" });
@@ -512,7 +531,7 @@ export function buildContentLakePlan(gate: ContentLakeGate): ContentLakePlan {
 
   linkTranslations([
     ...documents,
-    ...pending.flatMap((item) => (item.kind === "form" ? [item.document] : [])),
+    ...pending.flatMap((item) => (item.document ? [item.document] : [])),
   ]);
 
   const obsolete = new Set<string>(OBSOLETE_DOCUMENT_IDS);

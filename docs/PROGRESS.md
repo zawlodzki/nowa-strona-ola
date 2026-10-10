@@ -1,10 +1,113 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-10 (ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-10 (formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Krok 1 dokumentacji prawnej — integracja, 10.10.2026
+
+- `main` zsynchronizowany z `origin/main` `8d39131` (fast-forward o 38 commitów).
+  Lokalne zmiany z checkoutu użytkownika miały nowsze odpowiedniki upstream;
+  przyjęto wersje upstream. Kopia: ref `refs/backup/pre-sync-2026-10-10`, stash
+  „local changes pre-sync 2026-10-10” i pliki w `/private/tmp/claude-501/sync-backup/`.
+- Decyzje właściciela i zakres: [LEGAL-IMPLEMENTATION-PLAN.md](LEGAL-IMPLEMENTATION-PLAN.md)
+  (W1–W13: bez `/wspolprace` i logotypów, newsletter bez checkboxa, formularze na
+  webhook n8n, zgody zakupowe w Stripe/Cal.com, Omnibus na stronie e-booka,
+  Cal.com `live`, EN wyłączone; GTM i c15t wdraża właściciel).
+- Gałąź `feat/legal-step-1` scala trzy podpisane gałęzie: dokumenty B2C i stopka,
+  formularze i `/odstapienie/`, wyłączenie EN + `lowestPrice30Days` + Cal.com.
+  Poprawki po scaleniu: tryb demo `LeadForm` w `/ui/` i `/design-system/` (brak
+  wysyłki z katalogu), nagłówek polityki w `check-content-lake-build.mjs`.
+  AGENTS.md: nowa ścieżka formularzy i wyłączone EN.
+- Kontrole na gałęzi integracyjnej (Node 26.11, brak Node 24 lokalnie): format,
+  tokeny, lint, check, vitest 216/216, build, build:workspaces, test:build — PASS;
+  Playwright 322/324; test:content-lake PASS (uruchomiony osobno, bo verify
+  zatrzymuje się na e2e). Grep `dist`: brak `/en/`, hreflang i śladów B2B;
+  `/odstapienie/` jest; kotwice `#pouczenie`, `#formularz-odstapienia`; 25 formularzy
+  newslettera bez checkboxa; link Cal.com na `/konsultacje/`.
+- Znany błąd do rozwiązania po tej sesji: WebKit, `tests/e2e/sticky-navigation-3a.spec.ts`
+  „tabbing through the sticky header keeps the scroll position” (1440 i 390 px) —
+  failuje też na czystym `8d39131`.
+- Bramki przed merge do `main`: zapis do Content Lake (`form` z `formKey`, `version`,
+  `errorMessage`; strona `page-withdrawal-pl`; dokumenty prawne) razem z merge,
+  bo build z Sanity wymaga nowych pól. Publikacja dokumentów prawnych po akceptacji
+  radcy (walidacja blokuje placeholdery). Workflow n8n: walidacja, deduplikacja po
+  `submissionId`, honeypot `hp_website`, e-mail E7, double opt-in.
+- Korekta 10.10.2026: dane spółki usunięte ze stopki (`siteSettings.company`
+  usunięte); pełne dane zostają na `/kontakt/` i w dokumentach prawnych.
+- PR [#63](https://github.com/zawlodzki/nowa-strona-ola/pull/63). Decyzja 10.10.2026:
+  dokumenty B2C wchodzą w życie 10.10.2026, przed opinią radcy. Placeholdery
+  uzupełnione w `projekt prawny ola` (commit `0b626ff`: regulamin 2.3 — 3 pobrania,
+  ciąża po konsultacji z lekarzem, Pakiet współpracy, wizyta 30 min, kontakt 30 dni,
+  jadłospis 7 dni; lista cookies 2.1 — `olesiewicz-consent` 365 dni, Cal.com bez
+  cookies, Clarity 30 dni). Fixture’y przegenerowane konwerterem.
+- Zapis Content Lake: tylko dokumenty z PR (formularze, `page-withdrawal-pl`,
+  `siteSettings-pl`, usługa, dokumenty prawne), bez pełnego `import:3a`.
+- Następny krok: przegląd gałęzi przez właściciela, push/PR na zlecenie, potem
+  c15t i GTM (właściciel) oraz decyzje R1–R11 z przeglądu komunikacji.
+
+### Formularze wysyłają do webhooka n8n, 10.10.2026
+
+Decyzja właściciela: formularze wysyłają z przeglądarki POST JSON bezpośrednio
+na webhook n8n; ścieżka Worker → Queues → n8n i Turnstile odłożone.
+
+- Kontrakt `LeadSubmission` v2 w `packages/shared` (schemaVersion 2, formKey,
+  submittedAt, consents z wersją). Adres w `src/lib/lead-endpoint.ts`,
+  nadpisanie `PUBLIC_LEAD_WEBHOOK_URL`.
+- Schemat `form`: `formKey` (newsletter/contact/withdrawal), `version`,
+  `notice`, `noticeConsentId`, `errorMessage`, pole `date`, `defaultValue`.
+  GROQ (wspólna projekcja) i TypeGen zaktualizowane.
+- `LeadForm` zastąpił `DemoForm` i demonstracyjny `FormSection`: walidacja
+  i fokus jak dotąd, honeypot, blokada przycisku, sukces po 2xx, błąd
+  zachowuje dane i ten sam `submissionId`, bez JS brak wysyłki.
+- Newsletter: „Zapisuję się”, bez checkboxa, informacja Z6 (zgody 2.3 §7).
+  Kontakt: informacja §6. Nowa strona `/odstapienie/` (PL) z potwierdzeniem
+  na ekranie.
+- Testy: unit `lead-form`, `withdrawal`; Playwright `lead-forms.spec.ts`
+  z fixture blokującym prawdziwe żądania do `flows.zawlodzki.com`.
+- Kontrole 10.10.2026: format, tokeny, lint, check, test (207), build (68
+  stron), build workspace’ów, test:build, test:content-lake — zielone.
+  Playwright pełny: 280/282; 2 czerwone to WebKit
+  `sticky-navigation-3a` „tabbing…”, które failują identycznie na main
+  8d39131. Jednorazowo flaky kontakt w Firefox pod obciążeniem (60/60
+  w powtórkach).
+- Niewykonane: zapis do Content Lake (newsletter, kontakt, odstąpienie),
+  workflow n8n (walidacja, deduplikacja, honeypot, e-mail E7, double opt-in),
+  ręczny przegląd czytnikiem ekranu i zoom 200% formularza odstąpienia.
+- Kolejność wdrożenia: build z Sanity wymaga w Content Lake nowych pól
+  `form` (`formKey`, `version`, `errorMessage`) i strony `page-withdrawal-pl`,
+  a obecny main wymaga checkboxa newslettera. Zapis i merge muszą iść razem
+  (`import:3a` z `--write` dopiero na zlecenie).
+- Następny krok: przygotować testowy workflow n8n i zapis Content Lake
+  zsynchronizowany z merge.
+
+### Dokumenty prawne B2C, wersjonowanie i stopka, 10.10.2026
+
+- Treści B2B z zawlodzki.pl usunięte (HTML, konwerter Python, fixture’y).
+  Nowe źródło: szkice `projekt prawny ola/www-prawne/*.md`; konwerter
+  `scripts/convert-legal-md.mjs` (z `--check`), przykłady Markdown
+  `scripts/generate-legal-examples.ts`. Pouczenie i formularz odstąpienia są
+  załącznikami `/regulamin/#pouczenie` i `#formularz-odstapienia`.
+- `legalPage`: `version` (wymagane), `effectiveFrom` opcjonalne; publikację
+  blokuje brak daty albo `{{`/`[do sprawdzenia` w treści. Ta sama reguła
+  blokuje `import:legal --write` i legal w `import:3a`. Pod H1: „Wersja X ·
+  obowiązuje od …” albo „… · data wejścia w życie do ustalenia”.
+- `siteSettings`: `company`, `copyright`, `testimonialsDisclosure`; pięć linków
+  prawnych PL w stopce, linia danych sprzedawcy, informacja pod opiniami (Home,
+  O mnie, Konsultacje, E-book). Szczegóły: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
+- Kontrole: format, lint, check, `npm test` (201), build, `test:build`,
+  Playwright `legal-pages` (45/45) oraz consistency, contact, carousel
+  (łącznie 63/63) — na osobnym porcie 4391, bo 4321 zajmował inny worktree.
+  `ui.spec` i `sticky-navigation` mają adresy `127.0.0.1:4321` na sztywno
+  (nie dało się ich uruchomić izolowanie); dwa testy tabulacji WebKit padają
+  też na main 8d39131 w tym środowisku.
+- Nie zrobione: migracja bloku „Dane firmy” kontaktu do `siteSettings.company`
+  (zmiana kontraktu sekcji i eksportu Markdown); fixture czyta już
+  `site-legal.ts`. Zapis do Content Lake: brak. Następny krok: przegląd
+  radcy prawnego, daty wejścia w życie i usunięcie placeholderów w źródle,
+  potem `convert-legal-md.mjs` i import.
 
 ### Ikony tematów w „Z kim pracuję”, 10.10.2026
 

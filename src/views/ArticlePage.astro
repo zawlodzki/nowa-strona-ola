@@ -3,7 +3,6 @@ import type { Locale } from "@ola/shared";
 
 import { mapArticle } from "@/content/map-article";
 import { shellLinks } from "@/content/map-homepage";
-import { homepageCopyright } from "@/sanity/homepage-fixtures";
 import { blogPath } from "@/lib/paths";
 import type { ArticleContent, SiteSettings } from "@/sanity/repository";
 import Article3a from "@/views/Article3a.astro";
@@ -35,7 +34,7 @@ const headerCta = shell.headerCta
   description={content.seoDescription}
   preview={preview}
   footerNote={settings.footerNote ?? ""}
-  copyright={homepageCopyright(lang)}
+  copyright={shell.copyright}
   languageHref={content.alternateHref}
   navigation={navigation}
   headerCta={headerCta}

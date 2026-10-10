@@ -1,6 +1,6 @@
 import type { Locale } from "@ola/shared";
 
-import { footerLegalLinks } from "@/content/homepage-seed";
+import { footerLegalLinks, siteLegalCopy } from "@/content/site-legal";
 import { footerSocialLinks } from "@/content/social-profiles";
 import type { PageContent } from "@/sanity/repository";
 
@@ -111,8 +111,8 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
   if (!consultation.media) {
     throw new Error("Homepage 3a wymaga fotografii przy ofercie konsultacji.");
   }
-  if (newsletter.fields.some((field) => field.input === "checkbox") === false) {
-    throw new Error("Newsletter homepage wymaga zgody (checkbox).");
+  if (newsletter.formKey !== "newsletter") {
+    throw new Error("Newsletter homepage wymaga formularza newslettera.");
   }
 
   return {
@@ -127,7 +127,7 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
   };
 }
 
-export function shellLinks(settings: {
+interface ShellSettings {
   language?: string | null;
   navigation?:
     ({ label?: string | null; href?: string | null } | null)[] | null;
@@ -136,8 +136,23 @@ export function shellLinks(settings: {
     ({ label?: string | null; href?: string | null } | null)[] | null;
   legalLinks?:
     ({ label?: string | null; href?: string | null } | null)[] | null;
-}) {
-  const language = settings.language === "en" ? "en" : "pl";
+  copyright?: string | null;
+  testimonialsDisclosure?: string | null;
+}
+
+function settingsLanguage(settings: ShellSettings): Locale {
+  return settings.language === "en" ? "en" : "pl";
+}
+
+export function testimonialsDisclosure(settings: ShellSettings): string {
+  return (
+    settings.testimonialsDisclosure?.trim() ||
+    siteLegalCopy[settingsLanguage(settings)].testimonialsDisclosure
+  );
+}
+
+export function shellLinks(settings: ShellSettings) {
+  const language = settingsLanguage(settings);
   const socialLinks = (settings.socialLinks ?? []).flatMap((item) =>
     item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
   );
@@ -154,5 +169,6 @@ export function shellLinks(settings: {
         : undefined,
     socialLinks: socialLinks.length > 0 ? socialLinks : footerSocialLinks(),
     legalLinks: legalLinks.length > 0 ? legalLinks : footerLegalLinks(language),
+    copyright: settings.copyright?.trim() || siteLegalCopy[language].copyright,
   };
 }

@@ -1,8 +1,8 @@
 {
-  "title": "Regulamin sklepu www.zawlodzki.pl",
-  "effectiveFrom": "2026-08-24",
-  "effectiveLabel": "obowiązuje od 24.08.2026",
-  "seoDescription": "Regulamin serwisu www.zawlodzki.pl",
+  "title": "Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com",
+  "version": "2.3",
+  "effectiveFrom": "2026-10-10",
+  "seoDescription": "Regulamin sprzedaży e-booków i konsultacji dietetycznych online, z pouczeniem i wzorem formularza odstąpienia od umowy.",
   "body": [
     {
       "_type": "block",
@@ -11,7 +11,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0001",
+          "_key": "s0",
           "text": "§ 1. Postanowienia ogólne",
           "marks": []
         }
@@ -20,103 +20,219 @@
     },
     {
       "_type": "block",
-      "_key": "p0005",
+      "_key": "b1",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0002",
-          "text": "Regulamin określa zasady sprzedaży prowadzonej za pośrednictwem strony internetowej Sprzedawcy dostępnej pod adresami www.zawlodzki.pl oraz www.zawlodzki.com, wraz z ich subdomenami („",
+          "_key": "s0",
+          "text": "Regulamin określa zasady sprzedaży e-booków oraz świadczenia konsultacji dietetycznych online i usług z nimi związanych za pośrednictwem strony internetowej ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0003",
-          "text": "Sklep",
+          "_key": "s1",
+          "text": "aleksandraolesiewicz.com",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0004",
-          "text": "”), w tym zasady zakupu dostępu do kursów online i usług konsultacyjnych, świadczenia usług cyfrowych, reklamacji oraz odstąpienia od umowy.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0011",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0006",
-          "text": "Sprzedawcą jest ",
+          "_key": "s2",
+          "text": " wraz z podstronami („",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0007",
+          "_key": "s3",
+          "text": "Strona",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": "”), w tym zasady zawierania umów, płatności, dostarczania, reklamacji i odstąpienia od umowy.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b2",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Sprzedawcą i usługodawcą jest ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
           "text": "Wellbiz spółka z ograniczoną odpowiedzialnością",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0008",
-          "text": " z siedzibą w Krakowie, ul. Lipowa 3D, 30-702 Kraków, wpisana do rejestru przedsiębiorców KRS pod numerem 0001158341 (Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie, XI Wydział Gospodarczy KRS), NIP: 6793323800, REGON: 541006624, kapitał zakładowy 5 000,00 zł („",
+          "_key": "s2",
+          "text": " z siedzibą w Krakowie, ul. Lipowa 3D, 30-702 Kraków, wpisana do rejestru przedsiębiorców Krajowego Rejestru Sądowego pod numerem KRS 0001158341 (Sąd Rejonowy dla Krakowa-Śródmieścia w Krakowie, XI Wydział Gospodarczy KRS), NIP 6793323800, REGON 541006624, kapitał zakładowy 5 000,00 zł („",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0009",
-          "text": "Sprzedawca",
+          "_key": "s3",
+          "text": "Wellbiz",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0010",
+          "_key": "s4",
+          "text": "”, „",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s5",
+          "text": "my",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s6",
           "text": "”).",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0013",
+      "_key": "b3",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0012",
-          "text": "Kontakt ze Sprzedawcą: e-mail grzesiek@zawlodzki.pl, telefon +48 571 088 338, korespondencyjnie na adres siedziby.",
+          "_key": "s0",
+          "text": "Konsultacje i usługi dietetyczne w imieniu Wellbiz prowadzi ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "Aleksandra Olesiewicz-Zawłodzka",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ", dietetyczka, prokurentka Wellbiz („",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "Dietetyczka",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": "”). Autorką e-booków jest Aleksandra Olesiewicz-Zawłodzka.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0015",
+      "_key": "b4",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0014",
-          "text": "Złożenie Zamówienia wymaga akceptacji Regulaminu. Regulamin jest udostępniany nieodpłatnie na stronie Sklepu w sposób umożliwiający jego pobranie, utrwalenie i wydrukowanie.",
+          "_key": "s0",
+          "text": "Kontakt z Wellbiz: e-mail ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "ola@aleksandraolesiewicz.com",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ", telefon ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "+48 530 005 133",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": ", korespondencyjnie na adres siedziby. Ten sam adres e-mail służy do składania reklamacji i oświadczeń o odstąpieniu od umowy.",
           "marks": []
         }
       ],
-      "markDefs": [],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b5",
+      "style": "normal",
       "listItem": "number",
-      "level": 1
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Regulamin jest dostępny nieodpłatnie na Stronie w formie umożliwiającej jego pobranie, utrwalenie i wydrukowanie. Przed zawarciem umowy wymagana jest jego akceptacja.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b6",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Oferta jest skierowana do ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "osób pełnoletnich",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " (które ukończyły 18 lat) i mających pełną zdolność do czynności prawnych.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
     },
     {
       "_type": "block",
@@ -125,7 +241,7 @@
       "children": [
         {
           "_type": "span",
-          "_key": "s0016",
+          "_key": "s0",
           "text": "§ 2. Definicje",
           "marks": []
         }
@@ -134,417 +250,627 @@
     },
     {
       "_type": "block",
-      "_key": "p0019",
+      "_key": "b8",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0017",
+          "_key": "s0",
+          "text": "Klient",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – osoba fizyczna, która zawiera z Wellbiz Umowę; w Regulaminie słowo „Klient” obejmuje każdą osobę niezależnie od płci.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b9",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
           "text": "Konsument",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0018",
-          "text": " – osoba fizyczna dokonująca zakupu niezwiązanego bezpośrednio z jej działalnością gospodarczą lub zawodową.",
+          "_key": "s1",
+          "text": " – Klient zawierający Umowę niezwiązaną bezpośrednio z jego działalnością gospodarczą lub zawodową.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0022",
+      "_key": "b10",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0020",
+          "_key": "s0",
           "text": "Przedsiębiorca na prawach konsumenta",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0021",
-          "text": " – osoba fizyczna zawierająca umowę bezpośrednio związaną z jej działalnością gospodarczą, gdy z treści umowy wynika, że nie ma ona dla niej charakteru zawodowego, wynikającego w szczególności z przedmiotu działalności ujawnionego w CEIDG.",
+          "_key": "s1",
+          "text": " – osoba fizyczna zawierająca Umowę bezpośrednio związaną z jej działalnością gospodarczą, gdy z treści Umowy wynika, że nie ma ona dla niej charakteru zawodowego; ma ona uprawnienia Konsumenta w zakresie wskazanym w ustawie o prawach konsumenta.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0025",
+      "_key": "b11",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0023",
-          "text": "Kupujący",
+          "_key": "s0",
+          "text": "E-book",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0024",
-          "text": " – osoba fizyczna posiadająca pełną zdolność do czynności prawnych, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej, która zawiera Umowę ze Sprzedawcą.",
+          "_key": "s1",
+          "text": " – publikacja elektroniczna w formacie PDF, stanowiąca treść cyfrową w rozumieniu ustawy o prawach konsumenta, dostarczana przez udostępnienie linku do pobrania.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0028",
+      "_key": "b12",
       "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0026",
-          "text": "Kurs",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0027",
-          "text": " – usługa cyfrowa w rozumieniu ustawy o prawach konsumenta, polegająca na zapewnianiu przez Okres Dostępu ciągłego dostępu do Platformy, jej funkcjonalności oraz materiałów szkoleniowych (w szczególności wideo, tekstów, zadań i szablonów).",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0031",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0029",
-          "text": "Platforma",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0030",
-          "text": " – platforma kursowa LearnHouse, dostępna pod adresem wskazanym w wiadomości z dostępem do Kursu, prowadzona przez zewnętrznego dostawcę (LearnHouse, Inc. – learnhouse.app), za pośrednictwem której Sprzedawca dostarcza Kurs.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0034",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0032",
-          "text": "Konto",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0033",
-          "text": " – indywidualne, imienne konto Kupującego na Platformie, umożliwiające korzystanie z Kursu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0037",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0035",
-          "text": "Certyfikat",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0036",
-          "text": " – elektroniczne, imienne potwierdzenie ukończenia Kursu, wystawiane za pośrednictwem Certifier (Certifier sp. z o.o.), jeżeli opis danego Kursu przewiduje jego wydanie i Kupujący spełni wskazane tam kryteria.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0040",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0038",
-          "text": "Okres Dostępu",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0039",
-          "text": " – okres 12 miesięcy od dnia dostarczenia Kursu, w którym Kupujący ma dostęp do Kursu w ramach zapłaconej ceny.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0043",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0041",
+          "_key": "s0",
           "text": "Konsultacja",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0042",
-          "text": " – usługa świadczona przez Sprzedawcę online w terminie uzgodnionym z Kupującym.",
+          "_key": "s1",
+          "text": " – indywidualne spotkanie online z Dietetyczką przez Google Meet, o czasie trwania wskazanym w opisie usługi na Stronie (w dniu sporządzenia Regulaminu — 60 minut), wraz z przygotowaniem na podstawie Ankiety i Podsumowaniem.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0046",
+      "_key": "b13",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0044",
+          "_key": "s0",
+          "text": "Ankieta",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – formularz online wypełniany przez Klienta przed Konsultacją, zawierający informacje o stanie zdrowia, stylu życia i nawykach żywieniowych.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b14",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Podsumowanie",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – przesyłane e-mailem po Konsultacji pisemne podsumowanie ustaleń i zaleceń żywieniowych.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b15",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Usługi Dodatkowe",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – Pakiet, Wizyta Kontrolna, Kontakt Mailowy i Jadłospis (§ 12), dostępne, jeżeli są aktualnie oferowane na Stronie.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b16",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Usługa Dietetyczna",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – Konsultacja lub Usługa Dodatkowa.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b17",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
           "text": "Zamówienie",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0045",
-          "text": " – oświadczenie woli Kupującego zmierzające do zawarcia Umowy, składane za pośrednictwem koszyka obsługiwanego przez zewnętrznego dostawcę (EasyCart – Easytools sp. z o.o.), w którym płatność realizuje operator płatności Stripe.",
+          "_key": "s1",
+          "text": " – oświadczenie woli Klienta zmierzające do zawarcia Umowy o dostarczenie E-booka, składane na Stronie.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0049",
+      "_key": "b18",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0047",
+          "_key": "s0",
+          "text": "Rezerwacja",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – oświadczenie woli Klienta zmierzające do zawarcia Umowy o Usługę Dietetyczną, składane w kalendarzu rezerwacji Cal.com dostępnym ze Strony.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b19",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
           "text": "Umowa",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0048",
-          "text": " – umowa o świadczenie usługi cyfrowej (Kurs) lub umowa o świadczenie usługi (Konsultacja), zawierana na odległość między Sprzedawcą a Kupującym.",
+          "_key": "s1",
+          "text": " – umowa o dostarczenie E-booka albo umowa o świadczenie Usługi Dietetycznej, zawierana na odległość między Wellbiz a Klientem.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0058",
+      "_key": "b20",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0050",
-          "text": "Forum",
+          "_key": "s0",
+          "text": "Zgoda Zdrowotna",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0051",
-          "text": " – forum społecznościowe prowadzone przez Sprzedawcę za pośrednictwem zewnętrznego dostawcy Discourse (Civilized Discourse Construction Kit, Inc.), dostępne pod adresem wskazanym w wiadomości z dostępem, służące ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0052",
-          "text": "zadawaniu pytań dotyczących treści lekcji",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0053",
-          "text": " — prowadzącym i innym Uczestnikom. Forum jest dostępne ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0054",
-          "text": "wyłącznie po zalogowaniu",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0055",
-          "text": "; jego treści nie są publicznie dostępne ani indeksowane przez wyszukiwarki. Forum ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0056",
-          "text": "nie udostępnia wiadomości prywatnych",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0057",
-          "text": " między Uczestnikami.",
+          "_key": "s1",
+          "text": " – wyraźna zgoda Klienta na przetwarzanie danych dotyczących jego zdrowia w celu świadczenia Usług Dietetycznych, wyrażana w Ankiecie (art. 9 ust. 2 lit. a RODO).",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0065",
+      "_key": "b21",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0059",
-          "text": "Uczestnik",
+          "_key": "s0",
+          "text": "Partner",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0060",
-          "text": " – osoba fizyczna, której Sprzedawca udostępnił dostęp do Forum: Kupujący korzystający z Kursu albo z Programu kohortowego ",
+          "_key": "s1",
+          "text": " – podmiot, z którym Wellbiz współpracuje w ramach programu afiliacyjnego i którego kody rabatowe lub linki mogą być publikowane w mediach społecznościowych prowadzonych przez Dietetyczkę (§ 16).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "3-charakter-uslug-dietetycznych-i-ich-granice",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 3. Charakter Usług Dietetycznych i ich granice",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b23",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Usługi Dietetyczne to ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0061",
-          "text": "albo pracownik lub współpracownik wskazany przez Kupującego",
+          "_key": "s1",
+          "text": "poradnictwo żywieniowe i edukacja żywieniowa",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0062",
-          "text": " zgodnie z § 5 ust. 9. Uczestnik niebędący Kupującym nie jest stroną Umowy; przysługują mu prawa i obowiązki określone w § 6a oraz uprawnienia wynikające z przepisów o ochronie danych osobowych. Sprzedawca ",
+          "_key": "s2",
+          "text": ": analiza sposobu odżywiania i stylu życia Klienta, wyjaśnienie zależności między żywieniem a samopoczuciem oraz zalecenia dotyczące żywienia i nawyków.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b24",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "W ramach Usług Dietetycznych ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0063",
-          "text": "nie raportuje Kupującemu treści publikowanych przez wskazanego przez niego Uczestnika",
+          "_key": "s1",
+          "text": "nie stawiamy diagnoz, nie leczymy chorób, nie zlecamy badań i nie zmieniamy leczenia",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0064",
+          "_key": "s2",
+          "text": ". Dietetyczka może omówić rozpoznanie postawione przez lekarza i dostępne wyniki badań w kontekście żywienia; decyzje diagnostyczne i terapeutyczne, w tym dotyczące leków i ich dawkowania, należą do lekarza. Usługi Dietetyczne nie zastępują wizyty lekarskiej.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b25",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Usługi Dietetyczne są świadczeniem starannego działania. ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "Nie gwarantujemy określonego efektu",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ", w szczególności zmiany masy ciała, wyników badań lub objawów; efekty zależą od indywidualnych okoliczności i stosowania zaleceń.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b26",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Klient przekazuje w Ankiecie i podczas Konsultacji ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "prawdziwe i kompletne informacje",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " istotne dla zaleceń, w szczególności o rozpoznaniach, przyjmowanych lekach i suplementach, alergiach, nietolerancjach, ciąży lub karmieniu piersią. Informacje te są potrzebne do bezpiecznego przygotowania zaleceń.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b27",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Przeciwwskazania.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Usługi Dietetyczne nie są przeznaczone dla osób:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b28",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "w ciąży lub karmiących piersią — Usługi Dietetyczne świadczymy wyłącznie po potwierdzeniu konsultacji z lekarzem,",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b29",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "z rozpoznanymi lub podejrzewanymi zaburzeniami odżywiania (np. anoreksja, bulimia, kompulsywne objadanie się),",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b30",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "z cukrzycą leczoną insuliną, przewlekłą chorobą nerek lub wątroby w stadium zaawansowanym, chorobą nowotworową w trakcie leczenia, po niedawnej operacji bariatrycznej lub w innym stanie wymagającym diety pod stałym nadzorem lekarza,",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b31",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "które nie ukończyły 18 lat.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b32",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Jeżeli z Ankiety lub przebiegu Konsultacji wynika przeciwwskazanie albo potrzeba pilnej konsultacji lekarskiej, Dietetyczka może odmówić świadczenia lub je przerwać i wskazać potrzebę kontaktu z lekarzem. W takim przypadku ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "zwracamy cenę",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " niewykonanej części usługi, a za usługę przerwaną w trakcie — całą cenę, chyba że Klient zataił okoliczność wskazaną w ust. 4, o którą był pytany w Ankiecie; wtedy rozliczamy część wykonaną proporcjonalnie.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b33",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "W stanie nagłym Klient powinien skontaktować się z numerem alarmowym 112 lub lekarzem. Kanały kontaktu z Wellbiz nie służą do pomocy w nagłych sytuacjach zdrowotnych.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "4-uslugi-elektroniczne-i-wymagania-techniczne",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 4. Usługi elektroniczne i wymagania techniczne",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b35",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Wellbiz świadczy nieodpłatnie drogą elektroniczną usługi polegające na: udostępnianiu treści Strony, umożliwianiu składania Zamówień i Rezerwacji, udostępnianiu formularza Ankiety oraz formularza odstąpienia od umowy. Newsletter jest świadczony na podstawie odrębnego ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "regulaminu newslettera",
+          "marks": ["l0"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
           "text": ".",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0074",
-      "style": "normal",
-      "children": [
+      "markDefs": [
         {
-          "_type": "span",
-          "_key": "s0066",
-          "text": "Program kohortowy",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0067",
-          "text": " – usługa polegająca na prowadzeniu przez Sprzedawcę grupowego programu wdrożeniowego dla zespołów sprzedaży, obejmująca: ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0068",
-          "text": "osiem cotygodniowych spotkań online po 120 minut",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0069",
-          "text": " prowadzonych na żywo w grupie kilku firm, dwie godziny konsultacji indywidualnych, przegląd CRM i ankietę gotowości na starcie oraz ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0070",
-          "text": "pełny dostęp do Kursu przez Okres Dostępu",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0071",
-          "text": ". W Programie po stronie jednego Kupującego może uczestniczyć ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0072",
-          "text": "do trzech osób",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0073",
-          "text": " wskazanych zgodnie z § 5 ust. 9. Szczegółowy zakres, termin rozpoczęcia i cenę określa opis Programu w Sklepie.",
-          "marks": []
+          "_type": "link",
+          "_key": "l0",
+          "href": "/regulamin-newslettera/"
         }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      ]
     },
     {
       "_type": "block",
-      "_key": "3-uslugi-elektroniczne-i-wymagania-techniczne",
-      "style": "h2",
+      "_key": "b36",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0075",
-          "text": "§ 3. Usługi elektroniczne i wymagania techniczne",
+          "_key": "s0",
+          "text": "Do korzystania ze Strony, składania Zamówień i Rezerwacji potrzebne są: urządzenie z dostępem do internetu, aktualna przeglądarka z włączoną obsługą JavaScript i plików cookies niezbędnych do działania Strony oraz aktywny adres e-mail.",
           "marks": []
         }
       ],
@@ -552,125 +878,15 @@
     },
     {
       "_type": "block",
-      "_key": "p0077",
+      "_key": "b37",
       "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0076",
-          "text": "Sprzedawca świadczy nieodpłatnie usługę elektroniczną polegającą na umożliwieniu składania Zamówień oraz – po zakupie Kursu – na prowadzeniu Konta na Platformie przez Okres Dostępu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0079",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0078",
-          "text": "Do korzystania ze Sklepu i Kursu niezbędne są: urządzenie z dostępem do internetu, aktualna przeglądarka internetowa z włączoną obsługą JavaScript i plików cookies oraz aktywne konto e-mail. Do udziału w Konsultacji dodatkowo: mikrofon oraz możliwość korzystania z Google Meet.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0081",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0080",
-          "text": "Kurs jest udostępniany w formie streamingu wideo i materiałów do odczytu lub pobrania na Platformie; nie jest objęty zabezpieczeniami DRM wymagającymi dodatkowego oprogramowania. Informacje o funkcjonalności, kompatybilności i interoperacyjności danego Kursu są podane w jego opisie w Sklepie.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0083",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0082",
-          "text": "Kupującego obowiązuje zakaz dostarczania treści o charakterze bezprawnym oraz korzystania ze Sklepu i Platformy w sposób zakłócający ich działanie.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0085",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0084",
-          "text": "Korzystanie z usług elektronicznych wiąże się z typowymi zagrożeniami internetowymi, w szczególności z próbami wyłudzenia danych, przejęcia Konta, złośliwym oprogramowaniem i nieuprawnionym dostępem. Kupujący powinien korzystać z aktualnego oprogramowania, chronić dane logowania i weryfikować nadawcę wiadomości. Sprzedawca nie wprowadza do urządzenia Kupującego oprogramowania ani danych poza informacjami niezbędnymi do działania Strony, Platformy i cookies opisanymi w Polityce prywatności.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0087",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0086",
-          "text": "Kupujący może zażądać usunięcia Konta przed upływem Okresu Dostępu, wysyłając wiadomość na grzesiek@zawlodzki.pl. Usunięcie Konta na żądanie uniemożliwi dalsze korzystanie z Kursu, ale samo w sobie nie oznacza odstąpienia od Umowy ani nie tworzy prawa do zwrotu ceny. Nie ogranicza to ustawowych uprawnień Kupującego związanych z odstąpieniem, niezgodnością Kursu lub danymi osobowymi.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0089",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0088",
-          "text": "Reklamacje dotyczące działania Sklepu można składać na adres grzesiek@zawlodzki.pl; Sprzedawca odpowiada w terminie 14 dni.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "4-zamowienia-i-zawarcie-umowy",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0090",
-          "text": "§ 4. Zamówienia i zawarcie Umowy",
+          "_key": "s0",
+          "text": "Do udziału w Konsultacji potrzebne są dodatkowo: mikrofon i głośnik lub słuchawki, możliwość połączenia przez Google Meet w przeglądarce (bez konieczności zakładania konta Google) lub w aplikacji; kamera jest zalecana, ale nie wymagana.",
           "marks": []
         }
       ],
@@ -678,93 +894,15 @@
     },
     {
       "_type": "block",
-      "_key": "p0092",
+      "_key": "b38",
       "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0091",
-          "text": "Zamówienie składa się, wybierając produkt w Sklepie i przechodząc do koszyka obsługiwanego przez EasyCart, gdzie Kupujący podaje dane niezbędne do realizacji Zamówienia (co najmniej: imię i nazwisko, adres e-mail; w przypadku żądania faktury na firmę – także dane firmy i NIP), a następnie dokonuje płatności u operatora płatności Stripe. Dostawca koszyka nie jest stroną Umowy ani operatorem płatności; Sprzedawcą pozostaje Wellbiz sp. z o.o., a rozliczenie płatności prowadzi Stripe.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0094",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0093",
-          "text": "Bezpośrednio przed złożeniem Zamówienia Kupujący otrzymuje podsumowanie obejmujące co najmniej główne cechy świadczenia, łączną cenę, wybraną metodę płatności oraz – w przypadku Kursu – Okres Dostępu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0096",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0095",
-          "text": "Warunkiem złożenia Zamówienia jest akceptacja Regulaminu, potwierdzana w koszyku przed płatnością. Przycisk finalizujący Zamówienie jest oznaczony „Kupuję i płacę”, „Zapłać” albo innym jednoznacznym sformułowaniem informującym o obowiązku zapłaty.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0098",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0097",
-          "text": "Umowa zostaje zawarta z chwilą otrzymania przez Kupującego, na podany adres e-mail, potwierdzenia przyjęcia Zamówienia przez Sprzedawcę. Potwierdzenie obejmuje istotne warunki Umowy i jest przekazywane na trwałym nośniku. Sprzedawca przesyła w treści wiadomości lub w niezmiennym, wersjonowanym załączniku PDF Regulamin obowiązujący w dniu zawarcia Umowy; sam link do podstrony z Regulaminem nie zastępuje przekazania go na trwałym nośniku.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0100",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0099",
-          "text": "Sprzedawca może odmówić przyjęcia Zamówienia zawierającego dane niekompletne lub nieprawdziwe, uniemożliwiające jego realizację; wpłacona cena podlega wówczas zwrotowi.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "5-ceny-i-platnosci",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0101",
-          "text": "§ 5. Ceny i płatności",
+          "_key": "s0",
+          "text": "Do odczytu E-booka potrzebne jest oprogramowanie obsługujące format PDF. E-book nie jest zabezpieczony systemem DRM. Informacje o liczbie stron, języku i zakresie E-booka podajemy w jego opisie na Stronie.",
           "marks": []
         }
       ],
@@ -772,101 +910,433 @@
     },
     {
       "_type": "block",
-      "_key": "p0103",
+      "_key": "b39",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0102",
-          "text": "Ceny w Sklepie są cenami brutto (zawierają VAT) i są wyrażone w złotych polskich, chyba że przy produkcie wskazano inną walutę. Wiążąca jest cena widoczna w koszyku w chwili składania Zamówienia.",
+          "_key": "s0",
+          "text": "Korzystanie z usług elektronicznych wiąże się z typowymi zagrożeniami internetowymi (np. wyłudzanie danych, złośliwe oprogramowanie). Zalecamy korzystanie z aktualnego oprogramowania i weryfikowanie nadawcy wiadomości — wiadomości od nas wysyłamy wyłącznie z domeny ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "aleksandraolesiewicz.com",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ".",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0109",
+      "_key": "b40",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0104",
+          "_key": "s0",
+          "text": "Zakazane jest dostarczanie treści o charakterze bezprawnym.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b41",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Reklamacje dotyczące działania Strony można składać na adres e-mail z § 1 ust. 4; odpowiadamy w terminie 14 dni.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "5-zamowienie-e-booka-i-zawarcie-umowy",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 5. Zamówienie E-booka i zawarcie Umowy",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b43",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Aby złożyć Zamówienie, Klient wybiera E-book, przechodzi do podsumowania zamówienia na Stronie i podaje imię, nazwisko i adres e-mail.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b44",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Bezpośrednio przed złożeniem Zamówienia Klient widzi podsumowanie zawierające główne cechy E-booka, łączną cenę z podatkami, sposób dostarczenia i informację o prawie odstąpienia, a następnie:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b45",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "akceptuje Regulamin i potwierdza, że ukończył 18 lat (pole obowiązkowe),",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b46",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "wyraża zgodę na dostarczenie E-booka przed upływem terminu do odstąpienia od umowy i przyjmuje do wiadomości, że z chwilą dostarczenia traci prawo odstąpienia (pole dobrowolne — § 15 ust. 4),",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b47",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "klika przycisk ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "„Zamawiam z obowiązkiem zapłaty”",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ".",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b48",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Po kliknięciu przycisku Klient jest przekierowywany do strony płatności operatora Stripe w celu zapłaty ceny.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b49",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Umowa zostaje zawarta z chwilą otrzymania przez Klienta, na podany adres e-mail, potwierdzenia przyjęcia Zamówienia, wysyłanego po zaksięgowaniu płatności. Potwierdzenie zawiera istotne warunki Umowy, informację o wyrażonej zgodzie z ust. 2 pkt 2 (jeżeli została wyrażona), Regulamin w niezmiennym pliku PDF w wersji obowiązującej w dniu zawarcia Umowy oraz pouczenie o prawie odstąpienia i wzór formularza odstąpienia — na trwałym nośniku.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b50",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Jeżeli płatność nie zostanie dokonana w ciągu 60 minut od złożenia Zamówienia, Zamówienie wygasa, a Umowa nie zostaje zawarta.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "6-rezerwacja-uslugi-dietetycznej-i-zawarcie-umowy",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 6. Rezerwacja Usługi Dietetycznej i zawarcie Umowy",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b52",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Rezerwacji dokonuje się w kalendarzu Cal.com dostępnym ze Strony: Klient wybiera usługę i dostępny termin oraz podaje imię, nazwisko, adres e-mail i — opcjonalnie — numer telefonu. ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "W formularzu Rezerwacji nie podaje się informacji o zdrowiu",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": "; służy do tego wyłącznie Ankieta.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b53",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Bezpośrednio przed dokonaniem Rezerwacji Klient widzi podsumowanie zawierające opis usługi, termin, łączną cenę z podatkami i informację o prawie odstąpienia, a następnie:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b54",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "akceptuje Regulamin i potwierdza, że ukończył 18 lat (pole obowiązkowe),",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b55",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "jeżeli termin Konsultacji przypada przed upływem 14 dni od Rezerwacji — ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "żąda rozpoczęcia świadczenia przed upływem terminu do odstąpienia od umowy",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " i przyjmuje do wiadomości, że po pełnym wykonaniu usługi utraci prawo odstąpienia (pole obowiązkowe dla takich terminów — § 15 ust. 5),",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b56",
+      "style": "normal",
+      "listItem": "number",
+      "level": 2,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "klika przycisk oznaczony ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "„Rezerwuję z obowiązkiem zapłaty”",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " albo równoważnym jednoznacznym sformułowaniem i dokonuje płatności przez Stripe.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b57",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Umowa zostaje zawarta z chwilą otrzymania przez Klienta, na podany adres e-mail, potwierdzenia Rezerwacji, wysyłanego po zaksięgowaniu płatności. Potwierdzenie zawiera istotne warunki Umowy, termin, informację o żądaniu z ust. 2 pkt 2 (jeżeli zostało złożone), Regulamin w pliku PDF, pouczenie o prawie odstąpienia, wzór formularza odstąpienia oraz link do Ankiety — na trwałym nośniku, przed rozpoczęciem świadczenia.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b58",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Jeżeli płatność nie zostanie dokonana w czasie wskazanym w kalendarzu, Rezerwacja wygasa, a termin zostaje zwolniony.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "7-ceny-i-platnosci",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 7. Ceny i płatności",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b60",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Ceny na Stronie są cenami brutto (zawierają VAT) w złotych polskich. Wiążąca jest cena widoczna w podsumowaniu w chwili złożenia Zamówienia lub Rezerwacji.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b61",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
           "text": "Płatności obsługuje ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0105",
+          "_key": "s1",
           "text": "Stripe",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0106",
-          "text": " (Stripe Payments Europe, Ltd. z siedzibą w Irlandii) metodami udostępnionymi w koszyku (w szczególności karta płatnicza, BLIK, Przelewy24). Koszyk ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0107",
-          "text": "EasyCart",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0108",
-          "text": " (Easytools sp. z o.o. z siedzibą w Warszawie, KRS 0001002028) pełni wyłącznie funkcję techniczną – przyjmuje dane Zamówienia i kieruje płatność do Stripe. Ani Sprzedawca, ani dostawca koszyka nie przechowują danych kart płatniczych.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0111",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0110",
-          "text": "W przypadku ogłoszenia obniżki ceny Sprzedawca uwidacznia obok informacji o obniżce najniższą cenę produktu obowiązującą w okresie 30 dni przed wprowadzeniem obniżki.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0113",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0112",
-          "text": "Sprzedawca dokumentuje sprzedaż fakturą. Faktury dla Kupujących będących przedsiębiorcami wystawiane są jako faktury ustrukturyzowane w Krajowym Systemie e-Faktur (KSeF); ich wizualizacja przesyłana jest na adres e-mail Kupującego. Faktury dla Konsumentów przesyłane są elektronicznie na adres e-mail, na co Kupujący wyraża zgodę, składając Zamówienie.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "6-rozpoczecie-swiadczenia-kursu-i-okres-dostepu",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0114",
-          "text": "§ 6. Rozpoczęcie świadczenia Kursu i Okres Dostępu",
+          "_key": "s2",
+          "text": " (podmiot wskazany na stronie płatności) metodami udostępnionymi na stronie płatności. Wellbiz nie przechowuje danych kart płatniczych.",
           "marks": []
         }
       ],
@@ -874,245 +1344,15 @@
     },
     {
       "_type": "block",
-      "_key": "p0116",
+      "_key": "b62",
       "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0115",
-          "text": "Jeżeli Kupujący zażąda rozpoczęcia świadczenia Kursu przed upływem terminu odstąpienia zgodnie z § 10 ust. 3, Sprzedawca rozpoczyna świadczenie niezwłocznie po zawarciu Umowy, nie później niż w terminie 24 godzin od zaksięgowania płatności. W przeciwnym razie Sprzedawca rozpoczyna świadczenie po upływie 14 dni od zawarcia Umowy, nie później niż w ciągu kolejnych 24 godzin.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0118",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0117",
-          "text": "Rozpoczęcie świadczenia następuje przez wysłanie na adres e-mail Kupującego zaproszenia do utworzenia Konta lub danych dostępowych oraz zapewnienie faktycznej możliwości zalogowania się do Platformy.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0122",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0119",
-          "text": "Dostęp do Kursu przysługuje przez ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0120",
-          "text": "Okres Dostępu (12 miesięcy)",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0121",
-          "text": " od dnia rozpoczęcia świadczenia. Po upływie Okresu Dostępu dostęp do Kursu wygasa; nie wpływa to na materiały pobrane przez Kupującego w Okresie Dostępu zgodnie z § 7.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0124",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0123",
-          "text": "W Okresie Dostępu Sprzedawca dostarcza aktualizacje niezbędne do zachowania zgodności Kursu z Umową i informuje o nich Kupującego.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0126",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0125",
-          "text": "Sprzedawca może rozwijać, poprawiać i aktualizować treść Kursu oraz zmienić dostawcę Platformy lub jej adres, o ile nie zmniejsza to funkcjonalności ani zakresu Kursu; o zmianie Platformy Kupujący zostanie poinformowany e-mailem, a dostęp zostanie zapewniony w sposób ciągły przez pozostałą część Okresu Dostępu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0128",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0127",
-          "text": "Jeżeli zmiana Kursu wykracza poza aktualizacje niezbędne do zachowania zgodności z Umową i istotnie oraz negatywnie wpływa na dostęp do Kursu lub korzystanie z niego, Sprzedawca informuje Kupującego na trwałym nośniku z odpowiednim wyprzedzeniem o rodzaju i terminie zmiany oraz prawie do wypowiedzenia Umowy bez zachowania terminu w ciągu 30 dni. Prawo to nie przysługuje, jeżeli negatywny wpływ jest nieistotny albo Sprzedawca zapewni możliwość zachowania Kursu w niezmienionej wersji bez dodatkowych kosztów.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0130",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0129",
-          "text": "Jeżeli Sprzedawca nie rozpocznie świadczenia Kursu w terminie określonym w ust. 1, Kupujący może wezwać go do rozpoczęcia świadczenia. Jeżeli Sprzedawca nie zrobi tego niezwłocznie lub w dodatkowym terminie wyraźnie uzgodnionym z Kupującym, Kupujący może odstąpić od Umowy.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0132",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0131",
-          "text": "Kupujący może odstąpić od Umowy bez uprzedniego wezwania, jeżeli Sprzedawca oświadczył lub z okoliczności jednoznacznie wynika, że nie rozpocznie świadczenia Kursu, albo gdy uzgodniony termin miał dla Kupującego istotne znaczenie, a Sprzedawca go nie dotrzymał.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0136",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0133",
-          "text": "Konto jest imienne i przypisane do jednego użytkownika. Zakup przez przedsiębiorcę na rzecz pracownika lub współpracownika wymaga wskazania adresu e-mail tej osoby jako użytkownika Konta. Zakup Kursu uprawnia do jednego Konta; ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0134",
-          "text": "zakup Programu kohortowego uprawnia do trzech Kont",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0135",
-          "text": " dla osób wskazanych przez Kupującego. Kupujący wskazuje te osoby przed rozpoczęciem świadczenia i informuje je, że ich dane zostaną przekazane Sprzedawcy w celu założenia Konta i dostępu do Forum.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0138",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0137",
-          "text": "Jeżeli opis Kursu przewiduje Certyfikat, Sprzedawca wystawia go po spełnieniu kryteriów ukończenia wskazanych w opisie Kursu. Sam upływ Okresu Dostępu albo dokonanie zakupu nie oznacza automatycznie spełnienia tych kryteriów.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0140",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0139",
-          "text": "Certyfikat jest wysyłany na adres e-mail użytkownika Konta za pośrednictwem Certifier i może być dostępny pod indywidualnym linkiem weryfikacyjnym lub przez kod QR oraz możliwy do pobrania w formacie PDF.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0142",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0141",
-          "text": "Sprzedawca nie publikuje adresu e-mail ani publicznego katalogu uczestników. Uczestnik sam decyduje, czy udostępni Certyfikat lub jego link osobom trzecim, w szczególności w serwisach społecznościowych. Zasady przetwarzania danych, widoczności i weryfikacji opisuje Polityka prywatności.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0144",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0143",
-          "text": "Certyfikat potwierdza ukończenie Kursu w zakresie wskazanym w jego treści. Nie jest dyplomem ukończenia studiów, świadectwem państwowym ani dokumentem nadającym kwalifikacje regulowane, chyba że opis konkretnego Kursu wyraźnie stanowi inaczej i wskazuje podstawę takiego uprawnienia.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "6a-forum-spolecznosciowe",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0145",
-          "text": "§ 6a. Forum społecznościowe",
+          "_key": "s0",
+          "text": "Przy ogłoszeniu obniżki ceny podajemy obok informacji o obniżce najniższą cenę obowiązującą w okresie 30 dni przed jej wprowadzeniem.",
           "marks": []
         }
       ],
@@ -1120,469 +1360,1377 @@
     },
     {
       "_type": "block",
-      "_key": "p0149",
+      "_key": "b63",
       "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0146",
-          "text": "Sprzedawca udostępnia Uczestnikowi dostęp do Forum ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0147",
-          "text": "na czas trwania Okresu Dostępu",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0148",
-          "text": " — również wtedy, gdy Uczestnik nabył Program kohortowy, w którego cenie zawarty jest dostęp do Kursu. Dostęp do Forum jest nieodpłatny i stanowi element świadczenia objętego ceną.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0156",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0150",
-          "text": "Forum służy zadawaniu pytań dotyczących treści lekcji",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0151",
-          "text": " — prowadzącym i innym Uczestnikom — oraz odpowiadaniu na nie. Sprzedawca ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0152",
-          "text": "nie gwarantuje odpowiedzi na każdy wpis",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0153",
-          "text": " ani ciągłej obecności prowadzących; wsparcie merytoryczne w zakresie opisanym dla danego Kursu lub Programu świadczone jest niezależnie od Forum. Forum ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0154",
-          "text": "nie udostępnia wiadomości prywatnych",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0155",
-          "text": " między Uczestnikami; korespondencja prywatna między nimi nie powstaje i Sprzedawca nie ma do niej dostępu.",
+          "_key": "s0",
+          "text": "Na żądanie Klienta zgłoszone przy zakupie lub e-mailem wystawiamy fakturę i przesyłamy ją elektronicznie na adres e-mail Klienta. Na fakturze i w potwierdzeniu płatności usługa jest opisana ogólnie (np. „konsultacja dietetyczna”, „e-book”), bez informacji o zdrowiu.",
           "marks": []
         }
       ],
-      "markDefs": [],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "8-dostarczenie-e-booka",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 8. Dostarczenie E-booka",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b65",
+      "style": "normal",
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0159",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0157",
-          "text": "Treści publikowane przez Uczestnika pochodzą od niego i on za nie odpowiada.",
+          "_key": "s0",
+          "text": "E-book dostarczamy niezwłocznie po zawarciu Umowy, wysyłając na adres e-mail Klienta link do pobrania pliku. Link jest ważny przez ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "7 dni",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0158",
-          "text": " Sprzedawca nie monitoruje ich w sposób ciągły i nie sprawdza z góry każdego wpisu.",
+          "_key": "s2",
+          "text": " i pozwala na ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "3",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": " pobrań.",
           "marks": []
         }
       ],
-      "markDefs": [],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b66",
+      "style": "normal",
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0163",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0160",
-          "text": "Na Forum ",
+          "_key": "s0",
+          "text": "Jeżeli link wygaśnie albo Klient utraci plik, na prośbę przesłaną w ciągu ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0161",
-          "text": "nie wolno publikować",
+          "_key": "s1",
+          "text": "2 lat",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0162",
-          "text": ":",
+          "_key": "s2",
+          "text": " od zakupu przesyłamy nowy link bez dodatkowej opłaty.",
           "marks": []
         }
       ],
-      "markDefs": [],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b67",
+      "style": "normal",
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0168",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0164",
-          "text": "a) ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0165",
-          "text": "informacji o zdrowiu, życiu seksualnym, orientacji seksualnej, pochodzeniu, przekonaniach religijnych lub światopoglądowych, poglądach politycznych, przynależności związkowej ani danych genetycznych i biometrycznych — ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0166",
-          "text": "także własnych",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0167",
-          "text": ";",
+          "_key": "s0",
+          "text": "Jeżeli Klient nie otrzymał wiadomości z linkiem, powinien sprawdzić folder spam, a następnie wezwać nas do dostarczenia E-booka e-mailem. Jeżeli nie dostarczymy go niezwłocznie lub w dodatkowym, wyraźnie uzgodnionym terminie, Konsument może odstąpić od Umowy (art. 43j ust. 4 ustawy o prawach konsumenta).",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "bullet",
-      "level": 2
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0175",
-      "style": "normal",
+      "_key": "9-licencja-na-e-book",
+      "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "s0169",
-          "text": "b) ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0170",
-          "text": "danych osobowych innych osób, w szczególności klientów, kontrahentów, pracowników i członków rodziny Uczestnika, w tym opisów pozwalających taką osobę zidentyfikować. ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0171",
-          "text": "Dotyczy to także danych wklejanych z systemów Uczestnika",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0172",
-          "text": " — z CRM, poczty, ofert i notatek handlowych. Zadając pytanie o materiał roboczy, Uczestnik ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0173",
-          "text": "najpierw go anonimizuje",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0174",
-          "text": ": podmienia imiona, nazwiska i nazwy firm, usuwa adresy e-mail, numery telefonów, adresy pocztowe i kwoty. Przykład zamiast danych rzeczywistych jest wystarczający, żeby otrzymać odpowiedź;",
+          "_key": "s0",
+          "text": "§ 9. Licencja na E-book",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "bullet",
-      "level": 2
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0178",
+      "_key": "b69",
       "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0176",
-          "text": "c) ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0177",
-          "text": "treści bezprawnych, naruszających prawa osób trzecich, obraźliwych, nawołujących do nienawiści ani reklamowych bez zgody Sprzedawcy;",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "bullet",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0181",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0179",
-          "text": "d) ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0180",
-          "text": "materiałów Kursu ani ich fragmentów w sposób wykraczający poza licencję z § 7.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "bullet",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0185",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0182",
-          "text": "Zakaz z ust. 4 lit. a i b chroni Uczestnika i osoby trzecie: Sprzedawca ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0183",
-          "text": "nie ma podstawy prawnej do przetwarzania danych szczególnych kategorii",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0184",
-          "text": " na Forum. Treści naruszające ten zakaz Sprzedawca usuwa niezwłocznie po ich stwierdzeniu, także bez zgłoszenia i bez uprzedzenia Uczestnika. Usunięcie takiej treści nie jest karą i nie wpływa na prawo Uczestnika do korzystania z Kursu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0188",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0186",
-          "text": "Zgłaszanie treści.",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0187",
-          "text": " Każdy — Uczestnik i osoba spoza Forum — może zgłosić treść, którą uważa za bezprawną albo naruszającą ust. 4, przez funkcję zgłoszenia dostępną przy każdym wpisie albo wiadomością na grzesiek@zawlodzki.pl. Zgłoszenie powinno wskazywać konkretny wpis, powód zgłoszenia oraz dane kontaktowe zgłaszającego, jeżeli oczekuje on odpowiedzi. Sprzedawca rozpatruje zgłoszenia bez zbędnej zwłoki, w sposób niearbitralny i obiektywny.",
+          "_key": "s0",
+          "text": "E-book jest utworem chronionym prawem autorskim. Zakup nie przenosi praw autorskich.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0193",
+      "_key": "b70",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0189",
-          "text": "Decyzje moderacyjne.",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0190",
-          "text": " Sprzedawca może usunąć albo ukryć wpis, ograniczyć dostęp Uczestnika do Forum albo — przy poważnym lub powtarzającym się naruszeniu — zawiesić jego konto na Forum. O decyzji dotyczącej własnego wpisu Uczestnik jest informowany wraz z jej uzasadnieniem i pouczeniem o możliwości odwołania na adres grzesiek@zawlodzki.pl. Zawieszenie dostępu do Forum ",
+          "_key": "s0",
+          "text": "Z chwilą dostarczenia E-booka Wellbiz udziela Klientowi niewyłącznej, nieprzenoszalnej, nieograniczonej w czasie licencji na korzystanie z E-booka ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0191",
-          "text": "nie pozbawia dostępu do Kursu",
+          "_key": "s1",
+          "text": "na własny użytek osobisty",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0192",
-          "text": " ani nie zwalnia Sprzedawcy z obowiązku jego dostarczenia.",
+          "_key": "s2",
+          "text": ": odczyt na dowolnych własnych urządzeniach, zapisanie kopii zapasowych, wydruk na własne potrzeby. Wynagrodzenie za licencję jest zawarte w cenie.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0198",
+      "_key": "b71",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0194",
-          "text": "Brak wiadomości prywatnych.",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0195",
-          "text": " Forum ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0196",
-          "text": "nie udostępnia funkcji wiadomości prywatnych",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0197",
-          "text": " między Uczestnikami — jest ona wyłączona. Wszystkie wpisy na Forum są widoczne dla pozostałych Uczestników i dla prowadzących. Gdyby Sprzedawca zdecydował się tę funkcję udostępnić, poinformuje o tym Uczestników w trybie zmiany Regulaminu i wskaże zasady wglądu w taką korespondencję.",
+          "_key": "s0",
+          "text": "Bez odrębnej zgody nie wolno udostępniać E-booka lub linku do pobrania innym osobom, publikować go w całości lub w części, sprzedawać ani wykorzystywać do prowadzenia własnej działalności (np. szkoleń lub porad dla innych osób). Nie ogranicza to prawa do przytaczania fragmentów w granicach dozwolonego użytku.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0205",
+      "_key": "b72",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0199",
-          "text": "Los treści po zakończeniu udziału.",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0200",
-          "text": " Po zakończeniu dostępu Uczestnika do Forum jego konto zostaje ",
+          "_key": "s0",
+          "text": "Treści E-booka mają charakter edukacyjny i nie stanowią indywidualnych zaleceń. ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0201",
-          "text": "zanonimizowane",
+          "_key": "s1",
+          "text": "E-book nie zawiera linków ani kodów afiliacyjnych",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0202",
-          "text": ": nazwa użytkownika i adres e-mail przestają być z nim powiązane, a ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0203",
-          "text": "opublikowane wpisy pozostają w wątkach bez wskazania autora",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0204",
-          "text": ". Rozwiązanie to zachowuje czytelność rozmów dla pozostałych Uczestników. Niezależnie od tego Uczestnik może w każdej chwili żądać usunięcia albo ukrycia konkretnego własnego wpisu, a także skorzystać z uprawnień opisanych w Polityce prywatności, w tym prawa do usunięcia danych.",
+          "_key": "s2",
+          "text": " (§ 16).",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0209",
-      "style": "normal",
+      "_key": "10-przebieg-konsultacji",
+      "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "s0206",
-          "text": "Z Forum mogą korzystać wyłącznie osoby, które ukończyły ",
+          "_key": "s0",
+          "text": "§ 10. Przebieg Konsultacji",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b74",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Po zawarciu Umowy Klient otrzymuje link do Ankiety. Ankietę należy wypełnić najpóźniej ",
           "marks": []
         },
         {
           "_type": "span",
-          "_key": "s0207",
-          "text": "18 lat",
+          "_key": "s1",
+          "text": "48 godzin",
           "marks": ["strong"]
         },
         {
           "_type": "span",
-          "_key": "s0208",
+          "_key": "s2",
+          "text": " przed Konsultacją; w Ankiecie Klient wyraża Zgodę Zdrowotną. Bez Zgody Zdrowotnej Konsultacja nie może się odbyć — w takim przypadku Klient może odwołać Konsultację ze zwrotem ceny na zasadach § 11 ust. 1 bez względu na termin.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b75",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Wyniki badań, które Klient chce omówić, przesyła ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "w odpowiedzi",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " na wiadomość e-mail otrzymaną od Dietetyczki z adresu ola@aleksandraolesiewicz.com. Prosimy nie przesyłać wyników innymi kanałami (np. przez media społecznościowe).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b76",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Link do spotkania w Google Meet wysyłamy e-mailem. Konsultacja trwa czas wskazany w opisie usługi i kończy się o zaplanowanej godzinie.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b77",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Nagrywanie i transkrypcja.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Za odrębną, dobrowolną zgodą Klienta wyrażoną w Ankiecie Konsultacja może być nagrywana i transkrybowana, a notatki mogą być sporządzane przy pomocy narzędzia AI (Gemini w Google Workspace), wyłącznie w celu przygotowania Podsumowania. Przed rozpoczęciem nagrywania Google Meet prosi uczestników o zgodę. Klient może odmówić lub cofnąć tę zgodę w każdej chwili; ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": "Konsultacja odbywa się wtedy bez nagrania, na tych samych warunkach",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": ". Każde Podsumowanie przygotowuje i sprawdza Dietetyczka. Zasady przetwarzania nagrań opisuje Polityka prywatności.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b78",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Podsumowanie wysyłamy e-mailem w terminie ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "5 dni roboczych",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " od Konsultacji. Pytania wyjaśniające do Podsumowania Klient może zadać e-mailem w ciągu ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "7 dni",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": " od jego otrzymania; odpowiadamy w ciągu 3 dni roboczych.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b79",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Podsumowania i zalecenia ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "nie zawierają linków ani kodów afiliacyjnych",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ". Jeżeli w trakcie Konsultacji pojawi się produkt Partnera, Dietetyczka informuje o współpracy i — jeżeli to możliwe — wskazuje rozwiązanie niezwiązane z Partnerem.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "11-zmiana-terminu-odwolanie-spoznienie",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 11. Zmiana terminu, odwołanie, spóźnienie",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b81",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Klient może ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "bezpłatnie zmienić termin albo odwołać Konsultację",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " najpóźniej ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "24 godziny",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": " przed jej rozpoczęciem — przez link w potwierdzeniu Rezerwacji albo e-mailem. Przy odwołaniu zwracamy całą cenę w terminie 14 dni.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b82",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Przy odwołaniu lub zmianie terminu później niż 24 godziny przed Konsultacją albo nieobecności Klienta zatrzymujemy ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "50% ceny",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " Konsultacji jako zryczałtowane wynagrodzenie za zarezerwowany termin i przygotowanie, a ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "pozostałe 50% zwracamy",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": " w terminie 14 dni. Przy Konsultacji w ramach Pakietu rozliczamy w ten sposób część ceny Pakietu przypadającą na jedno spotkanie. Postanowienie nie ogranicza uprawnień z ust. 3 i § 15.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b83",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Jeden raz",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " w ramach danej Umowy Klient może zmienić termin później niż 24 godziny przed Konsultacją bez żadnej opłaty, jeżeli przyczyną jest nagła choroba, wypadek lub inne zdarzenie losowe, o którym poinformuje nas przed godziną rozpoczęcia.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b84",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Spóźnienie Klienta nie przedłuża Konsultacji. Brak połączenia ze strony Klienta przez ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "20 minut",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " od rozpoczęcia, bez kontaktu z nami, oznacza nieobecność w rozumieniu ust. 2.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b85",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Jeżeli Konsultacja nie odbędzie się albo zostanie przerwana ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "z przyczyn leżących po naszej stronie",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " (w tym z powodu problemów technicznych po naszej stronie lub choroby Dietetyczki), Klient wybiera nowy termin albo otrzymuje zwrot całej ceny. Jeżeli odwołamy Konsultację później niż 24 godziny przed jej rozpoczęciem z innej przyczyny niż choroba Dietetyczki lub zdarzenie losowe po naszej stronie, Klient — niezależnie od wyboru nowego terminu — otrzymuje ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "bezpłatną Wizytę Kontrolną",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": " (§ 12 ust. 2), a jeżeli Wizyty Kontrolne nie są aktualnie oferowane — bezpłatne przedłużenie nowej Konsultacji o 30 minut; Klient może też zamiast tego zażądać zwrotu całej ceny.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b86",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Przy problemach technicznych po stronie Klienta uniemożliwiających połączenie proponujemy kontynuację telefoniczną w zaplanowanym czasie.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "12-uslugi-dodatkowe",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 12. Usługi Dodatkowe",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b88",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Postanowienia tego paragrafu stosuje się do Usługi Dodatkowej, jeżeli jest ona aktualnie oferowana na Stronie; jej cenę i parametry określa opis na Stronie (opis usługi „Pakiet współpracy”).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b89",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Pakiet",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – określona w opisie liczba Konsultacji lub Wizyt Kontrolnych do wykorzystania w okresie ważności wskazanym w opisie. Terminy rezerwuje się na zasadach § 6 i § 11. Na prośbę zgłoszoną przed końcem okresu ważności przedłużamy go jednorazowo o 3 miesiące. Za Konsultacje niewykorzystane w okresie ważności (wraz z przedłużeniem) ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": "zwracamy część ceny proporcjonalną",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": " do liczby niewykorzystanych spotkań.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b90",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Wizyta Kontrolna",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – krótsze spotkanie online (30 minut) dostępne dla Klientów po Konsultacji, służące omówieniu realizacji zaleceń i ich korekcie.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b91",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Kontakt Mailowy",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – możliwość zadawania Dietetyczce pytań dotyczących zaleceń przez okres 30 dni, z odpowiedzią w ciągu 3 dni roboczych. Kontakt Mailowy nie obejmuje nowych zagadnień wymagających Konsultacji ani pomocy w nagłych sytuacjach (§ 3 ust. 7).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b92",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Jadłospis",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " – indywidualny plan żywieniowy przygotowany na podstawie Ankiety i Konsultacji, dostarczany w formacie PDF w terminie 7 dni, z jedną rundą poprawek zgłoszonych w ciągu 7 dni od otrzymania. Jadłospis jest przygotowywany dla Klienta osobiście i stosuje się do niego § 9 ust. 1–3 odpowiednio.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b93",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Przy Pakiecie i opiece ciągłej odstąpienie od Umowy lub cofnięcie Zgody Zdrowotnej w trakcie jej trwania rozlicza się według § 13 ust. 3 i § 15.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "13-dane-o-zdrowiu-i-cofniecie-zgody-zdrowotnej",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 13. Dane o zdrowiu i cofnięcie Zgody Zdrowotnej",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b95",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Dane o zdrowiu przetwarzamy wyłącznie w celu świadczenia Usług Dietetycznych, na podstawie Zgody Zdrowotnej, w zakresie i przez okres opisany w Polityce prywatności. Nie wykorzystujemy ich do marketingu ani analityki.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b96",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Klient może w każdej chwili ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "cofnąć Zgodę Zdrowotną",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " e-mailem na adres z § 1 ust. 4. Cofnięcie nie wpływa na zgodność z prawem przetwarzania dokonanego przed cofnięciem.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b97",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Po cofnięciu Zgody Zdrowotnej nie możemy dalej świadczyć Usług Dietetycznych wymagających danych o zdrowiu. ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "Zwracamy cenę za opłacone, a niewykonane usługi",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " w terminie 14 dni; usługi wykonane do chwili cofnięcia nie podlegają rozliczeniu zwrotnemu. Cofnięcie zgody nie wiąże się z żadną opłatą.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "14-zgodnosc-z-umowa-i-reklamacje",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 14. Zgodność z Umową i reklamacje",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b99",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "E-book.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Odpowiadamy wobec Konsumenta i Przedsiębiorcy na prawach konsumenta za brak zgodności E-booka z Umową na zasadach rozdziału 5b ustawy o prawach konsumenta — za brak zgodności istniejący w chwili dostarczenia i ujawniony w ciągu ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": "dwóch lat",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": " od tej chwili. Brak zgodności ujawniony przed upływem roku od dostarczenia uważa się za istniejący w chwili dostarczenia, dopóki nie udowodnimy, że było inaczej.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b100",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "W razie braku zgodności E-booka z Umową Klient może żądać doprowadzenia go do zgodności (np. dostarczenia poprawnego pliku), a w przypadkach wskazanych w ustawie — złożyć oświadczenie o obniżeniu ceny albo odstąpieniu od Umowy. Kwoty należne zwracamy w terminie 14 dni, tym samym sposobem zapłaty, chyba że Klient zgodzi się na inny bezkosztowy sposób.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b101",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Usługi Dietetyczne.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Odpowiadamy za niewykonanie lub nienależyte wykonanie Usługi Dietetycznej na zasadach ogólnych Kodeksu cywilnego. Regulamin nie wyłącza ani nie ogranicza tej odpowiedzialności wobec Konsumenta.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b102",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Reklamacje można składać e-mailem na adres z § 1 ust. 4 lub pisemnie na adres siedziby, w miarę możliwości z opisem problemu i datą zakupu. ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "Odpowiadamy w terminie 14 dni",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " od otrzymania reklamacji, na trwałym nośniku; brak odpowiedzi w tym terminie oznacza uznanie reklamacji.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "15-odstapienie-od-umowy",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 15. Odstąpienie od Umowy",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b104",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Konsument oraz Przedsiębiorca na prawach konsumenta może odstąpić od Umowy w terminie ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "14 dni od dnia jej zawarcia",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " bez podania przyczyny, z zastrzeżeniem ust. 4 i 6.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b105",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Oświadczenie o odstąpieniu można złożyć e-mailem na adres z § 1 ust. 4, pisemnie na adres siedziby albo przez formularz odstąpienia na Stronie (",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "/odstapienie",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": "). Można skorzystać z ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "wzoru formularza",
+          "marks": ["l0"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": "; nie jest to obowiązkowe. Po otrzymaniu oświadczenia przez formularz na Stronie niezwłocznie przesyłamy potwierdzenie jego otrzymania e-mailem. Do zachowania terminu wystarczy wysłanie oświadczenia przed jego upływem.",
+          "marks": []
+        }
+      ],
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "l0",
+          "href": "/regulamin/#formularz-odstapienia"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b106",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Zwracamy wszystkie płatności niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, tym samym sposobem zapłaty, chyba że Klient wyraźnie zgodzi się na inny bezkosztowy sposób; z zastrzeżeniem ust. 5.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b107",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "E-book.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Prawo odstąpienia ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": "nie przysługuje",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": ", jeżeli dostarczyliśmy E-book za wyraźną i uprzednią zgodą Klienta, który przed dostarczeniem został poinformowany, że po jego dostarczeniu utraci prawo odstąpienia, i przyjął to do wiadomości, a my przekazaliśmy potwierdzenie tej zgody na trwałym nośniku (§ 5 ust. 2 pkt 2 i ust. 4). Jeżeli Klient nie wyrazi tej zgody, E-book dostarczamy ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": "po upływie 14 dni",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s5",
+          "text": " od zawarcia Umowy, chyba że Klient wcześniej wyrazi zgodę e-mailem.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b108",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Usługi Dietetyczne.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Jeżeli Klient zażądał rozpoczęcia świadczenia przed upływem terminu do odstąpienia (§ 6 ust. 2 pkt 2), a następnie odstąpi od Umowy, płaci za świadczenia spełnione do chwili odstąpienia — kwotę proporcjonalną do zakresu spełnionego świadczenia, obliczoną według ceny z Umowy (np. przy Pakiecie: za odbyte spotkania). Jeżeli cena jest nadmierna, podstawą jest wartość rynkowa spełnionego świadczenia.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b109",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Prawo odstąpienia od Umowy o Usługę Dietetyczną ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "nie przysługuje po pełnym wykonaniu usługi",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ", jeżeli rozpoczęliśmy ją za wyraźną i uprzednią zgodą Klienta, który przed rozpoczęciem został poinformowany, że po pełnym wykonaniu utraci prawo odstąpienia, i przyjął to do wiadomości.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b110",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Klient nie ponosi kosztów świadczeń spełnionych przed odstąpieniem, jeżeli nie został prawidłowo poinformowany o prawie odstąpienia i obowiązku zapłaty proporcjonalnej albo nie złożył żądania z § 6 ust. 2 pkt 2.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b111",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Pełne pouczenie o prawie odstąpienia: ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "pouczenie",
+          "marks": ["l0"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " — przekazywane także w potwierdzeniu zawarcia Umowy.",
+          "marks": []
+        }
+      ],
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "l0",
+          "href": "/regulamin/#pouczenie"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "16-wspolprace-afiliacyjne",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 16. Współprace afiliacyjne",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b113",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Kody rabatowe i linki Partnerów mogą być publikowane ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "wyłącznie w mediach społecznościowych",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " prowadzonych przez Dietetyczkę, w treściach oznaczonych jako reklama, ze wskazaniem Partnera. Wellbiz może otrzymywać prowizję od zakupów dokonanych z ich użyciem.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b114",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Zakup u Partnera jest odrębną umową między Klientem a Partnerem, na warunkach Partnera. Wellbiz nie jest stroną tej umowy i nie odpowiada za produkty ani usługi Partnera.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b115",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Strona, E-booki, newsletter, Podsumowania i zalecenia nie zawierają linków ani kodów Partnerów, a skorzystanie z oferty Partnera nie jest warunkiem żadnej Usługi Dietetycznej. Kody i linki Partnerów nie są przekazywane w trakcie Konsultacji.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "17-opinie",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 17. Opinie",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b117",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Publikujemy wyłącznie opinie osób, które skorzystały z naszych usług lub kupiły E-book, weryfikując to na podstawie korespondencji i historii zamówień. Nie publikujemy opinii sponsorowanych i nie zmieniamy ich treści, poza skróceniem za zgodą autora. Informację o sposobie weryfikacji zamieszczamy przy opiniach.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b118",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Opinie zawierające informacje o zdrowiu publikujemy wyłącznie za wyraźną zgodą autora, w zakresie przez niego zaakceptowanym, i usuwamy po cofnięciu zgody.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "18-dane-osobowe",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "§ 18. Dane osobowe",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b120",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Administratorem danych osobowych jest Wellbiz. Zasady przetwarzania danych, w tym danych o zdrowiu, nagrań i plików cookies, opisuje ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "Polityka prywatności",
+          "marks": ["l0"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
           "text": ".",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0211",
-      "style": "normal",
-      "children": [
+      "markDefs": [
         {
-          "_type": "span",
-          "_key": "s0210",
-          "text": "Zasady przetwarzania danych osobowych na Forum, w tym treści wpisów, opisuje Polityka prywatności. Uczestnik, dla którego dostęp nabył Kupujący będący przedsiębiorcą, znajdzie tam odrębną podstawę przetwarzania i przysługujące mu prawo sprzeciwu.",
-          "marks": []
+          "_type": "link",
+          "_key": "l0",
+          "href": "/polityka-prywatnosci/"
         }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      ]
     },
     {
       "_type": "block",
-      "_key": "7-licencja-i-wlasnosc-intelektualna",
+      "_key": "19-pozasadowe-rozwiazywanie-sporow",
       "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "s0212",
-          "text": "§ 7. Licencja i własność intelektualna",
+          "_key": "s0",
+          "text": "§ 19. Pozasądowe rozwiązywanie sporów",
           "marks": []
         }
       ],
@@ -1590,169 +2738,15 @@
     },
     {
       "_type": "block",
-      "_key": "p0216",
+      "_key": "b122",
       "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0213",
-          "text": "Kurs oraz wszystkie materiały udostępniane w jego ramach (w tym wideo, teksty, szablony, grafiki – „",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s0214",
-          "text": "Materiały",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0215",
-          "text": "”) stanowią przedmiot praw autorskich i know-how Sprzedawcy lub jego licencjodawców. Zakup Kursu nie przenosi praw autorskich.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0218",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0217",
-          "text": "Z chwilą dostarczenia Kursu i zapłaty ceny Sprzedawca udziela Kupującemu licencji niewyłącznej, nieprzenoszalnej, bez prawa sublicencji, uprawniającej do korzystania z Materiałów wyłącznie na własne potrzeby Kupującego – w przypadku przedsiębiorców: na własne wewnętrzne potrzeby przedsiębiorstwa – na następujących polach eksploatacji:",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0220",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0219",
-          "text": "wyświetlanie i odtwarzanie Materiałów na Platformie w Okresie Dostępu,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0222",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0221",
-          "text": "utrwalanie i zwielokrotnianie techniką cyfrową oraz wprowadzanie do pamięci komputera Materiałów oznaczonych jako przeznaczone do pobrania,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0224",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0223",
-          "text": "w przypadku przedsiębiorców – udostępnienie Materiałów pobranych zgodnie z pkt 2 użytkownikowi Konta, o którym mowa w § 6 ust. 9.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0226",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0225",
-          "text": "Licencja na Materiały pobrane zgodnie z ust. 2 pkt 2 obejmuje prawo sporządzania ich opracowań (adaptacji, modyfikacji) i korzystania z nich wyłącznie w zakresie i na polach wskazanych w ust. 2, również po upływie Okresu Dostępu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0228",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0227",
-          "text": "Kupujący nie jest uprawniony do: udostępniania Materiałów ani danych logowania osobom trzecim, publikowania lub rozpowszechniania Materiałów, ich odsprzedaży, wykorzystywania ich w produktach lub usługach oferowanych osobom trzecim, prowadzenia na ich podstawie szkoleń lub kursów ani oferowania na ich podstawie usług tożsamych lub podobnych do usług Sprzedawcy. Wykorzystanie Materiałów w celu świadczenia usług na rzecz osób trzecich wymaga odrębnej umowy licencyjnej i odrębnego wynagrodzenia.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0230",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0229",
-          "text": "Wynagrodzenie z tytułu licencji jest zawarte w cenie Kursu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0232",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0231",
-          "text": "Sprzedawca może wypowiedzieć licencję i zablokować Konto wyłącznie z ważnych powodów: w przypadku istotnego naruszenia przez Kupującego warunków licencji (w szczególności udostępnienia Materiałów lub danych logowania osobom trzecim), po bezskutecznym wezwaniu do zaniechania naruszenia w terminie nie krótszym niż 14 dni. Postanowienie to nie ogranicza uprawnień Konsumenta i Przedsiębiorcy na prawach konsumenta wynikających z przepisów.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "8-konsultacje",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0233",
-          "text": "§ 8. Konsultacje",
+          "_key": "s0",
+          "text": "Konsument może skorzystać z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia roszczeń, w szczególności zwrócić się do wojewódzkiego inspektora Inspekcji Handlowej z wnioskiem o wszczęcie postępowania w sprawie pozasądowego rozwiązania sporu, do stałego sądu polubownego działającego przy Inspekcji Handlowej albo skorzystać z pomocy powiatowego (miejskiego) rzecznika konsumentów. Informacje: www.uokik.gov.pl.",
           "marks": []
         }
       ],
@@ -1760,549 +2754,29 @@
     },
     {
       "_type": "block",
-      "_key": "p0235",
+      "_key": "b123",
       "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0234",
-          "text": "Po zakupie Konsultacji Sprzedawca – w terminie 2 dni roboczych od zaksięgowania płatności – wysyła Kupującemu link do kalendarza Cal.com umożliwiającego wybór terminu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
       "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0237",
-      "style": "normal",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0236",
-          "text": "Kupujący może bezpłatnie zmienić termin Konsultacji najpóźniej 48 godzin przed jej rozpoczęciem, a odwołać ją najpóźniej 72 godziny przed rozpoczęciem.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0239",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0238",
-          "text": "Jeżeli Konsultacja nie odbędzie się z przyczyn leżących po stronie Sprzedawcy, Kupujący może wybrać nowy termin albo odstąpić od Umowy w tym zakresie i otrzymać zwrot ceny.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "9-zgodnosc-z-umowa-i-reklamacje",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0240",
-          "text": "§ 9. Zgodność z umową i reklamacje",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p0242",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0241",
-          "text": "Sprzedawca ma obowiązek świadczyć Kurs zgodnie z Umową i ponosi wobec Konsumenta oraz Przedsiębiorcy na prawach konsumenta odpowiedzialność za brak zgodności usługi cyfrowej z Umową na zasadach określonych w rozdziale 5b ustawy z dnia 30 maja 2014 r. o prawach konsumenta – przez cały okres świadczenia Kursu (Okres Dostępu).",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0244",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0243",
-          "text": "Jeżeli Kurs jest niezgodny z Umową, Kupujący, o którym mowa w ust. 1, może żądać doprowadzenia Kursu do zgodności z Umową. Sprzedawca może odmówić, jeżeli doprowadzenie do zgodności jest niemożliwe albo wymagałoby nadmiernych kosztów.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0246",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0245",
-          "text": "Sprzedawca doprowadza Kurs do zgodności z Umową w rozsądnym czasie od chwili poinformowania go o braku zgodności, bezpłatnie i bez nadmiernych niedogodności dla Kupującego, z uwzględnieniem charakteru i celu Kursu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0248",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0247",
-          "text": "Kupujący może złożyć oświadczenie o obniżeniu ceny albo odstąpieniu od Umowy, gdy:",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0250",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0249",
-          "text": "doprowadzenie Kursu do zgodności jest niemożliwe albo wymaga nadmiernych kosztów,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0252",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0251",
-          "text": "Sprzedawca nie doprowadził Kursu do zgodności w rozsądnym czasie, bezpłatnie i bez nadmiernych niedogodności,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0254",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0253",
-          "text": "brak zgodności występuje nadal mimo próby doprowadzenia Kursu do zgodności,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0256",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0255",
-          "text": "brak zgodności jest na tyle istotny, że uzasadnia obniżenie ceny albo odstąpienie bez wcześniejszego żądania doprowadzenia do zgodności,",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0258",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0257",
-          "text": "z oświadczenia Sprzedawcy lub okoliczności wyraźnie wynika, że nie doprowadzi Kursu do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 2
-    },
-    {
-      "_type": "block",
-      "_key": "p0260",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0259",
-          "text": "Obniżona cena pozostaje w takiej proporcji do ceny wynikającej z Umowy, w jakiej wartość Kursu niezgodnego z Umową pozostaje do wartości Kursu zgodnego z Umową. Kupujący nie może odstąpić od Umowy, jeżeli brak zgodności jest nieistotny; domniemywa się, że brak zgodności jest istotny.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0262",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0261",
-          "text": "Sprzedawca zwraca kwoty należne wskutek obniżenia ceny albo odstąpienia niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, przy użyciu takiego samego sposobu zapłaty, chyba że Kupujący wyraźnie zgodzi się na inny bezkosztowy sposób.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0264",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0263",
-          "text": "Po odstąpieniu od Umowy z powodu niezgodności Kursu Kupujący zaprzestaje korzystania z Kursu i udostępniania go osobom trzecim. Sprzedawca może zablokować dalszy dostęp do Konta, z poszanowaniem ustawowych praw Kupującego do treści innych niż dane osobowe, które Kupujący dostarczył lub wytworzył podczas korzystania z Kursu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0266",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0265",
-          "text": "Jeżeli jest to konieczne do ustalenia przyczyny braku zgodności, Kupujący współpracuje ze Sprzedawcą w rozsądnym zakresie i przy zastosowaniu najmniej uciążliwych środków technicznych. Jeżeli Sprzedawca przed zawarciem Umowy jasno poinformował o tym obowiązku, brak współpracy po uzasadnionym wezwaniu może wpłynąć na ustawowy rozkład ciężaru dowodu dotyczącego środowiska cyfrowego Kupującego.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0268",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0267",
-          "text": "Do odpowiedzialności za Konsultacje wobec osób, o których mowa w ust. 1, stosuje się przepisy o niewykonaniu lub nienależytym wykonaniu zobowiązania.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0270",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0269",
-          "text": "Reklamacje należy składać e-mailem na adres grzesiek@zawlodzki.pl lub pisemnie na adres siedziby Sprzedawcy, w miarę możliwości z opisem problemu i danymi kontaktowymi. Sprzedawca odpowiada w terminie 14 dni od otrzymania reklamacji; brak odpowiedzi w tym terminie oznacza uznanie reklamacji.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0272",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0271",
-          "text": "Wobec Kupujących innych niż wskazani w ust. 1 odpowiedzialność Sprzedawcy z tytułu rękojmi jest wyłączona, a odpowiedzialność odszkodowawcza ograniczona do zapłaconej ceny i nie obejmuje utraconych korzyści; ograniczenia nie dotyczą szkody wyrządzonej umyślnie.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "10-odstapienie-od-umowy",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0273",
-          "text": "§ 10. Odstąpienie od umowy",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p0275",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0274",
-          "text": "Konsument oraz Przedsiębiorca na prawach konsumenta może odstąpić od Umowy zawartej na odległość w terminie 14 dni bez podania przyczyny, składając oświadczenie e-mailem na adres grzesiek@zawlodzki.pl lub pisemnie. Można skorzystać z formularza stanowiącego załącznik do Regulaminu; skorzystanie z niego nie jest obowiązkowe.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0277",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0276",
-          "text": "Z zastrzeżeniem ust. 3 Sprzedawca zwraca płatności niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, tym samym sposobem zapłaty, jakiego użył Kupujący, chyba że Kupujący wyraźnie zgodził się na inny sposób zwrotu niewiążący się dla niego z kosztami.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0279",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0278",
-          "text": "Jeżeli Kupujący chce, aby świadczenie Kursu lub Konsultacji rozpoczęło się przed upływem 14 dni, składa w koszyku wyraźne żądanie rozpoczęcia świadczenia przed upływem terminu odstąpienia. Rozpoczęcie świadczenia nie pozbawia Kupującego prawa odstąpienia w pozostałej części tego terminu.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0281",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0280",
-          "text": "Jeżeli Kupujący odstąpi od Umowy po złożeniu żądania, o którym mowa w ust. 3, płaci za świadczenia spełnione do chwili odstąpienia. Kwotę oblicza się proporcjonalnie do zakresu spełnionego świadczenia, z uwzględnieniem ceny określonej w Umowie; jeżeli cena jest nadmierna, podstawą jest wartość rynkowa spełnionego świadczenia.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0283",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0282",
-          "text": "Kupujący nie ponosi kosztów świadczeń spełnionych przed odstąpieniem, jeżeli nie został prawidłowo poinformowany o prawie odstąpienia i obowiązku zapłaty proporcjonalnej albo nie złożył wyraźnego żądania rozpoczęcia świadczenia.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0286",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0284",
-          "text": "Prawo odstąpienia nie przysługuje po pełnym wykonaniu Konsultacji",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s0285",
-          "text": ", jeżeli Sprzedawca rozpoczął świadczenie za wyraźną i uprzednią zgodą Kupującego, który przed rozpoczęciem został poinformowany, że po pełnym wykonaniu utraci prawo odstąpienia, i przyjął to do wiadomości.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "11-dane-osobowe",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0287",
-          "text": "§ 11. Dane osobowe",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p0289",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0288",
-          "text": "Administratorem danych osobowych Kupujących jest Sprzedawca. Zasady przetwarzania danych oraz wykorzystywania plików cookies określa Polityka prywatności dostępna na stronie Sklepu.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "12-opinie-referencje-i-logotypy-klientow",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0290",
-          "text": "§ 12. Opinie, referencje i logotypy klientów",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p0292",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0291",
-          "text": "Jeżeli w Sklepie publikowane są opinie klientów, Sprzedawca zamieszcza wyłącznie opinie pochodzące od osób, które faktycznie korzystały z jego usług lub nabyły produkt, i weryfikuje to na podstawie własnej dokumentacji współpracy (korespondencja, umowy, zamówienia). Sprzedawca nie publikuje opinii sponsorowanych ani nie modyfikuje ich treści. Bezpośrednio przy opiniach Sprzedawca zamieszcza krótką informację, że opinie są weryfikowane w opisany wyżej sposób. Imię, stanowisko, wizerunek, treść referencji i logotyp klienta publikuje w zakresie objętym udokumentowaną zgodą lub licencją.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "13-pozasadowe-rozwiazywanie-sporow",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0293",
-          "text": "§ 13. Pozasądowe rozwiązywanie sporów",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p0295",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0294",
-          "text": "Konsument może skorzystać z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia roszczeń, w szczególności: zwrócić się do wojewódzkiego inspektora Inspekcji Handlowej z wnioskiem o wszczęcie postępowania w sprawie pozasądowego rozwiązania sporu, do stałego sądu polubownego działającego przy Inspekcji Handlowej albo skorzystać z pomocy powiatowego (miejskiego) rzecznika konsumentów. Szczegółowe informacje dostępne są na stronie www.uokik.gov.pl.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "p0297",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0296",
+          "_key": "s0",
           "text": "Skorzystanie z pozasądowych sposobów rozwiązywania sporów jest dobrowolne dla obu stron.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "14-zmiana-regulaminu",
+      "_key": "20-zmiana-regulaminu",
       "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "s0298",
-          "text": "§ 14. Zmiana Regulaminu",
+          "_key": "s0",
+          "text": "§ 20. Zmiana Regulaminu",
           "marks": []
         }
       ],
@@ -2310,77 +2784,77 @@
     },
     {
       "_type": "block",
-      "_key": "p0300",
+      "_key": "b125",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0299",
-          "text": "Sprzedawca może zmienić Regulamin z ważnych przyczyn: zmiany przepisów prawa, zmiany zakresu lub sposobu świadczenia usług, zmiany dostawców (w tym Platformy, dostawcy koszyka, platformy certyfikatów lub operatora płatności), zmian organizacyjnych lub technologicznych po stronie Sprzedawcy.",
+          "_key": "s0",
+          "text": "Możemy zmienić Regulamin z ważnych przyczyn: zmiany przepisów, zmiany zakresu lub sposobu świadczenia usług, zmiany dostawców usług technicznych (np. płatności, rezerwacji, wideokonferencji), zmian organizacyjnych lub technologicznych.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0302",
+      "_key": "b126",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0301",
-          "text": "O zmianie Sprzedawca informuje Kupujących posiadających aktywny Okres Dostępu e-mailem, co najmniej 14 dni przed wejściem zmiany w życie. Kupujący, który nie akceptuje zmiany, może w tym terminie wypowiedzieć umowę o prowadzenie Konta; do końca Okresu Dostępu wynikającego z zawartych Umów stosuje się wówczas Regulamin dotychczasowy.",
+          "_key": "s0",
+          "text": "Do Umów zawartych przed zmianą stosuje się Regulamin obowiązujący w dniu zawarcia Umowy.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0304",
+      "_key": "b127",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0303",
-          "text": "Zmiany Regulaminu nie naruszają praw nabytych: do Umów zawartych przed zmianą stosuje się Regulamin obowiązujący w dniu zawarcia Umowy, chyba że nowy Regulamin jest dla Kupującego korzystniejszy.",
+          "_key": "s0",
+          "text": "Klientów z niewykorzystanym Pakietem lub trwającą usługą ciągłą informujemy o zmianie e-mailem co najmniej 14 dni przed jej wejściem w życie. Klient, który nie akceptuje zmiany, może przed jej wejściem w życie wypowiedzieć Umowę i otrzymać zwrot ceny za niewykorzystaną część; do tego czasu stosuje się Regulamin dotychczasowy.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0306",
+      "_key": "b128",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0305",
-          "text": "Archiwalne wersje Regulaminu są dostępne u Sprzedawcy na żądanie.",
+          "_key": "s0",
+          "text": "Archiwalne wersje Regulaminu udostępniamy na żądanie.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "15-postanowienia-koncowe",
+      "_key": "21-postanowienia-koncowe",
       "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "s0307",
-          "text": "§ 15. Postanowienia końcowe",
+          "_key": "s0",
+          "text": "§ 21. Postanowienia końcowe",
           "marks": []
         }
       ],
@@ -2388,77 +2862,61 @@
     },
     {
       "_type": "block",
-      "_key": "p0309",
+      "_key": "b130",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0308",
-          "text": "Prawem właściwym jest prawo polskie. W sprawach nieuregulowanych stosuje się w szczególności Kodeks cywilny, ustawę o prawach konsumenta oraz ustawę o prawie autorskim i prawach pokrewnych.",
+          "_key": "s0",
+          "text": "Prawem właściwym jest prawo polskie. Wybór prawa nie pozbawia Konsumenta ochrony wynikającej z bezwzględnie obowiązujących przepisów prawa państwa jego zwykłego pobytu.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0311",
+      "_key": "b131",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0310",
-          "text": "Regulamin nie wyłącza ani nie ogranicza żadnych uprawnień Konsumenta oraz Przedsiębiorcy na prawach konsumenta, które przysługują im na mocy bezwzględnie obowiązujących przepisów prawa; w razie sprzeczności pierwszeństwo mają te przepisy.",
+          "_key": "s0",
+          "text": "Regulamin nie wyłącza ani nie ogranicza uprawnień Konsumenta i Przedsiębiorcy na prawach konsumenta wynikających z bezwzględnie obowiązujących przepisów; w razie sprzeczności pierwszeństwo mają te przepisy.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0313",
+      "_key": "b132",
       "style": "normal",
+      "listItem": "number",
+      "level": 1,
       "children": [
         {
           "_type": "span",
-          "_key": "s0312",
-          "text": "Spory z Kupującymi niebędącymi Konsumentami ani Przedsiębiorcami na prawach konsumenta rozstrzyga sąd właściwy dla siedziby Sprzedawcy.",
+          "_key": "s0",
+          "text": "Regulamin wchodzi w życie z dniem 10.10.2026.",
           "marks": []
         }
       ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
+      "markDefs": []
     },
     {
       "_type": "block",
-      "_key": "p0315",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0314",
-          "text": "Regulamin wchodzi w życie z dniem 24.08.2026.",
-          "marks": []
-        }
-      ],
-      "markDefs": [],
-      "listItem": "number",
-      "level": 1
-    },
-    {
-      "_type": "block",
-      "_key": "zalacznik-wzor-formularza-odstapienia-od-umowy",
+      "_key": "zalaczniki",
       "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "s0316",
-          "text": "Załącznik – wzór formularza odstąpienia od umowy",
+          "_key": "s0",
+          "text": "Załączniki",
           "marks": []
         }
       ],
@@ -2466,13 +2924,71 @@
     },
     {
       "_type": "block",
-      "_key": "p0318",
+      "_key": "b134",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Pouczenie o prawie odstąpienia od umowy",
+          "marks": ["l0"]
+        }
+      ],
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "l0",
+          "href": "/regulamin/#pouczenie"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b135",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Wzór formularza odstąpienia od umowy",
+          "marks": ["l0"]
+        }
+      ],
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "l0",
+          "href": "/regulamin/#formularz-odstapienia"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Pouczenie o prawie odstąpienia od umowy",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b0",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "s0317",
-          "text": "(formularz ten należy wypełnić i odesłać tylko w przypadku chęci odstąpienia od umowy)",
+          "_key": "s0",
+          "text": "Załącznik nr 1 do Regulaminu aleksandraolesiewicz.com · wersja 2.0 · obowiązuje od 10.10.2026",
           "marks": []
         }
       ],
@@ -2480,13 +2996,473 @@
     },
     {
       "_type": "block",
-      "_key": "p0320",
+      "_key": "pouczenie-b1",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Dotyczy umów zawieranych przez konsumentów oraz przedsiębiorców na prawach konsumenta: o świadczenie usług dietetycznych (konsultacje i usługi dodatkowe) oraz o dostarczenie e-booków.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b2",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Prawo odstąpienia od umowy",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b3",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Mają Państwo prawo odstąpić od niniejszej umowy w terminie 14 dni bez podania jakiejkolwiek przyczyny.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b4",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Termin do odstąpienia od umowy wygasa po upływie 14 dni od dnia zawarcia umowy.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b5",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Aby skorzystać z prawa odstąpienia od umowy, muszą Państwo poinformować nas:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b6",
       "style": "blockquote",
       "children": [
         {
           "_type": "span",
-          "_key": "s0319",
-          "text": "Adresat: Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, e-mail: grzesiek@zawlodzki.plJa, niżej podpisana/y ……………………………… niniejszym informuję o moim odstąpieniu od umowy o świadczenie następującej usługi cyfrowej / o świadczenie następującej konsultacji: ………………………………Data zawarcia umowy: ………………………………Imię i nazwisko: ……………………………… Adres e-mail podany przy zakupie: ……………………………… Data: ……………………………… Podpis (tylko jeżeli formularz jest przesyłany w wersji papierowej): ………………………………",
+          "_key": "s0",
+          "text": "Wellbiz sp. z o.o.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": ", ul. Lipowa 3D, 30-702 Kraków tel. +48 530 005 133, e-mail: ola@aleksandraolesiewicz.com",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b7",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "o swojej decyzji o odstąpieniu od niniejszej umowy w drodze jednoznacznego oświadczenia (na przykład pismo wysłane pocztą lub pocztą elektroniczną).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b8",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Mogą Państwo skorzystać z wzoru formularza odstąpienia od umowy, jednak nie jest to obowiązkowe. Mogą Państwo również wypełnić i przesłać formularz odstąpienia od umowy lub jakiekolwiek inne jednoznaczne oświadczenie drogą elektroniczną na naszej stronie internetowej ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "aleksandraolesiewicz.com/odstapienie",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ". Jeżeli skorzystają Państwo z tej możliwości, prześlemy Państwu niezwłocznie potwierdzenie otrzymania informacji o odstąpieniu od umowy na trwałym nośniku (np. pocztą elektroniczną).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b9",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Aby zachować termin do odstąpienia od umowy, wystarczy, aby wysłali Państwo informację dotyczącą wykonania przysługującego Państwu prawa odstąpienia od umowy przed upływem terminu do odstąpienia od umowy.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b10",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Skutki odstąpienia od umowy",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b11",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "W przypadku odstąpienia od niniejszej umowy zwracamy Państwu wszystkie otrzymane od Państwa płatności niezwłocznie, a w każdym przypadku nie później niż 14 dni od dnia, w którym zostaliśmy poinformowani o Państwa decyzji o wykonaniu prawa odstąpienia od niniejszej umowy. Zwrotu płatności dokonamy przy użyciu takich samych sposobów płatności, jakie zostały przez Państwa użyte w pierwotnej transakcji, chyba że wyraźnie zgodziliście się Państwo na inne rozwiązanie; w każdym przypadku nie poniosą Państwo żadnych opłat w związku z tym zwrotem.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b12",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Jeżeli zażądali Państwo rozpoczęcia świadczenia usług przed upływem terminu do odstąpienia od umowy, zapłacą nam Państwo kwotę proporcjonalną do zakresu świadczeń spełnionych do chwili, w której poinformowali nas Państwo o odstąpieniu od niniejszej umowy.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b13",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Kiedy prawo odstąpienia nie przysługuje",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b14",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Prawo odstąpienia od umowy nie przysługuje:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b15",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "przy e-booku",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " — jeżeli dostarczyliśmy e-book za Państwa wyraźną i uprzednią zgodą, po poinformowaniu Państwa przed dostarczeniem, że po jego dostarczeniu utracą Państwo prawo odstąpienia od umowy, i przyjęciu tego przez Państwa do wiadomości, a my przekazaliśmy Państwu potwierdzenie tej zgody na trwałym nośniku (art. 38 ust. 1 pkt 13 ustawy o prawach konsumenta);",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b16",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "przy usłudze dietetycznej",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " — jeżeli wykonaliśmy usługę w pełni za Państwa wyraźną i uprzednią zgodą, a przed rozpoczęciem świadczenia zostali Państwo poinformowani, że po spełnieniu świadczenia utracą Państwo prawo odstąpienia od umowy, i przyjęli to Państwo do wiadomości (art. 38 ust. 1 pkt 1 ustawy o prawach konsumenta).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b17",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Zgodę i oświadczenia, o których mowa wyżej, odbieramy w podsumowaniu zamówienia lub rezerwacji, a ich treść potwierdzamy w wiadomości e-mail potwierdzającej zawarcie umowy.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "pouczenie-b18",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, KRS 0001158341, NIP 6793323800.",
+          "marks": ["em"]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Wzór formularza odstąpienia od umowy",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b0",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Załącznik nr 2 do Regulaminu aleksandraolesiewicz.com · wersja 2.0",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b1",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "(formularz ten należy wypełnić i odesłać tylko w przypadku chęci odstąpienia od umowy)",
+          "marks": ["em"]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b2",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Adresat:",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, e-mail: ola@aleksandraolesiewicz.com",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b3",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Ja/My(*) niniejszym informuję/informujemy(*) o moim/naszym odstąpieniu od umowy o świadczenie następującej usługi(*) / o dostarczenie następującej treści cyfrowej (e-booka)(*):",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b4",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "………………………………………………………………………………",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b5",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Data zawarcia umowy: ………………………………",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b6",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Imię i nazwisko konsumenta(-ów): ………………………………",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b7",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Adres konsumenta(-ów): ………………………………",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b8",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Adres e-mail podany przy zakupie (ułatwia identyfikację zamówienia): ………………………………",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b9",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Podpis konsumenta(-ów) (tylko jeżeli formularz jest przesyłany w wersji papierowej): ………………………………",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b10",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Data: ………………………………",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "formularz-odstapienia-b11",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "(*) Niepotrzebne skreślić.",
           "marks": []
         }
       ],

@@ -11,6 +11,31 @@ const mediaFields = /* groq */ `{
 
 const actionFields = /* groq */ `{ label, href, emphasis }`;
 
+const formFields = /* groq */ `{
+  "id": _id,
+  language,
+  title,
+  formKey,
+  version,
+  submitLabel,
+  notice,
+  noticeConsentId,
+  successMessage,
+  errorMessage,
+  noscriptMessage,
+  fields[]{
+    _key,
+    name,
+    input,
+    label,
+    placeholder,
+    errorMessage,
+    required,
+    options,
+    defaultValue
+  }
+}`;
+
 export const ebookCardProjection = /* groq */ `
   "id": _id,
   language,
@@ -163,23 +188,7 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     eyebrow,
     title,
     lead,
-    "form": form->{
-      "id": _id,
-      language,
-      title,
-      submitLabel,
-      successMessage,
-      noscriptMessage,
-      fields[]{
-        _key,
-        name,
-        input,
-        label,
-        errorMessage,
-        required,
-        options
-      }
-    }
+    "form": form->${formFields}
   },
   _type == "mediaSection" => {
     title,
@@ -300,6 +309,8 @@ export const siteSettingsProjection = /* groq */ `
   navigation[]{ _key, label, href },
   "headerCta": headerCta${actionFields},
   legalLinks[]{ _key, label, href },
+  copyright,
+  testimonialsDisclosure,
   socialLinks[]{ _key, label, href },
   blogIndex{
     title,
@@ -325,24 +336,7 @@ export const siteSettingsProjection = /* groq */ `
     sidebarLead,
     sidebarActionLabel,
     sidebarNote,
-    "form": form->{
-      "id": _id,
-      language,
-      title,
-      submitLabel,
-      successMessage,
-      noscriptMessage,
-      fields[]{
-        _key,
-        name,
-        input,
-        label,
-        placeholder,
-        errorMessage,
-        required,
-        options
-      }
-    }
+    "form": form->${formFields}
   },
   "translation": translation->{ language }
 `;
@@ -477,6 +471,7 @@ export const ebookProjection = /* groq */ `
   coverTone,
   availability,
   priceGross,
+  lowestPrice30Days,
   currency,
   format,
   sortOrder,
@@ -583,6 +578,7 @@ export const legalPageProjection = /* groq */ `
   language,
   "slug": slug.current,
   title,
+  version,
   effectiveFrom,
   seo{title, description},
   body[]{ _key, _type, ..., rows[]{ _key, cells } },

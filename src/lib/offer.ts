@@ -18,6 +18,18 @@ export function currencyLabel(currency: string, language: Locale): string {
   return language === "pl" ? "zł" : "PLN";
 }
 
+export function formatLowestPriceNote(
+  priceGross: number,
+  lowestPrice30Days: number,
+  currency: string,
+  language: Locale,
+): string {
+  const unit = currencyLabel(currency, language);
+  return language === "pl"
+    ? `${priceGross} ${unit} · najniższa cena z 30 dni przed obniżką: ${lowestPrice30Days} ${unit}`
+    : `${priceGross} ${unit} · lowest price in the 30 days before the discount: ${lowestPrice30Days} ${unit}`;
+}
+
 export function durationLabel(minutes: number, language: Locale): string {
   return language === "pl" ? `${minutes} minut` : `${minutes} min`;
 }

@@ -3,7 +3,6 @@ import type { Locale } from "@ola/shared";
 
 import { mapBlogCollection } from "@/content/map-blog-collection";
 import { shellLinks } from "@/content/map-homepage";
-import { homepageCopyright } from "@/sanity/homepage-fixtures";
 import { blogPath } from "@/lib/paths";
 import type {
   ArticleCard,
@@ -67,7 +66,7 @@ const headerCta = shell.headerCta
   description={content.seoDescription}
   preview={preview}
   footerNote={settings.footerNote ?? ""}
-  copyright={homepageCopyright(lang)}
+  copyright={shell.copyright}
   languageHref={
     content.alternateHref ? (alternateHref ?? content.alternateHref) : null
   }

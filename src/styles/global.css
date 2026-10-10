@@ -98,6 +98,61 @@
   font-size: 1rem;
   border-radius: var(--wf-radius-10);
 }
+/* LeadForm z src/design-system w starszych sekcjach (FormSection). */
+.ao-field {
+  display: grid;
+  gap: var(--ao-space-12);
+}
+.ao-input {
+  inline-size: 100%;
+  min-block-size: var(--ao-control-min);
+  padding-inline: var(--ao-space-16);
+  background: var(--ao-background);
+  color: var(--ao-ink);
+  border: 1px solid var(--ao-line);
+  border-radius: var(--ao-radius-panel);
+  font-size: max(16px, 1rem);
+}
+.ao-input--multiline {
+  min-block-size: 9rem;
+  padding-block: var(--ao-space-12);
+}
+.ao-input[aria-invalid="true"] {
+  border-color: var(--ao-error);
+}
+.ao-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ao-space-24);
+  justify-self: start;
+  min-block-size: var(--ao-control-min);
+  padding-inline: var(--ao-space-24);
+  border-radius: var(--ao-radius-control);
+  background: var(--ao-primary);
+  color: var(--ao-on-primary);
+}
+.ao-button .ao-icon {
+  inline-size: 24px;
+  block-size: 24px;
+}
+.ao-field__error {
+  color: var(--ao-error);
+  font-size: 0.875rem;
+}
+.ao-form-note {
+  color: var(--ao-muted);
+  font-size: 0.75rem;
+}
+.ao-form-note a {
+  text-decoration: underline;
+}
+.ao-form__honeypot {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
 [data-slot="dialog-content"] {
   max-block-size: calc(100svh - 48px);
   overflow-y: auto;

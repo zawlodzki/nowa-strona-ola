@@ -2,6 +2,14 @@ import type { Locale } from "@ola/shared";
 
 export type SiteSection = "home" | "catalog" | "blog" | "page";
 
+// Decyzja 10.10.2026: wersja EN wyłączona. Włączenie: src/pages/_en → src/pages/en
+// i dopisanie "en" tutaj. Szczegóły w docs/IMPLEMENTATION-PLAN.md, sekcja PL/EN.
+export const enabledLocales: readonly Locale[] = ["pl"];
+
+export function isLocaleEnabled(language: Locale): boolean {
+  return enabledLocales.includes(language);
+}
+
 export const HOME_SLUG = "home";
 export const ARTICLES_PER_PAGE = 6;
 export const reservedPageSlugs = [
@@ -18,6 +26,7 @@ export const reservedPageSlugs = [
   "consultations",
   "kontakt",
   "contact",
+  "odstapienie",
 ] as const;
 export const reservedArticleSlugs = [
   "strona",

@@ -1,3 +1,5 @@
+import type { FormKey } from "@ola/shared";
+
 export const catalogSectionIds = [
   "hero",
   "text",
@@ -266,7 +268,7 @@ export interface MediaContent {
 }
 
 export type FormInputKind =
-  "text" | "email" | "tel" | "textarea" | "select" | "checkbox";
+  "text" | "email" | "tel" | "textarea" | "select" | "checkbox" | "date";
 
 export interface FormFieldCopy {
   name: string;
@@ -276,19 +278,21 @@ export interface FormFieldCopy {
   errorMessage: string;
   required: boolean;
   options?: string[];
+  defaultValue?: string;
 }
 
 export interface FormCopy {
   eyebrow?: string;
   title: string;
   lead: string;
-  nameLabel?: string;
-  nameError?: string;
-  emailLabel?: string;
-  emailError?: string;
+  formKey: FormKey;
+  version: string;
   submit: string;
   success: string;
+  error: string;
   noscript: string;
+  notice?: string;
+  noticeConsentId?: string;
   fields: FormFieldCopy[];
 }
 
