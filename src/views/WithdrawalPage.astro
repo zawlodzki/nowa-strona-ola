@@ -1,0 +1,34 @@
+---
+import type { Locale } from "@ola/shared";
+import { shellLinks } from "@/content/map-homepage";
+import { mapWithdrawal } from "@/content/map-withdrawal";
+import { homepageCopyright } from "@/sanity/homepage-fixtures";
+import type { PageContent, SiteSettings } from "@/sanity/repository";
+import SiteShell3a from "@/views/SiteShell3a.astro";
+import Withdrawal3a from "@/views/Withdrawal3a.astro";
+export interface Props {
+  lang: Locale;
+  page: PageContent;
+  settings: SiteSettings;
+  preview?: boolean;
+}
+const { lang, page, settings, preview = false } = Astro.props;
+const shell = shellLinks(settings);
+---
+
+<SiteShell3a
+  legacyBase
+  lang={lang}
+  title={page.seo?.title ?? page.title}
+  description={page.seo?.description ?? undefined}
+  preview={preview}
+  footerNote={settings.footerNote ?? ""}
+  copyright={homepageCopyright(lang)}
+  languageHref={null}
+  navigation={shell.navigation}
+  headerCta={shell.headerCta}
+  socialLinks={shell.socialLinks}
+  legalLinks={shell.legalLinks}
+>
+  <Withdrawal3a lang={lang} content={mapWithdrawal(page)} />
+</SiteShell3a>

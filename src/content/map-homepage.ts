@@ -111,8 +111,8 @@ export function mapHomepage(page: PageContent, language: Locale): HomepageView {
   if (!consultation.media) {
     throw new Error("Homepage 3a wymaga fotografii przy ofercie konsultacji.");
   }
-  if (newsletter.fields.some((field) => field.input === "checkbox") === false) {
-    throw new Error("Newsletter homepage wymaga zgody (checkbox).");
+  if (newsletter.formKey !== "newsletter") {
+    throw new Error("Newsletter homepage wymaga formularza newslettera.");
   }
 
   return {

@@ -32,17 +32,22 @@ function media(
   };
 }
 
+export const NEWSLETTER_FORM_VERSION = "2.3";
+export const NEWSLETTER_CONSENT_ID = "Z6";
+
 export function newsletterFormFixture(language: Locale) {
   const copy = homepageCopy[language];
   return {
     id: `newsletter-form-${language}`,
     language,
-    title:
-      language === "pl"
-        ? "Newsletter demonstracyjny"
-        : "Demonstration newsletter",
+    title: "Newsletter",
+    formKey: "newsletter",
+    version: NEWSLETTER_FORM_VERSION,
     submitLabel: copy.newsletterSubmit,
+    notice: copy.newsletterNotice,
+    noticeConsentId: NEWSLETTER_CONSENT_ID,
     successMessage: copy.newsletterSuccess,
+    errorMessage: copy.newsletterError,
     noscriptMessage: copy.newsletterNoscript,
     fields: [
       {
@@ -52,15 +57,6 @@ export function newsletterFormFixture(language: Locale) {
         label: copy.emailLabel,
         placeholder: copy.emailPlaceholder,
         errorMessage: copy.emailError,
-        required: "required",
-        options: null,
-      },
-      {
-        _key: "consent",
-        name: "consent",
-        input: "checkbox",
-        label: copy.consentLabel,
-        errorMessage: copy.consentError,
         required: "required",
         options: null,
       },

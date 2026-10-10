@@ -3,6 +3,16 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { languageField, translationField } from "../shared/fields";
 
+export const formKeyOptions = [
+  { title: "Newsletter", value: "newsletter" },
+  { title: "Kontakt", value: "contact" },
+  { title: "Odstąpienie od umowy", value: "withdrawal" },
+] as const;
+
+function isFormKeyOption(value: string): boolean {
+  return formKeyOptions.some((option) => option.value === value);
+}
+
 export const formType = defineType({
   name: "form",
   title: "Formularz",
@@ -18,15 +28,67 @@ export const formType = defineType({
     }),
     translationField("form"),
     defineField({
+      name: "formKey",
+      title: "Rodzaj formularza",
+      type: "string",
+      description:
+        "Stały klucz przekazywany do n8n. Decyduje o obsłudze zgłoszenia.",
+      options: { layout: "radio", list: [...formKeyOptions] },
+      validation: (rule) =>
+        rule
+          .required()
+          .custom((value) =>
+            typeof value === "string" && isFormKeyOption(value)
+              ? true
+              : "Wybierz newsletter, kontakt albo odstąpienie.",
+          ),
+    }),
+    defineField({
+      name: "version",
+      title: "Wersja treści",
+      type: "string",
+      description:
+        "Wersja dokumentu prawnego „Zgody i formularze”, z którego pochodzi copy, np. 2.3.",
+      validation: (rule) =>
+        rule.required().regex(/^\d+\.\d+$/, { name: "wersja, np. 2.3" }),
+    }),
+    defineField({
       name: "submitLabel",
       title: "Etykieta wysyłki",
       type: "string",
       validation: (rule) => rule.required().max(40),
     }),
     defineField({
+      name: "notice",
+      title: "Informacja pod przyciskiem",
+      type: "text",
+      rows: 4,
+      description:
+        "Odnośniki: [tekst](/adres/). Pogrubienie: **tekst**. Zapisz brzmienie zgodne z dokumentem prawnym.",
+      validation: (rule) => rule.max(600),
+    }),
+    defineField({
+      name: "noticeConsentId",
+      title: "Zgoda wyrażana wysłaniem",
+      type: "string",
+      description:
+        "Identyfikator zgody z mapy zgód (np. Z6), gdy samo wysłanie formularza oznacza zgodę opisaną w informacji.",
+      hidden: ({ document }) => !document?.notice,
+      validation: (rule) =>
+        rule.regex(/^Z\d+$/, { name: "identyfikator zgody, np. Z6" }),
+    }),
+    defineField({
       name: "successMessage",
       title: "Komunikat sukcesu",
       type: "string",
+      validation: (rule) => rule.required().max(160),
+    }),
+    defineField({
+      name: "errorMessage",
+      title: "Komunikat błędu wysyłki",
+      type: "string",
+      description:
+        "Pokazywany, gdy wysłanie się nie uda. Wpisane dane zostają w formularzu.",
       validation: (rule) => rule.required().max(160),
     }),
     defineField({
@@ -65,6 +127,7 @@ export const formType = defineType({
                   { title: "Dłuższy tekst", value: "textarea" },
                   { title: "Lista", value: "select" },
                   { title: "Zgoda", value: "checkbox" },
+                  { title: "Data", value: "date" },
                 ],
               },
               validation: (rule) => rule.required(),
@@ -74,7 +137,7 @@ export const formType = defineType({
               title: "Etykieta",
               type: "string",
               description:
-                "Przy zgodzie można wstawić odnośniki w postaci [tekst](/adres/).",
+                "Przy zgodzie można wstawić odnośniki w postaci [tekst](/adres/). Identyfikator zgody (np. Z1) trafia do listy zgód zgłoszenia.",
               validation: (rule) => rule.required().max(400),
             }),
             defineField({
@@ -97,6 +160,15 @@ export const formType = defineType({
               initialValue: "required",
             }),
             defineField({
+              name: "defaultValue",
+              title: "Tekst początkowy",
+              type: "text",
+              rows: 3,
+              description: "Edytowalny tekst wstawiony do pola na start.",
+              hidden: ({ parent }) => parent?.input !== "textarea",
+              validation: (rule) => rule.max(2000),
+            }),
+            defineField({
               name: "options",
               title: "Opcje listy",
               type: "array",
@@ -113,10 +185,10 @@ export const formType = defineType({
     }),
   ],
   preview: {
-    select: { title: "title", language: "language" },
-    prepare: ({ title, language }) => ({
+    select: { title: "title", language: "language", formKey: "formKey" },
+    prepare: ({ title, language, formKey }) => ({
       title,
-      subtitle: language?.toUpperCase(),
+      subtitle: [language?.toUpperCase(), formKey].filter(Boolean).join(" · "),
     }),
   },
 });

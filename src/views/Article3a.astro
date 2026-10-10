@@ -2,7 +2,7 @@
 import Breadcrumbs from "@/design-system/components/Breadcrumbs.astro";
 import Button from "@/design-system/components/Button.astro";
 import Container from "@/design-system/components/Container.astro";
-import DemoForm from "@/design-system/components/DemoForm.astro";
+import LeadForm from "@/design-system/components/LeadForm.astro";
 import Newsletter from "@/design-system/components/Newsletter.astro";
 import PriceGross from "@/design-system/components/PriceGross.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
@@ -388,7 +388,7 @@ const bodyHtml = markArticleIntro(html);
       title={content.newsletter.title}
       description={content.newsletter.lead}
     >
-      <DemoForm slot="form" content={content.newsletter} lang={lang} />
+      <LeadForm slot="form" content={content.newsletter} lang={lang} />
     </Newsletter>
   )}
 </main>

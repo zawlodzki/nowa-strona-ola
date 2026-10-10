@@ -5,7 +5,6 @@ import { describe, expect, it } from "vitest";
 import { mapLegalPage } from "../../src/content/map-legal";
 import { serializeLegalPage } from "../../src/content/serialize-legal";
 import { articleBodyToHtml } from "../../src/content/portable-text";
-import { checkboxLabelHtml } from "../../src/lib/checkbox-label";
 import {
   getLegalPage,
   getLegalPagePaths,
@@ -125,17 +124,5 @@ describe("legal portable text", () => {
     expect(html).toContain("<ol>");
     expect(html).toContain('<ol start="2">');
     expect(html).toContain("<code>x</code>");
-  });
-});
-
-describe("checkbox label links", () => {
-  it("turns markdown links into anchors", () => {
-    expect(
-      checkboxLabelHtml(
-        "Zgoda. [Polityka prywatności](/polityka-prywatnosci/) i [regulamin newslettera](/regulamin-newslettera/).",
-      ),
-    ).toBe(
-      'Zgoda. <a href="/polityka-prywatnosci/">Polityka prywatności</a> i <a href="/regulamin-newslettera/">regulamin newslettera</a>.',
-    );
   });
 });

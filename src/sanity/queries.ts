@@ -11,6 +11,31 @@ const mediaFields = /* groq */ `{
 
 const actionFields = /* groq */ `{ label, href, emphasis }`;
 
+const formFields = /* groq */ `{
+  "id": _id,
+  language,
+  title,
+  formKey,
+  version,
+  submitLabel,
+  notice,
+  noticeConsentId,
+  successMessage,
+  errorMessage,
+  noscriptMessage,
+  fields[]{
+    _key,
+    name,
+    input,
+    label,
+    placeholder,
+    errorMessage,
+    required,
+    options,
+    defaultValue
+  }
+}`;
+
 export const ebookCardProjection = /* groq */ `
   "id": _id,
   language,
@@ -163,23 +188,7 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     eyebrow,
     title,
     lead,
-    "form": form->{
-      "id": _id,
-      language,
-      title,
-      submitLabel,
-      successMessage,
-      noscriptMessage,
-      fields[]{
-        _key,
-        name,
-        input,
-        label,
-        errorMessage,
-        required,
-        options
-      }
-    }
+    "form": form->${formFields}
   },
   _type == "mediaSection" => {
     title,
@@ -325,24 +334,7 @@ export const siteSettingsProjection = /* groq */ `
     sidebarLead,
     sidebarActionLabel,
     sidebarNote,
-    "form": form->{
-      "id": _id,
-      language,
-      title,
-      submitLabel,
-      successMessage,
-      noscriptMessage,
-      fields[]{
-        _key,
-        name,
-        input,
-        label,
-        placeholder,
-        errorMessage,
-        required,
-        options
-      }
-    }
+    "form": form->${formFields}
   },
   "translation": translation->{ language }
 `;

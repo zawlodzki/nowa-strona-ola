@@ -18,13 +18,22 @@ export function contactFormFixture(language: Locale) {
     id: `form-contact-${language}`,
     language,
     title: pl ? "Formularz kontaktowy" : "Contact form",
-    submitLabel: pl ? "Sprawdź formularz" : "Check form",
+    formKey: "contact",
+    version: "2.3",
+    submitLabel: pl ? "Wyślij wiadomość" : "Send message",
+    notice: pl
+      ? "Odpowiemy na Twoje pytanie. **Nie opisuj tu szczegółów swojego zdrowia** — jeżeli umówisz konsultację, zapytamy o nie w bezpiecznej ankiecie. Administrator danych: Wellbiz sp. z o.o. [Polityka prywatności](/polityka-prywatnosci/)"
+      : "We will answer your question. **Do not describe your health in detail here** — if you book a consultation, we will ask about it in a secure questionnaire. Data controller: Wellbiz sp. z o.o. [Privacy policy](/en/privacy/)",
+    noticeConsentId: null,
     successMessage: pl
-      ? "Dane poprawne. Nic nie wysłano. Aby się skontaktować, napisz e-mail."
-      : "Details are valid. Nothing was sent. To get in touch, send an email.",
+      ? "Dziękujemy, wiadomość dotarła. Odpowiemy na podany adres e-mail."
+      : "Thank you, your message has arrived. We will reply to the email address you gave.",
+    errorMessage: pl
+      ? `Nie udało się wysłać wiadomości. Spróbuj ponownie albo napisz na ${contactEmail}.`
+      : `We could not send your message. Try again or email ${contactEmail}.`,
     noscriptMessage: pl
-      ? `Formularz demonstracyjny wymaga JavaScriptu. Napisz na ${contactEmail}.`
-      : `This demonstration form requires JavaScript. Email ${contactEmail}.`,
+      ? `Formularz wymaga włączonego JavaScriptu. Napisz na ${contactEmail}.`
+      : `This form requires JavaScript. Email ${contactEmail}.`,
     fields: [
       {
         _key: "contact-email",

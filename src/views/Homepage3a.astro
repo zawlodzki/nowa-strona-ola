@@ -7,7 +7,7 @@ import Button from "@/design-system/components/Button.astro";
 import Carousel from "@/design-system/components/Carousel.astro";
 import Container from "@/design-system/components/Container.astro";
 import ContentCard from "@/design-system/components/ContentCard.astro";
-import DemoForm from "@/design-system/components/DemoForm.astro";
+import LeadForm from "@/design-system/components/LeadForm.astro";
 import Heading from "@/design-system/components/Heading.astro";
 import Hero from "@/design-system/components/Hero.astro";
 import Newsletter from "@/design-system/components/Newsletter.astro";
@@ -385,7 +385,7 @@ function coverLabels(kind: CoverArtKind): string[] {
     title={content.newsletter.title}
     description={content.newsletter.lead}
   >
-    <DemoForm slot="form" content={content.newsletter} lang={lang} />
+    <LeadForm slot="form" content={content.newsletter} lang={lang} />
   </Newsletter>
 </main>
 

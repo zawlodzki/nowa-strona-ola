@@ -46,8 +46,8 @@ describe("about 3a fixtures", () => {
     expect(view.consultation.priceLabel).toBe("450 zł / 60 minut");
     expect(view.newsletter.fields.map((field) => field.name)).toEqual([
       "email",
-      "consent",
     ]);
+    expect(view.newsletter.noticeConsentId).toBe("Z6");
   });
 
   it("does not use Polish copy under the English about page", async () => {
@@ -59,7 +59,7 @@ describe("about 3a fixtures", () => {
     expect(view.credentials.person.diploma?.label).toBe(
       "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom",
     );
-    expect(view.newsletter.submit).toBe("I want the newsletter");
+    expect(view.newsletter.submit).toBe("Subscribe");
   });
 });
 

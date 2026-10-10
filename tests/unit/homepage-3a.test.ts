@@ -10,7 +10,6 @@ import {
   assertKnownSections,
   knownSectionTypes,
 } from "../../src/content/sections";
-import { validateDemoField } from "../../src/lib/validate-demo";
 import { getPage, getSiteSettings } from "../../src/sanity/repository";
 import { formatPriceGross, formatServicePrice } from "../../src/lib/offer";
 
@@ -56,8 +55,8 @@ describe("homepage 3a fixtures", () => {
     expect(view.testimonials.items.every((item) => item.anonymous)).toBe(true);
     expect(view.newsletter.fields.map((field) => field.name)).toEqual([
       "email",
-      "consent",
     ]);
+    expect(view.newsletter.noticeConsentId).toBe("Z6");
     expect(view.newsletter.fields[0]?.label).toBe("Twój adres e-mail");
     expect(view.newsletter.fields[0]?.placeholder).toBe("np. ola@przyklad.pl");
     expect(view.ebooks.items.map((item) => item.coverTone)).toEqual([
@@ -82,7 +81,7 @@ describe("homepage 3a fixtures", () => {
       "Trying to conceive",
       "Perimenopause",
     ]);
-    expect(view.newsletter.submit).toBe("I want the newsletter");
+    expect(view.newsletter.submit).toBe("Subscribe");
   });
 });
 
@@ -157,15 +156,6 @@ describe("offer formatting", () => {
   it("formats gross ebook prices and consultation time from data", () => {
     expect(formatPriceGross(97, "PLN", "pl")).toBe("97 zł brutto");
     expect(formatServicePrice(450, "PLN", 60, "pl")).toBe("450 zł / 60 minut");
-  });
-});
-
-describe("demo field validation", () => {
-  it("requires newsletter consent and a valid email", () => {
-    expect(validateDemoField("email", "ola@example.com", true)).toBe(false);
-    expect(validateDemoField("email", "ola", true)).toBe(true);
-    expect(validateDemoField("checkbox", "on", true)).toBe(false);
-    expect(validateDemoField("checkbox", "", true)).toBe(true);
   });
 });
 

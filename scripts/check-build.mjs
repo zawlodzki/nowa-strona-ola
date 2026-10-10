@@ -47,6 +47,7 @@ for (const path of [
   "en/blog/index.html",
   "en/blog/page/2/index.html",
   "blog/przygotowanie-do-konsultacji-pcos/index.html",
+  "odstapienie/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(

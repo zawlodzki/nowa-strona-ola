@@ -1,9 +1,12 @@
+import {
+  withdrawalFormFixture,
+  withdrawalPageFixture,
+} from "./withdrawal-fixtures";
 import { blogCollectionPageFixture } from "./blog-page";
 import {
   contactPageFixture,
   contactFormFixture,
 } from "@/sanity/contact-fixtures";
-import { homepageCopy } from "@/content/homepage-seed";
 import { BLOG_ARTICLE_SEED } from "@/content/blog-collection-seed";
 import {
   demonstrationCategories,
@@ -234,8 +237,10 @@ export function buildMutations(plan: ContentLakePlan): ContentLakeMutation[] {
 }
 
 export function formsFitLabelMax(formLabelMax: number): boolean {
-  return (["pl", "en"] as const).every(
-    (language) => homepageCopy[language].consentLabel.length <= formLabelMax,
+  return (["pl", "en"] as const).every((language) =>
+    newsletterFormFixture(language).fields.every(
+      (field) => field.label.length <= formLabelMax,
+    ),
   );
 }
 
@@ -243,7 +248,7 @@ export function assertWritable(plan: ContentLakePlan): void {
   const forms = plan.pending.filter((item) => item.kind === "form");
   if (forms.length > 0) {
     throw new Error(
-      "Formularze newslettera nie mieszczą się w limicie etykiety zgody. --write nic nie wysyła.",
+      "Formularze newslettera nie mieszczą się w limicie etykiety pola. --write nic nie wysyła.",
     );
   }
 }
@@ -476,6 +481,12 @@ export function buildContentLakePlan(gate: ContentLakeGate): ContentLakePlan {
       toDocument("page", ebookCollectionPageFixture(language), keepPlaceholder),
       toDocument("page", blogCollectionPageFixture(language), keepPlaceholder),
     );
+    if (language === "pl") {
+      documents.push(
+        toDocument("page", withdrawalPageFixture(), keepPlaceholder),
+        toDocument("form", withdrawalFormFixture(), keepPlaceholder),
+      );
+    }
     for (const category of demonstrationCategories[language]) {
       documents.push(toDocument("category", category, keepPlaceholder));
     }
