@@ -6,6 +6,18 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Test sticky header w WebKit, 10.10.2026
+
+- `sticky-navigation-3a.spec.ts` „tabbing through the sticky header…” failował
+  w WebKit od PR #56 (też na `8d39131`): po Tab fokus nie trafiał na
+  `.ao-skip`. Sonda Playwright: w WebKit Tab przechodzi tylko po polach
+  formularza i elementach z `tabindex` (karuzela, pole e-mail), jak domyślnie
+  Safari; Alt+Tab (Option+Tab) przechodzi po linkach `.ao-skip → wordmark → …`.
+  Strona działa poprawnie, błędne było założenie testu.
+- Poprawka: w WebKit test używa Alt+Tab; kontrola pozycji scrolla bez zmian.
+  Wynik: spec 24/24 (Chromium, Firefox, WebKit), WebKit `--repeat-each=5` 10/10,
+  lint i `npm run check` PASS.
+
 ### Krok 1 dokumentacji prawnej — integracja, 10.10.2026
 
 - `main` zsynchronizowany z `origin/main` `8d39131` (fast-forward o 38 commitów).
