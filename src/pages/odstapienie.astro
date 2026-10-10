@@ -1,0 +1,13 @@
+---
+import { getPage, getSiteSettings } from "@/sanity/repository";
+import { WITHDRAWAL_SLUG } from "@/sanity/withdrawal-fixtures";
+import WithdrawalPage from "@/views/WithdrawalPage.astro";
+
+const lang = "pl" as const;
+const [page, settings] = await Promise.all([
+  getPage(lang, WITHDRAWAL_SLUG),
+  getSiteSettings(lang),
+]);
+---
+
+<WithdrawalPage lang={lang} page={page} settings={settings} />

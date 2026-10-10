@@ -94,7 +94,10 @@ Studio odczytuje `SANITY_STUDIO_PROJECT_ID` i opcjonalne
 `SANITY_STUDIO_DATASET` zgodnie z `studio/.env.example`. Wartość zastępcza służy
 wyłącznie do lokalnej kontroli buildu. Frontend odczytuje parę
 `PUBLIC_SANITY_PROJECT_ID` i `PUBLIC_SANITY_DATASET` zgodnie z `.env.example`;
-ustawienie tylko jednej wartości zatrzymuje build. Klient produkcyjnego buildu
+ustawienie tylko jednej wartości zatrzymuje build. Formularze wysyłają POST JSON
+na produkcyjny webhook n8n; opcjonalne `PUBLIC_LEAD_WEBHOOK_URL` (https) zmienia
+go podczas builda. Lokalnie nie wysyłaj poprawnych danych bez osobnego webhooka
+testowego. Klient produkcyjnego buildu
 używa perspektywy `published`, bez CDN i bez tokenu. Po zmianie schematów lub GROQ
 uruchomić `npm run typegen --workspace @ola/studio`. Po zmianie
 `worker/wrangler.jsonc` ponownie wygenerować i zapisać typy Workera.

@@ -5,6 +5,12 @@ import { gzipSync } from "node:zlib";
 
 const templates = [
   {
+    paths: ["odstapienie/index.html"],
+    view: ".withdrawal3a",
+    external: 8 * 1024,
+    inline: 4 * 1024,
+  },
+  {
     paths: ["kontakt/index.html"],
     view: ".contact3a",
     external: 8 * 1024,

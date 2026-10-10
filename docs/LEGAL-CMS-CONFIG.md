@@ -25,6 +25,9 @@ i zawierają placeholdery `{{…}}`, więc nie wolno ich opublikować.
 EN (`/en/privacy/`, `/en/terms/`) ma tylko informację, że wiążąca jest wersja
 polska. Dezaktywację EN prowadzi osobny etap.
 
+Regulamin newslettera jest linkowany w informacji pod przyciskiem `LeadForm`
+jako `[Regulamin newslettera](/regulamin-newslettera/)` (zgody 2.3 §7).
+
 ## Konwerter
 
 ```sh

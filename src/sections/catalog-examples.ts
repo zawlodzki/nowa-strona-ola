@@ -218,7 +218,8 @@ const pl: CatalogCopy = {
       },
       {
         question: "Czy formularz coś wysyła?",
-        answer: "Nie. Sprawdza pola w przeglądarce i nic nie przesyła.",
+        answer:
+          "Tak. Po sprawdzeniu pól wysyła zgłoszenie do obsługi formularzy.",
       },
     ],
   },
@@ -251,14 +252,13 @@ const pl: CatalogCopy = {
   form: {
     eyebrow: "Kontakt demonstracyjny",
     title: "Co chcesz zmienić?",
-    lead: "Dane zostają w przeglądarce. Nic nie jest wysyłane.",
-    nameLabel: "Imię",
-    nameError: "Wpisz imię (od 2 do 100 znaków).",
-    emailLabel: "E-mail",
-    emailError: "Wpisz poprawny adres e-mail.",
-    submit: "Sprawdź formularz",
-    success: "Dane poprawne. Nic nie wysłano.",
-    noscript: "Włącz JavaScript, aby sprawdzić formularz demonstracyjny.",
+    lead: "Formularz katalogu wysyła zgłoszenie kontaktowe do obsługi formularzy.",
+    formKey: "contact",
+    version: "2.3",
+    submit: "Wyślij wiadomość",
+    success: "Dziękujemy, wiadomość dotarła.",
+    error: "Nie udało się wysłać wiadomości. Spróbuj ponownie.",
+    noscript: "Formularz wymaga włączonego JavaScriptu.",
     fields: [
       {
         name: "name",
@@ -539,7 +539,8 @@ const en: CatalogCopy = {
       },
       {
         question: "Does the form send anything?",
-        answer: "No. It checks fields in the browser and does not submit.",
+        answer:
+          "Yes. After checking the fields it sends the request to form handling.",
       },
     ],
   },
@@ -569,14 +570,13 @@ const en: CatalogCopy = {
   form: {
     eyebrow: "Demonstration contact",
     title: "What would you like to change?",
-    lead: "Your details stay in the browser. Nothing is sent.",
-    nameLabel: "Name",
-    nameError: "Enter a name (2 to 100 characters).",
-    emailLabel: "E-mail",
-    emailError: "Enter a valid email address.",
-    submit: "Check the form",
-    success: "Details valid. Nothing was sent.",
-    noscript: "Enable JavaScript to try the demonstration form.",
+    lead: "The catalog form sends a contact request to form handling.",
+    formKey: "contact",
+    version: "2.3",
+    submit: "Send message",
+    success: "Thank you, your message has arrived.",
+    error: "We could not send your message. Try again.",
+    noscript: "This form requires JavaScript.",
     fields: [
       {
         name: "name",

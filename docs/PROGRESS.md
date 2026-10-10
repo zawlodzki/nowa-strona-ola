@@ -1,10 +1,45 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-10 (ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-10 (formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Formularze wysyłają do webhooka n8n, 10.10.2026
+
+Decyzja właściciela: formularze wysyłają z przeglądarki POST JSON bezpośrednio
+na webhook n8n; ścieżka Worker → Queues → n8n i Turnstile odłożone.
+
+- Kontrakt `LeadSubmission` v2 w `packages/shared` (schemaVersion 2, formKey,
+  submittedAt, consents z wersją). Adres w `src/lib/lead-endpoint.ts`,
+  nadpisanie `PUBLIC_LEAD_WEBHOOK_URL`.
+- Schemat `form`: `formKey` (newsletter/contact/withdrawal), `version`,
+  `notice`, `noticeConsentId`, `errorMessage`, pole `date`, `defaultValue`.
+  GROQ (wspólna projekcja) i TypeGen zaktualizowane.
+- `LeadForm` zastąpił `DemoForm` i demonstracyjny `FormSection`: walidacja
+  i fokus jak dotąd, honeypot, blokada przycisku, sukces po 2xx, błąd
+  zachowuje dane i ten sam `submissionId`, bez JS brak wysyłki.
+- Newsletter: „Zapisuję się”, bez checkboxa, informacja Z6 (zgody 2.3 §7).
+  Kontakt: informacja §6. Nowa strona `/odstapienie/` (PL) z potwierdzeniem
+  na ekranie.
+- Testy: unit `lead-form`, `withdrawal`; Playwright `lead-forms.spec.ts`
+  z fixture blokującym prawdziwe żądania do `flows.zawlodzki.com`.
+- Kontrole 10.10.2026: format, tokeny, lint, check, test (207), build (68
+  stron), build workspace’ów, test:build, test:content-lake — zielone.
+  Playwright pełny: 280/282; 2 czerwone to WebKit
+  `sticky-navigation-3a` „tabbing…”, które failują identycznie na main
+  8d39131. Jednorazowo flaky kontakt w Firefox pod obciążeniem (60/60
+  w powtórkach).
+- Niewykonane: zapis do Content Lake (newsletter, kontakt, odstąpienie),
+  workflow n8n (walidacja, deduplikacja, honeypot, e-mail E7, double opt-in),
+  ręczny przegląd czytnikiem ekranu i zoom 200% formularza odstąpienia.
+- Kolejność wdrożenia: build z Sanity wymaga w Content Lake nowych pól
+  `form` (`formKey`, `version`, `errorMessage`) i strony `page-withdrawal-pl`,
+  a obecny main wymaga checkboxa newslettera. Zapis i merge muszą iść razem
+  (`import:3a` z `--write` dopiero na zlecenie).
+- Następny krok: przygotować testowy workflow n8n i zapis Content Lake
+  zsynchronizowany z merge.
 
 ### Dokumenty prawne B2C, wersjonowanie i stopka, 10.10.2026
 

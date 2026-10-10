@@ -484,6 +484,44 @@ body.ao-site {
 .ao-checkbox a {
   text-decoration: underline;
 }
+.ao-form-note a {
+  text-decoration: underline;
+}
+.ao-form-note strong {
+  color: var(--ao-ink);
+  font-weight: 600;
+}
+.ao-input--multiline {
+  min-block-size: 9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+.ao-form__honeypot {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.ao-form-receipt {
+  padding: var(--ao-space-16);
+  border: 1px solid var(--ao-line);
+  border-radius: var(--ao-radius-panel);
+  font-size: 0.875rem;
+}
+.ao-form-receipt__title {
+  font-weight: 600;
+}
+.ao-form-receipt dt {
+  margin-block-start: var(--ao-space-12);
+  color: var(--ao-muted);
+}
+.ao-form-receipt dd {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .ao-footer {
   padding-block: var(--ao-space-64) var(--ao-space-96);
 }

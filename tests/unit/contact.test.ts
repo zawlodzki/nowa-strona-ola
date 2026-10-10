@@ -3,9 +3,10 @@ import { describe, expect, it } from "vitest";
 import { getPage } from "../../src/sanity/repository";
 import { mapContact } from "../../src/content/map-contact";
 import { serializePage } from "../../src/content/serialize-sections";
-import { validateDemoField } from "../../src/lib/validate-demo";
+import { isInvalidField } from "../../src/lib/lead-form";
 
 const fixture = { environment: {} };
+const optionalPhone = { name: "phone", input: "tel", required: false } as const;
 describe("contact", () => {
   it.each(["pl", "en"] as const)(
     "maps and exports the %s contact page",
@@ -42,7 +43,7 @@ describe("contact", () => {
   it.each(["+48 500 600 700", "(500) 600-700", ""])(
     "accepts optional phone %j",
     (value) => {
-      expect(validateDemoField("tel", value, false)).toBe(false);
+      expect(isInvalidField(optionalPhone, value)).toBe(false);
     },
   );
   it.each([
@@ -52,7 +53,7 @@ describe("contact", () => {
     "123456@",
     "+48" + " ".repeat(40) + "123456",
   ])("rejects phone %j", (value) => {
-    expect(validateDemoField("tel", value, false)).toBe(true);
+    expect(isInvalidField(optionalPhone, value)).toBe(true);
   });
 });
 

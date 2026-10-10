@@ -1,0 +1,90 @@
+---
+import type { Locale } from "@ola/shared";
+import type { WithdrawalView } from "@/content/map-withdrawal";
+import { inlineMarkdownHtml } from "@/lib/inline-markdown";
+import Container from "@/design-system/components/Container.astro";
+import Heading from "@/design-system/components/Heading.astro";
+import LeadForm from "@/design-system/components/LeadForm.astro";
+import Section from "@/design-system/components/Section.astro";
+
+interface Props {
+  lang: Locale;
+  content: WithdrawalView;
+}
+const { lang, content } = Astro.props;
+---
+
+<main id="main" class="withdrawal3a">
+  <Section class="withdrawal3a-intro" aria-labelledby="withdrawal-title">
+    <Container>
+      {content.intro.eyebrow && (
+        <p class="withdrawal3a-eyebrow">{content.intro.eyebrow}</p>
+      )}
+      <Heading as="h1" size="display" id="withdrawal-title">
+        {content.intro.title}
+      </Heading>
+      <div class="withdrawal3a-lead">
+        {content.intro.body.map((line) => (
+          <p set:html={inlineMarkdownHtml(line)} />
+        ))}
+      </div>
+      <div class="withdrawal3a-form">
+        <Heading size="card" id="withdrawal-form-title">
+          {content.form.title}
+        </Heading>
+        <p class="withdrawal3a-form-lead">{content.form.lead}</p>
+        <LeadForm
+          content={content.form}
+          lang={lang}
+          idPrefix="withdrawal-"
+          layout="stacked"
+        />
+      </div>
+    </Container>
+  </Section>
+</main>
+<style>
+  .withdrawal3a-intro {
+    padding-top: var(--ao-space-64);
+  }
+  .withdrawal3a-eyebrow {
+    color: var(--ao-primary);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: var(--ao-space-16);
+  }
+  .withdrawal3a-lead {
+    display: grid;
+    gap: var(--ao-space-12);
+    max-width: 60ch;
+    color: var(--ao-muted);
+    font-size: 18px;
+    margin-top: var(--ao-space-24);
+  }
+  .withdrawal3a-lead :global(a) {
+    color: var(--ao-primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    overflow-wrap: anywhere;
+  }
+  .withdrawal3a-form {
+    max-width: 640px;
+    margin-top: var(--ao-space-48);
+    padding-top: var(--ao-space-32);
+    border-top: 1px solid var(--ao-line);
+  }
+  .withdrawal3a-form-lead {
+    margin-block: var(--ao-space-16) var(--ao-space-24);
+    color: var(--ao-muted);
+    font-size: 14px;
+    max-width: 48ch;
+  }
+  @container page3a (max-width: 767px) {
+    .withdrawal3a-intro {
+      padding-top: var(--ao-space-32);
+    }
+    .withdrawal3a-lead {
+      font-size: 17px;
+    }
+  }
+</style>

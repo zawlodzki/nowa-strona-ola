@@ -26,6 +26,7 @@ export const reservedPageSlugs = [
   "consultations",
   "kontakt",
   "contact",
+  "odstapienie",
 ] as const;
 export const reservedArticleSlugs = [
   "strona",

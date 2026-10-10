@@ -45,9 +45,8 @@ Wspólny punkt startu to świeży build fixture’ów i zdrowy doctor. Każda ko
 
 ```sh
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /
-node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Sprawdź formularz" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Wyślij wiadomość" --exact
 node .cursor/skills/verify-ola/scripts/verify.mjs browser fill --role textbox --name "Imię" --exact --value "Łucja"
-node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role status --text "Dane poprawne. Nic nie wysłano."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wpisz imię (od 2 do 100 znaków)."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path <plik>
@@ -59,7 +58,7 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser click --text "Chcę eb
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Suplementy w PCOS" --nth 1 --attribute href --value /ebooki/suplementy-w-pcos/
 ```
 
-`browser context` otwiera nową stronę i kasuje poprzedni stan sesji. Domyślnie JavaScript jest włączony. `expect` z rolą czeka, aż locator będzie widoczny, chyba że podasz `--state`, `--text`, `--attribute` albo `--count`. `--nth` to indeks od zera, gdy kilka elementów ma tę samą rolę i nazwę. `click --text` klika dokładny widoczny napis, gdy kontrolka nie ma nazwy w drzewie dostępności. Ścieżki `--path` przy snapshot i screenshot są względne wobec katalogu dowodów. Mapa funkcji jest w [features/README.md](features/README.md).
+Formularze wysyłają poprawne dane na produkcyjny webhook n8n (`flows.zawlodzki.com`), a sesja verify-ola nie przechwytuje sieci. Wysyłaj tu tylko dane, które nie przejdą walidacji. Wysyłkę z mockiem sprawdza Playwright `tests/e2e/lead-forms.spec.ts`. `browser context` otwiera nową stronę i kasuje poprzedni stan sesji. Domyślnie JavaScript jest włączony. `expect` z rolą czeka, aż locator będzie widoczny, chyba że podasz `--state`, `--text`, `--attribute` albo `--count`. `--nth` to indeks od zera, gdy kilka elementów ma tę samą rolę i nazwę. `click --text` klika dokładny widoczny napis, gdy kontrolka nie ma nazwy w drzewie dostępności. Ścieżki `--path` przy snapshot i screenshot są względne wobec katalogu dowodów. Mapa funkcji jest w [features/README.md](features/README.md).
 
 ## Evidence
 

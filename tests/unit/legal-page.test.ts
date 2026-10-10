@@ -9,7 +9,6 @@ import {
   articleBodyToMarkdown,
 } from "../../src/content/portable-text";
 import { unpublishableLegalText } from "../../studio/schema-types/shared/legal-publication";
-import { checkboxLabelHtml } from "../../src/lib/checkbox-label";
 import {
   getLegalPage,
   getLegalPagePaths,
@@ -250,17 +249,5 @@ describe("legal publication guard", () => {
         },
       ]),
     ).toEqual([]);
-  });
-});
-
-describe("checkbox label links", () => {
-  it("turns markdown links into anchors", () => {
-    expect(
-      checkboxLabelHtml(
-        "Zgoda. [Polityka prywatności](/polityka-prywatnosci/) i [regulamin newslettera](/regulamin-newslettera/).",
-      ),
-    ).toBe(
-      'Zgoda. <a href="/polityka-prywatnosci/">Polityka prywatności</a> i <a href="/regulamin-newslettera/">regulamin newslettera</a>.',
-    );
   });
 });

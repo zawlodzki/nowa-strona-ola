@@ -4,7 +4,7 @@ import type { Locale } from "@ola/shared";
 import ArrowIcon from "@/design-system/components/ArrowIcon.astro";
 import Button from "@/design-system/components/Button.astro";
 import Container from "@/design-system/components/Container.astro";
-import DemoForm from "@/design-system/components/DemoForm.astro";
+import LeadForm from "@/design-system/components/LeadForm.astro";
 import Heading from "@/design-system/components/Heading.astro";
 import Hero from "@/design-system/components/Hero.astro";
 import Newsletter from "@/design-system/components/Newsletter.astro";
@@ -284,7 +284,7 @@ const profileJsonLd = {
     title={content.newsletter.title}
     description={content.newsletter.lead}
   >
-    <DemoForm slot="form" content={content.newsletter} lang={lang} />
+    <LeadForm slot="form" content={content.newsletter} lang={lang} />
   </Newsletter>
 </main>
 

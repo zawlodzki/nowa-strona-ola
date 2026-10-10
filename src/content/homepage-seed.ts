@@ -254,16 +254,18 @@ export const homepageCopy = {
     newsletterTitle: "Mniej sprzecznych rad.\nWięcej konkretów.",
     newsletterLead:
       "Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.",
-    newsletterSubmit: "Chcę otrzymywać newsletter",
-    newsletterSuccess: "Dane poprawne. Nic nie wysłano.",
+    newsletterSubmit: "Zapisuję się",
+    newsletterSuccess:
+      "Sprawdź skrzynkę. Wysłaliśmy e-mail z linkiem potwierdzającym. Zapis będzie aktywny dopiero po kliknięciu w link.",
+    newsletterError:
+      "Nie udało się zapisać. Sprawdź połączenie i spróbuj ponownie — wpisany adres został w formularzu.",
     newsletterNoscript:
-      "Włącz JavaScript, aby sprawdzić formularz demonstracyjny. Dane nie są zapisywane ani wysyłane.",
+      "Zapis do newslettera wymaga włączonego JavaScriptu. Możesz też napisać na ola@aleksandraolesiewicz.com.",
+    newsletterNotice:
+      "Zapisując się, zamawiasz newsletter Wellbiz sp. z o.o. i zgadzasz się na otrzymywanie e-maili z wiedzą o żywieniu oraz informacjami o e-bookach i konsultacjach. Wypiszesz się jednym kliknięciem — link jest w każdej wiadomości. Newsletter jest dla osób pełnoletnich. [Regulamin newslettera](/regulamin-newslettera/) · [Polityka prywatności](/polityka-prywatnosci/)",
     emailLabel: "Twój adres e-mail",
     emailPlaceholder: "np. ola@przyklad.pl",
     emailError: "Wpisz poprawny adres e-mail.",
-    consentLabel:
-      "Wyrażam zgodę na otrzymywanie newslettera. To demonstracja — nic nie zostanie wysłane. [Polityka prywatności](/polityka-prywatnosci/) i [regulamin newslettera](/regulamin-newslettera/).",
-    consentError: "Zaznacz zgodę, aby sprawdzić formularz.",
     serviceSummary:
       "Pojedyncza konsultacja dietetyczna online: wyniki, odżywianie, codzienność i pierwsze zmiany.",
   },
@@ -354,16 +356,18 @@ export const homepageCopy = {
     newsletterTitle: "Fewer conflicting tips.\nMore specifics.",
     newsletterLead:
       "I write about PCOS, insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and news about new materials, including perimenopause.",
-    newsletterSubmit: "I want the newsletter",
-    newsletterSuccess: "The details look correct. Nothing was sent.",
+    newsletterSubmit: "Subscribe",
+    newsletterSuccess:
+      "Check your inbox. We sent a confirmation link. The subscription becomes active only after you click it.",
+    newsletterError:
+      "We could not subscribe you. Check your connection and try again — your address is still in the form.",
     newsletterNoscript:
-      "Turn on JavaScript to check the demonstration form. Nothing is stored or sent.",
+      "Subscribing requires JavaScript. You can also email ola@aleksandraolesiewicz.com.",
+    newsletterNotice:
+      "By subscribing, you order the Wellbiz sp. z o.o. newsletter and agree to receive emails with nutrition knowledge and information about e-books and consultations. Unsubscribe with one click — the link is in every email. The newsletter is for adults. [Newsletter terms](/regulamin-newslettera/) · [Privacy policy](/en/privacy/)",
     emailLabel: "Your email address",
     emailPlaceholder: "e.g. ola@example.com",
     emailError: "Enter a valid email address.",
-    consentLabel:
-      "I agree to receive the newsletter. This is a demonstration — nothing will be sent. [Privacy policy](/en/privacy/) and [newsletter terms](/regulamin-newslettera/).",
-    consentError: "Tick the consent box to check the form.",
     serviceSummary:
       "A single online dietetic consultation: results, nutrition, daily life and first changes.",
   },

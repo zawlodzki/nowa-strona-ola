@@ -252,6 +252,7 @@ export function serializeSection(section: Section, language: Locale): string {
         heading(2, content.title),
         content.lead,
         bullet(content.fields.map((field) => field.label)),
+        content.notice,
         content.noscript,
       ]
         .filter(Boolean)

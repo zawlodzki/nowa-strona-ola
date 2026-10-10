@@ -1,4 +1,4 @@
-import type { Locale } from "@ola/shared";
+import { isFormKey, type Locale } from "@ola/shared";
 
 import { articlePath, ebookPath } from "@/lib/paths";
 import { formatDate, toDatetime } from "@/lib/dates";
@@ -532,8 +532,13 @@ export function toFormCopy(section: {
   title?: string | null;
   lead?: string | null;
   form?: {
+    formKey?: string | null;
+    version?: string | null;
     submitLabel?: string | null;
+    notice?: string | null;
+    noticeConsentId?: string | null;
     successMessage?: string | null;
+    errorMessage?: string | null;
     noscriptMessage?: string | null;
     fields?:
       | {
@@ -544,11 +549,13 @@ export function toFormCopy(section: {
           errorMessage?: string | null;
           required?: string | null;
           options?: (string | null)[] | null;
+          defaultValue?: string | null;
         }[]
       | null;
   } | null;
 }): FormCopy {
-  const fields = (section.form?.fields ?? []).map((field): FormFieldCopy => {
+  const form = section.form;
+  const fields = (form?.fields ?? []).map((field): FormFieldCopy => {
     const input = toFormInput(field.input);
     return {
       name: required(field.name, "identyfikator pola"),
@@ -560,26 +567,29 @@ export function toFormCopy(section: {
       options: (field.options ?? []).filter((item): item is string =>
         Boolean(item),
       ),
+      defaultValue:
+        input === "textarea" ? (field.defaultValue ?? undefined) : undefined,
     };
   });
   if (fields.length === 0) {
     throw new Error("Formularz nie ma pól.");
   }
-  const nameField =
-    fields.find((field) => field.name === "name") ??
-    fields.find((field) => field.input === "text");
-  const emailField = fields.find((field) => field.input === "email");
+  const formKey = form?.formKey;
+  if (!isFormKey(formKey)) {
+    throw new Error(`Nieznany rodzaj formularza: ${formKey ?? "brak"}.`);
+  }
   return {
     eyebrow: section.eyebrow ?? undefined,
     title: required(section.title, "tytuł formularza"),
     lead: required(section.lead, "lead formularza"),
-    nameLabel: nameField?.label,
-    nameError: nameField?.errorMessage,
-    emailLabel: emailField?.label,
-    emailError: emailField?.errorMessage,
-    submit: required(section.form?.submitLabel, "etykieta wysyłki"),
-    success: required(section.form?.successMessage, "komunikat sukcesu"),
-    noscript: required(section.form?.noscriptMessage, "komunikat noscript"),
+    formKey,
+    version: required(form?.version, "wersja formularza"),
+    submit: required(form?.submitLabel, "etykieta wysyłki"),
+    success: required(form?.successMessage, "komunikat sukcesu"),
+    error: required(form?.errorMessage, "komunikat błędu wysyłki"),
+    noscript: required(form?.noscriptMessage, "komunikat noscript"),
+    notice: form?.notice ?? undefined,
+    noticeConsentId: form?.noticeConsentId ?? undefined,
     fields,
   };
 }
@@ -591,7 +601,8 @@ function toFormInput(value: string | null | undefined): FormInputKind {
     value === "tel" ||
     value === "textarea" ||
     value === "select" ||
-    value === "checkbox"
+    value === "checkbox" ||
+    value === "date"
   ) {
     return value;
   }

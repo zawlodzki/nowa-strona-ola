@@ -39,6 +39,7 @@ for (const path of [
   "blog/kategoria/pcos/index.html",
   "blog/kategoria/perimenopauza/index.html",
   "blog/przygotowanie-do-konsultacji-pcos/index.html",
+  "odstapienie/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(

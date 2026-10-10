@@ -173,20 +173,32 @@ describe("content lake plan", () => {
     }
   });
 
-  it("holds newsletter forms until the consent label fits", () => {
+  it("holds newsletter forms until every field label fits", () => {
+    const narrow = buildContentLakePlan({
+      formLabelMax: 10,
+      keepPlaceholder: false,
+      legalPages: null,
+    });
     expect(
-      plan.documents.some((document) =>
+      narrow.documents.some((document) =>
         document._id.startsWith("newsletter-form-"),
       ),
     ).toBe(false);
-    expect(plan.pending).toContainEqual({ kind: "legalPage" });
-    const form = plan.pending.find((item) => item.kind === "form");
+    expect(narrow.pending).toContainEqual({ kind: "legalPage" });
+    const form = narrow.pending.find((item) => item.kind === "form");
     if (!form || form.kind !== "form") throw new Error("Brak formularza.");
-    expect(JSON.stringify(form.document)).toContain(
-      homepageCopy.pl.consentLabel,
-    );
+    expect(form.document).toMatchObject({
+      _id: "newsletter-form-pl",
+      formKey: "newsletter",
+      version: "2.3",
+      noticeConsentId: "Z6",
+      submitLabel: "Zapisuję się",
+    });
     expect(
-      buildDataset(plan).some((document) => document._type === "form"),
+      buildDataset(narrow).some((document) => document._type === "form"),
+    ).toBe(true);
+    expect(
+      plan.documents.some((document) => document._id === "newsletter-form-pl"),
     ).toBe(true);
 
     const open = buildContentLakePlan({
