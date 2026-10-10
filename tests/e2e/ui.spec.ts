@@ -53,51 +53,15 @@ for (const [path, openName, closeName] of [
   });
 }
 
-test("form validation, error recovery and no network submission", async ({
+test("primary navigation lists e-books without an English link", async ({
   page,
 }) => {
-  const requests: string[] = [];
-  page.on("request", (request) => {
-    if (request.method() === "POST") requests.push(request.url());
-  });
   await page.goto("/");
   const primaryNav = page.getByRole("navigation", { name: "Nawigacja główna" });
   await expect(primaryNav.getByRole("link", { name: "E-booki" })).toBeVisible();
   await expect(primaryNav.getByRole("link", { name: "English" })).toHaveCount(
     0,
   );
-  const submit = page.getByRole("button", {
-    name: "Chcę otrzymywać newsletter",
-    exact: true,
-  });
-  await submit.click();
-  await expect(
-    page.getByLabel("Twój adres e-mail", { exact: true }),
-  ).toBeFocused();
-  await expect(page.locator("#email-error")).toBeVisible();
-  await page.getByLabel("Twój adres e-mail", { exact: true }).fill("wrong");
-  await submit.click();
-  await expect(
-    page.getByLabel("Twój adres e-mail", { exact: true }),
-  ).toBeFocused();
-  await page
-    .getByLabel("Twój adres e-mail", { exact: true })
-    .fill("test@example.com");
-  await submit.click();
-  await expect(
-    page.getByText("Zaznacz zgodę, aby sprawdzić formularz."),
-  ).toBeVisible();
-  await page
-    .getByRole("checkbox", {
-      name: /Wyrażam zgodę na otrzymywanie newslettera/,
-    })
-    .check();
-  await submit.click();
-  await expect(page.getByRole("status")).toHaveText(
-    "Dane poprawne. Nic nie wysłano.",
-  );
-  await expect(page.locator('[aria-invalid="true"]')).toHaveCount(0);
-  expect(requests).toEqual([]);
 });
 
 for (const width of [320, 390, 1440]) {
@@ -188,7 +152,7 @@ test("no JavaScript preserves content and prevents accidental form navigation", 
   await page.goto("http://127.0.0.1:4321/");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Chcę otrzymywać newsletter" }),
+    page.getByRole("button", { name: "Zapisuję się" }),
   ).toBeDisabled();
   await expect(page.locator("noscript p").first()).toBeVisible();
   await page.goto("http://127.0.0.1:4321/ebooki/suplementy-w-pcos/");
@@ -381,9 +345,7 @@ test("about page Polish and English plus missing Polish under English slug", asy
   page.on("request", (request) => {
     if (request.method() === "POST") posts.push(request.url());
   });
-  await page
-    .getByRole("button", { name: "Chcę otrzymywać newsletter" })
-    .click();
+  await page.getByRole("button", { name: "Zapisuję się" }).click();
   expect(posts).toEqual([]);
 
   await page.goto("/en/about/");

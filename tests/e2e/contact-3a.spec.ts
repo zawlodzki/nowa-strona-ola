@@ -1,37 +1,37 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./helpers/lead-webhook";
 
 for (const entry of [
   {
     path: "/kontakt/",
     title: "Porozmawiajmy.",
-    button: "Sprawdź formularz",
+    button: "Wyślij wiadomość",
     topic: "Temat rozmowy",
     phone: "Telefon (opcjonalnie)",
-    success: "Dane poprawne. Nic nie wysłano.",
+    success: "Dziękujemy, wiadomość dotarła.",
+    newsletter: "Zapisuję się",
   },
   {
     path: "/en/contact/",
     title: "Let’s talk.",
-    button: "Check form",
+    button: "Send message",
     topic: "Conversation topic",
     phone: "Phone (optional)",
-    success: "Details are valid. Nothing was sent.",
+    success: "Thank you, your message has arrived.",
+    newsletter: "Subscribe",
   },
 ]) {
-  test(`${entry.path} validates three fields and keeps newsletter independent without sending data`, async ({
+  test(`${entry.path} validates three fields and keeps newsletter independent`, async ({
     page,
+    leadWebhook,
   }) => {
-    const posts: string[] = [];
-    page.on("request", (request) => {
-      if (request.method() === "POST") posts.push(request.url());
-    });
+    const captured = await leadWebhook.mock(page, [200]);
     await page.goto(entry.path);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       entry.title,
     );
-    const contact = page.locator("#contact-demo-form");
-    await expect(contact.locator("input")).toHaveCount(3);
+    const contact = page.locator("#contact-lead-form");
+    await expect(contact.locator("input:not([data-honeypot])")).toHaveCount(3);
     await contact.getByRole("button", { name: entry.button }).click();
     await expect(contact.getByLabel("E-mail", { exact: true })).toBeFocused();
     await page.keyboard.press("Tab");
@@ -55,7 +55,7 @@ for (const entry of [
     await contact.getByRole("button", { name: entry.button }).click();
     await expect(contact.getByRole("status")).toContainText(entry.success);
     await expect(
-      page.locator("#newsletter-demo-form").getByRole("status"),
+      page.locator("#newsletter-lead-form").getByRole("status"),
     ).toBeEmpty();
     await expect(
       page.getByRole("link", {
@@ -67,11 +67,13 @@ for (const entry of [
       "NIP: 6793323800",
     );
     await expect(page.locator(".contact3a-social a svg")).toHaveCount(3);
-    const newsletter = page.locator("#newsletter-demo-form");
-    await newsletter.getByRole("button", { name: /newsletter/i }).click();
+    const newsletter = page.locator("#newsletter-lead-form");
+    await newsletter.getByRole("button", { name: entry.newsletter }).click();
     await expect(newsletter.locator('input[type="email"]')).toBeFocused();
     await expect(contact.getByRole("status")).toContainText(entry.success);
-    expect(posts).toEqual([]);
+    expect(
+      captured.map((lead) => (lead.body as { formKey: string }).formKey),
+    ).toEqual(["contact"]);
     expect(
       (
         await new AxeBuilder({ page })
@@ -120,7 +122,7 @@ test("contact stays readable at 320px, CSS zoom 200%, reduced motion and without
   await expect(nojs.getByRole("heading", { level: 1 })).toHaveText(
     "Porozmawiajmy.",
   );
-  await expect(nojs.locator("#contact-demo-form button")).toBeDisabled();
+  await expect(nojs.locator("#contact-lead-form button")).toBeDisabled();
   await expect(
     nojs.getByRole("link", {
       name: "ola@aleksandraolesiewicz.com",

@@ -80,16 +80,16 @@ test("English terms shows the Polish-binding notice", async ({ page }) => {
   await expect(page).toHaveURL(/\/regulamin\/$/);
 });
 
-test("newsletter consent links to privacy and newsletter terms", async ({
+test("newsletter notice links to privacy and newsletter terms", async ({
   page,
 }) => {
   await page.goto("/");
-  const consent = page.locator(".ao-checkbox");
+  const notice = page.locator("#newsletter .ao-form-note");
   await expect(
-    consent.getByRole("link", { name: "Polityka prywatności" }),
+    notice.getByRole("link", { name: "Polityka prywatności" }),
   ).toHaveAttribute("href", "/polityka-prywatnosci/");
   await expect(
-    consent.getByRole("link", { name: "regulamin newslettera" }),
+    notice.getByRole("link", { name: "Regulamin newslettera" }),
   ).toHaveAttribute("href", "/regulamin-newslettera/");
 });
 
