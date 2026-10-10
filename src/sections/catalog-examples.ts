@@ -218,8 +218,7 @@ const pl: CatalogCopy = {
       },
       {
         question: "Czy formularz coś wysyła?",
-        answer:
-          "Tak. Po sprawdzeniu pól wysyła zgłoszenie do obsługi formularzy.",
+        answer: "Nie. Sprawdza pola w przeglądarce i nic nie przesyła.",
       },
     ],
   },
@@ -252,7 +251,7 @@ const pl: CatalogCopy = {
   form: {
     eyebrow: "Kontakt demonstracyjny",
     title: "Co chcesz zmienić?",
-    lead: "Formularz katalogu wysyła zgłoszenie kontaktowe do obsługi formularzy.",
+    lead: "Ten sam formularz co na stronach. W katalogu nic nie jest wysyłane.",
     formKey: "contact",
     version: "2.3",
     submit: "Wyślij wiadomość",
@@ -539,8 +538,7 @@ const en: CatalogCopy = {
       },
       {
         question: "Does the form send anything?",
-        answer:
-          "Yes. After checking the fields it sends the request to form handling.",
+        answer: "No. It checks fields in the browser and does not submit.",
       },
     ],
   },
@@ -570,7 +568,7 @@ const en: CatalogCopy = {
   form: {
     eyebrow: "Demonstration contact",
     title: "What would you like to change?",
-    lead: "The catalog form sends a contact request to form handling.",
+    lead: "The same form as on the pages. Nothing is sent from the catalog.",
     formKey: "contact",
     version: "2.3",
     submit: "Send message",

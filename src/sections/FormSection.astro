@@ -13,6 +13,7 @@ export interface Props {
   content: FormCopy;
   id?: string;
   idPrefix?: string;
+  demo?: boolean;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   content,
   id = "contact",
   idPrefix = "",
+  demo = false,
 } = Astro.props as Props;
 ---
 
@@ -37,5 +39,6 @@ const {
     lang={lang}
     idPrefix={idPrefix}
     layout="stacked"
+    demo={demo}
   />
 </Section>

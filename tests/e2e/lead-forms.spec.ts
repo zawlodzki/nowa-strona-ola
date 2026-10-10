@@ -249,3 +249,43 @@ test("withdrawal form sends the statement and shows a receipt", async ({
     consents: [],
   });
 });
+
+for (const { path, form, fill, submit } of [
+  {
+    path: "/ui/",
+    form: "#section-form form",
+    fill: { Imię: "Ola", "E-mail": "ola@example.com" },
+    submit: "Wyślij wiadomość",
+  },
+  {
+    path: "/design-system/",
+    form: "#newsletter form",
+    fill: { "Twój adres e-mail": "ola@example.com" },
+    submit: "Zapisuję się",
+  },
+]) {
+  test(`catalog form on ${path} validates and sends nothing`, async ({
+    page,
+    leadWebhook,
+  }) => {
+    const captured = await leadWebhook.mock(page, []);
+    await page.goto(path);
+    const locator = page.locator(form);
+    await expect(locator.locator(".ao-form-note").last()).toHaveText(
+      "Przykład z katalogu: formularz sprawdza pola i niczego nie wysyła.",
+    );
+    const button = locator.getByRole("button", { name: submit });
+    await button.click();
+    await expect(
+      locator.locator('[aria-invalid="true"]').first(),
+    ).toBeFocused();
+    for (const [label, value] of Object.entries(fill)) {
+      await locator.getByLabel(label, { exact: true }).fill(value);
+    }
+    await button.click();
+    await expect(locator.getByRole("status")).toHaveText(
+      "Dane poprawne. Nic nie wysłano.",
+    );
+    expect(captured).toEqual([]);
+  });
+}

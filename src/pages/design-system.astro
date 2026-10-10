@@ -291,12 +291,13 @@ const colors = [
     <Newsletter
       id="newsletter"
       title="Mniej szumu. Więcej wiedzy."
-      description="Wspólny układ newslettera z tym samym formularzem co na stronach. Wysłanie zapisuje adres na newsletter."
+      description="Wspólny układ newslettera z tym samym formularzem co na stronach. W katalogu formularz niczego nie wysyła."
     >
       <LeadForm
         slot="form"
         lang="pl"
         idPrefix="ds-"
+        demo
         content={toFormCopy({
           title: "Newsletter",
           lead: "Przykład",
