@@ -12,7 +12,6 @@ const pl: CatalogCopy = {
     hero: "Hero",
     text: "Tekst",
     "text-image": "Tekst i obraz",
-    logos: "Logotypy",
     cards: "Karty",
     list: "Lista",
     process: "Proces",
@@ -77,12 +76,6 @@ const pl: CatalogCopy = {
       caption: "Kadr zastępczy. Docelowe zdjęcia wejdą z CMS.",
     },
     mediaPosition: "end",
-  },
-  logos: {
-    title: "Zaufanie bez udawania nawigacji",
-    lead: "Pasek logotypów jest podpisany i statyczny. Pętli nie ma, żeby treść nie wymagała pauzy.",
-    names: ["Northwind", "Contoso", "Fabrikam", "Litware", "Adventure Works"],
-    items: [],
   },
   cards: {
     variant: "media",
@@ -334,7 +327,6 @@ const en: CatalogCopy = {
     hero: "Hero",
     text: "Text",
     "text-image": "Text and image",
-    logos: "Logos",
     cards: "Cards",
     list: "List",
     process: "Process",
@@ -400,12 +392,6 @@ const en: CatalogCopy = {
         "Placeholder frame. Production photographs will come from the CMS.",
     },
     mediaPosition: "end",
-  },
-  logos: {
-    title: "Trust, not a second navigation",
-    lead: "The logo strip is labelled and static. There is no loop, so nothing needs a pause control.",
-    names: ["Northwind", "Contoso", "Fabrikam", "Litware", "Adventure Works"],
-    items: [],
   },
   cards: {
     variant: "media",

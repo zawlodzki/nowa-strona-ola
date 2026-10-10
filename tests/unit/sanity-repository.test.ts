@@ -143,7 +143,7 @@ describe("demonstration templates", () => {
 
     expect(home.sections?.map((section) => section?._type)).toEqual([
       "heroSection",
-      "logosSection",
+      "audienceSection",
       "metricsSection",
       "textImageSection",
       "ebooksSection",

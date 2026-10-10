@@ -123,16 +123,13 @@ for (const width of [320, 390, 1440]) {
       const style = getComputedStyle(img);
       const lead = document.querySelector(".home3a .ao-hero .ao-lead");
       const leadStyle = lead ? getComputedStyle(lead) : null;
-      const logo = document.querySelector(".home3a-partners img");
-      const logoStyle = logo ? getComputedStyle(logo) : null;
       return {
         fit: style.objectFit,
         position: style.objectPosition,
         height: Math.round(img.getBoundingClientRect().height),
         leadSize: leadStyle?.fontSize ?? "",
         leadLine: leadStyle ? parseFloat(leadStyle.lineHeight) : 0,
-        logoFilter: logoStyle?.filter ?? "",
-        logoHeight: logo ? Math.round(logo.getBoundingClientRect().height) : 0,
+        partnerLogos: document.querySelectorAll(".home3a-partners img").length,
       };
     });
     expect(heroBox.fit).toBe("contain");
@@ -141,7 +138,6 @@ for (const width of [320, 390, 1440]) {
       expect(heroBox.height).toBe(550);
       expect(heroBox.leadSize).toBe("18px");
       expect(heroBox.leadLine).toBe(27);
-      expect(heroBox.logoHeight).toBe(43);
     }
     if (width === 390 || width === 320) {
       expect(heroBox.leadSize).toBe("16px");
@@ -149,9 +145,8 @@ for (const width of [320, 390, 1440]) {
     }
     if (width === 390) {
       expect(heroBox.height).toBe(410);
-      expect(heroBox.logoHeight).toBe(32);
     }
-    expect(heroBox.logoFilter).toContain("grayscale");
+    expect(heroBox.partnerLogos).toBe(0);
     const metric = await page
       .locator(".home3a-count strong")
       .evaluate((element) => {

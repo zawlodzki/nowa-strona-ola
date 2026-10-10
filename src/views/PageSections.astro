@@ -11,7 +11,6 @@ import {
   toFormCopy,
   toHero,
   toList,
-  toLogos,
   toMediaSection,
   toMetrics,
   toPricing,
@@ -32,7 +31,6 @@ import FaqSection from "@/sections/FaqSection.astro";
 import FormSection from "@/sections/FormSection.astro";
 import HeroSection from "@/sections/HeroSection.astro";
 import ListSection from "@/sections/ListSection.astro";
-import LogosSection from "@/sections/LogosSection.astro";
 import MediaSection from "@/sections/MediaSection.astro";
 import MetricsSection from "@/sections/MetricsSection.astro";
 import PricingSection from "@/sections/PricingSection.astro";
@@ -90,14 +88,6 @@ let formCount = 0;
         <TextImageSection id={id} labelledby={labelledby} content={content} />
       );
     }
-    case "logosSection":
-      return (
-        <LogosSection
-          id={id}
-          labelledby={labelledby}
-          content={toLogos(section)}
-        />
-      );
     case "cardsSection": {
       const content = toCards(section);
       if (isTextCards(content)) {
@@ -230,6 +220,7 @@ let formCount = 0;
           content={toRelated(section, lang)}
         />
       );
+    case "audienceSection":
     case "ebooksSection":
     case "serviceOfferSection":
     case "credentialsSection":

@@ -42,7 +42,7 @@ ani dokumentacji w deklarację wykonania. Nie kopiować sekretów i danych zgło
 | Wskaźnik                | Wartość 450, przyrostek +, opis „kobiet rocznie, którym pomagają moje konsultacje”                                                                 | Bezpośrednia informacja 06.10.2026; nie zmieniać na sumę historyczną                                                                                                                                                                             |
 | Opinie                  | Sześć pełnych cytatów z `/Users/grzesiek/Github/ola-homepage/data/testimonials.js`                                                                 | Prawdziwość potwierdzona przez użytkownika 06.10.2026                                                                                                                                                                                            |
 | Podpis opinii           | „Opinia o dotychczasowej współpracy”; bez imion                                                                                                    | Obecna implementacja; nie przypisywać wyników do jednej konsultacji                                                                                                                                                                              |
-| Marki                   | Belka widoczna: ALAB laboratoria, UNS, NORSAN, Norsa Pharma, OMNi-BiOTiC                                                                           | Przywrócenie na polecenie użytkownika 06.10.2026                                                                                                                                                                                                 |
+| Z kim pracuję           | Sekcja `audienceSection` po hero: nagłówek, lead i 4 karty (PCOS, insulinooporność, „Szczupła, a jednak PCOS”, perimenopauza)                      | Decyzja użytkownika 09.10.2026 („Opcja 4”): pas logotypów zlikwidowany na stronie i w CMS. Copy jest szkicem do akceptacji Oli.                                                                                                                  |
 | Social media            | Instagram, Facebook, TikTok; kanoniczne URL profili                                                                                                | Decyzja użytkownika 08.10.2026: `https://www.instagram.com/aleksandra_olesiewicz`, `https://www.facebook.com/dietetykolesiewicz/`, `https://www.tiktok.com/@aleksandra_olesiewicz`. Ustalenie 06.10.2026 (widoczność trzech platform) pozostaje. |
 | Copy                    | Nowe copy 3a zachowane                                                                                                                             | Zlecona aktualizacja; bieżąca treść poniżej                                                                                                                                                                                                      |
 
@@ -57,7 +57,7 @@ Istniejący model strony: `page`, `language = pl`, `slug.current = home`.
 Daje publiczny adres `/`. Nie tworzyć drugiej polskiej strony głównej.
 EN wymaga osobnego dokumentu i rzeczywistego tłumaczenia; brak fallbacku PL.
 
-Kolejność: **hero → marki → podejście z liczbą → O mnie → e-booki →
+Kolejność: **hero → z kim pracuję → podejście z liczbą → O mnie → e-booki →
 konsultacje → opinie → newsletter**. Nawigacja i stopka należą do ustawień
 wspólnych. Sekcji podejścia nie rozbijać wizualnie na odległe bloki tylko po to,
 by dopasować ją do obecnego schematu.
@@ -111,17 +111,17 @@ Sprawdzone lokalnie w [schematach sekcji](../studio/schema-types/blocks/page-sec
 [GROQ](../src/sanity/queries.ts) i [mapowaniu treści](../src/content/map-sections.ts).
 Poniższa tabela rozróżnia istniejące pola od wymagań do wdrożenia.
 
-| Miejsce 3a       | Istniejący model / pola                                                              | Co wymaga pracy przed odwzorowaniem 3a                                                                                                                                                   |
-| ---------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Hero             | `heroSection`: `title`, `lead`, `primary`, `secondary`, `media`, wariant `split`     | `eyebrow` jest wymagany także w mapperze, a 3a nie ma nadtytułu. Nie dodawać sztucznego tekstu; dostosować schema/typy/renderer.                                                         |
-| Marki            | `logosSection.names`                                                                 | Teraz tylko nazwy, bez grafik. Dodać media i kontrolowany wariant belki. Nie wymyślać leadu, który obecnie jest wymagany.                                                                |
-| Podejście + 450+ | `metricsSection.items[].value/suffix/label`; `cardsSection`                          | Liczby wymagają min. 2 pozycji, obecna kompozycja jednej liczby z trzema opisami nie istnieje. Rozszerzyć kontrolowany wariant lub dedykowany typ, bez drugiej fikcyjnej statystyki.     |
-| O mnie           | `textImageSection`: `title`, `body`, `media`, `mediaPosition`                        | Brak osobnego wyróżnionego leadu i CTA oraz drugiego zdjęcia posiłku. Zaplanować wariant zachowujący układ 3a.                                                                           |
-| E-booki          | `cardsSection` ma tytuł, opis, adres i medium karty                                  | Nie ma dokumentu produktu, ceny, kategorii ani grupowanej karuzeli. Dodać model produktu i sekcję z referencjami.                                                                        |
-| Konsultacje      | `service` ma `title`, `summary`, `slug`; `textImageSection` częściowo opisuje wygląd | Brak pełnego wariantu z faktami i CTA do konsultacji oraz pól `service.price`, `currency`, `durationMinutes` i `bookingUrl`. Nie wkładać treści poza limit `service.summary` 240 znaków. |
-| Opinie           | `testimonialsSection.items` referencje do `testimonial`                              | Cytaty mieszczą się w limicie 320; model i mapper wymagają `name` oraz `role`. Obsłużyć anonimowy podpis, bez fikcyjnego imienia. Obecny renderer nie odpowiada karuzeli 3a.             |
-| Newsletter       | `formSection` + referencja `form`                                                    | Nadtytuł wymagany; 3a nie ma nadtytułu. Docelowo formularz tylko z e-mailem i zgodą: sprawdzić mapper, który obecnie oczekuje także pola imienia. Integracja pozostaje etapem 6.         |
-| Kotwice          | `PageSections.astro` generuje identyfikatory sekcji                                  | Dopasować kontrolowane identyfikatory do nawigacji 3a; nie wstawiać niedziałających kotwic.                                                                                              |
+| Miejsce 3a       | Istniejący model / pola                                                                                      | Co wymaga pracy przed odwzorowaniem 3a                                                                                                                                                   |
+| ---------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hero             | `heroSection`: `title`, `lead`, `primary`, `secondary`, `media`, wariant `split`                             | `eyebrow` jest wymagany także w mapperze, a 3a nie ma nadtytułu. Nie dodawać sztucznego tekstu; dostosować schema/typy/renderer.                                                         |
+| Z kim pracuję    | `audienceSection`: `title`, `lead`, `items[]` (4–6: `title`, `body`, opcjonalna `icon` = `arrow` \| `check`) | Wdrożone 09.10.2026. Ikony tylko z zestawu SVG serwisu; bez zdjęć i logotypów.                                                                                                           |
+| Podejście + 450+ | `metricsSection.items[].value/suffix/label`; `cardsSection`                                                  | Liczby wymagają min. 2 pozycji, obecna kompozycja jednej liczby z trzema opisami nie istnieje. Rozszerzyć kontrolowany wariant lub dedykowany typ, bez drugiej fikcyjnej statystyki.     |
+| O mnie           | `textImageSection`: `title`, `body`, `media`, `mediaPosition`                                                | Brak osobnego wyróżnionego leadu i CTA oraz drugiego zdjęcia posiłku. Zaplanować wariant zachowujący układ 3a.                                                                           |
+| E-booki          | `cardsSection` ma tytuł, opis, adres i medium karty                                                          | Nie ma dokumentu produktu, ceny, kategorii ani grupowanej karuzeli. Dodać model produktu i sekcję z referencjami.                                                                        |
+| Konsultacje      | `service` ma `title`, `summary`, `slug`; `textImageSection` częściowo opisuje wygląd                         | Brak pełnego wariantu z faktami i CTA do konsultacji oraz pól `service.price`, `currency`, `durationMinutes` i `bookingUrl`. Nie wkładać treści poza limit `service.summary` 240 znaków. |
+| Opinie           | `testimonialsSection.items` referencje do `testimonial`                                                      | Cytaty mieszczą się w limicie 320; model i mapper wymagają `name` oraz `role`. Obsłużyć anonimowy podpis, bez fikcyjnego imienia. Obecny renderer nie odpowiada karuzeli 3a.             |
+| Newsletter       | `formSection` + referencja `form`                                                                            | Nadtytuł wymagany; 3a nie ma nadtytułu. Docelowo formularz tylko z e-mailem i zgodą: sprawdzić mapper, który obecnie oczekuje także pola imienia. Integracja pozostaje etapem 6.         |
+| Kotwice          | `PageSections.astro` generuje identyfikatory sekcji                                                          | Dopasować kontrolowane identyfikatory do nawigacji 3a; nie wstawiać niedziałających kotwic.                                                                                              |
 
 Przy zmianie typu sekcji obowiązuje schema + renderer HTML + serializer
 Markdown + przykład, spójne GROQ/TypeGen/TypeScript i blokada nieznanego typu.
@@ -169,9 +169,16 @@ CTA oraz media opisano osobno pod zestawieniem.
 
 Jestem Ola, dietetyczka kliniczna. Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Przygotowuję też e-booki o PCOS i perimenopauzie.
 
-### marki
+### z-kim-pracuje
 
-Współpracuję z markami, które znasz
+**Z kim pracuję** (szkic do akceptacji Oli, 09.10.2026)
+
+Pracuję z kobietami, które chcą spokojnie uporządkować odżywianie i dopasować je do swojej codzienności.
+
+- **PCOS** — Gdy chcesz zrozumieć, jak jedzenie może wspierać Twoją codzienność z PCOS, i wybrać pierwszy krok, który ma sens dla Ciebie.
+- **Insulinooporność** — Gdy po diagnozie masz wiele pytań i chcesz ułożyć posiłki tak, by pasowały do Twojego dnia, bez listy zakazów.
+- **Szczupła, a jednak PCOS** — Gdy Twoim celem nie jest odchudzanie, a chcesz jeść regularnie, sycąco i lepiej poznać potrzeby swojego ciała.
+- **Perimenopauza** — Gdy zauważasz zmiany w ciele i codziennych nawykach i chcesz przyjrzeć się im spokojnie, krok po kroku.
 
 ### dlaczego-ja
 
@@ -311,9 +318,8 @@ Media do zaimportowania z zaakceptowanych lokalnych plików:
 [Konsultacje](../src/assets/portraits/contact.webp),
 [Posiłek](../src/assets/editorial/food-editorial.webp)
 (ten sam plik co [makieta](../mockups/homepage/assets/food-editorial.webp)).
-Logotypy i ich źródła: [README makiet](../mockups/homepage/README.md#materiały).
 Produkcja (07.10.2026): te pliki są fallbackiem i seedem kluczy `hero|about|contact|food`
-oraz logotypów, gdy `mediaObject.image` w CMS jest puste. Renderer idzie przez
+gdy `mediaObject.image` w CMS jest puste. Logotypy marek usunięto 09.10.2026. Renderer idzie przez
 pipeline Astro (`SiteImage`), nie przez surowy `?url`. Skan dyplomu nadal nie jest
 w repo — kadr na „O mnie” zostaje miejscem do uzupełnienia, bez fikcyjnego dokumentu.
 Okładki e-booków są dziś kompozycją HTML/CSS; nie istnieją jako sześć gotowych

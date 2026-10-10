@@ -7,7 +7,7 @@ import { catalogSectionIds } from "../../src/sections/types";
 
 describe("catalog sections", () => {
   it("lists every planned section in both languages", () => {
-    expect(catalogSectionIds).toHaveLength(18);
+    expect(catalogSectionIds).toHaveLength(17);
     for (const lang of ["pl", "en"] as const) {
       const copy = catalogCopy(lang);
       const toc = catalogToc(lang);

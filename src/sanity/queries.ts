@@ -58,14 +58,14 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
     resolutionTitle,
     caption
   },
-  _type == "logosSection" => {
+  _type == "audienceSection" => {
     title,
     lead,
-    names,
     items[]{
       _key,
-      name,
-      "media": media${mediaFields}
+      title,
+      body,
+      icon
     }
   },
   _type == "cardsSection" => {

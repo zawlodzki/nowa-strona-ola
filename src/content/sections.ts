@@ -2,7 +2,7 @@ export const knownSectionTypes = [
   "heroSection",
   "textSection",
   "textImageSection",
-  "logosSection",
+  "audienceSection",
   "cardsSection",
   "listSection",
   "processSection",

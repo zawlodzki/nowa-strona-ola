@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "@ola/shared";
 
+import ArrowIcon from "@/design-system/components/ArrowIcon.astro";
 import BookCover from "@/design-system/components/BookCover.astro";
 import Button from "@/design-system/components/Button.astro";
 import Carousel from "@/design-system/components/Carousel.astro";
@@ -23,22 +24,12 @@ import CheckMark from "@/design-system/decorations/CheckMark.astro";
 import CoverStage from "@/design-system/decorations/CoverStage.astro";
 import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
 import { currencyLabel, topicLabel } from "@/lib/offer";
-import { pickSiteImage } from "@/lib/site-images";
 import type { HomepageView } from "@/content/map-homepage";
-import type { LogoItem } from "@/sections/types";
 
 export interface Props {
   lang: Locale;
   content: HomepageView;
 }
-
-const partnerLogoSize: Record<string, { width: number; height: number }> = {
-  alab: { width: 156, height: 60 },
-  uns: { width: 170, height: 39 },
-  norsan: { width: 171, height: 37 },
-  norsa: { width: 500, height: 53 },
-  omni: { width: 280, height: 200 },
-};
 
 const { lang, content } = Astro.props;
 const metric = content.approach.items[0];
@@ -113,39 +104,30 @@ function coverLabels(kind: CoverArtKind): string[] {
   </Hero>
 
   <Section
+    id="z-kim-pracuje"
     spacing="compact"
-    class="home3a-partners"
-    aria-label={content.partners.title}
+    class="home3a-audience"
+    aria-labelledby="audience-title"
   >
     <Container>
-      <p>{content.partners.title}</p>
-      <ul>
-        {(content.partners.items.length > 0
-          ? content.partners.items
-          : content.partners.names.map((name): LogoItem => ({ name }))
-        ).map((item) => {
-          const logo = pickSiteImage(item.media?.src);
-          const size = partnerLogoSize[item.media?.src ?? ""] ?? {
-            width: 156,
-            height: 60,
-          };
-          return (
-            <li>
-              {logo ? (
-                <SiteImage
-                  src={item.media?.src}
-                  alt={item.name}
-                  width={size.width}
-                  height={size.height}
-                  fit="contain"
-                  loading="lazy"
-                />
-              ) : (
-                item.name
-              )}
-            </li>
-          );
-        })}
+      <div class="home3a-audience__head">
+        <Heading id="audience-title">{content.audience.title}</Heading>
+        {content.audience.lead && (
+          <p class="ao-lead">{content.audience.lead}</p>
+        )}
+      </div>
+      <ul class="home3a-audience__list">
+        {content.audience.items.map((item) => (
+          <li>
+            {item.icon && (
+              <span class="home3a-audience__icon" aria-hidden="true">
+                {item.icon === "check" ? <CheckMark /> : <ArrowIcon />}
+              </span>
+            )}
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </li>
+        ))}
       </ul>
     </Container>
   </Section>
@@ -418,52 +400,83 @@ function coverLabels(kind: CoverArtKind): string[] {
     object-fit: contain;
     object-position: center bottom;
   }
-  .home3a-partners {
-    padding-block: var(--ao-space-32) var(--ao-space-64);
+  .home3a-audience {
+    padding-block-start: var(--ao-space-32);
   }
-  .home3a-partners p {
-    text-align: center;
-    font-size: 0.8125rem;
-    color: var(--ao-muted);
-    margin-block-end: var(--ao-space-32);
+  .home3a-audience__head {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--ao-space-24) 80px;
+    align-items: end;
+    margin-block-end: var(--ao-space-40);
   }
-  .home3a-partners ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    gap: 36px;
+  .home3a-audience__head :global(.ao-heading) {
+    font-size: 3.5rem;
+  }
+  .home3a-audience__head .ao-lead {
+    max-inline-size: 52ch;
     margin: 0;
-    padding-block: 28px;
-    padding-inline: 0;
+  }
+  .home3a-audience__list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    margin: 0;
+    padding: 0;
     list-style: none;
-    border-block: 1px solid var(--ao-line);
+    counter-reset: audience;
   }
-  .home3a-partners :global(img) {
-    inline-size: auto;
-    max-inline-size: 160px;
-    block-size: 43px;
-    object-fit: contain;
-    filter: grayscale(1);
-    opacity: 0.78;
-    mix-blend-mode: multiply;
+  .home3a-audience__list:has(> li:nth-child(5)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .home3a-partners li:nth-child(2) :global(img) {
+  .home3a-audience__list li {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 28px;
+    border: 1px solid var(--ao-line);
+    border-radius: 24px;
+    counter-increment: audience;
+  }
+  .home3a-audience__list li:nth-child(odd) {
+    background: var(--ao-surface);
+    border-color: transparent;
+  }
+  .home3a-audience__list li::after {
+    content: counter(audience, decimal-leading-zero);
+    content: counter(audience, decimal-leading-zero) / "";
+    position: absolute;
+    inset-block-start: 28px;
+    inset-inline-end: 28px;
+    color: var(--ao-primary);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .home3a-audience__icon {
+    display: grid;
+    place-items: center;
+    inline-size: 40px;
     block-size: 40px;
-    inline-size: 82px;
+    margin-block-end: 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ao-accent) 14%, var(--ao-background));
+    color: var(--ao-accent);
   }
-  .home3a-partners li:nth-child(4) :global(img) {
-    block-size: 35px;
+  .home3a-audience__icon :global(svg) {
+    inline-size: 20px;
+    block-size: 20px;
   }
-  :global([data-theme="dark"]) .home3a-partners :global(img) {
-    filter: grayscale(1) invert(1);
-    mix-blend-mode: screen;
+  .home3a-audience__list h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
   }
-  @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme="light"])) .home3a-partners :global(img) {
-      filter: grayscale(1) invert(1);
-      mix-blend-mode: screen;
-    }
+  .home3a-audience__list p {
+    margin: 0;
+    color: var(--ao-muted);
+    font-size: 0.875rem;
   }
   .home3a-why {
     display: grid;
@@ -655,7 +668,15 @@ function coverLabels(kind: CoverArtKind): string[] {
       grid-template-columns: minmax(0, 1fr);
       gap: var(--ao-space-40);
     }
+    .home3a-audience__head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .home3a-audience__list,
+    .home3a-audience__list:has(> li:nth-child(5)) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     .home3a-why :global(.ao-heading),
+    .home3a-audience__head :global(.ao-heading),
     .home3a-about :global(.ao-heading) {
       font-size: clamp(2.25rem, 8vw, 3.25rem);
     }
@@ -671,10 +692,6 @@ function coverLabels(kind: CoverArtKind): string[] {
     }
     .home3a-portrait {
       block-size: 450px;
-    }
-    .home3a-partners :global(img) {
-      max-inline-size: 130px;
-      block-size: 32px;
     }
     .home3a-about__media :global(img:not(.home3a-about__food)) {
       block-size: 440px;
@@ -704,6 +721,12 @@ function coverLabels(kind: CoverArtKind): string[] {
     }
     .home3a :global(#konsultacje-panel img) {
       block-size: 280px;
+    }
+  }
+  @container page3a (max-width: 559px) {
+    .home3a-audience__list,
+    .home3a-audience__list:has(> li:nth-child(5)) {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
   @container page3a (max-width: 374px) {

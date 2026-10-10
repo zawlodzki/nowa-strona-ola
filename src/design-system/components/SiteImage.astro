@@ -7,11 +7,6 @@ import contactPortrait from "@/assets/portraits/contact.webp";
 import diplomaPhoto from "@/assets/portraits/diploma.jpg";
 import foodEditorial from "@/assets/editorial/food-editorial.webp";
 import heroPortrait from "@/assets/portraits/hero.webp";
-import norsanLogo from "@/assets/partners/norsan.png";
-import norsaLogo from "@/assets/partners/norsa.png";
-import omniLogo from "@/assets/partners/omni.png";
-import unsLogo from "@/assets/partners/uns.png";
-import alabLogo from "@/assets/partners/alab.svg?url";
 import {
   imageCropPosition,
   pickSiteImage,
@@ -38,10 +33,6 @@ const rasters: Record<SiteRasterKey, ImageMetadata> = {
   contact: contactPortrait,
   diploma: diplomaPhoto,
   food: foodEditorial,
-  uns: unsLogo,
-  norsan: norsanLogo,
-  norsa: norsaLogo,
-  omni: omniLogo,
 };
 
 const {
@@ -66,18 +57,6 @@ const picked = pickSiteImage(src, fallback);
 const eager = loading === "eager" || fetchpriority === "high";
 ---
 
-{picked?.type === "svg" && (
-  <img
-    src={alabLogo}
-    alt={alt}
-    width={width}
-    height={height}
-    class={className}
-    style={imageStyle}
-    loading={eager ? "eager" : "lazy"}
-    decoding={decoding}
-  />
-)}
 {picked?.type === "local" && (
   <Image
     src={rasters[picked.key]}

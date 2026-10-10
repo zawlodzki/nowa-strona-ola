@@ -19,7 +19,7 @@ describe("homepage 3a fixtures", () => {
     const page = await getPage("pl", "home", { environment: {} });
     expect(page.sections?.map((section) => section?._type)).toEqual([
       "heroSection",
-      "logosSection",
+      "audienceSection",
       "metricsSection",
       "textImageSection",
       "ebooksSection",
@@ -29,6 +29,16 @@ describe("homepage 3a fixtures", () => {
     ]);
     const view = mapHomepage(page, "pl");
     expect(view.hero.title).toContain("Zrozum swoje ciało");
+    expect(view.audience.title).toBe("Z kim pracuję");
+    expect(view.audience.items.map((item) => item.title)).toEqual([
+      "PCOS",
+      "Insulinooporność",
+      "Szczupła, a jednak PCOS",
+      "Perimenopauza",
+    ]);
+    expect(view.audience.items.every((item) => item.icon === "arrow")).toBe(
+      true,
+    );
     expect(view.approach.items[0]?.value).toBe(450);
     expect(view.ebooks.items).toHaveLength(6);
     expect(view.ebooks.items.every((item) => item.priceGross === 97)).toBe(
@@ -62,6 +72,13 @@ describe("homepage 3a fixtures", () => {
     const view = mapHomepage(page, "en");
     expect(view.hero.title).toContain("Understand your body");
     expect(view.hero.lead).not.toMatch(/Jestem Ola/);
+    expect(view.audience.title).toBe("Who I work with");
+    expect(view.audience.items.map((item) => item.title)).toEqual([
+      "PCOS",
+      "Insulin resistance",
+      "Slim, and still PCOS",
+      "Perimenopause",
+    ]);
     expect(view.newsletter.submit).toBe("I want the newsletter");
   });
 });
@@ -75,6 +92,16 @@ describe("section serializers", () => {
     expect(markdown).toContain("/ebooki/suplementy-w-pcos/");
     expect(markdown).toContain("Opinia o dotychczasowej współpracy");
     expect(markdown).toContain("Zarezerwuj konsultację");
+    expect(markdown).toContain("## Z kim pracuję");
+    expect(markdown).toContain("### Szczupła, a jednak PCOS");
+  });
+
+  it("drops the retired logo strip from known sections", () => {
+    expect(knownSectionTypes).toContain("audienceSection");
+    expect(knownSectionTypes).not.toContain("logosSection" as never);
+    expect(() =>
+      assertKnownSections([{ _key: "home-logos", _type: "logosSection" }]),
+    ).toThrow("Nieznany typ sekcji");
   });
 
   it("fails the build for an unknown section type", () => {

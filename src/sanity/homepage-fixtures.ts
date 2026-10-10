@@ -12,7 +12,6 @@ import {
   homepageHeaderCta,
   homepageMediaKeys,
   homepageNavigation,
-  PARTNER_LOGOS,
   TESTIMONIAL_QUOTES_EN,
   TESTIMONIAL_QUOTES_PL,
 } from "@/content/homepage-seed";
@@ -214,15 +213,15 @@ export function homepageSections(language: Locale) {
       ),
     },
     {
-      _key: "home-logos",
-      _type: "logosSection",
-      title: copy.partnersTitle,
-      lead: null,
-      names: PARTNER_LOGOS.map((item) => item.name),
-      items: PARTNER_LOGOS.map((item) => ({
+      _key: "home-audience",
+      _type: "audienceSection",
+      title: copy.audienceTitle,
+      lead: copy.audienceLead,
+      items: copy.audienceItems.map((item) => ({
         _key: item.key,
-        name: item.name,
-        media: media(item.key, item.name, "diagram"),
+        title: item.title,
+        body: item.body,
+        icon: item.icon,
       })),
     },
     {

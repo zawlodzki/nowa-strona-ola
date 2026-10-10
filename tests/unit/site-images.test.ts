@@ -11,8 +11,10 @@ describe("pickSiteImage", () => {
     });
   });
 
-  it("keeps partner SVGs out of the raster pipeline", () => {
-    expect(pickSiteImage("alab")).toEqual({ type: "svg", key: "alab" });
+  it("no longer resolves the removed partner logo keys", () => {
+    for (const key of ["alab", "uns", "norsan", "norsa", "omni"]) {
+      expect(pickSiteImage(key)).toBeUndefined();
+    }
   });
 
   it("passes CMS and root URLs through as remote sources", () => {

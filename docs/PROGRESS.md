@@ -1,10 +1,27 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-09 (sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### „Z kim pracuję” zamiast pasa logotypów, 09.10.2026
+
+Na polecenie użytkownika („Opcja 4”) usunięto pas logotypów marek ze strony
+głównej PL/EN, ze schematu Sanity (`logosSection`), katalogu sekcji, fixture,
+planu Content Lake, mockupu 3a i testów. Usunięto pliki `src/assets/partners/*`
+(do odzyskania z historii git). W tym samym miejscu, po hero, jest nowa sekcja
+`audienceSection` edytowalna w Studio: nagłówek, opcjonalny lead, 4–6 kart
+z opcjonalną ikoną SVG (`arrow`/`check`). Copy PL/EN to szkic do akceptacji Oli
+([copy](HOMEPAGE-COPY-3A.md)).
+
+Zmiana w Content Lake jest celowanym skryptem `npm run import:audience`
+(domyślnie dry run): podmiana `home-logos` → `home-audience` w
+`page-home-pl/en` w jednej transakcji z `ifRevisionID`, kopia zapasowa przed
+zapisem. Dokumentów i assetów logotypów do usunięcia nie ma (logotypy były
+lokalnymi plikami). Zapis i merge muszą iść razem: kod bez `logosSection`
+zatrzyma build na dzisiejszym Content Lake, a obecny main na danych po zapisie.
 
 ### Zmiana zdjęcia „O mnie”, 09.10.2026
 

@@ -126,14 +126,6 @@ export const EBOOK_SEED = [
   },
 ] as const;
 
-export const PARTNER_LOGOS = [
-  { key: "alab", name: "ALAB laboratoria" },
-  { key: "uns", name: "UNS" },
-  { key: "norsan", name: "NORSAN" },
-  { key: "norsa", name: "Norsa Pharma" },
-  { key: "omni", name: "OMNi-BiOTiC" },
-] as const;
-
 export function homepageNavigation(language: Locale) {
   return [
     {
@@ -215,7 +207,35 @@ export const homepageCopy = {
       "Jestem Ola, dietetyczka kliniczna. Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Przygotowuję też e-booki o PCOS i perimenopauzie.",
     heroPrimary: "Poznaj e-booki",
     heroSecondary: "Poznaj konsultacje",
-    partnersTitle: "Współpracuję z markami, które znasz",
+    audienceTitle: "Z kim pracuję",
+    audienceLead:
+      "Pracuję z kobietami, które chcą spokojnie uporządkować odżywianie i dopasować je do swojej codzienności.",
+    audienceItems: [
+      {
+        key: "audience-pcos",
+        title: "PCOS",
+        body: "Gdy chcesz zrozumieć, jak jedzenie może wspierać Twoją codzienność z PCOS, i wybrać pierwszy krok, który ma sens dla Ciebie.",
+        icon: "arrow",
+      },
+      {
+        key: "audience-insulin",
+        title: "Insulinooporność",
+        body: "Gdy po diagnozie masz wiele pytań i chcesz ułożyć posiłki tak, by pasowały do Twojego dnia, bez listy zakazów.",
+        icon: "arrow",
+      },
+      {
+        key: "audience-lean-pcos",
+        title: "Szczupła, a jednak PCOS",
+        body: "Gdy Twoim celem nie jest odchudzanie, a chcesz jeść regularnie, sycąco i lepiej poznać potrzeby swojego ciała.",
+        icon: "arrow",
+      },
+      {
+        key: "audience-perimenopause",
+        title: "Perimenopauza",
+        body: "Gdy zauważasz zmiany w ciele i codziennych nawykach i chcesz przyjrzeć się im spokojnie, krok po kroku.",
+        icon: "arrow",
+      },
+    ],
     approachTitle: "Wiesz, od czego zacząć.\nRozumiesz, po co to robisz.",
     approachLead:
       "Po diagnozie łatwo pogubić się w radach o diecie, badaniach i suplementach. Pomogę Ci uporządkować informacje i przełożyć je na codzienne decyzje.",
@@ -288,7 +308,35 @@ export const homepageCopy = {
       "I am Ola, a clinical dietitian. I specialise in PCOS and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also prepare e-books on PCOS and perimenopause.",
     heroPrimary: "See the e-books",
     heroSecondary: "See consultations",
-    partnersTitle: "I work with brands you already know",
+    audienceTitle: "Who I work with",
+    audienceLead:
+      "I work with women who want to sort out their nutrition calmly and fit it into their everyday life.",
+    audienceItems: [
+      {
+        key: "audience-pcos",
+        title: "PCOS",
+        body: "When you want to understand how food can support your everyday life with PCOS, and choose a first step that makes sense for you.",
+        icon: "arrow",
+      },
+      {
+        key: "audience-insulin",
+        title: "Insulin resistance",
+        body: "When a diagnosis leaves you with many questions and you want meals that fit your day, without a list of bans.",
+        icon: "arrow",
+      },
+      {
+        key: "audience-lean-pcos",
+        title: "Slim, and still PCOS",
+        body: "When weight loss is not your goal and you want regular, satisfying meals and a better sense of what your body needs.",
+        icon: "arrow",
+      },
+      {
+        key: "audience-perimenopause",
+        title: "Perimenopause",
+        body: "When you notice changes in your body and daily habits and want to look at them calmly, step by step.",
+        icon: "arrow",
+      },
+    ],
     approachTitle: "You know where to start.\nYou understand why.",
     approachLead:
       "After a diagnosis it is easy to get lost in advice about diet, tests and supplements. I will help you order the information and turn it into everyday decisions.",

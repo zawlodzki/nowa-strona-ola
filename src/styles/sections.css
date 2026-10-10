@@ -93,21 +93,6 @@
   color: var(--wf-color-muted);
   font-size: 0.875rem;
 }
-.logo-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--wf-space-16) var(--wf-space-48);
-  padding: 0;
-  margin-block: var(--wf-space-32) 0;
-  margin-inline: 0;
-  list-style: none;
-}
-.logo-strip li {
-  font-size: 0.875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--wf-color-muted);
-}
 .cards-scroller {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
