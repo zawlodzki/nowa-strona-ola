@@ -24,9 +24,9 @@ describe("consultation 3a fixtures", () => {
     ]);
     const view = mapConsultation(page, "pl");
     expect(view.hero.title).toBe("Wiesz już dużo.\nUstal, co dalej.");
-    expect(view.hero.primary.href).toBe("https://cal.com");
-    expect(view.offer.action.href).toBe("https://cal.com");
-    expect(view.offer.bookingStatus).toBe("placeholder");
+    expect(view.hero.primary.href).toBe("https://cal.com/dietetyk/konsultacja");
+    expect(view.offer.action.href).toBe("https://cal.com/dietetyk/konsultacja");
+    expect(view.offer.bookingStatus).toBe("live");
     expect(view.offer.priceLabel).toBe("450 zł / 60 minut");
     expect(view.price).toEqual({
       name: "Konsultacja dietetyczna online",
@@ -107,7 +107,7 @@ describe("consultation serializers", () => {
     expect(markdown).toContain("- Co jeść przy PCOS?");
     expect(markdown).toContain("Co jest ważne teraz?");
     expect(markdown).toContain("Czy to jest pojedyncze spotkanie?");
-    expect(markdown).toContain("https://cal.com");
+    expect(markdown).toContain("(https://cal.com/dietetyk/konsultacja)");
   });
 
   it("fails on an unknown section type", () => {

@@ -106,8 +106,8 @@ export function serviceFixture(language: Locale) {
     price: 450,
     currency: "PLN",
     durationMinutes: 60,
-    bookingUrl: "https://cal.com",
-    bookingStatus: "placeholder",
+    bookingUrl: "https://cal.com/dietetyk/konsultacja",
+    bookingStatus: "live",
   };
 }
 
@@ -293,7 +293,7 @@ export function homepageSections(language: Locale) {
       facts: [...copy.consultationFacts],
       action: {
         label: copy.consultationAction,
-        href: "https://cal.com",
+        href: service.bookingUrl,
         emphasis: "default",
       },
       media: media(

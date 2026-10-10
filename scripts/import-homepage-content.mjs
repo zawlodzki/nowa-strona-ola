@@ -17,12 +17,6 @@ const compare = !process.argv.includes("--skip-compare");
 
 const GAPS = [
   {
-    id: "booking-url",
-    status: "open",
-    detail:
-      "Właściwy URL płatnej rezerwacji nieustalony; fixture używa tymczasowego https://cal.com.",
-  },
-  {
     id: "diploma-scan",
     status: "open",
     detail:
@@ -149,8 +143,8 @@ function documents() {
     price: 450,
     currency: "PLN",
     durationMinutes: 60,
-    bookingUrl: "https://cal.com",
-    bookingStatus: "placeholder",
+    bookingUrl: "https://cal.com/dietetyk/konsultacja",
+    bookingStatus: "live",
     translation: { _type: "reference", _ref: "service-consultation-en" },
   };
   const serviceEn = {

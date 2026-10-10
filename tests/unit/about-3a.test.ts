@@ -42,7 +42,9 @@ describe("about 3a fixtures", () => {
     expect(view.approach.note).toMatch(/Nie zastępuje/);
     expect(view.testimonials.items).toHaveLength(2);
     expect(view.materials.variant).toBe("links");
-    expect(view.consultation.action.href).toBe("https://cal.com");
+    expect(view.consultation.action.href).toBe(
+      "https://cal.com/dietetyk/konsultacja",
+    );
     expect(view.consultation.priceLabel).toBe("450 zł / 60 minut");
     expect(view.newsletter.fields.map((field) => field.name)).toEqual([
       "email",
@@ -73,7 +75,7 @@ describe("about serializers", () => {
       "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
     );
     expect(markdown).toContain("450+");
-    expect(markdown).toContain("https://cal.com");
+    expect(markdown).toContain("(https://cal.com/dietetyk/konsultacja)");
     expect(markdown).not.toMatch(/fikcyjny dyplom/i);
   });
 

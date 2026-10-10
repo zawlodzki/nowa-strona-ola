@@ -139,7 +139,7 @@ export const consultationCopy = {
       {
         question: "Jak zarezerwować termin?",
         answer:
-          "Docelowo wybierzesz i opłacisz termin w kalendarzu. Na razie przyciski prowadzą do ogólnej strony Cal.com; kalendarz płatnej konsultacji nie jest jeszcze podłączony.",
+          "Wybierz „Zarezerwuj konsultację”. Termin wybierzesz i opłacisz w kalendarzu Cal.com.",
       },
     ],
     navigation: [
@@ -298,7 +298,7 @@ export const consultationCopy = {
       {
         question: "How do I book a time?",
         answer:
-          "Eventually you will choose and pay for a time in the calendar. For now the buttons lead to the general Cal.com page; the calendar for the paid consultation is not connected yet.",
+          "Select “Book a consultation”. You will choose and pay for a time in the Cal.com calendar.",
       },
     ],
     navigation: [

@@ -20,12 +20,6 @@ const GAPS = [
       "Fixture O mnie ma zdjęcie ukończenia (klucz diploma). Ten import nie wgrywa pliku do Content Lake. Puste diplomaScan nadal pokazuje ramkę.",
   },
   {
-    id: "booking-url",
-    status: "open",
-    detail:
-      "Właściwy URL płatnej rezerwacji nieustalony; fixture używa tymczasowego https://cal.com i bookingStatus=placeholder.",
-  },
-  {
     id: "contact-page",
     status: "open",
     detail:

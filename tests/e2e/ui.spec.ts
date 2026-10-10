@@ -343,7 +343,7 @@ test("about page without an English version", async ({ page }) => {
   );
   await expect(
     page.getByRole("link", { name: "Zarezerwuj konsultację" }),
-  ).toHaveAttribute("href", "https://cal.com");
+  ).toHaveAttribute("href", "https://cal.com/dietetyk/konsultacja");
   await expect(
     page
       .getByRole("navigation", { name: "Nawigacja główna" })
@@ -379,6 +379,14 @@ test("consultation page without an English version", async ({ page }) => {
     if (request.method() === "POST") posts.push(request.url());
   });
 
+  await page.goto("/");
+  await expect(
+    page.locator("#konsultacje").getByRole("link", {
+      name: "Zarezerwuj konsultację",
+    }),
+  ).toHaveAttribute("href", "https://cal.com/dietetyk/konsultacja");
+  await expect(page.getByText(/Tymczasowy adres kalendarza/)).toHaveCount(0);
+
   await page.goto("/konsultacje/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     /Wiesz już dużo\.\s*Ustal, co dalej\./,
@@ -386,12 +394,13 @@ test("consultation page without an English version", async ({ page }) => {
   const booking = page.getByRole("link", { name: "Zarezerwuj konsultację" });
   await expect(booking).toHaveCount(2);
   for (const link of await booking.all()) {
-    await expect(link).toHaveAttribute("href", "https://cal.com");
+    await expect(link).toHaveAttribute(
+      "href",
+      "https://cal.com/dietetyk/konsultacja",
+    );
   }
-  await expect(page.locator(".ao-hero")).not.toContainText("Podgląd oferty");
-  await expect(page.locator("#cena")).toContainText(
-    "Podgląd oferty: przycisk prowadzi tymczasowo do Cal.com. Właściwy kalendarz tej konsultacji zostanie dodany później.",
-  );
+  await expect(page.locator("#cena")).toContainText("450 zł");
+  await expect(page.getByText(/Podgląd oferty/)).toHaveCount(0);
   await expect(page.getByText("To nie jest potwierdzenie wizyty.")).toHaveCount(
     0,
   );
