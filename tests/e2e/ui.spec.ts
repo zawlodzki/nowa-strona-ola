@@ -282,11 +282,20 @@ test("about page without an English version", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Wiedza, którą możesz sprawdzić." }),
   ).toBeVisible();
+  await expect(page.getByText("Stopień", { exact: true })).toHaveCount(0);
+  await expect(page.getByText("Wcześniejsze miejsca pracy")).toHaveCount(0);
+  await expect(page.getByText(/Limanowej/)).toHaveCount(0);
+  await expect(page.getByText(/Myślenic/)).toHaveCount(0);
+  await expect(
+    page.getByText(
+      "Znam PMOS (PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
+    ),
+  ).toBeVisible();
   const diplomaPl = page.locator("#wyksztalcenie img");
   await expect(diplomaPl).toHaveCount(1);
   await expect(diplomaPl).toHaveAttribute(
     "alt",
-    "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
+    "Aleksandra Olesiewicz z pracą dyplomową przed budynkiem Wydziału Zdrowia Publicznego w Bytomiu",
   );
   await expect
     .poll(async () =>
@@ -303,7 +312,7 @@ test("about page without an English version", async ({ page }) => {
   ).toBeLessThan(0.02);
   await expect(page.getByText("Miejsce na skan dyplomu")).toHaveCount(0);
   await expect(page.locator("#wyksztalcenie figcaption")).toContainText(
-    "Dyplom licencjata dietetyki, specjalność dietetyka kliniczna",
+    "Z pracą dyplomową przed Wydziałem Zdrowia Publicznego w Bytomiu, Śląski Uniwersytet Medyczny",
   );
   await expect(
     page.getByRole("link", { name: "Zarezerwuj konsultację" }),

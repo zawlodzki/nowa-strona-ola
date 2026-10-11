@@ -17,7 +17,8 @@ export const aboutCopy = {
     portraitCredit: "",
     storyTitle: "Chcę, żebyś czuła się wysłuchana.",
     storyBody: [
-      "Znam PMOS (PCOS) także z własnego doświadczenia.",
+      "Znam PMOS (PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
+      "Najpierw uczyłam się sama i to w odżywianiu znalazłam wiele odpowiedzi, których szukałam. Tę wiedzę uporządkowałam i poszerzyłam na studiach dietetycznych na Śląskim Uniwersytecie Medycznym. Dziś pracuję z kobietami, które mierzą się z podobnymi trudnościami jak ja.",
       "Dlatego tak ważne jest dla mnie, żebyś mogła spokojnie opowiedzieć o swojej sytuacji i zadać pytania, z którymi przychodzisz.",
       "Jeśli gubisz się w sprzecznych poradach o diecie, badaniach i suplementach, możemy zacząć od ich uporządkowania. Przyjrzeć się temu, co już robisz, i ustalić, czemu warto poświęcić uwagę w pierwszej kolejności.",
       "Zależy mi, żebyś po rozmowie rozumiała kolejne kroki i wiedziała, jak odnieść je do swoich posiłków, pracy i codziennych obowiązków.",
@@ -31,9 +32,9 @@ export const aboutCopy = {
       "W konsultacjach łączę wiedzę dietetyczną z analizą Twojej sytuacji i praktycznymi zmianami w codziennym odżywianiu.",
     ],
     diplomaCaption:
-      "Dyplom licencjata dietetyki, specjalność dietetyka kliniczna, Śląski Uniwersytet Medyczny",
+      "Z pracą dyplomową przed Wydziałem Zdrowia Publicznego w Bytomiu, Śląski Uniwersytet Medyczny",
     diplomaAlt:
-      "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
+      "Aleksandra Olesiewicz z pracą dyplomową przed budynkiem Wydziału Zdrowia Publicznego w Bytomiu",
     diplomaPlaceholderTitle: "Miejsce na skan dyplomu",
     diplomaPlaceholderNote: "Dokument do uzupełnienia",
     approachTitle: "Zaczynam od Ciebie i Twojej codzienności.",
@@ -90,7 +91,8 @@ export const aboutCopy = {
     portraitCredit: "",
     storyTitle: "I want you to feel heard.",
     storyBody: [
-      "I also know PMOS (PCOS) from my own experience.",
+      "I also know PMOS (PCOS) from my own experience. Like many dietitians, I started by looking for answers to my own hormonal problems.",
+      "I studied on my own first, and it was in nutrition that I found many of the answers I was looking for. I organised that knowledge and broadened it while studying dietetics at the Medical University of Silesia. Today I work with women who face difficulties similar to mine.",
       "That is why it matters to me that you can talk through your situation and ask the questions you arrived with.",
       "If conflicting advice about diet, tests and supplements leaves you lost, we can start by putting it in order. Look at what you already do, and decide what deserves attention first.",
       "I want you to leave the conversation knowing the next steps and how they fit your meals, work and daily duties.",
@@ -103,9 +105,9 @@ export const aboutCopy = {
       "In consultations I combine dietetic knowledge with your situation and practical changes in everyday eating.",
     ],
     diplomaCaption:
-      "Bachelor's degree in dietetics, clinical dietetics specialisation, Medical University of Silesia",
+      "With her thesis outside the Faculty of Public Health in Bytom, Medical University of Silesia",
     diplomaAlt:
-      "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom",
+      "Aleksandra Olesiewicz with her thesis outside the Faculty of Public Health building in Bytom",
     diplomaPlaceholderTitle: "Space for the diploma scan",
     diplomaPlaceholderNote: "Document still to be added",
     approachTitle: "I start with you and your everyday life.",

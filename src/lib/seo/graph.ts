@@ -89,7 +89,7 @@ export function siteEntities(ctx: GraphContext): JsonLdNode[] {
           : {}),
       },
       // schema.org alumniOf accepts any Organization: university first,
-      // then earlier workplaces listed on „O mnie”.
+      // then earlier workplaces. Those workplaces are not rows on „O mnie”.
       alumniOf: [
         {
           "@type": "CollegeOrUniversity",
@@ -107,7 +107,7 @@ export function siteEntities(ctx: GraphContext): JsonLdNode[] {
           ? { "@type": "Thing", name: topic.name, sameAs: topic.sameAs }
           : topic.name,
       ),
-      // Only credentials marked public in Sanity and listed on „O mnie”.
+      // Public credentials. educationalLevel stays in JSON-LD and is not a row on „O mnie”.
       ...(person.credentials.length
         ? {
             hasCredential: person.credentials.map((credential) => {

@@ -233,7 +233,17 @@ describe("Sanity SEO fields (SEO-4)", () => {
     });
     // Trainers are people: recognizedBy accepts organizations only.
     expect(credentials[1]).not.toHaveProperty("recognizedBy");
-    expect(person?.alumniOf).toHaveLength(3);
+    expect(person?.alumniOf).toEqual([
+      expect.objectContaining({
+        name: "Śląski Uniwersytet Medyczny w Katowicach",
+      }),
+      expect.objectContaining({
+        name: "Szpital Powiatowy w Limanowej im. Miłosierdzia Bożego",
+      }),
+      expect.objectContaining({
+        name: "Samodzielny Publiczny Zakład Opieki Zdrowotnej w Myślenicach",
+      }),
+    ]);
     expect(person?.sameAs).toHaveLength(3);
   });
 
