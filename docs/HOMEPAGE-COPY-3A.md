@@ -86,6 +86,14 @@ Użytkownik podał docelową liczbę: **450+ kobiet rocznie, którym pomagają m
 konsultacje**. W 3a zastępuje ona blok „1:1”. Źródłem tej liczby jest
 bezpośrednia informacja użytkownika; nie obliczano jej z dokumentacji FIRMA.
 
+## 9000+ na Instagramie — 2026-10-11
+
+Decyzja użytkownika: zamiast 450+ godzin szkoleń wskaźnik ma być bliższy
+klientce końcowej: **9000+ — kobiet codziennie śledzi moje materiały edukacyjne na Instagramie** (EN „women follow my educational
+content on Instagram every day”). Tytuł sekcji w O mnie: „Materiały edukacyjne
+na Instagramie” (EN „Educational content on Instagram”). Zastępuje decyzję
+poniżej.
+
 ## 450+ godzin szkoleń — 2026-10-10
 
 Decyzja użytkownika: liczba 450+ zostaje, ale opis wskaźnika zmienia się

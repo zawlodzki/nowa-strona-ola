@@ -390,6 +390,9 @@
   .about-experience {
     flex-wrap: wrap;
   }
+  .about-experience strong {
+    font-size: 44px;
+  }
   .about-page .mobile-menu summary {
     padding-inline: 0;
   }

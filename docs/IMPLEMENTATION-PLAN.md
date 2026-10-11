@@ -545,7 +545,7 @@ materiały dla kobiet z PCOS i w perimenopauzie oraz konsultacje dietetyczne onl
       Opinie z `ola-homepage` potwierdzone przez użytkownika (2026-10-06).
 - [x] Ustawić 97 zł brutto dla sześciu e-booków i przywrócić marki/social media
       oraz wyróżnienie konsultacji 1:1 na polecenie użytkownika (2026-10-06).
-- [x] Ustawić wskaźnik 450+ zgodnie z informacją użytkownika (od 10.10.2026: godzin szkoleń)
+- [x] Ustawić wskaźnik 450+ zgodnie z informacją użytkownika (od 11.10.2026: 9000+ kobiet śledzących materiały na Instagramie)
       przy opisie konsultacji w 3a (2026-10-06).
 - [x] Zapisać bieżące decyzje, treści i mapowanie homepage 3a w
       [specyfikacji konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md) oraz zasadę

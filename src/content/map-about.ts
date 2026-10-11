@@ -103,7 +103,7 @@ export function mapAbout(page: PageContent, language: Locale): AboutView {
     throw new Error("About 3a wymaga hero w wariancie split.");
   }
   if (metrics.variant !== "approach" || metrics.items.length !== 1) {
-    throw new Error("About 3a wymaga jednego wskaźnika 450+ w historii.");
+    throw new Error("About 3a wymaga jednego wskaźnika 9000+ w historii.");
   }
   if (approach.steps.length !== 3) {
     throw new Error("About 3a wymaga trzech paneli podejścia.");

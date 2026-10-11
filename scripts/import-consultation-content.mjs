@@ -101,7 +101,7 @@ function consultationPage(language, created) {
       {
         _key: "consultation-expert",
         _type: "expertSection",
-        metric: { value: 450, suffix: "+" },
+        metric: { value: 9000, suffix: "+" },
         person: reference(`author-ola-${language}`),
       },
       {

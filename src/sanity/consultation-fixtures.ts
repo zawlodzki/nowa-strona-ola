@@ -139,7 +139,7 @@ export function consultationSections(language: Locale) {
       intro: copy.expertIntro,
       body: copy.expertBody,
       metric: {
-        value: 450,
+        value: 9000,
         suffix: "+",
         label: homepageCopy[language].metricLabel,
       },

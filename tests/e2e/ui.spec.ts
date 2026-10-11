@@ -120,7 +120,7 @@ for (const width of [320, 390, 1440]) {
           oneLine: element.getBoundingClientRect().height <= fontSize * 1.25,
         };
       });
-    expect(metric.text).toBe("450+");
+    expect(metric.text).toBe("9000+");
     expect(metric.oneLine).toBe(true);
     await expectDecodedWidth(page.locator(".home3a-about__food"), 1536);
     await expectDecodedWidth(page.locator("#konsultacje-panel img"), 1536);

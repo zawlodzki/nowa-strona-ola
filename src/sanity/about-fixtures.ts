@@ -88,7 +88,7 @@ export function aboutSections(language: Locale) {
       items: [
         {
           _key: "about-metric-450",
-          value: 450,
+          value: 9000,
           suffix: "+",
           label: copy.metricLabel,
         },

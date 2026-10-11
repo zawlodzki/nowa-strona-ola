@@ -230,7 +230,7 @@ export function homepageSections(language: Locale) {
       items: [
         {
           _key: "metric-450",
-          value: 450,
+          value: 9000,
           suffix: "+",
           label: copy.metricLabel,
         },

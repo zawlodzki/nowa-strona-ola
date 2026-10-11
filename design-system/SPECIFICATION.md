@@ -50,7 +50,7 @@ Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
   wspólny TextLink używa `accent` dla tekstu, strzałki i podkreślenia.
   Podkreślenie pozostaje widoczne bez hover, więc kolor nie jest jedynym
   wyróżnikiem linku. Link liniowy jest lżejszą akcją niż Button.
-- Sufiks wskaźnika `450+` i drobne oznaczenia etapów mogą korzystać z `accent`.
+- Sufiks wskaźnika `9000+` i drobne oznaczenia etapów mogą korzystać z `accent`.
   Liczba, nagłówki oraz duże powierzchnie zachowują wiśniową hierarchię.
 - Drobne elementy grafik (wdrożone 08.10.2026): jeden punkt na orbicie
   produktu, jeden punkt na półce butelek, jedna kreska lub punkt na jasnej

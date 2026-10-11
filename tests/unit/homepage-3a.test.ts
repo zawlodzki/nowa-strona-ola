@@ -45,7 +45,7 @@ describe("homepage 3a fixtures", () => {
       "sprout",
       "sun-horizon",
     ]);
-    expect(view.approach.items[0]?.value).toBe(450);
+    expect(view.approach.items[0]?.value).toBe(9000);
     expect(view.ebooks.items).toHaveLength(6);
     expect(view.ebooks.items.every((item) => item.priceGross === 97)).toBe(
       true,
@@ -96,7 +96,7 @@ describe("section serializers", () => {
   it("serializes homepage markdown with prices and anonymous labels", async () => {
     const page = await getPage("pl", "home", { environment: {} });
     const markdown = serializePage(page, "pl");
-    expect(markdown).toContain("450+");
+    expect(markdown).toContain("9000+");
     expect(markdown).toContain("97 zł brutto");
     expect(markdown).toContain("/ebooki/suplementy-w-pcos/");
     expect(markdown).toContain("Opinia o dotychczasowej współpracy");
