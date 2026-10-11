@@ -41,8 +41,11 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Zmianę zapisano z blokadą rewizji `BgWLAXsKsMgTSzpAsHKkan`, a szkic
   porównano z `site-identity.ts` (MATCH) przed publikacją. Poprzednie
   wartości są w `output/author-credentials-2026-10-11/before.json`.
-  Strony `page-about-pl` i konsultacji w Content Lake nadal mają starsze
-  zdanie „Ukończyłam dietetykę kliniczną”, którego nie zmieniano.
+  Na dodatkowe polecenie opublikowano też zdanie o studiach i podpis dyplomu
+  w `page-about-pl/en` oraz `page-consultation-pl/en` (sekcja ekspertki).
+  Przed publikacją sprawdzono, że szkice są zgodne z tekstem z kodu.
+  Zmiana była zabezpieczona blokadą rewizji. Poprzednie wartości są
+  w `output/author-credentials-2026-10-11/pages-before.json`.
 - Publikacja uruchamia webhook stagingu, który buduje kod z main. Do scalenia
   PR staging ma kwalifikacje w JSON-LD, ale nie pokazuje ich na stronie,
   a trenerzy są tam opisani jako organizacje. Webhook produkcji był wyłączony.
