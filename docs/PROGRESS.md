@@ -1,10 +1,41 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-11 (plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### PMOS (PCOS), wydział i historia na „O mnie”, 11.10.2026
+
+- Gość widzi PMOS (PCOS). Pierwsze wystąpienie w zdaniu ma skrót w nawiasie.
+  Kolejne w tym samym zdaniu jest samym PMOS. Slugi, identyfikatory i
+  `topic: "pcos"` zostają. Mockup kolekcji e-booków nadal mówi PCOS.
+- Wydział w treści i w JSON-LD to Wydział Zdrowia Publicznego w Bytomiu.
+- Strona „O mnie” i Markdown nie pokazują wiersza stopnia ani wcześniejszych
+  miejsc pracy. JSON-LD zostawia `educationalLevel` „Licencjat” oraz `alumniOf`
+  ze szpitalem w Limanowej i SPZOZ w Myślenicach.
+- Historia ma dwa nowe akapity o własnym doświadczeniu i studiach. Podpis
+  i alt zdjęcia opisują pracę dyplomową.
+- Kategorie bloga sortują się po tytule, więc Perimenopauza stoi przed
+  PMOS (PCOS).
+- `npm run import:pmos-rename` planuje jedną transakcję i domyślnie nic nie
+  zapisuje. W tym środowisku nie ma tokenu Sanity, więc suchy odczyt datasetu
+  nie wystartował. `--write` nie był uruchomiony. Sanity nie było zapisywane
+  i nic nie zostało wdrożone.
+- Kontrole na Node 24.21. Format, tokeny, lint i `astro check` przeszły.
+  Testy unit to 288 zaliczeń. Build, build workspace i `test:content-lake`
+  przeszły. CSS gzip ma 30867 B. Strona główna ma 8192 B przy limicie 8192 B.
+  „O mnie” ma 8161 B, czyli 31 B zapasu. SEO to 36 stron. E2E to 392 zaliczenia
+  w Chromium, Firefox i WebKit. Jeden test WebKit newslettera (fokus pustego
+  pola) odpadł za pierwszym razem i przeszedł przy powtórzeniu. verify-ola
+  na `/`, landingu suplementów i `/o-mnie/`. Widoczny tekst nie ma „Stopień”,
+  „Wcześniejsze miejsca pracy” ani „Limanowej”. `browser posts` po pustym
+  newsletterze zwrócił `[]`. Przy 390 px i 1440 px przepełnienie poziome
+  ma 0 px. W `dist` jest 678 wystąpień wewnątrz „PMOS (PCOS)” i zero samotnych
+  PCOS.
+- Następny krok. Właściciel uruchamia suchy odczyt z tokenem. Zapis do
+  datasetu jest osobnym `--write`. Scalenie i wdrożenie zostają po jego stronie.
 
 ### Kwalifikacje Oli na „O mnie” i w JSON-LD, 11.10.2026
 
