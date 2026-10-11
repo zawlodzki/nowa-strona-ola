@@ -12,8 +12,8 @@ Wpisy 2–7 z 11
 - [Insulinooporność](/blog/kategoria/insulinoopornosc/)
 - [Konsultacje](/blog/kategoria/konsultacje/)
 - [Odżywianie](/blog/kategoria/odzywianie/)
-- [PMOS (PCOS)](/blog/kategoria/pcos/)
 - [Perimenopauza](/blog/kategoria/perimenopauza/)
+- [PMOS (PCOS)](/blog/kategoria/pcos/)
 
 ## Najnowszy wpis
 
