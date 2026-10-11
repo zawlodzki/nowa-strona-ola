@@ -220,7 +220,10 @@ ratingów, obrazów dokumentu i danych rezerwacji. Mockup ma `noindex,nofollow`.
 - [x] Wykonać mockup i podłączyć homepage, biogram artykułu oraz indeks.
 - [x] Sprawdzić responsywność, klawiaturę, CSS zoom 200%, reduced motion,
       brak JS i dane profilu w Chromium, Firefox i WebKit; axe w obu motywach.
-- [ ] Uzupełnić rzeczywisty skan dyplomu, kontakt/profile i link płatnego wydarzenia.
-- [ ] Przenieść zaakceptowany wygląd do Astro/Sanity wraz z HTML, Markdown i TypeGen.
+- [x] Uzupełnić zdjęcie z dyplomem (08.10.2026), profile `sameAs` (D4,
+      11.10.2026) i link płatnego wydarzenia (`https://cal.com/dietetyk/konsultacja`,
+      11.10.2026). Skan dyplomu (`diplomaScan`) pozostaje pusty.
+- [x] Przenieść wygląd do Astro/Sanity wraz z HTML, Markdown i TypeGen
+      (About3a, fixture PL/EN). Bez Content Lake i akceptacji copy przez Olę.
 
 Wyniki kontroli: [PROGRESS.md](PROGRESS.md). Publikacja wymaga osobnego zlecenia.

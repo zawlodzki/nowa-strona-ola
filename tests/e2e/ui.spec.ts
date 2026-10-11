@@ -303,7 +303,7 @@ test("about page without an English version", async ({ page }) => {
   ).toBeLessThan(0.02);
   await expect(page.getByText("Miejsce na skan dyplomu")).toHaveCount(0);
   await expect(page.locator("#wyksztalcenie figcaption")).toContainText(
-    "Dyplom ukończenia dietetyki klinicznej",
+    "Dyplom licencjata dietetyki, specjalność dietetyka kliniczna",
   );
   await expect(
     page.getByRole("link", { name: "Zarezerwuj konsultację" }),

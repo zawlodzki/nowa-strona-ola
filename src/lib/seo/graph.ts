@@ -1,5 +1,6 @@
 import type { Locale } from "@ola/shared";
 
+import { credentialLevelLabel, credentialTitle } from "@/content/credentials";
 import { aboutPath, homePath } from "@/lib/paths";
 import type { SiteSeoData } from "@/lib/seo/site-data";
 import {
@@ -87,34 +88,63 @@ export function siteEntities(ctx: GraphContext): JsonLdNode[] {
             }
           : {}),
       },
-      alumniOf: {
-        "@type": "CollegeOrUniversity",
-        name: person.alumniOf.name,
-        ...(person.alumniOf.url ? { url: person.alumniOf.url } : {}),
-      },
+      // schema.org alumniOf accepts any Organization: university first,
+      // then earlier workplaces listed on „O mnie”.
+      alumniOf: [
+        {
+          "@type": "CollegeOrUniversity",
+          name: person.alumniOf.name,
+          ...(person.alumniOf.url ? { url: person.alumniOf.url } : {}),
+        },
+        ...person.experience.map((item) => ({
+          "@type": "Organization",
+          name: item.organization,
+          ...(item.url ? { url: item.url } : {}),
+        })),
+      ],
       knowsAbout: person.knowsAbout.map((topic) =>
         topic.sameAs.length
           ? { "@type": "Thing", name: topic.name, sameAs: topic.sameAs }
           : topic.name,
       ),
-      // Only credentials marked public in Sanity (decision D5: none for now).
+      // Only credentials marked public in Sanity and listed on „O mnie”.
       ...(person.credentials.length
         ? {
-            hasCredential: person.credentials.map((credential) => ({
-              "@type": "EducationalOccupationalCredential",
-              name: credential.name,
-              credentialCategory: credential.category,
-              recognizedBy: {
-                "@type": "Organization",
-                name: credential.institution,
-                ...(credential.institutionUrl
-                  ? { url: credential.institutionUrl }
+            hasCredential: person.credentials.map((credential) => {
+              const level = credentialLevelLabel(credential, lang);
+              return {
+                "@type": "EducationalOccupationalCredential",
+                name: credentialTitle(credential, lang),
+                credentialCategory: credential.category,
+                ...(level ? { educationalLevel: level } : {}),
+                // recognizedBy is Organization-only; trainers stay in the name list on the page.
+                ...(credential.issuerKind === "organization"
+                  ? {
+                      recognizedBy: {
+                        "@type":
+                          credential.category === "degree"
+                            ? "CollegeOrUniversity"
+                            : "Organization",
+                        name: credential.institution,
+                        ...(credential.institutionUrl
+                          ? { url: credential.institutionUrl }
+                          : {}),
+                        ...(credential.department
+                          ? {
+                              department: {
+                                "@type": "Organization",
+                                name: credential.department,
+                              },
+                            }
+                          : {}),
+                      },
+                    }
                   : {}),
-              },
-              ...(credential.year
-                ? { dateCreated: String(credential.year) }
-                : {}),
-            })),
+                ...(credential.year
+                  ? { dateCreated: String(credential.year) }
+                  : {}),
+              };
+            }),
           }
         : {}),
       sameAs: person.sameAs,

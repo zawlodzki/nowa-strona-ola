@@ -11,6 +11,20 @@ const mediaFields = /* groq */ `{
 
 const actionFields = /* groq */ `{ label, href, emphasis }`;
 
+const credentialFields = /* groq */ `{
+  category,
+  level,
+  name,
+  specialization,
+  institution,
+  department,
+  institutionUrl,
+  issuerKind,
+  year
+}`;
+
+const experienceFields = /* groq */ `{ organization, role, url }`;
+
 const seoFields = /* groq */ `{
   title,
   description,
@@ -278,6 +292,9 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
       bio,
       educationInstitution,
       educationProgram,
+      "credentials": credentials[isPublic == true]${credentialFields},
+      practiceSince,
+      "experience": experience[]${experienceFields},
       "photo": photo${mediaFields},
       "diplomaScan": diplomaScan${mediaFields}
     }
@@ -332,13 +349,9 @@ export const siteSettingsProjection = /* groq */ `
     occupationCode,
     sameAs,
     "knowsAbout": knowsAbout[]->{ title, sameAs },
-    "credentials": credentials[isPublic == true]{
-      name,
-      category,
-      institution,
-      institutionUrl,
-      year
-    },
+    "credentials": credentials[isPublic == true]${credentialFields},
+    practiceSince,
+    "experience": experience[]${experienceFields},
     "photo": photo${mediaFields}
   },
   seller,

@@ -456,10 +456,30 @@ oznacza wykonanej implementacji.
 - [x] SEO‑3 (Markdown, sitemap, robots.txt, RSS, llms.txt, `_headers`,
       `_redirects`) i SEO‑4 (pola SEO w Sanity, podgląd w Studio) w kodzie
       (11.10.2026). Otwarte: linki do e-booków bez landingu, dane w Sanity.
-- [ ] Dodać serializery wszystkich sekcji i Portable Text do Markdown.
-- [ ] Wdrożyć canonical, alternatywy .md, hreflang, sitemap, robots, RSS i llms.txt.
-- [ ] Wdrożyć JSON-LD i kontrolę zgodności z widoczną treścią.
-- [ ] Weryfikować adresy, 404, przekierowania, linki i nieznane typy sekcji.
+- [x] SEO‑5 (artykuł AEO, generowane obrazy OG, wytyczne redakcyjne)
+      w kodzie (11.10.2026). Wszystko z #69 scalone do main.
+- [x] Dodać serializery wszystkich sekcji i Portable Text do Markdown.
+      Każdy typ strony w spisie (`inventory.ts`) ma trasę `.md`; nieznany
+      typ sekcji lub bloku Portable Text zatrzymuje build.
+- [x] Wdrożyć canonical, alternatywy .md, sitemap, robots, RSS i llms.txt (SEO‑1, SEO‑3).
+      Po decyzji D8 (11.10.2026) do wdrożenia: RSS z pełną treścią
+      i `llms-full.txt` dla kluczowych stron.
+- [ ] Wdrożyć hreflang. Brak w kodzie; nie jest potrzebny, dopóki publiczne
+      EN jest wyłączone (`enabledLocales`). Dodać przy włączeniu EN.
+- [x] Wdrożyć JSON-LD i kontrolę zgodności z widoczną treścią (SEO‑2,
+      `check-seo.mjs`).
+- [ ] Ręczna walidacja w Rich Results Test i Schema Markup Validator
+      dla każdego typu strony, z wynikiem w postępie.
+- [x] Weryfikować adresy, 404, przekierowania, linki i nieznane typy sekcji.
+      Kontrole w buildzie (`check-seo.mjs`, `test:build`,
+      `test:content-lake`); ostatnie `check-seo` 36 stron PASS bez
+      niedziałających linków, końcowe verify PASS (11.10.2026).
+      Ręcznie nie sprawdzono przekierowań z danych Sanity na produkcji.
+- [ ] Uzupełnić pola SEO w Sanity, zarejestrować schemat i wdrożyć Studio
+      (tylko na osobne polecenie). Wdrożyć szablon tytułu z decyzji D3
+      (`{temat} | Aleksandra Olesiewicz`).
+- [ ] SEO‑6: robots.txt według D1 i AI Crawl Control, Search Console i Bing,
+      IndexNow, zdjęcie `noindex` z gotowej produkcji, grupa kanałów AI w GA4.
 
 Odbiór: HTML/Markdown są zgodne; schema przechodzi walidację; wycofane treści
 znikają z obu formatów i indeksów po udanej publikacji.
@@ -588,12 +608,15 @@ polecenie użytkownika; nie zmieniono tokenów Wonderful ani styli aplikacji.
 - [x] Przejrzeć kontekst FIRMA, poprzednią stronę oraz poradnik copywriterski.
 - [x] Obejrzeć bieżące 3a na desktopie i mobile; zaplanować układ oraz copy.
 - [x] Zapisać źródła, propozycje CTA, mapowanie do CMS i brakujące możliwości.
-- [ ] Zebrać ocenę [planu „O mnie”](ABOUT-MOCKUP-PLAN-3A.md) i dopracować
-      ewentualne szczegóły autobiografii; uczelnia i kierunek już potwierdzone.
+- [x] Zebrać ocenę [planu „O mnie”](ABOUT-MOCKUP-PLAN-3A.md): układ i copy
+      zaakceptowane przez użytkownika 11.10.2026.
+- [ ] Rozwinąć osobistą historię (np. cztery lata szukania diagnozy PCOS)
+      po potwierdzeniu i tekście od Oli. Do tego czasu zostaje krótka wersja.
 - [x] Zapisać cenę 450 zł/60 minut, CTA do płatnego kalendarza oraz wykształcenie
       i miejsce na skan dyplomu, zgodnie z decyzją użytkownika 06.10.2026.
 - [x] Zapisać tymczasowy cel CTA `https://cal.com`; użytkownik uzupełni link wydarzenia później.
-- [ ] Uzupełnić adres wydarzenia płatnej konsultacji.
+- [x] Uzupełnić adres wydarzenia płatnej konsultacji: decyzja 11.10.2026
+      `https://cal.com/dietetyk/konsultacja` (wdrożenie w fixture’ach i Sanity otwarte).
 - [x] Wstawić zdjęcie ukończenia w slot dyplomu na `/o-mnie/` i `/en/about/`
       (fixture, 08.10.2026). Asset w Content Lake nadal niewgrany.
 - [x] Wykonać lokalny mockup i podłączyć wejście „Poznaj moją historię” z 3a
@@ -602,8 +625,10 @@ polecenie użytkownika; nie zmieniono tokenów Wonderful ani styli aplikacji.
       granice konsultacji, opinie, materiały i spójne `ProfilePage`/`Person`.
 - [x] Zweryfikować mockup na desktopie/mobile, dla klawiatury, 320 px,
       CSS zoom 200%, reduced motion i bez JavaScriptu w trzech przeglądarkach.
-- [ ] Utworzyć i scalić PR mockupu na polecenie „pr merge” z 07.10.2026.
-- [ ] Po akceptacji przenieść szablon do Astro i Sanity.
+- [x] Utworzyć i scalić PR mockupu na polecenie „pr merge” z 07.10.2026.
+      Mockup `about-3a.html` jest na main.
+- [x] Przenieść szablon do Astro i modelu Sanity (About3a, fixture PL/EN;
+      etap 4a). Dane w Content Lake i akceptacja copy pozostają otwarte.
 
 Pierwsze zlecenie dotyczyło planowania; 07.10.2026 użytkownik zlecił mockup.
 [Wykonany HTML](../mockups/homepage/about-3a.html) i [ocena E-E-A-T](ABOUT-EEAT-3A.md)
