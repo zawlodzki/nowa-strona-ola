@@ -6,6 +6,8 @@ import type { PageContent, SiteSettings } from "@/sanity/repository";
 import SiteShell3a from "@/views/SiteShell3a.astro";
 import { mapContact } from "@/content/map-contact";
 import Contact3a from "@/views/Contact3a.astro";
+import { contactGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 export interface Props {
   lang: Locale;
   page: PageContent;
@@ -27,6 +29,10 @@ const navigation = shell.navigation.map((item) => ({
 const headerCta = shell.headerCta
   ? { ...shell.headerCta, href: "#newsletter" }
   : undefined;
+const seo = pageSeo(settings, page.seo, {
+  path: pagePath(lang, page.slug),
+  graph: contactGraph(),
+});
 ---
 
 <SiteShell3a
@@ -42,6 +48,7 @@ const headerCta = shell.headerCta
   headerCta={headerCta}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
+  seo={seo}
 >
   <Contact3a lang={lang} content={mapContact(page, lang)} />
 </SiteShell3a>

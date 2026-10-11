@@ -23,7 +23,7 @@ for (const path of ["/", "/ui/", "/warsztat/", "/ebooki/suplementy-w-pcos/"]) {
   test(`${path} links only to Polish pages`, async ({ page }) => {
     const response = await page.goto(path);
     expect(response?.status()).toBe(200);
-    await expect(page.locator("html")).toHaveAttribute("lang", "pl");
+    await expect(page.locator("html")).toHaveAttribute("lang", "pl-PL");
     await expect(page.locator('a[href*="/en/"]')).toHaveCount(0);
     await expect(page.locator("[hreflang]")).toHaveCount(0);
     await expect(page.getByRole("link", { name: "English" })).toHaveCount(0);

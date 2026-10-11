@@ -1,7 +1,10 @@
 import { defineField, type ReferenceOptions } from "sanity";
 
 import { homeSlug, languageOptions, slugPattern } from "./constants";
+import { publicPath } from "./public-path";
 import { isUniqueSlugPerLanguage } from "./uniqueness";
+
+const apiVersion = "2026-09-01";
 
 export const languageField = defineField({
   name: "language",
@@ -95,7 +98,7 @@ export function slugField(options: {
       source: "title",
       isUnique: isUniqueSlugPerLanguage(options.documentType),
     },
-    validation: (rule) =>
+    validation: (rule) => [
       rule.required().custom((value) => {
         const current = value?.current?.trim();
         if (!current) return "Podaj adres.";
@@ -109,5 +112,36 @@ export function slugField(options: {
         }
         return true;
       }),
+      rule
+        .custom(async (value, context) => {
+          // A changed address of a published page needs a redirect (SEO-4).
+          const document = context.document;
+          const current = value?.current?.trim();
+          if (!document || !current) return true;
+          const publishedId = document._id.replace(/^drafts\./, "");
+          const language =
+            typeof document.language === "string" ? document.language : "";
+          const result = await context
+            .getClient({ apiVersion })
+            .fetch<{ slug: string | null; redirects: string[] } | null>(
+              /* groq */ `{
+                "slug": *[_id == $publishedId][0].slug.current,
+                "redirects": *[_type == "redirect" && !(_id in path("drafts.**"))].from
+              }`,
+              { publishedId },
+            );
+          const previous = result?.slug;
+          if (!previous || previous === current) return true;
+          const oldPath = publicPath(options.documentType, previous, language);
+          if (!oldPath) return true;
+          const covered = (result?.redirects ?? []).some(
+            (from) => from.replace(/\/$/, "") === oldPath.replace(/\/$/, ""),
+          );
+          return covered
+            ? true
+            : `Opublikowana strona ma adres ${oldPath}. Po zmianie dodaj przekierowanie 301 z ${oldPath} na nowy adres (Przekierowania), żeby nie stracić linków i pozycji w wyszukiwarce.`;
+        })
+        .warning(),
+    ],
   });
 }

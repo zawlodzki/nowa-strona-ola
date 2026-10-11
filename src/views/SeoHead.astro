@@ -1,0 +1,120 @@
+---
+import type { Locale } from "@ola/shared";
+
+import {
+  graphDocument,
+  serializeJsonLd,
+  siteEntities,
+  type GraphContext,
+} from "@/lib/seo/graph";
+import { resolveSocialImage } from "@/lib/seo/images";
+import { markdownPath, ogCardPath } from "@/lib/seo/inventory";
+import { OG_HEIGHT, OG_WIDTH } from "@/lib/seo/og-size";
+import { siteSeoData } from "@/lib/seo/site-data";
+import { absoluteUrl, ogLocale, SITE_NAME } from "@/lib/seo/site";
+import type { PageSeo } from "@/lib/seo/types";
+
+export interface Props {
+  lang: Locale;
+  title: string;
+  description?: string;
+  seo: PageSeo;
+}
+
+const { lang, title, description, seo } = Astro.props;
+const canonical = absoluteUrl(seo.path);
+const site = seo.site ?? siteSeoData(null, lang);
+const [editorImage, pageImage, portrait, defaultImage] = await Promise.all([
+  resolveSocialImage(seo.shareImage?.src, { width: 1200, height: 630 }),
+  resolveSocialImage(seo.image?.src, { width: 1200, height: 630 }),
+  resolveSocialImage(site.person.portrait, {
+    width: 800,
+    height: 800,
+    position: "top",
+  }),
+  resolveSocialImage(site.defaultImage, {
+    width: 1200,
+    height: 630,
+    position: "top",
+  }),
+]);
+// Share image: editor override → generated card (inventory pages) → page
+// image → default. JSON-LD keeps the real page image (never the card).
+const card =
+  seo.markdown === false
+    ? undefined
+    : {
+        url: absoluteUrl(ogCardPath(seo.path)),
+        width: OG_WIDTH,
+        height: OG_HEIGHT,
+      };
+const image = editorImage ?? card ?? pageImage ?? defaultImage;
+const imageAlt =
+  (editorImage && seo.shareImage?.alt) ||
+  (card && !editorImage ? title : undefined) ||
+  (pageImage && seo.image?.alt) ||
+  site.person.name;
+const ctx: GraphContext = {
+  lang,
+  path: seo.path,
+  title,
+  description,
+  imageUrl: pageImage?.url,
+  personImageUrl: portrait?.url,
+  site,
+};
+const jsonLd = serializeJsonLd(
+  graphDocument([...siteEntities(ctx), ...(seo.graph?.(ctx) ?? [])]),
+);
+const ogType = seo.ogType ?? "website";
+const markdownHref =
+  seo.markdown === false ? null : absoluteUrl(markdownPath(seo.path));
+---
+
+<link rel="canonical" href={canonical} />
+{markdownHref && (
+  <link rel="alternate" type="text/markdown" href={markdownHref} />
+)}
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="Blog — Aleksandra Olesiewicz"
+  href={absoluteUrl("/blog/rss.xml")}
+/>
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content={ogLocale[lang]} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+{image && (
+  <>
+    <meta property="og:image" content={image.url} />
+    {image.width && (
+      <meta property="og:image:width" content={String(image.width)} />
+    )}
+    {image.height && (
+      <meta property="og:image:height" content={String(image.height)} />
+    )}
+    <meta property="og:image:alt" content={imageAlt} />
+  </>
+)}
+{seo.article && (
+  <>
+    <meta
+      property="article:published_time"
+      content={seo.article.publishedTime}
+    />
+    <meta
+      property="article:modified_time"
+      content={seo.article.modifiedTime ?? seo.article.publishedTime}
+    />
+  </>
+)}
+<meta name="twitter:card" content="summary_large_image" />
+<script
+  type="application/ld+json"
+  id="structured-data"
+  is:inline
+  set:html={jsonLd}
+></script>

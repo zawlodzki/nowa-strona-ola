@@ -1,6 +1,6 @@
 import { isFormKey, type Locale } from "@ola/shared";
 
-import { articlePath, ebookPath } from "@/lib/paths";
+import { articlePath, ebookPath, pagePath } from "@/lib/paths";
 import { formatDate, toDatetime } from "@/lib/dates";
 import type {
   ActionLink,
@@ -730,6 +730,11 @@ export function toServiceOffer(
       durationMinutes?: number | null;
       bookingUrl?: string | null;
       bookingStatus?: string | null;
+      serviceType?: string | null;
+      channel?: string | null;
+      audience?: string | null;
+      deliverables?: (string | null)[] | null;
+      terms?: { slug?: string | null; language?: string | null } | null;
     } | null;
   },
   language: Locale,
@@ -780,6 +785,11 @@ function toServiceDetails(service: {
   price?: number | null;
   currency?: string | null;
   durationMinutes?: number | null;
+  serviceType?: string | null;
+  channel?: string | null;
+  audience?: string | null;
+  deliverables?: (string | null)[] | null;
+  terms?: { slug?: string | null; language?: string | null } | null;
 }): ServiceDetails | undefined {
   if (
     typeof service.price !== "number" ||
@@ -796,7 +806,37 @@ function toServiceDetails(service: {
     price: service.price,
     currency: service.currency,
     durationMinutes: service.durationMinutes,
+    ...optionalServiceFields(service),
   };
+}
+
+/** Structured-data fields of `service`, only when filled in (SEO-4). */
+function optionalServiceFields(service: {
+  serviceType?: string | null;
+  channel?: string | null;
+  audience?: string | null;
+  deliverables?: (string | null)[] | null;
+  terms?: { slug?: string | null; language?: string | null } | null;
+}): Partial<ServiceDetails> {
+  const fields: Partial<ServiceDetails> = {};
+  const serviceType = service.serviceType?.trim();
+  if (serviceType) fields.serviceType = serviceType;
+  if (service.channel === "online" || service.channel === "inPerson") {
+    fields.channel = service.channel;
+  }
+  const audience = service.audience?.trim();
+  if (audience) fields.audience = audience;
+  const deliverables = (service.deliverables ?? []).filter(
+    (item): item is string => Boolean(item?.trim()),
+  );
+  if (deliverables.length) fields.deliverables = deliverables;
+  if (service.terms?.slug) {
+    fields.termsPath = pagePath(
+      service.terms.language === "en" ? "en" : "pl",
+      service.terms.slug,
+    );
+  }
+  return fields;
 }
 
 export function toCredentials(section: {

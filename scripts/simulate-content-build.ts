@@ -31,4 +31,5 @@ run("npx", ["astro", "build", "--config", "astro.sim.config.mjs"], {
   ASTRO_TELEMETRY_DISABLED: "1",
 });
 run("node", ["scripts/check-content-lake-build.mjs"], process.env);
+run("node", ["scripts/check-seo.mjs"], process.env);
 run("node", ["scripts/compare-fixture-lake.mjs"], process.env);

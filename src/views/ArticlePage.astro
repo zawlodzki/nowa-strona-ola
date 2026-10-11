@@ -7,6 +7,8 @@ import { blogPath } from "@/lib/paths";
 import type { ArticleContent, SiteSettings } from "@/sanity/repository";
 import Article3a from "@/views/Article3a.astro";
 import SiteShell3a from "@/views/SiteShell3a.astro";
+import { articleGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 
 export interface Props {
   lang: Locale;
@@ -26,6 +28,16 @@ const navigation = shell.navigation.map((item) => ({
 const headerCta = shell.headerCta
   ? { ...shell.headerCta, href: "#newsletter" }
   : undefined;
+const seo = pageSeo(settings, article.seo, {
+  path: content.href,
+  ogType: "article",
+  image: { src: content.hero.src, alt: content.hero.alt },
+  article: {
+    publishedTime: content.publishedAt,
+    modifiedTime: content.updatedAt,
+  },
+  graph: articleGraph(content),
+});
 ---
 
 <SiteShell3a
@@ -40,6 +52,7 @@ const headerCta = shell.headerCta
   headerCta={headerCta}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
+  seo={seo}
 >
   <Article3a content={content} preview={preview} />
 </SiteShell3a>

@@ -295,3 +295,24 @@ statusem i linkami. Filtr HTML nie zmienia źródła danych Markdown.
 Kod kolekcji (pakiet 5): renderer, schemat, GROQ, fixture, Markdown i dry-run
 importu bez zapisu. Copy i UX kolekcji pozostają propozycją. Content Lake
 bez dokumentów kolekcji.
+
+## Karty e-booków bez landingu — decyzja 11.10.2026
+
+Kontrola linków SEO‑3 wykazała, że karty e-booków bez pola `landing`
+(produkcja: 5 z 6 polskich e-booków, m.in. `badania-ktore-maja-sens`,
+`czy-to-juz`) linkują do `/ebooki/{slug}/`, a build tej strony nie tworzy
+(404). Decyzja użytkownika: kod bez zmian, landingi zostaną utworzone
+w Sanity. Do tego czasu `test:build` i `test:content-lake` są czerwone,
+a workflow publikacji (`publish-content.yml`) zatrzyma się na kontroli
+po scaleniu zmian SEO‑3. Fixture’y e-booków też potrzebują `landing`,
+żeby lokalny build przeszedł. Nie wykonano zapisu w Sanity.
+
+Aktualizacja 11.10.2026: na polecenie użytkownika pięć polskich e-booków
+(`badania-ktore-maja-sens`, `czy-to-juz`, `noc-zaczyna-sie-o-osiemnastej`,
+`szczupla-a-jednak-pcos`, `waga-cie-oklamuje`) dostało w Content Lake
+`landing`, `chapters`, `includedMaterials` i `sources` skopiowane
+z `suplementy-w-pcos` jako **tymczasowe treści zastępcze** (opublikowane).
+`seo` nie kopiowano, żeby tytuły stron pozostały unikalne. Każdy landing
+opisuje dziś suplementy w PCOS, także przy e-booku o perimenopauzie —
+wymaga właściwych treści przed sprzedażą. Fixture’y i plan Content Lake
+odwzorowują ten stan. Wersji EN nie zmieniano.

@@ -33,6 +33,27 @@ nie odkłada publikacji. Szkic nie trafia do publicznego buildu.
 Po zmianie sluga opublikowanego artykułu dodaj przekierowanie starego adresu
 w **Przekierowania**.
 
+## Pisanie pod wyszukiwarki i odpowiedzi AI
+
+Zasady z [planu SEO/GEO/AEO](SEO-GEO-AEO-PLAN.md), etap SEO‑5 (11.10.2026):
+
+- **Lead odpowiada na pytanie z tytułu** w jednym–dwóch zdaniach. Bez
+  wstępu typu „w tym artykule dowiesz się”.
+- **„W skrócie”**: 2–5 zdań z najważniejszymi wnioskami. Każde zdanie
+  ma być zrozumiałe bez reszty tekstu i zgodne z treścią artykułu.
+- **Nagłówki H2 w formie pytań lub jasnych tez**, jedno twierdzenie na
+  akapit. Liczby zawsze z jednostką i źródłem.
+- **Źródła**: publikacje i wytyczne, do których tekst się odwołuje.
+  Linki do źródeł pierwotnych, nie do streszczeń.
+- **Linki wewnętrzne** w treści do konsultacji, e-booków i powiązanych
+  wpisów, z opisowym tekstem odnośnika.
+- **Data aktualizacji** tylko przy merytorycznej zmianie treści.
+- **Przegląd merytoryczny** (osoba i data) wypełniaj wyłącznie, gdy
+  przegląd rzeczywiście się odbył (decyzja 11.10.2026: obecnie bez
+  deklaracji).
+- **Bez obietnic efektów zdrowotnych** i bez zaleceń dawkowania. Pod
+  treścią artykułu zawsze wyświetla się zastrzeżenie edukacyjne.
+
 ## Strona zbiorcza bloga
 
 **Strony → Polski/English → Blog** zawiera:
@@ -92,11 +113,9 @@ dla artykułów, stron i publicznych dokumentów zależnych. Pomija szkice,
 wersje wydań, dokumenty systemowe i pliki. Projekcja pasuje do istniejącego
 Workera `/webhooks/sanity`; zdarzenie nie zawiera treści artykułu.
 
-Kontrakt jest sprawdzony testem lokalnym. Nie został zapisany do zdalnych
-webhooków. CLI potwierdził dwa istniejące webhooki, opisane jako publikacja
-zmian stron, lecz nie udostępnił ich filtrów. Historyczna konfiguracja
-w PROGRESS zawiera filtr `_type == "page"`. Trzeba porównać i ustawić kontrakt
-w webhookach staging/production przed odbiorem automatycznej publikacji artykułu.
+Kontrakt jest sprawdzony testem lokalnym. 11.10.2026 filtr kontraktu
+zapisano w obu webhookach Sanity (wcześniej `_type == "page"`). Staging
+działa; produkcyjny webhook pozostaje wyłączony do wdrożenia c15t.
 
 Jeżeli artykuł ma status Published w Sanity, a nie widać go na stronie,
 sprawdź kolejno: dostarczenie webhooka dla `article`, przebieg **Publish content**,

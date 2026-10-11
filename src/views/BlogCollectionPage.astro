@@ -12,6 +12,8 @@ import type {
 } from "@/sanity/repository";
 import BlogCollection3a from "@/views/BlogCollection3a.astro";
 import SiteShell3a from "@/views/SiteShell3a.astro";
+import { blogCollectionGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 
 export interface Props {
   lang: Locale;
@@ -58,6 +60,13 @@ const navigation = shell.navigation.map((item) => ({
 const headerCta = shell.headerCta
   ? { ...shell.headerCta, href: "#newsletter" }
   : undefined;
+const seo = pageSeo(settings, page.seo, {
+  path: pageHref(index.page),
+  // Only page 1 of a non-empty collection is in the inventory (.md, sitemap).
+  markdown: index.page === 1 && !content.isCategoryEmpty,
+  noindex: content.isCategoryEmpty,
+  graph: blogCollectionGraph(content),
+});
 ---
 
 <SiteShell3a
@@ -74,6 +83,7 @@ const headerCta = shell.headerCta
   headerCta={headerCta}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
+  seo={seo}
 >
   <BlogCollection3a lang={lang} content={content} />
 </SiteShell3a>

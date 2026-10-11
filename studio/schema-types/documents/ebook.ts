@@ -179,6 +179,20 @@ export const ebookType = defineType({
       initialValue: "pdf",
     }),
     defineField({
+      name: "numberOfPages",
+      title: "Liczba stron",
+      type: "number",
+      group: "product",
+      validation: (rule) => rule.integer().min(1).max(2000),
+    }),
+    defineField({
+      name: "publishedAt",
+      title: "Data udostępnienia",
+      description: "Dzień rozpoczęcia sprzedaży. Trafia do datePublished.",
+      type: "date",
+      group: "product",
+    }),
+    defineField({
       name: "chapters",
       title: "Rozdziały",
       type: "array",

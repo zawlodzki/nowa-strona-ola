@@ -5,6 +5,9 @@ import Layout3a from "@/design-system/Layout3a.astro";
 import SiteFooter from "@/design-system/components/SiteFooter.astro";
 import SiteHeader from "@/design-system/components/SiteHeader.astro";
 import { homePath } from "@/lib/paths";
+import { isIndexingEnabled } from "@/lib/seo/site";
+import type { PageSeo } from "@/lib/seo/types";
+import SeoHead from "@/views/SeoHead.astro";
 import type { NavigationLink, SocialLink } from "@/design-system/types";
 
 export interface Props {
@@ -21,6 +24,10 @@ export interface Props {
   preview?: boolean;
   languageHref?: string | null;
   legacyBase?: boolean;
+  /** Canonical, Open Graph and JSON-LD; omitted in the draft preview. */
+  seo?: PageSeo;
+  /** Always noindex (e.g. 404), independent of the build environment. */
+  noindex?: boolean;
 }
 
 const {
@@ -37,16 +44,30 @@ const {
   preview = false,
   languageHref = null,
   legacyBase = false,
+  seo,
+  noindex: forceNoindex = false,
 } = Astro.props;
 const homeHref = homePath(lang);
+const noindex =
+  forceNoindex || preview || seo?.noindex === true || !isIndexingEnabled();
 ---
 
 <Layout3a
   lang={lang}
   title={title}
   description={description}
+  noindex={noindex}
   legacyBase={legacyBase}
 >
+  {seo && !preview && (
+    <SeoHead
+      slot="head"
+      lang={lang}
+      title={title}
+      description={description}
+      seo={seo}
+    />
+  )}
   {preview && (
     <div class="preview-banner">
       <strong>

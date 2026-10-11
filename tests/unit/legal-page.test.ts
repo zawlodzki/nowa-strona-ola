@@ -2,8 +2,11 @@ import { readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vitest";
 
+import { siteSeoData } from "../../src/lib/seo/site-data";
+
 import { mapLegalPage } from "../../src/content/map-legal";
 import { serializeLegalPage } from "../../src/content/serialize-legal";
+import { legalGraph } from "../../src/lib/seo/page-graphs";
 import {
   articleBodyToHtml,
   articleBodyToMarkdown,
@@ -35,7 +38,14 @@ describe("legal page mapper", () => {
     expect(view.html).toContain("<table>");
     expect(view.html).not.toContain("Metryka dokumentu");
     expect(view.html).not.toContain("Historia wersji");
-    expect(view.jsonLd["@graph"][0]).toMatchObject({
+    expect(
+      legalGraph(view)({
+        lang: "pl",
+        path: view.href,
+        title: view.title,
+        site: siteSeoData(null),
+      })[0],
+    ).toMatchObject({
       version: "2.1",
       datePublished: "2026-10-10",
     });
@@ -57,8 +67,22 @@ describe("legal page mapper", () => {
     expect(serializeLegalPage(view).split("\n")[2]).toBe(
       "Wersja 2.3 · data wejścia w życie do ustalenia",
     );
-    expect(view.jsonLd["@graph"][0]).toMatchObject({ version: "2.3" });
-    expect(view.jsonLd["@graph"][0]).not.toHaveProperty("datePublished");
+    expect(
+      legalGraph(view)({
+        lang: "pl",
+        path: view.href,
+        title: view.title,
+        site: siteSeoData(null),
+      })[0],
+    ).toMatchObject({ version: "2.3" });
+    expect(
+      legalGraph(view)({
+        lang: "pl",
+        path: view.href,
+        title: view.title,
+        site: siteSeoData(null),
+      })[0],
+    ).not.toHaveProperty("datePublished");
   });
 
   it("puts the withdrawal notice and form on the terms page under stable anchors", async () => {

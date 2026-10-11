@@ -2,6 +2,13 @@
 
 Bez perfekcyjnego dzienniczka i listy nowych obowiązków. Kilka notatek, które pomogą Ci spokojnie zacząć rozmowę.
 
+## W skrócie
+
+- Na pierwszą konsultację nie potrzebujesz idealnego jadłospisu ani perfekcyjnego dzienniczka.
+- Najwięcej daje opis zwykłego dnia: pracy, dojazdów, obowiązków i czasu na gotowanie.
+- Dokumenty, nazwy stosowanych preparatów i poprzednie zalecenia zbierz w jednym miejscu.
+- Kilka zapisanych pytań pomaga wrócić w rozmowie do tematów, które są dla Ciebie najważniejsze.
+
 Pierwsza konsultacja nie musi zaczynać się od idealnego jadłospisu ani perfekcyjnie wypełnionego dzienniczka. Punktem wyjścia jest Twoja historia — i to, z czym potrzebujesz wsparcia teraz.
 
 Możesz mieć wiele pytań albo dopiero szukać słów, żeby opisać swoją sytuację. Kilka prostych notatek pomoże uporządkować rozmowę. Poniżej pokazuję, jak może wyglądać takie przygotowanie.
@@ -64,6 +71,8 @@ Na końcu notatki zostaw kilka pustych linijek. Podczas konsultacji zapiszesz ta
 **Przygotowanie ma ułatwić rozmowę, a nie dodać Ci kolejnych obowiązków.** Jeśli masz tylko chwilę, zacznij od jednego pytania i opisu zwykłego dnia.
 
 Chcesz poznać sposób współpracy? [Zobacz konsultacje dietetyczne online](/konsultacje/).
+
+Artykuł ma charakter edukacyjny. Nie zastępuje konsultacji z lekarzem ani indywidualnych zaleceń.
 
 ## Pytania przed pierwszą konsultacją.
 

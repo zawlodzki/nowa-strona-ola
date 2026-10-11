@@ -10,6 +10,9 @@ const mockClient = path.join(
 );
 
 export default defineConfig({
+  site: "https://aleksandraolesiewicz.com",
+  trailingSlash: "always",
+  build: { format: "directory" },
   output: "static",
   image: {
     remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],

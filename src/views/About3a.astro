@@ -19,7 +19,6 @@ import {
   diplomaSlotSize,
 } from "@/content/about-seed";
 import type { AboutView } from "@/content/map-about";
-import { socialProfileSameAs } from "@/content/social-profiles";
 import { pickSiteImage } from "@/lib/site-images";
 
 export interface Props {
@@ -35,30 +34,9 @@ const diplomaSrc = content.credentials.person.diploma?.src;
 const diplomaImage = pickSiteImage(diplomaSrc);
 const diplomaFrame = diplomaSlotSize();
 const person = content.credentials.person;
-const profileJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  mainEntity: {
-    "@type": "Person",
-    name: person.name,
-    alternateName: "Ola",
-    jobTitle: person.role,
-    description: person.bio ?? content.hero.lead.replaceAll("\n", " "),
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: person.educationInstitution,
-    },
-    sameAs: socialProfileSameAs(),
-  },
-};
 ---
 
 <main id="main" class="about3a">
-  <script
-    type="application/ld+json"
-    is:inline
-    set:html={JSON.stringify(profileJsonLd)}
-  ></script>
   <Hero
     id="start"
     kind="about"

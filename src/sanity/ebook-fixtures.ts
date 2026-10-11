@@ -204,14 +204,47 @@ export function pcosEbookFixture(language: Locale) {
   };
 }
 
+/**
+ * Mirrors Content Lake 11.10.2026: the remaining Polish e-books have a
+ * landing copied from the PCOS e-book as a placeholder, with their own card
+ * data and no `seo` (titles stay unique).
+ */
+function placeholderEbookFixture(
+  language: Locale,
+  card: ReturnType<typeof ebookFixtures>[number],
+) {
+  const base = pcosEbookFixture(language);
+  return {
+    ...base,
+    id: card.id,
+    slug: card.slug,
+    title: card.title,
+    subtitle: card.subtitle,
+    topic: card.topic,
+    cardDescription: card.cardDescription,
+    coverTone: card.coverTone,
+    sortOrder: card.sortOrder,
+    cover: card.cover,
+    seo: null,
+  };
+}
+
+function ebooksWithLanding(language: Locale) {
+  const pcos = pcosEbookFixture(language);
+  if (language !== "pl") return [pcos];
+  return ebookFixtures(language).map((card) =>
+    card.slug === pcos.slug ? pcos : placeholderEbookFixture(language, card),
+  );
+}
+
 export function fixtureEbook(language: Locale, slug: string) {
-  const fixture = pcosEbookFixture(language);
-  if (fixture.slug !== slug) return null;
-  return fixture;
+  return (
+    ebooksWithLanding(language).find((ebook) => ebook.slug === slug) ?? null
+  );
 }
 
 export function fixtureEbooksWithLanding() {
-  return [pcosEbookFixture("pl"), pcosEbookFixture("en")];
+  return [...ebooksWithLanding("pl"), ...ebooksWithLanding("en")];
 }
 
 export function fixtureEbooksForLanguage(language: Locale) {

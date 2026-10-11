@@ -11,6 +11,19 @@ Full text: `src/assets/fonts/switzer/FFL.txt`.
 Self-hosting with CSS `@font-face` is permitted. Subsetting, format conversion
 and redistribution of the font files are not.
 
+Share images (`/og/*.png`) are rendered at build time with the official,
+unmodified static `Switzer-Regular.otf`, `Switzer-Semibold.otf` and
+`Switzer-Bold.otf` from the same package (`src/assets/fonts/switzer/og/`,
+2026-10-11). FFL §01 permits use in digital images and social media; the OTF
+files are read from disk during the build and are not deployed or served.
+
+## satori and resvg-js
+
+Build-time share images use [satori](https://github.com/vercel/satori)
+(Vercel) and [@resvg/resvg-js](https://github.com/yisibl/resvg-js), both under
+the Mozilla Public License 2.0 (https://mozilla.org/MPL/2.0/). They are
+development dependencies, unmodified, and are not shipped to visitors.
+
 ## Gambarino
 
 Wordmarki w `src/assets/brand/` powstały z Gambarino Regular (Théo Guillard /

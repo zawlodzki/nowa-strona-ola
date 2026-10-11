@@ -7,6 +7,8 @@ import SiteShell3a from "@/views/SiteShell3a.astro";
 import { consultationCopy } from "@/content/consultation-seed";
 import { mapConsultation } from "@/content/map-consultation";
 import Consultation3a from "@/views/Consultation3a.astro";
+import { consultationGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 export interface Props {
   lang: Locale;
   page: PageContent;
@@ -27,6 +29,10 @@ const navigation = shell.navigation.map((item) => ({
 }));
 const consultation = mapConsultation(page, lang);
 const consultationLabels = consultationCopy[lang];
+const seo = pageSeo(settings, page.seo, {
+  path: pagePath(lang, page.slug),
+  graph: consultationGraph(consultation, consultationLabels.format),
+});
 ---
 
 <SiteShell3a
@@ -46,6 +52,7 @@ const consultationLabels = consultationCopy[lang];
   }}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
+  seo={seo}
 >
   <Consultation3a
     lang={lang}

@@ -24,7 +24,12 @@ export function blogPageFromLegacySettings(
     language,
     slug: "blog",
     title: seoTitle || collection.title || "Blog",
-    seo: { title: seoTitle, description: seoDescription },
+    seo: {
+      title: seoTitle,
+      description: seoDescription,
+      noindex: null,
+      ogImage: null,
+    },
     translation: settings.translation?.language
       ? { language: settings.translation.language, slug: "blog" }
       : null,

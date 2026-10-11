@@ -5,6 +5,9 @@ import { mapWithdrawal } from "@/content/map-withdrawal";
 import type { PageContent, SiteSettings } from "@/sanity/repository";
 import SiteShell3a from "@/views/SiteShell3a.astro";
 import Withdrawal3a from "@/views/Withdrawal3a.astro";
+import { pagePath } from "@/lib/paths";
+import { plainPageGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 export interface Props {
   lang: Locale;
   page: PageContent;
@@ -13,6 +16,10 @@ export interface Props {
 }
 const { lang, page, settings, preview = false } = Astro.props;
 const shell = shellLinks(settings);
+const seo = pageSeo(settings, page.seo, {
+  path: pagePath(lang, page.slug),
+  graph: plainPageGraph(),
+});
 ---
 
 <SiteShell3a
@@ -28,6 +35,7 @@ const shell = shellLinks(settings);
   headerCta={shell.headerCta}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
+  seo={seo}
 >
   <Withdrawal3a lang={lang} content={mapWithdrawal(page)} />
 </SiteShell3a>

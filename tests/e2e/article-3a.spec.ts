@@ -160,7 +160,7 @@ test("FAQ follows the books and its structured data matches visible answers", as
       answer: normalize(item.querySelector("p")!.textContent!),
     }));
     const raw = JSON.parse(
-      document.querySelector("#article-faq-schema")!.textContent!,
+      document.querySelector("#structured-data")!.textContent!,
     ) as {
       "@type"?: string;
       "@graph"?: {

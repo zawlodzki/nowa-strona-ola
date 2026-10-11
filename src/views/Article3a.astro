@@ -39,12 +39,6 @@ const bodyHtml = markArticleIntro(html);
 ---
 
 <main id="main" class="article3a">
-  <script
-    type="application/ld+json"
-    id={content.faq ? "article-faq-schema" : undefined}
-    is:inline
-    set:html={JSON.stringify(content.jsonLd)}
-  ></script>
   <div class="article-heading" id="start">
     <Container>
       <Breadcrumbs
@@ -81,6 +75,18 @@ const bodyHtml = markArticleIntro(html);
               <time datetime={content.updatedAt}>{content.updatedLabel}</time>
             </span>
           )}
+          {content.review && (
+            <span>
+              {content.review.label}
+              <strong>
+                {content.review.name},{" "}
+                <time datetime={content.review.date}>
+                  {content.review.dateLabel}
+                </time>
+              </strong>
+            </span>
+          )}
+          <span class="article-reading">{content.readingLabel}</span>
         </div>
       </div>
     </Container>
@@ -191,6 +197,19 @@ const bodyHtml = markArticleIntro(html);
         )}
       </aside>
       <div class="article-center">
+        {content.keyTakeaways && (
+          <section
+            class="article-takeaways"
+            aria-labelledby="article-takeaways-title"
+          >
+            <h2 id="article-takeaways-title">{content.keyTakeaways.label}</h2>
+            <ul>
+              {content.keyTakeaways.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )}
         <article
           class="article-richtext"
           aria-label={pl ? "Treść artykułu" : "Article body"}
@@ -200,6 +219,7 @@ const bodyHtml = markArticleIntro(html);
           )}
           <Fragment set:html={bodyHtml} />
         </article>
+        <p class="article-disclaimer">{content.disclaimer}</p>
         {content.sources.length > 0 && (
           <section
             class="article-sources"
@@ -1368,6 +1388,36 @@ const bodyHtml = markArticleIntro(html);
     color: var(--ao-muted);
     font-size: 0.75rem;
     line-height: 1.6;
+  }
+  .article-dates strong {
+    margin-inline-start: 8px;
+    font-weight: inherit;
+    color: var(--ao-ink);
+  }
+  .article-dates strong time {
+    margin-inline-start: 0;
+  }
+  .article-takeaways {
+    margin-block-end: var(--ao-space-40);
+    padding: var(--ao-space-24);
+    border: 1px solid var(--ao-line);
+    border-radius: var(--ao-radius-panel);
+    background: var(--ao-surface);
+  }
+  .article-takeaways h2 {
+    margin-block-end: var(--ao-space-12);
+    font-size: 1.125rem;
+    letter-spacing: -0.01em;
+  }
+  .article-takeaways ul {
+    display: grid;
+    gap: var(--ao-space-8);
+    padding-inline-start: 1.25em;
+  }
+  .article-disclaimer {
+    margin-block-start: var(--ao-space-32);
+    color: var(--ao-muted);
+    font-size: 0.875rem;
   }
   .article-sources {
     margin-block-start: 40px;

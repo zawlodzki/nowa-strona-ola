@@ -1,71 +1,20 @@
 import type { APIRoute } from "astro";
 
-import {
-  articlePath,
-  blogPath,
-  ebookCollectionPath,
-  ebookPath,
-  enabledLocales,
-  homePath,
-  isLocaleEnabled,
-  pagePath,
-} from "@/lib/paths";
-import {
-  getArticlePaths,
-  getEbookPaths,
-  getLegalPagePaths,
-  getPagePaths,
-} from "@/sanity/repository";
+import { getInventory } from "@/lib/seo/inventory";
+import { absoluteUrl } from "@/lib/seo/site";
 
-const origin = "https://aleksandraolesiewicz.com";
-
-function loc(path: string): string {
-  return `${origin}${path}`;
-}
-
+/** HTML pages of the inventory only: no demo, empty, paginated or `.md` URLs. */
 export const GET: APIRoute = async () => {
-  const [pages, articles, ebooks, legal] = await Promise.all([
-    getPagePaths(),
-    getArticlePaths(),
-    getEbookPaths(),
-    getLegalPagePaths(),
-  ]);
-  const urls = new Set<string>(
-    enabledLocales.flatMap((language) => [
-      loc(homePath(language)),
-      loc(blogPath(language)),
-      loc(ebookCollectionPath(language)),
-    ]),
+  const entries = [...(await getInventory("pl"))].sort((a, b) =>
+    a.path.localeCompare(b.path),
   );
-  for (const page of pages) {
-    if (!page.slug || !page.language || !isLocaleEnabled(page.language))
-      continue;
-    urls.add(loc(pagePath(page.language, page.slug)));
-  }
-  for (const article of articles) {
-    if (
-      !article.slug ||
-      !article.language ||
-      !isLocaleEnabled(article.language)
-    )
-      continue;
-    urls.add(loc(articlePath(article.language, article.slug)));
-  }
-  for (const ebook of ebooks) {
-    if (!ebook.slug || !ebook.language || !isLocaleEnabled(ebook.language))
-      continue;
-    urls.add(loc(ebookPath(ebook.language, ebook.slug)));
-  }
-  for (const page of legal) {
-    if (!page.slug || !page.language || !isLocaleEnabled(page.language))
-      continue;
-    urls.add(loc(pagePath(page.language, page.slug)));
-  }
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...urls]
-  .sort()
-  .map((url) => `  <url><loc>${url}</loc></url>`)
+${entries
+  .map((entry) => {
+    const lastmod = entry.lastmod ? `<lastmod>${entry.lastmod}</lastmod>` : "";
+    return `  <url><loc>${absoluteUrl(entry.path)}</loc>${lastmod}</url>`;
+  })
   .join("\n")}
 </urlset>
 `;

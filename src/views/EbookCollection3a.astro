@@ -23,7 +23,6 @@ import { availabilityBadge, currencyLabel, topicLabel } from "@/lib/offer";
 import {
   ebookCollectionFilterParam,
   ebookCollectionPath,
-  homePath,
   type EbookCollectionFilter,
 } from "@/lib/paths";
 import { homepageMediaKeys } from "@/content/homepage-seed";
@@ -59,46 +58,14 @@ const topicAnchor = {
   perimenopause: collection.items.find((item) => item.topic === "perimenopause")
     ?.slug,
 };
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CollectionPage",
-      name: collection.title.replaceAll("\n", " "),
-      description: collection.lead,
-      url: content.href,
-    },
-    {
-      "@type": "ItemList",
-      itemListElement: content.visibleItems.map((item, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        url: item.href,
-        name: item.title,
-      })),
-    },
-  ],
-};
 ---
 
 <main id="main" class="ebooks3a">
-  <script
-    type="application/ld+json"
-    is:inline
-    set:html={JSON.stringify(jsonLd)}
-  ></script>
   <section class="ebooks3a-intro" id="start">
     <Container>
       <Breadcrumbs
         label={pl ? "Ścieżka nawigacji" : "Breadcrumb"}
-        links={[
-          { href: homePath(lang), label: copy.breadcrumbHome },
-          {
-            href: content.href,
-            label: copy.breadcrumbCurrent,
-            current: true,
-          },
-        ]}
+        links={content.breadcrumbs}
       />
       <div class="ebooks3a-heading">
         <Heading as="h1" size="display">

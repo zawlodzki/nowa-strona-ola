@@ -164,6 +164,7 @@ function articleRecord(
 
 type BlogArticleFixture = ReturnType<typeof articleRecord> & {
   related: BlogArticleFixture[];
+  keyTakeaways?: string[] | null;
 };
 
 export const demonstrationArticles = Object.fromEntries(
@@ -206,6 +207,7 @@ function applyFeaturedArticle(language: Locale) {
   article.updatedAt = extras.updatedAt;
   article.breadcrumbTitle = extras.breadcrumbTitle;
   article.proposalNote = extras.proposalNote;
+  article.keyTakeaways = extras.keyTakeaways;
   article.body = extras.body as PortableBlock[];
   article.media = { ...article.media, caption: extras.heroCaption };
   article.faq = {

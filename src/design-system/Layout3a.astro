@@ -2,10 +2,12 @@
 import "./global.css";
 import fontUrl from "../assets/fonts/switzer/Switzer-Variable.woff2?url";
 import iconUrl from "../assets/brand/logo-monogram.svg?url";
+import { htmlLang, isIndexingEnabled } from "@/lib/seo/site";
 interface Props {
   title: string;
   lang: "pl" | "en";
   description?: string;
+  /** Defaults to noindex unless the build sets SITE_INDEXING=production. */
   noindex?: boolean;
   /** Keep legacy Layout base metrics for routes migrated from it (visual parity). */
   legacyBase?: boolean;
@@ -14,20 +16,25 @@ const {
   title,
   lang,
   description,
-  noindex = true,
+  noindex = !isIndexingEnabled(),
   legacyBase = false,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={htmlLang[lang]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta
+      name="robots"
+      content={
+        noindex ? "noindex,nofollow" : "index,follow,max-image-preview:large"
+      }
+    />
     <link
       rel="preload"
       href={fontUrl}

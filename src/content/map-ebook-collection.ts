@@ -1,10 +1,12 @@
 import type { Locale } from "@ola/shared";
 
 import { ebookCollectionCopy } from "@/content/ebook-collection-seed";
+import { topicLabel } from "@/lib/offer";
 import { assertKnownSections } from "@/content/sections";
 import { toEbookCard, toFormCopy } from "@/content/map-sections";
 import {
   ebookCollectionPath,
+  homePath,
   parseEbookCollectionFilter,
   type EbookCollectionFilter,
 } from "@/lib/paths";
@@ -39,6 +41,7 @@ export interface EbookCollectionView {
   seoTitle: string;
   seoDescription?: string;
   filter: EbookCollectionFilter;
+  breadcrumbs: { href: string; label: string; current?: boolean }[];
   collection: EbookCollectionContent;
   newsletter: FormCopy;
   visibleItems: EbookCardContent[];
@@ -139,9 +142,20 @@ export function mapEbookCollection(
     alternateHref: page.translation?.slug
       ? ebookCollectionPath(page.translation.language === "en" ? "en" : "pl")
       : null,
-    seoTitle: page.seo?.title ?? copy.seoTitle,
+    seoTitle:
+      selected === "all"
+        ? (page.seo?.title ?? copy.seoTitle)
+        : `${topicLabel(selected, language)} — ${page.seo?.title ?? copy.seoTitle}`,
     seoDescription: page.seo?.description ?? copy.seoDescription,
     filter: selected,
+    breadcrumbs: [
+      { href: homePath(language), label: copy.breadcrumbHome },
+      {
+        href: ebookCollectionPath(language),
+        label: copy.breadcrumbCurrent,
+        current: true,
+      },
+    ],
     collection: toEbookCollection(catalog, items),
     newsletter: toFormCopy(newsletter),
     visibleItems,

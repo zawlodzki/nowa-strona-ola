@@ -90,6 +90,9 @@ export interface EbookView {
   chapters: EbookChapter[];
   materials: EbookMaterial[];
   sources: EbookSource[];
+  numberOfPages?: number;
+  /** Sale start date (YYYY-MM-DD) for JSON-LD datePublished. */
+  publishedAt?: string;
   checkoutUrl?: string;
   /** Tylko dla statusu „Wkrótce dostępny” z kompletną konfiguracją zapisu. */
   waitlist?: EbookWaitlist;
@@ -134,6 +137,8 @@ export interface EbookView {
 
 type RawEbook = {
   language?: string | null;
+  numberOfPages?: number | null;
+  publishedAt?: string | null;
   slug?: string | null;
   title?: string | null;
   subtitle?: string | null;
@@ -438,6 +443,8 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
       href: required(source.href, "adres źródła"),
       scope: source.scope ?? undefined,
     })),
+    numberOfPages: ebook.numberOfPages ?? undefined,
+    publishedAt: ebook.publishedAt ?? undefined,
     checkoutUrl: canPurchase(availability) ? checkoutUrl : undefined,
     waitlist: toWaitlist(ebook.waitlist, availability, slug),
     landing: {

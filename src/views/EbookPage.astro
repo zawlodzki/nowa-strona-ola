@@ -7,6 +7,8 @@ import { shellLinks, testimonialsDisclosure } from "@/content/map-homepage";
 import type { EbookContent, SiteSettings } from "@/sanity/repository";
 import Ebook3a from "@/views/Ebook3a.astro";
 import SiteShell3a from "@/views/SiteShell3a.astro";
+import { ebookGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 
 export interface Props {
   lang: Locale;
@@ -24,6 +26,13 @@ const footerLinks = shell.navigation.map((item) => ({
   ...item,
   current: item.href === currentHref,
 }));
+const seo = pageSeo(settings, ebook.seo, {
+  path: content.href,
+  image: content.cover?.src
+    ? { src: content.cover.src, alt: content.cover.label }
+    : undefined,
+  graph: ebookGraph(content),
+});
 ---
 
 <SiteShell3a
@@ -42,6 +51,7 @@ const footerLinks = shell.navigation.map((item) => ({
   }}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
+  seo={seo}
 >
   <Ebook3a
     lang={lang}

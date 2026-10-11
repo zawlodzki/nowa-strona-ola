@@ -6,6 +6,8 @@ import { shellLinks } from "@/content/map-homepage";
 import type { LegalPageContent, SiteSettings } from "@/sanity/repository";
 import Legal3a from "@/views/Legal3a.astro";
 import SiteShell3a from "@/views/SiteShell3a.astro";
+import { legalGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 
 export interface Props {
   lang: Locale;
@@ -17,6 +19,10 @@ export interface Props {
 const { lang, page, settings, preview = false } = Astro.props;
 const content = mapLegalPage(page, settings);
 const shell = shellLinks(settings);
+const seo = pageSeo(settings, page.seo, {
+  path: content.href,
+  graph: legalGraph(content),
+});
 ---
 
 <SiteShell3a
@@ -32,6 +38,7 @@ const shell = shellLinks(settings);
   headerCta={shell.headerCta}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
+  seo={seo}
 >
   <Legal3a content={content} />
 </SiteShell3a>

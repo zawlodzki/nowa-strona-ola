@@ -78,7 +78,12 @@ export interface BlogCollectionView {
   newsletter: FormCopy | null;
   isEmpty: boolean;
   isCategoryEmpty: boolean;
-  category: { title: string; slug: string } | null;
+  category: {
+    title: string;
+    slug: string;
+    description?: string;
+    sameAs: string[];
+  } | null;
 }
 
 function required(value: string | null | undefined, name: string): string {
@@ -179,6 +184,18 @@ export function toBlogPostCard(
   };
 }
 
+/** Category and pagination pages get their own title (unique <title>, SEO-1). */
+export function collectionSeoTitle(
+  base: string,
+  language: Locale,
+  categoryTitle?: string,
+  page = 1,
+): string {
+  const withCategory = categoryTitle ? `${categoryTitle} — ${base}` : base;
+  if (page <= 1) return withCategory;
+  return `${withCategory} — ${language === "pl" ? "strona" : "page"} ${page}`;
+}
+
 export function mapBlogCollection(
   page: PageContent,
   index: {
@@ -198,7 +215,10 @@ export function mapBlogCollection(
   }[],
   language: Locale,
   options: {
-    category?: Pick<CategoryContent, "title" | "slug" | "translation"> | null;
+    category?:
+      | (Pick<CategoryContent, "title" | "slug" | "translation"> &
+          Partial<Pick<CategoryContent, "description" | "sameAs">>)
+      | null;
     pageHref: (page: number) => string;
   },
 ): BlogCollectionView {
@@ -240,6 +260,10 @@ export function mapBlogCollection(
     ? {
         title: required(options.category.title, "nazwę kategorii"),
         slug: options.category.slug,
+        description: options.category.description?.trim() || undefined,
+        sameAs: (options.category.sameAs ?? []).filter((url): url is string =>
+          Boolean(url),
+        ),
       }
     : null;
   const href = category
@@ -309,7 +333,12 @@ export function mapBlogCollection(
     language,
     href,
     alternateHref,
-    seoTitle: page.seo?.title?.trim() || copy.seoTitle,
+    seoTitle: collectionSeoTitle(
+      page.seo?.title?.trim() || copy.seoTitle,
+      language,
+      category?.title,
+      index.page,
+    ),
     seoDescription: page.seo?.description?.trim() || copy.seoDescription,
     title,
     lead,

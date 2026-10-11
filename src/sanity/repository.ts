@@ -40,6 +40,7 @@ import {
   PUBLISHED_LEGAL_PAGE_QUERY,
   PUBLISHED_PAGE_PATHS_QUERY,
   PUBLISHED_PAGE_QUERY,
+  PUBLISHED_REDIRECTS_QUERY,
   SITE_SETTINGS_QUERY,
 } from "./queries";
 import type {
@@ -53,6 +54,7 @@ import type {
   PUBLISHED_EBOOKS_QUERY_RESULT,
   PUBLISHED_LEGAL_PAGE_PATHS_QUERY_RESULT,
   PUBLISHED_LEGAL_PAGE_QUERY_RESULT,
+  PUBLISHED_REDIRECTS_QUERY_RESULT,
   PUBLISHED_PAGE_PATHS_QUERY_RESULT,
   PUBLISHED_PAGE_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
@@ -474,4 +476,16 @@ export async function listEbooks(
     return fixtureEbooksForLanguage(language) as unknown as EbookCard[];
   }
   return client.fetch<EbookCard[]>(PUBLISHED_EBOOKS_QUERY, { language });
+}
+
+/** Published redirects for the generated `_redirects` (SEO-3). Fixtures have none. */
+export async function listRedirects(
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+): Promise<PUBLISHED_REDIRECTS_QUERY_RESULT> {
+  const client = resolveClient(options);
+  if (!client) return [];
+  return client.fetch(PUBLISHED_REDIRECTS_QUERY);
 }

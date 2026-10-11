@@ -3,12 +3,12 @@ import type { Locale } from "@ola/shared";
 import { ebookCollectionCopy } from "@/content/ebook-collection-seed";
 import {
   articleBodyToHtml,
+  articleBodyToMarkdown,
   parsePortableBlocks,
   type PortableBlock,
 } from "@/content/portable-text";
 import { toEbookCard, toFaq, toFormCopy } from "@/content/map-sections";
 import { objectPositionFromMedia } from "@/content/blog-collection-seed";
-import { socialProfileSameAs } from "@/content/social-profiles";
 import { formatDate, toDatetime } from "@/lib/dates";
 import {
   aboutPath,
@@ -89,6 +89,22 @@ export interface Article3aView {
   body: PortableBlock[];
   sourcesLabel: string;
   sources: { title: string; href: string }[];
+  /** Categories as topics for JSON-LD `about` (sameAs: Wikidata/Wikipedia). */
+  topics: { title: string; sameAs: string[] }[];
+  /** Real editorial review only; null when not declared (decision D5). */
+  review: {
+    name: string;
+    role?: string;
+    date: string;
+    label: string;
+    dateLabel: string;
+  } | null;
+  /** 2–5 standalone sentences shown under the lead (SEO-5). */
+  keyTakeaways: { label: string; items: string[] } | null;
+  wordCount: number;
+  readingMinutes: number;
+  readingLabel: string;
+  disclaimer: string;
   authors: {
     name: string;
     role: string;
@@ -109,10 +125,6 @@ export interface Article3aView {
     actionLabel: string;
     note: string;
   } | null;
-  jsonLd: {
-    "@context": "https://schema.org";
-    "@graph": Record<string, unknown>[];
-  };
 }
 
 const labels = {
@@ -141,6 +153,11 @@ const labels = {
     booksTitle: "Przyjrzyj się temu bliżej.",
     booksLead: "Trzy e-booki o PCOS wybrane do tego artykułu.",
     faqNote: "Przykładowe FAQ do akceptacji redakcyjnej.",
+    keyTakeaways: "W skrócie",
+    readingTime: "min czytania",
+    reviewed: "Sprawdziła merytorycznie",
+    disclaimer:
+      "Artykuł ma charakter edukacyjny. Nie zastępuje konsultacji z lekarzem ani indywidualnych zaleceń.",
   },
   en: {
     breadcrumbLabel: "Breadcrumb",
@@ -167,8 +184,27 @@ const labels = {
     booksTitle: "Take a closer look.",
     booksLead: "Three PCOS e-books chosen for this article.",
     faqNote: "Sample FAQ pending editorial approval.",
+    keyTakeaways: "Key takeaways",
+    readingTime: "min read",
+    reviewed: "Reviewed by",
+    disclaimer:
+      "This article is educational. It does not replace medical advice or individual recommendations.",
   },
 } as const;
+
+/** Words of the article body (Markdown without markup), for reading time. */
+export function countWords(markdown: string): number {
+  return markdown
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/[#>*_|`~-]+/g, " ")
+    .split(/\s+/)
+    .filter((word) => /[\p{L}\p{N}]/u.test(word)).length;
+}
+
+/** Reading time at 200 words per minute, at least one minute. */
+export function readingMinutes(words: number): number {
+  return Math.max(1, Math.ceil(words / 200));
+}
 
 // The two featured recommendations show both topics from the mockup.
 // Each article document still has one category, so the pair is not joinable from the data.
@@ -234,6 +270,11 @@ export function mapArticle(
   }
   const body = parsePortableBlocks(article.body);
   const { toc } = articleBodyToHtml(body);
+  const wordCount = countWords(articleBodyToMarkdown(body));
+  const minutes = readingMinutes(wordCount);
+  const takeaways = (article.keyTakeaways ?? [])
+    .map((item) => item?.trim())
+    .filter((item): item is string => Boolean(item));
   const href = articlePath(language, slug);
   const alternateHref = article.translation?.slug
     ? articlePath(
@@ -352,57 +393,6 @@ export function mapArticle(
     120,
     "50% 50%",
   );
-  const graph: Record<string, unknown>[] = [
-    {
-      "@type": "BlogPosting",
-      headline: title,
-      description: lead,
-      datePublished: toDatetime(publishedAt),
-      ...(updatedAt ? { dateModified: toDatetime(updatedAt) } : {}),
-      inLanguage: language,
-      author: {
-        "@type": "Person",
-        name: author.name,
-        jobTitle: author.role,
-        sameAs: socialProfileSameAs(),
-      },
-      mainEntityOfPage: href,
-    },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: copy.home,
-          item: homePath(language),
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: copy.blog,
-          item: blogPath(language),
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: article.breadcrumbTitle?.trim() || title,
-          item: href,
-        },
-      ],
-    },
-  ];
-  if (faq) {
-    graph.push({
-      "@type": "FAQPage",
-      inLanguage: language,
-      mainEntity: faq.items.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: { "@type": "Answer", text: item.answer },
-      })),
-    });
-  }
   return {
     language,
     href,
@@ -462,6 +452,35 @@ export function mapArticle(
     body,
     sourcesLabel: copy.sources,
     sources,
+    topics: (article.categories ?? []).flatMap((category) =>
+      category?.title
+        ? [
+            {
+              title: category.title,
+              sameAs: (category.sameAs ?? []).filter((url): url is string =>
+                Boolean(url),
+              ),
+            },
+          ]
+        : [],
+    ),
+    review:
+      article.reviewedBy?.name && article.lastReviewedAt
+        ? {
+            name: article.reviewedBy.name,
+            role: article.reviewedBy.role ?? undefined,
+            date: article.lastReviewedAt,
+            label: copy.reviewed,
+            dateLabel: formatDate(article.lastReviewedAt, language),
+          }
+        : null,
+    keyTakeaways: takeaways.length
+      ? { label: copy.keyTakeaways, items: takeaways }
+      : null,
+    wordCount,
+    readingMinutes: minutes,
+    readingLabel: `${minutes} ${copy.readingTime}`,
+    disclaimer: copy.disclaimer,
     authors: [
       {
         name: author.name,
@@ -479,6 +498,5 @@ export function mapArticle(
     faq,
     newsletter,
     sidebar,
-    jsonLd: { "@context": "https://schema.org", "@graph": graph },
   };
 }

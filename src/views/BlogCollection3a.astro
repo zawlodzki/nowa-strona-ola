@@ -24,29 +24,6 @@ export interface Props {
 
 const { lang, content } = Astro.props;
 const pl = lang === "pl";
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CollectionPage",
-      name: content.title.replaceAll("\n", " "),
-      description: content.lead,
-      url: content.href,
-    },
-    {
-      "@type": "ItemList",
-      itemListElement: [
-        ...(content.latest ? [content.latest] : []),
-        ...content.items,
-      ].map((item, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        url: item.href,
-        name: item.title,
-      })),
-    },
-  ],
-};
 
 function readAria(item: BlogPostCard) {
   return `${content.readActionLabel}: ${item.title}`;
@@ -54,11 +31,6 @@ function readAria(item: BlogPostCard) {
 ---
 
 <main id="main" class="blog3a">
-  <script
-    type="application/ld+json"
-    is:inline
-    set:html={JSON.stringify(jsonLd)}
-  ></script>
   <section class="blog3a-heading" aria-labelledby="blog-title">
     <Container>
       <Breadcrumbs
