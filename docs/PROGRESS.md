@@ -1,10 +1,29 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-11 (wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Wskaźnik 9000+ Instagram zamiast 450+, 11.10.2026
+
+- Decyzja użytkownika: zamiast „450+ godzin szkoleń” wszędzie „9000+ kobiet codziennie śledzi moje materiały edukacyjne na Instagramie”
+  (EN „women follow my educational content on Instagram every day”). Tytuł
+  sekcji O mnie: „Materiały edukacyjne na Instagramie”. Zapis w
+  [konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md).
+- Zmienione: seedy homepage i About, fixture’y homepage/About/konsultacji
+  (wartość 9000), `import-consultation-content.mjs`, przykład Markdown,
+  komunikat walidacji About, testy unit/e2e, makiety 3a.
+- Makieta About przy 320 px i zoomie 200% wychodziła 9 px poza ekran przez
+  szerszą liczbę; w kontenerze ≤374 px liczba ma 44 px.
+- Content Lake `production`: opublikowano 6 dokumentów `page-home-*`,
+  `page-about-*`, `page-consultation-*` (PL/EN), wartość 9000 i nowe opisy.
+  Usunięto jednorazowy `import:training-metric` z PR #66 — po tej zmianie
+  nieaktualny.
+- Kontrole: `npm run verify` PASS (216 unit, e2e 324/324, content-lake OK).
+  Następny krok: potwierdzić źródło liczby 9000+
+  i przebudować produkcję.
 
 ### Wskaźnik 450+: godziny szkoleń, 10.10.2026
 

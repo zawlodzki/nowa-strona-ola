@@ -211,7 +211,8 @@ export const homepageCopy = {
     approachTitle: "Wiesz, od czego zacząć.\nRozumiesz, po co to robisz.",
     approachLead:
       "Po diagnozie łatwo pogubić się w radach o diecie, badaniach i suplementach. Pomogę Ci uporządkować informacje i przełożyć je na codzienne decyzje.",
-    metricLabel: "godzin szkoleń",
+    metricLabel:
+      "kobiet codziennie śledzi moje materiały edukacyjne na Instagramie",
     highlights: [
       {
         title: "Twoja sytuacja jest punktem wyjścia.",
@@ -313,7 +314,7 @@ export const homepageCopy = {
     approachTitle: "You know where to start.\nYou understand why.",
     approachLead:
       "After a diagnosis it is easy to get lost in advice about diet, tests and supplements. I will help you order the information and turn it into everyday decisions.",
-    metricLabel: "hours of training",
+    metricLabel: "women follow my educational content on Instagram every day",
     highlights: [
       {
         title: "Your situation is the starting point.",

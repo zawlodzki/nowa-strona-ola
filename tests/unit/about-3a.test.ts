@@ -25,7 +25,7 @@ describe("about 3a fixtures", () => {
     ]);
     const view = mapAbout(page, "pl");
     expect(view.hero.title).toContain("Jestem Ola");
-    expect(view.experience.value).toBe(450);
+    expect(view.experience.value).toBe(9000);
     expect(view.credentials.person.educationInstitution).toBe(
       "Śląski Uniwersytet Medyczny",
     );
@@ -74,7 +74,7 @@ describe("about serializers", () => {
     expect(markdown).toContain(
       "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
     );
-    expect(markdown).toContain("450+");
+    expect(markdown).toContain("9000+");
     expect(markdown).toContain("(https://cal.com/dietetyk/konsultacja)");
     expect(markdown).not.toMatch(/fikcyjny dyplom/i);
   });
