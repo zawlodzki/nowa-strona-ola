@@ -503,7 +503,9 @@ test("ebook collection with categories, empty URL and no POST", async ({
   const all = page.getByRole("radio", { name: /Wszystkie/ });
   await all.focus();
   await page.keyboard.press("ArrowRight");
-  await expect(page.getByRole("radio", { name: /PMOS \(PCOS\)/ })).toBeChecked();
+  await expect(
+    page.getByRole("radio", { name: /PMOS \(PCOS\)/ }),
+  ).toBeChecked();
   await expect(cards).toHaveCount(3);
   await expect(page).toHaveURL(/kategoria=pcos|\/kategoria\/pcos\//);
   await page.getByRole("radio", { name: "Perimenopauza" }).check();
@@ -516,7 +518,9 @@ test("ebook collection with categories, empty URL and no POST", async ({
   expect(posts).toEqual([]);
 
   await page.goto("/ebooki/kategoria/pcos/");
-  await expect(page.getByRole("radio", { name: /PMOS \(PCOS\)/ })).toBeChecked();
+  await expect(
+    page.getByRole("radio", { name: /PMOS \(PCOS\)/ }),
+  ).toBeChecked();
   await expect(cards).toHaveCount(3);
 
   const missing = await page.goto("/en/ebooki/");
@@ -543,7 +547,9 @@ test("ebook collection categories work without JavaScript", async ({
   ).toHaveCount(3);
   await expect(page.locator('[data-count="perimenopause"]')).toBeVisible();
   await page.goto("/ebooki/kategoria/pcos/");
-  await expect(page.getByRole("radio", { name: /PMOS \(PCOS\)/ })).toBeChecked();
+  await expect(
+    page.getByRole("radio", { name: /PMOS \(PCOS\)/ }),
+  ).toBeChecked();
   await expect(
     page.locator(".ebooks3a-grid .ebooks3a-card:visible"),
   ).toHaveCount(3);

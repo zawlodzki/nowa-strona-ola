@@ -281,7 +281,8 @@ function documents() {
     _type: "siteSettings",
     language: "pl",
     siteTitle: "Aleksandra Olesiewicz",
-    footerNote: "PMOS (PCOS), insulinooporność i odżywianie dopasowane do życia.",
+    footerNote:
+      "PMOS (PCOS), insulinooporność i odżywianie dopasowane do życia.",
     navigation: [
       { _key: "nav-ebooks", label: "E-booki", href: "/ebooki/" },
       {
@@ -307,7 +308,8 @@ function documents() {
     ...settingsPl,
     _id: "siteSettings-en",
     language: "en",
-    footerNote: "PMOS (PCOS), insulin resistance and nutrition that fits real life.",
+    footerNote:
+      "PMOS (PCOS), insulin resistance and nutrition that fits real life.",
     navigation: [
       { _key: "nav-ebooks", label: "E-books", href: "/en/ebooks/" },
       {

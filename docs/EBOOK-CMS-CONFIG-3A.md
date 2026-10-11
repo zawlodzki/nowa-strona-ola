@@ -56,7 +56,7 @@ Użyć istniejących `languageField`, `translationField("ebook")`,
 | Pole                              | Typ i zasada                                                              | Wartość dla mockupu / status                                                     |
 | --------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `language`, `translation`, `slug` | Osobny dokument PL/EN; slug unikalny w obrębie języka                     | PL, `suplementy-w-pcos`; EN nieprzygotowane                                      |
-| `title`, `subtitle`               | String, tytuł wymagany max 100, podtytuł max 180                          | Suplementy w PMOS (PCOS) / Decyzje, które mają sens                                     |
+| `title`, `subtitle`               | String, tytuł wymagany max 100, podtytuł max 180                          | Suplementy w PMOS (PCOS) / Decyzje, które mają sens                              |
 | `topic`                           | Kontrolowana lista: `pcos`, `perimenopause`                               | `pcos`                                                                           |
 | `cardDescription`                 | Text, wymagany max 250                                                    | Obecny opis karty z homepage                                                     |
 | `cover`                           | Istniejący `mediaObject`, wymagany obraz i alt                            | Eksport kontrolowanej okładki z HTML/CSS lub zatwierdzony plik; nie fikcyjny URL |

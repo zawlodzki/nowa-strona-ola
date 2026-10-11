@@ -75,7 +75,10 @@ export const EBOOK_SEED = [
     topic: "pcos" as const,
     sortOrder: 3,
     coverTone: "light" as const,
-    title: { pl: "Szczupła, a jednak PMOS (PCOS)", en: "Slim, and still PMOS (PCOS)" },
+    title: {
+      pl: "Szczupła, a jednak PMOS (PCOS)",
+      en: "Slim, and still PMOS (PCOS)",
+    },
     subtitle: {
       pl: "Z troską o Twoje ciało",
       en: "With care for your body",
@@ -169,7 +172,8 @@ export { footerSocialLinks } from "@/content/social-profiles";
 export const homepageCopy = {
   pl: {
     siteTitle: "Aleksandra Olesiewicz",
-    footerNote: "PMOS (PCOS), insulinooporność i odżywianie dopasowane do życia.",
+    footerNote:
+      "PMOS (PCOS), insulinooporność i odżywianie dopasowane do życia.",
     seoTitle: "Aleksandra Olesiewicz — dietetyczka kliniczna",
     seoDescription:
       "Praktyczne wsparcie w odżywianiu przy PMOS (PCOS) i insulinooporności. Poznaj konsultacje online i materiały o PMOS (PCOS) i perimenopauzie.",
@@ -272,7 +276,8 @@ export const homepageCopy = {
   },
   en: {
     siteTitle: "Aleksandra Olesiewicz",
-    footerNote: "PMOS (PCOS), insulin resistance and nutrition that fits real life.",
+    footerNote:
+      "PMOS (PCOS), insulin resistance and nutrition that fits real life.",
     seoTitle: "Aleksandra Olesiewicz — clinical dietitian",
     seoDescription:
       "Practical nutrition support for PMOS (PCOS) and insulin resistance. Online consultations and materials on PMOS (PCOS) and perimenopause.",

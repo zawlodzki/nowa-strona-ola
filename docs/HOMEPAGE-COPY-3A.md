@@ -127,9 +127,9 @@ Propozycja nie powiela ich jako dowiedzionych obietnic produktu.
 | Źródło                                                                             | Znaczenie dla homepage                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ZRODLA-PRAWDY.md`                                                                 | Rozstrzyga konflikty; marka i oferta mają pierwszeństwo przed archiwum i planami pakietów.                                                                                                                  |
-| `00_KONTEKST/marka.md`, aktualizacja 05.08.2026                                    | Dietetyczka kliniczna, PMOS (PCOS)/IO, indywidualne podejście, empatia, analiza wyników, elastyczne odżywianie.                                                                                                    |
+| `00_KONTEKST/marka.md`, aktualizacja 05.08.2026                                    | Dietetyczka kliniczna, PMOS (PCOS)/IO, indywidualne podejście, empatia, analiza wyników, elastyczne odżywianie.                                                                                             |
 | `00_KONTEKST/oferta.md`, aktualizacja 05.08.2026                                   | Mentoring 5M, zakres, historyczne ceny, zawieszenie sprzedaży do 31.12.2026; ekosystem pakietów pozostaje planem. Dokument zawiera też sprzeczne zapisy o wcześniejszej sprzedaży pojedynczych konsultacji. |
-| `00_KONTEKST/klienci.md`, aktualizacja 05.08.2026                                  | Zagubienie po diagnozie, sprzeczne rady, potrzeba zrozumienia i konkretnego planu; PMOS (PCOS)/IO jest rdzeniem obecnej publiczności.                                                                              |
+| `00_KONTEKST/klienci.md`, aktualizacja 05.08.2026                                  | Zagubienie po diagnozie, sprzeczne rady, potrzeba zrozumienia i konkretnego planu; PMOS (PCOS)/IO jest rdzeniem obecnej publiczności.                                                                       |
 | `04_OFERTA_I_SPRZEDAZ/MENTORING/DEFINICJA_PRODUKTU_mentoring-pcos.md`, 08.09.2026  | Prowadzenie 1:1, a nie sama aplikacja czy jednorazowa wizyta. Roadmapa pozostaje do decyzji.                                                                                                                |
 | `03_CONTENT/STRATEGIA/style-guide.md`                                              | Bezpośredni, ciepły, rzeczowy język; autorka zaznacza, że to standard rejestru, nie niezależna próbka osobistego głosu.                                                                                     |
 | `03_CONTENT/STRATEGIA/storybrand.md`                                               | Pomocniczy framework. Przykładowe „500 osób” nie potwierdza liczby pacjentek Oli.                                                                                                                           |
@@ -260,14 +260,14 @@ Zachować dwa wejścia **PMOS (PCOS) / Perimenopauza** i sześć kart w mockupie
 Na gotowej stronie pokazać tylko ukończone produkty lub jawne zapowiedzi.
 Opis karty obiecuje zawartość, którą finalny plik musi rzeczywiście dostarczyć.
 
-| Produkt                       | Proponowany opis karty                                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Suplementy w PMOS (PCOS)             | Uporządkuj pytania o suplementy: po co je stosować i co omówić ze specjalistą przed zakupem.            |
-| Badania, które mają sens      | Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.                                    |
-| Szczupła, a jednak PMOS (PCOS)       | Jak podejść do odżywiania przy PMOS (PCOS), kiedy Twoim celem nie jest odchudzanie.                     |
-| Waga Cię okłamuje             | Przyjrzyj się zmianom w sylwetce i codziennych nawykach w okresie perimenopauzy.                        |
-| Czy to już?                   | Dziennik cyklu i samopoczucia, który pomoże Ci przygotować się do rozmowy z lekarzem.                   |
-| Noc zaczyna się o osiemnastej | Uporządkuj wieczorne posiłki i nawyki. Sprawdź, co warto obserwować przed rozmową o problemach ze snem. |
+| Produkt                        | Proponowany opis karty                                                                                  |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| Suplementy w PMOS (PCOS)       | Uporządkuj pytania o suplementy: po co je stosować i co omówić ze specjalistą przed zakupem.            |
+| Badania, które mają sens       | Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.                                    |
+| Szczupła, a jednak PMOS (PCOS) | Jak podejść do odżywiania przy PMOS (PCOS), kiedy Twoim celem nie jest odchudzanie.                     |
+| Waga Cię okłamuje              | Przyjrzyj się zmianom w sylwetce i codziennych nawykach w okresie perimenopauzy.                        |
+| Czy to już?                    | Dziennik cyklu i samopoczucia, który pomoże Ci przygotować się do rozmowy z lekarzem.                   |
+| Noc zaczyna się o osiemnastej  | Uporządkuj wieczorne posiłki i nawyki. Sprawdź, co warto obserwować przed rozmową o problemach ze snem. |
 
 „Czy to już?” nie obiecuje samodzielnego rozpoznania; „Noc…” nie obiecuje
 leczenia bezsenności. Tytuł „Waga Cię okłamuje” pozostaje roboczy do akceptacji Oli.

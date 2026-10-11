@@ -215,7 +215,8 @@ const relatedKickers: Record<Locale, Record<string, string>> = {
   },
   en: {
     "everyday-meals-with-pcos": "PMOS (PCOS) · Nutrition",
-    "sorting-pcos-questions-before-an-appointment": "PMOS (PCOS) · Consultations",
+    "sorting-pcos-questions-before-an-appointment":
+      "PMOS (PCOS) · Consultations",
   },
 };
 

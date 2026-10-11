@@ -4,7 +4,12 @@ const pages = [
   {
     path: "/",
     heading: "Z kim pracuję",
-    titles: ["PMOS (PCOS)", "Insulinooporność", "Starania o ciążę", "Perimenopauza"],
+    titles: [
+      "PMOS (PCOS)",
+      "Insulinooporność",
+      "Starania o ciążę",
+      "Perimenopauza",
+    ],
   },
 ] as const;
 

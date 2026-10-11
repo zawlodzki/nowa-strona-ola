@@ -1953,11 +1953,11 @@ Kontrole tej sesji (Node 24.21.0):
 
 Tabela zdjęć z makiety:
 
-| Zdjęcie z makiety                         | Plik na produkcji                                       | Sekcja                                                                                     | Status                   |
-| ----------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
-| `assets/food-editorial.webp`              | `src/assets/editorial/food-editorial.webp` klucz `food` | wyróżniony wpis; karty posiłków, suplementów, dzienniczka, zakupów                         | na miejscu, ten sam kadr |
+| Zdjęcie z makiety                         | Plik na produkcji                                       | Sekcja                                                                                            | Status                   |
+| ----------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------ |
+| `assets/food-editorial.webp`              | `src/assets/editorial/food-editorial.webp` klucz `food` | wyróżniony wpis; karty posiłków, suplementów, dzienniczka, zakupów                                | na miejscu, ten sam kadr |
 | `../../src/assets/portraits/contact.webp` | `src/assets/portraits/contact.webp` klucz `contact`     | pytania o PMOS (PCOS), insulinooporność, sprzeczne rady (`portrait` / `portrait-close`, 15% góry) | na miejscu, ten sam kadr |
-| `../../src/assets/portraits/about.webp`   | `src/assets/portraits/about.webp` klucz `about`         | wyniki badań, cel konsultacji (`portrait`, 15% góry)                                       | na miejscu, ten sam kadr |
+| `../../src/assets/portraits/about.webp`   | `src/assets/portraits/about.webp` klucz `about`         | wyniki badań, cel konsultacji (`portrait`, 15% góry)                                              | na miejscu, ten sam kadr |
 
 Brakujących plików nie było; placeholderów nie podstawiano.
 
@@ -2062,11 +2062,11 @@ Kontrole tej sesji (Node 24.21.0):
 
 Tabela zdjęć z makiety:
 
-| Zdjęcie z makiety                                                     | Plik na produkcji                                                         | Sekcja                                                   | Status                                         |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------- |
+| Zdjęcie z makiety                                                     | Plik na produkcji                                                         | Sekcja                                                                 | Status                                         |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------- |
 | `assets/food-editorial.webp` (CSS `.art-nutrition`)                   | `src/assets/editorial/food-editorial.webp` przez `SiteImage` klucz `food` | okładka „Szczupła, a jednak PMOS (PCOS)” / Slim, and still PMOS (PCOS) | na miejscu, ten sam kadr                       |
-| pozostałe 5 okładek (art-decisions/route/observation/journal/evening) | SVG `BookCoverArt` w `src/design-system/decorations/`                     | karty kolekcji                                           | SVG, bez rastrów — zgodnie z makietą           |
-| brak innych `<img>` w `ebooks-3a.html`                                | —                                                                         | —                                                        | nic nie brakuje; placeholderów nie podstawiano |
+| pozostałe 5 okładek (art-decisions/route/observation/journal/evening) | SVG `BookCoverArt` w `src/design-system/decorations/`                     | karty kolekcji                                                         | SVG, bez rastrów — zgodnie z makietą           |
+| brak innych `<img>` w `ebooks-3a.html`                                | —                                                                         | —                                                                      | nic nie brakuje; placeholderów nie podstawiano |
 
 Następny krok: pakiet 6 BlogCollection3a (wykonany 08.10.2026). Dane kolekcji
 e-booków w Content Lake i odbiór Studio/preview pozostają otwarte. Copy i UX
@@ -4235,7 +4235,7 @@ placeholdera-zdjęcia.
 | `about.webp` (portret)                                       | `src/assets/portraits/about.webp` → `/_astro/about.*.webp`                            | Homepage „O mnie”; O mnie hero; konsultacja „Po drugiej stronie jest Ola”; landing e-booka PL/EN autorka | OK; ekspert: 520 px / `center 28%` (470/400/340 w breakpointach)          |
 | `contact.webp` (wnętrze, 1536×1024)                          | `src/assets/portraits/contact.webp` → `/_astro/contact.*.webp`                        | Homepage panel konsultacji; O mnie panel; konsultacja przebieg                                           | OK; przebieg `object-position: 72% center`, 460/360/320/280 px            |
 | `food-editorial.webp` inset                                  | `src/assets/editorial/food-editorial.webp` (identyczny z makietą)                     | Homepage „O mnie”, kadr 220×156 / `right: -56px`                                                         | OK                                                                        |
-| `food-editorial.webp` tło okładki `art-nutrition`            | ten sam plik, wariant 320×180                                                         | Homepage karta e-booka „Szczupła, a jednak PMOS (PCOS)”                                                         | OK; `.ao-card__media > img` żeby globalny kadr 1.5 nie nadpisywał okładki |
+| `food-editorial.webp` tło okładki `art-nutrition`            | ten sam plik, wariant 320×180                                                         | Homepage karta e-booka „Szczupła, a jednak PMOS (PCOS)”                                                  | OK; `.ao-card__media > img` żeby globalny kadr 1.5 nie nadpisywał okładki |
 | `alab.svg`, `uns.png`, `norsan.png`, `norsa.png`, `omni.png` | `src/assets/partners/*` → `/_astro/*`                                                 | Homepage belka marek                                                                                     | OK; SVG poza rasterem, PNG przez pipeline                                 |
 | Skan dyplomu                                                 | **brak pliku w repo**                                                                 | O mnie, wykształcenie                                                                                    | Placeholder SVG jak makieta; bez fikcyjnego dokumentu                     |
 | Awatary opinii                                               | —                                                                                     | Homepage / O mnie / konsultacja / e-book opinie                                                          | Nie ma w makiecie; nie dodano                                             |

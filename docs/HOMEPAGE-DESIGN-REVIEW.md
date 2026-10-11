@@ -33,11 +33,11 @@ produkcyjnego sklepu ani certyfikacji dostępności.
 | #   | Heurystyka Nielsena              | Ocena | Uzasadnienie                                                                                           |
 | --- | -------------------------------- | ----- | ------------------------------------------------------------------------------------------------------ |
 | 1   | Widoczność stanu                 | 3/4   | Licznik biblioteki, krańcowe stany strzałek i jawny status demonstracji formularza.                    |
-| 2   | Język odbiorczyni                | 3/4   | PMOS (PCOS) i perimenopauza są czytelne, lecz hasła pozostają ogólne.                                         |
+| 2   | Język odbiorczyni                | 3/4   | PMOS (PCOS) i perimenopauza są czytelne, lecz hasła pozostają ogólne.                                  |
 | 3   | Kontrola i swoboda               | 4/4   | Natywne przewijanie, brak autoplay, statyczna treść; zachowanie klawiatury oceniono również ze źródła. |
 | 4   | Spójność i standardy             | 3/4   | Wspólne wzorce CTA; etykieta kontaktu nie wskazuje jasno newslettera.                                  |
 | 5   | Zapobieganie błędom              | 3/4   | Oznaczenia przykładów i walidacja; brak checkoutu jest zakresem makiety.                               |
-| 6   | Rozpoznawanie zamiast pamiętania | 2/4   | Pierwsza grupa produktów pokazuje tylko PMOS (PCOS).                                                          |
+| 6   | Rozpoznawanie zamiast pamiętania | 2/4   | Pierwsza grupa produktów pokazuje tylko PMOS (PCOS).                                                   |
 | 7   | Elastyczność i wydajność         | n/a   | Powierzchnia Persuade, nie narzędzie do powtarzalnej pracy.                                            |
 | 8   | Estetyka i minimalizm            | 3/4   | Dobra hierarchia; powtarzalne motywy i hasła.                                                          |
 | 9   | Pomoc przy błędach               | 3/4   | Czytelne komunikaty formularza w kodzie; pełnego testu formularza nie powtarzano.                      |

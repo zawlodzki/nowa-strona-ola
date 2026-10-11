@@ -35,7 +35,7 @@ kolorów ani pozycji elementów. Widoczność obu miejsc newslettera jest wspól
 | Obraz główny         | `article.image` (`mediaObject`)           | Obraz, alt i podpis; wykorzystać hotspot/kadr.                                                                                             |
 | Publikacja i edycja  | `article.publishedAt`, `updatedAt`        | Wprowadzić rzeczywiste daty. Aktualizacja nie wcześniej niż publikacja. Nie używać `_updatedAt` jako daty merytorycznej edycji.            |
 | Autor                | `article.authors[]` → `author`            | Wybrać istniejącą Aleksandrę. Biogram, rola i portret z dokumentu autora, bez kopii w artykule. Przy wielu autorach pokazać każdy biogram. |
-| Kategorie            | `article.categories[]` → `category`       | W przykładzie PMOS (PCOS); referencje w tym samym języku.                                                                                         |
+| Kategorie            | `article.categories[]` → `category`       | W przykładzie PMOS (PCOS); referencje w tym samym języku.                                                                                  |
 | Treść                | `article.body` (`articleBody`)            | Akapity, H2/H3, bold, italic, linki, listy, cytaty, obrazy, wyróżnienia, tabele i CTA.                                                     |
 | Źródła i SEO         | `article.sources[]`, `seo`                | Prawdziwe źródła dla wpisów merytorycznych; metadata zgodne z treścią.                                                                     |
 

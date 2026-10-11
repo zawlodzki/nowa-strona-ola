@@ -68,7 +68,8 @@ const ARTICLES = [
     tone: "photo",
     pl: {
       slug: "przygotowanie-do-konsultacji-pcos",
-      title: "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",
+      title:
+        "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",
       lead: "Bez perfekcyjnego dzienniczka i listy nowych obowiązków. Kilka notatek, które pomogą Ci spokojnie zacząć rozmowę.",
       alt: "Kolorowy posiłek z warzywami i kaszą na jasnym stole.",
     },
@@ -255,7 +256,8 @@ const ARTICLES = [
     },
     en: {
       slug: "conflicting-advice-on-pcos",
-      title: "Conflicting advice on PMOS (PCOS): write down what you want to clarify",
+      title:
+        "Conflicting advice on PMOS (PCOS): write down what you want to clarify",
       lead: "Instead of another list of rules — the sentences you have heard and want to check in a calm conversation.",
       alt: "Aleksandra Olesiewicz.",
     },

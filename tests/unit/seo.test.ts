@@ -169,7 +169,10 @@ describe("Sanity SEO fields (SEO-4)", () => {
         occupationCode: "2265",
         sameAs: ["https://www.instagram.com/aleksandra_olesiewicz"],
         knowsAbout: [
-          { title: "PMOS (PCOS)", sameAs: ["https://www.wikidata.org/wiki/Q1"] },
+          {
+            title: "PMOS (PCOS)",
+            sameAs: ["https://www.wikidata.org/wiki/Q1"],
+          },
         ],
         credentials: [
           {
