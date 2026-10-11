@@ -32,7 +32,7 @@ export interface BlogIndexCopy {
 export const blogIndexCopy: Record<Locale, BlogIndexCopy> = {
   pl: {
     title: "Blog. Po Twojemu.",
-    lead: "O PCOS, insulinooporności i odżywianiu, które pasuje do życia. Znajdź temat, z którym jesteś dzisiaj.",
+    lead: "O PMOS (PCOS), insulinooporności i odżywianiu, które pasuje do życia. Znajdź temat, z którym jesteś dzisiaj.",
     note: "Przykładowa kolekcja do oceny układu. Tytuły, opisy i daty są demonstracyjne.",
     latestTitle: "Najnowszy wpis",
     collectionTitle: "Wszystkie wpisy",
@@ -48,13 +48,13 @@ export const blogIndexCopy: Record<Locale, BlogIndexCopy> = {
     pageLabel: "Strona",
     seoTitle: "Blog — Aleksandra Olesiewicz",
     seoDescription:
-      "Blog Aleksandry Olesiewicz. PCOS, insulinooporność i codzienne odżywianie. Przeglądaj wpisy i zapisz się do newslettera.",
+      "Blog Aleksandry Olesiewicz. PMOS (PCOS), insulinooporność i codzienne odżywianie. Przeglądaj wpisy i zapisz się do newslettera.",
     breadcrumbHome: "Strona główna",
     breadcrumbBlog: "Blog",
   },
   en: {
     title: "Blog. On your terms.",
-    lead: "On PCOS, insulin resistance and eating that fits real life. Find the topic you need today.",
+    lead: "On PMOS (PCOS), insulin resistance and eating that fits real life. Find the topic you need today.",
     note: "A sample collection for layout review. Titles, descriptions and dates are demonstrative.",
     latestTitle: "Latest post",
     collectionTitle: "All posts",
@@ -70,7 +70,7 @@ export const blogIndexCopy: Record<Locale, BlogIndexCopy> = {
     pageLabel: "Page",
     seoTitle: "Blog — Aleksandra Olesiewicz",
     seoDescription:
-      "Aleksandra Olesiewicz’s blog. PCOS, insulin resistance and everyday nutrition. Browse posts and join the newsletter.",
+      "Aleksandra Olesiewicz’s blog. PMOS (PCOS), insulin resistance and everyday nutrition. Browse posts and join the newsletter.",
     breadcrumbHome: "Home",
     breadcrumbBlog: "Blog",
   },
@@ -128,8 +128,8 @@ export function blogNewsletterSettingsFixture(language: Locale, form: unknown) {
       language === "pl" ? "Zostańmy w kontakcie." : "Let’s stay in touch.",
     sidebarLead:
       language === "pl"
-        ? "PCOS, odżywianie i więcej jasności w codziennych wyborach. Prosto do Twojej skrzynki."
-        : "PCOS, nutrition and more clarity in everyday choices. Straight to your inbox.",
+        ? "PMOS (PCOS), odżywianie i więcej jasności w codziennych wyborach. Prosto do Twojej skrzynki."
+        : "PMOS (PCOS), nutrition and more clarity in everyday choices. Straight to your inbox.",
     sidebarActionLabel:
       language === "pl" ? "Chcę czytać więcej" : "I want to read more",
     sidebarNote:
@@ -166,10 +166,10 @@ export const BLOG_CATEGORY_SEED: Record<
   },
   pcos: {
     slugs: { pl: "pcos", en: "pcos" },
-    titles: { pl: "PCOS", en: "PCOS" },
+    titles: { pl: "PMOS (PCOS)", en: "PMOS (PCOS)" },
     descriptions: {
-      pl: "Pytania o PCOS, suplementy i sprzeczne rady.",
-      en: "Questions about PCOS, supplements and conflicting advice.",
+      pl: "Pytania o PMOS (PCOS), suplementy i sprzeczne rady.",
+      en: "Questions about PMOS (PCOS), supplements and conflicting advice.",
     },
   },
   insulin: {
@@ -223,13 +223,13 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
     imageHeight: 1024,
     pl: {
       slug: "przygotowanie-do-konsultacji-pcos",
-      title: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+      title: "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",
       lead: "Bez perfekcyjnego dzienniczka i listy nowych obowiązków. Kilka notatek, które pomogą Ci spokojnie zacząć rozmowę.",
       alt: foodAltFeaturedPl,
     },
     en: {
       slug: "preparing-for-a-pcos-nutrition-consultation",
-      title: "How to prepare for a nutrition consultation with PCOS?",
+      title: "How to prepare for a nutrition consultation with PMOS (PCOS)?",
       lead: "Without a perfect food diary or a list of new duties. A few notes that help you start the conversation calmly.",
       alt: foodAltFeaturedEn,
     },
@@ -244,13 +244,13 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
     imageHeight: 1024,
     pl: {
       slug: "codzienne-posilki-przy-pcos",
-      title: "Codzienne posiłki przy PCOS: zacznij od swojego rytmu",
+      title: "Codzienne posiłki przy PMOS (PCOS): zacznij od swojego rytmu",
       lead: "Nie musisz zaczynać od nowego jadłospisu. Przyjrzyj się temu, jak jesz w zwykłym tygodniu.",
       alt: foodAltPl,
     },
     en: {
       slug: "everyday-meals-with-pcos",
-      title: "Everyday meals with PCOS: start from your own rhythm",
+      title: "Everyday meals with PMOS (PCOS): start from your own rhythm",
       lead: "You do not have to start with a new meal plan. Look at how you eat in an ordinary week.",
       alt: foodAltEn,
     },
@@ -266,13 +266,13 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
     hotspot: { x: 0.5, y: 0.15 },
     pl: {
       slug: "pytania-o-pcos-przed-wizyta",
-      title: "Jak uporządkować pytania o PCOS przed wizytą?",
+      title: "Jak uporządkować pytania o PMOS (PCOS) przed wizytą?",
       lead: "Co chcesz wiedzieć, co Cię niepokoi i co warto zapisać przed spotkaniem ze specjalistą.",
       alt: portraitAltPl,
     },
     en: {
       slug: "sorting-pcos-questions-before-an-appointment",
-      title: "How to sort your PCOS questions before an appointment?",
+      title: "How to sort your PMOS (PCOS) questions before an appointment?",
       lead: "What you want to know, what worries you, and what is worth writing down before you meet a specialist.",
       alt: portraitAltEn,
     },
@@ -353,13 +353,13 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
     imageHeight: 1024,
     pl: {
       slug: "suplementy-w-pcos-pytania",
-      title: "Suplementy w PCOS: uporządkuj pytania, zanim kupisz",
+      title: "Suplementy w PMOS (PCOS): uporządkuj pytania, zanim kupisz",
       lead: "Co masz już w szafce i o co chcesz zapytać specjalistę? Zacznij od uporządkowania informacji.",
       alt: foodAltPl,
     },
     en: {
       slug: "pcos-supplements-sort-questions-before-you-buy",
-      title: "Supplements in PCOS: sort your questions before you buy",
+      title: "Supplements in PMOS (PCOS): sort your questions before you buy",
       lead: "What is already in your cupboard, and what do you want to ask a specialist? Start by sorting the information.",
       alt: foodAltEn,
     },
@@ -441,13 +441,13 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
     hotspot: { x: 0.5, y: 0.15 },
     pl: {
       slug: "sprzeczne-rady-o-pcos",
-      title: "Sprzeczne rady o PCOS: zapisz to, co chcesz wyjaśnić",
+      title: "Sprzeczne rady o PMOS (PCOS): zapisz to, co chcesz wyjaśnić",
       lead: "Zamiast kolejnej listy zasad — zbiór zdań, które usłyszałaś i chcesz sprawdzić w spokojnej rozmowie.",
       alt: portraitAltPl,
     },
     en: {
       slug: "conflicting-advice-on-pcos",
-      title: "Conflicting advice on PCOS: write down what you want to clarify",
+      title: "Conflicting advice on PMOS (PCOS): write down what you want to clarify",
       lead: "Instead of another list of rules — the sentences you have heard and want to check in a calm conversation.",
       alt: portraitAltEn,
     },

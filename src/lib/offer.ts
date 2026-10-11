@@ -47,7 +47,7 @@ export function topicLabel(
   topic: "pcos" | "perimenopause",
   language: Locale,
 ): string {
-  if (topic === "pcos") return "PCOS";
+  if (topic === "pcos") return "PMOS (PCOS)";
   return language === "pl" ? "Perimenopauza" : "Perimenopause";
 }
 

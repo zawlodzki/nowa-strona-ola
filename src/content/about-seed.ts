@@ -7,17 +7,17 @@ export const aboutCopy = {
     pageTitle: "O mnie — Aleksandra Olesiewicz",
     seoTitle: "O mnie — Aleksandra Olesiewicz | dietetyczka kliniczna",
     seoDescription:
-      "Poznaj Aleksandrę Olesiewicz — dietetyczkę kliniczną, absolwentkę Śląskiego Uniwersytetu Medycznego. PCOS, podejście do pracy i materiały edukacyjne.",
-    heroTitle: "Jestem Ola.\nZnam PCOS\nod środka.",
+      "Poznaj Aleksandrę Olesiewicz — dietetyczkę kliniczną, absolwentkę Śląskiego Uniwersytetu Medycznego. PMOS (PCOS), podejście do pracy i materiały edukacyjne.",
+    heroTitle: "Jestem Ola.\nZnam PMOS (PCOS)\nod środka.",
     heroLead:
-      "Jestem dietetyczką kliniczną, absolwentką Śląskiego Uniwersytetu Medycznego. Pomagam kobietom z PCOS i insulinoopornością uporządkować odżywianie i wybrać zmiany, które pasują do ich codzienności.",
+      "Jestem dietetyczką kliniczną, absolwentką Śląskiego Uniwersytetu Medycznego. Pomagam kobietom z PMOS (PCOS) i insulinoopornością uporządkować odżywianie i wybrać zmiany, które pasują do ich codzienności.",
     heroPrimary: "Zobacz, jak pracuję",
     heroSecondary: "Poznaj moje materiały",
     portraitAlt: "Portret Aleksandry Olesiewicz",
     portraitCredit: "",
     storyTitle: "Chcę, żebyś czuła się wysłuchana.",
     storyBody: [
-      "Znam PCOS także z własnego doświadczenia.",
+      "Znam PMOS (PCOS) także z własnego doświadczenia.",
       "Dlatego tak ważne jest dla mnie, żebyś mogła spokojnie opowiedzieć o swojej sytuacji i zadać pytania, z którymi przychodzisz.",
       "Jeśli gubisz się w sprzecznych poradach o diecie, badaniach i suplementach, możemy zacząć od ich uporządkowania. Przyjrzeć się temu, co już robisz, i ustalić, czemu warto poświęcić uwagę w pierwszej kolejności.",
       "Zależy mi, żebyś po rozmowie rozumiała kolejne kroki i wiedziała, jak odnieść je do swoich posiłków, pracy i codziennych obowiązków.",
@@ -58,15 +58,15 @@ export const aboutCopy = {
     testimonialsTitle: "Jak kobiety opisują współpracę ze mną.",
     materialsTitle: "Poznaj mnie także przez to, co tworzę.",
     materialsLead:
-      "Piszę o PCOS, insulinooporności i codziennym odżywianiu. Przygotowuję też materiały o perimenopauzie. Wybierz temat, który jest Ci teraz bliski.",
-    materialsEbooksTitle: "E-booki o PCOS i perimenopauzie.",
+      "Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu. Przygotowuję też materiały o perimenopauzie. Wybierz temat, który jest Ci teraz bliski.",
+    materialsEbooksTitle: "E-booki o PMOS (PCOS) i perimenopauzie.",
     materialsEbooksBody:
       "Badania, suplementy, posiłki i obserwacja samopoczucia.",
     materialsEbooksStatus: "W przygotowaniu",
     materialsEbooksAction: "Poznaj tematy e-booków",
     materialsBlogTitle: "Praktyczna wiedza na blogu.",
     materialsBlogBody:
-      "Treści o PCOS i odżywianiu, do których możesz wrócić we własnym tempie.",
+      "Treści o PMOS (PCOS) i odżywianiu, do których możesz wrócić we własnym tempie.",
     materialsBlogAction: "Czytaj blog",
     consultationTitle: "Porozmawiajmy o Twojej sytuacji.",
     consultationBody:
@@ -80,17 +80,17 @@ export const aboutCopy = {
     pageTitle: "About — Aleksandra Olesiewicz",
     seoTitle: "About — Aleksandra Olesiewicz | clinical dietitian",
     seoDescription:
-      "Meet Aleksandra Olesiewicz, a clinical dietitian and graduate of the Medical University of Silesia. PCOS, how she works, and educational materials.",
-    heroTitle: "I am Ola.\nI know PCOS\nfrom the inside.",
+      "Meet Aleksandra Olesiewicz, a clinical dietitian and graduate of the Medical University of Silesia. PMOS (PCOS), how she works, and educational materials.",
+    heroTitle: "I am Ola.\nI know PMOS (PCOS)\nfrom the inside.",
     heroLead:
-      "I am a clinical dietitian and a graduate of the Medical University of Silesia. I help women with PCOS and insulin resistance sort their nutrition and choose changes that fit their days.",
+      "I am a clinical dietitian and a graduate of the Medical University of Silesia. I help women with PMOS (PCOS) and insulin resistance sort their nutrition and choose changes that fit their days.",
     heroPrimary: "See how I work",
     heroSecondary: "See my materials",
     portraitAlt: "Portrait of Aleksandra Olesiewicz",
     portraitCredit: "",
     storyTitle: "I want you to feel heard.",
     storyBody: [
-      "I also know PCOS from my own experience.",
+      "I also know PMOS (PCOS) from my own experience.",
       "That is why it matters to me that you can talk through your situation and ask the questions you arrived with.",
       "If conflicting advice about diet, tests and supplements leaves you lost, we can start by putting it in order. Look at what you already do, and decide what deserves attention first.",
       "I want you to leave the conversation knowing the next steps and how they fit your meals, work and daily duties.",
@@ -130,14 +130,14 @@ export const aboutCopy = {
     testimonialsTitle: "How women describe working with me.",
     materialsTitle: "Get to know me through what I make.",
     materialsLead:
-      "I write about PCOS, insulin resistance and everyday nutrition. I am also preparing materials on perimenopause. Pick the topic that is close to you now.",
-    materialsEbooksTitle: "E-books on PCOS and perimenopause.",
+      "I write about PMOS (PCOS), insulin resistance and everyday nutrition. I am also preparing materials on perimenopause. Pick the topic that is close to you now.",
+    materialsEbooksTitle: "E-books on PMOS (PCOS) and perimenopause.",
     materialsEbooksBody: "Tests, supplements, meals and noticing how you feel.",
     materialsEbooksStatus: "In preparation",
     materialsEbooksAction: "See the e-book topics",
     materialsBlogTitle: "Practical writing on the blog.",
     materialsBlogBody:
-      "Notes on PCOS and nutrition that you can come back to at your own pace.",
+      "Notes on PMOS (PCOS) and nutrition that you can come back to at your own pace.",
     materialsBlogAction: "Read the blog",
     consultationTitle: "Let's talk about your situation.",
     consultationBody:

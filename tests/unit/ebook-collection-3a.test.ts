@@ -90,7 +90,7 @@ describe("ebook collection serializers", () => {
     expect(markdown).toContain("Wkrótce dostępny");
     expect(markdown).toContain("/ebooki/suplementy-w-pcos/");
     expect(markdown).toContain("/ebooki/badania-ktore-maja-sens/");
-    expect(markdown).toContain("PCOS");
+    expect(markdown).toContain("PMOS (PCOS)");
     expect(markdown).toContain("Perimenopauza");
   });
 

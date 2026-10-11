@@ -195,10 +195,10 @@ test("withdrawal form sends the statement and shows a receipt", async ({
     .selectOption("E-book");
   await form
     .getByLabel("Tytuł e-booka albo data usługi", { exact: true })
-    .fill("Suplementy w PCOS");
+    .fill("Suplementy w PMOS (PCOS)");
   await form.getByLabel("Data zakupu", { exact: true }).fill("2026-10-01");
   const text =
-    "Odstępuję od umowy o dostarczenie e-booka: Suplementy w PCOS, zawartej 1.10.2026.";
+    "Odstępuję od umowy o dostarczenie e-booka: Suplementy w PMOS (PCOS), zawartej 1.10.2026.";
   await statement.fill(text);
   expect(
     (
@@ -242,7 +242,7 @@ test("withdrawal form sends the statement and shows a receipt", async ({
       fullName: "Anna Nowak",
       email: "anna@example.com",
       subject: "E-book",
-      item: "Suplementy w PCOS",
+      item: "Suplementy w PMOS (PCOS)",
       purchaseDate: "2026-10-01",
       statement: text,
     },

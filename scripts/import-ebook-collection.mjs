@@ -79,8 +79,8 @@ function collectionPage(language) {
         ? "E-booki | Aleksandra Olesiewicz"
         : "E-books | Aleksandra Olesiewicz",
       description: pl
-        ? "Kolekcja e-booków o PCOS i perimenopauzie. Copy jest propozycją do zatwierdzenia."
-        : "E-book collection on PCOS and perimenopause. Copy is a proposal pending approval.",
+        ? "Kolekcja e-booków o PMOS (PCOS) i perimenopauzie. Copy jest propozycją do zatwierdzenia."
+        : "E-book collection on PMOS (PCOS) and perimenopause. Copy is a proposal pending approval.",
     },
     sections: [
       {
@@ -91,8 +91,8 @@ function collectionPage(language) {
           ? "Więcej jasności.\nW Twoim tempie."
           : "More clarity.\nAt your pace.",
         lead: pl
-          ? "PCOS, perimenopauza i codzienne wybory. E-booki, do których możesz wracać, kiedy potrzebujesz uporządkować pytania i znaleźć swój następny krok."
-          : "PCOS, perimenopause and everyday choices. E-books you can return to when you need to sort your questions and find your next step.",
+          ? "PMOS (PCOS), perimenopauza i codzienne wybory. E-booki, do których możesz wracać, kiedy potrzebujesz uporządkować pytania i znaleźć swój następny krok."
+          : "PMOS (PCOS), perimenopause and everyday choices. E-books you can return to when you need to sort your questions and find your next step.",
         catalogTitle: pl ? "Wszystkie e-booki" : "All e-books",
         catalogLead: pl
           ? "Wybierz to, co jest Ci teraz bliskie."
@@ -116,8 +116,8 @@ function collectionPage(language) {
           ? "Mniej sprzecznych rad.\nWięcej konkretów."
           : "Fewer conflicting tips.\nMore specifics.",
         lead: pl
-          ? "Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie."
-          : "I write about PCOS, insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and I send updates about new materials, including perimenopause.",
+          ? "Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie."
+          : "I write about PMOS (PCOS), insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and I send updates about new materials, including perimenopause.",
         form: reference(pl ? "form-newsletter-pl" : "form-newsletter-en"),
       },
     ],

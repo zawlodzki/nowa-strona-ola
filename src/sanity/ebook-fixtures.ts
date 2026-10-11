@@ -206,7 +206,7 @@ export function pcosEbookFixture(language: Locale) {
 
 /**
  * Mirrors Content Lake 11.10.2026: the remaining Polish e-books have a
- * landing copied from the PCOS e-book as a placeholder, with their own card
+ * landing copied from the PMOS (PCOS) e-book as a placeholder, with their own card
  * data and no `seo` (titles stay unique).
  */
 function placeholderEbookFixture(

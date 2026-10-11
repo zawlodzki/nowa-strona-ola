@@ -1,4 +1,4 @@
-# Jak przygotować się do konsultacji dietetycznej przy PCOS?
+# Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?
 
 Bez perfekcyjnego dzienniczka i listy nowych obowiązków. Kilka notatek, które pomogą Ci spokojnie zacząć rozmowę.
 
@@ -15,7 +15,7 @@ Możesz mieć wiele pytań albo dopiero szukać słów, żeby opisać swoją syt
 
 ## Zacznij od tego, z czym przychodzisz
 
-Zastanów się, co chciałabyś omówić w pierwszej kolejności. Czy trudno Ci zaplanować posiłki w pracy? Czy gubisz się w informacjach o PCOS? A może dotychczasowe zalecenia po prostu nie pasowały do Twojego dnia?
+Zastanów się, co chciałabyś omówić w pierwszej kolejności. Czy trudno Ci zaplanować posiłki w pracy? Czy gubisz się w informacjach o PMOS (PCOS)? A może dotychczasowe zalecenia po prostu nie pasowały do Twojego dnia?
 
 Nie musisz od razu nazywać wszystkich celów. Wystarczy jedno zdanie: **„Najbardziej potrzebuję pomocy z…”**. Resztę możesz doprecyzować podczas rozmowy.
 
@@ -96,8 +96,8 @@ Zanotuj, co chcesz lepiej zrozumieć, które wcześniejsze zmiany były trudne o
 
 ## Przyjrzyj się temu bliżej.
 
-Trzy e-booki o PCOS wybrane do tego artykułu.
+Trzy e-booki o PMOS (PCOS) wybrane do tego artykułu.
 
-- [Suplementy w PCOS](/ebooki/suplementy-w-pcos/)
+- [Suplementy w PMOS (PCOS)](/ebooki/suplementy-w-pcos/)
 - [Badania, które mają sens](/ebooki/badania-ktore-maja-sens/)
-- [Szczupła, a jednak PCOS](/ebooki/szczupla-a-jednak-pcos/)
+- [Szczupła, a jednak PMOS (PCOS)](/ebooki/szczupla-a-jednak-pcos/)

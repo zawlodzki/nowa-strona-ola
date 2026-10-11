@@ -235,7 +235,7 @@ Forms, Cal.com i Stripe mają osobne domeny, bez naszych tagów i bez
 przekazywania im subjectu c15t lub identyfikatora pomiaru.
 
 Nie uznawać strony za neutralną na podstawie samego adresu `/` lub `/o-mnie/`.
-Odczytany staging ma treści PCOS i insulinooporności także na homepage.
+Odczytany staging ma treści PMOS (PCOS) i insulinooporności także na homepage.
 Wariant B z §5.3 wymaga stron bez tematu zdrowotnego w adresie i treści;
 D12 wymienia brak tematu choroby w adresie i tytule wpisów. Plan proponuje
 sprawdzenie całej treści. Dlatego pusta allowlista Meta jest domyślną propozycją

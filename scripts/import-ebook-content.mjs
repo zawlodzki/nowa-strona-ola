@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Dry-run import landingu e-booka 3a (Suplementy w PCOS).
+ * Dry-run import landingu e-booka 3a (Suplementy w PMOS (PCOS)).
  * Rozszerza istniejący dokument ebook z importu homepage. Nic nie zapisuje.
  * Użycie: node scripts/import-ebook-content.mjs
  */
@@ -123,7 +123,7 @@ function landing(language) {
       pl
         ? [
             {
-              title: "Masz PCOS i pełną półkę.",
+              title: "Masz PMOS (PCOS) i pełną półkę.",
               body: "Bierzesz kilka preparatów, ale trudno Ci powiedzieć, jaki cel ma każdy z nich.",
             },
             {
@@ -141,7 +141,7 @@ function landing(language) {
           ]
         : [
             {
-              title: "You have PCOS and a full shelf.",
+              title: "You have PMOS (PCOS) and a full shelf.",
               body: "You take several products, but it is hard to say what aim each one has.",
             },
             {
@@ -255,12 +255,12 @@ function landing(language) {
       : "A good decision\nstarts with “why?”.",
     authorParagraphs: pl
       ? [
-          "W mojej pracy z kobietami z PCOS liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
-          "Suplementy też potrzebują kontekstu. W wytycznych PCOS z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania.",
+          "W mojej pracy z kobietami z PMOS (PCOS) liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
+          "Suplementy też potrzebują kontekstu. W wytycznych PMOS (PCOS) z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania.",
         ]
       : [
-          "In my work with women with PCOS, understanding daily life comes first. I offer the same starting point in the e-book: your situation first, then the next steps.",
-          "Supplements need context too. In the 2023 PCOS guideline, the clinical benefit of inositol was judged limited. That is why it is worth talking about expectations and whether use is justified.",
+          "In my work with women with PMOS (PCOS), understanding daily life comes first. I offer the same starting point in the e-book: your situation first, then the next steps.",
+          "Supplements need context too. In the 2023 PMOS (PCOS) guideline, the clinical benefit of inositol was judged limited. That is why it is worth talking about expectations and whether use is justified.",
         ],
     offerTitle: pl
       ? "Zanim kupisz\nkolejne opakowanie,\nzrób miejsce na wiedzę."
@@ -371,7 +371,7 @@ function ebookDocument(language) {
     _id: `ebook-suplementy-w-pcos-${language}`,
     _type: "ebook",
     language,
-    title: pl ? "Suplementy w PCOS" : "Supplements in PCOS",
+    title: pl ? "Suplementy w PMOS (PCOS)" : "Supplements in PMOS (PCOS)",
     subtitle: pl ? "Decyzje, które mają sens" : "Decisions that make sense",
     slug: { _type: "slug", current: slug },
     topic: "pcos",
@@ -477,21 +477,21 @@ function ebookDocument(language) {
         _key: "source-pcos-2023",
         _type: "ebookSource",
         title: pl
-          ? "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7"
-          : "See the source: 2023 PCOS guideline, section 4.7",
+          ? "Zobacz źródło: wytyczne PMOS (PCOS) 2023, sekcja 4.7"
+          : "See the source: 2023 PMOS (PCOS) guideline, section 4.7",
         href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/",
         scope: pl
-          ? "Wytyczne PCOS 2023, sekcja 4.7"
-          : "2023 PCOS guideline, section 4.7",
+          ? "Wytyczne PMOS (PCOS) 2023, sekcja 4.7"
+          : "2023 PMOS (PCOS) guideline, section 4.7",
       },
     ],
     seo: {
       title: pl
-        ? "Suplementy w PCOS | E-book Aleksandry Olesiewicz"
-        : "Supplements in PCOS | E-book by Aleksandra Olesiewicz",
+        ? "Suplementy w PMOS (PCOS) | E-book Aleksandry Olesiewicz"
+        : "Supplements in PMOS (PCOS) | E-book by Aleksandra Olesiewicz",
       description: pl
-        ? "Suplementy w PCOS. Uporządkuj swoją półkę i przygotuj pytania do specjalisty. Zapowiedź e-booka, sprzedaż nie jest uruchomiona."
-        : "Supplements in PCOS. Tidy your shelf and prepare questions for a specialist. An announcement — sales are not live.",
+        ? "Suplementy w PMOS (PCOS). Uporządkuj swoją półkę i przygotuj pytania do specjalisty. Zapowiedź e-booka, sprzedaż nie jest uruchomiona."
+        : "Supplements in PMOS (PCOS). Tidy your shelf and prepare questions for a specialist. An announcement — sales are not live.",
     },
     landing: landing(language),
     _createdNote: now(),

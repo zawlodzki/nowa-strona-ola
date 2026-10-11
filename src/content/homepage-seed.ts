@@ -23,7 +23,7 @@ export const TESTIMONIAL_QUOTES_PL = [
   "Ola, muszę się pochwalić choć dopiero co zaczęłyśmy! 😀 Na wadze dopiero -3kg, ale już się zadział mały cud. Z twarzy zaczęły znikać mi pryszcze, nie mam już tak wielkiej ochoty na słodycze!! Nawet nie wiesz jak się cieszę ❤️ a to dopiero początek naszej współpracy",
   "Dzięki współpracy z Olą schudłam 8 kg w 3 miesiące bez wyrzeczeń. Hormony się ustabilizowały, energii mam więcej niż kiedykolwiek!",
   "Najlepsza decyzja jaką podjęłam! Aplikacja jest super intuicyjna, a Ola zawsze dostępna gdy potrzebuję pomocy. Polecam z całego serca!",
-  "Po latach walki z PCOS w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!",
+  "Po latach walki z PMOS (PCOS) w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!",
   "Miałam problem z insulinoopornością i nie widziałam efektów mimo wielu diet. Z Olą w 2 miesiące schudłam 5 kg i wyniki badań się poprawiły!",
   "Nie wierzyłam, że dieta może być elastyczna i smaczna jednocześnie. Ola udowodniła mi, że to możliwe. Gotuje dla całej rodziny z tych samych przepisów!",
 ] as const;
@@ -32,7 +32,7 @@ export const TESTIMONIAL_QUOTES_EN = [
   "Ola, I have to share this even though we have only just started! 😀 The scale shows only −3 kg so far, but a small miracle is already happening. Spots are fading from my face and I no longer crave sweets so much!! You have no idea how happy I am ❤️ and this is only the beginning of our work together",
   "Working with Ola I lost 8 kg in 3 months without deprivation. My hormones settled and I have more energy than ever!",
   "The best decision I have made! The app is intuitive and Ola is there when I need help. I recommend her wholeheartedly!",
-  "After years of fighting PCOS I finally found someone who understands my problems. The way of eating is fitted to me, not the other way around!",
+  "After years of fighting PMOS (PCOS) I finally found someone who understands my problems. The way of eating is fitted to me, not the other way around!",
   "I struggled with insulin resistance and saw no change despite many diets. With Ola I lost 5 kg in 2 months and my lab results improved!",
   "I did not believe a way of eating could be flexible and tasty at once. Ola showed me it is possible. I now cook for the whole family from the same recipes!",
 ] as const;
@@ -48,7 +48,7 @@ export const EBOOK_SEED = [
     topic: "pcos" as const,
     sortOrder: 1,
     coverTone: "light" as const,
-    title: { pl: "Suplementy w PCOS", en: "Supplements in PCOS" },
+    title: { pl: "Suplementy w PMOS (PCOS)", en: "Supplements in PMOS (PCOS)" },
     subtitle: {
       pl: "Decyzje, które mają sens",
       en: "Decisions that make sense",
@@ -75,14 +75,14 @@ export const EBOOK_SEED = [
     topic: "pcos" as const,
     sortOrder: 3,
     coverTone: "light" as const,
-    title: { pl: "Szczupła, a jednak PCOS", en: "Slim, and still PCOS" },
+    title: { pl: "Szczupła, a jednak PMOS (PCOS)", en: "Slim, and still PMOS (PCOS)" },
     subtitle: {
       pl: "Z troską o Twoje ciało",
       en: "With care for your body",
     },
     description: {
-      pl: "Jak podejść do odżywiania przy PCOS, kiedy Twoim celem nie jest odchudzanie.",
-      en: "How to approach nutrition with PCOS when weight loss is not your goal.",
+      pl: "Jak podejść do odżywiania przy PMOS (PCOS), kiedy Twoim celem nie jest odchudzanie.",
+      en: "How to approach nutrition with PMOS (PCOS) when weight loss is not your goal.",
     },
   },
   {
@@ -169,14 +169,14 @@ export { footerSocialLinks } from "@/content/social-profiles";
 export const homepageCopy = {
   pl: {
     siteTitle: "Aleksandra Olesiewicz",
-    footerNote: "PCOS, insulinooporność i odżywianie dopasowane do życia.",
+    footerNote: "PMOS (PCOS), insulinooporność i odżywianie dopasowane do życia.",
     seoTitle: "Aleksandra Olesiewicz — dietetyczka kliniczna",
     seoDescription:
-      "Praktyczne wsparcie w odżywianiu przy PCOS i insulinooporności. Poznaj konsultacje online i materiały o PCOS i perimenopauzie.",
+      "Praktyczne wsparcie w odżywianiu przy PMOS (PCOS) i insulinooporności. Poznaj konsultacje online i materiały o PMOS (PCOS) i perimenopauzie.",
     pageTitle: "Aleksandra Olesiewicz — strona główna",
     heroTitle: "Zrozum swoje ciało.\nZacznij od odżywiania.",
     heroLead:
-      "Jestem Ola, dietetyczka kliniczna. Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Przygotowuję też e-booki o PCOS i perimenopauzie.",
+      "Jestem Ola, dietetyczka kliniczna. Specjalizuję się w PMOS (PCOS) i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Przygotowuję też e-booki o PMOS (PCOS) i perimenopauzie.",
     heroPrimary: "Poznaj e-booki",
     heroSecondary: "Poznaj konsultacje",
     audienceTitle: "Z kim pracuję",
@@ -185,8 +185,8 @@ export const homepageCopy = {
     audienceItems: [
       {
         key: "audience-pcos",
-        title: "PCOS",
-        body: "Gdy chcesz zrozumieć, jak jedzenie może wspierać Twoją codzienność z PCOS, i wybrać pierwszy krok, który ma sens dla Ciebie.",
+        title: "PMOS (PCOS)",
+        body: "Gdy chcesz zrozumieć, jak jedzenie może wspierać Twoją codzienność z PMOS (PCOS), i wybrać pierwszy krok, który ma sens dla Ciebie.",
         icon: "flower",
       },
       {
@@ -228,13 +228,13 @@ export const homepageCopy = {
       },
     ],
     aboutTitle: "Jestem Ola.",
-    aboutLead: "Znam PCOS także z własnego doświadczenia.",
+    aboutLead: "Znam PMOS (PCOS) także z własnego doświadczenia.",
     aboutBody: [
-      "Jestem dietetyczką kliniczną i sama mam doświadczenie z PCOS. Wiem, jak trudno odnaleźć się w sprzecznych radach i kolejnych próbach zmiany odżywiania.",
-      "W pracy z kobietami z PCOS i insulinoopornością łączę analizę wyników badań z praktycznymi zmianami w posiłkach. Zależy mi, żebyś rozumiała zalecenia i potrafiła korzystać z nich w swojej codzienności.",
+      "Jestem dietetyczką kliniczną i sama mam doświadczenie z PMOS (PCOS). Wiem, jak trudno odnaleźć się w sprzecznych radach i kolejnych próbach zmiany odżywiania.",
+      "W pracy z kobietami z PMOS (PCOS) i insulinoopornością łączę analizę wyników badań z praktycznymi zmianami w posiłkach. Zależy mi, żebyś rozumiała zalecenia i potrafiła korzystać z nich w swojej codzienności.",
     ],
     aboutAction: "Poznaj moją historię",
-    ebooksTitle: "E-booki o PCOS i perimenopauzie.",
+    ebooksTitle: "E-booki o PMOS (PCOS) i perimenopauzie.",
     ebooksLead:
       "Badania, suplementy, codzienne posiłki i obserwacja samopoczucia. Wybierz temat, w którym potrzebujesz więcej jasności.",
     ebooksNote:
@@ -254,7 +254,7 @@ export const homepageCopy = {
     testimonialsLead: "Doświadczenia moich podopiecznych",
     newsletterTitle: "Mniej sprzecznych rad.\nWięcej konkretów.",
     newsletterLead:
-      "Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.",
+      "Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.",
     newsletterSubmit: "Zapisuję się",
     newsletterSuccess:
       "Sprawdź skrzynkę. Wysłaliśmy e-mail z linkiem potwierdzającym. Zapis będzie aktywny dopiero po kliknięciu w link.",
@@ -272,14 +272,14 @@ export const homepageCopy = {
   },
   en: {
     siteTitle: "Aleksandra Olesiewicz",
-    footerNote: "PCOS, insulin resistance and nutrition that fits real life.",
+    footerNote: "PMOS (PCOS), insulin resistance and nutrition that fits real life.",
     seoTitle: "Aleksandra Olesiewicz — clinical dietitian",
     seoDescription:
-      "Practical nutrition support for PCOS and insulin resistance. Online consultations and materials on PCOS and perimenopause.",
+      "Practical nutrition support for PMOS (PCOS) and insulin resistance. Online consultations and materials on PMOS (PCOS) and perimenopause.",
     pageTitle: "Aleksandra Olesiewicz — home",
     heroTitle: "Understand your body.\nStart with nutrition.",
     heroLead:
-      "I am Ola, a clinical dietitian. I specialise in PCOS and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also prepare e-books on PCOS and perimenopause.",
+      "I am Ola, a clinical dietitian. I specialise in PMOS (PCOS) and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also prepare e-books on PMOS (PCOS) and perimenopause.",
     heroPrimary: "See the e-books",
     heroSecondary: "See consultations",
     audienceTitle: "Who I work with",
@@ -288,8 +288,8 @@ export const homepageCopy = {
     audienceItems: [
       {
         key: "audience-pcos",
-        title: "PCOS",
-        body: "When you want to understand how food can support your everyday life with PCOS, and choose a first step that makes sense for you.",
+        title: "PMOS (PCOS)",
+        body: "When you want to understand how food can support your everyday life with PMOS (PCOS), and choose a first step that makes sense for you.",
         icon: "flower",
       },
       {
@@ -330,13 +330,13 @@ export const homepageCopy = {
       },
     ],
     aboutTitle: "I am Ola.",
-    aboutLead: "I also know PCOS from my own experience.",
+    aboutLead: "I also know PMOS (PCOS) from my own experience.",
     aboutBody: [
-      "I am a clinical dietitian and I have my own experience of PCOS. I know how hard it is to find your way through conflicting advice and another attempt to change how you eat.",
-      "When I work with women with PCOS and insulin resistance I combine lab results with practical changes in meals. I want you to understand the recommendations and use them in your everyday life.",
+      "I am a clinical dietitian and I have my own experience of PMOS (PCOS). I know how hard it is to find your way through conflicting advice and another attempt to change how you eat.",
+      "When I work with women with PMOS (PCOS) and insulin resistance I combine lab results with practical changes in meals. I want you to understand the recommendations and use them in your everyday life.",
     ],
     aboutAction: "Read my story",
-    ebooksTitle: "E-books on PCOS and perimenopause.",
+    ebooksTitle: "E-books on PMOS (PCOS) and perimenopause.",
     ebooksLead:
       "Tests, supplements, everyday meals and watching how you feel. Choose the topic where you need more clarity.",
     ebooksNote:
@@ -356,7 +356,7 @@ export const homepageCopy = {
     testimonialsLead: "Experiences of the women I support",
     newsletterTitle: "Fewer conflicting tips.\nMore specifics.",
     newsletterLead:
-      "I write about PCOS, insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and news about new materials, including perimenopause.",
+      "I write about PMOS (PCOS), insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and news about new materials, including perimenopause.",
     newsletterSubmit: "Subscribe",
     newsletterSuccess:
       "Check your inbox. We sent a confirmation link. The subscription becomes active only after you click it.",

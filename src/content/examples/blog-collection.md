@@ -1,6 +1,6 @@
 # Blog. Po Twojemu.
 
-O PCOS, insulinooporności i odżywianiu, które pasuje do życia. Znajdź temat, z którym jesteś dzisiaj.
+O PMOS (PCOS), insulinooporności i odżywianiu, które pasuje do życia. Znajdź temat, z którym jesteś dzisiaj.
 
 Przykładowa kolekcja do oceny układu. Tytuły, opisy i daty są demonstracyjne.
 
@@ -12,34 +12,34 @@ Wpisy 2–7 z 11
 - [Insulinooporność](/blog/kategoria/insulinoopornosc/)
 - [Konsultacje](/blog/kategoria/konsultacje/)
 - [Odżywianie](/blog/kategoria/odzywianie/)
-- [PCOS](/blog/kategoria/pcos/)
+- [PMOS (PCOS)](/blog/kategoria/pcos/)
 - [Perimenopauza](/blog/kategoria/perimenopauza/)
 
 ## Najnowszy wpis
 
-### Jak przygotować się do konsultacji dietetycznej przy PCOS?
+### Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?
 
 Konsultacje, 28 września 2026
 
 Bez perfekcyjnego dzienniczka i listy nowych obowiązków. Kilka notatek, które pomogą Ci spokojnie zacząć rozmowę.
 
-[Jak przygotować się do konsultacji dietetycznej przy PCOS?](/blog/przygotowanie-do-konsultacji-pcos/)
+[Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?](/blog/przygotowanie-do-konsultacji-pcos/)
 
-### Codzienne posiłki przy PCOS: zacznij od swojego rytmu
+### Codzienne posiłki przy PMOS (PCOS): zacznij od swojego rytmu
 
 Odżywianie, 24 września 2026
 
 Nie musisz zaczynać od nowego jadłospisu. Przyjrzyj się temu, jak jesz w zwykłym tygodniu.
 
-[Codzienne posiłki przy PCOS: zacznij od swojego rytmu](/blog/codzienne-posilki-przy-pcos/)
+[Codzienne posiłki przy PMOS (PCOS): zacznij od swojego rytmu](/blog/codzienne-posilki-przy-pcos/)
 
-### Jak uporządkować pytania o PCOS przed wizytą?
+### Jak uporządkować pytania o PMOS (PCOS) przed wizytą?
 
-PCOS, 18 września 2026
+PMOS (PCOS), 18 września 2026
 
 Co chcesz wiedzieć, co Cię niepokoi i co warto zapisać przed spotkaniem ze specjalistą.
 
-[Jak uporządkować pytania o PCOS przed wizytą?](/blog/pytania-o-pcos-przed-wizyta/)
+[Jak uporządkować pytania o PMOS (PCOS) przed wizytą?](/blog/pytania-o-pcos-przed-wizyta/)
 
 ### Wyniki badań: co zabrać na konsultację?
 
@@ -65,16 +65,16 @@ Zanim zbierzesz kolejną listę zasad, nazwij to, co jest dla Ciebie najtrudniej
 
 [Insulinooporność: od czego zacząć rozmowę o odżywianiu?](/blog/insulinoopornosc-rozmowa-o-odzywianiu/)
 
-### Suplementy w PCOS: uporządkuj pytania, zanim kupisz
+### Suplementy w PMOS (PCOS): uporządkuj pytania, zanim kupisz
 
-PCOS, 17 sierpnia 2026
+PMOS (PCOS), 17 sierpnia 2026
 
 Co masz już w szafce i o co chcesz zapytać specjalistę? Zacznij od uporządkowania informacji.
 
-[Suplementy w PCOS: uporządkuj pytania, zanim kupisz](/blog/suplementy-w-pcos-pytania/)
+[Suplementy w PMOS (PCOS): uporządkuj pytania, zanim kupisz](/blog/suplementy-w-pcos-pytania/)
 
 1 · [2](/blog/strona/2/)
 
 ## Mniej sprzecznych rad. Więcej konkretów.
 
-Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.
+Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.

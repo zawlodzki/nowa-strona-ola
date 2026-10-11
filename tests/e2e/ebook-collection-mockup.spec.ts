@@ -42,7 +42,7 @@ test("ebook categories support keyboard, URL reload and browser history", async 
   await all.focus();
   await page.keyboard.press("ArrowRight");
   await expect(
-    page.getByRole("radio", { name: "PCOS", exact: false }),
+    page.getByRole("radio", { name: "PMOS (PCOS)", exact: false }),
   ).toBeChecked();
   await expect(cards).toHaveCount(3);
   await expect(page).toHaveURL(/kategoria=pcos/);
@@ -55,7 +55,7 @@ test("ebook categories support keyboard, URL reload and browser history", async 
   ).toHaveCount(0);
   await page.goBack();
   await expect(
-    page.getByRole("radio", { name: "PCOS", exact: false }),
+    page.getByRole("radio", { name: "PMOS (PCOS)", exact: false }),
   ).toBeChecked();
   await all.check();
   await expect(cards).toHaveCount(6);

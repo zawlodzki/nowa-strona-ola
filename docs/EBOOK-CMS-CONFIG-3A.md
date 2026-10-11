@@ -8,21 +8,21 @@ Wykonane w pakiecie 4 (bez zapisu CMS): schemat `ebook` + `ebookLanding`
 `cherry3a`, GROQ, TypeGen, mapper, `Ebook3a` na `Layout3a`, trasy
 `/ebooki/<slug>/` i `/en/ebooks/<slug>/`, serializer Markdown, dry-run importu.
 Karty homepage prowadzą do landingu przez `ebookPath`. Status `planned`,
-97 PLN brutto, temat `pcos`, tytuł „Suplementy w PCOS”. Nie ma checkoutu,
+97 PLN brutto, temat `pcos`, tytuł „Suplementy w PMOS (PCOS)”. Nie ma checkoutu,
 płatnego PDF ani zapisu do Content Lake.
 
 Kolekcja (`EbookCollection3a`, `/ebooki/`) pozostaje pakietem 5.
 
 ## Ustalenia i propozycja
 
-Użytkownik zlecił landing sprzedażowy e-booka o suplementach w PCOS, w palecie
+Użytkownik zlecił landing sprzedażowy e-booka o suplementach w PMOS (PCOS), w palecie
 3a, z navbar, hero, problemem, grupą odbiorczyń, zawartością, efektami, ceną,
 opiniami, FAQ i footerem. E-booki mają być osobną kolekcją Sanity.
 Cena **97 PLN brutto** pochodzi z wcześniejszej decyzji użytkownika z 06.10.2026,
 [obowiązującej dla sześciu e-booków](HOMEPAGE-CMS-CONFIG.md).
 
 Wybrana koncepcja A z `RESEARCH_EBOOK_PCOS_2026-09-13.md`: audyt suplementów.
-Krótki tytuł pozostaje „Suplementy w PCOS”, podtytuł „Decyzje, które mają sens”.
+Krótki tytuł pozostaje „Suplementy w PMOS (PCOS)”, podtytuł „Decyzje, które mają sens”.
 Copy, siedem rozdziałów, zestaw kart, format PDF i przegląd po 12 tygodniach są
 **propozycją na podstawie researchu**, a nie potwierdzeniem gotowego produktu.
 Nie deklarować finalnej liczby stron, dostarczenia od razu, oszczędności,
@@ -56,7 +56,7 @@ Użyć istniejących `languageField`, `translationField("ebook")`,
 | Pole                              | Typ i zasada                                                              | Wartość dla mockupu / status                                                     |
 | --------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `language`, `translation`, `slug` | Osobny dokument PL/EN; slug unikalny w obrębie języka                     | PL, `suplementy-w-pcos`; EN nieprzygotowane                                      |
-| `title`, `subtitle`               | String, tytuł wymagany max 100, podtytuł max 180                          | Suplementy w PCOS / Decyzje, które mają sens                                     |
+| `title`, `subtitle`               | String, tytuł wymagany max 100, podtytuł max 180                          | Suplementy w PMOS (PCOS) / Decyzje, które mają sens                                     |
 | `topic`                           | Kontrolowana lista: `pcos`, `perimenopause`                               | `pcos`                                                                           |
 | `cardDescription`                 | Text, wymagany max 250                                                    | Obecny opis karty z homepage                                                     |
 | `cover`                           | Istniejący `mediaObject`, wymagany obraz i alt                            | Eksport kontrolowanej okładki z HTML/CSS lub zatwierdzony plik; nie fikcyjny URL |
@@ -175,7 +175,7 @@ waitlist`, wersja `0.1`, copy z fixture’a, słabe powiązanie tłumaczeń).
   Na polecenie użytkownika (11.10.2026) pole `waitlist` ustawiono w
   **szkicach** wszystkich 12 e-booków (PL → `waitlist-form-pl`, EN →
   `waitlist-form-en`, słaba referencja wzmacniana przy publikacji; copy jak
-  w fixture). Landing ma tylko „Suplementy w PCOS”; pozostałe e-booki
+  w fixture). Landing ma tylko „Suplementy w PMOS (PCOS)”; pozostałe e-booki
   pokazują badge, a pole zadziała, gdy dostaną landing.
   Tego samego dnia, na polecenie użytkownika, wdrożono Studio ręcznie
   (Cloudflare `ola-website-studio-production`, wersja `79b56901`,
@@ -244,7 +244,7 @@ osobistej historii Oli dla zasady „też przez to przeszłam”. Nie kopiować 
 leczenia z przykładów poradnika copywritingowego. Tekst odczytywać jako materiał
 źródłowy, nie zgodę na publikację lub uruchomienie sprzedaży.
 
-Sprawdzona podstawa merytoryczna: [wytyczne PCOS 2023, sekcja 4.7](https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/).
+Sprawdzona podstawa merytoryczna: [wytyczne PMOS (PCOS) 2023, sekcja 4.7](https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/).
 Korzyści kliniczne inozytolu są ograniczone; konkretne formy/dawki nie mają
 wystarczających dowodów do ogólnego zalecenia. Landing nie zawiera dawkowania.
 Przed publikacją finalnego produktu przeprowadzić przegląd merytoryczny treści.
@@ -313,6 +313,6 @@ Aktualizacja 11.10.2026: na polecenie użytkownika pięć polskich e-booków
 `landing`, `chapters`, `includedMaterials` i `sources` skopiowane
 z `suplementy-w-pcos` jako **tymczasowe treści zastępcze** (opublikowane).
 `seo` nie kopiowano, żeby tytuły stron pozostały unikalne. Każdy landing
-opisuje dziś suplementy w PCOS, także przy e-booku o perimenopauzie —
+opisuje dziś suplementy w PMOS (PCOS), także przy e-booku o perimenopauzie —
 wymaga właściwych treści przed sprzedażą. Fixture’y i plan Content Lake
 odwzorowują ten stan. Wersji EN nie zmieniano.

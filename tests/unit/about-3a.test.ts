@@ -38,7 +38,7 @@ describe("about 3a fixtures", () => {
       level: "bachelor",
       name: "Dietetyka",
       specialization: "dietetyka kliniczna",
-      department: "Wydział Nauk o Zdrowiu w Bytomiu",
+      department: "Wydział Zdrowia Publicznego w Bytomiu",
       year: 2025,
     });
     expect(view.credentials.person.practiceSince).toBe(2022);
@@ -81,7 +81,7 @@ describe("about serializers", () => {
     const page = await getPage("pl", "o-mnie", { environment: {} });
     const markdown = serializePage(page, "pl");
     expect(markdown).toContain(
-      "- Dietetyka, specjalność dietetyka kliniczna, Licencjat, Śląski Uniwersytet Medyczny w Katowicach, Wydział Nauk o Zdrowiu w Bytomiu, 2025",
+      "- Dietetyka, specjalność dietetyka kliniczna, Licencjat, Śląski Uniwersytet Medyczny w Katowicach, Wydział Zdrowia Publicznego w Bytomiu, 2025",
     );
     expect(markdown).toContain("- Praktyka dietetyczna od 2022 roku");
     expect(markdown).toContain("### Wcześniejsze miejsca pracy");

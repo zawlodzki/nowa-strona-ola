@@ -21,7 +21,7 @@ wyniku rozszerzonego ani indeksacji.
 
 | Obszar                              | Wykonane                                                                                                                                                                                                     | Co pozostaje do potwierdzenia lub uzupełnienia                                                                                                                                            |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Experience — doświadczenie          | Własne doświadczenie PCOS, krótki osobisty kontekst, 9000+ kobiet śledzących materiały edukacyjne na Instagramie zgodnie z decyzją użytkownika (11.10.2026; wcześniej 450+ godzin szkoleń).                  | Nie wymyślano scen ani chronologii. Szczegóły autobiografii wymagają redakcyjnego potwierdzenia. Liczba pochodzi od użytkownika, nie z niezależnego audytu.                               |
+| Experience — doświadczenie          | Własne doświadczenie PMOS (PCOS), krótki osobisty kontekst, 9000+ kobiet śledzących materiały edukacyjne na Instagramie zgodnie z decyzją użytkownika (11.10.2026; wcześniej 450+ godzin szkoleń).                  | Nie wymyślano scen ani chronologii. Szczegóły autobiografii wymagają redakcyjnego potwierdzenia. Liczba pochodzi od użytkownika, nie z niezależnego audytu.                               |
 | Expertise — wiedza                  | Ukończona dietetyka kliniczna na Śląskim Uniwersytecie Medycznym, analiza sytuacji i posiłków, jawne miejsce na dyplom.                                                                                      | Uczelnię i kierunek potwierdził użytkownik. Skan jeszcze nie dostarczony; ramka nie jest dowodem dokumentowym. Nie dopisano stopnia akademickiego ani certyfikatów.                       |
 | Authoritativeness — rozpoznawalność | Pełne imię, nazwisko i rola; link z biogramu artykułu; dwa pełne cytaty o rzeczywistej współpracy.                                                                                                           | To użyteczne sygnały profilu, nie niezależne potwierdzenie autorytetu. Brak zweryfikowanych publikacji zewnętrznych i branżowych wzmianek; nie tworzono ich.                              |
 | Trust — zaufanie                    | Granice konsultacji dietetycznej, historyczny kontekst opinii, status e-booków, cena/czas konsultacji, jawnie tymczasowy Cal.com i demonstracyjny newsletter. Pochodzenie portretu AI widoczne przy obrazie. | Przed produkcją: realny kontakt, profile, polityka prywatności/regulamin, skan i właściwe wydarzenie płatnej rezerwacji. Profile i kontakt w mockupie prowadzą do ekranów objaśniających. |
@@ -31,8 +31,8 @@ wyniku rozszerzonego ani indeksacji.
 - Strona buduje zaufanie do konkretnej osoby. Hero kieruje do podejścia i materiałów;
   dalej są e-booki, blog, konsultacja, kontakt i newsletter. To realizuje korektę
   użytkownika, który wcześniej pomylił ją z podstroną konsultacji.
-- Osobiste doświadczenie PCOS nie stanowi dowodu skuteczności klinicznej.
-  Specjalizacja pozostaje PCOS/IO. Perimenopauza to temat materiałów, bez
+- Osobiste doświadczenie PMOS (PCOS) nie stanowi dowodu skuteczności klinicznej.
+  Specjalizacja pozostaje PMOS (PCOS)/IO. Perimenopauza to temat materiałów, bez
   dopisywania nowych kwalifikacji.
 - Opinie są pełnymi cytatami z poprzedniego repo, których prawdziwość użytkownik
   potwierdził wcześniej. Podpis „Opinia o dotychczasowej współpracy” zachowuje

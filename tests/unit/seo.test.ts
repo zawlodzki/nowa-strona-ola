@@ -149,8 +149,8 @@ describe("JSON-LD graph", () => {
 describe("collection titles", () => {
   it("makes category and pagination titles unique", () => {
     expect(collectionSeoTitle("Blog — A", "pl")).toBe("Blog — A");
-    expect(collectionSeoTitle("Blog — A", "pl", "PCOS")).toBe(
-      "PCOS — Blog — A",
+    expect(collectionSeoTitle("Blog — A", "pl", "PMOS (PCOS)")).toBe(
+      "PMOS (PCOS) — Blog — A",
     );
     expect(collectionSeoTitle("Blog — A", "pl", undefined, 2)).toBe(
       "Blog — A — strona 2",
@@ -169,7 +169,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
         occupationCode: "2265",
         sameAs: ["https://www.instagram.com/aleksandra_olesiewicz"],
         knowsAbout: [
-          { title: "PCOS", sameAs: ["https://www.wikidata.org/wiki/Q1"] },
+          { title: "PMOS (PCOS)", sameAs: ["https://www.wikidata.org/wiki/Q1"] },
         ],
         credentials: [
           {
@@ -194,7 +194,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
       "https://www.instagram.com/aleksandra_olesiewicz",
     ]);
     expect(site.person.knowsAbout).toEqual([
-      { name: "PCOS", sameAs: ["https://www.wikidata.org/wiki/Q1"] },
+      { name: "PMOS (PCOS)", sameAs: ["https://www.wikidata.org/wiki/Q1"] },
     ]);
     expect(site.person.portrait).toBe("about");
     expect(site.seller.legalName).toBe("Firma sp. z o.o.");
@@ -202,7 +202,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
     expect(person?.knowsAbout).toEqual([
       {
         "@type": "Thing",
-        name: "PCOS",
+        name: "PMOS (PCOS)",
         sameAs: ["https://www.wikidata.org/wiki/Q1"],
       },
     ]);
@@ -226,7 +226,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
         url: "https://sum.edu.pl/",
         department: {
           "@type": "Organization",
-          name: "Wydział Nauk o Zdrowiu w Bytomiu",
+          name: "Wydział Zdrowia Publicznego w Bytomiu",
         },
       },
       dateCreated: "2025",
@@ -272,7 +272,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
         ...view.price,
         serviceType: "Konsultacja dietetyczna",
         channel: "online" as const,
-        audience: "Kobiety z PCOS",
+        audience: "Kobiety z PMOS (PCOS)",
         deliverables: ["Plan pierwszych kroków"],
         termsPath: "/regulamin/",
       },
@@ -284,7 +284,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
     expect(service).toMatchObject({
       serviceType: "Konsultacja dietetyczna",
       availableChannel: { "@type": "ServiceChannel" },
-      audience: { audienceType: "Kobiety z PCOS" },
+      audience: { audienceType: "Kobiety z PMOS (PCOS)" },
       serviceOutput: [{ "@type": "Thing", name: "Plan pierwszych kroków" }],
       termsOfService: "https://aleksandraolesiewicz.com/regulamin/",
     });

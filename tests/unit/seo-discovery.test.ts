@@ -157,8 +157,8 @@ describe("share cards", () => {
     expect(ogCardPath("/")).toBe("/og/index.png");
     expect(ogCardPath("/blog/a/")).toBe("/og/blog/a.png");
     expect(stripBrand("Kontakt — Aleksandra Olesiewicz")).toBe("Kontakt");
-    expect(stripBrand("Suplementy w PCOS | E-book Aleksandry Olesiewicz")).toBe(
-      "Suplementy w PCOS",
+    expect(stripBrand("Suplementy w PMOS (PCOS) | E-book Aleksandry Olesiewicz")).toBe(
+      "Suplementy w PMOS (PCOS)",
     );
     expect(stripBrand("Regulamin newslettera — aleksandraolesiewicz.com")).toBe(
       "Regulamin newslettera",

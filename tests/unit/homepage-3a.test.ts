@@ -34,7 +34,7 @@ describe("homepage 3a fixtures", () => {
     expect(view.hero.title).toContain("Zrozum swoje ciało");
     expect(view.audience.title).toBe("Z kim pracuję");
     expect(view.audience.items.map((item) => item.title)).toEqual([
-      "PCOS",
+      "PMOS (PCOS)",
       "Insulinooporność",
       "Starania o ciążę",
       "Perimenopauza",
@@ -83,7 +83,7 @@ describe("homepage 3a fixtures", () => {
     expect(view.hero.lead).not.toMatch(/Jestem Ola/);
     expect(view.audience.title).toBe("Who I work with");
     expect(view.audience.items.map((item) => item.title)).toEqual([
-      "PCOS",
+      "PMOS (PCOS)",
       "Insulin resistance",
       "Trying to conceive",
       "Perimenopause",

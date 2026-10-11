@@ -430,7 +430,7 @@ export const sectionMarkdownExamples: Record<KnownSectionType, string> = {
   heroSection: "## Tytuł hero\n\nLead hero.",
   textSection: "## Tekst\n\nAkapit.",
   textImageSection: "## O mnie\n\nLead.\n\nAkapit.",
-  audienceSection: "## Z kim pracuję\n\n### PCOS\n\nOpis.",
+  audienceSection: "## Z kim pracuję\n\n### PMOS (PCOS)\n\nOpis.",
   cardsSection: "## Karty\n\n### Karta\n\nOpis.",
   listSection: "## Lista\n\n- Punkt",
   processSection: "## Proces\n\n### Krok\n\nOpis.",
@@ -445,10 +445,10 @@ export const sectionMarkdownExamples: Record<KnownSectionType, string> = {
   formSection: "## Newsletter\n\n- E-mail",
   mediaSection: "## Media",
   relatedSection: "## Powiązane",
-  ebooksSection: "## E-booki\n\n### Suplementy w PCOS\n\n97 zł brutto",
+  ebooksSection: "## E-booki\n\n### Suplementy w PMOS (PCOS)\n\n97 zł brutto",
   serviceOfferSection: "## Konsultacje\n\n450 zł / 60 minut",
   credentialsSection:
-    "## Wiedza, którą możesz sprawdzić.\n\n- Dietetyka, specjalność dietetyka kliniczna, Licencjat, Śląski Uniwersytet Medyczny w Katowicach, Wydział Nauk o Zdrowiu w Bytomiu, 2025\n- Praktyka dietetyczna od 2022 roku\n\n### Szkolenia\n\n- SIBO – od objawów do zdrowia, mgr Emilia Cesarek, 2023",
+    "## Wiedza, którą możesz sprawdzić.\n\n- Dietetyka, specjalność dietetyka kliniczna, Licencjat, Śląski Uniwersytet Medyczny w Katowicach, Wydział Zdrowia Publicznego w Bytomiu, 2025\n- Praktyka dietetyczna od 2022 roku\n\n### Szkolenia\n\n- SIBO – od objawów do zdrowia, mgr Emilia Cesarek, 2023",
   blogCollectionSection: "## Blog. Po Twojemu.\n\n### Wszystkie wpisy",
   ebookCollectionSection:
     "## Więcej jasności. W Twoim tempie.\n\n## Wszystkie e-booki",

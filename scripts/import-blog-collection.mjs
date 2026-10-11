@@ -34,10 +34,10 @@ const CATEGORIES = [
   {
     key: "pcos",
     slugs: { pl: "pcos", en: "pcos" },
-    titles: { pl: "PCOS", en: "PCOS" },
+    titles: { pl: "PMOS (PCOS)", en: "PMOS (PCOS)" },
     descriptions: {
-      pl: "Pytania o PCOS, suplementy i sprzeczne rady.",
-      en: "Questions about PCOS, supplements and conflicting advice.",
+      pl: "Pytania o PMOS (PCOS), suplementy i sprzeczne rady.",
+      en: "Questions about PMOS (PCOS), supplements and conflicting advice.",
     },
   },
   {
@@ -68,13 +68,13 @@ const ARTICLES = [
     tone: "photo",
     pl: {
       slug: "przygotowanie-do-konsultacji-pcos",
-      title: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+      title: "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",
       lead: "Bez perfekcyjnego dzienniczka i listy nowych obowiązków. Kilka notatek, które pomogą Ci spokojnie zacząć rozmowę.",
       alt: "Kolorowy posiłek z warzywami i kaszą na jasnym stole.",
     },
     en: {
       slug: "preparing-for-a-pcos-nutrition-consultation",
-      title: "How to prepare for a nutrition consultation with PCOS?",
+      title: "How to prepare for a nutrition consultation with PMOS (PCOS)?",
       lead: "Without a perfect food diary or a list of new duties. A few notes that help you start the conversation calmly.",
       alt: "A colourful meal with vegetables and groats on a light table.",
     },
@@ -86,13 +86,13 @@ const ARTICLES = [
     tone: "photo",
     pl: {
       slug: "codzienne-posilki-przy-pcos",
-      title: "Codzienne posiłki przy PCOS: zacznij od swojego rytmu",
+      title: "Codzienne posiłki przy PMOS (PCOS): zacznij od swojego rytmu",
       lead: "Nie musisz zaczynać od nowego jadłospisu. Przyjrzyj się temu, jak jesz w zwykłym tygodniu.",
       alt: "Kolorowy posiłek na jasnym stole.",
     },
     en: {
       slug: "everyday-meals-with-pcos",
-      title: "Everyday meals with PCOS: start from your own rhythm",
+      title: "Everyday meals with PMOS (PCOS): start from your own rhythm",
       lead: "You do not have to start with a new meal plan. Look at how you eat in an ordinary week.",
       alt: "A colourful meal on a light table.",
     },
@@ -104,13 +104,13 @@ const ARTICLES = [
     tone: "portrait",
     pl: {
       slug: "pytania-o-pcos-przed-wizyta",
-      title: "Jak uporządkować pytania o PCOS przed wizytą?",
+      title: "Jak uporządkować pytania o PMOS (PCOS) przed wizytą?",
       lead: "Co chcesz wiedzieć, co Cię niepokoi i co warto zapisać przed spotkaniem ze specjalistą.",
       alt: "Aleksandra Olesiewicz.",
     },
     en: {
       slug: "sorting-pcos-questions-before-an-appointment",
-      title: "How to sort your PCOS questions before an appointment?",
+      title: "How to sort your PMOS (PCOS) questions before an appointment?",
       lead: "What you want to know, what worries you, and what is worth writing down before you meet a specialist.",
       alt: "Aleksandra Olesiewicz.",
     },
@@ -176,13 +176,13 @@ const ARTICLES = [
     tone: "photo",
     pl: {
       slug: "suplementy-w-pcos-pytania",
-      title: "Suplementy w PCOS: uporządkuj pytania, zanim kupisz",
+      title: "Suplementy w PMOS (PCOS): uporządkuj pytania, zanim kupisz",
       lead: "Co masz już w szafce i o co chcesz zapytać specjalistę? Zacznij od uporządkowania informacji.",
       alt: "Kolorowy posiłek na jasnym stole.",
     },
     en: {
       slug: "pcos-supplements-sort-questions-before-you-buy",
-      title: "Supplements in PCOS: sort your questions before you buy",
+      title: "Supplements in PMOS (PCOS): sort your questions before you buy",
       lead: "What is already in your cupboard, and what do you want to ask a specialist? Start by sorting the information.",
       alt: "A colourful meal on a light table.",
     },
@@ -249,13 +249,13 @@ const ARTICLES = [
     tone: "portrait",
     pl: {
       slug: "sprzeczne-rady-o-pcos",
-      title: "Sprzeczne rady o PCOS: zapisz to, co chcesz wyjaśnić",
+      title: "Sprzeczne rady o PMOS (PCOS): zapisz to, co chcesz wyjaśnić",
       lead: "Zamiast kolejnej listy zasad — zbiór zdań, które usłyszałaś i chcesz sprawdzić w spokojnej rozmowie.",
       alt: "Aleksandra Olesiewicz.",
     },
     en: {
       slug: "conflicting-advice-on-pcos",
-      title: "Conflicting advice on PCOS: write down what you want to clarify",
+      title: "Conflicting advice on PMOS (PCOS): write down what you want to clarify",
       lead: "Instead of another list of rules — the sentences you have heard and want to check in a calm conversation.",
       alt: "Aleksandra Olesiewicz.",
     },
@@ -418,14 +418,14 @@ function legacySettingsDocument(language) {
     language,
     siteTitle: "Aleksandra Olesiewicz",
     footerNote: pl
-      ? "PCOS, insulinooporność i odżywianie dopasowane do życia."
-      : "PCOS, insulin resistance and nutrition that fits real life.",
+      ? "PMOS (PCOS), insulinooporność i odżywianie dopasowane do życia."
+      : "PMOS (PCOS), insulin resistance and nutrition that fits real life.",
     blogIndex: {
       _type: "blogIndexSettings",
       title: pl ? "Blog. Po Twojemu." : "Blog. On your terms.",
       lead: pl
-        ? "O PCOS, insulinooporności i odżywianiu, które pasuje do życia. Znajdź temat, z którym jesteś dzisiaj."
-        : "On PCOS, insulin resistance and eating that fits real life. Find the topic you need today.",
+        ? "O PMOS (PCOS), insulinooporności i odżywianiu, które pasuje do życia. Znajdź temat, z którym jesteś dzisiaj."
+        : "On PMOS (PCOS), insulin resistance and eating that fits real life. Find the topic you need today.",
       note: pl
         ? "Przykładowa kolekcja do oceny układu. Tytuły, opisy i daty są demonstracyjne."
         : "A sample collection for layout review. Titles, descriptions and dates are demonstrative.",
@@ -444,8 +444,8 @@ function legacySettingsDocument(language) {
       paginationLabel: pl ? "Strony bloga" : "Blog pages",
       seoTitle: "Blog — Aleksandra Olesiewicz",
       seoDescription: pl
-        ? "Blog Aleksandry Olesiewicz. PCOS, insulinooporność i codzienne odżywianie. Przeglądaj wpisy i zapisz się do newslettera."
-        : "Aleksandra Olesiewicz’s blog. PCOS, insulin resistance and everyday nutrition. Browse posts and join the newsletter.",
+        ? "Blog Aleksandry Olesiewicz. PMOS (PCOS), insulinooporność i codzienne odżywianie. Przeglądaj wpisy i zapisz się do newslettera."
+        : "Aleksandra Olesiewicz’s blog. PMOS (PCOS), insulin resistance and everyday nutrition. Browse posts and join the newsletter.",
     },
     blogNewsletter: {
       _type: "blogNewsletterSettings",
@@ -454,8 +454,8 @@ function legacySettingsDocument(language) {
         ? "Mniej sprzecznych rad.\nWięcej konkretów."
         : "Fewer conflicting tips.\nMore specifics.",
       lead: pl
-        ? "Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie."
-        : "I write about PCOS, insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and I send updates about new materials, including perimenopause.",
+        ? "Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie."
+        : "I write about PMOS (PCOS), insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and I send updates about new materials, including perimenopause.",
       form: reference(pl ? "form-newsletter-pl" : "form-newsletter-en"),
       sidebarTitle: pl ? "Zostań w kontakcie" : "Stay in touch",
       sidebarLead: pl

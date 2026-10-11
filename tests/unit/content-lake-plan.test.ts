@@ -133,14 +133,14 @@ describe("content lake plan", () => {
     ).toBe("hero");
   });
 
-  it("fills the PCOS ebook cover and the English slug", () => {
+  it("fills the PMOS (PCOS) ebook cover and the English slug", () => {
     const ebook = byId("ebook-suplementy-w-pcos-en");
     expect(ebook.slug).toEqual({
       _type: "slug",
       current: "supplements-in-pcos",
     });
     expect(ebook.cover).toMatchObject({
-      alt: "Controlled cover: Supplements in PCOS",
+      alt: "Controlled cover: Supplements in PMOS (PCOS)",
       tone: "diagram",
       rasterKey: "cover-suplementy-w-pcos",
     });
