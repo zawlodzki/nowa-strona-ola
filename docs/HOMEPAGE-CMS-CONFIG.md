@@ -3,6 +3,55 @@
 Aktualizacja: 2026-10-08. Status: specyfikacja do konfiguracji Sanity,
 nie wykonana migracja. Obowiązuje dla polskiej strony głównej.
 
+## SEO, GEO i AEO — decyzje i propozycje 11.10.2026
+
+Źródło: [plan SEO/GEO/AEO](SEO-GEO-AEO-PLAN.md), 11.10.2026. Nic nie
+skonfigurowano w Sanity.
+
+Ustalenia użytkownika (11.10.2026):
+
+| Decyzja                  | Wartość                                                                | Przyszłe pole Sanity            | Stan                                                                    |
+| ------------------------ | ---------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------------- |
+| Boty AI (D1)             | wyszukiwanie i odpowiedzi tak, trening nie (`ai-train=no`)             | brak (robots.txt w kodzie)      | do wdrożenia w SEO‑3                                                    |
+| Sprzedawca w schema (D2) | Wellbiz sp. z o.o. jako `Organization` `/#seller`, `Offer.seller`      | `siteSettings.seller`           | wdrożone w kodzie z `site-legal.ts`                                     |
+| Profile `sameAs` (D4)    | Instagram, Facebook, TikTok                                            | `author.sameAs[]`               | wdrożone (bez zmian)                                                    |
+| Dyplom (D5)              | na razie nie pokazujemy; bez `hasCredential`, bez deklaracji przeglądu | `author.credentials[].isPublic` | schema bez dyplomu; zdjęcie z dyplomem na „O mnie” zostaje (11.10.2026) |
+
+Propozycje bez decyzji: szablon tytułu (D3), `LocalBusiness` (D6),
+RSS i `llms-full.txt` (D8). Obrazy OG: decyzja 11.10.2026 — generowane
+w buildzie (wdrożone); `seo.ogImage` w dokumencie nadpisuje kartę.
+
+Pola SEO w schemacie (SEO‑4, 11.10.2026): dodane w kodzie Studio.
+**Wartości z tabeli wpisano i opublikowano w Content Lake 11.10.2026 na
+polecenie użytkownika** (`siteSettings-pl`, `author-ola-pl`,
+`service-consultation-pl`, `cat-pcos-pl`, `cat-insulin-pl`; Wikidata
+sprawdzona: Q500816 = zespół wielotorbielowatych jajników, Q1053470 =
+insulinooporność, plus hasła polskiej Wikipedii). Schemat
+niezarejestrowany i Studio niewdrożone: wdrożone Studio pokaże te pola
+jako nieznane do czasu deployu. Do czasu uzupełnienia frontend używa stałych z repo
+(`src/content/site-identity.ts`, `src/content/site-legal.ts`).
+
+| Pole Sanity                            | Wartość do wpisania                                                                                                             | Źródło / status                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `siteSettings-pl.siteOwner`            | `author-ola-pl`                                                                                                                 | ustalenie: osoba z `/#person`                        |
+| `siteSettings-pl.seller`               | Wellbiz sp. z o.o., ul. Lipowa 3D, 30-702 Kraków, NIP 6793323800, KRS 0001158341, REGON 541006624, ola@aleksandraolesiewicz.com | decyzja D2 i `site-legal.ts`                         |
+| `siteSettings-pl.defaultOgImage`       | prawdziwe zdjęcie z „O mnie” (`rasterKey: about` lub plik)                                                                      | ustalenie (portrety Hero/Kontakt to image_gen)       |
+| `author-ola-pl.sameAs`                 | Instagram, Facebook, TikTok (adresy z `social-profiles.ts`)                                                                     | decyzja D4                                           |
+| `author-ola-pl.occupationCode`         | `2265`                                                                                                                          | propozycja                                           |
+| `author-ola-pl.knowsAbout`             | kategorie PCOS i Insulinooporność                                                                                               | propozycja                                           |
+| `author-ola-pl.credentials`            | dyplom ŚUM z `isPublic: false`                                                                                                  | decyzja D5 (bez dyplomu w schema)                    |
+| `category.sameAs`                      | hasła Wikidata PCOS i insulinooporności                                                                                         | do sprawdzenia ręcznie; nie zgadywać identyfikatorów |
+| `service.serviceType`                  | Konsultacja dietetyczna                                                                                                         | propozycja                                           |
+| `service.channel`                      | online                                                                                                                          | zgodne z treścią strony                              |
+| `service.audience`                     | Kobiety z PCOS i insulinoopornością                                                                                             | propozycja, musi zgadzać się z sekcją „Dla kogo”     |
+| `service.deliverables`                 | Twoja sytuacja; Twoje priorytety; Twój pierwszy krok                                                                            | propozycja z sekcji „Cel konsultacji”                |
+| `service.terms`                        | dokument `regulamin`                                                                                                            | propozycja                                           |
+| `ebook.numberOfPages`, `publishedAt`   | po przygotowaniu e-booka                                                                                                        | brak danych                                          |
+| `article.reviewedBy`, `lastReviewedAt` | puste                                                                                                                           | decyzja D5: bez deklaracji przeglądu                 |
+
+Bez zmian: `titleTemplate` (D3 otwarte), `socialLinks` w ustawieniach
+nadal zasila stopkę.
+
 ## Źródła i sposób aktualizacji
 
 Decyzja użytkownika z 08.10.2026 po audycie Sanity: ujednolicić kolekcje.

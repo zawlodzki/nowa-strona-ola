@@ -343,6 +343,12 @@ export interface ServiceDetails {
   price: number;
   currency: "PLN";
   durationMinutes: number;
+  /** Optional structured-data fields of the `service` document (SEO-4). */
+  serviceType?: string;
+  channel?: "online" | "inPerson";
+  audience?: string;
+  deliverables?: string[];
+  termsPath?: string;
 }
 
 export interface ServiceOfferContent {

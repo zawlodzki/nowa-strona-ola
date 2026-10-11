@@ -49,6 +49,27 @@ export const articleType = defineType({
       validation: (rule) => rule.required().max(320),
     }),
     defineField({
+      name: "keyTakeaways",
+      title: "W skrócie",
+      description:
+        "2–5 zdań z najważniejszymi wnioskami tekstu, każde zrozumiałe samodzielnie. Pomaga czytelniczkom i wyszukiwarkom AI (wyświetlanie: etap SEO‑5).",
+      type: "array",
+      group: "content",
+      of: [
+        defineArrayMember({
+          type: "string",
+          validation: (rule) => rule.required().max(220),
+        }),
+      ],
+      validation: (rule) =>
+        rule.custom((items) => {
+          if (!items?.length) return true;
+          return items.length >= 2 && items.length <= 5
+            ? true
+            : "Dodaj od 2 do 5 zdań albo zostaw pole puste.";
+        }),
+    }),
+    defineField({
       name: "breadcrumbTitle",
       title: "Krótki tytuł w ścieżce",
       description:
@@ -86,6 +107,8 @@ export const articleType = defineType({
     defineField({
       name: "updatedAt",
       title: "Data aktualizacji",
+      description:
+        "Ustaw tylko przy merytorycznej zmianie treści. Literówki i zmiany SEO nie zmieniają tej daty. Trafia do dateModified i mapy strony.",
       type: "datetime",
       group: "meta",
       validation: (rule) =>
@@ -112,6 +135,38 @@ export const articleType = defineType({
         ],
       },
       initialValue: "standard",
+    }),
+    defineField({
+      name: "reviewedBy",
+      title: "Sprawdziła merytorycznie",
+      description:
+        "Wypełnij tylko przy faktycznym przeglądzie treści przez wskazaną osobę (decyzja 11.10.2026: na razie bez deklaracji przeglądu).",
+      type: "reference",
+      to: [{ type: "author" }],
+      group: "meta",
+      options: sameLanguageFilter("author"),
+    }),
+    defineField({
+      name: "lastReviewedAt",
+      title: "Data przeglądu merytorycznego",
+      type: "date",
+      group: "meta",
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const document = context.document as
+            { reviewedBy?: unknown; publishedAt?: string } | undefined;
+          if (Boolean(value) !== Boolean(document?.reviewedBy)) {
+            return "Osoba sprawdzająca i data przeglądu występują razem.";
+          }
+          if (
+            value &&
+            document?.publishedAt &&
+            value < document.publishedAt.slice(0, 10)
+          ) {
+            return "Przegląd nie może być wcześniejszy niż publikacja.";
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "authors",

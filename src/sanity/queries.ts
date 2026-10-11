@@ -11,6 +11,13 @@ const mediaFields = /* groq */ `{
 
 const actionFields = /* groq */ `{ label, href, emphasis }`;
 
+const seoFields = /* groq */ `{
+  title,
+  description,
+  noindex,
+  "ogImage": ogImage${mediaFields}
+}`;
+
 const formFields = /* groq */ `{
   "id": _id,
   language,
@@ -51,7 +58,8 @@ export const ebookCardProjection = /* groq */ `
   format,
   sortOrder,
   "cover": cover${mediaFields},
-  "authorName": author->name
+  "authorName": author->name,
+  "noindex": seo.noindex
 `;
 
 export const PAGE_SECTION_PROJECTION = /* groq */ `
@@ -251,7 +259,12 @@ export const PAGE_SECTION_PROJECTION = /* groq */ `
       currency,
       durationMinutes,
       bookingUrl,
-      bookingStatus
+      bookingStatus,
+      serviceType,
+      channel,
+      audience,
+      deliverables,
+      "terms": terms->{ "slug": slug.current, language }
     }
   },
   _type == "credentialsSection" => {
@@ -276,7 +289,7 @@ const pageProjection = /* groq */ `
   language,
   "slug": slug.current,
   title,
-  seo{title, description},
+  seo${seoFields},
   "translation": translation->{ language, "slug": slug.current },
   sections[]{ ${PAGE_SECTION_PROJECTION} }
 `;
@@ -312,6 +325,24 @@ export const siteSettingsProjection = /* groq */ `
   copyright,
   testimonialsDisclosure,
   socialLinks[]{ _key, label, href },
+  "siteOwner": siteOwner->{
+    name,
+    role,
+    educationInstitution,
+    occupationCode,
+    sameAs,
+    "knowsAbout": knowsAbout[]->{ title, sameAs },
+    "credentials": credentials[isPublic == true]{
+      name,
+      category,
+      institution,
+      institutionUrl,
+      year
+    },
+    "photo": photo${mediaFields}
+  },
+  seller,
+  "defaultOgImage": defaultOgImage${mediaFields},
   blogIndex{
     title,
     lead,
@@ -356,9 +387,11 @@ export const articleCardProjection = /* groq */ `
   title,
   lead,
   publishedAt,
+  updatedAt,
   featured,
+  "noindex": seo.noindex,
   "media": image${mediaFields},
-  categories[]->{ title, "slug": slug.current, language },
+  categories[]->{ title, "slug": slug.current, language, sameAs },
   "translation": translation->{ language, "slug": slug.current }
 `;
 
@@ -382,7 +415,10 @@ export const articleDetailProjection = /* groq */ `
   breadcrumbTitle,
   proposalNote,
   updatedAt,
-  seo{title, description},
+  keyTakeaways,
+  lastReviewedAt,
+  "reviewedBy": reviewedBy->{ name, role },
+  seo${seoFields},
   authors[]->{
     name,
     role,
@@ -440,6 +476,7 @@ export const PUBLISHED_CATEGORY_QUERY = defineQuery(/* groq */ `
     language,
     title,
     description,
+    sameAs,
     "slug": slug.current,
     "translation": translation->{ language, "slug": slug.current }
   }
@@ -476,6 +513,8 @@ export const ebookProjection = /* groq */ `
   format,
   sortOrder,
   reviewedAt,
+  numberOfPages,
+  publishedAt,
   "cover": cover${mediaFields},
   "author": author->{
     name,
@@ -496,7 +535,7 @@ export const ebookProjection = /* groq */ `
     "form": form->${formFields}
   },
   sources[]{ _key, title, href, scope },
-  seo{title, description},
+  seo${seoFields},
   "translation": translation->{ language, "slug": slug.current },
   landing{
     variant,
@@ -586,7 +625,7 @@ export const legalPageProjection = /* groq */ `
   title,
   version,
   effectiveFrom,
-  seo{title, description},
+  seo${seoFields},
   body[]{ _key, _type, ..., rows[]{ _key, cells } },
   "translation": translation->{ language, "slug": slug.current }
 `;
@@ -607,4 +646,13 @@ export const PUBLISHED_LEGAL_PAGE_PATHS_QUERY = defineQuery(/* groq */ `
     defined(slug.current) &&
     defined(language)
   ]{ language, "slug": slug.current }
+`);
+
+export const PUBLISHED_REDIRECTS_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "redirect" &&
+    !(_id in path("drafts.**")) &&
+    defined(from) &&
+    defined(to)
+  ] | order(from asc){ from, to, status }
 `);

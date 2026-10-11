@@ -19,6 +19,7 @@ export interface LegalPageView {
   breadcrumbLabel: string;
   breadcrumbs: { href: string; label: string; current?: boolean }[];
   title: string;
+  version: string;
   versionLabel: string;
   effective: { datetime: string; label: string } | null;
   effectiveCaption: string;
@@ -28,10 +29,6 @@ export interface LegalPageView {
   toc: { id: string; text: string }[];
   body: PortableBlock[];
   html: string;
-  jsonLd: {
-    "@context": "https://schema.org";
-    "@graph": Record<string, unknown>[];
-  };
 }
 
 const copy = {
@@ -94,36 +91,6 @@ export function mapLegalPage(
         label: formatEffectiveNumeric(effectiveFrom),
       }
     : null;
-  const origin = "https://aleksandraolesiewicz.com";
-  const graph: Record<string, unknown>[] = [
-    {
-      "@type": "WebPage",
-      "@id": `${origin}${href}#webpage`,
-      url: `${origin}${href}`,
-      name: title,
-      inLanguage: language === "pl" ? "pl-PL" : "en-GB",
-      version,
-      ...(effective ? { datePublished: effective.datetime } : {}),
-      isPartOf: { "@id": `${origin}/#website` },
-    },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: labels.home,
-          item: `${origin}${homePath(language)}`,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: title,
-          item: `${origin}${href}`,
-        },
-      ],
-    },
-  ];
   return {
     language,
     href,
@@ -140,6 +107,7 @@ export function mapLegalPage(
       { href, label: title, current: true },
     ],
     title,
+    version,
     versionLabel,
     effective,
     effectiveCaption: labels.effective,
@@ -151,6 +119,5 @@ export function mapLegalPage(
     toc,
     body,
     html,
-    jsonLd: { "@context": "https://schema.org", "@graph": graph },
   };
 }

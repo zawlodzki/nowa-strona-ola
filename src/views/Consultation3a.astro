@@ -14,7 +14,6 @@ import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
 import { consultationCopy } from "@/content/consultation-seed";
 import type { ConsultationView } from "@/content/map-consultation";
-import { socialProfileSameAs } from "@/content/social-profiles";
 
 export interface Props {
   lang: Locale;
@@ -31,59 +30,9 @@ const expertParagraphs = expert.body
   .split(/\n\s*\n/)
   .map((paragraph) => paragraph.trim())
   .filter(Boolean);
-const oneLine = (value: string) => value.replaceAll("\n", " ");
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      name: oneLine(hero.title),
-      description: hero.lead,
-      inLanguage: lang,
-      about: { "@id": "#konsultacja" },
-    },
-    {
-      "@type": "Service",
-      "@id": "#konsultacja",
-      name: price.name,
-      description: hero.lead,
-      provider: {
-        "@type": "Person",
-        name: expert.name,
-        jobTitle: expert.role,
-        sameAs: socialProfileSameAs(),
-        ...(expert.education && {
-          alumniOf: {
-            "@type": "CollegeOrUniversity",
-            name: expert.education.institution,
-          },
-        }),
-      },
-      offers: {
-        "@type": "Offer",
-        price: price.price,
-        priceCurrency: price.currency,
-        description: `${price.durationLabel} · ${copy.format}`,
-      },
-    },
-    {
-      "@type": "FAQPage",
-      mainEntity: faq.items.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: { "@type": "Answer", text: item.answer },
-      })),
-    },
-  ],
-};
 ---
 
 <main id="main" class="consult3a">
-  <script
-    type="application/ld+json"
-    is:inline
-    set:html={JSON.stringify(jsonLd)}
-  ></script>
   <Hero id="start" kind="service" title={hero.title} description={hero.lead}>
     <Button slot="actions" as="a" href={hero.primary.href} arrow>
       {hero.primary.label}

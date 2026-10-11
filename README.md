@@ -75,6 +75,18 @@ npm run preview
 ```
 
 Podgląd lokalny: `http://127.0.0.1:4321`. Praca nad kodem: `npm run dev`.
+
+SEO (plan: [SEO-GEO-AEO-PLAN.md](docs/SEO-GEO-AEO-PLAN.md)): każdy build jest
+`noindex`, dopóki nie ustawi się `SITE_INDEXING=production`. Zmienną ustawia
+się wyłącznie w buildzie gotowej produkcji. `npm run test:build` uruchamia
+`scripts/check-seo.mjs` (canonical, Open Graph, robots, graf JSON-LD). Kontrola
+trybu produkcyjnego bez nadpisywania `dist/`:
+
+```sh
+SITE_INDEXING=production npx astro build --outDir /tmp/dist-indexing
+SITE_INDEXING=production node scripts/check-seo.mjs /tmp/dist-indexing
+```
+
 Astro 7 w środowisku agenta może uruchomić CLI preview w tle; testy używają
 osobnego kontrolowanego procesu `scripts/preview-test.mjs`.
 

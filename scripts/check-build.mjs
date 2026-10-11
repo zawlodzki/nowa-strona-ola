@@ -104,7 +104,7 @@ assert.match(
   /Jak przygotować się do konsultacji dietetycznej przy PCOS\?/,
 );
 assert.match(articleHtml, /W tym artykule/);
-assert.match(articleHtml, /article-faq-schema/);
+assert.match(articleHtml, /"@type":"FAQPage"/);
 const homePl = await readFile("dist/index.html", "utf8");
 for (const [label, html] of [["/", homePl]]) {
   assert.match(

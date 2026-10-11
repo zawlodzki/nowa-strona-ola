@@ -1,12 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
 
-import aboutPortrait from "@/assets/portraits/about.webp";
-import contactPortrait from "@/assets/portraits/contact.webp";
-import diplomaPhoto from "@/assets/portraits/diploma.jpg";
-import foodEditorial from "@/assets/editorial/food-editorial.webp";
-import heroPortrait from "@/assets/portraits/hero.webp";
+import { siteRasters as rasters } from "@/assets/site-rasters";
 import {
   imageCropPosition,
   pickSiteImage,
@@ -26,14 +21,6 @@ interface Props {
   objectPosition?: string;
   fit?: "cover" | "contain" | "fill" | "none" | "scale-down";
 }
-
-const rasters: Record<SiteRasterKey, ImageMetadata> = {
-  hero: heroPortrait,
-  about: aboutPortrait,
-  contact: contactPortrait,
-  diploma: diplomaPhoto,
-  food: foodEditorial,
-};
 
 const {
   src,

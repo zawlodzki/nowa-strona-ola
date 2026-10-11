@@ -252,3 +252,17 @@ HTML i Markdown korzystają z tego samego wyboru artykułów i linków stron.
       (testy jednostkowe).
 
 Makieta nie zamyka zapisu do Content Lake ani odbioru Studio/preview.
+
+## Elementy AEO artykułu — 11.10.2026 (SEO‑5)
+
+Wdrożone w szablonie artykułu 3a (kod, bez zmian w Content Lake):
+
+| Element               | Źródło                            | Wartość / status                                                                                                                                                                                                                         |
+| --------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| „W skrócie”           | `article.keyTakeaways` (2–5 zdań) | panel nad treścią; pusty = brak panelu; w Markdown sekcja `## W skrócie`                                                                                                                                                                 |
+| Czas czytania         | liczony z treści (200 słów/min)   | „N min czytania” przy datach; `wordCount` i `timeRequired` w JSON-LD                                                                                                                                                                     |
+| Przegląd merytoryczny | `reviewedBy` + `lastReviewedAt`   | „Sprawdziła merytorycznie: …, data” tylko gdy oba pola wypełnione (decyzja D5: obecnie puste)                                                                                                                                            |
+| Zastrzeżenie          | stała etykieta w kodzie           | **propozycja** do akceptacji: „Artykuł ma charakter edukacyjny. Nie zastępuje konsultacji z lekarzem ani indywidualnych zaleceń.” (EN: „This article is educational. It does not replace medical advice or individual recommendations.”) |
+
+Fixture wyróżnionego artykułu ma przykładowe „W skrócie” (4 zdania
+streszczające treść). W Sanity pole jest puste we wszystkich artykułach.

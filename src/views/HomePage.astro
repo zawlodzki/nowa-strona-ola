@@ -6,6 +6,9 @@ import type { PageContent, SiteSettings } from "@/sanity/repository";
 import SiteShell3a from "@/views/SiteShell3a.astro";
 import { mapHomepage } from "@/content/map-homepage";
 import Homepage3a from "@/views/Homepage3a.astro";
+import { homePath } from "@/lib/paths";
+import { homeGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 export interface Props {
   lang: Locale;
   page: PageContent;
@@ -20,6 +23,10 @@ const alternateHref = page.translation?.slug
     )
   : null;
 const shell = shellLinks(settings);
+const seo = pageSeo(settings, page.seo, {
+  path: homePath(lang),
+  graph: homeGraph(),
+});
 ---
 
 <SiteShell3a
@@ -30,6 +37,7 @@ const shell = shellLinks(settings);
   preview={preview}
   footerNote={settings.footerNote ?? ""}
   languageHref={alternateHref}
+  seo={seo}
   {...shell}
 >
   <Homepage3a

@@ -11,11 +11,6 @@ const { content } = Astro.props;
 ---
 
 <main id="main" class="legal3a">
-  <script
-    type="application/ld+json"
-    is:inline
-    set:html={JSON.stringify(content.jsonLd)}
-  ></script>
   <div class="legal-heading" id="start">
     <Container>
       <Breadcrumbs

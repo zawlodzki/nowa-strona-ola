@@ -6,6 +6,260 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Obrazy OG generowane w buildzie, 11.10.2026
+
+- Decyzja użytkownika (D7): obrazy udostępniania generowane. Na polecenie
+  pobrano oficjalną paczkę Switzer z Fontshare
+  (`api.fontshare.com/v2/fonts/download/switzer`, 2,47 MB) do scratchpadu;
+  `Switzer-Variable.woff2` z paczki jest identyczny z plikiem w repo,
+  `FFL.txt` identyczny. Do `src/assets/fonts/switzer/og/` skopiowano bez
+  zmian `Switzer-Regular/Semibold/Bold.otf` (sumy SHA-1 zgodne z paczką).
+- Wdrożono `og-card.ts`, `og-size.ts` (wymiary bez importu satori w head,
+  żeby podgląd SSR nie dostał natywnego resvg), endpoint
+  `/og/[...ogPath].png`, tytuły kart (`cardTitle`, `stripBrand`), nową
+  kolejność `og:image` (`shareImage` z `seo.ogImage`). Zależności
+  `satori@^0.33.5` (wersja z 22.09.2026, nie najnowsza 0.47.1 sprzed dwóch
+  dni) i `@resvg/resvg-js@^2.6.2` (MPL-2.0) w devDependencies; lockfile
+  zawiera binarkę linux-x64. Wpis w `THIRD-PARTY-NOTICES.md` i README fontu.
+- Kontrole (Node 26.11.0): obejrzane karty strony głównej, artykułu
+  i regulaminu (najdłuższy tytuł mieści się, polskie znaki poprawne);
+  34 karty, łącznie 1,2 MB; brak `.otf` w `dist/`; `check-seo` 36 stron
+  PASS z kontrolą PNG 1200×630; 279 testów unit; `npm run check`
+  bez diagnostyki; lint, format, build:workspaces, `test:content-lake` PASS.
+  `test:build` nadal czerwone tylko przez budżet CSS panelu zgód.
+- Bez commitu, push i zmian w Sanity.
+
+### SEO‑5: elementy AEO artykułu, 11.10.2026
+
+- Na polecenie użytkownika: w artykule 3a panel „W skrócie”
+  (`article.keyTakeaways`), czas czytania (200 słów/min) przy datach,
+  linia przeglądu merytorycznego tylko przy wypełnionym `reviewedBy`
+  i `lastReviewedAt`, zastrzeżenie edukacyjne pod treścią (propozycja copy:
+  [konfiguracja bloga](BLOG-CMS-CONFIG-3A.md)). Markdown i przykład
+  `article.md` z tymi samymi elementami; `wordCount` i `timeRequired`
+  w JSON-LD. Fixture wyróżnionego artykułu ma 4 przykładowe zdania
+  „W skrócie”. Wytyczne redakcyjne w [BLOG-PUBLISHING.md](BLOG-PUBLISHING.md).
+- Bez nowych tokenów: panel używa `--ao-surface`, `--ao-line`,
+  `--ao-radius-panel`, odstępów `--ao-space-*`.
+- Kontrole (Node 26.11.0): 277 testów unit (nowe przypadki w
+  `article-3a.test.ts`), `astro check` bez diagnostyki, build,
+  `check-seo` 36 stron PASS, E2E `article-3a` + `blog-3a` 15/15.
+  Ręcznie w przeglądarce: 1440 px, 320 px w trybie ciemnym, zoom 200%
+  (CSS) bez przepełnienia; tekst listy 16 px, zastrzeżenie 14 px.
+  Zewnętrzny CSS artykułu 9598 B gzip (budżet 10240 B). Inline CSS
+  artykułu 4782 B > 4096 B to w całości blok `ConsentPanel` (równoległa
+  praca c15t), jak na `/odstapienie/`.
+- Nie wykonano: obrazów OG (D7 otwarte, brak plików OTF/TTF), natywnego
+  zoomu, czytnika ekranu, zapisu w Sanity, commitu, push.
+
+### Dane SEO i landingi e-booków w Sanity, 11.10.2026
+
+- Na polecenie użytkownika wpisano i opublikowano w Content Lake
+  (dataset `production`) wartości SEO z
+  [konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md): właścicielka i sprzedawca
+  w `siteSettings-pl`, `sameAs`/`occupationCode`/`knowsAbout`/
+  niepubliczny dyplom w `author-ola-pl`, pola usługi, `sameAs` kategorii
+  PCOS i insulinooporności (Wikidata sprawdzona przez API).
+- Pięć polskich e-booków dostało landing skopiowany z „Suplementów
+  w PCOS” jako treść zastępczą ([konfiguracja e-booka](EBOOK-CMS-CONFIG-3A.md)).
+  Zgodność kopii sprawdzona GROQ (7 rozdziałów, 5 materiałów, 6 FAQ,
+  2 opinie, źródło). Najpierw szkice, publikacja 10 dokumentów po
+  potwierdzeniu użytkownika. Trzech istniejących, cudzych szkiców
+  (`article-blog-01-pl` i dwa UUID) nie ruszano.
+- Fixture’y (`ebook-fixtures.ts`) i plan Content Lake odwzorowują nowe
+  landingi; dzięki temu kontrola linków jest zielona.
+- Kontrole: build lokalnego kodu na danych z Sanity → `check-seo`
+  36 stron PASS (bez niedziałających linków; Person z `knowsAbout`
+  i `sameAs`, sprzedawca, pola usługi, bez `hasCredential`); build
+  z fixture’ów → `check-seo` 36 stron PASS; `test:content-lake` PASS;
+  275 testów unit; `astro check` bez diagnostyki; E2E e-booków
+  i `english-disabled` 48/48. `test:build` nadal czerwone wyłącznie przez
+  budżet CSS panelu zgód.
+- Publikacja nie uruchomiła żadnego builda. Diagnoza (API zarządzania
+  Sanity, `sanity hook logs`): `publish-pages-production` jest wyłączony
+  przez użytkownika (celowo, do wdrożenia c15t). `publish-pages-staging`
+  był włączony, ale oba webhooki miały filtr `_type == "page"` (stan
+  z 13.09.2026), więc zmiany `ebook`, `author`, `service`, `category`,
+  `siteSettings` (a wcześniej także artykułów i opinii) nie wywoływały
+  dostaw — ostatnia dostawa 07:05 UTC. Filtr z
+  [konfiguracji webhooka](sanity-publication-webhook.json) nie został
+  wcześniej wdrożony.
+- Na polecenie użytkownika: filtr obu webhooków zmieniono na wersję
+  z repo (wszystkie typy treści, bez szkiców i wersji); produkcja nadal
+  `isDisabledByUser: true`. Ręcznie wysłano `repository_dispatch`
+  (`staging`): przebieg `Publish content` 38134677319 zakończony sukcesem;
+  staging zwraca 200 dla `/ebooki/czy-to-juz/` i `/ebooki/waga-cie-oklamuje/`.
+  Staging działa na kodzie `main` (stary JSON-LD, bez SEO‑1…4).
+- Nie wykonano: rejestracji schematu, deployu Studio, commitu, push.
+
+### SEO‑4: pola SEO w Sanity i ich użycie we frontendzie, 11.10.2026
+
+- Na polecenie użytkownika wdrożono SEO‑4 w kodzie (szczegóły i odstępstwa:
+  [plan SEO](SEO-GEO-AEO-PLAN.md), wartości do wpisania:
+  [konfiguracja CMS](HOMEPAGE-CMS-CONFIG.md)). Schemat: `seo`
+  (`ogImage`, `noindex`, ostrzeżenie < 70 znaków), `siteSettings`
+  (`siteOwner`, `seller`, `defaultOgImage`), `author` (`occupationCode`,
+  `sameAs`, `knowsAbout`, `credentials` z `isPublic`), `category.sameAs`,
+  `article` (`keyTakeaways`, `reviewedBy`, `lastReviewedAt`),
+  `service` (`serviceType`, `channel`, `audience`, `deliverables`,
+  `terms`), `ebook` (`numberOfPages`, `publishedAt`).
+- Studio: `SeoPreviewInput` (podgląd wyniku wyszukiwania z licznikami)
+  i ostrzeżenie przy zmianie adresu opublikowanego dokumentu bez
+  przekierowania. `@sanity/ui` importowane z instancji Sanity 4.4.0 — próba
+  dopisania zależności tworzyła drugą kopię w `studio/node_modules`, więc
+  `package.json` i lockfile przywrócono do wersji z repo.
+- Frontend: osoba i sprzedawca z `siteSettings` z fallbackiem do stałych,
+  `seo.noindex`/`seo.ogImage` we wszystkich wrapperach i spisie stron,
+  pola usługi w `Service`, tematy artykułu (`about` z `sameAs`),
+  `DefinedTerm` kategorii, przegląd tylko gdy wypełniony, dane e-booka.
+  TypeGen uruchomiony z `schema extract --force` (plik ignorowany);
+  ta ścieżka generuje poprawny blok `declare global`.
+- Kontrole (Node 26.11.0): `sanity schema validate` 0/0, format, lint,
+  `npm run check` (311 + 11 plików) bez diagnostyki, 275 testów unit
+  (nowe przypadki w `seo.test.ts` i `article-3a.test.ts`), build,
+  build:workspaces (w tym Studio). `check-seo` przechodzi poza znanymi
+  5 linkami e-booków (kopia bez tej asercji). `test:content-lake` i
+  `test:build` czerwone z tych samych powodów co wcześniej (linki
+  e-booków, budżet CSS panelu zgód). Podglądu SEO w uruchomionym Studio
+  nie oglądano (wymaga logowania do Sanity).
+- Nie wykonano: zapisu danych w Sanity, rejestracji schematu, deployu
+  Studio, commitu ani push. Uwaga: workflow `Deploy Studio` wdroży nowy
+  schemat automatycznie po scaleniu do `main`.
+- Następny krok: na polecenie — uzupełnienie pól w Sanity według tabeli
+  w konfiguracji CMS; landingi e-booków; poprawka panelu zgód; potem
+  SEO‑5 (wyświetlanie „W skrócie”, biogram, daty, obrazy OG).
+
+### SEO‑3: Markdown, sitemap, robots.txt, RSS, llms.txt, \_headers, \_redirects, 11.10.2026
+
+- Decyzje: zdjęcie z dyplomem na „O mnie” zostaje (D5 dotyczy tylko
+  schema); karty e-booków bez landingu bez zmian w kodzie — landingi
+  powstaną w Sanity ([konfiguracja e-booka](EBOOK-CMS-CONFIG-3A.md)).
+  Pytanie o przegląd treści wyjaśnione, deklaracja nadal wyłączona.
+- Wdrożono: `src/lib/seo/inventory.ts` (spis stron), `[...mdPath].md.ts`
+  (29 plików `.md` = 29 adresów w sitemap), sitemap z `lastmod` bez stron
+  demo (`/tylko-pl/`, `/warsztat/`, `/wdrozenie/` usunięte z sitemap),
+  `robots.txt` (staging `Disallow: /`; produkcja: `Content-Signal:
+search=yes, ai-input=yes, ai-train=no`, blokada GPTBot, ClaudeBot,
+  Google-Extended, Applebot-Extended, CCBot, Meta-ExternalAgent),
+  `blog/rss.xml`, `llms.txt`, `_headers`, `_redirects`
+  (`PUBLISHED_REDIRECTS_QUERY`, `listRedirects`, TypeGen; nagłówek
+  deklaracji w `sanity.types.ts` przywrócony do wersji z repo), linki
+  `alternate` w head, `noindex` pustych kategorii. `updatedAt` dodane do
+  projekcji kart artykułów.
+- Uwaga D1: `Google-Extended` obejmuje też grounding w aplikacji Gemini;
+  wyszukiwarka, AI Overviews i AI Mode działają przez Googlebot.
+- Kontrole (Node 26.11.0): format, lint, `astro check` 309 plików bez
+  diagnostyki, 271 testów unit (nowy `seo-discovery.test.ts`), build,
+  build:workspaces. `check-seo` w trybie noindex i produkcyjnym przechodzi
+  wszystkie kontrole poza linkami wewnętrznymi (kopia skryptu bez tej
+  asercji w scratchpadzie): **czerwone — 5 linków do e-booków bez
+  landingu**, ten sam wynik w `test:content-lake`. `wrangler dev` (lokalny
+  runtime) potwierdził `text/markdown`, `Link: rel=canonical` przez
+  `:splat`, `! Link` dla `/index.md` i `X-Robots-Tag`. E2E
+  `english-disabled` + `article-3a` 57/57. Pełnego `npm run verify` nie
+  uruchamiano ponownie (znane czerwone: budżet CSS panelu zgód, sticky
+  navigation, teraz także linki e-booków).
+- Zauważone w treści: opis SEO kolekcji e-booków (fixture) zawiera
+  roboczy dopisek „Copy i UX kolekcji są propozycją do zatwierdzenia”,
+  który trafia do meta, `.md` i llms.txt.
+- Bez commitu, push, zapisu w Sanity i zmian w Cloudflare.
+- Następny krok: landingi e-booków (Sanity i fixture’y) albo zmiana
+  decyzji o kartach; poprawka panelu zgód; ręczna walidacja schema;
+  potem SEO‑4 (pola Sanity) lub SEO‑5.
+
+### Decyzje SEO D1, D2, D4, D5 i licencja Switzer, 11.10.2026
+
+- Decyzje użytkownika zapisane w [planie SEO](SEO-GEO-AEO-PLAN.md#decyzje-użytkownika-11102026)
+  i [konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md): trening AI nie,
+  wyszukiwanie/odpowiedzi tak; sprzedawca w schema; `sameAs` IG/FB/TikTok;
+  dyplom na razie niepokazywany.
+- Wdrożono D2: `/#seller` (Wellbiz sp. z o.o.) na każdej stronie,
+  `Offer.seller` → `#seller`; `check-seo.mjs` wymaga węzła. Kontrole:
+  `tests/unit/seo.test.ts` 9/9, build, `check-seo` 31 stron PASS.
+- Licencja ITF FFL 2.0 sprawdzona na pliku w repo: obrazy OG dozwolone,
+  ale tylko z oficjalnych statycznych OTF/TTF (bez konwersji WOFF2),
+  używanych wyłącznie w buildzie. Plików fontu nie pobierano.
+- Otwarte: czy usunąć zdjęcie z dyplomem z „O mnie” (obecnie widoczne);
+  D3, D6, D8.
+- Następny krok bez zmian: budżet CSS i nakładka panelu zgód, ręczna
+  walidacja schema, SEO‑3 (z robots.txt według D1).
+
+### SEO‑1 i SEO‑2: adresy, head i graf JSON-LD, 11.10.2026
+
+- Na polecenie użytkownika wdrożono etapy SEO‑1 i SEO‑2
+  [planu SEO/GEO/AEO](SEO-GEO-AEO-PLAN.md). Odstępstwa opisane w planie.
+- Adresy i indeksacja: `site`, `trailingSlash: "always"`,
+  `build.format: "directory"` we wszystkich konfiguracjach Astro;
+  `src/lib/seo/site.ts` (origin, `absoluteUrl`, `@id`). Indeksacja tylko
+  przy `SITE_INDEXING=production`; domyślnie noindex. Workflow tej zmiennej
+  jeszcze nie ustawia (start produkcji, SEO‑6). `html lang="pl-PL"`
+  (także stary `Layout.astro`).
+- Head: `src/views/SeoHead.astro` przez slot `head` w `Layout3a`:
+  canonical, robots (`max-image-preview:large`), Open Graph 1200×630,
+  `article:*`, Twitter. Domyślny obraz OG i obraz osoby to prawdziwe
+  zdjęcie z „O mnie” (`about`), nie portrety image_gen. W podglądzie
+  szkicu SeoHead się nie renderuje. Nowe `src/pages/404.astro` (Hero 3a,
+  zawsze noindex, bez canonical).
+- Graf: `src/lib/seo/graph.ts` i `page-graphs.ts`. Jeden `@graph` w head
+  (`#structured-data`) z `/#person` i `/#website` na każdej stronie;
+  JSON-LD inline usunięty z 7 widoków i mapperów `map-article`/`map-legal`.
+  Usunięto błąd `Offer`/`OutOfStock` dla „Wkrótce dostępny”: `Offer` tylko
+  dla `available`/`presale` z `checkoutUrl`. Osoba tymczasowo z
+  `src/content/site-identity.ts` (SEO‑4 przeniesie do Sanity).
+- Kontrola wykryła i poprawiono zduplikowane `<title>` kategorii
+  i paginacji bloga oraz kategorii e-booków.
+- `scripts/check-seo.mjs` w `test:build` i `test:content-lake`: canonical =
+  adres strony, robots zgodne z trybem, OG, unikalne tytuły, jeden graf,
+  absolutne `@id`/`url`, rozwiązywalne referencje, FAQ i ceny `Offer`
+  widoczne w treści, link płatności przy `Product`.
+  `rasters` wydzielone do `src/assets/site-rasters.ts` (SiteImage i OG).
+- Kontrole (Node **26.11.0** — Node 24 nie jest zainstalowany lokalnie):
+  format, lint, `astro check` 298 plików bez diagnostyki, 261 testów unit
+  (nowy `tests/unit/seo.test.ts`), build, build:workspaces,
+  `check-seo` 31 stron w trybie noindex oraz osobny build
+  `SITE_INDEXING=production` → 31 stron index, 404 i demo noindex.
+  test:content-lake PASS. E2E: 375 passed / 15 failed; 6 błędów
+  `lang` w `english-disabled` poprawiono (powtórka: 57/57 z
+  `article-3a`). Pozostałe 9 to `sticky-navigation-3a`, w którym panel
+  cookies przechwytuje kliknięcia.
+- **Czerwone i niezależne od SEO:** `check-css-budgets` —
+  `/odstapienie/` inline CSS 4099 B > 4096 B. Cały blok to CSS
+  `ConsentPanel` (plik zmieniony 11:13 w równoległej pracy nad c15t);
+  tak samo testy sticky navigation. Plików zgód nie zmieniano.
+  `npm run verify` nie jest więc w całości zielone.
+- Ręcznie: 404 przy 320 px bez poziomego przewijania; panel cookies
+  zasłania przy 320 px cały ekran — ryzyko interstitial dla SEO do
+  uwzględnienia w pracy nad c15t. Nie wykonano: Rich Results Test,
+  Schema Markup Validator, zoom 200%, czytnik ekranu.
+- Bez commitu, push, zapisu w Sanity i zmian w Cloudflare.
+- Następny krok: naprawa budżetu CSS i nakładki panelu zgód (praca c15t),
+  ręczna walidacja schema, potem SEO‑3 (`.md`, sitemap z `lastmod`
+  i wykluczeniami, robots.txt, RSS, llms.txt, `_headers`, `_redirects`).
+
+### Plan infrastruktury SEO, GEO i AEO, 11.10.2026
+
+- Na polecenie użytkownika przygotowano
+  [plan SEO/GEO/AEO](SEO-GEO-AEO-PLAN.md): schemat `@id` i grafy
+  wszystkich typów stron (konsultacja `Service`+`Offer`, e-book
+  `Product`+`Book` bez `Offer` dla „Wkrótce dostępny”, blog `Blog`/
+  `BlogPosting`/`DefinedTerm`), zmiany modelu Sanity, implementacja
+  Astro/Cloudflare, kontrole w buildzie, styk z GTM, etapy SEO‑1…SEO‑6
+  i decyzje D1–D8.
+- Wejście: inwentaryzacja repo (stan: JSON-LD per widok z adresami
+  względnymi i bez `#person`/`#website`; brak canonical, OG, robots.txt,
+  RSS, llms.txt, tras `.md`, 404, `site` w Astro; `noindex` na sztywno;
+  `redirect` bez konsumenta; sitemap bez `lastmod` i z demo), analiza
+  publicznego HTML zawlodzki.pl (Webflow MCP nieautoryzowany — bez
+  ustawień projektu), research Astro 7 / Sanity / Cloudflare / Google.
+- Wykryty błąd do SEO‑2: landing e-booka „Wkrótce dostępny” emituje
+  `Offer` z `OutOfStock`.
+- Propozycje i brakujące pola zapisano w
+  [konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md); decyzje D1–D8 otwarte.
+- Kontrole: tylko dokumentacja (format i odnośniki). Kod, Sanity
+  i Cloudflare bez zmian; brak commitu i publikacji.
+- Następny krok: decyzje D1–D8 od użytkownika, potem SEO‑1 (`site`,
+  `urls.ts`, przełącznik indeksacji, `SeoHead`, 404) i SEO‑2 (graf).
+
 ### E-booki „Wkrótce dostępny” i lista oczekujących, 11.10.2026
 
 - Decyzja użytkownika: e-book można oznaczyć jako „wkrótce dostępny”;

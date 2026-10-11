@@ -64,6 +64,12 @@ const copy = {
     faqTitle: "Pytania przed pierwszą konsultacją.",
     faqLead: "Krótko o tym, jak przygotować się do rozmowy.",
     faqNote: "Przykładowe FAQ do akceptacji redakcyjnej.",
+    keyTakeaways: [
+      "Na pierwszą konsultację nie potrzebujesz idealnego jadłospisu ani perfekcyjnego dzienniczka.",
+      "Najwięcej daje opis zwykłego dnia: pracy, dojazdów, obowiązków i czasu na gotowanie.",
+      "Dokumenty, nazwy stosowanych preparatów i poprzednie zalecenia zbierz w jednym miejscu.",
+      "Kilka zapisanych pytań pomaga wrócić w rozmowie do tematów, które są dla Ciebie najważniejsze.",
+    ],
     faq: [
       [
         "Czy przed konsultacją muszę przygotować idealny jadłospis?",
@@ -91,6 +97,12 @@ const copy = {
     faqTitle: "Questions before the first consultation.",
     faqLead: "A short note on how to prepare for the conversation.",
     faqNote: "Sample FAQ pending editorial approval.",
+    keyTakeaways: [
+      "You do not need a perfect meal plan or food diary for the first consultation.",
+      "A description of an ordinary day helps most: work, commuting, chores and time for cooking.",
+      "Keep documents, the names of products you use and previous recommendations in one place.",
+      "A few written questions help you return to the topics that matter most to you.",
+    ],
     faq: [
       [
         "Do I need a perfect meal plan before the consultation?",
@@ -457,6 +469,7 @@ export function featuredArticleExtras(language: Locale) {
     breadcrumbTitle: text.breadcrumbTitle,
     heroCaption: text.heroCaption,
     updatedAt: "2026-10-06T08:00:00.000Z",
+    keyTakeaways: [...text.keyTakeaways],
     body: featuredBody(language),
     faq: {
       title: text.faqTitle,

@@ -7,6 +7,8 @@ import { ebookCollectionPath } from "@/lib/paths";
 import type { EbookCard, PageContent, SiteSettings } from "@/sanity/repository";
 import EbookCollection3a from "@/views/EbookCollection3a.astro";
 import SiteShell3a from "@/views/SiteShell3a.astro";
+import { ebookCollectionGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
 
 export interface Props {
   lang: Locale;
@@ -35,6 +37,12 @@ const navigation = shell.navigation.map((item) => ({
 const headerCta = shell.headerCta
   ? { ...shell.headerCta, href: "#newsletter" }
   : undefined;
+const seo = pageSeo(settings, page.seo, {
+  path: ebookCollectionPath(lang, content.filter),
+  markdown: !content.isCategoryEmpty,
+  noindex: content.isCategoryEmpty,
+  graph: ebookCollectionGraph(content),
+});
 ---
 
 <SiteShell3a
@@ -49,6 +57,7 @@ const headerCta = shell.headerCta
   headerCta={headerCta}
   socialLinks={shell.socialLinks}
   legalLinks={shell.legalLinks}
+  seo={seo}
 >
   <EbookCollection3a lang={lang} content={content} />
 </SiteShell3a>

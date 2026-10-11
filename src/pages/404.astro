@@ -1,0 +1,45 @@
+---
+import Button from "@/design-system/components/Button.astro";
+import Hero from "@/design-system/components/Hero.astro";
+import { shellLinks } from "@/content/map-homepage";
+import { blogPath, ebookCollectionPath, homePath } from "@/lib/paths";
+import { getSiteSettings } from "@/sanity/repository";
+import SiteShell3a from "@/views/SiteShell3a.astro";
+
+const lang = "pl" as const;
+const settings = await getSiteSettings(lang);
+const shell = shellLinks(settings);
+---
+
+<SiteShell3a
+  noindex
+  lang={lang}
+  title="Nie znaleziono strony — Aleksandra Olesiewicz"
+  description="Ta strona nie istnieje albo zmieniła adres."
+  footerNote={settings.footerNote ?? ""}
+  {...shell}
+>
+  <main id="main">
+    <Hero
+      id="start"
+      kind="service"
+      title="Nie znaleziono strony"
+      description="Ta strona nie istnieje albo zmieniła adres. Wróć na stronę główną albo przejdź do materiałów."
+    >
+      <Button slot="actions" as="a" href={homePath(lang)} arrow>
+        Strona główna
+      </Button>
+      <Button
+        slot="actions"
+        as="a"
+        href={ebookCollectionPath(lang)}
+        variant="secondary"
+      >
+        E-booki
+      </Button>
+      <Button slot="actions" as="a" href={blogPath(lang)} variant="secondary">
+        Blog
+      </Button>
+    </Hero>
+  </main>
+</SiteShell3a>

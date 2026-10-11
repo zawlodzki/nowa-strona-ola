@@ -1,7 +1,11 @@
 import { CogIcon } from "@sanity/icons/Cog";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-import { languageField, translationField } from "../shared/fields";
+import {
+  languageField,
+  sameLanguageFilter,
+  translationField,
+} from "../shared/fields";
 
 export const siteSettingsType = defineType({
   name: "siteSettings",
@@ -44,6 +48,83 @@ export const siteSettingsType = defineType({
       name: "defaultSeo",
       title: "Domyślne SEO",
       type: "seo",
+    }),
+    defineField({
+      name: "siteOwner",
+      title: "Właścicielka serwisu",
+      description:
+        "Autorka, której dane (imię, rola, profile, tematy, kwalifikacje) opisują osobę w danych strukturalnych każdej strony.",
+      type: "reference",
+      to: [{ type: "author" }],
+      options: sameLanguageFilter("author"),
+    }),
+    defineField({
+      name: "seller",
+      title: "Sprzedawca",
+      description:
+        "Dane firmy sprzedającej konsultacje i e-booki. Muszą być takie same jak w regulaminie i stopce (decyzja 11.10.2026).",
+      type: "object",
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: "legalName",
+          title: "Nazwa firmy",
+          type: "string",
+          validation: (rule) => rule.required().max(160),
+        }),
+        defineField({
+          name: "street",
+          title: "Ulica i numer",
+          type: "string",
+          validation: (rule) => rule.required().max(120),
+        }),
+        defineField({
+          name: "postalCode",
+          title: "Kod pocztowy",
+          type: "string",
+          validation: (rule) =>
+            rule.required().regex(/^\d{2}-\d{3}$/, { name: "kod pocztowy" }),
+        }),
+        defineField({
+          name: "city",
+          title: "Miejscowość",
+          type: "string",
+          validation: (rule) => rule.required().max(80),
+        }),
+        defineField({
+          name: "nip",
+          title: "NIP",
+          type: "string",
+          validation: (rule) =>
+            rule.required().regex(/^\d{10}$/, { name: "10 cyfr" }),
+        }),
+        defineField({
+          name: "krs",
+          title: "KRS",
+          type: "string",
+          validation: (rule) => rule.regex(/^\d{10}$/, { name: "10 cyfr" }),
+        }),
+        defineField({
+          name: "regon",
+          title: "REGON",
+          type: "string",
+          validation: (rule) =>
+            rule.regex(/^(\d{9}|\d{14})$/, { name: "9 lub 14 cyfr" }),
+        }),
+        defineField({
+          name: "email",
+          title: "E-mail",
+          type: "string",
+          validation: (rule) => rule.email(),
+        }),
+      ],
+    }),
+    defineField({
+      name: "defaultOgImage",
+      title: "Domyślny obraz udostępniania",
+      description:
+        "Używany, gdy strona nie ma własnego obrazu. Prawdziwe zdjęcie, nie grafika generowana jako portret.",
+      type: "mediaObject",
     }),
     defineField({
       name: "navigation",

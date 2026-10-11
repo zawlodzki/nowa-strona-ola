@@ -1,5 +1,5 @@
 import { CaseIcon } from "@sanity/icons/Case";
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { languageField, slugField, translationField } from "../shared/fields";
 
@@ -57,6 +57,54 @@ export const serviceType = defineType({
         "HTTPS do kalendarza płatnej rezerwacji. Tymczasowy placeholder jest dozwolony do czasu właściwego wydarzenia.",
       type: "url",
       validation: (rule) => rule.uri({ scheme: ["https"] }),
+    }),
+    defineField({
+      name: "serviceType",
+      title: "Rodzaj usługi",
+      description:
+        "Krótka nazwa kategorii usługi, np. „Konsultacja dietetyczna”.",
+      type: "string",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
+      name: "channel",
+      title: "Forma",
+      type: "string",
+      options: {
+        layout: "radio",
+        list: [
+          { title: "Online", value: "online" },
+          { title: "Stacjonarnie", value: "inPerson" },
+        ],
+      },
+      initialValue: "online",
+    }),
+    defineField({
+      name: "audience",
+      title: "Dla kogo",
+      description: "Jedno zdanie zgodne z sekcją „Dla kogo” na stronie usługi.",
+      type: "string",
+      validation: (rule) => rule.max(200),
+    }),
+    defineField({
+      name: "deliverables",
+      title: "Co klientka dostaje",
+      description: "Krótkie punkty widoczne na stronie usługi.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "string",
+          validation: (rule) => rule.required().max(120),
+        }),
+      ],
+      validation: (rule) => rule.max(8),
+    }),
+    defineField({
+      name: "terms",
+      title: "Regulamin",
+      type: "reference",
+      to: [{ type: "legalPage" }],
+      options: { disableNew: true },
     }),
     defineField({
       name: "bookingStatus",

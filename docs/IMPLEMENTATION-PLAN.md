@@ -443,6 +443,17 @@ a brak checkoutu/kalendarza nie może dawać fałszywego potwierdzenia zakupu/za
 
 ### Etap 5 — SEO i eksport treści
 
+Szczegółowy plan z 11.10.2026: [SEO-GEO-AEO-PLAN.md](SEO-GEO-AEO-PLAN.md)
+(graf encji, zmiany Sanity, etapy SEO‑1…SEO‑6, decyzje D1–D8). Plan nie
+oznacza wykonanej implementacji.
+
+- [x] Przygotować plan infrastruktury SEO/GEO/AEO (11.10.2026).
+- [x] SEO‑1 i SEO‑2: `site`, przełącznik `SITE_INDEXING`, canonical, OG,
+      404, wspólny graf JSON-LD i `check-seo.mjs` (11.10.2026; szczegóły
+      i niewykonane kontrole w [postępie](PROGRESS.md)).
+- [x] SEO‑3 (Markdown, sitemap, robots.txt, RSS, llms.txt, `_headers`,
+      `_redirects`) i SEO‑4 (pola SEO w Sanity, podgląd w Studio) w kodzie
+      (11.10.2026). Otwarte: linki do e-booków bez landingu, dane w Sanity.
 - [ ] Dodać serializery wszystkich sekcji i Portable Text do Markdown.
 - [ ] Wdrożyć canonical, alternatywy .md, hreflang, sitemap, robots, RSS i llms.txt.
 - [ ] Wdrożyć JSON-LD i kontrolę zgodności z widoczną treścią.

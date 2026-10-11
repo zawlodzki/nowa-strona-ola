@@ -5,6 +5,10 @@
     "sanity.config.ts",
     "presentation.ts",
     "structure.ts",
-    "schema-types/**/*.ts"
-  ]
+    "schema-types/**/*.ts",
+    "components/**/*.tsx"
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  }
 }

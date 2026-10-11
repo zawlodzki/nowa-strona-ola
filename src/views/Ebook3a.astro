@@ -18,11 +18,10 @@ import SheetShadow from "@/design-system/decorations/SheetShadow.astro";
 import SupplementBottles from "@/design-system/decorations/SupplementBottles.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
 import { ebookCopy } from "@/content/ebook-seed";
-import { socialProfileSameAs } from "@/content/social-profiles";
 import { canPurchase, type EbookView } from "@/content/map-ebook";
 import AvailabilityBadge from "@/design-system/components/AvailabilityBadge.astro";
 import WaitlistDialog from "@/design-system/components/WaitlistDialog.astro";
-import { availabilityBadge, schemaOfferAvailability } from "@/lib/offer";
+import { availabilityBadge } from "@/lib/offer";
 
 export interface Props {
   lang: Locale;
@@ -36,54 +35,9 @@ const { landing, author, chapters, materials } = content;
 const planned = !canPurchase(content.availability);
 const badge = availabilityBadge(content.availability, lang);
 const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${content.currencyLabel}`;
-const oneLine = (value: string) => value.replaceAll("\n", " ");
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      name: oneLine(landing.heroTitle),
-      description: landing.heroLead,
-      inLanguage: lang,
-      about: { "@id": "#ebook" },
-    },
-    {
-      "@type": "Product",
-      "@id": "#ebook",
-      name: content.title,
-      description: landing.heroLead,
-      author: {
-        "@type": "Person",
-        name: author.name,
-        jobTitle: author.role,
-        sameAs: socialProfileSameAs(),
-      },
-      offers: {
-        "@type": "Offer",
-        price: content.priceGross,
-        priceCurrency: content.currency,
-        availability: schemaOfferAvailability(content.availability),
-        url: content.checkoutUrl,
-      },
-    },
-    {
-      "@type": "FAQPage",
-      mainEntity: landing.faq.items.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: { "@type": "Answer", text: item.answer },
-      })),
-    },
-  ],
-};
 ---
 
 <main id="main" class="ebook3a">
-  <script
-    type="application/ld+json"
-    is:inline
-    set:html={JSON.stringify(jsonLd)}
-  ></script>
   <Hero
     id="start"
     kind="product"

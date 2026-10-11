@@ -13,7 +13,7 @@ import {
   demonstrationCategories,
   fixtureArticlesForLanguage,
 } from "@/sanity/blog-collection-fixtures";
-import { pcosEbookFixture, waitlistFormFixture } from "@/sanity/ebook-fixtures";
+import { fixtureEbook, waitlistFormFixture } from "@/sanity/ebook-fixtures";
 import { ebookCollectionPageFixture } from "@/sanity/ebook-collection-fixtures";
 import { aboutAuthorFixture, aboutPageFixture } from "@/sanity/about-fixtures";
 import { consultationPageFixture } from "@/sanity/consultation-fixtures";
@@ -441,10 +441,10 @@ function toDocument(
 }
 
 function ebookFixturesForDocuments(language: "pl" | "en"): JsonRecord[] {
-  const landing = pcosEbookFixture(language);
   return ebookFixtures(language).map((card) => {
     const author = { id: `author-ola-${language}`, language };
-    if (card.id !== landing.id) return { ...card, author };
+    const landing = fixtureEbook(language, card.slug);
+    if (!landing) return { ...card, author };
     return { ...card, ...landing, author: landing.author };
   });
 }
