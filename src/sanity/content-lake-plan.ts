@@ -13,7 +13,7 @@ import {
   demonstrationCategories,
   fixtureArticlesForLanguage,
 } from "@/sanity/blog-collection-fixtures";
-import { pcosEbookFixture } from "@/sanity/ebook-fixtures";
+import { pcosEbookFixture, waitlistFormFixture } from "@/sanity/ebook-fixtures";
 import { ebookCollectionPageFixture } from "@/sanity/ebook-collection-fixtures";
 import { aboutAuthorFixture, aboutPageFixture } from "@/sanity/about-fixtures";
 import { consultationPageFixture } from "@/sanity/consultation-fixtures";
@@ -495,6 +495,9 @@ export function buildContentLakePlan(gate: ContentLakeGate): ContentLakePlan {
     for (const testimonial of testimonialFixtures(language)) {
       documents.push(toDocument("testimonial", testimonial, keepPlaceholder));
     }
+    documents.push(
+      toDocument("form", waitlistFormFixture(language), keepPlaceholder),
+    );
     for (const ebook of ebookFixturesForDocuments(language)) {
       documents.push(toDocument("ebook", ebook, keepPlaceholder));
     }

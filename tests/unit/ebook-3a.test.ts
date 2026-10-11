@@ -8,6 +8,7 @@ import {
 } from "../../src/content/serialize-ebook";
 import { getEbook } from "../../src/sanity/repository";
 import { parseContentPath } from "../../src/lib/content-path";
+import { availabilityBadge } from "../../src/lib/offer";
 import { ebookPath } from "../../src/lib/paths";
 
 describe("ebook 3a fixtures", () => {
@@ -94,6 +95,55 @@ describe("ebook 3a fixtures", () => {
   });
 });
 
+describe("ebook waitlist", () => {
+  it("maps the waitlist form for a coming-soon ebook", async () => {
+    const ebook = await getEbook("pl", "suplementy-w-pcos", {
+      environment: {},
+    });
+    const view = mapEbook(ebook, "pl");
+    expect(view.waitlist?.buttonLabel).toBe("Zapisz się na listę oczekujących");
+    expect(view.waitlist?.form.formKey).toBe("waitlist");
+    expect(view.waitlist?.form.fields.map((field) => field.name)).toEqual([
+      "email",
+    ]);
+  });
+
+  it("drops the waitlist and links checkout once the ebook is on sale", async () => {
+    const ebook = structuredClone(
+      await getEbook("pl", "suplementy-w-pcos", { environment: {} }),
+    );
+    ebook.availability = "available";
+    ebook.checkoutUrl = "https://buy.stripe.com/test_pcos";
+    const view = mapEbook(ebook, "pl");
+    expect(view.waitlist).toBeUndefined();
+    expect(view.checkoutUrl).toBe("https://buy.stripe.com/test_pcos");
+  });
+
+  it("falls back to the sales preview when no waitlist is configured", async () => {
+    const ebook = structuredClone(
+      await getEbook("pl", "suplementy-w-pcos", { environment: {} }),
+    );
+    ebook.waitlist = null;
+    expect(mapEbook(ebook, "pl").waitlist).toBeUndefined();
+  });
+
+  it("labels only coming-soon ebooks with a card badge", () => {
+    expect(availabilityBadge("planned", "pl")).toBe("Wkrótce dostępny");
+    expect(availabilityBadge("planned", "en")).toBe("Coming soon");
+    expect(availabilityBadge("available", "pl")).toBeUndefined();
+    expect(availabilityBadge("presale", "pl")).toBeUndefined();
+  });
+
+  it("rejects a waitlist that points at another form", async () => {
+    const ebook = structuredClone(
+      await getEbook("pl", "suplementy-w-pcos", { environment: {} }),
+    );
+    if (!ebook.waitlist?.form) throw new Error("expected waitlist form");
+    ebook.waitlist.form.formKey = "newsletter";
+    expect(() => mapEbook(ebook, "pl")).toThrow("formularza waitlist");
+  });
+});
+
 describe("ebook serializers", () => {
   it("serializes price, chapters, FAQ and cooperation context from the same data", async () => {
     const ebook = await getEbook("pl", "suplementy-w-pcos", {
@@ -101,7 +151,7 @@ describe("ebook serializers", () => {
     });
     const markdown = serializeEbook(ebook, "pl");
     expect(markdown).toContain("97 zł brutto");
-    expect(markdown).toContain("Zapowiedź");
+    expect(markdown).toContain("Wkrótce dostępny");
     expect(markdown).toContain("Zacznij od swojej półki");
     expect(markdown).toContain("Czy mogę już kupić ebook?");
     expect(markdown).toContain("Opinie o dotychczasowej współpracy");
@@ -114,7 +164,7 @@ describe("ebook serializers", () => {
       "utf8",
     );
     expect(example).toContain("97 zł brutto");
-    expect(example).toContain("Zapowiedź");
+    expect(example).toContain("Wkrótce dostępny");
   });
 
   it("round-trips the mapped view", async () => {

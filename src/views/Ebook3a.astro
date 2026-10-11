@@ -20,7 +20,9 @@ import SiteImage from "@/design-system/components/SiteImage.astro";
 import { ebookCopy } from "@/content/ebook-seed";
 import { socialProfileSameAs } from "@/content/social-profiles";
 import { canPurchase, type EbookView } from "@/content/map-ebook";
-import { schemaOfferAvailability } from "@/lib/offer";
+import AvailabilityBadge from "@/design-system/components/AvailabilityBadge.astro";
+import WaitlistDialog from "@/design-system/components/WaitlistDialog.astro";
+import { availabilityBadge, schemaOfferAvailability } from "@/lib/offer";
 
 export interface Props {
   lang: Locale;
@@ -32,6 +34,7 @@ const { lang, content, reviewsDisclosure } = Astro.props;
 const copy = ebookCopy[lang];
 const { landing, author, chapters, materials } = content;
 const planned = !canPurchase(content.availability);
+const badge = availabilityBadge(content.availability, lang);
 const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${content.currencyLabel}`;
 const oneLine = (value: string) => value.replaceAll("\n", " ");
 const jsonLd = {
@@ -324,6 +327,7 @@ const jsonLd = {
         </div>
       </div>
       <div class="ebook3a-offer">
+        {badge && <AvailabilityBadge label={badge} />}
         <p class="ebook3a-eyebrow">{copy.offerPackage}</p>
         <Heading as="h3" size="card">
           {content.title}
@@ -345,7 +349,15 @@ const jsonLd = {
             </li>
           ))}
         </ul>
-        {planned || !content.checkoutUrl ? (
+        {content.waitlist ? (
+          <WaitlistDialog
+            id="lista-oczekujacych"
+            buttonLabel={content.waitlist.buttonLabel}
+            closeLabel={copy.waitlistClose}
+            form={content.waitlist.form}
+            lang={lang}
+          />
+        ) : planned || !content.checkoutUrl ? (
           <details class="ebook3a-purchase">
             <summary class="ao-button">
               {purchaseText}
@@ -818,6 +830,12 @@ const jsonLd = {
   .ebook3a-offer .ebook3a-materials {
     margin-block: 30px;
     font-size: 0.9375rem;
+  }
+  .ebook3a-offer > :global(.ao-badge) {
+    margin-block-end: 16px;
+  }
+  .ebook3a-offer > :global([data-waitlist-open]) {
+    inline-size: 100%;
   }
   .ebook3a-purchase summary {
     inline-size: 100%;

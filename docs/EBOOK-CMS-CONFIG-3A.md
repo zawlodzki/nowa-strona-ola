@@ -61,7 +61,8 @@ Użyć istniejących `languageField`, `translationField("ebook")`,
 | `cardDescription`                 | Text, wymagany max 250                                                    | Obecny opis karty z homepage                                                     |
 | `cover`                           | Istniejący `mediaObject`, wymagany obraz i alt                            | Eksport kontrolowanej okładki z HTML/CSS lub zatwierdzony plik; nie fikcyjny URL |
 | `author`                          | Wymagana referencja → `author`, ten sam język                             | Istniejąca Aleksandra; portret i rola z referencji                               |
-| `availability`                    | Enum `planned`, `presale`, `available`, `paused`; domyślnie `planned`     | `planned`; nie ustawiać `available` na podstawie makiety                         |
+| `availability`                    | Enum `planned` („Wkrótce dostępny”), `presale`, `available`, `paused`     | `planned`; nie ustawiać `available` na podstawie makiety                         |
+| `waitlist`                        | Obiekt: etykieta przycisku, tytuł, lead, referencja → `form` `waitlist`   | Szkice `waitlist-form-pl/en` w Sanity; bez publikacji i powiązań z e-bookami     |
 | `priceGross`                      | Number, wymagany, finite, ≥0, maks. 2 miejsca po przecinku                | 97                                                                               |
 | `lowestPrice30Days`               | Number, opcjonalny, >0, maks. 2 miejsca; ostrzeżenie, gdy < `priceGross`  | Puste (brak obniżki); w kodzie i fixture’ach od 10.10.2026                       |
 | `currency`                        | Enum ISO, początkowo tylko `PLN`                                          | PLN                                                                              |
@@ -150,8 +151,51 @@ rozszerzeń jako już istniejących.
 
 ## Status sprzedaży i akcje
 
-- `planned` / `paused`: bez checkoutu. Tekst o dostępności; zapis tylko przy
-  osobno skonfigurowanym i zatwierdzonym formularzu.
+### „Wkrótce dostępny” i lista oczekujących (decyzja użytkownika 11.10.2026)
+
+- Status `planned` ma w Studio etykietę „Wkrótce dostępny (lista
+  oczekujących)”. Karty e-booka (homepage, kolekcja, powiązane e-booki
+  w artykule) pokazują nad okładką badge „Wkrótce dostępny” / „Coming soon”.
+  Inne statusy nie mają badge’a. Landing pokazuje ten sam badge nad ofertą.
+- Na landingu `planned` przycisk oferty otwiera natywny `<dialog>` z
+  formularzem zapisu na listę oczekujących zamiast linku płatności.
+  Formularz wysyła JSON na webhook n8n jak pozostałe formularze, z
+  `formKey: "waitlist"`; e-book identyfikuje pole `source` (adres landingu).
+- `available` / `presale`: ten sam przycisk prowadzi do `checkoutUrl` —
+  linku płatności Stripe (Payment Link lub Checkout).
+- Mapowanie pól: `ebook.waitlist{buttonLabel, title, lead, form → form}`,
+  grupa „Oferta”; referencja tylko do dokumentu `form` z `formKey ==
+"waitlist"` w tym samym języku. Przy `planned` bez `waitlist` Studio
+  pokazuje ostrzeżenie, a landing wraca do informacji „Sprzedaż nie jest
+  uruchomiona”.
+- Wykonane w kodzie: schemat, GROQ, TypeGen, mapper, renderer, serializer,
+  fixture’y, testy. W Sanity (`dyuqkn8c/production`, 11.10.2026) utworzono
+  **szkice** `drafts.waitlist-form-pl` i `drafts.waitlist-form-en` (`formKey:
+waitlist`, wersja `0.1`, copy z fixture’a, słabe powiązanie tłumaczeń).
+  Na polecenie użytkownika (11.10.2026) pole `waitlist` ustawiono w
+  **szkicach** wszystkich 12 e-booków (PL → `waitlist-form-pl`, EN →
+  `waitlist-form-en`, słaba referencja wzmacniana przy publikacji; copy jak
+  w fixture). Landing ma tylko „Suplementy w PCOS”; pozostałe e-booki
+  pokazują badge, a pole zadziała, gdy dostaną landing.
+  Tego samego dnia, na polecenie użytkownika, wdrożono Studio ręcznie
+  (Cloudflare `ola-website-studio-production`, wersja `79b56901`,
+  `sanity deploy --external --schema-required`) i opublikowano oba
+  formularze, a potem 12 e-booków; referencje są silne, brak szkiców.
+  Uwaga: kod Studio nie jest jeszcze w `main` — workflow `Deploy Studio`
+  po kolejnym merge bez tej zmiany przywróci stary schemat.
+- Propozycja copy (fixture, `ebookCopy.waitlist`): przycisk „Zapisz się na
+  listę oczekujących”, tytuł „Daj znać, że czekasz”, informacja o celu
+  przetwarzania i link do polityki prywatności, bez checkboxa zgody.
+  Wersja formularza `0.1` — copy **wymaga przeglądu prawnego** i ujęcia w
+  dokumencie „Zgody i formularze”; polityka prywatności powinna wymieniać
+  cel „powiadomienie o starcie sprzedaży”.
+- Poza repo: n8n musi obsłużyć `formKey: "waitlist"` (zapis adresu i
+  jednorazowe powiadomienie). Stripe: utworzyć link płatności i wkleić go
+  w `checkoutUrl` przy zmianie statusu na `available`.
+
+- `paused`: bez checkoutu i bez listy oczekujących; informacja, że sprzedaż
+  nie jest uruchomiona.
+- `planned`: bez checkoutu; zapis na listę oczekujących (wyżej).
 - `presale`: checkout wyłącznie po uzupełnieniu terminu, sposobu dostarczenia,
   finalnego zakresu i zatwierdzonych warunków sprzedaży.
 - `available`: checkout po potwierdzeniu gotowych plików i dostarczania.

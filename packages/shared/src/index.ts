@@ -8,7 +8,12 @@ export interface ContentIdentity {
   slug: string;
 }
 
-export const formKeys = ["newsletter", "contact", "withdrawal"] as const;
+export const formKeys = [
+  "newsletter",
+  "contact",
+  "withdrawal",
+  "waitlist",
+] as const;
 
 export type FormKey = (typeof formKeys)[number];
 

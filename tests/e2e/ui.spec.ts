@@ -426,12 +426,15 @@ test("ebook landing without an English version", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "E-book · 97 zł" }),
   ).toHaveAttribute("href", "#cena");
-  await expect(page.getByText("Sprzedaż nie jest uruchomiona")).toBeHidden();
-  await page.getByText("Chcę ebook · 97 zł").click();
-  await expect(page.getByText("Sprzedaż nie jest uruchomiona")).toBeVisible();
+  await expect(page.getByText("Sprzedaż nie jest uruchomiona")).toHaveCount(0);
+  await page
+    .locator("#cena")
+    .getByRole("button", { name: "Zapisz się na listę oczekujących" })
+    .click();
   await expect(
-    page.getByText(/nie pobiera płatności i nie potwierdza zakupu/),
+    page.getByRole("dialog", { name: "Daj znać, że czekasz" }),
   ).toBeVisible();
+  await page.keyboard.press("Escape");
   await expect(
     page
       .getByRole("navigation", { name: "Nawigacja główna" })

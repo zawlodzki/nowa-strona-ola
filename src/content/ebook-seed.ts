@@ -233,8 +233,22 @@ export const ebookCopy = {
       { label: "FAQ", href: "#faq" },
     ],
     headerCtaPrefix: "E-book",
-    plannedStatus: "Zapowiedź",
     coverArt: ["Cel", "Dawka", "Decyzja"],
+    waitlistClose: "Zamknij",
+    // Propozycja 11.10.2026 — copy formularza wymaga przeglądu prawnego.
+    waitlist: {
+      buttonLabel: "Zapisz się na listę oczekujących",
+      title: "Daj znać, że czekasz",
+      lead: "E-book jest w przygotowaniu. Zostaw adres e-mail, a napiszemy, gdy ruszy sprzedaż.",
+      submit: "Zapisuję się",
+      success: "Gotowe. Napiszemy, gdy e-book będzie dostępny.",
+      error:
+        "Nie udało się zapisać. Sprawdź połączenie i spróbuj ponownie — wpisany adres został w formularzu.",
+      noscript:
+        "Zapis wymaga włączonego JavaScriptu. Możesz też napisać na ola@aleksandraolesiewicz.com.",
+      notice:
+        "Adres wykorzystamy tylko po to, żeby powiadomić Cię o starcie sprzedaży tego e-booka. Administratorem danych jest Wellbiz sp. z o.o. [Polityka prywatności](/polityka-prywatnosci/)",
+    },
   },
   en: {
     seoTitle: "Supplements in PCOS | E-book by Aleksandra Olesiewicz",
@@ -473,8 +487,22 @@ export const ebookCopy = {
       { label: "FAQ", href: "#faq" },
     ],
     headerCtaPrefix: "E-book",
-    plannedStatus: "Planned",
     coverArt: ["Aim", "Dose", "Decision"],
+    waitlistClose: "Close",
+    // Proposal 2026-10-11 — form copy needs legal review.
+    waitlist: {
+      buttonLabel: "Join the waitlist",
+      title: "Let us know you are waiting",
+      lead: "The e-book is in preparation. Leave your email address and we will write when sales open.",
+      submit: "Join",
+      success: "Done. We will write when the e-book is available.",
+      error:
+        "We could not sign you up. Check your connection and try again — your address is still in the form.",
+      noscript:
+        "Signing up requires JavaScript. You can also email ola@aleksandraolesiewicz.com.",
+      notice:
+        "We will use your address only to tell you when sales of this e-book open. The data controller is Wellbiz sp. z o.o. [Privacy policy](/en/privacy/)",
+    },
   },
 } as const;
 
