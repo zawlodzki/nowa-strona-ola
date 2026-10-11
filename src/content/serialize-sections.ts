@@ -24,6 +24,12 @@ import {
   toText,
   toTextImage,
 } from "@/content/map-sections";
+import {
+  credentialIssuer,
+  credentialLevelLabel,
+  credentialTitle,
+  splitCredentials,
+} from "@/content/credentials";
 import { assertKnownSections, type KnownSectionType } from "@/content/sections";
 import { toEbookCollection } from "@/content/map-ebook-collection";
 import { availabilityLabel, formatPriceGross, topicLabel } from "@/lib/offer";
@@ -313,11 +319,63 @@ export function serializeSection(section: Section, language: Locale): string {
     }
     case "credentialsSection": {
       const content = toCredentials(section);
+      const pl = language === "pl";
+      const { degrees, trainings } = splitCredentials(
+        content.person.credentials,
+      );
+      const education = degrees.length
+        ? degrees.map((degree) =>
+            [
+              credentialTitle(degree, language),
+              credentialLevelLabel(degree, language),
+              credentialIssuer(degree),
+              degree.year,
+            ]
+              .filter(Boolean)
+              .join(", "),
+          )
+        : [
+            `${content.person.educationProgram}, ${content.person.educationInstitution}`,
+          ];
       return [
         heading(2, content.title),
         paragraphs(content.body),
-        `- ${content.person.name}, ${content.person.role}`,
-        `- ${content.person.educationProgram}, ${content.person.educationInstitution}`,
+        bullet([
+          `${content.person.name}, ${content.person.role}`,
+          ...education,
+          ...(content.person.practiceSince
+            ? [
+                pl
+                  ? `Praktyka dietetyczna od ${content.person.practiceSince} roku`
+                  : `Dietetic practice since ${content.person.practiceSince}`,
+              ]
+            : []),
+        ]),
+        content.person.experience.length
+          ? [
+              heading(
+                3,
+                pl ? "Wcześniejsze miejsca pracy" : "Previous workplaces",
+              ),
+              bullet(
+                content.person.experience.map((item) =>
+                  [item.organization, item.role].filter(Boolean).join(", "),
+                ),
+              ),
+            ].join("\n\n")
+          : "",
+        trainings.length
+          ? [
+              heading(3, pl ? "Szkolenia" : "Training"),
+              bullet(
+                trainings.map((item) =>
+                  [item.name, item.institution, item.year]
+                    .filter(Boolean)
+                    .join(", "),
+                ),
+              ),
+            ].join("\n\n")
+          : "",
         content.person.diploma?.label,
         content.diplomaCaption,
       ]
@@ -390,7 +448,7 @@ export const sectionMarkdownExamples: Record<KnownSectionType, string> = {
   ebooksSection: "## E-booki\n\n### Suplementy w PCOS\n\n97 zł brutto",
   serviceOfferSection: "## Konsultacje\n\n450 zł / 60 minut",
   credentialsSection:
-    "## Wiedza, którą możesz sprawdzić.\n\n- Dietetyka kliniczna, Śląski Uniwersytet Medyczny",
+    "## Wiedza, którą możesz sprawdzić.\n\n- Dietetyka, specjalność dietetyka kliniczna, Licencjat, Śląski Uniwersytet Medyczny w Katowicach, Wydział Nauk o Zdrowiu w Bytomiu, 2025\n- Praktyka dietetyczna od 2022 roku\n\n### Szkolenia\n\n- SIBO – od objawów do zdrowia, mgr Emilia Cesarek, 2023",
   blogCollectionSection: "## Blog. Po Twojemu.\n\n### Wszystkie wpisy",
   ebookCollectionSection:
     "## Więcej jasności. W Twoim tempie.\n\n## Wszystkie e-booki",

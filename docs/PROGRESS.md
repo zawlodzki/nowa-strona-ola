@@ -6,6 +6,73 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Kwalifikacje Oli na „O mnie” i w JSON-LD, 11.10.2026
+
+- Dane od użytkownika, ze zgodą na publikację: licencjat, kierunek Dietetyka,
+  specjalność dietetyka kliniczna, ŚUM w Katowicach, Wydział Nauk o Zdrowiu
+  w Bytomiu, 2025. Praktyka od 2022. Dwa wcześniejsze miejsca pracy
+  i sześć szkoleń. Wartości i mapowanie: [konfiguracja CMS](HOMEPAGE-CMS-CONFIG.md).
+- Schemat `author`: `credentials[]` z nowymi polami `level`, `specialization`,
+  `department`, `issuerKind` i rodzajem „Szkolenie”, do tego `practiceSince`
+  i `experience[]`. GROQ (siteOwner i credentialsSection), TypeGen, mapper,
+  wspólne `src/content/credentials.ts`, renderer About3a, serializer Markdown
+  z przykładem i fixture z jednego źródła `site-identity.ts`.
+- JSON-LD: `hasCredential` z `educationalLevel` i `recognizedBy` z wydziałem.
+  Szkolenia prowadzone przez osoby nie mają `recognizedBy`, bo przyjmuje
+  ono tylko organizacje. Miejsca pracy trafiają do `alumniOf`.
+- Copy poprawione dla zgodności z dyplomem („dietetykę ze specjalnością
+  dietetyka kliniczna”) na „O mnie” i w konsultacjach, wraz z podpisem dyplomu.
+  Tytuły szkoleń NucleoCare zapisane w zdaniowej pisowni, bez cudzysłowu.
+- Kontrole: format plików repo PASS. Lokalne dowody
+  `output/cookie-docs-2026-10-11/before.json` są niesformatowane
+  i nieśledzone, dlatego ich nie zmieniano. Tokeny, lint i `astro check`
+  PASS, 281 testów unit PASS, build i build workspace PASS.
+  `check-build` na Node 26.11 jest czerwony: CSS strony głównej ma 8215 B
+  przy limicie 8192. Ten sam wynik daje main bez zmian, a CI na Node 24 przeszedł.
+  Na Node 24.21 (`npx -p node@24`) `check-build` i `check-seo` (36 stron) PASS.
+  E2E: 391/393, dwa błędy Firefox (udostępnianie artykułu, dialog zgód)
+  przeszły 4/4 przy powtórzeniu. `test:content-lake` PASS, 12 stron ze zgodnym DOM.
+  Obejrzano sekcję przy 1440 px i 320 px, bez poziomego przepełnienia.
+  Nie sprawdzono ciemnego motywu, zoomu 200% ani czytnika ekranu.
+- Na polecenie użytkownika wdrożono schemat z lokalnego Studio
+  (`sanity schema deploy`, 1/1). Hostowane Studio wdroży workflow
+  `Deploy Studio` dopiero po scaleniu do main. W `author-ola-pl` podmieniono
+  `credentials` (7 pozycji, `isPublic: true`), `practiceSince` i `experience`.
+  Zmianę zapisano z blokadą rewizji `BgWLAXsKsMgTSzpAsHKkan`, a szkic
+  porównano z `site-identity.ts` (MATCH) przed publikacją. Poprzednie
+  wartości są w `output/author-credentials-2026-10-11/before.json`.
+  Strony `page-about-pl` i konsultacji w Content Lake nadal mają starsze
+  zdanie „Ukończyłam dietetykę kliniczną”, którego nie zmieniano.
+- Publikacja uruchamia webhook stagingu, który buduje kod z main. Do scalenia
+  PR staging ma kwalifikacje w JSON-LD, ale nie pokazuje ich na stronie,
+  a trenerzy są tam opisani jako organizacje. Webhook produkcji był wyłączony.
+- Następny krok: scalić PR, potwierdzić `Deploy Studio` i staging, ręcznie
+  zwalidować JSON-LD w Rich Results Test.
+
+### Checklista etapu 5 po scaleniu #69 i #70, 11.10.2026
+
+- Lokalny main przewinięto do `origin/main` (657a220). Starszą lokalną
+  kopię zmian z PR #69/#70 odłożono do stasha, skąd można ją odzyskać.
+- W planie zaznaczono serializery Markdown, canonical/.md/sitemap/robots/
+  RSS/llms.txt, JSON-LD z kontrolą buildu i kontrole adresów oraz linków.
+  Na podstawie wcześniejszych wpisów (check-seo 36 stron PASS, verify PASS).
+  Bez nowego uruchomienia testów w tej sesji.
+- Otwarte: hreflang (po włączeniu EN), ręczna walidacja Rich Results,
+  dane SEO w Sanity i deploy Studio, D3, SEO‑6.
+- Sesja pytań o otwarte decyzje: odpowiedzi zapisano w
+  [konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md) (sekcja na górze) i w planie SEO
+  (D3, D5, D6, D8). Najważniejsze zmiany kierunku: RSS z pełną treścią,
+  własny checkout e-booków (PDF + EPUB), pomiar GA4/Meta/Clarity domyślnie
+  wszędzie z listą wykluczeń (prawne, formularze, konsultacje, pole w Sanity),
+  bez radcy prawnego, start produkcji jak najszybciej. Nic nie wdrożono.
+- Konflikt do rozwiązania przed publikacją tagów: polityka prywatności 2.2,
+  lista cookies i plan GTM zakładają blokadę pomiaru na treściach zdrowotnych.
+- „O mnie”: układ i copy zaakceptowane; rozwinięcie historii czeka na
+  potwierdzenie Oli. Odhaczono nieaktualne punkty tej sekcji w planie
+  (mockup na main, About3a w kodzie, link Cal.com ustalony).
+- Następny krok: plan minimalnego zakresu do startu produkcji, potem
+  przeniesienie treści do szkiców Content Lake (etap 4a).
+
 ### Baner zgód na telefonie, 11.10.2026
 
 - Z gałęzi usunięto pliki recenzji dodane tylko w tym PR. `git diff origin/feat/seo-geo-aeo --stat -- output .audit` jest pusty. Zostały `output/design-consistency-3a/`, `output/design-system-3a/` i `.audit/matcha-accent-3a.tsv`.
@@ -4216,3 +4283,22 @@ odnotować z datą i powodem. Nie przechowywać sekretów.
 - Format dokumentacji i 61 lokalnych odnośników poprawne. Diff-check wskazał
   jedną pustą linię na końcu importowanego automate-me/SKILL.md; zachowano źródło.
 - Pierwsza próba podpisu 1Password nie powiodła się, commit nie powstał.
+
+## Skill landingów e-booków 3a, 11.10.2026
+
+- Na zlecenie użytkownika przygotowano lokalny
+  [ebook-landing-3a](../.agents/skills/ebook-landing-3a/SKILL.md).
+  Instrukcja obejmuje brief, copy, wizualną kompozycję, makietę lub istniejący
+  szablon Astro, mapowanie CMS i kontrole. Zawiera dziesięć wymaganych sekcji
+  oraz samodzielną adaptację siedmiu zasad z `10000000 Sales Copy Advice.md`.
+- Format pozostaje zgodny z 3a. Układy hero, podglądu zawartości i efektów
+  mogą się różnić. Audyt wymaga cytatów i rozróżnia zasady użyte, częściowe
+  i pominięte. Brak osobistej historii autorki nie uzasadnia jej wymyślenia.
+- Mapa projektu wskazuje istniejący model `ebook`, renderer, mapper, Markdown
+  i fixture. Zwraca uwagę na teksty PCOS w seedzie i tymczasowe treści innych
+  produktów. Samo wywołanie skilla nie zleca zapisu do CMS ani publikacji.
+- Kontrole: `quick_validate.py` PASS, Prettier PASS dla czterech plików skilla,
+  24 lokalne odnośniki poprawne, metadane UI poprawne. Zmiana dotyczy instrukcji
+  i dokumentacji; nie uruchamiano `npm run verify` ani testów nowego landingu.
+- Nie zmieniano aplikacji ani Sanity. Blokad brak. Następny krok w tym zakresie
+  to użycie skilla dla kolejnego ebooka i weryfikacja rzeczywistego rezultatu.

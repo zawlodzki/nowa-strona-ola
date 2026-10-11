@@ -98,19 +98,13 @@ export const authorType = defineType({
       name: "credentials",
       title: "Kwalifikacje",
       description:
-        "Dyplomy i certyfikaty. Do danych strukturalnych trafiają tylko oznaczone jako publiczne i widoczne na stronie (decyzja 11.10.2026: dyplom na razie niepubliczny).",
+        "Dyplomy, certyfikaty i szkolenia. Publiczne pozycje są pokazane na stronie „O mnie” i trafiają do danych strukturalnych (zgoda na publikację 11.10.2026).",
       type: "array",
       of: [
         defineArrayMember({
           type: "object",
           name: "credential",
           fields: [
-            defineField({
-              name: "name",
-              title: "Nazwa",
-              type: "string",
-              validation: (rule) => rule.required().max(160),
-            }),
             defineField({
               name: "category",
               title: "Rodzaj",
@@ -120,26 +114,86 @@ export const authorType = defineType({
                 list: [
                   { title: "Dyplom", value: "degree" },
                   { title: "Certyfikat", value: "certificate" },
+                  { title: "Szkolenie", value: "course" },
                   { title: "Uprawnienie", value: "license" },
                 ],
               },
               validation: (rule) => rule.required(),
             }),
             defineField({
+              name: "name",
+              title: "Nazwa",
+              description:
+                "Dyplom: kierunek, np. „Dietetyka”. Szkolenie: tytuł jak na zaświadczeniu.",
+              type: "string",
+              validation: (rule) => rule.required().max(200),
+            }),
+            defineField({
+              name: "level",
+              title: "Stopień",
+              type: "string",
+              options: {
+                layout: "radio",
+                list: [
+                  { title: "Licencjat", value: "bachelor" },
+                  { title: "Magister", value: "master" },
+                ],
+              },
+              hidden: ({ parent }) => parent?.category !== "degree",
+              validation: (rule) =>
+                rule.custom((value, context) => {
+                  const parent = context.parent as
+                    { category?: string } | undefined;
+                  return parent?.category === "degree" && !value
+                    ? "Wybierz stopień dyplomu."
+                    : true;
+                }),
+            }),
+            defineField({
+              name: "specialization",
+              title: "Specjalność",
+              type: "string",
+              hidden: ({ parent }) => parent?.category !== "degree",
+              validation: (rule) => rule.max(120),
+            }),
+            defineField({
+              name: "issuerKind",
+              title: "Wystawca to",
+              type: "string",
+              options: {
+                layout: "radio",
+                list: [
+                  { title: "Instytucja", value: "organization" },
+                  { title: "Osoba prowadząca", value: "person" },
+                ],
+              },
+              initialValue: "organization",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
               name: "institution",
-              title: "Instytucja",
+              title: "Wystawca",
+              description:
+                "Uczelnia, firma szkoleniowa albo osoba prowadząca, np. „mgr Emilia Cesarek”.",
               type: "string",
               validation: (rule) => rule.required().max(160),
             }),
             defineField({
+              name: "department",
+              title: "Wydział",
+              type: "string",
+              hidden: ({ parent }) => parent?.category !== "degree",
+              validation: (rule) => rule.max(160),
+            }),
+            defineField({
               name: "institutionUrl",
-              title: "Strona instytucji",
+              title: "Strona wystawcy",
               type: "url",
               validation: (rule) => rule.uri({ scheme: ["https"] }),
             }),
             defineField({
               name: "year",
-              title: "Rok",
+              title: "Rok ukończenia",
               type: "number",
               validation: (rule) => rule.integer().min(1950).max(2100),
             }),
@@ -156,15 +210,61 @@ export const authorType = defineType({
             select: {
               title: "name",
               subtitle: "institution",
+              year: "year",
               isPublic: "isPublic",
             },
-            prepare: ({ title, subtitle, isPublic }) => ({
+            prepare: ({ title, subtitle, year, isPublic }) => ({
               title,
-              subtitle: [subtitle, isPublic ? "publiczne" : "niepubliczne"]
+              subtitle: [
+                subtitle,
+                year,
+                isPublic ? "publiczne" : "niepubliczne",
+              ]
                 .filter(Boolean)
                 .join(" · "),
             }),
           },
+        }),
+      ],
+    }),
+    defineField({
+      name: "practiceSince",
+      title: "Praktyka dietetyczna od roku",
+      description: "Pokazywane na stronie „O mnie”, np. 2022.",
+      type: "number",
+      validation: (rule) => rule.integer().min(1950).max(2100),
+    }),
+    defineField({
+      name: "experience",
+      title: "Wcześniejsze miejsca pracy",
+      description:
+        "Placówki pokazane na stronie „O mnie”. Trafiają do danych strukturalnych jako organizacje, z którymi osoba była związana.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "workExperience",
+          fields: [
+            defineField({
+              name: "organization",
+              title: "Placówka",
+              type: "string",
+              validation: (rule) => rule.required().max(160),
+            }),
+            defineField({
+              name: "role",
+              title: "Stanowisko",
+              type: "string",
+              validation: (rule) => rule.max(120),
+            }),
+            defineField({
+              name: "url",
+              title: "Strona placówki",
+              type: "url",
+              validation: (rule) => rule.uri({ scheme: ["https"] }),
+            }),
+          ],
+          preview: { select: { title: "organization", subtitle: "role" } },
         }),
       ],
     }),

@@ -18,6 +18,12 @@ import {
   diplomaCropPosition,
   diplomaSlotSize,
 } from "@/content/about-seed";
+import {
+  credentialIssuer,
+  credentialLevelLabel,
+  credentialTitle,
+  splitCredentials,
+} from "@/content/credentials";
 import type { AboutView } from "@/content/map-about";
 import { pickSiteImage } from "@/lib/site-images";
 
@@ -34,6 +40,7 @@ const diplomaSrc = content.credentials.person.diploma?.src;
 const diplomaImage = pickSiteImage(diplomaSrc);
 const diplomaFrame = diplomaSlotSize();
 const person = content.credentials.person;
+const { degrees, trainings } = splitCredentials(person.credentials);
 ---
 
 <main id="main" class="about3a">
@@ -99,14 +106,79 @@ const person = content.credentials.person;
             <p class={index === 0 ? "about3a-large" : undefined}>{paragraph}</p>
           ))}
           <dl>
-            <div>
-              <dt>{pl ? "Uczelnia" : "University"}</dt>
-              <dd>{person.educationInstitution}</dd>
-            </div>
-            <div>
-              <dt>{pl ? "Kierunek" : "Programme"}</dt>
-              <dd>{person.educationProgram}</dd>
-            </div>
+            {degrees.length ? (
+              degrees.map((degree) => (
+                <>
+                  <div>
+                    <dt>{pl ? "Uczelnia" : "University"}</dt>
+                    <dd>{credentialIssuer(degree)}</dd>
+                  </div>
+                  <div>
+                    <dt>{pl ? "Kierunek" : "Programme"}</dt>
+                    <dd>{credentialTitle(degree, lang)}</dd>
+                  </div>
+                  {(degree.level || degree.year) && (
+                    <div>
+                      <dt>{pl ? "Stopień" : "Degree"}</dt>
+                      <dd>
+                        {[credentialLevelLabel(degree, lang), degree.year]
+                          .filter(Boolean)
+                          .join(", ")}
+                      </dd>
+                    </div>
+                  )}
+                </>
+              ))
+            ) : (
+              <>
+                <div>
+                  <dt>{pl ? "Uczelnia" : "University"}</dt>
+                  <dd>{person.educationInstitution}</dd>
+                </div>
+                <div>
+                  <dt>{pl ? "Kierunek" : "Programme"}</dt>
+                  <dd>{person.educationProgram}</dd>
+                </div>
+              </>
+            )}
+            {person.practiceSince && (
+              <div>
+                <dt>{pl ? "Praktyka dietetyczna" : "Dietetic practice"}</dt>
+                <dd>
+                  {pl
+                    ? `od ${person.practiceSince} roku`
+                    : `since ${person.practiceSince}`}
+                </dd>
+              </div>
+            )}
+            {person.experience.length > 0 && (
+              <div>
+                <dt>
+                  {pl ? "Wcześniejsze miejsca pracy" : "Previous workplaces"}
+                </dt>
+                {person.experience.map((item) => (
+                  <dd>
+                    {item.organization}
+                    {item.role && <span>{item.role}</span>}
+                  </dd>
+                ))}
+              </div>
+            )}
+            {trainings.length > 0 && (
+              <div>
+                <dt>{pl ? "Szkolenia" : "Training"}</dt>
+                {trainings.map((training) => (
+                  <dd>
+                    {training.name}
+                    <span>
+                      {[training.institution, training.year]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </span>
+                  </dd>
+                ))}
+              </div>
+            )}
           </dl>
         </div>
         <figure class="about3a-diploma">
@@ -366,9 +438,14 @@ const person = content.credentials.person;
     color: var(--ao-muted);
   }
   .about3a-education dd {
-    margin-block: 4px 0;
+    margin-block: var(--ao-space-8) 0;
     margin-inline: 0;
     font-weight: 550;
+  }
+  .about3a-education dd span {
+    display: block;
+    font-weight: 400;
+    color: var(--ao-muted);
   }
   .about3a-diploma {
     inline-size: 100%;

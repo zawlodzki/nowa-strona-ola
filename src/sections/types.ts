@@ -364,12 +364,40 @@ export interface ServiceOfferContent {
   service?: ServiceDetails;
 }
 
+export type CredentialCategory =
+  "degree" | "certificate" | "course" | "license";
+
+/** A public qualification; rendered on „O mnie” and in `hasCredential`. */
+export interface PersonCredential {
+  category: CredentialCategory;
+  /** Degrees only. */
+  level?: "bachelor" | "master";
+  /** Programme or training title. */
+  name: string;
+  specialization?: string;
+  /** University, company or trainer. */
+  institution: string;
+  department?: string;
+  institutionUrl?: string;
+  issuerKind: "organization" | "person";
+  year?: number;
+}
+
+export interface PersonExperience {
+  organization: string;
+  role?: string;
+  url?: string;
+}
+
 export interface CredentialsPerson {
   name: string;
   role: string;
   bio?: string;
   educationInstitution: string;
   educationProgram: string;
+  credentials: readonly PersonCredential[];
+  practiceSince?: number;
+  experience: readonly PersonExperience[];
   photo?: MediaSpec;
   diploma?: MediaSpec;
 }

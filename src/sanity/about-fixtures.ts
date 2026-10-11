@@ -6,6 +6,7 @@ import {
   aboutMaterialsHref,
 } from "@/content/about-seed";
 import { homepageCopy, homepageMediaKeys } from "@/content/homepage-seed";
+import { siteIdentity } from "@/content/site-identity";
 import {
   authorFixture,
   newsletterFormFixture,
@@ -32,6 +33,12 @@ export function aboutAuthorFixture(language: Locale) {
   const copy = aboutCopy[language];
   return {
     ...authorFixture(language),
+    credentials: siteIdentity.credentials[language].map((credential) => ({
+      ...credential,
+      isPublic: true,
+    })),
+    practiceSince: siteIdentity.practiceSince,
+    experience: siteIdentity.experience.map((item) => ({ ...item })),
     diplomaScan: media("diploma", copy.diplomaAlt, "photo"),
   };
 }

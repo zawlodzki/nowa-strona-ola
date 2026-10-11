@@ -1,8 +1,10 @@
 import type { Locale } from "@ola/shared";
 
+import { toPersonCredentials } from "@/content/map-sections";
 import { siteIdentity } from "@/content/site-identity";
 import { sellerCompany } from "@/content/site-legal";
 import type { SiteSettings } from "@/sanity/repository";
+import type { PersonCredential, PersonExperience } from "@/sections/types";
 
 export interface PersonSeoData {
   name: string;
@@ -13,13 +15,10 @@ export interface PersonSeoData {
   knowsAbout: { name: string; sameAs: string[] }[];
   alumniOf: { name: string; url?: string };
   occupationCode?: string;
-  credentials: {
-    name: string;
-    category: string;
-    institution: string;
-    institutionUrl?: string;
-    year?: number;
-  }[];
+  /** Public credentials only; must match the list on „O mnie”. */
+  credentials: readonly PersonCredential[];
+  /** Earlier workplaces listed on „O mnie”. */
+  experience: readonly PersonExperience[];
   /** Site raster key or image URL of a real portrait. */
   portrait: string;
 }
@@ -78,19 +77,23 @@ export function siteSeoData(
           ? { name: institution }
           : { ...siteIdentity.alumniOf },
       occupationCode: owner?.occupationCode ?? siteIdentity.occupationCode,
-      credentials: clean(owner?.credentials).flatMap((credential) =>
-        credential.name && credential.category && credential.institution
-          ? [
-              {
-                name: credential.name,
-                category: credential.category,
-                institution: credential.institution,
-                institutionUrl: credential.institutionUrl ?? undefined,
-                year: credential.year ?? undefined,
-              },
-            ]
-          : [],
-      ),
+      // Without a Sanity owner the repo constants mirror the „O mnie” fixture.
+      credentials: owner
+        ? toPersonCredentials(owner.credentials)
+        : siteIdentity.credentials[language],
+      experience: owner
+        ? clean(owner.experience).flatMap((item) =>
+            item.organization
+              ? [
+                  {
+                    organization: item.organization,
+                    role: item.role ?? undefined,
+                    url: item.url ?? undefined,
+                  },
+                ]
+              : [],
+          )
+        : siteIdentity.experience,
       portrait: owner?.photo?.src || siteIdentity.portrait,
     },
     seller: seller?.legalName

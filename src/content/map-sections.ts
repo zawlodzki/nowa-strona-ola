@@ -8,7 +8,9 @@ import type {
   AudienceIconKey,
   CardsContent,
   ComparisonContent,
+  CredentialCategory,
   CredentialsContent,
+  PersonCredential,
   CtaContent,
   EbookAvailability,
   EbookCardContent,
@@ -839,6 +841,57 @@ function optionalServiceFields(service: {
   return fields;
 }
 
+export interface CredentialValue {
+  category?: string | null;
+  level?: string | null;
+  name?: string | null;
+  specialization?: string | null;
+  institution?: string | null;
+  department?: string | null;
+  institutionUrl?: string | null;
+  issuerKind?: string | null;
+  year?: number | null;
+}
+
+const credentialCategories = new Set<string>([
+  "degree",
+  "certificate",
+  "course",
+  "license",
+]);
+
+/** Public credentials from Sanity; incomplete entries are skipped. */
+export function toPersonCredentials(
+  values: (CredentialValue | null)[] | null | undefined,
+): PersonCredential[] {
+  return (values ?? []).flatMap((value) => {
+    if (
+      !value?.name ||
+      !value.institution ||
+      !value.category ||
+      !credentialCategories.has(value.category)
+    ) {
+      return [];
+    }
+    return [
+      {
+        category: value.category as CredentialCategory,
+        level:
+          value.level === "bachelor" || value.level === "master"
+            ? value.level
+            : undefined,
+        name: value.name,
+        specialization: value.specialization ?? undefined,
+        institution: value.institution,
+        department: value.department ?? undefined,
+        institutionUrl: value.institutionUrl ?? undefined,
+        issuerKind: value.issuerKind === "person" ? "person" : "organization",
+        year: value.year ?? undefined,
+      },
+    ];
+  });
+}
+
 export function toCredentials(section: {
   title?: string | null;
   body?: (string | null)[] | null;
@@ -849,6 +902,15 @@ export function toCredentials(section: {
     bio?: string | null;
     educationInstitution?: string | null;
     educationProgram?: string | null;
+    credentials?: CredentialValue[] | null;
+    practiceSince?: number | null;
+    experience?:
+      | {
+          organization?: string | null;
+          role?: string | null;
+          url?: string | null;
+        }[]
+      | null;
     photo?: MediaValue | null;
     diplomaScan?: MediaValue | null;
   } | null;
@@ -865,6 +927,19 @@ export function toCredentials(section: {
       bio: person.bio ?? undefined,
       educationInstitution: required(person.educationInstitution, "uczelnia"),
       educationProgram: required(person.educationProgram, "kierunek"),
+      credentials: toPersonCredentials(person.credentials),
+      practiceSince: person.practiceSince ?? undefined,
+      experience: (person.experience ?? []).flatMap((item) =>
+        item.organization
+          ? [
+              {
+                organization: item.organization,
+                role: item.role ?? undefined,
+                url: item.url ?? undefined,
+              },
+            ]
+          : [],
+      ),
       photo:
         person.photo?.alt || person.photo?.label
           ? toMedia(person.photo)

@@ -324,6 +324,8 @@ function memberType(key: string, type: string): string | undefined {
   if (key === "chapters") return "ebookChapter";
   if (key === "includedMaterials") return "ebookMaterial";
   if (key === "sources" && type === "ebook") return "ebookSource";
+  if (key === "credentials" && type === "author") return "credential";
+  if (key === "experience" && type === "author") return "workExperience";
   return undefined;
 }
 

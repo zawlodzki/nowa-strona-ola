@@ -440,9 +440,9 @@ z wynikiem w postępie).
       łańcuchów, duplikatów, kolizji ze stroną i brakujących celów.
 - [x] Kontrole w `check-seo.mjs`: sitemap ↔ robots ↔ alternate `.md`,
       linki wewnętrzne, robots.txt, `_headers`, llms.txt, RSS.
-- [ ] Linki wewnętrzne: 5 kart e-booków bez landingu prowadzi do 404
-      (decyzja 11.10.2026: landingi powstaną w Sanity). Do tego czasu
-      `test:build` i `test:content-lake` są czerwone.
+- [x] Linki wewnętrzne: 5 kart e-booków bez landingu prowadziło do 404
+      (decyzja 11.10.2026: landingi powstaną w Sanity). Późniejsze
+      `check-seo` (36 stron) przeszło bez niedziałających linków.
 - Puste kategorie bloga i e-booków dostają `noindex` i nie trafiają do
   spisu stron.
 
@@ -541,7 +541,7 @@ bo fallbacki są pokryte testami.
   `Offer.seller` konsultacji i e-booków → `#seller`. Wydawcą serwisu
   pozostaje `#person`. Telefon pominięty, bo nie jest widoczny na stronie.
 - **D4 — przyjęte:** `sameAs` = Instagram, Facebook, TikTok (bez zmian).
-- **D5 — częściowo:** na razie nie pokazujemy dyplomu; bez `hasCredential`.
+- **D5 — zastąpione 11.10.2026 (niżej):** pierwotnie: na razie nie pokazujemy dyplomu; bez `hasCredential`.
   Przeglądu treści nie deklarujemy (`reviewedBy`, `lastReviewed`), dopóki
   nie zapadnie osobna decyzja. Doprecyzowanie użytkownika: decyzja
   dotyczy tylko schema — zdjęcie z dyplomem i podpis na „O mnie” zostają.
@@ -559,7 +559,18 @@ bo fallbacki są pokryte testami.
   `src/assets/fonts/switzer/README.md`. Wybór „generowane czy ręczne”
   pozostaje propozycją (generowane). **Decyzja 11.10.2026: generowane;
   wdrożone w SEO‑5.**
-- Otwarte: D3, D6, D8.
+- **D3 — przyjęte (11.10.2026):** `{temat} | Aleksandra Olesiewicz`,
+  na stronie głównej marka pierwsza. Do wdrożenia (`titleTemplate`).
+- **D5 — zmienione (11.10.2026):** Ola sama weryfikuje artykuły;
+  `reviewedBy` i `lastReviewedAt` wypełniane przy faktycznym przeglądzie.
+  Dyplom (licencjat 2025) i sześć szkoleń są publiczne na „O mnie”
+  i w `hasCredential` (`educationalLevel`, `recognizedBy` z wydziałem;
+  szkolenia prowadzone przez osoby bez `recognizedBy`). Wcześniejsze
+  miejsca pracy w `alumniOf`. Wdrożone w kodzie, bez Content Lake.
+- **D6 — przyjęte (11.10.2026):** tylko online, bez `LocalBusiness`.
+- **D8 — przyjęte (11.10.2026):** RSS z pełną treścią (zmiana względem
+  wdrożonego leadu), `llms-full.txt` dla kluczowych stron. Do wdrożenia.
+- Wszystkie decyzje D1–D8 rozstrzygnięte.
 
 ## 10. Ryzyka i czego nie robić
 

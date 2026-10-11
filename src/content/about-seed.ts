@@ -27,11 +27,11 @@ export const aboutCopy = {
       "kobiet codziennie śledzi moje materiały edukacyjne na Instagramie",
     credentialsTitle: "Wiedza, którą możesz sprawdzić.",
     credentialsBody: [
-      "Ukończyłam dietetykę kliniczną na Śląskim Uniwersytecie Medycznym.",
+      "Ukończyłam dietetykę ze specjalnością dietetyka kliniczna na Śląskim Uniwersytecie Medycznym.",
       "W konsultacjach łączę wiedzę dietetyczną z analizą Twojej sytuacji i praktycznymi zmianami w codziennym odżywianiu.",
     ],
     diplomaCaption:
-      "Dyplom ukończenia dietetyki klinicznej, Śląski Uniwersytet Medyczny",
+      "Dyplom licencjata dietetyki, specjalność dietetyka kliniczna, Śląski Uniwersytet Medyczny",
     diplomaAlt:
       "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
     diplomaPlaceholderTitle: "Miejsce na skan dyplomu",
@@ -99,11 +99,11 @@ export const aboutCopy = {
     metricLabel: "women follow my educational content on Instagram every day",
     credentialsTitle: "Knowledge you can check.",
     credentialsBody: [
-      "I completed clinical dietetics at the Medical University of Silesia.",
+      "I completed a degree in dietetics, specialising in clinical dietetics, at the Medical University of Silesia.",
       "In consultations I combine dietetic knowledge with your situation and practical changes in everyday eating.",
     ],
     diplomaCaption:
-      "Diploma in clinical dietetics, Medical University of Silesia",
+      "Bachelor's degree in dietetics, clinical dietetics specialisation, Medical University of Silesia",
     diplomaAlt:
       "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom",
     diplomaPlaceholderTitle: "Space for the diploma scan",

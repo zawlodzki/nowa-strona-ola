@@ -93,7 +93,7 @@ export const consultationCopy = {
     expertTitle: "Po drugiej stronie\njest Ola.",
     expertIntro: "Dietetyczka kliniczna.\nI kobieta, która też ma PCOS.",
     expertBody:
-      "Wiem, ile pytań potrafi się pojawić. Dlatego zaczynam od wysłuchania Ciebie. Szukamy rozwiązań, które uwzględniają Twoje odżywianie, obowiązki i możliwości.\n\nUkończyłam dietetykę kliniczną na Śląskim Uniwersytecie Medycznym. Tłumaczę, po co proponuję daną zmianę, żebyś mogła świadomie zdecydować, jak ją wprowadzić.",
+      "Wiem, ile pytań potrafi się pojawić. Dlatego zaczynam od wysłuchania Ciebie. Szukamy rozwiązań, które uwzględniają Twoje odżywianie, obowiązki i możliwości.\n\nUkończyłam dietetykę ze specjalnością dietetyka kliniczna na Śląskim Uniwersytecie Medycznym. Tłumaczę, po co proponuję daną zmianę, żebyś mogła świadomie zdecydować, jak ją wprowadzić.",
     expertAlt: "Portret Aleksandry Olesiewicz",
     priceTitle: "Jedno spotkanie.\nTwój kolejny krok.",
     priceBody: [
@@ -252,7 +252,7 @@ export const consultationCopy = {
     expertTitle: "On the other side\nis Ola.",
     expertIntro: "A clinical dietitian.\nAnd a woman who has PCOS too.",
     expertBody:
-      "I know how many questions can come up. That is why I start by listening to you. We look for solutions that fit your eating, duties and what is possible for you.\n\nI completed clinical dietetics at the Medical University of Silesia. I explain why I suggest a change, so you can decide consciously how to bring it in.",
+      "I know how many questions can come up. That is why I start by listening to you. We look for solutions that fit your eating, duties and what is possible for you.\n\nI completed a degree in dietetics, specialising in clinical dietetics, at the Medical University of Silesia. I explain why I suggest a change, so you can decide consciously how to bring it in.",
     expertAlt: "Portrait of Aleksandra Olesiewicz",
     priceTitle: "One meeting.\nYour next step.",
     priceBody: [

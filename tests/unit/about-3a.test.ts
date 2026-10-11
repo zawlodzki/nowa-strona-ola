@@ -32,6 +32,17 @@ describe("about 3a fixtures", () => {
     expect(view.credentials.person.educationProgram).toBe(
       "Dietetyka kliniczna",
     );
+    expect(view.credentials.person.credentials).toHaveLength(7);
+    expect(view.credentials.person.credentials[0]).toMatchObject({
+      category: "degree",
+      level: "bachelor",
+      name: "Dietetyka",
+      specialization: "dietetyka kliniczna",
+      department: "Wydział Nauk o Zdrowiu w Bytomiu",
+      year: 2025,
+    });
+    expect(view.credentials.person.practiceSince).toBe(2022);
+    expect(view.credentials.person.experience).toHaveLength(2);
     expect(view.credentials.person.diploma).toMatchObject({
       src: "diploma",
       tone: "photo",
@@ -69,8 +80,18 @@ describe("about serializers", () => {
   it("serializes education facts and the diploma gap", async () => {
     const page = await getPage("pl", "o-mnie", { environment: {} });
     const markdown = serializePage(page, "pl");
-    expect(markdown).toContain("Śląski Uniwersytet Medyczny");
-    expect(markdown).toContain("Dietetyka kliniczna");
+    expect(markdown).toContain(
+      "- Dietetyka, specjalność dietetyka kliniczna, Licencjat, Śląski Uniwersytet Medyczny w Katowicach, Wydział Nauk o Zdrowiu w Bytomiu, 2025",
+    );
+    expect(markdown).toContain("- Praktyka dietetyczna od 2022 roku");
+    expect(markdown).toContain("### Wcześniejsze miejsca pracy");
+    expect(markdown).toContain(
+      "- Szpital Powiatowy w Limanowej im. Miłosierdzia Bożego",
+    );
+    expect(markdown).toContain("### Szkolenia");
+    expect(markdown).toContain(
+      "- Odchudzanie w chorobie Hashimoto, Polski Związek Trenerów Personalnych, 2023",
+    );
     expect(markdown).toContain(
       "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
     );

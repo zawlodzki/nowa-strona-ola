@@ -211,10 +211,39 @@ describe("Sanity SEO fields (SEO-4)", () => {
     expect(seller?.identifier).toEqual([]);
   });
 
-  it("falls back to constants without credentials (decision D5)", () => {
+  it("falls back to the public credentials shown on „O mnie”", () => {
     const [person] = siteEntities(ctx("/"));
-    expect(person).not.toHaveProperty("hasCredential");
+    const credentials = person?.hasCredential as Record<string, unknown>[];
+    expect(credentials).toHaveLength(7);
+    expect(credentials[0]).toEqual({
+      "@type": "EducationalOccupationalCredential",
+      name: "Dietetyka, specjalność dietetyka kliniczna",
+      credentialCategory: "degree",
+      educationalLevel: "Licencjat",
+      recognizedBy: {
+        "@type": "CollegeOrUniversity",
+        name: "Śląski Uniwersytet Medyczny w Katowicach",
+        url: "https://sum.edu.pl/",
+        department: {
+          "@type": "Organization",
+          name: "Wydział Nauk o Zdrowiu w Bytomiu",
+        },
+      },
+      dateCreated: "2025",
+    });
+    // Trainers are people: recognizedBy accepts organizations only.
+    expect(credentials[1]).not.toHaveProperty("recognizedBy");
+    expect(person?.alumniOf).toHaveLength(3);
     expect(person?.sameAs).toHaveLength(3);
+  });
+
+  it("keeps Sanity credentials authoritative when siteOwner exists", () => {
+    const site = siteSeoData({
+      siteOwner: { name: "Aleksandra Olesiewicz", credentials: [] },
+    } as unknown as Parameters<typeof siteSeoData>[0]);
+    const [person] = siteEntities({ ...ctx("/"), site });
+    expect(person).not.toHaveProperty("hasCredential");
+    expect(person?.alumniOf).toHaveLength(1);
   });
 
   it("applies seo.noindex and seo.ogImage of a document", () => {
