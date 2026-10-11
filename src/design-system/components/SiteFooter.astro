@@ -11,6 +11,7 @@ interface Props {
   legalLinks: NavigationLink[];
   copyright: string;
   lang?: Locale;
+  consentEnabled?: boolean;
 }
 const {
   homeHref,
@@ -20,6 +21,7 @@ const {
   legalLinks,
   copyright,
   lang = "pl",
+  consentEnabled = false,
 } = Astro.props;
 const pl = lang === "pl";
 function socialName(label: string) {
@@ -77,6 +79,17 @@ function isHttpUrl(href: string) {
         {legalLinks.map((link) => (
           <a href={link.href}>{link.label}</a>
         ))}
+        {consentEnabled && (
+          <button
+            class="ao-consent-settings"
+            type="button"
+            data-consent-open
+            hidden
+            aria-haspopup="dialog"
+          >
+            {pl ? "Ustawienia cookies" : "Cookie settings"}
+          </button>
+        )}
       </nav>
       <div class="ao-footer__tools">
         <ThemeToggle label={pl ? "Ciemny motyw" : "Dark theme"} />
@@ -91,3 +104,18 @@ function isHttpUrl(href: string) {
     </div>
   </div>
 </footer>
+
+<style>
+  .ao-consent-settings {
+    min-block-size: var(--ao-target-min);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+</style>

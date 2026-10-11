@@ -16,7 +16,8 @@ Nie wpisywać testowych profili i niezatwierdzonych URL w komponentach.
 | Wordmark          | `href`, `label`, HTML attrs                                                                                   | Znak Switzer z dostępną nazwą linku                                                    |
 | SiteHeader        | `homeHref`, `links`, opcjonalne `cta`, `lang`                                                                 | Sticky header; globalne lub lokalne linki landingu                                     |
 | SiteFooter        | `homeHref`, `description`, `links`, `socialLinks`, `legalLinks`, `copyright`, `sellerLine?`, `lang`           | Wspólna stopka; `links[].current` daje `aria-current`; dane sprzedawcy w jednej linii  |
-| ThemeToggle       | `label`                                                                                                       | Używany raz przez footer; systemowy motyw bez JS                                       |
+| ThemeToggle       | `label`                                                                                                       | Przycisk stopki sterowany przez ThemePreference; ukryty bez JS                         |
+| ThemePreference   | bez props                                                                                                     | W head Layout3a; odtwarza `ao-theme` przed body i obsługuje ręczny wybór               |
 | Breadcrumbs       | `links: {href,label,current}[]`, `label`                                                                      | Ścieżka; ostatnia pozycja jest tekstem                                                 |
 | Newsletter        | `id`, `title`, `description`, slot `form`                                                                     | Wygląd wspólny, wysyłka poza komponentem                                               |
 | FormField         | `id`, `label`, `hint`, `error`, input attrs                                                                   | Label, aria błędu, powiązania opisów                                                   |
@@ -36,8 +37,9 @@ iskierka cherry, znacznik, cień karty) są w
 jako SVG, nie jako kształty CSS. Hero ma opcjonalny slot `kicker` przed H1.
 
 `NavigationLink` i `SocialLink`: [types.ts](../src/design-system/types.ts).
-Komponenty niewymagające interakcji nie wysyłają JS. Header, Carousel i ThemeToggle
-mają lokalne skrypty deduplikowane przez Astro. Komponent `BookCover` jest ukryty
+Komponenty niewymagające interakcji nie wysyłają JS. Header i Carousel
+mają lokalne skrypty deduplikowane przez Astro. ThemePreference ma jeden
+synchroniczny skrypt inline w head, a ThemeToggle renderuje przycisk. Komponent `BookCover` jest ukryty
 przed czytnikiem, bo widoczny tytuł produktu jest już w ContentCard lub H1 landingu.
 Nie używać samej dekoracyjnej okładki jako jedynej nazwy produktu.
 

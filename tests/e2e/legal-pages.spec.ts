@@ -4,14 +4,14 @@ const pages = [
   {
     path: "/polityka-prywatnosci/",
     title: "Polityka prywatności aleksandraolesiewicz.com",
-    version: "Wersja 2.1 · obowiązuje od 10.10.2026",
+    version: "Wersja 2.2 · obowiązuje od 11.10.2026",
     heading: "1. Kto jest administratorem Twoich danych",
   },
   {
     path: "/lista-cookies-i-identyfikatorow/",
     title: "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
-    version: "Wersja 2.1 · obowiązuje od 10.10.2026",
-    heading: "Przed dokonaniem wyboru",
+    version: "Wersja 2.2 · obowiązuje od 11.10.2026",
+    heading: "Aktualny stan narzędzi",
   },
   {
     path: "/regulamin/",

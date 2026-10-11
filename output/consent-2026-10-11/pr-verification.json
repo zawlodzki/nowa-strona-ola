@@ -1,0 +1,14 @@
+{
+  "branch": "codex/ola-consent-cookies-theme",
+  "base": "origin/feat/seo-geo-aeo",
+  "baseCommit": "961eeb211bafbc0acab6b15e582d5fe561a2ebb0",
+  "node": "24.19.0",
+  "command": "PLAYWRIGHT_WORKERS=2 npm run verify",
+  "result": "PASS",
+  "unit": 280,
+  "e2e": 393,
+  "sanityDocuments": 88,
+  "sanityErrors": 0,
+  "matchingPages": 12,
+  "excludedEvidence": "gtm-workspace.jpg contains operator account metadata"
+}

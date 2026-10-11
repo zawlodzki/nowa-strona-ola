@@ -1,0 +1,24 @@
+{
+  "subject": {
+    "id": "sub_123456789ABCDEFGHJKLMNPQ",
+    "createdAt": "2026-10-11T08:00:00.000Z"
+  },
+  "consents": [
+    {
+      "id": "consent-fixture",
+      "type": "cookie_banner",
+      "policyId": "pol-fixture",
+      "policyVersion": 1,
+      "policyHash": "database-policy-hash",
+      "policyEffectiveDate": "2026-10-11T08:00:00.000Z",
+      "isLatestPolicy": true,
+      "preferences": {
+        "necessary": true,
+        "measurement": true,
+        "marketing": true
+      },
+      "givenAt": "2026-10-11T08:00:00.000Z"
+    }
+  ],
+  "isValid": true
+}

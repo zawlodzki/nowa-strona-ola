@@ -1,0 +1,43 @@
+<script is:inline>
+  (() => {
+    const storageKey = "ao-theme";
+    const root = document.documentElement;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    /** @type {"light" | "dark" | null} */
+    let preference = null;
+    try {
+      const saved = window.localStorage.getItem(storageKey);
+      if (saved === "light" || saved === "dark") preference = saved;
+    } catch {
+      preference = null;
+    }
+
+    const applyTheme = () => {
+      const theme = preference ?? (media.matches ? "dark" : "light");
+      root.dataset.theme = theme;
+      for (const button of document.querySelectorAll(".ao-theme-toggle")) {
+        button.setAttribute("aria-pressed", String(theme === "dark"));
+      }
+    };
+    applyTheme();
+    media.addEventListener("change", () => {
+      if (preference === null) applyTheme();
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+      applyTheme();
+      for (const button of document.querySelectorAll(".ao-theme-toggle")) {
+        if (!(button instanceof HTMLButtonElement)) continue;
+        button.hidden = false;
+        button.addEventListener("click", () => {
+          preference = root.dataset.theme === "dark" ? "light" : "dark";
+          applyTheme();
+          try {
+            window.localStorage.setItem(storageKey, preference);
+          } catch {
+            // Storage może być zablokowany, wybór nadal obowiązuje na tej stronie.
+          }
+        });
+      }
+    });
+  })();
+</script>

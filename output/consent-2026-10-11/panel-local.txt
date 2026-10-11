@@ -1,0 +1,286 @@
+- link "Przejdź do treści":
+  - /url: "#main"
+- banner:
+  - link "Aleksandra Olesiewicz — strona główna":
+    - /url: /
+  - navigation "Nawigacja główna":
+    - link "E-booki":
+      - /url: /ebooki/
+    - link "Konsultacje":
+      - /url: /konsultacje/
+    - link "O mnie":
+      - /url: /o-mnie/
+    - link "Blog":
+      - /url: /blog/
+    - link "Kontakt":
+      - /url: /kontakt/
+  - link "Newsletter":
+    - /url: /#newsletter
+- main:
+  - heading "Zrozum swoje ciało. Zacznij od odżywiania." [level=1]
+  - paragraph: Jestem Ola, dietetyczka kliniczna. Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Przygotowuję też e-booki o PCOS i perimenopauzie.
+  - link "Poznaj e-booki":
+    - /url: "#ebooki"
+  - link "Poznaj konsultacje":
+    - /url: /konsultacje/
+  - img "Aleksandra Olesiewicz, dietetyczka"
+  - region "Z kim pracuję":
+    - heading "Z kim pracuję" [level=2]
+    - paragraph: Pracuję z kobietami, które chcą spokojnie uporządkować odżywianie i dopasować je do swojej codzienności.
+    - list:
+      - listitem:
+        - heading "PCOS" [level=3]
+        - paragraph: Gdy chcesz zrozumieć, jak jedzenie może wspierać Twoją codzienność z PCOS, i wybrać pierwszy krok, który ma sens dla Ciebie.
+      - listitem:
+        - heading "Insulinooporność" [level=3]
+        - paragraph: Gdy po diagnozie masz wiele pytań i chcesz ułożyć posiłki tak, by pasowały do Twojego dnia, bez listy zakazów.
+      - listitem:
+        - heading "Starania o ciążę" [level=3]
+        - paragraph: Gdy planujesz ciążę albo już się starasz i chcesz spokojnie zadbać o odżywianie, w porozumieniu z lekarzem prowadzącym.
+      - listitem:
+        - heading "Perimenopauza" [level=3]
+        - paragraph: Gdy zauważasz zmiany w ciele i codziennych nawykach i chcesz przyjrzeć się im spokojnie, krok po kroku.
+  - heading "Wiesz, od czego zacząć. Rozumiesz, po co to robisz." [level=2]
+  - paragraph: Po diagnozie łatwo pogubić się w radach o diecie, badaniach i suplementach. Pomogę Ci uporządkować informacje i przełożyć je na codzienne decyzje.
+  - paragraph:
+    - strong: 9000+
+    - text: kobiet codziennie śledzi moje materiały edukacyjne na Instagramie
+  - article:
+    - heading "Twoja sytuacja jest punktem wyjścia." [level=3]
+    - paragraph: Przyglądam się Twoim wynikom badań, sposobowi odżywiania i codziennym nawykom.
+  - article:
+    - heading "Zmieniamy to, co jesz na co dzień." [level=3]
+    - paragraph: Szukamy rozwiązań, które uwzględniają Twoje ulubione posiłki, czas i możliwości.
+  - article:
+    - heading "Rozumiesz kolejne kroki." [level=3]
+    - paragraph: Wyjaśniam zalecenia, żebyś wiedziała, co robisz i dlaczego.
+  - img "Portret Aleksandry Olesiewicz"
+  - img "Kolorowy posiłek z warzywami i pieczywem"
+  - heading "Jestem Ola." [level=2]
+  - paragraph: Znam PCOS także z własnego doświadczenia.
+  - paragraph: Jestem dietetyczką kliniczną i sama mam doświadczenie z PCOS. Wiem, jak trudno odnaleźć się w sprzecznych radach i kolejnych próbach zmiany odżywiania.
+  - paragraph: W pracy z kobietami z PCOS i insulinoopornością łączę analizę wyników badań z praktycznymi zmianami w posiłkach. Zależy mi, żebyś rozumiała zalecenia i potrafiła korzystać z nich w swojej codzienności.
+  - link "Poznaj moją historię":
+    - /url: /o-mnie/
+  - heading "E-booki o PCOS i perimenopauzie." [level=2]
+  - paragraph: Badania, suplementy, codzienne posiłki i obserwacja samopoczucia. Wybierz temat, w którym potrzebujesz więcej jasności.
+  - navigation "Temat e-booków":
+    - link "PCOS":
+      - /url: "#ebook-suplementy-w-pcos"
+    - link "Perimenopauza":
+      - /url: "#ebook-waga-cie-oklamuje"
+  - button "Poprzednie elementy" [disabled]
+  - button "Następne elementy"
+  - region "E-booki, przewijaj w poziomie":
+    - article:
+      - paragraph: Wkrótce dostępny
+      - link "Suplementy w PCOS":
+        - /url: /ebooki/suplementy-w-pcos/
+      - paragraph: PCOS E-book
+      - heading "Suplementy w PCOS" [level=3]:
+        - link "Suplementy w PCOS":
+          - /url: /ebooki/suplementy-w-pcos/
+      - paragraph: "Uporządkuj pytania o suplementy: po co je stosować i co omówić ze specjalistą przed zakupem."
+      - text: 97 zł brutto
+      - link "Poznaj temat":
+        - /url: /ebooki/suplementy-w-pcos/
+    - article:
+      - paragraph: Wkrótce dostępny
+      - link "Badania, które mają sens":
+        - /url: /ebooki/badania-ktore-maja-sens/
+      - paragraph: PCOS E-book
+      - heading "Badania, które mają sens" [level=3]:
+        - link "Badania, które mają sens":
+          - /url: /ebooki/badania-ktore-maja-sens/
+      - paragraph: Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.
+      - text: 97 zł brutto
+      - link "Poznaj temat":
+        - /url: /ebooki/badania-ktore-maja-sens/
+    - article:
+      - paragraph: Wkrótce dostępny
+      - link "Szczupła, a jednak PCOS":
+        - /url: /ebooki/szczupla-a-jednak-pcos/
+      - paragraph: PCOS E-book
+      - heading "Szczupła, a jednak PCOS" [level=3]:
+        - link "Szczupła, a jednak PCOS":
+          - /url: /ebooki/szczupla-a-jednak-pcos/
+      - paragraph: Jak podejść do odżywiania przy PCOS, kiedy Twoim celem nie jest odchudzanie.
+      - text: 97 zł brutto
+      - link "Poznaj temat":
+        - /url: /ebooki/szczupla-a-jednak-pcos/
+    - article:
+      - paragraph: Wkrótce dostępny
+      - link "Waga Cię okłamuje":
+        - /url: /ebooki/waga-cie-oklamuje/
+      - paragraph: Perimenopauza E-book
+      - heading "Waga Cię okłamuje" [level=3]:
+        - link "Waga Cię okłamuje":
+          - /url: /ebooki/waga-cie-oklamuje/
+      - paragraph: Przyjrzyj się zmianom w sylwetce i codziennych nawykach w okresie perimenopauzy.
+      - text: 97 zł brutto
+      - link "Poznaj temat":
+        - /url: /ebooki/waga-cie-oklamuje/
+    - article:
+      - paragraph: Wkrótce dostępny
+      - link "Czy to już?":
+        - /url: /ebooki/czy-to-juz/
+      - paragraph: Perimenopauza E-book
+      - heading "Czy to już?" [level=3]:
+        - link "Czy to już?":
+          - /url: /ebooki/czy-to-juz/
+      - paragraph: Dziennik cyklu i samopoczucia, który pomoże Ci przygotować się do rozmowy z lekarzem.
+      - text: 97 zł brutto
+      - link "Poznaj temat":
+        - /url: /ebooki/czy-to-juz/
+    - article:
+      - paragraph: Wkrótce dostępny
+      - link "Noc zaczyna się o osiemnastej":
+        - /url: /ebooki/noc-zaczyna-sie-o-osiemnastej/
+      - paragraph: Perimenopauza E-book
+      - heading "Noc zaczyna się o osiemnastej" [level=3]:
+        - link "Noc zaczyna się o osiemnastej":
+          - /url: /ebooki/noc-zaczyna-sie-o-osiemnastej/
+      - paragraph: Uporządkuj wieczorne posiłki i nawyki. Sprawdź, co warto obserwować przed rozmową o problemach ze snem.
+      - text: 97 zł brutto
+      - link "Poznaj temat":
+        - /url: /ebooki/noc-zaczyna-sie-o-osiemnastej/
+  - paragraph:
+    - link "Zobacz wszystkie e-booki":
+      - /url: /ebooki/
+  - paragraph: Zapowiedzi e-booków. Tytuły i okładki są propozycją; materiały są w przygotowaniu.
+  - paragraph: 1–3 z 6
+  - region "Konsultacje dietetyczne online.":
+    - heading "Konsultacje dietetyczne online." [level=2]
+    - paragraph: Podczas pojedynczej konsultacji przyjrzymy się Twoim wynikom badań, sposobowi odżywiania i temu, z czym trudno Ci sobie poradzić na co dzień. Ustalimy priorytety i zmiany, od których możesz zacząć.
+    - list:
+      - listitem: Spotkanie online
+      - listitem: Analiza Twojej sytuacji
+      - listitem: Konkretne pierwsze kroki
+    - paragraph: 450 zł / 60 minut
+    - link "Zarezerwuj konsultację":
+      - /url: https://cal.com/dietetyk/konsultacja
+    - img "Aleksandra Olesiewicz podczas pracy przy laptopie"
+  - heading "O współpracy ze mną." [level=2]
+  - paragraph: Doświadczenia moich podopiecznych
+  - button "Poprzednie elementy" [disabled]
+  - button "Następne elementy"
+  - region "Opinie, przewijaj w poziomie":
+    - figure "Opinia o dotychczasowej współpracy":
+      - blockquote:
+        - paragraph: Ola, muszę się pochwalić choć dopiero co zaczęłyśmy! 😀 Na wadze dopiero -3kg, ale już się zadział mały cud. Z twarzy zaczęły znikać mi pryszcze, nie mam już tak wielkiej ochoty na słodycze!! Nawet nie wiesz jak się cieszę ❤️ a to dopiero początek naszej współpracy
+      - strong: Opinia o dotychczasowej współpracy
+    - figure "Opinia o dotychczasowej współpracy":
+      - blockquote:
+        - paragraph: Dzięki współpracy z Olą schudłam 8 kg w 3 miesiące bez wyrzeczeń. Hormony się ustabilizowały, energii mam więcej niż kiedykolwiek!
+      - strong: Opinia o dotychczasowej współpracy
+    - figure "Opinia o dotychczasowej współpracy":
+      - blockquote:
+        - paragraph: Najlepsza decyzja jaką podjęłam! Aplikacja jest super intuicyjna, a Ola zawsze dostępna gdy potrzebuję pomocy. Polecam z całego serca!
+      - strong: Opinia o dotychczasowej współpracy
+    - figure "Opinia o dotychczasowej współpracy":
+      - blockquote:
+        - paragraph: Po latach walki z PCOS w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!
+      - strong: Opinia o dotychczasowej współpracy
+    - figure "Opinia o dotychczasowej współpracy":
+      - blockquote:
+        - paragraph: Miałam problem z insulinoopornością i nie widziałam efektów mimo wielu diet. Z Olą w 2 miesiące schudłam 5 kg i wyniki badań się poprawiły!
+      - strong: Opinia o dotychczasowej współpracy
+    - figure "Opinia o dotychczasowej współpracy":
+      - blockquote:
+        - paragraph: Nie wierzyłam, że dieta może być elastyczna i smaczna jednocześnie. Ola udowodniła mi, że to możliwe. Gotuje dla całej rodziny z tych samych przepisów!
+      - strong: Opinia o dotychczasowej współpracy
+  - paragraph: Publikujemy wyłącznie opinie osób, które skorzystały z konsultacji lub kupiły e-book — sprawdzamy to w naszej korespondencji i historii zamówień. Nie płacimy za opinie i nie zmieniamy ich treści. Efekty są indywidualne i nie są gwarantowane.
+  - region "Mniej sprzecznych rad. Więcej konkretów.":
+    - heading "Mniej sprzecznych rad. Więcej konkretów." [level=2]
+    - paragraph: Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.
+    - text: Twój adres e-mail
+    - textbox "Twój adres e-mail":
+      - /placeholder: np. ola@przyklad.pl
+    - button "Zapisuję się"
+    - paragraph:
+      - text: Zapisując się, zamawiasz newsletter Wellbiz sp. z o.o. i zgadzasz się na otrzymywanie e-maili z wiedzą o żywieniu oraz informacjami o e-bookach i konsultacjach. Wypiszesz się jednym kliknięciem — link jest w każdej wiadomości. Newsletter jest dla osób pełnoletnich.
+      - link "Regulamin newslettera":
+        - /url: /regulamin-newslettera/
+      - text: ·
+      - link "Polityka prywatności":
+        - /url: /polityka-prywatnosci/
+    - alert
+    - status
+- contentinfo:
+  - link "Aleksandra Olesiewicz — strona główna":
+    - /url: /
+  - paragraph: PCOS, insulinooporność i odżywianie dopasowane do życia.
+  - navigation "Profile społecznościowe":
+    - link "Instagram Aleksandry Olesiewicz":
+      - /url: https://www.instagram.com/aleksandra_olesiewicz
+      - text: Instagram
+    - link "Facebook Aleksandry Olesiewicz":
+      - /url: https://www.facebook.com/dietetykolesiewicz/
+      - text: Facebook
+    - link "TikTok Aleksandry Olesiewicz":
+      - /url: https://www.tiktok.com/@aleksandra_olesiewicz
+      - text: TikTok
+  - navigation "Nawigacja w stopce":
+    - link "E-booki":
+      - /url: /ebooki/
+    - link "Konsultacje":
+      - /url: /konsultacje/
+    - link "O mnie":
+      - /url: /o-mnie/
+    - link "Blog":
+      - /url: /blog/
+    - link "Kontakt":
+      - /url: /kontakt/
+  - paragraph: "© 2026 Wellbiz sp. z o.o. · Treści: Aleksandra Olesiewicz-Zawłodzka"
+  - navigation "Informacje prawne":
+    - link "Regulamin":
+      - /url: /regulamin/
+    - link "Polityka prywatności":
+      - /url: /polityka-prywatnosci/
+    - link "Lista cookies":
+      - /url: /lista-cookies-i-identyfikatorow/
+    - link "Regulamin newslettera":
+      - /url: /regulamin-newslettera/
+    - link "Odstąpienie od umowy":
+      - /url: /odstapienie/
+    - button "Ustawienia cookies"
+  - button "Ciemny motyw"
+  - link "Powrót na górę":
+    - /url: "#main"
+- region "Pliki cookies na tej stronie":
+  - heading "Pliki cookies na tej stronie" [level=2]
+  - button "Zamknij bez zmiany zgód"
+  - paragraph: Niezbędne pliki cookies zapewniają działanie strony. Za Twoją zgodą włączymy też narzędzia analityczne (pomagają nam ulepszać stronę) i marketingowe (mierzymy skuteczność reklam). Na stronach konsultacji, e-booków, w zamówieniu i ankiecie te narzędzia nigdy nie działają. Wybór zmienisz w każdej chwili w „Ustawieniach cookies”.
+  - paragraph:
+    - link "Polityka prywatności":
+      - /url: /polityka-prywatnosci/
+    - link "Lista cookies":
+      - /url: /lista-cookies-i-identyfikatorow/
+  - button "Akceptuję wszystkie"
+  - button "Odrzucam opcjonalne"
+  - button "Dostosuj"
+  - status: Nie udało się zapisać lub odczytać ustawień cookies. Opcjonalne narzędzia pozostają wyłączone. Spróbuj ponownie.
+- dialog "Ustawienia cookies":
+  - heading "Ustawienia cookies" [level=2]
+  - button "Zamknij bez zmiany zgód"
+  - group "Kategorie plików cookies":
+    - text: Kategorie plików cookies
+    - checkbox "Niezbędne, zawsze aktywne Działanie strony, ochrona przed botami, płatności, zapis Twojego wyboru." [checked] [disabled]
+    - strong: Niezbędne, zawsze aktywne
+    - text: Działanie strony, ochrona przed botami, płatności, zapis Twojego wyboru.
+    - checkbox "Analityczne Google Analytics 4 i Microsoft Clarity (z maskowaniem treści formularzy)."
+    - strong: Analityczne
+    - text: Google Analytics 4 i Microsoft Clarity (z maskowaniem treści formularzy).
+    - checkbox "Marketingowe Piksel Meta, tylko na stronach niezwiązanych z tematyką zdrowia."
+    - strong: Marketingowe
+    - text: Piksel Meta, tylko na stronach niezwiązanych z tematyką zdrowia.
+  - paragraph:
+    - link "Polityka prywatności":
+      - /url: /polityka-prywatnosci/
+    - link "Lista cookies":
+      - /url: /lista-cookies-i-identyfikatorow/
+  - button "Zapisuję wybór"
+  - button "Akceptuję wszystkie"
+  - button "Odrzucam opcjonalne"
+  - status: Nie udało się zapisać lub odczytać ustawień cookies. Opcjonalne narzędzia pozostają wyłączone. Spróbuj ponownie.
+- status

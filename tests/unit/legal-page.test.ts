@@ -27,12 +27,12 @@ describe("legal page mapper", () => {
     const view = mapLegalPage(page, settings);
     expect(view.href).toBe("/polityka-prywatnosci/");
     expect(view.title).toBe("Polityka prywatności aleksandraolesiewicz.com");
-    expect(view.versionLabel).toBe("Wersja 2.1");
+    expect(view.versionLabel).toBe("Wersja 2.2");
     expect(view.effective).toEqual({
-      datetime: "2026-10-10",
-      label: "10.10.2026",
+      datetime: "2026-10-11",
+      label: "11.10.2026",
     });
-    expect(view.versionLine).toBe("Wersja 2.1 · obowiązuje od 10.10.2026");
+    expect(view.versionLine).toBe("Wersja 2.2 · obowiązuje od 11.10.2026");
     expect(view.toc[0]?.text).toBe("1. Kto jest administratorem Twoich danych");
     expect(view.html).toContain('href="/lista-cookies-i-identyfikatorow/"');
     expect(view.html).toContain("<table>");
@@ -46,8 +46,8 @@ describe("legal page mapper", () => {
         site: siteSeoData(null),
       })[0],
     ).toMatchObject({
-      version: "2.1",
-      datePublished: "2026-10-10",
+      version: "2.2",
+      datePublished: "2026-10-11",
     });
     expect(serializeLegalPage(view)).toBe(
       readFileSync("src/content/examples/legal-privacy.md", "utf8"),
@@ -134,8 +134,10 @@ describe("legal page mapper", () => {
     expect(cookies.html).toContain(
       '<a href="/polityka-prywatnosci/">Politykę prywatności</a>',
     );
-    expect(cookies.toc[0]?.text).toBe("Przed dokonaniem wyboru");
-    expect(cookies.versionLabel).toBe("Wersja 2.1");
+    expect(cookies.toc[0]?.text).toBe("Aktualny stan narzędzi");
+    expect(cookies.versionLabel).toBe("Wersja 2.2");
+    expect(cookies.html).toContain("ao-theme");
+    expect(cookies.html).toContain("wyłączone na całej Stronie");
     expect(serializeLegalPage(cookies)).toBe(
       readFileSync("src/content/examples/legal-cookies.md", "utf8"),
     );
@@ -162,7 +164,7 @@ describe("legal page mapper", () => {
     expect(view.html).toContain("binding version is the Polish text");
     expect(view.html).toContain('href="/polityka-prywatnosci/"');
     expect(view.html).not.toContain("Administratorem danych osobowych");
-    expect(view.versionLine).toBe("Version 2.1 · effective from 10.10.2026");
+    expect(view.versionLine).toBe("Version 2.2 · effective from 11.10.2026");
     expect(serializeLegalPage(view)).toBe(
       readFileSync("src/content/examples/legal-privacy-en.md", "utf8"),
     );

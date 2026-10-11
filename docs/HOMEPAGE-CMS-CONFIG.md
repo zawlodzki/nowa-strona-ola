@@ -1,5 +1,25 @@
 # Homepage 3a — konfiguracja treści CMS
 
+## GTM, c15t i motyw, decyzje 11.10.2026
+
+Źródło: bezpośrednie polecenie użytkownika w sesji 11.10.2026.
+Szczegóły: [plan integracji](GTM-C15T-DEPLOYMENT-PLAN.md).
+
+| Obszar        | Bieżące ustalenie                                                                                              | Mapowanie i stan                                                                                                                                             |
+| ------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Domeny        | Staging `ola-website-staging.zawlodzki.workers.dev`, produkcja `aleksandraolesiewicz.com` jeszcze niewdrożona. | `wrangler.jsonc`; klient c15t i motyw wdrożone na stagingu; produkcja pozostaje niewdrożona.                                                                 |
+| Zgody         | Ta sama instancja c15t i administracja, odrębne decyzje dla domeny Oli.                                        | Konfiguracja poza Sanity. Backend we wspólnej instancji i odrębne profile Oli działają; klient odebrany na stagingu.                                         |
+| Panel cookies | Wygląd zgodny z 3a, copy z `projekt prawny ola`. „Ustawienia cookies” w stopce.                                | `SiteFooter.astro` i `ConsentPanel.astro` wdrożone. Przycisk ustawień jest funkcją kodu; polityka Oli jest wersjonowana w c15t.                              |
+| GTM           | Wzorzec mechanizmów z zawlodzki.pl, kontener Oli ma starą konfigurację do migracji.                            | `GTM-PWBRPZ29`; konfiguracja GTM i allowlista poza CMS. Utworzono osobny workspace 5 z wstrzymanymi tagami; rollout false. Nie opublikowano GTM ani pomiaru. |
+| Motyw         | Zapamiętywać ręczny wybór light lub dark przy przejściu na podstronę.                                          | Wdrożone na stagingu w `ThemePreference.astro`, klucz localStorage `ao-theme`. To preferencja przeglądarki, nie pole Sanity i nie zgoda c15t.                |
+
+Propozycje planu, nie nowe decyzje użytkownika: brak opcjonalnych tagów na
+trasach wrażliwych, domyślnie pusta allowlista Meta, osobny identyfikator
+polityki Oli. Copy prawne ujednolicono z blokadą całego pomiaru na treściach zdrowotnych.
+Lista cookies i polityka prywatności 2.2 są opublikowane w Content Lake
+na dodatkowe zlecenie użytkownika; opisują c15t, localStorage i `ao-theme`.
+Konfiguracja kont i dopuszczenie neutralnych treści pozostają do odbioru.
+
 Aktualizacja: 2026-10-08. Status: specyfikacja do konfiguracji Sanity,
 nie wykonana migracja. Obowiązuje dla polskiej strony głównej.
 

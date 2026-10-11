@@ -1,5 +1,7 @@
 ---
 import "./global.css";
+import "./components/ConsentPanel.css";
+import ThemePreference from "./components/ThemePreference.astro";
 import fontUrl from "../assets/fonts/switzer/Switzer-Variable.woff2?url";
 import iconUrl from "../assets/brand/logo-monogram.svg?url";
 import { htmlLang, isIndexingEnabled } from "@/lib/seo/site";
@@ -27,6 +29,7 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
+    <ThemePreference />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <meta

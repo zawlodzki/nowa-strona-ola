@@ -1,10 +1,149 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-11 (e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-11 (plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Przygotowanie PR i push, 11.10.2026
+
+- Polecenie użytkownika obejmuje push i otwarcie PR dla zmian strony.
+  Wydzielono worktree i gałąź `codex/ola-consent-cookies-theme` z bazy
+  PR #69 `feat/seo-geo-aeo`. Porównanie zawartości potwierdziło wyłącznie
+  zakres c15t, motywu, cookies i powiązanych testów oraz dokumentacji.
+  Pierwotny checkout ze zmianami SEO pozostał zachowany.
+- Dokładna gałąź PR przeszła `PLAYWRIGHT_WORKERS=2 npm run verify`
+  na Node 24.19.0: 280 unit, 393 E2E, buildy i 12 zgodnych stron Content Lake.
+  Pierwszy przebieg zatrzymał format nowego proof.json; poprawiono go,
+  a pełna ponowna kontrola przeszła. Dowód `pr-verification.json` w
+  `output/consent-2026-10-11/`.
+- Niezależny przegląd zakresu i komentarzy nie znalazł blokera implementacji.
+  Poprawiono dwie nieaktualne deklaracje stanu; z PR wyłączono zrzut GTM
+  z danymi konta operatora. Lokalny zrzut pozostaje zachowany.
+- Repo prawne nie ma remote. Użytkownik potwierdził, że ma być zapisywane
+  lokalnie. Sześć dokumentów ma commit `481f81b` na osobnej gałęzi;
+  nie dołączono `.DS_Store` ani katalogu incydentów.
+- Następny krok: odbiór PR. Najpierw scalić SEO #69, potem przestawić bazę
+  tej gałęzi na main. Aktywacja pomiaru i produkcji wymaga osobnego odbioru.
+
+### Dokumenty cookies, 11.10.2026
+
+- Na zlecenie użytkownika zaktualizowano repo `projekt prawny ola` i fixture’y
+  listy identyfikatorów oraz polityki prywatności do wersji 2.2 z datą 11.10.2026.
+  Sekcję cookies zsynchronizowano z rejestrem czynności, macierzą retencji
+  i wykazem procesorów. Pozostały przegląd prawny pakietu pozostaje otwarty.
+- W Sanity opublikowano wyłącznie `legal-cookies-pl` i `legal-privacy-pl`.
+  Zastosowano kontrolę rewizji, zachowano kopię obu poprzednich dokumentów
+  i porównano dokładną treść nowych szkiców z fixture’ami przed publikacją.
+  Nie wykonano pełnego importu dokumentów prawnych ani zmian pozostałych stron.
+- Lista rozróżnia cookie ważne 365 dni, fizyczną trwałość localStorage,
+  pending wycofania, lokalny `ao-theme` oraz historię backendu 36 miesięcy.
+  Ujawnia zamaskowany IP, User-Agent i język w dowodzie serwera.
+  Narzędzia GTM/GA4/Meta/Clarity są opisane jako wyłączone, także po zgodzie.
+  Przyszłe narzędzia wymagają kontroli kont i osobnego dopuszczenia treści.
+- Niezależne sprawdzenie względem kodu nie znalazło blokerów. Doprecyzowano
+  wyjątek usunięcia cookie przy oczekującym wycofaniu w localStorage.
+  Konwerter źródła `--check` PASS. Końcowe `PLAYWRIGHT_WORKERS=2 npm run verify`
+  PASS: 280 unit, 393 E2E, 88 dokumentów Sanity bez błędów, 12 stron z tym samym
+  DOM fixture/Content Lake. Pierwsze przebiegi ujawniły stare asercje wersji 2.1;
+  zaktualizowano literalną wersję i datę w unit, E2E i kontroli builda.
+- Workflow Sanity `38155002467` zakończył się błędem starej asercji 2.1 w main,
+  bez deploy. Poprawka jest w bieżącym kodzie. Po zakończeniu tego pipeline
+  zbudowano aktualne treści opublikowane i wdrożono staging jako
+  `e2f08fed-3779-4b72-9617-f3a05a031bfa`, zachowując wspólny kod c15t i SEO.
+- Odbiór live obu stron i ich Markdown PASS (HTTP 200, wersja 2.2).
+  HTML czytelny bez JavaScriptu; przy 320 px brak poziomego przepełnienia strony,
+  tabela ma własne przewijanie. Obejrzano desktop i mobile. Nie wysłano POST,
+  formularza ani zapytania do usług pomiarowych. Dowody w
+  `output/cookie-docs-2026-10-11/`. Nie wykonano nowego osobnego odbioru tych tabel
+  w ciemnym motywie, natywnym zoomie 200% ani czytniku ekranu.
+- Następny krok: uwzględnić poprawione asercje cookies w przyszłym PR razem
+  z aktualnymi treściami; odebrać konta pomiarowe i neutralne strony przed aktywacją.
+  Produkcja pozostaje niewdrożona i wymaga skanu identyfikatorów przed uruchomieniem.
+
+### c15t na stagingu i workspace GTM, 11.10.2026
+
+- Wdrożono backend we wspólnej instancji VPS jako
+  `zawlodzki/c15t:2.2.1-ola-20261011-2`. Produkcja Oli i staging mają
+  osobne tenanty, audience snapshotów i originy. Legacy zawlodzki.pl
+  zachowuje profil `tenantId IS NULL`. Nie uruchamiano migracji istniejącej bazy.
+- Przed zmianą zachowano chronioną kopię bazy, źródeł i konfiguracji obrazu.
+  Na rzeczywistych handlerach przeszło 16 testów SQLite i polityki oraz
+  1 test PostgreSQL 17.10 w osobnej bazie. Audyt zależności runtime
+  obrazu wykazał zero podatności. Suma SHA-256 starego widgetu `cmp-v1.js`
+  jest identyczna przed i po zmianie.
+- Próba live zapisała syntetyczny dowód wyłącznie niezbędnych preferencji
+  dla stagingu. Ten sam subject był niedostępny z originów produkcji Oli
+  i zawlodzki.pl, oba odczyty dały 404. Snapshot stagingu odrzucono przy
+  zapisie produkcyjnym kodem 409. Nie użyto danych klientek ani analityki.
+- W kodzie strony dodano klienta potwierdzającego zgodę dopiero po zapisie
+  c15t, panel PL/EN z tokenami 3a, stopkę „Ustawienia cookies” i Basic
+  Consent Mode v2. Wycofanie zapisuje ograniczający stan pending przed
+  zatrzymaniem dokumentu. Po przerwaniu transportu kolejny dokument
+  synchronizuje pełną odmowę. Przerwane częściowe wycofanie może więc
+  wyłączyć także drugą opcjonalną kategorię do ponownego wyboru.
+- Niezależny przegląd wykrył i po poprawkach zweryfikował trzy problemy.
+  Dotyczyły przerwanego zapisu wycofania, reloadu przy focus z ważną zgodą
+  i dowolnego `uiSource` w dowodzie. Testy kontrolera i bramki dały 31 PASS.
+  Przegląd nie zastępuje pełnego odbioru strony lub usług pomiarowych.
+- W GTM utworzono osobny workspace 5
+  `Nowa strona Ola • c15t 2026-10-11`. Zapisano i wyeksportowano dwa
+  natywne tagi `googtag` i `gaawe`, oba wstrzymane. Stała rollout ma
+  `false`. Domyślny workspace 4 i opublikowana wersja 3 nie zmieniły się.
+  Stan konfiguracji opisuje [README GTM](../ops/gtm/README.md).
+- Pusta allowlista i `PUBLIC_GTM_ENABLED=false` blokują pomiar wszystkich
+  obecnych treści. Nadal wymagane są zatwierdzone neutralne strony,
+  kontrola GA4 oraz odbiór konfiguracji Meta i Clarity. W nowym workspace
+  nie ma tagów Meta ani Clarity. Nie opublikowano GTM.
+- Końcowy `PLAYWRIGHT_WORKERS=2 npm run verify` na Node 24.19.0 PASS.
+  Przeszło 280 testów jednostkowych i 393 E2E w Chromium, Firefox i WebKit.
+  Buildy, format, lint, typy, budżety CSS/JS i SEO również PASS.
+  Porównanie fixture/Content Lake potwierdziło 12 stron i zgodny DOM.
+  Pierwsze czerwone przebiegi oraz poprawki są zapisane w śladzie decyzji.
+- Odbiór live wykrył wyścig panelu otwartego przed zakończeniem GET.
+  Backend prawidłowo zapisywał obie zgody, ale checkboxy pokazywały stan
+  początkowy. Stopka teraz czeka na odczyt. Dodany test celowo opóźnionego
+  API przeszedł w trzech silnikach. Niezależny przegląd bez nowego blokera.
+- Test UI na stagingu i rzeczywistym c15t PASS. Jeden syntetyczny subject
+  w końcowym przebiegu dostał trzy decyzje: odmowę, akceptację i wycofanie.
+  Odtworzenie po reloadzie i przejściu na podstronę było zgodne z backendem.
+  Motyw ciemny przetrwał nawigację. Nie wysłano formularzy ani żadnego
+  żądania GTM, GA4, Meta lub Clarity, także po akceptacji wszystkich zgód.
+  Wcześniejsze próby również utworzyły wyłącznie syntetyczne subjecty.
+- Obejrzano panel na desktopie, w ciemnym motywie i przy 320 px, z reduced
+  motion i zoomem CSS 200%. Brak poziomego przepełnienia, Escape oddaje
+  fokus stopce. Dowody w `output/consent-2026-10-11/`.
+  Natywnego zoomu 200%, czytnika ekranu i osobnego scenariusza zamknięcia
+  dialogu podczas rewalidacji nie sprawdzono. Testy dostępności panelu
+  i klawiatury w pełnym E2E PASS.
+- `verify-ola` uruchomiono na własnym porcie 4340. Doctor na macOS nadal
+  nie obsługuje odczytu portu przez Linux `/proc`. Właściciela PID 59301
+  potwierdzono `lsof`, GET strony zwrócił 200. CLI otworzyło panel,
+  zapisało ARIA i screenshot, zamknęło go Escape oraz odczytało POST `[]`.
+  Cleanup usunął własne procesy i zachował dowody.
+- CSS panelu przeniesiono do wspólnego arkusza. Budżet strony głównej
+  i łączny budżet 32 KiB zachowano. Budżet zewnętrznego CSS dokumentów
+  prawnych zwiększono z 6 do 7 KiB dla współdzielonego panelu.
+  Wynik końcowego builda dla tych dokumentów wyniósł 6442 B gzip.
+  Globalnie JS 9214 B gzip i CSS 30845 B gzip. Strona główna CSS 8187 B
+  przy limicie 8192 B ma mały zapas; następne zmiany muszą przejść budżet.
+- Zachowano równoległe zmiany SEO. W bieżącym checkout nie ma konfliktów
+  Git, ale kod SEO i panel współdzielą shell i build. Dokumentacja SEO
+  poniżej opisuje wcześniejsze przebiegi, także poprzedni błąd budżetu CSS.
+- Staging wdrożono z opublikowanego datasetu Sanity `production`,
+  z aktualnym kodem wspólnego checkoutu, również zmianami SEO.
+  Wersja Worker `960b9749-6cb0-4bb4-bc40-bdd2e56fc636`. Produkcja Oli pozostaje niewdrożona.
+  Nie wykonano commitu, push ani publikacji GTM. Kolejny build z aktualnego
+  main może zastąpić staging starszym kodem, dopóki zmiany nie zostaną scalone.
+- W uploadzie znaleziono metadane Findera. `public/.assetsignore` wyklucza
+  `.DS_Store`, `.git` i `node_modules`; `/blog/.DS_Store` daje 404 po poprawce.
+- Aktualizacja listy cookies w CMS nadal jest propozycją z
+  [konfiguracji prawnej](LEGAL-CMS-CONFIG.md). Nie publikowano dokumentów
+  prawnych. Następny etap pomiaru wymaga zatwierdzonych neutralnych treści,
+  rzeczywistego odcisku treści w runtime oraz odbioru GA4, Meta i Clarity.
+  [Ślad decyzji](../.audit/ola-consent.tsv) i niezależne raporty zachowują
+  korekty oraz różnicę między działającym panelem a wstrzymanym pomiarem.
 
 ### Obrazy OG generowane w buildzie, 11.10.2026
 
@@ -259,6 +398,72 @@ search=yes, ai-input=yes, ai-train=no`, blokada GPTBot, ClaudeBot,
   i Cloudflare bez zmian; brak commitu i publikacji.
 - Następny krok: decyzje D1–D8 od użytkownika, potem SEO‑1 (`site`,
   `urls.ts`, przełącznik indeksacji, `SeoHead`, 404) i SEO‑2 (graf).
+
+### Plan GTM/c15t i trwały wybór motywu, 11.10.2026
+
+- `main` zaktualizowany fast-forward z `743b012` do `51e1e08`.
+  Wcześniejsze zmiany zabezpieczono w stashu
+  `pre-main sync 2026-10-11 GTM c15t theme` oraz kopii
+  `/private/tmp/ola-pre-main-2026-10-11`. Kod odpowiadał nowym commitom;
+  trzy odmienne pliki były starszymi opisami postępu/CMS i generowanymi
+  typami. Zachowano bieżące wersje upstream oraz ich pełne kopie lokalne.
+  Pozostałe nieśledzone pliki użytkownika pozostawiono w checkoutcie.
+- [Plan GTM i c15t](GTM-C15T-DEPLOYMENT-PLAN.md) obejmuje wspólną instancję,
+  odrębne zgody, panel 3a, Basic Consent Mode, migrację starego GTM Oli
+  i macierz odbioru. Zalogowana przeglądarka potwierdziła kontenery
+  `GTM-PWBRPZ29` i `GTM-P5V3CJ5`, GA4 `G-9QW05JYZTL`, Clarity
+  `ohzq3djq4y`. Nie zmieniono workspace ani opublikowanych tagów.
+- Źródła VPS opisują backend c15t 2.2.1, profil B2B i cztery originy
+  zawlodzki.pl/com. Aktualnego procesu/DB nie sprawdzono.
+  Publiczny `/init` zablokowała przeglądarka `ERR_BLOCKED_BY_CLIENT`.
+  GET przez curl następnie potwierdził HTTP 200, politykę B2B dla trzech
+  Originów i CORS wyłącznie dla zawlodzki.pl. Subjectów nie odczytywano.
+  Separacja profili i odczytów musi przejść próbę przed integracją.
+  Repo nie potwierdza dashboardu c15t; wspólna administracja oznacza
+  obecnie wspólnego operatora, serwis, bazę i backup.
+- Copy prawne ma rozbieżność zakresu GA4. Plan proponuje blokadę wszystkich
+  opcjonalnych tagów na wrażliwych trasach. Obecny homepage ma treści
+  zdrowotne, dlatego nie kwalifikuje się automatycznie do allowlisty Meta.
+  Ustalenia użytkownika i propozycje zapisano oddzielnie w
+  [konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md).
+- Błąd motywu odtworzono w Chromium na buildzie `main`.
+  Wynik `after toggle: dark`, `after navigation: light`.
+  `ThemeToggle` ustawiał `manual=false` i motyw systemowy dla każdego
+  dokumentu. Nowy `ThemePreference.astro` w head jest jednym właścicielem
+  `light | dark | null`, odtwarza `ao-theme` przed body i zapisuje wybór
+  po kliknięciu. Storage zablokowany nie psuje przycisku. Bez JS pozostaje
+  motyw systemowy. Tokeny i wygląd nie zmieniły się.
+- Nowy test przed przebudową poprawki czerwony na braku `ao-theme`
+  (`Expected: "dark"`, `Received: null`). Dowód
+  `/private/tmp/ola-theme-baseline-test.log`. Po poprawce pełne
+  `PLAYWRIGHT_WORKERS=2 npm run verify` na Node **24.19.0** PASS.
+  Format, tokeny, lint, Astro/TS 280 + 11 plików bez diagnostyki,
+  221 unit, buildy wszystkich workspace’ów, budżety, **351 E2E PASS**
+  w Chromium/Firefox/WebKit i test:content-lake PASS. Nowy plik motywu
+  obejmuje 24 przypadki. Log `/private/tmp/ola-theme-verify.log`.
+  Artefakty JS 4694 B gzip i CSS 30366 B gzip; inline JS osobno w HTML.
+- `verify-ola` uruchomił własny podgląd na 4340. Doctor jest zależny od
+  Linux `/proc` i na macOS błędnie zgłosił brak właściciela portu.
+  `lsof` potwierdził ten sam PID 58756 i HTTP działało. Repro wykonano
+  Playwrightem bez formularzy, proces zamknięto przez cleanup skilla.
+  Po poprawce sesja `ola-theme-fixed-20261011`, Node 24, PID 65426:
+  `lsof` potwierdził port, CLI click/goto/expect zwrócił
+  `aria-pressed=true` na O mnie i `posts []`. Snapshoty i zrzuty w
+  `/tmp/ola-verify-evidence/ola-theme-fixed-20261011/`.
+  Osobny Playwright na tym samym buildzie sprawdził 320/390/1440 px,
+  wybór przez kliknięcie, przejście linkiem i reload, reduced motion,
+  brak overflow także przy CSS zoom 200%. Wynik `responsive.json`,
+  dark `rgb(41, 26, 33)` jak tokeny; zrzuty desktop i mobile obejrzane.
+  Cleanup zachował dowody. Natywny zoom, czytnik i urządzenie fizyczne
+  niesprawdzone. Doctor na macOS nadal niewspierany; skilla nie zmieniono.
+- Dokumentacja sformatowana, 166 odnośników do lokalnych plików bez braków.
+  Przegląd niezależny kodu nie znalazł błędów funkcjonalnych. Przegląd
+  planu uzupełnił ryzyko odczytów po subjectId oraz różnicę retencji
+  `givenAt` względem ostatniej zmiany. Nie wykonano publikacji, push
+  ani zapisu CMS. Lista cookies nadal wymaga wpisu `ao-theme`.
+- Następny krok integracji: próba rozdzielenia domen/polityk i zabezpieczenia
+  odczytów w istniejącym c15t, następnie klient i panel 3a. Poprawka motywu
+  gotowa lokalnie; commit, push i wdrożenie nie były częścią zlecenia.
 
 ### E-booki „Wkrótce dostępny” i lista oczekujących, 11.10.2026
 

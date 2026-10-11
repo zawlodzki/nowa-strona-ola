@@ -77,7 +77,8 @@ analityki.
 `test:build` kontroluje także osiem szablonów 3a w PL/EN przez
 `scripts/check-css-budgets.mjs`: gzip ich linkowanych zasobów CSS oraz rozmiar
 inline CSS przed kompresją. Limity zewnętrznego CSS: 8 KiB Home/About,
-9 KiB Consultation, 8 KiB kolekcje/blog, 10 KiB produkt/artykuł, 6 KiB legal.
+9 KiB Consultation, 8 KiB kolekcje/blog, 10 KiB produkt/artykuł, 7 KiB legal.
+Od 11.10.2026 legal ma dodatkowy 1 KiB na współdzielony panel zgód; końcowy build dał 6442 B gzip. Limit całego CSS pozostaje 32 KiB.
 Inline: 4 KiB, legal 6 KiB. Te dwa pomiary są osobne: inline CSS jest częścią
 HTML, a nie dodatkowym żądaniem. Kontrola blokuje również dołączenie legacy
 lub styli innego szablonu do strony 3a.

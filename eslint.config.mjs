@@ -31,6 +31,16 @@ export default [
       },
     },
   },
+  {
+    files: ["ops/c15t/tests/**/*.mjs"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        URL: "readonly",
+        Request: "readonly",
+      },
+    },
+  },
   ...tseslint.configs.recommended,
   ...astro.configs.recommended,
   {
