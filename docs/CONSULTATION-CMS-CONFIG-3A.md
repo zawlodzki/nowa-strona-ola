@@ -29,7 +29,8 @@ rezerwacja i publikacja nie są wykonane. Bieżące decyzje wspólne:
 - PCOS/IO, osobiste doświadczenie PCOS: FIRMA `00_KONTEKST/marka.md`,
   `klienci.md` i poprzednie `ola-homepage/app/o-mnie/page.js`.
   Potwierdzone ukończenie dietetyki klinicznej na Śląskim Uniwersytecie Medycznym
-  i 450+ kobiet rocznie pochodzą z decyzji użytkownika 06.10.2026.
+  i 450+ pochodzą z decyzji użytkownika 06.10.2026 (opis wskaźnika od
+  10.10.2026: „godzin szkoleń”).
 - Pełne cytaty nr 4 i 6: `ola-homepage/data/testimonials.js`, wykorzystane już
   w homepage i potwierdzone przez użytkownika 06.10.2026. Podpis anonimowy,
   jawnie o dotychczasowej współpracy. Nie przypisywać jednej wizycie.
@@ -129,7 +130,7 @@ Mapper `mapConsultation` wymaga dokładnie tej kolejności i liczności oraz
 tego samego adresu rezerwacji w hero i ofercie; inaczej build się zatrzymuje.
 Cena 450 zł / 60 minut pochodzi wyłącznie z `service`: hero, przycisk
 nagłówka „Konsultacja · 450 zł” → `#cena`, karta oferty, Markdown i JSON-LD
-`Service`/`Offer`. Wskaźnik 450+ to liczba kobiet rocznie z homepage, nie cena.
+`Service`/`Offer`. Wskaźnik 450+ to liczba godzin szkoleń z homepage, nie cena.
 Serializer Markdown obsługuje warianty `questions`, `situations`/`goals`,
 `metric` i `note`. Dry-run: `npm run import:consultation`.
 

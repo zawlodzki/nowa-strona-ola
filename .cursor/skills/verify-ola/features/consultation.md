@@ -8,7 +8,7 @@ Publiczna `/konsultacje/` i angielska `/en/consultations/` pokazują landing Con
 - Nagłówek ma lokalne kotwice („Dla kogo”, „Jak to wygląda”, „Opinie”, „FAQ”) i przycisk „Konsultacja · 450 zł” do `#cena`.
 - Stopka ma pełną nawigację serwisu. Link „Konsultacje” ma `aria-current="page"`.
 - Przełącznik języka prowadzi do pary `/konsultacje/` ↔ `/en/consultations/`.
-- Cena w hero, nagłówku i karcie oferty pochodzi z jednego dokumentu `service`. Wskaźnik 450+ to liczba kobiet rocznie, nie cena.
+- Cena w hero, nagłówku i karcie oferty pochodzi z jednego dokumentu `service`. Wskaźnik 450+ to liczba godzin szkoleń, nie cena.
 
 ## How to get to it (user POV)
 

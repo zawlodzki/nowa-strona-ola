@@ -52,7 +52,7 @@ describe("consultation 3a fixtures", () => {
     expect(view.expert.metric).toEqual({
       value: 450,
       suffix: "+",
-      label: "kobiet rocznie, którym pomagają moje konsultacje",
+      label: "godzin szkoleń",
     });
     expect(view.expert.education?.institution).toBe(
       "Śląski Uniwersytet Medyczny",

@@ -142,7 +142,11 @@ test("text links and small accents share matcha while main CTAs stay cherry", as
 for (const width of [1440, 390]) {
   test(`tabbing through the sticky header keeps the scroll position at ${width}px`, async ({
     page,
+    browserName,
   }) => {
+    // WebKit, like Safari by default, moves Tab only between form controls;
+    // Option+Tab reaches links, which is how Safari keyboard users navigate.
+    const nextFocus = browserName === "webkit" ? "Alt+Tab" : "Tab";
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width, height: 800 });
     for (const path of ["/", articlePath]) {
@@ -159,7 +163,7 @@ for (const width of [1440, 390]) {
       const start = await page.evaluate(() => window.scrollY);
       expect(start).toBeGreaterThan(1000);
 
-      await page.keyboard.press("Tab");
+      await page.keyboard.press(nextFocus);
       await expect(page.locator(".ao-skip")).toBeFocused();
       await expect(page.locator(".ao-skip")).toBeInViewport();
 
@@ -181,7 +185,7 @@ for (const width of [1440, 390]) {
           Math.abs(state.scrollY - start),
           `${path} ${width}px: "${state.label}"`,
         ).toBeLessThanOrEqual(1);
-        await page.keyboard.press("Tab");
+        await page.keyboard.press(nextFocus);
       }
       // Skip link, wordmark and at least the menu or one nav link.
       expect(visited.length).toBeGreaterThanOrEqual(3);
