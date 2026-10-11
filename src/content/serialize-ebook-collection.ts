@@ -5,7 +5,7 @@ import {
   type EbookCollectionView,
 } from "@/content/map-ebook-collection";
 import { toEbookCard } from "@/content/map-sections";
-import { formatPriceGross, topicLabel } from "@/lib/offer";
+import { availabilityLabel, formatPriceGross, topicLabel } from "@/lib/offer";
 import type { PageContent } from "@/sanity/repository";
 
 function heading(level: 1 | 2 | 3, value: string) {
@@ -23,11 +23,7 @@ export function serializeEbookCollectionView(
     `[${item.title}](${item.href})`,
     formatPriceGross(item.priceGross, item.currency, language),
     topicLabel(item.topic, language),
-    item.availability === "planned"
-      ? language === "pl"
-        ? "Zapowiedź"
-        : "Planned"
-      : item.availability,
+    availabilityLabel(item.availability, language),
   ]);
   return [
     heading(1, collection.title),

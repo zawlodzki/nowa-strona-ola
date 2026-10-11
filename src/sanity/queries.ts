@@ -489,6 +489,12 @@ export const ebookProjection = /* groq */ `
   includedMaterials[]{ _key, title, description },
   delivery{ description, timeline },
   checkoutUrl,
+  waitlist{
+    buttonLabel,
+    title,
+    lead,
+    "form": form->${formFields}
+  },
   sources[]{ _key, title, href, scope },
   seo{title, description},
   "translation": translation->{ language, "slug": slug.current },

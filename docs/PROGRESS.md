@@ -1,10 +1,46 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-11 (wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-11 (e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### E-booki „Wkrótce dostępny” i lista oczekujących, 11.10.2026
+
+- Decyzja użytkownika: e-book można oznaczyć jako „wkrótce dostępny”;
+  karta pokazuje badge, a landing zamiast linku płatności ma przycisk
+  otwierający okno zapisu na listę oczekujących. Aktywny e-book prowadzi
+  do płatności Stripe (`checkoutUrl`). Zapis w
+  [konfiguracji CMS e-booka](EBOOK-CMS-CONFIG-3A.md).
+- Status `planned` = „Wkrótce dostępny”. Badge (`AvailabilityBadge`) na
+  kartach homepage, kolekcji i artykułu oraz nad ofertą landingu.
+  `WaitlistDialog`: natywny `<dialog>` z Invoker Commands, fallback JS,
+  fokus Safari, `closedby="any"`, LeadForm z `formKey: "waitlist"`.
+- Schemat: `formKey` `waitlist` (shared + Studio), pole `ebook.waitlist`
+  (etykieta, tytuł, lead, referencja do formularza waitlist), opisy Stripe.
+  GROQ, TypeGen, mapper, serializery Markdown (etykiety statusu), przykłady,
+  fixture’y, plan Content Lake (dokumenty `waitlist-form-pl/en`).
+- Kontrole: format, tokeny, lint, check, 221 testów unit, build,
+  build:workspaces, test:build, test:content-lake OK (88 dokumentów, bez
+  błędów). E2E 324 passed / 3 failed: 2× znany WebKit `sticky-navigation-3a`
+  (failuje też na `main`), 1× WebKit `article-mockup` — przy powtórce zielony.
+  Nowy E2E listy oczekujących (badge, dialog, Escape i fokus, axe, payload
+  na zmockowany webhook) zielony w Chromium/Firefox/WebKit. Zrzuty
+  1440/320/390-dark sprawdzone wizualnie. Node 26 zamiast 24.
+- Sanity: na polecenie użytkownika utworzono `waitlist-form-pl` i
+  `waitlist-form-en` (dataset `production`) oraz ustawiono pole `waitlist`
+  w 12 e-bookach w odpowiednim języku (zweryfikowane GROQ).
+- Na polecenie użytkownika: ręczny deploy Studio (Cloudflare, wersja
+  `79b56901`; produkcyjny bundle zawiera nowy schemat), rejestracja schematu
+  w Sanity, publikacja formularzy waitlist i 12 e-booków (silne referencje,
+  0 szkiców). Kod w PR `feat/ebook-waitlist`; do merge automatyczny deploy
+  z `main` cofnąłby schemat Studio.
+- Nie wykonano:
+  obsługi `formKey: "waitlist"` w n8n, przeglądu prawnego copy (wersja
+  formularza `0.1`), linku Stripe. Natywny zoom, czytnik — niesprawdzone.
+- Następny krok: zatwierdzić copy zapisu i politykę prywatności, dodać
+  obsługę `waitlist` w n8n, potem import formularzy do Sanity.
 
 ### Wskaźnik 9000+ Instagram zamiast 450+, 11.10.2026
 

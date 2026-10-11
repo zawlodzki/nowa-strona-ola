@@ -51,6 +51,40 @@ export function topicLabel(
   return language === "pl" ? "Perimenopauza" : "Perimenopause";
 }
 
+type Availability = "planned" | "presale" | "available" | "paused";
+
+const availabilityLabels: Record<Locale, Record<Availability, string>> = {
+  pl: {
+    planned: "Wkrótce dostępny",
+    presale: "Przedsprzedaż",
+    available: "Dostępny",
+    paused: "Sprzedaż wstrzymana",
+  },
+  en: {
+    planned: "Coming soon",
+    presale: "Pre-sale",
+    available: "Available",
+    paused: "Sales paused",
+  },
+};
+
+export function availabilityLabel(
+  availability: Availability,
+  language: Locale,
+): string {
+  return availabilityLabels[language][availability];
+}
+
+/** Badge karty e-booka: tylko „Wkrótce dostępny”. */
+export function availabilityBadge(
+  availability: Availability,
+  language: Locale,
+): string | undefined {
+  return availability === "planned"
+    ? availabilityLabel(availability, language)
+    : undefined;
+}
+
 export function schemaOfferAvailability(
   availability: "planned" | "presale" | "available" | "paused",
 ): string {

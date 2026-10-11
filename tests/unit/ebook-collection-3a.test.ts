@@ -87,7 +87,7 @@ describe("ebook collection serializers", () => {
     const ebooks = await listEbooks("pl", { environment: {} });
     const markdown = serializeEbookCollection(page, ebooks, "pl");
     expect(markdown).toContain("97 zł brutto");
-    expect(markdown).toContain("Zapowiedź");
+    expect(markdown).toContain("Wkrótce dostępny");
     expect(markdown).toContain("/ebooki/suplementy-w-pcos/");
     expect(markdown).toContain("/ebooki/badania-ktore-maja-sens/");
     expect(markdown).toContain("PCOS");

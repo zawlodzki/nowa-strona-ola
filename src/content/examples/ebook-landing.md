@@ -2,7 +2,7 @@
 
 97 zł brutto
 
-Zapowiedź
+Wkrótce dostępny
 
 Zanim kupisz kolejne opakowanie, sprawdź, po co je bierzesz.
 

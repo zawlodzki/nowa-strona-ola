@@ -16,7 +16,7 @@ Uporządkuj pytania o suplementy: po co je stosować i co omówić ze specjalist
 
 PCOS
 
-Zapowiedź
+Wkrótce dostępny
 
 ### Badania, które mają sens
 
@@ -28,7 +28,7 @@ Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.
 
 PCOS
 
-Zapowiedź
+Wkrótce dostępny
 
 ### Szczupła, a jednak PCOS
 
@@ -40,7 +40,7 @@ Jak podejść do odżywiania przy PCOS, kiedy Twoim celem nie jest odchudzanie.
 
 PCOS
 
-Zapowiedź
+Wkrótce dostępny
 
 ### Waga Cię okłamuje
 
@@ -52,7 +52,7 @@ Przyjrzyj się zmianom w sylwetce i codziennych nawykach w okresie perimenopauzy
 
 Perimenopauza
 
-Zapowiedź
+Wkrótce dostępny
 
 ### Czy to już?
 
@@ -64,7 +64,7 @@ Dziennik cyklu i samopoczucia, który pomoże Ci przygotować się do rozmowy z 
 
 Perimenopauza
 
-Zapowiedź
+Wkrótce dostępny
 
 ### Noc zaczyna się o osiemnastej
 
@@ -76,7 +76,7 @@ Uporządkuj wieczorne posiłki i nawyki. Sprawdź, co warto obserwować przed ro
 
 Perimenopauza
 
-Zapowiedź
+Wkrótce dostępny
 
 Zapowiedzi e-booków. Tytuły i okładki są propozycją; materiały są w przygotowaniu.
 

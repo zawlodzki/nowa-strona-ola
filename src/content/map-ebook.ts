@@ -1,7 +1,12 @@
 import type { Locale } from "@ola/shared";
 
 import { ebookCopy } from "@/content/ebook-seed";
-import { toEbookAvailability, toFaq, toMedia } from "@/content/map-sections";
+import {
+  toEbookAvailability,
+  toFaq,
+  toFormCopy,
+  toMedia,
+} from "@/content/map-sections";
 import {
   currencyLabel,
   formatLowestPriceNote,
@@ -12,6 +17,7 @@ import type {
   EbookAvailability,
   EbookTopic,
   FaqContent,
+  FormCopy,
   MediaSpec,
   TestimonialsContent,
 } from "@/sections/types";
@@ -55,6 +61,11 @@ export interface EbookAuthor {
   education?: { institution: string; program: string };
 }
 
+export interface EbookWaitlist {
+  buttonLabel: string;
+  form: FormCopy;
+}
+
 export interface EbookView {
   language: Locale;
   slug: string;
@@ -80,6 +91,8 @@ export interface EbookView {
   materials: EbookMaterial[];
   sources: EbookSource[];
   checkoutUrl?: string;
+  /** Tylko dla statusu „Wkrótce dostępny” z kompletną konfiguracją zapisu. */
+  waitlist?: EbookWaitlist;
   landing: {
     variant: "cherry3a";
     heroTitle: string;
@@ -146,6 +159,12 @@ type RawEbook = {
   includedMaterials?:
     { title?: string | null; description?: string | null }[] | null;
   checkoutUrl?: string | null;
+  waitlist?: {
+    buttonLabel?: string | null;
+    title?: string | null;
+    lead?: string | null;
+    form?: Parameters<typeof toFormCopy>[0]["form"];
+  } | null;
   sources?:
     | { title?: string | null; href?: string | null; scope?: string | null }[]
     | null;
@@ -234,6 +253,28 @@ function optionalMedia(value: Parameters<typeof toMedia>[0]) {
 
 export function canPurchase(availability: EbookAvailability): boolean {
   return availability === "available" || availability === "presale";
+}
+
+function toWaitlist(
+  waitlist: RawEbook["waitlist"],
+  availability: EbookAvailability,
+  slug: string,
+): EbookWaitlist | undefined {
+  if (availability !== "planned" || !waitlist) return undefined;
+  const form = toFormCopy({
+    title: waitlist.title,
+    lead: waitlist.lead,
+    form: waitlist.form,
+  });
+  if (form.formKey !== "waitlist") {
+    throw new Error(
+      `E-book ${slug}: lista oczekujących wymaga formularza waitlist, jest ${form.formKey}.`,
+    );
+  }
+  return {
+    buttonLabel: required(waitlist.buttonLabel, "etykieta listy oczekujących"),
+    form,
+  };
 }
 
 export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
@@ -398,6 +439,7 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
       scope: source.scope ?? undefined,
     })),
     checkoutUrl: canPurchase(availability) ? checkoutUrl : undefined,
+    waitlist: toWaitlist(ebook.waitlist, availability, slug),
     landing: {
       variant: "cherry3a",
       heroTitle: required(landing.heroTitle, "tytuł hero"),

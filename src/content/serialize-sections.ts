@@ -26,7 +26,7 @@ import {
 } from "@/content/map-sections";
 import { assertKnownSections, type KnownSectionType } from "@/content/sections";
 import { toEbookCollection } from "@/content/map-ebook-collection";
-import { formatPriceGross, topicLabel } from "@/lib/offer";
+import { availabilityLabel, formatPriceGross, topicLabel } from "@/lib/offer";
 import type { PageContent } from "@/sanity/repository";
 
 type Section = NonNullable<PageContent["sections"]>[number];
@@ -285,11 +285,7 @@ export function serializeSection(section: Section, language: Locale): string {
           `[${item.title}](${item.href})`,
           formatPriceGross(item.priceGross, item.currency, language),
           topicLabel(item.topic, language),
-          item.availability === "planned"
-            ? language === "pl"
-              ? "Zapowiedź"
-              : "Planned"
-            : item.availability,
+          availabilityLabel(item.availability, language),
         ]),
         content.note,
         content.collection

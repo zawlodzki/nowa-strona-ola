@@ -24,7 +24,7 @@ import CheckMark from "@/design-system/decorations/CheckMark.astro";
 import CoverStage from "@/design-system/decorations/CoverStage.astro";
 import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
 import TopicIcon from "@/design-system/decorations/TopicIcon.astro";
-import { currencyLabel, topicLabel } from "@/lib/offer";
+import { availabilityBadge, currencyLabel, topicLabel } from "@/lib/offer";
 import type { HomepageView } from "@/content/map-homepage";
 
 export interface Props {
@@ -256,6 +256,7 @@ function coverLabels(kind: CoverArtKind): string[] {
                 metadata={topicLabel(item.topic, lang)}
                 metadataEnd="E-book"
                 actionLabel={content.ebooks.cardActionLabel}
+                badge={availabilityBadge(item.availability, lang)}
               >
                 <CoverStage slot="media" variant={art.variant}>
                   <BookCover

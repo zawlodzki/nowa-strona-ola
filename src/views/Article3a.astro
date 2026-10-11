@@ -4,6 +4,7 @@ import Button from "@/design-system/components/Button.astro";
 import Container from "@/design-system/components/Container.astro";
 import LeadForm from "@/design-system/components/LeadForm.astro";
 import Newsletter from "@/design-system/components/Newsletter.astro";
+import AvailabilityBadge from "@/design-system/components/AvailabilityBadge.astro";
 import PriceGross from "@/design-system/components/PriceGross.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
@@ -23,7 +24,7 @@ import { articleBodyToHtml, markArticleIntro } from "@/content/portable-text";
 import type { Article3aView } from "@/content/map-article";
 import { homepageMediaKeys } from "@/content/homepage-seed";
 import { ebookCoverArt, ebookCoverLabels } from "@/lib/ebook-covers";
-import { currencyLabel, topicLabel } from "@/lib/offer";
+import { availabilityBadge, currencyLabel, topicLabel } from "@/lib/offer";
 
 export interface Props {
   content: Article3aView;
@@ -306,8 +307,13 @@ const bodyHtml = markArticleIntro(html);
         <div class="related-books">
           {content.ebooks.items.map((item) => {
             const art = ebookCoverArt(item.slug);
+            const badge = availabilityBadge(item.availability, lang);
             return (
-              <article class="book-card" data-book-topic={item.topic}>
+              <article
+                class="book-card ao-card-badged"
+                data-book-topic={item.topic}
+              >
+                {badge && <AvailabilityBadge label={badge} />}
                 <a class="cover-link" href={item.href}>
                   <CoverStage variant={art.variant}>
                     <BookCover

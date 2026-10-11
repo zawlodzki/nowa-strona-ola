@@ -7,6 +7,7 @@ export const formKeyOptions = [
   { title: "Newsletter", value: "newsletter" },
   { title: "Kontakt", value: "contact" },
   { title: "Odstąpienie od umowy", value: "withdrawal" },
+  { title: "Lista oczekujących na e-book", value: "waitlist" },
 ] as const;
 
 function isFormKeyOption(value: string): boolean {
@@ -40,7 +41,7 @@ export const formType = defineType({
           .custom((value) =>
             typeof value === "string" && isFormKeyOption(value)
               ? true
-              : "Wybierz newsletter, kontakt albo odstąpienie.",
+              : "Wybierz newsletter, kontakt, odstąpienie albo listę oczekujących.",
           ),
     }),
     defineField({
