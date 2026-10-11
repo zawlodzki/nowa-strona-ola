@@ -114,11 +114,14 @@ const prefix = lang === "en" ? "/en" : "";
         </svg>
       </button>
     </div>
-    <p>{copy.body}</p>
-    <p class="ao-consent-links">
-      <a href={`${prefix}/polityka-prywatnosci/`}>{copy.privacy}</a>
-      <span aria-hidden="true">·</span>
-      <a href={`${prefix}/lista-cookies-i-identyfikatorow/`}>{copy.cookies}</a>
+    <p>
+      {copy.body}{" "}
+      <span class="ao-consent-links">
+        <a href={`${prefix}/polityka-prywatnosci/`}>{copy.privacy}</a>
+        <a href={`${prefix}/lista-cookies-i-identyfikatorow/`}>
+          {copy.cookies}
+        </a>
+      </span>
     </p>
     <div class="ao-consent-actions">
       <button type="button" class="ao-button" data-consent-action="all">
@@ -201,7 +204,6 @@ const prefix = lang === "en" ? "/en" : "";
       </fieldset>
       <p class="ao-consent-links">
         <a href={`${prefix}/polityka-prywatnosci/`}>{copy.privacy}</a>
-        <span aria-hidden="true">·</span>
         <a href={`${prefix}/lista-cookies-i-identyfikatorow/`}>
           {copy.cookies}
         </a>

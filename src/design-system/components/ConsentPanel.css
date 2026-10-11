@@ -16,25 +16,27 @@
     100dvh - var(--ao-header-clearance) - 2 * var(--ao-space-16)
   );
   margin-inline: auto;
-  padding: clamp(1rem, 3vw, 2rem);
+  padding: clamp(var(--ao-space-8), 2vw, 2rem);
   border: 1px solid var(--ao-line);
   border-radius: var(--ao-radius-panel);
   background: var(--ao-background);
   overflow-y: auto;
   overscroll-behavior: contain;
   display: grid;
-  gap: var(--ao-space-16);
-}
-.ao-consent-banner[hidden] {
-  display: none;
+  gap: var(--ao-space-4);
 }
 .ao-consent-banner p {
   margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25;
 }
 .ao-consent-actions {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-  gap: var(--ao-space-12);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5rem), 1fr));
+  gap: var(--ao-space-4);
+}
+.ao-consent-actions .ao-button {
+  padding: var(--ao-space-4);
 }
 .ao-consent-dialog {
   inline-size: min(44rem, calc(100% - 2 * var(--ao-space-16)));
@@ -71,7 +73,7 @@
   font-size: 0.875rem;
 }
 .ao-consent-links {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   gap: var(--ao-space-8);
   font-size: 0.875rem;
