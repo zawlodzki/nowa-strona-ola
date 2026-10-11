@@ -843,3 +843,22 @@ opublikowano 6 dokumentów `page-home-*`, `page-about-*`, `page-consultation-*`
 (PL/EN) przez Sanity MCP (patch z `ifRevisionId`). Jednorazowy
 `import:training-metric` usunięty jako nieaktualny. Liczbę 9000+ trzeba umieć
 wykazać (ryzyko R4 w przeglądzie compliance); opis nie obiecuje efektu.
+
+## Proces kolejnych landingów e-booków, 11.10.2026
+
+Źródło decyzji: polecenie użytkownika o lokalnym skillu na podstawie pierwszego
+landingu. Nowe landingi mają zachować podobny format i stylistykę 3a, z możliwością
+różnic w kompozycji. Baza struktury to navbar, hero, definicja problemu, dla kogo,
+zawartość ebooka, efekty, cena, opinie, FAQ i footer. Copy korzysta z zasad
+`10000000 Sales Copy Advice.md`; nie oznacza to obowiązku deklarowania użycia
+wszystkich siedmiu zasad bez odpowiednich materiałów.
+
+Mapowanie do istniejącego CMS: treści produktu w `ebook`, sekcje w `landing`,
+rozdziały w `chapters`, materiały w `includedMaterials`, cena i dostępność
+w `priceGross`, `currency`, `availability`; opinie i autorka według istniejących
+referencji. Navbar i footer pozostają wspólne. Konkretne wartości i ewentualne
+nowe kontrolowane warianty ustala się dla każdego ebooka na podstawie briefu.
+
+Stan: zapisano proces w
+[ebook-landing-3a](../.agents/skills/ebook-landing-3a/SKILL.md).
+Nie zmieniono schematu, treści produktów, konfiguracji Content Lake ani szablonu.

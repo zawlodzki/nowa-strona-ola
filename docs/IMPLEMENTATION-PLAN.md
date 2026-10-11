@@ -827,3 +827,15 @@ z 04.10.2026. Hero i Kontakt zachowują wcześniejszy wybór.
 - [ ] Odebrać opublikowany staging po publikacji. Lokalny proxy blokuje domenę.
 
 Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
+
+## Skill landingów e-booków 3a, 11.10.2026
+
+- [x] Zapisać lokalny [ebook-landing-3a](../.agents/skills/ebook-landing-3a/SKILL.md)
+      na podstawie procesu landingu suplementów w PCOS.
+- [x] Uwzględnić dziesięć sekcji użytkownika, siedem zasad copywritingu
+      i audyt z cytatami, zachowując swobodę kompozycji w ramach 3a.
+- [x] Opisać wykorzystanie istniejącego modelu `ebook`, statusów oferty
+      i mapowania CMS, bez powielania kolekcji lub treści PCOS.
+- [x] Sprawdzić walidator skilla, format i lokalne odnośniki.
+- [ ] Przy pierwszym nowym ebooku sprawdzić rezultat użycia skilla na gotowym
+      landingu i poprawić instrukcję na podstawie rzeczywistych wyników.

@@ -4216,3 +4216,26 @@ odnotować z datą i powodem. Nie przechowywać sekretów.
 - Format dokumentacji i 61 lokalnych odnośników poprawne. Diff-check wskazał
   jedną pustą linię na końcu importowanego automate-me/SKILL.md; zachowano źródło.
 - Pierwsza próba podpisu 1Password nie powiodła się, commit nie powstał.
+
+## Skill landingów e-booków 3a, 11.10.2026
+
+- Na zlecenie użytkownika przygotowano lokalny
+  [ebook-landing-3a](../.agents/skills/ebook-landing-3a/SKILL.md).
+  Instrukcja obejmuje brief, copy, wizualną kompozycję, makietę lub istniejący
+  szablon Astro, mapowanie CMS i kontrole. Zawiera dziesięć wymaganych sekcji
+  oraz samodzielną adaptację siedmiu zasad z `10000000 Sales Copy Advice.md`.
+- Format pozostaje zgodny z 3a. Układy hero, podglądu zawartości i efektów
+  mogą się różnić. Audyt wymaga cytatów i rozróżnia zasady użyte, częściowe
+  i pominięte. Brak osobistej historii autorki nie uzasadnia jej wymyślenia.
+- Mapa projektu wskazuje istniejący model `ebook`, renderer, mapper, Markdown
+  i fixture. Zwraca uwagę na teksty PCOS w seedzie i tymczasowe treści innych
+  produktów. Samo wywołanie skilla nie zleca zapisu do CMS ani publikacji.
+- Kontrole: `quick_validate.py` PASS, Prettier PASS dla czterech plików skilla,
+  24 lokalne odnośniki poprawne, metadane UI poprawne. Zmiana dotyczy instrukcji
+  i dokumentacji; nie uruchamiano `npm run verify` ani testów nowego landingu.
+- Nie zmieniano aplikacji ani Sanity. Blokad brak. Następny krok w tym zakresie
+  to użycie skilla dla kolejnego ebooka i weryfikacja rzeczywistego rezultatu.
+
+- Na kolejne polecenie użytkownika wydzielono zakres skilla do osobnej gałęzi
+  na aktualnym `origin/main`. Pozostałe lokalne zmiany dokumentacji SEO
+  zachowano poza tym zakresem. Scalenie przez PR wymaga zielonej kontroli Quality.
