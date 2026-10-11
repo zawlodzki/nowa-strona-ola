@@ -4305,3 +4305,7 @@ odnotować z datą i powodem. Nie przechowywać sekretów.
   i dokumentacji; nie uruchamiano `npm run verify` ani testów nowego landingu.
 - Nie zmieniano aplikacji ani Sanity. Blokad brak. Następny krok w tym zakresie
   to użycie skilla dla kolejnego ebooka i weryfikacja rzeczywistego rezultatu.
+
+- Na kolejne polecenie użytkownika wydzielono zakres skilla do osobnej gałęzi
+  na aktualnym `origin/main`. Pozostałe lokalne zmiany dokumentacji SEO
+  zachowano poza tym zakresem. Scalenie przez PR wymaga zielonej kontroli Quality.

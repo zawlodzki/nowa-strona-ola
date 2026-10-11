@@ -1,0 +1,4 @@
+interface:
+  display_name: "Landingi e-booków 3a"
+  short_description: "Copy i wizualne landingi e-booków w stylu 3a"
+  default_prompt: "Użyj $ebook-landing-3a, aby przygotować landing nowego e-booka zgodny z 3a i zasadami copywritingu."
