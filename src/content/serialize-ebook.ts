@@ -1,7 +1,7 @@
 import type { Locale } from "@ola/shared";
 
 import { mapEbook, type EbookView } from "@/content/map-ebook";
-import { ebookCopy } from "@/content/ebook-seed";
+import { availabilityLabel } from "@/lib/offer";
 
 function heading(level: 1 | 2 | 3, value: string) {
   return `${"#".repeat(level)} ${value.replaceAll("\n", " ").trim()}`;
@@ -12,14 +12,12 @@ function bullets(items: string[]) {
 }
 
 export function serializeEbookView(view: EbookView, language: Locale): string {
-  const copy = ebookCopy[language];
   const { landing } = view;
   return [
     heading(1, view.title),
     view.subtitle,
     view.priceLabel,
-    copy.plannedStatus,
-    view.availability,
+    availabilityLabel(view.availability, language),
     landing.heroLead,
     heading(2, landing.problemTitle),
     ...landing.problemParagraphs,
@@ -84,7 +82,7 @@ export const ebookLandingMarkdownExample = `## Suplementy w PCOS
 
 97 zł brutto
 
-Zapowiedź
+Wkrótce dostępny
 
 ### Zacznij od swojej półki
 

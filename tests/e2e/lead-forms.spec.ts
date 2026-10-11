@@ -289,3 +289,55 @@ for (const { path, form, fill, submit } of [
     expect(captured).toEqual([]);
   });
 }
+
+test("coming-soon ebook shows a card badge and a waitlist dialog instead of checkout", async ({
+  page,
+  leadWebhook,
+}) => {
+  const captured = await leadWebhook.mock(page, [200]);
+  await page.goto("/ebooki/");
+  const card = page.locator(".ebooks3a-card").first();
+  await expect(card.locator(".ao-badge")).toHaveText("Wkrótce dostępny");
+
+  await page.goto("/ebooki/suplementy-w-pcos/");
+  const offer = page.locator(".ebook3a-offer");
+  await expect(offer.locator(".ao-badge")).toHaveText("Wkrótce dostępny");
+  await expect(offer.locator('a[href^="https://"]')).toHaveCount(0);
+  const open = offer.getByRole("button", {
+    name: "Zapisz się na listę oczekujących",
+  });
+  await open.click();
+  const dialog = page.getByRole("dialog", { name: "Daj znać, że czekasz" });
+  await expect(dialog).toBeVisible();
+  await dialog.evaluate((element) =>
+    Promise.all(element.getAnimations().map((animation) => animation.finished)),
+  );
+  const results = await new AxeBuilder({ page })
+    .include("#lista-oczekujacych")
+    .analyze();
+  expect(results.violations).toEqual([]);
+
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(open).toBeFocused();
+
+  await open.click();
+  const email = dialog.getByLabel("Twój adres e-mail", { exact: true });
+  await email.fill("ola@example.com");
+  await dialog.getByRole("button", { name: "Zapisuję się" }).click();
+  await expect(dialog.getByRole("status")).toHaveText(
+    "Gotowe. Napiszemy, gdy e-book będzie dostępny.",
+  );
+  expect(captured).toHaveLength(1);
+  expect(captured[0]?.body).toMatchObject({
+    formKey: "waitlist",
+    formVersion: "0.1",
+    language: "pl",
+    source: "http://127.0.0.1:4321/ebooki/suplementy-w-pcos/",
+    fields: { email: "ola@example.com" },
+    consents: [],
+  });
+
+  await dialog.getByRole("button", { name: "Zamknij" }).click();
+  await expect(dialog).toBeHidden();
+});

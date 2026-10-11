@@ -3,6 +3,7 @@ import type { Locale } from "@ola/shared";
 import { ebookCopy } from "@/content/ebook-seed";
 import { EBOOK_SEED } from "@/content/homepage-seed";
 import { ebookPath } from "@/lib/paths";
+import { homepageCopy } from "@/content/homepage-seed";
 import {
   authorFixture,
   ebookFixtures,
@@ -27,6 +28,40 @@ const PCOS_SLUG = {
   pl: "suplementy-w-pcos",
   en: "supplements-in-pcos",
 } as const;
+
+/** Propozycja copy; wersja 0.1 do czasu ujęcia w „Zgody i formularze”. */
+export const WAITLIST_FORM_VERSION = "0.1";
+
+export function waitlistFormFixture(language: Locale) {
+  const copy = ebookCopy[language].waitlist;
+  const shared = homepageCopy[language];
+  return {
+    id: `waitlist-form-${language}`,
+    language,
+    title: "Lista oczekujących na e-book",
+    formKey: "waitlist",
+    version: WAITLIST_FORM_VERSION,
+    submitLabel: copy.submit,
+    notice: copy.notice,
+    noticeConsentId: null,
+    successMessage: copy.success,
+    errorMessage: copy.error,
+    noscriptMessage: copy.noscript,
+    fields: [
+      {
+        _key: "email",
+        name: "email",
+        input: "email",
+        label: shared.emailLabel,
+        placeholder: shared.emailPlaceholder,
+        errorMessage: shared.emailError,
+        required: "required",
+        options: null,
+        defaultValue: null,
+      },
+    ],
+  };
+}
 
 export function pcosEbookFixture(language: Locale) {
   const copy = ebookCopy[language];
@@ -82,6 +117,12 @@ export function pcosEbookFixture(language: Locale) {
     })),
     delivery: null,
     checkoutUrl: null,
+    waitlist: {
+      buttonLabel: copy.waitlist.buttonLabel,
+      title: copy.waitlist.title,
+      lead: copy.waitlist.lead,
+      form: waitlistFormFixture(language),
+    },
     sources: [
       {
         _key: "source-pcos-2023",

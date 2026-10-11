@@ -98,12 +98,14 @@ export const ebookType = defineType({
     defineField({
       name: "availability",
       title: "Dostępność",
+      description:
+        "„Wkrótce dostępny” pokazuje badge na kartach i zamienia przycisk zakupu na zapis na listę oczekujących. „Dostępny” i „Przedsprzedaż” prowadzą do płatności Stripe.",
       type: "string",
       group: "offer",
       options: {
         layout: "radio",
         list: [
-          { title: "Zapowiedź", value: "planned" },
+          { title: "Wkrótce dostępny (lista oczekujących)", value: "planned" },
           { title: "Przedsprzedaż", value: "presale" },
           { title: "Dostępny", value: "available" },
           { title: "Wstrzymany", value: "paused" },
@@ -233,7 +235,7 @@ export const ebookType = defineType({
       name: "checkoutUrl",
       title: "Adres zakupu",
       description:
-        "Wyłącznie HTTPS zatwierdzonego operatora. Wymagany przy przedsprzedaży i sprzedaży. Nie wklejać kotwicy mockupu.",
+        "Link płatności Stripe (Payment Link lub Checkout), wyłącznie HTTPS. Wymagany przy przedsprzedaży i sprzedaży. Nie wklejać kotwicy mockupu.",
       type: "url",
       group: "offer",
       validation: (rule) =>
@@ -249,6 +251,69 @@ export const ebookType = defineType({
           }
           return true;
         }),
+    }),
+    defineField({
+      name: "waitlist",
+      title: "Lista oczekujących",
+      description:
+        "Okno zapisu otwierane przyciskiem oferty, gdy e-book jest „Wkrótce dostępny”. Przy sprzedaży pomijane.",
+      type: "object",
+      group: "offer",
+      options: { collapsible: true, collapsed: false },
+      fields: [
+        defineField({
+          name: "buttonLabel",
+          title: "Etykieta przycisku",
+          description: "Bez ceny, np. „Zapisz się na listę oczekujących”.",
+          type: "string",
+          validation: (rule) => rule.required().max(60),
+        }),
+        defineField({
+          name: "title",
+          title: "Tytuł okna",
+          type: "string",
+          validation: (rule) => rule.required().max(100),
+        }),
+        defineField({
+          name: "lead",
+          title: "Lead okna",
+          type: "text",
+          rows: 3,
+          validation: (rule) => rule.required().max(280),
+        }),
+        defineField({
+          name: "form",
+          title: "Formularz",
+          description: "Formularz rodzaju „Lista oczekujących na e-book”.",
+          type: "reference",
+          to: [{ type: "form" }],
+          options: {
+            disableNew: true,
+            filter: ({ document }) => ({
+              filter: `_type == "form" && formKey == "waitlist" && language == $language`,
+              params: {
+                language:
+                  typeof document.language === "string"
+                    ? document.language
+                    : "",
+              },
+            }),
+          },
+          validation: (rule) => rule.required(),
+        }),
+      ],
+      validation: (rule) =>
+        rule
+          .custom((value, context) => {
+            const availability = (
+              context.document as { availability?: string } | undefined
+            )?.availability;
+            if (availability === "planned" && !value) {
+              return "Bez listy oczekujących landing pokaże tylko informację, że sprzedaż nie jest uruchomiona.";
+            }
+            return true;
+          })
+          .warning(),
     }),
     defineField({
       name: "reviewedAt",

@@ -1,0 +1,99 @@
+---
+import type { Locale } from "@ola/shared";
+
+import type { FormCopy } from "@/sections/types";
+import ArrowIcon from "./ArrowIcon.astro";
+import LeadForm from "./LeadForm.astro";
+
+interface Props {
+  id: string;
+  buttonLabel: string;
+  closeLabel: string;
+  form: FormCopy;
+  lang: Locale;
+}
+
+const { id, buttonLabel, closeLabel, form, lang } = Astro.props;
+const titleId = `${id}-title`;
+const leadId = `${id}-lead`;
+// Invoker Commands open the modal without JS; the script covers older engines.
+const openCommand = { commandfor: id, command: "show-modal" };
+const closeCommand = { commandfor: id, command: "close" };
+---
+
+<button
+  type="button"
+  class="ao-button ao-button--primary"
+  aria-haspopup="dialog"
+  data-waitlist-open
+  {...openCommand}
+>
+  {buttonLabel}
+  <ArrowIcon />
+</button>
+<dialog
+  id={id}
+  class="ao-dialog"
+  aria-labelledby={titleId}
+  aria-describedby={leadId}
+  closedby="any"
+>
+  <div class="ao-dialog__panel">
+    <div class="ao-dialog__head">
+      <h2 id={titleId} class="ao-heading ao-heading--card">
+        {form.title}
+      </h2>
+      <button
+        type="button"
+        class="ao-dialog__close"
+        aria-label={closeLabel}
+        data-waitlist-close
+        {...closeCommand}
+      >
+        <svg
+          class="ao-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+    </div>
+    <p id={leadId} class="ao-dialog__lead">
+      {form.lead}
+    </p>
+    <LeadForm content={form} idPrefix={`${id}-`} lang={lang} layout="stacked" />
+  </div>
+</dialog>
+
+<script>
+  const supportsCommands = "command" in HTMLButtonElement.prototype;
+  for (const opener of document.querySelectorAll<HTMLButtonElement>(
+    "[data-waitlist-open]",
+  )) {
+    const dialog = document.getElementById(
+      opener.getAttribute("commandfor") ?? "",
+    );
+    if (!(dialog instanceof HTMLDialogElement)) continue;
+    const close = dialog.querySelector<HTMLButtonElement>(
+      "[data-waitlist-close]",
+    );
+    // Safari does not focus buttons on pointer activation; the dialog returns
+    // focus to whatever was focused when it opened.
+    opener.addEventListener("click", () => opener.focus(), { capture: true });
+    if (!supportsCommands) {
+      opener.addEventListener("click", () => dialog.showModal());
+      close?.addEventListener("click", () => dialog.close());
+    }
+    // Light dismiss for engines without closedby="any"; the panel fills the box.
+    if (!("closedBy" in HTMLDialogElement.prototype)) {
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    }
+  }
+</script>
