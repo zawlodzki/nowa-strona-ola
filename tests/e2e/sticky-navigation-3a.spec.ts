@@ -13,6 +13,10 @@ for (const width of [1440, 390, 320]) {
     await page.setViewportSize({ width, height: 720 });
     for (const path of ["/", articlePath, legalPath]) {
       await page.goto(path);
+      await page
+        .getByRole("button", { name: "Zamknij bez zmiany zgód", exact: true })
+        .first()
+        .click();
       await page.evaluate(() => document.fonts.ready);
       for (const top of [1200, 500]) {
         await page.evaluate((y) => window.scrollTo(0, y), top);
@@ -78,6 +82,10 @@ test("article and legal anchors clear the header with enlarged text and zoom", a
     await page.setViewportSize({ width: layout.width, height: 900 });
     for (const path of [articlePath, legalPath]) {
       await page.goto(path);
+      await page
+        .getByRole("button", { name: "Zamknij bez zmiany zgód", exact: true })
+        .first()
+        .click();
       await page.evaluate(({ fontSize, zoom }) => {
         document.documentElement.style.fontSize = fontSize;
         document.body.style.zoom = zoom;

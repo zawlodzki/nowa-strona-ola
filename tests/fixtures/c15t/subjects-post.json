@@ -1,0 +1,15 @@
+{
+  "subjectId": "sub_123456789ABCDEFGHJKLMNPQ",
+  "consentId": "consent-fixture",
+  "domainId": "dom-fixture",
+  "domain": "aleksandraolesiewicz.com",
+  "type": "cookie_banner",
+  "metadata": {},
+  "appliedPreferences": {
+    "necessary": true,
+    "measurement": true,
+    "marketing": true
+  },
+  "uiSource": "banner",
+  "givenAt": "2026-10-11T08:00:00.000Z"
+}

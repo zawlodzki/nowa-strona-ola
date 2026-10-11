@@ -1,0 +1,95 @@
+.ao-consent-visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.ao-consent-banner {
+  position: fixed;
+  z-index: 14;
+  inset-inline: clamp(var(--ao-space-16), 4vw, var(--ao-space-64));
+  inset-block-end: clamp(var(--ao-space-16), 3vw, var(--ao-space-40));
+  max-inline-size: 70rem;
+  max-block-size: calc(
+    100dvh - var(--ao-header-clearance) - 2 * var(--ao-space-16)
+  );
+  margin-inline: auto;
+  padding: clamp(var(--ao-space-8), 2vw, 2rem);
+  border: 1px solid var(--ao-line);
+  border-radius: var(--ao-radius-panel);
+  background: var(--ao-background);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: grid;
+  gap: var(--ao-space-4);
+}
+.ao-consent-banner p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25;
+}
+.ao-consent-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5rem), 1fr));
+  gap: var(--ao-space-4);
+}
+.ao-consent-actions .ao-button {
+  padding: var(--ao-space-4);
+}
+.ao-consent-dialog {
+  inline-size: min(44rem, calc(100% - 2 * var(--ao-space-16)));
+}
+.ao-consent-categories {
+  display: grid;
+  gap: var(--ao-space-16);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+.ao-consent-category {
+  display: flex;
+  align-items: start;
+  gap: var(--ao-space-12);
+  padding-block: var(--ao-space-12);
+  border-block-end: 1px solid var(--ao-line);
+}
+.ao-consent-category input {
+  flex: 0 0 auto;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  margin: 0;
+  margin-block-start: 0.2rem;
+  accent-color: var(--ao-primary);
+}
+.ao-consent-category > span {
+  display: grid;
+  gap: var(--ao-space-4);
+}
+.ao-consent-category > span > span {
+  color: var(--ao-muted);
+  font-size: 0.875rem;
+}
+.ao-consent-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--ao-space-8);
+  font-size: 0.875rem;
+}
+.ao-consent-links a {
+  text-decoration: underline;
+  min-block-size: var(--ao-target-min);
+  display: inline-flex;
+  align-items: center;
+}
+.ao-consent-status {
+  font-size: 0.875rem;
+}
+.ao-consent-status:empty {
+  display: none;
+}
+.ao-consent-status[data-error="true"] {
+  color: var(--ao-error);
+}

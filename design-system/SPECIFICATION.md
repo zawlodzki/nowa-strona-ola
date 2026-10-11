@@ -31,7 +31,10 @@ Wartości wykonawcze w [tokens.json](tokens.json).
 
 Light jest wyglądem referencyjnym 3a. Dark zachowuje istniejący wariant podglądu;
 bez JS reaguje na ustawienie systemowe. Jawne `data-theme="light|dark"` wygrywa.
-Przełącznik w stopce nie wymaga localStorage i nie zmienia zgód użytkownika.
+Od 11.10.2026 przełącznik w stopce zapisuje ręczny wybór w localStorage
+`ao-theme`. Layout odtwarza go przed wyświetleniem treści. Bez zapisu używa
+motywu systemowego; przy zablokowanej pamięci wybór działa w bieżącym dokumencie.
+Motyw nie zmienia zgód użytkownika.
 Okładki to grafika produktu: ich jasny lub wiśniowy front nie odwraca kolorów
 w dark. Stage zmienia paletę. Ten sam produkt ma jeden front w każdym szablonie.
 

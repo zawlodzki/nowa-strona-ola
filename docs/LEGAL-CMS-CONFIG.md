@@ -1,26 +1,27 @@
 # Strony prawne — konfiguracja CMS
 
-Aktualizacja: 2026-10-10. Status: model, konwerter i fixture’y w kodzie.
-**Nie** wykonano zapisu do Content Lake. Wszystkie cztery dokumenty to
-**szkice czekające na przegląd radcy prawnego**: nie mają daty wejścia w życie
-i zawierają placeholdery `{{…}}`, więc nie wolno ich opublikować.
+Aktualizacja: 2026-10-11. Model, konwerter i fixture’y działają w kodzie.
+W Content Lake zastano opublikowane dokumenty cookies i polityki prywatności
+w wersji 2.1 z datą 10.10.2026. Użytkownik zlecił aktualizację cookies na stronie
+i w repo prawnym. Aktualizacja 2.2 obejmuje stan techniczny c15t i motywu;
+nie stanowi odbioru pozostałych usług ani zamknięcia przeglądu prawnego pakietu.
 
 ## Źródło treści
 
-Źródło prawdy (poza repo, tylko do odczytu):
+Źródło treści poza repo (aktualizacja dozwolona na zlecenie użytkownika):
 `projekt prawny ola/www-prawne/` — szkice B2C dla Wellbiz sp. z o.o.
 (sprzedaż e-booków i konsultacje dietetyczne online).
 
-| Plik źródłowy                                         | Trasa                               | Uwagi                                                   |
-| ----------------------------------------------------- | ----------------------------------- | ------------------------------------------------------- |
-| `regulamin.md`                                        | `/regulamin/`                       | z dwoma załącznikami na tej samej stronie               |
-| `pouczenie-o-odstapieniu.md`                          | `/regulamin/#pouczenie`             | załącznik nr 1, stała kotwica                           |
-| `formularz-odstapienia.md`                            | `/regulamin/#formularz-odstapienia` | załącznik nr 2, stała kotwica                           |
-| `polityka-prywatnosci.md`                             | `/polityka-prywatnosci/`            |                                                         |
-| `lista-cookies-i-identyfikatorow.md`                  | `/lista-cookies-i-identyfikatorow/` | lista docelowa, wymaga skanu produkcji                  |
-| `regulamin-newslettera.md`                            | `/regulamin-newslettera/`           |                                                         |
-| `zgody-i-formularze.md`                               | — (nie publikujemy)                 | §1 stopka i dane sprzedawcy, §8 informacja pod opiniami |
-| `szablony-emaili.md`, `stopka-ebooka.md`, `README.md` | — (nie publikujemy)                 |                                                         |
+| Plik źródłowy                                         | Trasa                               | Uwagi                                                        |
+| ----------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------ |
+| `regulamin.md`                                        | `/regulamin/`                       | z dwoma załącznikami na tej samej stronie                    |
+| `pouczenie-o-odstapieniu.md`                          | `/regulamin/#pouczenie`             | załącznik nr 1, stała kotwica                                |
+| `formularz-odstapienia.md`                            | `/regulamin/#formularz-odstapienia` | załącznik nr 2, stała kotwica                                |
+| `polityka-prywatnosci.md`                             | `/polityka-prywatnosci/`            |                                                              |
+| `lista-cookies-i-identyfikatorow.md`                  | `/lista-cookies-i-identyfikatorow/` | stan stagingu 11.10.2026; skan produkcji przed uruchomieniem |
+| `regulamin-newslettera.md`                            | `/regulamin-newslettera/`           |                                                              |
+| `zgody-i-formularze.md`                               | — (nie publikujemy)                 | §1 stopka i dane sprzedawcy, §8 informacja pod opiniami      |
+| `szablony-emaili.md`, `stopka-ebooka.md`, `README.md` | — (nie publikujemy)                 |                                                              |
 
 EN (`/en/privacy/`, `/en/terms/`) ma tylko informację, że wiążąca jest wersja
 polska. Dezaktywację EN prowadzi osobny etap.
@@ -127,12 +128,27 @@ Markdown).
 
 ## Otwarte decyzje i blokady
 
-- **Przegląd prawny:** wszystkie dokumenty to szkice. Daty wejścia w życie,
-  placeholdery (`{{MAKS_POBRAŃ}}`, `{{CENY_I_PARAMETRY_PAKIETÓW}}`, nazwy cookies
-  itd.) i decyzje (np. przeciwwskazania w § 3) czekają na radcę prawnego.
-- **Lista cookies:** wymaga skanu produkcji po wdrożeniu c15t i tagów.
-- **„Ustawienia cookies”:** polityka i lista cookies odwołują się do linku w
-  stopce; dojdzie razem z c15t.
-- **Content Lake:** schemat i fixture’y nie oznaczają wdrożenia CMS. Nic nie
-  zostało zapisane; import i tak jest zablokowany do czasu usunięcia
-  placeholderów i ustalenia dat.
+- **Aktualizacja cookies 11.10.2026:** źródło i fixture’y mają wersję 2.2
+  oraz datę 11.10.2026. Zmieniono `legal-cookies-pl.body` i sekcję 8 oraz
+  powiązane wiersze `legal-privacy-pl.body`. Ujęto cookie i localStorage
+  `olesiewicz-consent`, lokalny `ao-theme`, osobne profile zgód i wyłączony
+  GTM/GA4/Meta/Clarity. Pole `version` i `effectiveFrom` odzwierciedla tę zmianę.
+- Potwierdzona decyzja obowiązuje 365 dni. Cookie wygasa automatycznie;
+  localStorage nie ma TTL i pozostaje fizycznie do zastąpienia lub usunięcia.
+  Oczekujące wycofanie nie ma daty wygaśnięcia w localStorage i przy kolejnym
+  uruchomieniu synchronizuje pełną odmowę. Dowód serwera obejmuje m.in.
+  zamaskowany IP, User-Agent i język; historia pozostaje do 36 miesięcy
+  od ostatniej decyzji subjectu w danym profilu.
+- `ao-theme` przechowuje `light` lub `dark` do zmiany lub wyczyszczenia pamięci,
+  wyłącznie po ręcznej zmianie. Nie jest wysyłany do c15t ani analityki.
+- **Przegląd prawny:** aktualizacja techniczna nie zatwierdza pozostałego
+  zakresu dokumentów, DPIA ani konfiguracji Workspace, płatności i rezerwacji.
+  Nie wykonywać pełnego importu pakietu jako części aktualizacji cookies.
+- **Lista cookies:** stan odebrano na stagingu. Produkcja nie jest wdrożona;
+  wymaga osobnego skanu przed uruchomieniem. Konta narzędzi pomiarowych
+  wymagają kontroli przed aktywacją, ich okresy nie są zatwierdzone.
+- **„Ustawienia cookies”:** przycisk w stopce publicznych stron otwiera panel
+  PL/EN. Podgląd szkiców go nie uruchamia. Zamknięcie panelu nie zmienia zgód.
+- **Publikacja CMS:** opublikowano `legal-cookies-pl` i `legal-privacy-pl`
+  w wersji 2.2 po kontroli rewizji i dokładnej zgodności treści szkiców
+  z fixture’ami. Odbiór stagingu jest zapisany w [postępie](PROGRESS.md).

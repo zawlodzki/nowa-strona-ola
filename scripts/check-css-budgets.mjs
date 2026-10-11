@@ -61,7 +61,7 @@ const templates = [
   {
     paths: ["polityka-prywatnosci/index.html"],
     view: ".legal3a",
-    external: 6 * 1024,
+    external: 7 * 1024,
     inline: 6 * 1024,
   },
 ];

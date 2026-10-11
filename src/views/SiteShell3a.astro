@@ -4,6 +4,7 @@ import type { Locale } from "@ola/shared";
 import Layout3a from "@/design-system/Layout3a.astro";
 import SiteFooter from "@/design-system/components/SiteFooter.astro";
 import SiteHeader from "@/design-system/components/SiteHeader.astro";
+import ConsentPanel from "@/design-system/components/ConsentPanel.astro";
 import { homePath } from "@/lib/paths";
 import { isIndexingEnabled } from "@/lib/seo/site";
 import type { PageSeo } from "@/lib/seo/types";
@@ -96,7 +97,17 @@ const noindex =
     legalLinks={legalLinks}
     copyright={copyright}
     lang={lang}
+    consentEnabled={!preview}
   />
+  {!preview && (
+    <ConsentPanel
+      lang={lang}
+      endpoint={
+        import.meta.env.PUBLIC_C15T_ENDPOINT ??
+        "https://consent.zawlodzki.com/api/c15t"
+      }
+    />
+  )}
 </Layout3a>
 
 <style>

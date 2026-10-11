@@ -1,7 +1,7 @@
 {
   "title": "Polityka prywatności aleksandraolesiewicz.com",
-  "version": "2.1",
-  "effectiveFrom": "2026-10-10",
+  "version": "2.2",
+  "effectiveFrom": "2026-10-11",
   "seoDescription": "Jak Wellbiz sp. z o.o. przetwarza dane osobowe, w tym dane o zdrowiu, przy konsultacjach dietetycznych, e-bookach i newsletterze.",
   "body": [
     {
@@ -374,16 +374,16 @@
         {
           "_key": "r10",
           "cells": [
-            "**Statystyki Strony** (Google Analytics 4, Microsoft Clarity)",
+            "**Planowane statystyki Strony** (Google Analytics 4, Microsoft Clarity; obecnie wyłączone)",
             "identyfikatory internetowe, pliki cookies, informacje o urządzeniu i aktywności na Stronie",
             "**Twoja zgoda** — art. 6 ust. 1 lit. a RODO i art. 399 Prawa komunikacji elektronicznej",
-            "GA4 — 2 miesiące na poziomie użytkownika; Clarity — zgodnie z [listą cookies](/lista-cookies-i-identyfikatorow/)"
+            "przed aktywacją do sprawdzenia w konfiguracji kont i [liście cookies](/lista-cookies-i-identyfikatorow/)"
           ]
         },
         {
           "_key": "r11",
           "cells": [
-            "**Pomiar reklam (piksel Meta)** — tylko na stronach niezwiązanych z tematyką zdrowia",
+            "**Planowany pomiar reklam (piksel Meta; obecnie wyłączony)** — tylko na osobno dopuszczonych stronach bez tematyki zdrowotnej",
             "identyfikatory, pliki cookies, ogólne zdarzenia (np. wyświetlenie strony głównej)",
             "**Twoja zgoda** — art. 6 ust. 1 lit. a RODO i art. 399 Prawa komunikacji elektronicznej",
             "zgodnie z [listą cookies](/lista-cookies-i-identyfikatorow/)"
@@ -402,7 +402,7 @@
           "_key": "r13",
           "cells": [
             "**Zapis Twoich wyborów dotyczących cookies**",
-            "identyfikator zgody, wybrane kategorie, wersja banera, data",
+            "identyfikatory użytkownika zgód i decyzji, domena, kategorie, data, polityka i wersja, sposób wyboru, język, User-Agent, zamaskowany adres IP",
             "obowiązek wykazania zgody — art. 6 ust. 1 lit. c w zw. z art. 7 ust. 1 RODO",
             "3 lata od ostatniej zmiany"
           ]
@@ -687,7 +687,7 @@
           "_key": "r8",
           "cells": [
             "Google (Analytics 4), Microsoft (Clarity)",
-            "statystyki Strony — po Twojej zgodzie",
+            "planowane statystyki Strony; obecnie wyłączone, po uruchomieniu wyłącznie za zgodą i na dopuszczonych stronach",
             "Google — procesor/administrator wg warunków usługi; Microsoft — odrębny administrator"
           ]
         },
@@ -695,7 +695,7 @@
           "_key": "r9",
           "cells": [
             "Meta Platforms Ireland",
-            "piksel reklamowy — po Twojej zgodzie, tylko na stronach bez tematyki zdrowotnej; nasze profile społecznościowe",
+            "planowany piksel reklamowy (obecnie wyłączony) — po uruchomieniu za zgodą i tylko na dopuszczonych stronach bez tematyki zdrowotnej; nasze profile społecznościowe",
             "współadministrator w zakresie zbierania i przekazania danych oraz statystyk profilu"
           ]
         },
@@ -875,7 +875,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Poza plikami niezbędnymi do działania Strony zapisujemy i odczytujemy informacje z Twojego urządzenia ",
+          "text": "Informacje niezbędne do zapamiętania decyzji o cookies oraz wybranego przez Ciebie motywu przechowujemy w przeglądarce. Pozostałe informacje zapisujemy i odczytujemy ",
           "marks": []
         },
         {
@@ -887,7 +887,7 @@
         {
           "_type": "span",
           "_key": "s2",
-          "text": " (art. 399 Prawa komunikacji elektronicznej). Zgodą zarządzasz w banerze i w każdej chwili przez link „Ustawienia cookies” w stopce Strony. Odmowa nie blokuje korzystania ze Strony.",
+          "text": " (art. 399 Prawa komunikacji elektronicznej). Odmowa nie blokuje korzystania ze Strony. Zamknięcie panelu nie oznacza zgody.",
           "marks": []
         }
       ],
@@ -903,7 +903,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Kategorie: ",
+          "text": "Zgodą zarządzasz w banerze i przez przycisk „Ustawienia cookies” w stopce. Kategorie to ",
           "marks": []
         },
         {
@@ -915,7 +915,7 @@
         {
           "_type": "span",
           "_key": "s2",
-          "text": " (działanie Strony, płatności, zapis wyboru zgody), ",
+          "text": ", ",
           "marks": []
         },
         {
@@ -927,7 +927,7 @@
         {
           "_type": "span",
           "_key": "s4",
-          "text": " (Google Analytics 4, Microsoft Clarity), ",
+          "text": " i ",
           "marks": []
         },
         {
@@ -939,7 +939,7 @@
         {
           "_type": "span",
           "_key": "s6",
-          "text": " (piksel Meta).",
+          "text": ". Kategorie opcjonalne są domyślnie wyłączone. Wybór możesz zmienić lub cofnąć w każdej chwili.",
           "marks": []
         }
       ],
@@ -955,7 +955,19 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Tagi Google uruchamiamy dopiero po zgodzie (Google Consent Mode w trybie podstawowym — przed zgodą nie są wysyłane żadne sygnały do Google).",
+          "text": "Zapis decyzji obsługuje c15t na naszym serwerze. Cookie ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "olesiewicz-consent",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " działa do 365 dni, a kopia w localStorage wspiera trwałe wycofanie przy awarii połączenia. Potwierdzona decyzja w tej kopii jest ważna do 365 dni; sama pamięć localStorage nie usuwa wpisów automatycznie. Historię decyzji w c15t zachowujemy do 36 miesięcy od ostatniej decyzji. Dowód obejmuje także domenę, wersję polityki, sposób wyboru, język, User-Agent i zamaskowany adres IP, bez danych formularzy. Zgody Strony, środowiska testowego i zawlodzki.pl są odrębne, mimo wspólnej infrastruktury i administracji. Wybór nie przenosi się między nimi.",
           "marks": []
         }
       ],
@@ -971,13 +983,19 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Na stronach konsultacji, e-booków, w kasie, na stronach potwierdzeń, w ankiecie i na stronie formularza odstąpienia nie działają piksel Meta ani Microsoft Clarity",
-          "marks": ["strong"]
+          "text": "Preferencja ",
+          "marks": []
         },
         {
           "_type": "span",
           "_key": "s1",
-          "text": ", a Google Analytics nie przekazuje nazw produktów. Clarity maskuje treść wpisywaną w pola formularzy.",
+          "text": "ao-theme",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": " zawiera wyłącznie wartość jasnego lub ciemnego motywu. Zapisujemy ją po ręcznej zmianie wyglądu, do kolejnej zmiany albo wyczyszczenia pamięci. Nie przekazujemy jej do analityki ani do c15t.",
           "marks": []
         }
       ],
@@ -993,7 +1011,51 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Szczegóły każdego identyfikatora: ",
+          "text": "GTM, Google Analytics 4, Microsoft Clarity i piksel Meta są obecnie wyłączone na całej Stronie, również po akceptacji wszystkich kategorii.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Planowane narzędzia analityczne i marketingowe uruchomimy dopiero po sprawdzeniu konfiguracji, dopuszczeniu konkretnych stron i uzyskaniu właściwej zgody. Google Consent Mode ma tryb podstawowy: przed zgodą nie wysyłamy sygnałów do Google.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b36",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Treści dotyczące zdrowia, konsultacji i e-booków, formularze, zamówienia, płatności, potwierdzenia i odstąpienia są wyłączone z analityki i marketingu, niezależnie od zgody.",
+          "marks": ["strong"]
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": " Obecnie żadna strona nie została dopuszczona do pomiaru. Ankieta przed konsultacją działa poza Stroną i nie zawiera naszych tagów. Danych formularzy nie przekazujemy do analityki.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b37",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Szczegóły wpisów, planowanych narzędzi oraz sposób zmiany zgody i usunięcia pamięci opisuje ",
           "marks": []
         },
         {
@@ -1033,7 +1095,7 @@
     },
     {
       "_type": "block",
-      "_key": "b37",
+      "_key": "b39",
       "style": "normal",
       "children": [
         {
@@ -1061,7 +1123,7 @@
     },
     {
       "_type": "block",
-      "_key": "b39",
+      "_key": "b41",
       "style": "normal",
       "children": [
         {
@@ -1089,7 +1151,7 @@
     },
     {
       "_type": "block",
-      "_key": "b41",
+      "_key": "b43",
       "style": "normal",
       "children": [
         {

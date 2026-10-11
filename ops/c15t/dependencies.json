@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "hono": "4.13.13"
+  },
+  "overrides": {
+    "@c15t/backend": {
+      "hono": "4.13.13"
+    },
+    "brace-expansion@2": "2.1.7"
+  }
+}

@@ -429,6 +429,8 @@ Checklista wykonania (zaznaczać osobno kod i dane):
 - [x] Zastąpić treści B2B szkicami B2C z `www-prawne` (konwerter Markdown,
       `version`, blokada publikacji placeholderów, stopka z danymi sprzedawcy
       i informacja pod opiniami; bez Content Lake).
+- [x] Uzupełnić dokumenty cookies o faktyczny klient c15t, localStorage i motyw;
+      zsynchronizować źródła prawne i opublikować dwa dokumenty Sanity (11.10.2026).
 - [ ] Po przeglądzie radcy prawnego: daty wejścia w życie, usunięcie
       placeholderów, ponowna konwersja i import `legalPage`.
 - [ ] Przenieść treści i media do szkiców Content Lake; zapisać wyniki walidacji.
@@ -464,11 +466,20 @@ znikają z obu formatów i indeksów po udanej publikacji.
 
 ### Etap 6 — formularze, c15t i analityka
 
+- [x] Przygotować [plan GTM i c15t dla domeny Oli](GTM-C15T-DEPLOYMENT-PLAN.md)
+      z inwentaryzacją kontenerów, separacją zgód, panelem 3a i macierzą odbioru
+      (11.10.2026). Plan nie oznacza wykonanej integracji.
 - [ ] Wdrożyć formularze CMS, walidację serwerową, Turnstile i ograniczenia.
 - [ ] Dodać kolejkę, retry, kolejkę błędów i wersjonowany kontrakt n8n.
 - [ ] Sprawdzić deduplikację, awarię n8n, błędy walidacji i brak wycieków danych.
-- [ ] Zintegrować zewnętrzne c15t, panel PL/EN i Basic Consent Mode v2.
-- [ ] Sprawdzić odrzucenie, zgodę częściową, zmianę, wycofanie i awarię c15t.
+- [x] Dodać klienta zewnętrznego c15t, panel PL/EN i Basic Consent Mode v2
+      w kodzie oraz wdrożyć izolację backendu we wspólnej instancji
+      (11.10.2026). Klient strony wdrożony i sprawdzony na staging.
+- [x] Przygotować osobny workspace GTM z dwoma wstrzymanymi tagami
+      natywnymi. Publikacja i odbiór usług pomiarowych pozostają otwarte.
+- [x] Zakończyć pełne verify, odbiór UI/sieci i wdrożenie klienta na staging.
+- [x] Sprawdzić odrzucenie, zgodę częściową, zmianę, wycofanie i awarię c15t.
+      E2E na atrapach oraz odmowa/akceptacja/wycofanie live na stagingu.
 - [ ] Zweryfikować w sieci kolejność ładowania GTM/GA4 i zdarzenia bez PII.
 
 Odbiór: potwierdzenie po kolejce; awaria n8n uruchamia retry; brak zgody

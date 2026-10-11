@@ -159,6 +159,27 @@ Playwright również przy uruchomieniu verify. Porównanie fixture/Content Lake
 honoruje ten sam wybór Chromium. Serwery developerskie działają dla
 oddzielnych tras legal i legacy: `npm run dev:web -- --port 4330`.
 
+Sprawdzona 11.10.2026 pełna kontrola na Node 24.19.0:
+
+```sh
+PLAYWRIGHT_WORKERS=2 npm run verify
+```
+
+Końcowa kontrola integracji c15t 11.10.2026 przeszła 280 testów jednostkowych
+i 393 E2E w trzech przeglądarkach.
+`tests/e2e/theme-preference.spec.ts` sprawdza zapis motywu, przejście
+linkiem, reload, inicjalizację przed body i blokadę storage. Preferencja
+`ao-theme` jest lokalna dla originu. [Plan GTM i c15t](docs/GTM-C15T-DEPLOYMENT-PLAN.md)
+opisuje zakres i bramki pomiaru. Panel c15t działa na stagingu; produkcja
+i pomiar GTM pozostają niewdrożone. Odbiór oraz dowody są w
+[postępie](docs/PROGRESS.md).
+
+CLI `verify-ola` uruchamia podgląd również na macOS, ale jego `doctor`
+sprawdza port przez Linux `/proc`. Na macOS w tej sesji potwierdzono
+właściciela poleceniem `lsof -nP -iTCP:4340 -sTCP:LISTEN`; kontrole UI
+wykonano CLI skilla i Playwrightem na własnym podglądzie. Nie traktować
+błędu doctor na macOS jako zaliczonej kontroli skilla.
+
 `npm run import:3a` buduje pełne dokumenty 3a z fixture’ów i zapisuje transakcję
 do `reports/content-lake-3a-transaction.json`. Domyślnie nic nie wysyła.
 `npm run import:3a -- --write --dataset production` wymaga
@@ -202,8 +223,9 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /blog/
 node .cursor/skills/verify-ola/scripts/verify.mjs cleanup
 ```
 
-n8n i self-hostowane c15t będą dostarczone poza repo. Tutaj powstaną integracje,
-formularze i panel zgód dopasowany do design systemu.
+n8n i self-hostowane c15t działają poza repo. Panel zgód 3a i klient c15t
+są wdrożone na stagingu; backend ma wspólne utrzymanie z zawlodzki.pl
+i osobne profile Oli. Nakładka serwera i eksport GTM są w `ops/`.
 
 Mockup artykułu 3a: `node scripts/preview-homepage-mockups.mjs`, następnie
 `http://127.0.0.1:8766/mockups/homepage/article-3a.html`.
@@ -255,3 +277,16 @@ Podstrona kontaktu 3a: `/kontakt/` i `/en/contact/`. Plan i stan integracji:
 [Kontakt CMS](docs/CONTACT-CMS-CONFIG-3A.md). Po zbudowaniu fixture lokalny
 podgląd i kontrola użytkowa: `node .cursor/skills/verify-ola/scripts/verify.mjs launch`
 (z ustawionym `VERIFY_RUN_ID`), następnie `browser start` i `doctor`.
+
+Sprawdzone wdrożenie wyłącznie stagingu 11.10.2026, po buildzie z
+`PUBLIC_SANITY_PROJECT_ID=dyuqkn8c`, `PUBLIC_SANITY_DATASET=production`,
+`PUBLIC_GTM_ENABLED=false` i `SITE_INDEXING=staging`:
+
+```sh
+npm run test:build
+npx wrangler deploy --config wrangler.jsonc --env staging --dry-run
+npx wrangler deploy --config wrangler.jsonc --env staging
+```
+
+Plik `public/.assetsignore` wyklucza metadane lokalne z zasobów zgodnie z
+[dokumentacją Cloudflare](https://developers.cloudflare.com/workers/static-assets/binding/#ignoring-assets).
