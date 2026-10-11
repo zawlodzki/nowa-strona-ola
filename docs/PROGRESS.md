@@ -6,6 +6,16 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Baner zgód na telefonie, 11.10.2026
+
+- Z gałęzi usunięto pliki recenzji dodane tylko w tym PR. `git diff origin/feat/seo-geo-aeo --stat -- output .audit` jest pusty. Zostały `output/design-consistency-3a/`, `output/design-system-3a/` i `.audit/matcha-accent-3a.tsv`.
+- Na 390×844 baner ma 278,5 px, czyli 33,0% wysokości, w Chromium, Firefox i WebKit. Pomiar jest przy pustej linii statusu, po udanym odczycie fixture `/init`. Trzy przyciski mają po 111×50 px i stoją w jednym rzędzie. Na 320×640 baner ma 409 px (63,9%) i nie przewija się. Trzeci przycisk schodzi do drugiego rzędu, bo trzy kolumny nie mieszczą słowa „opcjonalne”. Na 1440×900 baner ma 268 px (29,7%), mniej niż wcześniejsze 38%.
+- Kropka między linkami zniknęła z banera i z dialogu ustawień. Treść prawna PL i EN jest bez zmian.
+- CSS strony głównej ma 8192 B gzip, przy limicie 8192. Łącznie CSS ma 30850 B gzip, przy limicie 32768.
+- Przeszły format, tokeny, lint, typy i 280 testów jednostkowych, a także build, build workspace i `test:build`. Consent e2e dał 42/42 w Chromium, Firefox i WebKit. Pełne e2e dało 393/393 w drugim przebiegu. Pierwszy przebieg miał jeden błąd WebKit w teście ebooka bez wersji angielskiej. Ten sam test przeszedł dwukrotnie osobno. `verify-ola` na porcie 4340 przeszedł doctor, otworzył baner i dialog, zamknął go Escape i odczytał POST `[]`.
+- Nie zmieniano Sanity. Nie wdrażano stagingu, Studia ani produkcji.
+- Następny krok to odbiór PR #70. Najpierw scalić SEO #69.
+
 ### Przygotowanie PR i push, 11.10.2026
 
 - Polecenie użytkownika obejmuje push i otwarcie PR dla zmian strony.
@@ -142,8 +152,9 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   [konfiguracji prawnej](LEGAL-CMS-CONFIG.md). Nie publikowano dokumentów
   prawnych. Następny etap pomiaru wymaga zatwierdzonych neutralnych treści,
   rzeczywistego odcisku treści w runtime oraz odbioru GA4, Meta i Clarity.
-  [Ślad decyzji](../.audit/ola-consent.tsv) i niezależne raporty zachowują
+  Ślad decyzji i niezależne raporty zachowują
   korekty oraz różnicę między działającym panelem a wstrzymanym pomiarem.
+  Pliki tego śladu usunięto z gałęzi 11.10.2026.
 
 ### Obrazy OG generowane w buildzie, 11.10.2026
 
