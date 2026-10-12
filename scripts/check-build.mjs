@@ -131,6 +131,26 @@ for (const slug of articleSlugs) {
     1,
     `blog/${slug}: exactly one h1`,
   );
+  assert.match(
+    articlePage,
+    /"@type":"BlogPosting"/,
+    `blog/${slug}: BlogPosting`,
+  );
+}
+// Each category lists built articles or shows its empty state.
+for (const category of await readdir("dist/blog/kategoria", {
+  withFileTypes: true,
+})) {
+  if (!category.isDirectory()) continue;
+  const categoryHtml = await readFile(
+    `dist/blog/kategoria/${category.name}/index.html`,
+    "utf8",
+  );
+  assert(
+    articleSlugs.some((slug) => categoryHtml.includes(`/blog/${slug}/`)) ||
+      /tej kategorii nie ma jeszcze wpisów/i.test(categoryHtml),
+    `blog/kategoria/${category.name}: neither articles nor empty state`,
+  );
 }
 if (!liveContent) {
   // Fixtures are fixed: 11 posts, 6 per list page after the featured one.
