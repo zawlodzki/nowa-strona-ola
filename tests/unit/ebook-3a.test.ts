@@ -11,6 +11,18 @@ import { parseContentPath } from "../../src/lib/content-path";
 import { availabilityBadge } from "../../src/lib/offer";
 import { ebookPath } from "../../src/lib/paths";
 
+function stringsOf(value: unknown): string[] {
+  if (typeof value === "string") return [value];
+  if (Array.isArray(value)) return value.flatMap(stringsOf);
+  if (value && typeof value === "object") {
+    return Object.values(value).flatMap(stringsOf);
+  }
+  return [];
+}
+
+const pmosTogether = "PMOS\u00A0(PCOS)";
+const pmosBreakable = "PMOS (PCOS)";
+
 describe("ebook 3a fixtures", () => {
   it("maps the Polish PCOS landing from the shared ebook document", async () => {
     const ebook = await getEbook("pl", "suplementy-w-pcos", {
@@ -287,5 +299,42 @@ describe("ebook product presentation", () => {
     );
     expect(markdown).not.toContain(view.landing.sampleSheetTitle);
     expect(markdown).not.toContain(view.landing.coverTopic);
+  });
+
+  it.each(["badania-ktore-maja-sens", "szczupla-a-jednak-pcos"])(
+    "%s keeps PMOS and (PCOS) on one line",
+    async (slug) => {
+      const view = mapEbook(
+        await getEbook("pl", slug, { environment: {} }),
+        "pl",
+      );
+      const texts = stringsOf(view);
+      expect(texts.some((text) => text.includes(pmosTogether))).toBe(true);
+      expect(texts.some((text) => text.includes(pmosBreakable))).toBe(false);
+      expect(view.seoTitle.length).toBeLessThanOrEqual(60);
+      expect(
+        view.sources.some((source) =>
+          source.title.includes("Wytyczne PCOS 2023"),
+        ),
+      ).toBe(true);
+      expect(serializeEbookView(view, "pl")).toContain(pmosTogether);
+      expect(serializeEbookView(view, "pl")).not.toContain(pmosBreakable);
+    },
+  );
+
+  it("uses a hand-written SEO title for the slim ebook", async () => {
+    const view = mapEbook(
+      await getEbook("pl", "szczupla-a-jednak-pcos", { environment: {} }),
+      "pl",
+    );
+    expect(view.seoTitle).toBe(
+      "Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz",
+    );
+    expect(view.landing.heroTitle).toBe(
+      "Masz PMOS\u00A0(PCOS).\nNie chcesz chudnąć.",
+    );
+    expect(view.landing.problemTitle).toBe(
+      "Czytasz o PMOS\u00A0(PCOS).\nWszędzie plan\nna mniej kilogramów.",
+    );
   });
 });

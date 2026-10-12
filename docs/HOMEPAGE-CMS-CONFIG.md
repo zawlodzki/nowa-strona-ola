@@ -36,10 +36,12 @@ renderera i panelu redakcyjnego wymaga jeszcze scalenia do main oraz wdrożenia.
 
 Źródło: polecenie użytkownika z 12.10.2026. Zasady są te same co w PR #73.
 W plikach `badania-ktore-maja-sens.ts` i `szczupla-a-jednak-pcos.ts` samodzielne
-„PCOS” w copy dla odwiedzających brzmi „PMOS (PCOS)”. Pierwsze wystąpienie
-w zdaniu jest pełne. Następne w tym samym zdaniu brzmi „PMOS”. Tytuł SEO
-szczupłego e-booka to „Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz”
-(54 znaki), bo „PMOS (PCOS)” daje 61 znaków. Zostały tytuły „Wytyczne PCOS 2023”,
+„PCOS” w copy dla odwiedzających brzmi „PMOS”, potem twarda spacja U+00A0,
+potem „(PCOS)”. Zwykła spacja rozcina nagłówek na „PMOS” i „(PCOS)” przy 320
+i 390 px. Pierwsze wystąpienie w zdaniu jest pełne. Następne w tym samym zdaniu
+brzmi „PMOS”. Tytuł SEO szczupłego e-booka napisano ręcznie, bez ucinania
+zdania w środku. Brzmi „Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz”
+(54 znaki), bo pełna forma ma 61 znaków. Zostały tytuły „Wytyczne PCOS 2023”,
 zdania, które je cytują, slugi, identyfikatory i oferta „Suplementy w PCOS”.
 
 Stan: kod i fixture’y mają nowe brzmienie. Sanity nie było zapisywane.

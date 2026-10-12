@@ -12,10 +12,12 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Skrypt `scripts/prepare-ebook-landings.ts` nadal może je zapisać lokalnie
   i nie wysyła danych do Sanity. Nie uruchamiano go.
 - W `badania-ktore-maja-sens.ts` i `szczupla-a-jednak-pcos.ts` samodzielne
-  „PCOS” w copy dla odwiedzających jest „PMOS (PCOS)”. Tytuł SEO szczupłego
-  e-booka to „Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz”
-  (54 znaki). Zostały „Wytyczne PCOS 2023” i zdania, które cytują te wytyczne.
-  Slugi bez zmian. Oferta suplementów bez zmian.
+  „PCOS” w copy dla odwiedzających jest „PMOS” plus twarda spacja U+00A0 plus
+  „(PCOS)”. Dzięki temu nagłówek nie łamie „(PCOS)” do osobnej linii.
+  Tytuł SEO szczupłego e-booka napisano ręcznie:
+  „Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz” (54 znaki).
+  Pełna forma ma 61 znaków. Zostały „Wytyczne PCOS 2023” i zdania, które
+  cytują te wytyczne. Slugi bez zmian. Oferta suplementów bez zmian.
 - Sanity nie było zapisywane. Opublikowane dokumenty PL nadal mają poprzednie
   zdania. Lista zamian jest w konfiguracji CMS.
 - Etykiety „E-book · Szczupła, a jednak PCOS” nie ruszano. Bierze się z tytułu
