@@ -8,7 +8,7 @@ export const GET: APIRoute = async () => {
   const blog = entries.find((entry) => entry.kind === "blog");
   if (!blog) throw new Error("Brak strony bloga w spisie stron.");
   return new Response(
-    buildRss(
+    await buildRss(
       blog,
       entries.filter((entry) => entry.kind === "article"),
     ),

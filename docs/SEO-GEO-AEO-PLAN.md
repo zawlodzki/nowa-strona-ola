@@ -569,7 +569,8 @@ bo fallbacki są pokryte testami.
   miejsca pracy w `alumniOf`. Wdrożone w kodzie, bez Content Lake.
 - **D6 — przyjęte (11.10.2026):** tylko online, bez `LocalBusiness`.
 - **D8 — przyjęte (11.10.2026):** RSS z pełną treścią (zmiana względem
-  wdrożonego leadu), `llms-full.txt` dla kluczowych stron. Do wdrożenia.
+  wdrożonego leadu), `llms-full.txt` dla kluczowych stron. Kod rozszerzenia
+  z 12.10.2026 ma lokalny odbiór PASS opisany w postępie; bez publikacji.
 - Wszystkie decyzje D1–D8 rozstrzygnięte.
 
 ## 10. Ryzyka i czego nie robić

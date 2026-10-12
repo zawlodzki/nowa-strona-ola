@@ -1,7 +1,7 @@
 # Plan wdrożenia i przygotowania repozytorium
 
 Zatwierdzony: 2026-09-12. Aktualizacja kolejności prac: 2026-10-07.
-Realizacja etapami w wielu sesjach; bieżący zakres opisuje etap 4a.
+Realizacja etapami w wielu sesjach; bieżący zakres obejmuje etap 5 i odbiór treści z Sanity.
 Stan wykonania: [PROGRESS.md](PROGRESS.md). Instrukcje: [AGENTS.md](../AGENTS.md).
 Weryfikacja kodu: [CODE-QUALITY.md](CODE-QUALITY.md).
 Próba komponentów: [UI-SPIKE-RESULTS.md](UI-SPIKE-RESULTS.md).
@@ -462,8 +462,8 @@ oznacza wykonanej implementacji.
       Każdy typ strony w spisie (`inventory.ts`) ma trasę `.md`; nieznany
       typ sekcji lub bloku Portable Text zatrzymuje build.
 - [x] Wdrożyć canonical, alternatywy .md, sitemap, robots, RSS i llms.txt (SEO‑1, SEO‑3).
-      Po decyzji D8 (11.10.2026) do wdrożenia: RSS z pełną treścią
-      i `llms-full.txt` dla kluczowych stron.
+      Rozszerzenie D8 (11.10.2026): RSS z pełną treścią
+      i `llms-full.txt` dla kluczowych stron, odbiór poniżej.
 - [ ] Wdrożyć hreflang. Brak w kodzie; nie jest potrzebny, dopóki publiczne
       EN jest wyłączone (`enabledLocales`). Dodać przy włączeniu EN.
 - [x] Wdrożyć JSON-LD i kontrolę zgodności z widoczną treścią (SEO‑2,
@@ -917,3 +917,25 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
 - [ ] Odebrać Quality na PR, scalić po akceptacji i potwierdzić przygotowany
       workflow aktualizacji preview z main.
 - [ ] Sprawdzić zmianę pola po zapisie w CMS, natywny zoom, czytnik i urządzenie.
+
+## Pełne eksporty treści D8, 12.10.2026
+
+- [x] Odświeżyć lokalny main z GitHuba do `94d8204`, zachowując lokalne
+      zmiany dokumentacji w stashu oraz nieśledzone materiały.
+- [x] Odczytać opublikowane dane Sanity. Trzy nowe artykuły PL i sześć
+      planowanych e-booków. Pięć nowych landingów jest już w kodzie main.
+- [x] Rozszerzyć RSS o pełną treść z istniejącego serializera artykułu.
+- [x] Dodać `llms-full.txt` dla głównej, O mnie, konsultacji, kolekcji
+      e-booków i landingów, z treści tych samych stron Markdown.
+- [x] Sprawdzić format, typy, testy i pełne `npm run verify` na Node 24.
+- [x] Odebrać eksport rzeczywistych danych oraz blog i landingi w Chromium.
+
+Zakres wynika z decyzji D8 z 11.10.2026. Bez zapisu do CMS i publikacji.
+
+- [ ] Usunąć nieaktualny dopisek demonstracyjny w sekcji bloga Sanity
+      i odebrać przebudowę po zapisie na osobne zlecenie.
+- [ ] Dokończyć zewnętrzny odbiór SEO i konfigurację SEO‑6 przed indeksacją.
+
+Wyniki: pełne verify PASS, 310 unit i 429 E2E. Odczyt rzeczywistego
+Content Lake: 3 artykuły RSS, 10 dokumentów llms-full, 30 kontroli stron
+przy 1440/390/320 px bez JS i overflow. Szczegóły i ograniczenia w postępie.

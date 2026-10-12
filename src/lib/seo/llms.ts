@@ -5,6 +5,7 @@ import { siteIdentity } from "@/content/site-identity";
 import { sellerCompany } from "@/content/site-legal";
 import { availabilityLabel } from "@/lib/offer";
 import {
+  absolutizeMarkdownLinks,
   markdownPath,
   type InventoryEntry,
   type InventoryKind,
@@ -65,6 +66,8 @@ export function buildLlmsTxt(
     "",
     "Każda strona ma wersję Markdown pod tym samym adresem z rozszerzeniem .md; poniższe linki prowadzą do tych wersji. Strony HTML są wersją kanoniczną.",
     "",
+    `[Pełna treść kluczowych stron](${absoluteUrl("/llms-full.txt")})`,
+    "",
     "## Kluczowe fakty",
     "",
     `- Autorka treści: ${siteIdentity.name}, ${siteIdentity.jobTitle[language].toLowerCase()}.`,
@@ -96,4 +99,27 @@ export function buildLlmsTxt(
     .replace(/\n{3,}/g, "\n\n")
     .trimEnd()
     .concat("\n");
+}
+
+const fullContentKinds: InventoryKind[] = [
+  "home",
+  "about",
+  "consultation",
+  "ebooks",
+  "ebook",
+];
+
+export async function buildLlmsFullTxt(
+  entries: InventoryEntry[],
+): Promise<string> {
+  const selected = fullContentKinds.flatMap((kind) =>
+    entries.filter((entry) => entry.kind === kind),
+  );
+  const documents = await Promise.all(
+    selected.map(
+      async (entry) =>
+        `Źródło: ${absoluteUrl(entry.path)}\n\n${absolutizeMarkdownLinks(await entry.markdown(), entry.path).trimEnd()}`,
+    ),
+  );
+  return documents.length ? `${documents.join("\n\n---\n\n")}\n` : "";
 }

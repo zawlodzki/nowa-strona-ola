@@ -47,6 +47,7 @@
     "import:pmos-rename": "tsx scripts/import-pmos-rename.ts"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "^0.4.1",
     "@data-slot/dialog": "^0.2.166",
     "@sanity/client": "^8.9.0",
     "@tailwindcss/vite": "^4.3.3",

@@ -16,6 +16,11 @@ export function buildHeadersFile({ indexing }: { indexing: boolean }): string {
     ],
     ["/index.md", "! Link", `Link: <${SITE_ORIGIN}/>; rel="canonical"`],
     ["/llms.txt", "X-Robots-Tag: noindex"],
+    [
+      "/llms-full.txt",
+      "Content-Type: text/plain; charset=utf-8",
+      "X-Robots-Tag: noindex",
+    ],
     ["/blog/rss.xml", "Content-Type: application/rss+xml; charset=utf-8"],
     ["/_astro/*", "Cache-Control: public, max-age=31536000, immutable"],
   );
