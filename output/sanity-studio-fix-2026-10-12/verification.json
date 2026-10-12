@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-12",
+  "sourceCommit": "7d8bf85172d7c134cf878d29c64ad8567a5c7f9f",
+  "worktree": "/Users/grzesiek/.codex/worktrees/sanity-studio-fix/nowa strona ola",
+  "entry": "/static/sanity-BugRvHgS.js",
+  "sha256": "f1056f98983d7c5e76ba1888d8e32d44b9ceb7ea01ce630e98514f3f881f3733",
+  "fields": {
+    "coverTopic": true,
+    "coverArt": true,
+    "coverCaption": true,
+    "problemCaption": true,
+    "problemVisual": true,
+    "sampleKicker": true,
+    "sampleSheetTitle": true,
+    "sampleSheetLead": true,
+    "sampleSheetFooter": true,
+    "beforeLabel": true,
+    "afterLabel": true
+  },
+  "projectPresent": true,
+  "previewPresent": true,
+  "verify": {
+    "node": "24.21.0",
+    "unit": 300,
+    "e2e": 423,
+    "validatedDocuments": 88,
+    "matchingPages": 17,
+    "result": "PASS"
+  },
+  "scopedRepeatedE2E": 27,
+  "deployment": {
+    "result": "PASS",
+    "worker": "ola-website-studio-production",
+    "url": "https://studio.aleksandraolesiewicz.com",
+    "versionId": "4ffa4951-2ce0-444c-8a50-354a27552705",
+    "liveBundleMatches": true,
+    "schemaId": "uEiC9KTI3ZMUpceRzuybhUYV6tV1-WdK1S1u5Lk3PeJ2A4g",
+    "registeredSchemaFieldsPresent": 11,
+    "studioUiDocumentsChecked": 5,
+    "unknownFieldWarnings": 0,
+    "ebookRevisionsUnchanged": true
+  },
+  "pendingGit": "poprawka gotowa do zatwierdzonego push i PR"
+}

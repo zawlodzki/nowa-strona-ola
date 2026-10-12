@@ -883,3 +883,17 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
 - [x] Na dodatkowe zlecenie wykonać push i otworzyć
       [PR #74](https://github.com/zawlodzki/nowa-strona-ola/pull/74) do main.
 - [ ] Potwierdzić nowe UI na hostowanym serwisie po włączeniu kodu do main.
+
+## Naprawa blokady Studio Sanity, 12.10.2026
+
+- [x] Przygotować poprawkę stanów początkowych testów artykułu, kolekcji
+      e-booków i kontaktu w izolowanym worktree na aktualnym main.
+- [x] Potwierdzić pełne verify: 300 unit, 423 E2E, 88 dokumentów bez błędów
+      i 17 zgodnych stron Content Lake; 27 dodatkowych powtórzeń E2E PASS.
+- [x] Zbudować produkcyjne Studio i potwierdzić dry-run Cloudflare oraz
+      obecność 11 brakujących pól w artefakcie.
+- [x] Po wyraźnej zgodzie wdrożyć Studio oraz zarejestrowany schemat.
+      Cloudflare i Sanity PASS; bundle na domenie zgodny z artefaktem.
+- [x] Potwierdzić brak ostrzeżeń w pięciu dokumentach PL i niezmienione rewizje.
+- [ ] Po osobnym zleceniu wysłać poprawkę testów do PR i uzyskać zielone Quality
+      na main. Lokalny wynik nie oznacza naprawionego CI na GitHub.

@@ -6,6 +6,57 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Naprawa blokady Studio Sanity, 12.10.2026
+
+- Zlecenie „napraw” realizowano w izolowanym worktree
+  `sanity-studio-fix`, na aktualnym main
+  `7d8bf85172d7c134cf878d29c64ad8567a5c7f9f`. Zachowano lokalną gałąź,
+  dokumentację diagnozy oraz nieśledzone pliki użytkownika.
+- Testy udostępniania artykułu, kolekcji e-booków i formularza kontaktu
+  używają teraz istniejącej fixture polityki c15t i zamykają baner przyciskiem
+  „Zamknij bez zmiany zgód” przed dalszą interakcją. Helper oczekuje widocznego
+  banera, klika i potwierdza jego ukrycie. Nie usuwa DOM, nie wymusza kliknięć,
+  nie zmienia stanu zgód ani asercji testowanych funkcji. Kod aplikacji i schemat
+  nie wymagały zmian; brakujące pola są już na main.
+- Pierwotny test udostępniania przeszedł lokalnie sześć prób Firefox, także
+  z kontrolowaną awarią c15t. Nie odtworzono jego timeoutu z Ubuntu CI.
+  Poprawka usuwa asynchroniczne pojawienie się banera z tego scenariusza.
+  Po zmianie 18 powtórzeń artykułu/kolekcji w trzech silnikach PASS.
+- Pierwsze pełne verify: 300 unit PASS, 422 E2E PASS i 1 błąd Firefox
+  w kontroli fokusu newslettera na kontakcie. Test kontaktu otrzymał ten sam
+  kontrolowany stan początkowy, po czym 9 powtórzeń w trzech silnikach PASS.
+  Nie ustalono osobno przyczyny utraty fokusu z pierwszego przebiegu.
+- Końcowe `PLAYWRIGHT_WORKERS=2 npm run verify` na Node 24.21.0 PASS:
+  format, tokeny, lint, typy, 300 unit w 37 plikach, buildy wszystkich
+  workspace’ów, budżety i SEO, 423 E2E, 88 dokumentów bez błędów,
+  zgodny DOM 17 stron fixture/Content Lake. Bez wysyłki leadów na produkcję.
+- Osobny produkcyjny build Studio dla `dyuqkn8c/production` i originu
+  `https://preview.aleksandraolesiewicz.com` PASS. Bundle
+  `/static/sanity-BugRvHgS.js` zawiera wszystkie 11 pól. Dry-run Wranglera
+  4.148.0 dla `ola-website-studio-production` PASS, 32 pliki zasobów.
+  [Dowód](../output/sanity-studio-fix-2026-10-12/verification.json),
+  [patch](../output/sanity-studio-fix-2026-10-12/fix.patch).
+- Zalogowana sesja Studio potwierdziła ostrzeżenie o 11 polach przed naprawą.
+  Publikacja dokumentu była nieaktywna; nie edytowano ani nie usuwano danych.
+- Pierwszy deploy został odrzucony przez automatyczną kontrolę uprawnień.
+  Po wyraźnej zgodzie użytkownika na wdrożenie i push/PR wykonano
+  `npm run deploy:studio` PASS. Wersja Cloudflare
+  `4ffa4951-2ce0-444c-8a50-354a27552705`; odczyt hostowanego HTML i bundla
+  jest identyczny z przygotowanym artefaktem.
+- `sanity deploy --external --url https://studio.aleksandraolesiewicz.com
+--yes --schema-required` PASS, wdrożono 1/1 schematów i zarejestrowano
+  istniejący panel. MCP wskazuje schemat
+  `uEiC9KTI3ZMUpceRzuybhUYV6tV1-WdK1S1u5Lk3PeJ2A4g`, z 11 polami.
+  Wcześniejsza próba z `--no-build` została zatrzymana przez CLI, ponieważ
+  nie można łączyć tej flagi z `--external`; standardowe polecenie przeszło.
+- Zalogowany odbiór pięciu landingów PL: wszystkie 11 pól jest dostępnych
+  w formularzu, zero „Unknown fields found”. [Wyniki UI](../output/sanity-studio-fix-2026-10-12/studio-ui-checks.json)
+  i [zrzut](../output/sanity-studio-fix-2026-10-12/studio-fixed.png).
+  Pięć rewizji `_rev` przed i po wdrożeniu jest identycznych. Nie edytowano
+  ani nie publikowano treści; karta artykułu użytkownika pozostała zachowana.
+- Następny krok: wysłać zatwierdzoną poprawkę testów w PR, potwierdzić Quality
+  i po scaleniu automatyczne wdrożenie z main. Ręczna naprawa Studio już działa.
+
 ### Nazwa PMOS (PCOS) i usunięcie plików recenzji, 12.10.2026
 
 - Z repozytorium usunięto osiem plików `output/ebook-landings-3a-2026-10-11/`.

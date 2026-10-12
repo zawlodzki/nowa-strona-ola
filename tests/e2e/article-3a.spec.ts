@@ -1,4 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
+import {
+  dismissConsentBanner,
+  mockConsentPolicy,
+} from "./helpers/consent-banner";
 
 const articlePath = "/blog/przygotowanie-do-konsultacji-pcos/";
 const articleHeading =
@@ -98,7 +102,9 @@ test("related articles appear at half of the text and can be collapsed", async (
 test("sharing supports hover, keyboard, safe URLs and clipboard fallback", async ({
   page,
 }) => {
+  await mockConsentPolicy(page);
   await openArticle(page);
+  await dismissConsentBanner(page);
   const trigger = page.getByRole("button", { name: "Udostępnij", exact: true });
   const panel = page.getByRole("dialog", { name: "Udostępnij artykuł" });
   await trigger.hover();
