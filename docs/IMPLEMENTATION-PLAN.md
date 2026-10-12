@@ -862,5 +862,24 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
 - [x] Opisać wykorzystanie istniejącego modelu `ebook`, statusów oferty
       i mapowania CMS, bez powielania kolekcji lub treści PMOS (PCOS).
 - [x] Sprawdzić walidator skilla, format i lokalne odnośniki.
-- [ ] Przy pierwszym nowym ebooku sprawdzić rezultat użycia skilla na gotowym
-      landingu i poprawić instrukcję na podstawie rzeczywistych wyników.
+- [x] Zastosować skill do pięciu brakujących landingów PL; przygotować osobne
+      copy, diagramy i karty pracy.
+
+## Pięć landingów e-booków, 11.10.2026
+
+- [x] Rozpocząć pracę z aktualnego `origin/main` 134bb5b, zachować poprzednią
+      gałąź i pliki użytkownika; uruchomić trzech subagentów.
+- [x] Zastąpić pięć fixture'ów z treścią suplementów własnymi treściami PL,
+      SEO, rozdziałami, materiałami i FAQ.
+- [x] Przenieść etykiety okładki, diagramu i karty do schematu, GROQ,
+      TypeGen, mappera, HTML i Markdown. Nieznany diagram blokuje build.
+- [x] Przygotować kopię obecnych dokumentów i zakres patcha tylko pięciu
+      istniejących produktów, z zachowaniem referencji, ceny i dostępności.
+- [x] Potwierdzić pełne `npm run verify` i odbiór pięciu stron: 287 unit,
+      423 E2E, 88 dokumentów bez błędów, 17 zgodnych stron Content Lake.
+- [x] Wdrożyć schemat, zaktualizować rejestrację istniejącego Studio po
+      dodatkowej zgodzie i opublikować pięć landingów; odczytem potwierdzić
+      zgodność oraz zachowane pola produktów.
+- [x] Na dodatkowe zlecenie wykonać push i otworzyć
+      [PR #74](https://github.com/zawlodzki/nowa-strona-ola/pull/74) do main.
+- [ ] Potwierdzić nowe UI na hostowanym serwisie po włączeniu kodu do main.

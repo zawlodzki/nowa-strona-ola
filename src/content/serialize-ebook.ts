@@ -18,10 +18,20 @@ export function serializeEbookView(view: EbookView, language: Locale): string {
     view.subtitle,
     view.priceLabel,
     availabilityLabel(view.availability, language),
+    heading(2, landing.heroTitle),
     landing.heroLead,
+    ...(view.cover?.src
+      ? [`![${view.cover.label}](${view.cover.src})`]
+      : [landing.coverTopic, bullets(landing.coverArt)]),
+    landing.coverCaption,
+    ...landing.facts.map((fact) => `${fact.title} · ${fact.detail}`),
     heading(2, landing.problemTitle),
     ...landing.problemParagraphs,
+    ...(landing.problemMedia?.src
+      ? [`![${landing.problemMedia.label}](${landing.problemMedia.src})`]
+      : []),
     bullets(landing.problemQuestions),
+    landing.problemCaption,
     heading(2, landing.audienceTitle),
     landing.audienceLead,
     ...landing.audienceItems.flatMap((item) => [
@@ -31,18 +41,29 @@ export function serializeEbookView(view: EbookView, language: Locale): string {
     landing.educationNote,
     heading(2, landing.contentsTitle),
     landing.contentsLead,
+    bullets(landing.ingredients),
     ...view.chapters.flatMap((chapter, index) => [
       heading(3, `${String(index + 1).padStart(2, "0")} ${chapter.title}`),
       chapter.summary,
     ]),
     heading(2, landing.sampleTitle),
     landing.sampleLead,
+    ...(landing.sampleMedia?.src
+      ? [`![${landing.sampleMedia.label}](${landing.sampleMedia.src})`]
+      : [
+          landing.sampleKicker,
+          heading(3, landing.sampleSheetTitle),
+          landing.sampleSheetLead,
+          bullets(landing.sampleFields),
+          landing.sampleSheetFooter.join(" · "),
+        ]),
     bullets(view.materials.map((item) => item.title)),
     landing.sampleCaption,
     heading(2, landing.outcomesTitle),
     landing.outcomesLead,
     ...landing.comparisonItems.map(
-      (item) => `- ${item.before} → ${item.after}`,
+      (item) =>
+        `- ${landing.beforeLabel}: ${item.before} → ${landing.afterLabel}: ${item.after}`,
     ),
     landing.outcomesNote,
     heading(2, landing.authorTitle),
@@ -50,6 +71,10 @@ export function serializeEbookView(view: EbookView, language: Locale): string {
     ...view.sources.map((source) => `[${source.title}](${source.href})`),
     heading(2, landing.offerTitle),
     landing.offerLead,
+    view.format.split("-").join(" + ").toUpperCase(),
+    language === "pl"
+      ? `${view.chapters.length} rozdziałów`
+      : `${view.chapters.length} chapters`,
     view.priceLabel,
     view.lowestPriceNote,
     bullets(view.materials.map((item) => item.title)),

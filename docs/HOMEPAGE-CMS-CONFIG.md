@@ -1,5 +1,54 @@
 # Homepage 3a — konfiguracja treści CMS
 
+## Pięć landingów e-booków, 11.10.2026
+
+Źródło decyzji: użytkownik zlecił aktualizację repo z main, użycie skilla
+ebook-landing-3a, pracę subagentów i zastąpienie pięciu zaślepek w Sanity.
+Research PCOS i perimenopauzy z 13.09.2026 jest źródłem koncepcji, nie
+poleceniem uruchomienia sprzedaży ani potwierdzeniem gotowych plików.
+
+| Wartość                                                                                                                                          | Mapowanie CMS                                                                                                                                                                                | Stan                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Pięć istniejących produktów PL: Badania, które mają sens; Szczupła, a jednak PCOS; Waga Cię okłamuje; Czy to już?; Noc zaczyna się o osiemnastej | Istniejące `ebook-<slug>-pl`, bez nowych dokumentów `page`                                                                                                                                   | Zakres zlecenia 11.10.2026                                                                       |
+| Cena 97 PLN brutto, status Wkrótce dostępny                                                                                                      | `priceGross = 97`, `currency = PLN`, `availability = planned`                                                                                                                                | Zachowane ustalenia 06.10.2026; brak checkoutu                                                   |
+| Przyszłe PDF + EPUB                                                                                                                              | `format = pdf-epub`                                                                                                                                                                          | Wcześniejsza decyzja o formatach; pliki niegotowe                                                |
+| Osobne copy, planowane rozdziały i materiały, FAQ i źródła                                                                                       | `landing`, `chapters`, `includedMaterials`, `sources`, `seo`                                                                                                                                 | Propozycje na podstawie researchu; zakres publikacji zapowiedzi                                  |
+| Okładka i podgląd karty dopasowane do tematu                                                                                                     | `landing.coverTopic`, `coverArt`, `coverCaption`, `problemVisual`, `problemCaption`, `sampleKicker`, `sampleSheetTitle`, `sampleSheetLead`, `sampleSheetFooter`, `beforeLabel`, `afterLabel` | Nowe kontrolowane pola w kodzie; `problemVisual`: results, plate, measurements, journal, evening |
+| Navbar, hero, problem, dla kogo, zawartość, efekty, cena, opinie, FAQ i footer; dodatkowo karta i autorka                                        | Wspólny `Ebook3a`, istniejące pola landingu i shell                                                                                                                                          | Zachowana struktura skilla; brak dowolnego CSS w CMS                                             |
+| Obecna lista oczekujących i opinie o współpracy                                                                                                  | `waitlist.form`, `landing.testimonials`, `testimonialsScope = cooperation`                                                                                                                   | Referencje zachowane; opinii nie przedstawiamy jako recenzji ebooków                             |
+
+Przed zapisem zachowano pięć dokumentów. Pliki tej kopii usunięto z repozytorium 12.10.2026.
+Stan faktycznego zapisu i kontroli jest w [PROGRESS.md](PROGRESS.md).
+Nie ustalono terminu wydania, finalnych plików, liczby stron ani wyników zdrowotnych.
+
+**Wykonana konfiguracja 11.10.2026:** pięć istniejących dokumentów PL
+opublikowano w `dyuqkn8c/production`. Wartości z tabeli są zapisane w CMS;
+rozdziały i materiały pozostają propozycją przyszłych ebooków, opisaną w copy
+jako planowana. Patch obejmował wyłącznie `chapters`, `includedMaterials`,
+`sources`, `seo`, `landing` i `format`. Zachowano wszystkie pozostałe pola,
+w tym cenę, dostępność, okładki, autorkę i listę oczekujących. Szkice i publikację
+porównano z plikami przed i po zapisie, z kontrolą rewizji. Te pliki usunięto z repozytorium 12.10.2026.
+Schemat wdrożono, a rejestrację istniejącego Studio zaktualizowano po dodatkowej
+odpowiedzi użytkownika „Tak, zaktualizuj rejestrację Studio”. Kod nowego
+renderera i panelu redakcyjnego wymaga jeszcze scalenia do main oraz wdrożenia.
+
+## Nazwa PMOS (PCOS) w dwóch landingach, 12.10.2026
+
+Źródło: polecenie użytkownika z 12.10.2026. Zasady są te same co w PR #73.
+W plikach `badania-ktore-maja-sens.ts` i `szczupla-a-jednak-pcos.ts` samodzielne
+„PCOS” w copy dla odwiedzających brzmi „PMOS”, potem twarda spacja U+00A0,
+potem „(PCOS)”. Zwykła spacja rozcina nagłówek na „PMOS” i „(PCOS)” przy 320
+i 390 px. Pierwsze wystąpienie w zdaniu jest pełne. Następne w tym samym zdaniu
+brzmi „PMOS”. Tytuł SEO szczupłego e-booka napisano ręcznie, bez ucinania
+zdania w środku. Brzmi „Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz”
+(54 znaki), bo pełna forma ma 61 znaków. Zostały tytuły „Wytyczne PCOS 2023”,
+zdania, które je cytują, slugi, identyfikatory i oferta „Suplementy w PCOS”.
+
+Stan: kod i fixture’y mają nowe brzmienie. Sanity nie było zapisywane.
+Opublikowane dokumenty PL w `dyuqkn8c/production` nadal mają poprzednie zdania.
+Zapis w CMS ma powtórzyć listę zamian z opisu PR. Nie uruchamiać
+`scripts/prepare-ebook-landings.ts`, żeby zapisać Sanity.
+
 ## Decyzje użytkownika z sesji pytań, 11.10.2026
 
 Źródło: odpowiedzi użytkownika w sesji 11.10.2026 na listę otwartych decyzji.

@@ -4,6 +4,8 @@
 
 Wkrótce dostępny
 
+## Zrób porządek z suplementami.
+
 Zanim kupisz kolejne opakowanie, sprawdź, po co je bierzesz.
 
 ## Kolejna kapsułka. To samo pytanie: „Czy to ma sens?”
@@ -22,11 +24,20 @@ Zapisz, co bierzesz i po co.
 
 ## Jedna karta. Dobry początek.
 
+### Moja półka. Moje pytania.
+
+- Nazwa preparatu
+- Dlaczego go stosuję?
+- Co chcę omówić ze specjalistą?
+- Miesięczny koszt
+
+Karta audytu półki · Podgląd koncepcji
+
 - Karta audytu suplementów
 
 ## Mniej zgadywania. Więcej jasności.
 
-- „Biorę, bo polecano.” → Wiesz, o co zapytać.
+- Przed audytem: „Biorę, bo polecano.” → Po audycie: Wiesz, o co zapytać.
 
 ## Dobra decyzja zaczyna się od „po co?”.
 

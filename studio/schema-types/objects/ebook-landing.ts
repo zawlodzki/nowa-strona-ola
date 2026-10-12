@@ -150,6 +150,99 @@ export const ebookLandingType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "coverTopic",
+      title: "Temat na okładce",
+      type: "string",
+      validation: (rule) => rule.max(200),
+    }),
+    defineField({
+      name: "coverArt",
+      title: "Etykiety ilustracji okładki",
+      type: "array",
+      of: [{ type: "string", validation: (rule) => rule.required().max(80) }],
+      validation: (rule) => rule.length(3),
+    }),
+    defineField({
+      name: "coverCaption",
+      title: "Podpis okładki",
+      type: "string",
+      validation: (rule) => rule.max(200),
+    }),
+    defineField({
+      name: "problemCaption",
+      title: "Podpis ilustracji problemu",
+      type: "string",
+      validation: (rule) => rule.max(200),
+    }),
+    defineField({
+      name: "problemVisual",
+      title: "Schemat problemu",
+      type: "string",
+      options: {
+        list: [
+          { title: "Półka suplementów", value: "supplements" },
+          { title: "Porządkowanie wyników", value: "results" },
+          { title: "Komponowanie posiłku", value: "plate" },
+          { title: "Obserwacje poza wagą", value: "measurements" },
+          { title: "Dziennik obserwacji", value: "journal" },
+          { title: "Wieczorne nawyki", value: "evening" },
+        ],
+      },
+      description:
+        "Kontrolowana ilustracja związana z tematem. Nowe produkty wymagają pełnej konfiguracji prezentacji.",
+      validation: (rule) =>
+        rule.custom((value) =>
+          !value ||
+          [
+            "supplements",
+            "results",
+            "plate",
+            "measurements",
+            "journal",
+            "evening",
+          ].includes(value)
+            ? true
+            : "Wybierz jeden z dostępnych schematów problemu.",
+        ),
+    }),
+    defineField({
+      name: "sampleKicker",
+      title: "Etykieta karty pracy",
+      type: "string",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
+      name: "sampleSheetTitle",
+      title: "Tytuł karty pracy",
+      type: "string",
+      validation: (rule) => rule.max(200),
+    }),
+    defineField({
+      name: "sampleSheetLead",
+      title: "Lead karty pracy",
+      type: "text",
+      validation: (rule) => rule.max(320),
+    }),
+    defineField({
+      name: "sampleSheetFooter",
+      title: "Stopka karty pracy",
+      type: "array",
+      of: [{ type: "string", validation: (rule) => rule.required().max(80) }],
+      validation: (rule) => rule.length(2),
+    }),
+    defineField({
+      name: "beforeLabel",
+      title: "Etykieta przed lekturą",
+      type: "string",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
+      name: "afterLabel",
+      title: "Etykieta po lekturze",
+      type: "string",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
       name: "heroTitle",
       title: "Tytuł hero",
       type: "string",
@@ -220,7 +313,7 @@ export const ebookLandingType = defineType({
     }),
     defineField({
       name: "problemQuestions",
-      title: "Pytania przy półce",
+      title: "Pytania przy schemacie",
       type: "array",
       of: [{ type: "string" }],
       validation: (rule) => rule.required().length(3),
@@ -229,7 +322,7 @@ export const ebookLandingType = defineType({
       name: "problemMedia",
       title: "Ilustracja problemu",
       description:
-        "Opcjonalna. Bez pliku renderer pokazuje statyczną półkę z mockupu.",
+        "Opcjonalna. Bez pliku renderer pokazuje wybrany schemat problemu.",
       type: "mediaObject",
     }),
     defineField({
@@ -299,7 +392,7 @@ export const ebookLandingType = defineType({
     }),
     defineField({
       name: "ingredients",
-      title: "Omawiane składniki",
+      title: "Tematy ebooka",
       type: "array",
       of: [{ type: "string" }],
       validation: (rule) => rule.required().min(1).max(12),

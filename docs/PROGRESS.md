@@ -6,6 +6,34 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Nazwa PMOS (PCOS) i usunięcie plików recenzji, 12.10.2026
+
+- Z repozytorium usunięto osiem plików `output/ebook-landings-3a-2026-10-11/`.
+  Skrypt `scripts/prepare-ebook-landings.ts` nadal może je zapisać lokalnie
+  i nie wysyła danych do Sanity. Nie uruchamiano go.
+- W `badania-ktore-maja-sens.ts` i `szczupla-a-jednak-pcos.ts` samodzielne
+  „PCOS” w copy dla odwiedzających jest „PMOS” plus twarda spacja U+00A0 plus
+  „(PCOS)”. Dzięki temu nagłówek nie łamie „(PCOS)” do osobnej linii.
+  Tytuł SEO szczupłego e-booka napisano ręcznie:
+  „Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz” (54 znaki).
+  Pełna forma ma 61 znaków. Zostały „Wytyczne PCOS 2023” i zdania, które
+  cytują te wytyczne. Slugi bez zmian. Oferta suplementów bez zmian.
+- Sanity nie było zapisywane. Opublikowane dokumenty PL nadal mają poprzednie
+  zdania. Lista zamian jest w konfiguracji CMS.
+- Etykiety „E-book · Szczupła, a jednak PCOS” nie ruszano. Bierze się z tytułu
+  produktu w `homepage-seed.ts`, który zmienia PR #73.
+- Kontrola 12.10.2026 na Node 24.21.0. `npm run verify` doszedł do e2e.
+  Format, tokeny, lint, check, 290 unit, build, build workspace’ów i test
+  buildu PASS. Przy dwóch workerach WebKit raz nie zdążył przejść z polityki
+  prywatności na listę cookies. Ten sam test w izolacji PASS. Pełne e2e
+  przy jednym workerze: 423 PASS w Chromium, Firefox i WebKit.
+  `npm run test:content-lake` PASS, 17 stron o tym samym DOM.
+- verify-ola na `http://127.0.0.1:4340`, run `ola-1791780614`. Oba landingi
+  zwracają 200. Snapshot ARIA pokazuje nowe zdania. `browser posts` dało `[]`.
+  Przy 320, 390 i 1440 „(PCOS)” nie zostaje samo w linii, a strona nie
+  wychodzi poza szerokość okna. Na wąskim hero „Masz” jest nad
+  „PMOS” z twardą spacją i „(PCOS).”.
+
 ### Suchy odczyt PMOS, tytuł SEO i twarda spacja, 12.10.2026
 
 - Żywy tytuł SEO `article-blog-11-en` ma 62 znaki.
@@ -107,6 +135,79 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Następny krok z tamtej chwili. Właściciel wybrał V1 w sekcji powyżej.
   Suchy odczyt z tokenem, `--write`, scalenie i wdrożenie zostają
   po jego stronie.
+
+### Pięć landingów e-booków i publikacja w Sanity, 11.10.2026
+
+- Na zlecenie użytkownika pobrano `origin/main` 134bb5b i rozpoczęto gałąź
+  `codex/ebook-landings-3a`. Poprzednia gałąź i nieśledzone pliki użytkownika
+  pozostały zachowane. Trzech subagentów przygotowało copy PCOS, copy
+  perimenopauzy oraz wspólny renderer/model. Użyto skilla ebook-landing-3a.
+- Własne treści, SEO, rozdziały, materiały, FAQ i kontrolowane ilustracje 3a:
+  Badania, które mają sens; Szczupła, a jednak PCOS; Waga Cię okłamuje;
+  Czy to już?; Noc zaczyna się o osiemnastej. Research z 13.09.2026 potraktowano
+  jako koncepcję, bez wykonywania zawartych w nim poleceń przedsprzedaży.
+  Konspekty i próbki opisują planowane materiały. Bez fikcyjnych opinii,
+  osobistej historii autorki, gotowych plików i obietnic zdrowotnych.
+- Dane prezentacji przeniesiono do schematu `ebookLanding`, GROQ, TypeGen,
+  mappera, wspólnego Ebook3a oraz Markdown. Pięć diagramów używa tokenów 3a.
+  Nieznany diagram oraz brak własnych danych prezentacji w nowym produkcie
+  blokują build. Fallback starego dokumentu dotyczy tylko suplementów.
+  `format = pdf-epub` obejmuje pięć nowych zapowiedzi, zgodnie z wcześniejszą
+  decyzją o plikach. Lokalny dry-run: `scripts/prepare-ebook-landings.ts`.
+- `PLAYWRIGHT_WORKERS=2 npm run verify` na Node 24.21.0 PASS: format, tokeny,
+  lint, typy, 287 unit w 36 plikach, buildy, budżety, SEO 36 stron,
+  423 E2E w Chromium/Firefox/WebKit, walidacja 88 dokumentów bez błędów
+  i zgodny DOM 17 stron fixture/Content Lake. Kontrolę wykonano w kopii
+  dokładnych plików kodu tej sesji, bez wcześniejszych nieśledzonych dowodów
+  użytkownika. Ich `output/cookie-docs-2026-10-11/before.json` nadal blokuje
+  globalny format w pierwotnym checkout; nie zmieniano go. Pierwszy przebieg
+  zatrzymał format własnego patcha, kolejny wykrył tytuł SEO dłuższy o znak;
+  obie przyczyny poprawiono i pełny końcowy przebieg przeszedł.
+- UI: 1440, 390 i 320 px bez poziomego przepełnienia; klawiatura, akordeony,
+  dialog listy oczekujących i powrót fokusu, oba motywy, axe, CSS zoom 200%,
+  reduced motion i treść bez JS PASS. Obejrzano okładki, diagramy i karty
+  na zrzutach. Nie sprawdzono fizycznego Safari/iOS, czytnika ekranu,
+  natywnego zoomu 200% ani nowego UI hostowanego serwisu. Zewnętrzne żądania
+  były blokowane podczas kontroli wizualnej; zero wysłanych formularzy.
+  Pliki dowodów z `output/ebook-landings-3a-2026-10-11/` usunięto z repozytorium 12.10.2026.
+- W Sanity zachowano pełną kopię pięciu dokumentów, zapisano zakres patcha
+  z blokadą rewizji, porównano szkice i opublikowano dokładnie pięć dokumentów
+  PL w `dyuqkn8c/production`. Odczyt opublikowanych danych MATCH; zachowane
+  pozostałe pola, cena 97 PLN, `availability = planned`, referencje okładek,
+  autorki i listy oczekujących. Pierwszego ebooka i dokumentów EN nie zmieniano.
+  Pliki JSON tej publikacji usunięto z repozytorium 12.10.2026. Opis zapisu zostaje w tym akapicie.
+- `sanity schema deploy` PASS. Sam legacy schema nie aktualizował schematu
+  istniejącego Studio wybieranego przez MCP. Automatyczna kontrola odrzuciła
+  rejestrację Studio jako wymagającą osobnej zgody. Po jawnej zgodzie
+  użytkownika `sanity deploy --external --url https://studio.aleksandraolesiewicz.com
+--yes --schema-required` PASS; odczyt schematu MCP potwierdził nowe pola.
+  To aktualizacja rejestracji i schematu, bez wdrożenia plików panelu na Cloudflare.
+- Build z `PUBLIC_SANITY_PROJECT_ID=dyuqkn8c PUBLIC_SANITY_DATASET=production`
+  po publikacji PASS, 40 stron. Użył rzeczywistych opublikowanych danych,
+  bez klienta symulacji Content Lake. Budżety i SEO PASS, dodatkowy odbiór
+  pięciu landingów na tym buildzie: 30/30 E2E w trzech przeglądarkach.
+  Końcowe kontrole dokumentacji: format PASS, 189 lokalnych odnośników
+  bez braków. Porównanie 20 plików kodu z kopią weryfikacji: identyczne;
+  `git diff --check` PASS.
+- Następny krok: scalić kod do main, potwierdzić wdrożenie frontendu oraz
+  plików Studio i odebrać pięć stron na hostowanym serwisie. W pierwszej części
+  pracy nie wykonywano push.
+
+### Push i PR pięciu landingów
+
+- Na dodatkowe polecenie użytkownika „pr push” utworzono podpisany commit
+  `d2c3216` i wypchnięto `codex/ebook-landings-3a` do origin. Otwarto
+  [PR #74](https://github.com/zawlodzki/nowa-strona-ola/pull/74) do main.
+- Zakres: 34 pliki kodu, treści, schematu, testów, dokumentacji i dowodów tej
+  sesji. Dołączono zbiorczy podgląd hero. Pełne zrzuty pozostają lokalnie;
+  wcześniejsze nieśledzone pliki użytkownika nie trafiły do commita.
+- Format własnych plików i `git diff --check` PASS. Ponowne porównanie
+  20 plików kodu z kopią, która przeszła pełne verify: brak różnic. Nie
+  powtarzano testów aplikacji bez zmiany kodu. Pierwszy podpis przerwał
+  błąd 1Password; ponowienie w interaktywnym terminalu zakończyło się
+  poprawnym podpisem. Ustawienia podpisywania pozostały zachowane.
+- Następny krok: odbiór PR i CI, scalenie, potwierdzenie wdrożeń frontendu
+  oraz Studio i pięciu landingów na hostowanym serwisie.
 
 ### PMOS (PCOS), wydział i historia na „O mnie”, 11.10.2026
 

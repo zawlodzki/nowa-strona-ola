@@ -13,6 +13,7 @@ import {
   formatPriceGross,
 } from "@/lib/offer";
 import { ebookPath } from "@/lib/paths";
+import { pickSiteImage } from "@/lib/site-images";
 import type {
   EbookAvailability,
   EbookTopic,
@@ -21,6 +22,9 @@ import type {
   MediaSpec,
   TestimonialsContent,
 } from "@/sections/types";
+
+export type EbookProblemVisual =
+  "supplements" | "results" | "plate" | "measurements" | "journal" | "evening";
 
 export interface EbookChapter {
   title: string;
@@ -98,6 +102,17 @@ export interface EbookView {
   waitlist?: EbookWaitlist;
   landing: {
     variant: "cherry3a";
+    coverTopic: string;
+    coverArt: [string, string, string];
+    coverCaption: string;
+    problemCaption: string;
+    problemVisual: EbookProblemVisual;
+    sampleKicker: string;
+    sampleSheetTitle: string;
+    sampleSheetLead: string;
+    sampleSheetFooter: [string, string];
+    beforeLabel: string;
+    afterLabel: string;
     heroTitle: string;
     heroLead: string;
     primaryLabel: string;
@@ -175,6 +190,17 @@ type RawEbook = {
     | null;
   landing?: {
     variant?: string | null;
+    coverTopic?: string | null;
+    coverArt?: string[] | null;
+    coverCaption?: string | null;
+    problemCaption?: string | null;
+    problemVisual?: string | null;
+    sampleKicker?: string | null;
+    sampleSheetTitle?: string | null;
+    sampleSheetLead?: string | null;
+    sampleSheetFooter?: string[] | null;
+    beforeLabel?: string | null;
+    afterLabel?: string | null;
     heroTitle?: string | null;
     heroLead?: string | null;
     primaryLabel?: string | null;
@@ -234,7 +260,7 @@ function required(value: string | null | undefined, label: string): string {
 }
 
 function requiredList(
-  values: (string | null | undefined)[] | null | undefined,
+  values: readonly (string | null | undefined)[] | null | undefined,
   label: string,
   min: number,
   max: number,
@@ -246,6 +272,91 @@ function requiredList(
   return items;
 }
 
+function toProblemVisual(value: string | null | undefined): EbookProblemVisual {
+  switch (value) {
+    case "supplements":
+    case "results":
+    case "plate":
+    case "measurements":
+    case "journal":
+    case "evening":
+      return value;
+    default:
+      throw new Error(
+        `Nieznana ilustracja problemu e-booka: ${value ?? "brak"}.`,
+      );
+  }
+}
+
+function presentationFields(
+  landing: NonNullable<RawEbook["landing"]>,
+  slug: string,
+  language: Locale,
+) {
+  const legacy =
+    slug === "suplementy-w-pcos" || slug === "supplements-in-pcos"
+      ? ebookCopy[language]
+      : undefined;
+  const [one, two, three] = requiredList(
+    landing.coverArt ?? legacy?.coverArt,
+    "etykiety okładki",
+    3,
+    3,
+  );
+  const [footerOne, footerTwo] = requiredList(
+    landing.sampleSheetFooter ?? legacy?.sampleSheetFooter,
+    "stopka próbki",
+    2,
+    2,
+  );
+  return {
+    coverTopic: required(
+      landing.coverTopic ?? legacy?.coverTopic,
+      "temat okładki",
+    ),
+    coverArt: [
+      required(one, "etykieta okładki"),
+      required(two, "etykieta okładki"),
+      required(three, "etykieta okładki"),
+    ] satisfies [string, string, string],
+    coverCaption: required(
+      landing.coverCaption ?? legacy?.coverCaption,
+      "podpis okładki",
+    ),
+    problemCaption: required(
+      landing.problemCaption ?? legacy?.problemCaption,
+      "podpis ilustracji problemu",
+    ),
+    problemVisual: toProblemVisual(
+      landing.problemVisual ?? (legacy ? "supplements" : undefined),
+    ),
+    sampleKicker: required(
+      landing.sampleKicker ?? legacy?.sampleKicker,
+      "etykieta próbki",
+    ),
+    sampleSheetTitle: required(
+      landing.sampleSheetTitle ?? legacy?.sampleSheetTitle,
+      "tytuł karty pracy",
+    ),
+    sampleSheetLead: required(
+      landing.sampleSheetLead ?? legacy?.sampleSheetLead,
+      "lead karty pracy",
+    ),
+    sampleSheetFooter: [
+      required(footerOne, "stopka próbki"),
+      required(footerTwo, "stopka próbki"),
+    ] satisfies [string, string],
+    beforeLabel: required(
+      landing.beforeLabel ?? legacy?.beforeLabel,
+      "etykieta przed",
+    ),
+    afterLabel: required(
+      landing.afterLabel ?? legacy?.afterLabel,
+      "etykieta po",
+    ),
+  };
+}
+
 function toTopic(value: string | null | undefined): EbookTopic {
   if (value === "pcos" || value === "perimenopause") return value;
   throw new Error(`Nieznany temat e-booka: ${value ?? "brak"}.`);
@@ -253,7 +364,8 @@ function toTopic(value: string | null | undefined): EbookTopic {
 
 function optionalMedia(value: Parameters<typeof toMedia>[0]) {
   if (!value?.alt && !value?.label) return undefined;
-  return toMedia(value);
+  const media = toMedia(value);
+  return pickSiteImage(media.src) ? media : undefined;
 }
 
 export function canPurchase(availability: EbookAvailability): boolean {
@@ -449,6 +561,7 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
     waitlist: toWaitlist(ebook.waitlist, availability, slug),
     landing: {
       variant: "cherry3a",
+      ...presentationFields(landing, slug, language),
       heroTitle: required(landing.heroTitle, "tytuł hero"),
       heroLead: required(landing.heroLead, "lead hero"),
       primaryLabel: required(landing.primaryLabel, "główne CTA"),

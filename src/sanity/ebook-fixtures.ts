@@ -1,6 +1,12 @@
 import type { Locale } from "@ola/shared";
 
 import { ebookCopy } from "@/content/ebook-seed";
+import type { EbookLandingSeed } from "@/content/ebook-landing-seed";
+import { badaniaKtoreMajaSensLanding } from "@/content/ebook-landings/badania-ktore-maja-sens";
+import { szczuplaAJednakPcosLanding } from "@/content/ebook-landings/szczupla-a-jednak-pcos";
+import { wagaLanding } from "@/content/ebook-landings/waga-cie-oklamuje";
+import { czyToJuzLanding } from "@/content/ebook-landings/czy-to-juz";
+import { nocLanding } from "@/content/ebook-landings/noc-zaczyna-sie-o-osiemnastej";
 import { EBOOK_SEED } from "@/content/homepage-seed";
 import { ebookPath } from "@/lib/paths";
 import { homepageCopy } from "@/content/homepage-seed";
@@ -64,8 +70,16 @@ export function waitlistFormFixture(language: Locale) {
 }
 
 export function pcosEbookFixture(language: Locale) {
-  const copy = ebookCopy[language];
   const seed = EBOOK_SEED[0];
+  return buildEbookFixture(language, seed, ebookCopy[language]);
+}
+
+function buildEbookFixture(
+  language: Locale,
+  seed: (typeof EBOOK_SEED)[number],
+  copy: (typeof ebookCopy)[Locale] | EbookLandingSeed,
+) {
+  const waitlist = ebookCopy[language].waitlist;
   const author = authorFixture(language);
   const cards = ebookFixtures(language);
   const card = cards.find((item) => item.slug === seed.slug[language]);
@@ -91,7 +105,7 @@ export function pcosEbookFixture(language: Locale) {
     priceGross: 97,
     lowestPrice30Days: null,
     currency: "PLN" as const,
-    format: "pdf",
+    format: "problemVisual" in copy ? "pdf-epub" : "pdf",
     sortOrder: seed.sortOrder,
     reviewedAt: null,
     cover: card.cover,
@@ -118,9 +132,9 @@ export function pcosEbookFixture(language: Locale) {
     delivery: null,
     checkoutUrl: null,
     waitlist: {
-      buttonLabel: copy.waitlist.buttonLabel,
-      title: copy.waitlist.title,
-      lead: copy.waitlist.lead,
+      buttonLabel: waitlist.buttonLabel,
+      title: waitlist.title,
+      lead: waitlist.lead,
       form: waitlistFormFixture(language),
     },
     sources: [
@@ -137,10 +151,22 @@ export function pcosEbookFixture(language: Locale) {
     },
     translation: {
       language: language === "pl" ? ("en" as const) : ("pl" as const),
-      slug: language === "pl" ? PCOS_SLUG.en : PCOS_SLUG.pl,
+      slug: language === "pl" ? seed.slug.en : seed.slug.pl,
     },
     landing: {
       variant: "cherry3a" as const,
+      coverTopic: copy.coverTopic,
+      coverArt: [...copy.coverArt],
+      coverCaption: copy.coverCaption,
+      problemCaption: copy.problemCaption,
+      problemVisual:
+        "problemVisual" in copy ? copy.problemVisual : "supplements",
+      sampleKicker: copy.sampleKicker,
+      sampleSheetTitle: copy.sampleSheetTitle,
+      sampleSheetLead: copy.sampleSheetLead,
+      sampleSheetFooter: [...copy.sampleSheetFooter],
+      beforeLabel: copy.beforeLabel,
+      afterLabel: copy.afterLabel,
       heroTitle: copy.heroTitle,
       heroLead: copy.heroLead,
       primaryLabel: copy.primaryLabel,
@@ -204,37 +230,24 @@ export function pcosEbookFixture(language: Locale) {
   };
 }
 
-/**
- * Mirrors Content Lake 11.10.2026: the remaining Polish e-books have a
- * landing copied from the PMOS\u00A0(PCOS) e-book as a placeholder, with their own card
- * data and no `seo` (titles stay unique).
- */
-function placeholderEbookFixture(
-  language: Locale,
-  card: ReturnType<typeof ebookFixtures>[number],
-) {
-  const base = pcosEbookFixture(language);
-  return {
-    ...base,
-    id: card.id,
-    slug: card.slug,
-    title: card.title,
-    subtitle: card.subtitle,
-    topic: card.topic,
-    cardDescription: card.cardDescription,
-    coverTone: card.coverTone,
-    sortOrder: card.sortOrder,
-    cover: card.cover,
-    seo: null,
-  };
-}
+export const additionalEbookLandings: ReadonlyMap<string, EbookLandingSeed> =
+  new Map<string, EbookLandingSeed>([
+    ["badania-ktore-maja-sens", badaniaKtoreMajaSensLanding],
+    ["szczupla-a-jednak-pcos", szczuplaAJednakPcosLanding],
+    ["waga-cie-oklamuje", wagaLanding],
+    ["czy-to-juz", czyToJuzLanding],
+    ["noc-zaczyna-sie-o-osiemnastej", nocLanding],
+  ]);
 
 function ebooksWithLanding(language: Locale) {
   const pcos = pcosEbookFixture(language);
   if (language !== "pl") return [pcos];
-  return ebookFixtures(language).map((card) =>
-    card.slug === pcos.slug ? pcos : placeholderEbookFixture(language, card),
-  );
+  return EBOOK_SEED.map((seed) => {
+    if (seed.slug.pl === pcos.slug) return pcos;
+    const copy = additionalEbookLandings.get(seed.slug.pl);
+    if (!copy) throw new Error(`Brak treści landingu ${seed.slug.pl}.`);
+    return buildEbookFixture(language, seed, copy);
+  });
 }
 
 export function fixtureEbook(language: Locale, slug: string) {

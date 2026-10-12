@@ -12,6 +12,7 @@ import ReviewCard from "@/design-system/components/ReviewCard.astro";
 import Section from "@/design-system/components/Section.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
 import BookArtDecisions from "@/design-system/decorations/BookArtDecisions.astro";
+import EbookProblemVisual from "@/design-system/decorations/EbookProblemVisual.astro";
 import CheckMark from "@/design-system/decorations/CheckMark.astro";
 import ProductOrbit from "@/design-system/decorations/ProductOrbit.astro";
 import SheetShadow from "@/design-system/decorations/SheetShadow.astro";
@@ -34,6 +35,24 @@ const copy = ebookCopy[lang];
 const { landing, author, chapters, materials } = content;
 const planned = !canPurchase(content.availability);
 const badge = availabilityBadge(content.availability, lang);
+const presentationCopy =
+  lang === "pl"
+    ? {
+        sampleLink: "Zobacz kartę pracy",
+        topics: "Tematy ebooka",
+        package: `E-book ${content.format.split("-").join(" + ").toUpperCase()} + materiały`,
+        chapters: `${chapters.length} rozdziałów`,
+      }
+    : {
+        sampleLink: "See the worksheet",
+        topics: "E-book topics",
+        package: `${content.format.split("-").join(" + ").toUpperCase()} e-book + materials`,
+        chapters: `${chapters.length} chapters`,
+      };
+const offerIncludes = [
+  presentationCopy.chapters,
+  ...materials.map((material) => material.title),
+];
 const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${content.currencyLabel}`;
 ---
 
@@ -45,7 +64,7 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
     description={landing.heroLead}
   >
     <p class="ebook3a-eyebrow" slot="kicker">
-      {copy.heroEyebrow}
+      {`E-book · ${content.title}`}
     </p>
     <Button slot="actions" as="a" href="#cena" arrow>
       {landing.primaryLabel}
@@ -58,17 +77,28 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
         <ProductOrbit />
       </div>
       <div class="ebook3a-book">
-        <BookCover
-          title={content.title}
-          subtitle={content.subtitle ?? ""}
-          author={author.name}
-          topic={copy.coverTopic}
-          tone={content.coverTone}
-        >
-          <BookArtDecisions slot="art" labels={copy.coverArt} />
-        </BookCover>
+        {content.cover?.src ? (
+          <SiteImage
+            src={content.cover.src}
+            alt={content.cover.label}
+            width={504}
+            height={714}
+            loading="eager"
+            fit="contain"
+          />
+        ) : (
+          <BookCover
+            title={content.title}
+            subtitle={content.subtitle ?? ""}
+            author={author.name}
+            topic={landing.coverTopic}
+            tone={content.coverTone}
+          >
+            <BookArtDecisions slot="art" labels={landing.coverArt} />
+          </BookCover>
+        )}
       </div>
-      <figcaption class="ebook3a-caption">{copy.coverCaption}</figcaption>
+      <figcaption class="ebook3a-caption">{landing.coverCaption}</figcaption>
     </figure>
   </Hero>
 
@@ -92,13 +122,26 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
         ))}
       </div>
       <div class="ebook3a-shelf">
-        <SupplementBottles labels={copy.bottleLabels} />
+        {landing.problemMedia?.src ? (
+          <SiteImage
+            src={landing.problemMedia.src}
+            alt={landing.problemMedia.label}
+            width={708}
+            height={420}
+            loading="lazy"
+            fit="contain"
+          />
+        ) : landing.problemVisual === "supplements" ? (
+          <SupplementBottles labels={copy.bottleLabels} />
+        ) : (
+          <EbookProblemVisual kind={landing.problemVisual} />
+        )}
         <div class="ebook3a-questions">
           {landing.problemQuestions.map((question) => (
             <p>{question}</p>
           ))}
         </div>
-        <p class="ebook3a-caption">{copy.problemCaption}</p>
+        <p class="ebook3a-caption">{landing.problemCaption}</p>
       </div>
     </Container>
   </Section>
@@ -132,8 +175,8 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
         <p class="ebook3a-eyebrow">{copy.contentsEyebrow}</p>
         <Heading>{landing.contentsTitle}</Heading>
         <p class="ebook3a-copy">{landing.contentsLead}</p>
-        <TextLink href="#podglad">{copy.sampleLink}</TextLink>
-        <p class="ebook3a-cloud" aria-label={copy.ingredientsAria}>
+        <TextLink href="#podglad">{presentationCopy.sampleLink}</TextLink>
+        <p class="ebook3a-cloud" aria-label={presentationCopy.topics}>
           {landing.ingredients.map((item) => (
             <span>{item}</span>
           ))}
@@ -170,26 +213,37 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
     <Container class="ebook3a-split ebook3a-preview">
       <div class="ebook3a-sheet-wrap">
         <SheetShadow />
-        <div class="ebook3a-sheet">
-          <p class="ebook3a-eyebrow">{copy.sampleKicker}</p>
-          <Heading as="h3" size="card">
-            {copy.sampleSheetTitle}
-          </Heading>
-          <p>{copy.sampleSheetLead}</p>
-          <dl>
-            {landing.sampleFields.map((label) => (
-              <div>
-                <dt>{label}</dt>
-                <dd>................................................</dd>
-              </div>
-            ))}
-          </dl>
-          <p class="ebook3a-caption ebook3a-sheet-foot">
-            {copy.sampleSheetFooter.map((item) => (
-              <span>{item}</span>
-            ))}
-          </p>
-        </div>
+        {landing.sampleMedia?.src ? (
+          <SiteImage
+            src={landing.sampleMedia.src}
+            alt={landing.sampleMedia.label}
+            width={708}
+            height={900}
+            loading="lazy"
+            fit="contain"
+          />
+        ) : (
+          <div class="ebook3a-sheet">
+            <p class="ebook3a-eyebrow">{landing.sampleKicker}</p>
+            <Heading as="h3" size="card">
+              {landing.sampleSheetTitle}
+            </Heading>
+            <p>{landing.sampleSheetLead}</p>
+            <dl>
+              {landing.sampleFields.map((label) => (
+                <div>
+                  <dt>{label}</dt>
+                  <dd>................................................</dd>
+                </div>
+              ))}
+            </dl>
+            <p class="ebook3a-caption ebook3a-sheet-foot">
+              {landing.sampleSheetFooter.map((item) => (
+                <span>{item}</span>
+              ))}
+            </p>
+          </div>
+        )}
       </div>
       <div>
         <Heading>{landing.sampleTitle}</Heading>
@@ -213,13 +267,13 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
       <p class="ebook3a-copy ebook3a-outcomes-lead">{landing.outcomesLead}</p>
       <div class="ebook3a-compare">
         <div>
-          <span class="ebook3a-eyebrow">{copy.beforeLabel}</span>
+          <span class="ebook3a-eyebrow">{landing.beforeLabel}</span>
           {landing.comparisonItems.map((item) => (
             <p>{item.before}</p>
           ))}
         </div>
         <div>
-          <span class="ebook3a-eyebrow">{copy.afterLabel}</span>
+          <span class="ebook3a-eyebrow">{landing.afterLabel}</span>
           {landing.comparisonItems.map((item) => (
             <p>{item.after}</p>
           ))}
@@ -268,21 +322,32 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
         <p class="ebook3a-copy">{landing.offerLead}</p>
         <div class="ebook3a-price-book" aria-hidden="true">
           <div class="ebook3a-book">
-            <BookCover
-              title={content.title}
-              subtitle={content.subtitle ?? ""}
-              author={author.name}
-              topic={copy.coverTopic}
-              tone={content.coverTone}
-            >
-              <BookArtDecisions slot="art" labels={copy.coverArt} />
-            </BookCover>
+            {content.cover?.src ? (
+              <SiteImage
+                src={content.cover.src}
+                alt={content.cover.label}
+                width={504}
+                height={714}
+                loading="lazy"
+                fit="contain"
+              />
+            ) : (
+              <BookCover
+                title={content.title}
+                subtitle={content.subtitle ?? ""}
+                author={author.name}
+                topic={landing.coverTopic}
+                tone={content.coverTone}
+              >
+                <BookArtDecisions slot="art" labels={landing.coverArt} />
+              </BookCover>
+            )}
           </div>
         </div>
       </div>
       <div class="ebook3a-offer">
         {badge && <AvailabilityBadge label={badge} />}
-        <p class="ebook3a-eyebrow">{copy.offerPackage}</p>
+        <p class="ebook3a-eyebrow">{presentationCopy.package}</p>
         <Heading as="h3" size="card">
           {content.title}
         </Heading>
@@ -296,7 +361,7 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
           <p class="ebook3a-lowest-price">{content.lowestPriceNote}</p>
         )}
         <ul class="ebook3a-materials">
-          {copy.offerIncludes.map((item) => (
+          {offerIncludes.map((item) => (
             <li>
               <CheckMark />
               <span>{item}</span>
@@ -487,7 +552,10 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
     border-radius: var(--ao-radius-image);
     background: var(--ao-surface);
   }
-  .ebook3a-shelf :global(.ao-deco-bottles) {
+  .ebook3a-book :global(img),
+  .ebook3a-shelf :global(svg),
+  .ebook3a-shelf :global(img),
+  .ebook3a-sheet-wrap :global(img) {
     display: block;
     inline-size: 100%;
     block-size: auto;
