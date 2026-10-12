@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (pomiar Lighthouse i WCAG przed GTM; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
@@ -23,6 +23,27 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   ani polowego INP. Kod strony nie był zmieniany.
 - Następny krok należy do pomiaru po tagach GTM, tym samym zestawem szablonów.
   Ten zapis niczego nie wdraża i nie scala.
+
+### publish-content nie startuje, 12.10.2026
+
+- Po scaleniu #82 (`9a37ca8`) workflow `.github/workflows/publish-content.yml`
+  nie tworzy jobów. Run
+  [38279694507](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38279694507)
+  kończy się błędem pliku, z pustą listą jobów.
+- Przyczyna. `jobs.deploy.env` ustawia `INDEXNOW_PREVIOUS_FILE` wyrażeniem
+  `${{ runner.temp }}`. W `jobs.<job_id>.env` GitHub dopuszcza konteksty
+  `github`, `needs`, `strategy`, `matrix`, `vars`, `secrets` i `inputs`.
+  Kontekstu `runner` tam nie ma. Ten sam `runner.temp` w `steps.with` jest
+  dozwolony i zostaje.
+- Poprawka. Usunięto tę linię z env joba. Pierwszy krok zapisuje
+  `INDEXNOW_PREVIOUS_FILE=$RUNNER_TEMP/indexnow-previous.xml` do `$GITHUB_ENV`.
+  Późniejsze kroki, w tym `scripts/indexnow.ts` i `upload-artifact`, czytają
+  tę samą zmienną.
+- `actionlint` 1.7.7 z shellcheck 0.10.0 na wszystkich workflow kończy się
+  kodem 0. Przed poprawką zgłaszał jeden błąd na linii 26.
+- Nie scalano i nie wdrażano. Następny krok to odbiór tej poprawki CI.
+  Konfiguracja `SITE_INDEXING` i `INDEXNOW_KEY` oraz rzeczywiste zgłoszenie
+  IndexNow pozostają otwarte.
 
 ### IndexNow jako stacked PR, 12.10.2026
 
