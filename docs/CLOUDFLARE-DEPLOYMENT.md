@@ -25,14 +25,14 @@ stagingu. Access dotyczy obu adresów podglądu; dozwolony e-mail:
 
 ## Sekrety i zmienne builda
 
-Podgląd wymaga w każdym środowisku pięciu wartości zadeklarowanych przez
-`secrets.required`: `SANITY_PROJECT_ID`, `SANITY_DATASET`, `SANITY_STUDIO_URL`,
-`SANITY_API_READ_TOKEN` i `PREVIEW_SESSION_SECRET`. Zmienne `ACCESS_TEAM_DOMAIN`
-i `ACCESS_AUD` są w `preview/wrangler.jsonc` (osobny audience stagingu i
-produkcji). Po zalogowaniu Access Worker weryfikuje JWT z JWKS zespołu i wpuszcza
-do szkiców bez sekretu Presentation. Trzy pierwsze sekrety są konfiguracją
-operacyjną, ale również trafiają do sekretów, aby środowiska nie wymagały
-placeholderów w repo. Token musi mieć wyłącznie uprawnienia Viewer, a sekret sesji
+Podgląd wymaga w każdym środowisku czterech wartości zadeklarowanych przez
+`secrets.required`: `SANITY_PROJECT_ID`, `SANITY_DATASET`,
+`SANITY_API_READ_TOKEN` i `PREVIEW_SESSION_SECRET`. Zmienne `ACCESS_TEAM_DOMAIN`,
+`ACCESS_AUD` i `STUDIO_ORIGIN` są w `preview/wrangler.jsonc`. Staging i produkcja
+mają osobne audience; domena Studio jest jawna, a aplikacja nie używa już starego
+sekretu `SANITY_STUDIO_URL`. Po zalogowaniu Access Worker weryfikuje JWT z JWKS
+zespołu i wpuszcza do szkiców bez sekretu Presentation. Identyfikatory projektu
+i datasetu pozostają konfiguracją operacyjną w sekretach. Token musi mieć wyłącznie uprawnienia Viewer, a sekret sesji
 powinien być losowy i mieć co najmniej 32 znaki. Lokalnie skopiować
 `preview/.dev.vars.example` do ignorowanego `preview/.dev.vars`.
 
@@ -201,8 +201,10 @@ Sesja aplikacji podglądu też jest `SameSite=None`. Studio jest statyczną SPA 
 `studio.aleksandraolesiewicz.com` (Sanity logowanie, bez Access). Po wrzuceniu
 plików zarejestrować je w Sanity: `npx sanity deploy --external --url https://studio.aleksandraolesiewicz.com --yes --schema-required`
 z katalogu `studio/`. CORS origin z poświadczeniami:
-`https://studio.aleksandraolesiewicz.com`. Sekret podglądu `SANITY_STUDIO_URL`
-musi wskazywać ten adres.
+`https://studio.aleksandraolesiewicz.com`. Zmienna `STUDIO_ORIGIN` podglądu
+w konfiguracji produkcyjnej wskazuje ten adres. CSP dopuszcza zarówno Studio,
+jak i nadrzędne `https://www.sanity.io`; ciasteczka aktywacji w cross-site iframe
+mają `Partitioned`. Visual Editing jest wstrzykiwane wyłącznie w `preview/`.
 
 ## Hosty i Access
 

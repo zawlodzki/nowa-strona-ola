@@ -7,6 +7,7 @@ import type { APIRoute } from "astro";
 import { sanityApiVersion } from "../../../../../src/sanity/config";
 import {
   createPreviewSession,
+  previewCookiePartition,
   previewPerspectiveCookie,
   previewSessionCookie,
   previewSessionCookieName,
@@ -36,13 +37,12 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   cookies.set(
     previewSessionCookieName,
     await createPreviewSession(env.PREVIEW_SESSION_SECRET),
-    previewSessionCookie,
+    { ...previewSessionCookie, ...previewCookiePartition(request) },
   );
-  cookies.set(
-    perspectiveCookieName,
-    studioPreviewPerspective ?? "drafts",
-    previewPerspectiveCookie,
-  );
+  cookies.set(perspectiveCookieName, studioPreviewPerspective ?? "drafts", {
+    ...previewPerspectiveCookie,
+    ...previewCookiePartition(request),
+  });
 
   return redirect(redirectTo);
 };

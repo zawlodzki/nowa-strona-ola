@@ -23,7 +23,7 @@ import {
 const environment = {
   SANITY_PROJECT_ID: "project123",
   SANITY_DATASET: "production",
-  SANITY_STUDIO_URL: "https://studio.example.com",
+  STUDIO_ORIGIN: "https://studio.example.com",
   SANITY_API_READ_TOKEN: "test",
 };
 

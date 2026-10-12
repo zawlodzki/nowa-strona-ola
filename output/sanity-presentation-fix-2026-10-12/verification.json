@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-12",
+  "node": "24.19.0",
+  "base": "2f47b8655609fb295230b688a0af9166c8d0adb5",
+  "worktree": "/Users/grzesiek/.codex/worktrees/sanity-presentation-fix/nowa strona ola",
+  "worker": "ola-website-preview-production",
+  "version": "bd29bfe8-6c3d-444b-952d-cb2147a7d40d",
+  "checks": {
+    "unit": 304,
+    "e2ePassed": 422,
+    "e2eFlaky": 1,
+    "e2eFailed": 0,
+    "contentLakeDocuments": 88,
+    "contentLakeErrors": 0,
+    "fixtureDomMatches": 17,
+    "liveLocalSsrPages": 7,
+    "changedConsentScenariosRepeats": 21,
+    "unauthorizedProductionStatus": 302
+  },
+  "verifyNote": "Pełny verify zatrzymał się na aliasie testowego klienta w ostatnim etapie. Po poprawce ponowiono cały test:content-lake i nowe kontrole test:build; oba PASS. Reszta bramki PASS; E2E w trybie CI ma 1 flaky WebKit z udanym retry.",
+  "presentation": {
+    "sanityDashboard": {
+      "connected": true,
+      "editEnabled": true,
+      "document": "page-home-pl",
+      "desktop": true,
+      "mobile": true
+    },
+    "directStudio": {
+      "connected": true,
+      "editEnabled": true,
+      "consoleErrors": 0
+    }
+  },
+  "notPerformed": [
+    "zmiana treści pola CMS i obserwacja aktualizacji po zapisie",
+    "natywny zoom 200% w Studio",
+    "czytnik ekranu i urządzenie fizyczne"
+  ],
+  "cmsContentEdited": false,
+  "publicWebsiteDeployed": false,
+  "githubPushed": false
+}

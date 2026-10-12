@@ -6,6 +6,73 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Naprawa Presentation Sanity, 12.10.2026
+
+- Naprawę przygotowano w osobnym worktree `sanity-presentation-fix`.
+  Bazę zaktualizowano do `2f47b8655609fb295230b688a0af9166c8d0adb5`.
+  Dwa ostatnie commity zmieniały wyłącznie kontrole buildu; nowsze
+  `test:build` i SEO PASS. Pierwotny katalog oraz wcześniejsze zmiany
+  dokumentacji i nieśledzone pliki użytkownika zachowano.
+- Logi starego Workera `ca730a63-bc13-4e51-9688-add70d299705` potwierdziły
+  przerwanie SSR przez `audienceSection`. Nowy podgląd korzysta z bieżących
+  rendererów. Test rzeczywistych danych ujawnił też kodowanie Stega w `tone`.
+  Filtr pomija techniczne wartości, klucze obrazów i formatowanie Portable
+  Text; tekst zachowuje metadane edycji. Test używa rzeczywistego encodera.
+- Domena Studio jest teraz jawnym `STUDIO_ORIGIN` w konfiguracji Wranglera.
+  Stary sekret `SANITY_STUDIO_URL` pozostaje niewykorzystywany. CSP dopuszcza
+  produkcyjne Studio i nadrzędne `https://www.sanity.io`. Ciasteczka aktywacji
+  cross-site iframe mają `Partitioned`; podpis, TTL, HttpOnly i Secure
+  pozostają egzekwowane. Nie zmieniano polityk Cloudflare Access.
+- W `preview/` dodano `@sanity/visual-editing-standalone` 2.0.2 i klienta
+  historii. Integracja Astro wstrzykuje go wyłącznie w podglądzie. Metadane
+  HTML oczyszczono ze Stega i ujednolicono białe znaki tytułów z Open Graph.
+  Alias klienta w symulacji Content Lake dopasowuje teraz dokładny moduł,
+  umożliwiając import czystego helpera `@sanity/client/stega`.
+- Przygotowano workflow `deploy-preview.yml`, zależny od udanego Quality
+  dla bieżącego `main`. Workflow uruchomi się po scaleniu PR i udanym Quality.
+  README i instrukcja Cloudflare zawierają sprawdzone komendy oraz nową
+  konfigurację; nie deklarują automatycznego wdrożenia.
+- Weryfikacja na Node 24.19.0: format, tokeny, lint, typy, **304 unit**,
+  buildy wszystkich workspace'ów, budżety i SEO PASS. Końcowe E2E w trybie
+  CI: **422 passed, 1 flaky, 0 failed**; WebKit, wycofanie zgody offline,
+  przeszedł dopiero przy retry. Nie ustalono przyczyny tej niestabilności.
+  Ostatni pełny `verify` zatrzymał się potem na zbyt szerokim aliasie mocka.
+  Po jego poprawce ponowiono cały `test:content-lake`: **88 dokumentów bez
+  błędów, 17 zgodnych stron fixture/Content Lake**, SEO i budżety PASS.
+  Nie deklarujemy sukcesu pojedynczego pełnego polecenia po tej poprawce.
+- Wcześniejsze przebiegi E2E miały timeouty Firefox i wyścigi banera.
+  Pięć scenariuszy dostało istniejącą fixture polityki c15t oraz jawne
+  zamknięcie banera przed interakcją, również po nawigacji. Bez usuwania DOM,
+  wymuszania kliknięć, zmiany zgód lub osłabienia asercji. **21 powtórzeń**
+  zmienionych scenariuszy w trzech silnikach PASS. Trzy timeouty nie odtworzyły
+  się w osobnym przebiegu; pięć izolowanych przypadków Firefox PASS.
+- Lokalny Workerd z produkcyjnym artefaktem i rzeczywistym Content Lake:
+  **7 stron SSR PASS** (home, O mnie, blog, e-booki, konsultacje, kontakt,
+  Badania, które mają sens). Brak sesji i brak sekretu aktywacji: **401**.
+  Prywatny cache, noindex i CSP sprawdzone. Bez wysyłki leadów do produkcji.
+- Audit zależności produkcyjnych preview zgłasza cztery high w łańcuchu
+  Wrangler / Vite plugin / Miniflare / Sharp. Dotyczą lokalnego narzędzia
+  i librsvg w zagnieżdżonym Sharp 0.35.4. Ten pakiet nie jest w bundlu
+  Workera; preview ma `imageService: compile`, a build przetwarza zaufane
+  zasoby repo. Nowy standalone nie dodaje zależności runtime. Brak ekspozycji
+  tego łańcucha w wdrożonym SSR; nie wykonywano `audit fix --force`.
+- Produkcyjny build i dry-run PASS. W ramach zleconej naprawy wdrożono
+  wyłącznie `ola-website-preview-production`, wersję
+  `bd29bfe8-6c3d-444b-952d-cb2147a7d40d`. Publicznej strony i treści Sanity
+  nie publikowano. Niezalogowany odczyt domeny nadal zwraca **302 do Access**.
+- Zalogowany odbiór potwierdził handshake w panelu Sanity i bezpośrednim
+  Studio: strona widoczna, `Edit` aktywny, dokument `page-home-pl` rozpoznany.
+  Mobilny viewport Presentation działa; przywrócono desktop. Bezpośrednie
+  Studio: zero błędów konsoli. Nie zapisywano treści pól CMS. Natywny zoom
+  200% w Studio, czytnik i urządzenie fizyczne pozostają niewykonane.
+- [Wyniki](../output/sanity-presentation-fix-2026-10-12/verification.json),
+  [desktop](../output/sanity-presentation-fix-2026-10-12/presentation-fixed.jpg)
+  i [mobile](../output/sanity-presentation-fix-2026-10-12/presentation-mobile.jpg).
+  Na zlecenie „push pr” przygotowywana jest gałąź
+  `codex/sanity-presentation-fix`. Następny krok: odebrać Quality na PR,
+  scalić po akceptacji i potwierdzić automatyczne wdrożenie preview z main.
+  Naprawa działającego podglądu jest wykonana; workflow nie był uruchomiony.
+
 ### Naprawa blokady Studio Sanity, 12.10.2026
 
 - Zlecenie „napraw” realizowano w izolowanym worktree

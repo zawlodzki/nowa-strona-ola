@@ -2,8 +2,10 @@ import { env } from "cloudflare:workers";
 import { defineMiddleware } from "astro:middleware";
 
 import { readAccessJwt, verifyAccessJwt } from "./lib/access-jwt";
+import { previewFramePolicy } from "./lib/frame-policy";
 import {
   createPreviewSession,
+  previewCookiePartition,
   previewSessionCookie,
   previewSessionCookieName,
   verifyPreviewSession,
@@ -11,23 +13,13 @@ import {
 
 const activationPath = "/api/draft-mode/enable";
 
-function frameAncestors(): string {
-  const origins = new Set(["'self'"]);
-  try {
-    origins.add(new URL(env.SANITY_STUDIO_URL).origin);
-  } catch {
-    // Missing or invalid studio URL: allow only same-origin framing.
-  }
-  return `frame-ancestors ${[...origins].join(" ")}`;
-}
-
 function secureHeaders(response: Response): Response {
   const headers = new Headers(response.headers);
   headers.set("Cache-Control", "private, no-store, max-age=0");
   headers.set("Pragma", "no-cache");
   headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
   headers.set("Referrer-Policy", "no-referrer");
-  headers.set("Content-Security-Policy", frameAncestors());
+  headers.set("Content-Security-Policy", previewFramePolicy(env.STUDIO_ORIGIN));
   return new Response(response.body, {
     headers,
     status: response.status,
@@ -61,7 +53,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
       context.cookies.set(
         previewSessionCookieName,
         await createPreviewSession(env.PREVIEW_SESSION_SECRET),
-        previewSessionCookie,
+        { ...previewSessionCookie, ...previewCookiePartition(context.request) },
       );
     }
   }

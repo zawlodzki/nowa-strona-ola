@@ -17,6 +17,16 @@ export const previewPerspectiveCookie = {
   secure: true,
 };
 
+export function previewCookiePartition(request: Request): {
+  partitioned: boolean;
+} {
+  return {
+    partitioned:
+      request.headers.get("sec-fetch-dest") === "iframe" &&
+      request.headers.get("sec-fetch-site") === "cross-site",
+  };
+}
+
 const encoder = new TextEncoder();
 
 function assertSecret(secret: string): void {
