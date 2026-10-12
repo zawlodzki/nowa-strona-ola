@@ -895,5 +895,7 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
 - [x] Po wyraźnej zgodzie wdrożyć Studio oraz zarejestrowany schemat.
       Cloudflare i Sanity PASS; bundle na domenie zgodny z artefaktem.
 - [x] Potwierdzić brak ostrzeżeń w pięciu dokumentach PL i niezmienione rewizje.
-- [ ] Po osobnym zleceniu wysłać poprawkę testów do PR i uzyskać zielone Quality
-      na main. Lokalny wynik nie oznacza naprawionego CI na GitHub.
+- [x] Po osobnym zleceniu wysłać poprawkę testów do
+      [PR #76](https://github.com/zawlodzki/nowa-strona-ola/pull/76).
+- [ ] Potwierdzić zielone Quality, odebrać/scalić PR i automatyczne wdrożenie
+      z main. Lokalny wynik nie oznacza zakończonego CI na GitHub.

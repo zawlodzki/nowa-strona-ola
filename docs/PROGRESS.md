@@ -54,8 +54,12 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   i [zrzut](../output/sanity-studio-fix-2026-10-12/studio-fixed.png).
   Pięć rewizji `_rev` przed i po wdrożeniu jest identycznych. Nie edytowano
   ani nie publikowano treści; karta artykułu użytkownika pozostała zachowana.
-- Następny krok: wysłać zatwierdzoną poprawkę testów w PR, potwierdzić Quality
-  i po scaleniu automatyczne wdrożenie z main. Ręczna naprawa Studio już działa.
+- Zatwierdzony push `codex/sanity-studio-consent-tests` wykonano; otwarto
+  [PR #76](https://github.com/zawlodzki/nowa-strona-ola/pull/76). Podpisany
+  commit poprawki: `a36c901`. Quality na GitHub jest w toku, nie deklarowano
+  sukcesu CI ani nie scalano PR. Format i 135 lokalnych odnośników PASS.
+- Następny krok: potwierdzić Quality i po odbiorze PR/scaleniu sprawdzić
+  automatyczne wdrożenie z main. Ręczna naprawa Studio już działa.
 
 ### Nazwa PMOS (PCOS) i usunięcie plików recenzji, 12.10.2026
 

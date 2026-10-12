@@ -40,5 +40,11 @@
     "unknownFieldWarnings": 0,
     "ebookRevisionsUnchanged": true
   },
-  "pendingGit": "poprawka gotowa do zatwierdzonego push i PR"
+  "pullRequest": {
+    "url": "https://github.com/zawlodzki/nowa-strona-ola/pull/76",
+    "branch": "codex/sanity-studio-consent-tests",
+    "fixCommit": "a36c90169189afee07386676151d6ac81aed3ab9",
+    "state": "OPEN",
+    "qualityAtLastRead": "IN_PROGRESS"
+  }
 }
