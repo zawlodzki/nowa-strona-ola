@@ -95,9 +95,14 @@ function documents() {
     "Nie wierzyłam, że dieta może być elastyczna i smaczna jednocześnie. Ola udowodniła mi, że to możliwe. Gotuje dla całej rodziny z tych samych przepisów!",
   ];
   const ebooks = [
-    ["suplementy-w-pcos", "pcos", "Suplementy w PCOS", 1],
+    ["suplementy-w-pcos", "pcos", "Suplementy w PMOS\u00A0(PCOS)", 1],
     ["badania-ktore-maja-sens", "pcos", "Badania, które mają sens", 2],
-    ["szczupla-a-jednak-pcos", "pcos", "Szczupła, a jednak PCOS", 3],
+    [
+      "szczupla-a-jednak-pcos",
+      "pcos",
+      "Szczupła, a jednak PMOS\u00A0(PCOS)",
+      3,
+    ],
     ["waga-cie-oklamuje", "perimenopause", "Waga Cię okłamuje", 4],
     ["czy-to-juz", "perimenopause", "Czy to już?", 5],
     [
@@ -115,7 +120,7 @@ function documents() {
     name: "Aleksandra Olesiewicz",
     slug: { _type: "slug", current: "aleksandra-olesiewicz" },
     role: "Dietetyczka kliniczna",
-    bio: "Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Znam PCOS także z własnego doświadczenia.",
+    bio: "Specjalizuję się w PMOS\u00A0(PCOS) i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Znam PMOS\u00A0(PCOS) także z własnego doświadczenia.",
     educationInstitution: "Śląski Uniwersytet Medyczny",
     educationProgram: "Dietetyka kliniczna",
     translation: { _type: "reference", _ref: "author-ola-en" },
@@ -127,7 +132,7 @@ function documents() {
     name: "Aleksandra Olesiewicz",
     slug: { _type: "slug", current: "aleksandra-olesiewicz" },
     role: "Clinical dietitian",
-    bio: "I specialise in PCOS and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also know PCOS from my own experience.",
+    bio: "I specialise in PMOS\u00A0(PCOS) and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also know PMOS\u00A0(PCOS) from my own experience.",
     educationInstitution: "Śląski Uniwersytet Medyczny",
     educationProgram: "Clinical dietetics",
     translation: { _type: "reference", _ref: authorPl._id },
@@ -281,7 +286,8 @@ function documents() {
     _type: "siteSettings",
     language: "pl",
     siteTitle: "Aleksandra Olesiewicz",
-    footerNote: "PCOS, insulinooporność i odżywianie dopasowane do życia.",
+    footerNote:
+      "PMOS\u00A0(PCOS), insulinooporność i odżywianie dopasowane do życia.",
     navigation: [
       { _key: "nav-ebooks", label: "E-booki", href: "/ebooki/" },
       {
@@ -307,7 +313,8 @@ function documents() {
     ...settingsPl,
     _id: "siteSettings-en",
     language: "en",
-    footerNote: "PCOS, insulin resistance and nutrition that fits real life.",
+    footerNote:
+      "PMOS\u00A0(PCOS), insulin resistance and nutrition that fits real life.",
     navigation: [
       { _key: "nav-ebooks", label: "E-books", href: "/en/ebooks/" },
       {
@@ -384,7 +391,7 @@ function documents() {
     seo: {
       title: "Aleksandra Olesiewicz — dietetyczka kliniczna",
       description:
-        "Praktyczne wsparcie w odżywianiu przy PCOS i insulinooporności. Poznaj konsultacje online i materiały o PCOS i perimenopauzie.",
+        "Praktyczne wsparcie w odżywianiu przy PMOS\u00A0(PCOS) i insulinooporności. Poznaj konsultacje online i materiały o PMOS\u00A0(PCOS) i perimenopauzie.",
     },
     ebooks: ebookDocsPl,
     serviceId: servicePl._id,
@@ -395,7 +402,7 @@ function documents() {
     seo: {
       title: "Aleksandra Olesiewicz — clinical dietitian",
       description:
-        "Practical nutrition support for PCOS and insulin resistance. Online consultations and materials on PCOS and perimenopause.",
+        "Practical nutrition support for PMOS\u00A0(PCOS) and insulin resistance. Online consultations and materials on PMOS\u00A0(PCOS) and perimenopause.",
     },
     ebooks: ebookDocsEn,
     serviceId: serviceEn._id,

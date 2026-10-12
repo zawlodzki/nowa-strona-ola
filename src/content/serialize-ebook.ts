@@ -103,7 +103,7 @@ export function serializeEbook(
   return serializeEbookView(mapEbook(ebook, language), language);
 }
 
-export const ebookLandingMarkdownExample = `## Suplementy w PCOS
+export const ebookLandingMarkdownExample = `## Suplementy w PMOS\u00A0(PCOS)
 
 97 zł brutto
 

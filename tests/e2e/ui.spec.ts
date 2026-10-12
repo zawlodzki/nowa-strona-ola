@@ -282,11 +282,20 @@ test("about page without an English version", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Wiedza, którą możesz sprawdzić." }),
   ).toBeVisible();
+  await expect(page.getByText("Stopień", { exact: true })).toHaveCount(0);
+  await expect(page.getByText("Wcześniejsze miejsca pracy")).toHaveCount(0);
+  await expect(page.getByText(/Limanowej/)).toHaveCount(0);
+  await expect(page.getByText(/Myślenic/)).toHaveCount(0);
+  await expect(
+    page.getByText(
+      "Znam PMOS (PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
+    ),
+  ).toBeVisible();
   const diplomaPl = page.locator("#wyksztalcenie img");
   await expect(diplomaPl).toHaveCount(1);
   await expect(diplomaPl).toHaveAttribute(
     "alt",
-    "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
+    "Aleksandra Olesiewicz z pracą dyplomową przed budynkiem Wydziału Zdrowia Publicznego w Bytomiu",
   );
   await expect
     .poll(async () =>
@@ -303,7 +312,7 @@ test("about page without an English version", async ({ page }) => {
   ).toBeLessThan(0.02);
   await expect(page.getByText("Miejsce na skan dyplomu")).toHaveCount(0);
   await expect(page.locator("#wyksztalcenie figcaption")).toContainText(
-    "Dyplom licencjata dietetyki, specjalność dietetyka kliniczna",
+    "Z pracą dyplomową przed Wydziałem Zdrowia Publicznego w Bytomiu, Śląski Uniwersytet Medyczny",
   );
   await expect(
     page.getByRole("link", { name: "Zarezerwuj konsultację" }),
@@ -468,7 +477,7 @@ test("ebook collection with categories, empty URL and no POST", async ({
   const cards = page.locator(".ebooks3a-grid .ebooks3a-card:visible");
   await expect(cards).toHaveCount(6);
   await expect(
-    page.getByRole("link", { name: "Suplementy w PCOS" }).first(),
+    page.getByRole("link", { name: "Suplementy w PMOS (PCOS)" }).first(),
   ).toHaveAttribute("href", "/ebooki/suplementy-w-pcos/");
   await expect(
     page.getByRole("link", { name: "Badania, które mają sens" }).first(),
@@ -494,7 +503,9 @@ test("ebook collection with categories, empty URL and no POST", async ({
   const all = page.getByRole("radio", { name: /Wszystkie/ });
   await all.focus();
   await page.keyboard.press("ArrowRight");
-  await expect(page.getByRole("radio", { name: /PCOS/ })).toBeChecked();
+  await expect(
+    page.getByRole("radio", { name: /PMOS \(PCOS\)/ }),
+  ).toBeChecked();
   await expect(cards).toHaveCount(3);
   await expect(page).toHaveURL(/kategoria=pcos|\/kategoria\/pcos\//);
   await page.getByRole("radio", { name: "Perimenopauza" }).check();
@@ -507,7 +518,9 @@ test("ebook collection with categories, empty URL and no POST", async ({
   expect(posts).toEqual([]);
 
   await page.goto("/ebooki/kategoria/pcos/");
-  await expect(page.getByRole("radio", { name: /PCOS/ })).toBeChecked();
+  await expect(
+    page.getByRole("radio", { name: /PMOS \(PCOS\)/ }),
+  ).toBeChecked();
   await expect(cards).toHaveCount(3);
 
   const missing = await page.goto("/en/ebooki/");
@@ -534,7 +547,9 @@ test("ebook collection categories work without JavaScript", async ({
   ).toHaveCount(3);
   await expect(page.locator('[data-count="perimenopause"]')).toBeVisible();
   await page.goto("/ebooki/kategoria/pcos/");
-  await expect(page.getByRole("radio", { name: /PCOS/ })).toBeChecked();
+  await expect(
+    page.getByRole("radio", { name: /PMOS \(PCOS\)/ }),
+  ).toBeChecked();
   await expect(
     page.locator(".ebooks3a-grid .ebooks3a-card:visible"),
   ).toHaveCount(3);
@@ -570,14 +585,14 @@ test("landing pages, blog and missing English translation", async ({
   await page.goto("/blog/");
   await page
     .getByRole("link", {
-      name: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+      name: "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",
       exact: true,
     })
     .first()
     .click();
   await expect(
     page.getByRole("heading", {
-      name: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+      name: "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",
     }),
   ).toBeVisible();
   await expect(

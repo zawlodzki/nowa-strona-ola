@@ -1,20 +1,20 @@
 # Więcej jasności. W Twoim tempie.
 
-PCOS, perimenopauza i codzienne wybory. E-booki, do których możesz wracać, kiedy potrzebujesz uporządkować pytania i znaleźć swój następny krok.
+PMOS (PCOS), perimenopauza i codzienne wybory. E-booki, do których możesz wracać, kiedy potrzebujesz uporządkować pytania i znaleźć swój następny krok.
 
 ## Wszystkie e-booki
 
 Wybierz to, co jest Ci teraz bliskie.
 
-### Suplementy w PCOS
+### Suplementy w PMOS (PCOS)
 
 Uporządkuj pytania o suplementy: po co je stosować i co omówić ze specjalistą przed zakupem.
 
-[Suplementy w PCOS](/ebooki/suplementy-w-pcos/)
+[Suplementy w PMOS (PCOS)](/ebooki/suplementy-w-pcos/)
 
 97 zł brutto
 
-PCOS
+PMOS (PCOS)
 
 Wkrótce dostępny
 
@@ -26,19 +26,19 @@ Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.
 
 97 zł brutto
 
-PCOS
+PMOS (PCOS)
 
 Wkrótce dostępny
 
-### Szczupła, a jednak PCOS
+### Szczupła, a jednak PMOS (PCOS)
 
-Jak podejść do odżywiania przy PCOS, kiedy Twoim celem nie jest odchudzanie.
+Jak podejść do odżywiania przy PMOS (PCOS), kiedy Twoim celem nie jest odchudzanie.
 
-[Szczupła, a jednak PCOS](/ebooki/szczupla-a-jednak-pcos/)
+[Szczupła, a jednak PMOS (PCOS)](/ebooki/szczupla-a-jednak-pcos/)
 
 97 zł brutto
 
-PCOS
+PMOS (PCOS)
 
 Wkrótce dostępny
 
@@ -82,4 +82,4 @@ Zapowiedzi e-booków. Tytuły i okładki są propozycją; materiały są w przyg
 
 ## Mniej sprzecznych rad. Więcej konkretów.
 
-Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.
+Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie.

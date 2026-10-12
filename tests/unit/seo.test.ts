@@ -90,6 +90,15 @@ describe("JSON-LD graph", () => {
     ]);
   });
 
+  it("writes a normal space between PMOS and (PCOS) in JSON-LD", () => {
+    const json = serializeJsonLd(
+      graphDocument([{ "@type": "Thing", name: "PMOS\u00A0(PCOS)" }]),
+    );
+    expect(json).toContain("PMOS (PCOS)");
+    expect(json).not.toContain("\u00A0");
+    expect(JSON.parse(json)["@graph"][0].name).toBe("PMOS (PCOS)");
+  });
+
   it("escapes characters that could close the script element", () => {
     const json = serializeJsonLd(
       graphDocument([{ "@type": "Thing", name: "</script><b>&" }]),
@@ -149,8 +158,8 @@ describe("JSON-LD graph", () => {
 describe("collection titles", () => {
   it("makes category and pagination titles unique", () => {
     expect(collectionSeoTitle("Blog — A", "pl")).toBe("Blog — A");
-    expect(collectionSeoTitle("Blog — A", "pl", "PCOS")).toBe(
-      "PCOS — Blog — A",
+    expect(collectionSeoTitle("Blog — A", "pl", "PMOS (PCOS)")).toBe(
+      "PMOS (PCOS) — Blog — A",
     );
     expect(collectionSeoTitle("Blog — A", "pl", undefined, 2)).toBe(
       "Blog — A — strona 2",
@@ -169,7 +178,10 @@ describe("Sanity SEO fields (SEO-4)", () => {
         occupationCode: "2265",
         sameAs: ["https://www.instagram.com/aleksandra_olesiewicz"],
         knowsAbout: [
-          { title: "PCOS", sameAs: ["https://www.wikidata.org/wiki/Q1"] },
+          {
+            title: "PMOS (PCOS)",
+            sameAs: ["https://www.wikidata.org/wiki/Q1"],
+          },
         ],
         credentials: [
           {
@@ -194,7 +206,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
       "https://www.instagram.com/aleksandra_olesiewicz",
     ]);
     expect(site.person.knowsAbout).toEqual([
-      { name: "PCOS", sameAs: ["https://www.wikidata.org/wiki/Q1"] },
+      { name: "PMOS (PCOS)", sameAs: ["https://www.wikidata.org/wiki/Q1"] },
     ]);
     expect(site.person.portrait).toBe("about");
     expect(site.seller.legalName).toBe("Firma sp. z o.o.");
@@ -202,7 +214,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
     expect(person?.knowsAbout).toEqual([
       {
         "@type": "Thing",
-        name: "PCOS",
+        name: "PMOS (PCOS)",
         sameAs: ["https://www.wikidata.org/wiki/Q1"],
       },
     ]);
@@ -226,14 +238,24 @@ describe("Sanity SEO fields (SEO-4)", () => {
         url: "https://sum.edu.pl/",
         department: {
           "@type": "Organization",
-          name: "Wydział Nauk o Zdrowiu w Bytomiu",
+          name: "Wydział Zdrowia Publicznego w Bytomiu",
         },
       },
       dateCreated: "2025",
     });
     // Trainers are people: recognizedBy accepts organizations only.
     expect(credentials[1]).not.toHaveProperty("recognizedBy");
-    expect(person?.alumniOf).toHaveLength(3);
+    expect(person?.alumniOf).toEqual([
+      expect.objectContaining({
+        name: "Śląski Uniwersytet Medyczny w Katowicach",
+      }),
+      expect.objectContaining({
+        name: "Szpital Powiatowy w Limanowej im. Miłosierdzia Bożego",
+      }),
+      expect.objectContaining({
+        name: "Samodzielny Publiczny Zakład Opieki Zdrowotnej w Myślenicach",
+      }),
+    ]);
     expect(person?.sameAs).toHaveLength(3);
   });
 
@@ -272,7 +294,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
         ...view.price,
         serviceType: "Konsultacja dietetyczna",
         channel: "online" as const,
-        audience: "Kobiety z PCOS",
+        audience: "Kobiety z PMOS (PCOS)",
         deliverables: ["Plan pierwszych kroków"],
         termsPath: "/regulamin/",
       },
@@ -284,7 +306,7 @@ describe("Sanity SEO fields (SEO-4)", () => {
     expect(service).toMatchObject({
       serviceType: "Konsultacja dietetyczna",
       availableChannel: { "@type": "ServiceChannel" },
-      audience: { audienceType: "Kobiety z PCOS" },
+      audience: { audienceType: "Kobiety z PMOS (PCOS)" },
       serviceOutput: [{ "@type": "Thing", name: "Plan pierwszych kroków" }],
       termsOfService: "https://aleksandraolesiewicz.com/regulamin/",
     });

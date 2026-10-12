@@ -238,7 +238,7 @@ export const authorType = defineType({
       name: "experience",
       title: "Wcześniejsze miejsca pracy",
       description:
-        "Placówki pokazane na stronie „O mnie”. Trafiają do danych strukturalnych jako organizacje, z którymi osoba była związana.",
+        "Tylko dane strukturalne (alumniOf). Strona „O mnie” nie pokazuje tych placówek.",
       type: "array",
       of: [
         defineArrayMember({

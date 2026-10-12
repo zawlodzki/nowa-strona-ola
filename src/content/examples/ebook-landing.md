@@ -1,4 +1,4 @@
-# Suplementy w PCOS
+# Suplementy w PMOS (PCOS)
 
 97 zł brutto
 

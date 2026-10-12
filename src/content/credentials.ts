@@ -25,7 +25,7 @@ export function credentialTitle(
     : `${credential.name}, ${credential.specialization} specialisation`;
 }
 
-/** „Śląski Uniwersytet Medyczny w Katowicach, Wydział Nauk o Zdrowiu w Bytomiu”. */
+/** „Śląski Uniwersytet Medyczny w Katowicach, Wydział Zdrowia Publicznego w Bytomiu”. */
 export function credentialIssuer(credential: PersonCredential): string {
   return [credential.institution, credential.department]
     .filter(Boolean)

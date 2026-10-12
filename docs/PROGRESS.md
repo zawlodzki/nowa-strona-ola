@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-11 (plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
@@ -33,6 +33,108 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Przy 320, 390 i 1440 „(PCOS)” nie zostaje samo w linii, a strona nie
   wychodzi poza szerokość okna. Na wąskim hero „Masz” jest nad
   „PMOS” z twardą spacją i „(PCOS).”.
+
+### Suchy odczyt PMOS, tytuł SEO i twarda spacja, 12.10.2026
+
+- Żywy tytuł SEO `article-blog-11-en` ma 62 znaki.
+  `Conflicting advice on PMOS (PCOS): write down what you want to`.
+  Notatka z 08.10.2026 podała ten sam napis jako 55 znaków. To była zła
+  liczba. Plan na `952d5e1` zamieniał go na ucięte
+  `Conflicting advice on PMOS: write down what you want to` (55).
+- Po poprawce ten dokument i szkic `drafts.article-blog-11-en` dostają
+  ręczne `Conflicting advice on PMOS: write down what to clarify` (54).
+  Innych ręcznych tytułów nie ma. Artykuły 06 i 09 zostają, bo żywy tytuł
+  ma już mniej niż 60 znaków i nie zawiera PMOS (PCOS). Tytuł, który po
+  samym skrócie PMOS nadal ma ponad 60 znaków, zostaje bez zmian i trafia
+  do raportu. Skrypt nie ucina znaków.
+- Tekst dla gościa ma U+00A0 między PMOS a (PCOS). Tytuł strony, opis
+  meta, RSS i JSON-LD mają zwykłą spację. Na zbudowanej stronie e-booka
+  ciało ma 9 par z twardą spacją i zero ze zwykłą. JSON-LD ma 5 par ze
+  zwykłą spacją i zero twardych. `<title>` nie ma twardej spacji.
+- `npm run verify` na Node 24.21.0 skończył się kodem 1 przez jeden test
+  WebKit. Format, tokeny, lint, `astro check`, 291 testów unit, build,
+  build workspace, `test:build` i 392 testy E2E przeszły. Odpadł
+  `consultation page without an English version` w WebKit. Odpowiedź FAQ
+  została ukryta po kliknięciu. Pytanie nie zawiera PMOS. Osobne
+  powtórzenie tego testu przeszło w 2,9 s. `test:content-lake` przeszedł
+  osobno, 12 stron. CSS gzip 30867 B. Strona główna 8192 B. „O mnie”
+  8161 B. SEO 36 stron.
+- verify-ola `ola-1791781512` na `http://127.0.0.1:4340`. Nagłówek
+  „Masz PMOS (PCOS) i pełną półkę.” jest widoczny. H1 „O mnie” to
+  „Jestem Ola. Znam PMOS od środka.” Lead ma PMOS (PCOS). `browser posts`
+  zwrócił `[]`. Sanity nie było zapisywane. Nic nie zostało scalone
+  ani wdrożone.
+- Następny krok. Właściciel powtarza suchy odczyt z tokenem. `--write`,
+  scalenie i wdrożenie zostają po jego stronie.
+
+### Hero „O mnie”, wariant V1, 12.10.2026
+
+- Właściciel wybrał „Jestem Ola. / Znam PMOS / od środka.” Lead zostaje
+  z pierwszym „PMOS (PCOS)”. Angielski tytuł to „I am Ola. / I know PMOS /
+  from the inside.”, bo reszta strony mówi „I am”, nie „I'm”.
+- Źródło to `aboutCopy.heroTitle`. Fixture czyta to pole. Plan
+  `import:pmos-rename` ustawia `sections[_key=="about-hero"].title`
+  i nie rusza leadu.
+- Zmierzone linie na zbudowanej stronie, przy 320, 390 i 1440, to trzy.
+  „Jestem Ola.”, „Znam PMOS”, „od środka.” Lead zawiera „PMOS (PCOS)”.
+  CSS bez zmian. „O mnie” ma 8161 B przy limicie 8192 B.
+- `npm run verify` na Node 24.21.0 zakończył się kodem 0. Format, tokeny,
+  lint, `astro check`, 289 testów unit, build, build workspace,
+  `test:build`, 393 testy E2E w Chromium, Firefox i WebKit oraz
+  `test:content-lake` (12 stron) przeszły. CSS gzip 30867 B. Strona główna
+  8192 B. SEO 36 stron.
+- verify-ola `ola-1791779534` na `http://127.0.0.1:4340/o-mnie/`. H1 to
+  „Jestem Ola. Znam PMOS od środka.” Lead ma „PMOS (PCOS)”. Pusty
+  newsletter dał `browser posts` `[]`. Sanity nie było zapisywane.
+  Nic nie zostało scalone ani wdrożone.
+- Następny krok. Właściciel uruchamia suchy odczyt z tokenem. `--write`,
+  scalenie i wdrożenie zostają po jego stronie.
+
+### Przegląd PR 73, 12.10.2026
+
+- `planPmosRename` pomija dokumenty spoza listy treści. Lista to `article`,
+  `author`, `category`, `ebook`, `form`, `page`, `service`, `siteSettings`.
+  Poza nią zostają opinie, strony prawne i przekierowania. Identyfikator
+  zaczynający się od `_.` albo `sanity.` oraz typ `sanity.*` i `system.*`
+  też odpadają. Tytuł i zakres w `sources` zostają, bo to opublikowana
+  nazwa wytycznych.
+- Opinie klientki, „Wytyczne PCOS 2023” i regulamin newslettera 2.1 są
+  w fixture i w seedach takie jak przed podmianą. Słowa „przy PCOS”
+  w regulaminie zostają.
+- Tytuł SEO skraca się dopiero, gdy po podmianie ma więcej niż 60 znaków.
+  Tytuł, który już się mieści, zostaje z „PMOS (PCOS)”. Widoczny H1 artykułu
+  zostaje dłuższy niż tytuł w `<title>`.
+- Do wyboru właściciela tytuł w kodzie był „Jestem Ola. / Znam PMOS (PCOS) /
+  od środka.”. CSS nie ruszane. „O mnie” ma 8161 B przy limicie 8192 B.
+  V4 nie mieści się w trzech liniach przy 320 i 1440. Przy 320 i 1440
+  trzecia linia to „(PCOS) od”, a czwarta „środka.”. Przy 390 są trzy
+  linie, a trzecia zaczyna się od „(PCOS) od środka.”. Wybrany V1 jest
+  w sekcji powyżej.
+- Suchy odczyt datasetu nie wystartował. Brak tokenu. Skrypt wypisał, że
+  nie wysyła zapytania. Na 88 dokumentach lokalnego planu content-lake
+  plan PMOS ma 0 zmian i 0 problemów. Nie ma w nim dokumentów `_.`, opinii,
+  stron prawnych ani ścieżek `sources`. To nie jest liczba łatek na żywym
+  datasetcie.
+- Kontrole na Node 24.21.0, commit przed notatką `2264ea2`. Format, tokeny,
+  lint, `astro check`, 289 testów unit, build, build workspace i
+  `test:build` przeszły w `npm run verify`. CSS gzip 30867 B. Strona główna
+  8192 B. SEO 36 stron. E2E to 393 testy w Chromium, Firefox i WebKit.
+  Pierwszy przebieg miał 391 zaliczeń i 2 odpadki Firefox (hover
+  „Udostępnij” zasłonięty banerem zgód, pusty alert newslettera). Oba
+  przeszły w osobnym powtórzeniu. `test:content-lake` przeszedł osobno,
+  12 stron ze zgodnym DOM, błędy walidacji 0. compare pominięte, brak tokenu.
+- verify-ola `ola-1791777773`, baza `http://127.0.0.1:4340`. Formularz
+  na `/` z pustym i złym e-mailem, `browser posts` zwrócił `[]`. Opinia
+  „Po latach walki z PCOS…” jest widoczna. `/o-mnie/` ma obecny H1 i lead
+  z pierwszym „PMOS (PCOS)”. Brak „Stopień”, „Wcześniejsze miejsca pracy”
+  i „Limanowej”. Źródło e-booka to „Zobacz źródło: wytyczne PCOS 2023,
+  sekcja 4.7”. H1 artykułu 01 zostaje długi, a `<title>` ma 58 znaków.
+  Regulamin newslettera pokazuje wersję 2.1 i „przy PCOS”. `/en/` i
+  `/en/about/` zwracają 404. `/static/` bez JavaScriptu ma 0 skryptów.
+  Newsletter na „O mnie” też dał `posts` `[]`.
+- Następny krok z tamtej chwili. Właściciel wybrał V1 w sekcji powyżej.
+  Suchy odczyt z tokenem, `--write`, scalenie i wdrożenie zostają
+  po jego stronie.
 
 ### Pięć landingów e-booków i publikacja w Sanity, 11.10.2026
 
@@ -109,10 +211,41 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Następny krok: odbiór PR i CI, scalenie, potwierdzenie wdrożeń frontendu
   oraz Studio i pięciu landingów na hostowanym serwisie.
 
+### PMOS (PCOS), wydział i historia na „O mnie”, 11.10.2026
+
+- Gość widzi PMOS (PCOS). Pierwsze wystąpienie w zdaniu ma skrót w nawiasie.
+  Kolejne w tym samym zdaniu jest samym PMOS. Slugi, identyfikatory i
+  `topic: "pcos"` zostają. Mockup kolekcji e-booków nadal mówi PCOS.
+- Wydział w treści i w JSON-LD to Wydział Zdrowia Publicznego w Bytomiu.
+- Strona „O mnie” i Markdown nie pokazują wiersza stopnia ani wcześniejszych
+  miejsc pracy. JSON-LD zostawia `educationalLevel` „Licencjat” oraz `alumniOf`
+  ze szpitalem w Limanowej i SPZOZ w Myślenicach.
+- Historia ma dwa nowe akapity o własnym doświadczeniu i studiach. Podpis
+  i alt zdjęcia opisują pracę dyplomową.
+- Kategorie bloga sortują się po tytule, więc Perimenopauza stoi przed
+  PMOS (PCOS).
+- `npm run import:pmos-rename` planuje jedną transakcję i domyślnie nic nie
+  zapisuje. W tym środowisku nie ma tokenu Sanity, więc suchy odczyt datasetu
+  nie wystartował. `--write` nie był uruchomiony. Sanity nie było zapisywane
+  i nic nie zostało wdrożone.
+- Kontrole na Node 24.21. Format, tokeny, lint i `astro check` przeszły.
+  Testy unit to 288 zaliczeń. Build, build workspace i `test:content-lake`
+  przeszły. CSS gzip ma 30867 B. Strona główna ma 8192 B przy limicie 8192 B.
+  „O mnie” ma 8161 B, czyli 31 B zapasu. SEO to 36 stron. E2E to 392 zaliczenia
+  w Chromium, Firefox i WebKit. Jeden test WebKit newslettera (fokus pustego
+  pola) odpadł za pierwszym razem i przeszedł przy powtórzeniu. verify-ola
+  na `/`, landingu suplementów i `/o-mnie/`. Widoczny tekst nie ma „Stopień”,
+  „Wcześniejsze miejsca pracy” ani „Limanowej”. `browser posts` po pustym
+  newsletterze zwrócił `[]`. Przy 390 px i 1440 px przepełnienie poziome
+  ma 0 px. W `dist` jest 678 wystąpień wewnątrz „PMOS (PCOS)” i zero samotnych
+  PCOS.
+- Następny krok. Właściciel uruchamia suchy odczyt z tokenem. Zapis do
+  datasetu jest osobnym `--write`. Scalenie i wdrożenie zostają po jego stronie.
+
 ### Kwalifikacje Oli na „O mnie” i w JSON-LD, 11.10.2026
 
 - Dane od użytkownika, ze zgodą na publikację: licencjat, kierunek Dietetyka,
-  specjalność dietetyka kliniczna, ŚUM w Katowicach, Wydział Nauk o Zdrowiu
+  specjalność dietetyka kliniczna, ŚUM w Katowicach, Wydział Zdrowia Publicznego
   w Bytomiu, 2025. Praktyka od 2022. Dwa wcześniejsze miejsca pracy
   i sześć szkoleń. Wartości i mapowanie: [konfiguracja CMS](HOMEPAGE-CMS-CONFIG.md).
 - Schemat `author`: `credentials[]` z nowymi polami `level`, `specialization`,
@@ -382,9 +515,9 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   [konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md): właścicielka i sprzedawca
   w `siteSettings-pl`, `sameAs`/`occupationCode`/`knowsAbout`/
   niepubliczny dyplom w `author-ola-pl`, pola usługi, `sameAs` kategorii
-  PCOS i insulinooporności (Wikidata sprawdzona przez API).
+  PMOS (PCOS) i insulinooporności (Wikidata sprawdzona przez API).
 - Pięć polskich e-booków dostało landing skopiowany z „Suplementów
-  w PCOS” jako treść zastępczą ([konfiguracja e-booka](EBOOK-CMS-CONFIG-3A.md)).
+  w PMOS (PCOS)” jako treść zastępczą ([konfiguracja e-booka](EBOOK-CMS-CONFIG-3A.md)).
   Zgodność kopii sprawdzona GROQ (7 rozdziałów, 5 materiałów, 6 FAQ,
   2 opinie, źródło). Najpierw szkice, publikacja 10 dokumentów po
   potwierdzeniu użytkownika. Trzech istniejących, cudzych szkiców
@@ -854,7 +987,7 @@ na webhook n8n; ścieżka Worker → Queues → n8n i Turnstile odłożone.
 ### Ikony tematów w „Z kim pracuję”, 10.10.2026
 
 - Każda karta ma własną ikonę liniową (24 × 24, kreska 1,6, `currentColor`):
-  PCOS — `flower`, insulinooporność — `drop-wave`, starania o ciążę —
+  PMOS (PCOS) — `flower`, insulinooporność — `drop-wave`, starania o ciążę —
   `sprout`, perimenopauza — `sun-horizon`. Oryginalne ścieżki projektu
   (`src/design-system/decorations/topic-icons.ts`), bez zewnętrznego zestawu.
 - Studio: nowe opcje ikon z polskimi etykietami; `arrow` i `check` zostają.
@@ -1091,7 +1224,7 @@ Skill [verify-ola](../.cursor/skills/verify-ola/SKILL.md), przebieg
 `ola-blog-audit-20261008`, Node 24.19.0, własny port 4340, doctor PASS.
 Świeży build fixture’ów, bez konfiguracji Sanity. Sprawdzono:
 
-- Blog PL/EN, stronę 2 („Wpisy 8–11 z 11”), kategorię PCOS i pustą
+- Blog PL/EN, stronę 2 („Wpisy 8–11 z 11”), kategorię PMOS (PCOS) i pustą
   perimenopauzę: HTTP 200 i oczekiwane nagłówki/komunikaty.
 - Kliknięcie artykułu z listy PL, H1 i spis treści, bezpośredni adres EN.
   Historyczny przepis przełącznika „English” zatrzymał się na braku linku.
@@ -1404,7 +1537,7 @@ pominięte:
   już blokowany przez stan pending.
 
 `siteSettings` bierze nawigację i indeks bloga z jednego fixture’a.
-Angielski slug ebooka PCOS to `supplements-in-pcos`.
+Angielski slug ebooka PMOS (PCOS) to `supplements-in-pcos`.
 `cover.alt` i `cover.tone` pochodzą z fixture’ów.
 Klucz rastra zostaje w `rasterKey`, a zapytanie GROQ czyta
 `coalesce(image.asset->url, rasterKey)`.
@@ -1432,7 +1565,7 @@ Angielskie tytuły SEO skrócone do prefiksu istniejącego tytułu, bo przekracz
 
 - 06: `Insulin resistance: where to start the nutrition` (48)
 - 09: `What do you want to change? How to name the goal of a` (53)
-- 11: `Conflicting advice on PCOS: write down what you want to` (55)
+- 11: `Conflicting advice on PMOS (PCOS): write down what you want to` (55)
 
 PR #39 jest na `main` jako `d7ba6a1`. Ta gałąź wciąga go zwykłym merge.
 Walidacja offline obejmuje 78 dokumentów, w tym `form` i `legalPage`.
@@ -1788,7 +1921,7 @@ Kontrole (Node 24.21.0):
 
 - `npm run verify` **PASS**: **115** unit, **141** E2E Chromium/Firefox/WebKit
   (7 przypadków `matcha-accent-3a.spec.ts` × 3, w tym brak kolizji z tekstem
-  na homepage, kolekcji, kategorii PCOS, artykule, katalogu, EN, 1280 i 390).
+  na homepage, kolekcji, kategorii PMOS (PCOS), artykule, katalogu, EN, 1280 i 390).
 - CSS gzip **29 778 B** / 32 768 B; JS gzip **5 770 B**.
 - Kontrast `#D8E78A` na `cover-primary` **6,17** (≥ 3 dla grafiki).
 - verify-ola `ola-cherry-accent`, `browser posts` = `[]`.
@@ -1970,7 +2103,7 @@ Różnica → poprawka:
    produkcja miała tylko księżyc motywu. Przycisk motywu zostaje; dodany link
    `#main` z `ArrowIcon` (ścieżka `M7 17 17 7M7 7h10v10`) we wspólnym
    `SiteFooter` 3a — na wszystkich stronach 3a.
-6. Mobile, kategoria PCOS i EN: te same radius, kadr 1.8 i strzałka w stopce.
+6. Mobile, kategoria PMOS (PCOS) i EN: te same radius, kadr 1.8 i strzałka w stopce.
 
 Świadome różnice (nie ucięcie): filtry kategorii (zlecone, makieta ich nie ma);
 `aria-label` „Przeczytaj artykuł: …”; English/Polski; zgoda newslettera; przycisk
@@ -2006,7 +2139,7 @@ Pozostałe różnice po porównaniu pikselowym (lista nie jest pusta):
 - Newsletter: zgoda demonstracyjna `DemoForm` (wspólna 3a).
 - Mobile: szerokość treści 342 vs 350 px (gutter `.ao-container`, nie makietowy
   `.container`).
-- Kategoria PCOS: brak makiety kategorii; najnowszy wpis kategorii jest
+- Kategoria PMOS (PCOS): brak makiety kategorii; najnowszy wpis kategorii jest
   wyróżniony jak na indeksie.
 - EN: brak makiety EN; ten sam układ, zaokrąglenia, kadr i strzałka.
 - Bez JS: motyw ukryty, strzałka widoczna, zdjęcia eager nadal w HTML.
@@ -2043,7 +2176,7 @@ Kontrole tej sesji (Node 24.21.0):
 - Playwright: `npx playwright install chromium firefox webkit` oraz
   `install-deps` **nie zawisły**.
 - verify-ola (`VERIFY_RUN_ID=ola-1791426038`, baza `http://127.0.0.1:4340`):
-  `/blog/` 200, strona 2, kategoria PCOS, pusta perimenopauza, `/en/blog/`
+  `/blog/` 200, strona 2, kategoria PMOS (PCOS), pusta perimenopauza, `/en/blog/`
   bez polskiego H1, bez JS. `browser posts` = `[]`. Dowody:
   `/tmp/ola-verify-evidence/ola-1791426038/`.
 - Porównania obok makiety: `/opt/cursor/artifacts/screenshots/`
@@ -2056,11 +2189,11 @@ Kontrole tej sesji (Node 24.21.0):
 
 Tabela zdjęć z makiety:
 
-| Zdjęcie z makiety                         | Plik na produkcji                                       | Sekcja                                                                                     | Status                   |
-| ----------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
-| `assets/food-editorial.webp`              | `src/assets/editorial/food-editorial.webp` klucz `food` | wyróżniony wpis; karty posiłków, suplementów, dzienniczka, zakupów                         | na miejscu, ten sam kadr |
-| `../../src/assets/portraits/contact.webp` | `src/assets/portraits/contact.webp` klucz `contact`     | pytania o PCOS, insulinooporność, sprzeczne rady (`portrait` / `portrait-close`, 15% góry) | na miejscu, ten sam kadr |
-| `../../src/assets/portraits/about.webp`   | `src/assets/portraits/about.webp` klucz `about`         | wyniki badań, cel konsultacji (`portrait`, 15% góry)                                       | na miejscu, ten sam kadr |
+| Zdjęcie z makiety                         | Plik na produkcji                                       | Sekcja                                                                                            | Status                   |
+| ----------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------ |
+| `assets/food-editorial.webp`              | `src/assets/editorial/food-editorial.webp` klucz `food` | wyróżniony wpis; karty posiłków, suplementów, dzienniczka, zakupów                                | na miejscu, ten sam kadr |
+| `../../src/assets/portraits/contact.webp` | `src/assets/portraits/contact.webp` klucz `contact`     | pytania o PMOS (PCOS), insulinooporność, sprzeczne rady (`portrait` / `portrait-close`, 15% góry) | na miejscu, ten sam kadr |
+| `../../src/assets/portraits/about.webp`   | `src/assets/portraits/about.webp` klucz `about`         | wyniki badań, cel konsultacji (`portrait`, 15% góry)                                              | na miejscu, ten sam kadr |
 
 Brakujących plików nie było; placeholderów nie podstawiano.
 
@@ -2126,7 +2259,7 @@ Następny krok: pakiet 6 BlogCollection3a (wykonany 08.10.2026).
 
 Zakres: `EbookCollection3a` na `/ebooki/` i `/en/ebooks/` według makiety
 `ebooks-3a.html`. Te same dokumenty `ebook` co homepage i landing (referencje,
-bez drugiej tablicy produktów). Kategorie Wszystkie / PCOS / Perimenopauza
+bez drugiej tablicy produktów). Kategorie Wszystkie / PMOS (PCOS) / Perimenopauza
 z licznikami, CSS `:has` bez JS, ścieżki `/ebooki/kategoria/{topic}/` oraz
 query `?kategoria=` z JS. Pusta kolekcja ukrywa filtry; pusta kategoria ma
 komunikat. Karty używają `ebookPath`; cena 97 zł brutto i status przygotowania
@@ -2136,7 +2269,7 @@ jak w makiecie. Newsletter to `DemoForm` bez POST. Copy i UX kolekcji są
 Kod: schemat `ebookCollectionSection` (cherry3a), GROQ publiczny i preview,
 TypeGen (19 kwerend, 67 typów schematu), mappery, serializer Markdown
 z przykładem, fixture, dry-run importu (`npm run import:ebook-collection`,
-`--write` kończy się kodem 2). Okładka „Szczupła, a jednak PCOS” używa
+`--write` kończy się kodem 2). Okładka „Szczupła, a jednak PMOS (PCOS)” używa
 `SiteImage` + `astro:assets` (`food` → `src/assets/editorial/food-editorial.webp`);
 pozostałe okładki to SVG w `src/design-system/decorations/` (`BookCoverArt`).
 Wyrównanie akcentów matcha z PR #31 jest poza tym pakietem.
@@ -2148,7 +2281,7 @@ Kontrole tej sesji (Node 24.21.0):
   5 770 B. Designu nie wycinano pod budżet.
 - Dry-run importu: 2 dokumenty `page`, 0 duplikatów `ebook`, bez zapisu.
 - verify-ola (`VERIFY_RUN_ID=ola-1791408926`, baza `http://127.0.0.1:4340`):
-  PL/EN, Wszystkie / PCOS / Perimenopauza, ścieżka `/ebooki/kategoria/pcos/`,
+  PL/EN, Wszystkie / PMOS (PCOS) / Perimenopauza, ścieżka `/ebooki/kategoria/pcos/`,
   bez JS, desktop 1280 i mobile 390. `browser posts` = `[]`. `/en/ebooki/`
   → 404. Dowody: `/tmp/ola-verify-evidence/ola-1791408926/`.
 - Porównanie z makietą: siatka, filtry, okładki, ceny 97 zł brutto i nota
@@ -2157,7 +2290,7 @@ Kontrole tej sesji (Node 24.21.0):
   `SiteShell3a` z pakietów 1–4, nie z ucięcia kolekcji.
 - Pusty stan kolekcji/kategorii: mapper + unit; fixture ma 6 e-booków, więc
   zrzut pustej siatki nie istnieje na tym `dist/`.
-- Pięć kart poza Suplementami w PCOS ma prawdziwy `ebookPath`; landingi
+- Pięć kart poza Suplementami w PMOS (PCOS) ma prawdziwy `ebookPath`; landingi
   tych slugów jeszcze nie istnieją (404 do kolejnych prac).
 - Playwright Chromium/Firefox/WebKit zainstalowano; `install-deps` nie
   zawisł. Natywny zoom przeglądarki, czytnik i urządzenie fizyczne **nie
@@ -2165,11 +2298,11 @@ Kontrole tej sesji (Node 24.21.0):
 
 Tabela zdjęć z makiety:
 
-| Zdjęcie z makiety                                                     | Plik na produkcji                                                         | Sekcja                                                   | Status                                         |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------- |
-| `assets/food-editorial.webp` (CSS `.art-nutrition`)                   | `src/assets/editorial/food-editorial.webp` przez `SiteImage` klucz `food` | okładka „Szczupła, a jednak PCOS” / Slim, and still PCOS | na miejscu, ten sam kadr                       |
-| pozostałe 5 okładek (art-decisions/route/observation/journal/evening) | SVG `BookCoverArt` w `src/design-system/decorations/`                     | karty kolekcji                                           | SVG, bez rastrów — zgodnie z makietą           |
-| brak innych `<img>` w `ebooks-3a.html`                                | —                                                                         | —                                                        | nic nie brakuje; placeholderów nie podstawiano |
+| Zdjęcie z makiety                                                     | Plik na produkcji                                                         | Sekcja                                                                 | Status                                         |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------- |
+| `assets/food-editorial.webp` (CSS `.art-nutrition`)                   | `src/assets/editorial/food-editorial.webp` przez `SiteImage` klucz `food` | okładka „Szczupła, a jednak PMOS (PCOS)” / Slim, and still PMOS (PCOS) | na miejscu, ten sam kadr                       |
+| pozostałe 5 okładek (art-decisions/route/observation/journal/evening) | SVG `BookCoverArt` w `src/design-system/decorations/`                     | karty kolekcji                                                         | SVG, bez rastrów — zgodnie z makietą           |
+| brak innych `<img>` w `ebooks-3a.html`                                | —                                                                         | —                                                                      | nic nie brakuje; placeholderów nie podstawiano |
 
 Następny krok: pakiet 6 BlogCollection3a (wykonany 08.10.2026). Dane kolekcji
 e-booków w Content Lake i odbiór Studio/preview pozostają otwarte. Copy i UX
@@ -2971,7 +3104,7 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   przykładowe efekty, O mnie, sześć e-booków, konsultacje, opinie, opt-in i stopkę.
   Biblioteka pokazuje trzy całe e-booki na desktopie; karty i opinie przewijają
   się natywnie, przez przyciski i klawiaturę. Nie ma automatycznego przewijania.
-- Przeczytano dwa wskazane dokumenty researchu PCOS/perimenopauza, z których
+- Przeczytano dwa wskazane dokumenty researchu PMOS (PCOS)/perimenopauza, z których
   wykorzystano sześć koncepcji. Research rekomenduje po jednej koncepcji w każdej
   grupie; umieszczenie sześciu nie oznacza gotowości produktów do sprzedaży.
   Kwota około 100 zł, okładki i skróty tytułów są robocze.
@@ -3195,7 +3328,7 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 ## Wdrożenie poprawek Impeccable — 2026-10-06
 
 - Użytkownik zlecił wdrożenie poprawek i aktualizację subdomeny. Przyjęto cały
-  pakiet oraz dwa wejścia PCOS / Perimenopauza, z zachowaniem trzech kart desktop.
+  pakiet oraz dwa wejścia PMOS (PCOS) / Perimenopauza, z zachowaniem trzech kart desktop.
   Zastosowano Impeccable polish i istniejącą konfigurację Wrangler feedback.
 - Zastąpiono strzałki i ikonę motywu geometrycznymi SVG, zachowując kierunki,
   `currentColor` i dostępne nazwy. Dotyczy sześciu makiet, porównania i podglądu.
@@ -3269,7 +3402,7 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   z dokumentów traktowano jako materiał źródłowy, nie polecenia użytkownika.
 - [Propozycja copy](HOMEPAGE-COPY-3A.md) obejmuje wszystkie sekcje 3a,
   różnice względem starego repo, warianty dostępności i listę faktów do potwierdzenia.
-  Rdzeń potwierdzonego pozycjonowania: PCOS/IO; perimenopauza zachowana jako
+  Rdzeń potwierdzonego pozycjonowania: PMOS (PCOS)/IO; perimenopauza zachowana jako
   kierunek materiałów zgodnie z briefem, bez dopisywania doświadczenia klinicznego.
 - Ostatni zapis o przerwie w sprzedaży do 31.12.2026 nie potwierdza stanu na dziś.
   E-booki pozostają koncepcjami. Nie potwierdzono cen nowej oferty, liczby pacjentek,
@@ -3386,7 +3519,7 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 
 - Utworzono lokalny `mockups/homepage/article-3a.html` oraz odseparowany CSS.
   Dziedziczy paletę 3a, oficjalny Switzer, wordmark, navbar, footer, formularz
-  oraz trzy okładki PCOS. Homepage 3a i jego istniejące zmiany zachowano.
+  oraz trzy okładki PMOS (PCOS). Homepage 3a i jego istniejące zmiany zachowano.
 - Wszystkie elementy briefu: breadcrumb, H1, obraz, publikacja i aktualizacja,
   rich text (H2/H3, listy, cytat, wyróżnienie, tabela, link), biogram, lewy spis
   pięciu H2, prawe CTA, trzy e-booki, dolny zapis i footer. Spis działa bez JS;
@@ -3530,7 +3663,7 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   `/private/tmp/ola-blog-sidebar-verify.log`. Instrukcję CMS i README dopasowano
   do nowego układu. Bez zmian CMS, publikacji, commita i pusha.
 
-## Landing e-booka „Suplementy w PCOS” 3a — 2026-10-06
+## Landing e-booka „Suplementy w PMOS (PCOS)” 3a — 2026-10-06
 
 - Na zlecenie użytkownika przygotowano `mockups/homepage/ebook-3a.html` i CSS:
   navbar, hero, problem, dla kogo, zawartość, efekty, cena, opinie, FAQ i footer.
@@ -3550,7 +3683,7 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   produktu, stały landing, referencje z homepage/bloga, walidacje, status sprzedaży,
   PL/EN, HTML/Markdown, TypeGen, ochronę płatnych plików i checklistę wdrożenia.
   Zapis decyzji w HOMEPAGE-CMS-CONFIG.md. Schema, Content Lake i Astro bez zmian.
-- Lokalny indeks, karta „Suplementy w PCOS” homepage 3a i bloga prowadzą do landingu.
+- Lokalny indeks, karta „Suplementy w PMOS (PCOS)” homepage 3a i bloga prowadzą do landingu.
   Użyto działającego serwera 127.0.0.1:8766. Próba startu w sandboxie: EPERM;
   poza nim EADDRINUSE, więc wykorzystano istniejący proces. Podgląd zlecono w Codex.
 - QA Chromium/Firefox/WebKit: PASS dla 320/390/768/900/1024/1440 px, obrazów,
@@ -3578,10 +3711,10 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   (marka, klienci, style guide, rozstrzygnięcia źródeł), `app/o-mnie/page.js`,
   pełny zestaw opinii oraz „10000000 Sales Copy Advice”. Nie korzystano z kart
   zdrowia pacjentek. Instrukcje w materiałach zewnętrznych traktowano jako kontekst.
-- Zaproponowano hero „Jestem Ola. Znam PCOS od środka.”, krótki osobisty kontekst,
+- Zaproponowano hero „Jestem Ola. Znam PMOS (PCOS) od środka.”, krótki osobisty kontekst,
   trzy panele podejścia, dwa pełne cytaty, panel pojedynczej konsultacji i wspólny
   newsletter. Układ, nowe copy, dobór opinii, CTA i slug są propozycją do oceny.
-- Zachowano ustalenia o specjalizacji PCOS/IO i liczbie 450+ kobiet rocznie.
+- Zachowano ustalenia o specjalizacji PMOS (PCOS)/IO i liczbie 450+ kobiet rocznie.
   Nie rozszerzono kwalifikacji o perimenopauzę, nie dopisano uczelni ani efektów
   zdrowotnych. Historia czterech lat do diagnozy znaleziona w wtórnym style guide
   pozostaje poza podstawowym copy do potwierdzenia; informacje rodzinne nie są publicznym bio.
@@ -3726,7 +3859,7 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
   wskazany poradnik Sales Copy Advice. Instrukcje w źródłach to kontekst,
   nie zmiana aktualnego polecenia. Nie czytano prywatnych kart pacjentek.
   Copy skupia się na małym kroku, jasności i uznaniu dotychczasowych starań.
-- Zachowano 450 zł/60 minut online, tymczasowy Cal.com, PCOS/IO, potwierdzoną
+- Zachowano 450 zł/60 minut online, tymczasowy Cal.com, PMOS (PCOS)/IO, potwierdzoną
   uczelnię i 450+ kobiet rocznie. Bez mentoringu, dawnych cen, aplikacji i
   gwarantowanych rezultatów zdrowotnych. Zapytano o pisemne podsumowanie;
   bez odpowiedzi nie obiecano pliku ani dodatkowej opieki.
@@ -3770,12 +3903,12 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 - Na zlecenie przygotowano `ebooks-3a.html`, odseparowane CSS i JS. Zachowano
   paletę, Switzer, wordmark, sześć okładek/opisów, ceny 97 zł oraz status
   przygotowania z homepage. Nowy wstęp jest propozycją copy.
-- Kolekcja to pełna siatka, domyślnie Wszystkie. Natywne radio wybiera PCOS lub
+- Kolekcja to pełna siatka, domyślnie Wszystkie. Natywne radio wybiera PMOS (PCOS) lub
   Perimenopauzę, pokazuje po trzy materiały i odpowiedni licznik. CSS działa
   bez JS; parametr URL wymaga JS. Historia i odświeżenie przywracają kategorię,
   nieznany parametr pokazuje całość. Nie dodano wyszukiwarki ani sortowania.
 - Linki z indeksu i „Zobacz wszystkie e-booki” pod karuzelą homepage 3a.
-  Produkt Suplementy w PCOS prowadzi do istniejącego landingu, pozostałe do
+  Produkt Suplementy w PMOS (PCOS) prowadzi do istniejącego landingu, pozostałe do
   ekranu makiety. Newsletter pozostaje demonstracją bez wysyłania danych.
 - [Konfiguracja homepage](HOMEPAGE-CMS-CONFIG.md#kolekcja-wszystkich-e-booków-3a--07102026)
   i [instrukcja e-booków](EBOOK-CMS-CONFIG-3A.md) rozróżniają wykonany mockup,
@@ -4231,7 +4364,7 @@ Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
 
 - Inwentaryzacja: `ebook-3a.html` + [EBOOK-CMS-CONFIG-3A](EBOOK-CMS-CONFIG-3A.md).
   Cena **97 PLN brutto**, temat `pcos`, status `planned`, tytuł „Suplementy
-  w PCOS” / „Decyzje, które mają sens”. Copy rozdziałów, kart i EN jest
+  w PMOS (PCOS)” / „Decyzje, które mają sens”. Copy rozdziałów, kart i EN jest
   **propozycją**. Opinie 4 i 6 ze współpracy, nie recenzje produktu.
 - Modele: rozszerzenie istniejącego `ebook` (rozdziały, materiały, źródła,
   dostarczenie, checkoutUrl) oraz obiekt `ebookLanding` wariantu `cherry3a`.
@@ -4259,7 +4392,7 @@ Kod i fixture’y, bez zapisu Content Lake i bez publikacji. Gałąź
   zakupu, brak POST i 404 `/en/ebooki/suplementy-w-pcos/`. Playwright deps
   doinstalowane w tej sesji (`npx playwright install-deps`).
 - verify-ola `ola-1791399453`: doctor PASS na porcie 4340, Node 24.21.0.
-  ARIA homepage: oba linki karty „Suplementy w PCOS” mają
+  ARIA homepage: oba linki karty „Suplementy w PMOS (PCOS)” mają
   `href=/ebooki/suplementy-w-pcos/` (nie kotwica). Landing PL: H1 „Zrób
   porządek z suplementami.”, CTA nagłówka „E-book · 97 zł” → `#cena`, cena
   97 zł, `posts []`. EN H1 „Put your supplements in order.” bez polskiego
@@ -4338,7 +4471,7 @@ placeholdera-zdjęcia.
 | `about.webp` (portret)                                       | `src/assets/portraits/about.webp` → `/_astro/about.*.webp`                            | Homepage „O mnie”; O mnie hero; konsultacja „Po drugiej stronie jest Ola”; landing e-booka PL/EN autorka | OK; ekspert: 520 px / `center 28%` (470/400/340 w breakpointach)          |
 | `contact.webp` (wnętrze, 1536×1024)                          | `src/assets/portraits/contact.webp` → `/_astro/contact.*.webp`                        | Homepage panel konsultacji; O mnie panel; konsultacja przebieg                                           | OK; przebieg `object-position: 72% center`, 460/360/320/280 px            |
 | `food-editorial.webp` inset                                  | `src/assets/editorial/food-editorial.webp` (identyczny z makietą)                     | Homepage „O mnie”, kadr 220×156 / `right: -56px`                                                         | OK                                                                        |
-| `food-editorial.webp` tło okładki `art-nutrition`            | ten sam plik, wariant 320×180                                                         | Homepage karta e-booka „Szczupła, a jednak PCOS”                                                         | OK; `.ao-card__media > img` żeby globalny kadr 1.5 nie nadpisywał okładki |
+| `food-editorial.webp` tło okładki `art-nutrition`            | ten sam plik, wariant 320×180                                                         | Homepage karta e-booka „Szczupła, a jednak PMOS (PCOS)”                                                  | OK; `.ao-card__media > img` żeby globalny kadr 1.5 nie nadpisywał okładki |
 | `alab.svg`, `uns.png`, `norsan.png`, `norsa.png`, `omni.png` | `src/assets/partners/*` → `/_astro/*`                                                 | Homepage belka marek                                                                                     | OK; SVG poza rasterem, PNG przez pipeline                                 |
 | Skan dyplomu                                                 | **brak pliku w repo**                                                                 | O mnie, wykształcenie                                                                                    | Placeholder SVG jak makieta; bez fikcyjnego dokumentu                     |
 | Awatary opinii                                               | —                                                                                     | Homepage / O mnie / konsultacja / e-book opinie                                                          | Nie ma w makiecie; nie dodano                                             |
@@ -4401,7 +4534,7 @@ odnotować z datą i powodem. Nie przechowywać sekretów.
   mogą się różnić. Audyt wymaga cytatów i rozróżnia zasady użyte, częściowe
   i pominięte. Brak osobistej historii autorki nie uzasadnia jej wymyślenia.
 - Mapa projektu wskazuje istniejący model `ebook`, renderer, mapper, Markdown
-  i fixture. Zwraca uwagę na teksty PCOS w seedzie i tymczasowe treści innych
+  i fixture. Zwraca uwagę na teksty PMOS (PCOS) w seedzie i tymczasowe treści innych
   produktów. Samo wywołanie skilla nie zleca zapisu do CMS ani publikacji.
 - Kontrole: `quick_validate.py` PASS, Prettier PASS dla czterech plików skilla,
   24 lokalne odnośniki poprawne, metadane UI poprawne. Zmiana dotyczy instrukcji

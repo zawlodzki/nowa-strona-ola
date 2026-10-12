@@ -20,7 +20,6 @@ import {
 } from "@/content/about-seed";
 import {
   credentialIssuer,
-  credentialLevelLabel,
   credentialTitle,
   splitCredentials,
 } from "@/content/credentials";
@@ -117,16 +116,6 @@ const { degrees, trainings } = splitCredentials(person.credentials);
                     <dt>{pl ? "Kierunek" : "Programme"}</dt>
                     <dd>{credentialTitle(degree, lang)}</dd>
                   </div>
-                  {(degree.level || degree.year) && (
-                    <div>
-                      <dt>{pl ? "Stopień" : "Degree"}</dt>
-                      <dd>
-                        {[credentialLevelLabel(degree, lang), degree.year]
-                          .filter(Boolean)
-                          .join(", ")}
-                      </dd>
-                    </div>
-                  )}
                 </>
               ))
             ) : (
@@ -149,19 +138,6 @@ const { degrees, trainings } = splitCredentials(person.credentials);
                     ? `od ${person.practiceSince} roku`
                     : `since ${person.practiceSince}`}
                 </dd>
-              </div>
-            )}
-            {person.experience.length > 0 && (
-              <div>
-                <dt>
-                  {pl ? "Wcześniejsze miejsca pracy" : "Previous workplaces"}
-                </dt>
-                {person.experience.map((item) => (
-                  <dd>
-                    {item.organization}
-                    {item.role && <span>{item.role}</span>}
-                  </dd>
-                ))}
               </div>
             )}
             {trainings.length > 0 && (

@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 const articlePath = "/blog/przygotowanie-do-konsultacji-pcos/";
 const articleHeading =
-  "Jak przygotować się do konsultacji dietetycznej przy PCOS?";
+  "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?";
 
 async function openArticle(page: Page, path = articlePath) {
   await page.goto(path);

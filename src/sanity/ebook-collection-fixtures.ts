@@ -39,8 +39,8 @@ export function ebookCollectionPageFixture(language: Locale) {
         title: copy.newsletterTitle,
         lead:
           language === "pl"
-            ? "Piszę o PCOS, insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie."
-            : "I write about PCOS, insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and I send updates about new materials, including perimenopause.",
+            ? "Piszę o PMOS\u00A0(PCOS), insulinooporności i codziennym odżywianiu. Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję o nowych materiałach, także o perimenopauzie."
+            : "I write about PMOS\u00A0(PCOS), insulin resistance and everyday nutrition. I share notes you can use at an ordinary meal and I send updates about new materials, including perimenopause.",
         form,
       },
     ],

@@ -24,12 +24,12 @@ const pmosTogether = "PMOS\u00A0(PCOS)";
 const pmosBreakable = "PMOS (PCOS)";
 
 describe("ebook 3a fixtures", () => {
-  it("maps the Polish PCOS landing from the shared ebook document", async () => {
+  it("maps the Polish PMOS\u00A0(PCOS) landing from the shared ebook document", async () => {
     const ebook = await getEbook("pl", "suplementy-w-pcos", {
       environment: {},
     });
     const view = mapEbook(ebook, "pl");
-    expect(view.title).toBe("Suplementy w PCOS");
+    expect(view.title).toBe("Suplementy w PMOS\u00A0(PCOS)");
     expect(view.subtitle).toBe("Decyzje, które mają sens");
     expect(view.topic).toBe("pcos");
     expect(view.availability).toBe("planned");

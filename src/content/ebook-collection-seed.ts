@@ -5,9 +5,9 @@ export const ebookCollectionCopy = {
     pageTitle: "E-booki | Aleksandra Olesiewicz",
     seoTitle: "E-booki | Aleksandra Olesiewicz",
     seoDescription:
-      "Kolekcja e-booków Aleksandry Olesiewicz o PCOS i perimenopauzie. Copy i UX kolekcji są propozycją do zatwierdzenia.",
+      "Kolekcja e-booków Aleksandry Olesiewicz o PMOS\u00A0(PCOS) i perimenopauzie. Copy i UX kolekcji są propozycją do zatwierdzenia.",
     title: "Więcej jasności.\nW Twoim tempie.",
-    lead: "PCOS, perimenopauza i codzienne wybory. E-booki, do których możesz wracać, kiedy potrzebujesz uporządkować pytania i znaleźć swój następny krok.",
+    lead: "PMOS\u00A0(PCOS), perimenopauza i codzienne wybory. E-booki, do których możesz wracać, kiedy potrzebujesz uporządkować pytania i znaleźć swój następny krok.",
     findTopicLabel: "Znajdź swój temat",
     catalogTitle: "Wszystkie e-booki",
     catalogLead: "Wybierz to, co jest Ci teraz bliskie.",
@@ -28,9 +28,9 @@ export const ebookCollectionCopy = {
     pageTitle: "E-books | Aleksandra Olesiewicz",
     seoTitle: "E-books | Aleksandra Olesiewicz",
     seoDescription:
-      "Aleksandra Olesiewicz’s e-book collection on PCOS and perimenopause. Collection copy and UX are a proposal pending approval.",
+      "Aleksandra Olesiewicz’s e-book collection on PMOS\u00A0(PCOS) and perimenopause. Collection copy and UX are a proposal pending approval.",
     title: "More clarity.\nAt your pace.",
-    lead: "PCOS, perimenopause and everyday choices. E-books you can return to when you need to sort your questions and find your next step.",
+    lead: "PMOS\u00A0(PCOS), perimenopause and everyday choices. E-books you can return to when you need to sort your questions and find your next step.",
     findTopicLabel: "Find your topic",
     catalogTitle: "All e-books",
     catalogLead: "Choose what feels close right now.",
