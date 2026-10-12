@@ -308,10 +308,21 @@ describe("planPmosRename", () => {
         _type: "article",
         _rev: "rev-11",
         title:
-          "Conflicting advice on PCOS: write down what you want to clarify",
+          "Conflicting advice on PMOS (PCOS): write down what you want to clarify",
         seo: {
           title:
-            "Conflicting advice on PCOS: write down what you want to clarify",
+            "Conflicting advice on PMOS (PCOS): write down what you want to",
+        },
+      },
+      {
+        _id: "drafts.article-blog-11-en",
+        _type: "article",
+        _rev: "rev-11-draft",
+        title:
+          "Conflicting advice on PMOS (PCOS): write down what you want to clarify",
+        seo: {
+          title:
+            "Conflicting advice on PMOS (PCOS): write down what you want to",
         },
       },
       {
@@ -378,9 +389,19 @@ describe("planPmosRename", () => {
       (change) =>
         change.id === "article-blog-11-en" && change.path === "seo.title",
     );
-    expect(english?.after).toBe(
-      "Conflicting advice on PMOS: write down what to clarify",
-    );
+    expect(english).toEqual({
+      id: "article-blog-11-en",
+      path: "seo.title",
+      before: "Conflicting advice on PMOS (PCOS): write down what you want to",
+      after: "Conflicting advice on PMOS: write down what to clarify",
+    });
+    expect(
+      plan.changes.find(
+        (change) =>
+          change.id === "drafts.article-blog-11-en" &&
+          change.path === "seo.title",
+      )?.after,
+    ).toBe("Conflicting advice on PMOS: write down what to clarify");
     expect(
       plan.changes.some(
         (change) =>
