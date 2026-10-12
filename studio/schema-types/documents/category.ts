@@ -11,6 +11,14 @@ export const categoryType = defineType({
   fields: [
     languageField,
     defineField({
+      name: "excludeFromMeasurement",
+      title: "Bez pomiaru",
+      description:
+        "Wyłącza Google Analytics, Microsoft Clarity i piksel Meta na stronie tej kategorii, niezależnie od zgody odwiedzającego. Nie zmienia ustawienia poszczególnych artykułów.",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
       name: "title",
       title: "Nazwa",
       type: "string",

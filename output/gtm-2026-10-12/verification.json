@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-12",
+  "node": "24.19.0",
+  "verify": {
+    "unit": 383,
+    "unitFiles": 43,
+    "e2ePassed": 456,
+    "e2eSkipped": 9,
+    "cmsDocuments": 88,
+    "cmsErrors": 0,
+    "matchingPages": 17
+  },
+  "enabledGtmMock": {
+    "e2e": 9,
+    "engines": ["Chromium", "Firefox", "WebKit"],
+    "telemetrySent": 0
+  },
+  "budgetsGzipBytes": {
+    "js": 9591,
+    "css": 30873
+  },
+  "gtm": {
+    "workspace": 5,
+    "publishedVersion": 3,
+    "importModifiedTags": 2,
+    "importAdded": 0,
+    "importDeleted": 0,
+    "rollout": false,
+    "published": false
+  },
+  "ga4": {
+    "property": "462835494",
+    "stream": "9802578320",
+    "measurementId": "G-9QW05JYZTL",
+    "enhancedMeasurement": false,
+    "adPersonalizationRegions": 0,
+    "googleSignals": false,
+    "eventRetentionMonths": 2,
+    "userRetentionMonthsSaved": 14,
+    "userRetentionMonthsPrepared": 2,
+    "retentionSaved": false
+  },
+  "meta": {
+    "pixel": "2915257895296567",
+    "advancedMatching": false,
+    "automaticEvents": false,
+    "core": true,
+    "newTagAdded": false
+  },
+  "notVerified": [
+    "compiled GTM workspace traffic",
+    "Tag Assistant",
+    "production activation",
+    "native zoom 200%",
+    "physical device",
+    "screen reader"
+  ],
+  "initialBasePr": 82,
+  "initialBaseCommit": "d8bc1b8",
+  "baseCommit": "b8e7c85",
+  "baseBranch": "main",
+  "commitCreated": false,
+  "pullRequestCreated": false
+}

@@ -24,6 +24,7 @@ jobs:
       SITE_INDEXING: ${{ github.event.client_payload.target_environment == 'production' && vars.SITE_INDEXING || '' }}
       INDEXNOW_KEY: ${{ github.event.client_payload.target_environment == 'production' && secrets.INDEXNOW_KEY || '' }}
       DEPLOYMENT_TARGET: ${{ github.event.client_payload.target_environment }}
+      PUBLIC_GTM_ENABLED: ${{ github.event.client_payload.target_environment == 'production' && vars.PUBLIC_GTM_ENABLED == 'true' && 'true' || 'false' }}
       PUBLIC_SANITY_PROJECT_ID: ${{ vars.PUBLIC_SANITY_PROJECT_ID }}
       PUBLIC_SANITY_DATASET: ${{ vars.PUBLIC_SANITY_DATASET }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

@@ -1,5 +1,5 @@
-import type { ConsentPreferences } from "./consent";
-import { resolveTrackingPolicy, type TrackingPolicy } from "./tracking-policy";
+import type { ConsentPreferences, ConsentView } from "./consent";
+import { parseTrackingPolicy, type TrackingPolicy } from "./tracking-policy";
 
 type ConsentCommand = [
   "consent",
@@ -14,6 +14,7 @@ interface AnalyticsOptions {
   push: (entry: LayerEntry) => void;
   load: () => void;
   stop: () => void;
+  reload?: () => void;
 }
 
 export function createAnalytics(options: AnalyticsOptions) {
@@ -21,6 +22,8 @@ export function createAnalytics(options: AnalyticsOptions) {
   let pageViewSent = false;
   let activeMeasurement = false;
   let activeMarketing = false;
+  let revoked: { measurement: boolean; marketing: boolean } | null = null;
+  let reloading = false;
 
   const command = (
     measurement: boolean,
@@ -40,7 +43,21 @@ export function createAnalytics(options: AnalyticsOptions) {
   ];
 
   return {
+    applyConsent(view: ConsentView) {
+      this.applyPreferences(view.preferences);
+      if (
+        revoked &&
+        !reloading &&
+        view.phase === "settled" &&
+        !(revoked.measurement && view.preferences.measurement) &&
+        !(revoked.marketing && view.preferences.marketing)
+      ) {
+        reloading = true;
+        options.reload?.();
+      }
+    },
     applyPreferences(preferences: ConsentPreferences) {
+      if (revoked) return;
       const measurement = Boolean(
         options.enabled &&
         options.policy?.measurement &&
@@ -53,6 +70,10 @@ export function createAnalytics(options: AnalyticsOptions) {
         loaded &&
         ((activeMeasurement && !measurement) || (activeMarketing && !marketing))
       ) {
+        revoked = {
+          measurement: activeMeasurement && !measurement,
+          marketing: activeMarketing && !marketing,
+        };
         activeMeasurement = false;
         activeMarketing = false;
         options.stop();
@@ -84,17 +105,50 @@ export function createAnalytics(options: AnalyticsOptions) {
   };
 }
 
+export function clearMeasurementStorage() {
+  const names = document.cookie
+    .split(";")
+    .map((cookie) => cookie.trim().split("=")[0]);
+  const hostname = window.location.hostname;
+  const domains = [
+    "",
+    ...hostname
+      .split(".")
+      .map((_, index, parts) => `; Domain=${parts.slice(index).join(".")}`),
+  ];
+  for (const name of names) {
+    if (
+      !name ||
+      !/^(?:_ga(?:_.+)?|_gid|_gat(?:_.+)?|_fbp|_fbc|_clck|_clsk)$/.test(name)
+    )
+      continue;
+    for (const domain of domains) {
+      document.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax${domain}${window.location.protocol === "https:" ? "; Secure" : ""}`;
+    }
+  }
+  for (const key of ["localStorage", "sessionStorage"] as const) {
+    try {
+      window[key].removeItem("_cltk");
+    } catch {
+      continue;
+    }
+  }
+}
+
 const layer: (LayerEntry | IArguments)[] = [];
-export function applyPreferences(preferences: ConsentPreferences) {
-  browserAnalytics.applyPreferences(preferences);
+export function applyConsent(view: ConsentView) {
+  browserAnalytics.applyConsent(view);
 }
 
 const browserAnalytics = createAnalytics({
   enabled: import.meta.env.PUBLIC_GTM_ENABLED === "true",
   policy:
-    typeof window === "undefined"
+    typeof document === "undefined"
       ? null
-      : resolveTrackingPolicy(window.location.pathname, ""),
+      : parseTrackingPolicy(
+          document.querySelector<HTMLElement>('meta[name="ao-tracking-policy"]')
+            ?.dataset ?? {},
+        ),
   push: (entry) => {
     if (Array.isArray(entry)) {
       Reflect.apply(queueGoogleCommand, null, entry);
@@ -108,7 +162,11 @@ const browserAnalytics = createAnalytics({
     layer.push({ "gtm.start": Date.now(), event: "gtm.js" });
     document.head.append(script);
   },
-  stop: () => window.location.reload(),
+  stop: () => {
+    Reflect.set(window, "ga-disable-G-9QW05JYZTL", true);
+    clearMeasurementStorage();
+  },
+  reload: () => window.location.reload(),
 });
 
 function queueGoogleCommand() {

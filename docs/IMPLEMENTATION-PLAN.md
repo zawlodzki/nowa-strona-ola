@@ -500,7 +500,13 @@ znikają z obu formatów i indeksów po udanej publikacji.
 - [x] Zakończyć pełne verify, odbiór UI/sieci i wdrożenie klienta na staging.
 - [x] Sprawdzić odrzucenie, zgodę częściową, zmianę, wycofanie i awarię c15t.
       E2E na atrapach oraz odmowa/akceptacja/wycofanie live na stagingu.
-- [ ] Zweryfikować w sieci kolejność ładowania GTM/GA4 i zdarzenia bez PII.
+- [x] Dodać politykę wykluczeń stron i pola „Bez pomiaru” w schemacie CMS,
+      zachowanie częściowej zgody i bezpieczne cofnięcie, 12.10.2026.
+      Kod zweryfikowano; schema Studio i pomiar produkcji nie są wdrożone.
+- [x] Zweryfikować bramkę GTM na atrapach oraz rzeczywisty SDK GA4 z blokadą
+      wysyłki telemetrii, 12.10.2026.
+- [ ] Odebrać skompilowany kontener w Tag Assistant i opublikować pomiar
+      po zapisie ustawień usług oraz spójnego copy prawnego.
 
 Odbiór: potwierdzenie po kolejce; awaria n8n uruchamia retry; brak zgody
 nie uruchamia skryptów Google.

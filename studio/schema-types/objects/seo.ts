@@ -11,6 +11,14 @@ export const seoType = defineType({
   components: { input: SeoPreviewInput },
   fields: [
     defineField({
+      name: "excludeFromMeasurement",
+      title: "Bez pomiaru",
+      description:
+        "Wyłącza Google Analytics, Microsoft Clarity i piksel Meta na tej stronie niezależnie od zgody odwiedzającego. Kontakt, konsultacje, odstąpienie i dokumenty prawne są zawsze wyłączone. Zapis do newslettera nie wyklucza strony.",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
       name: "title",
       title: "Tytuł SEO",
       description:
