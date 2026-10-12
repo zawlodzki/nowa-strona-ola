@@ -1,4 +1,4 @@
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
 import { checkCssBudgets } from "./check-css-budgets.mjs";
@@ -25,6 +25,20 @@ assert.equal(
   43220,
   "Switzer variable woff2 must stay the unmodified Fontshare file",
 );
+// Lista wpisów z buildu: katalogi dist/blog/<slug>/ poza kategoriami i paginacją.
+// Wcześniej sprawdzenia zakładały 11 wpisów z makiety („Wpisy 2–7 z 11”, wpis
+// przygotowanie-do-konsultacji-pcos), więc każda prawdziwa zmiana treści w Sanity
+// wywracała Publish content (12.10.2026: najpierw 14 wpisów, potem 3).
+const BLOG_FIRST_PAGE = 7; // „Najnowszy wpis” + 6 kart
+const blogArticles = (await readdir("dist/blog", { withFileTypes: true }))
+  .filter(
+    (entry) =>
+      entry.isDirectory() && !["kategoria", "strona"].includes(entry.name),
+  )
+  .map((entry) => entry.name)
+  .sort();
+const blogArticlePaths = blogArticles.map((slug) => `blog/${slug}/index.html`);
+assert(blogArticles.length > 0, "build has no blog articles");
 for (const path of [
   "index.html",
   "o-mnie/index.html",
@@ -35,11 +49,14 @@ for (const path of [
   "ui/index.html",
   "static/index.html",
   "blog/index.html",
-  "blog/strona/2/index.html",
   "blog/kategoria/pcos/index.html",
   "blog/kategoria/perimenopauza/index.html",
-  "blog/przygotowanie-do-konsultacji-pcos/index.html",
   "odstapienie/index.html",
+  // Wpisy i paginacja wynikają z treści (fixture albo Content Lake), nie z listy na sztywno.
+  ...blogArticlePaths,
+  ...(blogArticles.length > BLOG_FIRST_PAGE
+    ? ["blog/strona/2/index.html"]
+    : []),
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(
@@ -79,32 +96,58 @@ assert.doesNotMatch(ebookHtml, /potwierdzenie zakupu|płatność przyjęta/i);
 const blogHtml = await readFile("dist/blog/index.html", "utf8");
 assert.match(blogHtml, /Blog\. Po Twojemu\./);
 assert.match(blogHtml, /Najnowszy wpis/);
-assert.match(blogHtml, /Wpisy 2–7 z 11/);
-assert.match(blogHtml, /przygotowanie-do-konsultacji-pcos/);
-assert.match(blogHtml, /\/blog\/strona\/2\//);
-assert.doesNotMatch(
-  blogHtml.split('id="wpisy"')[1] ?? "",
-  /przygotowanie-do-konsultacji-pcos/,
+const blogTotal = blogArticles.length;
+if (blogTotal > 1) {
+  assert.match(
+    blogHtml,
+    new RegExp(
+      `Wpisy 2–${Math.min(blogTotal, BLOG_FIRST_PAGE)} z ${blogTotal}`,
+    ),
+  );
+}
+const firstPageLinks = blogArticles.filter((slug) =>
+  blogHtml.includes(`/blog/${slug}/`),
 );
-const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
-assert.match(blogPage2, /Wpisy 8–11 z 11/);
-assert.doesNotMatch(blogPage2, /Najnowszy wpis/);
-const blogEmpty = await readFile(
-  "dist/blog/kategoria/perimenopauza/index.html",
-  "utf8",
+assert.equal(
+  firstPageLinks.length,
+  Math.min(blogTotal, BLOG_FIRST_PAGE),
+  `blog index links ${firstPageLinks.length} of ${blogTotal} articles`,
 );
-assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
-const articleHtml = await readFile(
-  "dist/blog/przygotowanie-do-konsultacji-pcos/index.html",
-  "utf8",
+const hasPage2 = await access("dist/blog/strona/2/index.html").then(
+  () => true,
+  () => false,
 );
-assert.match(articleHtml, /article3a/);
-assert.match(
-  articleHtml,
-  /Jak przygotować się do konsultacji dietetycznej przy PMOS \(PCOS\)\?/,
+assert.equal(
+  hasPage2,
+  blogTotal > BLOG_FIRST_PAGE,
+  `pagination page 2 ${hasPage2 ? "exists" : "missing"} for ${blogTotal} articles`,
 );
-assert.match(articleHtml, /W tym artykule/);
-assert.match(articleHtml, /"@type":"FAQPage"/);
+if (hasPage2) {
+  assert.match(blogHtml, /\/blog\/strona\/2\//);
+  const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
+  assert.match(
+    blogPage2,
+    new RegExp(`Wpisy ${BLOG_FIRST_PAGE + 1}–\\d+ z ${blogTotal}`),
+  );
+  assert.doesNotMatch(blogPage2, /Najnowszy wpis/);
+}
+for (const category of await readdir("dist/blog/kategoria")) {
+  if (category.endsWith(".md")) continue;
+  const html = await readFile(
+    `dist/blog/kategoria/${category}/index.html`,
+    "utf8",
+  );
+  const linked = blogArticles.some((slug) => html.includes(`/blog/${slug}/`));
+  assert(
+    linked || /tej kategorii nie ma jeszcze wpisów/i.test(html),
+    `blog/kategoria/${category}: neither articles nor empty state`,
+  );
+}
+for (const path of blogArticlePaths) {
+  const articleHtml = await readFile(`dist/${path}`, "utf8");
+  assert.match(articleHtml, /article3a/, `${path}: article template`);
+  assert.match(articleHtml, /"@type":"BlogPosting"/, `${path}: BlogPosting`);
+}
 const homePl = await readFile("dist/index.html", "utf8");
 for (const [label, html] of [["/", homePl]]) {
   assert.match(
