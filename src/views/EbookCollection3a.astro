@@ -162,7 +162,12 @@ const topicAnchor = {
                   }
                 >
                   {badge && <AvailabilityBadge label={badge} />}
-                  <a class="ebooks3a-cover-link" href={item.href}>
+                  <a
+                    class="ebooks3a-cover-link"
+                    href={item.href}
+                    tabindex="-1"
+                    aria-hidden="true"
+                  >
                     <CoverStage variant={art.variant}>
                       <BookCover
                         title={item.title}
