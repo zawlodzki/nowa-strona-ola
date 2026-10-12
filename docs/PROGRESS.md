@@ -65,7 +65,24 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   bez braków. Porównanie 20 plików kodu z kopią weryfikacji: identyczne;
   `git diff --check` PASS.
 - Następny krok: scalić kod do main, potwierdzić wdrożenie frontendu oraz
-  plików Studio i odebrać pięć stron na hostowanym serwisie. Bez push w tej sesji.
+  plików Studio i odebrać pięć stron na hostowanym serwisie. W pierwszej części
+  pracy nie wykonywano push.
+
+### Push i PR pięciu landingów
+
+- Na dodatkowe polecenie użytkownika „pr push” utworzono podpisany commit
+  `d2c3216` i wypchnięto `codex/ebook-landings-3a` do origin. Otwarto
+  [PR #74](https://github.com/zawlodzki/nowa-strona-ola/pull/74) do main.
+- Zakres: 34 pliki kodu, treści, schematu, testów, dokumentacji i dowodów tej
+  sesji. Dołączono zbiorczy podgląd hero. Pełne zrzuty pozostają lokalnie;
+  wcześniejsze nieśledzone pliki użytkownika nie trafiły do commita.
+- Format własnych plików i `git diff --check` PASS. Ponowne porównanie
+  20 plików kodu z kopią, która przeszła pełne verify: brak różnic. Nie
+  powtarzano testów aplikacji bez zmiany kodu. Pierwszy podpis przerwał
+  błąd 1Password; ponowienie w interaktywnym terminalu zakończyło się
+  poprawnym podpisem. Ustawienia podpisywania pozostały zachowane.
+- Następny krok: odbiór PR i CI, scalenie, potwierdzenie wdrożeń frontendu
+  oraz Studio i pięciu landingów na hostowanym serwisie.
 
 ### Kwalifikacje Oli na „O mnie” i w JSON-LD, 11.10.2026
 

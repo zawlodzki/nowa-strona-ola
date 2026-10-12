@@ -882,4 +882,6 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
 - [x] Wdrożyć schemat, zaktualizować rejestrację istniejącego Studio po
       dodatkowej zgodzie i opublikować pięć landingów; odczytem potwierdzić
       zgodność oraz zachowane pola produktów.
+- [x] Na dodatkowe zlecenie wykonać push i otworzyć
+      [PR #74](https://github.com/zawlodzki/nowa-strona-ola/pull/74) do main.
 - [ ] Potwierdzić nowe UI na hostowanym serwisie po włączeniu kodu do main.
