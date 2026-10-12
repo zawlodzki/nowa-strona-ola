@@ -104,6 +104,13 @@ jest ładowana tylko przez aplikację `preview/`. Workflow
 po udanym Quality dla bieżącego `main`. `CLOUDFLARE_ENV` zostaw tylko
 przy buildzie podglądu.
 
+IndexNow jest przygotowany do uruchomienia dopiero dla gotowej, indeksowalnej
+produkcji. Domyślny `npm run indexnow` wykonuje dry-run; bez konfiguracji
+kończy się `skipped`, bez połączeń. Wyłączone warianty sprawdzono również
+przez `npm run indexnow -- --send` i `--capture-previous`. Instrukcja
+konfiguracji, zgłoszenia usunięć i ponowień: [IndexNow](docs/INDEXNOW-DEPLOYMENT.md).
+W tej sesji nie uruchamiano prawdziwej wysyłki ani deployu.
+
 Eksporty pełnej treści: `/blog/rss.xml` zawiera lead i pełny HTML artykułów,
 a `/llms-full.txt` łączy Markdown głównej, O mnie, konsultacji, kolekcji
 i landingów e-booków. Oba pliki korzystają z tego samego spisu co `.md`

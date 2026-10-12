@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: publish-content-${{ github.event.client_payload.target_environment }}
@@ -20,6 +21,9 @@ jobs:
     timeout-minutes: 15
     environment: ${{ github.event.client_payload.target_environment }}
     env:
+      SITE_INDEXING: ${{ github.event.client_payload.target_environment == 'production' && vars.SITE_INDEXING || '' }}
+      INDEXNOW_KEY: ${{ github.event.client_payload.target_environment == 'production' && secrets.INDEXNOW_KEY || '' }}
+      INDEXNOW_PREVIOUS_FILE: ${{ runner.temp }}/indexnow-previous.xml
       DEPLOYMENT_TARGET: ${{ github.event.client_payload.target_environment }}
       PUBLIC_SANITY_PROJECT_ID: ${{ vars.PUBLIC_SANITY_PROJECT_ID }}
       PUBLIC_SANITY_DATASET: ${{ vars.PUBLIC_SANITY_DATASET }}
@@ -53,5 +57,58 @@ jobs:
           npm run test
           npm run build
           npm run test:build
+      - name: Restore sitemap from an earlier attempt
+        id: indexnow_restore
+        if: env.DEPLOYMENT_TARGET == 'production' && env.SITE_INDEXING == 'production' && env.INDEXNOW_KEY != ''
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: indexnow-before-deploy-${{ github.run_id }}
+          path: ${{ runner.temp }}
+          run-id: ${{ github.run_id }}
+          github-token: ${{ github.token }}
+      - name: Capture sitemap before deployment
+        id: indexnow_capture
+        if: env.DEPLOYMENT_TARGET == 'production' && env.SITE_INDEXING == 'production' && env.INDEXNOW_KEY != ''
+        continue-on-error: true
+        env:
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          RESTORE_OUTCOME: ${{ steps.indexnow_restore.outcome }}
+        run: |
+          if [ "$RUN_ATTEMPT" -gt 1 ] && [ "$RESTORE_OUTCOME" != "success" ]; then
+            echo "::error::Brak oryginalnej migawki sprzed wdrożenia. Ponowienie nie pobierze nowej sitemap ani nie zgłosi IndexNow."
+            exit 1
+          fi
+          npm run indexnow -- --capture-previous
+      - name: Preserve sitemap for deployment retries
+        id: indexnow_upload
+        if: env.DEPLOYMENT_TARGET == 'production' && env.SITE_INDEXING == 'production' && env.INDEXNOW_KEY != '' && steps.indexnow_capture.outcome == 'success' && steps.indexnow_restore.outcome != 'success'
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexnow-before-deploy-${{ github.run_id }}
+          path: ${{ env.INDEXNOW_PREVIOUS_FILE }}
+          if-no-files-found: error
+          retention-days: 7
       - name: Deploy immutable successful build
+        id: deploy
         run: npx wrangler deploy --config wrangler.jsonc --env "$DEPLOYMENT_TARGET"
+      - name: Notify IndexNow after successful deployment
+        if: success() && steps.deploy.outcome == 'success' && env.DEPLOYMENT_TARGET == 'production' && env.SITE_INDEXING == 'production' && env.INDEXNOW_KEY != ''
+        env:
+          CAPTURE_OUTCOME: ${{ steps.indexnow_capture.outcome }}
+          RESTORE_OUTCOME: ${{ steps.indexnow_restore.outcome }}
+          UPLOAD_OUTCOME: ${{ steps.indexnow_upload.outcome }}
+        run: |
+          if [ "$CAPTURE_OUTCOME" != "success" ]; then
+            echo "::error::Wdrożenie zakończyło się sukcesem. IndexNow nie został zgłoszony, ponieważ pobranie poprzedniego sitemap nie powiodło się."
+            exit 1
+          fi
+          if [ "$RESTORE_OUTCOME" != "success" ] && [ "$UPLOAD_OUTCOME" != "success" ]; then
+            echo "::error::Wdrożenie zakończyło się sukcesem. IndexNow nie został zgłoszony, ponieważ migawka sprzed wdrożenia nie jest zachowana do ponowienia."
+            exit 1
+          fi
+          if ! npm run indexnow -- --send; then
+            echo "::error::Wdrożenie zakończyło się sukcesem. Zgłoszenie IndexNow nie zostało potwierdzone."
+            exit 1
+          fi
