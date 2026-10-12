@@ -1,10 +1,33 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków, warianty hero „O mnie”); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Hero „O mnie”, wariant V1, 12.10.2026
+
+- Właściciel wybrał „Jestem Ola. / Znam PMOS / od środka.” Lead zostaje
+  z pierwszym „PMOS (PCOS)”. Angielski tytuł to „I am Ola. / I know PMOS /
+  from the inside.”, bo reszta strony mówi „I am”, nie „I'm”.
+- Źródło to `aboutCopy.heroTitle`. Fixture czyta to pole. Plan
+  `import:pmos-rename` ustawia `sections[_key=="about-hero"].title`
+  i nie rusza leadu.
+- Zmierzone linie na zbudowanej stronie, przy 320, 390 i 1440, to trzy.
+  „Jestem Ola.”, „Znam PMOS”, „od środka.” Lead zawiera „PMOS (PCOS)”.
+  CSS bez zmian. „O mnie” ma 8161 B przy limicie 8192 B.
+- `npm run verify` na Node 24.21.0 zakończył się kodem 0. Format, tokeny,
+  lint, `astro check`, 289 testów unit, build, build workspace,
+  `test:build`, 393 testy E2E w Chromium, Firefox i WebKit oraz
+  `test:content-lake` (12 stron) przeszły. CSS gzip 30867 B. Strona główna
+  8192 B. SEO 36 stron.
+- verify-ola `ola-1791779534` na `http://127.0.0.1:4340/o-mnie/`. H1 to
+  „Jestem Ola. Znam PMOS od środka.” Lead ma „PMOS (PCOS)”. Pusty
+  newsletter dał `browser posts` `[]`. Sanity nie było zapisywane.
+  Nic nie zostało scalone ani wdrożone.
+- Następny krok. Właściciel uruchamia suchy odczyt z tokenem. `--write`,
+  scalenie i wdrożenie zostają po jego stronie.
 
 ### Przegląd PR 73, 12.10.2026
 
@@ -20,11 +43,12 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Tytuł SEO skraca się dopiero, gdy po podmianie ma więcej niż 60 znaków.
   Tytuł, który już się mieści, zostaje z „PMOS (PCOS)”. Widoczny H1 artykułu
   zostaje dłuższy niż tytuł w `<title>`.
-- Tytuł hero na „O mnie” w kodzie zostaje „Jestem Ola. / Znam PMOS (PCOS) /
+- Do wyboru właściciela tytuł w kodzie był „Jestem Ola. / Znam PMOS (PCOS) /
   od środka.”. CSS nie ruszane. „O mnie” ma 8161 B przy limicie 8192 B.
-  Właściciel wybiera wariant. V4 nie mieści się w trzech liniach przy 320
-  i 1440. Przy 320 i 1440 trzecia linia to „(PCOS) od”, a czwarta „środka.”.
-  Przy 390 są trzy linie, a trzecia zaczyna się od „(PCOS) od środka.”.
+  V4 nie mieści się w trzech liniach przy 320 i 1440. Przy 320 i 1440
+  trzecia linia to „(PCOS) od”, a czwarta „środka.”. Przy 390 są trzy
+  linie, a trzecia zaczyna się od „(PCOS) od środka.”. Wybrany V1 jest
+  w sekcji powyżej.
 - Suchy odczyt datasetu nie wystartował. Brak tokenu. Skrypt wypisał, że
   nie wysyła zapytania. Na 88 dokumentach lokalnego planu content-lake
   plan PMOS ma 0 zmian i 0 problemów. Nie ma w nim dokumentów `_.`, opinii,
@@ -47,9 +71,9 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Regulamin newslettera pokazuje wersję 2.1 i „przy PCOS”. `/en/` i
   `/en/about/` zwracają 404. `/static/` bez JavaScriptu ma 0 skryptów.
   Newsletter na „O mnie” też dał `posts` `[]`.
-- Następny krok. Właściciel wybiera wariant tytułu hero. Potem może
-  uruchomić suchy odczyt z tokenem. `--write`, scalenie i wdrożenie
-  zostają po jego stronie.
+- Następny krok z tamtej chwili. Właściciel wybrał V1 w sekcji powyżej.
+  Suchy odczyt z tokenem, `--write`, scalenie i wdrożenie zostają
+  po jego stronie.
 
 ### PMOS (PCOS), wydział i historia na „O mnie”, 11.10.2026
 
