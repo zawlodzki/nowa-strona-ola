@@ -98,6 +98,8 @@ npm run types --workspace @ola/worker
 npm run types --workspace @ola/preview
 npm run build:workspaces
 npm run deploy:studio
+cd studio
+npx sanity deploy --external --url https://studio.aleksandraolesiewicz.com --yes --schema-required
 ```
 
 Hostowane Studio: `https://studio.aleksandraolesiewicz.com`. Build hostowany

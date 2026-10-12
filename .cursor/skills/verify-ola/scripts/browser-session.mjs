@@ -94,8 +94,10 @@ async function run(body) {
     }
     case "expect": {
       if (!body.role && body.text !== undefined) {
-        const target = page.getByText(body.text, { exact: true });
-        await target.first().waitFor({ state: body.state ?? "visible" });
+        const state = body.state ?? "visible";
+        let target = page.getByText(body.text, { exact: true });
+        if (state === "visible") target = target.filter({ visible: true });
+        await target.first().waitFor({ state });
         return body.text;
       }
       const target = locatorFor(body);

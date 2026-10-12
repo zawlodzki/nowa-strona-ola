@@ -32,6 +32,6 @@ Preconditions:
 
 - `browser context` kasuje poprzednią stronę sesji. Nie łącz tego przepisu w tej samej sesji z niedokończonym formularzem.
 - Licznik `script-count` dotyczy elementów w dokumencie, nie braku żądań sieciowych.
-- Formularz na `/` przy tym kontekście zostaje disabled. To inna funkcja, opisana w formularzu demonstracyjnym.
+- Formularz na `/` przy tym kontekście zostaje disabled. To przepis formularza newslettera.
 - Link marki „Aleksandra Olesiewicz — strona główna” jest w nagłówku i w stopce. Dowodem powrotu jest nagłówek strony głównej, nie sam ten link.
-- `/static/` pokazuje w nagłówku „English” do `/en/`. To fallback nagłówka, nie para tłumaczeń.
+- Przy wyłączonym publicznym EN nagłówek `/static/` nie pokazuje linku „English”. `enabledLocales` ma tylko `pl`, a ta strona nie podaje adresu tłumaczenia.

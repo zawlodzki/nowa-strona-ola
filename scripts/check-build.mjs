@@ -1,4 +1,4 @@
-import { access, readFile, readdir } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
 import { checkCssBudgets } from "./check-css-budgets.mjs";
@@ -25,20 +25,6 @@ assert.equal(
   43220,
   "Switzer variable woff2 must stay the unmodified Fontshare file",
 );
-// Lista wpisów z buildu: katalogi dist/blog/<slug>/ poza kategoriami i paginacją.
-// Wcześniej sprawdzenia zakładały 11 wpisów z makiety („Wpisy 2–7 z 11”, wpis
-// przygotowanie-do-konsultacji-pcos), więc każda prawdziwa zmiana treści w Sanity
-// wywracała Publish content (12.10.2026: najpierw 14 wpisów, potem 3).
-const BLOG_FIRST_PAGE = 7; // „Najnowszy wpis” + 6 kart
-const blogArticles = (await readdir("dist/blog", { withFileTypes: true }))
-  .filter(
-    (entry) =>
-      entry.isDirectory() && !["kategoria", "strona"].includes(entry.name),
-  )
-  .map((entry) => entry.name)
-  .sort();
-const blogArticlePaths = blogArticles.map((slug) => `blog/${slug}/index.html`);
-assert(blogArticles.length > 0, "build has no blog articles");
 for (const path of [
   "index.html",
   "o-mnie/index.html",
@@ -52,11 +38,6 @@ for (const path of [
   "blog/kategoria/pcos/index.html",
   "blog/kategoria/perimenopauza/index.html",
   "odstapienie/index.html",
-  // Wpisy i paginacja wynikają z treści (fixture albo Content Lake), nie z listy na sztywno.
-  ...blogArticlePaths,
-  ...(blogArticles.length > BLOG_FIRST_PAGE
-    ? ["blog/strona/2/index.html"]
-    : []),
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
   assert.match(
@@ -96,57 +77,109 @@ assert.doesNotMatch(ebookHtml, /potwierdzenie zakupu|płatność przyjęta/i);
 const blogHtml = await readFile("dist/blog/index.html", "utf8");
 assert.match(blogHtml, /Blog\. Po Twojemu\./);
 assert.match(blogHtml, /Najnowszy wpis/);
-const blogTotal = blogArticles.length;
-if (blogTotal > 1) {
-  assert.match(
-    blogHtml,
-    new RegExp(
-      `Wpisy 2–${Math.min(blogTotal, BLOG_FIRST_PAGE)} z ${blogTotal}`,
-    ),
-  );
-}
-const firstPageLinks = blogArticles.filter((slug) =>
-  blogHtml.includes(`/blog/${slug}/`),
-);
-assert.equal(
-  firstPageLinks.length,
-  Math.min(blogTotal, BLOG_FIRST_PAGE),
-  `blog index links ${firstPageLinks.length} of ${blogTotal} articles`,
-);
-const hasPage2 = await access("dist/blog/strona/2/index.html").then(
-  () => true,
-  () => false,
-);
-assert.equal(
-  hasPage2,
-  blogTotal > BLOG_FIRST_PAGE,
-  `pagination page 2 ${hasPage2 ? "exists" : "missing"} for ${blogTotal} articles`,
-);
-if (hasPage2) {
-  assert.match(blogHtml, /\/blog\/strona\/2\//);
-  const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
-  assert.match(
-    blogPage2,
-    new RegExp(`Wpisy ${BLOG_FIRST_PAGE + 1}–\\d+ z ${blogTotal}`),
-  );
-  assert.doesNotMatch(blogPage2, /Najnowszy wpis/);
-}
-for (const category of await readdir("dist/blog/kategoria")) {
-  if (category.endsWith(".md")) continue;
+// Posts are published by hand in Sanity, so a live build has no fixed count.
+// Pagination must match the article pages that were actually built.
+const liveContent = Boolean(process.env.PUBLIC_SANITY_PROJECT_ID);
+const blogEntries = await readdir("dist/blog", { withFileTypes: true });
+const articleSlugs = [];
+for (const entry of blogEntries) {
+  if (!entry.isDirectory() || ["strona", "kategoria"].includes(entry.name))
+    continue;
   const html = await readFile(
-    `dist/blog/kategoria/${category}/index.html`,
+    `dist/blog/${entry.name}/index.html`,
+    "utf8",
+  ).catch(() => "");
+  if (/article3a/.test(html)) articleSlugs.push(entry.name);
+}
+const postCount = articleSlugs.length;
+assert(postCount >= 1, "blog: expected at least one article page");
+const rangeOf = (html, label) => {
+  const match = html.match(/Wpisy (\d+)–(\d+) z (\d+)/);
+  if (!match) return null;
+  const [start, end, total] = match.slice(1).map(Number);
+  assert.equal(total, postCount, `${label}: total matches built articles`);
+  assert(start <= end, `${label}: range ${start}–${end}`);
+  return { start, end };
+};
+let previousEnd = 1; // the latest post is featured above the list
+let page = 1;
+let html = blogHtml;
+for (;;) {
+  const label = page === 1 ? "blog" : `blog/strona/${page}`;
+  if (page > 1) assert.doesNotMatch(html, /Najnowszy wpis/, label);
+  const range = rangeOf(html, label);
+  if (range) {
+    assert.equal(range.start, previousEnd + 1, `${label}: range continues`);
+    previousEnd = range.end;
+  }
+  const next = await readFile(
+    `dist/blog/strona/${page + 1}/index.html`,
+    "utf8",
+  ).catch(() => null);
+  if (!next) break;
+  assert(range, `${label}: a next page needs a range label`);
+  assert.match(html, new RegExp(`/blog/strona/${page + 1}/`), label);
+  html = next;
+  page += 1;
+}
+assert.equal(previousEnd, postCount, "blog: pages cover every built article");
+for (const slug of articleSlugs) {
+  const articlePage = await readFile(`dist/blog/${slug}/index.html`, "utf8");
+  assert.match(articlePage, /noindex,nofollow/, `blog/${slug}: noindex`);
+  assert.equal(
+    (articlePage.match(/<h1[\s>]/g) ?? []).length,
+    1,
+    `blog/${slug}: exactly one h1`,
+  );
+  assert.match(
+    articlePage,
+    /"@type":"BlogPosting"/,
+    `blog/${slug}: BlogPosting`,
+  );
+}
+// Each category lists built articles or shows its empty state.
+for (const category of await readdir("dist/blog/kategoria", {
+  withFileTypes: true,
+})) {
+  if (!category.isDirectory()) continue;
+  const categoryHtml = await readFile(
+    `dist/blog/kategoria/${category.name}/index.html`,
     "utf8",
   );
-  const linked = blogArticles.some((slug) => html.includes(`/blog/${slug}/`));
   assert(
-    linked || /tej kategorii nie ma jeszcze wpisów/i.test(html),
-    `blog/kategoria/${category}: neither articles nor empty state`,
+    articleSlugs.some((slug) => categoryHtml.includes(`/blog/${slug}/`)) ||
+      /tej kategorii nie ma jeszcze wpisów/i.test(categoryHtml),
+    `blog/kategoria/${category.name}: neither articles nor empty state`,
   );
 }
-for (const path of blogArticlePaths) {
-  const articleHtml = await readFile(`dist/${path}`, "utf8");
-  assert.match(articleHtml, /article3a/, `${path}: article template`);
-  assert.match(articleHtml, /"@type":"BlogPosting"/, `${path}: BlogPosting`);
+if (!liveContent) {
+  // Fixtures are fixed: 11 posts, 6 per list page after the featured one.
+  assert.equal(postCount, 11, "fixture: 11 articles");
+  assert.match(blogHtml, /Wpisy 2–7 z 11/);
+  const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
+  assert.match(blogPage2, /Wpisy 8–11 z 11/);
+  assert.match(blogHtml, /przygotowanie-do-konsultacji-pcos/);
+  assert.match(blogHtml, /\/blog\/strona\/2\//);
+  assert.doesNotMatch(
+    blogHtml.split('id="wpisy"')[1] ?? "",
+    /przygotowanie-do-konsultacji-pcos/,
+  );
+  const articleHtml = await readFile(
+    "dist/blog/przygotowanie-do-konsultacji-pcos/index.html",
+    "utf8",
+  );
+  assert.match(articleHtml, /article3a/);
+  assert.match(
+    articleHtml,
+    /Jak przygotować się do konsultacji dietetycznej przy PMOS \(PCOS\)\?/,
+  );
+  assert.match(articleHtml, /W tym artykule/);
+  assert.match(articleHtml, /"@type":"FAQPage"/);
+  const blogEmpty = await readFile(
+    "dist/blog/kategoria/perimenopauza/index.html",
+    "utf8",
+  );
+  assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
 }
 const homePl = await readFile("dist/index.html", "utf8");
 for (const [label, html] of [["/", homePl]]) {

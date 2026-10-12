@@ -25,7 +25,7 @@ Preconditions:
 - **Włączony przycisk.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button --name "Zapisuję się" --exact --state enabled`. Wynik to `enabled`.
 - **Puste wysłanie.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Zapisuję się" --exact`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wpisz poprawny adres e-mail."`.
 - **Zły e-mail.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser fill --role textbox --name "Twój adres e-mail" --exact --value "wrong"` i ponownie kliknij „Zapisuję się”. Komunikat błędu zostaje.
-- **Informacja.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Regulamin newslettera" --attribute href --value /regulamin-newslettera/` oraz to samo dla „Polityka prywatności” i `/polityka-prywatnosci/`.
+- **Informacja.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Regulamin newslettera" --exact --nth 0 --attribute href --value /regulamin-newslettera/` oraz `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Polityka prywatności" --exact --nth 0 --attribute href --value /polityka-prywatnosci/`.
 - **Brak wysyłki.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser posts`. Wynik to `[]`.
 - **Dowód.** `browser snapshot --aria --path home-form/error.aria.txt` i `browser screenshot --path home-form/error.png`.
 
@@ -33,4 +33,5 @@ Preconditions:
 
 - **Nie wysyłaj poprawnego adresu.** Poprawne dane trafiają na produkcyjny webhook n8n i zapisują prawdziwy adres. Ścieżkę sukcesu i błędu serwera sprawdza Playwright `tests/e2e/lead-forms.spec.ts` z mockiem `flows.zawlodzki.com`.
 - Przycisk startuje jako disabled i włącza go skrypt strony. Bez JavaScriptu pozostaje disabled i widać komunikat noscript.
-- „Twój adres e-mail” wymaga `--exact`. Katalog `/ui/` ma osobny formularz kontaktowy („Wyślij wiadomość”, „Imię”, „E-mail”).
+- „Twój adres e-mail” wymaga `--exact`. Katalog `/ui/` ma osobny formularz kontaktowy „Wyślij wiadomość”.
+- „Regulamin newslettera” i „Polityka prywatności” są też w stopce, a polityka bywa trzecim linkiem w panelu zgód. Bez `--nth 0` odczyt `href` pada na strict mode. Indeks 0 to link w informacji pod przyciskiem.
