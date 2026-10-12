@@ -36,9 +36,9 @@
     "adPersonalizationRegions": 0,
     "googleSignals": false,
     "eventRetentionMonths": 2,
-    "userRetentionMonthsSaved": 14,
+    "userRetentionMonthsSaved": 2,
     "userRetentionMonthsPrepared": 2,
-    "retentionSaved": false
+    "retentionSaved": true
   },
   "meta": {
     "pixel": "2915257895296567",
@@ -57,8 +57,9 @@
   ],
   "initialBasePr": 82,
   "initialBaseCommit": "d8bc1b8",
-  "baseCommit": "b8e7c85",
+  "baseCommit": "33f3326",
   "baseBranch": "main",
-  "commitCreated": false,
-  "pullRequestCreated": false
+  "commitCreated": true,
+  "pullRequestCreated": true,
+  "pullRequest": 86
 }

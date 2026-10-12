@@ -46,13 +46,13 @@ jest niedostępne dla tej kategorii branży.
 
 Wyłączono pomiar zaawansowany oraz personalizację reklam we wszystkich
 307 regionach. Zdarzenia mają retencję dwóch miesięcy. Użytkownicy mieli
-retencję 14 miesięcy z resetem przy aktywności. Przygotowano zmianę na dwa
-miesiące bez resetu; pozostaje do zatwierdzenia i zapisu. Skrócenie retencji
-może usunąć starsze dane. Nie deklarować zapisu na podstawie wybranej opcji.
+retencję 14 miesięcy z resetem przy aktywności. Po zatwierdzeniu właściciela
+zapisano dwa miesiące bez resetu; odczyt po reload potwierdził ustawienia.
+Zmiana może usunąć starsze dane po upływie okresu retencji.
 
 ## Odbiór i aktywacja
 
-Przed aktywacją wymagane są zapis retencji, spójne opublikowane teksty prawne,
+Przed aktywacją wymagane są spójne opublikowane teksty prawne,
 odbiór rzeczywistych żądań GA4 z blokadą wysyłki i zgoda na publikację.
 Testy c15t/GTM używają atrap i blokują produkcyjne leady oraz telemetrię.
 Nie uznawać bezpiecznego dataLayer za dowód payloadu zewnętrznego SDK.

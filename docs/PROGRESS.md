@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
@@ -11,7 +11,8 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Gałąź `codex/gtm-rollout` powstała na tipie #82 `d8bc1b8`. Zakres
   obejmuje bramkę GTM/GA4, wspólne wykluczenia, pole CMS i cofnięcie zgody.
   W trakcie pracy scalono #81, #82 i poprawkę CI #83. Przeniesiono zmiany
-  na `origin/main` `b8e7c85`, zachowując poprawkę runner.temp i oba wpisy postępu.
+  na `origin/main` `b8e7c85`. Następnie włączono main `33f3326` z #84,
+  zachowując poprawkę runner.temp i pomiar Lighthouse.
 - Właściciel potwierdził wykluczenie kontaktu, konsultacji i odstąpienia.
   Newsletter nie wyklucza strony. Zapisano decyzję w konfiguracji CMS.
   Dokumenty prawne i preview zawsze pozostają bez pomiaru.
@@ -33,8 +34,8 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - GA4 konto `332767742`, usługa `462835494`, strumień `9802578320`,
   `G-9QW05JYZTL`. Wyłączono pomiar zaawansowany oraz personalizację reklam
   w 307 regionach. Google Signals było wyłączone. Retencja zdarzeń wynosi
-  dwa miesiące; retencja użytkowników nadal 14 miesięcy. Zmianę na dwa
-  miesiące bez resetu przygotowano, ale nie zapisano.
+  dwa miesiące. Po zatwierdzeniu właściciela zapisano także dwa miesiące
+  dla danych użytkownika, bez resetu. Odczyt po reload potwierdził zapis.
 - Potwierdzono piksel Meta `2915257895296567`, właściciel Longevity Goddess.
   Po zgodzie właściciela wyłączono automatyczne dopasowywanie danych klientów
   i automatyczne zdarzenia bez kodu. Przegląd automatyczny początkowo odrzucił
@@ -50,7 +51,7 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   domen. HTTP Referer nadal zawiera domenę. Bez Core samo autoConfig=false
   ujawnia pełny URL. Cofnięcie zgody zatrzymało kolejne PageView, formularz
   nie wygenerował automatycznego zdarzenia. Wszystkie wysyłki zablokowane
-  przed siecią. Akceptacja kontraktu domen dla Meta pozostaje pytaniem.
+  przed siecią. Właściciel zatwierdził kontrakt samych domen po zgodzie marketingowej.
 - Pełne `PLAYWRIGHT_WORKERS=2 npm run verify` PASS na Node 24.19.0:
   383 unit w 43 plikach, 456 E2E w trzech silnikach, 9 celowo pominiętych
   testów włączonego loadera. Osobny build PUBLIC_GTM_ENABLED=true i 9/9 tych
@@ -61,14 +62,33 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   uaktualnienia przed aktywacją. Meta i Clarity nie mają nowych tagów w tym PR.
 - Podpis op-ssh-sign ponownie nie przeszedł po dwóch próbach. Jednorazowy
   ssh-keygen z poprawnym socketem 1Password także zwrócił błąd komunikacji
-  z agentem. Nie wyłączono podpisów. Commit, push i PR nie zostały wykonane;
-  zmiany pozostają przygotowane w indeksie. Kopia jest w stash
-  `gtm-verified-before-main-83`.
-- Następny krok: odblokować podpis, push i odbiór PR do main; kolejny PR
-  wskazuje gałąź GTM. Następnie zgoda na zapis krótszej
-  retencji oraz publikacja spójnego copy i kontenera, odbiór compiled GTM
+  z agentem. Po odblokowaniu przez właściciela podpis commita `61bc39f`
+  przeszedł. Nie wyłączono podpisów. Kopia zakresu sprzed przeniesienia na main
+  jest w stash `gtm-verified-before-main-83`.
+- Otworzono [PR #86](https://github.com/zawlodzki/nowa-strona-ola/pull/86)
+  do main. Kolejny podpis dokumentacji zatrzymał się na autoryzacji Touch ID.
+- Następny krok: kolejny PR Meta wskazuje gałąź GTM. Następnie publikacja
+  spójnego copy i kontenera oraz odbiór compiled GTM
   z blokadą telemetrii przed aktywacją. Nie wykonano natywnego zoomu 200%,
   czytnika i fizycznego urządzenia w tej sesji.
+
+### Pomiar Lighthouse i WCAG przed GTM, 12.10.2026
+
+- Zapis liczb jest w
+  [LIGHTHOUSE-A11Y-BASELINE-2026-10-12.md](LIGHTHOUSE-A11Y-BASELINE-2026-10-12.md).
+  Build lokalny to fixture z `9a37ca8`, `SITE_INDEXING=production`, HTTP/2 i
+  brotli. W HTML nie ma GTM. Staging odpowiedział i ma `noindex`.
+- Cel ≥95 na lokalnym mobile pada na blogu fixture 78, artykule fixture 88,
+  O mnie 91 i stronie głównej 94. LCP strony głównej to 3152 ms, mediana
+  trzech przebiegów, rozrzut 2 ms. Pozostałe lokalne szablony mobile są od 99
+  wzwyż. Desktop lokalny jest 99 albo 100. Blog na stagingu jest lżejszą
+  stroną i ma wydajność 100.
+- Jedyny błąd axe przy tagach WCAG 2.2 AA to link bez nazwy.
+  `a.ebooks3a-cover-link` na `/ebooki/` i `a.cover-link` w artykule fixture.
+- Nie mierzono natywnego zoomu 200%, czytnika ekranu, urządzenia fizycznego
+  ani polowego INP. Kod strony nie był zmieniany.
+- Następny krok należy do pomiaru po tagach GTM, tym samym zestawem szablonów.
+  Ten zapis niczego nie wdraża i nie scala.
 
 ### publish-content nie startuje, 12.10.2026
 

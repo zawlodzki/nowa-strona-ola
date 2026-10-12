@@ -105,6 +105,15 @@ oraz automatyczne zdarzenia Meta dla piksela `2915257895296567`.
 Wykonano i odczytano oba przełączniki jako „Wył.”. Ustawienia zewnętrzne
 Meta, bez pola w CMS. Nie oznacza to aktywacji piksela na nowej stronie.
 
+Decyzje właściciela z 12.10.2026 przy odbiorze integracji:
+
+- Meta PageView po zgodzie marketingowej może zawierać domenę strony
+  i domenę odsyłającą. Bez ścieżek, query, fragmentów, danych formularzy,
+  automatycznych zdarzeń i dopasowywania klientów. Wymagana konfiguracja Core.
+- GA4 usługa `462835494`: zatwierdzono retencję danych użytkownika dwa
+  miesiące bez resetu przy nowej aktywności. Zapis wykonano w interfejsie
+  i potwierdzono po odświeżeniu. Ustawienie zewnętrzne, bez pola CMS.
+
 ## GTM, c15t i motyw, decyzje 11.10.2026
 
 Źródło: bezpośrednie polecenie użytkownika w sesji 11.10.2026.
