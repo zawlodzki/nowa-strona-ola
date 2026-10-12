@@ -1,4 +1,8 @@
 import { expect, test } from "@playwright/test";
+import {
+  dismissConsentBanner,
+  mockConsentPolicy,
+} from "./helpers/consent-banner";
 
 const pages = [
   {
@@ -61,7 +65,9 @@ test("privacy and cookies link to each other", async ({ page }) => {
 });
 
 test("terms appendices open at their anchors", async ({ page }) => {
+  await mockConsentPolicy(page);
   await page.goto("/regulamin/");
+  await dismissConsentBanner(page);
   await page
     .locator(".article-richtext")
     .getByRole("link", { name: "Pouczenie o prawie odstąpienia od umowy" })

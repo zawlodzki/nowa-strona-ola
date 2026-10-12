@@ -76,6 +76,33 @@ npm run preview
 
 Podgląd lokalny: `http://127.0.0.1:4321`. Praca nad kodem: `npm run dev`.
 
+Podgląd szkiców SSR, sprawdzony 12.10.2026 na Node 24.19.0 i Workerd.
+`preview/.dev.vars` zawiera istniejący token odczytu Sanity i sekret sesji.
+Domena Studio jest jawnym `STUDIO_ORIGIN` w konfiguracji Wranglera,
+osobno dla pracy lokalnej i produkcji. Stary sekret `SANITY_STUDIO_URL`
+nie jest już używany przez aplikację.
+
+```sh
+CLOUDFLARE_ENV=production npm run build --workspace @ola/preview
+cp preview/.dev.vars preview/dist/server/.dev.vars
+chmod 600 preview/dist/server/.dev.vars
+npx wrangler dev --config preview/dist/server/wrangler.json --port 4432 --inspector-port 9432
+```
+
+W osobnym terminalu, z katalogu repo:
+
+```sh
+npx tsx scripts/check-preview-runtime.ts
+npx wrangler deploy --config preview/dist/server/wrangler.json --dry-run
+```
+
+Skrypt sprawdza lokalny SSR z Content Lake, odmowę dostępu bez sesji,
+odrzucenie aktywacji bez sekretu oraz prywatne nagłówki i osadzanie.
+Nie zapisuje danych ani nie wysyła formularzy. Integracja Visual Editing
+jest ładowana tylko przez aplikację `preview/`. Workflow
+`.github/workflows/deploy-preview.yml` aktualizuje produkcyjny podgląd
+po udanym Quality dla bieżącego `main`; nie uruchomiono go w tej sesji.
+
 SEO (plan: [SEO-GEO-AEO-PLAN.md](docs/SEO-GEO-AEO-PLAN.md)): każdy build jest
 `noindex`, dopóki nie ustawi się `SITE_INDEXING=production`. Zmienną ustawia
 się wyłącznie w buildzie gotowej produkcji. `npm run test:build` uruchamia

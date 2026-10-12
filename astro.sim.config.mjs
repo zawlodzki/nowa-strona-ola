@@ -20,9 +20,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     resolve: {
-      alias: {
-        "@sanity/client": mockClient,
-      },
+      alias: [{ find: /^@sanity\/client$/, replacement: mockClient }],
     },
   },
 });

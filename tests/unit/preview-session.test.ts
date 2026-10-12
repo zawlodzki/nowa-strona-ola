@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   createPreviewSession,
+  previewCookiePartition,
   previewPerspectiveCookie,
   previewSessionCookie,
   previewSessionTtlSeconds,
@@ -12,6 +13,25 @@ const secret = "0123456789abcdef0123456789abcdef";
 const now = Date.UTC(2026, 8, 13, 8);
 
 describe("preview session", () => {
+  it("partitions cookies for cross-site Presentation frames and keeps top-level cookies unpartitioned", () => {
+    expect(
+      previewCookiePartition(
+        new Request("https://preview.example.com/api/draft-mode/enable", {
+          headers: {
+            "sec-fetch-dest": "iframe",
+            "sec-fetch-site": "cross-site",
+          },
+        }),
+      ),
+    ).toEqual({ partitioned: true });
+    expect(
+      previewCookiePartition(
+        new Request("https://preview.example.com/", {
+          headers: { "sec-fetch-dest": "document", "sec-fetch-site": "none" },
+        }),
+      ),
+    ).toEqual({ partitioned: false });
+  });
   it("accepts a signed session before expiry", async () => {
     const session = await createPreviewSession(secret, now);
     await expect(verifyPreviewSession(session, secret, now)).resolves.toBe(

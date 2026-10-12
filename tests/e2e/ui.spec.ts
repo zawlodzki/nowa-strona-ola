@@ -354,6 +354,7 @@ test("consultation page without an English version", async ({ page }) => {
     if (request.method() === "POST") posts.push(request.url());
   });
 
+  await mockConsentPolicy(page);
   await page.goto("/");
   await expect(
     page.locator("#konsultacje").getByRole("link", {
@@ -363,6 +364,7 @@ test("consultation page without an English version", async ({ page }) => {
   await expect(page.getByText(/Tymczasowy adres kalendarza/)).toHaveCount(0);
 
   await page.goto("/konsultacje/");
+  await dismissConsentBanner(page);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     /Wiesz już dużo\.\s*Ustal, co dalej\./,
   );
@@ -477,6 +479,7 @@ test("ebook collection with categories, empty URL and no POST", async ({
   ).toHaveAttribute("href", "/ebooki/");
   await page.getByRole("link", { name: "Zobacz wszystkie e-booki" }).click();
   await expect(page).toHaveURL(/\/ebooki\/$/);
+  await dismissConsentBanner(page);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     /Więcej jasności\.\s*W Twoim tempie\./,
   );
@@ -565,6 +568,7 @@ test("ebook collection categories work without JavaScript", async ({
 test("landing pages, blog and missing English translation", async ({
   page,
 }) => {
+  await mockConsentPolicy(page);
   await page.goto("/warsztat/");
   await expect(
     page.getByRole("heading", { name: "Jeden dzień na wspólny porządek." }),
@@ -589,6 +593,7 @@ test("landing pages, blog and missing English translation", async ({
     page.getByText("W tej kategorii nie ma jeszcze wpisów"),
   ).toBeVisible();
   await page.goto("/blog/");
+  await dismissConsentBanner(page);
   await page
     .getByRole("link", {
       name: "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",
@@ -596,6 +601,8 @@ test("landing pages, blog and missing English translation", async ({
     })
     .first()
     .click();
+  await expect(page).toHaveURL(/\/blog\/przygotowanie-do-konsultacji-pcos\/$/);
+  await dismissConsentBanner(page);
   await expect(
     page.getByRole("heading", {
       name: "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",

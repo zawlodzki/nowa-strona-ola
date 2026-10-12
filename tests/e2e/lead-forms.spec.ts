@@ -1,6 +1,10 @@
 import AxeBuilder from "@axe-core/playwright";
 
 import { expect, test } from "./helpers/lead-webhook";
+import {
+  dismissConsentBanner,
+  mockConsentPolicy,
+} from "./helpers/consent-banner";
 
 const uuid =
   /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -161,7 +165,9 @@ test("withdrawal form sends the statement and shows a receipt", async ({
   leadWebhook,
 }) => {
   const captured = await leadWebhook.mock(page, [200]);
+  await mockConsentPolicy(page);
   await page.goto("/odstapienie/");
+  await dismissConsentBanner(page);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Odstąpienie od umowy",
   );

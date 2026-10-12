@@ -19,6 +19,7 @@ import type {
   SiteSettings,
 } from "../../../src/sanity/repository";
 import { sanityApiVersion } from "../../../src/sanity/config";
+import { previewStegaFilter } from "./stega-filter";
 import type { PUBLISHED_CATEGORIES_QUERY_RESULT } from "../../../src/sanity.types";
 import {
   PREVIEW_ARTICLE_QUERY,
@@ -35,7 +36,7 @@ import {
 export interface PreviewEnvironment {
   SANITY_PROJECT_ID: string;
   SANITY_DATASET: string;
-  SANITY_STUDIO_URL: string;
+  STUDIO_ORIGIN: string;
   SANITY_API_READ_TOKEN: string;
 }
 
@@ -57,7 +58,8 @@ export function createPreviewContentClient(
     perspective: "drafts",
     stega: {
       enabled: true,
-      studioUrl: environment.SANITY_STUDIO_URL,
+      studioUrl: environment.STUDIO_ORIGIN,
+      filter: previewStegaFilter,
     },
     token: environment.SANITY_API_READ_TOKEN,
     useCdn: false,

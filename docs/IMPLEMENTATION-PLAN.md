@@ -899,3 +899,21 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
       [PR #76](https://github.com/zawlodzki/nowa-strona-ola/pull/76).
 - [ ] Potwierdzić zielone Quality, odebrać/scalić PR i automatyczne wdrożenie
       z main. Lokalny wynik nie oznacza zakończonego CI na GitHub.
+
+## Naprawa Presentation Sanity, 12.10.2026
+
+- [x] Potwierdzić przyczynę pustego SSR w logach i użyć aktualnych rendererów.
+- [x] Dodać klienta Visual Editing wyłącznie do aplikacji preview.
+- [x] Wykluczyć techniczne wartości ze Stega, zachowując edytowalną treść.
+- [x] Ustawić właściwy origin Studio i dopuścić nadrzędną ramkę Sanity.
+- [x] Sprawdzić prywatny SSR na siedmiu stronach i odmowę dostępu bez sesji.
+- [x] Wykonać wszystkie etapy jakości: 304 unit, 422 E2E PASS i 1 flaky po
+      retry, 88 dokumentów bez błędów, 17 zgodnych stron. Ostatni etap
+      powtórzono osobno po poprawce aliasu; nie oznacza to jednego zielonego
+      przebiegu pełnego verify po tej poprawce.
+- [x] Wdrożyć chroniony Worker preview i odebrać handshake w obu sposobach
+      otwierania Studio, także z mobilnym viewportem Presentation.
+- [x] Na zlecenie „push pr” zapisać poprawkę w GitHub, [PR #79](https://github.com/zawlodzki/nowa-strona-ola/pull/79).
+- [ ] Odebrać Quality na PR, scalić po akceptacji i potwierdzić przygotowany
+      workflow aktualizacji preview z main.
+- [ ] Sprawdzić zmianę pola po zapisie w CMS, natywny zoom, czytnik i urządzenie.
