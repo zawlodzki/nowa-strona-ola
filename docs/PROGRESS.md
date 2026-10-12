@@ -1,10 +1,28 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (pomiar Lighthouse i WCAG przed GTM; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Pomiar Lighthouse i WCAG przed GTM, 12.10.2026
+
+- Zapis liczb jest w
+  [LIGHTHOUSE-A11Y-BASELINE-2026-10-12.md](LIGHTHOUSE-A11Y-BASELINE-2026-10-12.md).
+  Build lokalny to fixture z `9a37ca8`, `SITE_INDEXING=production`, HTTP/2 i
+  brotli. W HTML nie ma GTM. Staging odpowiedział i ma `noindex`.
+- Cel ≥95 na lokalnym mobile pada na blogu fixture 78, artykule fixture 88,
+  O mnie 91 i stronie głównej 94. LCP strony głównej to 3152 ms, mediana
+  trzech przebiegów, rozrzut 2 ms. Pozostałe lokalne szablony mobile są od 99
+  wzwyż. Desktop lokalny jest 99 albo 100. Blog na stagingu jest lżejszą
+  stroną i ma wydajność 100.
+- Jedyny błąd axe przy tagach WCAG 2.2 AA to link bez nazwy.
+  `a.ebooks3a-cover-link` na `/ebooki/` i `a.cover-link` w artykule fixture.
+- Nie mierzono natywnego zoomu 200%, czytnika ekranu, urządzenia fizycznego
+  ani polowego INP. Kod strony nie był zmieniany.
+- Następny krok należy do pomiaru po tagach GTM, tym samym zestawem szablonów.
+  Ten zapis niczego nie wdraża i nie scala.
 
 ### IndexNow jako stacked PR, 12.10.2026
 
