@@ -61,9 +61,10 @@ function quiet(): SanityDocument[] {
 
 describe("rewriteCopy", () => {
   it("wraps the first PCOS in a sentence and shortens the next one", () => {
-    expect(rewriteCopy("PCOS i PCOS.")).toBe("PMOS (PCOS) i PMOS.");
-    expect(rewriteCopy("PMOS (PCOS) i PCOS.")).toBe("PMOS (PCOS) i PMOS.");
-    expect(rewriteCopy("PCOS. PCOS.")).toBe("PMOS (PCOS). PMOS (PCOS).");
+    expect(rewriteCopy("PCOS i PCOS.")).toBe("PMOS\u00A0(PCOS) i PMOS.");
+    expect(rewriteCopy("PMOS (PCOS) i PCOS.")).toBe("PMOS\u00A0(PCOS) i PMOS.");
+    expect(rewriteCopy("PMOS\u00A0(PCOS) i PCOS.")).toBe("PMOS\u00A0(PCOS) i PMOS.");
+    expect(rewriteCopy("PCOS. PCOS.")).toBe("PMOS\u00A0(PCOS). PMOS\u00A0(PCOS).");
   });
 
   it("renames every faculty inflection and leaves a URL alone", () => {
