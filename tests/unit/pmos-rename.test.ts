@@ -203,6 +203,166 @@ describe("planPmosRename", () => {
     ]);
   });
 
+  it("leaves system documents, client quotes, legal text, and citation titles untouched, and keeps SEO titles within 60 characters", () => {
+    const quote = "Po latach walki z PCOS w końcu znalazłam kogoś.";
+    const citation = "Wytyczne PCOS 2023, sekcja 4.7";
+    const seeSource = "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7";
+    const docs: SanityDocument[] = [
+      ...quiet(),
+      {
+        _id: "_.schemas.default",
+        _type: "system.schema",
+        _rev: "rev-schema",
+        schema: "PCOS i Wydział Nauk o Zdrowiu",
+      },
+      {
+        _id: "drafts._.schemas.default",
+        _type: "system.schema",
+        _rev: "rev-schema-draft",
+        schema: "PCOS",
+      },
+      {
+        _id: "image-pcos",
+        _type: "sanity.imageAsset",
+        _rev: "rev-image",
+        originalFilename: "PCOS.png",
+        title: "Wydział Nauk o Zdrowiu",
+      },
+      {
+        _id: "translation.metadata.pl",
+        _type: "translation.metadata",
+        _rev: "rev-meta",
+        title: "PCOS",
+      },
+      {
+        _id: "testimonial-pl-4",
+        _type: "testimonial",
+        _rev: "rev-quote",
+        quote,
+      },
+      {
+        _id: "legal-newsletter-pl",
+        _type: "legalPage",
+        _rev: "rev-legal",
+        version: "2.1",
+        body: "w szczególności przy PCOS, insulinooporności",
+      },
+      {
+        _id: "ebook-szczupla-a-jednak-pcos-pl",
+        _type: "ebook",
+        _rev: "rev-szczupla",
+        title: "Szczupła, a jednak PCOS",
+        seo: {
+          title: "Szczupła, a jednak PCOS | E-book Aleksandry Olesiewicz",
+        },
+        sources: [
+          {
+            _key: "source-pcos-2023",
+            title: seeSource,
+            scope: citation,
+            href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/",
+          },
+        ],
+      },
+      {
+        _id: "article-blog-01-pl",
+        _type: "article",
+        _rev: "rev-01",
+        title: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+        seo: {
+          title: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+        },
+      },
+      {
+        _id: "drafts.article-blog-01-pl",
+        _type: "article",
+        _rev: "rev-01-draft",
+        title: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+        seo: {
+          title: "Jak przygotować się do konsultacji dietetycznej przy PCOS?",
+        },
+      },
+      {
+        _id: "article-blog-11-en",
+        _type: "article",
+        _rev: "rev-11",
+        title:
+          "Conflicting advice on PCOS: write down what you want to clarify",
+        seo: {
+          title:
+            "Conflicting advice on PCOS: write down what you want to clarify",
+        },
+      },
+    ];
+    const plan = planPmosRename(docs);
+    expect(plan.problems).toEqual([]);
+    const ids = new Set(plan.changes.map((change) => change.id));
+    expect(ids.has("_.schemas.default")).toBe(false);
+    expect(ids.has("drafts._.schemas.default")).toBe(false);
+    expect(ids.has("image-pcos")).toBe(false);
+    expect(ids.has("translation.metadata.pl")).toBe(false);
+    expect(ids.has("testimonial-pl-4")).toBe(false);
+    expect(ids.has("legal-newsletter-pl")).toBe(false);
+    expect(plan.changes.some((change) => change.path.includes("sources"))).toBe(
+      false,
+    );
+    const szczupla = plan.changes.filter(
+      (change) => change.id === "ebook-szczupla-a-jednak-pcos-pl",
+    );
+    expect(szczupla).toEqual([
+      {
+        id: "ebook-szczupla-a-jednak-pcos-pl",
+        path: "seo.title",
+        before: "Szczupła, a jednak PCOS | E-book Aleksandry Olesiewicz",
+        after: "Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz",
+      },
+      {
+        id: "ebook-szczupla-a-jednak-pcos-pl",
+        path: "title",
+        before: "Szczupła, a jednak PCOS",
+        after: "Szczupła, a jednak PMOS (PCOS)",
+      },
+    ]);
+    expect(
+      plan.changes.find(
+        (change) =>
+          change.id === "article-blog-01-pl" && change.path === "seo.title",
+      )?.after,
+    ).toBe("Jak przygotować się do konsultacji dietetycznej przy PMOS?");
+    expect(
+      plan.changes.find(
+        (change) =>
+          change.id === "drafts.article-blog-01-pl" &&
+          change.path === "seo.title",
+      )?.after,
+    ).toBe("Jak przygotować się do konsultacji dietetycznej przy PMOS?");
+    const english = plan.changes.find(
+      (change) =>
+        change.id === "article-blog-11-en" && change.path === "seo.title",
+    );
+    expect(english?.after).toBe(
+      "Conflicting advice on PMOS: write down what to clarify",
+    );
+    expect(
+      plan.changes
+        .filter((change) => change.path === "seo.title")
+        .every(
+          (change) =>
+            typeof change.after === "string" && change.after.length <= 60,
+        ),
+    ).toBe(true);
+    const ebook = docs.find(
+      (doc) => doc._id === "ebook-szczupla-a-jednak-pcos-pl",
+    );
+    const sources = ebook?.sources as { title: string; scope: string }[];
+    expect(sources[0]?.title).toBe(seeSource);
+    expect(sources[0]?.scope).toBe(citation);
+    expect(docs.find((doc) => doc._id === "testimonial-pl-4")?.quote).toBe(
+      quote,
+    );
+    expect(planPmosRename(applyPlan(docs, plan.mutations)).changes).toEqual([]);
+  });
+
   it("is empty on the second plan, and a stale revision does not apply", () => {
     const docs = [
       page(
