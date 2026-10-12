@@ -435,6 +435,30 @@ describe("planPmosRename", () => {
     expect(planPmosRename(applyPlan(docs, plan.mutations)).changes).toEqual([]);
   });
 
+  it("reports an SEO title that stays over 60 and does not patch it", () => {
+    const title =
+      "What do you want to change? How to name the goal of a consultation";
+    const docs = [
+      ...quiet(),
+      {
+        _id: "article-blog-09-en",
+        _type: "article",
+        _rev: "rev-09",
+        seo: { title },
+      },
+    ];
+    const plan = planPmosRename(docs);
+    expect(plan.problems).toEqual([
+      "article-blog-09-en: tytuł SEO nie mieści się w 60 znakach (seo.title)",
+    ]);
+    expect(plan.changes.some((change) => change.id === "article-blog-09-en")).toBe(
+      false,
+    );
+    expect(docs.find((doc) => doc._id === "article-blog-09-en")?.seo).toEqual({
+      title,
+    });
+  });
+
   it("is empty on the second plan, and a stale revision does not apply", () => {
     const docs = [
       page(

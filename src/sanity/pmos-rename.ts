@@ -17,6 +17,11 @@ const ABOUT_PAGE = { pl: "page-about-pl", en: "page-about-en" } as const;
 const ABOUT_AUTHOR = { pl: "author-ola-pl", en: "author-ola-en" } as const;
 const SEO_TITLE_LIMIT = 60;
 
+const SEO_TITLE_OVERRIDES: Readonly<Record<string, string>> = {
+  "article-blog-11-en":
+    "Conflicting advice on PMOS: write down what to clarify",
+};
+
 // Opinie i strony prawne są poza listą. Zostają słowa klientki i opublikowany tekst.
 const CONTENT_TYPES = new Set([
   "article",
@@ -159,20 +164,19 @@ function isCitationField(path: string, key: string): boolean {
   return /(?:^|\.)sources(?:\[[^\]]*\])?$/.test(path);
 }
 
-function fitSeoTitle(value: string): string | null {
+function fitSeoTitle(id: string, value: string): string | null {
+  const override = SEO_TITLE_OVERRIDES[publishedId(id)];
+  if (override) return override.length <= SEO_TITLE_LIMIT ? override : null;
   if (value.length <= SEO_TITLE_LIMIT) return value;
-  const collapsed = value.replaceAll("PMOS (PCOS)", "PMOS");
+  const collapsed = value.replace(/PMOS[ \u00A0]\(PCOS\)/g, "PMOS");
   if (collapsed.length <= SEO_TITLE_LIMIT) return collapsed;
-  // Po samym „PMOS” zostaje jeden angielski tytuł ponad 60 znaków.
-  const tighter = collapsed.replace(" you want", "");
-  if (tighter !== collapsed && tighter.length <= SEO_TITLE_LIMIT)
-    return tighter;
   return null;
 }
 
 function walk(
   value: unknown,
   path: string,
+  id: string,
   into: { path: string; before: string; after: string }[],
   unfit: string[],
 ): void {
@@ -180,7 +184,7 @@ function walk(
     if (isFrozenString(value)) return;
     let after = rewriteCopy(value);
     if (isSeoTitlePath(path)) {
-      const fitted = fitSeoTitle(after);
+      const fitted = fitSeoTitle(id, after);
       if (fitted === null) {
         unfit.push(path);
         return;
@@ -193,9 +197,9 @@ function walk(
   if (Array.isArray(value)) {
     value.forEach((item, index) => {
       if (isRecord(item) && typeof item._key === "string") {
-        walk(item, `${path}[_key=="${item._key}"]`, into, unfit);
+        walk(item, `${path}[_key=="${item._key}"]`, id, into, unfit);
       } else {
-        walk(item, `${path}[${index}]`, into, unfit);
+        walk(item, `${path}[${index}]`, id, into, unfit);
       }
     });
     return;
@@ -203,7 +207,7 @@ function walk(
   if (!isRecord(value)) return;
   for (const [key, child] of Object.entries(value)) {
     if (SKIP_KEY.test(key) || isCitationField(path, key)) continue;
-    walk(child, path ? `${path}.${key}` : key, into, unfit);
+    walk(child, path ? `${path}.${key}` : key, id, into, unfit);
   }
 }
 
@@ -330,7 +334,7 @@ export function planPmosRename(documents: SanityDocument[]): PmosRenamePlan {
     if (!isContentDocument(doc)) continue;
     const walked = [] as { path: string; before: string; after: string }[];
     const unfit: string[] = [];
-    walk(doc, "", walked, unfit);
+    walk(doc, "", doc._id, walked, unfit);
     for (const path of unfit) {
       problems.push(
         `${doc._id}: tytuł SEO nie mieści się w ${SEO_TITLE_LIMIT} znakach (${path})`,
