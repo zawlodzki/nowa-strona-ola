@@ -8,7 +8,7 @@ Formularz kontaktowy, bezpośredni e-mail, social media, dane firmy i newsletter
 
 ## How to get to it (user POV)
 
-Z menu Kontakt lub Contact; bezpośrednio `/kontakt/` i `/en/contact/`.
+Z menu „Kontakt” albo bezpośrednio `/kontakt/`. `/en/contact/` nie jest publikowane.
 
 ## Driving it with verify-ola
 
@@ -24,8 +24,9 @@ Z menu Kontakt lub Contact; bezpośrednio `/kontakt/` i `/en/contact/`.
   sprawdza `tests/e2e/lead-forms.spec.ts` i `tests/e2e/contact-3a.spec.ts`.
 - Bezpośredni link: `mailto:ola@aleksandraolesiewicz.com`.
 - Pod zdjęciem nazwane linki Instagram, Facebook, TikTok. Dane Wellbiz i NIP widoczne.
-- Zbierz ARIA, screenshot z H1 i `browser posts` (ma być `[]` po samych błędach walidacji).
-- Powtórz `/en/contact/`, także bez JS: przyciski wyłączone, e-mail działa.
+- Newsletter jest osobny. Po poprawnym e-mailu kontaktu i błędnym telefonie uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Zapisuję się" --exact`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wpisz poprawny adres e-mail."`.
+- Zbierz ARIA, screenshot z H1 i `browser posts`. Po samych błędach walidacji lista to `[]`.
+- Bez JS, po `browser context --javascript false` i `goto --path /kontakt/`, oba przyciski są disabled, a `mailto:ola@aleksandraolesiewicz.com` działa.
 - Cleanup tylko własnego VERIFY_RUN_ID.
 
 ## Gotchas
