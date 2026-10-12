@@ -17,8 +17,7 @@ poleceniem uruchomienia sprzedaży ani potwierdzeniem gotowych plików.
 | Navbar, hero, problem, dla kogo, zawartość, efekty, cena, opinie, FAQ i footer; dodatkowo karta i autorka                                        | Wspólny `Ebook3a`, istniejące pola landingu i shell                                                                                                                                          | Zachowana struktura skilla; brak dowolnego CSS w CMS                                             |
 | Obecna lista oczekujących i opinie o współpracy                                                                                                  | `waitlist.form`, `landing.testimonials`, `testimonialsScope = cooperation`                                                                                                                   | Referencje zachowane; opinii nie przedstawiamy jako recenzji ebooków                             |
 
-Przed zapisem zachowano pięć dokumentów w
-[kopii](../output/ebook-landings-3a-2026-10-11/before.json).
+Przed zapisem zachowano pięć dokumentów. Pliki tej kopii usunięto z repozytorium 12.10.2026.
 Stan faktycznego zapisu i kontroli jest w [PROGRESS.md](PROGRESS.md).
 Nie ustalono terminu wydania, finalnych plików, liczby stron ani wyników zdrowotnych.
 
@@ -28,12 +27,25 @@ rozdziały i materiały pozostają propozycją przyszłych ebooków, opisaną w 
 jako planowana. Patch obejmował wyłącznie `chapters`, `includedMaterials`,
 `sources`, `seo`, `landing` i `format`. Zachowano wszystkie pozostałe pola,
 w tym cenę, dostępność, okładki, autorkę i listę oczekujących. Szkice i publikację
-porównano z plikami przed i po zapisie, z kontrolą rewizji. Dowody:
-[stan po publikacji](../output/ebook-landings-3a-2026-10-11/after.json)
-i [porównanie](../output/ebook-landings-3a-2026-10-11/cms-proof.json).
+porównano z plikami przed i po zapisie, z kontrolą rewizji. Te pliki usunięto z repozytorium 12.10.2026.
 Schemat wdrożono, a rejestrację istniejącego Studio zaktualizowano po dodatkowej
 odpowiedzi użytkownika „Tak, zaktualizuj rejestrację Studio”. Kod nowego
 renderera i panelu redakcyjnego wymaga jeszcze scalenia do main oraz wdrożenia.
+
+## Nazwa PMOS (PCOS) w dwóch landingach, 12.10.2026
+
+Źródło: polecenie użytkownika z 12.10.2026. Zasady są te same co w PR #73.
+W plikach `badania-ktore-maja-sens.ts` i `szczupla-a-jednak-pcos.ts` samodzielne
+„PCOS” w copy dla odwiedzających brzmi „PMOS (PCOS)”. Pierwsze wystąpienie
+w zdaniu jest pełne. Następne w tym samym zdaniu brzmi „PMOS”. Tytuł SEO
+szczupłego e-booka to „Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz”
+(54 znaki), bo „PMOS (PCOS)” daje 61 znaków. Zostały tytuły „Wytyczne PCOS 2023”,
+zdania, które je cytują, slugi, identyfikatory i oferta „Suplementy w PCOS”.
+
+Stan: kod i fixture’y mają nowe brzmienie. Sanity nie było zapisywane.
+Opublikowane dokumenty PL w `dyuqkn8c/production` nadal mają poprzednie zdania.
+Zapis w CMS ma powtórzyć listę zamian z opisu PR. Nie uruchamiać
+`scripts/prepare-ebook-landings.ts`, żeby zapisać Sanity.
 
 ## Decyzje użytkownika z sesji pytań, 11.10.2026
 

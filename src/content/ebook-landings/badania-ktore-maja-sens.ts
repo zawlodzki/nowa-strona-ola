@@ -3,10 +3,10 @@ import type { EbookLandingSeed } from "../ebook-landing-seed";
 export const badaniaKtoreMajaSensLanding = {
   seoTitle: "Badania, które mają sens | E-book Aleksandry Olesiewicz",
   seoDescription:
-    "Przygotuj objawy, wyniki i pytania na wizytę dotyczącą PCOS. Zapowiedź edukacyjnego ebooka. Planowana cena 97 zł, sprzedaż nieaktywna.",
+    "Przygotuj objawy, wyniki i pytania na wizytę dotyczącą PMOS (PCOS). Zapowiedź edukacyjnego ebooka. Planowana cena 97 zł, sprzedaż nieaktywna.",
   heroTitle: "Na wizytę z pytaniami.\nNie z kolejną listą badań.",
   heroLead:
-    "PCOS: badania, które mają sens. Przygotuj opis objawów, zbierz wyniki i zapisz, co chcesz ustalić z lekarzem. Planowany przewodnik pomoże Ci uporządkować rozmowę o diagnostyce.",
+    "PMOS (PCOS): badania, które mają sens. Przygotuj opis objawów, zbierz wyniki i zapisz, co chcesz ustalić z lekarzem. Planowany przewodnik pomoże Ci uporządkować rozmowę o diagnostyce.",
   primaryLabel: "Sprawdź planowany pakiet",
   secondaryLabel: "Zobacz zakres ebooka",
   facts: [
@@ -34,7 +34,7 @@ export const badaniaKtoreMajaSensLanding = {
     "Jeśli masz już wyniki lub zapisujesz objawy, wykonałaś pracę, którą warto wykorzystać. Następny krok to zebranie ich w jedną kartę na konsultację.",
   audienceItems: [
     {
-      title: "Podejrzewasz PCOS.",
+      title: "Podejrzewasz PMOS (PCOS).",
       body: "Chcesz opisać zmiany w cyklu, skórze lub owłosieniu i zapytać lekarza o dalszą ocenę.",
     },
     {
@@ -51,7 +51,7 @@ export const badaniaKtoreMajaSensLanding = {
     },
   ],
   educationNote:
-    "Ebook przygotowuje do rozmowy z lekarzem. Nie rozpoznaje PCOS, nie interpretuje indywidualnych wyników i nie zastępuje zlecenia badań.",
+    "Ebook przygotowuje do rozmowy z lekarzem. Nie rozpoznaje PMOS (PCOS), nie interpretuje indywidualnych wyników i nie zastępuje zlecenia badań.",
   contentsTitle: "Nie tylko co zbadać.\nTakże o co zapytać.",
   contentsLead:
     "Proponowany zakres sześciu rozdziałów prowadzi od zebrania informacji do zapisania ustaleń z wizyty. Rozdziały i załączniki są w przygotowaniu.",
@@ -70,7 +70,7 @@ export const badaniaKtoreMajaSensLanding = {
         "Uporządkuj daty, jednostki, zakresy referencyjne i wcześniejsze zalecenia. Przygotuj dane do interpretacji przez lekarza.",
     },
     {
-      title: "Jak lekarz rozpoznaje PCOS",
+      title: "Jak lekarz rozpoznaje PMOS (PCOS)",
       summary:
         "Poznaj rolę objawów, badań i wykluczania innych przyczyn. Zapisz pytania o USG i AMH zamiast szukać jednego rozstrzygającego wyniku.",
     },
@@ -95,7 +95,7 @@ export const badaniaKtoreMajaSensLanding = {
         "Przygotuj opis najważniejszego problemu, pytania o kolejne kroki i miejsce na odpowiedzi. Ustal, kiedy wrócić z wynikami.",
     },
   ],
-  sampleKicker: "PCOS: badania, które mają sens · Koncepcja karty",
+  sampleKicker: "PMOS (PCOS): badania, które mają sens · Koncepcja karty",
   sampleSheetTitle: "Moje objawy.\nMoje pytania.",
   sampleSheetLead:
     "Zapisz jedną rzecz, którą chcesz wyjaśnić na najbliższej konsultacji.",
@@ -153,10 +153,10 @@ export const badaniaKtoreMajaSensLanding = {
     },
   ],
   outcomesNote:
-    "Lektura nie potwierdza ani nie wyklucza PCOS. Nie gwarantuje skierowania, określonego zestawu badań ani terminu rozpoznania.",
+    "Lektura nie potwierdza ani nie wyklucza PMOS (PCOS). Nie gwarantuje skierowania, określonego zestawu badań ani terminu rozpoznania.",
   authorTitle: "Dobrze przygotowana rozmowa\nzaczyna się od Twojej sytuacji.",
   authorParagraphs: [
-    "Aleksandra Olesiewicz, dietetyczka kliniczna, przygotowuje materiał dla kobiet, które chcą uporządkować informacje przed konsultacją dotyczącą PCOS. Punktem wyjścia są Twoje obserwacje i pytania.",
+    "Aleksandra Olesiewicz, dietetyczka kliniczna, przygotowuje materiał dla kobiet, które chcą uporządkować informacje przed konsultacją dotyczącą PMOS (PCOS). Punktem wyjścia są Twoje obserwacje i pytania.",
     "Wytyczne PCOS z 2023 roku nie traktują AMH jako samodzielnego testu rozpoznania. Pojedynczy wynik nie zastępuje oceny całej sytuacji przez lekarza. Ten sposób myślenia wyznacza granice planowanego ebooka.",
   ],
   sourceLabel: "Wytyczne PCOS 2023: diagnostyka i ocena metaboliczna",
@@ -180,7 +180,7 @@ export const badaniaKtoreMajaSensLanding = {
         "Materiał ma pomóc przygotować rozmowę o zasadności badań. Nie dobiera indywidualnego zestawu ani nie zastępuje skierowania. O potrzebnych badaniach, terminie i przygotowaniu porozmawiaj z lekarzem.",
     },
     {
-      question: "Czy z wyników rozpoznam PCOS samodzielnie?",
+      question: "Czy z wyników rozpoznam PMOS (PCOS) samodzielnie?",
       answer:
         "Nie. Ebook ma wyjaśnić pojęcia i pomóc zebrać pytania. Rozpoznanie wymaga oceny lekarskiej, uwzględnienia objawów i innych możliwych przyczyn. Karta wyników służy przygotowaniu konsultacji.",
     },

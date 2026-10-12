@@ -1,12 +1,12 @@
 import type { EbookLandingSeed } from "../ebook-landing-seed";
 
 export const szczuplaAJednakPcosLanding = {
-  seoTitle: "Szczupła, a jednak PCOS | E-book Aleksandry Olesiewicz",
+  seoTitle: "Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz",
   seoDescription:
-    "PCOS przy szczupłej sylwetce. Zapowiedź ebooka o jedzeniu, ruchu i przygotowaniu konsultacji bez celu redukcji masy. Planowana cena 97 zł.",
-  heroTitle: "Masz PCOS.\nNie chcesz chudnąć.",
+    "PMOS (PCOS) przy szczupłej sylwetce. Zapowiedź ebooka o jedzeniu, ruchu i przygotowaniu konsultacji bez celu redukcji masy. Planowana cena 97 zł.",
+  heroTitle: "Masz PMOS (PCOS).\nNie chcesz chudnąć.",
   heroLead:
-    "Szczupła, a jednak PCOS. Planowany przewodnik pomoże Ci przyjrzeć się jedzeniu, ruchowi i odpoczynkowi bez podporządkowywania ich utracie kilogramów. Zacznij od swoich potrzeb.",
+    "Szczupła, a jednak PMOS (PCOS). Planowany przewodnik pomoże Ci przyjrzeć się jedzeniu, ruchowi i odpoczynkowi bez podporządkowywania ich utracie kilogramów. Zacznij od swoich potrzeb.",
   primaryLabel: "Sprawdź planowany pakiet",
   secondaryLabel: "Zobacz zakres ebooka",
   facts: [
@@ -20,7 +20,7 @@ export const szczuplaAJednakPcosLanding = {
   coverTopic: "Codzienne nawyki bez celu redukcji masy",
   coverArt: ["Posiłki", "Ruch", "Odpoczynek"],
   coverCaption: "W przygotowaniu · PDF + EPUB i karta obserwacji",
-  problemTitle: "Czytasz o PCOS.\nWszędzie plan\nna mniej kilogramów.",
+  problemTitle: "Czytasz o PMOS (PCOS).\nWszędzie plan\nna mniej kilogramów.",
   problemParagraphs: [
     "Chcesz zrozumieć swoje objawy, a trafiasz na kolejną dietę odchudzającą. Zastanawiasz się, co z tych rad dotyczy Ciebie, skoro nie potrzebujesz redukcji masy ciała.",
     "To zrozumiałe, że czujesz się pominięta przez porady skupione na wadze. Nie świadczy to o tym, że za mało się starasz. Potrzebujesz materiału, który uwzględnia Twoją sytuację i pomaga przygotować konkretne pytania.",
@@ -37,7 +37,7 @@ export const szczuplaAJednakPcosLanding = {
     "Jeśli już próbowałaś oddzielić pomocne rady od zaleceń odchudzania, nie zaczynasz od zera. Teraz zbierz obserwacje, które pomogą dopasować kolejne kroki ze specjalistą.",
   audienceItems: [
     {
-      title: "Masz PCOS i szczupłą sylwetkę.",
+      title: "Masz PMOS (PCOS) i szczupłą sylwetkę.",
       body: "Chcesz rozmawiać o nawykach i samopoczuciu bez przyjmowania, że celem musi być chudnięcie.",
     },
     {
@@ -68,7 +68,7 @@ export const szczuplaAJednakPcosLanding = {
   ],
   chapters: [
     {
-      title: "PCOS przy szczupłej sylwetce",
+      title: "PMOS (PCOS) przy szczupłej sylwetce",
       summary:
         "Zrozum, dlaczego masa ciała nie opisuje całej sytuacji. Przygotuj pytania o objawy i ocenę zdrowia ze specjalistą.",
     },
@@ -85,7 +85,7 @@ export const szczuplaAJednakPcosLanding = {
     {
       title: "Ruch, który mieści się w Twoim tygodniu",
       summary:
-        "Zbierz obecny plan aktywności, preferencje i czas na odpoczynek. Nie traktuj jednego rodzaju treningu jako obowiązku dla każdej kobiety z PCOS.",
+        "Zbierz obecny plan aktywności, preferencje i czas na odpoczynek. Nie traktuj jednego rodzaju treningu jako obowiązku dla każdej kobiety z PMOS (PCOS).",
     },
     {
       title: "Sen i odpoczynek w codziennym planie",
@@ -95,10 +95,10 @@ export const szczuplaAJednakPcosLanding = {
     {
       title: "Kiedy potrzebujesz indywidualnej oceny",
       summary:
-        "Przygotuj opis cyklu i objawów do wizyty. Dowiedz się, dlaczego brak miesiączki wymaga wyjaśnienia przyczyny, również przy wcześniejszym rozpoznaniu PCOS.",
+        "Przygotuj opis cyklu i objawów do wizyty. Dowiedz się, dlaczego brak miesiączki wymaga wyjaśnienia przyczyny, również przy wcześniejszym rozpoznaniu PMOS (PCOS).",
     },
   ],
-  sampleKicker: "Szczupła, a jednak PCOS · Koncepcja karty",
+  sampleKicker: "Szczupła, a jednak PMOS (PCOS) · Koncepcja karty",
   sampleSheetTitle: "Mój dzień.\nMoje potrzeby.",
   sampleSheetLead:
     "Zapisz, jak wyglądał dzień. Bez oceniania siebie i liczenia kilogramów.",
@@ -111,7 +111,7 @@ export const szczuplaAJednakPcosLanding = {
   sampleSheetFooter: ["Karta obserwacji nawyków", "Podgląd koncepcji"],
   sampleTitle: "Zapisz jeden dzień.\nZobacz, o czym chcesz porozmawiać.",
   sampleLead:
-    "Pierwszy zapis pomoże Ci zauważyć pytania o jedzenie, aktywność i odpoczynek. Planowana karta na 14 dni pozwoli zebrać przykłady na konsultację. Nie służy do rozpoznawania PCOS ani oceniania własnej dyscypliny.",
+    "Pierwszy zapis pomoże Ci zauważyć pytania o jedzenie, aktywność i odpoczynek. Planowana karta na 14 dni pozwoli zebrać przykłady na konsultację. Nie służy do rozpoznawania PMOS (PCOS) ani oceniania własnej dyscypliny.",
   sampleCaption:
     "Podgląd projektowanej karty, nie fragment gotowego PDF. Przykłady posiłków i finalne materiały wymagają przygotowania oraz przeglądu merytorycznego.",
   materials: [
@@ -156,10 +156,10 @@ export const szczuplaAJednakPcosLanding = {
     },
   ],
   outcomesNote:
-    "Ebook nie gwarantuje zmiany glikemii, hormonów, masy ciała ani powrotu miesiączki. Nie jest planem leczenia PCOS lub zaburzeń odżywiania.",
+    "Ebook nie gwarantuje zmiany glikemii, hormonów, masy ciała ani powrotu miesiączki. Nie jest planem leczenia PMOS (PCOS) lub zaburzeń odżywiania.",
   authorTitle: "Punktem wyjścia\nsą Twoje potrzeby.",
   authorParagraphs: [
-    "Aleksandra Olesiewicz, dietetyczka kliniczna, przygotowuje materiał dla kobiet z PCOS, które szukają wskazówek bez celu odchudzania. Planowany ebook ma pomóc opisać codzienne nawyki i przygotować rozmowę o ich dopasowaniu.",
+    "Aleksandra Olesiewicz, dietetyczka kliniczna, przygotowuje materiał dla kobiet z PMOS (PCOS), które szukają wskazówek bez celu odchudzania. Planowany ebook ma pomóc opisać codzienne nawyki i przygotować rozmowę o ich dopasowaniu.",
     "Wytyczne PCOS z 2023 roku wskazują, że zdrowe nawyki przynoszą korzyści również bez utraty masy ciała. Nie wskazują jednej najlepszej diety dla wszystkich. Dlatego w tym materiale punktem wyjścia będą potrzeby i preferencje, nie uniwersalny deficyt.",
   ],
   sourceLabel: "Wytyczne PCOS 2023: styl życia i żywienie",

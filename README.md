@@ -195,11 +195,12 @@ dokumentu `ebook-suplementy-w-pcos-*`. `npm run import:blog-collection` robi
 dry-run 34 dokumentów (`article`, `category`, strony Blog `page`) do
 `reports/`; nic nie zapisuje.
 Sprawdzona komenda `node --import tsx scripts/prepare-ebook-landings.ts`
-przygotowuje pięć pozostałych landingów PL w
+zapisuje lokalnie pięć pozostałych landingów PL do
 `output/ebook-landings-3a-2026-10-11/`: pełne propozycje NDJSON oraz patche
 ograniczone do treści landingu, SEO, rozdziałów, materiałów, źródeł i formatu.
-Nie wysyła danych do Sanity. Istniejące ceny, dostępność i referencje należy
-zachować; zapis wymaga kopii danych i kontroli rewizji.
+Nie wysyła danych do Sanity. Tego katalogu nie commitujemy.
+Istniejące ceny, dostępność i referencje należy zachować. Zapis do Sanity
+wymaga kopii danych i kontroli rewizji.
 Migracja istniejących ustawień bloga ma osobny skrypt. Sprawdzona komenda
 `npm run migrate:blog-pages -- --input /tmp/ola-blog-migration-source.ndjson`
 przyjmuje eksport NDJSON i generuje raport oraz nowe szkice bez zapisu.

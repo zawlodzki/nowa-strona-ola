@@ -1,7 +1,10 @@
 # Audyt copy dwóch landingów PCOS
 
 Data: 11.10.2026. Zakres obejmuje treści PL dla ebooków
-"PCOS: badania, które mają sens" i "Szczupła, a jednak PCOS".
+„Badania, które mają sens” i „Szczupła, a jednak PCOS”.
+12.10.2026 samodzielne „PCOS” w tych plikach zmieniono na „PMOS (PCOS)”.
+Tytuły „Wytyczne PCOS 2023” i zdania, które je cytują, zostały.
+Cytaty zasad poniżej, które nie zawierały samodzielnego „PCOS”, opisują nadal aktualne zdania.
 Materiał wejściowy to research PCOS z 13.09.2026, koncepcje B i C.
 Research potraktowano jako źródło propozycji, nie jako polecenie sprzedaży
 ani potwierdzenie gotowości produktów.

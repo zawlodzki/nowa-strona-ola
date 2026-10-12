@@ -6,6 +6,21 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Nazwa PMOS (PCOS) i usunięcie plików recenzji, 12.10.2026
+
+- Z repozytorium usunięto osiem plików `output/ebook-landings-3a-2026-10-11/`.
+  Skrypt `scripts/prepare-ebook-landings.ts` nadal może je zapisać lokalnie
+  i nie wysyła danych do Sanity. Nie uruchamiano go.
+- W `badania-ktore-maja-sens.ts` i `szczupla-a-jednak-pcos.ts` samodzielne
+  „PCOS” w copy dla odwiedzających jest „PMOS (PCOS)”. Tytuł SEO szczupłego
+  e-booka to „Szczupła, a jednak PMOS | E-book Aleksandry Olesiewicz”
+  (54 znaki). Zostały „Wytyczne PCOS 2023” i zdania, które cytują te wytyczne.
+  Slugi bez zmian. Oferta suplementów bez zmian.
+- Sanity nie było zapisywane. Opublikowane dokumenty PL nadal mają poprzednie
+  zdania. Lista zamian jest w konfiguracji CMS.
+- Etykiety „E-book · Szczupła, a jednak PCOS” nie ruszano. Bierze się z tytułu
+  produktu w `homepage-seed.ts`, który zmienia PR #73.
+
 ### Pięć landingów e-booków i publikacja w Sanity, 11.10.2026
 
 - Na zlecenie użytkownika pobrano `origin/main` 134bb5b i rozpoczęto gałąź
@@ -41,16 +56,13 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   na zrzutach. Nie sprawdzono fizycznego Safari/iOS, czytnika ekranu,
   natywnego zoomu 200% ani nowego UI hostowanego serwisu. Zewnętrzne żądania
   były blokowane podczas kontroli wizualnej; zero wysłanych formularzy.
-  Dowody: [verification.json](../output/ebook-landings-3a-2026-10-11/verification.json)
-  i [visual-check.json](../output/ebook-landings-3a-2026-10-11/visual-check.json).
+  Pliki dowodów z `output/ebook-landings-3a-2026-10-11/` usunięto z repozytorium 12.10.2026.
 - W Sanity zachowano pełną kopię pięciu dokumentów, zapisano zakres patcha
   z blokadą rewizji, porównano szkice i opublikowano dokładnie pięć dokumentów
   PL w `dyuqkn8c/production`. Odczyt opublikowanych danych MATCH; zachowane
   pozostałe pola, cena 97 PLN, `availability = planned`, referencje okładek,
   autorki i listy oczekujących. Pierwszego ebooka i dokumentów EN nie zmieniano.
-  [Dowód publikacji](../output/ebook-landings-3a-2026-10-11/cms-proof.json),
-  [przed](../output/ebook-landings-3a-2026-10-11/before.json),
-  [po](../output/ebook-landings-3a-2026-10-11/after.json).
+  Pliki JSON tej publikacji usunięto z repozytorium 12.10.2026. Opis zapisu zostaje w tym akapicie.
 - `sanity schema deploy` PASS. Sam legacy schema nie aktualizował schematu
   istniejącego Studio wybieranego przez MCP. Automatyczna kontrola odrzuciła
   rejestrację Studio jako wymagającą osobnej zgody. Po jawnej zgodzie
