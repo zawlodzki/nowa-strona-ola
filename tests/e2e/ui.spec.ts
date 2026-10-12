@@ -1,5 +1,9 @@
 import { expect, test, type Locator } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import {
+  dismissConsentBanner,
+  mockConsentPolicy,
+} from "./helpers/consent-banner";
 
 async function expectDecodedWidth(locator: Locator, width: number) {
   await locator.scrollIntoViewIfNeeded();
@@ -465,7 +469,9 @@ test("ebook collection with categories, empty URL and no POST", async ({
     if (request.method() === "POST") posts.push(request.url());
   });
 
+  await mockConsentPolicy(page);
   await page.goto("/");
+  await dismissConsentBanner(page);
   await expect(
     page.getByRole("link", { name: "Zobacz wszystkie e-booki" }),
   ).toHaveAttribute("href", "/ebooki/");

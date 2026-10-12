@@ -1,5 +1,9 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "./helpers/lead-webhook";
+import {
+  dismissConsentBanner,
+  mockConsentPolicy,
+} from "./helpers/consent-banner";
 
 for (const entry of [
   {
@@ -17,7 +21,9 @@ for (const entry of [
     leadWebhook,
   }) => {
     const captured = await leadWebhook.mock(page, [200]);
+    await mockConsentPolicy(page);
     await page.goto(entry.path);
+    await dismissConsentBanner(page);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       entry.title,
     );
