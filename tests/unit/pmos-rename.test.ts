@@ -293,6 +293,23 @@ describe("planPmosRename", () => {
             "Conflicting advice on PCOS: write down what you want to clarify",
         },
       },
+      {
+        _id: "article-blog-02-pl",
+        _type: "article",
+        _rev: "rev-02",
+        title: "Codzienne posiłki przy PMOS (PCOS): zacznij od swojego rytmu",
+        seo: {
+          title: "Codzienne posiłki przy PMOS (PCOS): zacznij od swojego rytmu",
+        },
+      },
+      {
+        _id: "ebook-suplementy-w-pcos-pl",
+        _type: "ebook",
+        _rev: "rev-suplementy",
+        seo: {
+          title: "Suplementy w PMOS (PCOS) | E-book Aleksandry Olesiewicz",
+        },
+      },
     ];
     const plan = planPmosRename(docs);
     expect(plan.problems).toEqual([]);
@@ -343,6 +360,19 @@ describe("planPmosRename", () => {
     expect(english?.after).toBe(
       "Conflicting advice on PMOS: write down what to clarify",
     );
+    expect(
+      plan.changes.some(
+        (change) =>
+          change.id === "article-blog-02-pl" && change.path === "seo.title",
+      ),
+    ).toBe(false);
+    expect(
+      plan.changes.some(
+        (change) =>
+          change.id === "ebook-suplementy-w-pcos-pl" &&
+          change.path === "seo.title",
+      ),
+    ).toBe(false);
     expect(
       plan.changes
         .filter((change) => change.path === "seo.title")
