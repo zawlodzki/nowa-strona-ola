@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-12",
+  "node": "24.19.0",
+  "baseBranch": "codex/seo-full-content-exports",
+  "baseCommit": "53d992894864e5d3235e2955fc00d615438588ba",
+  "verify": {
+    "exitCode": 0,
+    "unit": 363,
+    "e2e": 429,
+    "documents": 88,
+    "errors": 0,
+    "matchingPages": 17
+  },
+  "indexNowUnitTests": 53,
+  "productionArtifactSeoPages": 36,
+  "dryRunUrlCount": 34,
+  "realRequests": 0,
+  "errorLogCases": 4,
+  "workflowShellCases": 8,
+  "deployPerformed": false,
+  "indexingEnabledInGitHub": false,
+  "open": [
+    "live artifact restore and retention in Actions",
+    "actual notification after approved production launch",
+    "Search Console, Bing, AI Crawl Control"
+  ]
+}

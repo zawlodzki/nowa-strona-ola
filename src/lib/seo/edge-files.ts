@@ -1,11 +1,25 @@
+import type { IndexNowConfiguration } from "@/lib/seo/indexnow";
+
 import { SITE_ORIGIN } from "@/lib/seo/site";
 
 /**
  * `_headers` for Workers Static Assets (max 100 rules). Markdown alternates
  * stay out of the index and point to their HTML canonical (`:splat`).
  */
-export function buildHeadersFile({ indexing }: { indexing: boolean }): string {
+export function buildHeadersFile({
+  indexing,
+  indexNow,
+}: {
+  indexing: boolean;
+  indexNow?: IndexNowConfiguration;
+}): string {
   const rules: string[][] = [];
+  if (indexing && indexNow?.kind === "enabled")
+    rules.push([
+      indexNow.keyPath,
+      "Content-Type: text/plain; charset=utf-8",
+      "X-Robots-Tag: noindex",
+    ]);
   if (!indexing) rules.push(["/*", "X-Robots-Tag: noindex"]);
   rules.push(
     [

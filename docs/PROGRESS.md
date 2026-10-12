@@ -6,6 +6,61 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### IndexNow jako stacked PR, 12.10.2026
+
+- Na zlecenie „push pr i idź dalej, kolejny PR jako stacked PR” wysłano
+  podpisany commit `53d9928` i otwarto [PR #81](https://github.com/zawlodzki/nowa-strona-ola/pull/81)
+  do main. Bazę wcześniej odświeżono do `f28988e` z #80.
+  Nowa gałąź `codex/seo-indexnow` powstała na dokładnym tipie #81.
+- Pierwsze podpisy op-ssh-sign oraz próba ssh-keygen przez agenta
+  1Password nie przeszły. Po naprawie 1Password przez użytkownika
+  podpis SSH jest poprawny, `git log %G?` zwrócił `G`. Nie wyłączono podpisów.
+- Kolejny zakres SEO‑6 obejmuje model IndexNow, domyślny dry-run CLI,
+  produkcyjny plik potwierdzenia i wywołanie po udanym deployu.
+  Suma poprzedniej i bieżącej sitemap obejmuje usunięte URL. Wyłączony
+  wariant kończy pracę przed siecią i odczytem plików.
+- Niezależny przegląd wykrył logowanie klucza przez asercje błędów oraz
+  utratę usuniętych URL przy Re-run jobs. Asercje używają warunków boolean
+  i komunikatów bez wartości. Capture adoptuje istniejącą migawkę; workflow
+  zachowuje i odtwarza artefakt danego run_id przez 7 dni. Zapis migawki
+  nie zatrzymuje deployu, ale jego błąd blokuje powiadomienie.
+- Odczyt GitHub potwierdził brak `SITE_INDEXING` i nazwy sekretu
+  `INDEXNOW_KEY` zarówno na poziomie repo, jak i środowiska production.
+  Nie odczytywano wartości sekretów; PR sam nie uruchomi zgłoszeń.
+- Plik potwierdzenia powstaje wyłącznie dla produkcji, włączonej indeksacji
+  i poprawnego klucza. Publiczny klucz, robots i sitemap muszą odpowiadać
+  artefaktowi przed POST. HTTP 202 oznacza oczekiwanie na walidację klucza.
+- Konfiguracji GitHub, CMS, indeksacji i pomiaru nie zmieniono. Nie wysyłano
+  prawdziwego zgłoszenia IndexNow ani leadów. [Instrukcja](INDEXNOW-DEPLOYMENT.md).
+- Kontrole właściciela: 53 testy IndexNow po poprawce ponowień PASS,
+  scoped lint, format i typy PASS na Node 24.19.0.
+- Końcowe `PLAYWRIGHT_WORKERS=2 npm run verify` PASS na Node 24.19.0:
+  **363 unit w 41 plikach**, **429 E2E** w Chromium/Firefox/WebKit,
+  **88 dokumentów bez błędów**, **17 zgodnych stron** fixture/Content Lake.
+  Build publiczny, Studio, preview, Worker dry-run, budżety i SEO PASS.
+  UI i budżety nie zmieniły się: JS 9214 B, CSS 30873 B gzip.
+- Osobny indeksowalny build w `/tmp/ola-indexnow-production-dist` z
+  syntetycznym kluczem PASS, kontrola SEO **36 stron PASS**. Plik klucza
+  istnieje, ma poprawną treść i noindex w `_headers`; brak go w
+  domyślnym artefakcie. Dry-run na rzeczywistych plikach: **34 URL**,
+  **0 połączeń**. Klucz nie został skonfigurowany ani wdrożony.
+- Cztery próby awarii kontroli artefaktu (zła treść, brak pliku,
+  niepoprawny klucz, staging ze starym plikiem) zwróciły błąd bez klucza
+  lub jego treści w logu. [Dowód](../output/indexnow-2026-10-12/artifact-check.json).
+- YAML i **8 rzeczywistych przypadków shell** z workflow PASS, polecenie
+  npm zastąpiono lokalnym stubem. Ponowienie bez oryginalnej migawki
+  blokuje capture i zgłoszenie; failed snapshot nie zatrzymuje deployu.
+  [Dowód](../output/indexnow-2026-10-12/workflow-check.json). Całego workflow
+  na żywym koncie nie uruchamiano. GitHub retencja i odtworzenie artefaktu
+  wymagają odbioru po osobnym uruchomieniu gotowej produkcji.
+- Po końcowej poprawce guardu ponowień sprawdzono format, lint i diff;
+  kod aplikacji nie zmienił się po pełnym verify. Przegląd niezależnych
+  agentów zakończył się poprawą trzech ustaleń, bez pominięcia zgłoszonych
+  ryzyk. Nie wykonywano natywnego zoomu, czytnika ani fizycznego urządzenia.
+- Następny krok: push i stacked PR z bazą #81. Zewnętrzne SEO, konfiguracja
+  gotowej produkcji, rzeczywisty IndexNow i pomiar nadal pozostają otwarte.
+  Nie zmieniano dopisku demonstracyjnego w CMS bloga.
+
 ### Deploy preview, podwójna nazwa Workera, 12.10.2026
 
 - Run [38250764226](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38250764226)

@@ -1,6 +1,7 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 
 import { buildHeadersFile, buildRedirectsFile } from "@/lib/seo/edge-files";
+import { indexNowConfiguration } from "@/lib/seo/indexnow";
 import { getInventory } from "@/lib/seo/inventory";
 import { isIndexingEnabled } from "@/lib/seo/site";
 import { listRedirects } from "@/sanity/repository";
@@ -14,7 +15,10 @@ export const getStaticPaths = (() => [
 export const GET: APIRoute = async ({ params }) => {
   const body =
     params.edgeFile === "_headers"
-      ? buildHeadersFile({ indexing: isIndexingEnabled() })
+      ? buildHeadersFile({
+          indexing: isIndexingEnabled(),
+          indexNow: indexNowConfiguration(process.env),
+        })
       : buildRedirectsFile(
           await listRedirects(),
           (await getInventory("pl")).map((entry) => entry.path),

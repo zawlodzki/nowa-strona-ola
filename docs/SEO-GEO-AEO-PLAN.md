@@ -510,7 +510,10 @@ bo fallbacki są pokryte testami.
 ### SEO‑6: start produkcji i pomiar
 
 - [ ] robots.txt według D1, sprawdzenie AI Crawl Control.
-- [ ] Search Console i Bing (DNS), sitemap, IndexNow w Actions.
+- [x] Kod IndexNow w Actions po udanym deployu, bez uruchamiania indeksacji
+      i konfiguracji klucza (12.10.2026; odbiór w postępie).
+- [ ] Search Console i Bing (DNS), zgłoszenie sitemap i rzeczywisty odbiór
+      IndexNow po skonfigurowaniu gotowej produkcji.
 - [ ] Zdjęcie `noindex` wyłącznie z gotowej produkcji (etap 7 planu).
 - [ ] Grupa kanałów AI w GA4. Przegląd po 4 i 12 tygodniach: indeksacja,
       zapytania, raporty AI, Core Web Vitals.

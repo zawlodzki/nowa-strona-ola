@@ -337,14 +337,56 @@ if (indexing) {
 }
 
 const headers = await readFile(path.join(distDir, "_headers"), "utf8");
+const indexNowKey = process.env.INDEXNOW_KEY;
+const indexNowEnabled =
+  indexing &&
+  process.env.DEPLOYMENT_TARGET === "production" &&
+  Boolean(indexNowKey);
+const keyFiles = (await readdir(distDir)).filter(
+  (file) =>
+    /^[A-Za-z0-9-]{8,128}\.txt$/.test(file) &&
+    !["robots.txt", "llms-full.txt"].includes(file),
+);
+if (indexNowEnabled) {
+  assert.ok(
+    /^[A-Za-z0-9-]{8,128}$/.test(indexNowKey),
+    "IndexNow: invalid key format",
+  );
+  assert.ok(
+    keyFiles.length === 1 && keyFiles[0] === `${indexNowKey}.txt`,
+    "IndexNow: one configured key artifact",
+  );
+  const keyContent = await readFile(
+    path.join(distDir, `${indexNowKey}.txt`),
+    "utf8",
+  ).catch(() => {
+    throw new Error("IndexNow: cannot read key artifact");
+  });
+  assert.ok(keyContent === indexNowKey, "IndexNow: key file contents");
+  assert.ok(
+    headers.includes(
+      `/${indexNowKey}.txt\n  Content-Type: text/plain; charset=utf-8\n  X-Robots-Tag: noindex`,
+    ),
+    "IndexNow: key response headers",
+  );
+  assert.ok(
+    !sitemapLocs.has(`${ORIGIN}/${indexNowKey}.txt`),
+    "IndexNow: key outside sitemap",
+  );
+} else {
+  assert.ok(
+    keyFiles.length === 0,
+    "IndexNow: disabled builds have no key artifact",
+  );
+}
+
 assert.equal(
   /^\/\*\n {2}X-Robots-Tag: noindex/m.test(headers),
   !indexing,
   "_headers: site-wide noindex only outside production",
 );
-assert.match(
-  headers,
-  /\/\*\.md\n[\s\S]*?rel="canonical"/,
+assert.ok(
+  /\/\*\.md\n[\s\S]*?rel="canonical"/.test(headers),
   "_headers: .md canonical",
 );
 assert.ok(await exists(path.join(distDir, "_redirects")), "_redirects missing");

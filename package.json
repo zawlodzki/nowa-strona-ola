@@ -39,6 +39,7 @@
     "import:article": "node scripts/import-article.mjs",
     "import:3a": "tsx scripts/import-3a.ts",
     "import:legal": "node scripts/import-legal.mjs",
+    "indexnow": "node --import tsx scripts/indexnow.ts",
     "test:content-lake": "tsx scripts/simulate-content-build.ts",
     "tokens:generate": "node scripts/generate-tokens.mjs",
     "migrate:blog-pages": "tsx scripts/migrate-blog-pages.ts",

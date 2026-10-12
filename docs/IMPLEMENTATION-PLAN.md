@@ -939,3 +939,18 @@ Zakres wynika z decyzji D8 z 11.10.2026. Bez zapisu do CMS i publikacji.
 Wyniki: pełne verify PASS, 310 unit i 429 E2E. Odczyt rzeczywistego
 Content Lake: 3 artykuły RSS, 10 dokumentów llms-full, 30 kontroli stron
 przy 1440/390/320 px bez JS i overflow. Szczegóły i ograniczenia w postępie.
+
+## IndexNow po wdrożeniu, stacked PR, 12.10.2026
+
+- [x] Wysłać pełne eksporty do PR #81 na aktualnym main.
+- [x] Przygotować IndexNow na gałęzi opartej na dokładnym tipie #81.
+- [x] Dodać domyślny dry-run, walidację konfiguracji i publicznego artefaktu,
+      klucz tylko w indeksowalnym buildzie produkcji, zgłoszenie po deployu.
+- [x] Zachować migawkę sprzed deployu dla usunięć i ponowień danego run_id.
+- [x] Potwierdzić pełne verify, produkcyjny artefakt i brak klucza w błędach.
+- [ ] Wysłać drugi PR z bazą `codex/seo-full-content-exports`.
+- [ ] Na osobne zlecenie uruchomić produkcyjną indeksację i skonfigurować
+      klucz, Search Console, Bing oraz AI Crawl Control.
+
+Instrukcja: [INDEXNOW-DEPLOYMENT.md](INDEXNOW-DEPLOYMENT.md). Bez zmiany
+ustawień GitHub, treści Sanity i publikacji w tej sesji.
