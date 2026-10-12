@@ -23,3 +23,25 @@ const { pages, label = "Paginacja", pageLabel = "Strona" } = Astro.props;
     </a>
   ))}
 </nav>
+
+<style>
+  .ao-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ao-space-8);
+  }
+  .ao-pagination a {
+    display: grid;
+    place-items: center;
+    min-inline-size: var(--ao-target-min);
+    min-block-size: var(--ao-target-min);
+    border: 1px solid var(--ao-line);
+    border-radius: var(--ao-radius-control);
+    font-variant-numeric: tabular-nums;
+  }
+  .ao-pagination a[aria-current] {
+    background: var(--ao-primary);
+    color: var(--ao-on-primary);
+    border-color: var(--ao-primary);
+  }
+</style>

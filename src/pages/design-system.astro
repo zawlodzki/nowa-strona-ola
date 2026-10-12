@@ -387,4 +387,33 @@ const colors = [
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: var(--ao-space-32);
   }
+  :global(.ao-container--reading) {
+    max-inline-size: var(--ao-reading);
+  }
+  :global(.ao-heading--article) {
+    font-size: var(--ao-article-heading);
+    font-weight: 750;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+  :global(.ao-field__hint) {
+    font-size: 0.75rem;
+    color: var(--ao-muted);
+  }
+  .ao-table-scroll {
+    overflow-x: auto;
+    max-inline-size: 100%;
+    scrollbar-color: var(--ao-muted) var(--ao-background);
+  }
+  .ao-table-scroll table {
+    min-inline-size: 560px;
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+  .ao-table-scroll :where(th, td) {
+    text-align: start;
+    padding: var(--ao-space-16);
+    border-block-end: 1px solid var(--ao-line);
+  }
 </style>
