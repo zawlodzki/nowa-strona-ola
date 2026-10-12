@@ -65,10 +65,7 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Mobilny viewport Presentation działa; przywrócono desktop. Bezpośrednie
   Studio: zero błędów konsoli. Nie zapisywano treści pól CMS. Natywny zoom
   200% w Studio, czytnik i urządzenie fizyczne pozostają niewykonane.
-- [Wyniki](../output/sanity-presentation-fix-2026-10-12/verification.json),
-  [desktop](../output/sanity-presentation-fix-2026-10-12/presentation-fixed.jpg)
-  i [mobile](../output/sanity-presentation-fix-2026-10-12/presentation-mobile.jpg).
-  Na zlecenie „push pr” wypchnięto podpisany commit `39b1643` na gałąź
+- Na zlecenie „push pr” wypchnięto podpisany commit `39b1643` na gałąź
   `codex/sanity-presentation-fix` i otwarto
   [PR #79](https://github.com/zawlodzki/nowa-strona-ola/pull/79).
   Quality uruchomiło się na GitHub; wynik pozostaje oczekiwany.
