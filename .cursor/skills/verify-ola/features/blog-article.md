@@ -1,18 +1,17 @@
 # Artykuł na blogu
 
-Z listy bloga użytkownik otwiera najnowszy wpis o przygotowaniu do konsultacji, widzi spis treści. Angielska wersja tego samego artykułu działa pod osobnym adresem; nagłówek 3a nie pokazuje przełącznika języka.
+Z listy bloga użytkownik otwiera najnowszy wpis o przygotowaniu do konsultacji i widzi spis treści Article3a. Tytuł mówi „PMOS (PCOS)”. Slug zostaje `przygotowanie-do-konsultacji-pcos`. Nagłówek 3a nie pokazuje przełącznika języka.
 
 ## Sub-features
 
 - `blog-index` pokazuje nagłówek „Blog. Po Twojemu.” na `/blog/`.
 - `blog-open` otwiera artykuł z karty wyróżnionej na liście.
-- `blog-en-direct` otwiera bezpośrednio `/en/blog/preparing-for-a-pcos-nutrition-consultation/`.
+- Spis treści ma nazwę „W tym artykule”.
 
 ## How to get to it (user POV)
 
-- Otwórz `/blog/` i wybierz „Jak przygotować się do konsultacji dietetycznej przy PCOS?”.
+- Otwórz `/blog/` i wybierz „Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?”.
 - Otwórz bezpośrednio `/blog/przygotowanie-do-konsultacji-pcos/`.
-- Otwórz bezpośrednio `/en/blog/preparing-for-a-pcos-nutrition-consultation/`.
 
 ## Driving it with verify-ola
 
@@ -22,14 +21,12 @@ Preconditions:
 - Na liście jest link artykułu z fixture’a. To nie jest treść z datasetu Sanity.
 
 - **Lista.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /blog/`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Blog. Po Twojemu."`.
-- **Wejście z listy.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Jak przygotować się do konsultacji dietetycznej przy PCOS?" --exact`. Potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Jak przygotować się do konsultacji dietetycznej przy PCOS?"` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role navigation --name "W tym artykule"`.
-- **Angielski artykuł bezpośrednio.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /en/blog/preparing-for-a-pcos-nutrition-consultation/`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "How to prepare for a nutrition consultation with PCOS?"`.
-- **Dowód.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path blog-article/english.aria.txt` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path blog-article/english.png`.
+- **Wejście z listy.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?" --exact`. Potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?"` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role navigation --name "W tym artykule"`.
+- **Dowód.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path blog-article/article.aria.txt` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path blog-article/article.png`.
 
 ## Gotchas
 
 - Obrazek wyróżniony ma aria-label zaczynające się od „Przeczytaj artykuł:”. `--exact` na samym tytule trafia w link H3.
 - Szablon artykułu to Article3a. Spis treści ma nazwę „W tym artykule”, nie „Spis treści”.
+- W tytule fixture’a przed `(PCOS)` jest spacja niełamliwa. Nazwa dostępna pasuje do zwykłej spacji w komendzie.
 - Copy i daty wpisów z makiety są propozycją.
-
-- Historyczny przepis kliknięcia „English” jest niedostępny w nagłówku 3a. Bezpośrednie otwarcie EN nie stanowi dowodu działania przełącznika.

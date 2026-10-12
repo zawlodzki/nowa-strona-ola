@@ -35,16 +35,17 @@ Każdy plik ma H1, jeden akapit zachowania widocznego dla użytkownika i dokład
 ## Features
 
 - [Kontakt 3a](./contact.md) sprawdza trzy pola, niezależny newsletter, dane firmy i brak POST.
-
-- [Formularz demonstracyjny](./home-form.md) sprawdza walidację na stronie głównej i brak wysyłki.
-- [Strona O mnie](./about.md) otwiera `/o-mnie/` i `/en/about/`, ramkę dyplomu i newsletter bez POST.
-- [Landing konsultacji](./consultation.md) otwiera `/konsultacje/` i `/en/consultations/`, cenę z usługi, Cal.com jako placeholder i FAQ bez POST.
-- [Landing e-booka](./ebook.md) otwiera `/ebooki/suplementy-w-pcos/` z karty homepage, 97 zł brutto, status zapowiedzi i brak POST.
-- [Kolekcja e-booków](./ebook-collection.md) otwiera `/ebooki/` i `/en/ebooks/`, kategorie bez JS, karty z `ebookPath` i brak POST.
-- [Przełącznik języka](./language.md) prowadzi z PL na EN i z powrotem, w tym stronę bez tłumaczenia.
+- [Formularz newslettera](./home-form.md) sprawdza walidację na stronie głównej i brak wysyłki.
+- [Strona O mnie](./about.md) otwiera `/o-mnie/`, dyplom, wydział w Bytomiu i newsletter bez POST.
+- [Landing konsultacji](./consultation.md) otwiera `/konsultacje/`, cenę z usługi, żywy link Cal.com i FAQ bez POST.
+- [Landing e-booka](./ebook.md) otwiera `/ebooki/suplementy-w-pcos/` z karty homepage, 97 zł brutto, status „Wkrótce dostępny” i listę oczekujących bez POST.
+- [Pozostałe landingi e-booków](./ebook-landings.md) otwiera pięć pozostałych adresów PL z odznaką zapowiedzi i przyciskiem listy oczekujących.
+- [Kolekcja e-booków](./ebook-collection.md) otwiera `/ebooki/`, kategorie bez JS, karty z `ebookPath` i brak POST.
+- [Przełącznik języka](./language.md) sprawdza brak linku „English” i 404 pod `/en/`.
 - [Dialog katalogu](./catalog-dialog.md) otwiera i zamyka dialog „Jak pracujemy”.
 - [Katalog 3a](./design-system.md) otwiera `/design-system/`, motyw i karuzelę.
-- [Kolekcja bloga](./blog-collection.md) otwiera `/blog/` i `/en/blog/`, paginację, kategorię i pustą kategorię, bez POST.
-- [Artykuł na blogu](./blog-article.md) wchodzi z listy bloga w artykuł i angielski odpowiednik.
-- [Strony prawne](./legal-pages.md) otwiera cztery dokumenty PL, informację EN i link zgody newslettera.
+- [Kolekcja bloga](./blog-collection.md) otwiera `/blog/`, paginację, kategorię i pustą kategorię, bez POST.
+- [Artykuł na blogu](./blog-article.md) wchodzi z listy bloga w artykuł Article3a.
+- [Strony prawne](./legal-pages.md) otwiera cztery dokumenty PL, odstąpienie od umowy i link zgody newslettera.
+- [Baner zgód](./consent.md) pokazuje panel cookies na stronach 3a i zamyka go bez POST.
 - [Strona bez skryptów](./static-page.md) sprawdza `/static/` przy wyłączonym JavaScript.

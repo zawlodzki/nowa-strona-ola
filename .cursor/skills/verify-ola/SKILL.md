@@ -1,11 +1,11 @@
 ---
 name: verify-ola
-description: "Uruchamia statyczny serwis Astro (strona Oli) i prowadzi go jak użytkownik przez Chromium: strony PL/EN, katalog, katalog 3a, blog i formularz demonstracyjny. Sięgnij po ten skill, gdy zmiana dotyczy publicznego UI, tras, treści fixture albo zachowania bez wysyłki leada."
+description: "Uruchamia statyczny serwis Astro (strona Oli) i prowadzi go jak użytkownik przez Chromium: strony PL, katalog, katalog 3a, blog, landingi e-booków i formularze bez wysyłki leada. Sięgnij po ten skill, gdy zmiana dotyczy publicznego UI, tras, treści fixture albo zachowania bez wysyłki leada."
 ---
 
 # Weryfikacja strony Oli
 
-Publiczna powierzchnia to statyczny serwis Astro. Użytkownik otwiera HTML w przeglądarce: strona główna `/`, angielska `/en/`, katalog `/ui/` i `/en/ui/`, katalog 3a `/design-system/`, blog, landingi fixture oraz `/static/`. Studio Sanity, podgląd szkiców na porcie 4322 i Worker integracji są osobnymi procesami. Ten skill ich nie uruchamia i nie weryfikuje. Mockupy HTML w `mockups/homepage/` nie są tym serwisem.
+Publiczna powierzchnia to statyczny serwis Astro. Użytkownik otwiera HTML w przeglądarce: strona główna `/`, katalog `/ui/`, katalog 3a `/design-system/`, blog, landingi e-booków oraz `/static/`. Publiczne EN jest wyłączone. Adresy `/en/…` zwracają 404. Studio Sanity, podgląd szkiców na porcie 4322 i Worker integracji są osobnymi procesami. Ten skill ich nie uruchamia i nie weryfikuje. Mockupy HTML w `mockups/homepage/` nie są tym serwisem.
 
 Treść bez `PUBLIC_SANITY_*` pochodzi z fixture’ów wbudowanych w `dist/`. Dwa podglądy na różnych portach mogą czytać ten sam `dist/` równolegle. Nie przebudowuj `dist/` w trakcie sesji. Nie podłączaj się do cudzego procesu na 4321 (testy Playwright) ani 4322 (podgląd szkiców).
 
@@ -45,20 +45,20 @@ Wspólny punkt startu to świeży build fixture’ów i zdrowy doctor. Każda ko
 
 ```sh
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /
-node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Wyślij wiadomość" --exact
-node .cursor/skills/verify-ola/scripts/verify.mjs browser fill --role textbox --name "Imię" --exact --value "Łucja"
-node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wpisz imię (od 2 do 100 znaków)."
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Zapisuję się" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser fill --role textbox --name "Twój adres e-mail" --exact --value "wrong"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wpisz poprawny adres e-mail."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path <plik>
 node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path <plik>
 node .cursor/skills/verify-ola/scripts/verify.mjs browser context --javascript false
 node .cursor/skills/verify-ola/scripts/verify.mjs browser script-count
 node .cursor/skills/verify-ola/scripts/verify.mjs browser press --key Escape
-node .cursor/skills/verify-ola/scripts/verify.mjs browser click --text "Chcę ebook · 97 zł"
-node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Suplementy w PCOS" --nth 1 --attribute href --value /ebooki/suplementy-w-pcos/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Zapisz się na listę oczekujących" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Suplementy w PMOS (PCOS)" --exact --nth 1 --attribute href --value /ebooki/suplementy-w-pcos/
 ```
 
-Formularze wysyłają poprawne dane na produkcyjny webhook n8n (`flows.zawlodzki.com`), a sesja verify-ola nie przechwytuje sieci. Wysyłaj tu tylko dane, które nie przejdą walidacji. Wysyłkę z mockiem sprawdza Playwright `tests/e2e/lead-forms.spec.ts`. `browser context` otwiera nową stronę i kasuje poprzedni stan sesji. Domyślnie JavaScript jest włączony. `expect` z rolą czeka, aż locator będzie widoczny, chyba że podasz `--state`, `--text`, `--attribute` albo `--count`. `--nth` to indeks od zera, gdy kilka elementów ma tę samą rolę i nazwę. `click --text` klika dokładny widoczny napis, gdy kontrolka nie ma nazwy w drzewie dostępności. Ścieżki `--path` przy snapshot i screenshot są względne wobec katalogu dowodów. Mapa funkcji jest w [features/README.md](features/README.md).
+Formularze wysyłają poprawne dane na produkcyjny webhook n8n (`flows.zawlodzki.com`), a sesja verify-ola nie przechwytuje sieci. Wysyłaj tu tylko dane, które nie przejdą walidacji. Wysyłkę z mockiem sprawdza Playwright `tests/e2e/lead-forms.spec.ts`. `browser context` otwiera nową stronę i kasuje poprzedni stan sesji. Domyślnie JavaScript jest włączony. `expect` z rolą czeka, aż locator będzie widoczny, chyba że podasz `--state`, `--text`, `--attribute` albo `--count`. `expect --text` szuka widocznego elementu. Ukryty duplikat tego samego napisu go nie zasłania. `--nth` to indeks od zera, gdy kilka elementów ma tę samą rolę i nazwę. `click --text` klika dokładny widoczny napis, gdy kontrolka nie ma nazwy w drzewie dostępności. Ścieżki `--path` przy snapshot i screenshot są względne wobec katalogu dowodów. Mapa funkcji jest w [features/README.md](features/README.md). `browser posts` zbiera adresy POST od startu procesu przeglądarki. `browser context` tej listy nie czyści.
 
 ## Evidence
 
@@ -68,9 +68,9 @@ Każda komenda przeglądarki dopisuje linię do `transcript.jsonl` (komenda, arg
 
 - snapshot ARIA po akcji użytkownika i po stanie wynikowym, nie sam ekran końcowy,
 - zrzut ekranu, na którym widać tożsamość strony (nagłówek z marką albo H1),
-- skutek uboczny. Formularz demonstracyjny nie wysyła leada: `browser posts` ma wypisać `[]`. Brak wpisu w transkrypcie nie zastępuje tego odczytu.
+- skutek uboczny. Przepis, który nie wysyła leada, ma dostać z `browser posts` wynik `[]`. Brak wpisu w transkrypcie nie zastępuje tego odczytu.
 
-Nie wołaj wewnętrznych setterów ani endpointów testowych. Nie uznawaj nazwy „demonstracyjny” za dowód, że POST nie wyszedł.
+Nie wołaj wewnętrznych setterów ani endpointów testowych. Nie uznawaj etykiety formularza za dowód, że POST nie wyszedł.
 
 ## Cleanup
 
