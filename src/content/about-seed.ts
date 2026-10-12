@@ -8,7 +8,7 @@ export const aboutCopy = {
     seoTitle: "O mnie — Aleksandra Olesiewicz | dietetyczka kliniczna",
     seoDescription:
       "Poznaj Aleksandrę Olesiewicz — dietetyczkę kliniczną, absolwentkę Śląskiego Uniwersytetu Medycznego. PMOS (PCOS), podejście do pracy i materiały edukacyjne.",
-    heroTitle: "Jestem Ola.\nZnam PMOS (PCOS)\nod środka.",
+    heroTitle: "Jestem Ola.\nZnam PMOS\nod środka.",
     heroLead:
       "Jestem dietetyczką kliniczną, absolwentką Śląskiego Uniwersytetu Medycznego. Pomagam kobietom z PMOS (PCOS) i insulinoopornością uporządkować odżywianie i wybrać zmiany, które pasują do ich codzienności.",
     heroPrimary: "Zobacz, jak pracuję",
@@ -82,7 +82,7 @@ export const aboutCopy = {
     seoTitle: "About — Aleksandra Olesiewicz | clinical dietitian",
     seoDescription:
       "Meet Aleksandra Olesiewicz, a clinical dietitian and graduate of the Medical University of Silesia. PMOS (PCOS), how she works, and educational materials.",
-    heroTitle: "I am Ola.\nI know PMOS (PCOS)\nfrom the inside.",
+    heroTitle: "I am Ola.\nI know PMOS\nfrom the inside.",
     heroLead:
       "I am a clinical dietitian and a graduate of the Medical University of Silesia. I help women with PMOS (PCOS) and insulin resistance sort their nutrition and choose changes that fit their days.",
     heroPrimary: "See how I work",

@@ -258,6 +258,15 @@ function aboutOverrides(
         });
       }
     }
+    const hero = section(doc, "about-hero", "heroSection", problems);
+    if (hero && hero.title !== copy.heroTitle) {
+      changes.push({
+        id: doc._id,
+        path: 'sections[_key=="about-hero"].title',
+        before: typeof hero.title === "string" ? hero.title : null,
+        after: copy.heroTitle,
+      });
+    }
     const credentials = section(
       doc,
       "about-credentials",

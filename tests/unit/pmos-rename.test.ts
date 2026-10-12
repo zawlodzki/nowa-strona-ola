@@ -27,6 +27,12 @@ function page(body: string[], caption: string): SanityDocument {
     _rev: "rev-page",
     sections: [
       {
+        _key: "about-hero",
+        _type: "heroSection",
+        title: "Jestem Ola.\nZnam PMOS\nod środka.",
+        lead: "Pomagam kobietom z PMOS (PCOS) i insulinoopornością.",
+      },
+      {
         _key: "about-story",
         _type: "textSection",
         body,
@@ -124,6 +130,10 @@ describe("planPmosRename", () => {
       ),
       author("Stary alt dyplomu", "Stary alt dyplomu"),
     ];
+    const hero = (docs[0].sections as { _key: string; title?: string }[]).find(
+      (section) => section._key === "about-hero",
+    );
+    if (hero) hero.title = "Jestem Ola.\nZnam PMOS (PCOS)\nod środka.";
     const plan = planPmosRename(docs);
     expect(plan.problems).toEqual([]);
     expect(plan.notes).toEqual([
@@ -140,6 +150,17 @@ describe("planPmosRename", () => {
         after: STORY,
       },
     ]);
+    expect(
+      plan.changes.find((change) => change.path.endsWith(".title")),
+    ).toEqual({
+      id: "page-about-pl",
+      path: 'sections[_key=="about-hero"].title',
+      before: "Jestem Ola.\nZnam PMOS (PCOS)\nod środka.",
+      after: "Jestem Ola.\nZnam PMOS\nod środka.",
+    });
+    expect(plan.changes.some((change) => change.path.endsWith(".lead"))).toBe(
+      false,
+    );
     expect(
       plan.changes.find((change) => change.path.endsWith("diplomaCaption")),
     ).toEqual({
@@ -405,6 +426,12 @@ describe("planPmosRename", () => {
         _type: "page",
         _rev: "rev-en-page",
         sections: [
+          {
+            _key: "about-hero",
+            _type: "heroSection",
+            title: "I am Ola.\nI know PMOS\nfrom the inside.",
+            lead: "I help women with PMOS (PCOS) and insulin resistance.",
+          },
           {
             _key: "about-story",
             _type: "textSection",

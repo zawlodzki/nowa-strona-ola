@@ -24,7 +24,8 @@ describe("about 3a fixtures", () => {
       "formSection",
     ]);
     const view = mapAbout(page, "pl");
-    expect(view.hero.title).toContain("Jestem Ola");
+    expect(view.hero.title).toBe("Jestem Ola.\nZnam PMOS\nod środka.");
+    expect(view.hero.lead).toContain("PMOS (PCOS)");
     expect(view.experience.value).toBe(9000);
     expect(view.credentials.person.educationInstitution).toBe(
       "Śląski Uniwersytet Medyczny",
@@ -72,7 +73,8 @@ describe("about 3a fixtures", () => {
   it("does not use Polish copy under the English about page", async () => {
     const page = await getPage("en", "about", { environment: {} });
     const view = mapAbout(page, "en");
-    expect(view.hero.title).toContain("I am Ola");
+    expect(view.hero.title).toBe("I am Ola.\nI know PMOS\nfrom the inside.");
+    expect(view.hero.lead).toContain("PMOS (PCOS)");
     expect(view.hero.lead).not.toMatch(/Jestem Ola/);
     expect(view.credentials.person.educationProgram).toBe("Clinical dietetics");
     expect(view.credentials.person.diploma?.label).toBe(

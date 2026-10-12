@@ -75,7 +75,9 @@ wyraźnie mówi o dokumencie do uzupełnienia.
 
 ### Hero
 
-**Jestem Ola. Znam PMOS (PCOS) od środka.**
+**Jestem Ola.**
+**Znam PMOS**
+**od środka.**
 
 Jestem dietetyczką kliniczną, absolwentką Śląskiego Uniwersytetu Medycznego.
 Pomagam kobietom z PMOS (PCOS) i insulinoopornością uporządkować odżywianie i wybrać

@@ -17,7 +17,7 @@ Ze strony głównej wybrać „O mnie” w nawigacji albo „Poznaj moją histor
 
 ```sh
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /o-mnie/
-node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Jestem Ola. Znam PCOS od środka."
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Jestem Ola. Znam PMOS od środka."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role img --name "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Śląski Uniwersytet Medyczny"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Zapisuję się" --exact
@@ -25,7 +25,7 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path about-pl-aria.txt
 node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path about-pl.png
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /en/about/
-node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "I am Ola. I know PCOS from the inside."
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "I am Ola. I know PMOS from the inside."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role img --name "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path about-en-aria.txt
 node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path about-en.png
@@ -35,5 +35,5 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path abou
 
 ## Gotchas
 
-H1 mockupu łamie wiersze. Playwright i verify-ola widzą złączony tekst „Jestem Ola. Znam PCOS od środka.”
+H1 mockupu łamie wiersze. Playwright i verify-ola widzą złączony tekst „Jestem Ola. Znam PMOS od środka.”
 Nie otwieraj Studio, podglądu 4322 ani Workera. Natywny zoom, czytnik i urządzenie fizyczne nie są w tym przepisie.
