@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { Buffer } from "node:buffer";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 
 const templates = [
@@ -53,7 +53,8 @@ const templates = [
     inline: 4 * 1024,
   },
   {
-    paths: ["blog/przygotowanie-do-konsultacji-pcos/index.html"],
+    // Articles are published by hand in Sanity: check every built article.
+    paths: articlePaths,
     view: ".article3a",
     external: 10 * 1024,
     inline: 4 * 1024,
@@ -66,10 +67,29 @@ const templates = [
   },
 ];
 
+async function articlePaths(directory) {
+  const paths = [];
+  for (const entry of await readdir(`${directory}/blog`, {
+    withFileTypes: true,
+  })) {
+    if (!entry.isDirectory() || ["strona", "kategoria"].includes(entry.name))
+      continue;
+    const path = `blog/${entry.name}/index.html`;
+    const html = await readFile(`${directory}/${path}`, "utf8").catch(() => "");
+    if (html.includes("article3a")) paths.push(path);
+  }
+  assert(paths.length > 0, "blog: no article pages built");
+  return paths.sort();
+}
+
 export async function checkCssBudgets(directory = "dist") {
   const report = {};
   for (const template of templates) {
-    for (const path of template.paths) {
+    const paths =
+      typeof template.paths === "function"
+        ? await template.paths(directory)
+        : template.paths;
+    for (const path of paths) {
       const html = await readFile(`${directory}/${path}`, "utf8");
       const hrefs = new Set(
         [

@@ -35,10 +35,8 @@ for (const path of [
   "ui/index.html",
   "static/index.html",
   "blog/index.html",
-  "blog/strona/2/index.html",
   "blog/kategoria/pcos/index.html",
   "blog/kategoria/perimenopauza/index.html",
-  "blog/przygotowanie-do-konsultacji-pcos/index.html",
   "odstapienie/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
@@ -79,32 +77,90 @@ assert.doesNotMatch(ebookHtml, /potwierdzenie zakupu|płatność przyjęta/i);
 const blogHtml = await readFile("dist/blog/index.html", "utf8");
 assert.match(blogHtml, /Blog\. Po Twojemu\./);
 assert.match(blogHtml, /Najnowszy wpis/);
-assert.match(blogHtml, /Wpisy 2–7 z 11/);
-assert.match(blogHtml, /przygotowanie-do-konsultacji-pcos/);
-assert.match(blogHtml, /\/blog\/strona\/2\//);
-assert.doesNotMatch(
-  blogHtml.split('id="wpisy"')[1] ?? "",
-  /przygotowanie-do-konsultacji-pcos/,
-);
-const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
-assert.match(blogPage2, /Wpisy 8–11 z 11/);
-assert.doesNotMatch(blogPage2, /Najnowszy wpis/);
-const blogEmpty = await readFile(
-  "dist/blog/kategoria/perimenopauza/index.html",
-  "utf8",
-);
-assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
-const articleHtml = await readFile(
-  "dist/blog/przygotowanie-do-konsultacji-pcos/index.html",
-  "utf8",
-);
-assert.match(articleHtml, /article3a/);
-assert.match(
-  articleHtml,
-  /Jak przygotować się do konsultacji dietetycznej przy PMOS \(PCOS\)\?/,
-);
-assert.match(articleHtml, /W tym artykule/);
-assert.match(articleHtml, /"@type":"FAQPage"/);
+// Posts are published by hand in Sanity, so a live build has no fixed count.
+// Pagination must match the article pages that were actually built.
+const liveContent = Boolean(process.env.PUBLIC_SANITY_PROJECT_ID);
+const blogEntries = await readdir("dist/blog", { withFileTypes: true });
+const articleSlugs = [];
+for (const entry of blogEntries) {
+  if (!entry.isDirectory() || ["strona", "kategoria"].includes(entry.name))
+    continue;
+  const html = await readFile(
+    `dist/blog/${entry.name}/index.html`,
+    "utf8",
+  ).catch(() => "");
+  if (/article3a/.test(html)) articleSlugs.push(entry.name);
+}
+const postCount = articleSlugs.length;
+assert(postCount >= 1, "blog: expected at least one article page");
+const rangeOf = (html, label) => {
+  const match = html.match(/Wpisy (\d+)–(\d+) z (\d+)/);
+  if (!match) return null;
+  const [start, end, total] = match.slice(1).map(Number);
+  assert.equal(total, postCount, `${label}: total matches built articles`);
+  assert(start <= end, `${label}: range ${start}–${end}`);
+  return { start, end };
+};
+let previousEnd = 1; // the latest post is featured above the list
+let page = 1;
+let html = blogHtml;
+for (;;) {
+  const label = page === 1 ? "blog" : `blog/strona/${page}`;
+  if (page > 1) assert.doesNotMatch(html, /Najnowszy wpis/, label);
+  const range = rangeOf(html, label);
+  if (range) {
+    assert.equal(range.start, previousEnd + 1, `${label}: range continues`);
+    previousEnd = range.end;
+  }
+  const next = await readFile(
+    `dist/blog/strona/${page + 1}/index.html`,
+    "utf8",
+  ).catch(() => null);
+  if (!next) break;
+  assert(range, `${label}: a next page needs a range label`);
+  assert.match(html, new RegExp(`/blog/strona/${page + 1}/`), label);
+  html = next;
+  page += 1;
+}
+assert.equal(previousEnd, postCount, "blog: pages cover every built article");
+for (const slug of articleSlugs) {
+  const articlePage = await readFile(`dist/blog/${slug}/index.html`, "utf8");
+  assert.match(articlePage, /noindex,nofollow/, `blog/${slug}: noindex`);
+  assert.equal(
+    (articlePage.match(/<h1[\s>]/g) ?? []).length,
+    1,
+    `blog/${slug}: exactly one h1`,
+  );
+}
+if (!liveContent) {
+  // Fixtures are fixed: 11 posts, 6 per list page after the featured one.
+  assert.equal(postCount, 11, "fixture: 11 articles");
+  assert.match(blogHtml, /Wpisy 2–7 z 11/);
+  const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
+  assert.match(blogPage2, /Wpisy 8–11 z 11/);
+  assert.match(blogHtml, /przygotowanie-do-konsultacji-pcos/);
+  assert.match(blogHtml, /\/blog\/strona\/2\//);
+  assert.doesNotMatch(
+    blogHtml.split('id="wpisy"')[1] ?? "",
+    /przygotowanie-do-konsultacji-pcos/,
+  );
+  const articleHtml = await readFile(
+    "dist/blog/przygotowanie-do-konsultacji-pcos/index.html",
+    "utf8",
+  );
+  assert.match(articleHtml, /article3a/);
+  assert.match(
+    articleHtml,
+    /Jak przygotować się do konsultacji dietetycznej przy PMOS \(PCOS\)\?/,
+  );
+  assert.match(articleHtml, /W tym artykule/);
+  assert.match(articleHtml, /"@type":"FAQPage"/);
+  const blogEmpty = await readFile(
+    "dist/blog/kategoria/perimenopauza/index.html",
+    "utf8",
+  );
+  assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
+}
 const homePl = await readFile("dist/index.html", "utf8");
 for (const [label, html] of [["/", homePl]]) {
   assert.match(
