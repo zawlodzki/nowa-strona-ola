@@ -3,7 +3,10 @@ import { expect, test } from "@playwright/test";
 
 const products = [
   { slug: "badania-ktore-maja-sens", title: "Badania, które mają sens" },
-  { slug: "szczupla-a-jednak-pcos", title: "Szczupła, a jednak PCOS" },
+  {
+    slug: "szczupla-a-jednak-pcos",
+    title: "Szczupła, a jednak PMOS\u00A0(PCOS)",
+  },
   { slug: "waga-cie-oklamuje", title: "Waga Cię okłamuje" },
   { slug: "czy-to-juz", title: "Czy to już?" },
   {
