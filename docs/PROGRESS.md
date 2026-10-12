@@ -46,11 +46,11 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   **0 połączeń**. Klucz nie został skonfigurowany ani wdrożony.
 - Cztery próby awarii kontroli artefaktu (zła treść, brak pliku,
   niepoprawny klucz, staging ze starym plikiem) zwróciły błąd bez klucza
-  lub jego treści w logu. [Dowód](../output/indexnow-2026-10-12/artifact-check.json).
+  lub jego treści w logu.
 - YAML i **8 rzeczywistych przypadków shell** z workflow PASS, polecenie
   npm zastąpiono lokalnym stubem. Ponowienie bez oryginalnej migawki
   blokuje capture i zgłoszenie; failed snapshot nie zatrzymuje deployu.
-  [Dowód](../output/indexnow-2026-10-12/workflow-check.json). Całego workflow
+  Całego workflow
   na żywym koncie nie uruchamiano. GitHub retencja i odtworzenie artefaktu
   wymagają odbioru po osobnym uruchomieniu gotowej produkcji.
 - Po końcowej poprawce guardu ponowień sprawdzono format, lint i diff;
