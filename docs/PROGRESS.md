@@ -30,6 +30,19 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Firefox i WebKit, w 3,0 min. Przepis verify-ola dla newslettera na `/`
   odrzucił pusty i zły e-mail, a `browser posts` zwrócił `[]`. Dowód jest w
   `/tmp/ola-verify-evidence/ola-1791841438/`.
+- Recenzja PR 89 złapała dwie regresje. Na kontenerze do 767 px hero
+  konsultacji i landingów e-booków brał rozmiar desktopowy, bo reguła
+  wariantu ładowała się po `@container` ze wspólnego arkusza. Obok wariantu
+  jest teraz to samo `font-size: var(--ao-display-mobile)`. `line-height`
+  zostaje przy każdej szerokości, tak jak na `main` (42 px daje 43,68 px).
+- Style `.ao-form-receipt` są w `LeadForm.astro`. Potwierdzenie po wysłaniu
+  formularza odstąpienia ma ten sam padding, obrys i krój co na `main`.
+  Webhook był zatrzymany w teście.
+- Po poprawce zewnętrzny CSS strony głównej dalej ma 7754 B gzip. Dwa
+  odczyty `test:build` dały tę samą liczbę. Inline strony głównej ma 2911 B,
+  bo reguły potwierdzenia weszły do arkusza wstawionego w HTML. Cały CSS ma
+  30559 B gzip. Piksele konsultacji i sześciu landingów e-booków są zgodne
+  z `main` przy 320, 390, 768 i 1280 px.
 - Nie scalano i nie wdrażano. Następny krok to odbiór PR.
 
 ### Ponowienie wrangler deploy, 12.10.2026

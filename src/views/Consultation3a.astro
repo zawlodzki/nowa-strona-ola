@@ -344,6 +344,11 @@ const expertParagraphs = expert.body
     font-size: var(--ao-hero-service);
     line-height: 1.04;
   }
+  @container page3a (max-width: 767px) {
+    :global(.ao-hero--service .ao-heading) {
+      font-size: var(--ao-display-mobile);
+    }
+  }
   .consult3a h3,
   .consult3a-closing {
     white-space: pre-line;

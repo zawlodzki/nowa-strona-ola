@@ -441,6 +441,11 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
     line-height: 1.04;
     letter-spacing: -0.06em;
   }
+  @container page3a (max-width: 767px) {
+    :global(.ao-hero--product .ao-heading) {
+      font-size: var(--ao-display-mobile);
+    }
+  }
   .ebook3a :global(.ao-hero--product) {
     gap: 32px;
     padding-block: 44px 52px;
