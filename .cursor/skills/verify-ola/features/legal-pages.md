@@ -1,37 +1,50 @@
 # Strony prawne
 
-Użytkownik czyta dokumenty prawne z CMS (fixture bez Sanity): tytuł, datę
-obowiązywania i treść. Angielska polityka informuje, że wiążąca jest wersja
-polska. Zgoda newslettera na stronie głównej linkuje regulamin newslettera.
+Użytkownik czyta polskie dokumenty z fixture’ów. Tytuł jest H1. Pod nim jest wersja i data obowiązywania. Stopka linkuje regulamin, politykę, listę cookies, regulamin newslettera i odstąpienie od umowy. Zgoda newslettera na stronie głównej linkuje regulamin newslettera.
 
 ## Sub-features
 
-- `legal-privacy` otwiera `/polityka-prywatnosci/` z H1 i datą 24.08.2026.
-- `legal-cookies` przechodzi z polityki na listę cookies i z powrotem.
-- `legal-en` na `/en/privacy/` pokazuje informację o wersji polskiej.
-- `legal-newsletter-form` pokazuje link regulaminu newslettera w zgodzie.
+- `legal-privacy` otwiera `/polityka-prywatnosci/` z H1 „Polityka prywatności aleksandraolesiewicz.com” i wersją 2.2 z 11.10.2026.
+- `legal-cookies` przechodzi z polityki linkiem „Lista cookies i identyfikatorów” i wraca linkiem „Politykę prywatności”.
+- `legal-terms` otwiera `/regulamin/` w wersji 2.3 z 10.10.2026.
+- `legal-newsletter` otwiera `/regulamin-newslettera/` w wersji 2.1 z 10.10.2026.
+- `legal-withdrawal` otwiera `/odstapienie/` z H1 „Odstąpienie od umowy”.
 
 ## How to get to it (user POV)
 
-- Stopka: „Polityka prywatności” albo „Regulamin”.
-- Z polityki: odnośnik do listy cookies.
-- Nagłówek „English”, potem `/en/privacy/`.
-- Strona główna, sekcja newslettera, etykieta zgody.
+- Stopka, nawigacja „Informacje prawne”.
+- Z polityki odnośnik „Lista cookies i identyfikatorów”.
+- Strona główna, informacja pod przyciskiem newslettera.
 
 ## Driving it with verify-ola
 
-Preconditions:
+```sh
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /polityka-prywatnosci/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Polityka prywatności aleksandraolesiewicz.com"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wersja 2.2 · obowiązuje od 11.10.2026"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Lista cookies i identyfikatorów"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Lista cookies i identyfikatorów aleksandraolesiewicz.com"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wersja 2.2 · obowiązuje od 11.10.2026"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Politykę prywatności"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Polityka prywatności aleksandraolesiewicz.com"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /regulamin/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wersja 2.3 · obowiązuje od 10.10.2026"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /regulamin-newslettera/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Regulamin newslettera i materiałów bezpłatnych — aleksandraolesiewicz.com"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wersja 2.1 · obowiązuje od 10.10.2026"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path legal/newsletter.aria.txt
+node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path legal/newsletter.png
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /odstapienie/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Odstąpienie od umowy" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path legal/withdrawal.png
+```
 
-- Doctor potwierdza bazowy podgląd.
-- Sesja przeglądarki jest świeża.
-
-- **Polityka.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /polityka-prywatnosci/`. Potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Polityka prywatności www.zawlodzki.pl"`. Snapshot i zrzut: `--path legal/privacy-desktop.png`.
-- **Cookies.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "liście cookies i identyfikatorów"`. Potem oczekuj H1 „Lista cookies i identyfikatorów”.
-- **EN.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /en/privacy/`. Oczekuj tekstu „The binding version is the Polish text”.
-- **Zgoda.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /`. Oczekuj linku „regulamin newslettera”.
+Link zgody newslettera na `/` sprawdza przepis formularza newslettera, z `--nth 0`, bo ta sama nazwa jest też w stopce.
 
 ## Gotchas
 
-- Treść PL jest 1:1 ze źródła B2B (zawlodzki.pl); nie oceniaj jej jako copy Oli.
-- EN nie ma tłumaczenia dokumentu — tylko informacja i link do PL.
-- Stopka nie linkuje listy cookies ani regulaminu newslettera.
+- H1 regulaminów zawierają pauzę z treści fixture’a. Komenda musi podać ten znak.
+- „liście cookies” w treści polityki to inny link niż „Lista cookies i identyfikatorów”. Przepis klika dłuższą nazwę.
+- Publiczne `/en/privacy/` nie istnieje. 404 EN sprawdza `language.md`.
+- Stopka zawiera listę cookies, regulamin newslettera i odstąpienie od umowy.

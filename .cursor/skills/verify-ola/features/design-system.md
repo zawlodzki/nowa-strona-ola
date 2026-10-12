@@ -34,8 +34,8 @@ Preconditions:
 
 - To nie jest `/ui/`. Dialog „Jak pracujemy” należy do tamtego przepisu.
 - Przycisk motywu i sterowanie karuzelą startują z `hidden` i pokazuje je skrypt. Przy wyłączonym JavaScript te role mają `--count 0`.
-- Skrypt ustawia motyw z `prefers-color-scheme`. Przepis zakłada jasny start. Przy ciemnym starcie pierwsze kliknięcie ustawia `aria-pressed` na `false`.
+- Zapisany `ao-theme` wygrywa z `prefers-color-scheme`. Świeża sesja verify-ola ma puste storage i jasny start, więc pierwsze kliknięcie ustawia `aria-pressed` na `true`. Przy zapisanym ciemnym motywie pierwsze kliknięcie ustawia `false`.
 - Pytanie FAQ „Czy te komponenty działają bez JavaScript?” jest w `details`. Harness nie otwiera go przez `--role group`. Dowodem jest otwarty drugi blok, nie kliknięcie pierwszego pytania.
-- Przycisk newslettera „Zapisz się — przykład” jest disabled z założenia. To nie jest regresja produktu.
+- Przycisk newslettera na tej stronie ma napis „Zapisuję się”. W HTML startuje jako disabled, a skrypt strony go włącza. Ten przepis go nie wysyła.
 - Link marki na tej stronie prowadzi na `/design-system/`, nie na `/`.
 - Brak angielskiej pary. Nie szukaj `/en/design-system/`.
