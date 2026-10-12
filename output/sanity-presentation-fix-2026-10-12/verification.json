@@ -39,5 +39,6 @@
   ],
   "cmsContentEdited": false,
   "publicWebsiteDeployed": false,
-  "githubPushed": false
+  "githubPushed": true,
+  "pullRequest": "https://github.com/zawlodzki/nowa-strona-ola/pull/79"
 }

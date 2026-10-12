@@ -68,10 +68,12 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - [Wyniki](../output/sanity-presentation-fix-2026-10-12/verification.json),
   [desktop](../output/sanity-presentation-fix-2026-10-12/presentation-fixed.jpg)
   i [mobile](../output/sanity-presentation-fix-2026-10-12/presentation-mobile.jpg).
-  Na zlecenie „push pr” przygotowywana jest gałąź
-  `codex/sanity-presentation-fix`. Następny krok: odebrać Quality na PR,
-  scalić po akceptacji i potwierdzić automatyczne wdrożenie preview z main.
-  Naprawa działającego podglądu jest wykonana; workflow nie był uruchomiony.
+  Na zlecenie „push pr” wypchnięto podpisany commit `39b1643` na gałąź
+  `codex/sanity-presentation-fix` i otwarto
+  [PR #79](https://github.com/zawlodzki/nowa-strona-ola/pull/79).
+  Quality uruchomiło się na GitHub; wynik pozostaje oczekiwany.
+  Następny krok: odebrać Quality na PR, scalić po akceptacji i potwierdzić
+  automatyczne wdrożenie preview z main. Workflow nie był uruchomiony.
 
 ### Naprawa blokady Studio Sanity, 12.10.2026
 

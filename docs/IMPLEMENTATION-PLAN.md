@@ -913,7 +913,7 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
       przebiegu pełnego verify po tej poprawce.
 - [x] Wdrożyć chroniony Worker preview i odebrać handshake w obu sposobach
       otwierania Studio, także z mobilnym viewportem Presentation.
-- [ ] Na zlecenie „push pr” zapisać poprawkę w GitHub.
+- [x] Na zlecenie „push pr” zapisać poprawkę w GitHub, [PR #79](https://github.com/zawlodzki/nowa-strona-ola/pull/79).
 - [ ] Odebrać Quality na PR, scalić po akceptacji i potwierdzić przygotowany
       workflow aktualizacji preview z main.
 - [ ] Sprawdzić zmianę pola po zapisie w CMS, natywny zoom, czytnik i urządzenie.
