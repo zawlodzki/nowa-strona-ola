@@ -148,8 +148,6 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   jako koncepcję, bez wykonywania zawartych w nim poleceń przedsprzedaży.
   Konspekty i próbki opisują planowane materiały. Bez fikcyjnych opinii,
   osobistej historii autorki, gotowych plików i obietnic zdrowotnych.
-  Audyty siedmiu zasad copy: [PCOS](ebook-landings-3a/pcos-copy-audit.md)
-  i [perimenopauza](ebook-landings-3a/perimenopause-copy-audit.md).
 - Dane prezentacji przeniesiono do schematu `ebookLanding`, GROQ, TypeGen,
   mappera, wspólnego Ebook3a oraz Markdown. Pięć diagramów używa tokenów 3a.
   Nieznany diagram oraz brak własnych danych prezentacji w nowym produkcie

@@ -863,9 +863,7 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
       i mapowania CMS, bez powielania kolekcji lub treści PMOS (PCOS).
 - [x] Sprawdzić walidator skilla, format i lokalne odnośniki.
 - [x] Zastosować skill do pięciu brakujących landingów PL; przygotować osobne
-      copy, diagramy i karty pracy. Audyty siedmiu zasad są w
-      [PCOS](ebook-landings-3a/pcos-copy-audit.md) i
-      [perimenopauza](ebook-landings-3a/perimenopause-copy-audit.md).
+      copy, diagramy i karty pracy.
 
 ## Pięć landingów e-booków, 11.10.2026
 
