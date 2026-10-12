@@ -22,6 +22,17 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   zdania. Lista zamian jest w konfiguracji CMS.
 - Etykiety „E-book · Szczupła, a jednak PCOS” nie ruszano. Bierze się z tytułu
   produktu w `homepage-seed.ts`, który zmienia PR #73.
+- Kontrola 12.10.2026 na Node 24.21.0. `npm run verify` doszedł do e2e.
+  Format, tokeny, lint, check, 290 unit, build, build workspace’ów i test
+  buildu PASS. Przy dwóch workerach WebKit raz nie zdążył przejść z polityki
+  prywatności na listę cookies. Ten sam test w izolacji PASS. Pełne e2e
+  przy jednym workerze: 423 PASS w Chromium, Firefox i WebKit.
+  `npm run test:content-lake` PASS, 17 stron o tym samym DOM.
+- verify-ola na `http://127.0.0.1:4340`, run `ola-1791780614`. Oba landingi
+  zwracają 200. Snapshot ARIA pokazuje nowe zdania. `browser posts` dało `[]`.
+  Przy 320, 390 i 1440 „(PCOS)” nie zostaje samo w linii, a strona nie
+  wychodzi poza szerokość okna. Na wąskim hero „Masz” jest nad
+  „PMOS” z twardą spacją i „(PCOS).”.
 
 ### Pięć landingów e-booków i publikacja w Sanity, 11.10.2026
 
