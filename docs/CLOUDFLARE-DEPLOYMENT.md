@@ -183,8 +183,10 @@ npx wrangler deploy --config worker/wrangler.jsonc --env <environment>
 ```
 
 Adapter Astro spłaszcza wybrane `CLOUDFLARE_ENV` do wygenerowanego pliku
-`preview/dist/server/wrangler.json`; dlatego przy wdrożeniu podglądu nie podawać
-ponownie `--env`. Sesje Astro są wyłączone, bo aplikacja używa własnego podpisanego
+`preview/dist/server/wrangler.json`. Przy `wrangler deploy` nie podawaj
+`--env` i nie zostawiaj `CLOUDFLARE_ENV`. Wrangler czyta tę zmienną jak
+`--env`. Spłaszczony plik nie ma sekcji `env.production`, więc drugi odczyt
+dokleja sufiks i woła Worker `ola-website-preview-production-production`. Sesje Astro są wyłączone, bo aplikacja używa własnego podpisanego
 cookie. Obrazy są optymalizowane podczas builda, więc pierwszy deploy nie może
 automatycznie utworzyć zbędnych bindingów KV ani Cloudflare Images.
 
