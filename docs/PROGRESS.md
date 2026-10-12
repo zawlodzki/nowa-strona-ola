@@ -1,10 +1,32 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (ponowienie przejściowych błędów wrangler deploy; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Ponowienie wrangler deploy, 12.10.2026
+
+- API Cloudflare zwróciło dziś trzy razy 504 i komunikat
+  `Received a malformed response from the API` podczas `wrangler deploy`
+  w workflow Studio i podglądu. Ręczne ponowienie za każdym razem przeszło.
+- Kroki deploy w Deploy preview, Deploy Studio i Publish content wołają
+  `scripts/retry-wrangler-deploy.ts`. Są trzy próby. Odstępy to 20 s i 60 s.
+  Każda próba dostaje to samo polecenie. Skrypt usuwa `CLOUDFLARE_ENV`,
+  więc podgląd nie dostaje drugiego sufiksu nazwy Workera.
+- Powtarzane są odpowiedzi 5xx, malformed response, timeout i zerwane
+  połączenie. Błąd konfiguracji, tokenu i odpowiedź 429 kończą krok od razu.
+- IndexNow nadal startuje tylko po `success()` kroku `deploy` i tylko
+  na produkcji. Porównanie `main` z testowanym commitem w podglądzie
+  i Studio zostaje.
+- Limit czasu tych jobów wzrósł z 15 do 25 min, żeby trzecia próba
+  zmieściła się po buildzie.
+- Testy `tests/unit/retry-wrangler-deploy.test.ts` dały 29 PASS na Node
+  24.21.0. `actionlint` 1.7.12 z shellcheck 0.10.0 na wszystkich workflow
+  kończy się kodem 0.
+- Nie scalano i nie wdrażano. Następny krok to odbiór PR. Potem kolejny
+  Deploy preview albo Deploy Studio z `main`.
 
 ### Pomiar Lighthouse i WCAG przed GTM, 12.10.2026
 
