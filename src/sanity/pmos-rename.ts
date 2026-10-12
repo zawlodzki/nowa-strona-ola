@@ -160,6 +160,7 @@ function isCitationField(path: string, key: string): boolean {
 }
 
 function fitSeoTitle(value: string): string | null {
+  if (value.length <= SEO_TITLE_LIMIT) return value;
   const collapsed = value.replaceAll("PMOS (PCOS)", "PMOS");
   if (collapsed.length <= SEO_TITLE_LIMIT) return collapsed;
   // Po samym „PMOS” zostaje jeden angielski tytuł ponad 60 znaków.
