@@ -23,7 +23,7 @@ export const TESTIMONIAL_QUOTES_PL = [
   "Ola, muszę się pochwalić choć dopiero co zaczęłyśmy! 😀 Na wadze dopiero -3kg, ale już się zadział mały cud. Z twarzy zaczęły znikać mi pryszcze, nie mam już tak wielkiej ochoty na słodycze!! Nawet nie wiesz jak się cieszę ❤️ a to dopiero początek naszej współpracy",
   "Dzięki współpracy z Olą schudłam 8 kg w 3 miesiące bez wyrzeczeń. Hormony się ustabilizowały, energii mam więcej niż kiedykolwiek!",
   "Najlepsza decyzja jaką podjęłam! Aplikacja jest super intuicyjna, a Ola zawsze dostępna gdy potrzebuję pomocy. Polecam z całego serca!",
-  "Po latach walki z PMOS (PCOS) w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!",
+  "Po latach walki z PCOS w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!",
   "Miałam problem z insulinoopornością i nie widziałam efektów mimo wielu diet. Z Olą w 2 miesiące schudłam 5 kg i wyniki badań się poprawiły!",
   "Nie wierzyłam, że dieta może być elastyczna i smaczna jednocześnie. Ola udowodniła mi, że to możliwe. Gotuje dla całej rodziny z tych samych przepisów!",
 ] as const;
@@ -32,7 +32,7 @@ export const TESTIMONIAL_QUOTES_EN = [
   "Ola, I have to share this even though we have only just started! 😀 The scale shows only −3 kg so far, but a small miracle is already happening. Spots are fading from my face and I no longer crave sweets so much!! You have no idea how happy I am ❤️ and this is only the beginning of our work together",
   "Working with Ola I lost 8 kg in 3 months without deprivation. My hormones settled and I have more energy than ever!",
   "The best decision I have made! The app is intuitive and Ola is there when I need help. I recommend her wholeheartedly!",
-  "After years of fighting PMOS (PCOS) I finally found someone who understands my problems. The way of eating is fitted to me, not the other way around!",
+  "After years of fighting PCOS I finally found someone who understands my problems. The way of eating is fitted to me, not the other way around!",
   "I struggled with insulin resistance and saw no change despite many diets. With Ola I lost 5 kg in 2 months and my lab results improved!",
   "I did not believe a way of eating could be flexible and tasty at once. Ola showed me it is possible. I now cook for the whole family from the same recipes!",
 ] as const;

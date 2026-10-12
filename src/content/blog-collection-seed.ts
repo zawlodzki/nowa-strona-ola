@@ -199,8 +199,20 @@ export interface BlogArticleSeed {
   imageWidth: number;
   imageHeight: number;
   hotspot?: { x: number; y: number };
-  pl: { slug: string; title: string; lead: string; alt: string };
-  en: { slug: string; title: string; lead: string; alt: string };
+  pl: {
+    slug: string;
+    title: string;
+    lead: string;
+    alt: string;
+    seoTitle?: string;
+  };
+  en: {
+    slug: string;
+    title: string;
+    lead: string;
+    alt: string;
+    seoTitle?: string;
+  };
 }
 
 const foodAltPl = "Kolorowy posiłek na jasnym stole.";
@@ -225,12 +237,14 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
       slug: "przygotowanie-do-konsultacji-pcos",
       title:
         "Jak przygotować się do konsultacji dietetycznej przy PMOS (PCOS)?",
+      seoTitle: "Jak przygotować się do konsultacji dietetycznej przy PMOS?",
       lead: "Bez perfekcyjnego dzienniczka i listy nowych obowiązków. Kilka notatek, które pomogą Ci spokojnie zacząć rozmowę.",
       alt: foodAltFeaturedPl,
     },
     en: {
       slug: "preparing-for-a-pcos-nutrition-consultation",
       title: "How to prepare for a nutrition consultation with PMOS (PCOS)?",
+      seoTitle: "How to prepare for a nutrition consultation with PMOS?",
       lead: "Without a perfect food diary or a list of new duties. A few notes that help you start the conversation calmly.",
       alt: foodAltFeaturedEn,
     },
@@ -274,6 +288,7 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
     en: {
       slug: "sorting-pcos-questions-before-an-appointment",
       title: "How to sort your PMOS (PCOS) questions before an appointment?",
+      seoTitle: "How to sort your PMOS questions before an appointment?",
       lead: "What you want to know, what worries you, and what is worth writing down before you meet a specialist.",
       alt: portraitAltEn,
     },
@@ -340,6 +355,7 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
     en: {
       slug: "insulin-resistance-starting-the-nutrition-conversation",
       title: "Insulin resistance: where to start the nutrition conversation?",
+      seoTitle: "Insulin resistance: where to start the conversation?",
       lead: "Before you collect another list of rules, name what is hardest for you day to day.",
       alt: portraitAltEn,
     },
@@ -361,6 +377,7 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
     en: {
       slug: "pcos-supplements-sort-questions-before-you-buy",
       title: "Supplements in PMOS (PCOS): sort your questions before you buy",
+      seoTitle: "Supplements in PMOS: sort your questions before you buy",
       lead: "What is already in your cupboard, and what do you want to ask a specialist? Start by sorting the information.",
       alt: foodAltEn,
     },
@@ -406,6 +423,7 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
       slug: "naming-the-goal-of-a-consultation",
       title:
         "What do you want to change? How to name the goal of a consultation",
+      seoTitle: "What do you want to change? Name the consultation goal",
       lead: "From a general “I want to eat better” to questions about what actually matters in your everyday life.",
       alt: portraitAltEn,
     },
@@ -450,6 +468,7 @@ export const BLOG_ARTICLE_SEED: readonly BlogArticleSeed[] = [
       slug: "conflicting-advice-on-pcos",
       title:
         "Conflicting advice on PMOS (PCOS): write down what you want to clarify",
+      seoTitle: "Conflicting advice on PMOS: write down what to clarify",
       lead: "Instead of another list of rules — the sentences you have heard and want to check in a calm conversation.",
       alt: portraitAltEn,
     },

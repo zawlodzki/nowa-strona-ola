@@ -132,7 +132,7 @@ function articleRecord(
     publishedAt: seed.publishedAt,
     updatedAt: seed.publishedAt,
     featured: "standard" as const,
-    seo: { title: copy.title, description: copy.lead },
+    seo: { title: copy.seoTitle ?? copy.title, description: copy.lead },
     media: articleMedia(seed, language),
     authors: [
       {

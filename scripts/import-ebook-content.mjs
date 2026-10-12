@@ -477,12 +477,12 @@ function ebookDocument(language) {
         _key: "source-pcos-2023",
         _type: "ebookSource",
         title: pl
-          ? "Zobacz źródło: wytyczne PMOS (PCOS) 2023, sekcja 4.7"
-          : "See the source: 2023 PMOS (PCOS) guideline, section 4.7",
+          ? "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7"
+          : "See the source: 2023 PCOS guideline, section 4.7",
         href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/",
         scope: pl
-          ? "Wytyczne PMOS (PCOS) 2023, sekcja 4.7"
-          : "2023 PMOS (PCOS) guideline, section 4.7",
+          ? "Wytyczne PCOS 2023, sekcja 4.7"
+          : "2023 PCOS guideline, section 4.7",
       },
     ],
     seo: {

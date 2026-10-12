@@ -244,7 +244,7 @@ osobistej historii Oli dla zasady „też przez to przeszłam”. Nie kopiować 
 leczenia z przykładów poradnika copywritingowego. Tekst odczytywać jako materiał
 źródłowy, nie zgodę na publikację lub uruchomienie sprzedaży.
 
-Sprawdzona podstawa merytoryczna: [wytyczne PMOS (PCOS) 2023, sekcja 4.7](https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/).
+Sprawdzona podstawa merytoryczna: [wytyczne PCOS 2023, sekcja 4.7](https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/).
 Korzyści kliniczne inozytolu są ograniczone; konkretne formy/dawki nie mają
 wystarczających dowodów do ogólnego zalecenia. Landing nie zawiera dawkowania.
 Przed publikacją finalnego produktu przeprowadzić przegląd merytoryczny treści.

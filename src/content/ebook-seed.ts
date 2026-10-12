@@ -167,9 +167,9 @@ export const ebookCopy = {
       "W mojej pracy z kobietami z PMOS (PCOS) liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
       "Suplementy też potrzebują kontekstu. W wytycznych PMOS (PCOS) z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania.",
     ],
-    sourceLabel: "Zobacz źródło: wytyczne PMOS (PCOS) 2023, sekcja 4.7",
+    sourceLabel: "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7",
     sourceHref: PCOS_SOURCE_HREF,
-    sourceScope: "Wytyczne PMOS (PCOS) 2023, sekcja 4.7",
+    sourceScope: "Wytyczne PCOS 2023, sekcja 4.7",
     offerTitle: "Zanim kupisz\nkolejne opakowanie,\nzrób miejsce na wiedzę.",
     offerLead:
       "Zacznij od tego, co już masz. Sprawdź pytania, policz koszty i przygotuj się do świadomej rozmowy o suplementacji.",
@@ -421,9 +421,9 @@ export const ebookCopy = {
       "In my work with women with PMOS (PCOS), understanding daily life comes first. I offer the same starting point in the e-book: your situation first, then the next steps.",
       "Supplements need context too. In the 2023 PMOS (PCOS) guideline, the clinical benefit of inositol was judged limited. That is why it is worth talking about expectations and whether use is justified.",
     ],
-    sourceLabel: "See the source: 2023 PMOS (PCOS) guideline, section 4.7",
+    sourceLabel: "See the source: 2023 PCOS guideline, section 4.7",
     sourceHref: PCOS_SOURCE_HREF,
-    sourceScope: "2023 PMOS (PCOS) guideline, section 4.7",
+    sourceScope: "2023 PCOS guideline, section 4.7",
     offerTitle: "Before you buy\nanother pack,\nmake space for knowledge.",
     offerLead:
       "Start with what you already have. Check the questions, count the costs and prepare for a considered conversation about supplementation.",

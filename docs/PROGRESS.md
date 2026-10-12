@@ -3470,7 +3470,7 @@ Po cleanup katalog `/tmp/ola-verify-evidence/ola-1790839417/` nadal istnieje.
 - Copy z koncepcji A wskazanego researchu i poradnika „10000000 Sales Copy Advice”.
   Mały pierwszy krok, konkretne pytania i rezultat edukacyjny; bez obwiniania,
   zmyślonej historii Oli, dawkowania i obietnic efektów zdrowotnych. Sprawdzono
-  źródło wytycznych PMOS (PCOS) 2023 (sekcja 4.7). Cena zachowana: 97 PLN brutto.
+  źródło wytycznych PCOS 2023 (sekcja 4.7). Cena zachowana: 97 PLN brutto.
   Zakres, pliki, dostarczanie i dostępność są propozycją do zatwierdzenia.
 - Użyto dwóch pełnych opinii współpracy z homepage, wyraźnie odróżnionych od
   recenzji ebooka. Bez fikcyjnych nabywczyń, ocen i przypisania wyników produktowi.

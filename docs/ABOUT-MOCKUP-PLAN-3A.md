@@ -130,7 +130,7 @@ rozpoznania ani leczenia.**
 
 **Jak kobiety opisują współpracę ze mną.**
 
-> Po latach walki z PMOS (PCOS) w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!
+> Po latach walki z PCOS w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!
 
 > Nie wierzyłam, że dieta może być elastyczna i smaczna jednocześnie. Ola udowodniła mi, że to możliwe. Gotuje dla całej rodziny z tych samych przepisów!
 

@@ -10,7 +10,7 @@ Wersja 2.1 · obowiązuje od 10.10.2026
 
 ## § 2. Co dostajesz
 
-1. **Newsletter** to świadczona w sposób ciągły usługa cyfrowa polegająca na cyklicznym wysyłaniu wiadomości e-mail (z częstotliwością wskazaną przy formularzu zapisu) z treściami edukacyjnymi o żywieniu, w szczególności przy PMOS (PCOS), insulinooporności i w perimenopauzie. Wiadomości mogą zawierać także informacje o e-bookach, konsultacjach i promocjach Usługodawcy. Newsletter nie zawiera linków ani kodów afiliacyjnych ani reklam produktów partnerów.
+1. **Newsletter** to świadczona w sposób ciągły usługa cyfrowa polegająca na cyklicznym wysyłaniu wiadomości e-mail (z częstotliwością wskazaną przy formularzu zapisu) z treściami edukacyjnymi o żywieniu, w szczególności przy PCOS, insulinooporności i w perimenopauzie. Wiadomości mogą zawierać także informacje o e-bookach, konsultacjach i promocjach Usługodawcy. Newsletter nie zawiera linków ani kodów afiliacyjnych ani reklam produktów partnerów.
 2. **Materiał bezpłatny** to jednorazowo dostarczana treść cyfrowa, np. e-book, szablon lub checklista, udostępniana po podaniu adresu e-mail i – jeżeli wskazano to bezpośrednio przy formularzu – zapisie do Newslettera.
 3. Newsletter i Materiały bezpłatne są dostarczane bez zapłaty ceny, w zamian za dane osobowe podane przez subskrybenta. Stosuje się do nich przepisy rozdziału 5b ustawy o prawach konsumenta, chyba że dane są przetwarzane wyłącznie w celu wykonania umowy albo obowiązku ustawowego.
 4. Przed zamówieniem Materiału bezpłatnego Usługodawca wskazuje przy formularzu co najmniej jego rodzaj, format, główne cechy i sposób dostarczenia.

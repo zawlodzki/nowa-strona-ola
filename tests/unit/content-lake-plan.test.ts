@@ -165,11 +165,13 @@ describe("content lake plan", () => {
       expect(article.placeholderBody).toBe(true);
     }
     for (const seed of BLOG_ARTICLE_SEED) {
-      const english = byId(`article-blog-${seed.key}-en`);
-      expect(english.title).toBe(seed.en.title);
-      const seo = english.seo as { title: string };
-      expect(seo.title.length).toBeLessThanOrEqual(60);
-      expect(seed.en.title.startsWith(seo.title)).toBe(true);
+      for (const locale of ["pl", "en"] as const) {
+        const article = byId(`article-blog-${seed.key}-${locale}`);
+        expect(article.title).toBe(seed[locale].title);
+        const seo = article.seo as { title: string };
+        expect(seo.title).toBe(seed[locale].seoTitle ?? seed[locale].title);
+        expect(seo.title.length).toBeLessThanOrEqual(60);
+      }
     }
   });
 

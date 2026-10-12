@@ -395,7 +395,7 @@ Opinia o dotychczasowej współpracy
 
 Opinia o dotychczasowej współpracy
 
-> Po latach walki z PMOS (PCOS) w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!
+> Po latach walki z PCOS w końcu znalazłam kogoś, kto rozumie moje problemy. Dieta jest dopasowana do mnie, a nie ja do diety!
 
 Opinia o dotychczasowej współpracy
 
