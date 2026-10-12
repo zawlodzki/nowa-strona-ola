@@ -90,6 +90,15 @@ describe("JSON-LD graph", () => {
     ]);
   });
 
+  it("writes a normal space between PMOS and (PCOS) in JSON-LD", () => {
+    const json = serializeJsonLd(
+      graphDocument([{ "@type": "Thing", name: "PMOS\u00A0(PCOS)" }]),
+    );
+    expect(json).toContain("PMOS (PCOS)");
+    expect(json).not.toContain("\u00A0");
+    expect(JSON.parse(json)["@graph"][0].name).toBe("PMOS (PCOS)");
+  });
+
   it("escapes characters that could close the script element", () => {
     const json = serializeJsonLd(
       graphDocument([{ "@type": "Thing", name: "</script><b>&" }]),

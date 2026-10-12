@@ -8,7 +8,7 @@ import {
 } from "../../src/sanity/pmos-rename";
 
 const STORY = [
-  "Znam PMOS (PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
+  "Znam PMOS\u00A0(PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
   "Najpierw uczyłam się sama i to w odżywianiu znalazłam wiele odpowiedzi, których szukałam. Tę wiedzę uporządkowałam i poszerzyłam na studiach dietetycznych na Śląskim Uniwersytecie Medycznym. Dziś pracuję z kobietami, które mierzą się z podobnymi trudnościami jak ja.",
   "Dlatego tak ważne jest dla mnie, żebyś mogła spokojnie opowiedzieć o swojej sytuacji i zadać pytania, z którymi przychodzisz.",
   "Jeśli gubisz się w sprzecznych poradach o diecie, badaniach i suplementach, możemy zacząć od ich uporządkowania. Przyjrzeć się temu, co już robisz, i ustalić, czemu warto poświęcić uwagę w pierwszej kolejności.",
@@ -30,7 +30,7 @@ function page(body: string[], caption: string): SanityDocument {
         _key: "about-hero",
         _type: "heroSection",
         title: "Jestem Ola.\nZnam PMOS\nod środka.",
-        lead: "Pomagam kobietom z PMOS (PCOS) i insulinoopornością.",
+        lead: "Pomagam kobietom z PMOS\u00A0(PCOS) i insulinoopornością.",
       },
       {
         _key: "about-story",
@@ -63,8 +63,12 @@ describe("rewriteCopy", () => {
   it("wraps the first PCOS in a sentence and shortens the next one", () => {
     expect(rewriteCopy("PCOS i PCOS.")).toBe("PMOS\u00A0(PCOS) i PMOS.");
     expect(rewriteCopy("PMOS (PCOS) i PCOS.")).toBe("PMOS\u00A0(PCOS) i PMOS.");
-    expect(rewriteCopy("PMOS\u00A0(PCOS) i PCOS.")).toBe("PMOS\u00A0(PCOS) i PMOS.");
-    expect(rewriteCopy("PCOS. PCOS.")).toBe("PMOS\u00A0(PCOS). PMOS\u00A0(PCOS).");
+    expect(rewriteCopy("PMOS\u00A0(PCOS) i PCOS.")).toBe(
+      "PMOS\u00A0(PCOS) i PMOS.",
+    );
+    expect(rewriteCopy("PCOS. PCOS.")).toBe(
+      "PMOS\u00A0(PCOS). PMOS\u00A0(PCOS).",
+    );
   });
 
   it("renames every faculty inflection and leaves a URL alone", () => {
@@ -79,7 +83,7 @@ describe("rewriteCopy", () => {
       "Faculty of Public Health in Bytom",
     );
     expect(rewriteCopy("Czytaj https://example.com/PCOS i PCOS.")).toBe(
-      "Czytaj https://example.com/PCOS i PMOS (PCOS).",
+      "Czytaj https://example.com/PCOS i PMOS\u00A0(PCOS).",
     );
   });
 });
@@ -102,7 +106,7 @@ describe("planPmosRename", () => {
         id: "ebook-pcos",
         path: "title",
         before: "Suplementy w PCOS.",
-        after: "Suplementy w PMOS (PCOS).",
+        after: "Suplementy w PMOS\u00A0(PCOS).",
       },
     ]);
     expect(plan.mutations).toEqual([
@@ -110,7 +114,7 @@ describe("planPmosRename", () => {
         patch: {
           id: "ebook-pcos",
           ifRevisionID: "rev-ebook",
-          set: { title: "Suplementy w PMOS (PCOS)." },
+          set: { title: "Suplementy w PMOS\u00A0(PCOS)." },
         },
       },
     ]);
@@ -220,7 +224,7 @@ describe("planPmosRename", () => {
         id: "ebook-pcos",
         path: "title",
         before: "PCOS.",
-        after: "PMOS (PCOS).",
+        after: "PMOS\u00A0(PCOS).",
       },
     ]);
   });
@@ -370,7 +374,7 @@ describe("planPmosRename", () => {
         id: "ebook-szczupla-a-jednak-pcos-pl",
         path: "title",
         before: "Szczupła, a jednak PCOS",
-        after: "Szczupła, a jednak PMOS (PCOS)",
+        after: "Szczupła, a jednak PMOS\u00A0(PCOS)",
       },
     ]);
     expect(
@@ -452,9 +456,9 @@ describe("planPmosRename", () => {
     expect(plan.problems).toEqual([
       "article-blog-09-en: tytuł SEO nie mieści się w 60 znakach (seo.title)",
     ]);
-    expect(plan.changes.some((change) => change.id === "article-blog-09-en")).toBe(
-      false,
-    );
+    expect(
+      plan.changes.some((change) => change.id === "article-blog-09-en"),
+    ).toBe(false);
     expect(docs.find((doc) => doc._id === "article-blog-09-en")?.seo).toEqual({
       title,
     });
@@ -476,7 +480,7 @@ describe("planPmosRename", () => {
             _key: "about-hero",
             _type: "heroSection",
             title: "I am Ola.\nI know PMOS\nfrom the inside.",
-            lead: "I help women with PMOS (PCOS) and insulin resistance.",
+            lead: "I help women with PMOS\u00A0(PCOS) and insulin resistance.",
           },
           {
             _key: "about-story",
@@ -521,7 +525,7 @@ describe("planPmosRename", () => {
       "Aleksandra Olesiewicz with her thesis outside the Faculty of Public Health building in Bytom",
     );
     expect(enBody?.after).toEqual([
-      "I also know PMOS (PCOS) from my own experience. Like many dietitians, I started by looking for answers to my own hormonal problems.",
+      "I also know PMOS\u00A0(PCOS) from my own experience. Like many dietitians, I started by looking for answers to my own hormonal problems.",
       "I studied on my own first, and it was in nutrition that I found many of the answers I was looking for. I organised that knowledge and broadened it while studying dietetics at the Medical University of Silesia. Today I work with women who face difficulties similar to mine.",
       "That is why it matters to me that you can talk through your situation and ask the questions you arrived with.",
       "If conflicting advice about diet, tests and supplements leaves you lost, we can start by putting it in order. Look at what you already do, and decide what deserves attention first.",

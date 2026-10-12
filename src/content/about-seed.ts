@@ -7,17 +7,17 @@ export const aboutCopy = {
     pageTitle: "O mnie — Aleksandra Olesiewicz",
     seoTitle: "O mnie — Aleksandra Olesiewicz | dietetyczka kliniczna",
     seoDescription:
-      "Poznaj Aleksandrę Olesiewicz — dietetyczkę kliniczną, absolwentkę Śląskiego Uniwersytetu Medycznego. PMOS (PCOS), podejście do pracy i materiały edukacyjne.",
+      "Poznaj Aleksandrę Olesiewicz — dietetyczkę kliniczną, absolwentkę Śląskiego Uniwersytetu Medycznego. PMOS\u00A0(PCOS), podejście do pracy i materiały edukacyjne.",
     heroTitle: "Jestem Ola.\nZnam PMOS\nod środka.",
     heroLead:
-      "Jestem dietetyczką kliniczną, absolwentką Śląskiego Uniwersytetu Medycznego. Pomagam kobietom z PMOS (PCOS) i insulinoopornością uporządkować odżywianie i wybrać zmiany, które pasują do ich codzienności.",
+      "Jestem dietetyczką kliniczną, absolwentką Śląskiego Uniwersytetu Medycznego. Pomagam kobietom z PMOS\u00A0(PCOS) i insulinoopornością uporządkować odżywianie i wybrać zmiany, które pasują do ich codzienności.",
     heroPrimary: "Zobacz, jak pracuję",
     heroSecondary: "Poznaj moje materiały",
     portraitAlt: "Portret Aleksandry Olesiewicz",
     portraitCredit: "",
     storyTitle: "Chcę, żebyś czuła się wysłuchana.",
     storyBody: [
-      "Znam PMOS (PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
+      "Znam PMOS\u00A0(PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
       "Najpierw uczyłam się sama i to w odżywianiu znalazłam wiele odpowiedzi, których szukałam. Tę wiedzę uporządkowałam i poszerzyłam na studiach dietetycznych na Śląskim Uniwersytecie Medycznym. Dziś pracuję z kobietami, które mierzą się z podobnymi trudnościami jak ja.",
       "Dlatego tak ważne jest dla mnie, żebyś mogła spokojnie opowiedzieć o swojej sytuacji i zadać pytania, z którymi przychodzisz.",
       "Jeśli gubisz się w sprzecznych poradach o diecie, badaniach i suplementach, możemy zacząć od ich uporządkowania. Przyjrzeć się temu, co już robisz, i ustalić, czemu warto poświęcić uwagę w pierwszej kolejności.",
@@ -59,15 +59,15 @@ export const aboutCopy = {
     testimonialsTitle: "Jak kobiety opisują współpracę ze mną.",
     materialsTitle: "Poznaj mnie także przez to, co tworzę.",
     materialsLead:
-      "Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu. Przygotowuję też materiały o perimenopauzie. Wybierz temat, który jest Ci teraz bliski.",
-    materialsEbooksTitle: "E-booki o PMOS (PCOS) i perimenopauzie.",
+      "Piszę o PMOS\u00A0(PCOS), insulinooporności i codziennym odżywianiu. Przygotowuję też materiały o perimenopauzie. Wybierz temat, który jest Ci teraz bliski.",
+    materialsEbooksTitle: "E-booki o PMOS\u00A0(PCOS) i perimenopauzie.",
     materialsEbooksBody:
       "Badania, suplementy, posiłki i obserwacja samopoczucia.",
     materialsEbooksStatus: "W przygotowaniu",
     materialsEbooksAction: "Poznaj tematy e-booków",
     materialsBlogTitle: "Praktyczna wiedza na blogu.",
     materialsBlogBody:
-      "Treści o PMOS (PCOS) i odżywianiu, do których możesz wrócić we własnym tempie.",
+      "Treści o PMOS\u00A0(PCOS) i odżywianiu, do których możesz wrócić we własnym tempie.",
     materialsBlogAction: "Czytaj blog",
     consultationTitle: "Porozmawiajmy o Twojej sytuacji.",
     consultationBody:
@@ -81,17 +81,17 @@ export const aboutCopy = {
     pageTitle: "About — Aleksandra Olesiewicz",
     seoTitle: "About — Aleksandra Olesiewicz | clinical dietitian",
     seoDescription:
-      "Meet Aleksandra Olesiewicz, a clinical dietitian and graduate of the Medical University of Silesia. PMOS (PCOS), how she works, and educational materials.",
+      "Meet Aleksandra Olesiewicz, a clinical dietitian and graduate of the Medical University of Silesia. PMOS\u00A0(PCOS), how she works, and educational materials.",
     heroTitle: "I am Ola.\nI know PMOS\nfrom the inside.",
     heroLead:
-      "I am a clinical dietitian and a graduate of the Medical University of Silesia. I help women with PMOS (PCOS) and insulin resistance sort their nutrition and choose changes that fit their days.",
+      "I am a clinical dietitian and a graduate of the Medical University of Silesia. I help women with PMOS\u00A0(PCOS) and insulin resistance sort their nutrition and choose changes that fit their days.",
     heroPrimary: "See how I work",
     heroSecondary: "See my materials",
     portraitAlt: "Portrait of Aleksandra Olesiewicz",
     portraitCredit: "",
     storyTitle: "I want you to feel heard.",
     storyBody: [
-      "I also know PMOS (PCOS) from my own experience. Like many dietitians, I started by looking for answers to my own hormonal problems.",
+      "I also know PMOS\u00A0(PCOS) from my own experience. Like many dietitians, I started by looking for answers to my own hormonal problems.",
       "I studied on my own first, and it was in nutrition that I found many of the answers I was looking for. I organised that knowledge and broadened it while studying dietetics at the Medical University of Silesia. Today I work with women who face difficulties similar to mine.",
       "That is why it matters to me that you can talk through your situation and ask the questions you arrived with.",
       "If conflicting advice about diet, tests and supplements leaves you lost, we can start by putting it in order. Look at what you already do, and decide what deserves attention first.",
@@ -132,14 +132,14 @@ export const aboutCopy = {
     testimonialsTitle: "How women describe working with me.",
     materialsTitle: "Get to know me through what I make.",
     materialsLead:
-      "I write about PMOS (PCOS), insulin resistance and everyday nutrition. I am also preparing materials on perimenopause. Pick the topic that is close to you now.",
-    materialsEbooksTitle: "E-books on PMOS (PCOS) and perimenopause.",
+      "I write about PMOS\u00A0(PCOS), insulin resistance and everyday nutrition. I am also preparing materials on perimenopause. Pick the topic that is close to you now.",
+    materialsEbooksTitle: "E-books on PMOS\u00A0(PCOS) and perimenopause.",
     materialsEbooksBody: "Tests, supplements, meals and noticing how you feel.",
     materialsEbooksStatus: "In preparation",
     materialsEbooksAction: "See the e-book topics",
     materialsBlogTitle: "Practical writing on the blog.",
     materialsBlogBody:
-      "Notes on PMOS (PCOS) and nutrition that you can come back to at your own pace.",
+      "Notes on PMOS\u00A0(PCOS) and nutrition that you can come back to at your own pace.",
     materialsBlogAction: "Read the blog",
     consultationTitle: "Let's talk about your situation.",
     consultationBody:

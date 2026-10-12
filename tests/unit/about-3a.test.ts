@@ -25,7 +25,7 @@ describe("about 3a fixtures", () => {
     ]);
     const view = mapAbout(page, "pl");
     expect(view.hero.title).toBe("Jestem Ola.\nZnam PMOS\nod środka.");
-    expect(view.hero.lead).toContain("PMOS (PCOS)");
+    expect(view.hero.lead).toContain("PMOS\u00A0(PCOS)");
     expect(view.experience.value).toBe(9000);
     expect(view.credentials.person.educationInstitution).toBe(
       "Śląski Uniwersytet Medyczny",
@@ -45,7 +45,7 @@ describe("about 3a fixtures", () => {
     expect(view.credentials.person.practiceSince).toBe(2022);
     expect(view.credentials.person.experience).toHaveLength(2);
     expect(view.story.body[0]).toBe(
-      "Znam PMOS (PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
+      "Znam PMOS\u00A0(PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
     );
     expect(view.story.body[1]).toBe(
       "Najpierw uczyłam się sama i to w odżywianiu znalazłam wiele odpowiedzi, których szukałam. Tę wiedzę uporządkowałam i poszerzyłam na studiach dietetycznych na Śląskim Uniwersytecie Medycznym. Dziś pracuję z kobietami, które mierzą się z podobnymi trudnościami jak ja.",
@@ -74,7 +74,7 @@ describe("about 3a fixtures", () => {
     const page = await getPage("en", "about", { environment: {} });
     const view = mapAbout(page, "en");
     expect(view.hero.title).toBe("I am Ola.\nI know PMOS\nfrom the inside.");
-    expect(view.hero.lead).toContain("PMOS (PCOS)");
+    expect(view.hero.lead).toContain("PMOS\u00A0(PCOS)");
     expect(view.hero.lead).not.toMatch(/Jestem Ola/);
     expect(view.credentials.person.educationProgram).toBe("Clinical dietetics");
     expect(view.credentials.person.diploma?.label).toBe(

@@ -140,7 +140,7 @@ function featuredBody(language: Locale) {
       paragraph("punkt-wyjscia", "Zacznij od tego, z czym przychodzisz", "h2"),
       paragraph(
         "punkt-p1",
-        "Zastanów się, co chciałabyś omówić w pierwszej kolejności. Czy trudno Ci zaplanować posiłki w pracy? Czy gubisz się w informacjach o PMOS (PCOS)? A może dotychczasowe zalecenia po prostu nie pasowały do Twojego dnia?",
+        "Zastanów się, co chciałabyś omówić w pierwszej kolejności. Czy trudno Ci zaplanować posiłki w pracy? Czy gubisz się w informacjach o PMOS\u00A0(PCOS)? A może dotychczasowe zalecenia po prostu nie pasowały do Twojego dnia?",
       ),
       richParagraph("punkt-p2", [
         span(
@@ -291,7 +291,7 @@ function featuredBody(language: Locale) {
     paragraph("starting-point", "Start from what you are bringing", "h2"),
     paragraph(
       "start-p1",
-      "Think about what you would like to discuss first. Is it hard to plan meals at work? Are you lost in information about PMOS (PCOS)? Or did earlier recommendations simply not fit your day?",
+      "Think about what you would like to discuss first. Is it hard to plan meals at work? Are you lost in information about PMOS\u00A0(PCOS)? Or did earlier recommendations simply not fit your day?",
     ),
     richParagraph("start-p2", [
       span(

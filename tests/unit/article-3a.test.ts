@@ -36,7 +36,7 @@ describe("Article3a mapper", () => {
       "po-rozmowie",
     ]);
     expect(view.authors[0]?.bio).toContain(
-      "Znam PMOS (PCOS) także z własnego doświadczenia.",
+      "Znam PMOS\u00A0(PCOS) także z własnego doświadczenia.",
     );
     expect(view.ebooks?.items).toHaveLength(3);
     expect(view.ebooks?.items.map((item) => item.slug)).toEqual([
@@ -45,8 +45,12 @@ describe("Article3a mapper", () => {
       "szczupla-a-jednak-pcos",
     ]);
     expect(view.recommendations).toHaveLength(2);
-    expect(view.recommendations?.[0]?.kicker).toBe("PMOS (PCOS) · Odżywianie");
-    expect(view.recommendations?.[1]?.kicker).toBe("PMOS (PCOS) · Konsultacje");
+    expect(view.recommendations?.[0]?.kicker).toBe(
+      "PMOS\u00A0(PCOS) · Odżywianie",
+    );
+    expect(view.recommendations?.[1]?.kicker).toBe(
+      "PMOS\u00A0(PCOS) · Konsultacje",
+    );
     expect(view.faq?.items).toHaveLength(4);
     expect(
       view.newsletter?.fields.some((field) => field.input === "email"),
@@ -94,7 +98,9 @@ describe("Article3a mapper", () => {
     expect(view.toc).toHaveLength(5);
     expect(view.ebooks?.items).toHaveLength(3);
     expect(view.faq?.items).toHaveLength(4);
-    expect(view.recommendations?.[0]?.kicker).toBe("PMOS (PCOS) · Nutrition");
+    expect(view.recommendations?.[0]?.kicker).toBe(
+      "PMOS\u00A0(PCOS) · Nutrition",
+    );
   });
 
   it("keeps the markdown example for the featured article", async () => {

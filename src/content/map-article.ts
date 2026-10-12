@@ -151,7 +151,7 @@ const labels = {
     recommendations: "Sprawdź również",
     sidebar: "Newsletter i polecane artykuły",
     booksTitle: "Przyjrzyj się temu bliżej.",
-    booksLead: "Trzy e-booki o PMOS (PCOS) wybrane do tego artykułu.",
+    booksLead: "Trzy e-booki o PMOS\u00A0(PCOS) wybrane do tego artykułu.",
     faqNote: "Przykładowe FAQ do akceptacji redakcyjnej.",
     keyTakeaways: "W skrócie",
     readingTime: "min czytania",
@@ -182,7 +182,7 @@ const labels = {
     recommendations: "See also",
     sidebar: "Newsletter and recommended articles",
     booksTitle: "Take a closer look.",
-    booksLead: "Three PMOS (PCOS) e-books chosen for this article.",
+    booksLead: "Three PMOS\u00A0(PCOS) e-books chosen for this article.",
     faqNote: "Sample FAQ pending editorial approval.",
     keyTakeaways: "Key takeaways",
     readingTime: "min read",
@@ -210,13 +210,13 @@ export function readingMinutes(words: number): number {
 // Each article document still has one category, so the pair is not joinable from the data.
 const relatedKickers: Record<Locale, Record<string, string>> = {
   pl: {
-    "codzienne-posilki-przy-pcos": "PMOS (PCOS) · Odżywianie",
-    "pytania-o-pcos-przed-wizyta": "PMOS (PCOS) · Konsultacje",
+    "codzienne-posilki-przy-pcos": "PMOS\u00A0(PCOS) · Odżywianie",
+    "pytania-o-pcos-przed-wizyta": "PMOS\u00A0(PCOS) · Konsultacje",
   },
   en: {
-    "everyday-meals-with-pcos": "PMOS (PCOS) · Nutrition",
+    "everyday-meals-with-pcos": "PMOS\u00A0(PCOS) · Nutrition",
     "sorting-pcos-questions-before-an-appointment":
-      "PMOS (PCOS) · Consultations",
+      "PMOS\u00A0(PCOS) · Consultations",
   },
 };
 

@@ -1,3 +1,4 @@
+import { catalogText } from "@/lib/catalog-text";
 import { unpublishableLegalText } from "../../studio/schema-types/shared/legal-publication";
 import {
   withdrawalFormFixture,
@@ -422,19 +423,18 @@ function toDocument(
   if (type === "article") {
     const placeholder = !/^article-blog-01-/.test(document._id);
     document.placeholderBody = placeholder;
-    if (isRecord(document.seo) && typeof document.seo.title === "string") {
-      document.seo.title = seoTitleWithinLimit(document.seo.title);
-    }
-    if (
-      isRecord(document.seo) &&
-      typeof document.seo.description === "string" &&
-      document.seo.description.length > 160
-    ) {
-      document.seo.description = seoTitleWithinLimit(
-        document.seo.description,
-        160,
-      );
-    }
+  }
+  if (isRecord(document.seo) && typeof document.seo.title === "string") {
+    const title = catalogText(document.seo.title);
+    document.seo.title =
+      type === "article" ? seoTitleWithinLimit(title) : title;
+  }
+  if (isRecord(document.seo) && typeof document.seo.description === "string") {
+    const description = catalogText(document.seo.description);
+    document.seo.description =
+      type === "article" && description.length > 160
+        ? seoTitleWithinLimit(description, 160)
+        : description;
   }
   if (typeof document.slug === "string") {
     document.slug = { _type: "slug", current: document.slug };

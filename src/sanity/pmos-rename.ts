@@ -1,4 +1,5 @@
 import { aboutCopy } from "@/content/about-seed";
+import { catalogText } from "@/lib/catalog-text";
 
 import type { SanityDocument } from "./content-lake-plan";
 
@@ -86,7 +87,8 @@ function isFrozenString(value: string): boolean {
 
 type CopySpan = { kind: "text" | "url" | "wrapped"; text: string };
 
-const PROTECTED = /https?:\/\/[^\s)]+|PMOS \(PCOS\)/g;
+const PMOS_LABEL = "PMOS\u00A0(PCOS)";
+const PROTECTED = /https?:\/\/[^\s)]+|PMOS[ \u00A0]\(PCOS\)/g;
 
 function spansOf(text: string): CopySpan[] {
   const spans: CopySpan[] = [];
@@ -113,12 +115,12 @@ function rewriteSentence(text: string): string {
       if (span.kind === "url") return span.text;
       if (span.kind === "wrapped") {
         seen = true;
-        return span.text;
+        return PMOS_LABEL;
       }
       return span.text.replace(/\bPCOS\b/g, () => {
         if (seen) return "PMOS";
         seen = true;
-        return "PMOS (PCOS)";
+        return PMOS_LABEL;
       });
     })
     .join("");
@@ -159,16 +161,23 @@ function isSeoTitlePath(path: string): boolean {
   return /(?:^|\.)(?:seo\.title|defaultSeo\.title|seoTitle)$/.test(path);
 }
 
+function isCatalogPath(path: string): boolean {
+  return /(?:^|\.)(?:seo\.description|defaultSeo\.description|seoDescription)$/.test(
+    path,
+  );
+}
+
 function isCitationField(path: string, key: string): boolean {
   if (key !== "title" && key !== "scope") return false;
   return /(?:^|\.)sources(?:\[[^\]]*\])?$/.test(path);
 }
 
 function fitSeoTitle(id: string, value: string): string | null {
+  const plain = catalogText(value);
   const override = SEO_TITLE_OVERRIDES[publishedId(id)];
   if (override) return override.length <= SEO_TITLE_LIMIT ? override : null;
-  if (value.length <= SEO_TITLE_LIMIT) return value;
-  const collapsed = value.replace(/PMOS[ \u00A0]\(PCOS\)/g, "PMOS");
+  if (plain.length <= SEO_TITLE_LIMIT) return plain;
+  const collapsed = plain.replaceAll("PMOS (PCOS)", "PMOS");
   if (collapsed.length <= SEO_TITLE_LIMIT) return collapsed;
   return null;
 }
@@ -190,6 +199,8 @@ function walk(
         return;
       }
       after = fitted;
+    } else if (isCatalogPath(path)) {
+      after = catalogText(after);
     }
     if (after !== value) into.push({ path, before: value, after });
     return;

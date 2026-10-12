@@ -15,12 +15,12 @@ export const siteIdentity = {
     en: "Clinical dietitian",
   } satisfies Record<Locale, string>,
   description: {
-    pl: "Dietetyczka kliniczna, absolwentka Śląskiego Uniwersytetu Medycznego. Pomaga kobietom z PMOS (PCOS) i insulinoopornością uporządkować odżywianie.",
-    en: "Clinical dietitian, graduate of the Medical University of Silesia. Helps women with PMOS (PCOS) and insulin resistance organise their eating.",
+    pl: "Dietetyczka kliniczna, absolwentka Śląskiego Uniwersytetu Medycznego. Pomaga kobietom z PMOS\u00A0(PCOS) i insulinoopornością uporządkować odżywianie.",
+    en: "Clinical dietitian, graduate of the Medical University of Silesia. Helps women with PMOS\u00A0(PCOS) and insulin resistance organise their eating.",
   } satisfies Record<Locale, string>,
   knowsAbout: {
-    pl: ["PMOS (PCOS)", "Insulinooporność", "Dietetyka kliniczna"],
-    en: ["PMOS (PCOS)", "Insulin resistance", "Clinical nutrition"],
+    pl: ["PMOS\u00A0(PCOS)", "Insulinooporność", "Dietetyka kliniczna"],
+    en: ["PMOS\u00A0(PCOS)", "Insulin resistance", "Clinical nutrition"],
   } satisfies Record<Locale, string[]>,
   alumniOf: {
     name: "Śląski Uniwersytet Medyczny w Katowicach",

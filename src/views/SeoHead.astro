@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "@ola/shared";
 
+import { catalogText } from "@/lib/catalog-text";
 import {
   graphDocument,
   serializeJsonLd,
@@ -22,6 +23,8 @@ export interface Props {
 }
 
 const { lang, title, description, seo } = Astro.props;
+const metaTitle = catalogText(title);
+const metaDescription = description ? catalogText(description) : undefined;
 const canonical = absoluteUrl(seo.path);
 const site = seo.site ?? siteSeoData(null, lang);
 const [editorImage, pageImage, portrait, defaultImage] = await Promise.all([
@@ -49,11 +52,12 @@ const card =
         height: OG_HEIGHT,
       };
 const image = editorImage ?? card ?? pageImage ?? defaultImage;
-const imageAlt =
+const imageAlt = catalogText(
   (editorImage && seo.shareImage?.alt) ||
-  (card && !editorImage ? title : undefined) ||
-  (pageImage && seo.image?.alt) ||
-  site.person.name;
+    (card && !editorImage ? metaTitle : undefined) ||
+    (pageImage && seo.image?.alt) ||
+    site.person.name,
+);
 const ctx: GraphContext = {
   lang,
   path: seo.path,
@@ -85,8 +89,10 @@ const markdownHref =
 <meta property="og:site_name" content={SITE_NAME} />
 <meta property="og:locale" content={ogLocale[lang]} />
 <meta property="og:url" content={canonical} />
-<meta property="og:title" content={title} />
-{description && <meta property="og:description" content={description} />}
+<meta property="og:title" content={metaTitle} />
+{metaDescription && (
+  <meta property="og:description" content={metaDescription} />
+)}
 {image && (
   <>
     <meta property="og:image" content={image.url} />

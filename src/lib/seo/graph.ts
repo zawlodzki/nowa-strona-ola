@@ -1,6 +1,7 @@
 import type { Locale } from "@ola/shared";
 
 import { credentialLevelLabel, credentialTitle } from "@/content/credentials";
+import { catalogText } from "@/lib/catalog-text";
 import { aboutPath, homePath } from "@/lib/paths";
 import type { SiteSeoData } from "@/lib/seo/site-data";
 import {
@@ -299,7 +300,7 @@ function stripUndefined(value: unknown): unknown {
 
 /** JSON for a `<script>` element: escapes characters that could end it. */
 export function serializeJsonLd(document: JsonLdDocument): string {
-  return JSON.stringify(document)
+  return catalogText(JSON.stringify(document))
     .replace(/</g, "\\u003c")
     .replace(/>/g, "\\u003e")
     .replace(/&/g, "\\u0026")

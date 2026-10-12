@@ -105,7 +105,7 @@ describe("consultation serializers", () => {
     const page = await getPage("pl", "konsultacje", { environment: {} });
     const markdown = serializePage(page, "pl");
     expect(markdown).toContain("450 zł / 60 minut");
-    expect(markdown).toContain("- Co jeść przy PMOS (PCOS)?");
+    expect(markdown).toContain("- Co jeść przy PMOS\u00A0(PCOS)?");
     expect(markdown).toContain("Co jest ważne teraz?");
     expect(markdown).toContain("Czy to jest pojedyncze spotkanie?");
     expect(markdown).toContain("(https://cal.com/dietetyk/konsultacja)");
