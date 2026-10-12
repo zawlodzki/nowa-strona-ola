@@ -4,7 +4,9 @@
   "branch": "codex/gtm-meta",
   "parentBranch": "codex/gtm-rollout",
   "parentPr": 86,
-  "parentCommit": "a64c8a2",
+  "initialParentCommit": "a64c8a2",
+  "parentCommit": "5aa44e0",
+  "mainCommit": "bc61a7e",
   "pullRequest": 88,
   "commit": "9bc4c35",
   "verify": {
