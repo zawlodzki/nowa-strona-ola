@@ -101,7 +101,8 @@ odrzucenie aktywacji bez sekretu oraz prywatne nagłówki i osadzanie.
 Nie zapisuje danych ani nie wysyła formularzy. Integracja Visual Editing
 jest ładowana tylko przez aplikację `preview/`. Workflow
 `.github/workflows/deploy-preview.yml` aktualizuje produkcyjny podgląd
-po udanym Quality dla bieżącego `main`; nie uruchomiono go w tej sesji.
+po udanym Quality dla bieżącego `main`. `CLOUDFLARE_ENV` zostaw tylko
+przy buildzie podglądu.
 
 SEO (plan: [SEO-GEO-AEO-PLAN.md](docs/SEO-GEO-AEO-PLAN.md)): każdy build jest
 `noindex`, dopóki nie ustawi się `SITE_INDEXING=production`. Zmienną ustawia

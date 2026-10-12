@@ -1,10 +1,32 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Deploy preview, podwójna nazwa Workera, 12.10.2026
+
+- Run [38250764226](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38250764226)
+  padł dwa razy na `wrangler deploy` (próba 1 o 14:44, próba 2 o 14:46 czasu
+  warszawskiego). `npm ci` i build przeszły. Wrangler 4.148.0.
+- Obie próby dostały HTML 504 z brzegu Cloudflare i komunikat
+  `Received a malformed response from the API`. Próba 1:
+  `GET .../workers/scripts/ola-website-preview-production-production/secrets`.
+  Próba 2:
+  `POST .../workers/scripts/ola-website-preview-production-production/assets-upload-session`.
+  Ray ID próby 2: `a4963479680268e6-LAX`. Moduły miały 1723.13 KiB. Sekretów
+  konta nie brakowało. To nie jest odmowa uprawnień tokenu.
+- Job ustawiał `CLOUDFLARE_ENV=production` także przy deployu. Build już
+  spłaszcza nazwę do `ola-website-preview-production`. Wrangler czyta zmienną
+  jak `--env` i dokleja drugi sufiks, bo wygenerowany plik nie ma sekcji
+  `env.production`. Lokalny odczyt na atrapie API, bez tokenu Cloudflare,
+  potwierdził obie nazwy. Równoległy Deploy Studio na właściwą nazwę
+  `ola-website-studio-production` zakończył się sukcesem.
+- Poprawka zostawia `CLOUDFLARE_ENV` tylko na kroku buildu. Żywego
+  `wrangler deploy` na konto Cloudflare nie powtarzano. Następny krok to
+  scalenie poprawki i odbiór kolejnego Deploy preview z `main`.
 
 ### Naprawa Presentation Sanity, 12.10.2026
 

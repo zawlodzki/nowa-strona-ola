@@ -26,7 +26,6 @@ jobs:
       name: production
       url: https://preview.aleksandraolesiewicz.com
     env:
-      CLOUDFLARE_ENV: production
       WRANGLER_SEND_METRICS: "false"
     steps:
       - uses: actions/checkout@v4
@@ -38,6 +37,8 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Build production preview
+        env:
+          CLOUDFLARE_ENV: production
         run: npm run build --workspace @ola/preview
       - name: Skip an outdated Quality run
         id: current
