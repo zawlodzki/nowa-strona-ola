@@ -334,7 +334,12 @@ const bodyHtml = markArticleIntro(html);
                 data-book-topic={item.topic}
               >
                 {badge && <AvailabilityBadge label={badge} />}
-                <a class="cover-link" href={item.href}>
+                <a
+                  class="cover-link"
+                  href={item.href}
+                  tabindex="-1"
+                  aria-hidden="true"
+                >
                   <CoverStage variant={art.variant}>
                     <BookCover
                       title={item.title}
