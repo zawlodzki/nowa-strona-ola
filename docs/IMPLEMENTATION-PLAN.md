@@ -948,7 +948,8 @@ przy 1440/390/320 px bez JS i overflow. Szczegóły i ograniczenia w postępie.
       klucz tylko w indeksowalnym buildzie produkcji, zgłoszenie po deployu.
 - [x] Zachować migawkę sprzed deployu dla usunięć i ponowień danego run_id.
 - [x] Potwierdzić pełne verify, produkcyjny artefakt i brak klucza w błędach.
-- [ ] Wysłać drugi PR z bazą `codex/seo-full-content-exports`.
+- [x] Wysłać [PR #82](https://github.com/zawlodzki/nowa-strona-ola/pull/82)
+      z bazą `codex/seo-full-content-exports` (#81).
 - [ ] Na osobne zlecenie uruchomić produkcyjną indeksację i skonfigurować
       klucz, Search Console, Bing oraz AI Crawl Control.
 

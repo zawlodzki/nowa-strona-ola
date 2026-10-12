@@ -57,7 +57,13 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   kod aplikacji nie zmienił się po pełnym verify. Przegląd niezależnych
   agentów zakończył się poprawą trzech ustaleń, bez pominięcia zgłoszonych
   ryzyk. Nie wykonywano natywnego zoomu, czytnika ani fizycznego urządzenia.
-- Następny krok: push i stacked PR z bazą #81. Zewnętrzne SEO, konfiguracja
+- Wysłano podpisany commit `f6d427e` i otwarto
+  [PR #82](https://github.com/zawlodzki/nowa-strona-ola/pull/82)
+  z bazą `codex/seo-full-content-exports`, dokładny tip #81 `53d9928`.
+  Oba PR są otwarte do przeglądu. Nie scalano zmian. Wyniku GitHub Quality
+  nie odbierano; lokalne verify nie zastępuje CI.
+- Następny krok: odbiór stosu #81 → #82. Najpierw scalić #81, potem
+  przestawić bazę #82 na main i odebrać końcowe CI. Zewnętrzne SEO, konfiguracja
   gotowej produkcji, rzeczywisty IndexNow i pomiar nadal pozostają otwarte.
   Nie zmieniano dopisku demonstracyjnego w CMS bloga.
 

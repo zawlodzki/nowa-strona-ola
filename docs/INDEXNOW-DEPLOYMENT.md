@@ -1,6 +1,8 @@
 # Zgłoszenia IndexNow po wdrożeniu
 
-Status 12.10.2026: lokalny odbiór PASS. Konfiguracji GitHub
+Status 12.10.2026: lokalny odbiór PASS,
+[PR #82](https://github.com/zawlodzki/nowa-strona-ola/pull/82) na bazie
+[PR #81](https://github.com/zawlodzki/nowa-strona-ola/pull/81). Konfiguracji GitHub
 ani indeksacji produkcji nie włączono. Dokument rozwija SEO‑6 z
 [planu SEO](SEO-GEO-AEO-PLAN.md). Wyniki są w [postępie](PROGRESS.md).
 

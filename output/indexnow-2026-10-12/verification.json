@@ -23,5 +23,9 @@
     "live artifact restore and retention in Actions",
     "actual notification after approved production launch",
     "Search Console, Bing, AI Crawl Control"
-  ]
+  ],
+  "pullRequest": "https://github.com/zawlodzki/nowa-strona-ola/pull/82",
+  "parentPullRequest": "https://github.com/zawlodzki/nowa-strona-ola/pull/81",
+  "codeCommit": "f6d427e808365f016cb31aefc4f00bfab5297e1d",
+  "gitHubIndexingConfigPresent": false
 }
