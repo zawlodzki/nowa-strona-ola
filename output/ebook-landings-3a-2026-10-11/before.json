@@ -1,0 +1,1547 @@
+[
+  {
+    "_createdAt": "2026-10-08T14:02:40Z",
+    "_id": "ebook-badania-ktore-maja-sens-pl",
+    "_rev": "BgWLAXsKsMgTSzpAsHKkan",
+    "_system": {
+      "base": {
+        "id": "ebook-badania-ktore-maja-sens-pl",
+        "rev": "D9pjXnjSkonW3tYBZoUrpX"
+      }
+    },
+    "_type": "ebook",
+    "_updatedAt": "2026-10-11T10:55:50Z",
+    "author": {
+      "_ref": "author-ola-pl",
+      "_type": "reference"
+    },
+    "availability": "planned",
+    "cardDescription": "Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.",
+    "chapters": [
+      {
+        "_key": "chapter-1",
+        "_type": "ebookChapter",
+        "summary": "Zapisz, co bierzesz i po co. Oddziel własny cel od obietnicy na opakowaniu.",
+        "title": "Zacznij od swojej półki"
+      },
+      {
+        "_key": "chapter-2",
+        "_type": "ebookChapter",
+        "summary": "Uporządkuj posiadane wyniki i pytania. Dowiedz się, czego nie da się ocenić z reklamy.",
+        "title": "Zanim kupisz kolejny preparat"
+      },
+      {
+        "_key": "chapter-3",
+        "_type": "ebookChapter",
+        "summary": "Zrozum, co mówią dowody, gdzie są ich ograniczenia i co warto omówić ze specjalistą.",
+        "title": "Inozytol bez wielkich obietnic"
+      },
+      {
+        "_key": "chapter-4",
+        "_type": "ebookChapter",
+        "summary": "Porównaj popularne składniki: zastosowanie, ograniczenia i sytuacje wymagające konsultacji.",
+        "title": "Witamina D, omega-3 i reszta półki"
+      },
+      {
+        "_key": "chapter-5",
+        "_type": "ebookChapter",
+        "summary": "Przyjrzyj się składowi, porcji i kosztowi. Rozpoznaj hasła, które niewiele mówią o produkcie.",
+        "title": "Przeczytaj etykietę, zanim zapłacisz"
+      },
+      {
+        "_key": "chapter-6",
+        "_type": "ebookChapter",
+        "summary": "Przygotuj listę leków i suplementów do rozmowy z lekarzem lub farmaceutą.",
+        "title": "Bezpieczeństwo i interakcje"
+      },
+      {
+        "_key": "chapter-7",
+        "_type": "ebookChapter",
+        "summary": "Zapisz ustalenia ze specjalistą, obserwacje i datę ponownej oceny. Nie zmieniaj wszystkiego naraz.",
+        "title": "Zaplanuj przegląd za 12 tygodni"
+      }
+    ],
+    "cover": {
+      "_type": "mediaObject",
+      "alt": "Kontrolowana okładka: Badania, które mają sens",
+      "rasterKey": "cover-badania-ktore-maja-sens",
+      "tone": "diagram"
+    },
+    "coverTone": "cherry",
+    "currency": "PLN",
+    "format": "pdf",
+    "includedMaterials": [
+      {
+        "_key": "material-1",
+        "_type": "ebookMaterial",
+        "description": "Preparat, cel, pytania.",
+        "title": "Karta audytu suplementów"
+      },
+      {
+        "_key": "material-2",
+        "_type": "ebookMaterial",
+        "description": "Skład, porcja, hasła.",
+        "title": "Checklista czytania etykiety"
+      },
+      {
+        "_key": "material-3",
+        "_type": "ebookMaterial",
+        "description": "Policz, zanim dokładasz.",
+        "title": "Arkusz miesięcznych kosztów"
+      },
+      {
+        "_key": "material-4",
+        "_type": "ebookMaterial",
+        "description": "Lista na wizytę.",
+        "title": "Pytania do lekarza i farmaceuty"
+      },
+      {
+        "_key": "material-5",
+        "_type": "ebookMaterial",
+        "description": "Termin przeglądu.",
+        "title": "Plan obserwacji na 12 tygodni"
+      }
+    ],
+    "landing": {
+      "_type": "ebookLanding",
+      "audienceItems": [
+        {
+          "_key": "audience-1",
+          "body": "Bierzesz kilka preparatów, ale trudno Ci powiedzieć, jaki cel ma każdy z nich.",
+          "title": "Masz PCOS i pełną półkę."
+        },
+        {
+          "_key": "audience-2",
+          "body": "Zanim zamówisz następne, chcesz wrócić do pytania: dlaczego właśnie ten suplement?",
+          "title": "Kończy Ci się opakowanie."
+        },
+        {
+          "_key": "audience-3",
+          "body": "Chcesz odróżnić reklamowe obietnice od informacji, które pomagają w decyzji.",
+          "title": "Każdy poleca coś innego."
+        },
+        {
+          "_key": "audience-4",
+          "body": "Potrzebujesz uporządkowanej listy preparatów i konkretnych pytań do specjalisty.",
+          "title": "Chcesz przygotować się do wizyty."
+        }
+      ],
+      "audienceLead": "Nie zaczynasz od zera. Już szukasz rozwiązań. Teraz możesz poukładać je w całość.",
+      "audienceTitle": "Brzmi znajomo?\nJesteś w dobrym miejscu.",
+      "authorParagraphs": [
+        "W mojej pracy z kobietami z PCOS liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
+        "Suplementy też potrzebują kontekstu. W wytycznych PCOS z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania."
+      ],
+      "authorTitle": "Dobra decyzja\nzaczyna się od „po co?”.",
+      "comparisonItems": [
+        {
+          "_key": "compare-1",
+          "after": "Wiesz, o co zapytać.",
+          "before": "„Biorę, bo polecano.”"
+        },
+        {
+          "_key": "compare-2",
+          "after": "Masz policzony koszt.",
+          "before": "„Nie wiem, ile wydaję.”"
+        },
+        {
+          "_key": "compare-3",
+          "after": "Masz plan rozmowy i przeglądu.",
+          "before": "„Może dołożę coś jeszcze?”"
+        }
+      ],
+      "contentsLead": "Od listy preparatów do karty przeglądu. Czytasz, zapisujesz i przygotowujesz kolejny krok.",
+      "contentsTitle": "Każdy rozdział\nkończy się konkretem.",
+      "educationNote": "E-book ma charakter edukacyjny. Nie zastępuje diagnostyki ani indywidualnych zaleceń.",
+      "facts": [
+        {
+          "_key": "fact-1",
+          "detail": "od pytań do planu działania",
+          "title": "7 rozdziałów"
+        },
+        {
+          "_key": "fact-2",
+          "detail": "preparat, cel, koszt, pytania",
+          "title": "Twój audyt półki"
+        },
+        {
+          "_key": "fact-3",
+          "detail": "plan obserwacji i przeglądu",
+          "title": "12 tygodni"
+        }
+      ],
+      "faq": {
+        "_type": "faqSection",
+        "items": [
+          {
+            "_key": "faq-1",
+            "answer": "Dostaniesz sposób porządkowania informacji i pytań o własne preparaty. Nie jest to indywidualna rozpiska leczenia ani dawkowania. Cel, zasadność stosowania i zmiany suplementacji omów z lekarzem lub farmaceutą.",
+            "question": "Czy dostanę gotową listę suplementów do brania?"
+          },
+          {
+            "_key": "faq-2",
+            "answer": "Tak, jeśli chcesz zrozumieć temat przed zakupami. Możesz zacząć od karty „co wiem / czego nie wiem” i listy pytań na wizytę. Nie musisz mieć pełnej szafki suplementów.",
+            "question": "Czy ten ebook jest dla mnie, jeśli dopiero mam diagnozę?"
+          },
+          {
+            "_key": "faq-3",
+            "answer": "Możesz użyć go do przygotowania rozmowy o bezpieczeństwie. Nie odstawiaj leków ani zaleconych preparatów na podstawie ebooka. Przed zmianą suplementacji skonsultuj możliwe interakcje z lekarzem lub farmaceutą.",
+            "question": "Czy mogę korzystać z niego, gdy biorę leki?"
+          },
+          {
+            "_key": "faq-4",
+            "answer": "Te sytuacje wymagają indywidualnych zaleceń. Ebook nie zawiera planu suplementacji na ciążę ani karmienie. Przygotuj listę preparatów i omów ją z osobą prowadzącą Twoją opiekę.",
+            "question": "A jeśli planuję ciążę, jestem w ciąży lub karmię?"
+          },
+          {
+            "_key": "faq-5",
+            "answer": "Planowany pakiet to ebook PDF i karty pracy do wydruku lub uzupełnienia cyfrowo. Przeczytasz go na komputerze, tablecie i telefonie. Finalne pliki oraz sposób dostarczenia zostaną potwierdzone przed rozpoczęciem sprzedaży.",
+            "question": "W jakiej formie otrzymam materiał?"
+          },
+          {
+            "_key": "faq-6",
+            "answer": "To zapowiedź strony sprzedażowej. Cena wynosi 97 zł brutto, ale płatność nie jest aktywna. Dostępność, termin dostarczenia i warunki zakupu zostaną podane przed uruchomieniem sprzedaży.",
+            "question": "Czy mogę już kupić ebook?"
+          }
+        ],
+        "lead": "Sprawdź, czy to materiał na Twój obecny etap.",
+        "title": "Jeszcze\nkilka odpowiedzi."
+      },
+      "heroLead": "Zanim kupisz kolejne opakowanie, sprawdź, po co je bierzesz. Uporządkuj swoją półkę i pytania do specjalisty.",
+      "heroTitle": "Zrób porządek\nz suplementami.",
+      "ingredients": [
+        "Inozytol",
+        "Witamina D",
+        "Omega-3",
+        "Magnez",
+        "NAC",
+        "Berberyna",
+        "i inne składniki"
+      ],
+      "offerLead": "Zacznij od tego, co już masz. Sprawdź pytania, policz koszty i przygotuj się do świadomej rozmowy o suplementacji.",
+      "offerNote": "Zapowiedź oferty. Zakres pakietu i dostępność do potwierdzenia przed sprzedażą.",
+      "offerTitle": "Zanim kupisz\nkolejne opakowanie,\nzrób miejsce na wiedzę.",
+      "outcomesLead": "Rezultat pracy z ebookiem zobaczysz w swoich notatkach: cel, pytania, koszt i termin przeglądu dla każdego preparatu.",
+      "outcomesNote": "E-book pomaga uporządkować decyzje. Nie obiecuje regulacji hormonów, utraty kilogramów ani powrotu miesiączki.",
+      "outcomesTitle": "Mniej zgadywania.\nWięcej jasności.",
+      "primaryLabel": "Chcę uporządkować suplementy",
+      "problemParagraphs": [
+        "Inozytol z polecenia. Witamina D z reklamy. Jeszcze coś „na hormony”. A na półce coraz więcej opakowań i coraz mniej jasności.",
+        "Trudno podjąć dobrą decyzję, kiedy każda rada brzmi inaczej. Potrzebujesz kryteriów, które pomogą Ci przyjrzeć się temu, co już masz."
+      ],
+      "problemQuestions": [
+        "Po co to biorę?",
+        "Czy pasuje do mojej sytuacji?",
+        "Kiedy warto do tego wrócić?"
+      ],
+      "problemTitle": "Kolejna kapsułka.\nTo samo pytanie:\n„Czy to ma sens?”",
+      "purchaseLabel": "Chcę ebook",
+      "sampleCaption": "Podgląd projektowanej karty. Finalny skład pakietu wymaga przygotowania materiałów.",
+      "sampleFields": [
+        {
+          "_key": "sample-field-1",
+          "label": "Nazwa preparatu"
+        },
+        {
+          "_key": "sample-field-2",
+          "label": "Dlaczego go stosuję?"
+        },
+        {
+          "_key": "sample-field-3",
+          "label": "Co chcę omówić ze specjalistą?"
+        },
+        {
+          "_key": "sample-field-4",
+          "label": "Miesięczny koszt"
+        }
+      ],
+      "sampleLead": "Wyjmij preparaty z szafki. Zapisz, po co je bierzesz i czego jeszcze nie wiesz. Z taką listą łatwiej zacząć konkretną rozmowę.",
+      "sampleTitle": "Jedna karta.\nDobry początek.",
+      "secondaryLabel": "Zajrzyj do środka",
+      "testimonials": [
+        {
+          "_key": "testimonial-pl-4",
+          "_ref": "testimonial-pl-4",
+          "_type": "reference"
+        },
+        {
+          "_key": "testimonial-pl-6",
+          "_ref": "testimonial-pl-6",
+          "_type": "reference"
+        }
+      ],
+      "testimonialsContext": "Opinie o dotychczasowej współpracy. Nie są recenzjami tego ebooka ani obietnicą jego efektów.",
+      "testimonialsScope": "cooperation",
+      "testimonialsTitle": "Jak pracuje się z Olą?",
+      "variant": "cherry3a"
+    },
+    "language": "pl",
+    "priceGross": 97,
+    "slug": {
+      "_type": "slug",
+      "current": "badania-ktore-maja-sens"
+    },
+    "sortOrder": 2,
+    "sources": [
+      {
+        "_key": "source-pcos-2023",
+        "_type": "ebookSource",
+        "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/",
+        "scope": "Wytyczne PCOS 2023, sekcja 4.7",
+        "title": "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7"
+      }
+    ],
+    "subtitle": "Mniej zgadywania",
+    "title": "Badania, które mają sens",
+    "topic": "pcos",
+    "translation": {
+      "_ref": "ebook-badania-ktore-maja-sens-en",
+      "_type": "reference"
+    },
+    "waitlist": {
+      "buttonLabel": "Zapisz się na listę oczekujących",
+      "form": {
+        "_ref": "waitlist-form-pl",
+        "_type": "reference"
+      },
+      "lead": "E-book jest w przygotowaniu. Zostaw adres e-mail, a napiszemy, gdy ruszy sprzedaż.",
+      "title": "Daj znać, że czekasz"
+    }
+  },
+  {
+    "_createdAt": "2026-10-08T14:02:40Z",
+    "_id": "ebook-czy-to-juz-pl",
+    "_rev": "BgWLAXsKsMgTSzpAsHKkan",
+    "_system": {
+      "base": {
+        "id": "ebook-czy-to-juz-pl",
+        "rev": "D9pjXnjSkonW3tYBZoUrpX"
+      }
+    },
+    "_type": "ebook",
+    "_updatedAt": "2026-10-11T10:55:50Z",
+    "author": {
+      "_ref": "author-ola-pl",
+      "_type": "reference"
+    },
+    "availability": "planned",
+    "cardDescription": "Dziennik cyklu i samopoczucia, który pomoże Ci przygotować się do rozmowy z lekarzem.",
+    "chapters": [
+      {
+        "_key": "chapter-1",
+        "_type": "ebookChapter",
+        "summary": "Zapisz, co bierzesz i po co. Oddziel własny cel od obietnicy na opakowaniu.",
+        "title": "Zacznij od swojej półki"
+      },
+      {
+        "_key": "chapter-2",
+        "_type": "ebookChapter",
+        "summary": "Uporządkuj posiadane wyniki i pytania. Dowiedz się, czego nie da się ocenić z reklamy.",
+        "title": "Zanim kupisz kolejny preparat"
+      },
+      {
+        "_key": "chapter-3",
+        "_type": "ebookChapter",
+        "summary": "Zrozum, co mówią dowody, gdzie są ich ograniczenia i co warto omówić ze specjalistą.",
+        "title": "Inozytol bez wielkich obietnic"
+      },
+      {
+        "_key": "chapter-4",
+        "_type": "ebookChapter",
+        "summary": "Porównaj popularne składniki: zastosowanie, ograniczenia i sytuacje wymagające konsultacji.",
+        "title": "Witamina D, omega-3 i reszta półki"
+      },
+      {
+        "_key": "chapter-5",
+        "_type": "ebookChapter",
+        "summary": "Przyjrzyj się składowi, porcji i kosztowi. Rozpoznaj hasła, które niewiele mówią o produkcie.",
+        "title": "Przeczytaj etykietę, zanim zapłacisz"
+      },
+      {
+        "_key": "chapter-6",
+        "_type": "ebookChapter",
+        "summary": "Przygotuj listę leków i suplementów do rozmowy z lekarzem lub farmaceutą.",
+        "title": "Bezpieczeństwo i interakcje"
+      },
+      {
+        "_key": "chapter-7",
+        "_type": "ebookChapter",
+        "summary": "Zapisz ustalenia ze specjalistą, obserwacje i datę ponownej oceny. Nie zmieniaj wszystkiego naraz.",
+        "title": "Zaplanuj przegląd za 12 tygodni"
+      }
+    ],
+    "cover": {
+      "_type": "mediaObject",
+      "alt": "Kontrolowana okładka: Czy to już?",
+      "rasterKey": "cover-czy-to-juz",
+      "tone": "diagram"
+    },
+    "coverTone": "cherry",
+    "currency": "PLN",
+    "format": "pdf",
+    "includedMaterials": [
+      {
+        "_key": "material-1",
+        "_type": "ebookMaterial",
+        "description": "Preparat, cel, pytania.",
+        "title": "Karta audytu suplementów"
+      },
+      {
+        "_key": "material-2",
+        "_type": "ebookMaterial",
+        "description": "Skład, porcja, hasła.",
+        "title": "Checklista czytania etykiety"
+      },
+      {
+        "_key": "material-3",
+        "_type": "ebookMaterial",
+        "description": "Policz, zanim dokładasz.",
+        "title": "Arkusz miesięcznych kosztów"
+      },
+      {
+        "_key": "material-4",
+        "_type": "ebookMaterial",
+        "description": "Lista na wizytę.",
+        "title": "Pytania do lekarza i farmaceuty"
+      },
+      {
+        "_key": "material-5",
+        "_type": "ebookMaterial",
+        "description": "Termin przeglądu.",
+        "title": "Plan obserwacji na 12 tygodni"
+      }
+    ],
+    "landing": {
+      "_type": "ebookLanding",
+      "audienceItems": [
+        {
+          "_key": "audience-1",
+          "body": "Bierzesz kilka preparatów, ale trudno Ci powiedzieć, jaki cel ma każdy z nich.",
+          "title": "Masz PCOS i pełną półkę."
+        },
+        {
+          "_key": "audience-2",
+          "body": "Zanim zamówisz następne, chcesz wrócić do pytania: dlaczego właśnie ten suplement?",
+          "title": "Kończy Ci się opakowanie."
+        },
+        {
+          "_key": "audience-3",
+          "body": "Chcesz odróżnić reklamowe obietnice od informacji, które pomagają w decyzji.",
+          "title": "Każdy poleca coś innego."
+        },
+        {
+          "_key": "audience-4",
+          "body": "Potrzebujesz uporządkowanej listy preparatów i konkretnych pytań do specjalisty.",
+          "title": "Chcesz przygotować się do wizyty."
+        }
+      ],
+      "audienceLead": "Nie zaczynasz od zera. Już szukasz rozwiązań. Teraz możesz poukładać je w całość.",
+      "audienceTitle": "Brzmi znajomo?\nJesteś w dobrym miejscu.",
+      "authorParagraphs": [
+        "W mojej pracy z kobietami z PCOS liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
+        "Suplementy też potrzebują kontekstu. W wytycznych PCOS z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania."
+      ],
+      "authorTitle": "Dobra decyzja\nzaczyna się od „po co?”.",
+      "comparisonItems": [
+        {
+          "_key": "compare-1",
+          "after": "Wiesz, o co zapytać.",
+          "before": "„Biorę, bo polecano.”"
+        },
+        {
+          "_key": "compare-2",
+          "after": "Masz policzony koszt.",
+          "before": "„Nie wiem, ile wydaję.”"
+        },
+        {
+          "_key": "compare-3",
+          "after": "Masz plan rozmowy i przeglądu.",
+          "before": "„Może dołożę coś jeszcze?”"
+        }
+      ],
+      "contentsLead": "Od listy preparatów do karty przeglądu. Czytasz, zapisujesz i przygotowujesz kolejny krok.",
+      "contentsTitle": "Każdy rozdział\nkończy się konkretem.",
+      "educationNote": "E-book ma charakter edukacyjny. Nie zastępuje diagnostyki ani indywidualnych zaleceń.",
+      "facts": [
+        {
+          "_key": "fact-1",
+          "detail": "od pytań do planu działania",
+          "title": "7 rozdziałów"
+        },
+        {
+          "_key": "fact-2",
+          "detail": "preparat, cel, koszt, pytania",
+          "title": "Twój audyt półki"
+        },
+        {
+          "_key": "fact-3",
+          "detail": "plan obserwacji i przeglądu",
+          "title": "12 tygodni"
+        }
+      ],
+      "faq": {
+        "_type": "faqSection",
+        "items": [
+          {
+            "_key": "faq-1",
+            "answer": "Dostaniesz sposób porządkowania informacji i pytań o własne preparaty. Nie jest to indywidualna rozpiska leczenia ani dawkowania. Cel, zasadność stosowania i zmiany suplementacji omów z lekarzem lub farmaceutą.",
+            "question": "Czy dostanę gotową listę suplementów do brania?"
+          },
+          {
+            "_key": "faq-2",
+            "answer": "Tak, jeśli chcesz zrozumieć temat przed zakupami. Możesz zacząć od karty „co wiem / czego nie wiem” i listy pytań na wizytę. Nie musisz mieć pełnej szafki suplementów.",
+            "question": "Czy ten ebook jest dla mnie, jeśli dopiero mam diagnozę?"
+          },
+          {
+            "_key": "faq-3",
+            "answer": "Możesz użyć go do przygotowania rozmowy o bezpieczeństwie. Nie odstawiaj leków ani zaleconych preparatów na podstawie ebooka. Przed zmianą suplementacji skonsultuj możliwe interakcje z lekarzem lub farmaceutą.",
+            "question": "Czy mogę korzystać z niego, gdy biorę leki?"
+          },
+          {
+            "_key": "faq-4",
+            "answer": "Te sytuacje wymagają indywidualnych zaleceń. Ebook nie zawiera planu suplementacji na ciążę ani karmienie. Przygotuj listę preparatów i omów ją z osobą prowadzącą Twoją opiekę.",
+            "question": "A jeśli planuję ciążę, jestem w ciąży lub karmię?"
+          },
+          {
+            "_key": "faq-5",
+            "answer": "Planowany pakiet to ebook PDF i karty pracy do wydruku lub uzupełnienia cyfrowo. Przeczytasz go na komputerze, tablecie i telefonie. Finalne pliki oraz sposób dostarczenia zostaną potwierdzone przed rozpoczęciem sprzedaży.",
+            "question": "W jakiej formie otrzymam materiał?"
+          },
+          {
+            "_key": "faq-6",
+            "answer": "To zapowiedź strony sprzedażowej. Cena wynosi 97 zł brutto, ale płatność nie jest aktywna. Dostępność, termin dostarczenia i warunki zakupu zostaną podane przed uruchomieniem sprzedaży.",
+            "question": "Czy mogę już kupić ebook?"
+          }
+        ],
+        "lead": "Sprawdź, czy to materiał na Twój obecny etap.",
+        "title": "Jeszcze\nkilka odpowiedzi."
+      },
+      "heroLead": "Zanim kupisz kolejne opakowanie, sprawdź, po co je bierzesz. Uporządkuj swoją półkę i pytania do specjalisty.",
+      "heroTitle": "Zrób porządek\nz suplementami.",
+      "ingredients": [
+        "Inozytol",
+        "Witamina D",
+        "Omega-3",
+        "Magnez",
+        "NAC",
+        "Berberyna",
+        "i inne składniki"
+      ],
+      "offerLead": "Zacznij od tego, co już masz. Sprawdź pytania, policz koszty i przygotuj się do świadomej rozmowy o suplementacji.",
+      "offerNote": "Zapowiedź oferty. Zakres pakietu i dostępność do potwierdzenia przed sprzedażą.",
+      "offerTitle": "Zanim kupisz\nkolejne opakowanie,\nzrób miejsce na wiedzę.",
+      "outcomesLead": "Rezultat pracy z ebookiem zobaczysz w swoich notatkach: cel, pytania, koszt i termin przeglądu dla każdego preparatu.",
+      "outcomesNote": "E-book pomaga uporządkować decyzje. Nie obiecuje regulacji hormonów, utraty kilogramów ani powrotu miesiączki.",
+      "outcomesTitle": "Mniej zgadywania.\nWięcej jasności.",
+      "primaryLabel": "Chcę uporządkować suplementy",
+      "problemParagraphs": [
+        "Inozytol z polecenia. Witamina D z reklamy. Jeszcze coś „na hormony”. A na półce coraz więcej opakowań i coraz mniej jasności.",
+        "Trudno podjąć dobrą decyzję, kiedy każda rada brzmi inaczej. Potrzebujesz kryteriów, które pomogą Ci przyjrzeć się temu, co już masz."
+      ],
+      "problemQuestions": [
+        "Po co to biorę?",
+        "Czy pasuje do mojej sytuacji?",
+        "Kiedy warto do tego wrócić?"
+      ],
+      "problemTitle": "Kolejna kapsułka.\nTo samo pytanie:\n„Czy to ma sens?”",
+      "purchaseLabel": "Chcę ebook",
+      "sampleCaption": "Podgląd projektowanej karty. Finalny skład pakietu wymaga przygotowania materiałów.",
+      "sampleFields": [
+        {
+          "_key": "sample-field-1",
+          "label": "Nazwa preparatu"
+        },
+        {
+          "_key": "sample-field-2",
+          "label": "Dlaczego go stosuję?"
+        },
+        {
+          "_key": "sample-field-3",
+          "label": "Co chcę omówić ze specjalistą?"
+        },
+        {
+          "_key": "sample-field-4",
+          "label": "Miesięczny koszt"
+        }
+      ],
+      "sampleLead": "Wyjmij preparaty z szafki. Zapisz, po co je bierzesz i czego jeszcze nie wiesz. Z taką listą łatwiej zacząć konkretną rozmowę.",
+      "sampleTitle": "Jedna karta.\nDobry początek.",
+      "secondaryLabel": "Zajrzyj do środka",
+      "testimonials": [
+        {
+          "_key": "testimonial-pl-4",
+          "_ref": "testimonial-pl-4",
+          "_type": "reference"
+        },
+        {
+          "_key": "testimonial-pl-6",
+          "_ref": "testimonial-pl-6",
+          "_type": "reference"
+        }
+      ],
+      "testimonialsContext": "Opinie o dotychczasowej współpracy. Nie są recenzjami tego ebooka ani obietnicą jego efektów.",
+      "testimonialsScope": "cooperation",
+      "testimonialsTitle": "Jak pracuje się z Olą?",
+      "variant": "cherry3a"
+    },
+    "language": "pl",
+    "priceGross": 97,
+    "slug": {
+      "_type": "slug",
+      "current": "czy-to-juz"
+    },
+    "sortOrder": 5,
+    "sources": [
+      {
+        "_key": "source-pcos-2023",
+        "_type": "ebookSource",
+        "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/",
+        "scope": "Wytyczne PCOS 2023, sekcja 4.7",
+        "title": "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7"
+      }
+    ],
+    "subtitle": "Poznaj swój rytm",
+    "title": "Czy to już?",
+    "topic": "perimenopause",
+    "translation": {
+      "_ref": "ebook-czy-to-juz-en",
+      "_type": "reference"
+    },
+    "waitlist": {
+      "buttonLabel": "Zapisz się na listę oczekujących",
+      "form": {
+        "_ref": "waitlist-form-pl",
+        "_type": "reference"
+      },
+      "lead": "E-book jest w przygotowaniu. Zostaw adres e-mail, a napiszemy, gdy ruszy sprzedaż.",
+      "title": "Daj znać, że czekasz"
+    }
+  },
+  {
+    "_createdAt": "2026-10-08T14:02:40Z",
+    "_id": "ebook-noc-zaczyna-sie-o-osiemnastej-pl",
+    "_rev": "BgWLAXsKsMgTSzpAsHKkan",
+    "_system": {
+      "base": {
+        "id": "ebook-noc-zaczyna-sie-o-osiemnastej-pl",
+        "rev": "D9pjXnjSkonW3tYBZoUrpX"
+      }
+    },
+    "_type": "ebook",
+    "_updatedAt": "2026-10-11T10:55:50Z",
+    "author": {
+      "_ref": "author-ola-pl",
+      "_type": "reference"
+    },
+    "availability": "planned",
+    "cardDescription": "Uporządkuj wieczorne posiłki i nawyki. Sprawdź, co warto obserwować przed rozmową o problemach ze snem.",
+    "chapters": [
+      {
+        "_key": "chapter-1",
+        "_type": "ebookChapter",
+        "summary": "Zapisz, co bierzesz i po co. Oddziel własny cel od obietnicy na opakowaniu.",
+        "title": "Zacznij od swojej półki"
+      },
+      {
+        "_key": "chapter-2",
+        "_type": "ebookChapter",
+        "summary": "Uporządkuj posiadane wyniki i pytania. Dowiedz się, czego nie da się ocenić z reklamy.",
+        "title": "Zanim kupisz kolejny preparat"
+      },
+      {
+        "_key": "chapter-3",
+        "_type": "ebookChapter",
+        "summary": "Zrozum, co mówią dowody, gdzie są ich ograniczenia i co warto omówić ze specjalistą.",
+        "title": "Inozytol bez wielkich obietnic"
+      },
+      {
+        "_key": "chapter-4",
+        "_type": "ebookChapter",
+        "summary": "Porównaj popularne składniki: zastosowanie, ograniczenia i sytuacje wymagające konsultacji.",
+        "title": "Witamina D, omega-3 i reszta półki"
+      },
+      {
+        "_key": "chapter-5",
+        "_type": "ebookChapter",
+        "summary": "Przyjrzyj się składowi, porcji i kosztowi. Rozpoznaj hasła, które niewiele mówią o produkcie.",
+        "title": "Przeczytaj etykietę, zanim zapłacisz"
+      },
+      {
+        "_key": "chapter-6",
+        "_type": "ebookChapter",
+        "summary": "Przygotuj listę leków i suplementów do rozmowy z lekarzem lub farmaceutą.",
+        "title": "Bezpieczeństwo i interakcje"
+      },
+      {
+        "_key": "chapter-7",
+        "_type": "ebookChapter",
+        "summary": "Zapisz ustalenia ze specjalistą, obserwacje i datę ponownej oceny. Nie zmieniaj wszystkiego naraz.",
+        "title": "Zaplanuj przegląd za 12 tygodni"
+      }
+    ],
+    "cover": {
+      "_type": "mediaObject",
+      "alt": "Kontrolowana okładka: Noc zaczyna się o osiemnastej",
+      "rasterKey": "cover-noc-zaczyna-sie-o-osiemnastej",
+      "tone": "diagram"
+    },
+    "coverTone": "light",
+    "currency": "PLN",
+    "format": "pdf",
+    "includedMaterials": [
+      {
+        "_key": "material-1",
+        "_type": "ebookMaterial",
+        "description": "Preparat, cel, pytania.",
+        "title": "Karta audytu suplementów"
+      },
+      {
+        "_key": "material-2",
+        "_type": "ebookMaterial",
+        "description": "Skład, porcja, hasła.",
+        "title": "Checklista czytania etykiety"
+      },
+      {
+        "_key": "material-3",
+        "_type": "ebookMaterial",
+        "description": "Policz, zanim dokładasz.",
+        "title": "Arkusz miesięcznych kosztów"
+      },
+      {
+        "_key": "material-4",
+        "_type": "ebookMaterial",
+        "description": "Lista na wizytę.",
+        "title": "Pytania do lekarza i farmaceuty"
+      },
+      {
+        "_key": "material-5",
+        "_type": "ebookMaterial",
+        "description": "Termin przeglądu.",
+        "title": "Plan obserwacji na 12 tygodni"
+      }
+    ],
+    "landing": {
+      "_type": "ebookLanding",
+      "audienceItems": [
+        {
+          "_key": "audience-1",
+          "body": "Bierzesz kilka preparatów, ale trudno Ci powiedzieć, jaki cel ma każdy z nich.",
+          "title": "Masz PCOS i pełną półkę."
+        },
+        {
+          "_key": "audience-2",
+          "body": "Zanim zamówisz następne, chcesz wrócić do pytania: dlaczego właśnie ten suplement?",
+          "title": "Kończy Ci się opakowanie."
+        },
+        {
+          "_key": "audience-3",
+          "body": "Chcesz odróżnić reklamowe obietnice od informacji, które pomagają w decyzji.",
+          "title": "Każdy poleca coś innego."
+        },
+        {
+          "_key": "audience-4",
+          "body": "Potrzebujesz uporządkowanej listy preparatów i konkretnych pytań do specjalisty.",
+          "title": "Chcesz przygotować się do wizyty."
+        }
+      ],
+      "audienceLead": "Nie zaczynasz od zera. Już szukasz rozwiązań. Teraz możesz poukładać je w całość.",
+      "audienceTitle": "Brzmi znajomo?\nJesteś w dobrym miejscu.",
+      "authorParagraphs": [
+        "W mojej pracy z kobietami z PCOS liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
+        "Suplementy też potrzebują kontekstu. W wytycznych PCOS z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania."
+      ],
+      "authorTitle": "Dobra decyzja\nzaczyna się od „po co?”.",
+      "comparisonItems": [
+        {
+          "_key": "compare-1",
+          "after": "Wiesz, o co zapytać.",
+          "before": "„Biorę, bo polecano.”"
+        },
+        {
+          "_key": "compare-2",
+          "after": "Masz policzony koszt.",
+          "before": "„Nie wiem, ile wydaję.”"
+        },
+        {
+          "_key": "compare-3",
+          "after": "Masz plan rozmowy i przeglądu.",
+          "before": "„Może dołożę coś jeszcze?”"
+        }
+      ],
+      "contentsLead": "Od listy preparatów do karty przeglądu. Czytasz, zapisujesz i przygotowujesz kolejny krok.",
+      "contentsTitle": "Każdy rozdział\nkończy się konkretem.",
+      "educationNote": "E-book ma charakter edukacyjny. Nie zastępuje diagnostyki ani indywidualnych zaleceń.",
+      "facts": [
+        {
+          "_key": "fact-1",
+          "detail": "od pytań do planu działania",
+          "title": "7 rozdziałów"
+        },
+        {
+          "_key": "fact-2",
+          "detail": "preparat, cel, koszt, pytania",
+          "title": "Twój audyt półki"
+        },
+        {
+          "_key": "fact-3",
+          "detail": "plan obserwacji i przeglądu",
+          "title": "12 tygodni"
+        }
+      ],
+      "faq": {
+        "_type": "faqSection",
+        "items": [
+          {
+            "_key": "faq-1",
+            "answer": "Dostaniesz sposób porządkowania informacji i pytań o własne preparaty. Nie jest to indywidualna rozpiska leczenia ani dawkowania. Cel, zasadność stosowania i zmiany suplementacji omów z lekarzem lub farmaceutą.",
+            "question": "Czy dostanę gotową listę suplementów do brania?"
+          },
+          {
+            "_key": "faq-2",
+            "answer": "Tak, jeśli chcesz zrozumieć temat przed zakupami. Możesz zacząć od karty „co wiem / czego nie wiem” i listy pytań na wizytę. Nie musisz mieć pełnej szafki suplementów.",
+            "question": "Czy ten ebook jest dla mnie, jeśli dopiero mam diagnozę?"
+          },
+          {
+            "_key": "faq-3",
+            "answer": "Możesz użyć go do przygotowania rozmowy o bezpieczeństwie. Nie odstawiaj leków ani zaleconych preparatów na podstawie ebooka. Przed zmianą suplementacji skonsultuj możliwe interakcje z lekarzem lub farmaceutą.",
+            "question": "Czy mogę korzystać z niego, gdy biorę leki?"
+          },
+          {
+            "_key": "faq-4",
+            "answer": "Te sytuacje wymagają indywidualnych zaleceń. Ebook nie zawiera planu suplementacji na ciążę ani karmienie. Przygotuj listę preparatów i omów ją z osobą prowadzącą Twoją opiekę.",
+            "question": "A jeśli planuję ciążę, jestem w ciąży lub karmię?"
+          },
+          {
+            "_key": "faq-5",
+            "answer": "Planowany pakiet to ebook PDF i karty pracy do wydruku lub uzupełnienia cyfrowo. Przeczytasz go na komputerze, tablecie i telefonie. Finalne pliki oraz sposób dostarczenia zostaną potwierdzone przed rozpoczęciem sprzedaży.",
+            "question": "W jakiej formie otrzymam materiał?"
+          },
+          {
+            "_key": "faq-6",
+            "answer": "To zapowiedź strony sprzedażowej. Cena wynosi 97 zł brutto, ale płatność nie jest aktywna. Dostępność, termin dostarczenia i warunki zakupu zostaną podane przed uruchomieniem sprzedaży.",
+            "question": "Czy mogę już kupić ebook?"
+          }
+        ],
+        "lead": "Sprawdź, czy to materiał na Twój obecny etap.",
+        "title": "Jeszcze\nkilka odpowiedzi."
+      },
+      "heroLead": "Zanim kupisz kolejne opakowanie, sprawdź, po co je bierzesz. Uporządkuj swoją półkę i pytania do specjalisty.",
+      "heroTitle": "Zrób porządek\nz suplementami.",
+      "ingredients": [
+        "Inozytol",
+        "Witamina D",
+        "Omega-3",
+        "Magnez",
+        "NAC",
+        "Berberyna",
+        "i inne składniki"
+      ],
+      "offerLead": "Zacznij od tego, co już masz. Sprawdź pytania, policz koszty i przygotuj się do świadomej rozmowy o suplementacji.",
+      "offerNote": "Zapowiedź oferty. Zakres pakietu i dostępność do potwierdzenia przed sprzedażą.",
+      "offerTitle": "Zanim kupisz\nkolejne opakowanie,\nzrób miejsce na wiedzę.",
+      "outcomesLead": "Rezultat pracy z ebookiem zobaczysz w swoich notatkach: cel, pytania, koszt i termin przeglądu dla każdego preparatu.",
+      "outcomesNote": "E-book pomaga uporządkować decyzje. Nie obiecuje regulacji hormonów, utraty kilogramów ani powrotu miesiączki.",
+      "outcomesTitle": "Mniej zgadywania.\nWięcej jasności.",
+      "primaryLabel": "Chcę uporządkować suplementy",
+      "problemParagraphs": [
+        "Inozytol z polecenia. Witamina D z reklamy. Jeszcze coś „na hormony”. A na półce coraz więcej opakowań i coraz mniej jasności.",
+        "Trudno podjąć dobrą decyzję, kiedy każda rada brzmi inaczej. Potrzebujesz kryteriów, które pomogą Ci przyjrzeć się temu, co już masz."
+      ],
+      "problemQuestions": [
+        "Po co to biorę?",
+        "Czy pasuje do mojej sytuacji?",
+        "Kiedy warto do tego wrócić?"
+      ],
+      "problemTitle": "Kolejna kapsułka.\nTo samo pytanie:\n„Czy to ma sens?”",
+      "purchaseLabel": "Chcę ebook",
+      "sampleCaption": "Podgląd projektowanej karty. Finalny skład pakietu wymaga przygotowania materiałów.",
+      "sampleFields": [
+        {
+          "_key": "sample-field-1",
+          "label": "Nazwa preparatu"
+        },
+        {
+          "_key": "sample-field-2",
+          "label": "Dlaczego go stosuję?"
+        },
+        {
+          "_key": "sample-field-3",
+          "label": "Co chcę omówić ze specjalistą?"
+        },
+        {
+          "_key": "sample-field-4",
+          "label": "Miesięczny koszt"
+        }
+      ],
+      "sampleLead": "Wyjmij preparaty z szafki. Zapisz, po co je bierzesz i czego jeszcze nie wiesz. Z taką listą łatwiej zacząć konkretną rozmowę.",
+      "sampleTitle": "Jedna karta.\nDobry początek.",
+      "secondaryLabel": "Zajrzyj do środka",
+      "testimonials": [
+        {
+          "_key": "testimonial-pl-4",
+          "_ref": "testimonial-pl-4",
+          "_type": "reference"
+        },
+        {
+          "_key": "testimonial-pl-6",
+          "_ref": "testimonial-pl-6",
+          "_type": "reference"
+        }
+      ],
+      "testimonialsContext": "Opinie o dotychczasowej współpracy. Nie są recenzjami tego ebooka ani obietnicą jego efektów.",
+      "testimonialsScope": "cooperation",
+      "testimonialsTitle": "Jak pracuje się z Olą?",
+      "variant": "cherry3a"
+    },
+    "language": "pl",
+    "priceGross": 97,
+    "slug": {
+      "_type": "slug",
+      "current": "noc-zaczyna-sie-o-osiemnastej"
+    },
+    "sortOrder": 6,
+    "sources": [
+      {
+        "_key": "source-pcos-2023",
+        "_type": "ebookSource",
+        "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/",
+        "scope": "Wytyczne PCOS 2023, sekcja 4.7",
+        "title": "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7"
+      }
+    ],
+    "subtitle": "Wieczór dla Ciebie",
+    "title": "Noc zaczyna się o osiemnastej",
+    "topic": "perimenopause",
+    "translation": {
+      "_ref": "ebook-noc-zaczyna-sie-o-osiemnastej-en",
+      "_type": "reference"
+    },
+    "waitlist": {
+      "buttonLabel": "Zapisz się na listę oczekujących",
+      "form": {
+        "_ref": "waitlist-form-pl",
+        "_type": "reference"
+      },
+      "lead": "E-book jest w przygotowaniu. Zostaw adres e-mail, a napiszemy, gdy ruszy sprzedaż.",
+      "title": "Daj znać, że czekasz"
+    }
+  },
+  {
+    "_createdAt": "2026-10-08T14:02:40Z",
+    "_id": "ebook-szczupla-a-jednak-pcos-pl",
+    "_rev": "BgWLAXsKsMgTSzpAsHKkan",
+    "_system": {
+      "base": {
+        "id": "ebook-szczupla-a-jednak-pcos-pl",
+        "rev": "D9pjXnjSkonW3tYBZoUrpX"
+      }
+    },
+    "_type": "ebook",
+    "_updatedAt": "2026-10-11T10:55:50Z",
+    "author": {
+      "_ref": "author-ola-pl",
+      "_type": "reference"
+    },
+    "availability": "planned",
+    "cardDescription": "Jak podejść do odżywiania przy PCOS, kiedy Twoim celem nie jest odchudzanie.",
+    "chapters": [
+      {
+        "_key": "chapter-1",
+        "_type": "ebookChapter",
+        "summary": "Zapisz, co bierzesz i po co. Oddziel własny cel od obietnicy na opakowaniu.",
+        "title": "Zacznij od swojej półki"
+      },
+      {
+        "_key": "chapter-2",
+        "_type": "ebookChapter",
+        "summary": "Uporządkuj posiadane wyniki i pytania. Dowiedz się, czego nie da się ocenić z reklamy.",
+        "title": "Zanim kupisz kolejny preparat"
+      },
+      {
+        "_key": "chapter-3",
+        "_type": "ebookChapter",
+        "summary": "Zrozum, co mówią dowody, gdzie są ich ograniczenia i co warto omówić ze specjalistą.",
+        "title": "Inozytol bez wielkich obietnic"
+      },
+      {
+        "_key": "chapter-4",
+        "_type": "ebookChapter",
+        "summary": "Porównaj popularne składniki: zastosowanie, ograniczenia i sytuacje wymagające konsultacji.",
+        "title": "Witamina D, omega-3 i reszta półki"
+      },
+      {
+        "_key": "chapter-5",
+        "_type": "ebookChapter",
+        "summary": "Przyjrzyj się składowi, porcji i kosztowi. Rozpoznaj hasła, które niewiele mówią o produkcie.",
+        "title": "Przeczytaj etykietę, zanim zapłacisz"
+      },
+      {
+        "_key": "chapter-6",
+        "_type": "ebookChapter",
+        "summary": "Przygotuj listę leków i suplementów do rozmowy z lekarzem lub farmaceutą.",
+        "title": "Bezpieczeństwo i interakcje"
+      },
+      {
+        "_key": "chapter-7",
+        "_type": "ebookChapter",
+        "summary": "Zapisz ustalenia ze specjalistą, obserwacje i datę ponownej oceny. Nie zmieniaj wszystkiego naraz.",
+        "title": "Zaplanuj przegląd za 12 tygodni"
+      }
+    ],
+    "cover": {
+      "_type": "mediaObject",
+      "alt": "Kontrolowana okładka: Szczupła, a jednak PCOS",
+      "rasterKey": "cover-szczupla-a-jednak-pcos",
+      "tone": "diagram"
+    },
+    "coverTone": "light",
+    "currency": "PLN",
+    "format": "pdf",
+    "includedMaterials": [
+      {
+        "_key": "material-1",
+        "_type": "ebookMaterial",
+        "description": "Preparat, cel, pytania.",
+        "title": "Karta audytu suplementów"
+      },
+      {
+        "_key": "material-2",
+        "_type": "ebookMaterial",
+        "description": "Skład, porcja, hasła.",
+        "title": "Checklista czytania etykiety"
+      },
+      {
+        "_key": "material-3",
+        "_type": "ebookMaterial",
+        "description": "Policz, zanim dokładasz.",
+        "title": "Arkusz miesięcznych kosztów"
+      },
+      {
+        "_key": "material-4",
+        "_type": "ebookMaterial",
+        "description": "Lista na wizytę.",
+        "title": "Pytania do lekarza i farmaceuty"
+      },
+      {
+        "_key": "material-5",
+        "_type": "ebookMaterial",
+        "description": "Termin przeglądu.",
+        "title": "Plan obserwacji na 12 tygodni"
+      }
+    ],
+    "landing": {
+      "_type": "ebookLanding",
+      "audienceItems": [
+        {
+          "_key": "audience-1",
+          "body": "Bierzesz kilka preparatów, ale trudno Ci powiedzieć, jaki cel ma każdy z nich.",
+          "title": "Masz PCOS i pełną półkę."
+        },
+        {
+          "_key": "audience-2",
+          "body": "Zanim zamówisz następne, chcesz wrócić do pytania: dlaczego właśnie ten suplement?",
+          "title": "Kończy Ci się opakowanie."
+        },
+        {
+          "_key": "audience-3",
+          "body": "Chcesz odróżnić reklamowe obietnice od informacji, które pomagają w decyzji.",
+          "title": "Każdy poleca coś innego."
+        },
+        {
+          "_key": "audience-4",
+          "body": "Potrzebujesz uporządkowanej listy preparatów i konkretnych pytań do specjalisty.",
+          "title": "Chcesz przygotować się do wizyty."
+        }
+      ],
+      "audienceLead": "Nie zaczynasz od zera. Już szukasz rozwiązań. Teraz możesz poukładać je w całość.",
+      "audienceTitle": "Brzmi znajomo?\nJesteś w dobrym miejscu.",
+      "authorParagraphs": [
+        "W mojej pracy z kobietami z PCOS liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
+        "Suplementy też potrzebują kontekstu. W wytycznych PCOS z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania."
+      ],
+      "authorTitle": "Dobra decyzja\nzaczyna się od „po co?”.",
+      "comparisonItems": [
+        {
+          "_key": "compare-1",
+          "after": "Wiesz, o co zapytać.",
+          "before": "„Biorę, bo polecano.”"
+        },
+        {
+          "_key": "compare-2",
+          "after": "Masz policzony koszt.",
+          "before": "„Nie wiem, ile wydaję.”"
+        },
+        {
+          "_key": "compare-3",
+          "after": "Masz plan rozmowy i przeglądu.",
+          "before": "„Może dołożę coś jeszcze?”"
+        }
+      ],
+      "contentsLead": "Od listy preparatów do karty przeglądu. Czytasz, zapisujesz i przygotowujesz kolejny krok.",
+      "contentsTitle": "Każdy rozdział\nkończy się konkretem.",
+      "educationNote": "E-book ma charakter edukacyjny. Nie zastępuje diagnostyki ani indywidualnych zaleceń.",
+      "facts": [
+        {
+          "_key": "fact-1",
+          "detail": "od pytań do planu działania",
+          "title": "7 rozdziałów"
+        },
+        {
+          "_key": "fact-2",
+          "detail": "preparat, cel, koszt, pytania",
+          "title": "Twój audyt półki"
+        },
+        {
+          "_key": "fact-3",
+          "detail": "plan obserwacji i przeglądu",
+          "title": "12 tygodni"
+        }
+      ],
+      "faq": {
+        "_type": "faqSection",
+        "items": [
+          {
+            "_key": "faq-1",
+            "answer": "Dostaniesz sposób porządkowania informacji i pytań o własne preparaty. Nie jest to indywidualna rozpiska leczenia ani dawkowania. Cel, zasadność stosowania i zmiany suplementacji omów z lekarzem lub farmaceutą.",
+            "question": "Czy dostanę gotową listę suplementów do brania?"
+          },
+          {
+            "_key": "faq-2",
+            "answer": "Tak, jeśli chcesz zrozumieć temat przed zakupami. Możesz zacząć od karty „co wiem / czego nie wiem” i listy pytań na wizytę. Nie musisz mieć pełnej szafki suplementów.",
+            "question": "Czy ten ebook jest dla mnie, jeśli dopiero mam diagnozę?"
+          },
+          {
+            "_key": "faq-3",
+            "answer": "Możesz użyć go do przygotowania rozmowy o bezpieczeństwie. Nie odstawiaj leków ani zaleconych preparatów na podstawie ebooka. Przed zmianą suplementacji skonsultuj możliwe interakcje z lekarzem lub farmaceutą.",
+            "question": "Czy mogę korzystać z niego, gdy biorę leki?"
+          },
+          {
+            "_key": "faq-4",
+            "answer": "Te sytuacje wymagają indywidualnych zaleceń. Ebook nie zawiera planu suplementacji na ciążę ani karmienie. Przygotuj listę preparatów i omów ją z osobą prowadzącą Twoją opiekę.",
+            "question": "A jeśli planuję ciążę, jestem w ciąży lub karmię?"
+          },
+          {
+            "_key": "faq-5",
+            "answer": "Planowany pakiet to ebook PDF i karty pracy do wydruku lub uzupełnienia cyfrowo. Przeczytasz go na komputerze, tablecie i telefonie. Finalne pliki oraz sposób dostarczenia zostaną potwierdzone przed rozpoczęciem sprzedaży.",
+            "question": "W jakiej formie otrzymam materiał?"
+          },
+          {
+            "_key": "faq-6",
+            "answer": "To zapowiedź strony sprzedażowej. Cena wynosi 97 zł brutto, ale płatność nie jest aktywna. Dostępność, termin dostarczenia i warunki zakupu zostaną podane przed uruchomieniem sprzedaży.",
+            "question": "Czy mogę już kupić ebook?"
+          }
+        ],
+        "lead": "Sprawdź, czy to materiał na Twój obecny etap.",
+        "title": "Jeszcze\nkilka odpowiedzi."
+      },
+      "heroLead": "Zanim kupisz kolejne opakowanie, sprawdź, po co je bierzesz. Uporządkuj swoją półkę i pytania do specjalisty.",
+      "heroTitle": "Zrób porządek\nz suplementami.",
+      "ingredients": [
+        "Inozytol",
+        "Witamina D",
+        "Omega-3",
+        "Magnez",
+        "NAC",
+        "Berberyna",
+        "i inne składniki"
+      ],
+      "offerLead": "Zacznij od tego, co już masz. Sprawdź pytania, policz koszty i przygotuj się do świadomej rozmowy o suplementacji.",
+      "offerNote": "Zapowiedź oferty. Zakres pakietu i dostępność do potwierdzenia przed sprzedażą.",
+      "offerTitle": "Zanim kupisz\nkolejne opakowanie,\nzrób miejsce na wiedzę.",
+      "outcomesLead": "Rezultat pracy z ebookiem zobaczysz w swoich notatkach: cel, pytania, koszt i termin przeglądu dla każdego preparatu.",
+      "outcomesNote": "E-book pomaga uporządkować decyzje. Nie obiecuje regulacji hormonów, utraty kilogramów ani powrotu miesiączki.",
+      "outcomesTitle": "Mniej zgadywania.\nWięcej jasności.",
+      "primaryLabel": "Chcę uporządkować suplementy",
+      "problemParagraphs": [
+        "Inozytol z polecenia. Witamina D z reklamy. Jeszcze coś „na hormony”. A na półce coraz więcej opakowań i coraz mniej jasności.",
+        "Trudno podjąć dobrą decyzję, kiedy każda rada brzmi inaczej. Potrzebujesz kryteriów, które pomogą Ci przyjrzeć się temu, co już masz."
+      ],
+      "problemQuestions": [
+        "Po co to biorę?",
+        "Czy pasuje do mojej sytuacji?",
+        "Kiedy warto do tego wrócić?"
+      ],
+      "problemTitle": "Kolejna kapsułka.\nTo samo pytanie:\n„Czy to ma sens?”",
+      "purchaseLabel": "Chcę ebook",
+      "sampleCaption": "Podgląd projektowanej karty. Finalny skład pakietu wymaga przygotowania materiałów.",
+      "sampleFields": [
+        {
+          "_key": "sample-field-1",
+          "label": "Nazwa preparatu"
+        },
+        {
+          "_key": "sample-field-2",
+          "label": "Dlaczego go stosuję?"
+        },
+        {
+          "_key": "sample-field-3",
+          "label": "Co chcę omówić ze specjalistą?"
+        },
+        {
+          "_key": "sample-field-4",
+          "label": "Miesięczny koszt"
+        }
+      ],
+      "sampleLead": "Wyjmij preparaty z szafki. Zapisz, po co je bierzesz i czego jeszcze nie wiesz. Z taką listą łatwiej zacząć konkretną rozmowę.",
+      "sampleTitle": "Jedna karta.\nDobry początek.",
+      "secondaryLabel": "Zajrzyj do środka",
+      "testimonials": [
+        {
+          "_key": "testimonial-pl-4",
+          "_ref": "testimonial-pl-4",
+          "_type": "reference"
+        },
+        {
+          "_key": "testimonial-pl-6",
+          "_ref": "testimonial-pl-6",
+          "_type": "reference"
+        }
+      ],
+      "testimonialsContext": "Opinie o dotychczasowej współpracy. Nie są recenzjami tego ebooka ani obietnicą jego efektów.",
+      "testimonialsScope": "cooperation",
+      "testimonialsTitle": "Jak pracuje się z Olą?",
+      "variant": "cherry3a"
+    },
+    "language": "pl",
+    "priceGross": 97,
+    "slug": {
+      "_type": "slug",
+      "current": "szczupla-a-jednak-pcos"
+    },
+    "sortOrder": 3,
+    "sources": [
+      {
+        "_key": "source-pcos-2023",
+        "_type": "ebookSource",
+        "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/",
+        "scope": "Wytyczne PCOS 2023, sekcja 4.7",
+        "title": "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7"
+      }
+    ],
+    "subtitle": "Z troską o Twoje ciało",
+    "title": "Szczupła, a jednak PCOS",
+    "topic": "pcos",
+    "translation": {
+      "_ref": "ebook-szczupla-a-jednak-pcos-en",
+      "_type": "reference"
+    },
+    "waitlist": {
+      "buttonLabel": "Zapisz się na listę oczekujących",
+      "form": {
+        "_ref": "waitlist-form-pl",
+        "_type": "reference"
+      },
+      "lead": "E-book jest w przygotowaniu. Zostaw adres e-mail, a napiszemy, gdy ruszy sprzedaż.",
+      "title": "Daj znać, że czekasz"
+    }
+  },
+  {
+    "_createdAt": "2026-10-08T14:02:40Z",
+    "_id": "ebook-waga-cie-oklamuje-pl",
+    "_rev": "BgWLAXsKsMgTSzpAsHKkan",
+    "_system": {
+      "base": {
+        "id": "ebook-waga-cie-oklamuje-pl",
+        "rev": "D9pjXnjSkonW3tYBZoUrpX"
+      }
+    },
+    "_type": "ebook",
+    "_updatedAt": "2026-10-11T10:55:50Z",
+    "author": {
+      "_ref": "author-ola-pl",
+      "_type": "reference"
+    },
+    "availability": "planned",
+    "cardDescription": "Przyjrzyj się zmianom w sylwetce i codziennych nawykach w okresie perimenopauzy.",
+    "chapters": [
+      {
+        "_key": "chapter-1",
+        "_type": "ebookChapter",
+        "summary": "Zapisz, co bierzesz i po co. Oddziel własny cel od obietnicy na opakowaniu.",
+        "title": "Zacznij od swojej półki"
+      },
+      {
+        "_key": "chapter-2",
+        "_type": "ebookChapter",
+        "summary": "Uporządkuj posiadane wyniki i pytania. Dowiedz się, czego nie da się ocenić z reklamy.",
+        "title": "Zanim kupisz kolejny preparat"
+      },
+      {
+        "_key": "chapter-3",
+        "_type": "ebookChapter",
+        "summary": "Zrozum, co mówią dowody, gdzie są ich ograniczenia i co warto omówić ze specjalistą.",
+        "title": "Inozytol bez wielkich obietnic"
+      },
+      {
+        "_key": "chapter-4",
+        "_type": "ebookChapter",
+        "summary": "Porównaj popularne składniki: zastosowanie, ograniczenia i sytuacje wymagające konsultacji.",
+        "title": "Witamina D, omega-3 i reszta półki"
+      },
+      {
+        "_key": "chapter-5",
+        "_type": "ebookChapter",
+        "summary": "Przyjrzyj się składowi, porcji i kosztowi. Rozpoznaj hasła, które niewiele mówią o produkcie.",
+        "title": "Przeczytaj etykietę, zanim zapłacisz"
+      },
+      {
+        "_key": "chapter-6",
+        "_type": "ebookChapter",
+        "summary": "Przygotuj listę leków i suplementów do rozmowy z lekarzem lub farmaceutą.",
+        "title": "Bezpieczeństwo i interakcje"
+      },
+      {
+        "_key": "chapter-7",
+        "_type": "ebookChapter",
+        "summary": "Zapisz ustalenia ze specjalistą, obserwacje i datę ponownej oceny. Nie zmieniaj wszystkiego naraz.",
+        "title": "Zaplanuj przegląd za 12 tygodni"
+      }
+    ],
+    "cover": {
+      "_type": "mediaObject",
+      "alt": "Kontrolowana okładka: Waga Cię okłamuje",
+      "rasterKey": "cover-waga-cie-oklamuje",
+      "tone": "diagram"
+    },
+    "coverTone": "light",
+    "currency": "PLN",
+    "format": "pdf",
+    "includedMaterials": [
+      {
+        "_key": "material-1",
+        "_type": "ebookMaterial",
+        "description": "Preparat, cel, pytania.",
+        "title": "Karta audytu suplementów"
+      },
+      {
+        "_key": "material-2",
+        "_type": "ebookMaterial",
+        "description": "Skład, porcja, hasła.",
+        "title": "Checklista czytania etykiety"
+      },
+      {
+        "_key": "material-3",
+        "_type": "ebookMaterial",
+        "description": "Policz, zanim dokładasz.",
+        "title": "Arkusz miesięcznych kosztów"
+      },
+      {
+        "_key": "material-4",
+        "_type": "ebookMaterial",
+        "description": "Lista na wizytę.",
+        "title": "Pytania do lekarza i farmaceuty"
+      },
+      {
+        "_key": "material-5",
+        "_type": "ebookMaterial",
+        "description": "Termin przeglądu.",
+        "title": "Plan obserwacji na 12 tygodni"
+      }
+    ],
+    "landing": {
+      "_type": "ebookLanding",
+      "audienceItems": [
+        {
+          "_key": "audience-1",
+          "body": "Bierzesz kilka preparatów, ale trudno Ci powiedzieć, jaki cel ma każdy z nich.",
+          "title": "Masz PCOS i pełną półkę."
+        },
+        {
+          "_key": "audience-2",
+          "body": "Zanim zamówisz następne, chcesz wrócić do pytania: dlaczego właśnie ten suplement?",
+          "title": "Kończy Ci się opakowanie."
+        },
+        {
+          "_key": "audience-3",
+          "body": "Chcesz odróżnić reklamowe obietnice od informacji, które pomagają w decyzji.",
+          "title": "Każdy poleca coś innego."
+        },
+        {
+          "_key": "audience-4",
+          "body": "Potrzebujesz uporządkowanej listy preparatów i konkretnych pytań do specjalisty.",
+          "title": "Chcesz przygotować się do wizyty."
+        }
+      ],
+      "audienceLead": "Nie zaczynasz od zera. Już szukasz rozwiązań. Teraz możesz poukładać je w całość.",
+      "audienceTitle": "Brzmi znajomo?\nJesteś w dobrym miejscu.",
+      "authorParagraphs": [
+        "W mojej pracy z kobietami z PCOS liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
+        "Suplementy też potrzebują kontekstu. W wytycznych PCOS z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania."
+      ],
+      "authorTitle": "Dobra decyzja\nzaczyna się od „po co?”.",
+      "comparisonItems": [
+        {
+          "_key": "compare-1",
+          "after": "Wiesz, o co zapytać.",
+          "before": "„Biorę, bo polecano.”"
+        },
+        {
+          "_key": "compare-2",
+          "after": "Masz policzony koszt.",
+          "before": "„Nie wiem, ile wydaję.”"
+        },
+        {
+          "_key": "compare-3",
+          "after": "Masz plan rozmowy i przeglądu.",
+          "before": "„Może dołożę coś jeszcze?”"
+        }
+      ],
+      "contentsLead": "Od listy preparatów do karty przeglądu. Czytasz, zapisujesz i przygotowujesz kolejny krok.",
+      "contentsTitle": "Każdy rozdział\nkończy się konkretem.",
+      "educationNote": "E-book ma charakter edukacyjny. Nie zastępuje diagnostyki ani indywidualnych zaleceń.",
+      "facts": [
+        {
+          "_key": "fact-1",
+          "detail": "od pytań do planu działania",
+          "title": "7 rozdziałów"
+        },
+        {
+          "_key": "fact-2",
+          "detail": "preparat, cel, koszt, pytania",
+          "title": "Twój audyt półki"
+        },
+        {
+          "_key": "fact-3",
+          "detail": "plan obserwacji i przeglądu",
+          "title": "12 tygodni"
+        }
+      ],
+      "faq": {
+        "_type": "faqSection",
+        "items": [
+          {
+            "_key": "faq-1",
+            "answer": "Dostaniesz sposób porządkowania informacji i pytań o własne preparaty. Nie jest to indywidualna rozpiska leczenia ani dawkowania. Cel, zasadność stosowania i zmiany suplementacji omów z lekarzem lub farmaceutą.",
+            "question": "Czy dostanę gotową listę suplementów do brania?"
+          },
+          {
+            "_key": "faq-2",
+            "answer": "Tak, jeśli chcesz zrozumieć temat przed zakupami. Możesz zacząć od karty „co wiem / czego nie wiem” i listy pytań na wizytę. Nie musisz mieć pełnej szafki suplementów.",
+            "question": "Czy ten ebook jest dla mnie, jeśli dopiero mam diagnozę?"
+          },
+          {
+            "_key": "faq-3",
+            "answer": "Możesz użyć go do przygotowania rozmowy o bezpieczeństwie. Nie odstawiaj leków ani zaleconych preparatów na podstawie ebooka. Przed zmianą suplementacji skonsultuj możliwe interakcje z lekarzem lub farmaceutą.",
+            "question": "Czy mogę korzystać z niego, gdy biorę leki?"
+          },
+          {
+            "_key": "faq-4",
+            "answer": "Te sytuacje wymagają indywidualnych zaleceń. Ebook nie zawiera planu suplementacji na ciążę ani karmienie. Przygotuj listę preparatów i omów ją z osobą prowadzącą Twoją opiekę.",
+            "question": "A jeśli planuję ciążę, jestem w ciąży lub karmię?"
+          },
+          {
+            "_key": "faq-5",
+            "answer": "Planowany pakiet to ebook PDF i karty pracy do wydruku lub uzupełnienia cyfrowo. Przeczytasz go na komputerze, tablecie i telefonie. Finalne pliki oraz sposób dostarczenia zostaną potwierdzone przed rozpoczęciem sprzedaży.",
+            "question": "W jakiej formie otrzymam materiał?"
+          },
+          {
+            "_key": "faq-6",
+            "answer": "To zapowiedź strony sprzedażowej. Cena wynosi 97 zł brutto, ale płatność nie jest aktywna. Dostępność, termin dostarczenia i warunki zakupu zostaną podane przed uruchomieniem sprzedaży.",
+            "question": "Czy mogę już kupić ebook?"
+          }
+        ],
+        "lead": "Sprawdź, czy to materiał na Twój obecny etap.",
+        "title": "Jeszcze\nkilka odpowiedzi."
+      },
+      "heroLead": "Zanim kupisz kolejne opakowanie, sprawdź, po co je bierzesz. Uporządkuj swoją półkę i pytania do specjalisty.",
+      "heroTitle": "Zrób porządek\nz suplementami.",
+      "ingredients": [
+        "Inozytol",
+        "Witamina D",
+        "Omega-3",
+        "Magnez",
+        "NAC",
+        "Berberyna",
+        "i inne składniki"
+      ],
+      "offerLead": "Zacznij od tego, co już masz. Sprawdź pytania, policz koszty i przygotuj się do świadomej rozmowy o suplementacji.",
+      "offerNote": "Zapowiedź oferty. Zakres pakietu i dostępność do potwierdzenia przed sprzedażą.",
+      "offerTitle": "Zanim kupisz\nkolejne opakowanie,\nzrób miejsce na wiedzę.",
+      "outcomesLead": "Rezultat pracy z ebookiem zobaczysz w swoich notatkach: cel, pytania, koszt i termin przeglądu dla każdego preparatu.",
+      "outcomesNote": "E-book pomaga uporządkować decyzje. Nie obiecuje regulacji hormonów, utraty kilogramów ani powrotu miesiączki.",
+      "outcomesTitle": "Mniej zgadywania.\nWięcej jasności.",
+      "primaryLabel": "Chcę uporządkować suplementy",
+      "problemParagraphs": [
+        "Inozytol z polecenia. Witamina D z reklamy. Jeszcze coś „na hormony”. A na półce coraz więcej opakowań i coraz mniej jasności.",
+        "Trudno podjąć dobrą decyzję, kiedy każda rada brzmi inaczej. Potrzebujesz kryteriów, które pomogą Ci przyjrzeć się temu, co już masz."
+      ],
+      "problemQuestions": [
+        "Po co to biorę?",
+        "Czy pasuje do mojej sytuacji?",
+        "Kiedy warto do tego wrócić?"
+      ],
+      "problemTitle": "Kolejna kapsułka.\nTo samo pytanie:\n„Czy to ma sens?”",
+      "purchaseLabel": "Chcę ebook",
+      "sampleCaption": "Podgląd projektowanej karty. Finalny skład pakietu wymaga przygotowania materiałów.",
+      "sampleFields": [
+        {
+          "_key": "sample-field-1",
+          "label": "Nazwa preparatu"
+        },
+        {
+          "_key": "sample-field-2",
+          "label": "Dlaczego go stosuję?"
+        },
+        {
+          "_key": "sample-field-3",
+          "label": "Co chcę omówić ze specjalistą?"
+        },
+        {
+          "_key": "sample-field-4",
+          "label": "Miesięczny koszt"
+        }
+      ],
+      "sampleLead": "Wyjmij preparaty z szafki. Zapisz, po co je bierzesz i czego jeszcze nie wiesz. Z taką listą łatwiej zacząć konkretną rozmowę.",
+      "sampleTitle": "Jedna karta.\nDobry początek.",
+      "secondaryLabel": "Zajrzyj do środka",
+      "testimonials": [
+        {
+          "_key": "testimonial-pl-4",
+          "_ref": "testimonial-pl-4",
+          "_type": "reference"
+        },
+        {
+          "_key": "testimonial-pl-6",
+          "_ref": "testimonial-pl-6",
+          "_type": "reference"
+        }
+      ],
+      "testimonialsContext": "Opinie o dotychczasowej współpracy. Nie są recenzjami tego ebooka ani obietnicą jego efektów.",
+      "testimonialsScope": "cooperation",
+      "testimonialsTitle": "Jak pracuje się z Olą?",
+      "variant": "cherry3a"
+    },
+    "language": "pl",
+    "priceGross": 97,
+    "slug": {
+      "_type": "slug",
+      "current": "waga-cie-oklamuje"
+    },
+    "sortOrder": 4,
+    "sources": [
+      {
+        "_key": "source-pcos-2023",
+        "_type": "ebookSource",
+        "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/",
+        "scope": "Wytyczne PCOS 2023, sekcja 4.7",
+        "title": "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7"
+      }
+    ],
+    "subtitle": "Więcej niż kilogramy",
+    "title": "Waga Cię okłamuje",
+    "topic": "perimenopause",
+    "translation": {
+      "_ref": "ebook-waga-cie-oklamuje-en",
+      "_type": "reference"
+    },
+    "waitlist": {
+      "buttonLabel": "Zapisz się na listę oczekujących",
+      "form": {
+        "_ref": "waitlist-form-pl",
+        "_type": "reference"
+      },
+      "lead": "E-book jest w przygotowaniu. Zostaw adres e-mail, a napiszemy, gdy ruszy sprzedaż.",
+      "title": "Daj znać, że czekasz"
+    }
+  }
+]

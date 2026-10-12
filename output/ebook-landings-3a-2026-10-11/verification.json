@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-11",
+  "node": "24.21.0",
+  "command": "PLAYWRIGHT_WORKERS=2 npm run verify",
+  "result": "PASS",
+  "exitCode": 0,
+  "scope": "Kopia dokładnych śledzonych plików i nowych plików tej sesji; wcześniejsze nieśledzone dowody użytkownika wyłączone.",
+  "unit": {
+    "files": 36,
+    "tests": 287
+  },
+  "e2e": {
+    "tests": 423,
+    "browsers": ["Chromium", "Firefox", "WebKit"]
+  },
+  "contentLake": {
+    "documents": 88,
+    "validationErrors": 0,
+    "comparedPages": 17
+  },
+  "seoPages": 36,
+  "productionFormRequests": 0,
+  "ui": {
+    "widths": [1440, 390, 320],
+    "keyboard": true,
+    "cssZoomPercent": 200,
+    "reducedMotion": true,
+    "noJavaScript": true,
+    "themes": ["light", "dark"],
+    "screenshots": "visual-check.json"
+  },
+  "notChecked": [
+    "Fizyczne Safari/iOS",
+    "Czytnik ekranu",
+    "Natywny zoom przeglądarki 200%",
+    "Nowe UI na hostowanym serwisie"
+  ],
+  "publishedSanityBuild": {
+    "projectId": "dyuqkn8c",
+    "dataset": "production",
+    "result": "PASS",
+    "builtPages": 40,
+    "buildBudgets": "PASS",
+    "seo": "PASS",
+    "ebookE2e": 30,
+    "productionFormRequests": 0
+  },
+  "finalReview": {
+    "localLinks": 189,
+    "brokenLinks": 0,
+    "codeFilesComparedWithVerifiedSnapshot": 20,
+    "mismatches": 0,
+    "gitDiffCheck": "PASS"
+  }
+}

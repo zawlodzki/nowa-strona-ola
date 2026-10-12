@@ -174,7 +174,10 @@ export const ebookType = defineType({
       type: "string",
       group: "offer",
       options: {
-        list: [{ title: "PDF", value: "pdf" }],
+        list: [
+          { title: "PDF", value: "pdf" },
+          { title: "PDF + EPUB", value: "pdf-epub" },
+        ],
       },
       initialValue: "pdf",
     }),

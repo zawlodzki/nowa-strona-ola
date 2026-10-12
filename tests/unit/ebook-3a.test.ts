@@ -196,3 +196,96 @@ describe("ebook routes", () => {
     );
   });
 });
+
+describe("ebook product presentation", () => {
+  async function legacyDocument() {
+    const ebook: Parameters<typeof mapEbook>[0] = structuredClone(
+      await getEbook("pl", "suplementy-w-pcos", { environment: {} }),
+    );
+    if (!ebook.landing) throw new Error("expected landing");
+    return ebook;
+  }
+
+  it("rejects an unknown problem illustration instead of rendering a supplement fallback", async () => {
+    const ebook = await legacyDocument();
+    if (!ebook.landing) throw new Error("expected landing");
+    ebook.landing.problemVisual = "arbitrary";
+    expect(() => mapEbook(ebook, "pl")).toThrow("Nieznana ilustracja problemu");
+  });
+
+  it("requires complete presentation data for another product", async () => {
+    const ebook = await legacyDocument();
+    ebook.slug = "new-product";
+    if (!ebook.landing) throw new Error("expected landing");
+    ebook.landing.coverTopic = undefined;
+    expect(() => mapEbook(ebook, "pl")).toThrow("temat okładki");
+  });
+
+  it("keeps presentation defaults only for the original supplements landing", async () => {
+    const ebook = await legacyDocument();
+    if (!ebook.landing) throw new Error("expected landing");
+    ebook.landing.coverTopic = undefined;
+    ebook.landing.problemVisual = undefined;
+    ebook.landing.sampleSheetTitle = undefined;
+    const view = mapEbook(ebook, "pl");
+    expect(view.landing.problemVisual).toBe("supplements");
+    expect(view.landing.coverTopic).toBe("Praktyczny przewodnik dla kobiet");
+    expect(view.landing.sampleSheetTitle).toContain("Moja półka");
+  });
+
+  it("rejects malformed cover and worksheet label counts", async () => {
+    const ebook = await legacyDocument();
+    if (!ebook.landing) throw new Error("expected landing");
+    ebook.landing.coverArt = ["one", "two"];
+    expect(() => mapEbook(ebook, "pl")).toThrow("etykiety okładki");
+    ebook.landing.coverArt = ["one", "two", "three"];
+    ebook.landing.sampleSheetFooter = ["one"];
+    expect(() => mapEbook(ebook, "pl")).toThrow("stopka próbki");
+  });
+
+  it("serializes the visible worksheet and comparison labels", async () => {
+    const ebook = await legacyDocument();
+    if (!ebook.landing) throw new Error("expected landing");
+    ebook.landing.sampleKicker = "Karta obserwacji";
+    ebook.landing.sampleSheetTitle = "Moje notatki";
+    ebook.landing.sampleSheetLead = "Zapisz swoje pytania.";
+    ebook.landing.sampleSheetFooter = ["Materiał edukacyjny", "Propozycja"];
+    ebook.landing.beforeLabel = "Przed lekturą";
+    ebook.landing.afterLabel = "Po lekturze";
+    const markdown = serializeEbook(ebook, "pl");
+    expect(markdown).toContain("Karta obserwacji");
+    expect(markdown).toContain("Moje notatki");
+    expect(markdown).toContain("Zapisz swoje pytania.");
+    expect(markdown).toContain("Materiał edukacyjny · Propozycja");
+    expect(markdown).toContain("Przed lekturą:");
+    expect(markdown).toContain("Po lekturze:");
+    expect(markdown).toContain(
+      ebook.landing.heroTitle?.replaceAll("\n", " ").trim(),
+    );
+  });
+
+  it("serializes CMS cover and sample images and omits the replaced worksheet", async () => {
+    const ebook = await legacyDocument();
+    if (!ebook.landing) throw new Error("expected landing");
+    ebook.cover = {
+      alt: "Okładka produktu",
+      tone: "diagram",
+      src: "https://cdn.sanity.io/images/project/dataset/cover.png",
+    };
+    ebook.landing.sampleMedia = {
+      alt: "Podgląd karty pracy",
+      tone: "diagram",
+      src: "https://cdn.sanity.io/images/project/dataset/sample.png",
+    };
+    const view = mapEbook(ebook, "pl");
+    const markdown = serializeEbookView(view, "pl");
+    expect(markdown).toContain(
+      "![Okładka produktu](https://cdn.sanity.io/images/project/dataset/cover.png)",
+    );
+    expect(markdown).toContain(
+      "![Podgląd karty pracy](https://cdn.sanity.io/images/project/dataset/sample.png)",
+    );
+    expect(markdown).not.toContain(view.landing.sampleSheetTitle);
+    expect(markdown).not.toContain(view.landing.coverTopic);
+  });
+});

@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-11",
+  "projectId": "dyuqkn8c",
+  "dataset": "production",
+  "draftsCompared": true,
+  "publishedCompared": true,
+  "publication": "published",
+  "checks": [
+    {
+      "id": "ebook-badania-ktore-maja-sens-pl",
+      "rev": "BgWLAXsKsMgTSzpAsHuEr8",
+      "updatedAt": "2026-10-11T21:10:32Z",
+      "fieldsMatch": true,
+      "preservedFields": true,
+      "availability": "planned",
+      "priceGross": 97,
+      "format": "pdf-epub",
+      "chapters": 6,
+      "materials": 5
+    },
+    {
+      "id": "ebook-czy-to-juz-pl",
+      "rev": "BgWLAXsKsMgTSzpAsHuEr8",
+      "updatedAt": "2026-10-11T21:10:32Z",
+      "fieldsMatch": true,
+      "preservedFields": true,
+      "availability": "planned",
+      "priceGross": 97,
+      "format": "pdf-epub",
+      "chapters": 6,
+      "materials": 4
+    },
+    {
+      "id": "ebook-noc-zaczyna-sie-o-osiemnastej-pl",
+      "rev": "BgWLAXsKsMgTSzpAsHuEr8",
+      "updatedAt": "2026-10-11T21:10:32Z",
+      "fieldsMatch": true,
+      "preservedFields": true,
+      "availability": "planned",
+      "priceGross": 97,
+      "format": "pdf-epub",
+      "chapters": 5,
+      "materials": 4
+    },
+    {
+      "id": "ebook-szczupla-a-jednak-pcos-pl",
+      "rev": "BgWLAXsKsMgTSzpAsHuEr8",
+      "updatedAt": "2026-10-11T21:10:32Z",
+      "fieldsMatch": true,
+      "preservedFields": true,
+      "availability": "planned",
+      "priceGross": 97,
+      "format": "pdf-epub",
+      "chapters": 6,
+      "materials": 5
+    },
+    {
+      "id": "ebook-waga-cie-oklamuje-pl",
+      "rev": "BgWLAXsKsMgTSzpAsHuEr8",
+      "updatedAt": "2026-10-11T21:10:32Z",
+      "fieldsMatch": true,
+      "preservedFields": true,
+      "availability": "planned",
+      "priceGross": 97,
+      "format": "pdf-epub",
+      "chapters": 7,
+      "materials": 4
+    }
+  ],
+  "changedFields": [
+    "chapters",
+    "includedMaterials",
+    "sources",
+    "seo",
+    "landing",
+    "format"
+  ],
+  "preserved": [
+    "title",
+    "slug",
+    "language",
+    "priceGross",
+    "currency",
+    "availability",
+    "author",
+    "coverMedia",
+    "waitlist"
+  ],
+  "schema": {
+    "legacyDeployed": true,
+    "studioRegistrationUpdated": true,
+    "newFieldsRecognized": true,
+    "userApproval": "11.10.2026: Tak, zaktualizuj rejestrację Studio"
+  },
+  "frontendDeployment": "pending merge to main"
+}
