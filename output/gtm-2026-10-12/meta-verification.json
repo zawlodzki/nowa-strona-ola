@@ -5,6 +5,8 @@
   "parentBranch": "codex/gtm-rollout",
   "parentPr": 86,
   "parentCommit": "a64c8a2",
+  "pullRequest": 88,
+  "commit": "9bc4c35",
   "verify": {
     "unit": 391,
     "unitFiles": 44,

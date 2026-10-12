@@ -12,6 +12,9 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Rodzic zawiera main `33f3326` i zachowany pomiar Lighthouse z #84.
   Podpis 1Password przeszedł po odblokowaniu i autoryzacji. Aktualizację rodzica
   wysłano; nie wyłączano podpisów.
+- Podpisany commit `9bc4c35` wysłano i otwarto
+  [PR #88](https://github.com/zawlodzki/nowa-strona-ola/pull/88) do gałęzi
+  `codex/gtm-rollout`. Kolejność odbioru to #86, następnie #88.
 - Właściciel zatwierdził PageView Meta z samymi domenami adresu i odsyłacza
   po zgodzie marketingowej. W GA4 zapisano dwa miesiące retencji użytkownika
   bez resetu. Oba automatyczne mechanizmy Meta są wyłączone; Core włączone.
@@ -104,7 +107,8 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   przeszedł. Nie wyłączono podpisów. Kopia zakresu sprzed przeniesienia na main
   jest w stash `gtm-verified-before-main-83`.
 - Otworzono [PR #86](https://github.com/zawlodzki/nowa-strona-ola/pull/86)
-  do main. Kolejny podpis dokumentacji zatrzymał się na autoryzacji Touch ID.
+  do main. Kolejny podpis dokumentacji zatrzymał się na autoryzacji Touch ID;
+  po ponownym odblokowaniu przeszedł w commicie `a64c8a2`.
 - Następny krok: kolejny PR Meta wskazuje gałąź GTM. Następnie publikacja
   spójnego copy i kontenera oraz odbiór compiled GTM
   z blokadą telemetrii przed aktywacją. Nie wykonano natywnego zoomu 200%,
