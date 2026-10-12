@@ -1,10 +1,43 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Suchy odczyt PMOS, tytuł SEO i twarda spacja, 12.10.2026
+
+- Żywy tytuł SEO `article-blog-11-en` ma 62 znaki.
+  `Conflicting advice on PMOS (PCOS): write down what you want to`.
+  Notatka z 08.10.2026 podała ten sam napis jako 55 znaków. To była zła
+  liczba. Plan na `952d5e1` zamieniał go na ucięte
+  `Conflicting advice on PMOS: write down what you want to` (55).
+- Po poprawce ten dokument i szkic `drafts.article-blog-11-en` dostają
+  ręczne `Conflicting advice on PMOS: write down what to clarify` (54).
+  Innych ręcznych tytułów nie ma. Artykuły 06 i 09 zostają, bo żywy tytuł
+  ma już mniej niż 60 znaków i nie zawiera PMOS (PCOS). Tytuł, który po
+  samym skrócie PMOS nadal ma ponad 60 znaków, zostaje bez zmian i trafia
+  do raportu. Skrypt nie ucina znaków.
+- Tekst dla gościa ma U+00A0 między PMOS a (PCOS). Tytuł strony, opis
+  meta, RSS i JSON-LD mają zwykłą spację. Na zbudowanej stronie e-booka
+  ciało ma 9 par z twardą spacją i zero ze zwykłą. JSON-LD ma 5 par ze
+  zwykłą spacją i zero twardych. `<title>` nie ma twardej spacji.
+- `npm run verify` na Node 24.21.0 skończył się kodem 1 przez jeden test
+  WebKit. Format, tokeny, lint, `astro check`, 291 testów unit, build,
+  build workspace, `test:build` i 392 testy E2E przeszły. Odpadł
+  `consultation page without an English version` w WebKit. Odpowiedź FAQ
+  została ukryta po kliknięciu. Pytanie nie zawiera PMOS. Osobne
+  powtórzenie tego testu przeszło w 2,9 s. `test:content-lake` przeszedł
+  osobno, 12 stron. CSS gzip 30867 B. Strona główna 8192 B. „O mnie”
+  8161 B. SEO 36 stron.
+- verify-ola `ola-1791781512` na `http://127.0.0.1:4340`. Nagłówek
+  „Masz PMOS (PCOS) i pełną półkę.” jest widoczny. H1 „O mnie” to
+  „Jestem Ola. Znam PMOS od środka.” Lead ma PMOS (PCOS). `browser posts`
+  zwrócił `[]`. Sanity nie było zapisywane. Nic nie zostało scalone
+  ani wdrożone.
+- Następny krok. Właściciel powtarza suchy odczyt z tokenem. `--write`,
+  scalenie i wdrożenie zostają po jego stronie.
 
 ### Hero „O mnie”, wariant V1, 12.10.2026
 
