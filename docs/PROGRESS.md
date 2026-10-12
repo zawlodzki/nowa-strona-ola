@@ -34,8 +34,6 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   `https://preview.aleksandraolesiewicz.com` PASS. Bundle
   `/static/sanity-BugRvHgS.js` zawiera wszystkie 11 pól. Dry-run Wranglera
   4.148.0 dla `ola-website-studio-production` PASS, 32 pliki zasobów.
-  [Dowód](../output/sanity-studio-fix-2026-10-12/verification.json),
-  [patch](../output/sanity-studio-fix-2026-10-12/fix.patch).
 - Zalogowana sesja Studio potwierdziła ostrzeżenie o 11 polach przed naprawą.
   Publikacja dokumentu była nieaktywna; nie edytowano ani nie usuwano danych.
 - Pierwszy deploy został odrzucony przez automatyczną kontrolę uprawnień.
@@ -50,8 +48,7 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Wcześniejsza próba z `--no-build` została zatrzymana przez CLI, ponieważ
   nie można łączyć tej flagi z `--external`; standardowe polecenie przeszło.
 - Zalogowany odbiór pięciu landingów PL: wszystkie 11 pól jest dostępnych
-  w formularzu, zero „Unknown fields found”. [Wyniki UI](../output/sanity-studio-fix-2026-10-12/studio-ui-checks.json)
-  i [zrzut](../output/sanity-studio-fix-2026-10-12/studio-fixed.png).
+  w formularzu, zero „Unknown fields found”.
   Pięć rewizji `_rev` przed i po wdrożeniu jest identycznych. Nie edytowano
   ani nie publikowano treści; karta artykułu użytkownika pozostała zachowana.
 - Zatwierdzony push `codex/sanity-studio-consent-tests` wykonano; otwarto
