@@ -1,10 +1,55 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków, warianty hero „O mnie”); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Przegląd PR 73, 12.10.2026
+
+- `planPmosRename` pomija dokumenty spoza listy treści. Lista to `article`,
+  `author`, `category`, `ebook`, `form`, `page`, `service`, `siteSettings`.
+  Poza nią zostają opinie, strony prawne i przekierowania. Identyfikator
+  zaczynający się od `_.` albo `sanity.` oraz typ `sanity.*` i `system.*`
+  też odpadają. Tytuł i zakres w `sources` zostają, bo to opublikowana
+  nazwa wytycznych.
+- Opinie klientki, „Wytyczne PCOS 2023” i regulamin newslettera 2.1 są
+  w fixture i w seedach takie jak przed podmianą. Słowa „przy PCOS”
+  w regulaminie zostają.
+- Tytuł SEO skraca się dopiero, gdy po podmianie ma więcej niż 60 znaków.
+  Tytuł, który już się mieści, zostaje z „PMOS (PCOS)”. Widoczny H1 artykułu
+  zostaje dłuższy niż tytuł w `<title>`.
+- Tytuł hero na „O mnie” w kodzie zostaje „Jestem Ola. / Znam PMOS (PCOS) /
+  od środka.”. CSS nie ruszane. „O mnie” ma 8161 B przy limicie 8192 B.
+  Właściciel wybiera wariant. V4 nie mieści się w trzech liniach przy 320
+  i 1440. Przy 320 i 1440 trzecia linia to „(PCOS) od”, a czwarta „środka.”.
+  Przy 390 są trzy linie, a trzecia zaczyna się od „(PCOS) od środka.”.
+- Suchy odczyt datasetu nie wystartował. Brak tokenu. Skrypt wypisał, że
+  nie wysyła zapytania. Na 88 dokumentach lokalnego planu content-lake
+  plan PMOS ma 0 zmian i 0 problemów. Nie ma w nim dokumentów `_.`, opinii,
+  stron prawnych ani ścieżek `sources`. To nie jest liczba łatek na żywym
+  datasetcie.
+- Kontrole na Node 24.21.0, commit przed notatką `2264ea2`. Format, tokeny,
+  lint, `astro check`, 289 testów unit, build, build workspace i
+  `test:build` przeszły w `npm run verify`. CSS gzip 30867 B. Strona główna
+  8192 B. SEO 36 stron. E2E to 393 testy w Chromium, Firefox i WebKit.
+  Pierwszy przebieg miał 391 zaliczeń i 2 odpadki Firefox (hover
+  „Udostępnij” zasłonięty banerem zgód, pusty alert newslettera). Oba
+  przeszły w osobnym powtórzeniu. `test:content-lake` przeszedł osobno,
+  12 stron ze zgodnym DOM, błędy walidacji 0. compare pominięte, brak tokenu.
+- verify-ola `ola-1791777773`, baza `http://127.0.0.1:4340`. Formularz
+  na `/` z pustym i złym e-mailem, `browser posts` zwrócił `[]`. Opinia
+  „Po latach walki z PCOS…” jest widoczna. `/o-mnie/` ma obecny H1 i lead
+  z pierwszym „PMOS (PCOS)”. Brak „Stopień”, „Wcześniejsze miejsca pracy”
+  i „Limanowej”. Źródło e-booka to „Zobacz źródło: wytyczne PCOS 2023,
+  sekcja 4.7”. H1 artykułu 01 zostaje długi, a `<title>` ma 58 znaków.
+  Regulamin newslettera pokazuje wersję 2.1 i „przy PCOS”. `/en/` i
+  `/en/about/` zwracają 404. `/static/` bez JavaScriptu ma 0 skryptów.
+  Newsletter na „O mnie” też dał `posts` `[]`.
+- Następny krok. Właściciel wybiera wariant tytułu hero. Potem może
+  uruchomić suchy odczyt z tokenem. `--write`, scalenie i wdrożenie
+  zostają po jego stronie.
 
 ### PMOS (PCOS), wydział i historia na „O mnie”, 11.10.2026
 
