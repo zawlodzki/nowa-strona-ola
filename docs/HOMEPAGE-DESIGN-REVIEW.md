@@ -33,11 +33,11 @@ produkcyjnego sklepu ani certyfikacji dostępności.
 | #   | Heurystyka Nielsena              | Ocena | Uzasadnienie                                                                                           |
 | --- | -------------------------------- | ----- | ------------------------------------------------------------------------------------------------------ |
 | 1   | Widoczność stanu                 | 3/4   | Licznik biblioteki, krańcowe stany strzałek i jawny status demonstracji formularza.                    |
-| 2   | Język odbiorczyni                | 3/4   | PCOS i perimenopauza są czytelne, lecz hasła pozostają ogólne.                                         |
+| 2   | Język odbiorczyni                | 3/4   | PMOS (PCOS) i perimenopauza są czytelne, lecz hasła pozostają ogólne.                                  |
 | 3   | Kontrola i swoboda               | 4/4   | Natywne przewijanie, brak autoplay, statyczna treść; zachowanie klawiatury oceniono również ze źródła. |
 | 4   | Spójność i standardy             | 3/4   | Wspólne wzorce CTA; etykieta kontaktu nie wskazuje jasno newslettera.                                  |
 | 5   | Zapobieganie błędom              | 3/4   | Oznaczenia przykładów i walidacja; brak checkoutu jest zakresem makiety.                               |
-| 6   | Rozpoznawanie zamiast pamiętania | 2/4   | Pierwsza grupa produktów pokazuje tylko PCOS.                                                          |
+| 6   | Rozpoznawanie zamiast pamiętania | 2/4   | Pierwsza grupa produktów pokazuje tylko PMOS (PCOS).                                                   |
 | 7   | Elastyczność i wydajność         | n/a   | Powierzchnia Persuade, nie narzędzie do powtarzalnej pracy.                                            |
 | 8   | Estetyka i minimalizm            | 3/4   | Dobra hierarchia; powtarzalne motywy i hasła.                                                          |
 | 9   | Pomoc przy błędach               | 3/4   | Czytelne komunikaty formularza w kodzie; pełnego testu formularza nie powtarzano.                      |
@@ -63,9 +63,9 @@ jasno określać zawartość i częstotliwość po ich ustaleniu.
    i `aria-hidden`, zachowujące kierunki i istniejące dostępne nazwy przycisków.
    Źródło: `mockups/homepage/wonderful-cherry.html`, CTA i kontrolki karuzel;
    analogicznie pięć pozostałych. Polecenie: `$impeccable polish`.
-2. **P1 — Perimenopauza ukryta za pierwszą grupą PCOS.** Obie grupy są w
-   obietnicy hero, ale pierwsze trzy karty desktop dotyczą wyłącznie PCOS.
-   Propozycja: dwa wejścia PCOS / Perimenopauza przesuwające bibliotekę do grupy,
+2. **P1 — Perimenopauza ukryta za pierwszą grupą PMOS (PCOS).** Obie grupy są w
+   obietnicy hero, ale pierwsze trzy karty desktop dotyczą wyłącznie PMOS (PCOS).
+   Propozycja: dwa wejścia PMOS (PCOS) / Perimenopauza przesuwające bibliotekę do grupy,
    albo pierwszy widok zawierający obie grupy. Zachować trzy widoczne karty.
    Źródło: `wonderful.html:175`, pierwsza karta `:211`, perimenopauza `:299`;
    kolejność wspólna dla sześciu makiet. Polecenie: `$impeccable clarify`.
@@ -118,7 +118,7 @@ dlatego, że detektor przekroczył próg.
 
 ## Persony i mocne strony
 
-- Nowa odbiorczyni z PCOS: rozumie ofertę, ale nie widzi jeszcze wyraźnej metody
+- Nowa odbiorczyni z PMOS (PCOS): rozumie ofertę, ale nie widzi jeszcze wyraźnej metody
   pracy; fotografia posiłku na poradniku o badaniach może mylić.
 - Kobieta w perimenopauzie: musi odkryć drugą część biblioteki, zanim zobaczy
   produkty dla siebie.
@@ -137,7 +137,7 @@ porównania może zasłaniać fragment zdjęcia/ceny na mobile; Cherry przy 320 
 
 1. Zakres: same SVG / SVG i dopracowanie treści oraz okładek / pełny powyższy
    pakiet, z poprawą rytmu 03/3a i drobnej czytelności.
-2. Biblioteka: przełączniki PCOS / Perimenopauza / mieszany pierwszy widok /
+2. Biblioteka: przełączniki PMOS (PCOS) / Perimenopauza / mieszany pierwszy widok /
    zachowanie obecnej kolejności.
 
 Zmiany UI, publikacja i przeniesienie do Astro/Sanity pozostają wstrzymane do

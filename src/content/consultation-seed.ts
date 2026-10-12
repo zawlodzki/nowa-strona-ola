@@ -3,15 +3,15 @@ export const consultationCopy = {
     pageTitle: "Konsultacje — Aleksandra Olesiewicz",
     seoTitle: "Konsultacja dietetyczna 1:1 | Aleksandra Olesiewicz",
     seoDescription:
-      "Pojedyncza konsultacja dietetyczna online z Aleksandrą Olesiewicz. PCOS, insulinooporność i odżywianie dopasowane do Ciebie.",
+      "Pojedyncza konsultacja dietetyczna online z Aleksandrą Olesiewicz. PMOS\u00A0(PCOS), insulinooporność i odżywianie dopasowane do Ciebie.",
     heroTitle: "Wiesz już dużo.\nUstal, co dalej.",
     heroLead:
-      "Konsultacja dietetyczna 1:1 przy PCOS i insulinooporności. Przyjrzyjmy się Twojej sytuacji i wybierzmy pierwszy krok, który pasuje do Twojego życia.",
+      "Konsultacja dietetyczna 1:1 przy PMOS\u00A0(PCOS) i insulinooporności. Przyjrzyjmy się Twojej sytuacji i wybierzmy pierwszy krok, który pasuje do Twojego życia.",
     heroPrimary: "Zarezerwuj konsultację",
     heroSecondary: "Zobacz, jak wygląda spotkanie",
     portraitAlt: "Ola, Aleksandra Olesiewicz, dietetyczka kliniczna",
     portraitName: "Ola Olesiewicz",
-    portraitCaption: "Dietetyczka kliniczna. Też mam PCOS.",
+    portraitCaption: "Dietetyczka kliniczna. Też mam PMOS\u00A0(PCOS).",
     pathTitle: "Cel konsultacji",
     pathItems: ["Twoja sytuacja", "Twoje priorytety", "Twój pierwszy krok"],
     problemTitle: "Tyle porad.\nA od czego\nzacząć?",
@@ -20,7 +20,7 @@ export const consultationCopy = {
       "Nic dziwnego, że trudno Ci ruszyć. Ogólne porady nie znają Twojego dnia, wyników ani tego, co już próbowałaś. Podczas konsultacji jest miejsce na cały ten kontekst.",
     ],
     prompts: [
-      "Co jeść przy PCOS?",
+      "Co jeść przy PMOS\u00A0(PCOS)?",
       "Czy te wyniki są ważne?",
       "Co z węglowodanami?",
       "Czy potrzebuję suplementów?",
@@ -31,7 +31,7 @@ export const consultationCopy = {
     mapCaption: "Nie musisz mieć wszystkich odpowiedzi, żeby zacząć.",
     audienceTitle: "Przyjdź z tym,\nco Cię zatrzymuje.",
     audienceLead:
-      "To spotkanie dla Ciebie, jeśli chcesz przełożyć wiedzę o PCOS lub insulinooporności na swoją codzienność.",
+      "To spotkanie dla Ciebie, jeśli chcesz przełożyć wiedzę o PMOS\u00A0(PCOS) lub insulinooporności na swoją codzienność.",
     audience: [
       {
         title: "Masz diagnozę.\nBrakuje Ci kierunku.",
@@ -91,7 +91,8 @@ export const consultationCopy = {
     outcomesClosing:
       "Nie musisz wywracać całego życia. Pierwsza zmiana może mieścić się w Twoim zwykłym dniu.",
     expertTitle: "Po drugiej stronie\njest Ola.",
-    expertIntro: "Dietetyczka kliniczna.\nI kobieta, która też ma PCOS.",
+    expertIntro:
+      "Dietetyczka kliniczna.\nI kobieta, która też ma PMOS\u00A0(PCOS).",
     expertBody:
       "Wiem, ile pytań potrafi się pojawić. Dlatego zaczynam od wysłuchania Ciebie. Szukamy rozwiązań, które uwzględniają Twoje odżywianie, obowiązki i możliwości.\n\nUkończyłam dietetykę ze specjalnością dietetyka kliniczna na Śląskim Uniwersytecie Medycznym. Tłumaczę, po co proponuję daną zmianę, żebyś mogła świadomie zdecydować, jak ją wprowadzić.",
     expertAlt: "Portret Aleksandry Olesiewicz",
@@ -162,15 +163,15 @@ export const consultationCopy = {
     pageTitle: "Consultations — Aleksandra Olesiewicz",
     seoTitle: "1:1 dietetic consultation | Aleksandra Olesiewicz",
     seoDescription:
-      "A single online dietetic consultation with Aleksandra Olesiewicz. PCOS, insulin resistance and nutrition fitted to you.",
+      "A single online dietetic consultation with Aleksandra Olesiewicz. PMOS\u00A0(PCOS), insulin resistance and nutrition fitted to you.",
     heroTitle: "You already know a lot.\nDecide what comes next.",
     heroLead:
-      "A 1:1 dietetic consultation for PCOS and insulin resistance. Let's look at your situation and choose a first step that fits your life.",
+      "A 1:1 dietetic consultation for PMOS\u00A0(PCOS) and insulin resistance. Let's look at your situation and choose a first step that fits your life.",
     heroPrimary: "Book a consultation",
     heroSecondary: "See how the meeting works",
     portraitAlt: "Ola, Aleksandra Olesiewicz, clinical dietitian",
     portraitName: "Ola Olesiewicz",
-    portraitCaption: "Clinical dietitian. I have PCOS too.",
+    portraitCaption: "Clinical dietitian. I have PMOS\u00A0(PCOS) too.",
     pathTitle: "Purpose of the consultation",
     pathItems: ["Your situation", "Your priorities", "Your first step"],
     problemTitle: "So much advice.\nWhere do\nyou start?",
@@ -179,7 +180,7 @@ export const consultationCopy = {
       "No wonder it is hard to get going. General advice does not know your day, your results or what you have already tried. A consultation has room for all of that context.",
     ],
     prompts: [
-      "What should I eat with PCOS?",
+      "What should I eat with PMOS\u00A0(PCOS)?",
       "Do these results matter?",
       "What about carbohydrates?",
       "Do I need supplements?",
@@ -190,7 +191,7 @@ export const consultationCopy = {
     mapCaption: "You do not need all the answers to start.",
     audienceTitle: "Come with whatever\nis holding you back.",
     audienceLead:
-      "This meeting is for you if you want to turn what you know about PCOS or insulin resistance into your everyday life.",
+      "This meeting is for you if you want to turn what you know about PMOS\u00A0(PCOS) or insulin resistance into your everyday life.",
     audience: [
       {
         title: "You have a diagnosis.\nYou lack direction.",
@@ -250,7 +251,8 @@ export const consultationCopy = {
     outcomesClosing:
       "You do not have to turn your whole life upside down. The first change can fit into an ordinary day.",
     expertTitle: "On the other side\nis Ola.",
-    expertIntro: "A clinical dietitian.\nAnd a woman who has PCOS too.",
+    expertIntro:
+      "A clinical dietitian.\nAnd a woman who has PMOS\u00A0(PCOS) too.",
     expertBody:
       "I know how many questions can come up. That is why I start by listening to you. We look for solutions that fit your eating, duties and what is possible for you.\n\nI completed a degree in dietetics, specialising in clinical dietetics, at the Medical University of Silesia. I explain why I suggest a change, so you can decide consciously how to bring it in.",
     expertAlt: "Portrait of Aleksandra Olesiewicz",

@@ -29,17 +29,17 @@ Pierwszeństwo mają bieżące decyzje zapisane w
 [konfiguracji CMS](HOMEPAGE-CMS-CONFIG.md), w tym pojedyncze konsultacje,
 prawdziwość opinii oraz wskaźnik 9000+ (Instagram, od 11.10.2026).
 
-| Źródło                                                                                                                                                                                                       | Co wykorzystujemy                                                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Homepage 3a](../mockups/homepage/cherry-white.html), [style 3a](../mockups/homepage/cherry.css), [białe tło](../mockups/homepage/white-background.css), [dopasowanie copy](../mockups/homepage/3a-copy.css) | Autorytet wizualny; obejrzany lokalnie na desktopie 1440 px i mobile 390 px.                                                                              |
-| [Poprzednia strona „O mnie”](/Users/grzesiek/Github/ola-homepage/app/o-mnie/page.js)                                                                                                                         | Osobiste doświadczenie zaburzeń hormonalnych, empatia, indywidualne podejście. Rozbudowujemy bardzo krótki układ hero → opinie → CTA.                     |
-| [Opinie poprzedniej strony](/Users/grzesiek/Github/ola-homepage/data/testimonials.js)                                                                                                                        | Oryginalne cytaty; prawdziwość potwierdzona wcześniej przez użytkownika.                                                                                  |
-| [FIRMA: marka](/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/.shortcut-targets-by-id/1DF6-5PSHY3Mo2wPVczTflEek4_DzLFU3/FIRMA/00_KONTEKST/marka.md)                                  | Dietetyczka kliniczna, PCOS/IO, własne doświadczenie PCOS, elastyczne odżywianie, analiza wyników i tłumaczenie zaleceń. Aktualizacja źródła: 05.08.2026. |
-| [FIRMA: klienci](/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/.shortcut-targets-by-id/1DF6-5PSHY3Mo2wPVczTflEek4_DzLFU3/FIRMA/00_KONTEKST/klienci.md)                              | Potrzeba bycia wysłuchaną, zagubienie w poradach, brak czasu, potrzeba jasnych kroków. Wypowiedzi z tego dokumentu nie stają się referencjami.            |
-| [FIRMA: style guide](/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/.shortcut-targets-by-id/1DF6-5PSHY3Mo2wPVczTflEek4_DzLFU3/FIRMA/03_CONTENT/STRATEGIA/style-guide.md)             | Ciepły, bezpośredni rejestr, prosty język i konkret. Źródło samo zaznacza, że nie jest niezależną próbką osobistego głosu Oli.                            |
-| [FIRMA: rozstrzygnięcia źródeł](/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/.shortcut-targets-by-id/1DF6-5PSHY3Mo2wPVczTflEek4_DzLFU3/FIRMA/ZRODLA-PRAWDY.md)                     | Rozróżnienie aktualnych materiałów, archiwum i niewdrożonych planów. Bieżąca decyzja o konsultacjach zastępuje historyczne założenia mentoringu.          |
-| [10000000 Sales Copy Advice](</Users/grzesiek/Github/CRM-delivery-framework/frameworks/writing/10000000 Sales Copy Advice.md>)                                                                               | Identyfikacja przez własne doświadczenie, empatia, konkretny pierwszy krok i pokazywanie praktycznej wartości.                                            |
-| [Wybrane portrety](../src/assets/portraits/README.md), [Wonderful](../archive/wonderful-design-system/README.md), [ruch](../archive/wonderful-design-system/MOTION.md)                                       | Istniejące media, font, hierarchia, odstępy, dostępność i reduced motion.                                                                                 |
+| Źródło                                                                                                                                                                                                       | Co wykorzystujemy                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Homepage 3a](../mockups/homepage/cherry-white.html), [style 3a](../mockups/homepage/cherry.css), [białe tło](../mockups/homepage/white-background.css), [dopasowanie copy](../mockups/homepage/3a-copy.css) | Autorytet wizualny; obejrzany lokalnie na desktopie 1440 px i mobile 390 px.                                                                                     |
+| [Poprzednia strona „O mnie”](/Users/grzesiek/Github/ola-homepage/app/o-mnie/page.js)                                                                                                                         | Osobiste doświadczenie zaburzeń hormonalnych, empatia, indywidualne podejście. Rozbudowujemy bardzo krótki układ hero → opinie → CTA.                            |
+| [Opinie poprzedniej strony](/Users/grzesiek/Github/ola-homepage/data/testimonials.js)                                                                                                                        | Oryginalne cytaty; prawdziwość potwierdzona wcześniej przez użytkownika.                                                                                         |
+| [FIRMA: marka](/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/.shortcut-targets-by-id/1DF6-5PSHY3Mo2wPVczTflEek4_DzLFU3/FIRMA/00_KONTEKST/marka.md)                                  | Dietetyczka kliniczna, PMOS (PCOS)/IO, własne doświadczenie PMOS, elastyczne odżywianie, analiza wyników i tłumaczenie zaleceń. Aktualizacja źródła: 05.08.2026. |
+| [FIRMA: klienci](/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/.shortcut-targets-by-id/1DF6-5PSHY3Mo2wPVczTflEek4_DzLFU3/FIRMA/00_KONTEKST/klienci.md)                              | Potrzeba bycia wysłuchaną, zagubienie w poradach, brak czasu, potrzeba jasnych kroków. Wypowiedzi z tego dokumentu nie stają się referencjami.                   |
+| [FIRMA: style guide](/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/.shortcut-targets-by-id/1DF6-5PSHY3Mo2wPVczTflEek4_DzLFU3/FIRMA/03_CONTENT/STRATEGIA/style-guide.md)             | Ciepły, bezpośredni rejestr, prosty język i konkret. Źródło samo zaznacza, że nie jest niezależną próbką osobistego głosu Oli.                                   |
+| [FIRMA: rozstrzygnięcia źródeł](/Users/grzesiek/Library/CloudStorage/GoogleDrive-grzesiek@zawlodzki.pl/.shortcut-targets-by-id/1DF6-5PSHY3Mo2wPVczTflEek4_DzLFU3/FIRMA/ZRODLA-PRAWDY.md)                     | Rozróżnienie aktualnych materiałów, archiwum i niewdrożonych planów. Bieżąca decyzja o konsultacjach zastępuje historyczne założenia mentoringu.                 |
+| [10000000 Sales Copy Advice](</Users/grzesiek/Github/CRM-delivery-framework/frameworks/writing/10000000 Sales Copy Advice.md>)                                                                               | Identyfikacja przez własne doświadczenie, empatia, konkretny pierwszy krok i pokazywanie praktycznej wartości.                                                   |
+| [Wybrane portrety](../src/assets/portraits/README.md), [Wonderful](../archive/wonderful-design-system/README.md), [ruch](../archive/wonderful-design-system/MOTION.md)                                       | Istniejące media, font, hierarchia, odstępy, dostępność i reduced motion.                                                                                        |
 
 Nie wykorzystano indywidualnych kart zdrowia pacjentek. Uczelnię i ukończony
 kierunek potwierdził bezpośrednio użytkownik 06.10.2026; ta decyzja zastępuje
@@ -49,7 +49,7 @@ Roadmapy ani pełnej metody R.I.S.E. do opisu pojedynczej konsultacji.
 
 Style guide zawiera przytoczoną deklarację o czterech latach poszukiwania diagnozy.
 To materiał wtórny; w podstawowym copy pozostaje krótkie, potwierdzone doświadczenie
-PCOS. Rozwinięcie chronologii wymaga potwierdzenia przez Olę. Nie wprowadzamy informacji
+PMOS (PCOS). Rozwinięcie chronologii wymaga potwierdzenia przez Olę. Nie wprowadzamy informacji
 rodzinnych ani historycznego statusu ciąży z dokumentów wewnętrznych do publicznego bio.
 
 ## 3. Zrealizowany układ
@@ -75,10 +75,12 @@ wyraźnie mówi o dokumencie do uzupełnienia.
 
 ### Hero
 
-**Jestem Ola. Znam PCOS od środka.**
+**Jestem Ola.**
+**Znam PMOS**
+**od środka.**
 
 Jestem dietetyczką kliniczną, absolwentką Śląskiego Uniwersytetu Medycznego.
-Pomagam kobietom z PCOS i insulinoopornością uporządkować odżywianie i wybrać
+Pomagam kobietom z PMOS (PCOS) i insulinoopornością uporządkować odżywianie i wybrać
 zmiany, które pasują do ich codzienności.
 
 CTA: **Zobacz, jak pracuję** oraz **Poznaj moje materiały**.
@@ -87,7 +89,7 @@ CTA: **Zobacz, jak pracuję** oraz **Poznaj moje materiały**.
 
 **Chcę, żebyś czuła się wysłuchana.**
 
-Znam PCOS także z własnego doświadczenia.
+Znam PMOS (PCOS) także z własnego doświadczenia.
 
 Dlatego tak ważne jest dla mnie, żebyś mogła spokojnie opowiedzieć o swojej
 sytuacji i zadać pytania, z którymi przychodzisz.
@@ -141,7 +143,7 @@ bez przypisania rezultatu pojedynczej konsultacji i bez ocen liczbowych.
 
 **Poznaj mnie także przez to, co tworzę.**
 
-Piszę o PCOS, insulinooporności i codziennym odżywianiu. Przygotowuję też materiały
+Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu. Przygotowuję też materiały
 o perimenopauzie. Wybierz temat, który jest Ci teraz bliski.
 
 - **Poznaj tematy e-booków** → `cherry-white.html#ebooki`; status „W przygotowaniu”.
@@ -163,11 +165,11 @@ Newsletter i stopka zachowują copy homepage 3a i demonstracyjny formularz.
 | Technika                                          | Zastosowanie i granica                                                                                                                                                                                                     |
 | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Mała czynność prowadzi do wartościowego rezultatu | Konsultacja zaczyna się od pytań i ustalenia priorytetów. Rezultat opisujemy jako jasność kolejnych kroków, bez obietnicy zmiany zdrowia po jednej wizycie.                                                                |
-| Złożony problem ma zrozumiały punkt wejścia       | Chaos porad przekładamy na analizę sytuacji i codziennych posiłków; nie nazywamy PCOS prostym problemem do szybkiego rozwiązania.                                                                                          |
+| Złożony problem ma zrozumiały punkt wejścia       | Chaos porad przekładamy na analizę sytuacji i codziennych posiłków; nie nazywamy PMOS (PCOS) prostym problemem do szybkiego rozwiązania.                                                                                   |
 | Pierwszy krok jest blisko                         | W hero „Zobacz, jak pracuję” prowadzi do podejścia; dalej można przejść do materiałów lub konsultacji. Cena i czas konsultacji są widoczne przy jej CTA. Nie stosujemy obietnic natychmiastowych efektów ani presji czasu. |
 | Nie obwiniaj odbiorczyni                          | Nazywamy trudność sprzecznych porad, pytamy o możliwości i traktujemy je jako część planowania zmian. Nie tworzymy wroga w osobie lekarza ani nie sugerujemy odstawienia leczenia.                                         |
 | Zauważ wcześniejsze starania                      | „Przyjrzeć się temu, co już robisz” uznaje jej dotychczasową pracę. Nie twierdzimy, że najtrudniejszy etap ma już za sobą.                                                                                                 |
-| Własne doświadczenie buduje identyfikację         | Hero i krótki osobisty kontekst wykorzystują potwierdzone doświadczenie PCOS. Nie dopisujemy autobiograficznych scen i efektów.                                                                                            |
+| Własne doświadczenie buduje identyfikację         | Hero i krótki osobisty kontekst wykorzystują potwierdzone doświadczenie PMOS (PCOS). Nie dopisujemy autobiograficznych scen i efektów.                                                                                     |
 | Pokaż coś, co zwykle pozostaje za kulisami        | Sekcja podejścia ujawnia, jak Ola łączy wyniki, posiłki, preferencje i czas. Konkret zastępuje sztuczną zapowiedź „sekretnej metody”.                                                                                      |
 
 W porównaniu z poprzednią stroną ogólne „Teraz czas na Twoją zmianę” zastępuje

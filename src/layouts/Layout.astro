@@ -2,12 +2,14 @@
 import monogramIcon from "../assets/brand/logo-monogram.svg?url";
 import switzerWoff2 from "../assets/fonts/switzer/Switzer-Variable.woff2?url";
 import "../styles/global.css";
+import { catalogText } from "@/lib/catalog-text";
 import { htmlLang } from "@/lib/seo/site";
 interface Props {
   lang: "pl" | "en";
   title: string;
 }
 const { lang, title } = Astro.props;
+const documentTitle = catalogText(title);
 ---
 
 <!doctype html>
@@ -25,7 +27,7 @@ const { lang, title } = Astro.props;
       crossorigin
     />
     <link rel="icon" href={monogramIcon} type="image/svg+xml" />
-    <title>{title}</title>
+    <title>{documentTitle}</title>
   </head>
   <body>
     <a class="skip" href="#main">

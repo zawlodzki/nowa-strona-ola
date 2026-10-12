@@ -35,7 +35,7 @@ kolorów ani pozycji elementów. Widoczność obu miejsc newslettera jest wspól
 | Obraz główny         | `article.image` (`mediaObject`)           | Obraz, alt i podpis; wykorzystać hotspot/kadr.                                                                                             |
 | Publikacja i edycja  | `article.publishedAt`, `updatedAt`        | Wprowadzić rzeczywiste daty. Aktualizacja nie wcześniej niż publikacja. Nie używać `_updatedAt` jako daty merytorycznej edycji.            |
 | Autor                | `article.authors[]` → `author`            | Wybrać istniejącą Aleksandrę. Biogram, rola i portret z dokumentu autora, bez kopii w artykule. Przy wielu autorach pokazać każdy biogram. |
-| Kategorie            | `article.categories[]` → `category`       | W przykładzie PCOS; referencje w tym samym języku.                                                                                         |
+| Kategorie            | `article.categories[]` → `category`       | W przykładzie PMOS (PCOS); referencje w tym samym języku.                                                                                  |
 | Treść                | `article.body` (`articleBody`)            | Akapity, H2/H3, bold, italic, linki, listy, cytaty, obrazy, wyróżnienia, tabele i CTA.                                                     |
 | Źródła i SEO         | `article.sources[]`, `seo`                | Prawdziwe źródła dla wpisów merytorycznych; metadata zgodne z treścią.                                                                     |
 
@@ -84,9 +84,9 @@ puste karty. Pole `article.related` oznacza powiązane wpisy, nie e-booki.
 
 Przykład dla tej makiety, w kolejności:
 
-1. Suplementy w PCOS.
+1. Suplementy w PMOS (PCOS).
 2. Badania, które mają sens.
-3. Szczupła, a jednak PCOS.
+3. Szczupła, a jednak PMOS (PCOS).
 
 Okładki są obecnie HTML/CSS. Wybrać eksport do plików lub kontrolowany renderer
 z instrukcji homepage; nie wklejać nieistniejących URL-i. Cena, status i adres

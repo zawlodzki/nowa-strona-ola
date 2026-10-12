@@ -101,7 +101,7 @@ const articleHtml = await readFile(
 assert.match(articleHtml, /article3a/);
 assert.match(
   articleHtml,
-  /Jak przygotować się do konsultacji dietetycznej przy PCOS\?/,
+  /Jak przygotować się do konsultacji dietetycznej przy PMOS \(PCOS\)\?/,
 );
 assert.match(articleHtml, /W tym artykule/);
 assert.match(articleHtml, /"@type":"FAQPage"/);

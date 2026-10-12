@@ -1,8 +1,9 @@
+import { catalogText } from "@/lib/catalog-text";
 import type { InventoryEntry } from "@/lib/seo/inventory";
 import { absoluteUrl, htmlLang } from "@/lib/seo/site";
 
 function escapeXml(value: string): string {
-  return value
+  return catalogText(value)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")

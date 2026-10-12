@@ -68,8 +68,8 @@ function consultationPage(language, created) {
         ? "Konsultacja dietetyczna 1:1 | Aleksandra Olesiewicz"
         : "1:1 dietetic consultation | Aleksandra Olesiewicz",
       description: pl
-        ? "Pojedyncza konsultacja dietetyczna online z Aleksandrą Olesiewicz. PCOS, insulinooporność i odżywianie dopasowane do Ciebie."
-        : "A single online dietetic consultation with Aleksandra Olesiewicz. PCOS, insulin resistance and nutrition fitted to you.",
+        ? "Pojedyncza konsultacja dietetyczna online z Aleksandrą Olesiewicz. PMOS\u00A0(PCOS), insulinooporność i odżywianie dopasowane do Ciebie."
+        : "A single online dietetic consultation with Aleksandra Olesiewicz. PMOS\u00A0(PCOS), insulin resistance and nutrition fitted to you.",
     },
     translation: reference(
       pl ? "page-consultation-en" : "page-consultation-pl",

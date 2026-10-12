@@ -31,7 +31,7 @@ Układ, typografia i tła paneli treści pozostają w CSS.
 | article-3a.html                    | Article3a         | Header, Breadcrumbs, Prose CSS, ContentCard/Carousel, FaqItem, Newsletter, Footer                        | Portable Text, TOC, sidebar, autor, share, źródła     |
 
 Dwie strony bloga używają jednego szablonu, nie dwóch komponentów ze skopiowanym
-HTML. Front „Suplementy w PCOS” jest jasny z motywem Cel/Dawka/Decyzja,
+HTML. Front „Suplementy w PMOS (PCOS)” jest jasny z motywem Cel/Dawka/Decyzja,
 identyczny na homepage, w kolekcji i produkcie. Motywy innych e-booków to dane
 produktu oraz kontrolowany renderer; nie losować ich na każdym użyciu.
 

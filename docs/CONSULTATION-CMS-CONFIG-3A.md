@@ -26,7 +26,7 @@ rezerwacja i publikacja nie są wykonane. Bieżące decyzje wspólne:
 - Zakres bazowy z zaakceptowanego homepage: rozmowa o dostępnych wynikach,
   odżywianiu, codzienności, priorytetach i pierwszych zmianach. Nowe sformułowania,
   przebieg i FAQ są propozycją do oceny, nie potwierdzonym regulaminem usługi.
-- PCOS/IO, osobiste doświadczenie PCOS: FIRMA `00_KONTEKST/marka.md`,
+- PMOS (PCOS)/IO, osobiste doświadczenie PMOS: FIRMA `00_KONTEKST/marka.md`,
   `klienci.md` i poprzednie `ola-homepage/app/o-mnie/page.js`.
   Potwierdzone ukończenie dietetyki klinicznej na Śląskim Uniwersytecie Medycznym
   i 450+ pochodzą z decyzji użytkownika 06.10.2026 (od 11.10.2026 wskaźnik
@@ -49,18 +49,18 @@ Navbar → hero → definicja problemu → dla kogo → jak wygląda konsultacja
 efekty → prowadząca → cena → opinie → FAQ → footer.
 Dodatkowy blok prowadzącej wzmacnia zaufanie do osoby świadczącej usługę.
 
-| Część      | Bieżący nagłówek / treść główna                                                                                                                        | Rola                                                                                         |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| Hero       | „Wiesz już dużo. Ustal, co dalej.”                                                                                                                     | Uznaje dotychczasowy wysiłek; nazywa bliski, realistyczny rezultat.                          |
-| Lead       | „Konsultacja dietetyczna 1:1 przy PCOS i insulinooporności. Przyjrzyjmy się Twojej sytuacji i wybierzmy pierwszy krok, który pasuje do Twojego życia.” | Oferta, odbiorczyni i korzyść w pierwszym ekranie.                                           |
-| Problem    | „Tyle porad. A od czego zacząć?”                                                                                                                       | Sprzeczne ogólne porady; bez winy odbiorczyni.                                               |
-| Dla kogo   | „Przyjdź z tym, co Cię zatrzymuje.”                                                                                                                    | Diagnoza bez kierunku, pytania mimo starań, dostępne wyniki, potrzeba jednego spotkania.     |
-| Przebieg   | „60 minut. Cała uwaga na Tobie.”                                                                                                                       | Trzy kolejne etapy: historia → informacje → priorytety, bez niepotwierdzonych minut na etap. |
-| Efekty     | „Wyjdź z kierunkiem. Zacznij po swojemu.”                                                                                                              | Rozumiem → wybieram → zaczynam. Rezultat rozmowy, bez gwarancji zdrowotnych.                 |
-| Prowadząca | „Po drugiej stronie jest Ola.”                                                                                                                         | Rola, własne PCOS, wykształcenie i podejście.                                                |
-| Cena       | „Jedno spotkanie. Twój kolejny krok.”                                                                                                                  | 450 zł / 60 minut; zakres i brak zobowiązania do pakietu.                                    |
-| Opinie     | „Wysłuchana. Zrozumiana. Zaopiekowana.”                                                                                                                | Dwa pełne cytaty o wcześniejszej współpracy, bez ocen i fikcyjnych podpisów.                 |
-| FAQ        | „Jeszcze kilka pytań?”                                                                                                                                 | Jedna wizyta, badania, jadłospis, oczekiwania, granice dietetyki i rezerwacja.               |
+| Część      | Bieżący nagłówek / treść główna                                                                                                                               | Rola                                                                                         |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Hero       | „Wiesz już dużo. Ustal, co dalej.”                                                                                                                            | Uznaje dotychczasowy wysiłek; nazywa bliski, realistyczny rezultat.                          |
+| Lead       | „Konsultacja dietetyczna 1:1 przy PMOS (PCOS) i insulinooporności. Przyjrzyjmy się Twojej sytuacji i wybierzmy pierwszy krok, który pasuje do Twojego życia.” | Oferta, odbiorczyni i korzyść w pierwszym ekranie.                                           |
+| Problem    | „Tyle porad. A od czego zacząć?”                                                                                                                              | Sprzeczne ogólne porady; bez winy odbiorczyni.                                               |
+| Dla kogo   | „Przyjdź z tym, co Cię zatrzymuje.”                                                                                                                           | Diagnoza bez kierunku, pytania mimo starań, dostępne wyniki, potrzeba jednego spotkania.     |
+| Przebieg   | „60 minut. Cała uwaga na Tobie.”                                                                                                                              | Trzy kolejne etapy: historia → informacje → priorytety, bez niepotwierdzonych minut na etap. |
+| Efekty     | „Wyjdź z kierunkiem. Zacznij po swojemu.”                                                                                                                     | Rozumiem → wybieram → zaczynam. Rezultat rozmowy, bez gwarancji zdrowotnych.                 |
+| Prowadząca | „Po drugiej stronie jest Ola.”                                                                                                                                | Rola, własne PMOS (PCOS), wykształcenie i podejście.                                         |
+| Cena       | „Jedno spotkanie. Twój kolejny krok.”                                                                                                                         | 450 zł / 60 minut; zakres i brak zobowiązania do pakietu.                                    |
+| Opinie     | „Wysłuchana. Zrozumiana. Zaopiekowana.”                                                                                                                       | Dwa pełne cytaty o wcześniejszej współpracy, bez ocen i fikcyjnych podpisów.                 |
+| FAQ        | „Jeszcze kilka pytań?”                                                                                                                                        | Jedna wizyta, badania, jadłospis, oczekiwania, granice dietetyki i rezerwacja.               |
 
 Pełne propozycje akapitów i sześciu odpowiedzi FAQ są w linkowanym HTML.
 Przy przenoszeniu zachować je jako dane, nie tekst ukryty w CSS.

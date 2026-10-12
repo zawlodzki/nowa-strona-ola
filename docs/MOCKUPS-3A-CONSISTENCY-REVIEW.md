@@ -61,7 +61,7 @@ nie zastępuje kontroli natywnego powiększenia przeglądarki.
 
 ### 1. P2 — ten sam e-book ma dwie różne okładki
 
-„Suplementy w PCOS” na homepage, w kolekcji i pod artykułem ma jasną okładkę
+„Suplementy w PMOS (PCOS)” na homepage, w kolekcji i pod artykułem ma jasną okładkę
 `#fff4f6`, tekst `#70283f` i motyw „Cel / Dawka / Decyzja”. Landing pokazuje
 wiśniową okładkę `#882f48`, jasny tekst, inny układ i „Cel / Dowody / Decyzja”.
 Wiśniowa wersja w katalogu przynależy do innego produktu — „Badania, które mają sens”.

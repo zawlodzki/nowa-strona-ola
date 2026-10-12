@@ -4,10 +4,10 @@ const PCOS_SOURCE_HREF = "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/";
 
 export const ebookCopy = {
   pl: {
-    seoTitle: "Suplementy w PCOS | E-book Aleksandry Olesiewicz",
+    seoTitle: "Suplementy w PMOS\u00A0(PCOS) | E-book Aleksandry Olesiewicz",
     seoDescription:
-      "Suplementy w PCOS. Uporządkuj swoją półkę i przygotuj pytania do specjalisty. Zapowiedź e-booka, sprzedaż nie jest uruchomiona.",
-    heroEyebrow: "E-book · Suplementy w PCOS",
+      "Suplementy w PMOS\u00A0(PCOS). Uporządkuj swoją półkę i przygotuj pytania do specjalisty. Zapowiedź e-booka, sprzedaż nie jest uruchomiona.",
+    heroEyebrow: "E-book · Suplementy w PMOS\u00A0(PCOS)",
     heroTitle: "Zrób porządek\nz suplementami.",
     heroLead:
       "Zanim kupisz kolejne opakowanie, sprawdź, po co je bierzesz. Uporządkuj swoją półkę i pytania do specjalisty.",
@@ -38,7 +38,7 @@ export const ebookCopy = {
       "Nie zaczynasz od zera. Już szukasz rozwiązań. Teraz możesz poukładać je w całość.",
     audienceItems: [
       {
-        title: "Masz PCOS i pełną półkę.",
+        title: "Masz PMOS\u00A0(PCOS) i pełną półkę.",
         body: "Bierzesz kilka preparatów, ale trudno Ci powiedzieć, jaki cel ma każdy z nich.",
       },
       {
@@ -108,7 +108,7 @@ export const ebookCopy = {
           "Zapisz ustalenia ze specjalistą, obserwacje i datę ponownej oceny. Nie zmieniaj wszystkiego naraz.",
       },
     ],
-    sampleKicker: "Suplementy w PCOS · Karta pracy",
+    sampleKicker: "Suplementy w PMOS\u00A0(PCOS) · Karta pracy",
     sampleSheetTitle: "Moja półka.\nMoje pytania.",
     sampleSheetLead:
       "Zapisz jeden preparat. Zacznij od tego, który właśnie Ci się kończy.",
@@ -164,8 +164,8 @@ export const ebookCopy = {
     authorEyebrow: "Aleksandra Olesiewicz · Dietetyczka kliniczna",
     authorTitle: "Dobra decyzja\nzaczyna się od „po co?”.",
     authorParagraphs: [
-      "W mojej pracy z kobietami z PCOS liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
-      "Suplementy też potrzebują kontekstu. W wytycznych PCOS z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania.",
+      "W mojej pracy z kobietami z PMOS\u00A0(PCOS) liczy się zrozumienie ich codzienności. Ten sam punkt wyjścia proponuję w ebooku: najpierw Twoja sytuacja, potem kolejne kroki.",
+      "Suplementy też potrzebują kontekstu. W wytycznych PMOS\u00A0(PCOS) z 2023 roku korzyści kliniczne inozytolu oceniono jako ograniczone. Dlatego warto rozmawiać o oczekiwaniach i zasadności stosowania.",
     ],
     sourceLabel: "Zobacz źródło: wytyczne PCOS 2023, sekcja 4.7",
     sourceHref: PCOS_SOURCE_HREF,
@@ -251,10 +251,11 @@ export const ebookCopy = {
     },
   },
   en: {
-    seoTitle: "Supplements in PCOS | E-book by Aleksandra Olesiewicz",
+    seoTitle:
+      "Supplements in PMOS\u00A0(PCOS) | E-book by Aleksandra Olesiewicz",
     seoDescription:
-      "Supplements in PCOS. Tidy your shelf and prepare questions for a specialist. An announcement — sales are not live.",
-    heroEyebrow: "E-book · Supplements in PCOS",
+      "Supplements in PMOS\u00A0(PCOS). Tidy your shelf and prepare questions for a specialist. An announcement — sales are not live.",
+    heroEyebrow: "E-book · Supplements in PMOS\u00A0(PCOS)",
     heroTitle: "Put your supplements\nin order.",
     heroLead:
       "Before you buy another pack, check why you are taking it. Tidy your shelf and your questions for a specialist.",
@@ -286,7 +287,7 @@ export const ebookCopy = {
       "You are not starting from scratch. You are already looking for answers. Now you can put them together.",
     audienceItems: [
       {
-        title: "You have PCOS and a full shelf.",
+        title: "You have PMOS\u00A0(PCOS) and a full shelf.",
         body: "You take several products, but it is hard to say what aim each one has.",
       },
       {
@@ -356,7 +357,7 @@ export const ebookCopy = {
           "Write down what you agreed with a specialist, what you observe, and the date of the next review. Do not change everything at once.",
       },
     ],
-    sampleKicker: "Supplements in PCOS · Worksheet",
+    sampleKicker: "Supplements in PMOS\u00A0(PCOS) · Worksheet",
     sampleSheetTitle: "My shelf.\nMy questions.",
     sampleSheetLead:
       "Write down one product. Start with the one that is running out.",
@@ -418,8 +419,8 @@ export const ebookCopy = {
     authorEyebrow: "Aleksandra Olesiewicz · Clinical dietitian",
     authorTitle: "A good decision\nstarts with “why?”.",
     authorParagraphs: [
-      "In my work with women with PCOS, understanding daily life comes first. I offer the same starting point in the e-book: your situation first, then the next steps.",
-      "Supplements need context too. In the 2023 PCOS guideline, the clinical benefit of inositol was judged limited. That is why it is worth talking about expectations and whether use is justified.",
+      "In my work with women with PMOS\u00A0(PCOS), understanding daily life comes first. I offer the same starting point in the e-book: your situation first, then the next steps.",
+      "Supplements need context too. In the 2023 PMOS\u00A0(PCOS) guideline, the clinical benefit of inositol was judged limited. That is why it is worth talking about expectations and whether use is justified.",
     ],
     sourceLabel: "See the source: 2023 PCOS guideline, section 4.7",
     sourceHref: PCOS_SOURCE_HREF,

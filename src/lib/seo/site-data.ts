@@ -15,9 +15,9 @@ export interface PersonSeoData {
   knowsAbout: { name: string; sameAs: string[] }[];
   alumniOf: { name: string; url?: string };
   occupationCode?: string;
-  /** Public credentials only; must match the list on „O mnie”. */
+  /** Public credentials. The degree level and year stay here and are not rows on „O mnie”. */
   credentials: readonly PersonCredential[];
-  /** Earlier workplaces listed on „O mnie”. */
+  /** Earlier workplaces. JSON-LD alumniOf only. „O mnie” does not list them. */
   experience: readonly PersonExperience[];
   /** Site raster key or image URL of a real portrait. */
   portrait: string;

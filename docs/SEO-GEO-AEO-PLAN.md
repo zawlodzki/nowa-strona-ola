@@ -68,7 +68,7 @@ Szczegóły wraz z plikami i liniami są w notatce w [postępie](PROGRESS.md).
    Fakty mają datę i źródło. Nagłówki H2 mają formę pytań. Na końcu jest
    sekcja „skąd te informacje”. Autor ma widoczny biogram.
 7. **Encja omawianego tematu z `sameAs`.** Na zawlodzki.pl to Pipedrive
-   z linkiem do Wikipedii. U Oli: PCOS, insulinooporność.
+   z linkiem do Wikipedii. U Oli: PMOS (PCOS), insulinooporność.
 8. **Opinie bez znaczników `Review` i `AggregateRating`.**
 9. **ProfilePage dla „O mnie”**, z `mainEntity` → `#person`.
 
@@ -147,7 +147,7 @@ wymaga utrzymania. Dzięki temu każda strona jest kompletna dla parsera.
 - `hasCredential`: `EducationalOccupationalCredential` dla dyplomu
   (`credentialCategory: "degree"`, `recognizedBy` → uczelnia). Tylko gdy
   dyplom jest pokazany lub opisany na „O mnie” (D5).
-- `knowsAbout`: tematy z dokumentów kategorii (PCOS, insulinooporność,
+- `knowsAbout`: tematy z dokumentów kategorii (PMOS (PCOS), insulinooporność,
   perimenopauza), z `sameAs` do Wikidaty. To ta sama lista co
   specjalizacje widoczne na stronie.
 - `sameAs`: tylko profile prowadzone przez Olę. Obecnie Instagram,

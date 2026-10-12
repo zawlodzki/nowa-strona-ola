@@ -4,6 +4,7 @@ import "./components/ConsentPanel.css";
 import ThemePreference from "./components/ThemePreference.astro";
 import fontUrl from "../assets/fonts/switzer/Switzer-Variable.woff2?url";
 import iconUrl from "../assets/brand/logo-monogram.svg?url";
+import { catalogText } from "@/lib/catalog-text";
 import { htmlLang, isIndexingEnabled } from "@/lib/seo/site";
 interface Props {
   title: string;
@@ -21,6 +22,8 @@ const {
   noindex = !isIndexingEnabled(),
   legacyBase = false,
 } = Astro.props;
+const documentTitle = catalogText(title);
+const metaDescription = description ? catalogText(description) : undefined;
 ---
 
 <!doctype html>
@@ -30,8 +33,8 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <ThemePreference />
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
+    <title>{documentTitle}</title>
+    {metaDescription && <meta name="description" content={metaDescription} />}
     <meta
       name="robots"
       content={

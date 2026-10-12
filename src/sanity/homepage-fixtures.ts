@@ -73,8 +73,8 @@ export function authorFixture(language: Locale) {
     role: language === "pl" ? "Dietetyczka kliniczna" : "Clinical dietitian",
     bio:
       language === "pl"
-        ? "Specjalizuję się w PCOS i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Znam PCOS także z własnego doświadczenia."
-        : "I specialise in PCOS and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also know PCOS from my own experience.",
+        ? "Specjalizuję się w PMOS\u00A0(PCOS) i insulinooporności. Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia. Znam PMOS\u00A0(PCOS) także z własnego doświadczenia."
+        : "I specialise in PMOS\u00A0(PCOS) and insulin resistance. I help you organise nutrition and choose next steps that fit your life. I also know PMOS\u00A0(PCOS) from my own experience.",
     educationInstitution: "Śląski Uniwersytet Medyczny",
     educationProgram:
       language === "pl" ? "Dietetyka kliniczna" : "Clinical dietetics",

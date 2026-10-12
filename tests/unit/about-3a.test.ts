@@ -24,7 +24,8 @@ describe("about 3a fixtures", () => {
       "formSection",
     ]);
     const view = mapAbout(page, "pl");
-    expect(view.hero.title).toContain("Jestem Ola");
+    expect(view.hero.title).toBe("Jestem Ola.\nZnam PMOS\nod środka.");
+    expect(view.hero.lead).toContain("PMOS\u00A0(PCOS)");
     expect(view.experience.value).toBe(9000);
     expect(view.credentials.person.educationInstitution).toBe(
       "Śląski Uniwersytet Medyczny",
@@ -38,16 +39,22 @@ describe("about 3a fixtures", () => {
       level: "bachelor",
       name: "Dietetyka",
       specialization: "dietetyka kliniczna",
-      department: "Wydział Nauk o Zdrowiu w Bytomiu",
+      department: "Wydział Zdrowia Publicznego w Bytomiu",
       year: 2025,
     });
     expect(view.credentials.person.practiceSince).toBe(2022);
     expect(view.credentials.person.experience).toHaveLength(2);
+    expect(view.story.body[0]).toBe(
+      "Znam PMOS\u00A0(PCOS) także z własnego doświadczenia. Jak wiele dietetyczek, zaczęłam od szukania rozwiązań dla własnych problemów hormonalnych.",
+    );
+    expect(view.story.body[1]).toBe(
+      "Najpierw uczyłam się sama i to w odżywianiu znalazłam wiele odpowiedzi, których szukałam. Tę wiedzę uporządkowałam i poszerzyłam na studiach dietetycznych na Śląskim Uniwersytecie Medycznym. Dziś pracuję z kobietami, które mierzą się z podobnymi trudnościami jak ja.",
+    );
     expect(view.credentials.person.diploma).toMatchObject({
       src: "diploma",
       tone: "photo",
       label:
-        "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
+        "Aleksandra Olesiewicz z pracą dyplomową przed budynkiem Wydziału Zdrowia Publicznego w Bytomiu",
     });
     expect(view.approach.steps).toHaveLength(3);
     expect(view.approach.note).toMatch(/Nie zastępuje/);
@@ -66,11 +73,12 @@ describe("about 3a fixtures", () => {
   it("does not use Polish copy under the English about page", async () => {
     const page = await getPage("en", "about", { environment: {} });
     const view = mapAbout(page, "en");
-    expect(view.hero.title).toContain("I am Ola");
+    expect(view.hero.title).toBe("I am Ola.\nI know PMOS\nfrom the inside.");
+    expect(view.hero.lead).toContain("PMOS\u00A0(PCOS)");
     expect(view.hero.lead).not.toMatch(/Jestem Ola/);
     expect(view.credentials.person.educationProgram).toBe("Clinical dietetics");
     expect(view.credentials.person.diploma?.label).toBe(
-      "Aleksandra Olesiewicz with her diploma outside the Faculty of Public Health, Medical University of Silesia in Bytom",
+      "Aleksandra Olesiewicz with her thesis outside the Faculty of Public Health building in Bytom",
     );
     expect(view.newsletter.submit).toBe("Subscribe");
   });
@@ -81,19 +89,20 @@ describe("about serializers", () => {
     const page = await getPage("pl", "o-mnie", { environment: {} });
     const markdown = serializePage(page, "pl");
     expect(markdown).toContain(
-      "- Dietetyka, specjalność dietetyka kliniczna, Licencjat, Śląski Uniwersytet Medyczny w Katowicach, Wydział Nauk o Zdrowiu w Bytomiu, 2025",
+      "- Dietetyka, specjalność dietetyka kliniczna, Śląski Uniwersytet Medyczny w Katowicach, Wydział Zdrowia Publicznego w Bytomiu",
     );
+    expect(markdown).not.toContain("Licencjat");
+    expect(markdown).not.toContain("Stopień");
+    expect(markdown).not.toContain("Wcześniejsze miejsca pracy");
+    expect(markdown).not.toContain("Limanowej");
+    expect(markdown).not.toContain("Myślenicach");
     expect(markdown).toContain("- Praktyka dietetyczna od 2022 roku");
-    expect(markdown).toContain("### Wcześniejsze miejsca pracy");
-    expect(markdown).toContain(
-      "- Szpital Powiatowy w Limanowej im. Miłosierdzia Bożego",
-    );
     expect(markdown).toContain("### Szkolenia");
     expect(markdown).toContain(
       "- Odchudzanie w chorobie Hashimoto, Polski Związek Trenerów Personalnych, 2023",
     );
     expect(markdown).toContain(
-      "Aleksandra Olesiewicz z dyplomem przed Wydziałem Zdrowia Publicznego ŚUM w Bytomiu",
+      "Aleksandra Olesiewicz z pracą dyplomową przed budynkiem Wydziału Zdrowia Publicznego w Bytomiu",
     );
     expect(markdown).toContain("9000+");
     expect(markdown).toContain("(https://cal.com/dietetyk/konsultacja)");

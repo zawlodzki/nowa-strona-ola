@@ -552,7 +552,7 @@ Pozostałe propozycje i galeria pozostają lokalnie. Ten zestaw nie zamyka etap�
 
 Bieżące zlecenie użytkownika poprzedza dalszą implementację docelowego wyglądu
 oraz konfigurację treści w CMS. Strona Aleksandry Olesiewicz ma sprzedawać
-materiały dla kobiet z PCOS i w perimenopauzie oraz konsultacje dietetyczne online.
+materiały dla kobiet z PMOS (PCOS) i w perimenopauzie oraz konsultacje dietetyczne online.
 
 - [x] Przygotować osobny mockup HTML zgodny z Wonderful.
 - [x] Przygotować dwie odmienne propozycje z `design-taste-frontend`:
@@ -610,7 +610,7 @@ polecenie użytkownika; nie zmieniono tokenów Wonderful ani styli aplikacji.
 - [x] Zapisać źródła, propozycje CTA, mapowanie do CMS i brakujące możliwości.
 - [x] Zebrać ocenę [planu „O mnie”](ABOUT-MOCKUP-PLAN-3A.md): układ i copy
       zaakceptowane przez użytkownika 11.10.2026.
-- [ ] Rozwinąć osobistą historię (np. cztery lata szukania diagnozy PCOS)
+- [ ] Rozwinąć osobistą historię (np. cztery lata szukania diagnozy PMOS (PCOS))
       po potwierdzeniu i tekście od Oli. Do tego czasu zostaje krótka wersja.
 - [x] Zapisać cenę 450 zł/60 minut, CTA do płatnego kalendarza oraz wykształcenie
       i miejsce na skan dyplomu, zgodnie z decyzją użytkownika 06.10.2026.
@@ -697,7 +697,7 @@ etapów wdrożenia bloga, eksportu Markdown ani integracji newslettera.
 
 ## Landing e-booka 3a — 2026-10-06
 
-- [x] Przygotować osobny mockup „Suplementy w PCOS” z pełnym układem sprzedażowym.
+- [x] Przygotować osobny mockup „Suplementy w PMOS (PCOS)” z pełnym układem sprzedażowym.
 - [x] Zastosować paletę 3a, Switzer, okładkę, podgląd karty, ilustrację i portret.
 - [x] Przygotować copy według wskazanego poradnika i koncepcji A researchu.
 - [x] Zapisać instrukcję osobnej kolekcji e-booków i wspólnych referencji CMS.
@@ -729,7 +729,7 @@ Lokalny landing nie zamyka wdrożenia CMS ani kalendarza.
 ## Kolekcja wszystkich e-booków 3a — 2026-10-07
 
 - [x] Przygotować pełną siatkę sześciu istniejących e-booków w estetyce 3a.
-- [x] Dodać wybór Wszystkie / PCOS / Perimenopauza, liczniki i stan w URL.
+- [x] Dodać wybór Wszystkie / PMOS (PCOS) / Perimenopauza, liczniki i stan w URL.
 - [x] Zachować ceny 97 zł brutto, opisy, okładki i status przygotowania.
 - [x] Połączyć kolekcję z indeksem oraz sekcją e-booków homepage 3a.
 - [x] Zapisać decyzję użytkownika i proponowane pola przyszłego CMS.
@@ -856,11 +856,11 @@ Następny krok: odbiór zmian wyglądu i publikacja przez istniejący proces.
 ## Skill landingów e-booków 3a, 11.10.2026
 
 - [x] Zapisać lokalny [ebook-landing-3a](../.agents/skills/ebook-landing-3a/SKILL.md)
-      na podstawie procesu landingu suplementów w PCOS.
+      na podstawie procesu landingu suplementów w PMOS (PCOS).
 - [x] Uwzględnić dziesięć sekcji użytkownika, siedem zasad copywritingu
       i audyt z cytatami, zachowując swobodę kompozycji w ramach 3a.
 - [x] Opisać wykorzystanie istniejącego modelu `ebook`, statusów oferty
-      i mapowania CMS, bez powielania kolekcji lub treści PCOS.
+      i mapowania CMS, bez powielania kolekcji lub treści PMOS (PCOS).
 - [x] Sprawdzić walidator skilla, format i lokalne odnośniki.
 - [ ] Przy pierwszym nowym ebooku sprawdzić rezultat użycia skilla na gotowym
       landingu i poprawić instrukcję na podstawie rzeczywistych wyników.

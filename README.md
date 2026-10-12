@@ -61,7 +61,7 @@ i [wersja 1a](https://design.aleksandraolesiewicz.com/1a).
 Publikacja jest odseparowana od strony i CMS; [opis i komendy](mockups/homepage/README.md#publiczny-feedback).
 Mockupy są osobne od aplikacji i CMS; formularz nic nie wysyła.
 Opublikowane warianty zawierają poprawki po Impeccable: SVG strzałek,
-wybór grup PCOS / Perimenopauza i rozróżnione tematycznie okładki.
+wybór grup PMOS (PCOS) / Perimenopauza i rozróżnione tematycznie okładki.
 
 ## Uruchomienie i weryfikacja
 
@@ -247,7 +247,7 @@ Mockup pojedynczej konsultacji 3a: `node scripts/preview-homepage-mockups.mjs`, 
 Mockup kolekcji e-booków 3a z wyborem kategorii:
 `node scripts/preview-homepage-mockups.mjs`, następnie
 [otwórz kolekcję lokalnie](http://127.0.0.1:8766/mockups/homepage/ebooks-3a.html).
-Sześć zapowiedzi, Wszystkie / PCOS / Perimenopauza; ręczne filtrowanie działa
+Sześć zapowiedzi, Wszystkie / PMOS (PCOS) / Perimenopauza; ręczne filtrowanie działa
 również bez JS. [Opis](mockups/homepage/README.md#kolekcja-wszystkich-e-booków-3a--2026-10-07).
 
 ## Ujednolicenie serii 3a — 2026-10-07

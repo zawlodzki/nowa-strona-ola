@@ -1,6 +1,7 @@
 import type { Locale } from "@ola/shared";
 
 import { credentialLevelLabel, credentialTitle } from "@/content/credentials";
+import { catalogText } from "@/lib/catalog-text";
 import { aboutPath, homePath } from "@/lib/paths";
 import type { SiteSeoData } from "@/lib/seo/site-data";
 import {
@@ -89,7 +90,7 @@ export function siteEntities(ctx: GraphContext): JsonLdNode[] {
           : {}),
       },
       // schema.org alumniOf accepts any Organization: university first,
-      // then earlier workplaces listed on „O mnie”.
+      // then earlier workplaces. Those workplaces are not rows on „O mnie”.
       alumniOf: [
         {
           "@type": "CollegeOrUniversity",
@@ -107,7 +108,7 @@ export function siteEntities(ctx: GraphContext): JsonLdNode[] {
           ? { "@type": "Thing", name: topic.name, sameAs: topic.sameAs }
           : topic.name,
       ),
-      // Only credentials marked public in Sanity and listed on „O mnie”.
+      // Public credentials. educationalLevel stays in JSON-LD and is not a row on „O mnie”.
       ...(person.credentials.length
         ? {
             hasCredential: person.credentials.map((credential) => {
@@ -299,7 +300,7 @@ function stripUndefined(value: unknown): unknown {
 
 /** JSON for a `<script>` element: escapes characters that could end it. */
 export function serializeJsonLd(document: JsonLdDocument): string {
-  return JSON.stringify(document)
+  return catalogText(JSON.stringify(document))
     .replace(/</g, "\\u003c")
     .replace(/>/g, "\\u003e")
     .replace(/&/g, "\\u0026")

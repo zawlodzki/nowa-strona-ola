@@ -12,17 +12,17 @@ Decyzja użytkownika („Opcja 4”): pas logotypów zlikwidowany na stronie i w
 W tym samym miejscu, zaraz po hero, jest sekcja `audienceSection`. Copy jest
 **szkicem do akceptacji Oli**, zbudowanym wyłącznie z tematów już obecnych
 w serwisie. Bez obietnic efektów, twierdzeń medycznych i nazw marek. Karta 3
-(pierwotnie „Szczupła, a jednak PCOS”) zastąpiona 10.10.2026 zatwierdzonym przez
+(pierwotnie „Szczupła, a jednak PMOS (PCOS)”) zastąpiona 10.10.2026 zatwierdzonym przez
 użytkownika copy „Starania o ciążę” / „Trying to conceive”; `_key` karty
 (`audience-lean-pcos`) pozostał bez zmian, zgodnie z Content Lake. Od 10.10.2026 każda karta ma
-własną ikonę (decyzja użytkownika): PCOS — kwiat, insulinooporność — kropla
+własną ikonę (decyzja użytkownika): PMOS (PCOS) — kwiat, insulinooporność — kropla
 z falą, starania o ciążę — kiełek, perimenopauza — słońce nad horyzontem.
 Ikony są oryginalnymi ścieżkami SVG projektu (bez zewnętrznego zestawu).
 
 PL — **Z kim pracuję**. Pracuję z kobietami, które chcą spokojnie uporządkować
 odżywianie i dopasować je do swojej codzienności.
 
-1. **PCOS** — Gdy chcesz zrozumieć, jak jedzenie może wspierać Twoją codzienność z PCOS, i wybrać pierwszy krok, który ma sens dla Ciebie.
+1. **PMOS (PCOS)** — Gdy chcesz zrozumieć, jak jedzenie może wspierać Twoją codzienność z PMOS (PCOS), i wybrać pierwszy krok, który ma sens dla Ciebie.
 2. **Insulinooporność** — Gdy po diagnozie masz wiele pytań i chcesz ułożyć posiłki tak, by pasowały do Twojego dnia, bez listy zakazów.
 3. **Starania o ciążę** — Gdy planujesz ciążę albo już się starasz i chcesz spokojnie zadbać o odżywianie, w porozumieniu z lekarzem prowadzącym.
 4. **Perimenopauza** — Gdy zauważasz zmiany w ciele i codziennych nawykach i chcesz przyjrzeć się im spokojnie, krok po kroku.
@@ -30,7 +30,7 @@ odżywianie i dopasować je do swojej codzienności.
 EN — **Who I work with**. I work with women who want to sort out their
 nutrition calmly and fit it into their everyday life.
 
-1. **PCOS** — When you want to understand how food can support your everyday life with PCOS, and choose a first step that makes sense for you.
+1. **PMOS (PCOS)** — When you want to understand how food can support your everyday life with PMOS (PCOS), and choose a first step that makes sense for you.
 2. **Insulin resistance** — When a diagnosis leaves you with many questions and you want meals that fit your day, without a list of bans.
 3. **Trying to conceive** — When you are planning a pregnancy or already trying, and want to look after your nutrition calmly, alongside your doctor's care.
 4. **Perimenopause** — When you notice changes in your body and daily habits and want to look at them calmly, step by step.
@@ -106,7 +106,7 @@ kobiet, więc zostają bez zmian.
 
 ## Wniosek i hierarchia źródeł
 
-Zachować estetykę i bibliotekę PCOS / Perimenopauza z aktualnego briefu.
+Zachować estetykę i bibliotekę PMOS (PCOS) / Perimenopauza z aktualnego briefu.
 Wzmocnić konkrety: specjalizacja, analiza badań w pracy dietetycznej,
 odżywianie dopasowane do życia, wyjaśnianie kolejnych kroków i wsparcie.
 Obecne „Dietetyka dla kobiet” jest zbyt szerokie, a opisy efektów zbyt ogólne.
@@ -127,9 +127,9 @@ Propozycja nie powiela ich jako dowiedzionych obietnic produktu.
 | Źródło                                                                             | Znaczenie dla homepage                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ZRODLA-PRAWDY.md`                                                                 | Rozstrzyga konflikty; marka i oferta mają pierwszeństwo przed archiwum i planami pakietów.                                                                                                                  |
-| `00_KONTEKST/marka.md`, aktualizacja 05.08.2026                                    | Dietetyczka kliniczna, PCOS/IO, indywidualne podejście, empatia, analiza wyników, elastyczne odżywianie.                                                                                                    |
+| `00_KONTEKST/marka.md`, aktualizacja 05.08.2026                                    | Dietetyczka kliniczna, PMOS (PCOS)/IO, indywidualne podejście, empatia, analiza wyników, elastyczne odżywianie.                                                                                             |
 | `00_KONTEKST/oferta.md`, aktualizacja 05.08.2026                                   | Mentoring 5M, zakres, historyczne ceny, zawieszenie sprzedaży do 31.12.2026; ekosystem pakietów pozostaje planem. Dokument zawiera też sprzeczne zapisy o wcześniejszej sprzedaży pojedynczych konsultacji. |
-| `00_KONTEKST/klienci.md`, aktualizacja 05.08.2026                                  | Zagubienie po diagnozie, sprzeczne rady, potrzeba zrozumienia i konkretnego planu; PCOS/IO jest rdzeniem obecnej publiczności.                                                                              |
+| `00_KONTEKST/klienci.md`, aktualizacja 05.08.2026                                  | Zagubienie po diagnozie, sprzeczne rady, potrzeba zrozumienia i konkretnego planu; PMOS (PCOS)/IO jest rdzeniem obecnej publiczności.                                                                       |
 | `04_OFERTA_I_SPRZEDAZ/MENTORING/DEFINICJA_PRODUKTU_mentoring-pcos.md`, 08.09.2026  | Prowadzenie 1:1, a nie sama aplikacja czy jednorazowa wizyta. Roadmapa pozostaje do decyzji.                                                                                                                |
 | `03_CONTENT/STRATEGIA/style-guide.md`                                              | Bezpośredni, ciepły, rzeczowy język; autorka zaznacza, że to standard rejestru, nie niezależna próbka osobistego głosu.                                                                                     |
 | `03_CONTENT/STRATEGIA/storybrand.md`                                               | Pomocniczy framework. Przykładowe „500 osób” nie potwierdza liczby pacjentek Oli.                                                                                                                           |
@@ -177,9 +177,9 @@ Zamiast „Dietetyka dla kobiet”:
 
 Lead:
 
-> Jestem Ola, dietetyczka kliniczna. Specjalizuję się w PCOS i insulinooporności.
+> Jestem Ola, dietetyczka kliniczna. Specjalizuję się w PMOS (PCOS) i insulinooporności.
 > Pomagam uporządkować odżywianie i wybrać kolejne kroki dopasowane do Twojego życia.
-> Przygotowuję też e-booki o PCOS i perimenopauzie.
+> Przygotowuję też e-booki o PMOS (PCOS) i perimenopauzie.
 
 CTA: **Poznaj e-booki** oraz **Poznaj współpracę**.
 Po ukończeniu produktów „Przygotowuję” można zmienić na „W moich e-bookach…”.
@@ -229,14 +229,14 @@ kompozycję tej części; tekst nie musi mieścić się w obecnym miejscu liczby
 Nagłówek:
 
 > Jestem Ola.
-> Znam PCOS także z własnego doświadczenia.
+> Znam PMOS (PCOS) także z własnego doświadczenia.
 
 Tekst:
 
-> Jestem dietetyczką kliniczną i sama mam doświadczenie z PCOS.
+> Jestem dietetyczką kliniczną i sama mam doświadczenie z PMOS (PCOS).
 > Wiem, jak trudno odnaleźć się w sprzecznych radach i kolejnych próbach zmiany odżywiania.
 >
-> W pracy z kobietami z PCOS i insulinoopornością łączę analizę wyników badań
+> W pracy z kobietami z PMOS (PCOS) i insulinoopornością łączę analizę wyników badań
 > z praktycznymi zmianami w posiłkach. Zależy mi, żebyś rozumiała zalecenia
 > i potrafiła korzystać z nich w swojej codzienności.
 
@@ -249,25 +249,25 @@ tytułu magistra, stażu ani specjalizacji w perimenopauzie bez dokumentów.
 
 ### 6. Biblioteka e-booków
 
-Nagłówek: **E-booki o PCOS i perimenopauzie.**
+Nagłówek: **E-booki o PMOS (PCOS) i perimenopauzie.**
 
 Lead:
 
 > Badania, suplementy, codzienne posiłki i obserwacja samopoczucia.
 > Wybierz temat, w którym potrzebujesz więcej jasności.
 
-Zachować dwa wejścia **PCOS / Perimenopauza** i sześć kart w mockupie.
+Zachować dwa wejścia **PMOS (PCOS) / Perimenopauza** i sześć kart w mockupie.
 Na gotowej stronie pokazać tylko ukończone produkty lub jawne zapowiedzi.
 Opis karty obiecuje zawartość, którą finalny plik musi rzeczywiście dostarczyć.
 
-| Produkt                       | Proponowany opis karty                                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Suplementy w PCOS             | Uporządkuj pytania o suplementy: po co je stosować i co omówić ze specjalistą przed zakupem.            |
-| Badania, które mają sens      | Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.                                    |
-| Szczupła, a jednak PCOS       | Jak podejść do odżywiania przy PCOS, kiedy Twoim celem nie jest odchudzanie.                            |
-| Waga Cię okłamuje             | Przyjrzyj się zmianom w sylwetce i codziennych nawykach w okresie perimenopauzy.                        |
-| Czy to już?                   | Dziennik cyklu i samopoczucia, który pomoże Ci przygotować się do rozmowy z lekarzem.                   |
-| Noc zaczyna się o osiemnastej | Uporządkuj wieczorne posiłki i nawyki. Sprawdź, co warto obserwować przed rozmową o problemach ze snem. |
+| Produkt                        | Proponowany opis karty                                                                                  |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| Suplementy w PMOS (PCOS)       | Uporządkuj pytania o suplementy: po co je stosować i co omówić ze specjalistą przed zakupem.            |
+| Badania, które mają sens       | Przygotuj pytania na wizytę i uporządkuj dotychczasowe wyniki badań.                                    |
+| Szczupła, a jednak PMOS (PCOS) | Jak podejść do odżywiania przy PMOS (PCOS), kiedy Twoim celem nie jest odchudzanie.                     |
+| Waga Cię okłamuje              | Przyjrzyj się zmianom w sylwetce i codziennych nawykach w okresie perimenopauzy.                        |
+| Czy to już?                    | Dziennik cyklu i samopoczucia, który pomoże Ci przygotować się do rozmowy z lekarzem.                   |
+| Noc zaczyna się o osiemnastej  | Uporządkuj wieczorne posiłki i nawyki. Sprawdź, co warto obserwować przed rozmową o problemach ze snem. |
 
 „Czy to już?” nie obiecuje samodzielnego rozpoznania; „Noc…” nie obiecuje
 leczenia bezsenności. Tytuł „Waga Cię okłamuje” pozostaje roboczy do akceptacji Oli.
@@ -335,7 +335,7 @@ Nagłówek:
 
 Tekst:
 
-> Piszę o PCOS, insulinooporności i codziennym odżywianiu.
+> Piszę o PMOS (PCOS), insulinooporności i codziennym odżywianiu.
 > Dzielę się wskazówkami do wykorzystania przy zwykłym posiłku i informuję
 > o nowych materiałach, także o perimenopauzie.
 
@@ -349,18 +349,18 @@ zapisu dopracować przy integracji formularza; ta propozycja ich nie zatwierdza.
 
 Stopka zamiast „Dietetyka, która robi miejsce na Ciebie”:
 
-> PCOS, insulinooporność i odżywianie dopasowane do życia.
+> PMOS (PCOS), insulinooporność i odżywianie dopasowane do życia.
 
 Pokazać tylko potwierdzone profile; sam link do ekranu podglądu nie potwierdza
 istnienia Facebooka czy TikToka. Usunąć elementy wyboru estetyki dopiero
 przy tworzeniu gotowej strony, nie w tej propozycji.
 
 Propozycja tytułu strony:
-**Aleksandra Olesiewicz — dietetyczka kliniczna | PCOS i insulinooporność**.
+**Aleksandra Olesiewicz — dietetyczka kliniczna | PMOS (PCOS) i insulinooporność**.
 
 Opis po potwierdzeniu zakresu i produktów:
-**Praktyczne wsparcie w odżywianiu przy PCOS i insulinooporności.
-Poznaj Aleksandrę Olesiewicz, współpracę online i materiały o PCOS i perimenopauzie.**
+**Praktyczne wsparcie w odżywianiu przy PMOS (PCOS) i insulinooporności.
+Poznaj Aleksandrę Olesiewicz, współpracę online i materiały o PMOS (PCOS) i perimenopauzie.**
 
 ## Kolejność wdrożenia i otwarte decyzje
 

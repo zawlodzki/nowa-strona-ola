@@ -133,14 +133,14 @@ describe("content lake plan", () => {
     ).toBe("hero");
   });
 
-  it("fills the PCOS ebook cover and the English slug", () => {
+  it("fills the PMOS\u00A0(PCOS) ebook cover and the English slug", () => {
     const ebook = byId("ebook-suplementy-w-pcos-en");
     expect(ebook.slug).toEqual({
       _type: "slug",
       current: "supplements-in-pcos",
     });
     expect(ebook.cover).toMatchObject({
-      alt: "Controlled cover: Supplements in PCOS",
+      alt: "Controlled cover: Supplements in PMOS\u00A0(PCOS)",
       tone: "diagram",
       rasterKey: "cover-suplementy-w-pcos",
     });
@@ -165,11 +165,18 @@ describe("content lake plan", () => {
       expect(article.placeholderBody).toBe(true);
     }
     for (const seed of BLOG_ARTICLE_SEED) {
-      const english = byId(`article-blog-${seed.key}-en`);
-      expect(english.title).toBe(seed.en.title);
-      const seo = english.seo as { title: string };
-      expect(seo.title.length).toBeLessThanOrEqual(60);
-      expect(seed.en.title.startsWith(seo.title)).toBe(true);
+      for (const locale of ["pl", "en"] as const) {
+        const article = byId(`article-blog-${seed.key}-${locale}`);
+        expect(article.title).toBe(seed[locale].title);
+        const seo = article.seo as { title: string };
+        expect(seo.title).toBe(
+          (seed[locale].seoTitle ?? seed[locale].title).replaceAll(
+            "\u00A0",
+            " ",
+          ),
+        );
+        expect(seo.title.length).toBeLessThanOrEqual(60);
+      }
     }
   });
 
