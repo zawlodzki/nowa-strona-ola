@@ -92,8 +92,7 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Subagent przygotował szkielet kodu, lecz zatrzymał go limit usługi.
   Główny agent dokończył implementację, przegląd, testy i odbiór. Niezależny
   przegląd drugiego agenta nie został wykonany z tego samego powodu.
-- [Dowód rzeczywistych danych](../output/seo-full-exports-2026-10-12/live-verification.json).
-  Plan i konfiguracja CMS zaktualizowane. Końcowy format i 181 lokalnych
+- Plan i konfiguracja CMS zaktualizowane. Końcowy format i 181 lokalnych
   odnośników do plików PASS, diff-check PASS. Bez zapisu do CMS, commita, pusha
   i publikacji. Gałąź gotowa do przeglądu lokalnych zmian.
 - Następny krok: uporządkować dopisek demonstracyjny w
