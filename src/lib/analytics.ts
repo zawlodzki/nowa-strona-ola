@@ -8,6 +8,9 @@ type ConsentCommand = [
 ];
 type LayerEntry = ConsentCommand | Record<string, string | boolean | number>;
 
+type TrackingState =
+  "inactive" | "measurement" | "marketing" | "all" | "revoked";
+
 interface AnalyticsOptions {
   enabled: boolean;
   policy: TrackingPolicy | null;
@@ -15,6 +18,7 @@ interface AnalyticsOptions {
   load: () => void;
   stop: () => void;
   reload?: () => void;
+  syncState?: (state: TrackingState) => void;
 }
 
 export function createAnalytics(options: AnalyticsOptions) {
@@ -76,11 +80,21 @@ export function createAnalytics(options: AnalyticsOptions) {
         };
         activeMeasurement = false;
         activeMarketing = false;
+        options.syncState?.("revoked");
         options.stop();
         return;
       }
       activeMeasurement = measurement;
       activeMarketing = marketing;
+      options.syncState?.(
+        marketing
+          ? measurement
+            ? "all"
+            : "marketing"
+          : measurement
+            ? "measurement"
+            : "inactive",
+      );
       options.push(command(measurement, marketing));
       if (!options.policy || (!measurement && !marketing)) return;
       options.push({
@@ -162,8 +176,12 @@ const browserAnalytics = createAnalytics({
     layer.push({ "gtm.start": Date.now(), event: "gtm.js" });
     document.head.append(script);
   },
+  syncState: (state) => Reflect.set(window, "aoTrackingState", state),
   stop: () => {
     Reflect.set(window, "ga-disable-G-9QW05JYZTL", true);
+    const pixel: unknown = Reflect.get(window, "fbq");
+    if (typeof pixel === "function")
+      Reflect.apply(pixel, window, ["consent", "revoke"]);
     clearMeasurementStorage();
   },
   reload: () => window.location.reload(),
@@ -175,6 +193,7 @@ function queueGoogleCommand() {
 }
 
 if (typeof window !== "undefined") {
+  Reflect.set(window, "aoTrackingState", "inactive");
   Reflect.set(window, "dataLayer", layer);
   Reflect.apply(queueGoogleCommand, null, [
     "consent",

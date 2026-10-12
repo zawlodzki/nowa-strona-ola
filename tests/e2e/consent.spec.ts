@@ -721,6 +721,14 @@ for (const blocked of [false, true]) {
       .click();
     await expect.poll(() => requests.length).toBe(1);
     await expect(banner(page)).not.toBeVisible();
+    await page.evaluate(() => {
+      const calls: unknown[][] = [];
+      Reflect.set(window, "aoMetaCalls", calls);
+      Reflect.set(window, "fbq", (...args: unknown[]) => calls.push(args));
+    });
+    expect(
+      await page.evaluate(() => Reflect.get(window, "aoTrackingState")),
+    ).toBe("all");
     let navigations = 0;
     page.on("framenavigated", (frame) => {
       if (frame === page.mainFrame()) navigations++;
@@ -769,6 +777,12 @@ for (const blocked of [false, true]) {
       await page.evaluate(() => Reflect.get(window, "ga-disable-G-9QW05JYZTL")),
     ).toBe(true);
     expect(navigations).toBe(0);
+    expect(
+      await page.evaluate(() => Reflect.get(window, "aoTrackingState")),
+    ).toBe("revoked");
+    expect(
+      await page.evaluate(() => Reflect.get(window, "aoMetaCalls")),
+    ).toEqual([["consent", "revoke"]]);
     if (blocked) {
       release();
       await expect(dialog(page).getByRole("status")).toContainText(

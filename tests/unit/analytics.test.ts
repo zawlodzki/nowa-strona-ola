@@ -174,3 +174,32 @@ it("waits for durable restricted settlement, never reloads an expanded or unavai
   expect(reload).toHaveBeenCalledOnce();
   expect(push).not.toHaveBeenCalled();
 });
+
+it("synchronizes runtime state before queued grants and marks revocation before stopping SDKs", () => {
+  const order: unknown[] = [];
+  const gate = createAnalytics({
+    enabled: true,
+    policy: { ...neutral, marketing: true },
+    push: (entry) => order.push(entry),
+    load: () => order.push("load"),
+    stop: () => order.push("stop"),
+    syncState: (state) => order.push(state),
+  });
+  gate.applyPreferences({
+    necessary: true,
+    measurement: false,
+    marketing: true,
+  });
+  expect(order[0]).toBe("marketing");
+  expect(order).not.toContainEqual({
+    event: "ao_page_view",
+    ao_page_code: "home",
+  });
+  gate.applyPreferences({ ...preferences, marketing: true });
+  expect(order).toContain("all");
+  order.length = 0;
+  gate.applyPreferences(preferences);
+  expect(order).toEqual(["revoked", "stop"]);
+  gate.applyPreferences({ ...preferences, marketing: true });
+  expect(order).toEqual(["revoked", "stop"]);
+});

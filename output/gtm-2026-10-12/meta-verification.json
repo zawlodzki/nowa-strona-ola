@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-12",
+  "node": "24.19.0",
+  "branch": "codex/gtm-meta",
+  "parentBranch": "codex/gtm-rollout",
+  "parentPr": 86,
+  "parentCommit": "a64c8a2",
+  "verify": {
+    "unit": 391,
+    "unitFiles": 44,
+    "e2ePassed": 456,
+    "e2eSkipped": 9,
+    "cmsDocuments": 88,
+    "cmsErrors": 0,
+    "matchingPages": 17
+  },
+  "enabledGtmMock": {
+    "e2e": 9,
+    "engines": ["Chromium", "Firefox", "WebKit"],
+    "telemetrySent": 0
+  },
+  "gtm": {
+    "workspace": 5,
+    "tags": 3,
+    "triggers": 3,
+    "userVariables": 4,
+    "importAdded": 3,
+    "importModified": 0,
+    "importDeleted": 0,
+    "exportTimeUtc": "2026-10-12 20:48:29",
+    "exportMatched": true,
+    "rollout": false,
+    "published": false
+  },
+  "sdkEvidence": "meta-sdk.json",
+  "review": "PASS",
+  "notVerified": [
+    "compiled GTM workspace traffic",
+    "Tag Assistant",
+    "production activation",
+    "native zoom 200%",
+    "physical device",
+    "screen reader"
+  ]
+}
