@@ -104,6 +104,18 @@ jest ładowana tylko przez aplikację `preview/`. Workflow
 po udanym Quality dla bieżącego `main`. `CLOUDFLARE_ENV` zostaw tylko
 przy buildzie podglądu.
 
+Eksporty pełnej treści: `/blog/rss.xml` zawiera lead i pełny HTML artykułów,
+a `/llms-full.txt` łączy Markdown głównej, O mnie, konsultacji, kolekcji
+i landingów e-booków. Oba pliki korzystają z tego samego spisu co `.md`
+i sitemap. `npm run test:build` sprawdza zgodność eksportu, a E2E parsuje XML RSS.
+
+Odczyt i build opublikowanych danych Sanity bez zapisu, sprawdzony 12.10.2026:
+
+```sh
+PUBLIC_SANITY_PROJECT_ID=dyuqkn8c PUBLIC_SANITY_DATASET=production npx astro build --outDir /tmp/ola-exports-live-dist
+node scripts/check-seo.mjs /tmp/ola-exports-live-dist
+```
+
 SEO (plan: [SEO-GEO-AEO-PLAN.md](docs/SEO-GEO-AEO-PLAN.md)): każdy build jest
 `noindex`, dopóki nie ustawi się `SITE_INDEXING=production`. Zmienną ustawia
 się wyłącznie w buildzie gotowej produkcji. `npm run test:build` uruchamia

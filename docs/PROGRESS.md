@@ -28,6 +28,81 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   `wrangler deploy` na konto Cloudflare nie powtarzano. Następny krok to
   scalenie poprawki i odbiór kolejnego Deploy preview z `main`.
 
+### Pełne eksporty treści D8, 12.10.2026
+
+- Na zlecenie „push pr i idź dalej” przygotowano wysłanie pierwszego
+  zakresu i kolejny stacked PR. Bazę uaktualniono do `f28988e`,
+  uwzględniając wyłącznie poprawkę workflow preview z #80 oraz dokumentację.
+  Konflikt postępu rozwiązano, zachowując oba wpisy. Przegląd
+  `no-comments` nowych linii nie znalazł flag ani komentarzy do usunięcia.
+  Kod eksportów jest identyczny z pełnym zweryfikowanym przebiegiem.
+
+- Main przewinięto z `657a220` do `94d8204`. Prace na lokalnej gałęzi
+  `codex/seo-full-content-exports`. Lokalne dopiski do planu i postępu
+  zachowano w stashu `local-docs-before-main-refresh-2026-10-12`; ich wpisy
+  o Studio i Presentation są także w scalonym main. Nieśledzone materiały
+  poprzednich sesji pozostały w katalogu.
+- Odczyt opublikowanego Sanity `dyuqkn8c/production` potwierdził trzy
+  artykuły PL: `hirsutyzm`, `pcos-co-to-za-choroba`,
+  `wysoki-testosteron-u-kobiet`. Sześć e-booków ma status `planned`.
+  Nie zmieniano danych, nie odtwarzano usuniętych testowych wpisów.
+- Rozpoczęto otwarty zakres etapu 5 zgodnie z decyzją D8. RSS ma
+  zawierać pełną treść; `llms-full.txt` ma łączyć kluczowe strony z
+  istniejących serializerów Markdown. Bez archiwum bloga, kontaktu
+  i dokumentów prawnych w tym drugim eksporcie.
+- RSS `/blog/rss.xml` zachowuje lead w `description` i dodaje pełny HTML
+  w `content:encoded`. Źródłem jest obecny serializer Markdown artykułu,
+  renderowany przez ten sam pakiet co Astro. Tabele, źródła i FAQ są w
+  eksporcie. Surowy HTML pozostaje tekstem; schematy adresów są ograniczone,
+  linki i obrazy mają adresy absolutne. XML jest escapowany, bez CDATA.
+- `/llms-full.txt` łączy Markdown kluczowych stron w stałej kolejności.
+  `llms.txt` zawiera link do pełnego eksportu; `_headers` ustawia text/plain
+  i noindex. Kontrola buildu porównuje pełne dokumenty z ich plikami `.md`.
+- Node 24.19.0 z runtime Codex. `npm ci` PASS. Dodano bezpośrednią zależność
+  `@astrojs/markdown-satteri` 0.4.1, wcześniej obecnego przez Astro. Żadna
+  wersja ani wpis zainstalowanego pakietu w lockfile nie zmieniły się.
+- Końcowe `PLAYWRIGHT_WORKERS=2 npm run verify` PASS na Node 24.19.0.
+  Format, tokeny, lint, typy, **310 unit w 40 plikach**, build publiczny,
+  Studio, preview i Worker dry-run, budżety i SEO, **429 E2E w trzech
+  silnikach**, **88 dokumentów bez błędów**, **17 zgodnych stron**
+  fixture/Content Lake. JS 9214 B gzip, CSS 30873 B gzip.
+- Pierwsze próby zatrzymały format, brak sieci do CDN Sanity oraz błąd
+  nowego porównania eksportu, które czytało tylko pierwszą linię. Kontrolę
+  poprawiono, bez zmiany treści eksportu; potem ponowiono całe verify.
+  Nieśledzony `output/cookie-docs-2026-10-11/before.json` sformatowano bez
+  zmiany danych. Oryginalne bajty zachowano w `/tmp/ola-cookie-before-original.json`.
+- Osobny build rzeczywistego, opublikowanego `dyuqkn8c/production` w
+  `/tmp/ola-exports-live-dist` PASS. Kontrola SEO: **27 stron PASS**,
+  noindex. RSS ma dokładnie trzy nowe wpisy, pełny HTML i poprawny XML;
+  llms-full ma **10 dokumentów**. Nie przywracano usuniętych treści.
+- Chromium na rzeczywistym buildzie: blog, trzy artykuły i sześć landingów
+  przy **1440/390/320 px**, **30 kontroli PASS**, jeden H1 i brak overflow.
+  Treść bez JS, reduced motion, **0 POST**. Przejrzano zrzut bloga desktop
+  i landingu Badania przy 320 px. E2E obejmuje klawiaturę, obie palety,
+  axe i CSS zoom. Nie wykonano natywnego zoomu, czytnika ani urządzenia fizycznego.
+- verify-ola `ola-exports-20261012`: blog, ARIA, screenshot i `posts []`.
+  `doctor` nie obsługuje macOS, bo wymaga `/proc`; jego wynik jest FAIL.
+  Zamiast deklarować sukces, potwierdzono ten sam PID/port przez `lsof`
+  i HTTP 200. Własne procesy sprzątnięto, dowody w `/tmp/ola-verify-evidence/`.
+- Audit produkcyjnych zależności: 9 moderate i 12 high, bez critical.
+  Wszystkie węzły high były już w lockfile main. Dotyczą narzędzi Sanity
+  CLI/codegen i Wrangler/Miniflare, nie nowego renderera. Renderer nie ma
+  zgłoszenia; zmiana nie aktualizuje tych pakietów ani nie wdraża aplikacji.
+  Istniejące zależności wymagają osobnego przeglądu przed wydaniem.
+- Subagent przygotował szkielet kodu, lecz zatrzymał go limit usługi.
+  Główny agent dokończył implementację, przegląd, testy i odbiór. Niezależny
+  przegląd drugiego agenta nie został wykonany z tego samego powodu.
+- [Dowód rzeczywistych danych](../output/seo-full-exports-2026-10-12/live-verification.json).
+  Plan i konfiguracja CMS zaktualizowane. Końcowy format i 181 lokalnych
+  odnośników do plików PASS, diff-check PASS. Bez zapisu do CMS, commita, pusha
+  i publikacji. Gałąź gotowa do przeglądu lokalnych zmian.
+- Następny krok: uporządkować dopisek demonstracyjny w
+  `page` bloga `22b9ceed-e5fb-40ae-aa08-97ae79cfed22`,
+  `sections[blogCollectionSection].note`, który nadal mówi o testowych
+  tytułach i datach, mimo trzech rzeczywistych artykułów. Potwierdzono pole
+  odczytem CMS i screenshotem, nie zmieniono go. Potem zewnętrzny odbiór
+  SEO oraz SEO‑6. Konfiguracja CMS i publikacja wymagają osobnego zlecenia.
+
 ### Naprawa Presentation Sanity, 12.10.2026
 
 - Naprawę przygotowano w osobnym worktree `sanity-presentation-fix`.

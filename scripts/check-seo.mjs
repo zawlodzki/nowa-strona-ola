@@ -352,6 +352,7 @@ assert.ok(await exists(path.join(distDir, "_redirects")), "_redirects missing");
 const llms = await readFile(path.join(distDir, "llms.txt"), "utf8");
 assert.match(llms, /^# \S[\s\S]*\n> \S/, "llms.txt: H1 and summary");
 for (const [, url] of llms.matchAll(/\]\((https:[^)]+)\)/g)) {
+  if (url === `${ORIGIN}/llms-full.txt`) continue;
   assert.ok(url.endsWith(".md"), `llms.txt: link is not Markdown ${url}`);
   assert.ok(
     await exists(fileForPath(url.slice(ORIGIN.length))),
@@ -359,9 +360,66 @@ for (const [, url] of llms.matchAll(/\]\((https:[^)]+)\)/g)) {
   );
 }
 
+assert.ok(
+  llms.includes(`${ORIGIN}/llms-full.txt`),
+  "llms.txt: full export link missing",
+);
+const llmsFull = await readFile(path.join(distDir, "llms-full.txt"), "utf8");
+const fullSources = new Set();
+for (const [, url, body] of llmsFull.matchAll(
+  /^Źródło: (https:[^\n]+)\n\n([\s\S]*?)(?=\n\n---\n\nŹródło: |(?![\s\S]))/gm,
+)) {
+  assert.ok(
+    sitemapLocs.has(url),
+    `llms-full.txt: ${url} is not in the sitemap`,
+  );
+  const sourcePath = url.slice(ORIGIN.length);
+  assert.ok(
+    ["/", "/o-mnie/", "/konsultacje/", "/ebooki/"].includes(sourcePath) ||
+      /^\/ebooki\/[^/]+\/$/.test(sourcePath),
+    `llms-full.txt: unexpected page ${url}`,
+  );
+  const markdownFile =
+    sourcePath === "/" ? "/index.md" : `${sourcePath.replace(/\/$/, "")}.md`;
+  const markdown = await readFile(fileForPath(markdownFile), "utf8");
+  assert.equal(
+    body.trimEnd(),
+    markdown.trimEnd(),
+    `llms-full.txt differs from ${markdownFile}`,
+  );
+  assert.ok(!fullSources.has(url), `llms-full.txt: duplicate ${url}`);
+  fullSources.add(url);
+}
+assert.ok(fullSources.size > 0, "llms-full.txt: empty export");
+for (const url of sitemapLocs) {
+  const sourcePath = url.slice(ORIGIN.length);
+  if (
+    ["/", "/o-mnie/", "/konsultacje/", "/ebooki/"].includes(sourcePath) ||
+    /^\/ebooki\/[^/]+\/$/.test(sourcePath)
+  ) {
+    assert.ok(fullSources.has(url), `llms-full.txt: missing key page ${url}`);
+  }
+}
+assert.match(
+  headers,
+  /\/llms-full\.txt\n {2}Content-Type: text\/plain; charset=utf-8\n {2}X-Robots-Tag: noindex/,
+  "llms-full.txt: headers",
+);
+
 const rss = await readFile(path.join(distDir, "blog/rss.xml"), "utf8");
-for (const [, link] of rss.matchAll(/<item>[\s\S]*?<link>([^<]+)<\/link>/g)) {
+assert.match(
+  rss,
+  /xmlns:content="http:\/\/purl.org\/rss\/1.0\/modules\/content\/"/,
+  "RSS: content namespace missing",
+);
+for (const [, item] of rss.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
+  const link = item.match(/<link>([^<]+)<\/link>/)?.[1];
   assert.ok(sitemapLocs.has(link), `RSS: ${link} is not in the sitemap`);
+  assert.match(
+    item,
+    /<content:encoded>&lt;[\s\S]+<\/content:encoded>/,
+    `RSS: full HTML missing for ${link}`,
+  );
 }
 
 assert.ok(checked > 0, "No pages with SEO head were checked");
