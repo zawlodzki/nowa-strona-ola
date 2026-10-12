@@ -186,7 +186,21 @@ Adapter Astro spłaszcza wybrane `CLOUDFLARE_ENV` do wygenerowanego pliku
 `preview/dist/server/wrangler.json`. Przy `wrangler deploy` nie podawaj
 `--env` i nie zostawiaj `CLOUDFLARE_ENV`. Wrangler czyta tę zmienną jak
 `--env`. Spłaszczony plik nie ma sekcji `env.production`, więc drugi odczyt
-dokleja sufiks i woła Worker `ola-website-preview-production-production`. Sesje Astro są wyłączone, bo aplikacja używa własnego podpisanego
+dokleja sufiks i woła Worker `ola-website-preview-production-production`.
+
+Workflowy Deploy preview, Deploy Studio i Publish content powtarzają krok
+`wrangler deploy` do trzech razy. Po pierwszej nieudanej próbie czekają 20 s,
+po drugiej 60 s. Powtórzenie dotyczy odpowiedzi 5xx, komunikatu
+`Received a malformed response from the API`, timeoutu i zerwanego połączenia.
+Błąd konfiguracji, brak pliku, odrzucenie tokenu i odpowiedź 429 kończą krok
+od razu. Każda próba dostaje to samo polecenie i nie zmienia nazwy Workera.
+Skrypt `scripts/retry-wrangler-deploy.ts` usuwa `CLOUDFLARE_ENV` z otoczenia
+procesu. Flaga `--env` w poleceniu zostaje. IndexNow w Publish content startuje
+dopiero po udanym kroku deploy i tylko na produkcji. Podgląd i Studio nadal
+pomijają wdrożenie, gdy `main` nie jest już testowanym commitem. Limit czasu
+tych trzech jobów to 25 min.
+
+Sesje Astro są wyłączone, bo aplikacja używa własnego podpisanego
 cookie. Obrazy są optymalizowane podczas builda, więc pierwszy deploy nie może
 automatycznie utworzyć zbędnych bindingów KV ani Cloudflare Images.
 

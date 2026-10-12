@@ -18,7 +18,7 @@ jobs:
       github.event.client_payload.target_environment == 'staging' ||
       github.event.client_payload.target_environment == 'production'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     environment: ${{ github.event.client_payload.target_environment }}
     env:
       SITE_INDEXING: ${{ github.event.client_payload.target_environment == 'production' && vars.SITE_INDEXING || '' }}
@@ -93,7 +93,7 @@ jobs:
           retention-days: 7
       - name: Deploy immutable successful build
         id: deploy
-        run: npx wrangler deploy --config wrangler.jsonc --env "$DEPLOYMENT_TARGET"
+        run: node --import tsx scripts/retry-wrangler-deploy.ts -- npx wrangler deploy --config wrangler.jsonc --env "$DEPLOYMENT_TARGET"
       - name: Notify IndexNow after successful deployment
         if: success() && steps.deploy.outcome == 'success' && env.DEPLOYMENT_TARGET == 'production' && env.SITE_INDEXING == 'production' && env.INDEXNOW_KEY != ''
         env:
