@@ -37,6 +37,14 @@
     "published": false
   },
   "sdkEvidence": "meta-sdk.json",
+  "finalCheckAfterMain85": {
+    "firstRun": { "e2ePassed": 455, "e2eFailed": 1 },
+    "failure": "Firefox catalog form on /design-system/: empty status after second activation",
+    "focusedReproductionsPassed": 5,
+    "formOrTestChanged": false,
+    "fullRecheck": "PASS",
+    "unconfirmedCause": true
+  },
   "review": "PASS",
   "notVerified": [
     "compiled GTM workspace traffic",

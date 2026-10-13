@@ -42,6 +42,13 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   testów PASS we wszystkich trzech silnikach. Obejmują zatrzymanie Meta,
   oczekiwanie na receipt i błąd storage. Domyślny build przywrócono.
   Kontrola CMS obejmuje 88 dokumentów bez błędów i 17 zgodnych stron.
+- Po włączeniu #85 pierwszy pełny przebieg miał 455 E2E PASS i jeden błąd
+  formularza katalogu 3a w Firefox. Drugie kliknięcie po około 152 ms nie
+  uruchomiło walidacji; trace nie dowodzi przyczyny. Dokładny scenariusz
+  przeszedł pięć kolejnych prób. Bez zmian testu i formularza powtórzono całą
+  bramkę: 391 unit, 456 E2E, 88 dokumentów bez błędów i 17 zgodnych stron,
+  PASS. Zachowany trace jest w `/private/tmp/ola-meta-final-firefox-catalog-trace.zip`.
+  Przy ponownym wystąpieniu rejestrować target i detail zdarzeń pointer oraz submit.
 - Core musi pozostać włączone. Zmiana SDK lub konfiguracji konta wymaga
   ponownego odbioru. Składany kontener GTM i Tag Assistant pozostają
   niesprawdzone. Kontrole natywnego zoomu, czytnika i urządzenia fizycznego
