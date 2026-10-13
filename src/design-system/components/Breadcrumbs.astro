@@ -20,3 +20,27 @@ const { links, label = "Ścieżka nawigacji" } = Astro.props;
     ))}
   </ol>
 </nav>
+
+<style is:global>
+  .ao-breadcrumbs {
+    font-size: 0.8125rem;
+    color: var(--ao-muted);
+  }
+  .ao-breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ao-space-12);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .ao-breadcrumbs li + li::before {
+    content: "/";
+    margin-inline-end: var(--ao-space-12);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ao-breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+  }
+</style>
