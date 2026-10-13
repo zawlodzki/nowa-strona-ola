@@ -39,7 +39,7 @@ Każdy plik ma H1, jeden akapit zachowania widocznego dla użytkownika i dokład
 - [Strona O mnie](./about.md) otwiera `/o-mnie/`, dyplom, wydział w Bytomiu i newsletter bez POST.
 - [Landing konsultacji](./consultation.md) otwiera `/konsultacje/`, cenę z usługi, żywy link Cal.com i FAQ bez POST.
 - [Landing e-booka](./ebook.md) otwiera `/ebooki/suplementy-w-pcos/` z karty homepage, 97 zł brutto, status „Wkrótce dostępny” i listę oczekujących bez POST.
-- [Pozostałe landingi e-booków](./ebook-landings.md) otwiera pięć pozostałych adresów PL z odznaką zapowiedzi i przyciskiem listy oczekujących.
+- [Pozostałe landingi e-booków](./ebook-landings.md) otwiera pozostałe adresy PL z `additionalEbookLandings` z odznaką zapowiedzi i przyciskiem listy oczekujących.
 - [Kolekcja e-booków](./ebook-collection.md) otwiera `/ebooki/`, kategorie bez JS, karty z `ebookPath` i brak POST.
 - [Przełącznik języka](./language.md) sprawdza brak linku „English” i 404 pod `/en/`.
 - [Dialog katalogu](./catalog-dialog.md) otwiera i zamyka dialog „Jak pracujemy”.

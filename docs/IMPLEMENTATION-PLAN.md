@@ -512,15 +512,23 @@ znikają z obu formatów i indeksów po udanej publikacji.
       podczas pobierania SDK oraz konfiguracji. Eksport odpowiada workspace;
       pomiar pozostaje wyłączony, 12.10.2026.
 - [x] Opublikować kontener GTM 4 z trzema tagami GA4/Meta, 13.10.2026.
-      PR #86 i #88 scalone; loader produkcyjny nadal wyłączony.
+      PR #86 i #88 scalone; loader aktywowany w produkcji 13.10.2026.
 - [x] Sprawdzić skompilowany kontener z blokadą telemetrii oraz rzeczywiste
       cookies SDK. Właściciel dopuścił neutralny `user_engagement` GA4 po
       zgodzie analitycznej, 13.10.2026. Tag Assistant pozostaje osobnym odbiorem.
 - [x] Przygotować copy prawne 2.3 i źródła zgód 2.4/memo 1.5 dla wyświetleń
       i neutralnego czasu zaangażowania GA4 oraz ręcznego PageView Meta.
-- [ ] Zakończyć pełne verify i niezależny przegląd finalnego zakresu.
-- [ ] Opublikować dwa zmienione dokumenty prawne w CMS z kontrolą rewizji.
-- [ ] Włączyć loader produkcyjny i odebrać produkcję po publikacji copy.
+- [x] Zakończyć pełne verify i niezależny przegląd finalnego zakresu.
+      420 unit, 459 E2E, 88 dokumentów bez błędów, 17 zgodnych stron;
+      pełna powtórka z jednym workerem PASS, wcześniejsze błędy zachowane.
+- [x] Opublikować dwa zmienione dokumenty prawne 2.3 w CMS z kontrolą
+      rewizji i odczytem zgodności całej treści z fixture’ami.
+- [x] Włączyć loader produkcyjny po publikacji copy; deployment
+      `38354038028` SUCCESS, 13.10.2026.
+- [x] Zakończyć odbiór runtime produkcji: 9/9 PASS, wykluczenia, brak
+      duplikatów i wycofanie z rzeczywistym przeładowaniem i usunięciem cookies.
+- [x] Sprawdzić dziewięć scenariuszy włączonego loadera na fixture’ach
+      w Chromium, Firefox i WebKit; telemetria i leady testowe zablokowane.
 - [ ] Wykonać odbiór w Tag Assistant.
 
 Odbiór: potwierdzenie po kolejce; awaria n8n uruchamia retry; brak zgody
