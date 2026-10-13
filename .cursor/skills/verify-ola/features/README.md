@@ -6,7 +6,7 @@ Ten katalog jest źródłem weryfikacji zachowania, które widzi użytkownik pub
 
 - Zbuduj serwis bez `PUBLIC_SANITY_*`, żeby strony pochodziły z fixture’ów.
 - Ustaw `VERIFY_RUN_ID` i uruchom podgląd skillen `verify-ola` na porcie 4340–4390.
-- `verify.mjs doctor` musi potwierdzić pid, port i znacznik `Aleksandra Olesiewicz — strona główna`.
+- `verify.mjs doctor` musi potwierdzić właściciela portu oraz tytuł i canonical homepage zgodne z `dist/index.html`. Na macOS wymaga `/usr/sbin/lsof`, na Linuksie dostępu do `/proc`.
 - Nie prowadź instancji, której nie uruchomił ten przebieg. Porty 4321 i 4322 są poza tym skillen.
 - Równoległe przebiegi dostają osobne `VERIFY_RUN_ID` i osobne porty. Wspólny jest tylko odczyt `dist/`.
 - Wersja EN jest wyłączona od 10.10.2026 (`language.md`). Kroki przepisów prowadzące pod `/en/…` pomijaj; te adresy zwracają 404. Wrócą po ponownym włączeniu EN.

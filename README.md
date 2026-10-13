@@ -237,11 +237,16 @@ E2E_GTM_ENABLED=true npx playwright test tests/e2e/consent.spec.ts --grep 'GTM r
 Po tej kontroli przywróć domyślny artefakt przez `npm run build`. Eksport
 workspace i stan aktywacji opisuje [instrukcja GTM](ops/gtm/README.md).
 
-CLI `verify-ola` uruchamia podgląd również na macOS, ale jego `doctor`
-sprawdza port przez Linux `/proc`. Na macOS w tej sesji potwierdzono
-właściciela poleceniem `lsof -nP -iTCP:4340 -sTCP:LISTEN`; kontrole UI
-wykonano CLI skilla i Playwrightem na własnym podglądzie. Nie traktować
-błędu doctor na macOS jako zaliczonej kontroli skilla.
+CLI `verify-ola` sprawdza właściciela portu przez `/proc` na Linuksie
+oraz `/usr/sbin/lsof` na macOS. `doctor` wymaga odpowiedzi homepage z tytułem
+i canonical zgodnymi z aktualnym `dist/index.html`. Brak dostępu do listenera
+lub inny system kończy kontrolę błędem. Launch wykrywa zajęte porty przez
+próbę nasłuchu na `127.0.0.1` i potwierdza właściciela po starcie.
+Test tych kontroli bez budowania aplikacji:
+
+```sh
+node --test .cursor/skills/verify-ola/scripts/server-checks.test.mjs
+```
 
 `npm run import:3a` buduje pełne dokumenty 3a z fixture’ów i zapisuje transakcję
 do `reports/content-lake-3a-transaction.json`. Domyślnie nic nie wysyła.
