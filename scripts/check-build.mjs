@@ -237,7 +237,7 @@ const privacyHtml = await readFile(
 assert.match(privacyHtml, /Polityka prywatności aleksandraolesiewicz\.com/);
 assert.match(
   privacyHtml,
-  /Wersja 2\.2 · obowiązuje od <time datetime="2026-10-11"/,
+  /Wersja 2\.3 · obowiązuje od <time datetime="2026-10-13"/,
 );
 assert.match(privacyHtml, /1\. Kto jest administratorem Twoich danych/);
 assert.match(privacyHtml, /\/lista-cookies-i-identyfikatorow\//);

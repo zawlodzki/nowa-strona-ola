@@ -1,10 +1,37 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-13 (GTM 4 opublikowany, odbiór SDK i przygotowane copy prawne; loader produkcyjny nadal wyłączony); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Przygotowanie aktywacji produkcyjnego pomiaru, 13.10.2026
+
+- Użytkownik zlecił włączenie produkcyjnego pomiaru oraz wyrównanie źródeł
+  w `projekt prawny ola`. Zatwierdził neutralny czas zaangażowania GA4
+  (`user_engagement`) po zgodzie analitycznej, wykryty w odbiorze SDK.
+- PR #86 i #88 zostały scalone. Kontener GTM 4 opublikowano 13.10.2026
+  o 07:27; zawiera wyłącznie trzy tagi GA4 i Meta. Loader produkcyjny
+  nadal jest wyłączony. Publikacja kontenera nie włącza pomiaru na stronie.
+- Odbiór skompilowanego kontenera potwierdził neutralny URL `/m/home`,
+  tytuł `home`, pusty referrer GA4 oraz automatyczny `user_engagement`.
+  W Chromium cookies GA4 wygasają po 400 dniach, Meta `_fbp` i `_fbc`
+  po 90 dniach. Retencja GA4 2 miesiące jest odrębnym ustawieniem.
+- Przygotowano privacy i cookies 2.3 (13.10.2026), zgody 2.4 i memo 1.5
+  ze zgodami, rzeczywistymi wykluczeniami, neutralnym pomiarem GA4, domenami
+  Meta i nieaktywnym Clarity. Cztery źródła w sąsiednim projekcie prawnym
+  zaktualizowano po kontroli hashy, z zachowaniem oryginałów w kopii lokalnej.
+  Publikacja dwóch dokumentów w Content Lake
+  oraz aktywacja loadera pozostają otwarte.
+- Pierwsze uruchomienie `npm run verify` zatrzymał format nowego eksportu
+  GTM; poprawiono wyłącznie formatowanie. Kolejne przeszło format, typy,
+  lint, 420 unit w 45 plikach i buildy, lecz zatrzymało się na starej literalnej
+  wersji prawnej 2.2 w `check-build.mjs`. Oczekiwanie zaktualizowano do 2.3;
+  końcowa pełna bramka pozostaje do ponowienia po aktualizacji copy.
+- Następny krok: końcowe verify i niezależny przegląd, publikacja dokładnych
+  dwóch treści prawnych z kontrolą rewizji, następnie uruchomienie loadera
+  i odbiór produkcji bez wysyłania danych formularzy lub testowej telemetrii.
 
 ### Meta jako stacked PR na GTM, 12.10.2026
 
