@@ -119,8 +119,6 @@ export function ebookGraph(view: EbookView): PageGraph {
   return (ctx) => {
     const productId = pageEntityId(ctx.path, "product");
     const { landing } = view;
-    // Offer only when the visitor can pay now (available/presale); "Wkrótce
-    // dostępny" and paused have no Offer (plan, section 4).
     const offer =
       canPurchase(view.availability) && view.checkoutUrl
         ? {
@@ -135,7 +133,7 @@ export function ebookGraph(view: EbookView): PageGraph {
     const nodes: JsonLdNode[] = [
       webPage(ctx, "WebPage", { about: ref(productId) }),
       {
-        "@type": ["Product", "Book"],
+        "@type": offer ? ["Product", "Book"] : "Book",
         "@id": productId,
         name: view.title,
         description: landing.heroLead.replace(/\s*\n\s*/g, " "),

@@ -468,8 +468,15 @@ oznacza wykonanej implementacji.
       EN jest wyłączone (`enabledLocales`). Dodać przy włączeniu EN.
 - [x] Wdrożyć JSON-LD i kontrolę zgodności z widoczną treścią (SEO‑2,
       `check-seo.mjs`).
-- [ ] Ręczna walidacja w Rich Results Test i Schema Markup Validator
-      dla każdego typu strony, z wynikiem w postępie.
+- [x] Zewnętrzna walidacja 12 reprezentantów typów publicznych stron
+      w Rich Results Test i Schema Markup Validator, 13.10.2026.
+      [Macierz wyników](SEO-VALIDATION-2026-10-13.md) rozróżnia poprawność
+      Schema.org, kwalifikację Google i lokalny retest poprawki.
+- [x] Poprawić lokalny graf zapowiadanego e-booka po krytycznym wyniku Google.
+      Bez rzeczywistego Offer emituje Book; Product pozostaje przy sprzedaży.
+- [ ] Po wdrożeniu poprawki Book ponowić test produkcyjnego URL e-booka.
+- [ ] Ustalić rzeczywisty timestamp redakcyjny lub zaakceptować opcjonalne
+      uwagi Google dla dat artykułów zapisanych z dokładnością do dnia.
 - [x] Weryfikować adresy, 404, przekierowania, linki i nieznane typy sekcji.
       Kontrole w buildzie (`check-seo.mjs`, `test:build`,
       `test:content-lake`); ostatnie `check-seo` 36 stron PASS bez

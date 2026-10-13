@@ -141,33 +141,83 @@ describe("JSON-LD graph", () => {
     expect(faq?.about).toEqual({ "@id": service?.["@id"] });
   });
 
-  it("gives e-books an Offer only when they can be bought", async () => {
-    const ebook = await getEbook("pl", "suplementy-w-pcos", {
-      environment: {},
-    });
-    const view = mapEbook(ebook, "pl");
-    const product = (availability: typeof view.availability) =>
-      ebookGraph({
-        ...view,
-        availability,
-        checkoutUrl: "https://buy.stripe.com/test",
-      })(ctx(view.href)).find((node) =>
-        [node["@type"]].flat().includes("Product"),
+  it.each([
+    { availability: "planned", checkoutUrl: "https://buy.stripe.com/test" },
+    { availability: "paused", checkoutUrl: "https://buy.stripe.com/test" },
+    { availability: "available", checkoutUrl: undefined },
+    { availability: "presale", checkoutUrl: undefined },
+  ] satisfies {
+    availability: Parameters<typeof ebookGraph>[0]["availability"];
+    checkoutUrl: string | undefined;
+  }[])(
+    "models $availability without a purchasable Offer as Book",
+    async (state) => {
+      const ebook = await getEbook("pl", "suplementy-w-pcos", {
+        environment: {},
+      });
+      const view = mapEbook(ebook, "pl");
+      const graph = ebookGraph({ ...view, ...state })(ctx(view.href));
+      const book = graph.find(
+        (node) => node["@id"] === pageEntityId(view.href, "product"),
       );
-    expect(product("planned")).not.toHaveProperty("offers");
-    expect(product("paused")).not.toHaveProperty("offers");
-    expect(product("available")?.offers).toMatchObject({
-      availability: "https://schema.org/InStock",
-      url: "https://buy.stripe.com/test",
-    });
-    expect(product("presale")?.offers).toMatchObject({
-      availability: "https://schema.org/PreOrder",
-    });
-    expect(product("planned")).toMatchObject({
-      "@type": ["Product", "Book"],
-      bookFormat: "https://schema.org/EBook",
-    });
-  });
+      expect(book).toMatchObject({
+        "@type": "Book",
+        bookFormat: "https://schema.org/EBook",
+        name: view.title,
+        author: { "@id": "https://aleksandraolesiewicz.com/#person" },
+      });
+      expect(book).not.toHaveProperty("offers");
+      expect(graph.find((node) => node["@type"] === "WebPage")?.about).toEqual({
+        "@id": pageEntityId(view.href, "product"),
+      });
+      expect(graph.find((node) => node["@type"] === "FAQPage")?.about).toEqual({
+        "@id": pageEntityId(view.href, "product"),
+      });
+    },
+  );
+
+  it.each([
+    {
+      availability: "available",
+      schemaAvailability: "https://schema.org/InStock",
+    },
+    {
+      availability: "presale",
+      schemaAvailability: "https://schema.org/PreOrder",
+    },
+  ] satisfies {
+    availability: Parameters<typeof ebookGraph>[0]["availability"];
+    schemaAvailability: string;
+  }[])(
+    "models purchasable $availability as Product and Book",
+    async (state) => {
+      const ebook = await getEbook("pl", "suplementy-w-pcos", {
+        environment: {},
+      });
+      const view = mapEbook(ebook, "pl");
+      const graph = ebookGraph({
+        ...view,
+        availability: state.availability,
+        checkoutUrl: "https://buy.stripe.com/test",
+        priceGross: 129,
+      })(ctx(view.href));
+      const product = graph.find(
+        (node) => node["@id"] === pageEntityId(view.href, "product"),
+      );
+      expect(product).toMatchObject({
+        "@type": ["Product", "Book"],
+        bookFormat: "https://schema.org/EBook",
+        offers: {
+          "@type": "Offer",
+          availability: state.schemaAvailability,
+          price: 129,
+          priceCurrency: "PLN",
+          url: "https://buy.stripe.com/test",
+          seller: { "@id": "https://aleksandraolesiewicz.com/#seller" },
+        },
+      });
+    },
+  );
 });
 
 describe("collection titles", () => {
