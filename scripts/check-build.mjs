@@ -3,6 +3,43 @@ import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
 import { checkCssBudgets } from "./check-css-budgets.mjs";
 import { assertEnglishDisabled } from "./check-disabled-locales.mjs";
+
+const indexing = process.env.SITE_INDEXING === "production";
+const liveContent = Boolean(process.env.PUBLIC_SANITY_PROJECT_ID);
+const layoutNoindex = new Set(["ui/index.html", "static/index.html"]);
+const checkoutReceipt = /potwierdzenie zakupu|płatność przyjęta/i;
+
+function assertRobots(html, filePath) {
+  if (layoutNoindex.has(filePath) || !indexing) {
+    assert.match(
+      html,
+      /noindex,nofollow/,
+      `${filePath}: prototype must remain noindex`,
+    );
+  }
+}
+
+function assertOneHeading(html, filePath) {
+  assert.equal(
+    (html.match(/<h1[\s>]/g) ?? []).length,
+    1,
+    `${filePath}: exactly one h1`,
+  );
+}
+
+async function directoryNames(dir) {
+  const entries = await readdir(dir, { withFileTypes: true }).catch(() => []);
+  return entries
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
+}
+
+function inputWithValue(html, value) {
+  return [...html.matchAll(/<input\b[^>]*>/g)]
+    .map((match) => match[0])
+    .find((tag) => new RegExp(`\\bvalue="${value}"`).test(tag));
+}
+
 const assets = await readdir("dist/_astro");
 const sizes = { js: 0, css: 0 };
 for (const name of assets) {
@@ -30,56 +67,56 @@ for (const path of [
   "o-mnie/index.html",
   "konsultacje/index.html",
   "ebooki/index.html",
-  "ebooki/kategoria/pcos/index.html",
-  "ebooki/suplementy-w-pcos/index.html",
   "ui/index.html",
   "static/index.html",
   "blog/index.html",
-  "blog/kategoria/pcos/index.html",
-  "blog/kategoria/perimenopauza/index.html",
   "odstapienie/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
-  assert.match(
-    html,
-    /noindex,nofollow/,
-    `${path}: prototype must remain noindex`,
-  );
-  assert.equal(
-    (html.match(/<h1[\s>]/g) ?? []).length,
-    1,
-    `${path}: exactly one h1`,
-  );
+  assertRobots(html, path);
+  assertOneHeading(html, path);
   if (path === "static/index.html")
     assert(!html.includes("<script"), "static primitives emit JS");
 }
 const filesWithoutEnglish = await assertEnglishDisabled();
 const collectionHtml = await readFile("dist/ebooki/index.html", "utf8");
-assert.match(collectionHtml, /Więcej jasności/);
-assert.match(collectionHtml, /97/);
-assert.match(collectionHtml, /materiały są w przygotowaniu/);
-assert.match(collectionHtml, /\/ebooki\/suplementy-w-pcos\//);
-assert.match(collectionHtml, /\/ebooki\/badania-ktore-maja-sens\//);
-assert.doesNotMatch(collectionHtml, /potwierdzenie zakupu|płatność przyjęta/i);
-const collectionPcosHtml = await readFile(
-  "dist/ebooki/kategoria/pcos/index.html",
-  "utf8",
+assert.match(collectionHtml, /class="ebooks3a"/);
+assert.doesNotMatch(collectionHtml, checkoutReceipt);
+const ebookSlugs = (await directoryNames("dist/ebooki")).filter(
+  (name) => name !== "kategoria",
 );
-assert.match(collectionPcosHtml, /value="pcos"/);
-assert.match(collectionPcosHtml, /checked/);
-const ebookHtml = await readFile(
-  "dist/ebooki/suplementy-w-pcos/index.html",
-  "utf8",
-);
-assert.match(ebookHtml, /97/);
-assert.match(ebookHtml, /Zapowiedź oferty|Sprzedaż nie jest uruchomiona/);
-assert.doesNotMatch(ebookHtml, /potwierdzenie zakupu|płatność przyjęta/i);
+assert(ebookSlugs.length >= 1, "ebooks: expected at least one landing");
+for (const slug of ebookSlugs) {
+  const filePath = `ebooki/${slug}/index.html`;
+  const html = await readFile(`dist/${filePath}`, "utf8");
+  assert.match(
+    collectionHtml,
+    new RegExp(`/ebooki/${slug}/`),
+    `${filePath}: collection must link the built landing`,
+  );
+  assert.match(html, /class="ebook3a"/, filePath);
+  assertRobots(html, filePath);
+  assertOneHeading(html, filePath);
+  assert.doesNotMatch(html, checkoutReceipt, filePath);
+}
+for (const topic of await directoryNames("dist/ebooki/kategoria")) {
+  const filePath = `ebooki/kategoria/${topic}/index.html`;
+  const html = await readFile(`dist/${filePath}`, "utf8");
+  const input = inputWithValue(html, topic);
+  assert.ok(input, `${filePath}: missing value="${topic}"`);
+  assert.match(
+    input,
+    /\schecked(?:\s|=|>)/,
+    `${filePath}: ${topic} is not selected`,
+  );
+  assertRobots(html, filePath);
+  assertOneHeading(html, filePath);
+}
 const blogHtml = await readFile("dist/blog/index.html", "utf8");
-assert.match(blogHtml, /Blog\. Po Twojemu\./);
-assert.match(blogHtml, /Najnowszy wpis/);
+assert.match(blogHtml, /class="blog3a"/);
+assert.match(blogHtml, /id="latest-title"/);
 // Posts are published by hand in Sanity, so a live build has no fixed count.
 // Pagination must match the article pages that were actually built.
-const liveContent = Boolean(process.env.PUBLIC_SANITY_PROJECT_ID);
 const blogEntries = await readdir("dist/blog", { withFileTypes: true });
 const articleSlugs = [];
 for (const entry of blogEntries) {
@@ -106,7 +143,7 @@ let page = 1;
 let html = blogHtml;
 for (;;) {
   const label = page === 1 ? "blog" : `blog/strona/${page}`;
-  if (page > 1) assert.doesNotMatch(html, /Najnowszy wpis/, label);
+  if (page > 1) assert.doesNotMatch(html, /id="latest-title"/, label);
   const range = rangeOf(html, label);
   if (range) {
     assert.equal(range.start, previousEnd + 1, `${label}: range continues`);
@@ -125,12 +162,9 @@ for (;;) {
 assert.equal(previousEnd, postCount, "blog: pages cover every built article");
 for (const slug of articleSlugs) {
   const articlePage = await readFile(`dist/blog/${slug}/index.html`, "utf8");
-  assert.match(articlePage, /noindex,nofollow/, `blog/${slug}: noindex`);
-  assert.equal(
-    (articlePage.match(/<h1[\s>]/g) ?? []).length,
-    1,
-    `blog/${slug}: exactly one h1`,
-  );
+  const articlePath = `blog/${slug}/index.html`;
+  assertRobots(articlePage, articlePath);
+  assertOneHeading(articlePage, articlePath);
   assert.match(
     articlePage,
     /"@type":"BlogPosting"/,
@@ -148,11 +182,24 @@ for (const category of await readdir("dist/blog/kategoria", {
   );
   assert(
     articleSlugs.some((slug) => categoryHtml.includes(`/blog/${slug}/`)) ||
-      /tej kategorii nie ma jeszcze wpisów/i.test(categoryHtml),
+      /class="blog3a-empty"/.test(categoryHtml),
     `blog/kategoria/${category.name}: neither articles nor empty state`,
   );
 }
 if (!liveContent) {
+  assert.match(collectionHtml, /Więcej jasności/);
+  assert.match(collectionHtml, /97/);
+  assert.match(collectionHtml, /materiały są w przygotowaniu/);
+  assert.match(collectionHtml, /\/ebooki\/suplementy-w-pcos\//);
+  assert.match(collectionHtml, /\/ebooki\/badania-ktore-maja-sens\//);
+  const ebookHtml = await readFile(
+    "dist/ebooki/suplementy-w-pcos/index.html",
+    "utf8",
+  );
+  assert.match(ebookHtml, /97/);
+  assert.match(ebookHtml, /Zapowiedź oferty|Sprzedaż nie jest uruchomiona/);
+  assert.match(blogHtml, /Blog\. Po Twojemu\./);
+  assert.match(blogHtml, /Najnowszy wpis/);
   // Fixtures are fixed: 11 posts, 6 per list page after the featured one.
   assert.equal(postCount, 11, "fixture: 11 articles");
   assert.match(blogHtml, /Wpisy 2–7 z 11/);
@@ -182,34 +229,26 @@ if (!liveContent) {
   assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
 }
 const homePl = await readFile("dist/index.html", "utf8");
-for (const [label, html] of [["/", homePl]]) {
-  assert.match(
-    html,
-    /href="https:\/\/www\.instagram\.com\/aleksandra_olesiewicz"/,
-    `${label}: Instagram profile`,
-  );
-  assert.match(
-    html,
-    /href="https:\/\/www\.facebook\.com\/dietetykolesiewicz\/"/,
-    `${label}: Facebook profile`,
-  );
-  assert.match(
-    html,
-    /href="https:\/\/www\.tiktok\.com\/@aleksandra_olesiewicz"/,
-    `${label}: TikTok profile`,
-  );
+assert.match(homePl, /class="home3a"/);
+const socialNav =
+  homePl.match(/class="ao-footer__social"[\s\S]*?<\/nav>/)?.[0] ?? "";
+assert.match(socialNav, /href="https:\/\//, "/: social profile link");
+for (const placeholder of [
+  "https://www.instagram.com/",
+  "https://www.facebook.com/",
+  "https://www.tiktok.com/",
+]) {
   assert.doesNotMatch(
-    html,
-    /href="https:\/\/www\.instagram\.com\/"/,
-    `${label}: placeholder Instagram homepage`,
+    socialNav,
+    new RegExp(`href="${placeholder.replaceAll("/", "\\/")}"`),
+    `/: placeholder ${placeholder}`,
   );
 }
-assert.match(homePl, /Zrozum swoje ciało/);
 const aboutHtml = await readFile("dist/o-mnie/index.html", "utf8");
-assert.match(aboutHtml, /Jestem Ola/);
-assert.match(aboutHtml, /diploma/);
+assert.match(aboutHtml, /class="about3a"/);
+assert.match(aboutHtml, /class="about3a-diploma"/);
 const consultationHtml = await readFile("dist/konsultacje/index.html", "utf8");
-assert.match(consultationHtml, /Konsultacje dietetyczne|60 minut/i);
+assert.match(consultationHtml, /class="consult3a"/);
 
 for (const path of [
   "polityka-prywatnosci/index.html",
@@ -218,39 +257,48 @@ for (const path of [
   "regulamin-newslettera/index.html",
 ]) {
   const html = await readFile(`dist/${path}`, "utf8");
-  assert.match(
-    html,
-    /noindex,nofollow/,
-    `${path}: prototype must remain noindex`,
-  );
-  assert.equal(
-    (html.match(/<h1[\s>]/g) ?? []).length,
-    1,
-    `${path}: exactly one h1`,
-  );
+  assertRobots(html, path);
+  assertOneHeading(html, path);
   assert.match(html, /legal3a/);
 }
 const privacyHtml = await readFile(
   "dist/polityka-prywatnosci/index.html",
   "utf8",
 );
-assert.match(privacyHtml, /Polityka prywatności aleksandraolesiewicz\.com/);
-assert.match(
-  privacyHtml,
-  /Wersja 2\.3 · obowiązuje od <time datetime="2026-10-13"/,
-);
-assert.match(privacyHtml, /1\. Kto jest administratorem Twoich danych/);
-assert.match(privacyHtml, /\/lista-cookies-i-identyfikatorow\//);
 const termsHtml = await readFile("dist/regulamin/index.html", "utf8");
-assert.match(termsHtml, /<h2 id="pouczenie"/);
-assert.match(termsHtml, /<h2 id="formularz-odstapienia"/);
-assert.match(termsHtml, /href="\/regulamin\/#pouczenie"/);
 const cookiesHtml = await readFile(
   "dist/lista-cookies-i-identyfikatorow/index.html",
   "utf8",
 );
-assert.match(cookiesHtml, /Przed dokonaniem wyboru/);
-assert.match(cookiesHtml, /\/polityka-prywatnosci\//);
+if (!liveContent) {
+  assert.match(
+    homePl,
+    /href="https:\/\/www\.instagram\.com\/aleksandra_olesiewicz"/,
+  );
+  assert.match(
+    homePl,
+    /href="https:\/\/www\.facebook\.com\/dietetykolesiewicz\/"/,
+  );
+  assert.match(
+    homePl,
+    /href="https:\/\/www\.tiktok\.com\/@aleksandra_olesiewicz"/,
+  );
+  assert.match(homePl, /Zrozum swoje ciało/);
+  assert.match(aboutHtml, /Jestem Ola/);
+  assert.match(consultationHtml, /Konsultacje dietetyczne|60 minut/i);
+  assert.match(privacyHtml, /Polityka prywatności aleksandraolesiewicz\.com/);
+  assert.match(
+    privacyHtml,
+    /Wersja 2\.3 · obowiązuje od <time datetime="2026-10-13"/,
+  );
+  assert.match(privacyHtml, /1\. Kto jest administratorem Twoich danych/);
+  assert.match(privacyHtml, /\/lista-cookies-i-identyfikatorow\//);
+  assert.match(termsHtml, /<h2 id="pouczenie"/);
+  assert.match(termsHtml, /<h2 id="formularz-odstapienia"/);
+  assert.match(termsHtml, /href="\/regulamin\/#pouczenie"/);
+  assert.match(cookiesHtml, /Przed dokonaniem wyboru/);
+  assert.match(cookiesHtml, /\/polityka-prywatnosci\//);
+}
 const sitemap = await readFile("dist/sitemap.xml", "utf8");
 for (const loc of [
   "https://aleksandraolesiewicz.com/polityka-prywatnosci/",

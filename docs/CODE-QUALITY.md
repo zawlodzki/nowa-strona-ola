@@ -12,17 +12,17 @@ Astro i Studio, dry-run bundla Workera, kontrolę artefaktów i testy przegląda
 Pierwszy błąd zatrzymuje całość. Polecenie nie naprawia kodu.
 Przed pierwszym uruchomieniem: `npm ci` oraz `npx playwright install`.
 
-| Polecenie            | Odpowiedzialność                                                                      |
-| -------------------- | ------------------------------------------------------------------------------------- |
-| npm run format:check | Prettier + plugin Astro: spójny format kodu i dokumentacji                            |
-| npm run format       | Jawne formatowanie podczas pracy; nigdy automatyczna naprawa w CI                     |
-| npm run tokens:check | Zgodność `tokens.css` z `tokens.json` oraz aktywne wartości i font Switzer w 3a       |
-| npm run lint         | ESLint 10, typescript-eslint, eslint-plugin-astro; zero ostrzeżeń, zakaz explicit any |
-| npm run check        | Astro check i TypeScript strict: komponenty, props, importy, kod i testy TS           |
-| npm test             | Vitest: logika i przypadki brzegowe (walidacja, Sanity, podgląd, webhook, tokeny)     |
-| npm run build        | Rzeczywisty build statyczny, nie tylko sprawdzenie składni                            |
-| npm run test:build   | Budżety gzip, noindex prototypu, jeden H1 i brak JS dla statycznych elementów         |
-| npm run test:e2e     | Playwright: Chromium, Firefox, WebKit; uruchamia podgląd wcześniej zbudowanego dist   |
+| Polecenie            | Odpowiedzialność                                                                       |
+| -------------------- | -------------------------------------------------------------------------------------- |
+| npm run format:check | Prettier + plugin Astro: spójny format kodu i dokumentacji                             |
+| npm run format       | Jawne formatowanie podczas pracy; nigdy automatyczna naprawa w CI                      |
+| npm run tokens:check | Zgodność `tokens.css` z `tokens.json` oraz aktywne wartości i font Switzer w 3a        |
+| npm run lint         | ESLint 10, typescript-eslint, eslint-plugin-astro; zero ostrzeżeń, zakaz explicit any  |
+| npm run check        | Astro check i TypeScript strict: komponenty, props, importy, kod i testy TS            |
+| npm test             | Vitest: logika i przypadki brzegowe (walidacja, Sanity, podgląd, webhook, tokeny)      |
+| npm run build        | Rzeczywisty build statyczny, nie tylko sprawdzenie składni                             |
+| npm run test:build   | Budżety gzip, noindex poza `SITE_INDEXING=production`, jeden H1, brak JS na `/static/` |
+| npm run test:e2e     | Playwright: Chromium, Firefox, WebKit; uruchamia podgląd wcześniej zbudowanego dist    |
 
 ESLint 10 wybrany zamiast niewspieranego ESLint 9. eslint-plugin-jsx-a11y nie został
 włączony: jego aktualne peer dependencies nie obejmują ESLint 10. Kontrole dostępności

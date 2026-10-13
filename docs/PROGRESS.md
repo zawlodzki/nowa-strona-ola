@@ -1,10 +1,30 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-13 (kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-13 (kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Kontrole buildu po publikacji Sanity, 13.10.2026
+
+- Produkcyjny `publish-content` padał w `tests/unit/seo.test.ts` na
+  `isIndexingEnabled(undefined)`, bo argument `undefined` włącza odczyt
+  `SITE_INDEXING`. Test stubuje i czyści tę zmienną przez `vi.stubEnv`
+  i `vi.unstubAllEnvs`. `src/lib/seo/site.ts` bez zmian.
+- `scripts/check-build.mjs` nie wymaga już zdań z Content Lake na buildzie
+  z `PUBLIC_SANITY_PROJECT_ID`. Zdania fixture zostają pod `!liveContent`.
+  Build żywy sprawdza szablon, linki do zbudowanych landingów, paginację
+  bloga i robots. `noindex` jest wymagany, gdy `SITE_INDEXING` nie jest
+  `production`, oraz zawsze na `/ui/` i `/static/`. `check-seo.mjs` bez zmian.
+- Kontrole. `npm test` dał 439 testów w 46 plikach, także przy
+  `SITE_INDEXING=production`. `npm run test:build` przeszedł na fixture
+  i na buildzie `PUBLIC_SANITY_PROJECT_ID=dyuqkn8c` `PUBLIC_SANITY_DATASET=production`,
+  w obu razach z `SITE_INDEXING` pustym i równym `production`.
+  E2E dało 467 passed, 9 skipped i 1 failed w Firefoxie
+  (`lead-forms` na `/design-system/`). Ten sam test w Chromium i WebKit
+  przeszedł, a trzy powtórzenia w Firefoxie też. Nie scalano i nie wdrażano.
+- Następny krok. Poczekać na zielony `publish-content` po merge.
 
 ### Kopia datasetu Sanity, 13.10.2026
 
