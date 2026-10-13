@@ -1,12 +1,12 @@
 # Lista cookies i identyfikatorów aleksandraolesiewicz.com
 
-Wersja 2.2 · obowiązuje od 11.10.2026
+Wersja 2.3 · obowiązuje od 13.10.2026
 
 Lista uzupełnia [Politykę prywatności](/polityka-prywatnosci/) i opisuje pliki cookies, pamięć lokalną przeglądarki (localStorage) oraz podobne identyfikatory Strony.
 
 ## Aktualny stan narzędzi
 
-**Google Tag Manager, Google Analytics 4, Microsoft Clarity i piksel Meta są obecnie wyłączone na całej Stronie, również po wybraniu „Akceptuj wszystkie”.** Panel zapisuje Twoje preferencje, ale sam wybór nie uruchamia tych usług. Ich planowane zastosowania opisujemy osobno poniżej. Uruchomienie będzie wymagało sprawdzenia konfiguracji i aktualizacji tej listy.
+Google Tag Manager ładuje Google Analytics 4 po potwierdzonej zgodzie analitycznej wyłącznie na dopuszczonych stronach. Piksel Meta wymaga potwierdzonej zgody marketingowej i wysyła tylko ręczne zdarzenie wyświetlenia strony. Microsoft Clarity jest wyłączony; nie nagrywamy sesji ani treści ekranu. Samo zamknięcie banera nie uruchamia pomiaru.
 
 ## Przed dokonaniem wyboru
 
@@ -35,22 +35,28 @@ Zgody tej Strony są zbierane osobno od zgód zawlodzki.pl. Wspólna infrastrukt
 
 Link do rezerwacji Cal.com prowadzi na zewnętrzną stronę. Samo wyświetlenie linku nie osadza kalendarza ani nie zapisuje cookies Cal.com na Stronie. Po przejściu do zewnętrznej usługi zastosowanie ma jej polityka prywatności i cookies.
 
-## Planowane narzędzia opcjonalne
+## Narzędzia opcjonalne
 
-Poniższe identyfikatory **nie są obecnie ustawiane przez Stronę**. Nazwy stanowią wykaz planowanych narzędzi; rzeczywiste domeny i okresy muszą zostać sprawdzone przed aktywacją i wpisane do tej listy.
+| Kategoria zgody | Identyfikator           | Dostawca, mechanizm i zakres                                                                           | Cel                                                                                                                         | Okres działania                                                                                                                   |
+| --------------- | ----------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Analityczne     | `_ga`, `_ga_9QW05JYZTL` | Google Analytics 4; cookies własne w domenie Strony                                                    | rozróżnianie przeglądarek i utrzymanie stanu sesji dla statystyk wyświetleń i czasu zaangażowania na dopuszczonych stronach | do 2 lat od ostatniego odnowienia cookie; przeglądarka może skrócić ten czas; wycofanie zgody powoduje ich usunięcie przez Stronę |
+| Marketingowe    | `_fbp`                  | Meta; cookie własne w domenie Strony                                                                   | identyfikator przeglądarki w pomiarze reklam                                                                                | do 90 dni; przeglądarka może skrócić ten czas; wycofanie zgody powoduje jego usunięcie przez Stronę                               |
+| Marketingowe    | `_fbc`                  | Meta; cookie własne w domenie Strony, może powstać po przejściu z reklamy z identyfikatorem kliknięcia | powiązanie wyświetlenia z kliknięciem reklamy                                                                               | do 90 dni; przeglądarka może skrócić ten czas; wycofanie zgody powoduje jego usunięcie przez Stronę                               |
 
-| Kategoria zgody | Narzędzie          | Planowane identyfikatory                                              | Cel                                                      |
-| --------------- | ------------------ | --------------------------------------------------------------------- | -------------------------------------------------------- |
-| Analityczne     | Google Analytics 4 | `_ga`, `_ga_*`                                                        | statystyki korzystania z dopuszczonych stron             |
-| Analityczne     | Microsoft Clarity  | `_clck`, `_clsk`                                                      | mapy kliknięć i nagrania sesji na dopuszczonych stronach |
-| Marketingowe    | piksel Meta        | `_fbp`, ewentualne cookies w domenach Meta po uruchomieniu integracji | pomiar skuteczności reklam na dopuszczonych stronach     |
+Okres cookies w przeglądarce jest odrębny od retencji w usłudze. Dane użytkownika i zdarzeń w GA4 mają retencję 2 miesiące; nowa aktywność nie odnawia okresu retencji użytkownika. Nie oznacza to usunięcia zbiorczych raportów po 2 miesiącach. Google Signals, personalizacja reklam i pomiar rozszerzony są wyłączone.
 
-Planowany Google Consent Mode działa w trybie podstawowym. Tagi Google mogą być ładowane dopiero po właściwej zgodzie; przed zgodą nie wysyłamy sygnałów do Google. Sama zgoda nie wystarczy do uruchomienia pomiaru. Każda strona musi też zostać osobno dopuszczona do danego narzędzia.
+Google Consent Mode działa w trybie podstawowym: przed zgodą nie ładujemy tagów Google ani nie wysyłamy do Google sygnałów pomiarowych. GTM zarządza tagami, nie zastępuje panelu ani dowodu zgody c15t.
 
-**Treści dotyczące zdrowia, konsultacji i e-booków, formularze, zamówienia, płatności, potwierdzenia i odstąpienia są wyłączone z analityki i marketingu, niezależnie od zgody.** Obecnie żadna strona nie została dopuszczona do pomiaru. Ankieta przed konsultacją działa poza Stroną i nie zawiera naszych tagów. Dane wpisane w formularzach nie są przekazywane do analityki.
+Do GA4 trafiają neutralne kody `home`, `about`, `blog-index`, `blog-article`, `ebook-index` albo `ebook-detail`: tytuł zdarzenia zawiera kod, a adres strony ma postać `https://aleksandraolesiewicz.com/m/<kod>`. To adres techniczny pomiaru, a nie rzeczywisty adres oglądanej strony. Adres odsyłający jest pusty. GA4 mierzy wyświetlenia oraz czas zaangażowania, również przez automatyczne zdarzenie `user_engagement`, po zgodzie analitycznej. Nie przekazujemy nazw produktów, tytułów wpisów, danych formularzy ani User-ID.
+
+Meta otrzymuje ręczne zdarzenie `PageView`. Konfiguracja Core ogranicza adres strony i adres odsyłający do domen, bez ścieżek, parametrów i fragmentów. Automatyczne zdarzenia i automatyczne zaawansowane dopasowywanie klientów są wyłączone. Narzędzia nadal przetwarzają własne identyfikatory, informacje o urządzeniu oraz dane techniczne połączenia; ograniczenie adresów nie oznacza anonimowości. Nie wysyłamy im treści formularzy ani zdarzeń zapisu lub zakupu.
+
+Dopuszczone rodzaje stron to strona główna, „O mnie”, katalog i karty e-booków, blog i wpisy. Każdą z nich możemy dodatkowo wyłączyć w konfiguracji treści. **Kontakt, konsultacje, odstąpienie od umowy i dokumenty prawne są zawsze wyłączone z analityki i marketingu, niezależnie od zgody.** Formularz newslettera nie wyłącza pomiaru całej strony; jego pola i dane zapisu nie trafiają do analityki. Zamówienia, płatności i ankieta przed konsultacją są poza pomiarem Strony.
+
+Clarity pozostaje wyłączony: `_clck`, `_clsk` i `_cltk` nie są ustawiane przez aktualną konfigurację Strony. Nie jest uruchamiany również po akceptacji wszystkich kategorii.
 
 ## Zmiana zgody i usunięcie wpisów
 
-Przycisk „Ustawienia cookies” w stopce otwiera panel. Możesz odmówić wszystkich kategorii opcjonalnych, zaakceptować je lub zapisać własny wybór. Odmowa nie blokuje korzystania ze Strony. Cofnięcie zgody blokuje odpowiednie narzędzia; awaria serwera nie uprawnia nas do ich uruchomienia. Jeżeli zapis wycofania zostanie przerwany, przy kolejnym otwarciu Strony synchronizujemy odmowę wszystkich kategorii opcjonalnych. Możesz wtedy ponownie wybrać kategorie, na które chcesz się zgodzić.
+Przycisk „Ustawienia cookies” w stopce otwiera panel. Możesz odmówić wszystkich kategorii opcjonalnych, zaakceptować je lub zapisać własny wybór. Odmowa nie blokuje korzystania ze Strony. Cofnięcie zgody blokuje odpowiednie narzędzia i usuwa znane cookies pomiarowe. Po potwierdzeniu zapisu ograniczenia odświeżamy stronę, aby usunąć załadowane narzędzia. Awaria serwera nie uprawnia nas do ich uruchomienia. Jeżeli zapis wycofania zostanie przerwany, przy kolejnym otwarciu Strony synchronizujemy odmowę wszystkich kategorii opcjonalnych. Możesz wtedy ponownie wybrać kategorie, na które chcesz się zgodzić.
 
 Cookies i localStorage możesz usunąć w ustawieniach przeglądarki dla tej strony. Po usunięciu cookie zgody prosimy o ponowny wybór, chyba że w pamięci lokalnej pozostało oczekujące wycofanie; wtedy najpierw synchronizujemy odmowę. Usunięcie `ao-theme` przywraca korzystanie z ustawienia systemowego. Wyczyszczenie pamięci przeglądarki nie usuwa automatycznie dowodu decyzji z c15t; w sprawach praw dotyczących danych skontaktuj się z nami zgodnie z Polityką prywatności.

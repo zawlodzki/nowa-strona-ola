@@ -1,5 +1,23 @@
 # Homepage 3a — konfiguracja treści CMS
 
+## Pomiar produkcyjny — decyzja 13.10.2026
+
+Źródło: użytkownik zlecił aktywację produkcyjnego GTM oraz wyrównanie dokumentów
+w `projekt prawny ola`. Po odbiorze rzeczywistego SDK zatwierdził także neutralny
+czas zaangażowania GA4 (`user_engagement`) po zgodzie analitycznej.
+
+| Wartość                                                                                           | Mapowanie i stan                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GA4: wyświetlenia i neutralny czas zaangażowania po zgodzie analitycznej                          | c15t `measurement`; `trackingPolicy.pageCode`, syntetyczny URL `/m/<kod>`, tytuł równy kodowi, pusty referrer; konfiguracja klienta i GTM, bez nowego pola CMS |
+| Meta: ręczny PageView po zgodzie marketingowej, same domeny strony i referrera                    | c15t `marketing`; Core włączone w koncie Meta; automatyczne dopasowywanie i zdarzenia wyłączone                                                                |
+| Kontakt, konsultacje, odstąpienie i strony prawne zawsze wyłączone; newsletter nie wyłącza strony | reguły `resolveTrackingPolicy`; dane formularzy nigdy nie trafiają do analityki                                                                                |
+| Dodatkowe wyłączenie dopuszczonej strony lub kategorii                                            | istniejące `seo.excludeFromMeasurement` oraz `category.excludeFromMeasurement`; nie zmieniono wartości dokumentów w CMS w tym kroku                            |
+| Retencja GA4 2 miesiące bez resetu użytkownika; Clarity nieaktywne                                | konfiguracja usług; odrębne od okresu cookies; bez zmiany schematu CMS                                                                                         |
+
+Kontener GTM 4 jest opublikowany; loader produkcyjny pozostaje wyłączony do
+ukończenia publikacji copy prawnego i odbioru. Decyzja nie oznacza aktywacji
+na podstawie samej dokumentacji.
+
 ## Pięć landingów e-booków, 11.10.2026
 
 Źródło decyzji: użytkownik zlecił aktualizację repo z main, użycie skilla
