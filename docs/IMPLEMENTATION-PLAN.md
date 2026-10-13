@@ -505,6 +505,12 @@ znikają z obu formatów i indeksów po udanej publikacji.
       Kod zweryfikowano; schema Studio i pomiar produkcji nie są wdrożone.
 - [x] Zweryfikować bramkę GTM na atrapach oraz rzeczywisty SDK GA4 z blokadą
       wysyłki telemetrii, 12.10.2026.
+- [x] Zapisać retencję GA4 dwa miesiące bez resetu oraz wyłączyć automatyczne
+      dopasowywanie i zdarzenia Meta po zatwierdzeniu właściciela, 12.10.2026.
+- [x] Dodać ręczny PageView Meta do nieopublikowanego workspace. Sprawdzić
+      rzeczywisty SDK z Core, domeny zamiast pełnych adresów i cofnięcie zgody
+      podczas pobierania SDK oraz konfiguracji. Eksport odpowiada workspace;
+      pomiar pozostaje wyłączony, 12.10.2026.
 - [ ] Odebrać skompilowany kontener w Tag Assistant i opublikować pomiar
       po zapisie ustawień usług oraz spójnego copy prawnego.
 

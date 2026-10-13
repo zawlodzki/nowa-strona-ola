@@ -6,6 +6,57 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Meta jako stacked PR na GTM, 12.10.2026
+
+- Gałąź `codex/gtm-meta` powstała na dokładnym tipie rodzica #86 `a64c8a2`.
+  Rodzic zawiera main `33f3326` i zachowany pomiar Lighthouse z #84.
+  Podpis 1Password przeszedł po odblokowaniu i autoryzacji. Aktualizację rodzica
+  wysłano; nie wyłączano podpisów.
+- Podpisany commit `9bc4c35` wysłano i otwarto
+  [PR #88](https://github.com/zawlodzki/nowa-strona-ola/pull/88) do gałęzi
+  `codex/gtm-rollout`. Kolejność odbioru to #86, następnie #88.
+- W trakcie odbioru doszedł main `bc61a7e` z poprawką dostępności #85.
+  Włączono go do rodzica `5aa44e0`, a jego dokładny tip do dziecka,
+  bez force-pusha i z zachowaniem wpisów postępu obu zakresów.
+- Właściciel zatwierdził PageView Meta z samymi domenami adresu i odsyłacza
+  po zgodzie marketingowej. W GA4 zapisano dwa miesiące retencji użytkownika
+  bez resetu. Oba automatyczne mechanizmy Meta są wyłączone; Core włączone.
+- `aoTrackingState` jest wspólnym zamkniętym stanem runtime. Astro ustawia go
+  przed kolejką GTM. HTML sprawdza zgodę przed pobraniem SDK i po jego
+  załadowaniu. Cofnięcie ustawia `revoked` przed teardown i wykonuje
+  `fbq('consent', 'revoke')`. Spóźniony grant GTM nie przywraca piksela.
+- Import scalający do workspace 5 dodał tag Meta, trigger i zmienną zgody.
+  Zero modyfikacji i usunięć. Ponowny eksport z 20:48 UTC odpowiada
+  przygotowanej konfiguracji; zawiera trzy tagi, trzy reguły i cztery zmienne
+  własne. Meta wymaga `ad_storage`, hosta produkcyjnego i rollout true.
+  Rollout nadal false; nie opublikowano wersji ani nie włączono produkcji.
+- Dokładny HTML ponownego eksportu z prawdziwym SDK 2.9.419 i Core dał jeden
+  PageView z domenami, bez custom data ani user data. Formularz i cofnięcie
+  nie dodały zdarzeń. Opóźniona konfiguracja po cofnięciu oraz awaria
+  konfiguracji dały zero zdarzeń. Każde żądanie pomiarowe zablokowano przed
+  siecią. SDK nadal dodaje własne identyfikatory i dane urządzenia.
+  [Dowód](../output/gtm-2026-10-12/meta-sdk.json).
+- Niezależny przegląd i no-comments PASS. `npm run verify` na Node 24.19.0
+  PASS, 391 unit w 44 plikach, 456 E2E i dziewięć celowo pominiętych testów
+  włączonego loadera. Osobny build z PUBLIC_GTM_ENABLED=true i te dziewięć
+  testów PASS we wszystkich trzech silnikach. Obejmują zatrzymanie Meta,
+  oczekiwanie na receipt i błąd storage. Domyślny build przywrócono.
+  Kontrola CMS obejmuje 88 dokumentów bez błędów i 17 zgodnych stron.
+- Po włączeniu #85 pierwszy pełny przebieg miał 455 E2E PASS i jeden błąd
+  formularza katalogu 3a w Firefox. Drugie kliknięcie po około 152 ms nie
+  uruchomiło walidacji; trace nie dowodzi przyczyny. Dokładny scenariusz
+  przeszedł pięć kolejnych prób. Bez zmian testu i formularza powtórzono całą
+  bramkę: 391 unit, 456 E2E, 88 dokumentów bez błędów i 17 zgodnych stron,
+  PASS. Zachowany trace jest w `/private/tmp/ola-meta-final-firefox-catalog-trace.zip`.
+  Przy ponownym wystąpieniu rejestrować target i detail zdarzeń pointer oraz submit.
+- Core musi pozostać włączone. Zmiana SDK lub konfiguracji konta wymaga
+  ponownego odbioru. Składany kontener GTM i Tag Assistant pozostają
+  niesprawdzone. Kontrole natywnego zoomu, czytnika i urządzenia fizycznego
+  nie były wykonane. Clarity pozostaje osobnym zakresem.
+- Następny krok: odbiór stosu PR, spójne treści prawne oraz test skompilowanego
+  kontenera z blokadą telemetrii. Publikacja kontenera i aktywacja pomiaru
+  wymagają osobnego zatwierdzenia przygotowanej konfiguracji.
+
 ### GTM jako następny stacked PR, 12.10.2026
 
 - Gałąź `codex/gtm-rollout` powstała na tipie #82 `d8bc1b8`. Zakres
@@ -66,7 +117,8 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   przeszedł. Nie wyłączono podpisów. Kopia zakresu sprzed przeniesienia na main
   jest w stash `gtm-verified-before-main-83`.
 - Otworzono [PR #86](https://github.com/zawlodzki/nowa-strona-ola/pull/86)
-  do main. Kolejny podpis dokumentacji zatrzymał się na autoryzacji Touch ID.
+  do main. Kolejny podpis dokumentacji zatrzymał się na autoryzacji Touch ID;
+  po ponownym odblokowaniu przeszedł w commicie `a64c8a2`.
 - Następny krok: kolejny PR Meta wskazuje gałąź GTM. Następnie publikacja
   spójnego copy i kontenera oraz odbiór compiled GTM
   z blokadą telemetrii przed aktywacją. Nie wykonano natywnego zoomu 200%,
