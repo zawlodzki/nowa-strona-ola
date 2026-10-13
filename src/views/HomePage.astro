@@ -1,4 +1,5 @@
 ---
+import { resolveTrackingPolicy } from "@/lib/tracking-policy";
 import type { Locale } from "@ola/shared";
 import { shellLinks, testimonialsDisclosure } from "@/content/map-homepage";
 import { pagePath } from "@/lib/paths";
@@ -30,6 +31,7 @@ const seo = pageSeo(settings, page.seo, {
 ---
 
 <SiteShell3a
+  trackingPolicy={resolveTrackingPolicy("home", page.seo)}
   legacyBase
   lang={lang}
   title={page.seo?.title ?? page.title}

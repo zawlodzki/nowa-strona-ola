@@ -6,6 +6,72 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### GTM jako następny stacked PR, 12.10.2026
+
+- Gałąź `codex/gtm-rollout` powstała na tipie #82 `d8bc1b8`. Zakres
+  obejmuje bramkę GTM/GA4, wspólne wykluczenia, pole CMS i cofnięcie zgody.
+  W trakcie pracy scalono #81, #82 i poprawkę CI #83. Przeniesiono zmiany
+  na `origin/main` `b8e7c85`. Następnie włączono main `33f3326` z #84,
+  zachowując poprawkę runner.temp i pomiar Lighthouse.
+- Właściciel potwierdził wykluczenie kontaktu, konsultacji i odstąpienia.
+  Newsletter nie wyklucza strony. Zapisano decyzję w konfiguracji CMS.
+  Dokumenty prawne i preview zawsze pozostają bez pomiaru.
+- Serwer przekazuje sześć kodów rodzaju strony, bez slugów, nazw chorób,
+  tytułów i identyfikatorów dokumentu. Flaga `seo.excludeFromMeasurement`
+  i `category.excludeFromMeasurement` działa w schemacie, GROQ i widokach.
+  Brak pola w istniejących dokumentach oznacza niewykluczenie. Content Lake
+  nie modyfikowano; schema Studio wymaga wdrożenia po scaleniu PR.
+- Przegląd odtworzył przywrócenie starych zgód przy reload przed POST c15t
+  i utratę częściowego wyboru. GA4 zatrzymuje się natychmiast przez
+  `ga-disable`, a reload czeka na zweryfikowany trwały receipt. Błąd storage
+  nie przeładowuje strony. Cleanup usuwa znane identyfikatory opcjonalne,
+  zachowując wybór zgód i motyw. Testy potwierdziły obie naprawy.
+- Pobrano kopię workspace 5 i opublikowanej wersji 3. Import scalający
+  zmienił tylko dwa tagi, bez nowych elementów i usuwania. Ponowny eksport
+  potwierdza `ONCE_PER_LOAD`, konfigurację przed ręcznym page_view,
+  jeden syntetyczny adres `/m/<kod>`, pusty referrer i dodatkową zgodę.
+  Rollout pozostaje false. Wersji kontenera nie opublikowano.
+- GA4 konto `332767742`, usługa `462835494`, strumień `9802578320`,
+  `G-9QW05JYZTL`. Wyłączono pomiar zaawansowany oraz personalizację reklam
+  w 307 regionach. Google Signals było wyłączone. Retencja zdarzeń wynosi
+  dwa miesiące. Po zatwierdzeniu właściciela zapisano także dwa miesiące
+  dla danych użytkownika, bez resetu. Odczyt po reload potwierdził zapis.
+- Potwierdzono piksel Meta `2915257895296567`, właściciel Longevity Goddess.
+  Po zgodzie właściciela wyłączono automatyczne dopasowywanie danych klientów
+  i automatyczne zdarzenia bez kodu. Przegląd automatyczny początkowo odrzucił
+  zmianę zdarzeń bez tej konkretnej zgody. Po odpowiedzi wykonano ją i
+  odczytano oba przełączniki jako „Wył.”. Nie tworzono tokenów ani kampanii.
+- Rzeczywisty gtag.js w izolowanym Chromium: dwa żądania przechwycone przed
+  siecią, page_view i ręczny user_engagement. Syntetyczny adres, tytuł-kod,
+  pusty referrer, zero przecieków siedmiu znaczników URL/tytułu/formularza.
+  Po ga-disable zero kolejnych żądań. SDK dodaje własne identyfikatory cid/sid
+  i dane urządzenia. [Dowód](../output/gtm-2026-10-12/ga4-sdk.json).
+  To odbiór SDK, bez skompilowanego kontenera i Tag Assistant.
+- SDK Meta 2.9.419 z obecną konfiguracją Core redukuje adres i odsyłacz do
+  domen. HTTP Referer nadal zawiera domenę. Bez Core samo autoConfig=false
+  ujawnia pełny URL. Cofnięcie zgody zatrzymało kolejne PageView, formularz
+  nie wygenerował automatycznego zdarzenia. Wszystkie wysyłki zablokowane
+  przed siecią. Właściciel zatwierdził kontrakt samych domen po zgodzie marketingowej.
+- Pełne `PLAYWRIGHT_WORKERS=2 npm run verify` PASS na Node 24.19.0:
+  383 unit w 43 plikach, 456 E2E w trzech silnikach, 9 celowo pominiętych
+  testów włączonego loadera. Osobny build PUBLIC_GTM_ENABLED=true i 9/9 tych
+  E2E PASS w Chromium/Firefox/WebKit. 88 dokumentów bez błędów, 17 stron
+  fixture/Content Lake zgodnych. JS 9591 B, CSS 30873 B gzip.
+- Nie wysyłano telemetrii testowej, leadów, nie włączono zmiennej GitHub ani
+  pomiaru produkcyjnego. Dotychczasowe copy prawne Content Lake wymaga
+  uaktualnienia przed aktywacją. Meta i Clarity nie mają nowych tagów w tym PR.
+- Podpis op-ssh-sign ponownie nie przeszedł po dwóch próbach. Jednorazowy
+  ssh-keygen z poprawnym socketem 1Password także zwrócił błąd komunikacji
+  z agentem. Po odblokowaniu przez właściciela podpis commita `61bc39f`
+  przeszedł. Nie wyłączono podpisów. Kopia zakresu sprzed przeniesienia na main
+  jest w stash `gtm-verified-before-main-83`.
+- Otworzono [PR #86](https://github.com/zawlodzki/nowa-strona-ola/pull/86)
+  do main. Kolejny podpis dokumentacji zatrzymał się na autoryzacji Touch ID.
+- Następny krok: kolejny PR Meta wskazuje gałąź GTM. Następnie publikacja
+  spójnego copy i kontenera oraz odbiór compiled GTM
+  z blokadą telemetrii przed aktywacją. Nie wykonano natywnego zoomu 200%,
+  czytnika i fizycznego urządzenia w tej sesji.
+
 ### Zapas CSS strony głównej, 12.10.2026
 
 - Na `3691368` zewnętrzny CSS strony głównej miał 8192 B gzip, równo z limitem

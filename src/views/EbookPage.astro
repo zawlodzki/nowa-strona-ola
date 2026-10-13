@@ -1,4 +1,5 @@
 ---
+import { resolveTrackingPolicy } from "@/lib/tracking-policy";
 import type { Locale } from "@ola/shared";
 
 import { ebookCopy } from "@/content/ebook-seed";
@@ -36,6 +37,7 @@ const seo = pageSeo(settings, ebook.seo, {
 ---
 
 <SiteShell3a
+  trackingPolicy={resolveTrackingPolicy("ebook-detail", ebook.seo)}
   lang={lang}
   title={content.seoTitle}
   description={content.seoDescription}

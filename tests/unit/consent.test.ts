@@ -274,7 +274,7 @@ describe("confirmed c15t consent", () => {
       const analytics = createAnalytics({
         enabled: true,
         policy: {
-          pageCode: "neutral",
+          pageCode: "home",
           measurement: true,
           marketing: true,
           clarity: true,
@@ -310,7 +310,7 @@ describe("confirmed c15t consent", () => {
     const analytics = createAnalytics({
       enabled: true,
       policy: {
-        pageCode: "neutral",
+        pageCode: "home",
         measurement: true,
         marketing: true,
         clarity: true,
@@ -547,4 +547,56 @@ describe("confirmed c15t consent", () => {
       "po przejściu dalej wcześniejszy wybór może wrócić",
     );
   });
+});
+
+describe("durable analytics withdrawal", () => {
+  it.each([false, true])(
+    "completes authoritative POST before teardown reload (blocked writes: %s)",
+    async (blocked) => {
+      const s = setup();
+      const stop = vi.fn();
+      const reload = vi.fn(() => s.controller.dispose());
+      const gate = createAnalytics({
+        enabled: true,
+        policy: {
+          pageCode: "home",
+          measurement: true,
+          marketing: true,
+          clarity: false,
+        },
+        push: vi.fn(),
+        load: vi.fn(),
+        stop,
+        reload,
+      });
+      s.controller.subscribe((view) => gate.applyConsent(view));
+      await s.controller.start();
+      await s.controller.choose(all, "all", "banner");
+      if (blocked) {
+        s.storage.writeCookie = () => {};
+        s.storage.writeMirror = () => {};
+      }
+      const partial = { ...all, marketing: false };
+      const result = await s.controller.choose(partial, "custom", "dialog");
+      expect(s.post?.preferences).toEqual(partial);
+      expect(stop).toHaveBeenCalledOnce();
+      expect(reload).toHaveBeenCalledTimes(blocked ? 0 : 1);
+      expect(result).toBe(!blocked);
+      if (blocked) {
+        expect(s.view?.phase).toBe("unavailable");
+        expect(s.view?.preferences).toEqual(denied);
+      } else {
+        const next = s.make();
+        let restored: ConsentView | undefined;
+        next.subscribe((view) => {
+          restored = view;
+        });
+        await next.start();
+        expect(restored).toMatchObject({
+          phase: "settled",
+          preferences: partial,
+        });
+      }
+    },
+  );
 });

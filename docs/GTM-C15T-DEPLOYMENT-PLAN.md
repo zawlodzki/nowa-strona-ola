@@ -195,8 +195,8 @@ mają dodatkowych wymogów zgody. Inicjalizacja Google jest wczesna.
 | Consent default                       | Jeden właściciel w stronie, wszystkie opcjonalne Google storage `denied` przed uruchomieniem GTM. Usunąć duplikat starego CMP.                                           |
 | Consent update                        | c15t aktualizuje Consent Mode i emituje nowe, jawnie uzgodnione zdarzenie `consent-update`. Stare „cookie activated” wycofać.                                            |
 | GA4                                   | Wymóg `analytics_storage` i dozwolonej strony. Wyłączyć automatyczny page_view, enhanced measurement formularzy i automatyczne przesyłanie query, tytułu oraz referrera. |
-| Clarity                               | Wymóg analityki i odrębnej allowlisty, ścisłe maskowanie, wykluczenie formularzy i stron zdrowotnych. Osobne ustawienia projektu do sprawdzenia.                         |
-| Meta                                  | Wymóg marketingu i ręcznie zatwierdzonej neutralnej strony. Bez automatic events, advanced matching i danych produktów. Domyślnie pusta allowlista.                      |
+| Clarity                               | Wymóg analityki i wspólnych wykluczeń, ścisłe maskowanie. Ustawienia projektu i rzeczywiste payloady wymagają osobnego odbioru.                                          |
+| Meta                                  | Wymóg marketingu i wspólnych wykluczeń. Bez automatic events, advanced matching i danych produktów. Rzeczywiste payloady wymagają osobnego odbioru.                      |
 | client_id formularzy, GTAG GET API    | Wyłączyć. Nie przepisywać identyfikatorów pomiaru do formularzy n8n.                                                                                                     |
 | Google Ads, Conversion Linker         | Nie włączać na start. Nie są narzędziami opisanymi dla Oli w obecnej liście.                                                                                             |
 | Leadfeeder, Albacross i atrybucja B2B | Nie przenosić. Dotyczą zawlodzki.pl.                                                                                                                                     |
@@ -220,36 +220,31 @@ Clarity ma retencję nagrań 30 dni, maskowanie całego tekstu i pól oraz brak
 integracji identyfikatorów użytkownika z GA4. Same ustawienia tagu nie
 potwierdzają tych ustawień usług.
 
-### Wyłączenia tras i rozbieżność dokumentów
+### Wyłączenia stron, decyzje 11–12.10.2026
 
-Tekst banera wyklucza wszystkie opcjonalne narzędzia na stronach konsultacji,
-e-booków, zamówienia i ankiety. Polityka §8 i lista cookies dopuszczają tam
-GA4 bez nazw produktów, wykluczając Meta i Clarity. Przed uruchomieniem
-ujednolicić te teksty i konfigurację. Propozycja na start stosuje bardziej
-restrykcyjny wariant, zgodny z obecnym tekstem banera.
+Decyzja właściciela zastępuje propozycję pustej allowlisty i neutralnych treści.
+GA4, Meta i Clarity mają wspólną listę wykluczeń. Dokumenty prawne, kontakt,
+konsultacje i odstąpienie zawsze pozostają bez pomiaru. Newsletter nie
+wyklucza strony. Pozostałą stronę można wykluczyć polem „Bez pomiaru” w Sanity.
+Kategorie bloga dziedziczą wykluczenie strony bloga i własnego dokumentu.
+Podgląd, katalogi UI, strony demonstracyjne i nieznane widoki nie otrzymują polityki.
 
-Blokować wszystkie opcjonalne narzędzia na `/konsultacje/`, `/ebooki/` i ich
-podstronach, `/kontakt/`, `/odstapienie/`, zamówieniu, potwierdzeniu i ankiecie.
-Strony o zdrowiu i nieznane trasy są domyślnie zablokowane. Ankieta Google
-Forms, Cal.com i Stripe mają osobne domeny, bez naszych tagów i bez
-przekazywania im subjectu c15t lub identyfikatora pomiaru.
+Serwer przekazuje sześć kodów rodzaju strony, bez sluga, tytułu ani identyfikatora
+artykułu. GA4 otrzymuje syntetyczny adres `/m/<kod>`, pusty referrer i kod jako
+tytuł. Kody grupują wszystkie artykuły i wszystkie e-booki. Nie rozróżniają
+problemów zdrowotnych. Zewnętrzne formularze Google Forms, Cal.com i Stripe
+nie otrzymują naszych tagów ani identyfikatorów zgody i pomiaru.
 
-Nie uznawać strony za neutralną na podstawie samego adresu `/` lub `/o-mnie/`.
-Odczytany staging ma treści PMOS (PCOS) i insulinooporności także na homepage.
-Wariant B z §5.3 wymaga stron bez tematu zdrowotnego w adresie i treści;
-D12 wymienia brak tematu choroby w adresie i tytule wpisów. Plan proponuje
-sprawdzenie całej treści. Dlatego pusta allowlista Meta jest domyślną propozycją
-do czasu sprawdzenia neutralnych treści. D12 pozostaje decyzją właściciela,
-ale nie potwierdza kwalifikacji dzisiejszego homepage.
-
-Allowlista pomiaru ma powstawać z klasyfikacji treści podczas buildu.
-Nie wystarczy regex słowa „pcos” w pathname. Sanity może zmienić treść przy
-tym samym slugu. Nieznana lub zmieniona treść wymaga ponownego przeglądu.
+Dokumenty prawne w Content Lake nadal opisują poprzedni zakres oraz nieaktywny
+pomiar. Przed aktywacją trzeba opublikować spójne copy. Zmiana niniejszego
+planu lub lokalnych fixture nie potwierdza publikacji dokumentów prawnych.
+Meta i Clarity wymagają osobnego odbioru rzeczywistych payloadów. Zastąpienie
+adresu GA4 nie maskuje automatycznie adresów i treści w tych narzędziach.
 
 ### Zdarzenia i wycofanie
 
 Początkowy kontrakt dopuszcza `page_view`, `cta_click`, `form_start` i
-`generate_lead` tylko na jawnie dozwolonych neutralnych stronach. Parametry
+`generate_lead` tylko na stronach dopuszczonych przez politykę wykluczeń. W pierwszym PR GTM wdrażamy wyłącznie `page_view`; pozostałe zdarzenia pozostają planem. Parametry
 to kontrolowane kody strony i akcji. `generate_lead` dopiero po faktycznym
 2xx webhooka, nie po kliknięciu. Jeśli strona formularza jest wykluczona,
 zdarzenia formularza pozostają wyłączone.
@@ -283,7 +278,7 @@ Nie uruchamiać trzech integracji naraz, zanim wiadomo, skąd pochodzi żądanie
 3. Dodać klienta i panel Astro zgodny z 3a oraz mock backendu w E2E.
    Wszystkie opcjonalne żądania pozostają zablokowane.
 4. Przygotować nowy workspace GTM z ograniczonym zestawem tagów, bez publikacji.
-   Ujednolicić copy prawne, ustalić allowlistę i sprawdzić ustawienia usług.
+   Ujednolicić copy prawne, wdrożyć wspólne wykluczenia i sprawdzić ustawienia usług.
 5. Na zlecenie wdrożyć panel na staging. Tag Assistant używa workspace
    migracji. Testy stagingu nie wysyłają do produkcyjnej usługi GA4, Meta
    lub Clarity. Użyć izolowanej usługi testowej albo blokad sieciowych.
@@ -300,20 +295,20 @@ istniejących dowodów zgód zawlodzki.pl.
 
 ### Macierz obowiązkowych kontroli
 
-| Scenariusz                                               | Dowód wymagany do zaliczenia                                                                                        |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Świeża przeglądarka, odmowa, zamknięcie                  | Zero żądań GTM, GA4, Meta i Clarity oraz zero opcjonalnych identyfikatorów.                                         |
-| Analityka bez marketingu                                 | Wyłącznie dozwolone narzędzia analityczne, brak Meta i marketing storage.                                           |
-| Marketing bez analityki                                  | GA4 i Clarity nie działają. Meta tylko na zatwierdzonej neutralnej stronie.                                         |
-| Obie zgody                                               | Tylko narzędzia z allowlisty, pojedyncza inicjalizacja, poprawna kolejność default/update/loader.                   |
-| Powrót i nowa polityka                                   | Ważna decyzja działa tylko na tym originie, wygasła lub niezgodna wersja ponownie pyta.                             |
-| Cofnięcie, druga karta i reload                          | Pomiar ustaje, cleanup nie kasuje odmowy ani motywu, druga karta respektuje zmianę.                                 |
-| Backend offline, 409, 500, timeout, blokada rozszerzenia | Brak nowej zgody i tagów, podstawowa strona działa, zapis da się ponowić.                                           |
-| Inna domena                                              | Decyzja zawlodzki.pl nie daje zgody Oli, staging nie daje zgody produkcji. Backend odrzuca obcy subject i snapshot. |
-| Strona wykluczona po wcześniejszej zgodzie               | Brak tagów także po wejściu linkiem, reloadzie i z historią.                                                        |
-| PII i kontekst zdrowotny                                 | Skan request payload, URL, cookie i storage nie znajduje danych formularzy ani nazw zdrowotnych w telemetrii.       |
-| UI                                                       | Desktop, 390 i 320 px, dark/light, klawiatura, natywny zoom 200%, reduced motion, axe i porównanie z 3a.            |
-| Formularze                                               | Wyłącznie mock webhooka. Żaden test nie wysyła na produkcyjne n8n.                                                  |
+| Scenariusz                                               | Dowód wymagany do zaliczenia                                                                                            |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Świeża przeglądarka, odmowa, zamknięcie                  | Zero żądań GTM, GA4, Meta i Clarity oraz zero opcjonalnych identyfikatorów.                                             |
+| Analityka bez marketingu                                 | Wyłącznie dozwolone narzędzia analityczne, brak Meta i marketing storage.                                               |
+| Marketing bez analityki                                  | GA4 i Clarity nie działają. Meta tylko po osobnym odbiorze na niewykluczonej stronie.                                   |
+| Obie zgody                                               | Tylko odebrane narzędzia na niewykluczonej stronie, pojedyncza inicjalizacja, poprawna kolejność default/update/loader. |
+| Powrót i nowa polityka                                   | Ważna decyzja działa tylko na tym originie, wygasła lub niezgodna wersja ponownie pyta.                                 |
+| Cofnięcie, druga karta i reload                          | Pomiar ustaje, cleanup nie kasuje odmowy ani motywu, druga karta respektuje zmianę.                                     |
+| Backend offline, 409, 500, timeout, blokada rozszerzenia | Brak nowej zgody i tagów, podstawowa strona działa, zapis da się ponowić.                                               |
+| Inna domena                                              | Decyzja zawlodzki.pl nie daje zgody Oli, staging nie daje zgody produkcji. Backend odrzuca obcy subject i snapshot.     |
+| Strona wykluczona po wcześniejszej zgodzie               | Brak tagów także po wejściu linkiem, reloadzie i z historią.                                                            |
+| PII i kontekst zdrowotny                                 | Skan request payload, URL, cookie i storage nie znajduje danych formularzy ani nazw zdrowotnych w telemetrii.           |
+| UI                                                       | Desktop, 390 i 320 px, dark/light, klawiatura, natywny zoom 200%, reduced motion, axe i porównanie z 3a.                |
+| Formularze                                               | Wyłącznie mock webhooka. Żaden test nie wysyła na produkcyjne n8n.                                                      |
 
 ### Checklista tego planu
 
@@ -322,7 +317,7 @@ istniejących dowodów zgód zawlodzki.pl.
 - [x] Przeczytać konfigurację c15t i źródła prawne oraz zapisać rozbieżności.
 - [x] Określić osobne zgody, wspólne utrzymanie, styl panelu i testy odbioru.
 - [x] Potwierdzić aktualny serwer i izolację domen na wersji 2.2.1.
-- [ ] Ujednolicić dokumenty prawne i zatwierdzić neutralne strony pomiaru.
+- [ ] Ujednolicić dokumenty prawne i wdrożyć wspólne wykluczenia pomiaru.
 - [x] Wdrożyć i zweryfikować klienta c15t oraz panel 3a na stagingu.
 - [ ] Przebudować workspace GTM i sprawdzić ustawienia GA4, Meta i Clarity.
 - [x] Wdrożyć staging i przeprowadzić odbiór panelu oraz preferencji.

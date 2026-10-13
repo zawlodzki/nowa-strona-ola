@@ -454,8 +454,13 @@ test("unexpected shared-instance policy fails closed instead of collecting the w
   await optionalState(page, denied);
 });
 
-for (const path of ["/", "/konsultacje/", "/ebooki/suplementy-w-pcos/"]) {
-  test(`confirmed acceptance loads no trackers on excluded health page ${path}`, async ({
+for (const path of [
+  "/kontakt/",
+  "/konsultacje/",
+  "/odstapienie/",
+  "/polityka-prywatnosci/",
+]) {
+  test(`confirmed acceptance loads no trackers on always excluded page ${path}`, async ({
     page,
     context,
   }) => {
@@ -551,5 +556,248 @@ for (const colorScheme of ["light", "dark"] satisfies ("light" | "dark")[]) {
     ).toBe(true);
     await page.keyboard.press("Escape");
     await expect(trigger).toBeFocused();
+  });
+}
+
+for (const [path, code] of [
+  ["/", "home"],
+  ["/o-mnie/", "about"],
+  ["/blog/", "blog-index"],
+  ["/ebooki/", "ebook-index"],
+  ["/ebooki/suplementy-w-pcos/", "ebook-detail"],
+  ["/kontakt/", null],
+  ["/konsultacje/", null],
+  ["/odstapienie/", null],
+  ["/polityka-prywatnosci/", null],
+] as const) {
+  test(`GTM rollout: server policy ${path}`, async ({ page, context }) => {
+    await backend(context);
+    await page.goto(path);
+    const policy = page.locator('meta[name="ao-tracking-policy"]');
+    if (code === null) {
+      await expect(policy).toHaveCount(0);
+      await banner(page)
+        .getByRole("button", { name: "Akceptuję wszystkie", exact: true })
+        .click();
+      await expect(banner(page)).not.toBeVisible();
+      await expect(page.locator('script[src*="googletagmanager"]')).toHaveCount(
+        0,
+      );
+      const consent = await page.evaluate(() => {
+        const layer: unknown = Reflect.get(window, "dataLayer");
+        if (!Array.isArray(layer)) return null;
+        return layer
+          .filter(
+            (entry) => entry && entry[0] === "consent" && entry[1] === "update",
+          )
+          .at(-1)?.[2];
+      });
+      expect(consent).toMatchObject({
+        analytics_storage: "denied",
+        ad_storage: "denied",
+      });
+    } else await expect(policy).toHaveAttribute("data-page-code", code);
+  });
+}
+
+test("GTM rollout: consent gates one loader, late analytics and withdrawal cleanup", async ({
+  page,
+  context,
+}) => {
+  test.skip(
+    process.env.E2E_GTM_ENABLED !== "true",
+    "Requires the separate PUBLIC_GTM_ENABLED=true build; all vendor requests are mocked.",
+  );
+  await backend(context);
+  const requests: string[] = [];
+  await context.route(
+    "https://www.googletagmanager.com/gtm.js**",
+    async (route) => {
+      requests.push(route.request().url());
+      await route.fulfill({
+        contentType: "application/javascript",
+        body: "/* mocked vendor: no telemetry */",
+      });
+    },
+  );
+  await page.goto("/?email=private@example.com#sensitive");
+  expect(requests).toEqual([]);
+  await banner(page)
+    .getByRole("button", { name: "Dostosuj", exact: true })
+    .click();
+  await dialog(page)
+    .getByRole("checkbox", { name: /^Marketingowe/ })
+    .check();
+  await dialog(page)
+    .getByRole("button", { name: "Zapisuję wybór", exact: true })
+    .click();
+  await expect.poll(() => requests.length).toBe(1);
+  const events = () =>
+    page.evaluate(() => {
+      const layer: unknown = Reflect.get(window, "dataLayer");
+      if (!Array.isArray(layer)) return [];
+      return layer.filter(
+        (entry) =>
+          entry !== null && typeof entry === "object" && "event" in entry,
+      );
+    });
+  expect(await events()).not.toContainEqual({
+    event: "ao_page_view",
+    ao_page_code: "home",
+  });
+  await page
+    .getByRole("button", { name: "Ustawienia cookies", exact: true })
+    .click();
+  await dialog(page)
+    .getByRole("checkbox", { name: /^Analityczne/ })
+    .check();
+  await dialog(page)
+    .getByRole("button", { name: "Zapisuję wybór", exact: true })
+    .click();
+  await expect
+    .poll(async () =>
+      (await events()).filter((entry) => entry.event === "ao_page_view"),
+    )
+    .toEqual([{ event: "ao_page_view", ao_page_code: "home" }]);
+  expect(requests).toHaveLength(1);
+  expect(JSON.stringify(await events())).not.toMatch(
+    /private|example\.com|sensitive|email|page_location|page_title|referrer/,
+  );
+  await page.evaluate(() => {
+    document.cookie = "_ga=test; Path=/";
+    document.cookie = "_fbp=test; Path=/";
+    localStorage.setItem("_cltk", "test");
+    localStorage.setItem("theme-proof", "keep");
+  });
+  await page
+    .getByRole("button", { name: "Ustawienia cookies", exact: true })
+    .click();
+  await dialog(page)
+    .getByRole("checkbox", { name: /^Analityczne/ })
+    .uncheck();
+  await dialog(page)
+    .getByRole("checkbox", { name: /^Marketingowe/ })
+    .uncheck();
+  await Promise.all([
+    page.waitForEvent("load"),
+    dialog(page)
+      .getByRole("button", { name: "Zapisuję wybór", exact: true })
+      .click(),
+  ]);
+  expect(requests).toHaveLength(1);
+  expect(
+    await page.evaluate(() => ({
+      cookie: document.cookie,
+      clarity: localStorage.getItem("_cltk"),
+      other: localStorage.getItem("theme-proof"),
+    })),
+  ).toEqual({
+    cookie: expect.not.stringMatching(/_ga=|_fbp=/),
+    clarity: null,
+    other: "keep",
+  });
+  await expect(page.locator('script[src*="googletagmanager"]')).toHaveCount(0);
+});
+
+for (const blocked of [false, true]) {
+  test(`GTM rollout: withdrawal waits for durable partial consent (blocked storage: ${blocked})`, async ({
+    page,
+    context,
+  }) => {
+    test.skip(
+      process.env.E2E_GTM_ENABLED !== "true",
+      "Requires enabled GTM build; vendor requests stay mocked.",
+    );
+    const api = await backend(context);
+    const requests: string[] = [];
+    await context.route(
+      "https://www.googletagmanager.com/gtm.js**",
+      async (route) => {
+        requests.push(route.request().url());
+        await route.fulfill({
+          contentType: "application/javascript",
+          body: "/* no telemetry */",
+        });
+      },
+    );
+    await page.goto("/");
+    await banner(page)
+      .getByRole("button", { name: "Akceptuję wszystkie", exact: true })
+      .click();
+    await expect.poll(() => requests.length).toBe(1);
+    await expect(banner(page)).not.toBeVisible();
+    let navigations = 0;
+    page.on("framenavigated", (frame) => {
+      if (frame === page.mainFrame()) navigations++;
+    });
+    if (blocked) {
+      await page.evaluate((storageKey) => {
+        const descriptor = Object.getOwnPropertyDescriptor(
+          Document.prototype,
+          "cookie",
+        );
+        if (!descriptor?.get || !descriptor.set)
+          throw new Error("Missing cookie descriptor");
+        const getter = descriptor.get;
+        const setter = descriptor.set;
+        Object.defineProperty(document, "cookie", {
+          get() {
+            return Reflect.apply(getter, document, []);
+          },
+          set(value: string) {
+            if (!value.startsWith(`${storageKey}=`))
+              Reflect.apply(setter, document, [value]);
+          },
+        });
+        const setItem = Storage.prototype.setItem;
+        Storage.prototype.setItem = function (name, value) {
+          if (name !== storageKey) Reflect.apply(setItem, this, [name, value]);
+        };
+      }, key);
+    }
+    let release = () => {};
+    api.hold(
+      new Promise<void>((resolve) => {
+        release = resolve;
+      }),
+    );
+    await optionalState(page, all);
+    await dialog(page)
+      .getByRole("checkbox", { name: /^Marketingowe/ })
+      .uncheck();
+    await dialog(page)
+      .getByRole("button", { name: "Zapisuję wybór", exact: true })
+      .click();
+    await expect.poll(() => api.posts.length).toBe(2);
+    expect(api.posts[1].preferences).toEqual({ ...all, marketing: false });
+    expect(
+      await page.evaluate(() => Reflect.get(window, "ga-disable-G-9QW05JYZTL")),
+    ).toBe(true);
+    expect(navigations).toBe(0);
+    if (blocked) {
+      release();
+      await expect(dialog(page).getByRole("status")).toContainText(
+        "Przeglądarka blokuje trwały zapis",
+      );
+      expect(navigations).toBe(0);
+      expect(requests).toHaveLength(1);
+      expect(
+        await page.evaluate(() =>
+          Reflect.get(window, "ga-disable-G-9QW05JYZTL"),
+        ),
+      ).toBe(true);
+    } else {
+      await Promise.all([
+        page.waitForEvent("load"),
+        Promise.resolve().then(release),
+      ]);
+      await expect.poll(() => requests.length).toBe(2);
+      expect(navigations).toBe(1);
+      expect(await saved(page)).toMatchObject({
+        kind: "receipt",
+        preferences: { ...all, marketing: false },
+      });
+      await optionalState(page, { ...all, marketing: false });
+    }
   });
 }

@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
 import { createAnalytics } from "../../src/lib/analytics";
-import { resolveTrackingPolicy } from "../../src/lib/tracking-policy";
 
 const preferences = {
   necessary: true,
@@ -8,7 +7,7 @@ const preferences = {
   marketing: false,
 } as const;
 const neutral = {
-  pageCode: "neutral-information",
+  pageCode: "home" as const,
   measurement: true,
   clarity: false,
   marketing: false,
@@ -35,15 +34,6 @@ describe("Basic consent measurement gateway", () => {
         ad_storage: "denied",
       }),
     ]);
-    for (const path of [
-      "/",
-      "/o-mnie/",
-      "/konsultacje/",
-      "/ebooki/",
-      "/kontakt/",
-      "/unknown/",
-    ])
-      expect(resolveTrackingPolicy(path, "unreviewed-content")).toBeNull();
   });
 
   it("requires the loader flag and the relevant category independently", () => {
@@ -95,7 +85,7 @@ describe("Basic consent measurement gateway", () => {
           "event" in entry &&
           entry.event === "ao_page_view",
       ),
-    ).toEqual([{ event: "ao_page_view", ao_page_code: "neutral-information" }]);
+    ).toEqual([{ event: "ao_page_view", ao_page_code: "home" }]);
   });
 
   it("stops an already loaded vendor on withdrawal before sending a denied update ping", () => {
@@ -136,7 +126,7 @@ describe("Basic consent measurement gateway", () => {
     });
     expect(push.mock.calls.flat()).not.toContainEqual({
       event: "ao_page_view",
-      ao_page_code: "neutral-information",
+      ao_page_code: "home",
     });
     gate.applyPreferences({ ...preferences, marketing: true });
     gate.applyPreferences({ ...preferences, marketing: true });
@@ -147,7 +137,40 @@ describe("Basic consent measurement gateway", () => {
         (entry) => !Array.isArray(entry) && entry.event === "ao_page_view",
       );
     expect(pageViews).toEqual([
-      { event: "ao_page_view", ao_page_code: "neutral-information" },
+      { event: "ao_page_view", ao_page_code: "home" },
     ]);
   });
+});
+
+it("waits for durable restricted settlement, never reloads an expanded or unavailable state", () => {
+  const stop = vi.fn();
+  const reload = vi.fn();
+  const push = vi.fn();
+  const gate = createAnalytics({
+    enabled: true,
+    policy: { ...neutral, marketing: true },
+    push,
+    load: vi.fn(),
+    stop,
+    reload,
+  });
+  const all = { ...preferences, marketing: true };
+  const partial = { ...preferences, marketing: false };
+  gate.applyConsent({ phase: "settled", preferences: all, error: null });
+  push.mockClear();
+  gate.applyConsent({ phase: "saving", preferences: partial, error: null });
+  gate.applyConsent({ phase: "saving", preferences: partial, error: null });
+  gate.applyConsent({
+    phase: "unavailable",
+    preferences: partial,
+    error: "blocked",
+  });
+  gate.applyConsent({ phase: "settled", preferences: all, error: null });
+  expect(stop).toHaveBeenCalledOnce();
+  expect(reload).not.toHaveBeenCalled();
+  expect(push).not.toHaveBeenCalled();
+  gate.applyConsent({ phase: "settled", preferences: partial, error: null });
+  gate.applyConsent({ phase: "settled", preferences: partial, error: null });
+  expect(reload).toHaveBeenCalledOnce();
+  expect(push).not.toHaveBeenCalled();
 });

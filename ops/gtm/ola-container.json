@@ -1,6 +1,6 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-10-11 15:33:34",
+  "exportTime": "2026-10-12 20:12:27",
   "containerVersion": {
     "path": "accounts/6057592803/containers/197326666/versions/0",
     "accountId": "6057592803",
@@ -40,7 +40,7 @@
         "tagId": "51",
         "name": "AO Google tag • ręczny pomiar",
         "type": "googtag",
-        "notes": "Wstrzymany do odbioru GA4, neutralnych treści i ręcznego page_view. Zgody aktualizuje wyłącznie klient Astro/c15t.",
+        "notes": "Basic Consent Mode v2. Polityka strony i zgody pochodzą z Astro/c15t. Rollout pozostaje false do odbioru i publikacji.",
         "parameter": [
           {
             "type": "TEMPLATE",
@@ -107,7 +107,7 @@
                   {
                     "type": "TEMPLATE",
                     "key": "parameterValue",
-                    "value": "https://aleksandraolesiewicz.com/__measurement/{{AO page code}}"
+                    "value": "https://aleksandraolesiewicz.com/m/{{AO page code}}"
                   }
                 ]
               },
@@ -143,10 +143,9 @@
             ]
           }
         ],
-        "fingerprint": "1791732085322",
+        "fingerprint": "1791835852237",
         "firingTriggerId": ["49"],
-        "tagFiringOption": "ONCE_PER_EVENT",
-        "paused": true,
+        "tagFiringOption": "ONCE_PER_LOAD",
         "monitoringMetadata": {
           "type": "MAP"
         },
@@ -169,6 +168,7 @@
         "tagId": "53",
         "name": "AO GA4 • page_view",
         "type": "gaawe",
+        "notes": "Basic Consent Mode v2. Polityka strony i zgody pochodzą z Astro/c15t. Rollout pozostaje false do odbioru i publikacji.",
         "parameter": [
           {
             "type": "BOOLEAN",
@@ -236,10 +236,15 @@
             "value": "G-9QW05JYZTL"
           }
         ],
-        "fingerprint": "1791732472025",
+        "fingerprint": "1791835852237",
         "firingTriggerId": ["52"],
-        "tagFiringOption": "ONCE_PER_EVENT",
-        "paused": true,
+        "setupTag": [
+          {
+            "tagName": "AO Google tag • ręczny pomiar",
+            "stopOnSetupFailure": true
+          }
+        ],
+        "tagFiringOption": "ONCE_PER_LOAD",
         "monitoringMetadata": {
           "type": "MAP"
         },
@@ -487,7 +492,7 @@
         "name": "Event"
       }
     ],
-    "fingerprint": "1791732814661",
+    "fingerprint": "1791835947409",
     "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6057592803/containers/197326666/versions/0?apiLink=version"
   }
 }

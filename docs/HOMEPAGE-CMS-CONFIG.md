@@ -89,6 +89,31 @@ cookies) zakładały blokadę pomiaru na treściach zdrowotnych. Nowy model
 uruchamia pomiar także na wpisach bloga o zdrowiu. Przed publikacją tagów
 trzeba zaktualizować dokumenty prawne i plan GTM.
 
+## Doprecyzowanie wykluczeń pomiaru, 12.10.2026
+
+Źródło: odpowiedź właściciela podczas wdrożenia GTM, 12.10.2026.
+Kontakt, konsultacje i odstąpienie od umowy są wykluczone. Newsletter
+nie wyklucza strony z pomiaru. Dokumenty prawne nadal są wykluczone,
+niezależnie od ustawień redaktora. Pole „Bez pomiaru” pozwoli wykluczyć
+pozostałe treści. Mapowanie planowane w tym PR: `seo.excludeFromMeasurement`
+na dokumentach stron, artykułów i e-booków oraz `category.excludeFromMeasurement`
+na kategoriach bloga. To decyzja zakresu; konfiguracja Content Lake i aktywacja
+usług pozostają oddzielnymi czynnościami.
+
+Zatwierdzenie z 12.10.2026: wyłączyć automatyczne zaawansowane dopasowywanie
+oraz automatyczne zdarzenia Meta dla piksela `2915257895296567`.
+Wykonano i odczytano oba przełączniki jako „Wył.”. Ustawienia zewnętrzne
+Meta, bez pola w CMS. Nie oznacza to aktywacji piksela na nowej stronie.
+
+Decyzje właściciela z 12.10.2026 przy odbiorze integracji:
+
+- Meta PageView po zgodzie marketingowej może zawierać domenę strony
+  i domenę odsyłającą. Bez ścieżek, query, fragmentów, danych formularzy,
+  automatycznych zdarzeń i dopasowywania klientów. Wymagana konfiguracja Core.
+- GA4 usługa `462835494`: zatwierdzono retencję danych użytkownika dwa
+  miesiące bez resetu przy nowej aktywności. Zapis wykonano w interfejsie
+  i potwierdzono po odświeżeniu. Ustawienie zewnętrzne, bez pola CMS.
+
 ## GTM, c15t i motyw, decyzje 11.10.2026
 
 Źródło: bezpośrednie polecenie użytkownika w sesji 11.10.2026.
@@ -104,7 +129,7 @@ Szczegóły: [plan integracji](GTM-C15T-DEPLOYMENT-PLAN.md).
 
 Propozycje planu rozstrzygnięte 11.10.2026 (sekcja na górze): identyfikator
 polityki przyjęty, pusta allowlista Meta i brak tagów na trasach wrażliwych
-zastąpione wspólną listą wykluczeń. Copy prawne ujednolicono z blokadą całego pomiaru na treściach zdrowotnych.
+zastąpione wspólną listą wykluczeń. Copy prawne z 11.10 opisuje wcześniejszą blokadę pomiaru zdrowotnego. Decyzja z 11–12.10 zastąpiła tę regułę; nowe copy wymaga osobnej publikacji.
 Lista cookies i polityka prywatności 2.2 są opublikowane w Content Lake
 na dodatkowe zlecenie użytkownika; opisują c15t, localStorage i `ao-theme`.
 Konfiguracja kont i dopuszczenie neutralnych treści pozostają do odbioru.
