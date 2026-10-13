@@ -1,7 +1,7 @@
 {
   "title": "Polityka prywatności aleksandraolesiewicz.com",
-  "version": "2.2",
-  "effectiveFrom": "2026-10-11",
+  "version": "2.3",
+  "effectiveFrom": "2026-10-13",
   "seoDescription": "Jak Wellbiz sp. z o.o. przetwarza dane osobowe, w tym dane o zdrowiu, przy konsultacjach dietetycznych, e-bookach i newsletterze.",
   "body": [
     {
@@ -244,19 +244,19 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Na stronach z ofertą konsultacji i e-booków, w kasie i w ankiecie ",
+          "text": "Na stronach kontaktu, konsultacji, odstąpienia od umowy i dokumentów prawnych ",
           "marks": []
         },
         {
           "_type": "span",
           "_key": "s1",
-          "text": "nie działają piksele reklamowe",
+          "text": "nie działa analityka ani piksel reklamowy",
           "marks": ["strong"]
         },
         {
           "_type": "span",
           "_key": "s2",
-          "text": ".",
+          "text": ", niezależnie od zgody. Zamówienia, płatności i ankieta działają poza pomiarem Strony. Dane formularzy nie trafiają do analityki ani reklam.",
           "marks": []
         }
       ],
@@ -374,17 +374,17 @@
         {
           "_key": "r10",
           "cells": [
-            "**Planowane statystyki Strony** (Google Analytics 4, Microsoft Clarity; obecnie wyłączone)",
-            "identyfikatory internetowe, pliki cookies, informacje o urządzeniu i aktywności na Stronie",
+            "**Statystyki Strony** (Google Analytics 4)",
+            "identyfikatory internetowe, pliki cookies, informacje o urządzeniu, neutralny typ dopuszczonej strony, zdarzenie jej wyświetlenia i czas zaangażowania; bez rzeczywistego adresu, tytułu i adresu odsyłającego",
             "**Twoja zgoda** — art. 6 ust. 1 lit. a RODO i art. 399 Prawa komunikacji elektronicznej",
-            "przed aktywacją do sprawdzenia w konfiguracji kont i [liście cookies](/lista-cookies-i-identyfikatorow/)"
+            "dane użytkownika i zdarzeń w GA4 — 2 miesiące, bez odnawiania retencji użytkownika przy nowej aktywności; okres cookies jest odrębny i opisany w [liście cookies](/lista-cookies-i-identyfikatorow/)"
           ]
         },
         {
           "_key": "r11",
           "cells": [
-            "**Planowany pomiar reklam (piksel Meta; obecnie wyłączony)** — tylko na osobno dopuszczonych stronach bez tematyki zdrowotnej",
-            "identyfikatory, pliki cookies, ogólne zdarzenia (np. wyświetlenie strony głównej)",
+            "**Pomiar reklam (piksel Meta)** — tylko na dopuszczonych stronach",
+            "identyfikatory, pliki cookies, informacje o urządzeniu, ręczne zdarzenie wyświetlenia strony; z adresów strony i odsyłającej przekazywane są wyłącznie domeny, bez ścieżek, parametrów i fragmentów",
             "**Twoja zgoda** — art. 6 ust. 1 lit. a RODO i art. 399 Prawa komunikacji elektronicznej",
             "zgodnie z [listą cookies](/lista-cookies-i-identyfikatorow/)"
           ]
@@ -686,16 +686,16 @@
         {
           "_key": "r8",
           "cells": [
-            "Google (Analytics 4), Microsoft (Clarity)",
-            "planowane statystyki Strony; obecnie wyłączone, po uruchomieniu wyłącznie za zgodą i na dopuszczonych stronach",
-            "Google — procesor/administrator wg warunków usługi; Microsoft — odrębny administrator"
+            "Google (Analytics 4)",
+            "statystyki Strony, wyłącznie za zgodą analityczną i na dopuszczonych stronach",
+            "procesor/administrator wg warunków usługi"
           ]
         },
         {
           "_key": "r9",
           "cells": [
             "Meta Platforms Ireland",
-            "planowany piksel reklamowy (obecnie wyłączony) — po uruchomieniu za zgodą i tylko na dopuszczonych stronach bez tematyki zdrowotnej; nasze profile społecznościowe",
+            "pomiar wyświetleń na dopuszczonych stronach wyłącznie za zgodą marketingową; nasze profile społecznościowe",
             "współadministrator w zakresie zbierania i przekazania danych oraz statystyk profilu"
           ]
         },
@@ -1011,13 +1011,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "GTM, Google Analytics 4, Microsoft Clarity i piksel Meta są obecnie wyłączone na całej Stronie, również po akceptacji wszystkich kategorii.",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s1",
-          "text": " Planowane narzędzia analityczne i marketingowe uruchomimy dopiero po sprawdzeniu konfiguracji, dopuszczeniu konkretnych stron i uzyskaniu właściwej zgody. Google Consent Mode ma tryb podstawowy: przed zgodą nie wysyłamy sygnałów do Google.",
+          "text": "Google Tag Manager uruchamia Google Analytics 4 wyłącznie po potwierdzonej zgodzie analitycznej, a piksel Meta po potwierdzonej zgodzie marketingowej. Google Consent Mode działa w trybie podstawowym: przed zgodą nie ładujemy narzędzi opcjonalnych ani nie wysyłamy sygnałów do Google. Microsoft Clarity pozostaje wyłączony; nie nagrywamy sesji ani treści ekranu.",
           "marks": []
         }
       ],
@@ -1033,13 +1027,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Treści dotyczące zdrowia, konsultacji i e-booków, formularze, zamówienia, płatności, potwierdzenia i odstąpienia są wyłączone z analityki i marketingu, niezależnie od zgody.",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s1",
-          "text": " Obecnie żadna strona nie została dopuszczona do pomiaru. Ankieta przed konsultacją działa poza Stroną i nie zawiera naszych tagów. Danych formularzy nie przekazujemy do analityki.",
+          "text": "Pomiar obejmuje dopuszczone strony główną i „O mnie”, katalog i karty e-booków oraz blog i wpisy. Każdą z nich możemy dodatkowo wyłączyć z pomiaru. Kontakt, konsultacje, odstąpienie od umowy i dokumenty prawne są zawsze wyłączone, niezależnie od zgody. Formularz newslettera nie wyłącza pomiaru całej strony; jego pola i dane zapisu nie trafiają do narzędzi pomiarowych. Nie mierzymy wysłania formularzy, zakupów, płatności ani ankiety przed konsultacją.",
           "marks": []
         }
       ],
@@ -1055,7 +1043,35 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Szczegóły wpisów, planowanych narzędzi oraz sposób zmiany zgody i usunięcia pamięci opisuje ",
+          "text": "Do GA4 przekazujemy neutralny kod rodzaju strony zamiast jej rzeczywistego adresu i tytułu; adres odsyłający jest pusty. Oprócz wyświetlenia strony GA4 mierzy czas zaangażowania, również przez automatyczne zdarzenie ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s1",
+          "text": "user_engagement",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s2",
+          "text": ". Wyłączone są Google Signals, personalizacja reklam i automatyczny pomiar rozszerzony. Nie przekazujemy User-ID ani nazw produktów, treści wpisów, danych formularzy lub danych o zdrowiu. Piksel Meta wysyła ręczne zdarzenie wyświetlenia strony. Włączona konfiguracja Core ogranicza adres strony i adres odsyłający do domen. Automatyczne zdarzenia i automatyczne zaawansowane dopasowywanie danych klientów są wyłączone. Narzędzia nadal wykorzystują własne identyfikatory i informacje o urządzeniu; nie jest to pomiar anonimowy.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "b38",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "_key": "s0",
+          "text": "Cofnięcie zgody zatrzymuje odpowiedni pomiar. Usuwamy znane cookies pomiarowe, a po potwierdzeniu zapisu ograniczenia odświeżamy stronę, aby usunąć załadowane narzędzia. Szczegóły wpisów i sposób usunięcia pamięci opisuje ",
           "marks": []
         },
         {
@@ -1095,7 +1111,7 @@
     },
     {
       "_type": "block",
-      "_key": "b39",
+      "_key": "b40",
       "style": "normal",
       "children": [
         {
@@ -1123,7 +1139,7 @@
     },
     {
       "_type": "block",
-      "_key": "b41",
+      "_key": "b42",
       "style": "normal",
       "children": [
         {
@@ -1151,7 +1167,7 @@
     },
     {
       "_type": "block",
-      "_key": "b43",
+      "_key": "b44",
       "style": "normal",
       "children": [
         {

@@ -1,10 +1,11 @@
 # Strony prawne — konfiguracja CMS
 
-Aktualizacja: 2026-10-11. Model, konwerter i fixture’y działają w kodzie.
-W Content Lake zastano opublikowane dokumenty cookies i polityki prywatności
-w wersji 2.1 z datą 10.10.2026. Użytkownik zlecił aktualizację cookies na stronie
-i w repo prawnym. Aktualizacja 2.2 obejmuje stan techniczny c15t i motywu;
-nie stanowi odbioru pozostałych usług ani zamknięcia przeglądu prawnego pakietu.
+Aktualizacja: 2026-10-13. Właściciel zlecił uruchomienie pomiaru produkcyjnego
+i wyrównanie źródeł w `projekt prawny ola`. Przygotowano politykę prywatności
+i listę cookies 2.3 z datą 13.10.2026 dla GA4 i ręcznego PageView Meta po
+właściwej zgodzie. Kontener GTM w wersji 4 jest opublikowany; loader produkcyjny
+nadal jest wyłączony. Publikacja nowych dokumentów w Content Lake i aktywacja
+loadera pozostają osobnymi krokami. Pozostałe ustalenia pakietu bez zmian.
 
 ## Źródło treści
 
@@ -12,16 +13,16 @@ nie stanowi odbioru pozostałych usług ani zamknięcia przeglądu prawnego paki
 `projekt prawny ola/www-prawne/` — szkice B2C dla Wellbiz sp. z o.o.
 (sprzedaż e-booków i konsultacje dietetyczne online).
 
-| Plik źródłowy                                         | Trasa                               | Uwagi                                                        |
-| ----------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------ |
-| `regulamin.md`                                        | `/regulamin/`                       | z dwoma załącznikami na tej samej stronie                    |
-| `pouczenie-o-odstapieniu.md`                          | `/regulamin/#pouczenie`             | załącznik nr 1, stała kotwica                                |
-| `formularz-odstapienia.md`                            | `/regulamin/#formularz-odstapienia` | załącznik nr 2, stała kotwica                                |
-| `polityka-prywatnosci.md`                             | `/polityka-prywatnosci/`            |                                                              |
-| `lista-cookies-i-identyfikatorow.md`                  | `/lista-cookies-i-identyfikatorow/` | stan stagingu 11.10.2026; skan produkcji przed uruchomieniem |
-| `regulamin-newslettera.md`                            | `/regulamin-newslettera/`           |                                                              |
-| `zgody-i-formularze.md`                               | — (nie publikujemy)                 | §1 stopka i dane sprzedawcy, §8 informacja pod opiniami      |
-| `szablony-emaili.md`, `stopka-ebooka.md`, `README.md` | — (nie publikujemy)                 |                                                              |
+| Plik źródłowy                                         | Trasa                               | Uwagi                                                     |
+| ----------------------------------------------------- | ----------------------------------- | --------------------------------------------------------- |
+| `regulamin.md`                                        | `/regulamin/`                       | z dwoma załącznikami na tej samej stronie                 |
+| `pouczenie-o-odstapieniu.md`                          | `/regulamin/#pouczenie`             | załącznik nr 1, stała kotwica                             |
+| `formularz-odstapienia.md`                            | `/regulamin/#formularz-odstapienia` | załącznik nr 2, stała kotwica                             |
+| `polityka-prywatnosci.md`                             | `/polityka-prywatnosci/`            |                                                           |
+| `lista-cookies-i-identyfikatorow.md`                  | `/lista-cookies-i-identyfikatorow/` | przygotowana wersja 2.3; odbiór produkcji przed aktywacją |
+| `regulamin-newslettera.md`                            | `/regulamin-newslettera/`           |                                                           |
+| `zgody-i-formularze.md`                               | — (nie publikujemy)                 | §1 stopka i dane sprzedawcy, §8 informacja pod opiniami   |
+| `szablony-emaili.md`, `stopka-ebooka.md`, `README.md` | — (nie publikujemy)                 |                                                           |
 
 EN (`/en/privacy/`, `/en/terms/`) ma tylko informację, że wiążąca jest wersja
 polska. Dezaktywację EN prowadzi osobny etap.
@@ -126,7 +127,7 @@ Blok „Dane firmy” na stronie kontaktu jest sekcją `textSection` dokumentu
 osobna kopia (migracja wymaga zmiany kontraktu sekcji kontaktu i jego eksportu
 Markdown).
 
-## Otwarte decyzje i blokady
+## Stan po publikacji 2.2 — zapis historyczny 11.10.2026
 
 - **Aktualizacja cookies 11.10.2026:** źródło i fixture’y mają wersję 2.2
   oraz datę 11.10.2026. Zmieniono `legal-cookies-pl.body` i sekcję 8 oraz
@@ -144,11 +145,44 @@ Markdown).
 - **Przegląd prawny:** aktualizacja techniczna nie zatwierdza pozostałego
   zakresu dokumentów, DPIA ani konfiguracji Workspace, płatności i rezerwacji.
   Nie wykonywać pełnego importu pakietu jako części aktualizacji cookies.
-- **Lista cookies:** stan odebrano na stagingu. Produkcja nie jest wdrożona;
-  wymaga osobnego skanu przed uruchomieniem. Konta narzędzi pomiarowych
-  wymagają kontroli przed aktywacją, ich okresy nie są zatwierdzone.
+- **Lista cookies 2.2:** opis dotyczył stagingu przed konfiguracją kont i
+  aktywacją pomiaru. Przygotowany zakres 2.3 jest opisany poniżej.
 - **„Ustawienia cookies”:** przycisk w stopce publicznych stron otwiera panel
   PL/EN. Podgląd szkiców go nie uruchamia. Zamknięcie panelu nie zmienia zgód.
 - **Publikacja CMS:** opublikowano `legal-cookies-pl` i `legal-privacy-pl`
   w wersji 2.2 po kontroli rewizji i dokładnej zgodności treści szkiców
   z fixture’ami. Odbiór stagingu jest zapisany w [postępie](PROGRESS.md).
+
+## Przygotowana aktualizacja pomiaru 13.10.2026
+
+Decyzja użytkownika z 13.10.2026: włączyć pomiar produkcyjny i wyrównać dokumenty
+w repo prawnym. W zakresie pomiaru zastępuje starsze założenia o wyłączeniu
+wszystkich e-booków i stron zdrowotnych oraz o nieaktywnych GA4 i Meta.
+
+- Publiczne źródła: `polityka-prywatnosci.md` i
+  `lista-cookies-i-identyfikatorow.md`, wersja 2.3, data 13.10.2026.
+- Wewnętrzne źródła: `zgody-i-formularze.md` 2.4 (copy cookies) oraz
+  `compliance/memo-marketing-afiliacja-piksele.md` 1.5 (sekcja 6d).
+- GA4: właściwa zgoda analityczna; neutralny kod sześciu rodzajów stron,
+  syntetyczny URL `/m/<kod>`, tytuł równy kodowi i pusty referrer. Retencja
+  użytkownika i zdarzeń 2 miesiące, bez resetu użytkownika przy aktywności.
+  Wyświetlenia i neutralny czas zaangażowania (`user_engagement`) po zgodzie
+  analitycznej; właściciel zatwierdził ten zakres 13.10.2026.
+- Meta: właściwa zgoda marketingowa; ręczny PageView, Core włączone,
+  domeny strony i referrera dopuszczone przez właściciela; automatyczne
+  zdarzenia i automatyczne zaawansowane dopasowywanie wyłączone.
+- Kontakt, konsultacje, odstąpienie i dokumenty prawne zawsze poza pomiarem.
+  Newsletter nie wyłącza całej strony; wartości pól formularzy są poza pomiarem.
+  Pozostałe dopuszczone strony można dodatkowo wyłączyć flagą CMS.
+- Clarity pozostaje nieaktywny. Cookies i własne identyfikatory SDK są opisane
+  odrębnie od retencji GA4; pomiar nie jest anonimowy. Odbiór skompilowanego
+  kontenera potwierdził w Chromium 400 dni dla cookies GA4 oraz 90 dni dla
+  `_fbp` i `_fbc`. Lista opisuje GA4 do 2 lat z ograniczeniami przeglądarki
+  i Meta do 90 dni.
+
+Fixture’y i ich eksport Markdown są przygotowane do aktywacji. Cztery źródła
+w `projekt prawny ola` zaktualizowano po kontroli hashy; zachowano odwracalną
+kopię oryginałów. Content Lake nie został jeszcze zmieniony w tym kroku.
+Publikować wyłącznie `body`, `version`, `effectiveFrom` istniejących
+`legal-privacy-pl` i `legal-cookies-pl`, po kontroli rewizji. Nie wykonywać
+pełnego importu sześciu dokumentów ani zmiany niepowiązanych szkiców.

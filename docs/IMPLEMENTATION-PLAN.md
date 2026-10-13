@@ -511,8 +511,17 @@ znikają z obu formatów i indeksów po udanej publikacji.
       rzeczywisty SDK z Core, domeny zamiast pełnych adresów i cofnięcie zgody
       podczas pobierania SDK oraz konfiguracji. Eksport odpowiada workspace;
       pomiar pozostaje wyłączony, 12.10.2026.
-- [ ] Odebrać skompilowany kontener w Tag Assistant i opublikować pomiar
-      po zapisie ustawień usług oraz spójnego copy prawnego.
+- [x] Opublikować kontener GTM 4 z trzema tagami GA4/Meta, 13.10.2026.
+      PR #86 i #88 scalone; loader produkcyjny nadal wyłączony.
+- [x] Sprawdzić skompilowany kontener z blokadą telemetrii oraz rzeczywiste
+      cookies SDK. Właściciel dopuścił neutralny `user_engagement` GA4 po
+      zgodzie analitycznej, 13.10.2026. Tag Assistant pozostaje osobnym odbiorem.
+- [x] Przygotować copy prawne 2.3 i źródła zgód 2.4/memo 1.5 dla wyświetleń
+      i neutralnego czasu zaangażowania GA4 oraz ręcznego PageView Meta.
+- [ ] Zakończyć pełne verify i niezależny przegląd finalnego zakresu.
+- [ ] Opublikować dwa zmienione dokumenty prawne w CMS z kontrolą rewizji.
+- [ ] Włączyć loader produkcyjny i odebrać produkcję po publikacji copy.
+- [ ] Wykonać odbiór w Tag Assistant.
 
 Odbiór: potwierdzenie po kolejce; awaria n8n uruchamia retry; brak zgody
 nie uruchamia skryptów Google.
