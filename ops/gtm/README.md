@@ -107,7 +107,7 @@ i cleanup. Reload czeka na trwały receipt c15t, żeby zachować częściową zg
 Test wykonuje dokładny HTML eksportu z rzeczywistym SDK 2.9.419 i aktualną
 konfiguracją Core. PageView zawiera same domeny. Formularz nie dodaje zdarzeń.
 Cofnięcie zgody przed opóźnioną konfiguracją i awaria konfiguracji nie wysłały
-zdarzeń w obserwowanym okresie. [Wyniki SDK](../../output/gtm-2026-10-12/meta-sdk.json).
+zdarzeń w obserwowanym okresie.
 Test jednostkowy uruchamia dokładny HTML eksportu, również po cofnięciu zgody
 w czasie pobierania SDK. Nie zastępuje odbioru skompilowanego kontenera.
 

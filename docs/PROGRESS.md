@@ -200,7 +200,7 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   siecią, page_view i ręczny user_engagement. Syntetyczny adres, tytuł-kod,
   pusty referrer, zero przecieków siedmiu znaczników URL/tytułu/formularza.
   Po ga-disable zero kolejnych żądań. SDK dodaje własne identyfikatory cid/sid
-  i dane urządzenia. [Dowód](../output/gtm-2026-10-12/ga4-sdk.json).
+  i dane urządzenia.
   To odbiór SDK, bez skompilowanego kontenera i Tag Assistant.
 - SDK Meta 2.9.419 z obecną konfiguracją Core redukuje adres i odsyłacz do
   domen. HTTP Referer nadal zawiera domenę. Bez Core samo autoConfig=false
@@ -2918,12 +2918,12 @@ zachowano poza zakresem. Format, lokalne odnośniki oraz diff-check sprawdzono;
 bez zmiany kodu aplikacji i bez publikacji.
 
 Na zlecenie użytkownika przygotowano trzy rastrowe edycje wizualizacji katalogu
-3a: oliwka, morela i błękit. [Wyniki i prompty](../output/design-system-3a/2026-10-07/accent-proposals/README.md)
-zapisano w repo. Wszystkie obejrzano: zachowują biel i wiśnię jako bazę,
+3a: oliwka, morela i błękit. Wyniki i prompty
+zapisano lokalnie, poza repozytorium. Wszystkie obejrzano: zachowują biel i wiśnię jako bazę,
 pokazują dodatkowy przycisk, podkreślenie i jasne tło portretu. Są propozycjami,
 z drobnymi różnicami generowania; nie zmieniają aplikacji, tokenów ani CMS.
 Oliwka została następnie odrzucona przez użytkownika (07.10.2026).
-Na jego zlecenie przygotowano i obejrzano [wersję matcha](../output/design-system-3a/2026-10-07/accent-proposals/04-matcha.png):
+Na jego zlecenie przygotowano i obejrzano wersję matcha:
 akcent #A8C686, tekst #354A2B, jasne tło #EEF4E7. To propozycja do oceny,
 bez zatwierdzenia odcienia, wdrożenia tokenów ani konfiguracji Sanity.
 
@@ -2934,7 +2934,7 @@ zmieniono tylko materiały koncepcyjne i dokumentację. Kontrole desktop/mobile,
 Następnie użytkownik wybrał matchę z 1a (#53671B / #D8E78A) i ograniczył ją
 do subtelnych detali, m.in. białego secondary buttona z zieloną obwódką oraz
 elementów grafik. Wykluczył tło hero. Przygotowano i obejrzano
-[poprawioną planszę](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png)
+poprawioną planszę
 z różowym tłem portretu; zapisano reguły w specyfikacji i konfiguracji CMS.
 Wcześniejsza propozycja #A8C686 jest zastąpiona tą decyzją.
 Kontrole aktualizacji: przegląd obrazu, format i odnośniki dokumentacji.

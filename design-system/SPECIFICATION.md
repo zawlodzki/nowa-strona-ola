@@ -43,7 +43,7 @@ w dark. Stage zmienia paletę. Ten sam produkt ma jeden front w każdym szabloni
 Użytkownik wybrał odcienie z 1a: **#53671B** na jasnej powierzchni oraz
 **#D8E78A** na wiśniowej lub ciemnej powierzchni.
 Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
-[Wizualizacja zastosowań](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).
+Wizualizacja zastosowań była lokalnym artefaktem poza repozytorium.
 
 - Secondary button: białe wnętrze, cienka obwódka matcha. Tekst i strzałka
   matcha jak na planszy 05; wariant tylko tam, gdzie szablon używa Button
