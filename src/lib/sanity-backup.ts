@@ -328,8 +328,11 @@ function isInsideRoot(root: string, candidate: string): boolean {
   const relative = path.relative(root, candidate);
   if (relative === "") return true;
   if (path.isAbsolute(relative)) return false;
-  const [firstSegment] = relative.split(path.sep);
-  return firstSegment !== "..";
+  return !climbsOut(relative);
+}
+
+function climbsOut(relativePath: string): boolean {
+  return relativePath === ".." || relativePath.startsWith(`..${path.sep}`);
 }
 
 function archiveFileName(now: Date): string | null {
