@@ -33,8 +33,14 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   Ten sam test osobno przeszedł w 1,6 s. Symulacja Content Lake dała
   88 dokumentów bez błędów i 17 stron o tym samym DOM. JS ma 9694 B gzip,
   CSS 30575 B gzip. Kontrola SEO objęła 36 stron, `robots=noindex`.
-- Nie scalano i nie wdrażano. Następny krok to odbiór tego PR.
-  Po scaleniu #99 trzeba powtórzyć test produkcyjnego URL e-booka.
+- PR #101 scalony do `main` jako `7703d48` (13.10.2026, squash).
+  Quality na gałęzi przeszło dwukrotnie. Nie wdrażano.
+- Po scaleniu verify-ola `ola-1791902241` odczytał build z `7703d48`
+  na 4340. Siedem tytułów `<title>` i `og:title` zostało zgodnych
+  z D3. Zły e-mail newslettera zatrzymał wysyłkę. Widoczny nagłówek
+  „O mnie” został. `browser posts` zwrócił `[]`. Dowód jest w
+  `/tmp/ola-verify-evidence/ola-1791902241/`.
+- Następny krok. Po scaleniu #99 powtórzyć test produkcyjnego URL e-booka.
 
 ### Szablon tytułu D3, 13.10.2026
 
