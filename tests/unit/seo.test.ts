@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { pageSeo } from "../../src/lib/seo/page-seo";
 import { siteSeoData } from "../../src/lib/seo/site-data";
@@ -38,10 +38,25 @@ describe("SEO site configuration", () => {
   });
 
   it("indexes only builds with SITE_INDEXING=production", () => {
-    expect(isIndexingEnabled(undefined)).toBe(false);
-    expect(isIndexingEnabled("staging")).toBe(false);
-    expect(isIndexingEnabled("true")).toBe(false);
-    expect(isIndexingEnabled("production")).toBe(true);
+    try {
+      vi.stubEnv("SITE_INDEXING", undefined);
+      expect(isIndexingEnabled()).toBe(false);
+      expect(isIndexingEnabled(undefined)).toBe(false);
+      expect(isIndexingEnabled("production")).toBe(true);
+
+      vi.stubEnv("SITE_INDEXING", "production");
+      expect(isIndexingEnabled()).toBe(true);
+      expect(isIndexingEnabled(undefined)).toBe(true);
+      expect(isIndexingEnabled("staging")).toBe(false);
+      expect(isIndexingEnabled("true")).toBe(false);
+      expect(isIndexingEnabled("production")).toBe(true);
+
+      vi.stubEnv("SITE_INDEXING", "staging");
+      expect(isIndexingEnabled()).toBe(false);
+      expect(isIndexingEnabled(undefined)).toBe(false);
+    } finally {
+      vi.unstubAllEnvs();
+    }
   });
 
   it("builds absolute URLs and page identifiers", () => {
