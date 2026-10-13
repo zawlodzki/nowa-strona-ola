@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   documentTitle,
+  resolveDocumentTitle,
   titlePlacement,
 } from "../../src/lib/seo/document-title";
 
@@ -58,20 +59,25 @@ describe("document title", () => {
   });
 
   it("appends the brand when the source has none", () => {
-    expect(
-      documentTitle(
-        "Polityka prywatności",
-        titlePlacement("/polityka-prywatnosci/", "pl"),
-      ),
-    ).toBe("Polityka prywatności | Aleksandra Olesiewicz");
+    const placement = titlePlacement("/polityka-prywatnosci/", "pl");
+    expect(documentTitle("Polityka prywatności", placement)).toBe(
+      "Polityka prywatności | Aleksandra Olesiewicz",
+    );
+    expect(resolveDocumentTitle("Polityka prywatności", placement)).toEqual({
+      title: "Polityka prywatności | Aleksandra Olesiewicz",
+      brandOmitted: false,
+    });
   });
 
   it("returns a 50-character topic unchanged when the suffix would pass 60", () => {
     const source = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
     expect(source).toHaveLength(50);
-    expect(documentTitle(source, titlePlacement("/temat/", "pl"))).toBe(
-      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    );
+    const placement = titlePlacement("/temat/", "pl");
+    expect(documentTitle(source, placement)).toBe(source);
+    expect(resolveDocumentTitle(source, placement)).toEqual({
+      title: source,
+      brandOmitted: true,
+    });
   });
 
   it("leaves a genitive product line unchanged", () => {

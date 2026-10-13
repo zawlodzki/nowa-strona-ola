@@ -1,9 +1,9 @@
 import type { Locale } from "@ola/shared";
 
+export { SITE_NAME } from "@ola/shared";
+
 /** Production origin. Must equal `site` in astro.config.mjs (unit test). */
 export const SITE_ORIGIN = "https://aleksandraolesiewicz.com";
-
-export const SITE_NAME = "Aleksandra Olesiewicz";
 
 export const htmlLang: Record<Locale, string> = { pl: "pl-PL", en: "en-GB" };
 export const ogLocale: Record<Locale, string> = { pl: "pl_PL", en: "en_GB" };
