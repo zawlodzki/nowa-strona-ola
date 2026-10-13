@@ -25,3 +25,59 @@ const { question, open = false } = Astro.props;
     <slot />
   </div>
 </details>
+
+<style is:global>
+  .ao-faq {
+    border-block-start: 1px solid var(--ao-line);
+    padding-block: var(--ao-space-24);
+  }
+  .ao-faq summary {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: var(--ao-space-24);
+    min-block-size: var(--ao-target-min);
+    cursor: pointer;
+    list-style: none;
+    font-size: 1.25rem;
+    font-weight: 550;
+  }
+  .ao-faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .ao-faq[open] summary .ao-icon {
+    transform: rotate(45deg);
+  }
+  .ao-faq .ao-prose {
+    margin-block-start: var(--ao-space-16);
+  }
+  .ao-prose {
+    max-inline-size: var(--ao-reading);
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+  .ao-prose > * + * {
+    margin-block-start: var(--ao-space-24);
+  }
+  .ao-prose :where(h2, h3) {
+    margin-block-start: var(--ao-space-48);
+    font-weight: 650;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+  }
+  .ao-prose h2 {
+    font-size: 2.25rem;
+  }
+  .ao-prose h3 {
+    font-size: 1.625rem;
+  }
+  .ao-prose a {
+    text-decoration: underline;
+  }
+  .ao-prose blockquote {
+    margin-inline: 0;
+    padding: var(--ao-space-24);
+    background: var(--ao-surface);
+    border-radius: var(--ao-radius-panel);
+  }
+</style>

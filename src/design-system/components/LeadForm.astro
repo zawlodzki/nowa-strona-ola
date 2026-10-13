@@ -352,3 +352,24 @@ const autocomplete: Partial<Record<FormFieldCopy["input"], string>> = {
     });
   }
 </script>
+
+<style is:global>
+  .ao-form-receipt {
+    padding: var(--ao-space-16);
+    border: 1px solid var(--ao-line);
+    border-radius: var(--ao-radius-panel);
+    font-size: 0.875rem;
+  }
+  .ao-form-receipt__title {
+    font-weight: 600;
+  }
+  .ao-form-receipt dt {
+    margin-block-start: var(--ao-space-12);
+    color: var(--ao-muted);
+  }
+  .ao-form-receipt dd {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+</style>
