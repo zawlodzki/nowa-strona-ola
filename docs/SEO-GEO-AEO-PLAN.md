@@ -475,7 +475,10 @@ publikacji.
       przy zmianie adresu opublikowanego dokumentu bez przekierowania
       (walidacja sluga) zamiast osobnej akcji dokumentu.
 - [x] Szablon tytułu D3 jest w `documentTitle` (13.10.2026), nie w polu
-      `siteSettings.titleTemplate`.
+      `siteSettings.titleTemplate`. Podgląd Studio woła tę samą funkcję.
+      Licznik 60 znaków dotyczy tytułu złożonego. Paginacja bloga i tytuł
+      kategorii e-booków powstają przy renderze i nie wchodzą do podglądu
+      dokumentu.
 - [ ] Bez zmian: `shortBio`, `definition` kategorii (używany istniejący
       `description`), osobne pole `about` artykułu (używane kategorie).
       „W skrócie” jest w SEO‑5.

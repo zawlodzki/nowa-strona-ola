@@ -1,3 +1,13 @@
+export {
+  documentTitle,
+  placementForPath,
+  resolveDocumentTitle,
+  SEO_TITLE_LIMIT,
+  SITE_NAME,
+  type DocumentTitle,
+  type TitlePlacement,
+} from "./document-title";
+
 export const locales = ["pl", "en"] as const;
 
 export type Locale = (typeof locales)[number];

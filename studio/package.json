@@ -10,6 +10,7 @@
     "typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate"
   },
   "dependencies": {
+    "@ola/shared": "0.0.0",
     "@sanity/icons": "^5.2.3",
     "@sanity/vision": "^6.18.0",
     "react": "^19.3.0",

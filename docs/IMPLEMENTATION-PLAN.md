@@ -479,8 +479,9 @@ oznacza wykonanej implementacji.
       Strona wewnętrzna dostaje `{temat} | Aleksandra Olesiewicz`, strona
       główna zaczyna się od marki. Złożenie dłuższe niż 60 znaków zostaje
       przy zapisanym tytule. Linia „E-book Aleksandry Olesiewicz” zostaje.
-      Pole `titleTemplate` w Sanity nie powstało. Podgląd Studio nadal
-      liczy zapisany tytuł.
+      Pole `titleTemplate` w Sanity nie powstało. Podgląd Studio liczy ten
+      sam złożony tytuł. Paginacja bloga i tytuł kategorii e-booków
+      powstają przy renderze strony i nie są polami dokumentu.
 - [ ] Uzupełnić pola SEO w Sanity, zarejestrować schemat i wdrożyć Studio
       (tylko na osobne polecenie).
 - [ ] SEO‑6: robots.txt według D1 i AI Crawl Control, Search Console i Bing,
