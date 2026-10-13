@@ -500,11 +500,12 @@ function coverLabels(kind: CoverArtKind): string[] {
   .home3a-count {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: var(--ao-space-24);
     margin-block-start: var(--ao-space-48);
   }
   .home3a-count strong {
-    font-size: 92px;
+    font-size: 5.75rem;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.07em;
@@ -514,6 +515,7 @@ function coverLabels(kind: CoverArtKind): string[] {
     color: var(--ao-accent);
   }
   .home3a-count > span {
+    flex: 1 1 0%;
     max-inline-size: 180px;
     font-size: 14px;
   }
@@ -720,7 +722,7 @@ function coverLabels(kind: CoverArtKind): string[] {
   }
   @container page3a (max-width: 767px) {
     .home3a-count strong {
-      font-size: 78px;
+      font-size: min(4.875rem, 32cqi);
     }
     .home3a-portrait {
       block-size: 410px;
@@ -744,7 +746,7 @@ function coverLabels(kind: CoverArtKind): string[] {
       block-size: 340px;
     }
     .home3a-count strong {
-      font-size: 64px;
+      font-size: min(4rem, 30cqi);
     }
   }
 </style>
