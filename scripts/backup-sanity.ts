@@ -1,6 +1,7 @@
 import { spawn } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
+  chmodSync,
   createReadStream,
   lstatSync,
   mkdirSync,
@@ -44,6 +45,7 @@ async function main(): Promise<void> {
       listArchive,
       readArchiveText,
       removeFile,
+      restrictFile,
       writeChecksum,
     });
     if (code !== 0) process.exit(code);
@@ -81,6 +83,10 @@ function removeFile(filePath: string): void {
   rmSync(filePath);
 }
 
+function restrictFile(filePath: string): void {
+  chmodSync(filePath, 0o600);
+}
+
 async function hashFile(filePath: string): Promise<string> {
   const hash = createHash("sha256");
   await pipeline(createReadStream(filePath), hash);
@@ -92,7 +98,10 @@ function writeChecksum(
   archiveBasename: string,
   hex: string,
 ): void {
-  writeFileSync(checksumPath, `${hex}  ${archiveBasename}\n`, { flag: "wx" });
+  writeFileSync(checksumPath, `${hex}  ${archiveBasename}\n`, {
+    flag: "wx",
+    mode: 0o600,
+  });
 }
 
 async function listArchive(archivePath: string): Promise<readonly string[]> {

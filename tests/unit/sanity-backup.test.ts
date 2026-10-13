@@ -333,9 +333,52 @@ describe("runSanityBackup", () => {
       listArchive: () => Promise.resolve([]),
       readArchiveText: () => Promise.resolve(""),
       removeFile: () => undefined,
+      restrictFile: () => undefined,
       writeChecksum: () => undefined,
     });
   }
+
+  it("restricts the archive and checksum to the owner", async () => {
+    lines.length = 0;
+    const calls: string[] = [];
+    const code = await runSanityBackup({
+      argv: [],
+      env: { SANITY_AUTH_TOKEN: "t", SANITY_BACKUP_DIR: "/backups" },
+      repoRoot: "/repo",
+      homeDir: "/home/ola",
+      now: NOW,
+      writeLine: (line) => {
+        lines.push(line);
+      },
+      spawnExport: () => Promise.resolve(0),
+      realpath: identityRealpath(),
+      exists: () => false,
+      mkdir: () => undefined,
+      hashFile: (file) => {
+        calls.push(`hash ${path.basename(file)}`);
+        return Promise.resolve("abc");
+      },
+      listArchive: () => Promise.resolve(["x/data.ndjson"]),
+      readArchiveText: () => Promise.resolve(""),
+      removeFile: () => undefined,
+      restrictFile: (file) => {
+        calls.push(`restrict ${path.basename(file)}`);
+      },
+      writeChecksum: (file) => {
+        calls.push(`checksum ${path.basename(file)}`);
+      },
+    });
+    expect(code).toBe(0);
+    const archive = "sanity-dyuqkn8c-production-20261013T051000Z.tar.gz";
+    expect(
+      calls.map((c) => c.replace(/\d{8}T\d{6}Z/, "20261013T051000Z")),
+    ).toEqual([
+      `restrict ${archive}`,
+      `hash ${archive}`,
+      `checksum ${archive}.sha256`,
+      `restrict ${archive}.sha256`,
+    ]);
+  });
 
   it("stops when the token is blank and does not export", async () => {
     const code = await run({ SANITY_AUTH_TOKEN: "  " });

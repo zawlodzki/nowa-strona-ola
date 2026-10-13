@@ -196,6 +196,7 @@ export async function runSanityBackup(input: {
     entryName: string,
   ) => Promise<string>;
   readonly removeFile: (filePath: string) => void;
+  readonly restrictFile: (filePath: string) => void;
   readonly writeChecksum: (
     checksumPath: string,
     archiveBasename: string,
@@ -256,12 +257,14 @@ export async function runSanityBackup(input: {
     return code;
   }
 
+  input.restrictFile(destination.archivePath);
   const hex = await input.hashFile(destination.archivePath);
   input.writeChecksum(
     destination.checksumPath,
     path.basename(destination.archivePath),
     hex,
   );
+  input.restrictFile(destination.checksumPath);
 
   try {
     const paths = await input.listArchive(destination.archivePath);

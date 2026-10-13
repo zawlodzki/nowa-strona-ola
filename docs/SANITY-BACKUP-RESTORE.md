@@ -28,7 +28,7 @@ npx sanity datasets export production ~/sanity-backups/sanity-dyuqkn8c-productio
 
 ## Suma kontrolna
 
-Skrypt zapisuje `<plik>.sha256` obok archiwum. Między skrótem hex a nazwą bazową są dwie spacje. Format jest zgodny z `sha256sum -c`.
+Skrypt zapisuje `<plik>.sha256` obok archiwum. Między skrótem hex a nazwą bazową są dwie spacje. Format jest zgodny z `sha256sum -c`. Archiwum i plik `.sha256` dostają tryb `0600`, więc czyta je tylko właściciel. Kopiując je gdzie indziej, zachowaj ten tryb.
 
 Sprawdź sumę z katalogu kopii:
 
