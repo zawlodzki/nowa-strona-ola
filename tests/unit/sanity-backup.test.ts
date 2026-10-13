@@ -1,7 +1,14 @@
-import { lstatSync, mkdirSync, realpathSync, symlinkSync } from "node:fs";
+import {
+  lstatSync,
+  mkdirSync,
+  readFileSync,
+  realpathSync,
+  symlinkSync,
+} from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
@@ -306,6 +313,23 @@ describe("runSanityBackup", () => {
     });
     expect(code).toBe(1);
     expect(lines).toEqual([INSIDE_REPO]);
+  });
+});
+
+describe("runbook", () => {
+  it("documents the export command and the npm script", () => {
+    const doc = readFileSync(
+      fileURLToPath(
+        new URL("../../docs/SANITY-BACKUP-RESTORE.md", import.meta.url),
+      ),
+      "utf8",
+    );
+    expect(doc).toContain(
+      sanityExportArgv(
+        "~/sanity-backups/sanity-dyuqkn8c-production-<UTC>.tar.gz",
+      ).join(" "),
+    );
+    expect(doc).toContain("npm run backup:sanity");
   });
 });
 
