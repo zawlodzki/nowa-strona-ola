@@ -2,7 +2,7 @@
 
 ## Stan
 
-Stan na 13.10.2026. Ćwiczenie odtworzenia jest w toku oczekiwania. Token zapisu treści nie ma uprawnienia `sanity.project.datasets/create`.
+Stan na 13.10.2026. Ćwiczenie odtworzenia nie zostało wykonane. Token zapisu treści nie ma uprawnienia `sanity.project.datasets/create`.
 
 ## Eksport
 
@@ -16,7 +16,7 @@ npm run backup:sanity
 
 Polecenie eksportuje dataset `production` projektu `dyuqkn8c`.
 
-Domyślny katalog to `~/sanity-backups/`. Zmienna `SANITY_BACKUP_DIR` zmienia katalog. Względna ścieżka jest odmowna. Ścieżka wewnątrz repozytorium, w tym `reports/` i `output/`, jest odmowna.
+Domyślny katalog to `~/sanity-backups/`. Zmienna `SANITY_BACKUP_DIR` zmienia katalog. Względna ścieżka zostaje odrzucona. Ścieżka wewnątrz repozytorium też zostaje odrzucona. Dotyczy to `reports/` i `output/`.
 
 Skrypt uruchamia to polecenie:
 
@@ -36,13 +36,15 @@ Sprawdź sumę z katalogu kopii:
 sha256sum -c <plik>.tar.gz.sha256
 ```
 
+Na macOS to samo sprawdzenie robi `shasum -a 256 -c <plik>.tar.gz.sha256`.
+
 ## Liczby dokumentów
 
-Skrypt wypisuje liczby per `_type`. Skrypt rozdziela je na opublikowane, szkice i wersje. Skrypt czyta je z archiwum. Skrypt nie filtruje dokumentów.
+Skrypt wypisuje liczbę dokumentów każdego `_type`. Osobno liczy opublikowane, szkice i wersje. Liczby biorą się z archiwum. Skrypt nie usuwa dokumentów.
 
 ## Sekret podglądu
 
-Uwaga. Archiwum zawiera `sanity.previewUrlSecret`. Trzymaj plik poza repozytorium i poza `output/`.
+Archiwum zawiera `sanity.previewUrlSecret`. Trzymaj plik poza repozytorium i poza `output/`.
 
 ## Przygotowanie importu
 
@@ -52,9 +54,10 @@ Przed każdym odtworzeniem rozpakuj archiwum poza repozytorium. Usuń każdą li
 
 Wpis danych ma postać `<jeden-katalog>/data.ndjson`. Plik `data.ndjson` w korzeniu archiwum nie jest tym wpisem.
 
-Rozpakuj kopię poza repozytorium:
+Rozpakuj kopię poza repozytorium. Zacznij od pustego katalogu roboczego.
 
 ```sh
+rm -rf ~/sanity-backups/restore-work
 mkdir -p ~/sanity-backups/restore-work
 tar -xzf ~/sanity-backups/sanity-dyuqkn8c-production-<UTC>.tar.gz -C ~/sanity-backups/restore-work
 ```
@@ -125,7 +128,7 @@ Nie commituj tokenu administratora.
 
 ## Import
 
-Importuj wyłącznie do `restore-drill`. Użyj `--missing` i `--dataset`. Dataset nie jest wtedy zgadywany z gołej pozycji argumentu.
+Importuj wyłącznie do `restore-drill`. Użyj `--missing` i `--dataset`. Flaga `--dataset` nazywa dataset wprost.
 
 `production` nigdy nie jest celem importu.
 
@@ -141,10 +144,10 @@ rm -rf ~/sanity-backups/restore-work
 
 ## Weryfikacja
 
-1. Porównaj liczby per typ i szkice z sekcją poniżej. Po filtrze liczba `sanity.previewUrlSecret` w datasecie ćwiczeniowym wynosi 0. Plik kopii nadal ma 8 dokumentów `sanity.previewUrlSecret`.
+1. Porównaj liczby według typu i szkice z sekcją poniżej. Po filtrze liczba `sanity.previewUrlSecret` w datasecie ćwiczeniowym wynosi 0. Plik kopii nadal ma 8 dokumentów `sanity.previewUrlSecret`.
 2. Sprawdź rekordy obrazów. Typ `sanity.imageAsset` liczy 10 dokumentów. 7 dokumentów jest wskazywanych przez `_ref` zasobu w innym dokumencie. 3 dokumenty nie są wskazywane.
 3. Sprawdź każdy `_ref` zasobu, który zaczyna się od `image-`. Każdy taki `_ref` równa się pewnemu `_id` dokumentu w przefiltrowanym NDJSON.
-4. Sprawdź jedną opublikowaną stronę `page`. Sprawdź jeden `ebook`. Sprawdź jeden `article`. Porównaj tytuł i slug ze Studio datasetu `production`. Nie wymyślaj tytułów dokumentów.
+4. Sprawdź jedną opublikowaną stronę `page`. Sprawdź jeden `ebook`. Sprawdź jeden `article`. Porównaj tytuł i slug ze Studio datasetu `production`.
 5. Zbuduj serwis dwa razy do dwóch katalogów poza repozytorium. Pierwszy build używa `PUBLIC_SANITY_PROJECT_ID=dyuqkn8c` i `PUBLIC_SANITY_DATASET=production`. Drugi build używa `PUBLIC_SANITY_DATASET=restore-drill` oraz tego samego identyfikatora projektu. `npm run test:build` czyta `dist/`, bo `scripts/check-build.mjs` ma tę ścieżkę na stałe. Skopiuj build produkcyjny na bok. Zbuduj dataset ćwiczeniowy do `dist/`. Uruchom `npm run test:build`.
 
    ```sh
@@ -174,7 +177,7 @@ npx sanity datasets delete restore-drill --force --project-id dyuqkn8c
 
 Eksport z 2026-10-13 07:10 zawiera 77 dokumentów. 69 dokumentów jest opublikowanych. 8 dokumentów to szkice.
 
-Liczby per typ:
+Liczby według typu:
 
 - `page` 13
 - `ebook` 12
@@ -192,4 +195,4 @@ Obrazy to 10 rekordów. 7 rekordów jest użytych. 3 rekordy są nieużyte.
 
 ## Wynik ćwiczenia
 
-Ćwiczenie odtworzenia jest w toku oczekiwania. Blokuje je brak uprawnienia `sanity.project.datasets/create`. Dataset `restore-drill` nie został utworzony.
+Ćwiczenie odtworzenia nie zostało wykonane. Brakuje uprawnienia `sanity.project.datasets/create`. Dataset `restore-drill` nie został utworzony.
