@@ -1,10 +1,40 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-13 (szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Podgląd tytułu w Studio, 13.10.2026
+
+- Podgląd SEO woła `resolveDocumentTitle`, tę samą regułę co `<title>`
+  i `og:title`. Licznik 60 znaków liczy tytuł złożony. Gdy marka nie
+  wchodzi, podgląd mówi o limicie.
+- Źródłem zostaje zapisany tytuł. Pole `titleTemplate` nie powstało.
+  Strona główna to dokument `page` o slugu `home`. Dokument bez adresu
+  publicznego dostaje układ strony wewnętrznej.
+- Paginacja bloga oraz tytuł kategorii e-booków powstają przy renderze.
+  Podgląd dokumentu ich nie składa.
+- Gałąź wychodzi z `main`. PR #98 i #99 nie są rodzicem.
+- Kontrole na Node 24.21.0. `npm test` dał 455 testów w 48 plikach.
+  TypeScript Studio i `@ola/shared` przeszedł. `sanity build` przeszedł.
+  ESLint na zmienionych plikach nie zgłosił ostrzeżeń.
+- verify-ola `ola-1791900911` odczytał podgląd na 4340. `<title>` i
+  `og:title` były zgodne. Strona główna zaczyna się od marki. „O mnie”
+  i kontakt kończą się marką. Blog, strona 2, artykuł o 60 znakach
+  i linia e-booka zostały przy dotychczasowych tytułach. Widoczny
+  nagłówek „Jestem Ola. Znam PMOS od środka.” został.
+  `browser posts` zwrócił `[]`. Dowód jest w
+  `/tmp/ola-verify-evidence/ola-1791900911/`.
+- `npm run verify` na Node 24.21.0 przeszedł format, tokeny, lint, typy,
+  455 testów, build, build workspace’ów i `test:build`. E2E dało 467 passed,
+  9 skipped i 1 failed. To hover „Kopiuj link” w WebKit w makiecie artykułu.
+  Ten sam test osobno przeszedł w 1,6 s. Symulacja Content Lake dała
+  88 dokumentów bez błędów i 17 stron o tym samym DOM. JS ma 9694 B gzip,
+  CSS 30575 B gzip. Kontrola SEO objęła 36 stron, `robots=noindex`.
+- Nie scalano i nie wdrażano. Następny krok to odbiór tego PR.
+  Po scaleniu #99 trzeba powtórzyć test produkcyjnego URL e-booka.
 
 ### Szablon tytułu D3, 13.10.2026
 
