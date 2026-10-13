@@ -853,7 +853,7 @@ zapisywać w raporcie importu. Szczegółowa kolejność i kryteria: etap 4a
 Źródło: bezpośrednie polecenie użytkownika „oliwka na pewno nie, spróbuj matcha”.
 Ustalenie: oliwka odrzucona. Matcha jest kierunkiem do wizualnej próby;
 konkretne wartości #A8C686 / #354A2B / #EEF4E7 są propozycją autora,
-nie zatwierdzoną paletą. [Wizualizacja](../output/design-system-3a/2026-10-07/accent-proposals/04-matcha.png).
+nie zatwierdzoną paletą. Wizualizacja była lokalnym artefaktem poza repozytorium.
 
 Mapowanie: design-system/tokens.json; w Sanity wyłącznie kontrolowane warianty
 sekcji, bez edytowalnych kodów kolorów. Nie ustalono nowego pola ani wariantu
@@ -880,7 +880,7 @@ ma ten wariant (katalog, homepage). About, konsultacje i landing ebooka
 korzystały wtedy z TextLink w ink. CMS nie otrzymał pól kolorów; schematy i
 Content Lake bez zmian. Mapa strona → element → kolor jest w opisie PR.
 [Zasady](../design-system/SPECIFICATION.md) i
-[plansza](../output/design-system-3a/2026-10-07/accent-proposals/05-matcha-1a-subtle.png).
+plansza.
 
 ### Rozszerzenie akcentów i czytelności linków, 09.10.2026
 

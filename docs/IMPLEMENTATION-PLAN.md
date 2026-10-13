@@ -822,7 +822,7 @@ Biblioteka nie oznacza migracji szablonów, konfiguracji CMS ani publikacji.
 - [x] Przygotować trzy wizualizacje katalogu 3a: oliwka, morela i błękit.
 - [x] Po odrzuceniu oliwki przygotować dodatkową wizualizację matcha.
 - [x] Zachować aktualne tokeny; zapisać propozycje i pełne prompty w
-      [materiale porównawczym](../output/design-system-3a/2026-10-07/accent-proposals/README.md).
+      materiale porównawczym.
 - [x] Wybrać matchę z 1a: #53671B / #D8E78A; delikatny akcent bez tła hero.
 - [x] Pokazać biały secondary button z obwódką oraz drobne elementy grafik.
 - [x] Wdrożyć tokeny matcha i secondary button w jednym źródle tokens.json.

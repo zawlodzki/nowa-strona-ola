@@ -51,8 +51,8 @@ widoków przechodzi kontrolę. Blog, jego druga strona i „O mnie” przechodz�
 również wąskie widoki z zoomem.
 
 Źródła: `wordmarks.css:3`, `base.css:190`, lokalne szerokości logo w CSS
-obu landingów. Dowód: [homepage z powiększeniem](../output/design-consistency-3a/2026-10-07/cherry-white-zoom-320.png)
-i [O mnie z powiększeniem](../output/design-consistency-3a/2026-10-07/about-3a-zoom-320.png).
+obu landingów. Dowód: homepage z powiększeniem
+i O mnie z powiększeniem (lokalny artefakt, poza repozytorium).
 
 **Zalecenie:** wspólny responsywny nagłówek uwzględniający rzeczywistą szerokość
 marki i miejsce na natywny trigger; wykorzystać sprawdzone zabezpieczenia bloga
@@ -227,12 +227,12 @@ Zlicza również style wspólne ponownie dla kolejnych HTML. Nie są to 123 osob
 potwierdzone defekty. M.in. grzbiety okładek, mocny tracking i krótkie podpisy
 należą do zastanego projektu; sam detektor nie uzasadnia ich usunięcia.
 
-Dowody: [pomiary](../output/design-consistency-3a/2026-10-07/measurements.json),
-[pierwsza kontrola](../output/design-consistency-3a/2026-10-07/checks.json),
-[końcowe potwierdzenie](../output/design-consistency-3a/2026-10-07/confirmation.json),
-[detektor](../output/design-consistency-3a/2026-10-07/detector.json),
-[zestawienie desktop](../output/design-consistency-3a/2026-10-07/comparison-1440.png)
-i [mobile](../output/design-consistency-3a/2026-10-07/comparison-390.png).
+Dowody: pomiary,
+pierwsza kontrola,
+końcowe potwierdzenie,
+detektor,
+zestawienie desktop
+i mobile (lokalny artefakt, poza repozytorium).
 
 Nie wykonano natywnego zoomu, czytnika ekranu, kontroli na fizycznym telefonie
 ani pomiarów Lighthouse/CWV. Nie przeprowadzano pełnego testu wszystkich
@@ -286,9 +286,9 @@ Końcowy osobny przebieg: 6/6 PASS w Chromium/Firefox/WebKit. Wcześniejsze
 nieudane przebiegi ujawniły dalsze źródła overflow; poprawiono kod, bez wyłączania
 asercji ani zwiększania timeoutów.
 
-Dowody po zmianach: [QA](../output/design-consistency-3a/2026-10-07/updated/qa.json),
-[pierwsza runda](../output/design-consistency-3a/2026-10-07/updated/qa-first.json),
-[detektor](../output/design-consistency-3a/2026-10-07/updated/detector.json).
+Dowody po zmianach: QA,
+pierwsza runda,
+detektor (lokalny artefakt, poza repozytorium).
 Końcowe wyniki szerokiej kontroli i verify zapisano w [postępie](PROGRESS.md).
 
 Migracja do komponentów Astro, wspólnych referencji Sanity i serializerów
