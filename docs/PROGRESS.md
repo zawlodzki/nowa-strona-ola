@@ -6,6 +6,18 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Zatwierdzony kod źródła AI, 13.10.2026
+
+- Właściciel dopuścił pięć kodów po zgodzie analitycznej, bez pełnych URL
+  i dowolnych UTM. Implementacja w izolowanym worktree.
+- Dwa projekty architektury i niezależna ocena wybrały parser Astro,
+  walidowany adapter GTM oraz source kampanii. Sam wymiar eventu
+  nie zasilałby grupy kanałów.
+- [Kontrakt i komendy odbioru](AI-SOURCE-CONTRACT.md).
+- Google sitemap w szczegółach: sukces, 23 adresy, odczyt 13.10.2026.
+  Lista wcześniej pokazywała nieaktualny błąd. Brak zmian WAF/XML.
+- Kontrole i publikacje pozostają w toku; nie deklarowano wdrożenia.
+
 ### Lokalny odbiór etapu 7 i verify-ola na macOS, 13.10.2026
 
 - `git fetch origin` potwierdził aktualny `main` i `origin/main` na

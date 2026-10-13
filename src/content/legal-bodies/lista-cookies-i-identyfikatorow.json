@@ -1,6 +1,6 @@
 {
   "title": "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
-  "version": "2.3",
+  "version": "2.4",
   "effectiveFrom": "2026-10-13",
   "seoDescription": "Pliki cookies i identyfikatory na aleksandraolesiewicz.com: niezbędne, analityczne i marketingowe, z dostawcą i okresem działania.",
   "body": [
@@ -429,18 +429,78 @@
         {
           "_type": "span",
           "_key": "s14",
-          "text": ". To adres techniczny pomiaru, a nie rzeczywisty adres oglądanej strony. Adres odsyłający jest pusty. GA4 mierzy wyświetlenia oraz czas zaangażowania, również przez automatyczne zdarzenie ",
+          "text": ". To adres techniczny pomiaru, a nie rzeczywisty adres oglądanej strony. Adres odsyłający jest pusty. Po zgodzie analitycznej rozpoznajemy też wejścia z ChatGPT, Perplexity, Claude, Gemini i Copilot. Do GA4 przekazujemy wyłącznie kod rozpoznanego asystenta: ",
           "marks": []
         },
         {
           "_type": "span",
           "_key": "s15",
-          "text": "user_engagement",
+          "text": "chatgpt",
           "marks": ["code"]
         },
         {
           "_type": "span",
           "_key": "s16",
+          "text": ", ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s17",
+          "text": "perplexity",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s18",
+          "text": ", ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s19",
+          "text": "claude",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s20",
+          "text": ", ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s21",
+          "text": "gemini",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s22",
+          "text": " albo ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s23",
+          "text": "copilot",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s24",
+          "text": ". Nie przekazujemy pełnego adresu odsyłającego ani parametrów UTM. Gdy źródła nie rozpoznamy, nie dodajemy kodu. Nie zapisujemy go w dodatkowych cookies ani pamięci przeglądarki. GA4 mierzy wyświetlenia oraz czas zaangażowania, również przez automatyczne zdarzenie ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s25",
+          "text": "user_engagement",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s26",
           "text": ", po zgodzie analitycznej. Nie przekazujemy nazw produktów, tytułów wpisów, danych formularzy ani User-ID.",
           "marks": []
         }

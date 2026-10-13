@@ -493,6 +493,11 @@ oznacza wykonanej implementacji.
       (tylko na osobne polecenie).
 - [ ] SEO‑6: robots.txt według D1 i AI Crawl Control, Search Console i Bing,
       IndexNow, zdjęcie `noindex` z gotowej produkcji, grupa kanałów AI w GA4.
+- [x] Potwierdzić Google sitemap: szczegóły mapy pokazują sukces i 23 URL,
+      13.10.2026. Lista wcześniej pokazywała nieaktualny błąd.
+- [x] Zatwierdzić zakres źródła AI: pięć kodów po zgodzie analitycznej.
+- [ ] Wdrożyć i odebrać kody źródła AI w Astro, GTM i GA4.
+      [Kontrakt](AI-SOURCE-CONTRACT.md).
 
 Odbiór: HTML/Markdown są zgodne; schema przechodzi walidację; wycofane treści
 znikają z obu formatów i indeksów po udanej publikacji.

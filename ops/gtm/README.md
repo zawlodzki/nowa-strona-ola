@@ -115,3 +115,12 @@ Core musi pozostać włączone w koncie Meta. Samo `autoConfig=false` nie usuwa
 adresów URL. Zmiana SDK lub konfiguracji konta wymaga ponownego odbioru
 payloadu przed aktywacją. Oficjalny [szablon Meta dla GTM](https://github.com/facebook/GoogleTagManager-WebTemplate-For-FacebookPixel/blob/main/template.tpl)
 potwierdza kolejność `set autoConfig`, `init`, `trackSingle`.
+
+## Kontrolowane źródło AI, 13.10.2026
+
+[Kontrakt źródła AI](../../docs/AI-SOURCE-CONTRACT.md) opisuje pięć kodów
+zamiast pełnego referrera. `ai-source-container.json` rozszerza opublikowane
+v4, zachowując rollout true. Bazowy `ola-container.json` zachowuje false.
+Kampania jest ustawiona tylko w tagu Google 51; page_view dziedziczy ją.
+Trzy nowe zmienne czytają i walidują `ao_ai_source` oraz wyprowadzają medium.
+Żaden tag nie parsuje referrera. Publikacja nowego kontenera jest w toku.

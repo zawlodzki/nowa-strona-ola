@@ -817,3 +817,73 @@ for (const blocked of [false, true]) {
     }
   });
 }
+
+test("GTM rollout: AI referrer becomes only a code after late measurement", async ({
+  page,
+  context,
+}) => {
+  test.skip(
+    process.env.E2E_GTM_ENABLED !== "true",
+    "Requires enabled GTM build; vendors remain mocked.",
+  );
+  await backend(context);
+  await context.route("https://www.googletagmanager.com/gtm.js**", (route) =>
+    route.fulfill({
+      contentType: "application/javascript",
+      body: "",
+    }),
+  );
+  await page.goto("/?utm_source=private-campaign&email=private@example.com", {
+    referer:
+      "https://chatgpt.com/private-conversation?email=secret@example.com",
+  });
+  const events = () =>
+    page.evaluate(() => {
+      const layer: unknown = Reflect.get(window, "dataLayer");
+      if (!Array.isArray(layer)) throw new Error("Missing data layer");
+      return layer.filter(
+        (entry) =>
+          entry !== null && typeof entry === "object" && "event" in entry,
+      );
+    });
+  expect(JSON.stringify(await events())).not.toContain("ao_ai_source");
+  await optionalState(page, denied);
+  await dialog(page)
+    .getByRole("checkbox", { name: /^Marketingowe/ })
+    .check();
+  await dialog(page)
+    .getByRole("button", { name: "Zapisuję wybór", exact: true })
+    .click();
+  await expect(dialog(page)).not.toBeVisible();
+  expect(await events()).toContainEqual({
+    event: "consent-update",
+    ao_measurement: false,
+    ao_clarity: false,
+    ao_marketing: true,
+    ao_page_code: "home",
+  });
+  expect(JSON.stringify(await events())).not.toContain("ao_ai_source");
+  await optionalState(page, { measurement: false, marketing: true });
+  await dialog(page)
+    .getByRole("checkbox", { name: /^Analityczne/ })
+    .check();
+  await dialog(page)
+    .getByRole("button", { name: "Zapisuję wybór", exact: true })
+    .click();
+  await expect.poll(events).toContainEqual({
+    event: "ao_page_view",
+    ao_page_code: "home",
+    ao_ai_source: "chatgpt",
+  });
+  expect(await events()).toContainEqual({
+    event: "consent-update",
+    ao_measurement: true,
+    ao_clarity: true,
+    ao_marketing: true,
+    ao_page_code: "home",
+    ao_ai_source: "chatgpt",
+  });
+  expect(JSON.stringify(await events())).not.toMatch(
+    /private|secret|example\.com|chatgpt\.com|utm_source/,
+  );
+});

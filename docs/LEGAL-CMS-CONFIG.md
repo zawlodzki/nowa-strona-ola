@@ -191,3 +191,16 @@ loaderem. Odbiór domeny PASS, 9/9: właściwe narzędzia po zgodzie, brak SDK
 bez zgody i na wykluczonych stronach, brak duplikatów, wycofanie i usuwanie
 cookies. Publiczny HTML potwierdza wersję 2.3 i datę 13.10.2026. Dane testowe
 nie zostały wysłane do analityki ani webhooka. Szczegóły są w postępie.
+
+## Zatwierdzone źródło AI, 13.10.2026
+
+Właściciel zezwolił przekazywać do GA4 wyłącznie kod rozpoznanego asystenta
+ChatGPT, Perplexity, Claude, Gemini lub Copilot, po zgodzie analitycznej.
+Pełne referrery i dowolne UTM pozostają wyłączone. Aplikacja nie tworzy
+dodatkowej pamięci źródła. Decyzja rozszerza zakres neutralnego pomiaru,
+nie zmienia ceny, oferty, CTA ani sekcji strony głównej.
+
+Fixture’y `polityka-prywatnosci` i `lista-cookies-i-identyfikatorow` mają
+wersję 2.4 oraz datę 13.10.2026. Odpowiadają przygotowanym źródłom Markdown.
+Mapowanie do Sanity: `legal-privacy-pl` i `legal-cookies-pl`, pola `body`,
+`version`, `effectiveFrom`. Publikacja CMS nie została jeszcze wykonana.

@@ -1,3 +1,4 @@
+import { recognizeAiSource, type AiSource } from "./ai-source";
 import type { ConsentPreferences, ConsentView } from "./consent";
 import { parseTrackingPolicy, type TrackingPolicy } from "./tracking-policy";
 
@@ -12,6 +13,7 @@ type TrackingState =
   "inactive" | "measurement" | "marketing" | "all" | "revoked";
 
 interface AnalyticsOptions {
+  readAiSource?: () => AiSource;
   enabled: boolean;
   policy: TrackingPolicy | null;
   push: (entry: LayerEntry) => void;
@@ -24,6 +26,7 @@ interface AnalyticsOptions {
 export function createAnalytics(options: AnalyticsOptions) {
   let loaded = false;
   let pageViewSent = false;
+  let aiSource: AiSource = null;
   let activeMeasurement = false;
   let activeMarketing = false;
   let revoked: { measurement: boolean; marketing: boolean } | null = null;
@@ -95,10 +98,16 @@ export function createAnalytics(options: AnalyticsOptions) {
             ? "measurement"
             : "inactive",
       );
+      if (measurement && !pageViewSent) {
+        aiSource = options.readAiSource?.() ?? null;
+      }
+      const source: Record<string, string> =
+        measurement && aiSource ? { ao_ai_source: aiSource } : {};
       options.push(command(measurement, marketing));
       if (!options.policy || (!measurement && !marketing)) return;
       options.push({
         event: "consent-update",
+        ...source,
         ao_measurement: measurement,
         ao_clarity: measurement && options.policy.clarity,
         ao_marketing: marketing,
@@ -112,6 +121,7 @@ export function createAnalytics(options: AnalyticsOptions) {
         pageViewSent = true;
         options.push({
           event: "ao_page_view",
+          ...source,
           ao_page_code: options.policy.pageCode,
         });
       }
@@ -155,6 +165,7 @@ export function applyConsent(view: ConsentView) {
 }
 
 const browserAnalytics = createAnalytics({
+  readAiSource: () => recognizeAiSource(document.referrer),
   enabled: import.meta.env.PUBLIC_GTM_ENABLED === "true",
   policy:
     typeof document === "undefined"

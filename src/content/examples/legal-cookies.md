@@ -1,6 +1,6 @@
 # Lista cookies i identyfikatorów aleksandraolesiewicz.com
 
-Wersja 2.3 · obowiązuje od 13.10.2026
+Wersja 2.4 · obowiązuje od 13.10.2026
 
 Lista uzupełnia [Politykę prywatności](/polityka-prywatnosci/) i opisuje pliki cookies, pamięć lokalną przeglądarki (localStorage) oraz podobne identyfikatory Strony.
 
@@ -47,7 +47,7 @@ Okres cookies w przeglądarce jest odrębny od retencji w usłudze. Dane użytko
 
 Google Consent Mode działa w trybie podstawowym: przed zgodą nie ładujemy tagów Google ani nie wysyłamy do Google sygnałów pomiarowych. GTM zarządza tagami, nie zastępuje panelu ani dowodu zgody c15t.
 
-Do GA4 trafiają neutralne kody `home`, `about`, `blog-index`, `blog-article`, `ebook-index` albo `ebook-detail`: tytuł zdarzenia zawiera kod, a adres strony ma postać `https://aleksandraolesiewicz.com/m/<kod>`. To adres techniczny pomiaru, a nie rzeczywisty adres oglądanej strony. Adres odsyłający jest pusty. GA4 mierzy wyświetlenia oraz czas zaangażowania, również przez automatyczne zdarzenie `user_engagement`, po zgodzie analitycznej. Nie przekazujemy nazw produktów, tytułów wpisów, danych formularzy ani User-ID.
+Do GA4 trafiają neutralne kody `home`, `about`, `blog-index`, `blog-article`, `ebook-index` albo `ebook-detail`: tytuł zdarzenia zawiera kod, a adres strony ma postać `https://aleksandraolesiewicz.com/m/<kod>`. To adres techniczny pomiaru, a nie rzeczywisty adres oglądanej strony. Adres odsyłający jest pusty. Po zgodzie analitycznej rozpoznajemy też wejścia z ChatGPT, Perplexity, Claude, Gemini i Copilot. Do GA4 przekazujemy wyłącznie kod rozpoznanego asystenta: `chatgpt`, `perplexity`, `claude`, `gemini` albo `copilot`. Nie przekazujemy pełnego adresu odsyłającego ani parametrów UTM. Gdy źródła nie rozpoznamy, nie dodajemy kodu. Nie zapisujemy go w dodatkowych cookies ani pamięci przeglądarki. GA4 mierzy wyświetlenia oraz czas zaangażowania, również przez automatyczne zdarzenie `user_engagement`, po zgodzie analitycznej. Nie przekazujemy nazw produktów, tytułów wpisów, danych formularzy ani User-ID.
 
 Meta otrzymuje ręczne zdarzenie `PageView`. Konfiguracja Core ogranicza adres strony i adres odsyłający do domen, bez ścieżek, parametrów i fragmentów. Automatyczne zdarzenia i automatyczne zaawansowane dopasowywanie klientów są wyłączone. Narzędzia nadal przetwarzają własne identyfikatory, informacje o urządzeniu oraz dane techniczne połączenia; ograniczenie adresów nie oznacza anonimowości. Nie wysyłamy im treści formularzy ani zdarzeń zapisu lub zakupu.
 
