@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { dismissConsentBanner } from "./helpers/consent-banner";
 
 for (const preference of ["light", "dark"] as const) {
   test(`${preference} choice survives link navigation and reload`, async ({
@@ -8,6 +9,7 @@ for (const preference of ["light", "dark"] as const) {
       colorScheme: preference === "dark" ? "light" : "dark",
     });
     await page.goto("/");
+    await dismissConsentBanner(page);
     const toggle = page.getByRole("button", {
       name: "Ciemny motyw",
       exact: true,
@@ -83,6 +85,7 @@ test("system changes control the theme until a manual choice", async ({
 }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/");
+  await dismissConsentBanner(page);
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
   await page.emulateMedia({ colorScheme: "dark" });
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
@@ -124,6 +127,7 @@ for (const blockedOperation of ["getItem", "setItem"] as const) {
     }, blockedOperation);
     await page.emulateMedia({ colorScheme: "light" });
     await page.goto("/");
+    await dismissConsentBanner(page);
     const toggle = page.getByRole("button", {
       name: "Ciemny motyw",
       exact: true,

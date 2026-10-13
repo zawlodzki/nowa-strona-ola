@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import { dismissConsentBanner } from "./helpers/consent-banner";
 
 // Arrow presses must land on a card's snap point by themselves. iOS Safari
 // does not re-snap programmatic scrolls, so one variant switches snap off.
@@ -40,6 +41,7 @@ async function alignment(track: Locator) {
 async function openReviews(page: Page, width: number, snap: boolean) {
   await page.setViewportSize({ width, height: 844 });
   await page.goto("/");
+  await dismissConsentBanner(page);
   if (!snap)
     await page.addStyleTag({
       content: ".ao-carousel__track{scroll-snap-type:none!important}",
@@ -110,6 +112,7 @@ test("book group links scroll the first card of a topic into place", async ({
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
+  await dismissConsentBanner(page);
   await page.addStyleTag({
     content: ".ao-carousel__track{scroll-snap-type:none!important}",
   });

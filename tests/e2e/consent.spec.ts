@@ -151,9 +151,11 @@ async function optionalState(
   page: Page,
   choice: { measurement: boolean; marketing: boolean },
 ) {
-  await page
-    .getByRole("button", { name: "Ustawienia cookies", exact: true })
-    .click();
+  const opener = (await banner(page).isVisible())
+    ? banner(page).getByRole("button", { name: "Dostosuj", exact: true })
+    : page.getByRole("button", { name: "Ustawienia cookies", exact: true });
+  await opener.click();
+  await expect(dialog(page)).toBeVisible();
   await expect(
     dialog(page).getByRole("checkbox", { name: /^Analityczne/ }),
   ).toHaveJSProperty("checked", choice.measurement);
