@@ -1,6 +1,6 @@
 # Kolekcja e-booków
 
-Publiczna `/ebooki/` pokazuje EbookCollection3a z fixture’ów. To te same sześć dokumentów `ebook` co homepage. Kategorie to Wszystkie, PMOS (PCOS) i Perimenopauza, każda z licznikiem. Karty pokazują 97 zł brutto i odznakę „Wkrótce dostępny”. Każdy polski slug ma landing. Newsletter jest formularzem zapisu. Ten przepis go nie wysyła. Copy kolekcji jest propozycją.
+Publiczna `/ebooki/` pokazuje EbookCollection3a z fixture’ów. To te same dokumenty `ebook` co homepage, z `EBOOK_SEED` w `src/content/homepage-seed.ts`. Kategorie to Wszystkie, PMOS (PCOS) i Perimenopauza, każda z licznikiem wyliczonym z bieżących kart. Karty pokazują 97 zł brutto i odznakę „Wkrótce dostępny”. Każdy polski slug ma landing. Newsletter jest formularzem zapisu. Ten przepis go nie wysyła. Copy kolekcji jest propozycją.
 
 ## Sub-features
 
@@ -44,9 +44,9 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path eboo
 
 H1 łamie wiersze przez `\n`. Playwright widzi „Więcej jasności. W Twoim tempie.”
 Copy kolekcji jest propozycją, nie zatwierdzoną treścią.
-Każdy z sześciu slugów ma landing. Suplementy sprawdza `ebook.md`, pozostałe pięć `ebook-landings.md`.
-Pusty stan (0 e-booków) nie występuje na fixture z sześcioma produktami; mapper i komunikat są w unit testach. Na produkcji widać go, gdy CMS nie ma opublikowanych `ebook`.
+Każdy polski slug z `EBOOK_SEED` ma landing. Suplementy sprawdza `ebook.md`, pozostałe `ebook-landings.md`.
+Pusty stan (zero dokumentów) na bieżącym fixture nie występuje. Mapper i komunikat są w unit testach. Na produkcji widać go, gdy CMS nie ma opublikowanych `ebook`.
 Okładka „Szczupła, a jednak PMOS (PCOS)” używa zdjęcia `food`. Pozostałe okładki to SVG w `src/design-system/decorations/`.
-Radio „PMOS (PCOS)” ma w nazwie dostępnej licznik, na fixture „PMOS (PCOS) 3”. Komenda bez `--exact` trafia w ten przycisk. `--exact` na samym „PMOS (PCOS)” nie trafia.
+Radio „PMOS (PCOS)” dopisuje do nazwy dostępnej licznik kart z bieżącego seeda. Komenda bez `--exact` trafia w ten przycisk. `--exact` na samym „PMOS (PCOS)” nie trafia.
 Nie otwieraj Studio, podglądu 4322 ani Workera.
 Natywny zoom, czytnik i urządzenie fizyczne nie są w tym przepisie.

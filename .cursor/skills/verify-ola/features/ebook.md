@@ -43,4 +43,4 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button -
 
 H1 łamie wiersze przez `\n` w danych. Playwright i verify-ola widzą złączony tekst „Zrób porządek z suplementami.”
 Karta homepage ma dwa linki o nazwie „Suplementy w PMOS (PCOS)” i tym samym `href`. Okładka jest `--nth 0`. Tytuł jest `--nth 1`. Bez indeksu strict mode odrzuca parę. Spacja przed `(PCOS)` w źródle jest niełamliwa. W nazwie dostępnej Playwright przyjmuje zwykłą spację.
-Pozostałe pięć landingów ma osobny przepis. Kolekcja `/ebooki/` też. Nie otwieraj Studio, podglądu 4322 ani Workera.
+Pozostałe landingi z `additionalEbookLandings` mają osobny przepis. Kolekcja `/ebooki/` też. Nie otwieraj Studio, podglądu 4322 ani Workera.

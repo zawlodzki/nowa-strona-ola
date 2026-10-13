@@ -11,7 +11,7 @@ W przejściowym katalogu `/ui/` przycisk „Jak pracujemy” otwiera dialog. Esc
 ## How to get to it (user POV)
 
 - Otwórz `/ui/` i naciśnij „Jak pracujemy”.
-- Otwórz `/en/ui/` i naciśnij „How we work”. Ten przebieg opisuje wejście polskie.
+- `/en/ui/` nie jest publikowane. 404 sprawdza `language.md`. Ten przepis zostaje na `/ui/`.
 
 ## Driving it with verify-ola
 
@@ -29,6 +29,6 @@ Preconditions:
 ## Gotchas
 
 - „Zamknij” jest w dialogu. Kliknięcie poza otwartym dialogiem nie jest tym przepisem.
-- Angielskie nazwy to „How we work” i „Close”. Nie mieszaj ich z polskim przebiegiem.
+- Etykiety „How we work” i „Close” są w niepublikowanej gałęzi `lang="en"` w `src/views/ComponentCatalog.astro`. Nie używaj ich w tym przebiegu.
 - Fokus po Escape wraca na przycisk w teście Playwright. Ten harness nie czyta aktywnego elementu. Dowodem zamknięcia jest `aria-expanded="false"` na „Jak pracujemy”, nie sam `dialog` hidden.
 - Link „Docelowy design system 3a” prowadzi na `/design-system/`. To inna strona i inny przepis. Ten przebieg zostaje na `/ui/`.

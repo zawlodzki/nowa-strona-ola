@@ -19,7 +19,7 @@ Z menu „Kontakt” albo bezpośrednio `/kontakt/`. `/en/contact/` nie jest pub
   błędny e-mail i temat, fokus na e-mailu.
 - `browser fill --role textbox --name "E-mail" --exact --nth 0 --value "ola@example.com"`
 - `browser fill --role textbox --name "Temat rozmowy" --exact --value "Pytanie o konsultację"`
-- Telefon opcjonalny. „abcdef” ma wyświetlić błąd i zatrzymać wysyłkę.
+- Telefon opcjonalny. Po wpisaniu „abcdef” uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Wyślij wiadomość" --exact`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wpisz poprawny numer telefonu (6–15 cyfr)."`. Błąd powstaje w obsłudze wysłania, nie przy samym wypełnieniu pola.
 - Nie wysyłaj kompletu poprawnych danych: trafiłby do n8n. Sukces z mockiem
   sprawdza `tests/e2e/lead-forms.spec.ts` i `tests/e2e/contact-3a.spec.ts`.
 - Bezpośredni link: `mailto:ola@aleksandraolesiewicz.com`.
