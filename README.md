@@ -224,6 +224,19 @@ opisuje zakres i bramki pomiaru. Panel c15t działa na stagingu; produkcja
 i pomiar GTM pozostają niewdrożone. Odbiór oraz dowody są w
 [postępie](docs/PROGRESS.md).
 
+Kontrola GTM z 12.10.2026 na Node 24.19.0: `npm run verify` przeszło
+383 unit, 456 E2E i 88 dokumentów CMS. Dziewięć scenariuszy wymagających
+włączonego loadera przeszło osobno w trzech silnikach, z atrapami c15t/GTM
+oraz blokadą produkcyjnej telemetrii i webhooka. Sprawdzone polecenia:
+
+```sh
+PUBLIC_GTM_ENABLED=true npm run build
+E2E_GTM_ENABLED=true npx playwright test tests/e2e/consent.spec.ts --grep 'GTM rollout'
+```
+
+Po tej kontroli przywróć domyślny artefakt przez `npm run build`. Eksport
+workspace i stan aktywacji opisuje [instrukcja GTM](ops/gtm/README.md).
+
 CLI `verify-ola` uruchamia podgląd również na macOS, ale jego `doctor`
 sprawdza port przez Linux `/proc`. Na macOS w tej sesji potwierdzono
 właściciela poleceniem `lsof -nP -iTCP:4340 -sTCP:LISTEN`; kontrole UI

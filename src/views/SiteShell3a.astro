@@ -1,4 +1,5 @@
 ---
+import type { TrackingPolicy } from "@/lib/tracking-policy";
 import type { Locale } from "@ola/shared";
 
 import Layout3a from "@/design-system/Layout3a.astro";
@@ -12,6 +13,7 @@ import SeoHead from "@/views/SeoHead.astro";
 import type { NavigationLink, SocialLink } from "@/design-system/types";
 
 export interface Props {
+  trackingPolicy?: TrackingPolicy | null;
   lang: Locale;
   title: string;
   description?: string;
@@ -32,6 +34,7 @@ export interface Props {
 }
 
 const {
+  trackingPolicy = null,
   lang,
   title,
   description,
@@ -60,6 +63,16 @@ const noindex =
   noindex={noindex}
   legacyBase={legacyBase}
 >
+  {!preview && trackingPolicy && (
+    <meta
+      slot="head"
+      name="ao-tracking-policy"
+      data-page-code={trackingPolicy.pageCode}
+      data-measurement={String(trackingPolicy.measurement)}
+      data-clarity={String(trackingPolicy.clarity)}
+      data-marketing={String(trackingPolicy.marketing)}
+    />
+  )}
   {seo && !preview && (
     <SeoHead
       slot="head"

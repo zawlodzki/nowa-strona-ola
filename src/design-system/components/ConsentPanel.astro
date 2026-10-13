@@ -7,10 +7,13 @@ interface Props {
 }
 
 const { lang, endpoint } = Astro.props;
+const toolsEnabled = import.meta.env.PUBLIC_GTM_ENABLED === "true";
 const copy = {
   pl: {
     title: "Pliki cookies na tej stronie",
-    body: "Niezbędne pliki cookies zapewniają działanie strony. Za Twoją zgodą włączymy też narzędzia analityczne (pomagają nam ulepszać stronę) i marketingowe (mierzymy skuteczność reklam). Na stronach konsultacji, e-booków, w zamówieniu i ankiecie te narzędzia nigdy nie działają. Wybór zmienisz w każdej chwili w „Ustawieniach cookies”.",
+    inactive:
+      "Opcjonalne narzędzia nie zostały jeszcze uruchomione. Możesz zapisać swój wybór na przyszłość.",
+    body: "Niezbędne pliki cookies zapewniają działanie strony. Za Twoją zgodą włączymy też narzędzia analityczne (pomagają nam ulepszać stronę) i marketingowe (mierzymy skuteczność reklam). Pomiar jest wyłączony na stronach kontaktu, konsultacji, odstąpienia i dokumentów prawnych oraz stronach oznaczonych „Bez pomiaru”. Zapis do newslettera nie wyklucza strony. Wybór zmienisz w każdej chwili w „Ustawieniach cookies”.",
     privacy: "Polityka prywatności",
     cookies: "Lista cookies",
     all: "Akceptuję wszystkie",
@@ -25,10 +28,9 @@ const copy = {
       "Działanie strony, ochrona przed botami, płatności, zapis Twojego wyboru.",
     measurementTitle: "Analityczne",
     measurementDescription:
-      "Google Analytics 4 i Microsoft Clarity (z maskowaniem treści formularzy).",
+      "Google Analytics 4: statystyki wyświetleń i czasu zaangażowania.",
     marketingTitle: "Marketingowe",
-    marketingDescription:
-      "Piksel Meta, tylko na stronach niezwiązanych z tematyką zdrowia.",
+    marketingDescription: "Piksel Meta, z wyłączeniem stron opisanych powyżej.",
     success: "Ustawienia cookies zostały zapisane.",
     error:
       "Nie udało się zapisać ustawień cookies. Opcjonalne narzędzia pozostają wyłączone. Spróbuj ponownie.",
@@ -41,7 +43,9 @@ const copy = {
   },
   en: {
     title: "Cookies on this website",
-    body: "Necessary cookies keep the website working. With your permission, we will also enable analytics tools (to improve the website) and marketing tools (to measure advertising performance). These tools never run on consultation, e-book, checkout or questionnaire pages. You can change your choice at any time in Cookie settings.",
+    inactive:
+      "Optional tools have not been activated yet. You can save your preferences for later.",
+    body: "Necessary cookies keep the website working. With your permission, we will also enable analytics tools (to improve the website) and marketing tools (to measure advertising performance). Measurement is disabled on contact, consultation, withdrawal and legal pages and on pages marked as excluded from measurement. A newsletter signup does not exclude a page. You can change your choice at any time in Cookie settings.",
     privacy: "Privacy policy",
     cookies: "Cookie list",
     all: "Accept all",
@@ -56,10 +60,10 @@ const copy = {
       "Website operation, bot protection, payments and saving your choice.",
     measurementTitle: "Analytics",
     measurementDescription:
-      "Google Analytics 4 and Microsoft Clarity (with form content masking).",
+      "Google Analytics 4: statistics on page views and engagement time.",
     marketingTitle: "Marketing",
     marketingDescription:
-      "Meta pixel, only on pages unrelated to health topics.",
+      "Meta pixel, except on the excluded pages described above.",
     success: "Cookie settings have been saved.",
     error:
       "Cookie settings could not be saved. Optional tools remain disabled. Please try again.",
@@ -115,7 +119,7 @@ const prefix = lang === "en" ? "/en" : "";
       </button>
     </div>
     <p>
-      {copy.body}{" "}
+      {copy.body} {!toolsEnabled && <span>{copy.inactive} </span>}
       <span class="ao-consent-links">
         <a href={`${prefix}/polityka-prywatnosci/`}>{copy.privacy}</a>
         <a href={`${prefix}/lista-cookies-i-identyfikatorow/`}>

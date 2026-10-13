@@ -1,0 +1,633 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-10-13 05:28:03",
+  "containerVersion": {
+    "path": "accounts/6057592803/containers/197326666/versions/4",
+    "accountId": "6057592803",
+    "containerId": "197326666",
+    "containerVersionId": "4",
+    "name": "Astro • GA4 i Meta po zgodzie • 2026-10-13",
+    "description": "Basic Consent Mode v2 z c15t. Ręczny GA4 page_view z neutralnym kodem strony; Meta PageView po zgodzie marketingowej z Core. Bez Clarity, automatycznych zdarzeń, dopasowywania klientów i danych formularzy. Wykluczone kontakt, konsultacje, odstąpienie i dokumenty prawne. Aktywacja strony nastąpi osobno po odbiorze skompilowanego kontenera.",
+    "container": {
+      "path": "accounts/6057592803/containers/197326666",
+      "accountId": "6057592803",
+      "containerId": "197326666",
+      "name": "aleksandraolesiewicz.com",
+      "publicId": "GTM-PWBRPZ29",
+      "usageContext": ["WEB"],
+      "fingerprint": "1728822889117",
+      "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6057592803/containers/197326666/workspaces?apiLink=container",
+      "features": {
+        "supportUserPermissions": true,
+        "supportEnvironments": true,
+        "supportWorkspaces": true,
+        "supportGtagConfigs": false,
+        "supportBuiltInVariables": true,
+        "supportClients": false,
+        "supportFolders": true,
+        "supportTags": true,
+        "supportTemplates": true,
+        "supportTriggers": true,
+        "supportVariables": true,
+        "supportVersions": true,
+        "supportZones": true,
+        "supportTransformations": false
+      },
+      "tagIds": ["GTM-PWBRPZ29"]
+    },
+    "tag": [
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "tagId": "51",
+        "name": "AO Google tag • ręczny pomiar",
+        "type": "googtag",
+        "notes": "Basic Consent Mode v2. Polityka strony i zgody pochodzą z Astro/c15t. Rollout pozostaje false do odbioru i publikacji.",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "tagId",
+            "value": "G-9QW05JYZTL"
+          },
+          {
+            "type": "LIST",
+            "key": "configSettingsTable",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "send_page_view"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "false"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "allow_google_signals"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "false"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "allow_ad_personalization_signals"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "false"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "page_location"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "https://aleksandraolesiewicz.com/m/{{AO page code}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "page_referrer"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "page_title"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{AO page code}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1791835852237",
+        "firingTriggerId": ["49"],
+        "tagFiringOption": "ONCE_PER_LOAD",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "analytics_storage"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "tagId": "53",
+        "name": "AO GA4 • page_view",
+        "type": "gaawe",
+        "notes": "Basic Consent Mode v2. Polityka strony i zgody pochodzą z Astro/c15t. Rollout pozostaje false do odbioru i publikacji.",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "sendEcommerceData",
+            "value": "false"
+          },
+          {
+            "type": "LIST",
+            "key": "eventSettingsTable",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "page_location"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "https://aleksandraolesiewicz.com/m/{{AO page code}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "page_title"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{AO page code}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "page_referrer"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "page_view"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-9QW05JYZTL"
+          }
+        ],
+        "fingerprint": "1791835852237",
+        "firingTriggerId": ["52"],
+        "setupTag": [
+          {
+            "tagName": "AO Google tag • ręczny pomiar",
+            "stopOnSetupFailure": true
+          }
+        ],
+        "tagFiringOption": "ONCE_PER_LOAD",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "analytics_storage"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "tagId": "56",
+        "name": "AO Meta • PageView",
+        "type": "html",
+        "notes": "Tylko zgoda marketingowa. Core Meta musi pozostawać włączone: adres i odsyłacz ograniczone do domen. Automatyczne zdarzenia i dopasowywanie wyłączone. Rollout false do odbioru.",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  function allowed() {\n    return window.aoTrackingState === 'marketing' || window.aoTrackingState === 'all';\n  }\n  if (!allowed() || window.aoMetaPageView) return;\n  window.aoMetaPageView = 'loading';\n  if (!window.fbq) {\n    var pixel = window.fbq = function () {\n      if (pixel.callMethod) pixel.callMethod.apply(pixel, arguments);\n      else pixel.queue.push(arguments);\n    };\n    if (!window._fbq) window._fbq = pixel;\n    pixel.push = pixel;\n    pixel.loaded = true;\n    pixel.version = '2.0';\n    pixel.queue = [];\n  }\n  window.fbq.disablePushState = true;\n  function ready() {\n    if (!allowed() || window.aoMetaPageView === 'sent') return;\n    window.fbq('consent', 'grant');\n    window.fbq('set', 'autoConfig', false, '2915257895296567');\n    window.fbq('init', '2915257895296567');\n    window.aoMetaPageView = 'sent';\n    window.fbq('trackSingle', '2915257895296567', 'PageView');\n  }\n  if (window.fbq.callMethod) ready();\n  else {\n    var script = document.createElement('script');\n    script.async = true;\n    script.referrerPolicy = 'no-referrer';\n    script.src = 'https://connect.facebook.net/en_US/fbevents.js';\n    script.onload = ready;\n    document.head.appendChild(script);\n  }\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "fingerprint": "1791838035236",
+        "firingTriggerId": ["55"],
+        "tagFiringOption": "ONCE_PER_LOAD",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "triggerId": "49",
+        "name": "AO analytics • consent-update",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "consent-update"
+              }
+            ]
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Page Hostname}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "aleksandraolesiewicz.com"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{AO measurement}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "true"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{AO rollout approved}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "true"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1791732085321"
+      },
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "triggerId": "52",
+        "name": "AO analytics • ao_page_view",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "ao_page_view"
+              }
+            ]
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Page Hostname}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "aleksandraolesiewicz.com"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{AO measurement}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "true"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{AO rollout approved}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "true"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1791732085322"
+      },
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "triggerId": "55",
+        "name": "AO marketing • consent-update",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "consent-update"
+              }
+            ]
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Page Hostname}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "aleksandraolesiewicz.com"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{AO marketing}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "true"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{AO rollout approved}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "true"
+              }
+            ]
+          }
+        ],
+        "fingerprint": "1791838035236"
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "variableId": "47",
+        "name": "AO rollout approved",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "true"
+          }
+        ],
+        "fingerprint": "1791856157746",
+        "formatValue": {}
+      },
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "variableId": "48",
+        "name": "AO measurement",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "ao_measurement"
+          }
+        ],
+        "fingerprint": "1791732085321",
+        "formatValue": {}
+      },
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "variableId": "50",
+        "name": "AO page code",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "ao_page_code"
+          }
+        ],
+        "fingerprint": "1791732085322",
+        "formatValue": {}
+      },
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "variableId": "54",
+        "name": "AO marketing",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "ao_marketing"
+          }
+        ],
+        "fingerprint": "1791838035235",
+        "formatValue": {}
+      }
+    ],
+    "builtInVariable": [
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "type": "PAGE_HOSTNAME",
+        "name": "Page Hostname"
+      },
+      {
+        "accountId": "6057592803",
+        "containerId": "197326666",
+        "type": "EVENT",
+        "name": "Event"
+      }
+    ],
+    "fingerprint": "1791869220283",
+    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6057592803/containers/197326666/versions/4?apiLink=version"
+  }
+}

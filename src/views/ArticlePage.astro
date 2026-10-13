@@ -1,4 +1,5 @@
 ---
+import { resolveTrackingPolicy } from "@/lib/tracking-policy";
 import type { Locale } from "@ola/shared";
 
 import { mapArticle } from "@/content/map-article";
@@ -41,6 +42,7 @@ const seo = pageSeo(settings, article.seo, {
 ---
 
 <SiteShell3a
+  trackingPolicy={resolveTrackingPolicy("blog-article", article.seo)}
   lang={lang}
   title={content.seoTitle}
   description={content.seoDescription}

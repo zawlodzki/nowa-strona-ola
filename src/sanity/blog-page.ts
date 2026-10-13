@@ -28,6 +28,7 @@ export function blogPageFromLegacySettings(
       title: seoTitle,
       description: seoDescription,
       noindex: null,
+      excludeFromMeasurement: null,
       ogImage: null,
     },
     translation: settings.translation?.language

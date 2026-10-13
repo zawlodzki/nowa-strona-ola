@@ -1,82 +1,117 @@
-# Kontener GTM Oli przed uruchomieniem pomiaru
+# Kontener GTM Oli
 
-`ola-container.json` jest ponownym eksportem rzeczywistego workspace 5
-`Nowa strona Ola • c15t 2026-10-11` w kontenerze `GTM-PWBRPZ29`.
-11.10.2026 wykonano import do osobnego workspace i dodano natywny tag
-zdarzenia GA4 przez interfejs GTM. Plik odzwierciedla zapisany stan.
-Domyślny workspace 4 oraz opublikowana wersja 3 pozostają bez zmian.
-Nie opublikowano nowej wersji kontenera. Pomiar pozostaje wyłączony.
+Kontener `GTM-PWBRPZ29`, workspace 5
+[Nowa strona Ola • c15t 2026-10-11](https://tagmanager.google.com/#/container/accounts/6057592803/containers/197326666/workspaces/5/tags).
+12.10.2026 pobrano kopię workspace oraz opublikowanej wersji 3.
+Konfiguracja workspace przed zmianą odpowiadała eksportowi z 11.10.2026.
+Kopie są poza repo w `/private/tmp/ola-gtm-workspace5-before-2026-10-12.json`
+i `/private/tmp/ola-gtm-published-v3-before-2026-10-12.json`.
 
-[Workspace migracji w GTM](https://tagmanager.google.com/?hl=pl#/container/accounts/6057592803/containers/197326666/workspaces/5/tags)
-zawiera dwa wstrzymane tagi, dwie reguły, trzy zmienne użytkownika i dwie
-zmienne wbudowane. Nie zawiera szablonów niestandardowych.
-Kopia starego workspace znajduje się poza repo w
-`/private/tmp/ola-gtm-backup-workspace4.json`.
+`ola-container.json` zawiera dwa natywne tagi GA4 i ręczny PageView Meta.
+Pierwszy import zmienił tylko dwa tagi GA4 w workspace 5. Kolejny import dodał
+tag Meta, trigger i zmienną zgody, bez modyfikacji ani usuwania innych elementów.
+Ponowny eksport z 12.10.2026, 20:48 UTC potwierdził zapis i `ONCE_PER_LOAD`.
+Opublikowana wersja 3 pozostaje bez zmian. Flaga
+`AO rollout approved` pozostaje `false`. Sam eksport nie oznacza aktywacji.
 
-## Tagi i warunki uruchomienia
+## Kontrakt tagów
 
-Natywny Google tag `googtag`, ID 51, używa `G-9QW05JYZTL`.
-Wyłącza `send_page_view`, Google Signals i personalizację reklam.
-Natywny tag zdarzenia GA4 `gaawe`, ID 53, wysyła ręczny `page_view`
-do tej samej usługi i wyłącza wysyłkę e-commerce. Oba tagi mają
-`paused: true` i dodatkowy wymóg `analytics_storage`.
+Google tag ID 51 używa `G-9QW05JYZTL`. Wyłącza `send_page_view`, Google Signals
+i personalizację reklam. Tag zdarzenia ID 53 wysyła ręczny `page_view`, bez
+e-commerce. Oba działają raz na dokument i wymagają `analytics_storage`.
+Zdarzenie ma Google tag jako zależność konfiguracji, z zatrzymaniem przy błędzie.
 
-Google tag otrzymuje syntetyczne `page_location`
-`https://aleksandraolesiewicz.com/__measurement/{{AO page code}}`.
-Tag zdarzenia otrzymuje
-`https://aleksandraolesiewicz.com/m/{{AO page code}}`.
-Oba używają wyłącznie kontrolowanego kodu jako `page_title` oraz pustego
-`page_referrer`. Nie przekazują rzeczywistego adresu, query ani danych formularza.
-Ustawienia tagów nie potwierdzają retencji lub wyłączenia enhanced measurement
-w samej usłudze GA4.
+Oba tagi używają syntetycznego `page_location`
+`https://aleksandraolesiewicz.com/m/{{AO page code}}`, kontrolowanego kodu jako
+tytułu i pustego `page_referrer`. Kody `home`, `about`, `blog-index`,
+`blog-article`, `ebook-index`, `ebook-detail` nie zawierają sluga, tematu choroby,
+identyfikatora treści, query ani wartości formularzy.
 
-Reguły wymagają jednocześnie:
+Reguły wymagają właściwego zdarzenia, hosta `aleksandraolesiewicz.com`,
+`ao_measurement=true` i `AO rollout approved=true`. Nie obejmują stagingu.
+Nie ma All Pages, tagów Consent Mode, client_id formularzy, Google Ads,
+Conversion Linkera ani Clarity. c15t i Astro posiadają stan zgód.
 
-- zdarzenia `consent-update` dla Google tagu albo `ao_page_view` dla tagu GA4;
-- hosta `aleksandraolesiewicz.com` bez stagingu;
-- wartości `ao_measurement` równej `true`;
-- stałej `AO rollout approved` równej `true`, obecnie `false`.
+Serwer dopuszcza sześć rodzajów stron, ze wspólnymi wykluczeniami prawnymi,
+kontaktu, konsultacji, odstąpienia i flagą CMS „Bez pomiaru”. Newsletter nie
+wyklucza strony. Preview i widoki bez polityki pozostają wyłączone.
+`PUBLIC_GTM_ENABLED` domyślnie pozostaje `false`. Workflow bierze tę zmienną
+z GitHub wyłącznie dla production. Wyłączona flaga blokuje loader po każdej zgodzie.
 
-Pusta allowlista klienta oraz `PUBLIC_GTM_ENABLED=false` blokują loader
-kontenera także po udzieleniu zgód. Consent Mode posiada klient Astro/c15t.
-Nowy workspace nie zawiera `All Pages`, automatycznych zdarzeń, tagów
-Consent Mode, zapisu `client_id` do formularzy, Google Ads, Conversion
-Linkera, Meta ani Clarity. Stare osiem tagów zastąpiono wyłącznie w workspace
-migracji. Nie zmieniono kontenera zawlodzki.pl.
+## Odczyt GA4, 12.10.2026
 
-## Warunki odbioru pomiaru
+Potwierdzono konto `332767742`, usługę `462835494`, strumień `9802578320`
+i identyfikator `G-9QW05JYZTL`. Brak dodatkowych połączonych tagów.
+Google Signals jest wyłączone. Zbieranie danych przekazywanych przez użytkowników
+jest niedostępne dla tej kategorii branży.
 
-Przed uruchomieniem tagów pozostają do wykonania:
+Wyłączono pomiar zaawansowany oraz personalizację reklam we wszystkich
+307 regionach. Zdarzenia mają retencję dwóch miesięcy. Użytkownicy mieli
+retencję 14 miesięcy z resetem przy aktywności. Po zatwierdzeniu właściciela
+zapisano dwa miesiące bez resetu; odczyt po reload potwierdził ustawienia.
+Zmiana może usunąć starsze dane po upływie okresu retencji.
 
-- kontrola usługi i strumienia GA4, retencji dwóch miesięcy, Google Signals,
-  personalizacji reklam, braku User-ID i wyłączenia automatycznego pomiaru;
-- zatwierdzenie neutralnych treści oraz ich odcisków w allowliście klienta;
-- dodanie tych samych kontrolowanych kodów stron jako jawnego warunku reguł GTM;
-- test z blokadami sieci lub w izolowanej usłudze pomiarowej, bez wysyłki
-  do produkcyjnej usługi GA4;
-- kontrola kolejności default, update, loader i pojedynczego `page_view`,
-  payloadów, cofnięcia zgody i braku żądań na wykluczonych trasach;
-- odbiór w Tag Assistant oraz osobno zlecona publikacja kontenera.
+## Odbiór i aktywacja
 
-Meta i Clarity wymagają osobnego odbioru projektu, retencji i maskowania.
-Nowy workspace nie ma ich tagów. Pełne warunki opisuje
-[plan wdrożenia](../../docs/GTM-C15T-DEPLOYMENT-PLAN.md).
+Przed aktywacją wymagane są spójne opublikowane teksty prawne,
+odbiór rzeczywistych żądań GA4 z blokadą wysyłki i zgoda na publikację.
+Testy c15t/GTM używają atrap i blokują produkcyjne leady oraz telemetrię.
+Nie uznawać bezpiecznego dataLayer za dowód payloadu zewnętrznego SDK.
 
-## Źródło i zakres weryfikacji
+Publikacja kontenera, włączenie jego rollout oraz zmiennej GitHub są oddzielnymi
+czynnościami od stworzenia PR. PR GTM #86 wskazuje main. Kolejny PR Meta
+wskazuje gałąź GTM. Clarity pozostaje osobnym zakresem. Syntetyczny adres GA4
+nie zmienia adresów zbieranych przez inne SDK.
 
-Aktualny plik pochodzi z eksportu workspace 5 po zapisie obu natywnych tagów
-w interfejsie GTM. Importer przyjął konfigurację. Utworzenie `gaawe` w GTM
-usunęło wcześniejszą lukę, gdy plik miał wyłącznie `googtag` i nieprzypisaną
-regułę `ao_page_view`.
+Podstawy techniczne: [Basic Consent Mode](https://developers.google.com/tag-platform/security/guides/consent?consentmode=basic),
+[konfiguracja GA4](https://developers.google.com/analytics/devguides/collection/ga4/reference/config),
+[schemat tagów GTM](https://developers.google.com/tag-platform/tag-manager/api/reference/rest/v2/accounts.containers.workspaces.tags).
+Pełny [plan wdrożenia](../../docs/GTM-C15T-DEPLOYMENT-PLAN.md).
 
-Starszy eksport `GTM-P5V3CJ5_v50.json` zawlodzki.pl służył do potwierdzenia
-formatu stałej i dodatkowej zgody. Nie przeniesiono z niego ID usług ani tagów.
-Pole `paused` opisuje
-[schemat Google Tag Manager](https://developers.google.com/tag-platform/tag-manager/api/reference/rest/v2/accounts.containers.workspaces.tags).
-Eksport i zapis konfiguracji nie dowodzą działania pomiaru. Tagów nie
-uruchomiono, nie wykonano jeszcze odbioru rzeczywistej usługi GA4.
+## Odbiór Meta, 12.10.2026
 
-Obecny runtime przekazuje pusty odcisk do `resolveTrackingPolicy`, a rejestr
-zatwierdzonych treści jest pusty. Aktywacja wymaga także przekazania rzeczywistego,
-sprawdzonego odcisku treści ze strony. Samo ustawienie flagi i wznowienie tagów
-nie stanowi ukończenia pomiaru.
+Potwierdzono zestaw danych „aleksandraolesiewicz homepage”,
+`2915257895296567`, właściciel Longevity Goddess `262228866199050`,
+konto reklamowe Aleksandra Olesiewicz dietetyka `933541432132948`.
+Konfiguracja Core jest włączona. Nie tworzono tokenów API, połączeń
+Conversion API, nowych uprawnień ani kampanii.
+
+Na wyraźne zatwierdzenie właściciela wyłączono automatyczne zaawansowane
+dopasowywanie i automatyczne zdarzenia bez kodu. Oba przełączniki pokazują
+„Wył.”. Automatyczny przegląd bezpieczeństwa początkowo odrzucił zmianę
+zdarzeń bez tej konkretnej zgody; po odpowiedzi właściciela wykonano ją i
+odczytano wynik.
+
+Próba prawdziwego SDK 2.9.419 z aktualną publiczną konfiguracją Core
+przechwyciła `PageView` przed wysyłką. `dl` i `rl` zawierały wyłącznie
+origin, bez ścieżki, query, fragmentu, tytułu i wartości formularza.
+SDK ustawia jednak HTTP Referer na origin. Sam `autoConfig=false`
+nie usuwa pełnego adresu; kontrolna konfiguracja bez Core ujawniła adres.
+Nie przenosić zapewnienia GA4 o pustym referrerze na Meta. Właściciel zatwierdził
+same domeny po zgodzie marketingowej. SDK dodaje własny identyfikator cookie
+oraz dane urządzenia. Żadne zdarzenie testowe nie wyszło do Meta.
+
+## Ręczny PageView Meta
+
+Tag `AO Meta • PageView` wymaga `ao_marketing=true`, hosta produkcyjnego,
+`AO rollout approved=true` i dodatkowej zgody `ad_storage`. Działa raz na
+dokument. Nie zawiera noscript, danych użytkownika ani parametrów formularzy.
+Wyłącza automatyczną konfigurację i obsługę zmiany adresu przez pushState.
+
+Astro zapisuje jeden stan `aoTrackingState` przed zdarzeniami GTM. Tag sprawdza
+`marketing` lub `all` przed pobraniem SDK i ponownie po jego załadowaniu.
+`init` i `trackSingle` następują dopiero wtedy. Cofnięcie dowolnej aktywnej
+kategorii ustawia nieodwracalny stan `revoked`, wykonuje `fbq('consent', 'revoke')`
+i cleanup. Reload czeka na trwały receipt c15t, żeby zachować częściową zgodę.
+
+Test wykonuje dokładny HTML eksportu z rzeczywistym SDK 2.9.419 i aktualną
+konfiguracją Core. PageView zawiera same domeny. Formularz nie dodaje zdarzeń.
+Cofnięcie zgody przed opóźnioną konfiguracją i awaria konfiguracji nie wysłały
+zdarzeń w obserwowanym okresie. [Wyniki SDK](../../output/gtm-2026-10-12/meta-sdk.json).
+Test jednostkowy uruchamia dokładny HTML eksportu, również po cofnięciu zgody
+w czasie pobierania SDK. Nie zastępuje odbioru skompilowanego kontenera.
+
+Core musi pozostać włączone w koncie Meta. Samo `autoConfig=false` nie usuwa
+adresów URL. Zmiana SDK lub konfiguracji konta wymaga ponownego odbioru
+payloadu przed aktywacją. Oficjalny [szablon Meta dla GTM](https://github.com/facebook/GoogleTagManager-WebTemplate-For-FacebookPixel/blob/main/template.tpl)
+potwierdza kolejność `set autoConfig`, `init`, `trackSingle`.

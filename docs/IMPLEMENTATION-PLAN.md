@@ -500,7 +500,28 @@ znikają z obu formatów i indeksów po udanej publikacji.
 - [x] Zakończyć pełne verify, odbiór UI/sieci i wdrożenie klienta na staging.
 - [x] Sprawdzić odrzucenie, zgodę częściową, zmianę, wycofanie i awarię c15t.
       E2E na atrapach oraz odmowa/akceptacja/wycofanie live na stagingu.
-- [ ] Zweryfikować w sieci kolejność ładowania GTM/GA4 i zdarzenia bez PII.
+- [x] Dodać politykę wykluczeń stron i pola „Bez pomiaru” w schemacie CMS,
+      zachowanie częściowej zgody i bezpieczne cofnięcie, 12.10.2026.
+      Kod zweryfikowano; schema Studio i pomiar produkcji nie są wdrożone.
+- [x] Zweryfikować bramkę GTM na atrapach oraz rzeczywisty SDK GA4 z blokadą
+      wysyłki telemetrii, 12.10.2026.
+- [x] Zapisać retencję GA4 dwa miesiące bez resetu oraz wyłączyć automatyczne
+      dopasowywanie i zdarzenia Meta po zatwierdzeniu właściciela, 12.10.2026.
+- [x] Dodać ręczny PageView Meta do nieopublikowanego workspace. Sprawdzić
+      rzeczywisty SDK z Core, domeny zamiast pełnych adresów i cofnięcie zgody
+      podczas pobierania SDK oraz konfiguracji. Eksport odpowiada workspace;
+      pomiar pozostaje wyłączony, 12.10.2026.
+- [x] Opublikować kontener GTM 4 z trzema tagami GA4/Meta, 13.10.2026.
+      PR #86 i #88 scalone; loader produkcyjny nadal wyłączony.
+- [x] Sprawdzić skompilowany kontener z blokadą telemetrii oraz rzeczywiste
+      cookies SDK. Właściciel dopuścił neutralny `user_engagement` GA4 po
+      zgodzie analitycznej, 13.10.2026. Tag Assistant pozostaje osobnym odbiorem.
+- [x] Przygotować copy prawne 2.3 i źródła zgód 2.4/memo 1.5 dla wyświetleń
+      i neutralnego czasu zaangażowania GA4 oraz ręcznego PageView Meta.
+- [ ] Zakończyć pełne verify i niezależny przegląd finalnego zakresu.
+- [ ] Opublikować dwa zmienione dokumenty prawne w CMS z kontrolą rewizji.
+- [ ] Włączyć loader produkcyjny i odebrać produkcję po publikacji copy.
+- [ ] Wykonać odbiór w Tag Assistant.
 
 Odbiór: potwierdzenie po kolejce; awaria n8n uruchamia retry; brak zgody
 nie uruchamia skryptów Google.

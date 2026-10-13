@@ -29,6 +29,7 @@ const seoFields = /* groq */ `{
   title,
   description,
   noindex,
+  excludeFromMeasurement,
   "ogImage": ogImage${mediaFields}
 }`;
 
@@ -489,6 +490,7 @@ export const PUBLISHED_CATEGORY_QUERY = defineQuery(/* groq */ `
     language,
     title,
     description,
+  excludeFromMeasurement,
     sameAs,
     "slug": slug.current,
     "translation": translation->{ language, "slug": slug.current }

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-12",
+  "sdkVersion": "2.9.419",
+  "pixel": "2915257895296567",
+  "artifact": "ops/gtm/ola-container.json: AO Meta • PageView",
+  "coreRequired": true,
+  "pageViewsIntercepted": 1,
+  "pageLocation": "https://audit.example",
+  "referrerLocation": "https://synthetic-referrer.invalid",
+  "httpReferrer": "https://audit.example/",
+  "customDataFields": 0,
+  "userDataFields": 0,
+  "formEvents": 0,
+  "eventsAfterRevoke": 0,
+  "telemetrySent": 0,
+  "delayedConfig": {
+    "delayMs": 300,
+    "revokedBeforeConfig": true,
+    "events": 0,
+    "pageErrors": 0
+  },
+  "failedConfig": {
+    "observedMs": 7000,
+    "events": 0
+  },
+  "mockTagTests": {
+    "lateGtmGrantBlocked": true,
+    "revocationDuringSdkLoadBlocked": true,
+    "marketingOnlyPermitted": true,
+    "oncePerDocument": true
+  },
+  "limitations": [
+    "SDK adds its own cookie identifier and device metadata",
+    "Core must remain enabled in the Meta account",
+    "This verifies the exported HTML and captured SDK/config, not compiled GTM",
+    "Future SDK or account configuration changes require a new audit"
+  ]
+}

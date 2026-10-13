@@ -1,4 +1,4 @@
-import { applyPreferences } from "./analytics";
+import { applyConsent } from "./analytics";
 import {
   createConsentController,
   type ConsentPreferences,
@@ -43,7 +43,7 @@ export function initializeConsentPanel(): void {
 
   const render = (next: ConsentView): void => {
     view = next;
-    applyPreferences(next.preferences);
+    applyConsent(next);
     const busy = next.phase === "loading" || next.phase === "saving";
     banner.hidden =
       dismissed || next.phase === "loading" || next.phase === "settled";
