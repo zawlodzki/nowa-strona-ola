@@ -1,11 +1,11 @@
 # Strony prawne — konfiguracja CMS
 
 Aktualizacja: 2026-10-13. Właściciel zlecił uruchomienie pomiaru produkcyjnego
-i wyrównanie źródeł w `projekt prawny ola`. Przygotowano politykę prywatności
+i wyrównanie źródeł w `projekt prawny ola`. Opublikowano politykę prywatności
 i listę cookies 2.3 z datą 13.10.2026 dla GA4 i ręcznego PageView Meta po
-właściwej zgodzie. Kontener GTM w wersji 4 jest opublikowany; loader produkcyjny
-nadal jest wyłączony. Publikacja nowych dokumentów w Content Lake i aktywacja
-loadera pozostają osobnymi krokami. Pozostałe ustalenia pakietu bez zmian.
+właściwej zgodzie. Kontener GTM w wersji 4 jest opublikowany, a produkcyjny loader włączony.
+Wdrożenie i odbiór produkcyjnego runtime zakończyły się PASS. Pozostałe
+ustalenia pakietu bez zmian.
 
 ## Źródło treści
 
@@ -13,16 +13,16 @@ loadera pozostają osobnymi krokami. Pozostałe ustalenia pakietu bez zmian.
 `projekt prawny ola/www-prawne/` — szkice B2C dla Wellbiz sp. z o.o.
 (sprzedaż e-booków i konsultacje dietetyczne online).
 
-| Plik źródłowy                                         | Trasa                               | Uwagi                                                     |
-| ----------------------------------------------------- | ----------------------------------- | --------------------------------------------------------- |
-| `regulamin.md`                                        | `/regulamin/`                       | z dwoma załącznikami na tej samej stronie                 |
-| `pouczenie-o-odstapieniu.md`                          | `/regulamin/#pouczenie`             | załącznik nr 1, stała kotwica                             |
-| `formularz-odstapienia.md`                            | `/regulamin/#formularz-odstapienia` | załącznik nr 2, stała kotwica                             |
-| `polityka-prywatnosci.md`                             | `/polityka-prywatnosci/`            |                                                           |
-| `lista-cookies-i-identyfikatorow.md`                  | `/lista-cookies-i-identyfikatorow/` | przygotowana wersja 2.3; odbiór produkcji przed aktywacją |
-| `regulamin-newslettera.md`                            | `/regulamin-newslettera/`           |                                                           |
-| `zgody-i-formularze.md`                               | — (nie publikujemy)                 | §1 stopka i dane sprzedawcy, §8 informacja pod opiniami   |
-| `szablony-emaili.md`, `stopka-ebooka.md`, `README.md` | — (nie publikujemy)                 |                                                           |
+| Plik źródłowy                                         | Trasa                               | Uwagi                                                      |
+| ----------------------------------------------------- | ----------------------------------- | ---------------------------------------------------------- |
+| `regulamin.md`                                        | `/regulamin/`                       | z dwoma załącznikami na tej samej stronie                  |
+| `pouczenie-o-odstapieniu.md`                          | `/regulamin/#pouczenie`             | załącznik nr 1, stała kotwica                              |
+| `formularz-odstapienia.md`                            | `/regulamin/#formularz-odstapienia` | załącznik nr 2, stała kotwica                              |
+| `polityka-prywatnosci.md`                             | `/polityka-prywatnosci/`            |                                                            |
+| `lista-cookies-i-identyfikatorow.md`                  | `/lista-cookies-i-identyfikatorow/` | opublikowana wersja 2.3; odbiór produkcyjnego runtime PASS |
+| `regulamin-newslettera.md`                            | `/regulamin-newslettera/`           |                                                            |
+| `zgody-i-formularze.md`                               | — (nie publikujemy)                 | §1 stopka i dane sprzedawcy, §8 informacja pod opiniami    |
+| `szablony-emaili.md`, `stopka-ebooka.md`, `README.md` | — (nie publikujemy)                 |                                                            |
 
 EN (`/en/privacy/`, `/en/terms/`) ma tylko informację, że wiążąca jest wersja
 polska. Dezaktywację EN prowadzi osobny etap.
@@ -153,7 +153,7 @@ Markdown).
   w wersji 2.2 po kontroli rewizji i dokładnej zgodności treści szkiców
   z fixture’ami. Odbiór stagingu jest zapisany w [postępie](PROGRESS.md).
 
-## Przygotowana aktualizacja pomiaru 13.10.2026
+## Opublikowana aktualizacja pomiaru 13.10.2026
 
 Decyzja użytkownika z 13.10.2026: włączyć pomiar produkcyjny i wyrównać dokumenty
 w repo prawnym. W zakresie pomiaru zastępuje starsze założenia o wyłączeniu
@@ -180,9 +180,14 @@ wszystkich e-booków i stron zdrowotnych oraz o nieaktywnych GA4 i Meta.
   `_fbp` i `_fbc`. Lista opisuje GA4 do 2 lat z ograniczeniami przeglądarki
   i Meta do 90 dni.
 
-Fixture’y i ich eksport Markdown są przygotowane do aktywacji. Cztery źródła
+Fixture’y i ich eksport Markdown odpowiadają opublikowanej treści. Cztery źródła
 w `projekt prawny ola` zaktualizowano po kontroli hashy; zachowano odwracalną
-kopię oryginałów. Content Lake nie został jeszcze zmieniony w tym kroku.
-Publikować wyłącznie `body`, `version`, `effectiveFrom` istniejących
-`legal-privacy-pl` i `legal-cookies-pl`, po kontroli rewizji. Nie wykonywać
-pełnego importu sześciu dokumentów ani zmiany niepowiązanych szkiców.
+kopię oryginałów. Opublikowano wyłącznie `body`, `version`, `effectiveFrom`
+`legal-privacy-pl` i `legal-cookies-pl` po kontroli rewizji; odczyt treści
+obu dokumentów odpowiada dokładnie fixture’om. Rewizja obu po publikacji:
+`7p4cO3nTYg8IOCCy0082l0`. Nie zmieniono pozostałych dokumentów pakietu.
+Wdrożenie produkcyjne run `38354038028` zakończyło się SUCCESS z włączonym
+loaderem. Odbiór domeny PASS, 9/9: właściwe narzędzia po zgodzie, brak SDK
+bez zgody i na wykluczonych stronach, brak duplikatów, wycofanie i usuwanie
+cookies. Publiczny HTML potwierdza wersję 2.3 i datę 13.10.2026. Dane testowe
+nie zostały wysłane do analityki ani webhooka. Szczegóły są w postępie.

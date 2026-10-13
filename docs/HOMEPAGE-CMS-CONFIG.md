@@ -14,9 +14,11 @@ czas zaangażowania GA4 (`user_engagement`) po zgodzie analitycznej.
 | Dodatkowe wyłączenie dopuszczonej strony lub kategorii                                            | istniejące `seo.excludeFromMeasurement` oraz `category.excludeFromMeasurement`; nie zmieniono wartości dokumentów w CMS w tym kroku                            |
 | Retencja GA4 2 miesiące bez resetu użytkownika; Clarity nieaktywne                                | konfiguracja usług; odrębne od okresu cookies; bez zmiany schematu CMS                                                                                         |
 
-Kontener GTM 4 jest opublikowany; loader produkcyjny pozostaje wyłączony do
-ukończenia publikacji copy prawnego i odbioru. Decyzja nie oznacza aktywacji
-na podstawie samej dokumentacji.
+Kontener GTM 4 i dwa dokumenty prawne 2.3 są opublikowane. Włączono
+`PUBLIC_GTM_ENABLED=true`; wdrożenie produkcyjne run `38354038028`
+z main `a4ed967` zakończyło się pomyślnie. Pierwszy odbiór domeny potwierdza
+GA4 i Meta po właściwej zgodzie oraz brak SDK bez zgody. Odbiór wycofania, usuwania cookies, braku duplikatów i wykluczeń także
+zakończył się PASS. Wynik 9/9 i dowody są zapisane w postępie.
 
 ## Pięć landingów e-booków, 11.10.2026
 
