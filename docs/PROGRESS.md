@@ -11,7 +11,7 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Użytkownik zlecił włączenie produkcyjnego pomiaru oraz wyrównanie źródeł
   w `projekt prawny ola`. Zatwierdził neutralny czas zaangażowania GA4
   (`user_engagement`) po zgodzie analitycznej, wykryty w odbiorze SDK.
-- PR #86 i #88 zostały scalone. Kontener GTM 4 opublikowano 13.10.2026
+- PR #86, #88 i #90 zostały scalone. Kontener GTM 4 opublikowano 13.10.2026
   o 07:27; zawiera wyłącznie trzy tagi GA4 i Meta. Ustawiono
   `PUBLIC_GTM_ENABLED=true`; wdrożenie produkcyjne zakończyło się SUCCESS
   w run `38354038028`, z main `a4ed967be4f66c01d2eda0027001d20a3a80357c`.
@@ -55,6 +55,8 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   nie generuje kolejnych żądań. Kontakt, konsultacje, odstąpienie i obie
   zmienione strony prawne mają zero SDK mimo pełnej zgody. Zero błędów JS
   i brak Clarity. Telemetrię i leady testowe zablokowano przed wysyłką.
+  Backend c15t był zamockowany; ten odbiór nie potwierdza trwałego zapisu
+  produkcyjnego receipt ani obecności zdarzeń w raportach GA4 i Meta.
   Publiczne dokumenty mają wersję 2.3 i datę 13.10.2026.
   Wynik: `/private/tmp/ola-production-acceptance/result.json`.
 - CI `38352888397` zakończyło się SUCCESS: 420 unit, 457 E2E PASS,
