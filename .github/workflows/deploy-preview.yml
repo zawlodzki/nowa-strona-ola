@@ -21,7 +21,7 @@ jobs:
       github.event.workflow_run.head_branch == 'main' &&
       github.event.workflow_run.head_repository.full_name == github.repository
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     environment:
       name: production
       url: https://preview.aleksandraolesiewicz.com
@@ -59,4 +59,4 @@ jobs:
         run: |
           test -n "$CLOUDFLARE_ACCOUNT_ID"
           test -n "$CLOUDFLARE_API_TOKEN"
-          npx wrangler deploy --config preview/dist/server/wrangler.json
+          node --import tsx scripts/retry-wrangler-deploy.ts -- npx wrangler deploy --config preview/dist/server/wrangler.json

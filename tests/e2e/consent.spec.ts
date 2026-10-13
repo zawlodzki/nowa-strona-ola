@@ -454,8 +454,13 @@ test("unexpected shared-instance policy fails closed instead of collecting the w
   await optionalState(page, denied);
 });
 
-for (const path of ["/", "/konsultacje/", "/ebooki/suplementy-w-pcos/"]) {
-  test(`confirmed acceptance loads no trackers on excluded health page ${path}`, async ({
+for (const path of [
+  "/kontakt/",
+  "/konsultacje/",
+  "/odstapienie/",
+  "/polityka-prywatnosci/",
+]) {
+  test(`confirmed acceptance loads no trackers on always excluded page ${path}`, async ({
     page,
     context,
   }) => {

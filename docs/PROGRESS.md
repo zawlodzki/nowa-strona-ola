@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
@@ -71,6 +71,67 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   spójnego copy i kontenera oraz odbiór compiled GTM
   z blokadą telemetrii przed aktywacją. Nie wykonano natywnego zoomu 200%,
   czytnika i fizycznego urządzenia w tej sesji.
+
+### Zapas CSS strony głównej, 12.10.2026
+
+- Na `3691368` zewnętrzny CSS strony głównej miał 8192 B gzip, równo z limitem
+  8192 B. Wspólny arkusz miał 6447 B, arkusz strony 1745 B. Cały CSS miał
+  30873 B gzip przy limicie 32768 B.
+- Reguły, których strona główna nie dopasowuje, siedzą teraz przy komponencie
+  albo widoku, który je renderuje. Dotyczy to FAQ, prozy, tabeli, paginacji,
+  okruszków, hero usługi, hero produktu, potwierdzenia formularza odstąpienia
+  oraz wariantów katalogu `ao-container--reading`, `ao-heading--article` i
+  `ao-field__hint`. Dekoracje SVG oraz miejsce i kadr zdjęć zostają.
+  Checkbox, textarea i `ao-hero--about` zostają we wspólnym arkuszu, bo
+  formularz strony głównej może dostać te pola z CMS, a „O mnie” ma mały zapas.
+- Po zmianie strona główna ma 7754 B gzip. Ten sam odczyt dał build fixture
+  i build z `reports/content-lake-3a.ndjson`. Inline strony głównej zostaje
+  2586 B. Cały CSS ma 30518 B gzip.
+- Piksele strony głównej wobec `main` są zgodne przy 320, 390, 768 i 1280 px.
+  Przy 1280 px zgodne są też konsultacje, blog, e-book suplementy, odstąpienie
+  i O mnie. Zrzuty są w `/tmp/ola-pixel/`.
+- `npm run test:build` przeszedł na fixture i na buildzie NDJSON.
+  `npm run test:content-lake` dał 88 dokumentów, 0 błędów oraz 17 stron o tych
+  samych sekcjach, zdjęciach i DOM. E2E dało 429 PASS, po 143 w Chromium,
+  Firefox i WebKit, w 3,0 min. Przepis verify-ola dla newslettera na `/`
+  odrzucił pusty i zły e-mail, a `browser posts` zwrócił `[]`. Dowód jest w
+  `/tmp/ola-verify-evidence/ola-1791841438/`.
+- Recenzja PR 89 złapała dwie regresje. Na kontenerze do 767 px hero
+  konsultacji i landingów e-booków brał rozmiar desktopowy, bo reguła
+  wariantu ładowała się po `@container` ze wspólnego arkusza. Obok wariantu
+  jest teraz to samo `font-size: var(--ao-display-mobile)`. `line-height`
+  zostaje przy każdej szerokości, tak jak na `main` (42 px daje 43,68 px).
+- Style `.ao-form-receipt` są w `LeadForm.astro`. Potwierdzenie po wysłaniu
+  formularza odstąpienia ma ten sam padding, obrys i krój co na `main`.
+  Webhook był zatrzymany w teście.
+- Po poprawce zewnętrzny CSS strony głównej dalej ma 7754 B gzip. Dwa
+  odczyty `test:build` dały tę samą liczbę. Inline strony głównej ma 2911 B,
+  bo reguły potwierdzenia weszły do arkusza wstawionego w HTML. Cały CSS ma
+  30559 B gzip. Piksele konsultacji i sześciu landingów e-booków są zgodne
+  z `main` przy 320, 390, 768 i 1280 px.
+- Nie scalano i nie wdrażano. Następny krok to odbiór PR.
+
+### Ponowienie wrangler deploy, 12.10.2026
+
+- API Cloudflare zwróciło dziś trzy razy 504 i komunikat
+  `Received a malformed response from the API` podczas `wrangler deploy`
+  w workflow Studio i podglądu. Ręczne ponowienie za każdym razem przeszło.
+- Kroki deploy w Deploy preview, Deploy Studio i Publish content wołają
+  `scripts/retry-wrangler-deploy.ts`. Są trzy próby. Odstępy to 20 s i 60 s.
+  Każda próba dostaje to samo polecenie. Skrypt usuwa `CLOUDFLARE_ENV`,
+  więc podgląd nie dostaje drugiego sufiksu nazwy Workera.
+- Powtarzane są odpowiedzi 5xx, malformed response, timeout i zerwane
+  połączenie. Błąd konfiguracji, tokenu i odpowiedź 429 kończą krok od razu.
+- IndexNow nadal startuje tylko po `success()` kroku `deploy` i tylko
+  na produkcji. Porównanie `main` z testowanym commitem w podglądzie
+  i Studio zostaje.
+- Limit czasu tych jobów wzrósł z 15 do 25 min, żeby trzecia próba
+  zmieściła się po buildzie.
+- Testy `tests/unit/retry-wrangler-deploy.test.ts` dały 29 PASS na Node
+  24.21.0. `actionlint` 1.7.12 z shellcheck 0.10.0 na wszystkich workflow
+  kończy się kodem 0.
+- Nie scalano i nie wdrażano. Następny krok to odbiór PR. Potem kolejny
+  Deploy preview albo Deploy Studio z `main`.
 
 ### Nazwy linków okładek, 12.10.2026
 

@@ -21,7 +21,7 @@ jobs:
       github.event.workflow_run.head_branch == 'main' &&
       github.event.workflow_run.head_repository.full_name == github.repository
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     environment:
       name: production
       url: https://studio.aleksandraolesiewicz.com
@@ -70,7 +70,7 @@ jobs:
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: npm run deploy:studio
+        run: node --import tsx scripts/retry-wrangler-deploy.ts -- npm run deploy:studio
       - name: Register external Studio and deploy schemas
         if: steps.current.outputs.deploy == 'true'
         working-directory: studio
