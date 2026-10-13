@@ -6,14 +6,13 @@ import {
   mkdirSync,
   openSync,
   readFileSync,
-  readdirSync,
-  readlinkSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomBytes } from "node:crypto";
+import { assertHomeIdentity, portFree, portOwnedBy } from "./server-checks.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -29,7 +28,9 @@ function fail(message) {
 function runId() {
   const id = process.env.VERIFY_RUN_ID;
   if (!id || !/^[A-Za-z0-9._-]+$/.test(id)) {
-    fail("Set VERIFY_RUN_ID to a token of letters, numbers, dots, underscores, or hyphens.");
+    fail(
+      "Set VERIFY_RUN_ID to a token of letters, numbers, dots, underscores, or hyphens.",
+    );
   }
   return id;
 }
@@ -108,45 +109,6 @@ function stopPid(pid) {
   }
 }
 
-function listeningInodes(port) {
-  const inodes = new Set();
-  for (const file of ["/proc/net/tcp", "/proc/net/tcp6"]) {
-    if (!existsSync(file)) continue;
-    const lines = readFileSync(file, "utf8").trim().split("\n").slice(1);
-    for (const line of lines) {
-      const parts = line.trim().split(/\s+/);
-      const local = parts[1];
-      const state = parts[3];
-      const inode = parts[9];
-      const hexPort = local?.split(":")[1];
-      if (state === "0A" && Number.parseInt(hexPort, 16) === port) {
-        inodes.add(inode);
-      }
-    }
-  }
-  return inodes;
-}
-
-function portOwnedBy(port, pid) {
-  const inodes = listeningInodes(port);
-  const fdDir = `/proc/${pid}/fd`;
-  if (inodes.size === 0 || !existsSync(fdDir)) return false;
-  for (const fd of readdirSync(fdDir)) {
-    try {
-      const target = readlinkSync(path.join(fdDir, fd));
-      const match = /^socket:\[(\d+)\]$/.exec(target);
-      if (match && inodes.has(match[1])) return true;
-    } catch {
-      // The fd can disappear while we read the process.
-    }
-  }
-  return false;
-}
-
-function portFree(port) {
-  return listeningInodes(port).size === 0;
-}
-
 async function waitForHttp(url) {
   const started = Date.now();
   let last = "no response";
@@ -166,7 +128,10 @@ async function waitForHttp(url) {
 function transcript(id, line) {
   const file = path.join(evidenceDir(id), "transcript.jsonl");
   mkdirSync(evidenceDir(id), { recursive: true });
-  appendFileSync(file, `${JSON.stringify({ at: new Date().toISOString(), ...line })}\n`);
+  appendFileSync(
+    file,
+    `${JSON.stringify({ at: new Date().toISOString(), ...line })}\n`,
+  );
 }
 
 function requireNode24() {
@@ -197,7 +162,7 @@ async function launch() {
   mkdirSync(evidenceDir(id), { recursive: true });
   let port = 0;
   for (let candidate = 4340; candidate <= 4390; candidate += 1) {
-    if (portFree(candidate)) {
+    if (await portFree(candidate)) {
       port = candidate;
       break;
     }
@@ -222,9 +187,15 @@ async function launch() {
     node: process.version,
     startedAt: new Date().toISOString(),
   };
-  writeFileSync(path.join(dir, "server.json"), `${JSON.stringify(state, null, 2)}\n`);
+  writeFileSync(
+    path.join(dir, "server.json"),
+    `${JSON.stringify(state, null, 2)}\n`,
+  );
   try {
     await waitForHttp(`http://127.0.0.1:${port}/`);
+    if (!portOwnedBy(port, child.pid)) {
+      throw new Error(`Port ${port} is not owned by preview pid ${child.pid}.`);
+    }
   } catch (error) {
     stopPid(child.pid);
     fail(error instanceof Error ? error.message : String(error));
@@ -246,8 +217,10 @@ async function doctor() {
   const response = await fetch(`http://127.0.0.1:${state.port}/`);
   const body = await response.text();
   if (!response.ok) fail(`Home returned HTTP ${response.status}.`);
-  const marker = "Aleksandra Olesiewicz — strona główna";
-  if (!body.includes(marker)) fail(`Home HTML is missing ${marker}.`);
+  const marker = assertHomeIdentity(
+    body,
+    readFileSync(path.join(repoRoot, "dist/index.html"), "utf8"),
+  );
   const browserFile = path.join(stateDir(id), "browser.json");
   let browserLine = "browser=not-started";
   if (existsSync(browserFile)) {
@@ -308,14 +281,17 @@ async function browserStart() {
     }
     await sleep(100);
   }
-  if (!existsSync(portFile)) fail("Browser session did not announce a control port.");
+  if (!existsSync(portFile))
+    fail("Browser session did not announce a control port.");
   const state = {
     pid: child.pid,
     controlPort: Number(readFileSync(portFile, "utf8").trim()),
     token,
   };
   writeFileSync(browserFile, `${JSON.stringify(state, null, 2)}\n`);
-  process.stdout.write(`browser-pid=${child.pid}\ncontrol=${state.controlPort}\n`);
+  process.stdout.write(
+    `browser-pid=${child.pid}\ncontrol=${state.controlPort}\n`,
+  );
 }
 
 async function browserCommand(argv) {

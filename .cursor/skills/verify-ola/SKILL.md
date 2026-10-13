@@ -37,7 +37,13 @@ Uruchom zanim cokolwiek klikniesz, oraz gdy odpowiedź wygląda podejrzanie:
 node .cursor/skills/verify-ola/scripts/verify.mjs doctor
 ```
 
-Przechodzi tylko wtedy, gdy pid z `/tmp/ola-verify/$VERIFY_RUN_ID/server.json` żyje, ten sam pid trzyma port (odczyt `/proc/net/tcp` i `/proc/<pid>/fd`, więc doctor jest na Linuksa), a `GET /` zwraca 200 i zawiera `Aleksandra Olesiewicz — strona główna`. Wypisuje też URL, wersję Node zapisaną przy starcie i katalog dowodów. Jeśli sesja przeglądarki jest zapisana, doctor wymaga żywego pidu i odpowiedzi control portu.
+Przechodzi tylko wtedy, gdy pid z `/tmp/ola-verify/$VERIFY_RUN_ID/server.json` żyje i ten sam pid trzyma port. Linux sprawdza `/proc/net/tcp`, `/proc/net/tcp6` i `/proc/<pid>/fd`. macOS wymaga dostępnego `/usr/sbin/lsof` i odczytu listenera tego pidu. Inne systemy kończą kontrolę błędem. `GET /` musi zwrócić 200 oraz tytuł i canonical zgodne z aktualnym `dist/index.html`. Renderer SEO bierze tytuł z danych strony, więc doctor nie ma stałego tytułu fixture. Wypisuje też URL, tytuł, wersję Node zapisaną przy starcie i katalog dowodów. Jeśli sesja przeglądarki jest zapisana, doctor wymaga żywego pidu i odpowiedzi control portu.
+
+Launch sprawdza zajętość portu przez próbę nasłuchu na `127.0.0.1`, a po starcie potwierdza właściciela. Nie uznaje odpowiedzi cudzego listenera za gotowy podgląd. Lokalny test regresji nie buduje serwisu ani nie wysyła formularzy:
+
+```sh
+node --test .cursor/skills/verify-ola/scripts/server-checks.test.mjs
+```
 
 ## Drive
 

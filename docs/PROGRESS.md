@@ -6,6 +6,51 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Lokalny odbiór etapu 7 i verify-ola na macOS, 13.10.2026
+
+- `git fetch origin` potwierdził aktualny `main` i `origin/main` na
+  `dd2a6af9922f17b7a4c421cd3e495cf4bb2afd08`. Nie było nowych commitów
+  do pobrania. Zachowano wcześniejsze lokalne wpisy planu/postępu i materiały
+  nieśledzone. Nie zmieniano danych CMS, nie wykonywano push ani publikacji.
+- Odtworzono błąd `verify-ola doctor`. Własny podgląd działał na 4340,
+  a skrypt odrzucał PID, ponieważ korzystał wyłącznie z Linux `/proc`.
+  Druga nieaktualna kontrola wymagała dawnego tytułu strony głównej.
+- `server-checks.mjs` sprawdza wolny port próbą nasłuchu Node. Właściciela
+  potwierdza na macOS przez `lsof`, na Linux przez istniejącą kontrolę inode.
+  Launch potwierdza PID po starcie. Doctor porównuje tytuł i canonical
+  odpowiedzi z `dist/index.html`. Instrukcja skilla, mapa funkcji i README
+  odpowiadają nowemu zachowaniu.
+- 3 testy Node na rzeczywistych listenerach PASS, także w niezależnej
+  powtórce. Obejmują zajęty/zwolniony port, własny/obcy PID, osobny proces,
+  zmianę tytułu i odrzucenie innego canonical. Druga sesja uruchomiła się
+  na 4341, ominęła zajęty 4340, przeszła doctor i cleanup. Niezależny
+  przegląd nie znalazł usterek. Linux live nie był powtarzany.
+- Sesja `ola-20261013-continuation` na Node 26.11.0 przeszła doctor także
+  po starcie Chromium. Newsletter odrzucił puste pole i `wrong`, dialog
+  katalogu otworzył się i zamknął przez Escape, `aria-expanded=false`.
+  Obie kontrole zwróciły `posts []`. `/static/` bez JS ma `scripts 0`.
+- Zaległy lokalny odbiór `/o-mnie/` przy 320/390/1440 px z reduced motion
+  PASS. Axe z tagami WCAG 2 A/AA, 2.1 AA i 2.2 AA nie wykrył naruszeń,
+  szerokość dokumentu odpowiada oknu. Menu przy 320/390 px otwiera Enter,
+  zamyka Escape i oddaje fokus triggerowi. Każdy kontekst miał zero POST.
+  Dowody i skrypt odbioru są w
+  `/private/tmp/ola-verify-evidence/ola-20261013-continuation/` oraz
+  `/private/tmp/ola-about-acceptance.mjs`.
+- Pełne `PLAYWRIGHT_WORKERS=1 npm run verify` PASS, exit 0 na Node 26.11.0.
+  Format, tokeny, lint, typy wszystkich workspace’ów, 439 unit w 46 plikach,
+  buildy i kontrole artefaktów przeszły. E2E bez retry dało 468 PASS
+  i 9 warunkowych pominięć w Chromium, Firefox i WebKit. Symulacja Content
+  Lake zwalidowała 88 dokumentów bez błędów. JS ma 9685 B gzip,
+  CSS 30645 B gzip. Kontrola SEO objęła 36 stron, `robots=noindex`.
+  Log jest w `/private/tmp/ola-continuation-verify.log`.
+- Jawny format plików skilla i README, `git diff --check` oraz 150 lokalnych
+  odnośników PASS. Cleanup zamknął własny podgląd i Chromium, zachowując
+  dowody. Zgodności tego przebiegu z Node 24 nie sprawdzano.
+- Otwarte pozostają natywny zoom 200%, czytnik i urządzenie fizyczne,
+  odbiór Studio/chronionego preview, Tag Assistant, trwałe receipty i raporty
+  pomiaru oraz ćwiczenie odtworzenia Sanity z uprawnieniem administratora.
+  Następny krok to zewnętrzne walidatory danych strukturalnych z etapu 5.
+
 ### Podgląd tytułu w Studio, 13.10.2026
 
 - Podgląd SEO woła `resolveDocumentTitle`, tę samą regułę co `<title>`

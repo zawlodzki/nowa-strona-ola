@@ -542,6 +542,14 @@ nie uruchamia skryptów Google.
 
 ### Etap 7 — odbiór i utrzymanie
 
+- [x] Naprawić i odebrać `verify-ola` na macOS. Wolne porty sprawdza
+      próbny listener; właściciela potwierdza `lsof`, na Linux pozostaje `/proc`.
+      Doctor porównuje metadane z aktualnym buildem. 3 testy regresji PASS,
+      druga sesja omija zajęty port; Linux live nie był powtarzany, 13.10.2026.
+- [x] Domknąć lokalny odbiór About3a przy 320/390/1440 px z reduced motion.
+      Axe bez naruszeń, brak overflow; menu mobilne działa z Enter/Escape
+      i przywraca fokus. Nie zastępuje pełnego odbioru WCAG ani produkcji.
+
 - [ ] Przejść scenariusze redakcyjne, publikacji, leadów i zgód.
 - [ ] Sprawdzić desktop/mobile, 320 px, zoom 200%, klawiaturę i reduced motion.
 - [ ] Zweryfikować WCAG 2.2 AA; automatyczny audyt uzupełnić kontrolą ręczną.
