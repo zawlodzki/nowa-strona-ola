@@ -1,4 +1,8 @@
 import { expect, test } from "@playwright/test";
+import {
+  dismissConsentBanner,
+  mockConsentPolicy,
+} from "./helpers/consent-banner";
 
 const routes = [
   "/",
@@ -94,4 +98,93 @@ test.describe("touch feedback", () => {
     await expect(control).toHaveCSS("opacity", "1");
     await expect(page.locator(".ao-mobile-menu")).toHaveAttribute("open", "");
   });
+
+  test("Instagram keeps its resting color on a coarse pointer", async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce", colorScheme: "light" });
+    await mockConsentPolicy(page);
+    await page.goto("/kontakt/");
+    await dismissConsentBanner(page);
+    expect(
+      await page.evaluate(
+        () => matchMedia("(hover: hover) and (pointer: fine)").matches,
+      ),
+    ).toBe(false);
+    const link = page.getByRole("link", { name: "Instagram", exact: true });
+    await link.scrollIntoViewIfNeeded();
+    const box = await link.boundingBox();
+    if (!box) throw new Error("Instagram link has no hit area.");
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await expect(link).toHaveCSS("color", "rgb(112, 40, 63)");
+    await page.mouse.down();
+    await expect(link).toHaveCSS("color", "rgb(136, 47, 72)");
+    await page.mouse.up();
+    await expect(link).toHaveCSS("color", "rgb(112, 40, 63)");
+  });
+});
+
+test("count and contact eyebrow follow the root font size", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce", colorScheme: "light" });
+  const cases = [
+    { width: 320, countAt16: "64px", countAt32: 128 },
+    { width: 390, countAt16: "78px", countAt32: 156 },
+    { width: 768, countAt16: "92px", countAt32: 184 },
+    { width: 1280, countAt16: "92px", countAt32: 184 },
+  ];
+  for (const item of cases) {
+    await page.setViewportSize({ width: item.width, height: 900 });
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+    const count = page.locator(".home3a-count strong");
+    await page.evaluate(() => {
+      document.documentElement.style.fontSize = "16px";
+    });
+    await expect(count).toHaveCSS("font-size", item.countAt16);
+    await page.evaluate(() => {
+      document.documentElement.style.fontSize = "32px";
+    });
+    const grown = Number.parseFloat(
+      await count.evaluate((element) => getComputedStyle(element).fontSize),
+    );
+    expect(grown).toBeGreaterThan(Number.parseFloat(item.countAt16));
+    expect(grown).toBeLessThanOrEqual(item.countAt32);
+    const visible = await count.evaluate((element) => {
+      const box = element.getBoundingClientRect();
+      return box.left >= -1 && box.right <= innerWidth + 1;
+    });
+    expect(visible).toBe(true);
+    await page.goto("/kontakt/");
+    await page.evaluate(() => document.fonts.ready);
+    const eyebrow = page.locator(".contact3a-eyebrow");
+    await page.evaluate(() => {
+      document.documentElement.style.fontSize = "16px";
+    });
+    await expect(eyebrow).toHaveCSS("font-size", "14px");
+    await page.evaluate(() => {
+      document.documentElement.style.fontSize = "32px";
+    });
+    await expect(eyebrow).toHaveCSS("font-size", "28px");
+  }
+});
+
+test("Instagram hover color stays on a fine pointer", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce", colorScheme: "light" });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await mockConsentPolicy(page);
+  await page.goto("/kontakt/");
+  await dismissConsentBanner(page);
+  expect(
+    await page.evaluate(
+      () => matchMedia("(hover: hover) and (pointer: fine)").matches,
+    ),
+  ).toBe(true);
+  const link = page.getByRole("link", { name: "Instagram", exact: true });
+  await link.scrollIntoViewIfNeeded();
+  const box = await link.boundingBox();
+  if (!box) throw new Error("Instagram link has no hit area.");
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await expect(link).toHaveCSS("color", "rgb(136, 47, 72)");
 });
