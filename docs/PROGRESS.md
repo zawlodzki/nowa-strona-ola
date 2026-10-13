@@ -67,6 +67,52 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Nie scalano i nie wdrażano. Następny krok to odbiór tego PR.
   Po scaleniu #99 trzeba powtórzyć test produkcyjnego URL e-booka.
 
+### Zewnętrzna walidacja SEO i graf zapowiedzi e-booków, 13.10.2026
+
+- Zakończono testy URL 12 reprezentantów publicznej produkcji w Schema.org
+  i Google Rich Results Test. [Macierz odbioru](SEO-VALIDATION-2026-10-13.md)
+  zawiera adresy i linki wyników. Schema.org zgłosił zero błędów i ostrzeżeń
+  we wszystkich próbach. Google potwierdził ProfilePage, BreadcrumbList
+  i BlogPosting; strony bez obsługiwanej funkcji nie miały elementów.
+- Anonimowy Google wymagał logowania także w trybie kodu. Testy URL
+  wykonano przez istniejącą zalogowaną sesję Chrome. CAPTCHA Schema.org
+  rozwiązano po wyraźnej zgodzie użytkownika. Nie omijano tej blokady.
+- Google wskazał krytyczny problem Product na zapowiedzi e-booka bez
+  offers, review lub aggregateRating. Lokalny `ebookGraph` wyprowadza typ
+  z istniejącej oferty. Bez niej emituje Book, a przy sprzedaży albo
+  przedsprzedaży z checkoutem emituje Product i Book. Zachowano #product
+  oraz referencje. Nie dodano fikcyjnej sprzedaży ani recenzji.
+- Cztery przypadki regresji przed poprawką FAIL, po niej 20 testów SEO
+  PASS. Niezależny przegląd nie znalazł usterek. Test kodu Google na grafie
+  odczytanym z rzeczywistego lokalnego renderera nie zgłosił już
+  nieprawidłowego Product. Nie wykrył wyniku rozszerzonego. To kontrola
+  lokalnego artefaktu, a nie dowód wdrożenia produkcyjnego URL.
+- Artykuł produkcyjny ma prawidłowe BlogPosting i BreadcrumbList oraz
+  cztery opcjonalne uwagi dotyczące dat bez godziny i strefy. Nie dopisano
+  umownych godzin ani czasu buildu. Timestamp redakcyjny pozostaje otwarty.
+  Google usunął rozszerzenia FAQ od 7.05.2026, co potwierdzono w jego
+  aktualnej dokumentacji. FAQPage nadal poprawnie opisuje widoczną treść.
+- Pierwszy verify zatrzymał format zmienianego planu SEO. Po wyrównaniu
+  formatu `PLAYWRIGHT_WORKERS=4 npm run verify` PASS, exit 0 na Node 26.11.0.
+  444 unit w 46 plikach, 468 E2E PASS bez retry i 9 warunkowych pominięć
+  w Chromium, Firefox i WebKit. Symulacja Content Lake zwalidowała
+  88 dokumentów bez błędów. JS 9685 B gzip, CSS 30645 B gzip;
+  kontrola SEO objęła 36 stron. Logi oraz publiczny HTML z SHA-256 są
+  w `/private/tmp/ola-seo-validation/`.
+- Schema.org potwierdził także poprawiony lokalny graf w trybie kodu,
+  zero błędów i ostrzeżeń. Graf ma 7336 znaków i zapisany SHA-256.
+  Wynik Google oraz jego ograniczenie są w macierzy odbioru.
+- `verify-ola`, sesja `ola-20261013-seo`, przeszło doctor i otworzyło
+  landing e-booka. H1 i status zapowiedzi są widoczne, także bez JS.
+  Oba odczyty `posts` zwróciły `[]`. Cleanup zamknął własne procesy.
+  Dowody są w `/private/tmp/ola-verify-evidence/ola-20261013-seo/`.
+  Końcowy format, `git diff --check` i 113 lokalnych odnośników PASS.
+- Nie zmieniano danych CMS, treści, cen ani dostępności. Nie wykonano push
+  ani publikacji. Następny krok to odbiór i wdrożenie lokalnej poprawki
+  na osobne zlecenie, potem retest produkcyjnego URL. Daty artykułów
+  wymagają osobnego ustalenia dokładności. Pozostałe blokady etapu 7
+  dotyczą czytnika, urządzenia fizycznego i odtworzenia Sanity.
+
 ### Kontrole buildu po publikacji Sanity, 13.10.2026
 
 - Produkcyjny `publish-content` padał w `tests/unit/seo.test.ts` na
