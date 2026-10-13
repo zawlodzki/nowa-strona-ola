@@ -474,9 +474,11 @@ publikacji.
       wyszukiwania, liczniki 60/160, adres, stan „ukryta”). Ostrzeżenie
       przy zmianie adresu opublikowanego dokumentu bez przekierowania
       (walidacja sluga) zamiast osobnej akcji dokumentu.
-- [ ] Bez zmian: `titleTemplate` (D3 otwarte), `shortBio`, `definition`
-      kategorii (używany istniejący `description`), osobne pole `about`
-      artykułu (używane kategorie), wyświetlanie „W skrócie” (SEO‑5).
+- [x] Szablon tytułu D3 jest w `documentTitle` (13.10.2026), nie w polu
+      `siteSettings.titleTemplate`.
+- [ ] Bez zmian: `shortBio`, `definition` kategorii (używany istniejący
+      `description`), osobne pole `about` artykułu (używane kategorie).
+      „W skrócie” jest w SEO‑5.
 - [ ] Uzupełnienie danych w Sanity, rejestracja schematu i deploy Studio.
       Wyłącznie na osobne polecenie użytkownika. Wartości do wpisania:
       [konfiguracja CMS](HOMEPAGE-CMS-CONFIG.md).
@@ -563,7 +565,9 @@ bo fallbacki są pokryte testami.
   pozostaje propozycją (generowane). **Decyzja 11.10.2026: generowane;
   wdrożone w SEO‑5.**
 - **D3 — przyjęte (11.10.2026):** `{temat} | Aleksandra Olesiewicz`,
-  na stronie głównej marka pierwsza. Do wdrożenia (`titleTemplate`).
+  na stronie głównej marka pierwsza. Wdrożone 13.10.2026 w
+  `documentTitle`. Zapisany `seo.title` zostaje źródłem. Składanie
+  działa przy renderze. Pole CMS nie powstało.
 - **D5 — zmienione (11.10.2026):** Ola sama weryfikuje artykuły;
   `reviewedBy` i `lastReviewedAt` wypełniane przy faktycznym przeglądzie.
   Dyplom (licencjat 2025) i sześć szkoleń są publiczne na „O mnie”

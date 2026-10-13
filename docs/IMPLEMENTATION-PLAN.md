@@ -475,9 +475,14 @@ oznacza wykonanej implementacji.
       `test:content-lake`); ostatnie `check-seo` 36 stron PASS bez
       niedziałających linków, końcowe verify PASS (11.10.2026).
       Ręcznie nie sprawdzono przekierowań z danych Sanity na produkcji.
+- [x] Wdrożyć szablon tytułu z decyzji D3 w `documentTitle` (13.10.2026).
+      Strona wewnętrzna dostaje `{temat} | Aleksandra Olesiewicz`, strona
+      główna zaczyna się od marki. Złożenie dłuższe niż 60 znaków zostaje
+      przy zapisanym tytule. Linia „E-book Aleksandry Olesiewicz” zostaje.
+      Pole `titleTemplate` w Sanity nie powstało. Podgląd Studio nadal
+      liczy zapisany tytuł.
 - [ ] Uzupełnić pola SEO w Sanity, zarejestrować schemat i wdrożyć Studio
-      (tylko na osobne polecenie). Wdrożyć szablon tytułu z decyzji D3
-      (`{temat} | Aleksandra Olesiewicz`).
+      (tylko na osobne polecenie).
 - [ ] SEO‑6: robots.txt według D1 i AI Crawl Control, Search Console i Bing,
       IndexNow, zdjęcie `noindex` z gotowej produkcji, grupa kanałów AI w GA4.
 

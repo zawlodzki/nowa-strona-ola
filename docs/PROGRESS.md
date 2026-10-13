@@ -1,10 +1,35 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-13 (kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-13 (szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Szablon tytułu D3, 13.10.2026
+
+- `documentTitle` składa `<title>` i `og:title` w `SiteShell3a`.
+  Strona główna zaczyna się od marki. Pozostałe strony kończą się
+  ` | Aleksandra Olesiewicz`. Zapisany `seo.title` zostaje źródłem.
+- Złożenie dłuższe niż 60 znaków zostaje przy zapisanym tytule.
+  Artykuł „Codzienne posiłki przy PMOS (PCOS): zacznij od swojego rytmu”
+  ma 60 znaków i nie dostaje marki. Paginacja bloga zachowuje numer
+  strony. Linia „E-book Aleksandry Olesiewicz” zostaje.
+- Nagłówki H1 nie zmieniają się. Pole `titleTemplate` w Sanity nie
+  powstało. Podgląd Studio nadal liczy zapisany tytuł, nie złożony.
+- Gałąź wychodzi z `main`. PR #98 i #99 nie są rodzicem.
+- Kontrole na Node 24.21.0. Format, tokeny, lint i typy przeszły.
+  `npm test` dał 451 testów w 47 plikach. `npm run test:build` przeszedł.
+  Kontrola SEO objęła 36 stron, `robots=noindex`. JS ma 9694 B gzip,
+  CSS 30575 B gzip. E2E dało 468 passed i 9 skipped. Symulacja Content
+  Lake dała 17 stron o tym samym DOM. Pierwszy przebieg E2E wypadł,
+  bo w środowisku brakowało przeglądarek Playwright. Po instalacji
+  ten sam zestaw przeszedł.
+- verify-ola `ola-1791897031` odczytał tytuły z podglądu na 4340.
+  H1 strony głównej i „O mnie” zostały. `browser posts` zwrócił `[]`.
+  Dowód jest w `/tmp/ola-verify-evidence/ola-1791897031/`.
+- Nie scalano i nie wdrażano. Następny krok to odbiór tego PR.
+  Po scaleniu #99 trzeba powtórzyć test produkcyjnego URL e-booka.
 
 ### Kontrole buildu po publikacji Sanity, 13.10.2026
 
