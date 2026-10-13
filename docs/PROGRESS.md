@@ -1,6 +1,6 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-13 (kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, odbiór SDK i przygotowane copy prawne; loader produkcyjny nadal wyłączony); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-13 (kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
@@ -10,7 +10,7 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 - `npm run backup:sanity` eksportuje dataset `production` projektu `dyuqkn8c`
   do katalogu poza repozytorium. Domyślnie jest to `~/sanity-backups/`.
-  Obok archiwum powstaje plik `.sha256`. Liczby dokumentów biorą się z
+  Obok archiwum powstaje plik `.sha256`; oba mają tryb `0600`. Liczby dokumentów biorą się z
   archiwum. Ścieżka wewnątrz repozytorium, w tym `output/` i `reports/`,
   zostaje odrzucona.
 - Procedura odtworzenia jest w [runbooku](SANITY-BACKUP-RESTORE.md).
@@ -32,6 +32,13 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   do tworzenia datasetu albo tokenem administratora. Potem usuń ten
   dataset.
 
+### Stabilne kliknięcia e2e, 13.10.2026
+
+- Przyczyna wypadków z PR #89, #91 i #93 to baner zgód. Na localhost `/api/c15t/init` zwraca 404, faza schodzi do `unavailable` i baner zostaje przypięty do dołu okna. Playwright kończy kliknięcie, a zdarzenie trafia w baner. Ślad mówi `subtree intercepts pointer events` dla `[data-consent-panel]`. W tych śladach nie ma żądania na `flows.zawlodzki.com`. Listener formularza jest podpięty w tej samej turze, w której przycisk schodzi z `disabled`.
+- Testy wołają `dismissConsentBanner` przed kliknięciem i jeszcze raz po nawigacji, bo zamknięcie nie przeżywa przeładowania dokumentu. Katalog `/ui/` i `/design-system/` nie ma banera. `optionalState` klika „Dostosuj”, gdy baner jest widoczny, a „Ustawienia cookies”, gdy baner jest ukryty.
+- WebKit, `--repeat-each=30`, `--retries=0`, cztery wskazane testy. Wynik to 120 passed w 1.4 min. Pełna suita w Chromium, Firefox i WebKit, `--retries=0`, `--workers=4`. Wynik to 468 passed i 9 skipped w 3.1 min. Wcześniejszy pełny przebieg miał 3 failures. To karuzela Firefox przy 390 px oraz motyw WebKit dla `getItem` i `setItem`. Po tym samym zamknięciu banera oba pliki w WebKit i Firefox, `--repeat-each=10`, dały 260 passed.
+- Nie ruszano GTM, analityki ani CSS. Nie dodawano ponowień ani dłuższych timeoutów. Nie scalano. Następny krok to odbiór PR.
+
 ### Skala pisma i hover Instagrama, 13.10.2026
 
 - Pomiar z 12.10 zostawiał `.home3a-count strong` przy 64 px i `p.contact3a-eyebrow` przy 14 px, gdy korzeń miał 32 px. Na wskaźniku grubym link Instagram na `/kontakt/` brał kolor najechania i go trzymał.
@@ -43,14 +50,16 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Przepis verify-ola na `/` odrzucił pusty i zły e-mail. Na `/kontakt/` zły telefon zatrzymał wysyłkę. `browser posts` zwrócił `[]`. Dowód jest w `/tmp/ola-verify-evidence/ola-1791872044/`.
 - Nie scalano i nie wdrażano. Następny krok to odbiór PR.
 
-### Przygotowanie aktywacji produkcyjnego pomiaru, 13.10.2026
+### Wdrożenie produkcyjnego pomiaru, 13.10.2026
 
 - Użytkownik zlecił włączenie produkcyjnego pomiaru oraz wyrównanie źródeł
   w `projekt prawny ola`. Zatwierdził neutralny czas zaangażowania GA4
   (`user_engagement`) po zgodzie analitycznej, wykryty w odbiorze SDK.
-- PR #86 i #88 zostały scalone. Kontener GTM 4 opublikowano 13.10.2026
-  o 07:27; zawiera wyłącznie trzy tagi GA4 i Meta. Loader produkcyjny
-  nadal jest wyłączony. Publikacja kontenera nie włącza pomiaru na stronie.
+- PR #86, #88 i #90 zostały scalone. Kontener GTM 4 opublikowano 13.10.2026
+  o 07:27; zawiera wyłącznie trzy tagi GA4 i Meta. Ustawiono
+  `PUBLIC_GTM_ENABLED=true`; wdrożenie produkcyjne zakończyło się SUCCESS
+  w run `38354038028`, z main `a4ed967be4f66c01d2eda0027001d20a3a80357c`.
+  Wersja Workera: `39a13f67-f68b-40da-8f68-4d491f27a939`.
 - Odbiór skompilowanego kontenera potwierdził neutralny URL `/m/home`,
   tytuł `home`, pusty referrer GA4 oraz automatyczny `user_engagement`.
   W Chromium cookies GA4 wygasają po 400 dniach, Meta `_fbp` i `_fbc`
@@ -59,16 +68,48 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   ze zgodami, rzeczywistymi wykluczeniami, neutralnym pomiarem GA4, domenami
   Meta i nieaktywnym Clarity. Cztery źródła w sąsiednim projekcie prawnym
   zaktualizowano po kontroli hashy, z zachowaniem oryginałów w kopii lokalnej.
-  Publikacja dwóch dokumentów w Content Lake
-  oraz aktywacja loadera pozostają otwarte.
+  Opublikowano `legal-privacy-pl` i `legal-cookies-pl` w Content Lake w wersji
+  2.3, po kontroli rewizji; odczyt dokładnie odpowiada fixture’om. Rewizja
+  obu dokumentów: `7p4cO3nTYg8IOCCy0082l0`.
 - Pierwsze uruchomienie `npm run verify` zatrzymał format nowego eksportu
   GTM; poprawiono wyłącznie formatowanie. Kolejne przeszło format, typy,
   lint, 420 unit w 45 plikach i buildy, lecz zatrzymało się na starej literalnej
   wersji prawnej 2.2 w `check-build.mjs`. Oczekiwanie zaktualizowano do 2.3;
-  końcowa pełna bramka pozostaje do ponowienia po aktualizacji copy.
-- Następny krok: końcowe verify i niezależny przegląd, publikacja dokładnych
-  dwóch treści prawnych z kontrolą rewizji, następnie uruchomienie loadera
-  i odbiór produkcji bez wysyłania danych formularzy lub testowej telemetrii.
+  poprawiono też końcowe copy panelu, aby nie deklarowało aktywnego Clarity.
+- Kolejny pełny przebieg z czterema workerami zakończył się 452 E2E PASS,
+  9 skip i 7 błędami: CSS/zoom, dwa formularze Firefox oraz powrót cookies
+  do polityki w Firefox/WebKit. Zachowano siedem trace. Wszystkie siedem
+  scenariuszy przeszło pojedynczą próbę, a następnie trzy jawne powtórki
+  w swoich silnikach: 21/21 PASS. Przyczyny pierwotnych błędów nie ustalono.
+- Powtórzono całe `npm run verify` z końcowym panelem i jednym workerem:
+  exit 0, 420 unit w 45 plikach, 459 E2E PASS i 9 celowo pominiętych testów
+  włączonego loadera. Symulacja Content Lake: 88 dokumentów, 0 błędów,
+  17 stron z tym samym DOM. Logi i trace są w
+  `/private/tmp/ola-legal-activation/`; serwer podglądu miał potwierdzony PID
+  i cwd tego repo. Niezależny przegląd treści i parytetu PASS.
+- Osobny fixture build z `PUBLIC_GTM_ENABLED=true` i dziewięć scenariuszy
+  `E2E_GTM_ENABLED=true` PASS w Chromium/Firefox/WebKit (19.8 s).
+  Obejmują jednorazowy loader, późną zgodę analityczną, zatrzymanie Meta,
+  receipt częściowego wycofania oraz blokadę storage. Domyślny lokalny build
+  przywrócono; nie zmienia to produkcyjnej flagi.
+- Odbiór rzeczywistej domeny produkcyjnej PASS, 9/9: bez zgody zero SDK;
+  GA4 `page_view` i `user_engagement` z `/m/home`, `home`, pustym referrerem;
+  Meta tylko PageView z domenami. Ponowienie wyboru nie powiela wyświetleń.
+  Wycofanie uruchamia rzeczywiste przeładowanie, usuwa cookies i przez 16 s
+  nie generuje kolejnych żądań. Kontakt, konsultacje, odstąpienie i obie
+  zmienione strony prawne mają zero SDK mimo pełnej zgody. Zero błędów JS
+  i brak Clarity. Telemetrię i leady testowe zablokowano przed wysyłką.
+  Backend c15t był zamockowany; ten odbiór nie potwierdza trwałego zapisu
+  produkcyjnego receipt ani obecności zdarzeń w raportach GA4 i Meta.
+  Publiczne dokumenty mają wersję 2.3 i datę 13.10.2026.
+  Wynik: `/private/tmp/ola-production-acceptance/result.json`.
+- CI `38352888397` zakończyło się SUCCESS: 420 unit, 457 E2E PASS,
+  dwa przypadki przeszły po retry, dziewięć celowych skip. Lokalna pełna
+  powtórka z jednym workerem miała 459 E2E PASS bez retry.
+- Następny krok: utrzymać Core Meta, wyłączone automatyczne zdarzenia i
+  dopasowywanie oraz Basic Consent Mode. Po zmianie SDK lub konfiguracji
+  ponowić odbiór payloadu; Tag Assistant pozostaje osobnym niewykonanym
+  sprawdzeniem, podobnie jak natywny zoom, czytnik i urządzenia fizyczne.
 
 ### Meta jako stacked PR na GTM, 12.10.2026
 
@@ -99,7 +140,6 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   nie dodały zdarzeń. Opóźniona konfiguracja po cofnięciu oraz awaria
   konfiguracji dały zero zdarzeń. Każde żądanie pomiarowe zablokowano przed
   siecią. SDK nadal dodaje własne identyfikatory i dane urządzenia.
-  [Dowód](../output/gtm-2026-10-12/meta-sdk.json).
 - Niezależny przegląd i no-comments PASS. `npm run verify` na Node 24.19.0
   PASS, 391 unit w 44 plikach, 456 E2E i dziewięć celowo pominiętych testów
   włączonego loadera. Osobny build z PUBLIC_GTM_ENABLED=true i te dziewięć

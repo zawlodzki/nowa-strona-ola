@@ -30,3 +30,4 @@ Preconditions:
 - Szablon artykułu to Article3a. Spis treści ma nazwę „W tym artykule”, nie „Spis treści”.
 - W tytule fixture’a przed `(PCOS)` jest spacja niełamliwa. Nazwa dostępna pasuje do zwykłej spacji w komendzie.
 - Copy i daty wpisów z makiety są propozycją.
+- Okładka e-booka w artykule jest linkiem z `tabindex="-1"` i `aria-hidden="true"` (`src/views/Article3a.astro`). `BookCover` też jest ukryty przed czytnikiem (`src/design-system/components/BookCover.astro`). Snapshot ARIA artykułu nie ma osobnego linku okładki. Tytuł zostaje w linku nagłówka.

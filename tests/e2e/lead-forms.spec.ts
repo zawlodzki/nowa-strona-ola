@@ -30,6 +30,7 @@ test("newsletter sends the v2 payload with consent Z6 after the notice", async (
 }) => {
   const captured = await leadWebhook.mock(page, [200], { delayMs: 300 });
   await page.goto("/?utm_source=test#newsletter");
+  await dismissConsentBanner(page);
   const form = page.locator("#newsletter form");
   await expect(form.getByRole("checkbox")).toHaveCount(0);
   await expect(form.locator(".ao-form-note")).toHaveText(newsletterNotice);
@@ -82,6 +83,7 @@ test("newsletter keeps the address after a server error and retries with the sam
 }) => {
   const captured = await leadWebhook.mock(page, [500, 200]);
   await page.goto("/#newsletter");
+  await dismissConsentBanner(page);
   const form = page.locator("#newsletter form");
   const email = form.getByLabel("Twój adres e-mail", { exact: true });
   const submit = form.getByRole("button", { name: "Zapisuję się" });
@@ -108,6 +110,7 @@ test("filled honeypot shows success without sending", async ({
 }) => {
   const captured = await leadWebhook.mock(page, []);
   await page.goto("/#newsletter");
+  await dismissConsentBanner(page);
   const form = page.locator("#newsletter form");
   await form.locator("[data-honeypot]").evaluate((input: HTMLInputElement) => {
     input.value = "https://spam.example";
@@ -126,6 +129,7 @@ test("contact shows the health notice and sends the contact payload", async ({
 }) => {
   const captured = await leadWebhook.mock(page, [200]);
   await page.goto("/kontakt/");
+  await dismissConsentBanner(page);
   const form = page.locator("#contact-lead-form");
   const notice = form.locator(".ao-form-note");
   await expect(notice).toHaveText(
@@ -306,6 +310,7 @@ test("coming-soon ebook shows a card badge and a waitlist dialog instead of chec
   await expect(card.locator(".ao-badge")).toHaveText("Wkrótce dostępny");
 
   await page.goto("/ebooki/suplementy-w-pcos/");
+  await dismissConsentBanner(page);
   const offer = page.locator(".ebook3a-offer");
   await expect(offer.locator(".ao-badge")).toHaveText("Wkrótce dostępny");
   await expect(offer.locator('a[href^="https://"]')).toHaveCount(0);

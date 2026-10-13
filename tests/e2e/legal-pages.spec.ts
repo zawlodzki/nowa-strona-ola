@@ -52,6 +52,7 @@ for (const entry of pages) {
 
 test("privacy and cookies link to each other", async ({ page }) => {
   await page.goto("/polityka-prywatnosci/");
+  await dismissConsentBanner(page);
   await page
     .getByRole("link", { name: "Lista cookies i identyfikatorów" })
     .first()
@@ -60,6 +61,7 @@ test("privacy and cookies link to each other", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
   );
+  await dismissConsentBanner(page);
   await page.getByRole("link", { name: "Politykę prywatności" }).click();
   await expect(page).toHaveURL(/\/polityka-prywatnosci\/$/);
 });

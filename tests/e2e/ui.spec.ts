@@ -341,6 +341,7 @@ test("about page without an English version", async ({ page }) => {
   page.on("request", (request) => {
     if (request.method() === "POST") posts.push(request.url());
   });
+  await dismissConsentBanner(page);
   await page.getByRole("button", { name: "Zapisuję się" }).click();
   expect(posts).toEqual([]);
 
@@ -426,6 +427,7 @@ test("ebook landing without an English version", async ({ page }) => {
   });
 
   await page.goto("/");
+  await dismissConsentBanner(page);
   const card = page
     .locator("#ebook-suplementy-w-pcos")
     .getByRole("heading")
@@ -433,6 +435,7 @@ test("ebook landing without an English version", async ({ page }) => {
   await expect(card).toHaveAttribute("href", "/ebooki/suplementy-w-pcos/");
   await card.click();
   await expect(page).toHaveURL(/\/ebooki\/suplementy-w-pcos\/$/);
+  await dismissConsentBanner(page);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     /Zrób porządek\s*z suplementami\./,
   );
