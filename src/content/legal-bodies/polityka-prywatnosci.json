@@ -1,6 +1,6 @@
 {
   "title": "Polityka prywatności aleksandraolesiewicz.com",
-  "version": "2.3",
+  "version": "2.4",
   "effectiveFrom": "2026-10-13",
   "seoDescription": "Jak Wellbiz sp. z o.o. przetwarza dane osobowe, w tym dane o zdrowiu, przy konsultacjach dietetycznych, e-bookach i newsletterze.",
   "body": [
@@ -375,7 +375,7 @@
           "_key": "r10",
           "cells": [
             "**Statystyki Strony** (Google Analytics 4)",
-            "identyfikatory internetowe, pliki cookies, informacje o urządzeniu, neutralny typ dopuszczonej strony, zdarzenie jej wyświetlenia i czas zaangażowania; bez rzeczywistego adresu, tytułu i adresu odsyłającego",
+            "identyfikatory internetowe, pliki cookies, informacje o urządzeniu, neutralny typ dopuszczonej strony, zdarzenie jej wyświetlenia, czas zaangażowania i kod rozpoznanego asystenta AI; bez rzeczywistego adresu, tytułu i adresu odsyłającego",
             "**Twoja zgoda** — art. 6 ust. 1 lit. a RODO i art. 399 Prawa komunikacji elektronicznej",
             "dane użytkownika i zdarzeń w GA4 — 2 miesiące, bez odnawiania retencji użytkownika przy nowej aktywności; okres cookies jest odrębny i opisany w [liście cookies](/lista-cookies-i-identyfikatorow/)"
           ]
@@ -1043,18 +1043,78 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Do GA4 przekazujemy neutralny kod rodzaju strony zamiast jej rzeczywistego adresu i tytułu; adres odsyłający jest pusty. Oprócz wyświetlenia strony GA4 mierzy czas zaangażowania, również przez automatyczne zdarzenie ",
+          "text": "Do GA4 przekazujemy neutralny kod rodzaju strony zamiast jej rzeczywistego adresu i tytułu; adres odsyłający jest pusty. Po zgodzie analitycznej rozpoznajemy też wejścia z ChatGPT, Perplexity, Claude, Gemini i Copilot. Do GA4 przekazujemy wyłącznie kod rozpoznanego asystenta: ",
           "marks": []
         },
         {
           "_type": "span",
           "_key": "s1",
-          "text": "user_engagement",
+          "text": "chatgpt",
           "marks": ["code"]
         },
         {
           "_type": "span",
           "_key": "s2",
+          "text": ", ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s3",
+          "text": "perplexity",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s4",
+          "text": ", ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s5",
+          "text": "claude",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s6",
+          "text": ", ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s7",
+          "text": "gemini",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s8",
+          "text": " albo ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s9",
+          "text": "copilot",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s10",
+          "text": ". Nie przekazujemy pełnego adresu odsyłającego ani parametrów UTM. Gdy źródła nie rozpoznamy, nie dodajemy kodu. Nie zapisujemy go w dodatkowych cookies ani pamięci przeglądarki. Oprócz wyświetlenia strony GA4 mierzy czas zaangażowania, również przez automatyczne zdarzenie ",
+          "marks": []
+        },
+        {
+          "_type": "span",
+          "_key": "s11",
+          "text": "user_engagement",
+          "marks": ["code"]
+        },
+        {
+          "_type": "span",
+          "_key": "s12",
           "text": ". Wyłączone są Google Signals, personalizacja reklam i automatyczny pomiar rozszerzony. Nie przekazujemy User-ID ani nazw produktów, treści wpisów, danych formularzy lub danych o zdrowiu. Piksel Meta wysyła ręczne zdarzenie wyświetlenia strony. Włączona konfiguracja Core ogranicza adres strony i adres odsyłający do domen. Automatyczne zdarzenia i automatyczne zaawansowane dopasowywanie danych klientów są wyłączone. Narzędzia nadal wykorzystują własne identyfikatory i informacje o urządzeniu; nie jest to pomiar anonimowy.",
           "marks": []
         }
