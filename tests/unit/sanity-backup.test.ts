@@ -1,15 +1,19 @@
 import {
+  createWriteStream,
   lstatSync,
   mkdirSync,
   readFileSync,
   realpathSync,
   symlinkSync,
+  writeFileSync,
 } from "node:fs";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { finished } from "node:stream/promises";
 import { fileURLToPath } from "node:url";
 
+import { list, Pack } from "tar";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -250,6 +254,41 @@ describe("archive members", () => {
         "dyuqkn8c-export-2026-10-13/files/b.pdf",
       ]),
     ).toEqual({ images: 1, files: 1 });
+  });
+
+  it("reads the prefixed member names that tar packs", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "sanity-backup-tar-"));
+    try {
+      const work = path.join(root, "work");
+      await mkdir(path.join(work, "images"), { recursive: true });
+      await mkdir(path.join(work, "files"), { recursive: true });
+      writeFileSync(
+        path.join(work, "data.ndjson"),
+        '{"_id":"page-1","_type":"page"}\n',
+      );
+      writeFileSync(path.join(work, "images", "a.jpg"), "jpeg");
+      const prefix = "dyuqkn8c-export-20261013T071000Z";
+      const archive = path.join(root, "out.tar.gz");
+      const pack = new Pack({ gzip: true, cwd: work, prefix, portable: true });
+      pack.add("data.ndjson");
+      pack.add("images");
+      pack.add("files");
+      pack.end();
+      await finished(pack.pipe(createWriteStream(archive)));
+
+      const paths: string[] = [];
+      await list({
+        file: archive,
+        onReadEntry(entry) {
+          paths.push(entry.path);
+        },
+      });
+
+      expect(findDataNdjsonEntry(paths)).toBe(`${prefix}/data.ndjson`);
+      expect(countAssetEntries(paths)).toEqual({ images: 1, files: 0 });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
   });
 });
 

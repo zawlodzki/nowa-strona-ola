@@ -324,7 +324,6 @@ function insideRepoRefusal(
   return `Odmowa: katalog kopii ${realDirectory} leży w repozytorium ${realRepoDisplayed}. Kopia zawiera sekrety podglądu; wybierz katalog poza repozytorium, np. ~/sanity-backups.`;
 }
 
-// `..` as the first segment is outside the root, so `/repo-backups` is not inside `/repo`.
 function isInsideRoot(root: string, candidate: string): boolean {
   const relative = path.relative(root, candidate);
   if (relative === "") return true;

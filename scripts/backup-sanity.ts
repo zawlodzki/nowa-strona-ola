@@ -92,7 +92,7 @@ function writeChecksum(
   archiveBasename: string,
   hex: string,
 ): void {
-  writeFileSync(checksumPath, `${hex}  ${archiveBasename}\n`);
+  writeFileSync(checksumPath, `${hex}  ${archiveBasename}\n`, { flag: "wx" });
 }
 
 async function listArchive(archivePath: string): Promise<readonly string[]> {
@@ -143,6 +143,7 @@ function spawnExport(
   const [command, ...args] = argv;
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, {
+      cwd: path.resolve(fileURLToPath(new URL("..", import.meta.url))),
       env,
       shell: false,
       stdio: "inherit",
