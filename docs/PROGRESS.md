@@ -1,10 +1,36 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-13 (flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-13 (kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Kopia datasetu Sanity, 13.10.2026
+
+- `npm run backup:sanity` eksportuje dataset `production` projektu `dyuqkn8c`
+  do katalogu poza repozytorium. Domyślnie jest to `~/sanity-backups/`.
+  Obok archiwum powstaje plik `.sha256`; oba mają tryb `0600`. Liczby dokumentów biorą się z
+  archiwum. Ścieżka wewnątrz repozytorium, w tym `output/` i `reports/`,
+  zostaje odrzucona.
+- Procedura odtworzenia jest w [runbooku](SANITY-BACKUP-RESTORE.md).
+  Przed importem trzeba usunąć z `data.ndjson` dokumenty
+  `sanity.previewUrlSecret` i spakować archiwum ponownie. Celem importu
+  jest wyłącznie dataset `restore-drill`. `production` nie jest celem
+  importu.
+- Baseline z 2026-10-13 07:10 jest zapisany w runbooku. 77 dokumentów,
+  69 opublikowanych, 8 szkiców. Ćwiczenie odtworzenia nie zostało
+  wykonane. Token zapisu treści nie ma uprawnienia
+  `sanity.project.datasets/create`.
+- Kontrole tej sesji, na fixture bez `PUBLIC_SANITY_*`. `npm run lint`
+  zakończył się bez ostrzeżeń. `npm test` dał 410 testów w 43 plikach.
+  `npm run build` i `npm run test:build` przeszły. JS ma 9214 B gzip,
+  CSS 30559 B gzip. Kontrola SEO objęła 36 stron, `robots=noindex`.
+  Próbka filtra NDJSON usunęła `sanity.previewUrlSecret` i nic nie
+  wypisała. Eksport produkcyjny nie był uruchamiany.
+- Następny krok. Uruchom ćwiczenie `restore-drill` po nadaniu uprawnienia
+  do tworzenia datasetu albo tokenem administratora. Potem usuń ten
+  dataset.
 
 ### Stabilne kliknięcia e2e, 13.10.2026
 

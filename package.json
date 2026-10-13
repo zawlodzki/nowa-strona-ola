@@ -45,7 +45,8 @@
     "migrate:blog-pages": "tsx scripts/migrate-blog-pages.ts",
     "import:contact": "tsx scripts/import-contact.ts",
     "import:audience": "tsx scripts/import-audience.ts",
-    "import:pmos-rename": "tsx scripts/import-pmos-rename.ts"
+    "import:pmos-rename": "tsx scripts/import-pmos-rename.ts",
+    "backup:sanity": "tsx scripts/backup-sanity.ts"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.1",
@@ -75,6 +76,7 @@
     "sanity": "^6.18.0",
     "satori": "^0.33.5",
     "sharp": "^0.35.5",
+    "tar": "7.5.22",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.70.0",

@@ -22,6 +22,7 @@ Sprawdzony lokalny podgląd: `node scripts/preview-homepage-mockups.mjs`,
 - [Treści i decyzje do konfiguracji homepage w CMS](docs/HOMEPAGE-CMS-CONFIG.md)
 - [Zasady weryfikacji kodu](docs/CODE-QUALITY.md)
 - [Konfiguracja wdrożeń Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md)
+- [Kopia i odtworzenie Sanity](docs/SANITY-BACKUP-RESTORE.md)
 - [Wyniki próby Bejamas](docs/UI-SPIKE-RESULTS.md)
 - [Instrukcje pracy w repo](AGENTS.md)
 - [Docelowy design system 3a](design-system/README.md)
