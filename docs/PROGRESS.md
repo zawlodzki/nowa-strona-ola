@@ -1,10 +1,21 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-13 (skala pisma licznika i brwi oraz hover Instagrama); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Skala pisma i hover Instagrama, 13.10.2026
+
+- Pomiar z 12.10 zostawiał `.home3a-count strong` przy 64 px i `p.contact3a-eyebrow` przy 14 px, gdy korzeń miał 32 px. Na wskaźniku grubym link Instagram na `/kontakt/` brał kolor najechania i go trzymał.
+- Licznik ma `5.75rem`, `min(4.875rem, 32cqi)` i `min(4rem, 30cqi)`. Brew ma `0.875rem`. Przy bazie 16 px zostają 92 px, 78 px, 64 px i 14 px. Przy bazie 32 px brew ma 28 px, licznik na 768 px i 1280 px ma 184 px, na 390 px ma 124.8 px, na 320 px ma 96 px. Pełne 128 px dla „9000+” ma około 327 px szerokości i nie mieści się w oknie 320 px. Podpis schodzi pod liczbę tylko wtedy, gdy liczba rośnie.
+- `:hover` linku społecznościowego jest w `@media (hover: hover) and (pointer: fine)`. `:active` nadal daje kolor wiśni na czas naciśnięcia.
+- Zewnętrzny CSS strony głównej ma 7770 B gzip, wcześniej 7754 B, limit 8192 B. Cały CSS ma 30575 B gzip, wcześniej 30559 B, limit 32768 B. Zewnętrzny CSS kontaktu zostaje 6009 B. Inline kontaktu ma 3844 B, wcześniej 3699 B.
+- Piksele strony głównej i kontaktu wobec `main` są zgodne przy 320, 390, 768 i 1280 px i domyślnym rozmiarze pisma. Porównanie pełnych zrzutów dało PSNR `inf`. Zrzuty są w `/tmp/ola-pixel/`.
+- `npm run test:build` przeszedł. E2E dało 466 PASS w Chromium, Firefox i WebKit, w tym nowe asercje skali i koloru Instagrama. Dwa testy WebKit wypadły w pełnym przebiegu i przeszły osobno. To fokus newslettera i dialog listy oczekujących. Drugi przebieg samego WebKit miał dwa inne wypadki, hover udostępniania w makiecie artykułu i wyścig `disabled` przycisku newslettera. Trzy powtórzenia testu newslettera w WebKit przeszły.
+- Przepis verify-ola na `/` odrzucił pusty i zły e-mail. Na `/kontakt/` zły telefon zatrzymał wysyłkę. `browser posts` zwrócił `[]`. Dowód jest w `/tmp/ola-verify-evidence/ola-1791872044/`.
+- Nie scalano i nie wdrażano. Następny krok to odbiór PR.
 
 ### GTM jako następny stacked PR, 12.10.2026
 

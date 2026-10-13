@@ -110,7 +110,7 @@ const pl = lang === "pl";
   }
   .contact3a-eyebrow {
     color: var(--ao-primary);
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 600;
     margin-bottom: var(--ao-space-16);
   }
@@ -190,8 +190,13 @@ const pl = lang === "pl";
     text-decoration: none;
     font-size: 14px;
   }
-  .contact3a-social a:hover {
+  .contact3a-social a:active {
     color: var(--ao-primary);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .contact3a-social a:hover {
+      color: var(--ao-primary);
+    }
   }
   .contact3a-company {
     display: grid;
