@@ -158,7 +158,8 @@ Techniczne typy `media.tag` i `media.folder` nie pojawiają się na liście Tre�
 
 Lokalny panel uruchamia sprawdzone `npm run dev:studio` pod
 `http://localhost:3333`. Lokalna instalacja pluginów nie aktualizuje hostowanego
-Studio. Wdrożenie panelu wymaga osobnego zlecenia.
+Studio. Scalenie do `main` wdraża panel automatycznie przez
+`deploy-studio.yml` po zielonym Quality.
 
 Hostowane Studio: `https://studio.aleksandraolesiewicz.com`. Build hostowany
 wymaga `SANITY_STUDIO_PREVIEW_ORIGIN=https://preview.aleksandraolesiewicz.com`.

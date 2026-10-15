@@ -39,3 +39,4 @@ secrets/
 
 # Generated dry-run import artefacts
 reports/
+.audit/

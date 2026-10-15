@@ -5492,7 +5492,7 @@ zoomu 200%, reduced motion, czytnika ani fizycznego urządzenia dla Studio.
 Zmiany lokalne, bez commitu, push, publikacji treści, rejestracji schematu
 lub wdrożenia Studio. Zachowano wcześniejsze zmiany użytkownika.
 Następny krok w tym zakresie: odebrać zalogowane ToC i Media w lokalnym Studio,
-a po osobnym zleceniu wdrożyć panel i sprawdzić go pod hostowanym adresem.
+a po scaleniu, które wdraża panel automatycznie, sprawdzić go pod hostowanym adresem.
 
 ## Kontrola zachowania altów po instalacji pluginów, 15.10.2026
 
@@ -5506,7 +5506,7 @@ Daty aktualizacji artykułów i 13 powiązanych assetów są wcześniejsze niż
 instalacja pluginów. Najnowsza aktualizacja artykułu to 15.10.2026 19:03:03 UTC,
 a assetu 13:46:36 UTC. Brak pełnego snapshotu wszystkich pól sprzed instalacji;
 wynik opiera się na aktualnym odczycie, datach dokumentów i porównaniu trzech
-zapisanych wcześniej okładek. [Raport](../.audit/article-media-alts-20261015.json).
+zapisanych wcześniej okładek. Raport jest lokalny, poza repozytorium.
 
 Media pokazuje `sanity.imageAsset.altText`, obecnie puste na wszystkich 13
 plikach. Projekt przechowuje opisy w `article.image.alt` i `body[].alt`.
@@ -5517,8 +5517,8 @@ W tej kontroli również nie wykonywano zapisów do Sanity ani publikacji.
 
 Kontrola 13/13 altów, porównanie 3/3 okładek i dat dokumentów PASS.
 Nie uruchamiano ponownie pełnego verify, bo nie zmieniono kodu aplikacji.
-Następny krok: dotychczasowy odbiór zalogowanych pluginów i ewentualne wdrożenie
-Studio na osobne zlecenie. Nie ma potrzeby odtwarzania ani kopiowania altów.
+Następny krok: dotychczasowy odbiór zalogowanych pluginów. Studio wdroży się
+automatycznie po scaleniu. Nie ma potrzeby odtwarzania ani kopiowania altów.
 
 ### PR pluginów Studio, 15.10.2026
 
@@ -5529,4 +5529,4 @@ PR obejmuje osiem plików, wyłącznie pluginy i dotyczącą ich dokumentację.
 Pozostałe zmiany lokalne zachowano poza PR. Kod i lockfile porównano z pełnym
 zielonym przebiegiem verify; są identyczne. Końcowy format i diff PASS.
 Nie scalano PR ani nie wdrażano Studio. Następny krok: odebrać CI i zalogowane
-narzędzia Studio; scalenie i wdrożenie po osobnym zleceniu.
+narzędzia Studio. Scalenie wdraża Studio automatycznie przez `deploy-studio.yml`.

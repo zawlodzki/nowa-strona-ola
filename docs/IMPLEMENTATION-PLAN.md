@@ -1048,7 +1048,7 @@ ustawień GitHub, treści Sanity i publikacji w tej sesji.
       publiczny artykuł przez `verify-ola`, bez POST.
 - [ ] Odebrać kliknięcia ToC i bibliotekę Media w zalogowanym Studio.
       Sterowanie kartą utraciło połączenie po zalogowaniu.
-- [ ] Po osobnym zleceniu wdrożyć Studio i odebrać hostowany panel.
+- [ ] Po scaleniu (automatyczny Deploy Studio) odebrać hostowany panel.
 
 - [x] Sprawdzić zachowanie altów istniejących grafik po instalacji pluginów.
       Sanity raw: 13/13 obrazów w sześciu artykułach ma alt; trzy opublikowane
