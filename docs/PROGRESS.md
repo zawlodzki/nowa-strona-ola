@@ -6,6 +6,66 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Kierunek okładek zapisany w skillu FIRMA, 15.10.2026
+
+- Na zlecenie użytkownika zaktualizowano
+  `FIRMA/.claude/skills/grafiki-blogowe/`: osobny tryb nastrojowych grafik głównych
+  bez napisów, oddzielony od schematów 3a wewnątrz artykułu. Dodano trzy
+  zaakceptowane WebP i ich pełne prompty, zasady kadrowania, alt i mapowanie Sanity.
+- Zmieniono instrukcję główną, metadane i referencje produkcji/design systemu,
+  aby historyczny różowy hero nie był wzorcem nowych okładek. Eksportera
+  i istniejących szablonów nie zmieniano. Globalny skill zawlodzki.pl pozostaje
+  bez zmian. Oficjalny `quick_validate.py` PASS na zapisanym skillu; YAML,
+  odnośniki, prompty i zgodność dziewięciu zapisanych plików sprawdzone.
+- Bez generowania kolejnych obrazów, zmian aplikacji, Sanity, commit i push.
+  Następny krok: użyć zmienionego skilla przy następnej okładce artykułu.
+
+### Podmiana okładek bloga w Sanity i na produkcji, 15.10.2026
+
+- Użytkownik zaakceptował trzy propozycje i zlecił podmianę na stronie.
+  Wgrano WebP 1672×941, 77 644 / 155 752 / 140 620 B. Zmieniono wyłącznie
+  obraz, alt, tone i hotspot trzech istniejących artykułów PL.
+  Nie było wcześniejszych szkiców; edycje utworzyły szkice z odczytanych rewizji,
+  a publikacja miała warunek zgodności rewizji. Dat treści nie aktualizowano.
+  [Rejestr nowych i poprzednich zasobów](../design-system/proposals/blog-covers-2026-10-15/cms-change.json).
+- Webhooki samoczynnie uruchomiły oba buildy. Produkcja
+  [38702850639](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38702850639)
+  i staging
+  [38702849278](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38702849278)
+  SUCCESS. Produkcyjny Worker ma wersję `ff163c0e-b57f-4175-828d-f53d9db16110`.
+- Na publicznym `/blog/` i wszystkich trzech artykułach sprawdzono nowe obrazy
+  w przeglądarce na desktopie i przy 320 px. Wszystkie załadowane, hotspoty
+  prawidłowe, bez poziomego przepełnienia. Przy reduced motion lista zachowuje
+  widoczne obrazy. Enter na odnośniku grafiki otwiera artykuł o hirsutyzmie.
+  Nie używano formularzy. Ręczny natywny zoom 200%, czytnik i fizyczny telefon
+  pozostają niesprawdzone. Odbiór wykonano na produkcji przez przeglądarkę;
+  lokalnego helpera verify-ola nie uruchamiano.
+- `npm run verify` na Node 24.19.0 PASS: 618 unit, 507 E2E,
+  12 świadomych pominięć GTM; fixture i symulacja Content Lake mają zgodne
+  sekcje, zdjęcia i DOM na 17 stronach. Pierwsza próba zatrzymała się na DNS
+  `sanity-cdn.com` w sandboxie; pełne ponowienie z dostępem do sieci PASS.
+  Log `/tmp/ola-blog-covers-verify-network.log`. Format nowych dokumentów,
+  odnośniki i diff sprawdzone. Kod aplikacji bez zmian; bez commit i push.
+- Następny krok dla tego zakresu: użytkownik ocenia nowe obrazy w docelowym
+  układzie. Poprzednie zasoby Sanity zachowano do ewentualnego powrotu.
+
+### Propozycje nowych okładek bloga, 15.10.2026
+
+- Użytkownik wskazał osiem referencji a16z i poprosił o nowe propozycje dla
+  trzech wpisów ze screena. Wszystkie referencje obejrzano w przeglądarce.
+- Wygenerowano trzy osobne obrazy 16:9 wbudowanym `image_gen`: portret do
+  hirsutyzmu, szklane pętle do PCOS i martwą naturę laboratoryjną do testosteronu.
+  Obejrzano pełne obrazy, zapisano PNG i pełne prompty w
+  [pakiecie propozycji](../design-system/proposals/blog-covers-2026-10-15/README.md).
+- Kierunek użytkownika i status propozycji zapisano w HOMEPAGE-CMS-CONFIG.
+  Nie zmieniono kodu, danych aplikacji, Sanity ani wdrożeń. Nie uruchamiano
+  aplikacji ani pełnego verify; zakres obejmuje propozycje grafik i dokumentację.
+- Format i lokalne odnośniki zmienionych dokumentów sprawdzono. Oględziny
+  samych obrazów nie oznaczają odbioru UI. Mobile, 320 px, klawiatura,
+  zoom 200% i reduced motion pozostają do sprawdzenia przy wdrożeniu.
+- Następny krok dla tego zakresu: wybór lub korekta propozycji, następnie
+  podmiana wybranych obrazów i kontrola rzeczywistego kadrowania.
+
 ### Zatwierdzony kod źródła AI, 13.10.2026
 
 - Właściciel dopuścił pięć kodów po zgodzie analitycznej, bez pełnych URL
