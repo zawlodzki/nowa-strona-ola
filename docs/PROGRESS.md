@@ -5418,5 +5418,7 @@ cookies bez zmiany zgód. Dowody: `/tmp/ola-verify-evidence/ola-home-meal-202610
 Klawiatura i axe przechodzą w pełnym E2E. Natywny zoom 200%, czytnik
 oraz fizyczny telefon nie były ręcznie sprawdzane.
 
-Następny krok: wypchnąć gałąź i utworzyć PR. Po jego scaleniu i wdrożeniu
+Gałąź `codex/homepage-meal` wypchnięta, utworzono
+[PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106). Bez merge.
+Następny krok: po scaleniu i wdrożeniu PR
 opublikować przygotowany szkic CMS, po kontroli rewizji, i odebrać produkcję.

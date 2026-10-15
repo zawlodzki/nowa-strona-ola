@@ -1027,7 +1027,7 @@ ustawień GitHub, treści Sanity i publikacji w tej sesji.
 - [x] Po akceptacji v2 dodać osobny WebP, klucz kadru i konfigurację fixture.
 - [x] Przygotować szkic podmiany w Sanity, zachowując istniejące okładki.
 - [x] Zakończyć odbiór i pełne verify.
-- [ ] Wypchnąć gałąź i utworzyć PR.
+- [x] Wypchnąć gałąź i utworzyć [PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106).
 - [ ] Po scaleniu PR opublikować szkic homepage i odebrać produkcję.
 
 [Materiał i kolejność uruchomienia](../design-system/proposals/homepage-meal-2026-10-15/README.md).
