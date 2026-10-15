@@ -113,7 +113,7 @@ pipe wyłącznie w pamięci do PostgreSQL i n8n. Referencje podłączono w plika
 kandydatów; nie oznacza to aktualizacji aktywnego workflow. Kontrola rzeczywistych uprawnień i odbiór n8n PASS 15.10.2026:
 świeży token 200, replay 403, osiem równoczesnych prób 1×200 i 7×403,
 błąd zapisu 503, po przywróceniu zapytania 200. Staging po próbach wyłączony,
-bez lokalnego originu. [Dowód odbioru](../../../.audit/ola-turnstile-live-proof.json).
+bez lokalnego originu. Dowód odbioru jest zapisany lokalnie, poza repozytorium.
 
 Tabela jest trwała, z `synchronous_commit=on`, bez automatycznego usuwania
 odcisków. Nie przechowuje tokenów, kluczy ani danych zgłoszeń. Rośnie o jeden

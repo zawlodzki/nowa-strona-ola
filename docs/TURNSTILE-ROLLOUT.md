@@ -179,7 +179,7 @@ Po przywróceniu dostępu potwierdzono rzeczywiste uprawnienia obu ról i
 odebrano 11-węzłowy graf na odseparowanym stagingu: świeży token 200,
 powtórzenia 403, osiem równoczesnych żądań 1×200 i 7×403. Brak tokenu 400,
 błędny token/action 403, zasymulowany błąd zapisu rejestru 503, po naprawie 200.
-[Dowód i ograniczenia próby](../.audit/ola-turnstile-live-proof.json).
+Dowód i ograniczenia próby są zapisane lokalnie, poza repozytorium.
 Po testach staging wyłączono i usunięto lokalny origin oraz symulację błędu.
 Zapis danych wykonań wyłączony. Produkcyjny workflow i publiczny frontend bez zmian.
 Następnym krokiem jest konfiguracja publicznych zmiennych wdrożeń i odbiór
