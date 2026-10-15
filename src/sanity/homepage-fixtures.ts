@@ -262,10 +262,10 @@ export function homepageSections(language: Locale) {
         "portrait",
       ),
       secondaryMedia: media(
-        homepageMediaKeys.food,
+        homepageMediaKeys.meal,
         language === "pl"
-          ? "Kolorowy posiłek z warzywami i pieczywem"
-          : "A colourful meal with vegetables and bread",
+          ? "Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony"
+          : "Chicken liver with apple and onion, boiled potatoes and a fermented cucumber",
       ),
     },
     {

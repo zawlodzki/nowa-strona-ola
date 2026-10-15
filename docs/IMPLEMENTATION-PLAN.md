@@ -1020,3 +1020,14 @@ przy 1440/390/320 px bez JS i overflow. Szczegóły i ograniczenia w postępie.
 
 Instrukcja: [INDEXNOW-DEPLOYMENT.md](INDEXNOW-DEPLOYMENT.md). Bez zmiany
 ustawień GitHub, treści Sanity i publikacji w tej sesji.
+
+## Nakładka portretu z obiadem, 15.10.2026
+
+- [x] Wygenerować obiad i poprawić wątróbkę na mniejszą, ciemniejszą drobiową.
+- [x] Po akceptacji v2 dodać osobny WebP, klucz kadru i konfigurację fixture.
+- [x] Przygotować szkic podmiany w Sanity, zachowując istniejące okładki.
+- [x] Zakończyć odbiór i pełne verify.
+- [ ] Wypchnąć gałąź i utworzyć PR.
+- [ ] Po scaleniu PR opublikować szkic homepage i odebrać produkcję.
+
+[Materiał i kolejność uruchomienia](../design-system/proposals/homepage-meal-2026-10-15/README.md).

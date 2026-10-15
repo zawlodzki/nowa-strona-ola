@@ -4,6 +4,7 @@ import aboutPortrait from "@/assets/portraits/about.webp";
 import contactPortrait from "@/assets/portraits/contact.webp";
 import diplomaPhoto from "@/assets/portraits/diploma.jpg";
 import foodEditorial from "@/assets/editorial/food-editorial.webp";
+import homeMeal from "@/assets/editorial/home-meal.webp";
 import heroPortrait from "@/assets/portraits/hero.webp";
 import type { SiteRasterKey } from "@/lib/site-images";
 
@@ -14,4 +15,5 @@ export const siteRasters: Record<SiteRasterKey, ImageMetadata> = {
   contact: contactPortrait,
   diploma: diplomaPhoto,
   food: foodEditorial,
+  "home-meal": homeMeal,
 };

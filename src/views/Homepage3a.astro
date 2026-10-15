@@ -181,7 +181,7 @@ function coverLabels(kind: CoverArtKind): string[] {
         <SiteImage
           class="home3a-about__food"
           src={content.about.secondaryMedia?.src}
-          fallback="food"
+          fallback="home-meal"
           alt={content.about.secondaryMedia?.label ?? ""}
           width={1536}
           height={1024}
@@ -274,11 +274,6 @@ function coverLabels(kind: CoverArtKind): string[] {
                       slot="art"
                       kind={art.kind}
                       labels={coverLabels(art.kind)}
-                      imageSrc={
-                        art.kind === "nutrition"
-                          ? content.about.secondaryMedia?.src
-                          : undefined
-                      }
                     />
                   </BookCover>
                 </CoverStage>

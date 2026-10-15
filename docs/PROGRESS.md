@@ -5391,3 +5391,32 @@ odnotować z datą i powodem. Nie przechowywać sekretów.
 - Na kolejne polecenie użytkownika wydzielono zakres skilla do osobnej gałęzi
   na aktualnym `origin/main`. Pozostałe lokalne zmiany dokumentacji SEO
   zachowano poza tym zakresem. Scalenie przez PR wymaga zielonej kontroli Quality.
+
+## Nakładka portretu z obiadem, 15.10.2026
+
+Po akceptacji użytkownika podpięto wersję v2 jako osobny WebP 1536×1024
+i klucz `home-meal`. Zaktualizowano alt PL/EN oraz listę mediów importera.
+Okładka żywieniowa homepage przestała pobierać obraz z nakładki portretu,
+pozostając przy dotychczasowym `food`. Inne obrazy bez zmian.
+
+W Sanity utworzono szkic `drafts.page-home-pl`, wyłącznie klucz kadru i alt
+`home-about.secondaryMedia`, z warunkiem zgodności rewizji. Brak wcześniejszego
+szkicu potwierdzono zapytaniem raw. Publikacja dopiero po scaleniu i wdrożeniu
+PR; opublikowany dokument ma nadal `food`.
+[Materiał i kolejność uruchomienia](../design-system/proposals/homepage-meal-2026-10-15/README.md).
+
+`npm run verify` na Node 24.21.0 PASS: 618 unit, 507 E2E,
+12 świadomych pominięć GTM, buildy oraz zgodność fixture/Content Lake
+na 17 stronach. Log: `/tmp/ola-homepage-meal-verify.log`.
+
+verify-ola `ola-home-meal-20261015`, doctor PASS, port 4340,
+POST `[]`. Nakładka ładuje nowy WebP i właściwy alt. Osobny Chromium
+na tym samym podglądzie: 1440/390/320 px, bez overflow; nakładka czytelna,
+okładki nie używają `home-meal`. Reduced motion, brak JS i CSS zoom 200%
+na desktopie PASS. Zrzuty obejrzano na 1440 i 320 px po zamknięciu panelu
+cookies bez zmiany zgód. Dowody: `/tmp/ola-verify-evidence/ola-home-meal-20261015/`.
+Klawiatura i axe przechodzą w pełnym E2E. Natywny zoom 200%, czytnik
+oraz fizyczny telefon nie były ręcznie sprawdzane.
+
+Następny krok: wypchnąć gałąź i utworzyć PR. Po jego scaleniu i wdrożeniu
+opublikować przygotowany szkic CMS, po kontroli rewizji, i odebrać produkcję.

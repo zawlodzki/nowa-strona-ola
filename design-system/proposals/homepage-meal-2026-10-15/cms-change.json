@@ -1,0 +1,19 @@
+{
+  "projectId": "dyuqkn8c",
+  "dataset": "production",
+  "status": "draft-awaiting-pr-merge",
+  "documentId": "page-home-pl",
+  "publishedRevisionBefore": "Hldtf1Ee54aeykZ46H9tbc",
+  "draftId": "drafts.page-home-pl",
+  "draftRevisionAfter": "UOs2f8XeFxg25W1kCvSiFw",
+  "path": "sections[_key==\"home-about\"].secondaryMedia",
+  "before": {
+    "rasterKey": "food",
+    "alt": "Kolorowy posiłek z warzywami i pieczywem"
+  },
+  "after": {
+    "rasterKey": "home-meal",
+    "alt": "Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony"
+  },
+  "nextStep": "Po scaleniu i wdrożeniu PR porównać dokument i szkic z odczytanymi rewizjami, opublikować wyłącznie podmianę nakładki, następnie odebrać stronę."
+}
