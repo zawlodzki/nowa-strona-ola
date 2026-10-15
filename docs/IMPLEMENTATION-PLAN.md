@@ -1031,3 +1031,25 @@ ustawień GitHub, treści Sanity i publikacji w tej sesji.
 - [ ] Po scaleniu PR opublikować szkic homepage i odebrać produkcję.
 
 [Materiał i kolejność uruchomienia](../design-system/proposals/homepage-meal-2026-10-15/README.md).
+
+## Ocena pluginów Studio, 15.10.2026
+
+- [x] Sprawdzić deklarowaną zgodność Table of Contents 2.0.0, Media browser
+      6.3.5 i Link Checker 0.4.1 z Sanity 6.18.0 i zależnościami projektu.
+      Wszystkie trzy zgodne według metadanych npm; bez instalacji i testu Studio.
+      Wynik i ograniczenia zapisano w [postępie](PROGRESS.md).
+
+## Instalacja pluginów Studio, 15.10.2026
+
+- [x] Zainstalować Table of Contents 2.0.0 i Media browser 6.3.5 w Studio.
+- [x] Skonfigurować inspektor dla artykułów, stron i dokumentów prawnych
+      oraz ukryć techniczne typy Media w ogólnej liście Treści.
+- [x] Wykonać pełne `npm run verify`, porównać audyt zależności i sprawdzić
+      publiczny artykuł przez `verify-ola`, bez POST.
+- [ ] Odebrać kliknięcia ToC i bibliotekę Media w zalogowanym Studio.
+      Sterowanie kartą utraciło połączenie po zalogowaniu.
+- [ ] Po osobnym zleceniu wdrożyć Studio i odebrać hostowany panel.
+
+- [x] Sprawdzić zachowanie altów istniejących grafik po instalacji pluginów.
+      Sanity raw: 13/13 obrazów w sześciu artykułach ma alt; trzy opublikowane
+      okładki zgodne z wcześniejszym rejestrem. Osobne `asset.altText` jest puste.

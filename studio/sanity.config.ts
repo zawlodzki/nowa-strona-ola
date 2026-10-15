@@ -2,6 +2,8 @@ import { defineConfig, type Template } from "sanity";
 import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { visionTool } from "@sanity/vision";
+import { media } from "sanity-plugin-media";
+import { tableOfContentsPlugin } from "sanity-plugin-table-of-contents";
 
 import { previewOrigin, sanityEnvironment } from "./sanity.env";
 import { presentationResolve } from "./presentation";
@@ -50,6 +52,11 @@ export default defineConfig({
       resolve: presentationResolve,
     }),
     visionTool(),
+    tableOfContentsPlugin({
+      documentTypes: ["article", "page", "legalPage"],
+      fieldNames: ["body", "sections"],
+    }),
+    media(),
   ],
   document: {
     newDocumentOptions: (previous) =>
