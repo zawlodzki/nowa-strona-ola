@@ -6,6 +6,35 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
+### Charset UTF-8 dla plików tekstowych, 15.10.2026
+
+- Produkcyjny `curl -I https://aleksandraolesiewicz.com/llms.txt` zwracał
+  `content-type: text/plain` bez `charset`. `/llms-full.txt` miał
+  `text/plain; charset=utf-8`. Zagnieżdżone `.md`, na przykład
+  `/blog/kategoria/pcos.md`, miały `text/markdown; charset=utf-8`.
+  Bez charset przeglądarka czyta UTF-8 w `llms.txt` jako mojibake,
+  na przykład Śląski jako ŚlÄ…ski.
+- Workers Static Assets ignoruje nagłówek z trasy Astro. MIME bierze
+  z rozszerzenia, a `_headers` go nadpisuje. Reguła `/llms.txt` w
+  `buildHeadersFile` ustawiała tylko `X-Robots-Tag`. Wrangler dla `.txt`
+  wysyła `text/plain` bez charset. Reguła `/llms-full.txt` nadpisywała
+  Content-Type, dlatego ten plik był czytelny.
+- `/*.txt` jest teraz jedynym Content-Type plików tekstowych
+  (`text/plain; charset=utf-8`). Węższe reguły dla `llms.txt`,
+  `llms-full.txt` i klucza IndexNow zostawiają sam `X-Robots-Tag`.
+  Cloudflare skleja powtórzony nagłówek przecinkiem, więc druga wartość
+  Content-Type zepsułaby charset. `/*.md` bez zmian.
+- Test jednostkowy padał na pustym Content-Type dla `/llms.txt`, potem
+  73 testów SEO przeszło. `SITE_INDEXING=production node scripts/check-seo.mjs`
+  PASS, 36 stron. Kontrola idzie po każdym pliku `.txt` i `.md` w `dist`,
+  bez liczby stron i bez kopii Sanity. Lokalny Wrangler na
+  `http://127.0.0.1:8791` przy indeksowaniu produkcyjnym. `curl -I`
+  dał `text/plain; charset=utf-8` dla `/llms.txt`, `/llms-full.txt` i
+  `/robots.txt` oraz `text/markdown; charset=utf-8` dla `/index.md` i
+  `/blog/kategoria/pcos.md`. `robots.txt` bez `noindex`.
+- Zmiana dotyczy nagłówków plików tekstowych i Markdown. Następny krok
+  to odbiór PR.
+
 ### Kierunek okładek zapisany w skillu FIRMA, 15.10.2026
 
 - Na zlecenie użytkownika zaktualizowano

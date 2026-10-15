@@ -4,6 +4,7 @@ import {
   buildHeadersFile,
   buildRedirectsFile,
 } from "../../src/lib/seo/edge-files";
+import { headerValue } from "../../scripts/static-asset-headers.mjs";
 import {
   absolutizeMarkdownLinks,
   getInventory,
@@ -85,6 +86,71 @@ describe("_headers", () => {
       'Link: <https://aleksandraolesiewicz.com/:splat/>; rel="canonical"',
     );
     expect(headers).toContain("/index.md\n  ! Link");
+  });
+
+  it("combines matching rules and joins a repeated header", () => {
+    const headers = [
+      "/*.txt",
+      "  Content-Type: text/plain; charset=utf-8",
+      "/llms.txt",
+      "  X-Robots-Tag: noindex",
+      "/llms-full.txt",
+      "  Content-Type: text/plain",
+      "  X-Robots-Tag: noindex",
+      "/*.md",
+      '  Link: <https://aleksandraolesiewicz.com/:splat/>; rel="canonical"',
+      "/index.md",
+      "  ! Link",
+      '  Link: <https://aleksandraolesiewicz.com/>; rel="canonical"',
+      "",
+    ].join("\n");
+    expect(headerValue(headers, "/robots.txt", "Content-Type")).toBe(
+      "text/plain; charset=utf-8",
+    );
+    expect(headerValue(headers, "/llms.txt", "Content-Type")).toBe(
+      "text/plain; charset=utf-8",
+    );
+    expect(headerValue(headers, "/llms.txt", "X-Robots-Tag")).toBe("noindex");
+    expect(headerValue(headers, "/llms-full.txt", "Content-Type")).toBe(
+      "text/plain; charset=utf-8, text/plain",
+    );
+    expect(headerValue(headers, "/blog/kategoria/pcos.md", "Link")).toBe(
+      '<https://aleksandraolesiewicz.com/:splat/>; rel="canonical"',
+    );
+    expect(headerValue(headers, "/index.md", "Link")).toBe(
+      '<https://aleksandraolesiewicz.com/>; rel="canonical"',
+    );
+  });
+
+  it("serves every text and markdown asset as utf-8", () => {
+    for (const indexing of [true, false]) {
+      const headers = buildHeadersFile({ indexing });
+      expect(headerValue(headers, "/llms.txt", "Content-Type")).toBe(
+        "text/plain; charset=utf-8",
+      );
+      expect(headerValue(headers, "/robots.txt", "Content-Type")).toBe(
+        "text/plain; charset=utf-8",
+      );
+      expect(headerValue(headers, "/llms-full.txt", "Content-Type")).toBe(
+        "text/plain; charset=utf-8",
+      );
+      expect(
+        headerValue(headers, "/blog/kategoria/pcos.md", "Content-Type"),
+      ).toBe("text/markdown; charset=utf-8");
+    }
+    const withKey = buildHeadersFile({
+      indexing: true,
+      indexNow: {
+        kind: "enabled",
+        key: "abcd1234ef",
+        keyPath: "/abcd1234ef.txt",
+        keyLocation: "https://aleksandraolesiewicz.com/abcd1234ef.txt",
+      },
+    });
+    expect(headerValue(withKey, "/abcd1234ef.txt", "Content-Type")).toBe(
+      "text/plain; charset=utf-8",
+    );
+    expect(headerValue(withKey, "/llms.txt", "X-Robots-Tag")).toBe("noindex");
   });
 });
 

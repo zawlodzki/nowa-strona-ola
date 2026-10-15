@@ -175,7 +175,7 @@ describe("IndexNow configuration and CLI", () => {
 describe("IndexNow sitemap and artifact boundaries", () => {
   it("adds key headers only to an explicitly enabled indexable build", () => {
     expect(buildHeadersFile({ indexing: true, indexNow: enabled() })).toContain(
-      `/${key}.txt\n  Content-Type: text/plain; charset=utf-8\n  X-Robots-Tag: noindex`,
+      `/${key}.txt\n  X-Robots-Tag: noindex`,
     );
     expect(
       buildHeadersFile({ indexing: false, indexNow: enabled() }),

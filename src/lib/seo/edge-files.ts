@@ -5,6 +5,8 @@ import { SITE_ORIGIN } from "@/lib/seo/site";
 /**
  * `_headers` for Workers Static Assets (max 100 rules). Markdown alternates
  * stay out of the index and point to their HTML canonical (`:splat`).
+ * `/*.txt` is the only Content-Type for text files. A repeated header is
+ * joined with a comma, so a narrower rule must not set Content-Type again.
  */
 export function buildHeadersFile({
   indexing,
@@ -15,11 +17,7 @@ export function buildHeadersFile({
 }): string {
   const rules: string[][] = [];
   if (indexing && indexNow?.kind === "enabled")
-    rules.push([
-      indexNow.keyPath,
-      "Content-Type: text/plain; charset=utf-8",
-      "X-Robots-Tag: noindex",
-    ]);
+    rules.push([indexNow.keyPath, "X-Robots-Tag: noindex"]);
   if (!indexing) rules.push(["/*", "X-Robots-Tag: noindex"]);
   rules.push(
     [
@@ -29,12 +27,9 @@ export function buildHeadersFile({
       `Link: <${SITE_ORIGIN}/:splat/>; rel="canonical"`,
     ],
     ["/index.md", "! Link", `Link: <${SITE_ORIGIN}/>; rel="canonical"`],
+    ["/*.txt", "Content-Type: text/plain; charset=utf-8"],
     ["/llms.txt", "X-Robots-Tag: noindex"],
-    [
-      "/llms-full.txt",
-      "Content-Type: text/plain; charset=utf-8",
-      "X-Robots-Tag: noindex",
-    ],
+    ["/llms-full.txt", "X-Robots-Tag: noindex"],
     ["/blog/rss.xml", "Content-Type: application/rss+xml; charset=utf-8"],
     ["/_astro/*", "Cache-Control: public, max-age=31536000, immutable"],
   );
