@@ -53,6 +53,15 @@ Zasady z [planu SEO/GEO/AEO](SEO-GEO-AEO-PLAN.md), etap SEO‑5 (11.10.2026):
   deklaracji).
 - **Bez obietnic efektów zdrowotnych** i bez zaleceń dawkowania. Pod
   treścią artykułu zawsze wyświetla się zastrzeżenie edukacyjne.
+- **Luka w szkicu** to zapis `[[TODO: czego brakuje]]` w treści artykułu.
+  Panel **Do uzupełnienia** wypisuje takie znaczniki z akapitów, tekstów
+  alternatywnych, podpisów, wyróżnień, wezwań i komórek tabel.
+  Kliknięcie znacznika ustawia kursor w tym bloku.
+  Publikacja pokazuje ostrzeżenie, dopóki znacznik zostaje w treści.
+  To samo ostrzeżenie łapie starszy zapis `[DO UZUPEŁNIENIA]`,
+  `[TWÓJ KONKRET: tekst]` oraz `[ETYKIETA: tekst]` pisany wielkimi literami.
+  Sam skrót w nawiasie, na przykład `[PCOS]`, nie jest znacznikiem.
+  Ostrzeżenie nie blokuje publikacji. Usuń znacznik przed oddaniem tekstu.
 
 ## Strona zbiorcza bloga
 

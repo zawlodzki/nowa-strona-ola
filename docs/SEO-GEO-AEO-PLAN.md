@@ -302,7 +302,7 @@ Zmiany w komponentach 3a, bez nowych tokenów:
 - **Wytyczne redakcyjne** (do [BLOG-PUBLISHING.md](BLOG-PUBLISHING.md)):
   H2 w formie pytań, jedno twierdzenie na akapit, liczby z jednostką
   i źródłem, linki wewnętrzne przez referencje w treści, brak obietnic
-  efektów zdrowotnych.
+  efektów zdrowotnych, luka w szkicu jako `[[TODO: czego brakuje]]`.
 
 ### Kontrole w buildzie i testy
 

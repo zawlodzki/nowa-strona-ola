@@ -102,6 +102,11 @@ Walidacja `legalPage` (błąd blokuje „Publish”, szkic się zapisuje):
 - dowolny tekst w `body` (także komórki tabel i adresy linków) zawierający `{{`
   albo `[do sprawdzenia`.
 
+Znacznik szkicu `[[TODO: czego brakuje]]` oraz etykieta z wielkich liter dają osobne ostrzeżenie na polu `body`.
+Przykłady etykiety to `[DO UZUPEŁNIENIA]` i `[TWÓJ KONKRET: tekst]`.
+Ostrzeżenie nie blokuje publikacji.
+Nie zastępuje ono błędu dla `{{` oraz `[do sprawdzenia`.
+
 Tę samą regułę (`studio/schema-types/shared/legal-publication.ts`) stosują
 `npm run import:legal -- --write` (kończy się kodem 2) oraz `npm run import:3a`
 (dokument trafia do `pending`, nie do transakcji). Oba skrypty zapisują

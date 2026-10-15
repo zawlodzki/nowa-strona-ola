@@ -40,6 +40,10 @@
   reduced motion musi pozostawiać czytelny stan statyczny.
 - Sanity: sekcje z kontrolowanymi wariantami, bez dowolnego CSS. Modeluj znaczenie
   danych, dodawaj etykiety, walidację i podglądy; referencje dla treści wspólnych.
+- Szkic artykułu zostawia lukę jako `[[TODO: czego brakuje]]` w polu `body`.
+  Studio pokazuje ją w panelu **Do uzupełnienia** i daje ostrzeżenie przy
+  publikacji. Zasada i wyjątki są w
+  [edycji bloga](docs/BLOG-PUBLISHING.md).
 - Każda sekcja ma schemat, renderer HTML, serializer Markdown i przykład.
   Nieznany typ blokuje build. Utrzymuj zgodność typów Sanity/GROQ/TypeScript.
 - PL pod /, EN pod /en/; osobne dokumenty i powiązania tłumaczeń. Bez polskiego
