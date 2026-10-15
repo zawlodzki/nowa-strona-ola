@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "@ola/shared";
 
+import { resolveTurnstileSitekey } from "@/lib/turnstile-config";
 import { inlineMarkdownHtml } from "@/lib/inline-markdown";
 import { fieldMaxLength, type LeadFormSpec } from "@/lib/lead-form";
 import type { FormCopy, FormFieldCopy } from "@/sections/types";
@@ -22,6 +23,13 @@ const {
   layout = "inline",
   demo = false,
 } = Astro.props;
+const siteKey = demo
+  ? ""
+  : resolveTurnstileSitekey({
+      PUBLIC_TURNSTILE_SITEKEY: import.meta.env.PUBLIC_TURNSTILE_SITEKEY,
+      PUBLIC_SANITY_PROJECT_ID: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
+      DEPLOYMENT_TARGET: import.meta.env.DEPLOYMENT_TARGET,
+    });
 const pl = lang === "pl";
 const checkboxFields = content.fields.filter(
   (field) => field.input === "checkbox",
@@ -87,6 +95,7 @@ const autocomplete: Partial<Record<FormFieldCopy["input"], string>> = {
   data-success={demo ? copy.demoSuccess : content.success}
   data-error={content.error}
   data-demo={demo || undefined}
+  data-turnstile-sitekey={siteKey}
 >
   {controlFields.map((field) => {
     const { fieldId, errorId } = fieldIds(field);
@@ -187,6 +196,11 @@ const autocomplete: Partial<Record<FormFieldCopy["input"], string>> = {
     <p class="ao-form-note" set:html={inlineMarkdownHtml(content.notice)} />
   )}
   {demo && <p class="ao-form-note">{copy.demoNote}</p>}
+  <div
+    data-turnstile-container
+    role="group"
+    aria-label={pl ? "Zabezpieczenie przed botami" : "Bot protection"}
+  ></div>
   <p class="ao-field__error" role="alert" data-form-error></p>
   <p class="status" role="status" aria-live="polite"></p>
   {showsReceipt && (
@@ -222,6 +236,7 @@ const autocomplete: Partial<Record<FormFieldCopy["input"], string>> = {
     type FieldValues,
     type LeadFormSpec,
   } from "@/lib/lead-form";
+  import { createLeadProtection } from "@/lib/lead-protection";
   import { leadWebhookUrl } from "@/lib/lead-endpoint";
 
   type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
@@ -303,6 +318,16 @@ const autocomplete: Partial<Record<FormFieldCopy["input"], string>> = {
     const status = form.querySelector<HTMLElement>('[role="status"]');
     const failure = form.querySelector<HTMLElement>("[data-form-error]");
     const honeypot = form.querySelector<HTMLInputElement>("[data-honeypot]");
+    const container = form.querySelector<HTMLElement>(
+      "[data-turnstile-container]",
+    );
+    if (!container) continue;
+    const protection = createLeadProtection(container, {
+      siteKey: form.dataset.turnstileSitekey ?? "",
+      action: spec.formKey,
+      language: spec.language,
+    });
+    const pl = spec.language === "pl";
     let submissionId = crypto.randomUUID();
     let sending = false;
     if (button) button.disabled = false;
@@ -333,27 +358,52 @@ const autocomplete: Partial<Record<FormFieldCopy["input"], string>> = {
       sending = true;
       form.setAttribute("aria-busy", "true");
       if (button) button.disabled = true;
-      const sent = await postLeadSubmission(
-        leadWebhookUrl,
-        buildLeadSubmission(spec, values, {
-          submissionId,
-          submittedAt: sentAt.toISOString(),
-          href: location.href,
-        }),
-      );
-      sending = false;
-      form.removeAttribute("aria-busy");
-      if (button) button.disabled = false;
-      if (sent) {
-        succeed(values, sentAt);
-      } else if (failure) {
-        failure.textContent = form.dataset.error ?? "";
+      if (status)
+        status.textContent = pl
+          ? "Trwa sprawdzanie zabezpieczenia. Jeśli pojawi się zadanie, wykonaj je."
+          : "Checking security. Complete the challenge if prompted.";
+      try {
+        const sent = await protection.submit((turnstileToken) => {
+          if (status) status.textContent = pl ? "Wysyłanie…" : "Sending…";
+          return postLeadSubmission(
+            leadWebhookUrl,
+            buildLeadSubmission(spec, values, {
+              submissionId,
+              submittedAt: sentAt.toISOString(),
+              href: location.href,
+              turnstileToken,
+            }),
+          );
+        });
+        if (sent) succeed(values, sentAt);
+        else {
+          if (status) status.textContent = "";
+          if (failure) failure.textContent = form.dataset.error ?? "";
+        }
+      } catch {
+        if (status) status.textContent = "";
+        if (failure)
+          failure.textContent = pl
+            ? "Nie udało się sprawdzić zabezpieczenia. Sprawdź połączenie i spróbuj ponownie. Twoje dane pozostały w formularzu."
+            : "Security verification failed. Check your connection and try again. Your details remain in the form.";
+      } finally {
+        sending = false;
+        form.removeAttribute("aria-busy");
+        if (button) button.disabled = false;
       }
     });
   }
 </script>
 
 <style is:global>
+  [data-turnstile-container] {
+    grid-column: 1 / -1;
+    min-inline-size: 0;
+  }
+  [data-turnstile-container]:empty {
+    display: none;
+  }
+
   .ao-form-receipt {
     padding: var(--ao-space-16);
     border: 1px solid var(--ao-line);

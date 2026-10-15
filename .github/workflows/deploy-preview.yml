@@ -39,6 +39,8 @@ jobs:
       - name: Build production preview
         env:
           CLOUDFLARE_ENV: production
+          DEPLOYMENT_TARGET: preview
+          PUBLIC_TURNSTILE_SITEKEY: ${{ vars.PUBLIC_TURNSTILE_SITEKEY }}
         run: npm run build --workspace @ola/preview
       - name: Skip an outdated Quality run
         id: current

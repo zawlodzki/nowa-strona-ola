@@ -27,6 +27,8 @@ jobs:
       PUBLIC_GTM_ENABLED: ${{ github.event.client_payload.target_environment == 'production' && vars.PUBLIC_GTM_ENABLED == 'true' && 'true' || 'false' }}
       PUBLIC_SANITY_PROJECT_ID: ${{ vars.PUBLIC_SANITY_PROJECT_ID }}
       PUBLIC_SANITY_DATASET: ${{ vars.PUBLIC_SANITY_DATASET }}
+      PUBLIC_TURNSTILE_SITEKEY: ${{ vars.PUBLIC_TURNSTILE_SITEKEY }}
+      PUBLIC_LEAD_WEBHOOK_URL: ${{ vars.PUBLIC_LEAD_WEBHOOK_URL }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
@@ -47,6 +49,15 @@ jobs:
           esac
           test -n "$PUBLIC_SANITY_PROJECT_ID"
           test -n "$PUBLIC_SANITY_DATASET"
+          test -n "$PUBLIC_TURNSTILE_SITEKEY"
+          if [ "$DEPLOYMENT_TARGET" = staging ]; then
+            test -n "$PUBLIC_LEAD_WEBHOOK_URL"
+            node --input-type=module -e '
+              const endpoint = new URL(process.env.PUBLIC_LEAD_WEBHOOK_URL);
+              const production = new URL("https://flows.zawlodzki.com/webhook/2fba1cf1-729f-4e79-8ebf-869f9277284e");
+              if (endpoint.protocol !== "https:" || (endpoint.origin === production.origin && endpoint.pathname === production.pathname)) process.exit(1);
+            '
+          fi
           test -n "$CLOUDFLARE_ACCOUNT_ID"
           test -n "$CLOUDFLARE_API_TOKEN"
       - run: npm ci

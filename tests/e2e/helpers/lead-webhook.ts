@@ -8,6 +8,89 @@ const corsHeaders = {
   "access-control-allow-headers": "content-type",
 };
 
+type TurnstileMode =
+  | "success"
+  | "pending"
+  | "error"
+  | "expired"
+  | "empty"
+  | "script-error"
+  | "cleanup-error";
+
+declare global {
+  interface Window {
+    __turnstileMock: {
+      rendered: number;
+      executed: number;
+      removed: number;
+      options: {
+        action: string;
+        execution: string;
+        appearance: string;
+        size: string;
+        "response-field": boolean;
+      }[];
+      fire: (
+        id: number,
+        event: "success" | "error" | "expired",
+        token?: string,
+      ) => void;
+    };
+  }
+}
+
+function turnstileScript(mode: TurnstileMode): string {
+  return `
+    (() => {
+      const widgets = [];
+      const nodes = [];
+      const mock = window.__turnstileMock = {
+        rendered: 0, executed: 0, removed: 0, options: [],
+        fire(id, event, token = 'test-token-late-' + id) {
+          const options = widgets[id];
+          if (event === 'success') options.callback(token);
+          if (event === 'error') options['error-callback']();
+          if (event === 'expired') options['expired-callback']();
+        },
+      };
+      window.turnstile = {
+        render(container, options) {
+          const id = widgets.length;
+          widgets.push(options);
+          mock.options.push(options);
+          const challenge = document.createElement('label');
+          challenge.style.cssText = 'display:block;inline-size:150px;block-size:140px';
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.addEventListener('change', () => mock.fire(id, 'success', 'test-token-interaction-' + id));
+          challenge.append(checkbox, 'Testowe sprawdzenie zabezpieczenia');
+          container.append(challenge);
+          nodes.push(challenge);
+          mock.rendered++;
+          return String(id);
+        },
+        execute(id) {
+          mock.executed++;
+          const mode = ${JSON.stringify(mode)};
+          if (mode === 'pending') return;
+          setTimeout(() => {
+            if (mode === 'success' || mode === 'cleanup-error') mock.fire(Number(id), 'success', 'test-token-' + mock.executed);
+            if (mode === 'empty') mock.fire(Number(id), 'success', '');
+            if (mode === 'error') mock.fire(Number(id), 'error');
+            if (mode === 'expired') mock.fire(Number(id), 'expired');
+          }, 0);
+        },
+        reset() { if (${JSON.stringify(mode)} === 'cleanup-error') throw new Error('Reset failed'); },
+        remove(id) {
+          nodes[Number(id)].remove();
+          mock.removed++;
+          if (${JSON.stringify(mode)} === 'cleanup-error') throw new Error('Remove failed');
+        },
+      };
+    })();
+  `;
+}
+
 export interface CapturedLead {
   contentType: string | undefined;
   body: unknown;
@@ -18,6 +101,7 @@ export interface CapturedLead {
  * fails if one was attempted. `mock` answers them with a chosen status.
  */
 export const test = base.extend<{
+  turnstile: { mode: (mode: TurnstileMode) => void };
   leadWebhook: {
     mock: (
       page: Page,
@@ -26,6 +110,29 @@ export const test = base.extend<{
     ) => Promise<CapturedLead[]>;
   };
 }>({
+  turnstile: [
+    async ({ context }, use) => {
+      let mode: TurnstileMode = "success";
+      await context.route(
+        /^https:\/\/challenges\.cloudflare\.com\//,
+        (route) => {
+          if (mode === "script-error") return route.abort();
+          if (!route.request().url().includes("/turnstile/v0/api.js"))
+            return route.abort();
+          return route.fulfill({
+            contentType: "application/javascript",
+            body: turnstileScript(mode),
+          });
+        },
+      );
+      await use({
+        mode: (next) => {
+          mode = next;
+        },
+      });
+    },
+    { auto: true },
+  ],
   leadWebhook: [
     async ({ context }, use) => {
       const unexpected: string[] = [];

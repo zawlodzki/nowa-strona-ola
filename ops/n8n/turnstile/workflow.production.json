@@ -1,0 +1,364 @@
+{
+  "name": "formularz Ola",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2fba1cf1-729f-4e79-8ebf-869f9277284e",
+        "options": {
+          "allowedOrigins": "https://aleksandraolesiewicz.com"
+        },
+        "responseMode": "responseNode"
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "id": "c5480850-0361-4a6c-a2d0-5ea399d7365b",
+      "name": "Webhook",
+      "webhookId": "2fba1cf1-729f-4e79-8ebf-869f9277284e"
+    },
+    {
+      "id": "ola-turnstile-validate-lead",
+      "name": "Validate lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [260, 0],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst body = $input.first().json.body;\nconst object = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);\nconst text = (v, max) => typeof v === 'string' && v.length > 0 && v.length <= max;\nconst date = (v) => text(v, 64) && Number.isFinite(Date.parse(v));\nconst fail = () => [{ json: { valid: false, statusCode: 400, response: { error: 'invalid_submission' } } }];\nif (!object(body) || body.schemaVersion !== 3 ||\n ![\"newsletter\",\"contact\",\"withdrawal\",\"waitlist\"].includes(body.formKey) ||\n ![\"pl\",\"en\"].includes(body.language) ||\n !text(body.submissionId, 128) || !text(body.formVersion, 64) ||\n !text(body.source, 2048) || !date(body.submittedAt) ||\n !text(body.turnstileToken, 2048) || !object(body.fields) ||\n Object.keys(body.fields).length > 32 || Object.entries(body.fields).some(([k,v]) =>\n !text(k,64) || typeof v !== 'string' || v.length > 10000) ||\n !Array.isArray(body.consents) || body.consents.length > 16 ||\n body.consents.some(c => !object(c) || !text(c.id,128) || !text(c.version,64) || !date(c.acceptedAt))) return fail();\nif (![\"aleksandraolesiewicz.com\"].some(host => body.source.startsWith('https://' + host + '/'))) return fail();\nreturn [{ json: { valid: true, formKey: body.formKey, turnstileToken: body.turnstileToken } }];"
+      }
+    },
+    {
+      "id": "ola-turnstile-valid-lead",
+      "name": "Valid lead",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [520, 0],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ola-valid",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "ola-turnstile-verify-turnstile",
+      "name": "Verify Turnstile",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [780, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { response: $json.turnstileToken } }}",
+        "options": {
+          "timeout": 10000,
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          },
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "eri83sBSbYEoRx7U",
+          "name": "Ola Turnstile production"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "ola-turnstile-check-verification",
+      "name": "Check verification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1040, 0],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst result = $input.first().json;\nconst lead = $('Validate lead').first().json;\nconst object = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);\nlet statusCode = 503;\nlet response = { error: 'verification_unavailable' };\nif (object(result) && result.statusCode === 200 && object(result.body) && typeof result.body.success === 'boolean') {\n const verified = result.body;\n if (verified.success === true && verified.action === lead.formKey &&\n [\"aleksandraolesiewicz.com\"].includes(verified.hostname)) {\n  const timestamp = verified.challenge_ts;\n  const parsed = typeof timestamp === 'string' && /^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,3})?Z$/.test(timestamp) ? Date.parse(timestamp) : NaN;\n  const normalized = Number.isFinite(parsed) ? new Date(parsed).toISOString() : '';\n  const expected = typeof timestamp === 'string' ? timestamp.replace(/(?:\\.(\\d{1,3}))?Z$/, (_, fraction = '') => '.' + fraction.padEnd(3, '0') + 'Z') : '';\n  if (normalized && normalized === expected) {\n   const age = Date.now() - parsed;\n   if (age >= -30000 && age <= 300000) return [{ json: { verified: true } }];\n   statusCode = 403; response = { error: 'verification_failed' };\n  }\n } else { statusCode = 403; response = { error: 'verification_failed' }; }\n}\nreturn [{ json: { statusCode, response } }];"
+      }
+    },
+    {
+      "id": "ola-turnstile-verified-token",
+      "name": "Verified token",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1300, 0],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ola-verified",
+              "leftValue": "={{ $json.verified === true }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "ola-turnstile-hash-verified-token",
+      "name": "Hash verified token",
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [1560, 0],
+      "parameters": {
+        "action": "hash",
+        "type": "SHA256",
+        "binaryData": false,
+        "value": "={{ $('Validate lead').first().json.turnstileToken }}",
+        "dataPropertyName": "tokenDigest",
+        "encoding": "hex"
+      }
+    },
+    {
+      "id": "ola-turnstile-keep-ledger-input",
+      "name": "Keep ledger input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1690, 0],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ola-token-digest",
+              "name": "tokenDigest",
+              "value": "={{ $json.tokenDigest }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      }
+    },
+    {
+      "id": "ola-turnstile-claim-verified-token",
+      "name": "Claim verified token",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [1820, 0],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "WITH claimed AS (\n  INSERT INTO ola_replay_production.used_tokens (token_digest)\n  VALUES ($1::text)\n  ON CONFLICT (token_digest) DO NOTHING\n  RETURNING 1\n)\nSELECT EXISTS (SELECT 1 FROM claimed) AS claimed;",
+        "options": {
+          "queryReplacement": "={{ [$json.tokenDigest] }}",
+          "queryBatching": "independently",
+          "connectionTimeout": 10
+        }
+      },
+      "credentials": {
+        "postgres": {
+          "id": "sn5a20V6sGsaOTnJ",
+          "name": "Ola replay production"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "retryOnFail": false
+    },
+    {
+      "id": "ola-turnstile-decide-claim",
+      "name": "Decide claim",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2080, 0],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst rows = $input.all();\nlet statusCode = 503;\nlet response = { error: 'verification_unavailable' };\nif (rows.length === 1 && rows[0].json !== null && typeof rows[0].json === 'object' &&\n !Array.isArray(rows[0].json) && Object.keys(rows[0].json).length === 1 && typeof rows[0].json.claimed === 'boolean') {\n statusCode = rows[0].json.claimed === true ? 200 : 403;\n response = statusCode === 200 ? { message: 'Workflow was started' } : { error: 'verification_failed' };\n}\nreturn [{ json: { statusCode, response } }];"
+      }
+    },
+    {
+      "id": "ola-turnstile-respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [2340, 0],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.response }}",
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate lead": {
+      "main": [
+        [
+          {
+            "node": "Valid lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valid lead": {
+      "main": [
+        [
+          {
+            "node": "Verify Turnstile",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Turnstile": {
+      "main": [
+        [
+          {
+            "node": "Check verification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check verification": {
+      "main": [
+        [
+          {
+            "node": "Verified token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verified token": {
+      "main": [
+        [
+          {
+            "node": "Hash verified token",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hash verified token": {
+      "main": [
+        [
+          {
+            "node": "Keep ledger input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keep ledger input": {
+      "main": [
+        [
+          {
+            "node": "Claim verified token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claim verified token": {
+      "main": [
+        [
+          {
+            "node": "Decide claim",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decide claim": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "saveDataSuccessExecution": "none",
+    "saveExecutionProgress": false,
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner",
+    "saveDataErrorExecution": "none"
+  }
+}
