@@ -8,6 +8,16 @@ Próba komponentów: [UI-SPIKE-RESULTS.md](UI-SPIKE-RESULTS.md).
 
 ## 1. Cel i granice
 
+Grafiki wyróżniające bloga, zlecenie 15.10.2026:
+
+- [x] Przygotować trzy propozycje nastrojowych okładek na podstawie referencji
+      użytkownika i zapisać pliki oraz prompty.
+- [x] Po wyborze zestawu podmienić obrazy i odebrać kadrowanie w serwisie.
+      Publikacja Sanity i produkcji 15.10.2026, oględziny desktop i 320 px.
+- [x] Zapisać zaakceptowany kierunek okładek w skillu `grafiki-blogowe` repo FIRMA.
+
+Materiały: [propozycje okładek](../design-system/proposals/blog-covers-2026-10-15/README.md).
+
 Nowa marka i domena: strona główna, landing page’e, blog i formularze leadowe.
 Fundament techniczny i demonstracyjne szablony są wykonane. Od 07.10.2026
 docelowy kierunek to zatwierdzony 3a; pełna migracja stron i finalnych treści

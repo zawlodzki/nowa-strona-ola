@@ -1,5 +1,27 @@
 # Homepage 3a — konfiguracja treści CMS
 
+## Kierunek grafik wyróżniających bloga, 15.10.2026
+
+Źródło: użytkownik odrzucił podobieństwo obecnych grafik do reszty strony
+i wskazał osiem referencji a16z. Preferuje nastrojowe obrazy, rozmycie,
+kontrast z typografią i wyglądem serwisu oraz związek z tematem wpisu.
+To ustalony kierunek. W tej samej sesji użytkownik zaakceptował trzy propozycje
+i zlecił podmianę na stronie, aby ocenić je w docelowym układzie.
+
+Propozycje dla hirsutyzmu, PCOS i wysokiego testosteronu wraz z promptami
+są w [pakiecie okładek](../design-system/proposals/blog-covers-2026-10-15/README.md).
+Zaakceptowany zestaw ma kadry około 16:9 bez napisów i osobne palety.
+Design system strony pozostaje 3a.
+
+Mapowanie istniejącego schematu: `article.image.image` przechowuje plik
+Sanity, `article.image.alt` opis kadru, `article.image.tone` rodzaj kadru,
+a hotspot i crop należą do `article.image.image`. Schemat nie wymaga
+rozszerzenia dla podmiany obrazów. Trzy obrazy WebP, teksty alternatywne,
+`tone = photo` i hotspoty zapisano oraz opublikowano w Sanity 15.10.2026.
+Identyfikatory obrazów i dokumentów zawiera
+[rejestr podmiany](../design-system/proposals/blog-covers-2026-10-15/cms-change.json).
+Nie zmieniano treści artykułów ani ich dat merytorycznej aktualizacji.
+
 ## Zabezpieczenie formularzy, decyzja 14.10.2026
 
 Źródło: użytkownik zatwierdził realizację Turnstile po ocenie zgodności.

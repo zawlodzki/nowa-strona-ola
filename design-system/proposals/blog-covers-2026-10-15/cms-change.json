@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-15",
+  "projectId": "dyuqkn8c",
+  "dataset": "production",
+  "source": "Użytkownik zaakceptował propozycje i zlecił podmianę na stronie.",
+  "changes": [
+    {
+      "documentId": "article-hirsutyzm-pl",
+      "newImageAssetRef": "image-2bce019b52d1e2173359d5a0f4c73246519dc9db-1672x941-webp",
+      "previousImageAssetRef": "image-e1e7bef64412cac2d4e19a3038076ff2777a31f7-3072x2048-webp",
+      "alt": "Wygenerowany portret kobiety z delikatnymi włoskami na policzku i brodzie w bocznym, bursztynowym świetle.",
+      "tone": "photo",
+      "hotspot": {
+        "x": 0.6,
+        "y": 0.45,
+        "width": 0.25,
+        "height": 0.4
+      }
+    },
+    {
+      "documentId": "article-pcos-co-to-za-choroba-pl",
+      "newImageAssetRef": "image-8fd62c64abdff9a0de2f3e4f5c9e5a338b89c882-1672x941-webp",
+      "previousImageAssetRef": "image-e57fb5deb723df249029a852729cb22421182649-3072x2048-webp",
+      "alt": "Trzy nakładające się szklane pętle w chłodnym świetle, metafora powiązanych rytmów hormonalnych i metabolicznych.",
+      "tone": "photo",
+      "hotspot": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.25,
+        "height": 0.4
+      }
+    },
+    {
+      "documentId": "article-wysoki-testosteron-u-kobiet-pl",
+      "newImageAssetRef": "image-85da1d3db760323187e186d9994a9242f0377afd-1672x941-webp",
+      "previousImageAssetRef": "image-f0576dfba6618232a3d4b702d0020599d03e2221-3072x2048-webp",
+      "alt": "Dwie probówki przed taflą szkła rozpraszającą bursztynowe światło, ilustracja do artykułu o interpretowaniu wyników badań.",
+      "tone": "photo",
+      "hotspot": {
+        "x": 0.45,
+        "y": 0.5,
+        "width": 0.25,
+        "height": 0.4
+      }
+    }
+  ]
+}
