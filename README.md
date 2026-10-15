@@ -150,6 +150,17 @@ cd studio
 npx sanity deploy --external --url https://studio.aleksandraolesiewicz.com --yes --schema-required
 ```
 
+Konfiguracja Studio zawiera `sanity-plugin-table-of-contents` 2.0.0 i
+`sanity-plugin-media` 6.3.5. Spis treści obejmuje dokumenty `article`, `page`
+i `legalPage`, pola `body` i `sections`. Inspektor ma nazwę **Table of Contents**.
+Biblioteka **Media** dodaje narzędzie Studio oraz źródło wyboru obrazów i plików.
+Techniczne typy `media.tag` i `media.folder` nie pojawiają się na liście Treści.
+
+Lokalny panel uruchamia sprawdzone `npm run dev:studio` pod
+`http://localhost:3333`. Lokalna instalacja pluginów nie aktualizuje hostowanego
+Studio. Scalenie do `main` wdraża panel automatycznie przez
+`deploy-studio.yml` po zielonym Quality.
+
 Hostowane Studio: `https://studio.aleksandraolesiewicz.com`. Build hostowany
 wymaga `SANITY_STUDIO_PREVIEW_ORIGIN=https://preview.aleksandraolesiewicz.com`.
 Studio odczytuje `SANITY_STUDIO_PROJECT_ID` i opcjonalne

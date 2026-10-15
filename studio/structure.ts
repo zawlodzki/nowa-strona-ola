@@ -119,6 +119,8 @@ export const structure: StructureResolver = (S) =>
             "testimonial",
             "form",
             "redirect",
+            "media.tag",
+            "media.folder",
           ].includes(id)
         );
       }),

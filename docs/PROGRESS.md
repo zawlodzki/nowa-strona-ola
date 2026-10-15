@@ -5422,3 +5422,111 @@ Gałąź `codex/homepage-meal` wypchnięta, utworzono
 [PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106). Bez merge.
 Następny krok: po scaleniu i wdrożeniu PR
 opublikować przygotowany szkic CMS, po kontroli rewizji, i odebrać produkcję.
+
+## Zgodność pluginów Studio, 15.10.2026
+
+Na prośbę użytkownika sprawdzono aktualne metadane npm i dokumentację trzech
+pluginów. Lockfile projektu zawiera Sanity 6.18.0, React i React DOM 19.3.0
+oraz styled-components 6.5.3; projekt wymaga Node 24.
+
+- `sanity-plugin-table-of-contents` 2.0.0: peer Sanity `^6`, React/DOM `^19`,
+  styled-components `^6`, Node `>=22.12`. Deklaracje zgodne z projektem.
+- `sanity-plugin-media` 6.3.5: peer Sanity `^5 || ^6.0.0-0`, React/DOM `^19.2`,
+  styled-components `^6.1`. Deklaracje zgodne, także dla Node 24.
+- `sanity-plugin-link-checker` 0.4.1: peer Sanity `^6.14.1`, React `^19.2`.
+  Deklaracje zgodne, także dla Node 24. Linki zewnętrzne wymagają skanera
+  poza przeglądarką, np. dołączonego CLI lub Document Function, ze względu na CORS.
+
+Źródła: odczyt `npm view` z rejestru oraz
+[Table of Contents](https://www.sanity.io/plugins/plugin-table-of-contents),
+[Media browser](https://www.sanity.io/plugins/sanity-plugin-media) i
+[Link Checker](https://www.sanity.io/plugins/sanity-plugin-link-checker).
+Nie instalowano pluginów, nie zmieniano CMS ani wdrożeń. Nie wykonano testu
+buildu ani działania pluginów w Studio; wynik dotyczy deklarowanej zgodności.
+Następny krok w tym zakresie: po wyborze dodatków instalacja lokalna i odbiór
+Studio. Brak blokady dla oceny zgodności.
+
+## Instalacja dwóch pluginów Studio, 15.10.2026
+
+Na zlecenie użytkownika zainstalowano dokładne wersje
+`sanity-plugin-table-of-contents` 2.0.0 i `sanity-plugin-media` 6.3.5
+w workspace Studio. Konfiguracja ToC obejmuje `article`, `page`, `legalPage`
+i pola `body`, `sections`. Media dodaje narzędzie i źródła wyboru obrazów oraz
+plików. Typy `media.tag` i `media.folder` odfiltrowano z ogólnej listy Treści.
+Nie zmieniano schematów treści ani rendererów strony. W lockfile spośród
+wcześniejszych paczek zmienił się tylko `react-is` 19.3.0 na 19.3.1.
+Sanity 6.18.0, React 19.3.0 i styled-components 6.5.3 pozostały bez zmian.
+
+Kontrole na Node 24.19.0:
+
+- `npm run check --workspace @ola/studio` PASS.
+- Pełne `npm run verify` PASS: format, tokeny, lint, typy, 618 unit,
+  buildy publicznej strony, Studio, preview i dry-run Workera, kontrola
+  artefaktów, 507 E2E PASS, 12 świadomych pominięć GTM i zgodność 17 stron
+  fixture/Content Lake. Log `/tmp/ola-studio-plugins-verify.log`.
+- `verify-ola`, sesja `ola-studio-plugins-20261015`, port 4340: doctor PASS,
+  wejście z listy bloga do artykułu fixture, nawigacja „W tym artykule” PASS,
+  POST `[]`. Dowody `/tmp/ola-verify-evidence/ola-studio-plugins-20261015/`.
+  Procesy tej sesji zamknięto, dowody zachowano.
+- Audyt przed zmianą: 23 wpisy, w tym 12 high i 11 moderate. Po instalacji:
+  24 wpisy, 12 high i 12 moderate, zero critical i zero nowych adresów
+  advisory. Dodatkowy wpis ToC dziedziczy istniejące zgłoszenie Sanity CLI
+  przez peer dependency. High dotyczą istniejących łańcuchów CLI/codegen
+  i Wrangler/Miniflare, opisanych wcześniej w tym pliku; lokalne narzędzia
+  korzystają z zaufanych wejść repo, nie są publicznym endpointem tych parserów.
+  Nie wykonywano `audit fix`, downgrade’u Sanity ani zmian poza zakresem.
+  Raporty `/tmp/ola-studio-plugins-audit.json` i
+  `/tmp/ola-studio-plugins-baseline-audit.json`.
+
+Lokalny `npm run dev:studio` uruchomiono pod `http://localhost:3333`,
+który już ma dozwolony CORS. Nie dodawano originów. Próba odbioru pod 3335
+zatrzymała się na istniejącej blokadzie CORS; potem użyto 3333.
+Sanity auto-updates zgłasza runtime 6.19.0 przy lokalnym lockfile 6.18.0.
+Zalogowanie Google wymagało zatwierdzenia przez automatyczną kontrolę;
+użytkownik wyraził zgodę i karta wróciła do `/structure`.
+Zalogowany odbiór narzędzi ToC/Media pozostał niewykonany z powodu powtarzalnej
+utraty połączenia narzędzia sterującego kartą. Nie deklarujemy sprawdzenia
+kliknięć, wyszukiwania Media, nawigacji ToC, mobile, klawiatury, 320 px,
+zoomu 200%, reduced motion, czytnika ani fizycznego urządzenia dla Studio.
+
+Zmiany lokalne, bez commitu, push, publikacji treści, rejestracji schematu
+lub wdrożenia Studio. Zachowano wcześniejsze zmiany użytkownika.
+Następny krok w tym zakresie: odebrać zalogowane ToC i Media w lokalnym Studio,
+a po scaleniu, które wdraża panel automatycznie, sprawdzić go pod hostowanym adresem.
+
+## Kontrola zachowania altów po instalacji pluginów, 15.10.2026
+
+Na prośbę użytkownika wykonano odczyt wszystkich sześciu dokumentów `article`
+z perspektywą `raw`, w tym trzech opublikowanych i trzech szkiców. Wszystkie
+sześć okładek i siedem obrazów `articleImage` ma niepuste pole `alt`.
+Trzy opublikowane okładki mają dokładnie te same alty i referencje plików co
+wcześniejszy rejestr `blog-covers-2026-10-15/cms-change.json`.
+
+Daty aktualizacji artykułów i 13 powiązanych assetów są wcześniejsze niż
+instalacja pluginów. Najnowsza aktualizacja artykułu to 15.10.2026 19:03:03 UTC,
+a assetu 13:46:36 UTC. Brak pełnego snapshotu wszystkich pól sprzed instalacji;
+wynik opiera się na aktualnym odczycie, datach dokumentów i porównaniu trzech
+zapisanych wcześniej okładek. Raport jest lokalny, poza repozytorium.
+
+Media pokazuje `sanity.imageAsset.altText`, obecnie puste na wszystkich 13
+plikach. Projekt przechowuje opisy w `article.image.alt` i `body[].alt`.
+Zapytania GROQ i renderer korzystają z tych pól dokumentu, nie `asset.altText`.
+Puste pole w bibliotece Media nie oznacza utraty altu na stronie. Instalacja
+nie zmieniała schematów, GROQ, rendererów ani dokumentów CMS.
+W tej kontroli również nie wykonywano zapisów do Sanity ani publikacji.
+
+Kontrola 13/13 altów, porównanie 3/3 okładek i dat dokumentów PASS.
+Nie uruchamiano ponownie pełnego verify, bo nie zmieniono kodu aplikacji.
+Następny krok: dotychczasowy odbiór zalogowanych pluginów. Studio wdroży się
+automatycznie po scaleniu. Nie ma potrzeby odtwarzania ani kopiowania altów.
+
+### PR pluginów Studio, 15.10.2026
+
+Na zlecenie użytkownika wydzielono zakres do osobnego worktree i gałęzi
+`codex/studio-editor-plugins`. Podpisany commit implementacji `473d354`
+wypchnięto i otwarto [PR 107](https://github.com/zawlodzki/nowa-strona-ola/pull/107).
+PR obejmuje osiem plików, wyłącznie pluginy i dotyczącą ich dokumentację.
+Pozostałe zmiany lokalne zachowano poza PR. Kod i lockfile porównano z pełnym
+zielonym przebiegiem verify; są identyczne. Końcowy format i diff PASS.
+Nie scalano PR ani nie wdrażano Studio. Następny krok: odebrać CI i zalogowane
+narzędzia Studio. Scalenie wdraża Studio automatycznie przez `deploy-studio.yml`.
