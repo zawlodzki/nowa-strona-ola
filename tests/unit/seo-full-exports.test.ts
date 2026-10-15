@@ -5,6 +5,7 @@ import type {
   InventoryKind,
 } from "../../src/lib/seo/inventory";
 import { buildHeadersFile } from "../../src/lib/seo/edge-files";
+import { headerValue } from "../../scripts/static-asset-headers.mjs";
 import { buildLlmsFullTxt } from "../../src/lib/seo/llms";
 import { buildRss } from "../../src/lib/seo/rss";
 
@@ -125,8 +126,12 @@ describe("full RSS content", () => {
 
 describe("llms-full.txt", () => {
   it("sets plain text and noindex in production static asset headers", () => {
-    expect(buildHeadersFile({ indexing: true })).toContain(
-      "/llms-full.txt\n  Content-Type: text/plain; charset=utf-8\n  X-Robots-Tag: noindex",
+    const headers = buildHeadersFile({ indexing: true });
+    expect(headerValue(headers, "/llms-full.txt", "Content-Type")).toBe(
+      "text/plain; charset=utf-8",
+    );
+    expect(headerValue(headers, "/llms-full.txt", "X-Robots-Tag")).toBe(
+      "noindex",
     );
   });
   it("includes only key pages in fixed order and resolves links per page", async () => {

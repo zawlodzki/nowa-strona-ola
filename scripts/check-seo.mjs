@@ -4,6 +4,8 @@ import assert from "node:assert/strict";
 import { access, readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
+import { headerValue } from "./static-asset-headers.mjs";
+
 const ORIGIN = "https://aleksandraolesiewicz.com";
 const distDir = process.argv[2] ?? "dist";
 const indexing = process.env.SITE_INDEXING === "production";
@@ -18,6 +20,20 @@ const withoutSeo = new Set([
   "/warsztat/",
   "/wdrozenie/",
 ]);
+
+async function textAssets(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const nested = await Promise.all(
+    entries.map((entry) => {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) return textAssets(full);
+      return entry.name.endsWith(".txt") || entry.name.endsWith(".md")
+        ? [full]
+        : [];
+    }),
+  );
+  return nested.flat();
+}
 
 async function htmlFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -364,9 +380,7 @@ if (indexNowEnabled) {
   });
   assert.ok(keyContent === indexNowKey, "IndexNow: key file contents");
   assert.ok(
-    headers.includes(
-      `/${indexNowKey}.txt\n  Content-Type: text/plain; charset=utf-8\n  X-Robots-Tag: noindex`,
-    ),
+    headers.includes(`/${indexNowKey}.txt\n  X-Robots-Tag: noindex`),
     "IndexNow: key response headers",
   );
   assert.ok(
@@ -444,9 +458,34 @@ for (const url of sitemapLocs) {
 }
 assert.match(
   headers,
-  /\/llms-full\.txt\n {2}Content-Type: text\/plain; charset=utf-8\n {2}X-Robots-Tag: noindex/,
-  "llms-full.txt: headers",
+  /\/llms\.txt\n {2}X-Robots-Tag: noindex/,
+  "llms.txt: noindex",
 );
+assert.match(
+  headers,
+  /\/llms-full\.txt\n {2}X-Robots-Tag: noindex/,
+  "llms-full.txt: noindex",
+);
+const textFiles = await textAssets(distDir);
+assert.ok(
+  textFiles.some((file) => file.endsWith(".txt")),
+  "_headers: dist has no .txt assets",
+);
+assert.ok(
+  textFiles.some((file) => file.endsWith(".md")),
+  "_headers: dist has no .md assets",
+);
+for (const file of textFiles) {
+  const route = `/${path.relative(distDir, file).split(path.sep).join("/")}`;
+  const expected = route.endsWith(".md")
+    ? "text/markdown; charset=utf-8"
+    : "text/plain; charset=utf-8";
+  assert.equal(
+    headerValue(headers, route, "Content-Type"),
+    expected,
+    `_headers: ${route} Content-Type`,
+  );
+}
 
 const rss = await readFile(path.join(distDir, "blog/rss.xml"), "utf8");
 assert.match(
