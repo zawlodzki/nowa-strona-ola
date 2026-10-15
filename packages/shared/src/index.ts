@@ -31,7 +31,7 @@ export function isFormKey(value: unknown): value is FormKey {
   return (formKeys as readonly unknown[]).includes(value);
 }
 
-export const LEAD_SUBMISSION_SCHEMA_VERSION = 2;
+export const LEAD_SUBMISSION_SCHEMA_VERSION = 3;
 
 export interface ConsentRecord {
   id: string;
@@ -39,10 +39,11 @@ export interface ConsentRecord {
   acceptedAt: string;
 }
 
-/** JSON body POSTed by every site form (schema version 2). */
+/** JSON body POSTed by every site form (schema version 3). */
 export interface LeadSubmission {
   schemaVersion: typeof LEAD_SUBMISSION_SCHEMA_VERSION;
   submissionId: string;
+  turnstileToken: string;
   formKey: FormKey;
   formVersion: string;
   language: Locale;

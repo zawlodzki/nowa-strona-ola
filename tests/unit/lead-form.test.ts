@@ -1,3 +1,4 @@
+import { resolveTurnstileSitekey } from "../../src/lib/turnstile-config";
 import { formKeys } from "@ola/shared";
 import { describe, expect, it } from "vitest";
 
@@ -16,6 +17,7 @@ const context = {
   submissionId: "3f1c2a9e-0000-4000-8000-000000000001",
   submittedAt: "2026-10-10T12:30:00.000Z",
   href: "https://aleksandraolesiewicz.com/blog/pcos/?utm_source=ig&email=x#newsletter",
+  turnstileToken: "verified-token",
 };
 
 const newsletter: LeadFormSpec = {
@@ -31,7 +33,8 @@ describe("lead submission payload", () => {
     expect(
       buildLeadSubmission(newsletter, { email: " ola@example.com " }, context),
     ).toEqual({
-      schemaVersion: 2,
+      schemaVersion: 3,
+      turnstileToken: "verified-token",
       submissionId: "3f1c2a9e-0000-4000-8000-000000000001",
       formKey: "newsletter",
       formVersion: "2.3",
@@ -64,7 +67,8 @@ describe("lead submission payload", () => {
         context,
       ),
     ).toEqual({
-      schemaVersion: 2,
+      schemaVersion: 3,
+      turnstileToken: "verified-token",
       submissionId: "3f1c2a9e-0000-4000-8000-000000000001",
       formKey: "contact",
       formVersion: "2.3",
@@ -230,4 +234,43 @@ describe("inline markdown in labels and notices", () => {
       'Odpowiemy. <strong>Nie opisuj zdrowia</strong> &lt;b&gt;. <a href="/polityka-prywatnosci/">Polityka prywatności</a> [x](javascript:alert(1))',
     );
   });
+});
+
+describe("Turnstile build configuration", () => {
+  it("uses the official test key only in fixture builds", () => {
+    expect(resolveTurnstileSitekey({})).toBe("1x00000000000000000000AA");
+    expect(() =>
+      resolveTurnstileSitekey({ DEPLOYMENT_TARGET: "production" }),
+    ).toThrow("PUBLIC_TURNSTILE_SITEKEY");
+    expect(() =>
+      resolveTurnstileSitekey({ PUBLIC_SANITY_PROJECT_ID: "project" }),
+    ).toThrow("PUBLIC_TURNSTILE_SITEKEY");
+    expect(() =>
+      resolveTurnstileSitekey({
+        DEPLOYMENT_TARGET: "production",
+        PUBLIC_TURNSTILE_SITEKEY: "1x00000000000000000000AA",
+      }),
+    ).toThrow("PUBLIC_TURNSTILE_SITEKEY");
+    expect(
+      resolveTurnstileSitekey({
+        DEPLOYMENT_TARGET: "production",
+        PUBLIC_TURNSTILE_SITEKEY: " production-sitekey ",
+      }),
+    ).toBe("production-sitekey");
+  });
+});
+
+it.each([
+  "1x00000000000000000000AA",
+  "2x00000000000000000000AB",
+  "1x00000000000000000000BB",
+  "2x00000000000000000000BB",
+  "3x00000000000000000000FF",
+])("rejects official dummy Turnstile key %s in production", (key) => {
+  expect(() =>
+    resolveTurnstileSitekey({
+      DEPLOYMENT_TARGET: "production",
+      PUBLIC_TURNSTILE_SITEKEY: key,
+    }),
+  ).toThrow("PUBLIC_TURNSTILE_SITEKEY");
 });

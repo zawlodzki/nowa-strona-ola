@@ -40,10 +40,12 @@ describe("withdrawal page", () => {
         submissionId: "id-1",
         submittedAt: "2026-10-10T08:00:00.000Z",
         href: "https://aleksandraolesiewicz.com/odstapienie/",
+        turnstileToken: "verified-token",
       },
     );
     expect(submission).toEqual({
-      schemaVersion: 2,
+      schemaVersion: 3,
+      turnstileToken: "verified-token",
       submissionId: "id-1",
       formKey: "withdrawal",
       formVersion: "2.3",

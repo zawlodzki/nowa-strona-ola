@@ -1,5 +1,24 @@
 # Homepage 3a — konfiguracja treści CMS
 
+## Zabezpieczenie formularzy, decyzja 14.10.2026
+
+Źródło: użytkownik zatwierdził realizację Turnstile po ocenie zgodności.
+Ochrona obejmuje newsletter, kontakt, odstąpienie i listę oczekujących.
+Jest obowiązkową częścią wspólnego `LeadForm` oraz backendu n8n.
+Nie dodajemy przełącznika pozwalającego wyłączyć ochronę w Sanity.
+Mapowanie pozostaje przez istniejący `form.formKey`; action Turnstile
+jest identyczne z tym kluczem. Token jest technicznym polem kontraktu v3,
+poza polami treści i zgodami, bez zapisu w CMS.
+
+Klucze i hostnames to konfiguracja środowiska, nie pola CMS.
+[Zakres i kolejność uruchomienia](TURNSTILE-ROLLOUT.md).
+Kod i backend staging odebrano 15.10.2026. Świeży token daje 200, replay 403,
+a trwały rejestr PostgreSQL dopuszcza jednego zwycięzcę równoczesnych prób.
+Użytkownik zatwierdził widgety, credentials i rejestr odcisków; zasoby utworzone.
+15.10.2026 użytkownik zlecił publikację produkcyjną. Konfiguracja publicznych
+kluczy środowisk i publikacja są w toku. Copy formularzy w Sanity
+nie zmieniono. Przegląd dokumentów prywatności przed publikacją pozostaje otwarty.
+
 ## Pomiar produkcyjny — decyzja 13.10.2026
 
 Źródło: użytkownik zlecił aktywację produkcyjnego GTM oraz wyrównanie dokumentów

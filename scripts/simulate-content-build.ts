@@ -5,6 +5,7 @@ const root = import.meta.dirname
   ? path.resolve(import.meta.dirname, "..")
   : process.cwd();
 const ndjson = path.join(root, "reports", "content-lake-3a.ndjson");
+const simulationSitekey = "content-lake-simulation-sitekey";
 
 function run(command: string, args: string[], env: NodeJS.ProcessEnv): void {
   const result = spawnSync(command, args, {
@@ -20,6 +21,7 @@ function run(command: string, args: string[], env: NodeJS.ProcessEnv): void {
 run("npx", ["astro", "build", "--config", "astro.fixture-dist.config.mjs"], {
   ...process.env,
   ASTRO_TELEMETRY_DISABLED: "1",
+  PUBLIC_TURNSTILE_SITEKEY: simulationSitekey,
 });
 run("npx", ["tsx", "scripts/import-3a.ts"], process.env);
 run("npx", ["tsx", "scripts/validate-content-lake.ts"], process.env);
@@ -28,6 +30,7 @@ run("npx", ["astro", "build", "--config", "astro.sim.config.mjs"], {
   PUBLIC_SANITY_PROJECT_ID: "dyuqkn8c",
   PUBLIC_SANITY_DATASET: "production",
   CONTENT_LAKE_NDJSON: ndjson,
+  PUBLIC_TURNSTILE_SITEKEY: simulationSitekey,
   ASTRO_TELEMETRY_DISABLED: "1",
 });
 run("node", ["scripts/check-content-lake-build.mjs"], process.env);

@@ -28,6 +28,7 @@ export interface SubmissionContext {
   submissionId: string;
   submittedAt: string;
   href: string;
+  turnstileToken: string;
 }
 
 export type FieldValues = Readonly<Record<string, string>>;
@@ -132,6 +133,7 @@ export function buildLeadSubmission(
   return {
     schemaVersion: LEAD_SUBMISSION_SCHEMA_VERSION,
     submissionId: context.submissionId,
+    turnstileToken: context.turnstileToken,
     formKey: spec.formKey,
     formVersion: spec.version,
     language: spec.language,

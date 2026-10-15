@@ -24,7 +24,7 @@ function submittedAt(body: unknown): string {
   return String(body.submittedAt);
 }
 
-test("newsletter sends the v2 payload with consent Z6 after the notice", async ({
+test("newsletter sends the v3 payload with consent Z6 after the notice", async ({
   page,
   leadWebhook,
 }) => {
@@ -50,11 +50,12 @@ test("newsletter sends the v2 payload with consent Z6 after the notice", async (
   await submit.click();
   await expect(email).toBeFocused();
   expect(captured).toEqual([]);
+  expect(await page.evaluate(() => window.__turnstileMock)).toBeUndefined();
 
   await email.fill("ola@example.com");
   await submit.click();
   await expect(submit).toBeDisabled();
-  await expect(form.getByRole("status")).toBeEmpty();
+  await expect(form.getByRole("status")).toHaveText("Wysyłanie…");
   await expect(form.getByRole("status")).toHaveText(newsletterSuccess);
   await expect(submit).toBeEnabled();
   await expect(email).toHaveValue("");
@@ -65,7 +66,8 @@ test("newsletter sends the v2 payload with consent Z6 after the notice", async (
   expect(lead?.contentType).toBe("application/json");
   const sentAt = submittedAt(lead?.body);
   expect(lead?.body).toEqual({
-    schemaVersion: 2,
+    schemaVersion: 3,
+    turnstileToken: expect.stringMatching(/^test-token-/),
     submissionId: expect.stringMatching(uuid),
     formKey: "newsletter",
     formVersion: "2.3",
@@ -99,9 +101,10 @@ test("newsletter keeps the address after a server error and retries with the sam
   await expect(form.getByRole("alert")).toBeEmpty();
   expect(captured).toHaveLength(2);
   const [first, retry] = captured.map(
-    (lead) => lead.body as { submissionId: string },
+    (lead) => lead.body as { submissionId: string; turnstileToken: string },
   );
   expect(retry?.submissionId).toBe(first?.submissionId);
+  expect(retry?.turnstileToken).not.toBe(first?.turnstileToken);
 });
 
 test("filled honeypot shows success without sending", async ({
@@ -121,6 +124,7 @@ test("filled honeypot shows success without sending", async ({
   await form.getByRole("button", { name: "Zapisuję się" }).click();
   await expect(form.getByRole("status")).toHaveText(newsletterSuccess);
   expect(captured).toEqual([]);
+  expect(await page.evaluate(() => window.__turnstileMock)).toBeUndefined();
 });
 
 test("contact shows the health notice and sends the contact payload", async ({
@@ -241,7 +245,8 @@ test("withdrawal form sends the statement and shows a receipt", async ({
     ),
   );
   expect(body).toEqual({
-    schemaVersion: 2,
+    schemaVersion: 3,
+    turnstileToken: expect.stringMatching(/^test-token-/),
     submissionId: expect.stringMatching(uuid),
     formKey: "withdrawal",
     formVersion: "2.3",
@@ -297,6 +302,7 @@ for (const { path, form, fill, submit } of [
       "Dane poprawne. Nic nie wysłano.",
     );
     expect(captured).toEqual([]);
+    expect(await page.evaluate(() => window.__turnstileMock)).toBeUndefined();
   });
 }
 
