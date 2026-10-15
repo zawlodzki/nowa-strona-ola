@@ -5519,3 +5519,14 @@ Kontrola 13/13 altów, porównanie 3/3 okładek i dat dokumentów PASS.
 Nie uruchamiano ponownie pełnego verify, bo nie zmieniono kodu aplikacji.
 Następny krok: dotychczasowy odbiór zalogowanych pluginów i ewentualne wdrożenie
 Studio na osobne zlecenie. Nie ma potrzeby odtwarzania ani kopiowania altów.
+
+### PR pluginów Studio, 15.10.2026
+
+Na zlecenie użytkownika wydzielono zakres do osobnego worktree i gałęzi
+`codex/studio-editor-plugins`. Podpisany commit implementacji `473d354`
+wypchnięto i otwarto [PR 107](https://github.com/zawlodzki/nowa-strona-ola/pull/107).
+PR obejmuje osiem plików, wyłącznie pluginy i dotyczącą ich dokumentację.
+Pozostałe zmiany lokalne zachowano poza PR. Kod i lockfile porównano z pełnym
+zielonym przebiegiem verify; są identyczne. Końcowy format i diff PASS.
+Nie scalano PR ani nie wdrażano Studio. Następny krok: odebrać CI i zalogowane
+narzędzia Studio; scalenie i wdrożenie po osobnym zleceniu.

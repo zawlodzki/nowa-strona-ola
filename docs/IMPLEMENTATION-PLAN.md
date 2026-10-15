@@ -1053,3 +1053,7 @@ ustawień GitHub, treści Sanity i publikacji w tej sesji.
 - [x] Sprawdzić zachowanie altów istniejących grafik po instalacji pluginów.
       Sanity raw: 13/13 obrazów w sześciu artykułach ma alt; trzy opublikowane
       okładki zgodne z wcześniejszym rejestrem. Osobne `asset.altText` jest puste.
+
+- [x] Na zlecenie wypchnąć gałąź pluginów i utworzyć
+      [PR 107](https://github.com/zawlodzki/nowa-strona-ola/pull/107), bez
+      wcześniejszych zmian roboczych spoza zakresu.
