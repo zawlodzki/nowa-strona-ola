@@ -2,6 +2,7 @@ import { DocumentTextIcon } from "@sanity/icons/DocumentText";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { reservedArticleSlugs } from "../shared/constants";
+import { editorialMarkerMessage } from "../shared/editorial-markers";
 import {
   languageField,
   relatedArticleFilter,
@@ -219,7 +220,12 @@ export const articleType = defineType({
       title: "Treść",
       type: "articleBody",
       group: "content",
-      validation: (rule) => rule.required().min(1),
+      description:
+        "Lukę w szkicu zapisz jako [[TODO: czego brakuje]]. Panel Do uzupełnienia zbiera te znaczniki i ostrzega przy publikacji.",
+      validation: (rule) => [
+        rule.required().min(1),
+        rule.custom((value) => editorialMarkerMessage(value)).warning(),
+      ],
     }),
     defineField({
       name: "sources",
