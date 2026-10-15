@@ -1036,3 +1036,17 @@ nowe kontrolowane warianty ustala się dla każdego ebooka na podstawie briefu.
 Stan: zapisano proces w
 [ebook-landing-3a](../.agents/skills/ebook-landing-3a/SKILL.md).
 Nie zmieniono schematu, treści produktów, konfiguracji Content Lake ani szablonu.
+
+## Nakładka portretu z obiadem, decyzja 15.10.2026
+
+Źródło: użytkownik w czacie zaakceptował wygenerowaną wersję v2 i zlecił
+podmianę oraz PR i push. Nakładka ma przedstawiać wątróbkę drobiową
+z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony.
+Mapowanie: `page-home-pl.sections[_key=="home-about"].secondaryMedia`,
+`rasterKey = home-meal`, `alt = Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony`.
+
+Wykonano lokalny WebP, fixture PL/EN, fallback renderera i szkic w Sanity.
+Opublikowany dokument nadal ma `rasterKey = food`; publikacja szkicu następuje
+po scaleniu i wdrożeniu PR. Nowy klucz nie wymaga rozszerzenia schematu,
+ponieważ `rasterKey` jest polem tekstowym. `food` pozostaje obrazem okładek.
+[Pliki, prompty, rewizje i kolejność uruchomienia](../design-system/proposals/homepage-meal-2026-10-15/README.md).

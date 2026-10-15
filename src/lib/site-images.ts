@@ -3,6 +3,7 @@ export const SITE_RASTER_KEYS = [
   "about",
   "contact",
   "food",
+  "home-meal",
   "diploma",
 ] as const;
 

@@ -12,6 +12,7 @@ export const homepageMediaKeys = {
   about: "about",
   contact: "contact",
   food: "food",
+  meal: "home-meal",
   alab: "alab",
   uns: "uns",
   norsan: "norsan",

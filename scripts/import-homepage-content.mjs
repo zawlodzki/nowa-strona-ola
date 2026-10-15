@@ -69,10 +69,10 @@ const MEDIA = [
     alt: "Aleksandra Olesiewicz podczas pracy przy laptopie",
   },
   {
-    id: "image-food",
+    id: "image-home-meal",
     role: "about food inset",
-    source: "src/assets/editorial/food-editorial.webp",
-    alt: "Kolorowy posiłek z warzywami i pieczywem",
+    source: "src/assets/editorial/home-meal.webp",
+    alt: "Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony",
   },
 ];
 
