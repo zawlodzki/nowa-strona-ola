@@ -5559,3 +5559,39 @@ Pozostałe zmiany lokalne zachowano poza PR. Kod i lockfile porównano z pełnym
 zielonym przebiegiem verify; są identyczne. Końcowy format i diff PASS.
 Nie scalano PR ani nie wdrażano Studio. Następny krok: odebrać CI i zalogowane
 narzędzia Studio. Scalenie wdraża Studio automatycznie przez `deploy-studio.yml`.
+
+## Panel znaczników w Studio, 15.10.2026
+
+Na zlecenie użytkownika Studio dostaje panel **Do uzupełnienia** obok spisu treści.
+`scanEditorialMarkers` czyta `[[TODO: tekst]]` oraz starsze zapisy
+`[DO UZUPEŁNIENIA]`, `[TWÓJ KONKRET: tekst]` i `[ETYKIETA: tekst]` z wielkich liter.
+Sam skrót `[PCOS]` nie jest znacznikiem. Skan obejmuje bloki Portable Text
+w `article.body` i `legalPage.body`, w tym alt, podpis, wyróżnienie, wezwanie
+i komórki tabeli. Kliknięcie woła `onFocus` i `onPathOpen` ze ścieżką bloku,
+tak jak klik nagłówka w spisie treści.
+
+Ostrzeżenie jest na polu `body` przez `.warning()`. Nie blokuje publikacji.
+Błąd prawny dla `{{` i `[do sprawdzenia` zostaje błędem.
+`validate-content-lake` nadal liczy tylko poziom `error`.
+Publiczny renderer, GTM, zgody i analityka bez zmian.
+
+Kontrole na Node 24.22.0.
+
+- Format, tokeny, lint i typy PASS.
+- Vitest 629 testów PASS, w tym 9 nowych w `tests/unit/editorial-markers.test.ts`.
+- Build strony, build Studio, preview i dry-run Workera PASS.
+  Przy buildzie Studio wybrano kontynuację bez podnoszenia Sanity 6.18.0 do runtime 6.19.0.
+- `npm run test:build` PASS. SEO check 36 stron, `robots=noindex`.
+- `npm run test:e2e` po instalacji przeglądarek Playwright. 505 passed, 12 skipped,
+  2 flaky z udanym ponowieniem. Flaky to newsletter w Firefoxie i hover udostępniania
+  w WebKit. Nie dotyczą panelu Studio.
+- `npm run test:content-lake` PASS. 17 stron, te same sekcje, zdjęcia i DOM.
+- `npx sanity dev` na `http://127.0.0.1:3333/` zwrócił 200.
+  Moduł Vite panelu zawiera tytuł, pusty stan, licznik i wywołania `onFocus` oraz `onPathOpen`.
+  Bundle `studio/dist` zawiera „Do uzupełnienia”.
+  Brak `SANITY_STUDIO_PROJECT_ID` i logowania, więc nie otwarto dokumentu
+  i nie kliknięto znacznika w edytorze. Nie sprawdzono zalogowanego panelu,
+  klawiatury w Studio, 320 px ani telefonu.
+
+Nie wdrażano Studio. Scalenie do `main` uruchamia `deploy-studio.yml`.
+Następny krok: odebrać zalogowany panel na hostowanym Studio po scaleniu.

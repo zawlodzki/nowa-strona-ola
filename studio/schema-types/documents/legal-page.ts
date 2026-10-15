@@ -3,6 +3,7 @@ import { defineField, defineType } from "sanity";
 
 import { reservedLegalSlugs, reservedPageSlugs } from "../shared/constants";
 import { languageField, slugField, translationField } from "../shared/fields";
+import { editorialMarkerMessage } from "../shared/editorial-markers";
 import { unpublishableLegalText } from "../shared/legal-publication";
 
 export const legalPageType = defineType({
@@ -62,7 +63,7 @@ export const legalPageType = defineType({
       title: "Treść",
       type: "legalBody",
       group: "content",
-      validation: (rule) =>
+      validation: (rule) => [
         rule
           .required()
           .min(1)
@@ -73,6 +74,8 @@ export const legalPageType = defineType({
               `Treść zawiera placeholdery lub uwagi do sprawdzenia (${found.length}), np. „${found[0]}”. Usuń je przed publikacją.`
             );
           }),
+        rule.custom((value) => editorialMarkerMessage(value)).warning(),
+      ],
     }),
     defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" }),
   ],

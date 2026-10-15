@@ -153,6 +153,8 @@ npx sanity deploy --external --url https://studio.aleksandraolesiewicz.com --yes
 Konfiguracja Studio zawiera `sanity-plugin-table-of-contents` 2.0.0 i
 `sanity-plugin-media` 6.3.5. Spis treści obejmuje dokumenty `article`, `page`
 i `legalPage`, pola `body` i `sections`. Inspektor ma nazwę **Table of Contents**.
+Panel **Do uzupełnienia** obejmuje `article` i `legalPage`.
+Zbiera znaczniki `[[TODO: czego brakuje]]` z pola `body` i pokazuje ostrzeżenie przy publikacji.
 Biblioteka **Media** dodaje narzędzie Studio oraz źródło wyboru obrazów i plików.
 Techniczne typy `media.tag` i `media.folder` nie pojawiają się na liście Treści.
 

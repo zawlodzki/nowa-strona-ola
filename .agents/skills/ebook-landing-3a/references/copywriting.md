@@ -89,6 +89,10 @@ muszą mieć źródło. Nie dopisuj kupujących, oszczędności ani gwarancji.
 
 ## Audyt przed przekazaniem
 
+Renderowane copy nie zawiera `[[TODO: czego brakuje]]`, `[DO UZUPEŁNIENIA]`
+ani `[TWÓJ KONKRET: tekst]`. Lukę landingu zostaw w notatce, poza stroną.
+Lukę artykułu zapisz jako `[[TODO: czego brakuje]]` w treści Portable Text.
+
 Uzupełnij tabelę w notatkach roboczych lub raporcie. Dla każdej zasady podaj
 krótki dokładny cytat z finalnej strony i nazwę sekcji. Przy braku cytatu
 wpisz "brak" i powód. Statusy: użyta, częściowo, pominięta.

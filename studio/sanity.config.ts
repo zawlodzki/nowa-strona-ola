@@ -5,6 +5,7 @@ import { visionTool } from "@sanity/vision";
 import { media } from "sanity-plugin-media";
 import { tableOfContentsPlugin } from "sanity-plugin-table-of-contents";
 
+import { editorialMarkersPlugin } from "./components/editorial-markers";
 import { previewOrigin, sanityEnvironment } from "./sanity.env";
 import { presentationResolve } from "./presentation";
 import { schemaTypes } from "./schema-types";
@@ -56,6 +57,7 @@ export default defineConfig({
       documentTypes: ["article", "page", "legalPage"],
       fieldNames: ["body", "sections"],
     }),
+    editorialMarkersPlugin(),
     media(),
   ],
   document: {
