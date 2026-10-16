@@ -14,7 +14,7 @@ import { afterEach, expect, it, vi } from "vitest";
 
 import { openInPresentation } from "../../studio/components/open-in-presentation";
 
-globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
 
 const { navigateIntent, pane } = vi.hoisted(() => ({
   navigateIntent: vi.fn(),
@@ -58,32 +58,27 @@ function rememberFieldActionNode(value: unknown) {
 
 it("keeps the header action inside the pane resolver's render budget", async () => {
   let renders = 0;
-  let published: { onAction: () => void } | null = null;
+  const published: { onAction: (() => void) | null } = { onAction: null };
 
-  function HeaderFieldAction(props: {
-    publish: (node: { onAction: () => void }) => void;
-  }) {
+  function HeaderFieldAction(props: { publish: (tick: number) => void }) {
     renders += 1;
     const action = openInPresentation.useAction(headerProps);
     const node = rememberFieldActionNode(action);
     useEffect(() => {
-      if (
-        !node ||
-        typeof node !== "object" ||
-        !("onAction" in node) ||
-        typeof node.onAction !== "function"
-      ) {
-        return;
-      }
-      props.publish({ onAction: node.onAction });
+      if (!node || typeof node !== "object" || !("onAction" in node)) return;
+      const onAction = node.onAction;
+      if (typeof onAction !== "function") return;
+      published.onAction = () => {
+        onAction();
+      };
+      props.publish(1);
     }, [node, props.publish]);
     return null;
   }
 
   function PaneHeader() {
-    const [node, setNode] = useState<{ onAction: () => void } | null>(null);
-    published = node;
-    return createElement(HeaderFieldAction, { publish: setNode });
+    const [, setTick] = useState(0);
+    return createElement(HeaderFieldAction, { publish: setTick });
   }
 
   const container = document.createElement("div");
@@ -93,7 +88,8 @@ it("keeps the header action inside the pane resolver's render budget", async () 
   });
 
   expect(renders).toBe(2);
-  published?.onAction();
+  if (!published.onAction) throw new Error("header action did not publish");
+  published.onAction();
   expect(navigateIntent).toHaveBeenCalledTimes(1);
   expect(navigateIntent).toHaveBeenCalledWith("edit", {
     id: "article-1",
