@@ -57,7 +57,7 @@ function useOpenInPresentation(
 }
 
 // renderAsButton on a root field action is the document pane header slot in Sanity 6.18.
-const openInPresentation = defineDocumentFieldAction({
+export const openInPresentation = defineDocumentFieldAction({
   name: "open-in-presentation",
   useAction: useOpenInPresentation,
 });
