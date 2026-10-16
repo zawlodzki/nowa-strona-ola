@@ -4,7 +4,6 @@
     "sanity.cli.ts",
     "sanity.config.ts",
     "presentation.ts",
-    "presentation-intent.ts",
     "structure.ts",
     "schema-types/**/*.ts",
     "components/**/*.tsx"

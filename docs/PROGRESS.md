@@ -1,46 +1,19 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-16 (nagłówek dokumentu czyta wartość z panelu, nie z useFormValue; przycisk podglądu w nagłówku dokumentu Studio); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-16 (wycofany przycisk „Otwórz podgląd” w Studio); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
 
-### Nagłówek podglądu poza formularzem, 16.10.2026
+### Wycofanie przycisku podglądu w Studio, 16.10.2026
 
-- Hostowane Studio ładuje moduły z CDN. `studio/sanity.cli.ts` ma
-  `deployment.autoUpdates: true`. Lockfile trzyma `sanity` 6.18.0, a runtime
-  CDN to 6.19.0. W 6.19 `FieldActionsResolver` jest dzieckiem
-  `DocumentLayout`, wewnątrz `GetFormValueProvider`, poza
-  `FormValueProvider`. `useFormValue` rzuca
-  `useFormValue must be used within a FormValueProvider` i
-  StudioErrorBoundary zasłania dokument.
-- Przycisk czyta dokument z `useDocumentPane().value`. Ten sam hook jest
-  w zasięgu w Structure i w Presentation, bo oba malują panel dokumentu.
-  Artykuł, strona, e-book i strona prawna używają tej akcji. Typ bez
-  resolvera lokalizacji jej nie dostaje. Pole wejściowe SEO zostaje przy
-  `useFormValue`, bo renderuje się wewnątrz formularza.
-- `tests/unit/open-in-presentation.test.ts` renderuje akcję bez
-  `FormValueProvider`. Przed poprawką 4 testy FAIL tym komunikatem.
-  Po poprawce 4 testy PASS, a `presentation-intent` nadal 5 PASS.
-  `npm run check --workspace @ola/studio` PASS na Node 24.22.0.
-  Studio nie było wdrażane.
-
-### Przycisk podglądu w nagłówku dokumentu, 16.10.2026
-
-- W Structure przycisk **Otwórz podgląd** stoi w nagłówku panelu dokumentu,
-  gdy typ ma resolver lokalizacji. Otwiera Presentation na pierwszym adresie
-  z tego resolvera i otwiera ten sam dokument w edytorze. Artykuł PL idzie na
-  `/blog/<slug>/`, artykuł EN na `/en/blog/<slug>/`. Szkic używa id publikacji.
-- Ten sam przycisk jest też na stronach, e-bookach i stronach prawnych.
-  Ustawienia witryny, autorzy i kategorie go nie mają. Znaczniki redakcyjne
-  i spis treści zostają. Publiczny HTML bez zmian.
-- `tests/unit/presentation-intent.test.ts` ma 5 testów PASS.
-  `npm run check --workspace @ola/studio` i `npm run build --workspace @ola/studio`
-  PASS na Node 24.22.0. `sanity dev` na `http://127.0.0.1:3333` zwraca 200,
-  ale `SANITY_STUDIO_PROJECT_ID` to `replace-me`, więc dokumentu artykułu nie
-  dało się otworzyć. Vite serwuje moduł przycisku.
-- Studio nie było wdrażane. Następny krok to odbiór PR.
+- Przycisk „Otwórz podgląd” z #111 wywracał hostowane Studio błędem
+  `useFormValue must be used within a FormValueProvider`. Poprawka #113
+  dała w zamian błąd React #301 (zbyt wiele renderów).
+- Cofnięto oba squash commity (`0abd167`, `fba0db7`) przez `git revert`.
+  Panel „Do uzupełnienia” z #110 i zmiany verify-ola z #112 zostają.
+- Następny krok: nowa wersja przycisku z testem renderu w nagłówku dokumentu.
 
 ### Charset UTF-8 dla plików tekstowych, 15.10.2026
 
