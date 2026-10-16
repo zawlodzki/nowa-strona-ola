@@ -73,7 +73,7 @@
     "groq-js": "^2.0.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^1.0.0",
-    "sanity": "^6.18.0",
+    "sanity": "6.19.0",
     "satori": "^0.33.5",
     "sharp": "^0.35.5",
     "tar": "7.5.22",

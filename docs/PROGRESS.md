@@ -1,10 +1,25 @@
 # Postęp wdrożenia
 
-Aktualizacja: 2026-10-16 (wycofany przycisk „Otwórz podgląd” w Studio); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-16 (przycisk „Otwórz podgląd” z limitem renderów, Sanity 6.19.0 bez autoUpdates; wycofany przycisk „Otwórz podgląd” w Studio); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
 ## Aktualny etap
+
+### Przycisk podglądu bez pętli renderów, 16.10.2026
+
+- Przycisk **Otwórz podgląd** wraca do nagłówka dokumentu. Czyta slug,
+  język i tytuł z `useDocumentPane().value`. `onAction` jest stabilny,
+  dopóki adres podglądu i id dokumentu się nie zmienią.
+- Hostowane Studio po #113 padało React #301. Resolver akcji pola
+  porównuje wynik hooka przez `react-fast-compare` i woła `setState`
+  w trakcie renderu, gdy `onAction` jest nową funkcją. To jest komunikat
+  „Too many re-renders”. Test z tym samym porównaniem i efektem resolvera
+  padał na niestabilnym hooku i przechodzi przy dwóch renderach.
+- `deployment.autoUpdates` jest wyłączone. Lockfile i runtime buildu
+  to Sanity 6.19.0, ta sama wersja, która była na CDN przy awarii.
+  Kolejna łatka Sanity wejdzie dopiero ze zmianą zależności i wdrożeniem.
+- Studio nie było wdrażane z tej gałęzi.
 
 ### Wycofanie przycisku podglądu w Studio, 16.10.2026
 
