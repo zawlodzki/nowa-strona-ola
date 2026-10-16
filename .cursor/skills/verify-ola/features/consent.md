@@ -12,7 +12,7 @@ Build bez `PUBLIC_GTM_ENABLED` pokazuje zdanie, że opcjonalne narzędzia nie zo
 - `consent-dismiss` klika „Zamknij bez zmiany zgód” i chowa „Akceptuję wszystkie”.
 - `consent-excluded` na `/kontakt/` nadal pokazuje baner. Ta strona nie ma meta `ao-tracking-policy`.
 - `consent-absent` na `/ui/`, `/design-system/` i `/static/` nie ma przycisku „Akceptuję wszystkie”.
-- `consent-no-post` po zamknięciu i po „Dostosuj” zostawia pustą listę POST.
+- `consent-no-post` po zamknięciu, po „Dostosuj” i po „Akceptuję wszystkie” zostawia pustą listę POST.
 
 ## How to get to it (user POV)
 
@@ -50,13 +50,16 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button -
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /static/
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button --name "Akceptuję wszystkie" --exact --count 0
 node .cursor/skills/verify-ola/scripts/verify.mjs browser script-count
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Akceptuję wszystkie" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 ```
 
-Oba `browser posts` mają wypisać `[]`. Dwa odczyty `script-count` na `/` mają być równe. „Dostosuj” nie dokleja skryptu. Na `/static/` wynik to `scripts 0`.
+Trzy `browser posts` mają wypisać `[]`. Dwa odczyty `script-count` na `/` mają być równe. „Dostosuj” nie dokleja skryptu. Na `/static/` wynik to `scripts 0`. „Akceptuję wszystkie” na tym podglądzie też nie dopisuje POST.
 
 ## Gotchas
 
-Nie klikaj „Akceptuję wszystkie” ani „Odrzucam opcjonalne”. Wybór wysyła POST na `/api/c15t`, a lista `browser posts` żyje do końca procesu przeglądarki.
+„Akceptuję wszystkie” i „Odrzucam opcjonalne” na tym podglądzie nie dopisują POST. Klient woła najpierw `GET /api/c15t/init`. Tej trasy nie ma, więc `POST /subjects` nie startuje. POST pojawia się dopiero, gdy `/init` zwróci politykę. Lista `browser posts` żyje do końca procesu przeglądarki.
 Kontener `https://www.googletagmanager.com/gtm.js?id=GTM-PWBRPZ29` dokleja `src/lib/analytics.ts` dopiero po udanym zapisie, gdy build ma `PUBLIC_GTM_ENABLED=true` i strona ma politykę z `src/lib/tracking-policy.ts`. Kody to home, about, blog-index, blog-article, ebook-index i ebook-detail. Ten podgląd zostawia loader wyłączony, a zapis c15t się nie udaje, więc wstrzyknięcia GTM tu nie widać. Harness liczy elementy `script` i nie czyta ich `src`.
 „Ustawienia cookies” w stopce startuje z atrybutem `hidden`. `src/lib/consent-panel.ts` zdejmuje `hidden` przy starcie skryptu.
 Zamknięcie jest tylko w pamięci tej strony. Następny dokument może pokazać panel znowu.
