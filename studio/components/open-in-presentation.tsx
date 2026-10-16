@@ -1,4 +1,5 @@
 import { EyeOpenIcon } from "@sanity/icons/EyeOpen";
+import { useCallback } from "react";
 import { defineDocumentFieldAction, definePlugin } from "sanity";
 import type { DocumentFieldActionItem, DocumentFieldActionProps } from "sanity";
 import { useRouter } from "sanity/router";
@@ -32,7 +33,7 @@ function previewSelection(value: unknown): PreviewSelection | null {
 function useOpenInPresentation(
   props: DocumentFieldActionProps,
 ): DocumentFieldActionItem {
-  const router = useRouter();
+  const { navigateIntent } = useRouter();
   const { value } = useDocumentPane();
   const selected = previewSelection(value);
   const intent =
@@ -44,6 +45,20 @@ function useOpenInPresentation(
           locations: presentationResolve.locations,
         })
       : null;
+  const preview = intent?.params.preview;
+  const id = intent?.params.id;
+  const type = intent?.params.type;
+  // Sanity compares this object with react-fast-compare and setStates during
+  // render when onAction is a new function. That is React error #301.
+  const onAction = useCallback(() => {
+    if (!preview || !id || !type) return;
+    navigateIntent("edit", {
+      id,
+      type,
+      mode: "presentation",
+      preview,
+    });
+  }, [navigateIntent, preview, id, type]);
 
   return {
     type: "action",
@@ -51,10 +66,7 @@ function useOpenInPresentation(
     title: "Otwórz podgląd",
     renderAsButton: true,
     hidden: intent === null,
-    onAction: () => {
-      if (!intent) return;
-      router.navigateIntent(intent.intent, intent.params);
-    },
+    onAction,
   };
 }
 
