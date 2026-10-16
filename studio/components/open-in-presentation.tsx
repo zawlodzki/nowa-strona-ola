@@ -1,7 +1,8 @@
 import { EyeOpenIcon } from "@sanity/icons/EyeOpen";
-import { useFormValue, defineDocumentFieldAction, definePlugin } from "sanity";
+import { defineDocumentFieldAction, definePlugin } from "sanity";
 import type { DocumentFieldActionItem, DocumentFieldActionProps } from "sanity";
 import { useRouter } from "sanity/router";
+import { useDocumentPane } from "sanity/structure";
 
 import { presentationResolve } from "../presentation";
 import {
@@ -32,7 +33,8 @@ function useOpenInPresentation(
   props: DocumentFieldActionProps,
 ): DocumentFieldActionItem {
   const router = useRouter();
-  const selected = previewSelection(useFormValue());
+  const { value } = useDocumentPane();
+  const selected = previewSelection(value);
   const intent =
     props.path.length === 0
       ? presentationEditIntent({
@@ -56,8 +58,8 @@ function useOpenInPresentation(
   };
 }
 
-// renderAsButton on a root field action is the document pane header slot in Sanity 6.18.
-const openInPresentation = defineDocumentFieldAction({
+// renderAsButton on a root field action is the document pane header slot.
+export const openInPresentation = defineDocumentFieldAction({
   name: "open-in-presentation",
   useAction: useOpenInPresentation,
 });
