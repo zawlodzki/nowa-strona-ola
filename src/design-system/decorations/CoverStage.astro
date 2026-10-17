@@ -18,6 +18,7 @@ const { variant = "default", class: className } = Astro.props;
 <style>
   .ao-cover-stage {
     position: relative;
+    isolation: isolate;
     display: grid;
     place-items: center;
     inline-size: 100%;
