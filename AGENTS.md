@@ -68,6 +68,21 @@
 - UI porównuj z design systemem na desktopie i mobile, także dla klawiatury,
   320 px, zoomu 200% i reduced motion. Zapisuj niewykonane kontrole w postępie.
 
+## Bramki
+
+| Reguła                                                                         | Skrypt albo test                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------- |
+| Śledzone artefakty recenzji                                                    | `scripts/check-tracked-paths.mjs`                       |
+| Copy fixture pochodzi z seeda                                                  | import fixture w `scripts/check-build.mjs`              |
+| CSS szablonu jest ściśle pod limitem                                           | `scripts/check-css-budgets.mjs` używa `<`               |
+| Gołe PCOS w copy dla gościa. Body, tytuły i pola SEO artykułu są poza zakresem | `scripts/check-visitor-copy.mjs`                        |
+| Jeden kadr zdjęcia                                                             | `imageCropPosition` i `SiteImage`                       |
+| Regiony szablonu                                                               | `src/content/template-regions.ts`                       |
+| Pin Studio                                                                     | `scripts/check-studio-pin.mjs`                          |
+| `SITE_INDEXING` czyszczone w testach                                           | `tests/setup-env.ts`                                    |
+| Charset                                                                        | `buildHeadersFile` i `tests/unit/seo-discovery.test.ts` |
+| Malowane pseudoelementy                                                        | `scripts/check-pseudo-shapes.mjs`                       |
+
 ## Cursor Cloud
 
 Powłoka agenta może rozwiązywać `node` jako `/exec-daemon/node` (Node 22).
