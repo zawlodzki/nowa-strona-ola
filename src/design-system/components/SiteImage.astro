@@ -5,6 +5,7 @@ import { siteRasters as rasters } from "@/assets/site-rasters";
 import {
   imageCropPosition,
   pickSiteImage,
+  sharpCropPosition,
   type SiteRasterKey,
 } from "@/lib/site-images";
 
@@ -35,10 +36,14 @@ const {
   objectPosition,
   fit = "cover",
 } = Astro.props;
-const imageStyle = objectPosition
-  ? `object-position: ${objectPosition}`
+const cropInstruction = imageCropPosition(objectPosition);
+const imageStyle = cropInstruction
+  ? `object-position: ${cropInstruction}`
   : undefined;
-const cropPosition = imageCropPosition(objectPosition);
+const sharpPosition = sharpCropPosition(objectPosition);
+// Cover with no keyword falls back to centre and bakes a second crop.
+const imageFit =
+  cropInstruction?.includes("%") && fit === "cover" ? "inside" : fit;
 
 const picked = pickSiteImage(src, fallback);
 const eager = loading === "eager" || fetchpriority === "high";
@@ -54,8 +59,8 @@ const eager = loading === "eager" || fetchpriority === "high";
     style={imageStyle}
     layout="none"
     format="webp"
-    fit={fit}
-    position={cropPosition}
+    fit={imageFit}
+    position={sharpPosition}
     loading={eager ? "eager" : "lazy"}
     fetchpriority={fetchpriority}
     decoding={decoding}
@@ -71,8 +76,8 @@ const eager = loading === "eager" || fetchpriority === "high";
     style={imageStyle}
     layout="none"
     format="webp"
-    fit={fit}
-    position={cropPosition}
+    fit={imageFit}
+    position={sharpPosition}
     loading={eager ? "eager" : "lazy"}
     fetchpriority={fetchpriority}
     decoding={decoding}
