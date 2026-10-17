@@ -28,7 +28,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "verify": "npm run format:check && npm run tokens:check && node scripts/check-studio-pin.mjs && node scripts/check-tracked-paths.mjs && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e && npm run test:content-lake",
+    "verify": "npm run format:check && npm run tokens:check && node scripts/check-studio-pin.mjs && node scripts/check-tracked-paths.mjs && node scripts/check-pseudo-shapes.mjs src && npm run lint && npm run check && npm run test && npm run build && npm run build:workspaces && npm run test:build && npm run test:e2e && npm run test:content-lake",
     "test:build": "node scripts/check-build.mjs && node scripts/check-seo.mjs && node scripts/check-visitor-copy.mjs src/content",
     "import:homepage": "node scripts/import-homepage-content.mjs",
     "import:about": "node scripts/import-about-content.mjs",
