@@ -1,6 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
+import { tsImport } from "tsx/esm/api";
 import { checkCssBudgets } from "./check-css-budgets.mjs";
 import { assertEnglishDisabled } from "./check-disabled-locales.mjs";
 
@@ -38,6 +39,136 @@ function inputWithValue(html, value) {
   return [...html.matchAll(/<input\b[^>]*>/g)]
     .map((match) => match[0])
     .find((tag) => new RegExp(`\\bvalue="${value}"`).test(tag));
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function assertCopy(html, text, label) {
+  const forms = [
+    text,
+    text.replaceAll("\u00A0", " "),
+    text.replaceAll("\u00A0", "&nbsp;"),
+    text.replaceAll("\u00A0", "&#160;"),
+    text.replaceAll("\u00A0", "&#xa0;"),
+  ];
+  assert.ok(
+    forms.some((form) => html.includes(form)),
+    `${label}: missing fixture copy`,
+  );
+}
+
+function assertLegalVersion(html, view, label) {
+  assert.ok(view.effective, `${label}: fixture version has no date`);
+  assert.match(
+    html,
+    new RegExp(
+      `${escapeRegExp(view.versionLabel)}\\s*·\\s*${escapeRegExp(view.effectiveCaption)}\\s*<time datetime="${escapeRegExp(view.effective.datetime)}"`,
+    ),
+    label,
+  );
+}
+
+async function loadFixtureOracle() {
+  const load = (specifier) => tsImport(specifier, import.meta.url);
+  const [
+    ebookCollection,
+    blogSeed,
+    homepage,
+    about,
+    consultation,
+    ebookSeed,
+    social,
+    mapLegal,
+    legalFixtures,
+    homepageFixtures,
+    blogFixtures,
+    ebookFixtureModule,
+    mapArticleModule,
+    paths,
+    pagination,
+  ] = await Promise.all([
+    load("../src/content/ebook-collection-seed.ts"),
+    load("../src/content/blog-collection-seed.ts"),
+    load("../src/content/homepage-seed.ts"),
+    load("../src/content/about-seed.ts"),
+    load("../src/content/consultation-seed.ts"),
+    load("../src/content/ebook-seed.ts"),
+    load("../src/content/social-profiles.ts"),
+    load("../src/content/map-legal.ts"),
+    load("../src/sanity/legal-fixtures.ts"),
+    load("../src/sanity/homepage-fixtures.ts"),
+    load("../src/sanity/blog-collection-fixtures.ts"),
+    load("../src/sanity/ebook-fixtures.ts"),
+    load("../src/content/map-article.ts"),
+    load("../src/lib/paths.ts"),
+    load("../src/lib/pagination.ts"),
+  ]);
+  const settings = homepageFixtures.homepageSettingsFixture("pl");
+  const articles = blogFixtures.fixtureArticlesForLanguage("pl");
+  const featured = articles[0];
+  assert.ok(featured, "fixture article list is empty");
+  const cards = homepageFixtures.ebookFixtures("pl");
+  const card = cards[0];
+  assert.ok(card, "fixture ebook list is empty");
+  const pcosSlug = homepage.EBOOK_SEED[0]?.slug.pl;
+  assert.ok(pcosSlug, "fixture ebook seed is empty");
+  const pcos = ebookFixtureModule.fixtureEbook("pl", pcosSlug);
+  assert.ok(pcos, `missing ebook fixture ${pcosSlug}`);
+  const pageSize = paths.ARTICLES_PER_PAGE;
+  const firstPage = pagination.paginateBlogCollection(articles, 1, pageSize);
+  const secondPage = pagination.paginateBlogCollection(articles, 2, pageSize);
+  assert.ok(firstPage, "fixture blog page 1");
+  const legal = (slug) => {
+    const page = legalFixtures.fixtureLegalPage("pl", slug);
+    assert.ok(page, `missing legal fixture ${slug}`);
+    return mapLegal.mapLegalPage(page, settings);
+  };
+  const privacy = legal("polityka-prywatnosci");
+  const cookies = legal("lista-cookies-i-identyfikatorow");
+  assert.ok(privacy.toc[0], "privacy fixture has no heading");
+  assert.ok(cookies.toc[0], "cookies fixture has no heading");
+  return {
+    collectionTitle:
+      ebookCollection.ebookCollectionCopy.pl.title.split("\n")[0],
+    collectionNote: ebookCollection.ebookCollectionCopy.pl.note,
+    price: String(card.priceGross),
+    ebookSlugs: homepage.EBOOK_SEED.map((item) => item.slug.pl),
+    pcosSlug,
+    pcosPrice: String(pcos.priceGross),
+    offerNote: ebookSeed.ebookCopy.pl.offerNote,
+    blogTitle: blogSeed.blogIndexCopy.pl.title,
+    latestTitle: blogSeed.blogIndexCopy.pl.latestTitle,
+    articleCount: articles.length,
+    firstRange: blogSeed.blogRangeLabel(
+      "pl",
+      firstPage.rangeStart,
+      firstPage.rangeEnd,
+      articles.length,
+    ),
+    secondRange:
+      secondPage &&
+      blogSeed.blogRangeLabel(
+        "pl",
+        secondPage.rangeStart,
+        secondPage.rangeEnd,
+        articles.length,
+      ),
+    hasSecondPage: firstPage.totalPages > 1,
+    featuredSlug: featured.slug,
+    featuredTitle: featured.title,
+    tocLabel: mapArticleModule.mapArticle(featured, settings).tocLabel,
+    emptyCategorySlug: blogSeed.BLOG_CATEGORY_SEED.perimenopause.slugs.pl,
+    emptyCategoryMessage: blogSeed.blogIndexCopy.pl.emptyCategoryMessage,
+    socialHrefs: social.SOCIAL_PROFILES.map((item) => item.href),
+    heroLine: homepage.homepageCopy.pl.heroTitle.split("\n")[0],
+    aboutLine: about.aboutCopy.pl.heroTitle.split("\n")[0],
+    consultationLine:
+      consultation.consultationCopy.pl.processTitle.split("\n")[0],
+    privacy,
+    cookies,
+  };
 }
 
 const assets = await readdir("dist/_astro");
@@ -186,47 +317,58 @@ for (const category of await readdir("dist/blog/kategoria", {
     `blog/kategoria/${category.name}: neither articles nor empty state`,
   );
 }
-if (!liveContent) {
-  assert.match(collectionHtml, /Więcej jasności/);
-  assert.match(collectionHtml, /97/);
-  assert.match(collectionHtml, /materiały są w przygotowaniu/);
-  assert.match(collectionHtml, /\/ebooki\/suplementy-w-pcos\//);
-  assert.match(collectionHtml, /\/ebooki\/badania-ktore-maja-sens\//);
+const fixture = liveContent ? null : await loadFixtureOracle();
+if (fixture) {
+  assertCopy(collectionHtml, fixture.collectionTitle, "ebook collection title");
+  assertCopy(collectionHtml, fixture.price, "ebook collection price");
+  assertCopy(collectionHtml, fixture.collectionNote, "ebook collection note");
+  for (const slug of fixture.ebookSlugs) {
+    assert.match(
+      collectionHtml,
+      new RegExp(`/ebooki/${escapeRegExp(slug)}/`),
+      `ebook collection links ${slug}`,
+    );
+  }
   const ebookHtml = await readFile(
-    "dist/ebooki/suplementy-w-pcos/index.html",
+    `dist/ebooki/${fixture.pcosSlug}/index.html`,
     "utf8",
   );
-  assert.match(ebookHtml, /97/);
-  assert.match(ebookHtml, /Zapowiedź oferty|Sprzedaż nie jest uruchomiona/);
-  assert.match(blogHtml, /Blog\. Po Twojemu\./);
-  assert.match(blogHtml, /Najnowszy wpis/);
-  // Fixtures are fixed: 11 posts, 6 per list page after the featured one.
-  assert.equal(postCount, 11, "fixture: 11 articles");
-  assert.match(blogHtml, /Wpisy 2–7 z 11/);
-  const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
-  assert.match(blogPage2, /Wpisy 8–11 z 11/);
-  assert.match(blogHtml, /przygotowanie-do-konsultacji-pcos/);
-  assert.match(blogHtml, /\/blog\/strona\/2\//);
+  assertCopy(ebookHtml, fixture.pcosPrice, "ebook price");
+  assertCopy(ebookHtml, fixture.offerNote, "ebook offer note");
+  assertCopy(blogHtml, fixture.blogTitle, "blog title");
+  assertCopy(blogHtml, fixture.latestTitle, "blog latest title");
+  assert.equal(postCount, fixture.articleCount);
+  assert.ok(fixture.firstRange, "fixture blog range");
+  assertCopy(blogHtml, fixture.firstRange, "blog range");
+  assert.match(blogHtml, new RegExp(escapeRegExp(fixture.featuredSlug)));
   assert.doesNotMatch(
     blogHtml.split('id="wpisy"')[1] ?? "",
-    /przygotowanie-do-konsultacji-pcos/,
+    new RegExp(escapeRegExp(fixture.featuredSlug)),
   );
+  if (fixture.hasSecondPage) {
+    assert.ok(fixture.secondRange, "fixture blog page 2 range");
+    const blogPage2 = await readFile("dist/blog/strona/2/index.html", "utf8");
+    assertCopy(blogPage2, fixture.secondRange, "blog page 2 range");
+    assert.match(blogHtml, /\/blog\/strona\/2\//);
+  }
   const articleHtml = await readFile(
-    "dist/blog/przygotowanie-do-konsultacji-pcos/index.html",
+    `dist/blog/${fixture.featuredSlug}/index.html`,
     "utf8",
   );
   assert.match(articleHtml, /article3a/);
-  assert.match(
-    articleHtml,
-    /Jak przygotować się do konsultacji dietetycznej przy PMOS \(PCOS\)\?/,
-  );
-  assert.match(articleHtml, /W tym artykule/);
+  assertCopy(articleHtml, fixture.featuredTitle, "article title");
+  assertCopy(articleHtml, fixture.tocLabel, "article toc");
   assert.match(articleHtml, /"@type":"FAQPage"/);
   const blogEmpty = await readFile(
-    "dist/blog/kategoria/perimenopauza/index.html",
+    `dist/blog/kategoria/${fixture.emptyCategorySlug}/index.html`,
     "utf8",
   );
-  assert.match(blogEmpty, /tej kategorii nie ma jeszcze wpisów/i);
+  assert.ok(
+    blogEmpty
+      .toLowerCase()
+      .includes(fixture.emptyCategoryMessage.toLowerCase()),
+    "empty category message",
+  );
 }
 const homePl = await readFile("dist/index.html", "utf8");
 assert.match(homePl, /class="home3a"/);
@@ -270,33 +412,21 @@ const cookiesHtml = await readFile(
   "dist/lista-cookies-i-identyfikatorow/index.html",
   "utf8",
 );
-if (!liveContent) {
-  assert.match(
-    homePl,
-    /href="https:\/\/www\.instagram\.com\/aleksandra_olesiewicz"/,
-  );
-  assert.match(
-    homePl,
-    /href="https:\/\/www\.facebook\.com\/dietetykolesiewicz\/"/,
-  );
-  assert.match(
-    homePl,
-    /href="https:\/\/www\.tiktok\.com\/@aleksandra_olesiewicz"/,
-  );
-  assert.match(homePl, /Zrozum swoje ciało/);
-  assert.match(aboutHtml, /Jestem Ola/);
-  assert.match(consultationHtml, /Konsultacje dietetyczne|60 minut/i);
-  assert.match(privacyHtml, /Polityka prywatności aleksandraolesiewicz\.com/);
-  assert.match(
-    privacyHtml,
-    /Wersja 2\.4 · obowiązuje od <time datetime="2026-10-13"/,
-  );
-  assert.match(privacyHtml, /1\. Kto jest administratorem Twoich danych/);
+if (fixture) {
+  for (const href of fixture.socialHrefs) {
+    assert.match(homePl, new RegExp(`href="${escapeRegExp(href)}"`), href);
+  }
+  assertCopy(homePl, fixture.heroLine, "home hero");
+  assertCopy(aboutHtml, fixture.aboutLine, "about hero");
+  assertCopy(consultationHtml, fixture.consultationLine, "consultation");
+  assertCopy(privacyHtml, fixture.privacy.title, "privacy title");
+  assertLegalVersion(privacyHtml, fixture.privacy, "privacy version");
+  assertCopy(privacyHtml, fixture.privacy.toc[0].text, "privacy heading");
   assert.match(privacyHtml, /\/lista-cookies-i-identyfikatorow\//);
   assert.match(termsHtml, /<h2 id="pouczenie"/);
   assert.match(termsHtml, /<h2 id="formularz-odstapienia"/);
   assert.match(termsHtml, /href="\/regulamin\/#pouczenie"/);
-  assert.match(cookiesHtml, /Przed dokonaniem wyboru/);
+  assertCopy(cookiesHtml, fixture.cookies.toc[0].text, "cookies heading");
   assert.match(cookiesHtml, /\/polityka-prywatnosci\//);
 }
 const sitemap = await readFile("dist/sitemap.xml", "utf8");

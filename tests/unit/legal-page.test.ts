@@ -18,6 +18,30 @@ import {
   getSiteSettings,
 } from "../../src/sanity/repository";
 
+function fixtureDate(effectiveFrom: string) {
+  const [year, month, day] = effectiveFrom.split("-");
+  return `${day}.${month}.${year}`;
+}
+
+function fixtureVersionLine(
+  version: string,
+  effectiveFrom: string | null,
+  language: "pl" | "en" = "pl",
+) {
+  const versionLabel = `${language === "pl" ? "Wersja" : "Version"} ${version}`;
+  if (!effectiveFrom) {
+    return `${versionLabel} · ${
+      language === "pl"
+        ? "data wejścia w życie do ustalenia"
+        : "effective date to be confirmed"
+    }`;
+  }
+  const date = fixtureDate(effectiveFrom);
+  return language === "pl"
+    ? `${versionLabel} · obowiązuje od ${date}`
+    : `${versionLabel} · effective from ${date}`;
+}
+
 describe("legal page mapper", () => {
   it("maps the Polish privacy policy with its effective date", async () => {
     const [page, settings] = await Promise.all([
@@ -27,12 +51,17 @@ describe("legal page mapper", () => {
     const view = mapLegalPage(page, settings);
     expect(view.href).toBe("/polityka-prywatnosci/");
     expect(view.title).toBe("Polityka prywatności aleksandraolesiewicz.com");
-    expect(view.versionLabel).toBe("Wersja 2.4");
+    expect(view.version).toBe(page.version);
+    expect(view.versionLabel).toBe(`Wersja ${page.version}`);
+    expect(page.effectiveFrom).toEqual(expect.any(String));
+    const effectiveFrom = page.effectiveFrom ?? "";
     expect(view.effective).toEqual({
-      datetime: "2026-10-13",
-      label: "13.10.2026",
+      datetime: effectiveFrom,
+      label: fixtureDate(effectiveFrom),
     });
-    expect(view.versionLine).toBe("Wersja 2.4 · obowiązuje od 13.10.2026");
+    expect(view.versionLine).toBe(
+      fixtureVersionLine(page.version, page.effectiveFrom),
+    );
     expect(view.toc[0]?.text).toBe("1. Kto jest administratorem Twoich danych");
     expect(view.html).toContain('href="/lista-cookies-i-identyfikatorow/"');
     expect(view.html).toContain("<table>");
@@ -46,8 +75,8 @@ describe("legal page mapper", () => {
         site: siteSeoData(null),
       })[0],
     ).toMatchObject({
-      version: "2.4",
-      datePublished: "2026-10-13",
+      version: page.version,
+      datePublished: page.effectiveFrom,
     });
     expect(serializeLegalPage(view)).toBe(
       readFileSync("src/content/examples/legal-privacy.md", "utf8"),
@@ -61,11 +90,10 @@ describe("legal page mapper", () => {
     ]);
     const view = mapLegalPage({ ...page, effectiveFrom: null }, settings);
     expect(view.effective).toBeNull();
-    expect(view.versionLine).toBe(
-      "Wersja 2.3 · data wejścia w życie do ustalenia",
-    );
+    expect(view.version).toBe(page.version);
+    expect(view.versionLine).toBe(fixtureVersionLine(page.version, null));
     expect(serializeLegalPage(view).split("\n")[2]).toBe(
-      "Wersja 2.3 · data wejścia w życie do ustalenia",
+      fixtureVersionLine(page.version, null),
     );
     expect(
       legalGraph(view)({
@@ -74,7 +102,7 @@ describe("legal page mapper", () => {
         title: view.title,
         site: siteSeoData(null),
       })[0],
-    ).toMatchObject({ version: "2.3" });
+    ).toMatchObject({ version: page.version });
     expect(
       legalGraph(view)({
         lang: "pl",
@@ -123,31 +151,33 @@ describe("legal page mapper", () => {
 
   it("maps cookies and newsletter terms with links between documents", async () => {
     const settings = await getSiteSettings("pl", { environment: {} });
-    const cookies = mapLegalPage(
-      await getLegalPage("pl", "lista-cookies-i-identyfikatorow", {
-        environment: {},
-      }),
-      settings,
+    const cookiesPage = await getLegalPage(
+      "pl",
+      "lista-cookies-i-identyfikatorow",
+      { environment: {} },
     );
+    const cookies = mapLegalPage(cookiesPage, settings);
     expect(cookies.href).toBe("/lista-cookies-i-identyfikatorow/");
     expect(cookies.alternateHref).toBeNull();
     expect(cookies.html).toContain(
       '<a href="/polityka-prywatnosci/">Politykę prywatności</a>',
     );
     expect(cookies.toc[0]?.text).toBe("Aktualny stan narzędzi");
-    expect(cookies.versionLabel).toBe("Wersja 2.4");
+    expect(cookies.version).toBe(cookiesPage.version);
+    expect(cookies.versionLabel).toBe(`Wersja ${cookiesPage.version}`);
     expect(cookies.html).toContain("ao-theme");
     expect(cookies.html).toContain("Clarity jest wyłączony");
     expect(serializeLegalPage(cookies)).toBe(
       readFileSync("src/content/examples/legal-cookies.md", "utf8"),
     );
 
-    const newsletter = mapLegalPage(
-      await getLegalPage("pl", "regulamin-newslettera", { environment: {} }),
-      settings,
-    );
+    const newsletterPage = await getLegalPage("pl", "regulamin-newslettera", {
+      environment: {},
+    });
+    const newsletter = mapLegalPage(newsletterPage, settings);
     expect(newsletter.toc[0]?.text).toBe("§ 1. Kto wysyła newsletter");
-    expect(newsletter.versionLabel).toBe("Wersja 2.1");
+    expect(newsletter.version).toBe(newsletterPage.version);
+    expect(newsletter.versionLabel).toBe(`Wersja ${newsletterPage.version}`);
     expect(serializeLegalPage(newsletter)).toBe(
       readFileSync("src/content/examples/legal-newsletter.md", "utf8"),
     );
@@ -164,7 +194,10 @@ describe("legal page mapper", () => {
     expect(view.html).toContain("binding version is the Polish text");
     expect(view.html).toContain('href="/polityka-prywatnosci/"');
     expect(view.html).not.toContain("Administratorem danych osobowych");
-    expect(view.versionLine).toBe("Version 2.4 · effective from 13.10.2026");
+    expect(view.version).toBe(page.version);
+    expect(view.versionLine).toBe(
+      fixtureVersionLine(page.version, page.effectiveFrom, "en"),
+    );
     expect(serializeLegalPage(view)).toBe(
       readFileSync("src/content/examples/legal-privacy-en.md", "utf8"),
     );
@@ -182,6 +215,52 @@ describe("legal page mapper", () => {
         { language: "en", slug: "terms" },
       ]),
     );
+  });
+
+  it("fails when a legal-pages skill file copies a version sentence that is not the fixture", async () => {
+    const settings = await getSiteSettings("pl", { environment: {} });
+    const slugs = [
+      "polityka-prywatnosci",
+      "lista-cookies-i-identyfikatorow",
+      "regulamin",
+      "regulamin-newslettera",
+    ];
+    const views = await Promise.all(
+      slugs.map(async (slug) =>
+        mapLegalPage(
+          await getLegalPage("pl", slug, { environment: {} }),
+          settings,
+        ),
+      ),
+    );
+    const lines = new Set(views.map((view) => view.versionLine));
+    const sentence = /Wersja \d+\.\d+ · obowiązuje od \d{2}\.\d{2}\.\d{4}/g;
+    const proseDate = /(\d+\.\d+)\s+z\s+(\d{2}\.\d{2}\.\d{4})/g;
+    for (const path of [
+      ".cursor/skills/verify-ola/features/legal-pages.md",
+      ".agents/skills/verify-ola/features/legal-pages.md",
+    ]) {
+      const text = readFileSync(path, "utf8");
+      const sentences = [...text.matchAll(sentence)].map((match) => match[0]);
+      expect(sentences.length, path).toBeGreaterThan(0);
+      for (const found of sentences) {
+        expect(lines.has(found), `${path}: ${found}`).toBe(true);
+      }
+      for (const line of lines) {
+        expect(text, path).toContain(line);
+      }
+      for (const match of text.matchAll(proseDate)) {
+        const version = match[1] ?? "";
+        const date = match[2] ?? "";
+        expect(
+          views.some(
+            (view) =>
+              view.version === version && view.effective?.label === date,
+          ),
+          `${path}: ${match[0]}`,
+        ).toBe(true);
+      }
+    }
   });
 });
 
