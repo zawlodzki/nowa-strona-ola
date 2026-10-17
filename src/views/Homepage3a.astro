@@ -260,6 +260,7 @@ function coverLabels(kind: CoverArtKind): string[] {
               >
                 <CoverStage slot="media" variant={art.variant}>
                   <BookCover
+                    image={item.cover}
                     title={item.title}
                     subtitle={item.subtitle ?? ""}
                     author={item.authorName}
