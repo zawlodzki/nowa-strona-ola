@@ -2,6 +2,23 @@ import { expect, test } from "./helpers/lead-webhook";
 import { dismissConsentBanner } from "./helpers/consent-banner";
 import { renderedColor } from "./helpers/color";
 
+test("landing gives its image cover the shared book shadow", async ({
+  page,
+}) => {
+  await page.goto("/ebooki/suplementy-w-pcos/");
+  await dismissConsentBanner(page);
+  const book = page.locator(".ebook3a-book").first();
+  await book.evaluate((element) => {
+    const image = document.createElement("img");
+    image.src =
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='3'%3E%3Crect width='2' height='3' fill='navy'/%3E%3C/svg%3E";
+    image.alt = "Okładka testowa";
+    element.replaceChildren(image);
+  });
+  await expect(book.locator("img")).toBeVisible();
+  await expect(book.locator("img")).not.toHaveCSS("box-shadow", "none");
+});
+
 for (const width of [1280, 320]) {
   for (const theme of ["light", "dark"] as const) {
     test(`ebook badges stay above portrait covers at ${width}px in ${theme}`, async ({
