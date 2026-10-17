@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { tsImport } from "tsx/esm/api";
 import { checkCssBudgets } from "./check-css-budgets.mjs";
 import { assertEnglishDisabled } from "./check-disabled-locales.mjs";
+import { checkBuiltRegions } from "./check-regions.mjs";
 
 const indexing = process.env.SITE_INDEXING === "production";
 const liveContent = Boolean(process.env.PUBLIC_SANITY_PROJECT_ID);
@@ -88,6 +89,8 @@ async function loadFixtureOracle() {
     mapArticleModule,
     paths,
     pagination,
+    contactFixtures,
+    withdrawalFixtures,
   ] = await Promise.all([
     load("../src/content/ebook-collection-seed.ts"),
     load("../src/content/blog-collection-seed.ts"),
@@ -104,6 +107,8 @@ async function loadFixtureOracle() {
     load("../src/content/map-article.ts"),
     load("../src/lib/paths.ts"),
     load("../src/lib/pagination.ts"),
+    load("../src/sanity/contact-fixtures.ts"),
+    load("../src/sanity/withdrawal-fixtures.ts"),
   ]);
   const settings = homepageFixtures.homepageSettingsFixture("pl");
   const articles = blogFixtures.fixtureArticlesForLanguage("pl");
@@ -129,6 +134,13 @@ async function loadFixtureOracle() {
   const cookies = legal("lista-cookies-i-identyfikatorow");
   assert.ok(privacy.toc[0], "privacy fixture has no heading");
   assert.ok(cookies.toc[0], "cookies fixture has no heading");
+  const sectionTitle = (page, type, label) => {
+    const section = page.sections.find((item) => item._type === type);
+    assert.ok(section?.title, `${label} fixture has no title`);
+    return section.title;
+  };
+  const contactPage = contactFixtures.contactPageFixture("pl");
+  const withdrawalPage = withdrawalFixtures.withdrawalPageFixture();
   return {
     collectionTitle:
       ebookCollection.ebookCollectionCopy.pl.title.split("\n")[0],
@@ -168,6 +180,9 @@ async function loadFixtureOracle() {
       consultation.consultationCopy.pl.processTitle.split("\n")[0],
     privacy,
     cookies,
+    privacyTitle: privacy.title,
+    contactLine: sectionTitle(contactPage, "heroSection", "contact"),
+    withdrawalLine: sectionTitle(withdrawalPage, "textSection", "withdrawal"),
   };
 }
 
@@ -429,6 +444,27 @@ if (fixture) {
   assertCopy(cookiesHtml, fixture.cookies.toc[0].text, "cookies heading");
   assert.match(cookiesHtml, /\/polityka-prywatnosci\//);
 }
+function resolveRegionPath(region) {
+  if (region.path) return region.path;
+  if (region.id === "ebook") {
+    const slug = fixture?.pcosSlug ?? ebookSlugs[0];
+    assert.ok(slug, "ebook region: no landing");
+    return `ebooki/${slug}/index.html`;
+  }
+  if (region.id === "article") {
+    const slug = fixture?.featuredSlug ?? articleSlugs[0];
+    assert.ok(slug, "article region: no article");
+    return `blog/${slug}/index.html`;
+  }
+  assert.fail(`template region ${region.id} has no path`);
+}
+
+await checkBuiltRegions({
+  readHtml: (filePath) => readFile(`dist/${filePath}`, "utf8"),
+  resolvePath: resolveRegionPath,
+  seeds: fixture,
+  assertCopy: fixture ? assertCopy : undefined,
+});
 const sitemap = await readFile("dist/sitemap.xml", "utf8");
 for (const loc of [
   "https://aleksandraolesiewicz.com/polityka-prywatnosci/",
