@@ -1,37 +1,45 @@
 import { expect, test } from "@playwright/test";
+import { tsImport } from "tsx/esm/api";
 import {
   dismissConsentBanner,
   mockConsentPolicy,
 } from "./helpers/consent-banner";
 
+const { mapLegalPage } = await tsImport(
+  "../../src/content/map-legal.ts",
+  import.meta.url,
+);
+const { fixtureLegalPage } = await tsImport(
+  "../../src/sanity/legal-fixtures.ts",
+  import.meta.url,
+);
+const { homepageSettingsFixture } = await tsImport(
+  "../../src/sanity/homepage-fixtures.ts",
+  import.meta.url,
+);
+
+const settings = homepageSettingsFixture("pl");
+
+function legalView(slug: string) {
+  const page = fixtureLegalPage("pl", slug);
+  if (!page) throw new Error(`Brak fixture strony prawnej ${slug}.`);
+  const view = mapLegalPage(page, settings);
+  const heading = view.toc[0]?.text;
+  if (!heading) throw new Error(`Brak nagłówka fixture ${slug}.`);
+  return {
+    path: view.href,
+    title: view.title,
+    version: view.versionLine,
+    heading,
+  };
+}
+
 const pages = [
-  {
-    path: "/polityka-prywatnosci/",
-    title: "Polityka prywatności aleksandraolesiewicz.com",
-    version: "Wersja 2.4 · obowiązuje od 13.10.2026",
-    heading: "1. Kto jest administratorem Twoich danych",
-  },
-  {
-    path: "/lista-cookies-i-identyfikatorow/",
-    title: "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
-    version: "Wersja 2.4 · obowiązuje od 13.10.2026",
-    heading: "Aktualny stan narzędzi",
-  },
-  {
-    path: "/regulamin/",
-    title:
-      "Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com",
-    version: "Wersja 2.3 · obowiązuje od 10.10.2026",
-    heading: "§ 1. Postanowienia ogólne",
-  },
-  {
-    path: "/regulamin-newslettera/",
-    title:
-      "Regulamin newslettera i materiałów bezpłatnych — aleksandraolesiewicz.com",
-    version: "Wersja 2.1 · obowiązuje od 10.10.2026",
-    heading: "§ 1. Kto wysyła newsletter",
-  },
-] as const;
+  "polityka-prywatnosci",
+  "lista-cookies-i-identyfikatorow",
+  "regulamin",
+  "regulamin-newslettera",
+].map((slug) => legalView(slug));
 
 for (const entry of pages) {
   test(`${entry.path} renders title, version and first heading`, async ({
@@ -59,11 +67,14 @@ test("privacy and cookies link to each other", async ({ page }) => {
     .click();
   await expect(page).toHaveURL(/\/lista-cookies-i-identyfikatorow\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Lista cookies i identyfikatorów aleksandraolesiewicz.com",
+    legalView("lista-cookies-i-identyfikatorow").title,
   );
   await dismissConsentBanner(page);
   await page.getByRole("link", { name: "Politykę prywatności" }).click();
   await expect(page).toHaveURL(/\/polityka-prywatnosci\/$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    legalView("polityka-prywatnosci").title,
+  );
 });
 
 test("terms appendices open at their anchors", async ({ page }) => {
