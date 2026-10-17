@@ -82,6 +82,10 @@ async function articlePaths(directory) {
   return paths.sort();
 }
 
+export function assertCssUnderCap(bytes, cap, message) {
+  assert(bytes < cap, message);
+}
+
 export async function checkCssBudgets(directory = "dist") {
   const report = {};
   for (const template of templates) {
@@ -118,12 +122,14 @@ export async function checkCssBudgets(directory = "dist") {
       );
       const css = [...sources, ...inline].join("\n");
       assert(hrefs.size > 0, `${path}: CSS assets missing`);
-      assert(
-        externalGzipBytes <= template.external,
+      assertCssUnderCap(
+        externalGzipBytes,
+        template.external,
         `${path}: external CSS exceeds ${template.external} B gzip (${externalGzipBytes})`,
       );
-      assert(
-        inlineBytes <= template.inline,
+      assertCssUnderCap(
+        inlineBytes,
+        template.inline,
         `${path}: inline CSS exceeds ${template.inline} B (${inlineBytes})`,
       );
       assert(
