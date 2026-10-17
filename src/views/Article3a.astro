@@ -342,6 +342,7 @@ const bodyHtml = markArticleIntro(html);
                 >
                   <CoverStage variant={art.variant}>
                     <BookCover
+                      image={item.cover}
                       title={item.title}
                       subtitle={item.subtitle ?? ""}
                       author={item.authorName}
@@ -1059,7 +1060,7 @@ const bodyHtml = markArticleIntro(html);
       padding-inline: 12px;
       min-block-size: 340px;
     }
-    .article3a :global(.ao-book-cover) {
+    .article3a :global(.ao-book-cover:not(.ao-book-cover--image)) {
       padding: 14px;
       block-size: 300px;
     }

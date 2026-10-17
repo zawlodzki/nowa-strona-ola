@@ -1,5 +1,8 @@
 ---
 import CherryCoverAccent from "../decorations/CherryCoverAccent.astro";
+import SiteImage from "./SiteImage.astro";
+import { pickSiteImage } from "@/lib/site-images";
+import type { MediaSpec } from "@/sections/types";
 
 interface Props {
   title: string;
@@ -7,20 +10,50 @@ interface Props {
   author: string;
   topic: string;
   tone?: "light" | "cherry";
+  image?: MediaSpec;
 }
-const { title, subtitle, author, topic, tone = "light" } = Astro.props;
+const { title, subtitle, author, topic, tone = "light", image } = Astro.props;
+const hasImage = Boolean(pickSiteImage(image?.src));
 ---
 
 <div
-  class:list={["ao-book-cover", `ao-book-cover--${tone}`]}
+  class:list={[
+    "ao-book-cover",
+    `ao-book-cover--${tone}`,
+    { "ao-book-cover--image": hasImage },
+  ]}
   aria-hidden="true"
 >
-  <span class="ao-book-cover__author">{author}</span>
-  <strong>{title}</strong>
-  <span class="ao-book-cover__subtitle">{subtitle}</span>
-  <div class="ao-book-cover__art">
-    <slot name="art" />
-  </div>
-  <span class="ao-book-cover__topic">{topic}</span>
-  {tone === "cherry" && <CherryCoverAccent />}
+  {hasImage ? (
+    <SiteImage src={image?.src} alt="" width={504} height={756} fit="contain" />
+  ) : (
+    <>
+      <span class="ao-book-cover__author">{author}</span>
+      <strong>{title}</strong>
+      <span class="ao-book-cover__subtitle">{subtitle}</span>
+      <div class="ao-book-cover__art">
+        <slot name="art" />
+      </div>
+      <span class="ao-book-cover__topic">{topic}</span>
+      {tone === "cherry" && <CherryCoverAccent />}
+    </>
+  )}
 </div>
+
+<style>
+  .ao-book-cover--image {
+    block-size: auto;
+    aspect-ratio: 2 / 3;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: clip;
+  }
+
+  .ao-book-cover--image :global(img) {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+  }
+</style>
