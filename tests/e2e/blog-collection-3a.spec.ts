@@ -189,7 +189,6 @@ test("blog collection cards crop 1.8, round 24px and load every photo", async ({
   expect(metrics.ratio).toBeGreaterThan(1.7);
   expect(metrics.ratio).toBeLessThan(1.9);
   expect(metrics.naturalWidth).toBeGreaterThan(0);
-  expect(metrics.naturalWidth).toBeGreaterThan(metrics.naturalHeight);
   expect(metrics.htmlWidth).toBeGreaterThan(metrics.htmlHeight);
   expect(metrics.opacity).toBe("1");
   expect(metrics.visibility).toBe("visible");

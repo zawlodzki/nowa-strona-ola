@@ -32,15 +32,20 @@ export function pickSiteImage(
   return undefined;
 }
 
-/** Sharp `position` for a CSS object-position percentage pair. */
+/**
+ * Crop instruction for one image.
+ * A percentage pair stays a percentage. A keyword such as `left bottom` passes through for Sharp.
+ * Percentages are not collapsed to `top` or `centre`.
+ */
 export function imageCropPosition(objectPosition?: string): string | undefined {
-  if (!objectPosition) return undefined;
-  const match = /^([\d.]+)%\s+([\d.]+)%$/.exec(objectPosition.trim());
-  if (!match) return objectPosition;
-  const x = Number(match[1]);
-  const y = Number(match[2]);
-  const horizontal = x < 35 ? "left" : x > 65 ? "right" : "";
-  const vertical = y < 35 ? "top" : y > 65 ? "bottom" : "";
-  if (!horizontal && !vertical) return "centre";
-  return [horizontal, vertical].filter(Boolean).join(" ");
+  const instruction = objectPosition?.trim();
+  if (!instruction) return undefined;
+  return instruction;
+}
+
+/** Sharp `position` for a keyword crop. A percentage is not a Sharp gravity. */
+export function sharpCropPosition(objectPosition?: string): string | undefined {
+  const instruction = imageCropPosition(objectPosition);
+  if (!instruction || instruction.includes("%")) return undefined;
+  return instruction;
 }

@@ -308,12 +308,20 @@ test("about page without an English version", async ({ page }) => {
     .toBeGreaterThan(0);
   const diplomaPlSize = await diplomaPl.evaluate((img) => {
     const el = img as HTMLImageElement;
-    return { width: el.naturalWidth, height: el.naturalHeight };
+    const box = el.getBoundingClientRect();
+    return {
+      width: el.naturalWidth,
+      height: el.naturalHeight,
+      boxWidth: box.width,
+      boxHeight: box.height,
+      position: getComputedStyle(el).objectPosition,
+    };
   });
   expect(diplomaPlSize.height).toBeGreaterThan(0);
   expect(
-    Math.abs(diplomaPlSize.width / diplomaPlSize.height - 340 / 380),
+    Math.abs(diplomaPlSize.boxWidth / diplomaPlSize.boxHeight - 340 / 380),
   ).toBeLessThan(0.02);
+  expect(diplomaPlSize.position).toBe("50% 0%");
   await expect(page.getByText("Miejsce na skan dyplomu")).toHaveCount(0);
   await expect(page.locator("#wyksztalcenie figcaption")).toContainText(
     "Z pracą dyplomową przed Wydziałem Zdrowia Publicznego w Bytomiu, Śląski Uniwersytet Medyczny",

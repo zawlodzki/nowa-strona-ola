@@ -52,13 +52,14 @@ describe("pickSiteImage", () => {
 });
 
 describe("imageCropPosition", () => {
-  it("maps CSS hotspot percentages to Sharp gravity", () => {
-    expect(imageCropPosition("50% 15%")).toBe("top");
-    expect(imageCropPosition("50% 25%")).toBe("top");
-    expect(imageCropPosition("0% 100%")).toBe("left bottom");
-    expect(imageCropPosition("75% 70%")).toBe("right bottom");
-    expect(imageCropPosition("50% 0%")).toBe("top");
-    expect(imageCropPosition("50% 50%")).toBe("centre");
+  it("keeps percentage hotspots and passes keywords through", () => {
+    expect(imageCropPosition("50% 15%")).toBe("50% 15%");
+    expect(imageCropPosition("50% 25%")).toBe("50% 25%");
+    expect(imageCropPosition("0% 100%")).toBe("0% 100%");
+    expect(imageCropPosition("75% 70%")).toBe("75% 70%");
+    expect(imageCropPosition("50% 0%")).toBe("50% 0%");
+    expect(imageCropPosition("50% 50%")).toBe("50% 50%");
+    expect(imageCropPosition("left bottom")).toBe("left bottom");
     expect(imageCropPosition()).toBeUndefined();
   });
 });
