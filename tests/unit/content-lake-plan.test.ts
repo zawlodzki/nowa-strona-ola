@@ -1,5 +1,9 @@
 import { evaluate, parse } from "groq-js";
-import { PCOS_CHECKOUT_SETTINGS_QUERY } from "../../src/sanity/queries";
+import {
+  CHECKOUT_CATALOG_QUERY,
+  CHECKOUT_SALES_STATE_QUERY,
+  PCOS_CHECKOUT_SETTINGS_QUERY,
+} from "../../src/sanity/queries";
 import { readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vitest";
@@ -86,7 +90,7 @@ describe("content lake plan", () => {
       singlePriceGross: 97,
       pairPriceGross: 97,
       bundleOnlyNotice:
-        "Oferta obejmuje wyłącznie zakup obu pozostałych e-booków razem. Nie można kupić jednego e-booka z tej oferty za 48,50 zł.",
+        "Pakiet obejmuje oba pozostałe e-booki. To osobne zamówienie.",
       continueLabel: "Zamawiam z obowiązkiem zapłaty",
     });
   });
@@ -340,4 +344,39 @@ describe("content lake plan", () => {
     expect(source.startsWith(seo)).toBe(true);
     expect(seo).not.toBe(source);
   });
+});
+
+it("resolves complementary ebook references through the real checkout GROQ query", async () => {
+  const result = await evaluate(parse(CHECKOUT_CATALOG_QUERY), {
+    dataset: buildDataset(plan),
+  });
+  const catalog = await result.get();
+  expect(catalog).toHaveLength(6);
+  const first = catalog.find(
+    (item: { productCode: string }) => item.productCode === "ebook-01",
+  );
+  expect(
+    first.crossSell.products.map(
+      (item: { productCode: string }) => item.productCode,
+    ),
+  ).toEqual(["ebook-02", "ebook-03"]);
+  expect(first.stripePriceId).toBe("price_1URqR0Q8cdQEDgtW9swOgW4n");
+  expect(first.availability).toBe("planned");
+  const perimenopause = catalog.find(
+    (item: { productCode: string }) => item.productCode === "ebook-04",
+  );
+  expect(
+    perimenopause.crossSell.products.map(
+      (item: { productCode: string }) => item.productCode,
+    ),
+  ).toEqual(["ebook-05", "ebook-06"]);
+  expect(perimenopause.stripePriceId).toBeNull();
+  expect(perimenopause.crossSell.lead).toContain("perimenopauzy");
+});
+
+it("reads the paused CMS sales gate independently from catalog configuration", async () => {
+  const result = await evaluate(parse(CHECKOUT_SALES_STATE_QUERY), {
+    dataset: buildDataset(plan),
+  });
+  expect(await result.get()).toBe("paused");
 });

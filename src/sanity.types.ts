@@ -208,8 +208,6 @@ export type PcosCheckoutSettings = {
   singlePriceGross: number;
   pairPriceGross: number;
   crossSellKicker: string;
-  empathy: string;
-  mechanism: string;
   bundleReference: string;
   crossSellTitle: string;
   crossSellLead: string;
@@ -230,7 +228,19 @@ export type Ebook = {
   title: string;
   slug: Slug;
   translation?: EbookReference;
-  productCode?: "ebook-01" | "ebook-02" | "ebook-03";
+  productCode?: string;
+  stripePriceId?: string;
+  crossSell?: {
+    complementaryEbooks: Array<
+      {
+        _key: string;
+      } & EbookReference
+    >;
+    kicker: string;
+    title: string;
+    lead: string;
+    stripeCouponId?: string;
+  };
   subtitle?: string;
   topic: "pcos" | "perimenopause";
   cardDescription: string;
@@ -2390,7 +2400,7 @@ export type PREVIEW_EBOOK_QUERY_RESULT = {
     description: string;
     timeline: string | null;
   } | null;
-  productCode: "ebook-01" | "ebook-02" | "ebook-03" | null;
+  productCode: string | null;
   checkoutUrl: string | null;
   waitlist: {
     buttonLabel: string;
@@ -3825,7 +3835,7 @@ export type PUBLISHED_EBOOK_QUERY_RESULT = {
     description: string;
     timeline: string | null;
   } | null;
-  productCode: "ebook-01" | "ebook-02" | "ebook-03" | null;
+  productCode: string | null;
   checkoutUrl: string | null;
   waitlist: {
     buttonLabel: string;
@@ -4132,14 +4142,12 @@ export type PUBLISHED_REDIRECTS_QUERY_RESULT = Array<{
 
 // Source: ../src/sanity/queries.ts
 // Variable: PCOS_CHECKOUT_SETTINGS_QUERY
-// Query: *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0]{    salesState, singlePriceGross, pairPriceGross,    crossSellKicker, empathy, mechanism, bundleReference,    crossSellTitle, crossSellLead, bundleOnlyNotice,    continueLabel, skipLabel, educationNote, legalConsentVersion  }
+// Query: *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0]{    salesState, singlePriceGross, pairPriceGross,    crossSellKicker, bundleReference,    crossSellTitle, crossSellLead, bundleOnlyNotice,    continueLabel, skipLabel, educationNote, legalConsentVersion  }
 export type PCOS_CHECKOUT_SETTINGS_QUERY_RESULT = {
   salesState: "paused" | "ready";
   singlePriceGross: number;
   pairPriceGross: number;
   crossSellKicker: string;
-  empathy: string;
-  mechanism: string;
   bundleReference: string;
   crossSellTitle: string;
   crossSellLead: string;
@@ -4149,6 +4157,34 @@ export type PCOS_CHECKOUT_SETTINGS_QUERY_RESULT = {
   educationNote: string;
   legalConsentVersion: string;
 } | null;
+
+// Source: ../src/sanity/queries.ts
+// Variable: CHECKOUT_CATALOG_QUERY
+// Query: *[_type == "ebook" && language == "pl" && !(_id in path("drafts.**")) && defined(productCode)] | order(productCode asc){    productCode, title, stripePriceId, priceGross, availability,    crossSell{      kicker, title, lead, stripeCouponId,      "products": (complementaryEbooks[]->)[_type == "ebook" && language == "pl" && !(_id in path("drafts.**"))]{productCode, title, stripePriceId, priceGross}    }  }
+export type CHECKOUT_CATALOG_QUERY_RESULT = Array<{
+  productCode: string | null;
+  title: string;
+  stripePriceId: string | null;
+  priceGross: number;
+  availability: "available" | "paused" | "planned" | "presale";
+  crossSell: {
+    kicker: string;
+    title: string;
+    lead: string;
+    stripeCouponId: string | null;
+    products: Array<{
+      productCode: string | null;
+      title: string;
+      stripePriceId: string | null;
+      priceGross: number;
+    }>;
+  } | null;
+}>;
+
+// Source: ../src/sanity/queries.ts
+// Variable: CHECKOUT_SALES_STATE_QUERY
+// Query: *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0].salesState
+export type CHECKOUT_SALES_STATE_QUERY_RESULT = "paused" | "ready" | null;
 
 // Query TypeMap
 declare global {
@@ -4176,7 +4212,9 @@ declare global {
     '\n  *[\n    _type == "legalPage" &&\n    !(_id in path("drafts.**")) &&\n    language == $language &&\n    slug.current == $slug\n  ][0]{ \n  "id": _id,\n  language,\n  "slug": slug.current,\n  title,\n  version,\n  effectiveFrom,\n  seo{\n  title,\n  description,\n  noindex,\n  excludeFromMeasurement,\n  "ogImage": ogImage{\n  alt,\n  tone,\n  caption,\n  "label": alt,\n  "src": coalesce(image.asset->url, rasterKey),\n  "hotspot": image.hotspot{x, y, height, width}\n}\n},\n  body[]{ _key, _type, ..., rows[]{ _key, cells } },\n  "translation": translation->{ language, "slug": slug.current }\n }\n': PUBLISHED_LEGAL_PAGE_QUERY_RESULT;
     '\n  *[\n    _type == "legalPage" &&\n    !(_id in path("drafts.**")) &&\n    defined(slug.current) &&\n    defined(language)\n  ]{ language, "slug": slug.current }\n': PUBLISHED_LEGAL_PAGE_PATHS_QUERY_RESULT;
     '\n  *[\n    _type == "redirect" &&\n    !(_id in path("drafts.**")) &&\n    defined(from) &&\n    defined(to)\n  ] | order(from asc){ from, to, status }\n': PUBLISHED_REDIRECTS_QUERY_RESULT;
-    '\n  *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0]{\n    salesState, singlePriceGross, pairPriceGross,\n    crossSellKicker, empathy, mechanism, bundleReference,\n    crossSellTitle, crossSellLead, bundleOnlyNotice,\n    continueLabel, skipLabel, educationNote, legalConsentVersion\n  }\n': PCOS_CHECKOUT_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0]{\n    salesState, singlePriceGross, pairPriceGross,\n    crossSellKicker, bundleReference,\n    crossSellTitle, crossSellLead, bundleOnlyNotice,\n    continueLabel, skipLabel, educationNote, legalConsentVersion\n  }\n': PCOS_CHECKOUT_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "ebook" && language == "pl" && !(_id in path("drafts.**")) && defined(productCode)] | order(productCode asc){\n    productCode, title, stripePriceId, priceGross, availability,\n    crossSell{\n      kicker, title, lead, stripeCouponId,\n      "products": (complementaryEbooks[]->)[_type == "ebook" && language == "pl" && !(_id in path("drafts.**"))]{productCode, title, stripePriceId, priceGross}\n    }\n  }\n': CHECKOUT_CATALOG_QUERY_RESULT;
+    '\n  *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0].salesState\n': CHECKOUT_SALES_STATE_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

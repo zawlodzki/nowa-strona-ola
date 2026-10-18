@@ -1,5 +1,5 @@
 import { BookIcon } from "@sanity/icons/Book";
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 import {
   languageField,
@@ -39,16 +39,123 @@ export const ebookType = defineType({
       name: "productCode",
       title: "Kod produktu płatności",
       description:
-        "Stały identyfikator serii PCOS. Kod prowadzi do formularza zamówienia na stronie. Nie uruchamia sprzedaży.",
+        "Stały, unikalny kod używany przez proces zamówienia. Nie zmienia dostępności produktu.",
       type: "string",
       group: "offer",
-      options: {
-        list: [
-          { title: "Suplementy w PCOS", value: "ebook-01" },
-          { title: "Badania, które mają sens", value: "ebook-02" },
-          { title: "Szczupła, a jednak PCOS", value: "ebook-03" },
-        ],
-      },
+      validation: (rule) =>
+        rule
+          .regex(/^[a-z0-9][a-z0-9-]{1,63}$/)
+          .custom(async (value, context) => {
+            if (!value) return true;
+            const id = context.document?._id.replace(/^drafts\./, "");
+            const duplicate = await context
+              .getClient({ apiVersion: "2026-09-01" })
+              .fetch<string | null>(
+                '*[_type == "ebook" && productCode == $code && !(_id in [$id, $draftId])][0]._id',
+                { code: value, id: id ?? "", draftId: `drafts.${id}` },
+              );
+            return !duplicate || "Kod produktu musi być unikalny.";
+          }),
+    }),
+    defineField({
+      name: "stripePriceId",
+      title: "Identyfikator ceny Stripe",
+      description:
+        "Identyfikator price_ dla ceny 97 zł brutto. Brak pola wyłącza produkt z katalogu płatności.",
+      type: "string",
+      group: "offer",
+      validation: (rule) => rule.regex(/^price_[A-Za-z0-9]+$/),
+    }),
+    defineField({
+      name: "crossSell",
+      title: "Oferta po zakupie tego e-booka",
+      type: "object",
+      group: "offer",
+      fields: [
+        defineField({
+          name: "complementaryEbooks",
+          title: "Dwa e-booki w pakiecie uzupełniającym",
+          description:
+            "Wybierz dokładnie dwa inne e-booki. Kolejność odpowiada kolejności okładek w ofercie.",
+          type: "array",
+          of: [
+            defineArrayMember({
+              type: "reference",
+              to: [{ type: "ebook" }],
+              options: {
+                disableNew: true,
+                filter: ({ document }) => ({
+                  filter:
+                    'language == $language && !(_id in [$id, $draftId]) && !(_id in path("drafts.**"))',
+                  params: {
+                    language:
+                      typeof document.language === "string"
+                        ? document.language
+                        : "",
+                    id: document._id.replace(/^drafts\./, ""),
+                    draftId: document._id,
+                  },
+                }),
+              },
+            }),
+          ],
+          validation: (rule) =>
+            rule
+              .required()
+              .length(2)
+              .unique()
+              .custom(async (value, context) => {
+                if (!value) return true;
+                const ids = value.flatMap((item) =>
+                  typeof item === "object" &&
+                  item !== null &&
+                  "_ref" in item &&
+                  typeof item._ref === "string"
+                    ? [item._ref]
+                    : [],
+                );
+                const id = context.document?._id.replace(/^drafts\./, "");
+                if (ids.includes(id ?? "") || ids.includes(`drafts.${id}`))
+                  return "Pakiet nie może zawierać kupowanego e-booka.";
+                const count = await context
+                  .getClient({ apiVersion: "2026-09-01" })
+                  .fetch<number>(
+                    'count(*[_type == "ebook" && _id in $ids && !(_id in path("drafts.**")) && language == $language])',
+                    { ids, language: context.document?.language ?? "" },
+                  );
+                return (
+                  count === 2 ||
+                  "Wybierz dwa opublikowane e-booki w tym samym języku."
+                );
+              }),
+        }),
+        ...[
+          { name: "kicker", title: "Krótka etykieta nad nagłówkiem", max: 100 },
+          { name: "title", title: "Nagłówek oferty", max: 150 },
+          { name: "lead", title: "Krótkie wprowadzenie", max: 300 },
+        ].map(({ name, title, max }) =>
+          defineField({
+            name,
+            title,
+            type: "string",
+            validation: (rule) => rule.required().max(max),
+          }),
+        ),
+        defineField({
+          name: "stripeCouponId",
+          title: "Identyfikator kuponu Stripe dla pakietu",
+          type: "string",
+          description:
+            "Kupon 50% obejmujący wybrane produkty. Wymagany przed uruchomieniem płatności.",
+          validation: (rule) =>
+            rule.custom(
+              (value, context) =>
+                !context.document?.stripePriceId ||
+                !!value?.trim() ||
+                "Gotowa oferta wymaga kuponu Stripe.",
+            ),
+        }),
+      ],
     }),
     defineField({
       name: "subtitle",
@@ -267,7 +374,7 @@ export const ebookType = defineType({
       name: "checkoutUrl",
       title: "Adres zakupu",
       description:
-        "Dla produktów bez kodu płatności. Seria PCOS z productCode korzysta z formularza zamówienia na stronie. Nie wklejać kotwicy mockupu.",
+        "Dla produktów bez kodu płatności. E-book z productCode korzysta z formularza zamówienia na stronie. Nie wklejać kotwicy mockupu.",
       type: "url",
       group: "offer",
       validation: (rule) =>

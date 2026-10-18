@@ -30,6 +30,7 @@ const pages = [
   ["/regulamin-newslettera/", "regulamin newslettera"],
   ["/zamowienie/", "formularz zamówienia"],
   ["/po-zakupie/", "oferta uzupełnienia serii"],
+  ["/po-zakupie/pozniej/", "oferta na później"],
   ["/zamowienie/potwierdzenie/", "potwierdzenie zamówienia"],
 ];
 

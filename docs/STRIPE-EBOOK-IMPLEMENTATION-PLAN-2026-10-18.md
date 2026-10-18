@@ -91,7 +91,8 @@ karty, subskrypcji i sztucznego licznika czasu.
 - [x] Wdrożyć Worker z `CHECKOUT_ENABLED = false` i potwierdzić stan publicznym GET.
 - [x] Wdrożyć menu Studio.
 - [x] Zapisać podpisany commit i utworzyć [PR 128](https://github.com/zawlodzki/nowa-strona-ola/pull/128).
-- [ ] Scalić zweryfikowany PR i wdrożyć kod strony.
+- [x] Scalić zweryfikowany PR 128 i wdrożyć kod strony. Publikacja
+      `39136898625` SUCCESS; odbiór trzech adresów i blokady sprzedaży PASS.
 - [ ] Dodać sekret runtime Stripe i endpoint webhooka. Potwierdzić ustawienia
       podatkowe i dane sprzedawcy przed uruchomieniem rzeczywistych płatności.
 - [ ] Sprawdzić pełny przebieg rzeczywistej płatności w Stripe sandbox.

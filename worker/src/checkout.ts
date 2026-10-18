@@ -1,14 +1,18 @@
 export const CONSENT_VERSION = "pcos-d27-2026-10-18";
 export const TERMS_VERSION = "2.4";
-export const PRODUCTS = [
-  { code: "ebook-01", title: "Suplementy w PMOS (PCOS)" },
-  { code: "ebook-02", title: "Badania, które mają sens" },
-  {
-    code: "ebook-03",
-    title: "Szczupła, a jednak PMOS (PCOS)",
-  },
-] as const;
-type ProductCode = (typeof PRODUCTS)[number]["code"];
+export const OFFER_EMAIL_REQUEST_VERSION = "offer-email-request-v1-2026-10-18";
+export const OFFER_EMAIL_REQUEST_TEXT =
+  "Proszę o jednorazowe wysłanie na mój adres e-mail linku do tej oferty, ważnej przez 7 dni od pierwszego zakupu.";
+import {
+  parseCheckoutCatalog,
+  type CheckoutCatalogProduct,
+  type CheckoutOffer,
+} from "../../src/lib/checkout-products";
+import {
+  CHECKOUT_CATALOG_QUERY,
+  CHECKOUT_SALES_STATE_QUERY,
+} from "../../src/sanity/queries";
+type ProductCode = string;
 type Kind = "single" | "bundle";
 type Status = "pending" | "paid" | "expired" | "revoked";
 interface CheckoutStatement {
@@ -25,10 +29,8 @@ export interface CheckoutEnvironment {
   CHECKOUT_SITE_ORIGIN: string;
   STRIPE_SECRET_KEY?: string;
   STRIPE_WEBHOOK_SECRET?: string;
-  STRIPE_PRICE_EBOOK_01: string;
-  STRIPE_PRICE_EBOOK_02: string;
-  STRIPE_PRICE_EBOOK_03: string;
-  STRIPE_PAIR_COUPON: string;
+  CHECKOUT_SANITY_PROJECT_ID: string;
+  CHECKOUT_SANITY_DATASET: string;
 }
 interface Order {
   id: string;
@@ -41,6 +43,8 @@ interface Order {
   customer_email: string;
   consent_version: string;
   created_at: number;
+  paid_at: number | null;
+  snapshot: string;
   stripe_session_id: string | null;
   stripe_payment_intent: string | null;
   checkout_url: string | null;
@@ -87,25 +91,100 @@ export function consentText(kind: Kind): string {
   const noun = kind === "single" ? "e-booka" : "e-booków";
   return `Akceptuję Regulamin i oświadczam, że mam ukończone 18 lat. Zgadzam się na dostarczenie ${noun} przed upływem 14 dni na odstąpienie od umowy i przyjmuję do wiadomości, że po dostarczeniu ${noun} utracę prawo odstąpienia od umowy.`;
 }
-export function remainingProducts(
-  code: ProductCode,
-): [ProductCode, ProductCode] {
-  switch (code) {
-    case "ebook-01":
-      return ["ebook-02", "ebook-03"];
-    case "ebook-02":
-      return ["ebook-01", "ebook-03"];
-    case "ebook-03":
-      return ["ebook-01", "ebook-02"];
-  }
-}
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 function productCode(value: unknown): ProductCode {
-  if (value === "ebook-01" || value === "ebook-02" || value === "ebook-03")
+  if (typeof value === "string" && /^[a-z0-9][a-z0-9-]{1,63}$/.test(value))
     return value;
   throw new CheckoutError("invalid_product");
+}
+interface OrderSnapshot {
+  products: CheckoutOffer["products"] | [CheckoutCatalogProduct];
+  offer: CheckoutOffer | null;
+}
+function orderSnapshot(order: Order): OrderSnapshot {
+  const value: unknown = JSON.parse(order.snapshot);
+  if (!isRecord(value) || !Array.isArray(value.products))
+    throw new CheckoutError("invalid_order", 500);
+  const products = parseCheckoutCatalog(
+    value.products.map((item: unknown) =>
+      isRecord(item) ? { ...item, crossSell: null } : item,
+    ),
+  );
+  if (products.length !== (order.kind === "single" ? 1 : 2))
+    throw new CheckoutError("invalid_order", 500);
+  const first = products[0];
+  const second = products[1];
+  if (!first) throw new CheckoutError("invalid_order", 500);
+  const offerSource = value.offer;
+  let offer: CheckoutOffer | null = null;
+  if (offerSource !== null) {
+    if (!isRecord(offerSource) || !Array.isArray(offerSource.products))
+      throw new CheckoutError("invalid_order", 500);
+    const withOffer = parseCheckoutCatalog([
+      { ...first, crossSell: offerSource },
+      ...offerSource.products.map((item: unknown) =>
+        isRecord(item) ? { ...item, crossSell: null } : item,
+      ),
+    ]);
+    offer =
+      withOffer.find((item) => item.productCode === first.productCode)
+        ?.crossSell ?? null;
+  }
+  return { products: second ? [first, second] : [first], offer };
+}
+const OFFER_DURATION = 7 * 24 * 60 * 60 * 1000;
+function offerExpiry(order: Order): number | null {
+  return order.kind === "single" && order.paid_at !== null
+    ? order.paid_at + OFFER_DURATION
+    : null;
+}
+async function publishedSanityResult(
+  env: CheckoutEnvironment,
+  query: string,
+): Promise<unknown> {
+  if (
+    !/^[a-z0-9]+$/.test(env.CHECKOUT_SANITY_PROJECT_ID) ||
+    !/^[a-z0-9_-]+$/.test(env.CHECKOUT_SANITY_DATASET)
+  )
+    throw new CheckoutError("checkout_unconfigured", 503);
+  const url = new URL(
+    `https://${env.CHECKOUT_SANITY_PROJECT_ID}.api.sanity.io/v2026-10-18/data/query/${env.CHECKOUT_SANITY_DATASET}`,
+  );
+  url.searchParams.set("query", query);
+  url.searchParams.set("perspective", "published");
+  const result = await fetch(url.toString(), {
+    signal: AbortSignal.timeout(10000),
+  });
+  if (!result.ok) throw new CheckoutError("catalog_unavailable", 503);
+  const data: unknown = await result.json();
+  if (!isRecord(data)) throw new CheckoutError("invalid_catalog", 503);
+  return data.result;
+}
+async function salesReady(env: CheckoutEnvironment): Promise<boolean> {
+  return (
+    (await publishedSanityResult(env, CHECKOUT_SALES_STATE_QUERY)) === "ready"
+  );
+}
+async function catalog(
+  env: CheckoutEnvironment,
+): Promise<CheckoutCatalogProduct[]> {
+  const result = await publishedSanityResult(env, CHECKOUT_CATALOG_QUERY);
+  try {
+    const products = parseCheckoutCatalog(result);
+    if (
+      products.some(
+        (item) =>
+          item.priceGross !== 97 ||
+          item.crossSell?.products.some((product) => product.priceGross !== 97),
+      )
+    )
+      throw new Error("unsupported_price");
+    return products;
+  } catch {
+    throw new CheckoutError("invalid_catalog", 503);
+  }
 }
 function submission(value: unknown): Submission {
   if (
@@ -227,16 +306,6 @@ function response(data: unknown, status = 200, cookie?: string): Response {
     );
   return new Response(JSON.stringify(data), { status, headers });
 }
-function priceId(env: CheckoutEnvironment, code: ProductCode): string {
-  switch (code) {
-    case "ebook-01":
-      return env.STRIPE_PRICE_EBOOK_01;
-    case "ebook-02":
-      return env.STRIPE_PRICE_EBOOK_02;
-    case "ebook-03":
-      return env.STRIPE_PRICE_EBOOK_03;
-  }
-}
 function database(env: CheckoutEnvironment): CheckoutDatabase {
   if (!env.CHECKOUT_DB) throw new CheckoutError("checkout_unconfigured", 503);
   return env.CHECKOUT_DB;
@@ -246,10 +315,8 @@ function configured(env: CheckoutEnvironment): boolean {
     env.CHECKOUT_DB &&
     env.STRIPE_SECRET_KEY &&
     env.STRIPE_WEBHOOK_SECRET &&
-    env.STRIPE_PRICE_EBOOK_01 &&
-    env.STRIPE_PRICE_EBOOK_02 &&
-    env.STRIPE_PRICE_EBOOK_03 &&
-    env.STRIPE_PAIR_COUPON &&
+    env.CHECKOUT_SANITY_PROJECT_ID &&
+    env.CHECKOUT_SANITY_DATASET &&
     /^https:\/\//.test(env.CHECKOUT_SITE_ORIGIN),
   );
 }
@@ -334,7 +401,8 @@ async function reconcile(
   if (session.payment_status === "paid" && session.status === "complete") {
     if (!session.payment_intent)
       throw new CheckoutError("payment_requires_review", 409);
-    if (await paymentRevoked(env, session.payment_intent)) {
+    const payment = await paymentState(env, session.payment_intent);
+    if (payment.revoked) {
       await database(env)
         .prepare(
           "UPDATE checkout_orders SET stripe_payment_intent = ? WHERE id = ?",
@@ -352,7 +420,7 @@ async function reconcile(
       .prepare(
         "UPDATE checkout_orders SET status = 'paid', paid_at = COALESCE(paid_at, ?), stripe_payment_intent = ? WHERE id = ? AND status != 'revoked'",
       )
-      .bind(Date.now(), session.payment_intent, order.id)
+      .bind(payment.paidAt, session.payment_intent, order.id)
       .run();
     const current = await findOrder(env.CHECKOUT_DB, "id", order.id);
     if (!current) throw new CheckoutError("order_not_found", 404);
@@ -440,12 +508,22 @@ async function createSession(
   params.set("metadata[z2]", "true");
   params.set("metadata[z2_text_version]", CONSENT_VERSION);
   params.set("metadata[consent_ts]", new Date(order.created_at).toISOString());
-  for (const [index, code] of orderCodes(order).entries()) {
-    params.set(`line_items[${index}][price]`, priceId(env, code));
+  const snapshot = orderSnapshot(order);
+  for (const [index, product] of snapshot.products.entries()) {
+    params.set(`line_items[${index}][price]`, product.stripePriceId);
     params.set(`line_items[${index}][quantity]`, "1");
   }
-  if (order.kind === "bundle")
-    params.set("discounts[0][coupon]", env.STRIPE_PAIR_COUPON);
+  if (order.kind === "bundle") {
+    if (!order.parent_order_id) throw new CheckoutError("invalid_parent", 500);
+    const parent = await findOrder(
+      env.CHECKOUT_DB,
+      "id",
+      order.parent_order_id,
+    );
+    const offer = parent ? orderSnapshot(parent).offer : null;
+    if (!offer) throw new CheckoutError("offer_unavailable", 409);
+    params.set("discounts[0][coupon]", offer.stripeCouponId);
+  }
   const session = parseSession(
     await stripe(env, "checkout/sessions", params, `checkout-${order.id}`),
   );
@@ -540,10 +618,10 @@ async function revokeOrder(
       .bind(child.id)
       .run();
 }
-async function paymentRevoked(
+async function paymentState(
   env: CheckoutEnvironment,
   paymentIntentId: string,
-): Promise<boolean> {
+): Promise<{ revoked: boolean; paidAt: number }> {
   const payment = await stripe(
     env,
     `payment_intents/${encodeURIComponent(paymentIntentId)}?expand[]=latest_charge`,
@@ -552,14 +630,20 @@ async function paymentRevoked(
     !isRecord(payment) ||
     !isRecord(payment.latest_charge) ||
     typeof payment.latest_charge.amount_refunded !== "number" ||
-    typeof payment.latest_charge.disputed !== "boolean"
+    typeof payment.latest_charge.disputed !== "boolean" ||
+    typeof payment.latest_charge.created !== "number" ||
+    !Number.isSafeInteger(payment.latest_charge.created) ||
+    payment.latest_charge.created <= 0 ||
+    payment.latest_charge.created * 1000 > Date.now() + 300000
   )
     throw new CheckoutError("invalid_stripe_response", 502);
-  return (
-    payment.status !== "succeeded" ||
-    payment.latest_charge.amount_refunded > 0 ||
-    payment.latest_charge.disputed
-  );
+  return {
+    revoked:
+      payment.status !== "succeeded" ||
+      payment.latest_charge.amount_refunded > 0 ||
+      payment.latest_charge.disputed,
+    paidAt: payment.latest_charge.created * 1000,
+  };
 }
 async function validatePayment(
   env: CheckoutEnvironment,
@@ -570,7 +654,7 @@ async function validatePayment(
   if (!current?.stripe_payment_intent)
     throw new CheckoutError("payment_requires_review", 409);
   if (current.status !== "paid") return current;
-  if (await paymentRevoked(env, current.stripe_payment_intent)) {
+  if ((await paymentState(env, current.stripe_payment_intent)).revoked) {
     await revokeOrder(env, order);
     return { ...order, status: "revoked" };
   }
@@ -593,33 +677,61 @@ async function insertOrder(
   parent: Order | null,
 ): Promise<Order> {
   const kind = parent ? "bundle" : "single";
-  let codes: ProductCode[];
-  let name: string;
-  let email: string;
-  if ("productCode" in input) {
-    codes = [input.productCode];
-    name = input.customerName;
-    email = input.email;
-  } else if (parent) {
-    codes = remainingProducts(productCode(orderCodes(parent)[0]));
-    name = parent.customer_name;
-    email = parent.customer_email;
-  } else throw new CheckoutError("invalid_parent");
   const previous = await database(env)
     .prepare(
       "SELECT * FROM checkout_orders WHERE owner_hash=? AND request_id=?",
     )
     .bind(owner, input.requestId)
     .first<Order>();
-  if (previous?.status === "expired")
-    throw new CheckoutError("order_expired", 409);
+  if (previous) {
+    if (previous.status === "expired")
+      throw new CheckoutError("order_expired", 409);
+    if (
+      previous.kind !== kind ||
+      previous.parent_order_id !== (parent?.id ?? null) ||
+      previous.consent_version !== CONSENT_VERSION ||
+      ("productCode" in input &&
+        (orderCodes(previous)[0] !== input.productCode ||
+          previous.customer_name !== input.customerName ||
+          previous.customer_email !== input.email))
+    )
+      throw new CheckoutError("request_conflict", 409);
+    return previous;
+  }
+  let products: OrderSnapshot["products"];
+  let offer: CheckoutOffer | null;
+  let name: string;
+  let email: string;
+  if ("productCode" in input) {
+    const product = (await catalog(env)).find(
+      (item) => item.productCode === input.productCode,
+    );
+    if (!product) throw new CheckoutError("invalid_product");
+    if (
+      product.availability !== "available" &&
+      product.availability !== "presale"
+    )
+      throw new CheckoutError("product_unavailable", 409);
+    products = [product];
+    offer = product.crossSell;
+    name = input.customerName;
+    email = input.email;
+  } else if (parent) {
+    const parentOffer = orderSnapshot(parent).offer;
+    if (!parentOffer) throw new CheckoutError("offer_unavailable", 409);
+    const deadline = offerExpiry(parent);
+    if (deadline === null || Date.now() >= deadline)
+      throw new CheckoutError("offer_expired", 409);
+    products = parentOffer.products;
+    offer = null;
+    name = parent.customer_name;
+    email = parent.customer_email;
+  } else throw new CheckoutError("invalid_parent");
+  const codes = products.map((product) => product.productCode);
   const id = crypto.randomUUID();
   const snapshot = JSON.stringify({
-    products: codes.map((code) => ({
-      code,
-      title: PRODUCTS.find((product) => product.code === code)?.title,
-      amount: kind === "single" ? 9700 : 4850,
-    })),
+    products,
+    offer,
     amount: 9700,
     currency: "pln",
     consentText: consentText(kind),
@@ -768,19 +880,27 @@ export async function handleCheckout(
     const url = new URL(request.url);
     if (url.pathname === "/webhooks/stripe" && request.method === "POST")
       return await webhook(request, env);
-    if (url.pathname === "/api/checkout/catalog" && request.method === "GET")
+    if (url.pathname === "/api/checkout/catalog" && request.method === "GET") {
+      const [products, ready] = await Promise.all([
+        catalog(env),
+        salesReady(env),
+      ]);
       return response(
         {
-          enabled: env.CHECKOUT_ENABLED === "true" && configured(env),
+          enabled: env.CHECKOUT_ENABLED === "true" && configured(env) && ready,
           consentVersion: CONSENT_VERSION,
           singleAmount: 9700,
           bundleAmount: 9700,
           currency: "pln",
-          products: PRODUCTS.map(({ code, title }) => ({ code, title })),
+          products: products.map(({ productCode: code, title }) => ({
+            code,
+            title,
+          })),
         },
         200,
         cookieToken(request) ?? newToken(),
       );
+    }
     if (!configured(env)) throw new CheckoutError("checkout_unconfigured", 503);
     const existing = cookieToken(request);
     const owner = existing ? await sha256(existing) : null;
@@ -803,23 +923,62 @@ export async function handleCheckout(
         )
         .bind(order.id)
         .first<{ status: Status }>();
+      const requestedEmail = await database(env)
+        .prepare(
+          "SELECT requested_at FROM checkout_offer_email_requests WHERE order_id=?",
+        )
+        .bind(order.id)
+        .first<{ requested_at: number }>();
+      const selectedOffer = orderSnapshot(order).offer;
+      const deadline = offerExpiry(order);
       return response({
         status: order.status,
+        offerEmailRequested: requestedEmail !== null,
+        offerEmailRequestAvailable:
+          env.CHECKOUT_ENABLED === "true" &&
+          requestedEmail === null &&
+          order.kind === "single" &&
+          order.status === "paid" &&
+          selectedOffer !== null &&
+          deadline !== null &&
+          Date.now() < deadline &&
+          (!bundle || bundle.status === "pending"),
         kind: order.kind,
         productCodes: codes,
         remainingProductCodes:
-          order.kind === "single"
-            ? remainingProducts(productCode(codes[0]))
-            : [],
+          selectedOffer?.products.map((product) => product.productCode) ?? [],
+        offer:
+          selectedOffer && deadline !== null
+            ? {
+                kicker: selectedOffer.kicker,
+                title: selectedOffer.title,
+                lead: selectedOffer.lead,
+                originalAmount: selectedOffer.products.reduce(
+                  (total, product) =>
+                    total + Math.round(product.priceGross * 100),
+                  0,
+                ),
+                bundleAmount: 9700,
+                currency: "pln",
+                expiresAt: new Date(deadline).toISOString(),
+              }
+            : null,
         bundleAvailable:
           order.kind === "single" &&
           order.status === "paid" &&
+          selectedOffer !== null &&
+          deadline !== null &&
+          Date.now() < deadline &&
           (!bundle || bundle.status === "pending"),
       });
     }
     if (
       request.method !== "POST" ||
-      !["/api/checkout/orders", "/api/checkout/bundle"].includes(url.pathname)
+      ![
+        "/api/checkout/orders",
+        "/api/checkout/bundle",
+        "/api/checkout/offer-email-request",
+      ].includes(url.pathname)
     )
       return response({ error: "not_found" }, 404);
     if (
@@ -828,6 +987,12 @@ export async function handleCheckout(
     )
       throw new CheckoutError("invalid_origin", 403);
     if (env.CHECKOUT_ENABLED !== "true")
+      throw new CheckoutError("sales_not_enabled", 503);
+    if (
+      (url.pathname === "/api/checkout/orders" ||
+        url.pathname === "/api/checkout/bundle") &&
+      !(await salesReady(env))
+    )
       throw new CheckoutError("sales_not_enabled", 503);
     const payload = await jsonBody(request);
     if (url.pathname === "/api/checkout/orders") {
@@ -846,6 +1011,62 @@ export async function handleCheckout(
         200,
         token,
       );
+    }
+    if (url.pathname === "/api/checkout/offer-email-request") {
+      if (
+        !isRecord(payload) ||
+        payload.requestAccepted !== true ||
+        payload.requestVersion !== OFFER_EMAIL_REQUEST_VERSION ||
+        typeof payload.parentSessionId !== "string" ||
+        !/^cs_[a-zA-Z0-9_]+$/.test(payload.parentSessionId)
+      )
+        throw new CheckoutError("invalid_email_request");
+      if (!owner) throw new CheckoutError("order_not_found", 404);
+      const stored = await findOrder(
+        env.CHECKOUT_DB,
+        "stripe_session_id",
+        payload.parentSessionId,
+        owner,
+      );
+      if (!stored || stored.kind !== "single")
+        throw new CheckoutError("order_not_found", 404);
+      const parent = await validatePayment(env, await refreshed(env, stored));
+      if (parent.status !== "paid")
+        throw new CheckoutError("parent_not_paid", 409);
+      const prior = await database(env)
+        .prepare(
+          "SELECT requested_at FROM checkout_offer_email_requests WHERE order_id=?",
+        )
+        .bind(parent.id)
+        .first<{ requested_at: number }>();
+      if (prior) return response({ requested: true, deliveryPending: true });
+      const deadline = offerExpiry(parent);
+      if (
+        !orderSnapshot(parent).offer ||
+        deadline === null ||
+        Date.now() >= deadline
+      )
+        throw new CheckoutError("offer_expired", 409);
+      const bundle = await database(env)
+        .prepare(
+          "SELECT status FROM checkout_orders WHERE parent_order_id=? AND status!='expired'",
+        )
+        .bind(parent.id)
+        .first<{ status: Status }>();
+      if (bundle && bundle.status !== "pending")
+        throw new CheckoutError("offer_unavailable", 409);
+      await database(env)
+        .prepare(
+          "INSERT INTO checkout_offer_email_requests (order_id,request_version,request_text,requested_at) VALUES (?,?,?,?) ON CONFLICT(order_id) DO NOTHING",
+        )
+        .bind(
+          parent.id,
+          OFFER_EMAIL_REQUEST_VERSION,
+          OFFER_EMAIL_REQUEST_TEXT,
+          Date.now(),
+        )
+        .run();
+      return response({ requested: true, deliveryPending: true });
     }
     const input = bundleSubmission(payload);
     if (!owner) throw new CheckoutError("order_not_found", 404);

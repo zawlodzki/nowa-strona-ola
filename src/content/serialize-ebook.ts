@@ -1,6 +1,10 @@
 import type { Locale } from "@ola/shared";
 
-import { mapEbook, type EbookView } from "@/content/map-ebook";
+import {
+  ebookPaymentMethods,
+  ebookPaymentTrustCopy,
+} from "@/content/ebook-payment-trust";
+import { canPurchase, mapEbook, type EbookView } from "@/content/map-ebook";
 import { availabilityLabel } from "@/lib/offer";
 
 function heading(level: 1 | 2 | 3, value: string) {
@@ -13,6 +17,7 @@ function bullets(items: string[]) {
 
 export function serializeEbookView(view: EbookView, language: Locale): string {
   const { landing } = view;
+  const paymentTrust = ebookPaymentTrustCopy[language];
   return [
     heading(1, view.title),
     view.subtitle,
@@ -78,6 +83,14 @@ export function serializeEbookView(view: EbookView, language: Locale): string {
     view.priceLabel,
     view.lowestPriceNote,
     bullets(view.materials.map((item) => item.title)),
+    ...(canPurchase(view.availability) && view.checkoutUrl && view.productCode
+      ? [
+          ...(view.availability === "available" ? [paymentTrust.delivery] : []),
+          paymentTrust.payment,
+          `${paymentTrust.methods}: ${ebookPaymentMethods.map((method) => method.name).join(", ")}.`,
+          paymentTrust.availability,
+        ]
+      : []),
     landing.offerNote,
     heading(2, landing.testimonials.title),
     landing.testimonials.lead,

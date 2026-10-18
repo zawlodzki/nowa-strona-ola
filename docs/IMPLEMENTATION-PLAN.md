@@ -1,5 +1,58 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## PR ścieżki zakupu, 18.10.2026
+
+- [x] Przygotować izolowany zakres i lokalne verify.
+- [ ] Uzyskać niezależny werdykt, zielone CI i scalić PR zgodnie ze zleceniem.
+
+## Mikrocopy przy zakupie, 18.10.2026
+
+- [x] Potwierdzić w Stripe dostępność proponowanych metod płatności.
+- [x] Dodać dostawę po zapłacie, informację o Stripe i lokalne znaki metod.
+- [x] Zachować odrębne informacje dla zapowiedzi, przedsprzedaży i innego checkoutu.
+- [x] Zakończyć pełne verify i odbiór desktop/mobile w lokalnym podglądzie.
+      718 unit, 564 E2E PASS, 12 celowych pominięć; 21 stron zgodnych.
+      Trzy przeglądarki, 320 px, zoom CSS 200%, reduced motion i brak JS PASS.
+
+## Podgląd ścieżki pierwszego zakupu, 18.10.2026
+
+- [x] Pokazać lokalną symulację karty zakupu na landingu oraz formularza przed
+      Stripe z jednym niezaznaczonym oświadczeniem D27, bez aktywacji sprzedaży.
+      Build 35 stron i przejście z karty do formularza PASS, zero POST.
+
+## Konfigurowalna oferta i kolejne kroki po zakupie, 18.10.2026
+
+- [x] Przyjąć decyzję użytkownika: panel matcha, przycisk primary i większe,
+      przekreślone 194 zł jako cena zakupu dwóch e-booków osobno.
+- [x] Przygotować w schemacie e-booka wybór dokładnie dwóch komplementarnych
+      e-booków oraz copy oferty niezależne od tematu serii.
+- [x] Przygotować lokalne strony podziękowania po zakupie pakietu i odmowy
+      z możliwością powrotu do oferty w ciągu siedmiu dni od pierwszej płatności.
+- [x] Oddzielić odmowę zakupu od prośby o e-mail: samo „Nie, dziękuję”
+      nie uruchamia wiadomości ani zapisu do newslettera.
+- [x] Dokończyć zapis dobrowolnej, jednorazowej prośby „Wyślij mi tę ofertę
+      e-mailem” z dowodem tekstu i czasu; nie deklarować wykonanej wysyłki.
+- [x] Wykonać pełne `npm run verify`, odbiór UI oraz kontrolę doboru pary,
+      siedmiodniowego terminu i powtórzeń prośby.
+      714 unit, 564 E2E PASS, 12 celowych pominięć; 21 stron fixture/Content Lake zgodnych.
+- [x] Zarejestrować schemat i opublikować pary oraz copy sześciu e-booków w Sanity.
+- [x] Wdrożyć interfejs Studio z nowymi polami po jednoznacznej zgodzie użytkownika.
+      Wersja `1fed6df4-7bde-4d11-9ad0-53e3afb4557b`, ponowna rejestracja schematu PASS.
+- [ ] Opublikować kod strony i Workera oraz zastosować migrację D1 `0002`.
+
+Bieżąca rozszerzona wersja strony i Workera jest lokalna. Pełne verify tej
+wersji zakończyło się kodem 0; dane Sanity są opublikowane. Dostawa, transport maili i aktywacja sprzedaży
+pozostają osobnym etapem. D27 nie obejmuje informacji handlowej wysyłanej e-mailem.
+
+## Skrócona oferta po zakupie, 18.10.2026
+
+- [x] Skrócić copy, pokazywać jedną cenę pakietu i usunąć dopisek o wstrzymaniu.
+- [x] Zachować widoczną zgodę, CTA i blokadę płatności.
+- [x] Opublikować sześć skróconych pól copy w Sanity.
+- [x] Odświeżyć lokalny podgląd i potwierdzić dopasowanie 1366 × 768.
+- [x] Zakończyć pełne verify i odbiór desktop/mobile nowej kompozycji.
+      690 unit, 549 E2E PASS; 12 celowych pominięć, 20 stron zgodnych.
+
 ## Zamówienia serii e-booków, 18.10.2026
 
 Zakres zatwierdzony przez użytkownika obejmuje zakup jednego e-booka za 97 zł
@@ -21,7 +74,8 @@ brutto i osobne zamówienie dwóch pozostałych za łącznie 97 zł brutto.
 - [x] Wdrożyć Worker z wyłączoną sprzedażą i potwierdzić katalog produkcyjny.
 - [x] Wdrożyć nowe menu Studio.
 - [x] Zapisać podpisany commit i utworzyć [PR 128](https://github.com/zawlodzki/nowa-strona-ola/pull/128).
-- [ ] Scalić zweryfikowany PR i wdrożyć kod strony.
+- [x] Scalić zweryfikowany PR 128 i wdrożyć kod strony. Publikacja
+      `39136898625` SUCCESS; odbiór trzech adresów i blokady sprzedaży PASS.
 - [ ] Dodać sekret Stripe i webhook oraz sprawdzić rzeczywistą płatność
       w sandboxie przed aktywacją sprzedaży.
 - [ ] Na osobnym etapie przygotować dostawę, maile i dokumenty PDF.

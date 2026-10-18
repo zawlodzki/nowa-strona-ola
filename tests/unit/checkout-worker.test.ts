@@ -12,8 +12,9 @@ import {
 } from "vitest";
 import {
   CONSENT_VERSION,
+  OFFER_EMAIL_REQUEST_VERSION,
+  OFFER_EMAIL_REQUEST_TEXT,
   handleCheckout,
-  remainingProducts,
   verifyStripeSignature,
   type CheckoutEnvironment,
 } from "../../worker/src/checkout";
@@ -27,6 +28,46 @@ const createdBodies: URLSearchParams[] = [];
 const createdHeaders: Headers[] = [];
 const idempotency = new Map<string, string>();
 let nextId = 0;
+const initialProducts = [
+  {
+    productCode: "ebook-01",
+    title: "Suplementy",
+    stripePriceId: "price_01",
+    priceGross: 97,
+    availability: "available",
+  },
+  {
+    productCode: "ebook-02",
+    title: "Badania",
+    stripePriceId: "price_02",
+    priceGross: 97,
+    availability: "available",
+  },
+  {
+    productCode: "ebook-03",
+    title: "Szczupła",
+    stripePriceId: "price_03",
+    priceGross: 97,
+    availability: "available",
+  },
+];
+function initialCatalog() {
+  return initialProducts.map((product) => ({
+    ...product,
+    crossSell: {
+      products: initialProducts.filter(
+        (other) => other.productCode !== product.productCode,
+      ),
+      kicker: "Dwa kolejne kroki",
+      title: "Uzupełnij swoją bibliotekę",
+      lead: "Dwa uzupełniające poradniki w pakiecie.",
+      stripeCouponId: "coupon_pair",
+    },
+  }));
+}
+let cmsCatalog = initialCatalog();
+let cmsSalesState: unknown = "ready";
+let chargedAt = Math.floor(Date.now() / 1000);
 
 beforeAll(async () => {
   runtime = new Miniflare(
@@ -50,32 +91,54 @@ beforeAll(async () => {
       )
     ).replace(/\n/g, " "),
   );
+  await db.exec(
+    (
+      await readFile(
+        new URL(
+          "../../worker/migrations/0002_offer_email_requests.sql",
+          import.meta.url,
+        ),
+        "utf8",
+      )
+    ).replace(/\n/g, " "),
+  );
   env = {
     CHECKOUT_DB: db,
     CHECKOUT_ENABLED: "true",
     CHECKOUT_SITE_ORIGIN: origin,
     STRIPE_SECRET_KEY: "sk_test_fixture",
     STRIPE_WEBHOOK_SECRET: "whsec_fixture",
-    STRIPE_PRICE_EBOOK_01: "price_01",
-    STRIPE_PRICE_EBOOK_02: "price_02",
-    STRIPE_PRICE_EBOOK_03: "price_03",
-    STRIPE_PAIR_COUPON: "coupon_pair",
+    CHECKOUT_SANITY_PROJECT_ID: "projectfixture",
+    CHECKOUT_SANITY_DATASET: "production",
   };
 });
 afterAll(async () => {
   await runtime.dispose();
 });
 beforeEach(async () => {
+  await env.CHECKOUT_DB?.prepare(
+    "DELETE FROM checkout_offer_email_requests",
+  ).run();
   await env.CHECKOUT_DB?.prepare("DELETE FROM checkout_orders").run();
   sessions.clear();
   createdBodies.length = 0;
   createdHeaders.length = 0;
   idempotency.clear();
   nextId = 0;
+  cmsCatalog = initialCatalog();
+  cmsSalesState = "ready";
+  chargedAt = Math.floor(Date.now() / 1000);
   vi.stubGlobal(
     "fetch",
     vi.fn(async (input: string, init?: RequestInit) => {
-      const path = new URL(input).pathname;
+      const parsedUrl = new URL(input);
+      const path = parsedUrl.pathname;
+      if (parsedUrl.hostname.endsWith(".api.sanity.io"))
+        return Response.json({
+          result: parsedUrl.searchParams.get("query")?.includes("].salesState")
+            ? cmsSalesState
+            : cmsCatalog,
+        });
       if (init?.method === "POST" && path.endsWith("/expire")) {
         const id = path.split("/").at(-2) ?? "";
         const session = sessions.get(id);
@@ -110,7 +173,11 @@ beforeEach(async () => {
       if (path.includes("payment_intents/"))
         return Response.json({
           status: "succeeded",
-          latest_charge: { amount_refunded: 0, disputed: false },
+          latest_charge: {
+            amount_refunded: 0,
+            disputed: false,
+            created: chargedAt,
+          },
         });
       const id = path.split("/").at(-1) ?? "";
       return Response.json(sessions.get(id));
@@ -145,7 +212,7 @@ function single(code = "ebook-01") {
     requestId: crypto.randomUUID(),
   };
 }
-async function firstPaid(code = "ebook-01") {
+async function firstPaid(code = "ebook-01", bundleAvailable = true) {
   const result = await handleCheckout(
     request("/api/checkout/orders", single(code)),
     env,
@@ -163,7 +230,7 @@ async function firstPaid(code = "ebook-01") {
   expect(await status.json()).toMatchObject({
     status: "paid",
     kind: "single",
-    bundleAvailable: true,
+    bundleAvailable,
   });
   return cookie;
 }
@@ -280,9 +347,9 @@ describe("PCOS checkout with local D1", () => {
       expect(results.map((result) => result.status)).toEqual([200, 200]);
       expect(createdBodies).toHaveLength(2);
       const bundle = createdBodies[1];
-      const expected = remainingProducts(code).map(
-        (value) => `price_${value.slice(-2)}`,
-      );
+      const expected = initialProducts
+        .filter((product) => product.productCode !== code)
+        .map((product) => product.stripePriceId);
       expect([
         bundle?.get("line_items[0][price]"),
         bundle?.get("line_items[1][price]"),
@@ -548,7 +615,11 @@ describe("PCOS checkout with local D1", () => {
       url.includes("payment_intents/")
         ? Response.json({
             status: "succeeded",
-            latest_charge: { amount_refunded: 0, disputed: true },
+            latest_charge: {
+              amount_refunded: 0,
+              disputed: true,
+              created: chargedAt,
+            },
           })
         : previous(url, init),
     );
@@ -632,7 +703,11 @@ describe("PCOS checkout with local D1", () => {
       url.includes("payment_intents/pi_cs_test_2")
         ? Response.json({
             status: "succeeded",
-            latest_charge: { amount_refunded: 9700, disputed: false },
+            latest_charge: {
+              amount_refunded: 9700,
+              disputed: false,
+              created: chargedAt,
+            },
           })
         : previous(url, init),
     );
@@ -698,7 +773,11 @@ describe("PCOS checkout with local D1", () => {
       url.includes("payment_intents/pi_cs_test_2")
         ? Response.json({
             status: "succeeded",
-            latest_charge: { amount_refunded: 9700, disputed: false },
+            latest_charge: {
+              amount_refunded: 9700,
+              disputed: false,
+              created: chargedAt,
+            },
           })
         : previous(url, init),
     );
@@ -710,6 +789,478 @@ describe("PCOS checkout with local D1", () => {
       status: "revoked",
       kind: "bundle",
       bundleAvailable: false,
+    });
+  });
+  it("uses a configured future-series pair, offer copy and coupon instead of PCOS complements", async () => {
+    const future = [
+      {
+        productCode: "perimenopause-01",
+        title: "Pierwszy poradnik",
+        stripePriceId: "price_future1",
+        priceGross: 97,
+        availability: "available",
+      },
+      {
+        productCode: "perimenopause-02",
+        title: "Drugi poradnik",
+        stripePriceId: "price_future2",
+        priceGross: 97,
+        availability: "available",
+      },
+      {
+        productCode: "perimenopause-03",
+        title: "Trzeci poradnik",
+        stripePriceId: "price_future3",
+        priceGross: 97,
+        availability: "available",
+      },
+    ];
+    cmsCatalog = future.map((product) => ({
+      ...product,
+      crossSell: {
+        products: future
+          .filter((other) => other.productCode !== product.productCode)
+          .reverse(),
+        kicker: "Twój kolejny krok",
+        title: "Poznaj cały temat",
+        lead: "Dwa poradniki, jedna cena.",
+        stripeCouponId: "future_coupon",
+      },
+    }));
+    const cookie = await firstPaid("perimenopause-01");
+    cmsCatalog = initialCatalog();
+    const state = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_1", undefined, cookie),
+      env,
+    );
+    expect(await state.json()).toMatchObject({
+      remainingProductCodes: ["perimenopause-03", "perimenopause-02"],
+      offer: {
+        kicker: "Twój kolejny krok",
+        title: "Poznaj cały temat",
+        lead: "Dwa poradniki, jedna cena.",
+        originalAmount: 19400,
+        bundleAmount: 9700,
+        currency: "pln",
+      },
+    });
+    const result = await handleCheckout(
+      request(
+        "/api/checkout/bundle",
+        {
+          parentSessionId: "cs_test_1",
+          consentAccepted: true,
+          consentVersion: CONSENT_VERSION,
+          requestId: crypto.randomUUID(),
+          productCodes: ["ebook-02", "ebook-03"],
+        },
+        cookie,
+      ),
+      env,
+    );
+    expect(result.status).toBe(200);
+    expect(createdBodies[1]?.get("line_items[0][price]")).toBe("price_future3");
+    expect(createdBodies[1]?.get("line_items[1][price]")).toBe("price_future2");
+    expect(createdBodies[1]?.get("discounts[0][coupon]")).toBe("future_coupon");
+    expect(createdBodies[1]?.get("success_url")).toBe(
+      `${origin}/zamowienie/potwierdzenie/?session_id={CHECKOUT_SESSION_ID}`,
+    );
+  });
+  it("counts seven days from Stripe payment time and rejects new discounted orders after that deadline", async () => {
+    chargedAt = Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60 - 1;
+    const cookie = await firstPaid("ebook-01", false);
+    const state = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_1", undefined, cookie),
+      env,
+    );
+    expect(await state.json()).toMatchObject({
+      offer: {
+        expiresAt: new Date(
+          (chargedAt + 7 * 24 * 60 * 60) * 1000,
+        ).toISOString(),
+      },
+      bundleAvailable: false,
+    });
+    const result = await handleCheckout(
+      request(
+        "/api/checkout/bundle",
+        {
+          parentSessionId: "cs_test_1",
+          consentAccepted: true,
+          consentVersion: CONSENT_VERSION,
+          requestId: crypto.randomUUID(),
+        },
+        cookie,
+      ),
+      env,
+    );
+    expect(result.status).toBe(409);
+    expect(await result.json()).toEqual({ error: "offer_expired" });
+    expect(createdBodies).toHaveLength(1);
+  });
+  it("allows an already accepted bundle session to finish after the offer deadline without creating a new order", async () => {
+    const cookie = await firstPaid();
+    const payload = {
+      parentSessionId: "cs_test_1",
+      consentAccepted: true,
+      consentVersion: CONSENT_VERSION,
+      requestId: crypto.randomUUID(),
+    };
+    const initial = await handleCheckout(
+      request("/api/checkout/bundle", payload, cookie),
+      env,
+    );
+    expect(initial.status).toBe(200);
+    await env.CHECKOUT_DB?.prepare(
+      "UPDATE checkout_orders SET paid_at=? WHERE kind='single'",
+    )
+      .bind(Date.now() - 7 * 24 * 60 * 60 * 1000 - 1)
+      .run();
+    const repeated = await handleCheckout(
+      request("/api/checkout/bundle", payload, cookie),
+      env,
+    );
+    expect(repeated.status).toBe(200);
+    expect(await repeated.json()).toEqual(await initial.json());
+    expect(createdBodies).toHaveLength(2);
+    const fresh = await handleCheckout(
+      request(
+        "/api/checkout/bundle",
+        { ...payload, requestId: crypto.randomUUID() },
+        cookie,
+      ),
+      env,
+    );
+    expect(fresh.status).toBe(409);
+    expect(await fresh.json()).toEqual({ error: "offer_expired" });
+    const pair = sessions.get("cs_test_2");
+    if (!pair) throw new Error("missing pair");
+    pair.status = "complete";
+    pair.payment_status = "paid";
+    const final = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_2", undefined, cookie),
+      env,
+    );
+    expect(await final.json()).toMatchObject({
+      status: "paid",
+      kind: "bundle",
+    });
+  });
+  it("returns only public product labels from the trusted CMS catalog", async () => {
+    const result = await handleCheckout(request("/api/checkout/catalog"), env);
+    expect(result.status).toBe(200);
+    const payload = await result.json();
+    expect(payload.products).toEqual(
+      initialProducts.map(({ productCode: code, title }) => ({ code, title })),
+    );
+    expect(JSON.stringify(payload)).not.toContain("stripePriceId");
+    expect(JSON.stringify(payload)).not.toContain("coupon_pair");
+  });
+  it("rejects a malformed CMS pair before creating any Stripe payment", async () => {
+    const first = cmsCatalog[0];
+    const same = initialProducts[0];
+    if (!first || !same) throw new Error("missing fixture");
+    first.crossSell.products = [same, same];
+    const result = await handleCheckout(
+      request("/api/checkout/orders", single()),
+      env,
+    );
+    expect(result.status).toBe(503);
+    expect(await result.json()).toEqual({ error: "invalid_catalog" });
+    expect(createdBodies).toHaveLength(0);
+  });
+  it("reuses the accepted single-order snapshot when CMS content changes during a browser retry", async () => {
+    const payload = single();
+    const first = await handleCheckout(
+      request("/api/checkout/orders", payload),
+      env,
+    );
+    expect(first.status).toBe(200);
+    cmsCatalog = [];
+    const repeated = await handleCheckout(
+      request("/api/checkout/orders", payload),
+      env,
+    );
+    expect(repeated.status).toBe(200);
+    expect(await repeated.json()).toEqual(await first.json());
+    expect(createdBodies).toHaveLength(1);
+  });
+  it("records one explicit offer-email request with exact wording and timestamp despite concurrent retries", async () => {
+    const cookie = await firstPaid();
+    const payload = {
+      parentSessionId: "cs_test_1",
+      requestAccepted: true,
+      requestVersion: OFFER_EMAIL_REQUEST_VERSION,
+    };
+    const before = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_1", undefined, cookie),
+      env,
+    );
+    expect(await before.json()).toMatchObject({
+      offerEmailRequested: false,
+      offerEmailRequestAvailable: true,
+    });
+    const requests = await Promise.all([
+      handleCheckout(
+        request("/api/checkout/offer-email-request", payload, cookie),
+        env,
+      ),
+      handleCheckout(
+        request("/api/checkout/offer-email-request", payload, cookie),
+        env,
+      ),
+    ]);
+    for (const result of requests) {
+      expect(result.status).toBe(200);
+      expect(await result.json()).toEqual({
+        requested: true,
+        deliveryPending: true,
+      });
+    }
+    const row = await env.CHECKOUT_DB?.prepare(
+      "SELECT request_version,request_text,requested_at FROM checkout_offer_email_requests",
+    ).first<{
+      request_version: string;
+      request_text: string;
+      requested_at: number;
+    }>();
+    expect(row).toMatchObject({
+      request_version: OFFER_EMAIL_REQUEST_VERSION,
+      request_text: OFFER_EMAIL_REQUEST_TEXT,
+    });
+    expect(row?.requested_at).toBeGreaterThan(0);
+    const count = await env.CHECKOUT_DB?.prepare(
+      "SELECT COUNT(*) AS count FROM checkout_offer_email_requests",
+    ).first<{ count: number }>();
+    expect(count?.count).toBe(1);
+    const after = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_1", undefined, cookie),
+      env,
+    );
+    expect(await after.json()).toMatchObject({
+      offerEmailRequested: true,
+      offerEmailRequestAvailable: false,
+    });
+    expect(createdBodies).toHaveLength(1);
+  });
+  it("requires ownership, exact explicit request version and same-origin for an offer email", async () => {
+    const cookie = await firstPaid();
+    const payload = {
+      parentSessionId: "cs_test_1",
+      requestAccepted: true,
+      requestVersion: OFFER_EMAIL_REQUEST_VERSION,
+    };
+    for (const changes of [
+      { requestAccepted: false },
+      { requestVersion: "obsolete" },
+    ]) {
+      const result = await handleCheckout(
+        request(
+          "/api/checkout/offer-email-request",
+          { ...payload, ...changes },
+          cookie,
+        ),
+        env,
+      );
+      expect(result.status).toBe(400);
+    }
+    const stranger = await handleCheckout(
+      request(
+        "/api/checkout/offer-email-request",
+        payload,
+        "__Host-ola_checkout=" + "b".repeat(64),
+      ),
+      env,
+    );
+    expect(stranger.status).toBe(404);
+    const csrf = await handleCheckout(
+      request(
+        "/api/checkout/offer-email-request",
+        payload,
+        cookie,
+        "https://other.example",
+      ),
+      env,
+    );
+    expect(csrf.status).toBe(403);
+    const count = await env.CHECKOUT_DB?.prepare(
+      "SELECT COUNT(*) AS count FROM checkout_offer_email_requests",
+    ).first<{ count: number }>();
+    expect(count?.count).toBe(0);
+  });
+  it("does not record an offer-email request for an unpaid order", async () => {
+    const created = await handleCheckout(
+      request("/api/checkout/orders", single()),
+      env,
+    );
+    expect(created.status).toBe(200);
+    const result = await handleCheckout(
+      request("/api/checkout/offer-email-request", {
+        parentSessionId: "cs_test_1",
+        requestAccepted: true,
+        requestVersion: OFFER_EMAIL_REQUEST_VERSION,
+      }),
+      env,
+    );
+    expect(result.status).toBe(409);
+    expect(await result.json()).toEqual({ error: "parent_not_paid" });
+    const count = await env.CHECKOUT_DB?.prepare(
+      "SELECT COUNT(*) AS count FROM checkout_offer_email_requests",
+    ).first<{ count: number }>();
+    expect(count?.count).toBe(0);
+  });
+  it("does not accept a new email request after the seven-day offer deadline", async () => {
+    chargedAt = Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60 - 1;
+    const cookie = await firstPaid("ebook-01", false);
+    const result = await handleCheckout(
+      request(
+        "/api/checkout/offer-email-request",
+        {
+          parentSessionId: "cs_test_1",
+          requestAccepted: true,
+          requestVersion: OFFER_EMAIL_REQUEST_VERSION,
+        },
+        cookie,
+      ),
+      env,
+    );
+    expect(result.status).toBe(409);
+    expect(await result.json()).toEqual({ error: "offer_expired" });
+    const status = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_1", undefined, cookie),
+      env,
+    );
+    expect(await status.json()).toMatchObject({
+      offerEmailRequested: false,
+      offerEmailRequestAvailable: false,
+    });
+  });
+  it.each(["paused", null, "unexpected"])(
+    "blocks direct single and bundle POSTs when CMS sales state is %s",
+    async (state) => {
+      const cookie = await firstPaid();
+      cmsSalesState = state;
+      const catalogResponse = await handleCheckout(
+        request("/api/checkout/catalog"),
+        env,
+      );
+      expect(await catalogResponse.json()).toMatchObject({ enabled: false });
+      const first = await handleCheckout(
+        request("/api/checkout/orders", single("ebook-02"), cookie),
+        env,
+      );
+      expect(first.status).toBe(503);
+      expect(await first.json()).toEqual({ error: "sales_not_enabled" });
+      const bundle = await handleCheckout(
+        request(
+          "/api/checkout/bundle",
+          {
+            parentSessionId: "cs_test_1",
+            consentAccepted: true,
+            consentVersion: CONSENT_VERSION,
+            requestId: crypto.randomUUID(),
+          },
+          cookie,
+        ),
+        env,
+      );
+      expect(bundle.status).toBe(503);
+      expect(await bundle.json()).toEqual({ error: "sales_not_enabled" });
+      expect(createdBodies).toHaveLength(1);
+    },
+  );
+  it.each(["planned", "paused"])(
+    "blocks a direct first purchase of a %s ebook while CMS sales are ready",
+    async (availability) => {
+      const selected = cmsCatalog[0];
+      if (!selected) throw new Error("missing fixture");
+      selected.availability = availability;
+      const result = await handleCheckout(
+        request("/api/checkout/orders", single()),
+        env,
+      );
+      expect(result.status).toBe(409);
+      expect(await result.json()).toEqual({ error: "product_unavailable" });
+      expect(createdBodies).toHaveLength(0);
+    },
+  );
+  it.each(["available", "presale"])(
+    "allows a direct first purchase of an %s ebook when both gates are open",
+    async (availability) => {
+      const selected = cmsCatalog[0];
+      if (!selected) throw new Error("missing fixture");
+      selected.availability = availability;
+      const result = await handleCheckout(
+        request("/api/checkout/orders", single()),
+        env,
+      );
+      expect(result.status).toBe(200);
+      expect(createdBodies).toHaveLength(1);
+    },
+  );
+  it("keeps an accepted pair snapshot eligible after CMS product availability changes", async () => {
+    const cookie = await firstPaid();
+    cmsCatalog.forEach((product) => {
+      product.availability = "paused";
+    });
+    const status = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_1", undefined, cookie),
+      env,
+    );
+    expect(await status.json()).toMatchObject({
+      status: "paid",
+      bundleAvailable: true,
+    });
+    const result = await handleCheckout(
+      request(
+        "/api/checkout/bundle",
+        {
+          parentSessionId: "cs_test_1",
+          consentAccepted: true,
+          consentVersion: CONSENT_VERSION,
+          requestId: crypto.randomUUID(),
+        },
+        cookie,
+      ),
+      env,
+    );
+    expect(result.status).toBe(200);
+    expect(createdBodies).toHaveLength(2);
+  });
+  it("does not offer email-request submission while its runtime gate rejects writes", async () => {
+    const cookie = await firstPaid();
+    const pausedEnv = { ...env, CHECKOUT_ENABLED: "false" };
+    const before = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_1", undefined, cookie),
+      pausedEnv,
+    );
+    expect(await before.json()).toMatchObject({
+      offerEmailRequested: false,
+      offerEmailRequestAvailable: false,
+    });
+    const payload = {
+      parentSessionId: "cs_test_1",
+      requestAccepted: true,
+      requestVersion: OFFER_EMAIL_REQUEST_VERSION,
+    };
+    const blocked = await handleCheckout(
+      request("/api/checkout/offer-email-request", payload, cookie),
+      pausedEnv,
+    );
+    expect(blocked.status).toBe(503);
+    expect(await blocked.json()).toEqual({ error: "sales_not_enabled" });
+    const accepted = await handleCheckout(
+      request("/api/checkout/offer-email-request", payload, cookie),
+      env,
+    );
+    expect(accepted.status).toBe(200);
+    const after = await handleCheckout(
+      request("/api/checkout/status?session_id=cs_test_1", undefined, cookie),
+      pausedEnv,
+    );
+    expect(await after.json()).toMatchObject({
+      offerEmailRequested: true,
+      offerEmailRequestAvailable: false,
     });
   });
   it("rejects forged, altered and stale webhook signatures", async () => {

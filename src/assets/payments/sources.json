@@ -1,0 +1,59 @@
+[
+  {
+    "file": "apple-pay.svg",
+    "source": "https://github.com/datatrans/payment-logos/blob/b4175c79813792f1e2ab16c10cfd9f15d5af0e77/assets/wallets/apple-pay.svg",
+    "revision": "b4175c79813792f1e2ab16c10cfd9f15d5af0e77",
+    "license": "CC-BY-SA-4.0",
+    "originalSha256": "4f649c30680dbedbe06aef6e743bcd7fae2644c6ee872133ed79cc2637b872f7",
+    "distributedSha256": "de704fe465605c821d70ae2e252215fb07636e7557d3802c387dee0711e029ea"
+  },
+  {
+    "file": "google-pay.svg",
+    "source": "https://github.com/datatrans/payment-logos/blob/b4175c79813792f1e2ab16c10cfd9f15d5af0e77/assets/wallets/google-pay.svg",
+    "revision": "b4175c79813792f1e2ab16c10cfd9f15d5af0e77",
+    "license": "CC-BY-SA-4.0",
+    "originalSha256": "c2aa8f4f624e887396f72f367bf75b8ba86048dafba03f8bb211f04a7237c248",
+    "distributedSha256": "413e05fc05f118ee30ff6f2c5236b3365258270d78ab94defddcaab784bf744f"
+  },
+  {
+    "file": "visa.svg",
+    "source": "https://github.com/datatrans/payment-logos/blob/b4175c79813792f1e2ab16c10cfd9f15d5af0e77/assets/cards/visa.svg",
+    "revision": "b4175c79813792f1e2ab16c10cfd9f15d5af0e77",
+    "license": "CC-BY-SA-4.0",
+    "originalSha256": "4a598364981ec3d3e53cd5cfed6767c8879f5abd60782bd81fca5ddcbe626d8e",
+    "distributedSha256": "c08270a137ac4cadf4ad7e01e257848ec9cf1d342b392e651f31114523a83b31"
+  },
+  {
+    "file": "mastercard.svg",
+    "source": "https://github.com/datatrans/payment-logos/blob/b4175c79813792f1e2ab16c10cfd9f15d5af0e77/assets/cards/mastercard.svg",
+    "revision": "b4175c79813792f1e2ab16c10cfd9f15d5af0e77",
+    "license": "CC-BY-SA-4.0",
+    "originalSha256": "9f3a22cf79c00f13734f20d1884665df65f6818d2efdabf1bb8a3ea450a5b574",
+    "distributedSha256": "1d16f1d4bc0ad40e47750cf692baee707ef5a69ef388982eea909e573a396a68"
+  },
+  {
+    "file": "blik.svg",
+    "source": "https://github.com/datatrans/payment-logos/blob/b4175c79813792f1e2ab16c10cfd9f15d5af0e77/assets/apm/blik.svg",
+    "revision": "b4175c79813792f1e2ab16c10cfd9f15d5af0e77",
+    "license": "CC-BY-SA-4.0",
+    "originalSha256": "5853996712f6595441b210e8e93de9e7aab7bed480583a2a7c46086e3692d934",
+    "distributedSha256": "75caa5f4163cd842af0236ed7a93fdf18727f1d1736ab831d7df4036e875fb88"
+  },
+  {
+    "file": "klarna.svg",
+    "source": "https://github.com/datatrans/payment-logos/blob/b4175c79813792f1e2ab16c10cfd9f15d5af0e77/assets/apm/klarna.svg",
+    "revision": "b4175c79813792f1e2ab16c10cfd9f15d5af0e77",
+    "license": "CC-BY-SA-4.0",
+    "originalSha256": "32789c8eb63d168cca312323471d0c254e6c200549b14fc538032cb8272ef3e0",
+    "distributedSha256": "30781e131ee710d32647f451b00e2e2a3fba72934edb23e1025dcbb5723e5b40"
+  },
+  {
+    "file": "revolut-pay.svg",
+    "source": "https://github.com/revolut-engineering/revolut-checkout-example/blob/de907bdd8cbe049d521e11b977c5acdacccddd24/images/logo-revolut-pay.svg",
+    "revision": "de907bdd8cbe049d521e11b977c5acdacccddd24",
+    "usageGuidelines": "https://developer.revolut.com/docs/resources/revolut-pay-button-guidelines",
+    "originalSha256": "2a0192088b879bbba1916fd8c8a6c0d4011d2084c6bf2b2f4d348bd537314acf",
+    "distributedSha256": "2a0192088b879bbba1916fd8c8a6c0d4011d2084c6bf2b2f4d348bd537314acf",
+    "changes": "none"
+  }
+]

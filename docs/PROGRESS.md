@@ -1,5 +1,167 @@
 # Postęp wdrożenia
 
+## PR i scalenie ścieżki zakupu, 18.10.2026
+
+Użytkownik zlecił utworzenie PR i scalenie po testach. Zakres obejmuje
+konfigurowalną ofertę pary, ekrany po zakupie, prośbę o link i mikrocopy
+z metodami płatności. Niezależne zmiany głównego katalogu pozostają poza PR.
+Pełne verify tego kodu przeszło: 718 unit, 564 E2E, 12 pominięć i 21 stron
+zgodnych. Kolejny warunek to niezależny przegląd oraz zielone CI dla SHA PR.
+
+Origin CLI nie ma aktywnego logowania; operacje odczytu i scalenie wykonujemy
+przez gh. Tworzenie PR przez dostępny konektor GitHub. Scalenie uruchomi
+istniejące workflow Studio i podglądu po Quality. Publiczna strona wymaga
+osobnej publikacji treści, a Worker i migracja D1 osobnego wdrożenia.
+Sprzedaż i wysyłka pozostają wyłączone.
+
+## Mikrocopy i metody płatności przy zakupie, 18.10.2026
+
+Dodano wspólne teksty PL/EN i siedem lokalnych znaków metod płatności pod
+aktywnym CTA e-booka. Metody potwierdzono odczytem konfiguracji Stripe.
+Dostawa jest opisana jako e-mail po zapłacie, bez obietnicy natychmiastowości;
+w przedsprzedaży tę informację pomijamy. Inny dostawca checkoutu nie dostaje
+znaków Stripe. HTML i Markdown korzystają ze wspólnego katalogu.
+Nie zmieniono CMS, ustawień Stripe ani aktywności sprzedaży.
+
+Pełne `npm run verify` zakończyło się kodem 0: 718 testów jednostkowych,
+564 E2E PASS i 12 celowych pominięć. Porównanie fixture/Content Lake:
+21 stron zgodnych; SEO 40 stron PASS. Kontrola siedmiu SVG przeszła.
+
+Aktywna karta w podglądzie 4350 przeszła kontrolę Chromium, Firefox i WebKit:
+desktop, szerokość 320 px, zoom CSS 200%, reduced motion oraz załadowanie
+wszystkich siedmiu znaków. Chromium bez JavaScript również PASS; zero POST.
+W IAB potwierdzono nowe teksty, nazwy znaków i fokus przycisku klawiatury.
+Nie sprawdzano natywnego zoomu przeglądarki, fizycznego telefonu ani czytnika
+ekranu. Zrzuty zapisano w `.audit/checkout-20261018/`.
+
+Zsynchronizowano pliki zadania do głównego katalogu, zachowując niezależną
+korektę kadru zdjęcia autorki i inne zmiany użytkownika. Kontrola diffu plików
+tej zmiany przeszła; globalny diff głównego katalogu zgłasza istniejącą pustą
+linię na końcu README, której nie zmieniano. Następny krok: odbiór wizualny
+użytkownika; przed uruchomieniem sprzedaży test rzeczywistego checkoutu
+w sandboxie oraz podłączenie dostawy. Nowy kod nie został opublikowany.
+
+## Podgląd pierwszego zakupu, 18.10.2026
+
+Na prośbę użytkownika uruchomiono osobny lokalny podgląd na porcie 4350:
+karta zakupu na landingu suplementów i formularz pierwszego zamówienia.
+Symulacja pokazuje stan `available` i gotowy formularz, bez zmiany danych Sanity,
+źródeł aplikacji ani produkcji. Serwer odrzuca wszystkie POST; CSP ogranicza
+połączenia do własnego hosta. Poprzedni podgląd 4349 pozostaje niezależny.
+
+Osobny build z bieżącymi danymi Sanity przeszedł (35 stron). Sprawdzono klik
+„Chcę ebook · 97 zł” → formularz produktu `ebook-01`, dokładnie jedno wymagane,
+początkowo niezaznaczone pole D27 oraz zablokowany przycisk przed zgodą.
+Nie wpisywano danych klientki ani nie wysłano POST. Obie karty otwarto w IAB;
+formularz ustawiono na widoku zgody. Zapisano dwa screenshoty. Pełnego verify
+nie powtarzano, ponieważ nie zmieniono kodu aplikacji. Następny krok: odbiór
+wizualny użytkownika; rzeczywista sprzedaż i dostawa pozostają wyłączone.
+
+## Rozszerzenie oferty po zakupie — odebrane lokalnie, 18.10.2026
+
+Użytkownik wybrał panel matcha i przycisk primary, większą przekreśloną kwotę
+194 zł oraz jawny wybór dwóch komplementarnych e-booków przy dokumencie e-booka
+w CMS. Copy ma być konfigurowalne również dla przyszłej serii o perimenopauzie.
+194 zł opisujemy jako cenę zakupu dwóch pozycji osobno, nie jako historyczną
+cenę pakietu ani potwierdzoną najniższą cenę z 30 dni.
+
+W lokalnym kodzie przygotowano strony podziękowania po zakupie pakietu oraz
+odmowy. Podziękowanie zapowiada docelową dostawę e-mailem i kieruje dobrowolnie
+do istniejącego zapisu na newsletter; nie dopisuje klientki automatycznie.
+Odmowa prowadzi do informacji o siedmiu dniach od pierwszego zakupu.
+Backend wyznacza termin z `paid_at`, bez odnawiania go kolejnym wejściem.
+Parę i jej copy zapisuje w migawce zamówienia, zamiast wyprowadzać ofertę
+ze wszystkich produktów danej serii.
+
+Kontrola znaczenia zgód: Z2/D27 w `zgody-i-formularze.md` projektu prawnego
+obejmuje warunki zamówienia i dostawę cyfrową. Informacje handlowe są odrębnym
+celem. [Art. 398 PKE](https://eli.gov.pl/api/acts/DU/2024/1221/text.html)
+wymaga uprzedniej zgody; sam klik „Nie, dziękuję” jej nie wyraża. Użytkownik
+wybrał osobny dobrowolny przycisk „Wyślij mi tę ofertę e-mailem”. Jego obsługa
+ma zapisywać jednorazową prośbę i dowód jej zakresu, bez zapisu do newslettera.
+Transport nie jest podłączony: po zapisaniu prośby interfejs ma powiedzieć to
+wprost, zamiast deklarować wysłanie wiadomości.
+
+Schemat zarejestrowano, a pary i copy sześciu e-booków opublikowano w Sanity.
+Ceny pozostają 97 zł, statusy `planned`, a sprzedaż `paused`. Kody perimenopauzy
+04–06 są przygotowane w kodzie i fixture’ach; ich publikacja czeka na nowy kod,
+ponieważ stary renderer odrzuca nieznane kody. Referencje i copy są już zapisane.
+[Rewizje i mapowanie](HOMEPAGE-CMS-CONFIG.md#oferta-uzupełniająca-konfigurowana-przy-e-booku-18102026).
+
+POST `/api/checkout/offer-email-request` zapisuje tekst, wersję i czas osobnej
+prośby, idempotentnie dla pierwszego zamówienia. Wymaga migracji D1 `0002`.
+Nie wysyła maila. Podziękowanie i strona odmowy odczytują status zamówienia
+niezależnie od awarii bieżącego katalogu CMS. Serwerowa kontrola pauzy i
+dostępności produktu przeszła testy bezpośrednich POST.
+
+Kod widoków i Workera pozostaje lokalny. Końcowe `npm run verify` zakończyło się
+kodem 0: 714 testów jednostkowych, 564 E2E PASS, 12 celowych pominięć,
+SEO 40 stron oraz zgodność 21 stron fixture/Content Lake. Testy obejmują
+36 scenariuszy D1 i 42 kontrole checkoutu w trzech przeglądarkach. Pierwszy
+przebieg wykazał jedną porażkę testu Turnstile w Firefoxie; test powtórzony bez
+zmiany kodu przeszedł, a końcowa pełna bramka była zielona. Przejściowy błąd
+typu dostępności poprawiono przed końcową bramką.
+
+Lokalny podgląd potwierdza dopasowanie sześciu symulowanych par do 1366 × 768,
+brak przepełnienia przy 320 px i CSS zoom 200%, klawiaturę, reduced motion
+oraz czytelny komunikat bez JavaScript. Kontrola nie wysłała żadnego POST.
+Przycisk prośby sprawdzono osobno z lokalnym mockiem, bez wysyłki maila.
+Native zoom, czytnik ekranu i fizyczny telefon nie były sprawdzane.
+Sprawdzono wydzielony zakres w zarządzanym worktree, a pliki tego zakresu
+synchronizowano z głównym katalogiem, zachowując pozostałe zmiany użytkownika.
+
+Produkcyjny build Studio z projektem `dyuqkn8c`, zbiorem `production`
+i adresem podglądu `https://preview.aleksandraolesiewicz.com` przeszedł.
+Pierwszą publikację zatrzymała automatyczna kontrola zgody. Użytkownik następnie
+jednoznacznie zatwierdził publikację nowego Studio. Wdrożenie zakończyło się
+sukcesem, wersja `1fed6df4-7bde-4d11-9ad0-53e3afb4557b`; ponowna rejestracja
+schematu: 1/1 PASS. Przeglądarka załadowała `/static/sanity-Cq02Vlk9.js`,
+zgodny nazwą z produkcyjnym buildem, i ekran logowania „Ola — treści”.
+Odczyt HTTP przez Python zwrócił 403; nie traktowano go jako odbioru aplikacji.
+Nie sprawdzano zalogowanego edytora. Nowe pola są w zakładce „Oferta” dokumentu
+e-booka, w obiekcie „Oferta po zakupie tego e-booka”.
+
+Końcowy podgląd z aktualnym Sanity zbudowano do osobnego katalogu i odświeżono
+pod adresem `http://127.0.0.1:4349/po-zakupie/`. Aktualny build ma produkty
+PCOS; perimenopauzę sprawdzono w fixture’ach i mockach przed publikacją jej kodów.
+Ponowny pomiar desktopu końcowego buildu potwierdza wysokość 768 px i szerokość
+1366 px bez przepełnienia. Jedną próbę kontroli zatrzymał timeout automatycznej
+autoryzacji; dozwolone pojedyncze ponowienie zakończyło się sukcesem.
+
+Następny krok: opublikować stronę i Worker z migracją D1 `0002`. Przed sprzedażą
+podłączyć wysyłkę, bezpieczne linki do oferty otwierane z maila na innym
+urządzeniu, dostawę e-booków i rzeczywistą płatność sandbox. Obecny powrót do
+oferty jest chroniony ciasteczkiem tego samego właściciela przeglądarki.
+Sprzedaż jest wyłączona.
+
+## Skrócona oferta po zakupie, 18.10.2026
+
+Użytkownik odrzucił nadmiar tekstu i rozbicie ceny po 48,50 zł. Zlecił krótki,
+sprzedażowy widok mieszczący się na jednym ekranie komputera oraz usunięcie
+komunikatu o nieuruchomionej sprzedaży. Nowy układ ma okładki i korzyści
+po lewej oraz formularz pakietu za 97 zł po prawej. Zachowano pełną zgodę D27,
+obowiązek zapłaty i blokadę płatności. Szczegóły zakupu są rozwijane natywnie.
+
+Opublikowano sześć skróconych pól copy w `pcosCheckoutSettings-pl`, bez zmiany
+cen, dostępności, wersji oświadczenia ani starszych pól dokumentu. Schemat,
+mapper i kwerenda nowej wersji usuwają zbędne `empathy` i `mechanism`.
+17 skupionych testów CMS i Content Lake przeszło. Typy aplikacji przeszły.
+Pomiar lokalnego buildu z rzeczywistym Sanity potwierdził wysokość 768 px
+przy ekranie 1366 × 768 oraz brak poziomego przepełnienia. Podgląd 4349
+czyta osobny build w `/tmp/ola-checkout-compact-preview-20261018`, więc pełne
+testy nie zmieniają strony otwartej użytkownikowi. Obie karty odświeżono.
+Nowy kod układu jest na razie lokalny. Końcowe `npm run verify` zakończyło się
+kodem 0. Przeszło 690 testów jednostkowych, 549 E2E z 12 celowymi pominięciami,
+SEO 39 stron oraz porównanie 20 stron fixture/Content Lake. Każda para przeszła
+pomiar wysokości 1366 × 768 w Chromium, Firefoxie i WebKit. Pierwszy przebieg
+wykrył za wysokie zastępcze okładki z fixture; poprawiono ich lokalne proporcje
+i ponowiono całą bramkę. Kontrola CSS zoom 200% i reduced motion nie wykazała
+poziomego przepełnienia. Obie karty podglądu pokazują nową kompozycję.
+
+Dobór pary nie zmienił się. CMS przypisuje stały kod produktu; backend
+wyklucza opłacony kod i dobiera dwa pozostałe. Nie ma ręcznego zaznaczania
+pary w singletonie. Bieżąca korekta podglądu zakończona. Kod układu nie był ponownie publikowany na produkcję.
+
 ## Zamówienia serii e-booków, stan 18.10.2026
 
 Użytkownik zatwierdził implementację, doprecyzował zakup wyłącznie obu brakujących
@@ -24,8 +186,9 @@ Wykonane zapisy zewnętrzne potwierdzono odczytem.
   trzech e-booków, singleton `pcosCheckoutSettings-pl` w stanie `paused`,
   `legal-terms-pl` 2.4 i `legal-cookies-pl` 2.5. Zachowano statusy `planned`,
   dotychczasowe okładki i landingi. Zarejestrowano schemat, co nie oznacza
-  wdrożenia nowego menu hostowanego Studio. Nowy panel wdrożono następnie
-  w wersji `b1ec48a5-3eb4-44a3-99f6-97a34089db47`.
+  wdrożenia nowego menu hostowanego Studio. Panel wdrożono następnie
+  z jawnymi ustawieniami produkcyjnego projektu, datasetu i podglądu.
+  Poprawiona wersja to `d3e3c0f1-2706-4692-bf45-bf0edd5fb883`.
 - Cloudflare. Utworzono `ola-checkout-orders` w jurysdykcji EU, identyfikator
   `3223d46b-350f-4f4d-8fff-f63f90da082f`, i zastosowano migrację D1.
   Wdrożono Worker w wersji `9e760fd3-7759-45d0-a1a1-eff320cbbc73`.
@@ -69,11 +232,23 @@ Po odblokowaniu 1Password zapisano podpisany commit i utworzono
 [PR 128](https://github.com/zawlodzki/nowa-strona-ola/pull/128).
 Wcześniejsze zmiany użytkownika pozostały poza gałęzią. Build z opublikowanym
 Sanity oraz kontrola buildu i SEO 30 stron zakończyły się pomyślnie.
-Kod publicznej strony czeka na scalenie, publikację i odbiór domeny.
+PR scalono do `main` jako `1f983940798c8b3b380798fbe96399b5403c70e9`.
+Oba przebiegi Quality końcowego commitu zakończyły się sukcesem.
+Publikacja produkcyjna `39136898625` zakończyła się sukcesem.
+Chromium na publicznej domenie potwierdził HTTP 200, `noindex,nofollow`
+i `no-referrer` dla trzech nowych stron. Pierwsze zamówienie ma jeden
+niezaznaczony checkbox i wyłączony przycisk płatności. Odczyt API potwierdził
+`enabled = false` i kwoty 9700 groszy. Na publicznym widoku z atrapą wyłącznie
+opłaconego statusu sprawdzono właściwą parę, cenę 97 zł, okładki i 320 px.
+POST i żądania analityczne pozostały puste. Nie wykonano rzeczywistej płatności.
 
-Następny krok to odebrać CI i niezależny przegląd PR, scalić zmianę oraz
-opublikować stronę z wyłączoną sprzedażą. Aktywacja wymaga osobnego odbioru
-rzeczywistej płatności i dostawy.
+Automatyczna kontrola odrzuciła publikację komentarza GitHub z prywatnym
+raportem przeglądu i lokalnymi ścieżkami. Nie ponawiano komentarza. Niezależny
+werdykt PASS+NOTES i dowody zachowano lokalnie poza zakresem PR.
+
+Bieżący zakres wdrożenia zakończony. Następny osobny etap obejmuje dostawę,
+mailowe potwierdzenia i dokumenty PDF, sekret runtime i webhook Stripe oraz
+rzeczywistą płatność w sandboxie. Dopiero po ich odbiorze można aktywować sprzedaż.
 
 Aktualizacja: 2026-10-16 (przycisk „Otwórz podgląd” z limitem renderów, Sanity 6.19.0 bez autoUpdates; wycofany przycisk „Otwórz podgląd” w Studio); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).

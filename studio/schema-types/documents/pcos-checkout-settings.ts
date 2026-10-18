@@ -3,7 +3,7 @@ import { defineField, defineType } from "sanity";
 
 export const pcosCheckoutSettingsType = defineType({
   name: "pcosCheckoutSettings",
-  title: "Zamówienia serii PCOS",
+  title: "Zamówienia e-booków",
   type: "document",
   icon: CogIcon,
   fields: [
@@ -11,7 +11,7 @@ export const pcosCheckoutSettingsType = defineType({
       name: "salesState",
       title: "Gotowość procesu zamówienia",
       description:
-        "Przygotowany proces nadal wymaga konfiguracji Workera i dostawy. Nie zmienia dostępności e-booków.",
+        "Wstrzymany blokuje tworzenie nowych płatności również po stronie serwera. Przygotowany wymaga dodatkowo włączenia Workera, dostępnego produktu i gotowej dostawy. Treść oferty po zakupie edytuj przy konkretnym e-booku.",
       type: "string",
       options: {
         list: [
@@ -40,8 +40,6 @@ export const pcosCheckoutSettingsType = defineType({
     ),
     ...[
       { name: "crossSellKicker", title: "Etykieta oferty", max: 100 },
-      { name: "empathy", title: "Kontekst i potrzeba klientki", max: 500 },
-      { name: "mechanism", title: "Jak korzystać z serii", max: 500 },
       {
         name: "bundleReference",
         title: "Wyjaśnienie porównania cen",
@@ -74,6 +72,9 @@ export const pcosCheckoutSettingsType = defineType({
         name,
         title,
         readOnly: name === "continueLabel",
+        hidden: ["crossSellKicker", "crossSellTitle", "crossSellLead"].includes(
+          name,
+        ),
         description:
           name === "bundleOnlyNotice"
             ? "Oferta wymaga zakupu obu brakujących e-booków razem. Zakup jednego w tej cenie nie jest dostępny."
@@ -112,7 +113,7 @@ export const pcosCheckoutSettingsType = defineType({
   ],
   preview: {
     prepare: () => ({
-      title: "Zamówienia serii PCOS",
+      title: "Zamówienia e-booków",
       subtitle: "Pojedynczy e-book i para uzupełniająca",
     }),
   },

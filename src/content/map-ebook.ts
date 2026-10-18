@@ -13,7 +13,6 @@ import {
   formatPriceGross,
 } from "@/lib/offer";
 import {
-  PCOS_PRODUCTS,
   toPcosProductCode,
   type PcosProductCode,
 } from "@/lib/checkout-products";
@@ -438,12 +437,6 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
   }
   const productCode =
     language === "pl" ? toPcosProductCode(ebook.productCode) : undefined;
-  if (
-    productCode &&
-    PCOS_PRODUCTS.find((product) => product.code === productCode)?.slug !== slug
-  ) {
-    throw new Error(`Kod produktu płatności nie odpowiada e-bookowi ${slug}.`);
-  }
   if (ebook.productCode && !productCode) {
     throw new Error(`E-book ${slug} ma nieznany kod produktu płatności.`);
   }

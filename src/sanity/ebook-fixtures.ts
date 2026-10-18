@@ -8,7 +8,7 @@ import { wagaLanding } from "@/content/ebook-landings/waga-cie-oklamuje";
 import { czyToJuzLanding } from "@/content/ebook-landings/czy-to-juz";
 import { nocLanding } from "@/content/ebook-landings/noc-zaczyna-sie-o-osiemnastej";
 import { EBOOK_SEED } from "@/content/homepage-seed";
-import { PCOS_PRODUCTS } from "@/lib/checkout-products";
+
 import { ebookPath } from "@/lib/paths";
 import { homepageCopy } from "@/content/homepage-seed";
 import {
@@ -16,6 +16,12 @@ import {
   ebookFixtures,
   testimonialFixtures,
 } from "@/sanity/homepage-fixtures";
+
+const checkoutPriceIds: Record<string, string> = {
+  "suplementy-w-pcos": "price_1URqR0Q8cdQEDgtW9swOgW4n",
+  "badania-ktore-maja-sens": "price_1URqRCQ8cdQEDgtWL1ZkAQQS",
+  "szczupla-a-jednak-pcos": "price_1URqRFQ8cdQEDgtWFn0DNVMC",
+};
 
 function media(
   key: string,
@@ -133,8 +139,29 @@ function buildEbookFixture(
     delivery: null,
     productCode:
       language === "pl"
-        ? (PCOS_PRODUCTS.find((product) => product.slug === seed.slug.pl)
-            ?.code ?? null)
+        ? `ebook-${String(seed.sortOrder).padStart(2, "0")}`
+        : null,
+    stripePriceId:
+      language === "pl" ? (checkoutPriceIds[seed.slug.pl] ?? null) : null,
+    crossSell:
+      language === "pl"
+        ? {
+            complementaryEbooks: EBOOK_SEED.filter(
+              (item) =>
+                item.topic === seed.topic && item.slug.pl !== seed.slug.pl,
+            ).map((item) => ({
+              id: `ebook-${item.slug.pl}-pl`,
+              language: "pl",
+            })),
+            kicker: "Dwa e-booki · jeden pakiet",
+            title: "Uzupełnij serię za pół ceny",
+            lead:
+              seed.topic === "pcos"
+                ? "Dobierz dwa poradniki i przygotuj się do konsultacji z pełniejszą wiedzą o PMOS\u00A0(PCOS)."
+                : "Dobierz dwa poradniki i lepiej poznaj zmiany w okresie perimenopauzy.",
+            stripeCouponId:
+              seed.topic === "pcos" ? "ola_complete_pair_50_v1" : null,
+          }
         : null,
     checkoutUrl: null,
     waitlist: {

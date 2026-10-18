@@ -120,6 +120,7 @@ export function obsoleteDocumentType(id: string): string {
 const OBJECT_TYPES: Record<string, string> = {
   faq: "faqSection",
   landing: "ebookLanding",
+  crossSell: "object",
   seo: "seo",
   defaultSeo: "seo",
   blogIndex: "blogIndexSettings",
