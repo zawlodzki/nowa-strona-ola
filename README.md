@@ -378,3 +378,36 @@ npx wrangler deploy --config wrangler.jsonc --env staging
 
 Plik `public/.assetsignore` wyklucza metadane lokalne z zasobów zgodnie z
 [dokumentacją Cloudflare](https://developers.cloudflare.com/workers/static-assets/binding/#ignoring-assets).
+
+## Zamówienia e-booków, 18.10.2026
+
+Przygotowany proces obejmuje jeden e-book za 97 zł brutto i osobny zakup obu
+brakujących za kolejne 97 zł brutto. Sprzedaż pozostaje wyłączona. Produkty
+w Sanity mają `planned`, ustawienia serii `paused`, a Worker
+`CHECKOUT_ENABLED = false`. Dostawę użytkownik odłożył na później.
+[Plan i warunki uruchomienia](docs/STRIPE-EBOOK-IMPLEMENTATION-PLAN-2026-10-18.md),
+[konfiguracja CMS](docs/CHECKOUT-CMS-MIGRATION.md),
+[model backendu](worker/CHECKOUT-DESIGN.md).
+
+Sprawdzone komendy na Node 24, z katalogu repo.
+
+```sh
+npm run build
+npm run test:build
+npm run test -- tests/unit/checkout-worker.test.ts
+npm run test -- tests/unit/content-lake-plan.test.ts tests/unit/pcos-checkout-cms.test.ts
+npm run test:e2e -- --project=chromium tests/e2e/checkout.spec.ts
+npm run preview
+```
+
+Podgląd statycznych stron jest pod `http://127.0.0.1:4321/zamowienie/`,
+`http://127.0.0.1:4321/po-zakupie/` oraz
+`http://127.0.0.1:4321/zamowienie/potwierdzenie/`. Sam podgląd Astro nie obsługuje
+API Workera. E2E zamówień używa kontrolowanych odpowiedzi API i Stripe.
+Nie potwierdza rzeczywistej płatności ani dostawy.
+
+Pełne `npm run verify` zakończyło się kodem 0. Przeszło 690 testów jednostkowych
+i 549 E2E, z 12 celowymi pominięciami. Porównanie 20 stron fixture i Content Lake
+oraz SEO 39 stron przeszło. Otwarte kontrole pozostają
+w [postępie](docs/PROGRESS.md). Do uruchomienia realnych płatności
+brakuje sekretu runtime Stripe, webhooka, odbioru sandbox i dostawy.

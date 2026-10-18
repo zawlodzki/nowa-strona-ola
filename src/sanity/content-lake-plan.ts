@@ -1,3 +1,4 @@
+import { pcosCheckoutSettingsFixture } from "@/content/pcos-checkout-settings";
 import { catalogText } from "@/lib/catalog-text";
 import { unpublishableLegalText } from "../../studio/schema-types/shared/legal-publication";
 import {
@@ -466,7 +467,13 @@ function linkTranslations(documents: SanityDocument[]): void {
 export function buildContentLakePlan(gate: ContentLakeGate): ContentLakePlan {
   const languages = ["pl", "en"] as const;
   const keepPlaceholder = gate.keepPlaceholder;
-  const documents: SanityDocument[] = [];
+  const documents: SanityDocument[] = [
+    {
+      _id: "pcosCheckoutSettings-pl",
+      _type: "pcosCheckoutSettings",
+      ...pcosCheckoutSettingsFixture,
+    },
+  ];
 
   for (const language of languages) {
     documents.push(

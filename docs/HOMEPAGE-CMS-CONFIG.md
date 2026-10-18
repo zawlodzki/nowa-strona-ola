@@ -1,5 +1,32 @@
 # Homepage 3a — konfiguracja treści CMS
 
+## Oferta serii e-booków, decyzja użytkownika 18.10.2026
+
+Źródłem są polecenia użytkownika w tej sesji i korekta wykluczająca zakup
+jednego przecenionego e-booka. Poniższe wartości są ustalone, nie są propozycją.
+
+| Ustalenie                                                    | Mapowanie                                                                                      | Wykonanie                                                                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Pierwszy e-book 97 zł brutto                                 | Trzy `ebook.priceGross = 97`, `currency = PLN`, `productCode = ebook-01/02/03` według rejestru | Opublikowano trzy dokumenty PL. Dostępność pozostaje `planned`.                                   |
+| Dwa brakujące e-booki razem 97 zł brutto                     | `pcosCheckoutSettings-pl.singlePriceGross = 97`, `pairPriceGross = 97`                         | Opublikowano. Wybór pary i ceny egzekwuje backend.                                                |
+| Wyłącznie zakup pary w drugiej ofercie                       | `bundleOnlyNotice` i rejestr produktów w kodzie                                                | Treść opublikowano. Brak osobnej oferty po 48,50 zł.                                              |
+| Tytuł oferty „Dwa kolejne tematy. Jeden komplet dla Ciebie.” | `crossSellTitle`                                                                               | Opublikowano wraz z `crossSellKicker` i `crossSellLead`. Copy oceniono według `ebook-landing-3a`. |
+| Jeden wymagany checkbox D27 przy każdym zamówieniu           | `legalConsentVersion = pcos-d27-2026-10-18`, etykieta w kodzie                                 | Opublikowano wersję oświadczenia. Schemat nie pozwala dowolnie zmienić jego treści.               |
+| „Zamawiam z obowiązkiem zapłaty”                             | `continueLabel`                                                                                | Opublikowano. Schemat wymaga dokładnej etykiety.                                                  |
+| Dostawa później, sprzedaż wstrzymana                         | `salesState = paused` oraz trzy `ebook.availability = planned`                                 | Opublikowano. Worker ma także `CHECKOUT_ENABLED = false`.                                         |
+
+Sekwencja widoku po zakupie obejmuje kontekst pierwszego zakupu, dwie właściwe
+okładki, korzyści edukacyjne, cenę i warunki pakietu, nowe oświadczenie, przycisk
+zamówienia oraz możliwość pominięcia. Bez licznika czasu i fikcyjnej wyłączności.
+Układ jest kontrolowany przez wspólny renderer 3a, nie tablicę dowolnych sekcji
+w CMS. Kwota 48,50 zł jest podziałem ceny pakietu. Suma aktualnych cen osobno
+wynosi 194 zł i nie stanowi deklaracji najniższej ceny z 30 dni.
+
+Schemat, GROQ, TypeGen, fixture i serializer produktów uwzględniają stabilne
+kody. Przy aktywnej sprzedaży mapper tworzy własny adres zamówienia.
+Zmiana singletonu nie uruchamia dostawy ani nie zastępuje konfiguracji Stripe.
+[Wykonane zapisy i granice integracji](CHECKOUT-CMS-MIGRATION.md).
+
 ## Kierunek grafik wyróżniających bloga, 15.10.2026
 
 Źródło: użytkownik odrzucił podobieństwo obecnych grafik do reszty strony
@@ -568,7 +595,7 @@ na ola@aleksandraolesiewicz.com.
 
 Źródło i data: decyzja właściciela 10.10.2026, brzmienie z
 „Zgody i formularze” wersja 2.3, §7. Mapowanie do dokumentu `form`:
-`formKey` = `newsletter`, `version` = `2.3`, `submitLabel`, `notice`,
+`formKey` = `newsletter`, `version` = `2.3`, `continueLabel`, `notice`,
 `noticeConsentId` = `Z6`, `successMessage`, `errorMessage`, `noscriptMessage`,
 jedno pole `email`. Stan: schemat, fixture i renderer wykonane w kodzie;
 dokument w Content Lake niezaktualizowany. Double opt-in realizuje n8n/Listmonk.

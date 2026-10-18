@@ -36,6 +36,21 @@ export const ebookType = defineType({
     }),
     translationField("ebook"),
     defineField({
+      name: "productCode",
+      title: "Kod produktu płatności",
+      description:
+        "Stały identyfikator serii PCOS. Kod prowadzi do formularza zamówienia na stronie. Nie uruchamia sprzedaży.",
+      type: "string",
+      group: "offer",
+      options: {
+        list: [
+          { title: "Suplementy w PCOS", value: "ebook-01" },
+          { title: "Badania, które mają sens", value: "ebook-02" },
+          { title: "Szczupła, a jednak PCOS", value: "ebook-03" },
+        ],
+      },
+    }),
+    defineField({
       name: "subtitle",
       title: "Podtytuł",
       type: "string",
@@ -252,19 +267,20 @@ export const ebookType = defineType({
       name: "checkoutUrl",
       title: "Adres zakupu",
       description:
-        "Link płatności Stripe (Payment Link lub Checkout), wyłącznie HTTPS. Wymagany przy przedsprzedaży i sprzedaży. Nie wklejać kotwicy mockupu.",
+        "Dla produktów bez kodu płatności. Seria PCOS z productCode korzysta z formularza zamówienia na stronie. Nie wklejać kotwicy mockupu.",
       type: "url",
       group: "offer",
       validation: (rule) =>
         rule.uri({ scheme: ["https"] }).custom((value, context) => {
-          const availability = (
-            context.document as { availability?: string } | undefined
-          )?.availability;
+          const document = context.document;
+          const availability = document?.availability;
+          const productCode = document?.productCode;
           if (
             (availability === "presale" || availability === "available") &&
+            !productCode &&
             !value
           ) {
-            return "Aktywna sprzedaż wymaga adresu checkout HTTPS.";
+            return "Aktywna sprzedaż wymaga kodu produktu lub adresu checkout HTTPS.";
           }
           return true;
         }),

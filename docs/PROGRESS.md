@@ -1,5 +1,81 @@
 # Postęp wdrożenia
 
+## Zamówienia serii e-booków, stan 18.10.2026
+
+Użytkownik zatwierdził implementację, doprecyzował zakup wyłącznie obu brakujących
+e-booków za 97 zł brutto i odłożył dostawę na później. Pierwszy e-book również
+kosztuje 97 zł brutto. Są to dwa osobne zamówienia, łącznie 194 zł brutto.
+
+Kod przygotowano w osobnym worktree z aktualnego `main`, bez przenoszenia
+wcześniejszych zmian z głównego katalogu. Formularz ma jedno oświadczenie D27,
+niezaznaczone przed każdym zamówieniem, i przycisk „Zamawiam z obowiązkiem zapłaty”.
+Oferta po zakupie wynika z opłaconego zamówienia i chronionej sesji przeglądarki.
+Serwer wyznacza właściwą parę, kwotę, ponowienia oraz unieważnienie uprawnienia
+po zwrocie lub sporze. Druga płatność nie uruchamia następnej oferty.
+
+Wykonane zapisy zewnętrzne potwierdzono odczytem.
+
+- Stripe, konto `aleksandraolesiewicz.com`. Powstały trzy neutralne produkty
+  `ola_ebook_01`, `ola_ebook_02`, `ola_ebook_03`, ceny po 9700 groszy PLN
+  z `tax_behavior = inclusive` oraz kupon `ola_complete_pair_50_v1`.
+  Kupon ma 50% i ograniczenie do tych trzech produktów. Nie ma publicznego kodu
+  promocyjnego ani Payment Links. Nie wykonano rzeczywistej płatności.
+- Sanity `dyuqkn8c/production`. Opublikowano kody produktów i cenę 97 zł
+  trzech e-booków, singleton `pcosCheckoutSettings-pl` w stanie `paused`,
+  `legal-terms-pl` 2.4 i `legal-cookies-pl` 2.5. Zachowano statusy `planned`,
+  dotychczasowe okładki i landingi. Zarejestrowano schemat, co nie oznacza
+  wdrożenia nowego menu hostowanego Studio. Nowy panel wdrożono następnie
+  w wersji `b1ec48a5-3eb4-44a3-99f6-97a34089db47`.
+- Cloudflare. Utworzono `ola-checkout-orders` w jurysdykcji EU, identyfikator
+  `3223d46b-350f-4f4d-8fff-f63f90da082f`, i zastosowano migrację D1.
+  Wdrożono Worker w wersji `9e760fd3-7759-45d0-a1a1-eff320cbbc73`.
+  Produkcyjny GET katalogu potwierdził `enabled = false`, obie kwoty 9700
+  groszy, trzy produkty i cookie Secure/HttpOnly/SameSite=Lax.
+- Publiczny GET potwierdził regulamin 2.4 i listę cookies 2.5 z nowymi
+  identyfikatorami zamówienia. Workflow Publish content `39116733366`
+  zakończył się sukcesem. Nie jest to publikacja nowego kodu zamówień.
+
+Końcowe `npm run verify` zakończyło się kodem 0.
+
+- Format, tokeny, lint, typy, 64 pliki i 690 testów jednostkowych PASS.
+- Build strony, Studio, podglądu i dry-run Workera PASS.
+- Kontrola buildu i SEO 39 stron PASS.
+- E2E 549 PASS i 12 celowych pominięć. Wcześniejszy przebieg zatrzymał się
+  na formularzu kontaktu w Firefoxie. Ten test przeszedł przy osobnym ponowieniu,
+  a następny pełny przebieg zakończył się bez błędów.
+- Porównanie fixture z symulowanym Content Lake PASS. Wszystkie 20 stron mają
+  zgodną treść, sekcje, obrazy i DOM.
+- Dziewięć testów Chromium zamówień przeszło na atrapach Stripe i statusu,
+  w tym trzy możliwe pary produktów, stan wstrzymania i ponowienie zgody.
+  Po poprawce zdarzeń zwrotu przeszło 17/17 testów backendu na lokalnym D1.
+  Niezależny przegląd zaakceptował wydanie z wyłączoną sprzedażą.
+- Odbiór `verify-ola` obejmował desktop i brak JS bez POST. Obejrzano widok
+  opłaconego zamówienia na desktopie i przy 320 px na danych testowych.
+  Końcowa kontrola potwierdziła obsługę checkboxa klawiaturą i spacją, brak
+  przepełnienia przy 320 px, `reducedMotion = reduce` oraz CSS zoom 200%
+  stosowany w testach repo. Nie jest to potwierdzenie natywnego zoomu przeglądarki.
+  Rejestr POST pozostał pusty. Doctor i sprzątanie sesji przeszły.
+- Test rzeczywistego Stripe sandbox pozostaje otwarty. Testy z atrapami
+  nie potwierdzają rzeczywistej płatności ani dostawy.
+
+Lokalny log końcowej bramki to `/tmp/ola-checkout-final2-verify.log`.
+
+Sprzedaż pozostaje wyłączona trzema warunkami. Produkty mają `planned`, CMS
+ma `paused`, Worker ma `CHECKOUT_ENABLED = false`. Brakuje runtime sekretu
+Stripe, skonfigurowanego webhooka oraz dostawy i mailowego potwierdzenia.
+Nie tworzono sesji płatniczej na koncie produkcyjnym w celu testu.
+
+Zapis commitu zatrzymał się dwukrotnie na podpisie 1Password. Pierwsza próba
+zwróciła `agent returned an error`, druga `failed to fill whole buffer`.
+Nie wyłączono skonfigurowanego podpisywania. Kod jest zachowany na gałęzi
+`codex/pcos-checkout` w osobnym worktree, a zmiany znajdują się w indeksie Git.
+Publiczny kod strony nie został jeszcze wdrożony. Build z opublikowanym Sanity
+i kontrola buildu oraz SEO 30 stron zakończyły się pomyślnie.
+
+Następny krok to odblokować podpis Git, zapisać commit, utworzyć PR i wdrożyć
+kod strony z wyłączoną sprzedażą. Aktywacja wymaga
+osobnego odbioru rzeczywistej płatności i dostawy.
+
 Aktualizacja: 2026-10-16 (przycisk „Otwórz podgląd” z limitem renderów, Sanity 6.19.0 bez autoUpdates; wycofany przycisk „Otwórz podgląd” w Studio); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).

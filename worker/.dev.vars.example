@@ -2,3 +2,12 @@ SANITY_WEBHOOK_SECRET=shared-webhook-secret
 BUILD_TRIGGER_URL=https://api.github.com/repos/zawlodzki/nowa-strona-ola/dispatches
 BUILD_TRIGGER_TOKEN=build-trigger-token
 N8N_LEAD_WEBHOOK_URL=https://flows.example.invalid/webhook/replace-me
+
+CHECKOUT_ENABLED=false
+CHECKOUT_SITE_ORIGIN=https://aleksandraolesiewicz.com
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+STRIPE_PRICE_EBOOK_01=
+STRIPE_PRICE_EBOOK_02=
+STRIPE_PRICE_EBOOK_03=
+STRIPE_PAIR_COUPON=

@@ -1,3 +1,5 @@
+import { evaluate, parse } from "groq-js";
+import { PCOS_CHECKOUT_SETTINGS_QUERY } from "../../src/sanity/queries";
 import { readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vitest";
@@ -62,6 +64,32 @@ describe("import-3a client", () => {
 });
 
 describe("content lake plan", () => {
+  it("makes the paused checkout singleton available to the real public query", async () => {
+    const dataset = buildDataset(plan);
+    const settings = dataset.filter(
+      (document) => document._type === "pcosCheckoutSettings",
+    );
+    expect(settings).toHaveLength(1);
+    expect(settings[0]).toMatchObject({
+      _id: "pcosCheckoutSettings-pl",
+      salesState: "paused",
+      singlePriceGross: 97,
+      pairPriceGross: 97,
+      continueLabel: "Zamawiam z obowiązkiem zapłaty",
+      legalConsentVersion: "pcos-d27-2026-10-18",
+    });
+    const result = await evaluate(parse(PCOS_CHECKOUT_SETTINGS_QUERY), {
+      dataset,
+    });
+    expect(await result.get()).toMatchObject({
+      salesState: "paused",
+      singlePriceGross: 97,
+      pairPriceGross: 97,
+      bundleOnlyNotice:
+        "Oferta obejmuje wyłącznie zakup obu pozostałych e-booków razem. Nie można kupić jednego e-booka z tej oferty za 48,50 zł.",
+      continueLabel: "Zamawiam z obowiązkiem zapłaty",
+    });
+  });
   it("deletes exactly the obsolete prototype ids", () => {
     expect(plan.deletions).toEqual([...OBSOLETE_DOCUMENT_IDS]);
     expect(new Set(plan.deletions).size).toBe(35);

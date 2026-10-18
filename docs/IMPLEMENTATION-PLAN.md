@@ -1,5 +1,34 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## Zamówienia serii e-booków, 18.10.2026
+
+Zakres zatwierdzony przez użytkownika obejmuje zakup jednego e-booka za 97 zł
+brutto i osobne zamówienie dwóch pozostałych za łącznie 97 zł brutto.
+[Plan szczegółowy i warunki uruchomienia](STRIPE-EBOOK-IMPLEMENTATION-PLAN-2026-10-18.md).
+
+- [x] Zbudować własny formularz D27 z jednym wymaganym, niezaznaczonym polem
+      i przyciskiem „Zamawiam z obowiązkiem zapłaty”.
+- [x] Przygotować Worker, rejestr zamówień D1, podpisany webhook i chroniony
+      status. Zablokować zakup jednej przecenionej pozycji z drugiej oferty.
+- [x] Przygotować widoki 3a zamówienia, oferty po zakupie i potwierdzenia.
+- [x] Skonfigurować w Stripe trzy neutralne produkty, ceny 9700 groszy brutto
+      i rabat 50% ograniczony do tych produktów, bez publicznego kodu.
+- [x] Zarejestrować schemat Sanity, opublikować kody trzech produktów oraz
+      ustawienia `paused`, regulamin 2.4 i listę cookies 2.5.
+- [x] Utworzyć D1 w jurysdykcji EU i zastosować migrację zamówień.
+- [x] Zakończyć pełne `npm run verify` i końcowy odbiór UI.
+      690 unit PASS, 549 E2E PASS, 12 celowych pominięć, 20 stron Content Lake zgodnych.
+- [x] Wdrożyć Worker z wyłączoną sprzedażą i potwierdzić katalog produkcyjny.
+- [x] Wdrożyć nowe menu Studio.
+- [ ] Zakończyć podpis commitu 1Password, utworzyć PR i wdrożyć kod strony.
+- [ ] Dodać sekret Stripe i webhook oraz sprawdzić rzeczywistą płatność
+      w sandboxie przed aktywacją sprzedaży.
+- [ ] Na osobnym etapie przygotować dostawę, maile i dokumenty PDF.
+
+Użytkownik odłożył dostawę. E-booki pozostają `planned`, singleton ma
+`salesState = paused`, a Worker `CHECKOUT_ENABLED = false`.
+Konfiguracja produktów nie oznacza uruchomienia pobierania płatności.
+
 Zatwierdzony: 2026-09-12. Aktualizacja kolejności prac: 2026-10-07.
 Realizacja etapami w wielu sesjach; bieżący zakres obejmuje etap 5 i odbiór treści z Sanity.
 Stan wykonania: [PROGRESS.md](PROGRESS.md). Instrukcje: [AGENTS.md](../AGENTS.md).
