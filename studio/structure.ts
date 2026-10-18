@@ -88,13 +88,13 @@ export const structure: StructureResolver = (S) =>
     .items([
       settingsItem(S),
       S.listItem()
-        .title("Zamówienia serii PCOS")
+        .title("Zamówienia e-booków")
         .icon(CogIcon)
         .child(
           S.document()
             .schemaType("pcosCheckoutSettings")
             .documentId("pcosCheckoutSettings-pl")
-            .title("Zamówienia serii PCOS"),
+            .title("Zamówienia e-booków"),
         ),
       S.divider(),
       languageList(S, "page", "Strony").icon(DocumentIcon),

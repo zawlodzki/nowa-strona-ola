@@ -5,22 +5,39 @@
 Źródłem są polecenia użytkownika w tej sesji i korekta wykluczająca zakup
 jednego przecenionego e-booka. Poniższe wartości są ustalone, nie są propozycją.
 
-| Ustalenie                                                    | Mapowanie                                                                                      | Wykonanie                                                                                         |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Pierwszy e-book 97 zł brutto                                 | Trzy `ebook.priceGross = 97`, `currency = PLN`, `productCode = ebook-01/02/03` według rejestru | Opublikowano trzy dokumenty PL. Dostępność pozostaje `planned`.                                   |
-| Dwa brakujące e-booki razem 97 zł brutto                     | `pcosCheckoutSettings-pl.singlePriceGross = 97`, `pairPriceGross = 97`                         | Opublikowano. Wybór pary i ceny egzekwuje backend.                                                |
-| Wyłącznie zakup pary w drugiej ofercie                       | `bundleOnlyNotice` i rejestr produktów w kodzie                                                | Treść opublikowano. Brak osobnej oferty po 48,50 zł.                                              |
-| Tytuł oferty „Dwa kolejne tematy. Jeden komplet dla Ciebie.” | `crossSellTitle`                                                                               | Opublikowano wraz z `crossSellKicker` i `crossSellLead`. Copy oceniono według `ebook-landing-3a`. |
-| Jeden wymagany checkbox D27 przy każdym zamówieniu           | `legalConsentVersion = pcos-d27-2026-10-18`, etykieta w kodzie                                 | Opublikowano wersję oświadczenia. Schemat nie pozwala dowolnie zmienić jego treści.               |
-| „Zamawiam z obowiązkiem zapłaty”                             | `continueLabel`                                                                                | Opublikowano. Schemat wymaga dokładnej etykiety.                                                  |
-| Dostawa później, sprzedaż wstrzymana                         | `salesState = paused` oraz trzy `ebook.availability = planned`                                 | Opublikowano. Worker ma także `CHECKOUT_ENABLED = false`.                                         |
+| Ustalenie                                          | Mapowanie                                                                                      | Wykonanie                                                                                         |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Pierwszy e-book 97 zł brutto                       | Trzy `ebook.priceGross = 97`, `currency = PLN`, `productCode = ebook-01/02/03` według rejestru | Opublikowano trzy dokumenty PL. Dostępność pozostaje `planned`.                                   |
+| Dwa brakujące e-booki razem 97 zł brutto           | `pcosCheckoutSettings-pl.singlePriceGross = 97`, `pairPriceGross = 97`                         | Opublikowano. Wybór pary i ceny egzekwuje backend.                                                |
+| Wyłącznie zakup pary w drugiej ofercie             | `bundleOnlyNotice` i rejestr produktów w kodzie                                                | Treść opublikowano. Brak osobnej oferty po 48,50 zł.                                              |
+| Tytuł oferty „Uzupełnij serię za pół ceny”         | `crossSellTitle`                                                                               | Opublikowano wraz z `crossSellKicker` i `crossSellLead`. Copy oceniono według `ebook-landing-3a`. |
+| Jeden wymagany checkbox D27 przy każdym zamówieniu | `legalConsentVersion = pcos-d27-2026-10-18`, etykieta w kodzie                                 | Opublikowano wersję oświadczenia. Schemat nie pozwala dowolnie zmienić jego treści.               |
+| „Zamawiam z obowiązkiem zapłaty”                   | `continueLabel`                                                                                | Opublikowano. Schemat wymaga dokładnej etykiety.                                                  |
+| Dostawa później, sprzedaż wstrzymana               | `salesState = paused` oraz trzy `ebook.availability = planned`                                 | Opublikowano. Worker ma także `CHECKOUT_ENABLED = false`.                                         |
 
-Sekwencja widoku po zakupie obejmuje kontekst pierwszego zakupu, dwie właściwe
-okładki, korzyści edukacyjne, cenę i warunki pakietu, nowe oświadczenie, przycisk
-zamówienia oraz możliwość pominięcia. Bez licznika czasu i fikcyjnej wyłączności.
-Układ jest kontrolowany przez wspólny renderer 3a, nie tablicę dowolnych sekcji
-w CMS. Kwota 48,50 zł jest podziałem ceny pakietu. Suma aktualnych cen osobno
-wynosi 194 zł i nie stanowi deklaracji najniższej ceny z 30 dni.
+Korekta użytkownika z 18.10.2026 w otwartym podglądzie zastępuje długi układ.
+Oferta ma mieścić się na jednym ekranie komputera i komunikować pakiet.
+Nagłówek `crossSellTitle = Uzupełnij serię za pół ceny`, etykieta
+`crossSellKicker = Dwa pozostałe e-booki · jeden pakiet`, krótki `crossSellLead`,
+`bundleReference = 97 zł zamiast 194 zł za zakup osobno.`,
+`bundleOnlyNotice = Pakiet obejmuje oba pozostałe e-booki. To osobne zamówienie.`
+i `skipLabel = Nie, dziękuję` są opublikowane w Sanity. Pozostałe ceny,
+oświadczenie i stan `paused` zachowano. To wykonany zapis, nie propozycja.
+
+Nowy renderer pokazuje dwie okładki obok formularza, jedną cenę pakietu,
+widoczne oświadczenie i CTA. Rozbudowaną stopkę zastępują linki prawne,
+a dodatkowe informacje są dostępne w natywnym rozwijanym opisie.
+Nie pokazuje cen jednostkowych po 48,50 zł ani dopisku o nieuruchomionej
+sprzedaży po poprawnym odczycie uprawnienia. Blokada płatności pozostaje.
+Pola `empathy` i `mechanism` usunięto ze schematu, kwerendy i mappera nowej
+wersji. Starszych pól w dokumencie CMS nie usuwano przed wdrożeniem kodu.
+Układ jest kontrolowany w kodzie, bez dowolnego CSS z CMS.
+
+Bieżąca decyzja zastępuje wcześniejszy automatyczny dobór z rejestru trzech
+produktów: parę wskazuje `ebook.crossSell.complementaryEbooks`, a teksty
+`ebook.crossSell.kicker/title/lead`. Szczegóły i stan konfiguracji opisuje sekcja
+„Oferta uzupełniająca konfigurowana przy e-booku” na końcu tego dokumentu.
+Kwota 194 zł oznacza sumę aktualnych cen osobno, nie najniższą cenę z 30 dni.
 
 Schemat, GROQ, TypeGen, fixture i serializer produktów uwzględniają stabilne
 kody. Przy aktywnej sprzedaży mapper tworzy własny adres zamówienia.
@@ -1077,3 +1094,111 @@ Opublikowany dokument nadal ma `rasterKey = food`; publikacja szkicu następuje
 po scaleniu i wdrożeniu PR. Nowy klucz nie wymaga rozszerzenia schematu,
 ponieważ `rasterKey` jest polem tekstowym. `food` pozostaje obrazem okładek.
 [Pliki, prompty, rewizje i kolejność uruchomienia](../design-system/proposals/homepage-meal-2026-10-15/README.md).
+
+## Oferta uzupełniająca konfigurowana przy e-booku, 18.10.2026
+
+Źródło decyzji: użytkownik w czacie zlecił wskazywanie dwóch komplementarnych
+e-booków przy produkcie oraz copy niezależne od tematu serii. Oferta po zakupie
+ma sprzedawać wyłącznie cały pakiet dwóch wskazanych pozycji za 97 zł brutto.
+Cena 194 zł oznacza sumę cen zakupu osobno. Nie prezentujemy cen po 48,50 zł
+jako osobnych ofert zakupu. Panel ceny ma używać koloru matcha i głównego
+wariantu przycisku. Informacja o wstrzymaniu sprzedaży nie jest elementem
+copy podstrony oferty. Techniczna blokada sprzedaży pozostaje aktywna.
+
+| Znaczenie              | Pole CMS                              | Bieżąca konfiguracja                                                                                                                                                  |
+| ---------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stabilny kod płatności | `ebook.productCode`                   | `ebook-01` do `ebook-03` opublikowane; `ebook-04` do `ebook-06` przygotowane do publikacji po wdrożeniu nowego kodu. Kod unikalny, bez ograniczenia do jednego tematu |
+| Cena Stripe            | `ebook.stripePriceId`                 | Trzy istniejące ceny dla serii PMOS (PCOS); brak dla perimenopauzy                                                                                                    |
+| Pakiet po zakupie      | `ebook.crossSell.complementaryEbooks` | Dokładnie dwie referencje do innych opublikowanych e-booków tego samego języka                                                                                        |
+| Etykieta oferty        | `ebook.crossSell.kicker`              | „Dwa e-booki · jeden pakiet”                                                                                                                                          |
+| Nagłówek               | `ebook.crossSell.title`               | „Uzupełnij serię za pół ceny”                                                                                                                                         |
+| Krótkie copy           | `ebook.crossSell.lead`                | Osobno przy każdym produkcie, odpowiednio do tematu serii                                                                                                             |
+| Kupon pakietu          | `ebook.crossSell.stripeCouponId`      | `ola_complete_pair_50_v1` przy trzech produktach PMOS (PCOS); brak dla perimenopauzy                                                                                  |
+
+Pary skonfigurowane referencjami w Content Lake `dyuqkn8c` / `production`:
+Kody 04–06 w tabeli oznaczają przygotowane identyfikatory, które nie są obecnie
+opublikowane w CMS.
+
+| Kupiony kod | Dwa produkty pakietu   |
+| ----------- | ---------------------- |
+| `ebook-01`  | `ebook-02`, `ebook-03` |
+| `ebook-02`  | `ebook-01`, `ebook-03` |
+| `ebook-03`  | `ebook-01`, `ebook-02` |
+| `ebook-04`  | `ebook-05`, `ebook-06` |
+| `ebook-05`  | `ebook-04`, `ebook-06` |
+| `ebook-06`  | `ebook-04`, `ebook-05` |
+
+Kody 04, 05 i 06 odpowiadają kolejno „Waga Cię okłamuje”, „Czy to już?”
+i „Noc zaczyna się o osiemnastej”. Konfiguracja par perimenopauzy nie uruchamia
+ich sprzedaży. Nie utworzono dla nich cen Stripe ani kuponu.
+
+Wykonano 18.10.2026: rejestrację lokalnego schematu przez Sanity CLI oraz sześć
+minimalnych zapisów do szkiców z kontrolą rewizji. Przed zapisem odczytano
+opublikowane dokumenty i potwierdzono brak szkiców. Opublikowano tylko te sześć
+szkiców z kontrolą ich rewizji. Pierwsza publikacja sześciu dokumentów
+otrzymała rewizję `3kHOt65rYdKfn09iD1N5ds`. Ponowny pełny odczyt dokumentów wykazał
+wyłącznie zmiany `productCode`, `stripePriceId`, `crossSell` i metadanych
+systemowych publikacji. Tytuły, okładki, cena 97 zł i `availability = planned`
+pozostały bez zmian. Singleton nadal ma `salesState = paused` oraz obie ceny
+97 zł, rewizja `UdQdXKR5Wip8kOGZBbc0Gt`. Hostowanego Studio w tym kroku
+nie wdrażano.
+
+Katalog płatności rozwiązuje referencje przez `CHECKOUT_CATALOG_QUERY`.
+Backend zapisuje ofertę przy pierwszym zamówieniu. Późniejsza edycja CMS
+nie zmienia już zaoferowanego klientce pakietu. Brak konfiguracji ceny Stripe
+wyklucza produkt z katalogu płatności.
+
+Korekta zgodności z aktualnie wdrożonym kodem, 18.10.2026: usunięto wyłącznie
+`productCode` z trzech produktów perimenopauzy i opublikowano te trzy zmiany
+z kontrolą rewizji. Bieżący kod produkcyjny nie rozpoznaje jeszcze kodów 04–06.
+Pozostawiono wszystkie referencje `crossSell`, copy, cenę 97 zł i status
+`planned`. Ponowny odczyt potwierdza brak szkiców tych sześciu produktów.
+Bieżąca rewizja trzech produktów perimenopauzy to
+`W6ZgZ6YLs15DClTrjTZ2Vx`. Produkty PMOS (PCOS) zachowują kody 01–03 oraz
+rewizję `3kHOt65rYdKfn09iD1N5ds`. Kody 04–06 pozostają w lokalnych fixture’ach
+oraz pliku przygotowanej konfiguracji. Ich publikacja nastąpi po wdrożeniu
+obsługi dowolnych stabilnych kodów produktu. Nie zmienia to blokady sprzedaży
+ani braku cen Stripe i kuponu dla perimenopauzy.
+
+W panelu singletona „Zamówienia e-booków” ukryto trzy dawne pola
+`crossSellKicker`, `crossSellTitle` i `crossSellLead`. Dane, zapytanie i mapper
+pozostają dla zgodności ze starszą stroną. Bieżące copy oferty edytuje się
+wyłącznie przy produkcie, w `ebook.crossSell`. Opis `salesState` wskazuje
+serwerową blokadę nowych płatności oraz dodatkowe warunki uruchomienia.
+
+Odbiór interfejsu, 18.10.2026: nowy build Studio przeszedł z prawidłową
+konfiguracją produkcji. Po początkowej odmowie automatycznej kontroli zgody
+użytkownik jednoznacznie zatwierdził publikację. Studio wdrożono w wersji
+`1fed6df4-7bde-4d11-9ad0-53e3afb4557b`, schemat ponownie zarejestrowano (1/1).
+Przeglądarka ładuje nowy plik `/static/sanity-Cq02Vlk9.js` i ekran logowania.
+Zalogowanego edytora nie sprawdzano. Pola są w zakładce „Oferta” przy e-booku,
+w obiekcie „Oferta po zakupie tego e-booka”. Strona i Worker pozostają lokalne.
+Pełne verify: 714 unit i 564 E2E PASS, 12 celowych pominięć.
+
+## Wiarygodność przy CTA zakupu e-booka, 18.10.2026
+
+Źródło: użytkownik zlecił mikrocopy i zaproponował znaki metod płatności przy
+„Chcę ebook”. Wybrano tekst „E-book na Twój e-mail po opłaceniu zamówienia.”
+oraz „Bezpieczna płatność przez Stripe”. Nie przyjęto obietnicy natychmiastowej
+dostawy, ponieważ automatyczna wysyłka nie jest jeszcze podłączona.
+
+Odczyt produkcyjnego Stripe, bez zapisów, potwierdził domyślną konfigurację
+`pmc_1URYdhQ8cdQEDgtWJ3bckk8I`: Apple Pay, Google Pay, BLIK, karty,
+Revolut Pay i Klarna mają `available = true` i `display_preference.value = on`.
+Pokażemy znaki Apple Pay, Google Pay, BLIK, Visa, Mastercard, Revolut Pay
+oraz Klarna, z informacją „Dostępność metod zależy od urządzenia i transakcji.”
+Nie wykonano płatności ani zmiany ustawień Stripe. Rzeczywiste wyświetlanie
+metod trzeba potwierdzić przy odbiorze sandboxu przed uruchomieniem sprzedaży.
+
+Mapowanie: `ebook.productCode` i `ebook.availability` sterują widocznością.
+Wspólny katalog i teksty procesu płatności są w
+`src/content/ebook-payment-trust.ts`; nie dodano pól CMS. Pokazujemy je tylko
+przy aktywnym zakupie przez własny checkout Stripe. Przedsprzedaż pokazuje
+informację o płatności bez obietnicy dostawy po zapłacie. Zewnętrzny checkout
+innego dostawcy nie dostaje znaków Stripe. `landing.offerNote` zachowuje obecną
+uwagę redakcyjną; przed aktywacją należy zastąpić treści zapowiedzi finalnym copy.
+HTML i Markdown korzystają z tej samej listy metod oraz tekstów PL/EN.
+
+Znaki SVG są lokalne, z zachowaniem proporcji i kolorów. Źródła, przypięte
+wersje i licencje: [zasoby płatności](../src/assets/payments/README.md).
+Nowy kod jest lokalny; ten zapis nie oznacza publikacji strony ani aktywacji sprzedaży.

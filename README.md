@@ -411,3 +411,12 @@ i 549 E2E, z 12 celowymi pominięciami. Porównanie 20 stron fixture i Content L
 oraz SEO 39 stron przeszło. Otwarte kontrole pozostają
 w [postępie](docs/PROGRESS.md). Do uruchomienia realnych płatności
 brakuje sekretu runtime Stripe, webhooka, odbioru sandbox i dostawy.
+
+### Doraźny podgląd pierwszego zakupu, 18.10.2026
+
+Sprawdzona komenda na Node 24: `node /tmp/ola-first-order-review-server.mjs`.
+Karta zakupu: `http://127.0.0.1:4350/ebooki/suplementy-w-pcos/#cena`.
+Formularz: `http://127.0.0.1:4350/zamowienie/?produkt=ebook-01`.
+Serwer i build w `/tmp/ola-first-order-preview-build` są tymczasowe; symulują
+aktywną kartę bez zmiany CMS, odrzucają POST i blokują połączenia do innych
+hostów. To podgląd wyglądu, nie aktywacja płatności ani wdrożenie stagingu.

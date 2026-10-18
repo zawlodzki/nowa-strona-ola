@@ -10,35 +10,45 @@ import BookCover from "@/design-system/components/BookCover.astro";
 import Button from "@/design-system/components/Button.astro";
 import {
   getEbook,
+  getEbookPaths,
   getSiteSettings,
   getPcosCheckoutSettings,
 } from "@/sanity/repository";
 import { mapEbook } from "@/content/map-ebook";
 import { shellLinks } from "@/content/map-homepage";
-import {
-  checkoutCopy as copy,
-  checkoutProducts,
-} from "@/content/checkout-copy";
+import { checkoutCopy as copy } from "@/content/checkout-copy";
 
 interface Props {
-  kind: "single" | "crosssell" | "confirmation";
+  kind: "single" | "crosssell" | "confirmation" | "declined";
 }
 const { kind } = Astro.props;
 const settings = await getSiteSettings("pl");
 const shell = shellLinks(settings);
 const checkoutSettings = await getPcosCheckoutSettings();
-const products = await Promise.all(
-  checkoutProducts.map(async (product) => ({
-    ...product,
-    content: mapEbook(await getEbook("pl", product.slug), "pl"),
-  })),
-);
+const paths = await getEbookPaths();
+const products = (
+  await Promise.all(
+    paths
+      .flatMap((item) =>
+        item.language === "pl" && item.slug ? [item.slug] : [],
+      )
+      .map(async (slug) => {
+        const content = mapEbook(await getEbook("pl", slug), "pl");
+        return content.productCode
+          ? [{ code: content.productCode, content }]
+          : [];
+      }),
+  )
+).flat();
+
 const canonicalPath =
   kind === "single"
     ? "/zamowienie/"
     : kind === "crosssell"
       ? "/po-zakupie/"
-      : "/zamowienie/potwierdzenie/";
+      : kind === "declined"
+        ? "/po-zakupie/pozniej/"
+        : "/zamowienie/potwierdzenie/";
 const seo = pageSeo(settings, null, {
   path: canonicalPath,
   noindex: true,
@@ -49,8 +59,10 @@ const title =
   kind === "single"
     ? "Twoje zamówienie"
     : kind === "crosssell"
-      ? checkoutSettings.crossSellTitle
-      : "Status Twojej płatności";
+      ? "Uzupełnij swoją kolekcję"
+      : kind === "declined"
+        ? "Możesz wrócić do oferty"
+        : "Dziękuję za zakup";
 ---
 
 <Layout3a title={title} lang="pl" noindex>
@@ -68,15 +80,15 @@ const title =
     data-sales-state={checkoutSettings.salesState}
   >
     <header class="checkout__intro">
-      <p class="checkout__kicker">
+      <p class="checkout__kicker" data-offer-kicker>
         {kind === "crosssell"
-          ? checkoutSettings.crossSellKicker
-          : "Seria e-booków o PMOS\u00A0(PCOS)"}
+          ? "Pakiet e-booków dla Ciebie"
+          : "Aleksandra Olesiewicz · e-booki"}
       </p>
-      <h1>{title}</h1>
+      <h1 data-checkout-title>{title}</h1>
       {kind === "crosssell" && (
         <p data-paid-lead hidden>
-          {checkoutSettings.crossSellLead}
+          {""}
         </p>
       )}
     </header>
@@ -97,70 +109,109 @@ const title =
         </p>
       )}
     </noscript>
-    {kind === "crosssell" && (
-      <div class="checkout__context">
-        <p>{checkoutSettings.educationNote}</p>
-        <p>{checkoutSettings.empathy}</p>
-        <p>{checkoutSettings.mechanism}</p>
-      </div>
-    )}
     <section data-checkout-content hidden aria-label="Podsumowanie zamówienia">
-      <div class="checkout__products">
-        {products.map(({ code, benefit, content }) => (
-          <article data-product-code={code} class="checkout__product" hidden>
-            <div class="checkout__cover">
-              {content.cover?.src ? (
-                <SiteImage
-                  src={content.cover.src}
-                  alt={content.cover.label}
-                  width={252}
-                  height={378}
-                  fit="contain"
-                />
-              ) : (
-                <BookCover
-                  title={content.title}
-                  subtitle={content.subtitle ?? ""}
-                  author={content.author.name}
-                  topic="PMOS (PCOS)"
-                  tone={content.coverTone}
-                />
-              )}
-            </div>
-            <div>
-              <p class="checkout__kicker">{`E-book ${code.slice(-2)} · seria o PMOS\u00A0(PCOS)`}</p>
-              <h2>{content.title}</h2>
-              <p>{benefit}</p>
-              <p class="checkout__meta">
-                {content.format.toUpperCase().replace("-", " + ")}
-                {content.numberOfPages
-                  ? ` · ${content.numberOfPages} stron`
-                  : ""}
-              </p>
-              <p data-product-price>97 zł brutto</p>
-            </div>
-          </article>
-        ))}
-      </div>
-      {kind !== "confirmation" && (
+      {kind === "single" || kind === "crosssell" ? (
+        <div class="checkout__products">
+          {products.map(({ code, content }) => (
+            <article data-product-code={code} class="checkout__product" hidden>
+              <div class="checkout__cover">
+                {content.cover?.src ? (
+                  <SiteImage
+                    src={content.cover.src}
+                    alt={content.cover.label}
+                    width={252}
+                    height={378}
+                    fit="contain"
+                  />
+                ) : (
+                  <BookCover
+                    title={content.title}
+                    subtitle={content.subtitle ?? ""}
+                    author={content.author.name}
+                    topic={
+                      content.topic === "pcos" ? "PMOS (PCOS)" : "Perimenopauza"
+                    }
+                    tone={content.coverTone}
+                  />
+                )}
+              </div>
+              <div>
+                <p class="checkout__kicker">E-book</p>
+                <h2>{content.title}</h2>
+                {content.subtitle && <p>{content.subtitle}</p>}
+                <p class="checkout__meta">
+                  {content.format.toUpperCase().replace("-", " + ")}
+                  {content.numberOfPages
+                    ? ` · ${content.numberOfPages} stron`
+                    : ""}
+                </p>
+                {kind !== "crosssell" && <p data-product-price>97 zł brutto</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : null}
+      {kind === "confirmation" && (
+        <section class="checkout__message" aria-labelledby="delivery-title">
+          <h2 id="delivery-title">E-booki otrzymasz e-mailem.</h2>
+          <p>Sprawdź swoją skrzynkę, także folder Spam i Oferty.</p>
+          <div class="checkout__newsletter">
+            <h2>Nie ma Cię jeszcze w newsletterze?</h2>
+            <p>Dołącz, jeśli chcesz otrzymywać nowe materiały od Oli.</p>
+            <Button as="a" href="/#newsletter" variant="primary">
+              Zapisuję się do newslettera
+            </Button>
+          </div>
+        </section>
+      )}
+      {kind === "declined" && (
+        <section class="checkout__message" aria-labelledby="later-title">
+          <h2 id="later-title">Masz 7 dni od pierwszego zakupu.</h2>
+          <p>
+            W tym czasie możesz dokupić pakiet z rabatem 50%.{" "}
+            <span data-offer-deadline></span>
+          </p>
+          <Button
+            as="a"
+            href="/po-zakupie/"
+            class="checkout__return"
+            variant="primary"
+          >
+            Wracam do oferty
+          </Button>
+          <div class="checkout__offer-email" data-offer-email hidden>
+            <h2>Chcesz zachować link w skrzynce?</h2>
+            <p>
+              Na Twoje życzenie wyślemy jedną wiadomość z linkiem na adres z
+              pierwszego zamówienia. To nie jest zapis do newslettera.
+            </p>
+            <Button type="button" data-offer-email-request disabled>
+              Wyślij mi tę ofertę e-mailem
+            </Button>
+            <p data-offer-email-status role="status"></p>
+          </div>
+        </section>
+      )}
+      {(kind === "single" || kind === "crosssell") && (
         <form data-checkout-form class="checkout__form">
           {kind === "crosssell" && (
             <div class="checkout__offer">
-              <h2>{copy.bundlePrice}</h2>
-              <p>{checkoutSettings.bundleReference}</p>
-              <p>{checkoutSettings.bundleOnlyNotice}</p>
-              <p>
-                Zakup pakietu jest dobrowolny. Nie wpływa na Twoje wcześniejsze
-                zamówienie.
+              <p class="checkout__reference">
+                <span>Cena przy zakupie osobno</span>
+                <s data-reference-price>194 zł</s>
               </p>
+              <h2 data-bundle-price>{copy.bundlePrice}</h2>
+              <p>Pakiet obejmuje oba wskazane e-booki. To osobne zamówienie.</p>
             </div>
           )}
-          <h2>Podsumowanie zamówienia</h2>
-          <p data-order-total class="checkout__total">
-            {kind === "single"
-              ? "Razem 97 zł brutto"
-              : "Razem 97 zł brutto za 2 e-booki"}
-          </p>
+          {kind === "single" && (
+            <>
+              <h2>Podsumowanie zamówienia</h2>
+              <p data-order-total class="checkout__total">
+                Razem 97 zł brutto
+              </p>
+            </>
+          )}
           {kind === "single" ? (
             <>
               <label>
@@ -183,27 +234,49 @@ const title =
                 />
               </label>
             </>
+          ) : null}
+          {kind === "crosssell" ? (
+            <div class="checkout__legal">
+              <p>
+                Sprzedawca: Wellbiz sp. z o.o. Dostawa e-mailem po zapłacie.
+                Link ważny 7 dni.
+              </p>
+              <details>
+                <summary>Szczegóły zakupu</summary>
+                <p>
+                  Potrzebujesz programu do odczytu formatu wskazanego przy
+                  e-bookach, adresu e-mail i dostępu do internetu.{" "}
+                  {checkoutSettings.educationNote}{" "}
+                  <a
+                    href="/regulamin/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Warunki zakupu i pouczenie o odstąpieniu
+                  </a>
+                  .
+                </p>
+              </details>
+            </div>
           ) : (
-            <p>
-              Dane kupującej pobierzemy z pierwszego zamówienia. Ten pakiet to
-              osobne zamówienie i osobna płatność.
-            </p>
+            <div class="checkout__legal">
+              <p>Sprzedawca: Wellbiz sp. z o.o.</p>
+              <p>
+                Dostawa: link do pobrania wysłany e-mailem, ważny 7 dni. E-booki
+                wysyłamy po zapłacie. Po ich dostarczeniu utracisz prawo
+                odstąpienia od umowy.
+              </p>
+              <p>
+                Potrzebujesz programu do odczytu formatu wskazanego przy
+                e-booku, adresu e-mail i dostępu do internetu. Szczegóły formatu
+                podaliśmy przy każdym e-booku.{" "}
+                <a href="/regulamin/">
+                  Warunki zakupu i pouczenie o odstąpieniu
+                </a>
+                .
+              </p>
+            </div>
           )}
-          <div class="checkout__legal">
-            <p>Sprzedawca: Wellbiz sp. z o.o.</p>
-            <p>
-              Dostawa: link do pobrania wysłany e-mailem, ważny 7 dni. E-booki
-              wysyłamy po zapłacie. Po ich dostarczeniu utracisz prawo
-              odstąpienia od umowy.
-            </p>
-            <p>
-              Potrzebujesz programu do odczytu formatu wskazanego przy e-booku,
-              adresu e-mail i dostępu do internetu. Szczegóły formatu podaliśmy
-              przy każdym e-booku.{" "}
-              <a href="/regulamin/">Warunki zakupu i pouczenie o odstąpieniu</a>
-              .
-            </p>
-          </div>
           <label class="checkout__consent">
             <input name="consentAccepted" type="checkbox" required />
             <span>
@@ -221,9 +294,13 @@ const title =
               .
             </span>
           </label>
-          <p data-consent-hint>Zaznacz pole, żeby złożyć zamówienie.</p>
+          {kind === "single" && (
+            <p data-consent-hint>Zaznacz pole, żeby złożyć zamówienie.</p>
+          )}
           <p>
-            {copy.privacy} Więcej w{" "}
+            {kind === "crosssell"
+              ? "Dane z pierwszego zamówienia przetwarza Wellbiz sp. z o.o. w celu realizacji zakupu. Więcej w"
+              : `${copy.privacy} Więcej w`}{" "}
             <a
               href="/polityka-prywatnosci/"
               target="_blank"
@@ -234,31 +311,45 @@ const title =
             .
           </p>
           <p data-checkout-error role="alert" hidden></p>
-          <Button type="submit" disabled>
+          <Button type="submit" variant="primary" disabled>
             {checkoutSettings.continueLabel}
           </Button>
-          <p>W kolejnym kroku przejdziesz do płatności Stripe.</p>
+          {kind === "crosssell" ? (
+            <a class="checkout__skip" hidden href="/po-zakupie/pozniej/">
+              {checkoutSettings.skipLabel}
+            </a>
+          ) : (
+            <p>W kolejnym kroku przejdziesz do płatności Stripe.</p>
+          )}
         </form>
       )}
     </section>
-    {kind === "crosssell" && (
-      <a class="checkout__skip" hidden href="/zamowienie/potwierdzenie/">
-        {checkoutSettings.skipLabel}
+    {kind !== "crosssell" && (
+      <a class="checkout__back" href="/ebooki/">
+        Wróć do e-booków
       </a>
     )}
-    <a class="checkout__back" href="/ebooki/">
-      Wróć do e-booków
-    </a>
   </main>
-  <SiteFooter
-    homeHref="/"
-    description={settings.footerNote ?? ""}
-    links={shell.navigation}
-    socialLinks={shell.socialLinks}
-    legalLinks={shell.legalLinks}
-    copyright={shell.copyright}
-    lang="pl"
-  />
+  {kind !== "single" ? (
+    <footer class="checkout__footer ao-container">
+      <p>{shell.copyright}</p>
+      <nav aria-label="Informacje prawne">
+        {shell.legalLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+    </footer>
+  ) : (
+    <SiteFooter
+      homeHref="/"
+      description={settings.footerNote ?? ""}
+      links={shell.navigation}
+      socialLinks={shell.socialLinks}
+      legalLinks={shell.legalLinks}
+      copyright={shell.copyright}
+      lang="pl"
+    />
+  )}
 </Layout3a>
 <script>
   import "@/lib/checkout-client";
@@ -293,11 +384,6 @@ const title =
   .checkout__kicker {
     color: var(--ao-accent);
     font-size: 0.875rem;
-  }
-  .checkout__context {
-    display: grid;
-    gap: 1rem;
-    margin-block-end: 2rem;
   }
   .checkout__products {
     display: grid;
@@ -381,7 +467,7 @@ const title =
   .checkout a {
     text-decoration: underline;
   }
-  .checkout :is(a, input, button):focus-visible {
+  .checkout :is(a, input, button, summary):focus-visible {
     outline: 2px solid var(--ao-accent);
     outline-offset: 4px;
   }
@@ -398,5 +484,216 @@ const title =
   .checkout__skip {
     justify-self: start;
     padding-block: 0.75rem;
+  }
+  .checkout[data-checkout-kind="crosssell"] {
+    grid-template-columns: minmax(0, 1fr) minmax(25rem, 0.95fr);
+    grid-template-areas: "intro form" "products form";
+    align-content: center;
+    align-items: start;
+    column-gap: clamp(2rem, 5vw, 5rem);
+    row-gap: 1.5rem;
+    min-block-size: calc(100svh - 10rem);
+    padding-block: 1.5rem;
+  }
+  [data-checkout-kind="crosssell"] .checkout__intro {
+    grid-area: intro;
+    gap: 0.75rem;
+  }
+  [data-checkout-kind="crosssell"] h1 {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+  [data-checkout-kind="crosssell"] [data-checkout-status] {
+    grid-column: 1 / -1;
+  }
+  [data-checkout-kind="crosssell"] [data-checkout-content]:not([hidden]) {
+    display: contents;
+  }
+  [data-checkout-kind="crosssell"] .checkout__products {
+    grid-area: products;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  [data-checkout-kind="crosssell"] .checkout__product {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: 0.875rem;
+    border: 0;
+    padding: 0;
+  }
+  [data-checkout-kind="crosssell"] .checkout__cover {
+    inline-size: clamp(8rem, 12vw, 11rem);
+    container-type: inline-size;
+  }
+  [data-checkout-kind="crosssell"] .checkout__cover :global(.ao-book-cover) {
+    min-block-size: 0;
+    block-size: auto;
+    aspect-ratio: 2 / 3;
+    padding: 8cqi;
+  }
+  [data-checkout-kind="crosssell"]
+    .checkout__cover
+    :global(.ao-book-cover strong) {
+    font-size: 12cqi;
+  }
+  [data-checkout-kind="crosssell"]
+    .checkout__cover
+    :global(.ao-book-cover__author),
+  [data-checkout-kind="crosssell"]
+    .checkout__cover
+    :global(.ao-book-cover__topic) {
+    font-size: 4cqi;
+  }
+  [data-checkout-kind="crosssell"]
+    .checkout__cover
+    :global(.ao-book-cover__subtitle) {
+    font-size: 5cqi;
+  }
+  [data-checkout-kind="crosssell"] .checkout__product > div:last-child {
+    gap: 0.375rem;
+  }
+  [data-checkout-kind="crosssell"] .checkout__product h2 {
+    font-size: 1.125rem;
+  }
+  [data-checkout-kind="crosssell"] .checkout__product p {
+    font-size: 0.875rem;
+  }
+  [data-checkout-kind="crosssell"] .checkout__form {
+    grid-area: form;
+    margin: 0;
+    max-inline-size: none;
+    padding: clamp(1.25rem, 2vw, 2rem);
+    border-radius: var(--ao-radius-panel);
+    background: var(--ao-accent-on-primary);
+    color: var(--ao-cover-ink);
+    --ao-primary: var(--ao-cover-primary);
+    --ao-on-primary: var(--ao-cover);
+    gap: 0.875rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+  [data-checkout-kind="crosssell"] .checkout__offer {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    gap: 0.375rem;
+  }
+  .checkout__reference {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+  }
+  .checkout__reference span {
+    max-inline-size: 10rem;
+  }
+  .checkout__reference s {
+    font-size: clamp(2rem, 1.6rem + 1vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1;
+    text-decoration-thickness: 0.1em;
+  }
+  .checkout__message {
+    max-inline-size: 42rem;
+    display: grid;
+    gap: 1rem;
+  }
+  .checkout__newsletter,
+  .checkout__offer-email {
+    display: grid;
+    gap: 1rem;
+    margin-block-start: 1rem;
+    padding: 1.5rem;
+    background: var(--ao-accent-on-primary);
+    color: var(--ao-cover-ink);
+    border-radius: var(--ao-radius-panel);
+  }
+  .checkout__offer-email[hidden] {
+    display: none;
+  }
+  [data-checkout-kind="crosssell"] .checkout__offer h2 {
+    font-size: clamp(1.6rem, 1.3rem + 0.6vw, 2rem);
+  }
+  [data-checkout-kind="crosssell"] .checkout__legal {
+    gap: 0.5rem;
+  }
+  [data-checkout-kind="crosssell"] summary {
+    cursor: pointer;
+    text-decoration: underline;
+    min-block-size: 1.75rem;
+    align-content: center;
+  }
+  [data-checkout-kind="crosssell"] details[open] p {
+    margin-block-start: 0.5rem;
+  }
+  [data-checkout-kind="crosssell"] .checkout__consent {
+    gap: 0.625rem;
+  }
+  [data-checkout-kind="crosssell"] input[type="checkbox"] {
+    flex-basis: 1.25rem;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+  }
+  [data-checkout-kind="crosssell"] :global(button[type="submit"]) {
+    inline-size: 100%;
+    justify-self: stretch;
+    opacity: 1;
+  }
+  [data-checkout-kind="crosssell"] .checkout__skip {
+    justify-self: center;
+    text-align: center;
+    padding-block: 0.5rem;
+  }
+  .checkout__status--quiet {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: clip;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .checkout__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-block: 1rem;
+    border-block-start: 1px solid var(--ao-line);
+    font-size: 0.75rem;
+    color: var(--ao-muted);
+  }
+  .checkout__footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+  .checkout__footer a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 2.75rem;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .checkout__footer a:focus-visible {
+    outline: 2px solid var(--ao-accent);
+    outline-offset: 4px;
+  }
+  .checkout__footer a:active,
+  [data-checkout-kind="crosssell"] summary:active {
+    opacity: 0.7;
+  }
+  @media (width < 60rem) {
+    .checkout[data-checkout-kind="crosssell"] {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "intro" "products" "form";
+      gap: 1.5rem;
+    }
+    [data-checkout-kind="crosssell"] .checkout__cover {
+      inline-size: min(100%, 10rem);
+    }
   }
 </style>

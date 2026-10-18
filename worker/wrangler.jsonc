@@ -16,10 +16,8 @@
     "BUILD_TARGET_ENV": "staging",
     "CHECKOUT_ENABLED": "false",
     "CHECKOUT_SITE_ORIGIN": "https://aleksandraolesiewicz.com",
-    "STRIPE_PRICE_EBOOK_01": "",
-    "STRIPE_PRICE_EBOOK_02": "",
-    "STRIPE_PRICE_EBOOK_03": "",
-    "STRIPE_PAIR_COUPON": "",
+    "CHECKOUT_SANITY_PROJECT_ID": "dyuqkn8c",
+    "CHECKOUT_SANITY_DATASET": "production",
   },
   "d1_databases": [
     {
@@ -58,10 +56,8 @@
         "BUILD_TARGET_ENV": "staging",
         "CHECKOUT_ENABLED": "false",
         "CHECKOUT_SITE_ORIGIN": "https://aleksandraolesiewicz.com",
-        "STRIPE_PRICE_EBOOK_01": "",
-        "STRIPE_PRICE_EBOOK_02": "",
-        "STRIPE_PRICE_EBOOK_03": "",
-        "STRIPE_PAIR_COUPON": "",
+        "CHECKOUT_SANITY_PROJECT_ID": "dyuqkn8c",
+        "CHECKOUT_SANITY_DATASET": "production",
       },
       "secrets": {
         "required": [
@@ -110,10 +106,8 @@
         "BUILD_TARGET_ENV": "production",
         "CHECKOUT_ENABLED": "false",
         "CHECKOUT_SITE_ORIGIN": "https://aleksandraolesiewicz.com",
-        "STRIPE_PRICE_EBOOK_01": "price_1URqR0Q8cdQEDgtW9swOgW4n",
-        "STRIPE_PRICE_EBOOK_02": "price_1URqRCQ8cdQEDgtWL1ZkAQQS",
-        "STRIPE_PRICE_EBOOK_03": "price_1URqRFQ8cdQEDgtWFn0DNVMC",
-        "STRIPE_PAIR_COUPON": "ola_complete_pair_50_v1",
+        "CHECKOUT_SANITY_PROJECT_ID": "dyuqkn8c",
+        "CHECKOUT_SANITY_DATASET": "production",
       },
       "secrets": {
         "required": [

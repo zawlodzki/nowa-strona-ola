@@ -687,8 +687,22 @@ export const PUBLISHED_REDIRECTS_QUERY = defineQuery(/* groq */ `
 export const PCOS_CHECKOUT_SETTINGS_QUERY = defineQuery(`
   *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0]{
     salesState, singlePriceGross, pairPriceGross,
-    crossSellKicker, empathy, mechanism, bundleReference,
+    crossSellKicker, bundleReference,
     crossSellTitle, crossSellLead, bundleOnlyNotice,
     continueLabel, skipLabel, educationNote, legalConsentVersion
   }
+`);
+
+export const CHECKOUT_CATALOG_QUERY = defineQuery(`
+  *[_type == "ebook" && language == "pl" && !(_id in path("drafts.**")) && defined(productCode)] | order(productCode asc){
+    productCode, title, stripePriceId, priceGross, availability,
+    crossSell{
+      kicker, title, lead, stripeCouponId,
+      "products": (complementaryEbooks[]->)[_type == "ebook" && language == "pl" && !(_id in path("drafts.**"))]{productCode, title, stripePriceId, priceGross}
+    }
+  }
+`);
+
+export const CHECKOUT_SALES_STATE_QUERY = defineQuery(`
+  *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0].salesState
 `);

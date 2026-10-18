@@ -4,12 +4,24 @@ interface Catalog {
   enabled: boolean;
   consentVersion: string;
 }
+interface Offer {
+  kicker: string;
+  title: string;
+  lead: string;
+  originalAmount: number;
+  bundleAmount: number;
+  currency: "pln";
+  expiresAt: string;
+}
 interface PaymentStatus {
   status: "pending" | "paid" | "expired" | "revoked";
   kind: "single" | "bundle";
   productCodes: string[];
   remainingProductCodes: string[];
   bundleAvailable: boolean;
+  offer: Offer | null;
+  offerEmailRequested: boolean;
+  offerEmailRequestAvailable: boolean;
 }
 function object(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -27,6 +39,34 @@ function stringArray(value: unknown): value is string[] {
   return (
     Array.isArray(value) && value.every((item) => typeof item === "string")
   );
+}
+function parseOffer(value: unknown): Offer | null {
+  if (value == null) return null;
+  if (
+    !object(value) ||
+    typeof value.kicker !== "string" ||
+    typeof value.title !== "string" ||
+    typeof value.lead !== "string" ||
+    !Number.isSafeInteger(value.originalAmount) ||
+    !Number.isSafeInteger(value.bundleAmount) ||
+    typeof value.originalAmount !== "number" ||
+    typeof value.bundleAmount !== "number" ||
+    value.originalAmount <= 0 ||
+    value.bundleAmount <= 0 ||
+    value.currency !== "pln" ||
+    typeof value.expiresAt !== "string" ||
+    !Number.isFinite(Date.parse(value.expiresAt))
+  )
+    throw new Error("Nie udało się odczytać oferty.");
+  return {
+    kicker: value.kicker,
+    title: value.title,
+    lead: value.lead,
+    originalAmount: value.originalAmount,
+    bundleAmount: value.bundleAmount,
+    currency: value.currency,
+    expiresAt: value.expiresAt,
+  };
 }
 function parseStatus(value: unknown): PaymentStatus {
   if (
@@ -47,6 +87,9 @@ function parseStatus(value: unknown): PaymentStatus {
     productCodes: value.productCodes,
     remainingProductCodes: value.remainingProductCodes,
     bundleAvailable: value.bundleAvailable,
+    offer: parseOffer(value.offer),
+    offerEmailRequested: value.offerEmailRequested === true,
+    offerEmailRequestAvailable: value.offerEmailRequestAvailable === true,
   };
 }
 class ExpiredCheckoutError extends Error {}
@@ -106,7 +149,7 @@ async function initCheckout(root: HTMLElement) {
   if (incomingSessionId) history.replaceState(null, "", location.pathname);
   const skip = root.querySelector<HTMLAnchorElement>(".checkout__skip");
   if (skip && sessionId)
-    skip.href = `/zamowienie/potwierdzenie/?session_id=${encodeURIComponent(sessionId)}`;
+    skip.href = `/po-zakupie/pozniej/?session_id=${encodeURIComponent(sessionId)}`;
   let ready = false;
   let submitting = false;
   function updateSubmit() {
@@ -119,17 +162,18 @@ async function initCheckout(root: HTMLElement) {
       .querySelectorAll<HTMLElement>("[data-product-code]")
       .forEach((card) => {
         card.hidden = !codes.includes(card.dataset.productCode ?? "");
-        const price = card.querySelector("[data-product-price]");
-        if (price)
-          price.textContent = bundle
-            ? "48,50 zł brutto w pakiecie dwóch e-booków"
-            : "97 zł brutto";
+        const price = card.querySelector<HTMLElement>("[data-product-price]");
+        if (price) {
+          price.hidden = bundle;
+          price.textContent = "97 zł brutto";
+        }
       });
     orderContent.hidden = false;
   }
   try {
-    const catalog = parseCatalog(await request("/api/checkout/catalog"));
+    let catalog: Catalog;
     if (kind === "single") {
+      catalog = parseCatalog(await request("/api/checkout/catalog"));
       if (
         !productCode ||
         !Array.from(
@@ -180,16 +224,103 @@ async function initCheckout(root: HTMLElement) {
           "Płatność została potwierdzona. Oferta uzupełnienia serii nie jest dostępna dla tego zamówienia.";
         return;
       }
+      if (!payment.offer) {
+        status.textContent =
+          "Nie udało się odczytać oferty dla tego zamówienia.";
+        return;
+      }
+      if (kind === "declined") {
+        orderContent.hidden = false;
+        status.textContent = "Płatność została potwierdzona.";
+        status.classList.add("checkout__status--quiet");
+        const deadline = root.querySelector<HTMLElement>(
+          "[data-offer-deadline]",
+        );
+        if (deadline)
+          deadline.textContent = `Oferta jest ważna do ${new Intl.DateTimeFormat("pl-PL", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Warsaw" }).format(new Date(payment.offer.expiresAt))}.`;
+        const returnLink =
+          root.querySelector<HTMLAnchorElement>(".checkout__return");
+        if (returnLink)
+          returnLink.href = `/po-zakupie/?session_id=${encodeURIComponent(sessionId)}`;
+        const emailBlock =
+          root.querySelector<HTMLElement>("[data-offer-email]");
+        const emailButton = root.querySelector<HTMLButtonElement>(
+          "[data-offer-email-request]",
+        );
+        const emailStatus = root.querySelector<HTMLElement>(
+          "[data-offer-email-status]",
+        );
+        if (
+          emailBlock &&
+          emailButton &&
+          emailStatus &&
+          (payment.offerEmailRequestAvailable || payment.offerEmailRequested)
+        ) {
+          emailBlock.hidden = false;
+          emailButton.disabled = payment.offerEmailRequested;
+          if (payment.offerEmailRequested)
+            emailStatus.textContent =
+              "Prośba zapisana. Wysyłka linków nie jest jeszcze uruchomiona.";
+          emailButton.addEventListener("click", async () => {
+            emailButton.disabled = true;
+            try {
+              const result = await request(
+                "/api/checkout/offer-email-request",
+                {
+                  parentSessionId: sessionId,
+                  requestAccepted: true,
+                  requestVersion: "offer-email-request-v1-2026-10-18",
+                },
+              );
+              if (!object(result) || result.requested !== true)
+                throw new Error("Nie udało się zapisać prośby.");
+              emailStatus.textContent =
+                result.deliveryPending === true
+                  ? "Prośba zapisana. Wysyłka linków nie jest jeszcze uruchomiona."
+                  : "Prośba o wysłanie linku zapisana.";
+            } catch (cause) {
+              emailButton.disabled = false;
+              emailStatus.textContent =
+                cause instanceof Error
+                  ? cause.message
+                  : "Nie udało się zapisać prośby.";
+            }
+          });
+        }
+        return;
+      }
+      const offer = payment.offer;
+      const setText = (selector: string, text: string) => {
+        const element = root.querySelector<HTMLElement>(selector);
+        if (element) element.textContent = text;
+      };
+      setText("[data-offer-kicker]", offer.kicker);
+      setText("[data-checkout-title]", offer.title);
+      setText("[data-paid-lead]", offer.lead);
+      const money = new Intl.NumberFormat("pl-PL", {
+        style: "currency",
+        currency: offer.currency,
+        maximumFractionDigits: 0,
+      });
+      setText(
+        "[data-reference-price]",
+        money.format(offer.originalAmount / 100),
+      );
+      setText(
+        "[data-bundle-price]",
+        `${money.format(offer.bundleAmount / 100)} brutto za pakiet`,
+      );
       showProducts(payment.remainingProductCodes, true);
       if (skip) skip.hidden = false;
       const paidLead = root.querySelector<HTMLElement>("[data-paid-lead]");
       if (paidLead) paidLead.hidden = false;
+      catalog = parseCatalog(await request("/api/checkout/catalog"));
       ready = catalog.enabled && root.dataset.salesState === "ready";
-      status.textContent = ready
-        ? "Płatność za pierwszy e-book została potwierdzona. Możesz dokupić pozostałe dwa razem."
-        : checkoutCopy.unavailable;
+      status.textContent = "Oferta pakietu jest gotowa.";
+      status.classList.add("checkout__status--quiet");
     }
     updateSubmit();
+    const consentVersion = catalog.consentVersion;
     let requestId = crypto.randomUUID();
     form?.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -202,7 +333,7 @@ async function initCheckout(root: HTMLElement) {
         const fields = new FormData(form);
         const common = {
           consentAccepted: true,
-          consentVersion: catalog.consentVersion,
+          consentVersion,
           requestId,
         };
         const result = await request(
@@ -242,6 +373,7 @@ async function initCheckout(root: HTMLElement) {
       }
     });
   } catch (cause) {
+    status.classList.remove("checkout__status--quiet");
     status.textContent =
       cause instanceof Error ? cause.message : checkoutCopy.unavailable;
   }

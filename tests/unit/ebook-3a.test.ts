@@ -339,3 +339,47 @@ describe("ebook product presentation", () => {
     );
   });
 });
+
+describe("informacje o płatności przy zakupie e-booka", () => {
+  it.each(["available", "presale", "planned"] as const)(
+    "odzwierciedla stan %s w Markdown oferty",
+    async (availability) => {
+      const ebook = structuredClone(
+        await getEbook("pl", "suplementy-w-pcos", { environment: {} }),
+      );
+      ebook.availability = availability;
+      const markdown = serializeEbook(ebook, "pl");
+      if (availability === "planned") {
+        expect(markdown).not.toContain("Bezpieczna płatność przez Stripe");
+        expect(markdown).not.toContain("Metody płatności: Apple Pay");
+      } else {
+        expect(markdown).toContain("Bezpieczna płatność przez Stripe");
+        expect(markdown).toContain(
+          "Metody płatności: Apple Pay, Google Pay, BLIK, Visa, Mastercard, Revolut Pay, Klarna.",
+        );
+      }
+      if (availability === "available") {
+        expect(markdown).toContain(
+          "E-book na Twój e-mail po opłaceniu zamówienia.",
+        );
+      } else {
+        expect(markdown).not.toContain(
+          "E-book na Twój e-mail po opłaceniu zamówienia.",
+        );
+      }
+      expect(markdown).not.toContain("Dostawa natychmiast");
+    },
+  );
+});
+
+it("zachowuje własne warunki zakupu przy zewnętrznym checkout innego dostawcy", async () => {
+  const ebook = structuredClone(
+    await getEbook("pl", "suplementy-w-pcos", { environment: {} }),
+  );
+  ebook.availability = "available";
+  ebook.productCode = null;
+  ebook.checkoutUrl = "https://payments.example.com/ebook";
+  expect(serializeEbook(ebook, "pl")).not.toContain(
+    "Bezpieczna płatność przez Stripe",
+  );
+});

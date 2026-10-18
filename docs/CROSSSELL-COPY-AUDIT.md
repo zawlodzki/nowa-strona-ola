@@ -1,31 +1,54 @@
 # Audyt copy oferty po zakupie
 
-Data 18.10.2026. Podstawa to decyzja użytkownika o cenie i zakupie wyłącznie
-pary oraz skill [ebook-landing-3a](../.agents/skills/ebook-landing-3a/SKILL.md)
-i jego [zasady copywritingu](../.agents/skills/ebook-landing-3a/references/copywriting.md).
+Data 18.10.2026. Podstawa to decyzja użytkownika o krótkiej ofercie na jeden
+ekran komputera, cenie pakietu 97 zł i zakupie wyłącznie dwóch brakujących
+e-booków. Copy korzysta ze skilla [ebook-landing-3a](../.agents/skills/ebook-landing-3a/SKILL.md)
+i jego [zasad copywritingu](../.agents/skills/ebook-landing-3a/references/copywriting.md).
 
-Strona `/po-zakupie/` jest ofertą uzupełnienia opłaconego zamówienia.
-Nie jest kolejnym pełnym landingiem produktu. Skrócona kompozycja pokazuje
-kontekst zakupu, dwie właściwe okładki, użyteczność, cenę pakietu, warunki
-zamówienia i możliwość pominięcia. Nie dodaje opinii, fikcyjnej próbki PDF
-ani osobistej historii autorki. Wybór e-booków należy do serwera.
+Strona `/po-zakupie/` uzupełnia opłacone zamówienie. Pokazuje obie okładki,
+krótki opis użyteczności, cenę pakietu i warunki kolejnego zamówienia.
+Usunięto osobne akapity o trudnościach klientki i sposobie korzystania z serii.
+Nie dodano opinii ani osobistej historii autorki.
 
-| Zasada                             | Cytat i sekcja                                                                                                                                           | Status    | Uzasadnienie lub brak danych                                                                   |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------- |
-| 1. Mały krok i istotny wynik       | „możesz dołączyć dwa pozostałe i spojrzeć na PMOS (PCOS) z szerszej perspektywy”, wstęp                                                                  | częściowo | Poszerzenie wiedzy jest umiarkowaną korzyścią. Brak obietnicy wyniku zdrowotnego.              |
-| 2. Duży problem i prosty mechanizm | „Każdy e-book porządkuje inny temat. Możesz wracać do niego, gdy przygotowujesz pytania na konsultację lub chcesz lepiej zrozumieć zalecenia.”, kontekst | użyta     | Materiał porządkuje pytania, nie rozwiązuje PCOS.                                              |
-| 3. Bliski pierwszy wynik           | „Zacznij od tematu, którego potrzebujesz teraz”, kontekst                                                                                                | częściowo | Wskazuje pierwszy krok. Nie obiecuje czasu lektury ani dostawy przed uruchomieniem sprzedaży.  |
-| 4. Empatia bez obwiniania          | „Sprzeczne porady potrafią utrudnić wybór, nawet gdy poświęcasz czas na szukanie informacji”, kontekst                                                   | użyta     | Uznaje trudność bez oceniania wcześniejszych decyzji.                                          |
-| 5. Uznanie wcześniejszego wysiłku  | „Wybrałaś już e-book, który odpowiada na jedno z Twoich pytań”, wstęp                                                                                    | użyta     | Odnosi się do wykonanego zakupu. Nie deklaruje zakończenia trudnego etapu leczenia.            |
-| 6. Osobista historia autorki       | brak                                                                                                                                                     | pominięta | Brak zweryfikowanej osobistej historii, którą można wykorzystać.                               |
-| 7. Użyteczny mniej oczywisty wgląd | brak                                                                                                                                                     | pominięta | Brak źródła uzasadniającego nowy wgląd. Zwykłego opisu tematów nie przedstawiono jako sekretu. |
+| Zasada                             | Cytat i sekcja                                                                                   | Status    | Uzasadnienie lub brak danych                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------ | --------- | ------------------------------------------------------------------------------ |
+| 1. Mały krok i istotny wynik       | "Dobierz dwa pozostałe i przygotuj się do konsultacji z pełniejszą wiedzą o PMOS (PCOS).", wstęp | częściowo | Lektura wspiera przygotowanie do konsultacji. Nie obiecuje wyniku zdrowotnego. |
+| 2. Duży problem i prosty mechanizm | brak                                                                                             | pominięta | Kompaktowa oferta nie rozwija problemu ani mechanizmu materiałów.              |
+| 3. Bliski pierwszy wynik           | "przygotuj się do konsultacji z pełniejszą wiedzą", wstęp                                        | częściowo | Wskazuje użyteczny rezultat bez obietnicy terminu lektury lub dostawy.         |
+| 4. Empatia bez obwiniania          | brak                                                                                             | pominięta | Skrócona oferta nie powtarza opisu trudności z landingów produktów.            |
+| 5. Uznanie wcześniejszego wysiłku  | "Masz już pierwszy e-book.", wstęp                                                               | użyta     | Odnosi się do wykonanego zakupu.                                               |
+| 6. Osobista historia autorki       | brak                                                                                             | pominięta | Brak zweryfikowanej osobistej historii.                                        |
+| 7. Użyteczny mniej oczywisty wgląd | brak                                                                                             | pominięta | Brak źródła uzasadniającego nowy wgląd.                                        |
 
-Pakiet obejmuje dokładnie dwa pozostałe e-booki za 97 zł brutto.
-Kwota 48,50 zł opisuje rozliczenie pojedynczej pozycji w pakiecie.
-Nie jest osobną ofertą. Odniesienie 194 zł dotyczy sumy aktualnych cen
-zakupu osobno. Nie udaje najniższej ceny z 30 dni. Nie dodano licznika,
-terminu wygaśnięcia ani fikcyjnej wyłączności.
+Nagłówek "Uzupełnij serię za pół ceny" dotyczy wyłącznie dwóch brakujących
+e-booków razem. Pakiet kosztuje 97 zł brutto. Porównanie "97 zł zamiast
+194 zł za zakup osobno." odnosi się do sumy aktualnych cen zakupu osobno.
+Nie jest deklaracją najniższej ceny z 30 dni. Na stronie nie ma rozbicia ceny
+na 48,50 zł za sztukę. Nie dodano licznika ani terminu wygaśnięcia oferty.
 
-Informacja o braku uruchomionej sprzedaży pochodzi z bramki backendu.
+Warunek "Pakiet obejmuje oba pozostałe e-booki. To osobne zamówienie."
+wyjaśnia zakres zakupu. Obowiązkowe oświadczenie D27 i przycisk
+"Zamawiam z obowiązkiem zapłaty" zachowują pełne brzmienie.
+
+Serwer wybiera pozostałe dwa kody z rejestru trzech produktów po potwierdzeniu
+opłacenia pierwszego e-booka. CMS przechowuje kod każdego produktu i wspólne
+copy oferty. Nie zaznacza się ręcznie par dla poszczególnych e-booków.
 Widok nie potwierdza zapłaty przed odczytem chronionego statusu.
-Dostawa pozostaje poza bieżącym zakresem implementacji.
+
+Zgodnie z poleceniem użytkownika cross-sell nie wyświetla dopisku o nieuruchomionej
+sprzedaży. Bramka płatności pozostaje wyłączona. Dostawa pozostaje poza zakresem.
+Zmiany modelu i fixture nie oznaczają publikacji w Sanity.
+
+## Oferta konfigurowana przy produkcie, 18.10.2026
+
+Nagłówek, etykieta i krótki lead pochodzą teraz z `ebook.crossSell`, nie ze
+wspólnego tekstu dla PCOS. Pary wskazują dwie referencje przy kupowanym e-booku.
+Taki sam widok obsługuje perimenopauzę. Panel używa matcha i primary CTA.
+Przekreślone 194 zł ma etykietę „Cena przy zakupie osobno”; pakiet kosztuje
+97 zł brutto. Kwota nie oznacza historycznej ceny pakietu.
+
+Odmowa nie uruchamia promocji mailowej. Osobny przycisk „Wyślij mi tę ofertę
+e-mailem” zapisuje dobrowolną jednorazową prośbę. Termin to siedem dni od
+pierwszej płatności. Transport wiadomości jest odłożony, a podgląd nie
+udaje wykonanej wysyłki. Podziękowanie po zakupie pakietu zapowiada dostawę
+e-mailem i zaprasza do istniejącego formularza newslettera.
