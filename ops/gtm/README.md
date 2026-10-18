@@ -123,4 +123,9 @@ zamiast pełnego referrera. `ai-source-container.json` rozszerza opublikowane
 v4, zachowując rollout true. Bazowy `ola-container.json` zachowuje false.
 Kampania jest ustawiona tylko w tagu Google 51; page_view dziedziczy ją.
 Trzy nowe zmienne czytają i walidują `ao_ai_source` oraz wyprowadzają medium.
-Żaden tag nie parsuje referrera. Publikacja nowego kontenera jest w toku.
+Żaden tag nie parsuje referrera. Opublikowano wersję 5 o 23:05 CEST.
+Rzeczywisty eksport zapisano w lokalnym katalogu dowodów
+`/private/tmp/ola-measurement-seo-20261013/gtm-v5.json`.
+Test skompilowanego publicznego kontenera: 6/6 PASS, jeden page_view
+i user_engagement, wszystkie collect przechwycone lokalnie.
+[Odbiór usług](../../docs/MEASUREMENT-SEO-ACCEPTANCE-2026-10-13.md).

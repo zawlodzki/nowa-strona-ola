@@ -44,6 +44,111 @@ kody. Przy aktywnej sprzedaży mapper tworzy własny adres zamówienia.
 Zmiana singletonu nie uruchamia dostawy ani nie zastępuje konfiguracji Stripe.
 [Wykonane zapisy i granice integracji](CHECKOUT-CMS-MIGRATION.md).
 
+## Zakup serii i oferta po płatności, decyzja 18.10.2026
+
+Źródło: aktualne polecenie użytkownika. Cena każdego z trzech e-booków PCOS
+wynosi 97 zł brutto. Po pierwszej płatności nowa podstrona proponuje dwa
+pozostałe e-booki z obniżką 50%, razem za kolejne 97 zł brutto. To osobny
+dobrowolny zakup i druga płatność. Pełna seria w tej ścieżce kosztuje 194 zł.
+Nie zmieniono jeszcze Sanity, kodu ani Stripe. Użytkownik wymaga zatwierdzenia
+[planu](STRIPE-EBOOK-IMPLEMENTATION-PLAN-2026-10-18.md) przed implementacją.
+
+Stan późniejszy: plan zatwierdzono i wdrożono (PR 128 i 129). Bieżące wartości
+i wykonaną konfigurację CMS opisuje sekcja „Oferta serii e-booków” na początku
+dokumentu; poniższe zdania o braku zmian i brakach schematu są historyczne.
+
+Ponowny odczyt repo prawnego potwierdza D27: jedno wymagane niezaznaczone pole
+łączące regulamin, 18+ i natychmiastową dostawę, przycisk `Zamawiam z obowiązkiem
+zapłaty`, brak drugiego checkboxa regulaminu w Stripe i brak dostawy po 14 dniach.
+To zastępuje wcześniejsze założenia poniższego audytu.
+
+Mapowanie do wdrożenia: `ebook.priceGross=97`, stabilny kod każdego produktu,
+referencje do trzech e-booków serii, kontrolowany dokument oferty po zakupie
+oraz wspólne wersjonowane mikrocopy. Obecny schemat nie ma kodów i modelu
+oferty dodatkowej. Pole `lowestPrice30Days` pojedynczego produktu nie jest
+historią ceny pakietu. Cen odniesienia nie wolno wymyślać. Dostępność zmienimy
+dopiero po sprawdzeniu plików i działającej dostawy. Stan zamówień i uprawnienia
+do rabatu przechowuje backend poza CMS.
+
+## Wymagania zakupu e-booków, audyt 18.10.2026
+
+Źródło: użytkownik zlecił weryfikację płatności dla trzech e-booków o PCOS
+z projektem prawnym, w tym dokładnych nazw przycisków. Nie zlecił w tej sesji
+zmiany cen, dostępności ani publikacji konfiguracji.
+
+Wymóg istniejącego projektu prawnego: końcowy przycisk na podsumowaniu
+`Zamawiam z obowiązkiem zapłaty`, Z1 wymagany i Z2 dobrowolny. Propozycja
+techniczna z audytu: CTA landingu `Przejdź do zamówienia`, trzy własne
+formularze i indywidualne Checkout Sessions. Propozycja wymaga implementacji,
+nie jest wykonaną konfiguracją Sanity ani Stripe.
+
+Mapowanie obecnych pól: `ebook.checkoutUrl` jako HTTPS własnego formularza,
+`ebook.availability` nadal według aktualnej dostępności, `ebook.priceGross`
+i `ebook.deliveryDescription` zgodne z finalną ofertą. Tekst CTA landingu
+pozostaje w `ebook.landing.purchaseLabel`. Nie wstawiać tam etykiety przycisku
+składającego zamówienie, dopóki przycisk jedynie otwiera podsumowanie.
+Obecny opis schematu adresu sugeruje link Stripe i wymaga aktualizacji przy
+wdrożeniu. Brak kontraktu formularza zamówienia i wersjonowanych Z1/Z2.
+Lokalne 97 zł jest ceną zapowiedzi, nie nową decyzją o cenie sprzedaży.
+
+[Pełny raport i konfiguracja](STRIPE-EBOOK-CHECKOUT-2026-10-18.md).
+
+Stan późniejszy: model Z1/Z2 zastąpiono jednym polem D27, a 97 zł stało się
+decyzją o cenie sprzedaży. Bieżące wartości: sekcja „Oferta serii e-booków”.
+
+## Cień i badge okładek, korekta 17.10.2026
+
+Źródło: użytkownik wskazał brak widocznej głębi nowych okładek oraz zasłanianie
+badge „Wkrótce dostępny”. Badge ma być nad okładką i mieć kolory matcha.
+Ustalono jasne tło #D8E78A i oliwkowy tekst #53671B z istniejących tokenów 3a.
+Kontrast tej pary wynosi 4,73:1. Cień pozostaje miękki, przesunięty i wspólny
+dla kart oraz okładek w landingach.
+
+To zmiana prezentacji w kodzie, bez nowego pola CMS. Wartości availability,
+grafiki cover.image, alt, ceny, CTA i kolejność pozostają zachowane.
+Poprawka [PR 127](https://github.com/zawlodzki/nowa-strona-ola/pull/127)
+jest scalona i opublikowana. Produkcja run 39047050709 SUCCESS,
+Worker e7631c7e-3f11-4c0d-ab9e-1d2a4187f9b4.
+Odczyt i zrzuty produkcji potwierdziły matcha, warstwy i cień kart oraz landingów.
+
+## Kierunek okładek e-booków, 17.10.2026
+
+Źródło: polecenie użytkownika z 17.10.2026. Trzy napisane e-booki potrzebują
+nowych okładek kontrastujących ze stroną, bez powielania jej design systemu
+i kolorystyki. Dotyczy „Szczupła, a jednak PCOS”, „Badania w PCOS, które mają
+sens” i „Suplementy w PCOS”. To ustalenie kierunku, nie wybór projektów.
+
+Przygotowano [po trzy propozycje](../design-system/proposals/ebook-covers-2026-10-17/README.md).
+Warianty A, B i C pozostają propozycjami. Tytuły i podtytuły na obrazach pochodzą
+z dostarczonych tekstów; nie oznacza to zmiany pól tytułów w CMS.
+Nie zmieniono cen, CTA, dostępności, kolejności ani widoczności sekcji.
+
+Mapowanie: plik do `ebook.cover.image`, opis do `ebook.cover.alt`,
+hotspot i crop w `ebook.cover.image`. Istniejący schemat obsługuje obraz
+bez nowych tokenów lub pól kolorów. Landing renderuje plik, katalog nadal
+używa generowanej okładki BookCover. Przed podmianą potrzebna zmiana renderowania
+we wszystkich miejscach ekspozycji. Sanity i produkcja pozostają bez zmian.
+
+Aktualizacja 17.10.2026, źródło: kolejne polecenie użytkownika. Wybrany jest
+wariant C, ilustracyjny, dla wszystkich trzech e-booków. Podpis na okładkach
+ma brzmieć „Aleksandra Olesiewicz-Zawłodzka”. Wykonano edycję trzech obrazów,
+upload WebP i przypisanie do szkiców trzech dokumentów PL wraz z opisami alt.
+Nie publikowano szkiców; wersje opublikowane pozostają bez zmian.
+Nie zmieniono tytułów dokumentów ani wspólnego dokumentu autorki.
+Dotychczasowe tytuły CMS używają PMOS (PCOS), a „Badania” mają krótszy tytuł;
+okładki zachowują tytuły tekstów źródłowych zaakceptowane wyborem wariantu C.
+Wersji EN nie zmieniono. [Rejestr zasobów i poprzednich okładek](../design-system/proposals/ebook-covers-2026-10-17/cms-change.json).
+
+Kolejne polecenie 17.10.2026 obejmuje publikację. Opublikowano trzy dokumenty
+PL z nowymi cover.image i cover.alt. Odczyt published potwierdził referencje.
+Pozostałe pola dokumentów zachowano. Poprawka pięciu plików aplikacji w
+[PR 126](https://github.com/zawlodzki/nowa-strona-ola/pull/126) dopina obraz
+z CMS na homepage, w katalogu i w poleceniach artykułu oraz proporcje 2:3
+na landingu. Publikacja Sanity i kodu jest wykonana. PR 126 scalony,
+production run 39043923827 SUCCESS, Worker
+82361138-53a7-470f-929c-a73e5ef1e734. W publicznym katalogu obejrzano wszystkie
+trzy ilustracje z pełnym podpisem autorki i zachowane zaślepki pozostałych książek.
+
 ## Kierunek grafik wyróżniających bloga, 15.10.2026
 
 Źródło: użytkownik odrzucił podobieństwo obecnych grafik do reszty strony
@@ -82,8 +187,8 @@ Kod i backend staging odebrano 15.10.2026. Świeży token daje 200, replay 403,
 a trwały rejestr PostgreSQL dopuszcza jednego zwycięzcę równoczesnych prób.
 Użytkownik zatwierdził widgety, credentials i rejestr odcisków; zasoby utworzone.
 15.10.2026 użytkownik zlecił publikację produkcyjną. Konfiguracja publicznych
-kluczy środowisk i publikacja są w toku. Copy formularzy w Sanity
-nie zmieniono. Przegląd dokumentów prywatności przed publikacją pozostaje otwarty.
+kluczy środowisk wykonana; frontend v3 oraz produkcyjna bramka n8n są opublikowane. Copy formularzy w Sanity
+nie zmieniono. Osobny przegląd dokumentów prywatności pod kątem Turnstile nie został wykonany.
 
 ## Pomiar produkcyjny — decyzja 13.10.2026
 
@@ -1094,6 +1199,76 @@ Opublikowany dokument nadal ma `rasterKey = food`; publikacja szkicu następuje
 po scaleniu i wdrożeniu PR. Nowy klucz nie wymaga rozszerzenia schematu,
 ponieważ `rasterKey` jest polem tekstowym. `food` pozostaje obrazem okładek.
 [Pliki, prompty, rewizje i kolejność uruchomienia](../design-system/proposals/homepage-meal-2026-10-15/README.md).
+
+Stan późniejszy: szkic opublikowano 15.10.2026; bieżąco `rasterKey = home-meal`.
+Szczegóły w sekcji „Nakładka opublikowana” poniżej.
+
+## Propozycja nakładki portretu, 15.10.2026
+
+Źródło: prośba użytkownika w czacie 15.10.2026 o wygenerowanie codziennego
+obiadu. Wskazane danie: wątróbka z jabłkiem i cebulą, gotowane ziemniaki
+i ogórek kiszony. Wygenerowano [propozycję](../design-system/proposals/homepage-meal-2026-10-15/README.md).
+Docelowe miejsce: obraz posiłku w sekcji o-mnie, dotychczasowy klucz food.
+Status: materiał do oceny, bez zmiany bieżącego obrazu i konfiguracji CMS.
+Dokładne pole zapisu Sanity należy potwierdzić przed podmianą.
+
+Korekta propozycji 15.10.2026 na prośbę użytkownika: wątróbka drobiowa,
+mniejsze i ciemniejsze kawałki. Wygenerowano i obejrzano
+[wersję v2](../design-system/proposals/homepage-meal-2026-10-15/chicken-liver-apple-onion-v2.png).
+Materiał do oceny; strona i Sanity bez zmian.
+
+## Podmiana nakładki w PR 106, 15.10.2026
+
+Użytkownik zaakceptował v2 i zlecił podmianę, PR i push. Przygotowano
+[PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106),
+gałąź `codex/homepage-meal`, osobny zarządzany worktree `homepage-meal`.
+Nowy WebP 1536×1024 ma klucz `home-meal`; istniejące okładki zachowują `food`.
+Wykonano szkic Sanity `drafts.page-home-pl`, zmieniający tylko
+`sections[_key=="home-about"].secondaryMedia.rasterKey` oraz `alt`.
+Opis: „Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony”.
+Szkic ma rewizję `UOs2f8XeFxg25W1kCvSiFw`; opublikowany dokument nadal
+wskazuje `food`. Nie publikowano szkicu ani nie scalano PR.
+
+Pełne `npm run verify` Node 24.21.0 PASS: 618 unit, 507 E2E,
+12 świadomych pominięć GTM, zgodność fixture/Content Lake na 17 stronach.
+verify-ola doctor PASS; dodatkowy Chromium 1440/390/320 px, reduced motion,
+brak JS i CSS zoom 200% na desktopie PASS, POST `[]`. Kadry 1440 i 320 px
+obejrzano. Natywny zoom, czytnik i fizyczny telefon niesprawdzone.
+Log: `/tmp/ola-homepage-meal-verify.log`; dowody:
+`/tmp/ola-verify-evidence/ola-home-meal-20261015/`.
+
+Następny krok: po scaleniu i wdrożeniu PR opublikować wyłącznie przygotowaną
+podmianę nakładki, po ponownej kontroli rewizji CMS, i odebrać produkcję.
+
+## Nakładka opublikowana, 15.10.2026
+
+Na zlecenie użytkownika scalono [PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106)
+po zakończeniu obu kontroli Quality wynikiem SUCCESS. Main:
+`14b13801a252e367bf994bcf6fd5aaafc54009bb`.
+Szkic homepage ponownie porównano z opublikowanym dokumentem: jedyne zmiany
+treści to klucz obrazu `home-meal` i opis dania w
+`sections[_key=="home-about"].secondaryMedia`. Publikacja z warunkiem
+rewizji `UOs2f8XeFxg25W1kCvSiFw` zakończona; opublikowana rewizja
+`page-home-pl` to `7tcFiCWOj02pVQeWbH2n96`. Brak pozostałego szkicu.
+
+Bieżąca konfiguracja CMS: `rasterKey = home-meal`,
+`alt = Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony`.
+To wykonana publikacja, zastępująca wcześniejszy status propozycji i szkicu.
+
+[Build produkcji](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38718443896)
+i [build staging](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38718441996) SUCCESS.
+Wersja produkcyjnego Workera: `5fb25e0f-bd1b-498f-8f7c-ffbc698391db`.
+W publicznym serwisie obejrzano kadr na desktopie oraz w emulacji 320 px.
+Nowy obraz załadowany, naturalne 1536×1024, właściwy alt, bez overflow.
+Okładka żywieniowa nadal używa poprzedniego `food-editorial`.
+Formularzy nie używano; wpisów zasobów do webhooka leadowego brak.
+Natywnego zoomu, czytnika i fizycznego telefonu nie sprawdzano ponownie.
+Dowód: `.audit/meal-production-20261015/result.json`; zrzuty w czacie.
+
+Lokalny main wyrównano do scalenia, zachowując zawartość 49 wcześniej
+zmienionych plików; potwierdzono SHA256 przed aktualizacją dziennika tej sesji.
+Pozostałe zmiany robocze nie trafiły do commitu ani publikacji.
+Podmiana zakończona; brak dalszych zadań w tym zakresie.
 
 ## Oferta uzupełniająca konfigurowana przy e-booku, 18.10.2026
 

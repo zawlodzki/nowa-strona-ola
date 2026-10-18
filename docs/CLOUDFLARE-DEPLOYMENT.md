@@ -21,7 +21,8 @@ tej samej aplikacji: strefa ma 301 na apex (ścieżka i query zachowane). Chroni
 podgląd produkcyjny używa `preview.aleksandraolesiewicz.com`. Publiczny staging
 oraz staging podglądu zostają na `workers.dev`, dopóki nie pojawi się osobna nazwa
 stagingu. Access dotyczy obu adresów podglądu; dozwolony e-mail:
-`grzesiek@zawlodzki.pl`.
+`grzesiek@zawlodzki.pl`. Podgląd produkcyjny dopuszcza też
+`aleksandraolesiewicz@gmail.com` (od 18.10.2026, opis w sekcji Hosty i Access).
 
 ## Sekrety i zmienne builda
 
@@ -50,9 +51,12 @@ z przeglądarki bezpośrednio na webhook n8n; adres jest stałą w
 `src/lib/lead-endpoint.ts`, a build może go nadpisać zmienną
 `PUBLIC_LEAD_WEBHOOK_URL` (tylko `https://`). Webhook odpowiada na preflight CORS
 originem strony. Ścieżka Worker → Queues → n8n jest odłożona. Ryzyka: adres jest
-publiczny, nie ma Turnstile ani limitu częstotliwości, więc n8n musi walidować
-payload, deduplikować po `submissionId` i odrzucać zgłoszenia z wypełnionym
-`hp_website`. Wartości pól nie trafiają do logów ani analityki.
+publiczny. Od 15.10.2026 wszystkie formularze używają Turnstile Managed,
+a n8n wymaga Siteverify i trwałego rejestru SHA256 przed przyjęciem tokenu.
+Publiczny klucz widgeta jest w GitHub environment variable
+`PUBLIC_TURNSTILE_SITEKEY`, oddzielnie dla staging/production. Sekret pozostaje
+w credentials n8n. Brak limitu częstotliwości i deduplikacji `submissionId`
+pozostaje otwarty; honeypot nie wysyła zgłoszenia. Wartości pól nie trafiają do logów ani analityki.
 
 Worker integracyjny wymaga `SANITY_WEBHOOK_SECRET`, `BUILD_TRIGGER_URL` oraz
 `BUILD_TRIGGER_TOKEN`. `N8N_LEAD_WEBHOOK_URL` jest zarezerwowany na odłożoną
@@ -245,6 +249,15 @@ Workera. `noindex` i cookie sesji nie zastępują Access. Preview produkcji
 Aplikacje Access preview (produkcja i staging) mają włączone osadzanie w iframe
 oraz `SameSite=None` na ciasteczku sesji Zero Trust, żeby Presentation mogło
 wysłać sesję z hostowanego Studio. Polityka Allow z MFA bez zmian.
+
+Od 18.10.2026 aplikacja `ola-website-preview-production` ma drugą politykę
+wielokrotnego użytku „Allow Aleksandra Olesiewicz (preview)”: Include → Emails
+`aleksandraolesiewicz@gmail.com`, bez nadpisania MFA. Logowanie kodem
+jednorazowym (One-time PIN) na ten adres. Wspólnej polityki „Allow administrator
+with MFA” nie rozszerzano, bo chroni też inne aplikacje konta. Staging podglądu
+nadal wpuszcza tylko administratora. Pierwsze logowanie Access trzeba wykonać
+w nowej karcie (`https://preview.aleksandraolesiewicz.com`), potem Presentation
+w Studio korzysta z sesji (168 h).
 
 `www` nie dodawać jako custom domain publicznego Workera — to serwowałoby treść
 zamiast przekierowania. W strefie: rekord DNS `www` musi być proxied. Single

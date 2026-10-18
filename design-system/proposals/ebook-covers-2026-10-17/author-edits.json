@@ -1,0 +1,17 @@
+[
+  {
+    "id": "szczupla",
+    "source": "/Users/grzesiek/.codex/generated_images/01a14a38-e9b1-70b3-95fa-567a1fde4538/exec-fc4d66c1-cb53-46db-a460-c46f16cea3d6.png",
+    "prompt": "Edit this existing approved ebook front cover. Change ONLY the author name near the bottom from \"Aleksandra Olesiewicz\" to exactly \"Aleksandra Olesiewicz-Zawłodzka\". Polish diacritics are essential, especially ł in Zawłodzka. Fit the complete new name elegantly inside the existing bottom author area, preferably one line with smaller font, or two balanced lines if needed. Keep \"dietetyczka kliniczna\" beneath it. Preserve all other text verbatim, all illustration, colors, texture, title typography, composition, aspect ratio and margins. Do not redesign or crop. Output the complete cover."
+  },
+  {
+    "id": "badania",
+    "source": "/Users/grzesiek/.codex/generated_images/01a14a38-e9b1-70b3-95fa-567a1fde4538/exec-fce1db0a-c345-4cf9-819b-27bcc2763c54.png",
+    "prompt": "Edit this existing approved ebook front cover. Change ONLY the author name near the bottom from \"Aleksandra Olesiewicz\" to exactly \"Aleksandra Olesiewicz-Zawłodzka\". Polish diacritics are essential, especially ł in Zawłodzka. Fit the complete new name elegantly inside the existing bottom author area, preferably one line with smaller font, or two balanced lines if needed. Keep \"dietetyczka kliniczna\" beneath it. Preserve all other text verbatim, all illustration, colors, texture, title typography, composition, aspect ratio and margins. Do not redesign or crop. Output the complete cover."
+  },
+  {
+    "id": "suplementy",
+    "source": "/Users/grzesiek/.codex/generated_images/01a14a38-e9b1-70b3-95fa-567a1fde4538/exec-6e0ca685-6c91-4541-a32f-c6fe5a26c7a8.png",
+    "prompt": "Edit this existing approved ebook front cover. Change ONLY the author name near the bottom from \"Aleksandra Olesiewicz\" to exactly \"Aleksandra Olesiewicz-Zawłodzka\". Polish diacritics are essential, especially ł in Zawłodzka. Fit the complete new name elegantly inside the existing bottom author area, preferably one line with smaller font, or two balanced lines if needed. Keep \"dietetyczka kliniczna\" beneath it. Preserve all other text verbatim, all illustration, colors, texture, title typography, composition, aspect ratio and margins. Do not redesign or crop. Output the complete cover."
+  }
+]

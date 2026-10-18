@@ -1,5 +1,16 @@
 # Postęp wdrożenia
 
+## Scalenie lokalnych notatek z main, 18.10.2026
+
+Lokalny main przewinięto do `origin/main` (`88c34fd`). Niezacommitowane notatki
+z sesji 13–18.10 (Turnstile, źródło AI, okładki e-booków, D27, dostęp Oli do
+podglądu) połączono z wersjami z main. Usunięto dublety sekcji, nieaktualny wpis
+o webhooku Sanity i sprzeczne zdania o ręcznym wdrażaniu Studio. Wpisy
+zastąpione późniejszymi decyzjami oznaczono jako historyczne. Linki do `.audit/`
+zamieniono na tekst, bo te pliki są poza repozytorium. Kontrola: Prettier PASS
+i istnienie lokalnych odnośników; `npm run verify` nie uruchamiano, bo zmiana
+dotyczy tylko dokumentacji i materiałów graficznych.
+
 ## Webhook produkcji Sanity → 404, 18.10.2026
 
 - Objaw: Ola opublikowała `/blog/wysoki-testosteron-u-kobiet/` (19:20Z), zmian
@@ -32,6 +43,28 @@ istniejące workflow Studio i podglądu po Quality. Publiczna strona wymaga
 osobnej publikacji treści, a Worker i migracja D1 osobnego wdrożenia.
 Sprzedaż i wysyłka pozostają wyłączone.
 
+## PR #129 i scalenie ścieżki zakupu, 18.10.2026
+
+Na zlecenie użytkownika utworzono [PR #129](https://github.com/zawlodzki/nowa-strona-ola/pull/129)
+z izolowanego worktree. Head `14e9d5ebff34412526b0c12a27aa1b32c1e48d0a`,
+base `1f983940798c8b3b380798fbe96399b5403c70e9`.
+Niezależny przegląd `shipping_checkout_verdict`: PASS+NOTES; 73 dodatkowe testy
+PASS i rzeczywiste przejście CTA → formularz, jeden checkbox D27, zero POST.
+Pełne lokalne verify: 718 unit, 564 E2E, 12 pominięć, 21 stron zgodnych.
+Obie kontrole Quality na GitHub zakończyły się sukcesem. PR scalono squash
+18.10.2026 o 20:04:51 UTC. Commit `3bb6d51988456296bc0779f3bf1830f9ff823a39`
+potwierdzono po fetch na `origin/main`. Patch-id przed scaleniem odpowiadał
+niezależnemu werdyktowi. Nie używano auto-merge. Kolejny krok: odbiór istniejących
+workflow Studio i podglądu po Quality na main; publiczna strona i Worker
+wymagają własnych publikacji. Niezależnych zmian głównego katalogu nie dołączono.
+
+Przed osobnym wdrożeniem Workera zastosować migrację D1 `0002` i sprawdzić,
+czy istnieją zamówienia w starym formacie migawki. Nowy czytnik ich nie obsługuje;
+potrzebne jest potwierdzenie braku takich danych albo ich migracja. Merge sam
+nie wdraża Workera. Dostawa, transport e-mail i aktywacja płatności nadal odłożone.
+Niezależny werdykt i ograniczenia zapisano w komentarzu PR. Głównego katalogu
+nie resetowano ani nie przepinano, aby zachować inne trwające zmiany.
+
 ## Mikrocopy i metody płatności przy zakupie, 18.10.2026
 
 Dodano wspólne teksty PL/EN i siedem lokalnych znaków metod płatności pod
@@ -59,6 +92,21 @@ linię na końcu README, której nie zmieniano. Następny krok: odbiór wizualny
 użytkownika; przed uruchomieniem sprzedaży test rzeczywistego checkoutu
 w sandboxie oraz podłączenie dostawy. Nowy kod nie został opublikowany.
 
+## Podgląd oferty po zakupie, 18.10.2026
+
+Na prośbę użytkownika uruchomiono doraźny lokalny podgląd pod
+`http://127.0.0.1:4349/po-zakupie/?session_id=preview_ebook-01`. Serwer
+`/tmp/ola-checkout-review-server.mjs` czyta aktualny build produkcyjny z
+wydzielonego worktree. Symuluje wyłącznie status pierwszego zakupu, zwraca
+`enabled = false` i odrzuca wszystkie żądania inne niż GET. Nie łączy się
+z API płatności i nie zapisuje zamówień. Podgląd otwarto w panelu Codex.
+Chromium potwierdził dwie pozostałe pozycje, 97 zł za oba i wyłączony przycisk.
+
+Staging zwrócił 404 dla `/po-zakupie/`. Podgląd Sanity wymaga Access i jego
+renderer nie obsługuje jeszcze nowych tras zamówień. Nie wdrażano nowego trybu
+demo ani obejścia uprawnień do produkcji. Następny krok w tym zakresie to
+odbiór copy i wyglądu w lokalnym podglądzie. Serwer pozostawiono uruchomiony.
+
 ## Podgląd pierwszego zakupu, 18.10.2026
 
 Na prośbę użytkownika uruchomiono osobny lokalny podgląd na porcie 4350:
@@ -74,6 +122,17 @@ Nie wpisywano danych klientki ani nie wysłano POST. Obie karty otwarto w IAB;
 formularz ustawiono na widoku zgody. Zapisano dwa screenshoty. Pełnego verify
 nie powtarzano, ponieważ nie zmieniono kodu aplikacji. Następny krok: odbiór
 wizualny użytkownika; rzeczywista sprzedaż i dostawa pozostają wyłączone.
+
+## Dostęp Oli do podglądu produkcyjnego — wykonane w Cloudflare, 18.10.2026
+
+Dodano w Zero Trust politykę „Allow Aleksandra Olesiewicz (preview)”
+(`aleksandraolesiewicz@gmail.com`, One-time PIN) i podpięto ją jako drugą
+pod aplikację Access `ola-website-preview-production`. Odczyt API potwierdził
+dwie polityki, `allow_iframe` i `SameSite=None` bez zmian. Nie sprawdzono
+logowania z konta Oli. Następny krok: Ola otwiera
+`https://preview.aleksandraolesiewicz.com` w nowej karcie, loguje się kodem
+z maila, potem odświeża Presentation w Studio. Opis:
+[Hosty i Access](CLOUDFLARE-DEPLOYMENT.md#hosty-i-access).
 
 ## Rozszerzenie oferty po zakupie — odebrane lokalnie, 18.10.2026
 
@@ -268,7 +327,7 @@ Bieżący zakres wdrożenia zakończony. Następny osobny etap obejmuje dostawę
 mailowe potwierdzenia i dokumenty PDF, sekret runtime i webhook Stripe oraz
 rzeczywistą płatność w sandboxie. Dopiero po ich odbiorze można aktywować sprzedaż.
 
-Aktualizacja: 2026-10-16 (przycisk „Otwórz podgląd” z limitem renderów, Sanity 6.19.0 bez autoUpdates; wycofany przycisk „Otwórz podgląd” w Studio); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
+Aktualizacja: 2026-10-16 (przycisk „Otwórz podgląd” z limitem renderów, Sanity 6.19.0 bez autoUpdates; wycofany przycisk „Otwórz podgląd” w Studio); 2026-10-15 (Turnstile opublikowany na produkcji; frontend v3 i aktywna bramka n8n z trwałym rejestrem; brak zapisu danych wykonań; staging wyłączony); 2026-10-14 (Turnstile: klucze zgodne, trwały rejestr replay przygotowany i sprawdzony w izolowanym PostgreSQL; staging nieodebrany, produkcja bez zmian); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
 CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 
@@ -326,6 +385,261 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   `/blog/kategoria/pcos.md`. `robots.txt` bez `noindex`.
 - Zmiana dotyczy nagłówków plików tekstowych i Markdown. Następny krok
   to odbiór PR.
+
+### Plan D27 i oferty po zakupie, 18.10.2026
+
+- Użytkownik zlecił ponowny odczyt projektu prawnego i plan przed zmianami.
+  Commit fa6272c w źródle potwierdza jeden wymagany checkbox, brak dodatkowego
+  checkboxa Stripe i brak dostawy po 14 dniach. Wcześniejszy raport oznaczono
+  jako historyczny. Nie zmieniano źródeł prawa ani statusu ich akceptacji.
+- Zapisano decyzję ceny 97 zł brutto oraz drugiego zakupu dwóch pozostałych
+  e-booków za 97 zł brutto w HOMEPAGE-CMS-CONFIG. Powstał
+  [plan do zatwierdzenia](STRIPE-EBOOK-IMPLEMENTATION-PLAN-2026-10-18.md).
+  Obejmuje powiązane zamówienia, pojedynczy checkbox przy każdym zakupie,
+  ofertę dopiero po potwierdzonej płatności, Stripe, Sanity, R2, SES i testy.
+- Ponowny konwerter --check zakończył się kodem 1 zgodnie z wykrytą rozbieżnością:
+  tylko lokalny regulamin 2.3 jest niezgodny ze źródłem 2.4. Trzy pozostałe
+  fixture'y odpowiadają źródłom. To wykryty brak synchronizacji, nie PASS.
+  Metryka szablonów maili nadal 1.1, choć historia i D27 wskazują 1.2.
+- Odczyt kodu potwierdza brak backendu płatności i dostawy. Importer prawny
+  nadpisuje sześć dokumentów, w tym EN, więc plan przewiduje selektywną migrację
+  po porównaniu CMS. Odbiór prawny połączonej zgody pozostaje w źródle oceną.
+- W tej turze nie zmieniano aplikacji, Sanity ani Stripe i nie wykonywano
+  zakupów. Nie uruchamiano pełnego verify, UI ani verify-ola. Zweryfikowano
+  tylko plan i dokumentację. Następny krok: zatwierdzenie planu przez użytkownika,
+  następnie wdrożenie i odbiór wskazanych w nim etapów.
+- Kontrole dokumentacji PASS: format pięciu dokumentów, git diff --check,
+  cztery odwołania do istniejącego planu. Odczyt architektury i niezależna
+  synteza potwierdziły zakres, dopisano jawną migrację checkoutUrl oraz obsługę
+  zwrotów i cofniętych płatności. Bez deklaracji testów przyszłej implementacji.
+
+### Audyt płatności trzech e-booków, 18.10.2026
+
+- Na zlecenie użytkownika porównano projekt prawny z kodem i dokumentacją
+  Stripe. Po zgodzie na odczyt konta produkcyjnego aleksandraolesiewicz.com
+  listy API wykazały zero produktów, cen aktywnych i nieaktywnych, Payment
+  Links i endpointów webhooków. Wszystkie listy mają has_more=false.
+- [Raport i konkretna konfiguracja](STRIPE-EBOOK-CHECKOUT-2026-10-18.md)
+  opisują Z1/Z2, dokładny przycisk zamówienia, parametry Checkout, neutralne
+  nazwy, dowody i dostawę. Rekomendacja to trzy własne adresy zamówienia
+  i indywidualne sesje, nie bezpośrednie publiczne Payment Links.
+- Ustalono brak procesu zamówienia i integracji dostawy w repo. Nie odczytano
+  Public details, podatków, danych umownych konta ani ustawień maili.
+  API potwierdza zamknięte submit_type i brak własnego checkboxa Z2.
+  UOKiK dopuszcza równoważne nazwy przycisku, dokładny tekst wynika z projektu.
+- Zapisano rozbieżności źródeł: natychmiastowa dostawa w § 8 wobec § 15 ust. 4,
+  tekst pod przyciskiem Stripe i moment otrzymania potwierdzenia e-mail.
+  Materiały źródłowe zachowują status draft. Nie zmieniano projektu prawnego.
+- Nie tworzono obiektów Stripe, nie dokonywano zakupu, nie zmieniano CMS ani
+  aplikacji. Nie wykonano sandboxu, odbioru UI, desktop/mobile, klawiatury,
+  320 px, zoomu 200% ani reduced motion. Publiczne URL narzędziem web
+  były niedostępne, więc audyt strony dotyczy kodu. Pełne verify nie dotyczy
+  tej sesji dokumentacyjnej. Wynik formatu i odnośników zapisano poniżej.
+- Kontrole PASS: Prettier czterech dokumentów i rejestru odczytu,
+  git diff --check, trzy lokalne linki raportu oraz trzy odwołania do raportu
+  z planu, postępu i konfiguracji CMS. Rejestr odczytu:
+  `.audit/stripe-ebook-readonly-20261018.json` (lokalnie, poza repozytorium).
+- Następny krok: wdrożyć proces zamówienia według raportu, potwierdzić finalne
+  ceny i podatki, a następnie odebrać oba warianty dostawy w sandboxie Stripe.
+
+### Cień i badge matcha nad okładkami, 17.10.2026
+
+- Użytkownik wskazał słaby cień i zasłanianie badge. Na produkcji odtworzono
+  oba rozmiary: 1280/320 px, badgeAbove=false, dolny punkt trafiał w IMG.
+  Cień miał tylko 8% krycia. Przyczyną warstw był wspólny z-index 1 badge
+  i wewnętrznego content CoverStage, z późniejszym obrazem w DOM.
+- CoverStage ma isolation:isolate. Badge korzysta z istniejących stałych
+  tokenów matcha: #D8E78A i #53671B, kontrast 4,73:1. Istniejący book-shadow
+  wzmocniono dwiema miękkimi warstwami i dodano do bitmap na landingach,
+  bez dublowania cienia fallbacku.
+- Nowe cztery scenariusze Playwright, 1280/320 i light/dark, sprawdzają
+  homepage i katalog. Przed poprawką wszystkie cztery FAIL na hit-teście,
+  Expected true / Received false. Test zapisano w osobnym podpisanym commicie
+  przed poprawką. Pierwszy pełny przebieg: 666 unit PASS i 517 E2E PASS,
+  12 przewidzianych pominięć, dwa błędy czasowe Firefox w Turnstile.
+  Pełne ponowienie na finalnej kopii z czterema workerami jest w toku.
+- verify-ola prowadzi własną sesję danych live na 4340. Obejrzano desktop
+  i 320 px w jednym przebiegu: pełny badge na okładce, widoczny cień,
+  badgeAbove=true i oczekiwane kolory. Homepage → katalog i POST [].
+  Dowody .audit/ebook-cover-polish-20261017 oraz /tmp/ola-cover-polish-after.
+- Impeccable context odczytał istniejący DESIGN.md i pozwolił na tę lokalną
+  korektę. Jedyny wynik pojedynczego detect to wcześniejszy grzbiet 4 px
+  zatwierdzonych zaślepek 3a, bez zmian w tym zakresie. Przegląd źródeł
+  bez blokad; no-comments: 0 usunięć i MUST KILL.
+- [PR 127](https://github.com/zawlodzki/nowa-strona-ola/pull/127) obejmuje tylko
+  pięć plików prezentacji i nowy test. Pozostałe zmiany zachowano poza PR.
+  Następny krok: wynik pełnego verify i niezależnego odbioru, następnie CI,
+  scalenie i produkcyjny workflow publikacji.
+- Niezależny odbiór pierwszej wersji 59430c9 dał FAIL wyłącznie dla landingów:
+  Astro pozostawiło literalne :has(:global(img)) w CSS. Poprawiono selektor
+  na .ebook3a-book > :global(img), który działa na rzeczywistym obrazie.
+  Dodano piąty test regresji, odtwarzający markup obrazu z zachowanym scopingiem
+  kontenera. Pierwsza wersja nie została scalona ani opublikowana.
+  Cień kart i warstwy badge przeszły niezależną kontrolę w czterech wariantach,
+  12/12 trafień w badge, kontrast 4,73, klawiatura i POST [].
+  Końcowa runda i verify dotyczą 44b6545.
+- Finalne pełne verify na Node 24.21.0 i czterech workerach PASS:
+  666 unit, 522 E2E, 12 przewidzianych pominięć, 17 stron fixture zgodnych
+  z symulacją Content Lake. Log /tmp/ola-cover-polish-verify-complete.log.
+  Nowy test cienia obrazu przeszedł w Chromium, Firefox i WebKit.
+- Niezależna druga runda PASS dla 44b654555f9013c7fb31161b645ec855656c4244,
+  patch-id 50b61f55e12cd161c8a2e6e95913a333189943a2. Potwierdzono trzy
+  landingi i katalog desktop/mobile light/dark, brak literalnego :global
+  w wynikowym CSS, klawiaturę oraz POST []. Dowód
+  .audit/ebook-cover-polish-20261017/final-review.md.
+- Skupione ponowienie tej samej komendy regresji po poprawce: 5 passed
+  w Chromium, /tmp/ola-cover-polish-green.log. README ma sprawdzoną komendę.
+  verify-ola na fixture sprawdził filtr Perimenopauza, katalog bez JS,
+  snapshot, zrzut i POST []; sesje live i fixture zamknięto, dowody zachowano.
+- Oba Quality finalnego head PR 127 SUCCESS. Po potwierdzeniu zgodności
+  head i patch-id scalono PR oraz uruchomiono produkcyjny Publish content.
+- PR 127 scalony do 11169f8ea93f4f66054cb8b96794cc7ae4edecd0.
+  Produkcja [39047050709](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/39047050709)
+  SUCCESS, Worker e7631c7e-3f11-4c0d-ab9e-1d2a4187f9b4.
+  Końcowy odbiór publicznej strony: 48 kontroli PASS, POST [].
+  Homepage i katalog mają badge nad trzema ilustracjami, stałe kolory matcha
+  i widoczny cień. Oba obrazy wszystkich trzech landingów mają dwuwarstwowy
+  cień. Sprawdzono 1280/320 px i light/dark. Obejrzano oba zrzuty kart.
+  Wyniki i obrazy .audit/ebook-cover-polish-20261017/production.json
+  oraz production-1280.png i production-320.png.
+- CSS zoom 200%, reduced motion, brak JS i klawiatura przeszły w odbiorze
+  niezależnym oraz automatycznych testach. Natywnego zoomu 200%, czytnika
+  i fizycznego telefonu nie sprawdzano. Format i odnośniki dokumentacji
+  kontrolowane osobno. Publikacja tego zakresu zakończona; pozostała osobna
+  obserwacja niestabilnego zdjęcia posiłku bez JS z poprzedniej sesji.
+
+### Publikacja okładek i renderowanie kart, 17.10.2026
+
+- Użytkownik zlecił publikację okładek i użycie poteto-mode oraz verify-ola
+  przy zmianie kodu. Porównano pełne dokumenty opublikowane i szkice:
+  poza metadanymi Sanity zmieniło się wyłącznie cover. Opublikowano trzy
+  dokumenty PL z kontrolą rewizji. Odczyt published potwierdził trzy assety;
+  dostępność pozostała planned.
+- Po dwóch niezależnych szkicach i osobnej ocenie wybrano wspólny
+  BookCover z istniejącym MediaSpec. Trzy widoki kart przekazują cover;
+  pickSiteImage zachowuje fallback dla nierozpoznanych kluczy fixture.
+  Bitmapa ma 2:3, contain i nie powtarza tekstu okładki dla czytnika.
+  Landing ma proporcjonalne 504×756. Tabletowy selektor artykułu pomija bitmapy.
+- W odseparowanej kopii aktualnego main 18d700c pełne npm run verify
+  na Node 24.21.0 PASS: 666 unit, 507 E2E, 12 przewidzianych pominięć;
+  fixture i symulacja Content Lake zgodne na 17 stronach. Pierwsza próba
+  w sandboxie nie mogła otworzyć portu Playwright; pełne ponowienie
+  z dostępem do sieci i lokalnego serwera PASS. Log
+  /tmp/ola-ebook-isolated-verify-network.log.
+- Główny katalog ma niezwiązane błędy lint nowego pliku
+  design-system/exports/stripe/export.mjs. Tego pliku i innych zmian użytkownika
+  nie dołączono do publikacji. Próby z tego katalogu nie oznaczono jako PASS.
+- verify-ola uruchomił własne sesje fixture i danych live na 4340.
+  Przejście homepage → katalog → landing, filtry i wariant bez JS mają
+  snapshoty i zrzuty, POST []. Dodatkowy skrypt sprawdził sześć tras
+  na desktopie, 320 px, 850 px, reduced motion, bez JS i CSS zoom 200%:
+  37 kontroli PASS, obrazy załadowane, pełny kadr 2:3, bez overflow.
+  Natywnego zoomu 200%, czytnika i fizycznego telefonu nie sprawdzano.
+- Dodatkowo zbudowano izolowaną symulację Content Lake z trzema assetami
+  okładek podłączonymi do dokumentów fixture, bez zapisu w Sanity.
+  Panel polecanych e-booków Article3a przeszedł runtime na 320, 850 i 1280 px:
+  trzy załadowane bitmapy, padding 0, contain, 2:3, bez overflow i POST.
+  Obejrzano zrzut 850 px. /tmp/ola-ebook-article-results.json.
+- Niezależny parent/head odbiór PASS+NOTES, patch-id
+  2cc1f8d4a5d9170f2da74961357fa4195c30ad7c. Bieżące artykuły live nie mają
+  panelu relatedEbooks, dlatego nowa bitmapa w tym panelu nie została
+  odebrana w runtime. Istniejący badge dostępności jest częściowo zasłonięty
+  także przed zmianą na 320 px. No-comments: zero usunięć i MUST KILL.
+- Podpisany commit 71fbf1b dotyczy wyłącznie pięciu plików aplikacji.
+  [PR 126](https://github.com/zawlodzki/nowa-strona-ola/pull/126) utworzony,
+  CI w toku. Origin ma mirror inbound, więc źródłem publikacji jest GitHub.
+  Następny krok: zakończenie CI, scalenie tego PR i odbiór produkcji.
+- Oba Quality PR 126 SUCCESS, wyniki GitHub zgodne z lokalnymi.
+  PR scalono do 081ff16c8e329a3047498ea66b673f62720515db.
+  Uruchomiono istniejący workflow Publish content dla production,
+  run 39043923827 na tym samym commicie. Następny krok: potwierdzić wdrożenie
+  i obejrzeć trzy okładki w publicznym katalogu oraz landingach.
+- Produkcja [39043923827](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/39043923827)
+  SUCCESS na commicie scalenia. Worker
+  82361138-53a7-470f-929c-a73e5ef1e734. Obejrzano publiczny katalog po
+  przeładowaniu oraz zapisano zrzut .audit/ebook-covers-20261017/production-catalog.png.
+  Wszystkie trzy ilustracje i podpis autorki są widoczne. Ceny, statusy,
+  odnośniki i pozostałe zaślepki pozostały zachowane.
+- Dodatkowy odbiór produkcji wykrył przepełnienie homepage bez JS po
+  załadowaniu zdjęcia posiłku home3a-about__food. Dokument ma 1544 px przy
+  viewport 1280 px; wskazany element nie jest okładką. Początkowych przebiegów
+  nie uznano za PASS. Końcowe pełne ponowienie produkcji zakończyło 37 kontroli
+  PASS i POST [], zapisane w .audit/ebook-covers-20261017/production-results.json.
+  Nie zmieniano kodu pomiędzy tymi próbami, więc wcześniejszy wynik jest
+  niestabilną obserwacją i wymaga osobnego odtworzenia, nie deklaracji naprawy.
+  Natywny zoom, czytnik i fizyczny telefon nadal nieodebrane.
+  Sesje verify-ola zamknięto, dowody zachowano.
+- Następny krok poza zakończoną publikacją okładek: odtworzyć i naprawić
+  zachowanie zdjęcia posiłku bez JS oraz istniejące zasłanianie badge.
+
+### PNG logo do Stripe, 17.10.2026
+
+- Wyeksportowano dwuliniowy wordmark 3a, Switzer 750, kolor #70283f,
+  zgodnie z bieżącym komponentem i regułami CSS.
+  [PNG](../design-system/exports/stripe/logo-stripe.png): 1328×575 px,
+  przezroczyste tło i margines. Obejrzano wynik, potwierdzono kanał alfa.
+- Eksporter: `node design-system/exports/stripe/export.mjs` z katalogu repo.
+  Nie zmieniano aplikacji ani CMS; pełnego verify i odbioru UI nie uruchamiano.
+  Następny krok: ręczne wgranie pliku w panelu Stripe. Brak blokad eksportu.
+
+### Wybrane ilustracje e-booków w Sanity i skill FIRMA, 17.10.2026
+
+- Użytkownik wybrał C dla wszystkich trzech e-booków i zlecił zmianę podpisu
+  na „Aleksandra Olesiewicz-Zawłodzka”, upload do Sanity i lokalny skill FIRMA.
+  Edytowano trzy wybrane PNG przez image_gen, zachowano wcześniejsze wersje,
+  obejrzano wyniki i zapisano prompty edycji. WebP 1024×1536 mają odpowiednio
+  331000, 273824 i 244740 bajtów.
+- Wgrano trzy zasoby do dyuqkn8c/production. Nie było wcześniejszych szkiców.
+  Z kontrolą rewizji zmieniono wyłącznie cover.image, cover.alt i cover.tone
+  trzech dokumentów PL. Odczyt szkiców i rozwiniętych referencji potwierdził
+  wszystkie trzy assety, wymiary, opisy i zachowaną dostępność planned.
+  [Rejestr](../design-system/proposals/ebook-covers-2026-10-17/cms-change.json).
+  Zlecenie obejmowało upload do Sanity; szkiców nie publikowano.
+  Katalog nadal wymaga obsługi pliku z CMS, bez zmian kodu w tej sesji.
+- W FIRMA/.claude/skills/okladki-ebookow zapisano SKILL.md, opis dwóch kierunków,
+  sześć promptów z aktualnym nazwiskiem i trzy zaakceptowane ilustracje.
+  Fotografia jest kierunkiem propozycji, ilustracje zaakceptowanym wzorcem.
+  Wariant typograficzny pominięto. Bez zmian pozostałych skillów FIRMA.
+- Oficjalny quick_validate.py PASS po doinstalowaniu PyYAML do katalogu
+  tymczasowego. Format pakietu i skilla, odnośniki, zgodność kopii FIRMA
+  oraz git diff --check PASS. Pozostałe zmiany robocze zachowano.
+- Aplikacji nie uruchamiano, pełnego verify nie wykonywano. Odbiór publicznego
+  UI, mobile, 320 px, klawiatury, zoomu 200% i reduced motion pozostaje otwarty.
+  Następny krok dla strony: publikacja szkiców i obsługa obrazów we wszystkich
+  miejscach ekspozycji, po zleceniu tego zakresu.
+
+### Dziewięć propozycji okładek e-booków, 17.10.2026
+
+- Użytkownik zlecił po trzy wersje dla napisanych e-booków o szczupłym
+  fenotypie PCOS, badaniach i suplementach. Okładki mają kontrastować ze stroną,
+  bez powielania jej design systemu i kolorystyki.
+- Przeczytano wskazane materiały FIRMA, zasady 3a i kod obecnych okładek.
+  Wygenerowano dziewięć osobnych PNG 1024×1536 wbudowanym image_gen.
+  Obejrzano wszystkie obrazy; teksty odpowiadają tytułom, podtytułom
+  i autorstwu źródeł. Trzy kierunki: fotografia, typografia, kolaż.
+  [Pliki, porównanie, rekomendacja i prompty](../design-system/proposals/ebook-covers-2026-10-17/README.md).
+- Żaden wariant nie został zaakceptowany ani wdrożony. Suplementy A
+  przypomina reklamę preparatu; w Badania B warto dopracować odstępy.
+  Katalog nadal renderuje BookCover, choć landing obsługuje plik okładki.
+  Sam upload do Sanity nie zapewni podmiany we wszystkich miejscach.
+- Zakres sesji to obrazy i dokumentacja. Nie uruchamiano aplikacji
+  ani pełnego verify. Odbiór UI desktop/mobile, 320 px, klawiatury,
+  zoomu 200% i reduced motion pozostaje do wdrożenia.
+- Następny krok: wybór wariantów, finalizacja składu i miniatur,
+  następnie osobno zlecona podmiana w serwisie.
+
+### PR okładek bloga scalony, 15.10.2026
+
+- Na zlecenie użytkownika utworzono i scalono
+  [PR 105](https://github.com/zawlodzki/nowa-strona-ola/pull/105),
+  main `d7e493b39f49e84812884b6eed6ad1c2141bbbab`.
+  Zakres: dziewięć plików pakietu okładek i wyłącznie dotyczące ich fragmenty
+  trzech dokumentów. Bez plików FIRMA i pozostałych zmian roboczych.
+- Przed commitem format i diff PASS; pełne verify z podmiany opisano niżej.
+  GitHub przyjął natychmiastowy merge; oba joby Quality były wtedy w toku.
+  Nie deklarujemy ich końcowego wyniku. Lokalny main wyrównano bez zmiany
+  zawartości 55 plików roboczych, potwierdzone SHA256; indeks pusty.
+- Następny krok dla tego zakresu: sprawdzić końcowy wynik Quality PR 105.
 
 ### Kierunek okładek zapisany w skillu FIRMA, 15.10.2026
 
@@ -387,17 +701,487 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
 - Następny krok dla tego zakresu: wybór lub korekta propozycji, następnie
   podmiana wybranych obrazów i kontrola rzeczywistego kadrowania.
 
-### Zatwierdzony kod źródła AI, 13.10.2026
+### Publikacja Turnstile na produkcji, 15.10.2026
 
+- Użytkownik jawnie zlecił publikację. Wyodrębniono wyłącznie 25 plików Turnstile,
+  podpisano commit i scalono [PR 104](https://github.com/zawlodzki/nowa-strona-ola/pull/104)
+  do `9714df3c3d635c6ce424c0f28b1829f0e46cd954`. Pozostałe zmiany lokalne
+  zachowano. Wyrównanie lokalnego main i indeksu nie zmieniło zawartości
+  66 plików roboczych, co potwierdzono przez SHA256; indeks pozostaje pusty.
+- Świeży no-comments: brak usunięć i MUST KILL. Niezależny odbiór parent/head
+  PASS+NOTES: własne UI 1280/320, reduced motion i klawiatura, 123 unit i
+  21 Chromium; patch-id 5cbc493df0e438568cb834cc69ad7c4fa1cb3086.
+  W odseparowanej kopii testów oczekiwany port 4321 zmieniono na port własnego
+  serwera 4396, bez zmian głównego repo. Publiczną domenę dopuszczono do publikacji.
+- Oba Quality PR SUCCESS: 618 unit, 507 E2E PASS, 12 świadomych pominięć GTM,
+  Content Lake 17 stron z tymi samymi sekcjami, zdjęciami i DOM.
+  [Quality](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38700305795).
+- Ustawiono i ponownie odczytano PUBLIC_TURNSTILE_SITEKEY oraz
+  PUBLIC_LEAD_WEBHOOK_URL oddzielnie w GitHub environments staging/production.
+  Produkcyjny sekret Siteverify i uwierzytelnienie PostgreSQL sprawdzono na
+  odseparowanym webhooku staging: celowo błędny token daje invalid-input-response,
+  SELECT potwierdza właściwą rolę. Nie odszyfrowywano credentials i nie zapisano
+  odcisków w tabeli produkcyjnej tą próbą. Staging przywrócony do 11 węzłów inactive.
+- Istniejący [Publish content](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38701609220)
+  SUCCESS, 15.10 o 09:53 czasu PL. Cloudflare `ola-website-production`, wersja
+  `d0f1bfaf-3c3c-45ff-8334-30357df47ac3`. IndexNow zakończony bez błędu.
+  HTML homepage, kontaktu, odstąpienia i landingu e-booka zawiera właściwy
+  klucz produkcyjny, łącznie pięć formularzy; wszystkie strony zwróciły 200.
+- Dopiero po sprawdzeniu HTML zapisano nowy graf n8n jako szkic z
+  publishIfActive=false i opublikowano tę konkretną wersję. Endpoint nie był
+  wcześniej wyłączany. Aktywny workflow `8vE6DwHNx5xqGrod`, wersja i activeVersionId
+  `39af53f7-1377-4f3b-8ac1-a3b8bdf80606`, 11 węzłów; aktywne nodes/connections
+  są identyczne z zatwierdzonym kandydatem. Siteverify, SHA256 i rejestr
+  PostgreSQL obowiązkowe; CORS/hostname wyłącznie domena produkcyjna.
+  Success/error none, progress/manual false. Sekrety nadal tylko w credentials.
+- Kontrola rzeczywistego produkcyjnego UI przy 1280 i 320 px PASS: niewypełnione
+  pola odrzucone, właściwy sitekey, zero żądań webhooka. Wszystkie żądania flows
+  były blokowane przez kontekst testowy. Nie wykonano testowego POST ani próby
+  prawdziwego przyjęcia na produkcyjnym webhooku. Własne przeglądarki zamknięte.
+- Dowód publikacji (lokalnie poza repozytorium: `.audit/ola-turnstile-production-proof.json`) i checklisty
+  zapisane lokalnie. Dokumentacja i łącza sprawdzone. Kod jest scalony i
+  opublikowany; końcowy protokół oraz pozostałe zmiany dokumentacji pozostają
+  robocze. Sanity i copy formularzy bez zmian.
+- Ograniczenia: prawdziwa wysyłka z chronionego preview nie działa, bo hostname
+  preview nie należy do widgetu ani allowlist backendu produkcyjnego. Osobna
+  konfiguracja albo tryb demo preview to następny krok w tym zakresie. Nie
+  dodano dostarczania wiadomości, deduplikacji submissionId ani rate limitu.
+  Rzeczywisty iframe mobile, natywny zoom, czytnik i fizyczne urządzenie nadal
+  nieodebrane. Kolejny etap formularzy pozostaje otwarty; Turnstile produkcji wdrożony.
+
+### Odbiór rejestru replay na n8n, 15.10.2026
+
+- Po potwierdzeniu Touch ID helper n8n-api działa ponownie. Nowa pojedyncza
+  sesja SSH potwierdziła rzeczywiste uprawnienia obu ról: INSERT/SELECT własnej
+  kolumny, brak dostępu do innych tabel, brak UPDATE/DELETE/TRUNCATE i CREATE,
+  bez praw administracyjnych; statement_timeout 10s i synchronous_commit on.
+- Staging `tism0NvfJSKAU0lj` zaktualizowano do 11 węzłów i tymczasowo
+  aktywowano z lokalnym origin http://127.0.0.1:4340. Crypto i PostgreSQL
+  wykonały się na faktycznej instalacji n8n. Zapis success/error none,
+  progress/manual false. Użyto rzeczywistego widgetu staging i syntetycznych
+  payloadów, bez produkcyjnego POST i bez odczytu danych wykonań.
+- Świeży token: 200; dwa powtórzenia: 403/403. Osiem równoczesnych żądań
+  tego samego tokenu: dokładnie jedno 200 i siedem 403. W tej próbie checkbox
+  Cloudflare zaznaczył użytkownik. Brak tokenu 400, błędny token 403,
+  token newsletter wysłany jako contact 403.
+- Błąd zapisu rejestru zasymulowano przez nieistniejącą tabelę wyłącznie w
+  zapytaniu staging: 503 verification_unavailable. Nie zatrzymywano bazy ani
+  nie zmieniano credentials. Po przywróceniu poprawnego zapytania ta sama
+  próba dała 200. W panelu diagnostycznym automatyczne odświeżenie widgetu
+  wysłało jeszcze jeden świeży syntetyczny token; dlatego końcowo staging ma
+  4 odciski, a produkcja 0. Późniejszy plik failure-proof został nadpisany 200;
+  wcześniejsze 503 jest potwierdzone odczytem narzędzia w transkrypcji.
+  Liczba wierszy nie jest liczbą powtórzeń jednego tokenu.
+- Trwały, pozbawiony tokenów/sekretów/payloadów zapis wyników:
+  dowód odbioru (lokalnie poza repozytorium: `.audit/ola-turnstile-live-proof.json`). Końcowy GET:
+  staging inactive, 11 węzłów, tylko publiczny hostname staging, bez lokalnego
+  originu i symulacji błędu. Produkcja active, jeden Webhook, niezmieniony
+  versionId 9cf62e88-5ea7-4ec2-b7f4-6cea6825542f. Tabela jest logged,
+  fsync i synchronous_commit on. Nie usuwano syntetycznych odcisków.
+- Własna karta, lokalny serwer i SSH master zamknięte. Screenshot rzeczywistego
+  widgetu po przywróceniu rejestru `/private/tmp/ola-turnstile-ledger-restored.png`.
+  Po podłączeniu referencji credentials 94 testy generatora PASS. Ostatni pełny
+  verify aplikacji z 14.10: 618 unit, 507 E2E PASS, 12 świadomych pominięć GTM;
+  w tej sesji nie zmieniano kodu aplikacji ani generatora. Format dokumentów
+  i lokalne odnośniki sprawdzone. Bez commit, push, publikacji i zmian Sanity.
+- Następny krok: skonfigurować publiczne klucze i odseparowany endpoint w
+  środowiskach wdrożeń, odebrać opublikowany frontend v3 oraz skoordynować
+  aktywację bramki produkcyjnej dopiero na zlecenie publikacji. Produkcyjne
+  credentials PostgreSQL są utworzone, lecz nie były używane do POST na
+  produkcyjny webhook. Realny iframe mobile, natywny zoom, czytnik i urządzenie
+  fizyczne nadal niesprawdzone. Publiczny frontend pozostaje dotychczasową wersją.
+
+### Kod Turnstile i odseparowany n8n, 14.10.2026
+
+- Użytkownik zlecił realizację po ocenie zgodności. Wspólny LeadForm ma
+  kontroler całej próby wysyłki, Managed uruchamiane dopiero po poprawnej
+  walidacji pól i kontrakt v3 z wymaganym tokenem poza `fields` i `consents`.
+  Każda próba posiada własny widget. Retry zachowuje UUID i dostaje nowy token.
+  Callback starej próby nie wysyła zgłoszenia. Zamknięcie dialogu anuluje
+  oczekiwanie na challenge, ale zachowuje rozpoczętą wysyłkę HTTP.
+- Konfiguracja wymaga jawnego klucza dla wdrożeń, odrzuca oficjalne dummy
+  sitekeys. Fixture bez Sanity i celu wdrożenia używają klucza testowego.
+  Lokalna symulacja Content Lake ma jawny klucz atrapy w obu buildach.
+  Staging workflow publikacji wymaga odseparowanego endpointu, sprawdzając
+  origin i pathname także dla adresu z query. Pięć prób skryptu guard PASS.
+- [Generator](../scripts/turnstile-workflow.ts) i
+  [kandydat n8n](../ops/n8n/turnstile/workflow.production.json) mają fail-closed
+  Siteverify, ścisły hostname/action i odpowiedzi przez Respond. Credential
+  wskazuje zatwierdzony credential production. Zapis wykonań ustawiony na none, false.
+  Generator odmawia przebudowy workflow z istniejącym przetwarzaniem.
+- Utworzono odseparowany workflow `formularz Ola Turnstile staging`,
+  `tism0NvfJSKAU0lj`, sześć węzłów. Tymczasowo aktywowany do trzech prób,
+  potem wyłączony. Rzeczywiste odpowiedzi 400 bez tokena, 400 dla nieznanego
+  formKey, 503 przy brakującym credential. CORS wyłącznie staging.
+  Payloady syntetyczne, zapis wykonań wyłączony, bez produkcyjnego POST.
+  Dowód `/tmp/ola-turnstile-staging-negative-proof.json`.
+- Produkcyjny workflow nadal aktywny z jednym Webhookiem, versionId
+  `9cf62e88-5ea7-4ec2-b7f4-6cea6825542f`, identyczny z początkowym odczytem.
+  Produkcyjne ustawienia zapisu payloadów nie zostały jeszcze zmienione.
+  Po przywróceniu Chrome i jawnej zgodzie użytkownika utworzono dwa widgety
+  Managed i credentials `Ola Turnstile production` / `Ola Turnstile staging`.
+  Sekrety przekazano z panelu Cloudflare wyłącznie do n8n, bez repo, plików i czatu.
+  Credentials mają ograniczenie domeny do `challenges.cloudflare.com`.
+  GitHub variables i publikacja frontendu pozostają niewykonane.
+- Node 24.19.0 z dostarczonego runtime. Naprawiono puste symlinki narzędzi
+  przez `npm rebuild --ignore-scripts --bin-links`, bez zmiany zależności.
+  Unit 562 PASS. Pełny E2E 507 PASS, 12 świadomych pominięć GTM.
+  Pierwszy przebieg ujawnił błędne założenia nowych testów dotyczące czasu
+  ładowania mocka, ukrytego dialogu i formularzy landingu. Poprawione testy
+  Turnstile 39 PASS w trzech silnikach. Ostatni etap symulacji Content Lake
+  wymagał dostosowania klucza atrapy; końcowy pełny `npm run verify` PASS
+  (log `/tmp/ola-turnstile-verify-complete.log`). Po dodaniu jawnego lokalnego
+  profilu staging: 59 testów generatora, lint i check PASS. Pełna kontrola
+  w sandboxie przeszła 583 unit, ale build Studio zatrzymał DNS sanity-cdn.com.
+  Kontrola z siecią przeszła unit i buildy, lecz E2E pod wysokim obciążeniem
+  zatrzymano po 17 timeoutach, 172 PASS, 2 przerwanych i 324 niewykonanych.
+  Odseparowane testy karuzeli, audience i Turnstile: 75 PASS w trzech silnikach
+  z jednym workerem i artefaktami w /tmp. Wszystkie 17 timeoutów powtórzono
+  bez zmian kodu i limitów: PASS. Ponowienie reszty: 333 PASS, 8 pominięć.
+  Łączny dowód z rozłącznymi tożsamościami project/file/line/column/title:
+  507 PASS i 12 pominięć; `/tmp/ola-turnstile-e2e-combined-proof.json`.
+  Ostatni etap Content Lake ponownie PASS: 17 stron, te same sekcje, zdjęcia
+  i DOM; SEO 36 stron noindex. Nie deklarować jednego zielonego przebiegu
+  ostatniego `npm run verify`: jego E2E przerwano i odebrano w ponowieniach.
+- verify-ola `ola-turnstile-ui-20261014`: launch i doctor PASS na Node 24,
+  port 4340. Newsletter i kontakt zatrzymują błędne pola; POST `[]`.
+  ARIA i screenshot w `/tmp/ola-verify-evidence/ola-turnstile-ui-20261014/`.
+  Cleanup wykonany. Nowe E2E sprawdzają 320 px, klawiaturę, CSS zoom 200%
+  i reduced motion z atrapą widgeta. Rzeczywisty Managed odebrany na desktopie
+  przez osobny build z kluczem staging i origin `http://127.0.0.1:4340`;
+  launch/doctor PASS, bez produkcyjnego POST. Pozostałe rozmiary realnego iframe,
+  natywny zoom, czytnik i fizyczne urządzenie pozostają niesprawdzone.
+- Niezależny przegląd poprawił wynik HTTP po wyjątku cleanup i normalizację
+  endpointu stagingu. Audyt komentarzy nie wskazał usunięć. Przegląd końcowy
+  nie znalazł dalszej blokującej usterki; wskazał brak realnego 200 i replay.
+- [Kolejność i konfiguracja zatwierdzona](TURNSTILE-ROLLOUT.md), decyzja
+  ochrony zapisana w [mapie CMS](HOMEPAGE-CMS-CONFIG.md). Sanity bez zmian.
+  Ślad lokalny `.audit/ola-turnstile.tsv`. Nie wykonano commit, push ani publikacji.
+- Rzeczywisty staging: świeży token 200, niepoprawny token 403, niezgodny
+  action 403. Replay tego samego tokenu wielokrotnie zwrócił 200; diagnostyka
+  odpowiedzi Siteverify pokazała `success: true`, action newsletter i hostname
+  127.0.0.1. To niezgodne z wymaganiem jednorazowości; przyczyna niewyjaśniona.
+  Dodatkowy test oficjalnego widgeta na istniejącej domenie HTTPS staging
+  potwierdził 200 dla świeżego i ponownego tokenu oraz Siteverify success true.
+  Tymczasowy panel przeglądarki usunięty, bez publikacji strony.
+  Nie uznawać realnego odbioru za PASS. Dowód bez tokenów i danych:
+  `/tmp/ola-turnstile-real-staging-proof.json` oraz
+  `/tmp/ola-turnstile-https-staging-proof.json`.
+- Po testach staging wyłączono, usunięto diagnostykę i lokalny origin.
+  Został credential staging, publiczny hostname staging oraz brak zapisu wykonań.
+  Produkcyjna wersja i pojedynczy Webhook ponownie potwierdzone bez zmian.
+  Lokalny serwer zakończony; zrzut widgetów `/tmp/ola-turnstile-cloudflare-widgets.jpg`.
+- Następny krok: wyjaśnić przyjęcie powtórnego tokenu przez rzeczywisty Siteverify
+  (problem powtórzył się także na HTTPS staging) i odebrać jednorazowość.
+  Do tego czasu nie publikować bramki produkcyjnej. Następnie skonfigurować publiczne zmienne środowisk i uzyskać
+  zlecenie skoordynowanej publikacji frontendu v3 oraz backendu.
+  Dwie syntetyczne odmowy miały różne CF-Ray i Date w odpowiedziach Siteverify;
+  nie potwierdza to ani nie wyklucza cache odpowiedzi udanych tokenów.
+  Po udostępnieniu panelu przez użytkownika odczytano zatwierdzony sekret staging
+  prywatnie i wykonano bezpośrednie dwa POST do oficjalnego Siteverify. Świeży
+  token: success true; ten sam token ponownie: success false, timeout-or-duplicate.
+  Dowód bez sekretu/tokenu: `/tmp/ola-turnstile-direct-proof.json` i `.jpg`.
+  Sekret użyty wyłącznie przejściowo w pamięci testu; nie zapisano go w pliku,
+  repo, logu ani czacie. Odczyt credential staging potwierdził wyłącznie body.secret,
+  bez response ani idempotency_key. Cloudflare bez n8n spełnia jednorazowość;
+  różnica w torze n8n pozostaje niewyjaśniona. Dwa kolejne odczyty API n8n zakończyły się
+  brakiem N8N_API_KEY z mountu 1Password; wymagane przywrócenie istniejącego dostępu.
+  Panel diagnostyczny i jego własna karta zamknięte po zapisaniu dowodu.
+  Nie dodano dostarczania zgłoszeń, deduplikacji ani rate limitu.
+
+### Dalsza diagnostyka replay, 14.10.2026
+
+- Użytkownik odblokował 1Password; API n8n działa ponownie. Nie ma już blokady mountu.
+- Nowy własny panel wykonał dwa POST o identycznym body i tokenie, przechowywanym
+  tylko w pamięci. n8n zwrócił 200/200 i Siteverify success true z różnymi CF-Ray.
+  Ponowny zapis istniejącego credential staging przez UI oraz ponowna aktywacja
+  workflow nie zmieniły wyniku. Osobny UUID Siteverify per execution też nie pomógł;
+  eksperyment usunięto.
+- Test porównawczy użył dokładnie tego samego tokenu w obu torach: bezpośrednie
+  Siteverify true, potem false timeout-or-duplicate; następnie n8n dwa razy 200/true.
+  Dowód `/tmp/ola-turnstile-cross-proof.json`. Census aktorów można odtworzyć
+  przez `python3 /tmp/ola-turnstile-actor-census.py`; wynik replay direct false,
+  dwa przyjęcia zużytego tokenu w n8n. Przyczyna nadal niepotwierdzona.
+- Próba zapisu sekretu przez zdarzenia klawiatury edytora n8n dała 503 i bezpieczną
+  klasyfikację błędu uwierzytelnienia. Następnie istniejący credential
+  `eVFPn8fCOItrG6g6` zaktualizowano oficjalnym PATCH, zachowując ograniczenie do
+  challenges.cloudflare.com. Klucz z zatwierdzonego widgetu przesłano z lokalnego
+  formularza przez anonimowy deskryptor pipe do helpera n8n-api; nie zapisano go
+  w pliku, args, środowisku, repo, logu ani czacie. API potwierdziło ID, typ i datę.
+  Po tym świeży token i replay znowu 200/200. Dowody bez klucza:
+  `/tmp/ola-turnstile-credential-api-proof.json`,
+  `/tmp/ola-turnstile-n8n-replay-proof.json` i `/tmp/ola-turnstile-credentials-api-proof.jpg`.
+- Odczyt przez jedną sesję SSH: n8n main i worker 2.35.7; kod HTTP Request scala
+  body credential z body węzła. Worker nie ma HTTP_PROXY, HTTPS_PROXY, ALL_PROXY
+  ani NODE_OPTIONS. Nie czytano logów zgłoszeń ani wartości tych zmiennych.
+- Automatyczna kontrola uprawnień odrzuciła planowany odczyt dokładnie jednego
+  odszyfrowanego credential przez CLI do procesu liczącego SHA256. Uznała go za
+  nieautoryzowane źródło odczytu sekretu. Komenda nie została wykonana. Nie
+  obchodzono odmowy. Porównanie odcisku z kluczem widgetu wymaga jawnej zgody.
+- Po próbach staging wyłączony, lokalny origin i cała diagnostyka usunięte.
+  Zapis success/error none, progress/manual false. GET potwierdził niezmienioną
+  produkcję: versionId 9cf62e88-5ea7-4ec2-b7f4-6cea6825542f i jeden Webhook.
+  Własny panel, jego karta i sesja SSH zamknięte. Bez produkcyjnego POST,
+  publikacji, push ani zmian kodu aplikacji. Format dokumentów i odnośniki sprawdzone.
+- Następny krok: uzyskać zgodę na odczyt odcisku jednego credential staging,
+  porównać z kluczem widgetu i ustalić przyczynę różnicy obu torów. Publikacja
+  pozostaje zablokowana przez nieodebraną jednorazowość w n8n.
+
+### Odcisk klucza i trwały rejestr replay, 14.10.2026
+
+- Po jawnej zgodzie wykonano jednorazowy odczyt odszyfrowanego credential
+  staging `eVFPn8fCOItrG6g6` wewnątrz kontenera n8n przez anonimowy pipe
+  do procesu liczącego SHA256. Odcisk identyczny z kluczem widgeta Cloudflare.
+  Body zawiera tylko secret, właściwy klucz 35 znaków, ograniczenie domeny
+  challenges.cloudflare.com. Bez sekretu w pliku, logu, repo i czacie.
+  Dowód `/private/tmp/ola-turnstile-fingerprint-proof.json`. Poprzednia blokada
+  odczytu zniesiona wyłącznie dla tej zatwierdzonej próby; zgoda wykorzystana.
+- Macierz tego samego tokenu i sekretu: lokalny fetch true/false; fetch w workerze
+  n8n true/false mimo wcześniejszego zużycia lokalnie; fetch Connection:close
+  false/true; Axios keepAlive:false true/true; keepAlive:true true/false.
+  Dowód `/private/tmp/ola-turnstile-server-cross-proof.json`. To obserwowany
+  wzorzec związany z połączeniem, nie potwierdzona diagnoza błędu Cloudflare.
+  Wcześniejszy wniosek o różnicy wyłącznie n8n był zbyt wąski.
+- Dwa niezależne szkice Redis/PostgreSQL i osąd wybrały PostgreSQL.
+  Redis istniejącej instancji ma AOF everysec; wybrano logged table i
+  synchronous_commit=on. Generator wymaga jawnego środowiska i osobnego
+  credential PostgreSQL; 11 węzłów, walidacja challenge_ts, SHA256, Set
+  pozostawiający sam odcisk, atomowy INSERT ON CONFLICT, ścisły wynik boolean.
+  Powtórzenie 403; błąd rejestru 503. Nie ma automatycznej retencji; tabela rośnie
+  o jeden odcisk na przyjęty token. Nie przechowuje danych zgłoszeń ani tokenów.
+- [SQL, zakres uprawnień i runner](../ops/n8n/turnstile/README.md) gotowe.
+  94 testy generatora, lint, typy i format PASS. Rzeczywisty PostgreSQL 17.10
+  w własnym kontenerze bez sieci: 32 próby przy równoległości 8, 1 przyjęcie
+  i 31 odmów; 32 różne odciski przyjęte. Izolacja środowisk, 7 odmów operacji,
+  odrzucenie błędnego odcisku i replay po restarcie PASS.
+  Dowód `/private/tmp/ola-turnstile-postgres-concurrency-proof.json`.
+- Pełny `PLAYWRIGHT_WORKERS=1 npm run verify` na Node 24.19.0 PASS:
+  lint, format, typy, 618 unit, buildy Astro/Studio/podglądu/Workera,
+  507 E2E PASS i 12 świadomych pominięć GTM. Symulacja Content Lake PASS:
+  17 stron, te same sekcje, zdjęcia i DOM; SEO 36 stron noindex.
+  Jeden pełny zielony przebieg; log
+  `/private/tmp/ola-turnstile-replay-full-verify.log`.
+- Własny kontener i wolumen próby usunięto po sprawdzeniu identyfikatora i
+  etykiet; usunięto publiczny pakiet próbny z VPS. SSH master zamknięty.
+  Własna karta i serwer diagnostyczny zamknięte. Nie tworzono nowych zasobów
+  w bazie n8n ani credentials PostgreSQL. Staging nadal nieaktywny, sześć
+  starych węzłów; produkcja bez zmian. Bez produkcyjnego POST, push i publikacji.
+- Następny krok: osobna zgoda na dwa schematy/tabele, role runtime z INSERT/SELECT
+  tylko własnego odcisku i credentials `Ola replay production` / `Ola replay staging`.
+  Następnie odbiór nowych węzłów Crypto/Postgres na rzeczywistym stagingu.
+  Produkcyjna aktywacja dopiero po odbiorze i zleceniu publikacji frontendu v3.
+  Realny iframe na mobile, natywny zoom, czytnik i urządzenie nadal niesprawdzone.
+
+### Utworzenie rejestru replay po zgodzie, 14.10.2026
+
+- Użytkownik jawnie zatwierdził oba schematy/tabele, ograniczone role i credentials.
+  Utworzono `ola_replay_production.used_tokens` i `ola_replay_staging.used_tokens`
+  w PostgreSQL n8n oraz role `ola_replay_production_runtime` /
+  `ola_replay_staging_runtime`: LOGIN, NOINHERIT, bez praw administracyjnych,
+  USAGE własnego schematu i INSERT/SELECT kolumny token_digest.
+  Wykonano przygotowany SQL w transakcji, bez kasowania odcisków.
+- Credentials utworzone przez oficjalne API: `Ola replay production`
+  (`sn5a20V6sGsaOTnJ`) i `Ola replay staging` (`ebygmaWZbFplBfAk`).
+  Losowe hasła przekazano wyłącznie w pamięci/anonimowych pipe do PostgreSQL
+  i helpera n8n-api; wyłączono zapis treści SQL dla sesji tworzącej role.
+  Bez hasła w args, pliku, repo, logu i czacie. Dowód metadanych
+  `/private/tmp/ola-turnstile-replay-credentials-proof.json`.
+- Podłączono referencje w lokalnych kandydatach JSON; 94 unit PASS, format PASS.
+  Odczyt przed zmianami potwierdził staging inactive / 6 węzłów i produkcję
+  active / 1 Webhook, niezmieniony versionId
+  `9cf62e88-5ea7-4ec2-b7f4-6cea6825542f`. Aktualizacja n8n nie nastąpiła:
+  pierwszy GET credential przed zapisem zatrzymał monit 1Password.
+- Sesja SSH została przerwana podczas odczytu uprawnień; kontroli nie uznaje się
+  za wykonaną. Master nieaktywny. Nie powtarzano logowań. Panel n8n dostępny
+  bez uwierzytelnienia (HTTP 302), a helper API po monicie nie otrzymał N8N_API_KEY.
+  Użytkownik otrzymał prośbę o Touch ID dla istniejącego dostępu n8n.env.
+  Kolejny krok: przywrócić dostęp, sprawdzić uprawnienia, podłączyć i odebrać
+  11-węzłowy staging. Produkcyjny workflow bez zmian i bez testowego POST.
+
+### Ocena Turnstile i backendu formularzy, 14.10.2026
+
+- Na zlecenie oceny możliwości potwierdzono zgodność statycznego Astro,
+  wspólnego LeadForm i bezpośredniego JSON do n8n z Turnstile.
+  [Raport i zakres wdrożenia](TURNSTILE-ASSESSMENT-2026-10-14.md).
+- Panel Cloudflare dostępny w zalogowanym Chrome. Lista widgetów Turnstile
+  pusta. Publiczny HEAD strony HTTP 200, bez CSP blokującego widget.
+  Nie tworzono widgetów, nie odczytywano kluczy ani nie zmieniano konfiguracji.
+- Odczyt n8n potwierdził aktywny `formularz Ola`, `8vE6DwHNx5xqGrod`,
+  wskazany przez endpoint repo. Jeden Webhook, bez dalszych węzłów, walidacji
+  i Siteverify. Zapis udanych wykonań `all`, zapis postępu i prób ręcznych
+  włączony. Wymagana korekta zapisu payloadów zgodnie z zasadami projektu.
+  Nie pobierano wykonań ani zgłoszeń. Globalna retencja pozostaje niesprawdzona.
+- Rekomendacja to Managed w LeadForm i obowiązkowa bramka Siteverify
+  w istniejącym n8n. Bez nowego Workera i Queues. Odrzucenie zwraca błąd HTTP,
+  ponieważ obecny frontend traktuje każdy 2xx jako sukces. Sekret wyłącznie
+  po stronie backendu. Rekomendacja nie oznacza wdrożenia ani decyzji CMS.
+- `npm run build` PASS, 43 strony, Node 26.11.0. verify-ola
+  `ola-turnstile-20261014` launch/doctor PASS na 4340. Newsletter z błędnym
+  e-mailem i kontakt z pustymi wymaganymi polami pokazują błędy. POST `[]`.
+  Bez JS przyciski kontaktu i newslettera disabled, POST `[]`.
+  Cleanup wykonany, dowody w `/tmp/ola-verify-evidence/ola-turnstile-20261014/`.
+- Kontrola dotyczy istniejących formularzy. Nie uruchamiano pełnego verify,
+  Node 24, nowego odbioru desktop/mobile, klawiatury, 320 px, zoomu ani
+  reduced motion. Kod i wygląd nie zmienione. Początkowe ograniczenia DNS
+  i nasłuchu sandboxa rozwiązano dopuszczonym ponowieniem poza sandboxem.
+- Następny krok to wdrożenie frontendu i n8n na odseparowanym środowisku,
+  korekta zapisu danych oraz testy błędnego, wygasłego i powtórzonego tokena,
+  hostname/action, retry i awarii. Produkcyjny webhook nie był wywoływany.
+- Format czterech dokumentów Prettier PASS, 151 lokalnych odnośników
+  istnieje, `git diff --check` PASS. Zachowano wcześniejsze zmiany użytkownika.
+
+### Wdrożony kod źródła AI i sitemap Google, 13.10.2026
+
+- [PR #103](https://github.com/zawlodzki/nowa-strona-ola/pull/103) scalony
+  po dwóch zielonych Quality na Node 24. Main `5ff332c`, podpis GitHub
+  zweryfikowany. Lokalny main odświeżony; zachowano wcześniejsze zmiany
+  dokumentacji i pliki użytkownika, także kopię i stash.
 - Właściciel dopuścił pięć kodów po zgodzie analitycznej, bez pełnych URL
-  i dowolnych UTM. Implementacja w izolowanym worktree.
-- Dwa projekty architektury i niezależna ocena wybrały parser Astro,
-  walidowany adapter GTM oraz source kampanii. Sam wymiar eventu
-  nie zasilałby grupy kanałów.
-- [Kontrakt i komendy odbioru](AI-SOURCE-CONTRACT.md).
+  i UTM. Parser Astro czyta referrer dopiero przy dopuszczonym pomiarze;
+  GTM waliduje kod i ustawia source kampanii oraz medium referral.
+  Nieznane źródło jest pomijane. Brak dodatkowej pamięci przeglądarki.
+- `npm run verify`: PASS, 518 unit, 468 e2e, 12 świadomych pominięć
+  GTM przy wyłączonej fladze. Dodatkowy build z włączonym GTM: 39 e2e
+  PASS w trzech silnikach. Niezależna ocena końcowego patcha PASS+NOTES.
+- GTM 5 opublikowany o 23:05 CEST: trzy nowe zmienne i dwa parametry
+  konfiguracji Google tag. Eksport workspace zgodny z kandydatem po
+  usunięciu metadanych i pustych ustawień domyślnych; reguły i inne tagi
+  zgodne z wersją 4. Grupa GA4 AI assistants obejmuje pięć kodów,
+  pozostałe kanały i główna grupa bez zmian.
+- Rzeczywisty skompilowany GTM przed publikacją i publiczny GTM 5:
+  6/6 PASS (pięć kodów i brak źródła). Jeden page_view i user_engagement,
+  neutralne URL/tytuł, brak pełnego referrera i markerów UTM. Wszystkie
+  żądania collect przechwycone lokalnie z odpowiedzią 204.
+- Odbiór rzeczywistego HTML i skryptów produkcji: późna zgoda przez panel
+  cookies daje jeden page_view z `chatgpt`; nieznane źródło pominięte.
+  c15t i collect były atrapami, brak produkcyjnych POST i leadów.
+  To dowód payloadu, nie przetworzenia źródeł w raportach GA4.
+- Sanity: opublikowano tylko `legal-privacy-pl` i `legal-cookies-pl`,
+  wersja 2.4 z 13.10.2026, z kontrolą _rev i zgodności całej treści.
+  Publiczne Markdown obu dokumentów potwierdzają 2.4 i opis pięciu kodów.
+- [Staging](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38467782171)
+  i [produkcja](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38467783884)
+  SUCCESS z main `5ff332c`, opublikowanymi danymi Sanity i Node 24.
+  IndexNow zgłosił 23 adresy. Dodatkowy dispatch stagingu
+  [38467812659](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38467812659)
+  także SUCCESS, ten sam main. Sanity samo wyzwoliło dwa wcześniejsze runy.
 - Google sitemap w szczegółach: sukces, 23 adresy, odczyt 13.10.2026.
   Lista wcześniej pokazywała nieaktualny błąd. Brak zmian WAF/XML.
-- Kontrole i publikacje pozostają w toku; nie deklarowano wdrożenia.
+- [Kontrakt i komenda odbioru](AI-SOURCE-CONTRACT.md),
+  [odbiór usług](MEASUREMENT-SEO-ACCEPTANCE-2026-10-13.md).
+  Dowody lokalne: `/private/tmp/ola-measurement-seo-20261013/`,
+  `/private/tmp/ola-ai-live-app-proof.json`,
+  `/private/tmp/ola-ai-live-compiled-proof.json`.
+- Końcowy format Prettier i diff --check PASS; 159 lokalnych odnośników
+  do plików istnieje. Raporty i checklisty zaktualizowane lokalnie.
+- Następny krok: przegląd indeksacji i raportów AI po zebraniu ruchu
+  według planu SEO (4 i 12 tygodni). Nie deklarowano zakończonej
+  indeksacji ani ruchu AI, którego raporty jeszcze nie pokazały.
+  Brak zmian układu UI; nowe ręczne porównanie desktop/mobile nie było
+  potrzebne. Reflow, klawiatura i reduced motion objęte istniejącym e2e.
+
+### Odbiór pomiaru i konfiguracja wyszukiwarek, 13.10.2026
+
+- Na zlecenie realizacji punktów 1 i 2 potwierdzono realny produkcyjny
+  receipt c15t: POST 200, cookie receipt i odtworzenie przez GET 200,
+  isValid, zgodny identyfikator decyzji oraz isLatestPolicy. Odmowa
+  odtworzona po reloadzie, opcjonalne checkboxy wyłączone. Bez leadów.
+- Połączona przeglądarka blokowała GTM przez ERR_BLOCKED_BY_CONTENT_BLOCKER.
+  Nie zmieniano blokera. Odbiór w osobnym natywnym Chrome: Tag Assistant
+  połączony z GTM-PWBRPZ29 i G-9QW05JYZTL, odmowa domyślna przed
+  aktualizacjami, neutralny page_view /m/home i home.
+- Raport GA4 odebrał własną próbę: 1 użytkownik, 4 odsłony home,
+  user_engagement 1, first_visit 1, session_start 1. To własne otwarcia
+  i przeładowania, nie wynik ruchu klientek.
+- Meta wymagał zatwierdzenia domeny. Dodano aleksandraolesiewicz.com wraz
+  z poddomenami do listy zatwierdzonych. PageView właściwego piksela 200,
+  adres strony i referrer są domenami. Raport Meta około 20:09 CEST
+  pokazał 3 PageView, Aktywne, Przeglądarka. Wykres i lista witryn
+  jeszcze bez danych; potwierdzenie pochodzi z tabeli zdarzeń.
+- Zgłoszono aktualną sitemap do istniejących zweryfikowanych usług.
+  Bing Success, 23 URL. Google przyjął zgłoszenie i prośbę indeksowania
+  homepage; testy live potwierdziły dostęp do HTML o 19:42 i XML o 19:56.
+  Google nadal pokazuje błąd pobrania w tabeli sitemap, 0 URL. Nie
+  deklarowano przetworzenia mapy ani ukończenia indeksacji.
+- Cloudflare: Googlebot/BingBot i boty odpowiedzi AI bez blokady.
+  Włączono blokady GPTBot, ClaudeBot, CCBot i Meta-ExternalAgent zgodnie
+  z D1; Crawler Hints wyłączone. Bot Preference Sync i Markdown for Agents
+  wyłączone. Ostatni IndexNow z deployu: HTTP 200, submitted 23;
+  kod przed wysyłką sprawdził opublikowany klucz, robots i sitemap.
+- Zapisano grupę AI assistants w GA4: kanał pierwszy, klasyfikacja Google
+  lub źródło z regex domen wskazanych w planie. Pozostałe reguły domyślne.
+  Obecny pomiar usuwa referrer i UTM, więc sama grupa nie rozpozna źródła.
+  Użytkownik zatwierdził kontrolowany kod pięciu asystentów 13.10.2026;
+  implementacja rozpoczęta w osobnym worktree, bez pełnych URL i UTM.
+- [Raport i ograniczenia](MEASUREMENT-SEO-ACCEPTANCE-2026-10-13.md).
+  Dowody: /private/tmp/ola-measurement-seo-20261013/, bez surowych
+  identyfikatorów receipt i HAR. Decyzje: .audit/measurement-seo-20261013.tsv.
+  Szczegóły mapy Google w kolejnej sesji potwierdziły sukces i 23 adresy,
+  ostatni odczyt 13.10.2026. Lista wcześniej pokazywała nieaktualny błąd.
+  Dowód: gsc-sitemap-success.png. Bez zmian XML i WAF.
+  Kod źródła AI wdrożono i odebrano w sekcji powyżej.
+  Sprawdzono format i lokalne odnośniki dokumentacji, bez zmian aplikacji.
+
+### Publikacja i retest produkcyjnego Book, 13.10.2026
+
+- Na polecenie „dawaj dalej” opublikowano main `ba89bac` najpierw na staging,
+  po sukcesie na produkcję. Workflow korzystał z opublikowanych danych
+  Sanity; danych CMS nie edytowano. Kontrole i buildy PASS, 460 unit,
+  Node 24. E2E nie należą do tego workflow; świeże PR CI miało 468 PASS.
+- [Staging](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38423517711)
+  SUCCESS, Worker `6b6f1ab3-5c63-4e36-8b17-3e56f85031c3`.
+  `PUBLIC_GTM_ENABLED=false`, pusty `SITE_INDEXING`. Rzeczywisty odczyt
+  landingu HTTP 200, Book bez offers, status zapowiedzi zachowany.
+- [Produkcja](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38423922736)
+  SUCCESS, Worker `5c8450f6-eec5-4ffa-95ea-0beab0c06900`.
+  Odczyt HTML potwierdził Book bez offers. IndexNow zgłosił 23 adresy;
+  nie jest to dowód indeksacji. Metadane i status dostępności zachowane.
+- Retest URL w Google o 17:42:33 CEST nie wykrył żadnych elementów;
+  krytyczny Product z poprzedniej próby nie występuje. Wynik, hash HTML
+  i granice odbioru zapisano w [raporcie](SEO-VALIDATION-2026-10-13.md).
+  Dwanaście publicznych stron zwróciło HTTP 200 i parsowalny JSON-LD.
+  Dowody: `/private/tmp/ola-pr99-deployment/`. Zero wysyłek formularzy.
+- Deploy Studio `38424164508` i Deploy preview `38424164572` SUCCESS
+  na `ba89bac`. Quality po merge `38422836824` SUCCESS o 17:43:58 CEST.
+- Po wyraźnej zgodzie użytkownika rozwiązano nową CAPTCHA i dokończono
+  test produkcyjnego URL w Schema.org o 17:56 CEST: 0 błędów i 0 ostrzeżeń.
+  Zrzut: `/private/tmp/ola-pr99-deployment/schema-production-result.png`.
+  Odbiór poprawki Book na produkcji zakończony. Następny krok w SEO:
+  ustalenie rzeczywistych timestampów redakcyjnych albo akceptacja
+  opcjonalnych uwag Google dla dat artykułów z dokładnością do dnia.
+  Czytnik, urządzenie fizyczne i odtworzenie Sanity pozostają otwarte.
+
+### Odbiór i scalenie PR #98 oraz #99, 13.10.2026
+
+- Oba PR-y odebrano niezależnie po rebase na `31180e1` z zachowaniem
+  zmian D3 z #100–102. Origin CLI nie rozpoznał numerów PR; użyto GitHub.
+- [PR #98](https://github.com/zawlodzki/nowa-strona-ola/pull/98):
+  `reverify_pr98` dał PASS+NOTES dla head `f058380`, base `31180e1`,
+  stable patch ID `6d675503330bca01bf8112655c8a43177015cc10`.
+  Trzy rzeczywiste testy listenerów na macOS PASS; Linux live lokalnie
+  nie powtarzany. Quality `38421279996` i `38421271905` SUCCESS;
+  pełne CI: 455 unit, 468 E2E PASS, 9 warunkowych pominięć, Node 24.
+  Squash merge o 17:31 CEST do `dcc4a1f`.
+- [PR #99](https://github.com/zawlodzki/nowa-strona-ola/pull/99):
+  `reverify_pr99` dał PASS+NOTES dla head `d0e5c52`, base `31180e1`,
+  stable patch ID `a8d97e7bcf2a5ae2e3b122350c94bb46b302289b`.
+  20 testów SEO i osobny odczyt Book bez offers PASS. Quality
+  `38421603474` i `38421594821` SUCCESS; pełne CI: 460 unit,
+  468 E2E PASS i 9 warunkowych pominięć, Node 24.
+  Po scaleniu #98 patch ID pozostawał zgodny, mergeability CLEAN.
+  Squash merge o 17:31 CEST do `ba89bac`.
+- Potwierdzono oba merge SHA na `origin/main`. Lokalny `main` odświeżono
+  fast-forward do `ba89bac`; wcześniejsze wpisy #97, materiały audytowe
+  i konfigurację `.impeccable` przywrócono. Kopia zmian przed odświeżeniem
+  pozostaje w stash `f451e218588474fbe59894cc095a221d1e310b52` oraz
+  `/private/tmp/ola-before-pr98-pr99-merge.patch`. Konflikty dokumentacji
+  rozwiązano z zachowaniem sekcji D3; brak zmian aplikacji poza main.
+- Przy scaleniu Quality po merge był w toku. Jego późniejszy sukces
+  oraz publikacje Studio, SSR preview, stagingu i produkcji opisano
+  w następnym odbiorze powyżej. Publiczny `publish-content` wymaga dispatch.
+- Następny krok: publikacja aktualnego main i retest produkcyjnego URL
+  e-booka w Google oraz Schema.org. Opcjonalne uwagi o datach artykułów
+  pozostają otwarte. CMS, ceny i dostępność produktów bez zmian.
 
 ### Lokalny odbiór etapu 7 i verify-ola na macOS, 13.10.2026
 
@@ -551,6 +1335,47 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   wymagają osobnego ustalenia dokładności. Pozostałe blokady etapu 7
   dotyczą czytnika, urządzenia fizycznego i odtworzenia Sanity.
 
+### Odbiór PR #97 i aktualnych wdrożeń, 13.10.2026
+
+- Odświeżono main, zachowując nieśledzone materiały użytkownika. PR #92
+  był już scalony; uwzględniono również zmiany #93–#96. Własną wąską
+  poprawkę kontroli buildu wycofano na rzecz istniejącego PR #97.
+  Kopia pozostaje w `/private/tmp/ola-redundant-pr97-local.patch`.
+- Niezależny przegląd [PR #97](https://github.com/zawlodzki/nowa-strona-ola/pull/97)
+  dał PASS z uwagą o opcjonalnym katalogu kategorii. Sprawdzony head
+  `25b3304b1bf0ea7bf7d35a029c23820c729070d9`, baza
+  `f34ed8fb6ce1ad4541bd474bd9b2ea4ca7af350f`, stable patch ID
+  `63e65b6229e39f5c800fbf3db1701803bedfe80c`. Przeszły cztery kombinacje
+  fixture/Sanity oraz noindex/production i osiem negatywnych prób artefaktu.
+  Dwa świeże Quality zakończyły się SUCCESS. Pełny przebieg CI dał
+  439 unit oraz 468 E2E PASS i 9 warunkowych pominięć.
+- PR #97 scalono do `dd2a6af9922f17b7a4c421cd3e495cf4bb2afd08`.
+  [Produkcja](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38384327939)
+  i [staging](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38385157762)
+  na tym SHA zakończyły się SUCCESS. Wersje Workera wynoszą odpowiednio
+  `7e51918c-385c-43c0-bd53-690df273fc3b` i
+  `5c21d3a1-1941-41ba-9623-06e7c2bede4e`. Staging zachowuje
+  `PUBLIC_GTM_ENABLED=false` i pusty `SITE_INDEXING`.
+  Bezpośredni odczyt HTTP stagingu zwrócił 403; nie potwierdzano jego
+  publicznego runtime, a konfigurację odczytano z logu wdrożenia.
+- Ponowny odbiór rzeczywistej produkcji dał 9/9 PASS. Potwierdzono
+  neutralne `page_view` i `user_engagement` GA4, domeny Meta, wykluczenia,
+  brak duplikatów oraz cofnięcie zgody z przeładowaniem i usunięciem cookies.
+  Dwa rzeczywiste GET init c15t zwróciły HTTP 200, panel działał bez błędu.
+  Wszystkie żądania telemetrii zablokowano; zapis zgód korzystał z atrapy.
+  Nie potwierdzano trwałych receiptów ani pojawienia się zdarzeń w raportach.
+  Dokumenty prawne produkcji pozostają w wersji 2.3 i zawierają zaangażowanie.
+- Publiczne robots i sitemap zwróciły HTTP 200. Sitemap ma 23 kanoniczne
+  adresy PL, strona główna dopuszcza indeksację. IndexNow przyjął 23 URL
+  z wynikiem `key-validation-pending`; nie jest to potwierdzenie indeksacji.
+  Publicznego pliku klucza nie odczytano. Dowody odbioru znajdują się w
+  `/private/tmp/ola-production-acceptance/`, poprzednie zachowano w
+  `/private/tmp/ola-production-acceptance-before-pr97/`.
+- Blokada publikacji została usunięta. Otwarte pozostają odbiór Tag Assistant,
+  trwałych receiptów i raportów oraz ćwiczenie odtworzenia Sanity wymagające
+  uprawnienia do utworzenia datasetu. Nie zmieniano treści CMS ani dokumentów
+  prawnych podczas tej ponownej weryfikacji.
+
 ### Kontrole buildu po publikacji Sanity, 13.10.2026
 
 - Produkcyjny `publish-content` padał w `tests/unit/seo.test.ts` na
@@ -569,7 +1394,8 @@ CMS: [LEGAL-CMS-CONFIG.md](LEGAL-CMS-CONFIG.md).
   E2E dało 467 passed, 9 skipped i 1 failed w Firefoxie
   (`lead-forms` na `/design-system/`). Ten sam test w Chromium i WebKit
   przeszedł, a trzy powtórzenia w Firefoxie też. Nie scalano i nie wdrażano.
-- Następny krok. Poczekać na zielony `publish-content` po merge.
+- Aktualizacja odbioru. PR #97 scalony; produkcyjny i stagingowy
+  `publish-content` zakończyły się SUCCESS. Szczegóły powyżej.
 
 ### Kopia datasetu Sanity, 13.10.2026
 
@@ -5743,6 +6569,72 @@ Gałąź `codex/homepage-meal` wypchnięta, utworzono
 [PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106). Bez merge.
 Następny krok: po scaleniu i wdrożeniu PR
 opublikować przygotowany szkic CMS, po kontroli rewizji, i odebrać produkcję.
+
+## Propozycja obiadu do nakładki, 15.10.2026
+
+Wygenerowano w image_gen wątróbkę z jabłkiem i cebulą, ziemniakami
+i ogórkiem kiszonym według prośby użytkownika. Obraz obejrzano, składniki
+są widoczne. [Plik i prompt](../design-system/proposals/homepage-meal-2026-10-15/README.md).
+Bez zmian aplikacji, Sanity i publikacji. Kontroli UI i npm run verify
+nie uruchamiano. Następny krok: ocena propozycji, następnie podmiana i odbiór kadru.
+
+Korekta propozycji 15.10.2026 na prośbę użytkownika: wątróbka drobiowa,
+mniejsze i ciemniejsze kawałki. Wygenerowano i obejrzano
+[wersję v2](../design-system/proposals/homepage-meal-2026-10-15/chicken-liver-apple-onion-v2.png).
+Materiał do oceny; strona i Sanity bez zmian.
+
+## Podmiana nakładki w PR 106, 15.10.2026
+
+Użytkownik zaakceptował v2 i zlecił podmianę, PR i push. Przygotowano
+[PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106),
+gałąź `codex/homepage-meal`, osobny zarządzany worktree `homepage-meal`.
+Nowy WebP 1536×1024 ma klucz `home-meal`; istniejące okładki zachowują `food`.
+Wykonano szkic Sanity `drafts.page-home-pl`, zmieniający tylko
+`sections[_key=="home-about"].secondaryMedia.rasterKey` oraz `alt`.
+Opis: „Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony”.
+Szkic ma rewizję `UOs2f8XeFxg25W1kCvSiFw`; opublikowany dokument nadal
+wskazuje `food`. Nie publikowano szkicu ani nie scalano PR.
+
+Pełne `npm run verify` Node 24.21.0 PASS: 618 unit, 507 E2E,
+12 świadomych pominięć GTM, zgodność fixture/Content Lake na 17 stronach.
+verify-ola doctor PASS; dodatkowy Chromium 1440/390/320 px, reduced motion,
+brak JS i CSS zoom 200% na desktopie PASS, POST `[]`. Kadry 1440 i 320 px
+obejrzano. Natywny zoom, czytnik i fizyczny telefon niesprawdzone.
+Log: `/tmp/ola-homepage-meal-verify.log`; dowody:
+`/tmp/ola-verify-evidence/ola-home-meal-20261015/`.
+
+Następny krok: po scaleniu i wdrożeniu PR opublikować wyłącznie przygotowaną
+podmianę nakładki, po ponownej kontroli rewizji CMS, i odebrać produkcję.
+
+## Nakładka opublikowana, 15.10.2026
+
+Na zlecenie użytkownika scalono [PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106)
+po zakończeniu obu kontroli Quality wynikiem SUCCESS. Main:
+`14b13801a252e367bf994bcf6fd5aaafc54009bb`.
+Szkic homepage ponownie porównano z opublikowanym dokumentem: jedyne zmiany
+treści to klucz obrazu `home-meal` i opis dania w
+`sections[_key=="home-about"].secondaryMedia`. Publikacja z warunkiem
+rewizji `UOs2f8XeFxg25W1kCvSiFw` zakończona; opublikowana rewizja
+`page-home-pl` to `7tcFiCWOj02pVQeWbH2n96`. Brak pozostałego szkicu.
+
+Bieżąca konfiguracja CMS: `rasterKey = home-meal`,
+`alt = Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony`.
+To wykonana publikacja, zastępująca wcześniejszy status propozycji i szkicu.
+
+[Build produkcji](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38718443896)
+i [build staging](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38718441996) SUCCESS.
+Wersja produkcyjnego Workera: `5fb25e0f-bd1b-498f-8f7c-ffbc698391db`.
+W publicznym serwisie obejrzano kadr na desktopie oraz w emulacji 320 px.
+Nowy obraz załadowany, naturalne 1536×1024, właściwy alt, bez overflow.
+Okładka żywieniowa nadal używa poprzedniego `food-editorial`.
+Formularzy nie używano; wpisów zasobów do webhooka leadowego brak.
+Natywnego zoomu, czytnika i fizycznego telefonu nie sprawdzano ponownie.
+Dowód: `.audit/meal-production-20261015/result.json`; zrzuty w czacie.
+
+Lokalny main wyrównano do scalenia, zachowując zawartość 49 wcześniej
+zmienionych plików; potwierdzono SHA256 przed aktualizacją dziennika tej sesji.
+Pozostałe zmiany robocze nie trafiły do commitu ani publikacji.
+Podmiana zakończona; brak dalszych zadań w tym zakresie.
 
 ## Zgodność pluginów Studio, 15.10.2026
 

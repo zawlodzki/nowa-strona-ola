@@ -72,3 +72,12 @@ i [grupy kanałów Google Analytics](https://support.google.com/analytics/answer
 Google Search Console potwierdziło 13.10.2026 przetworzenie sitemap
 z 23 adresami. Błąd na liście był nieaktualny; szczegóły mapy pokazały
 sukces. Bez zmian XML i ochrony Cloudflare.
+
+## Wynik publikacji, 13.10.2026
+
+PR #103 scalony do `5ff332c` po CI Node 24, podpis scalenia zweryfikowany.
+GTM 5 opublikowany, grupa GA4 zapisana, oba dokumenty Sanity 2.4
+opublikowane z kontrolą _rev. Staging i produkcja SUCCESS. Rzeczywista
+strona i publiczny skompilowany GTM potwierdzają kod po zgodzie oraz brak
+źródła dla nieznanego referrera; żądania collect przechwycone lokalnie.
+[Wyniki i ograniczenia odbioru](MEASUREMENT-SEO-ACCEPTANCE-2026-10-13.md).

@@ -41,3 +41,23 @@ i `secondaryMedia.alt` na opis dania. Rewizja szkicu po zmianie:
 Kolejność uruchomienia: scalić i wdrożyć PR, potem opublikować przygotowany
 szkic po ponownym porównaniu rewizji. Nie publikować innych zmian strony.
 Samo scalenie PR nie zmieni obrazu przy opublikowanym w CMS kluczu `food`.
+
+## Publikacja, 15.10.2026
+
+[PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106) scalony
+po zielonych obu kontrolach Quality. Commit main:
+`14b13801a252e367bf994bcf6fd5aaafc54009bb`.
+Po ponownym porównaniu opublikowanego dokumentu ze szkicem
+opublikowano wyłącznie przygotowaną podmianę z warunkiem rewizji.
+Nowa rewizja `page-home-pl`: `7tcFiCWOj02pVQeWbH2n96`, bez szkicu.
+
+[Produkcja](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38718443896)
+i [staging](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38718441996)
+SUCCESS. Wersja produkcyjnego Workera: `5fb25e0f-bd1b-498f-8f7c-ffbc698391db`.
+
+Na publicznej stronie obejrzano nakładkę na desktopie i w emulacji 320 px.
+Obraz `home-meal.B1J7bjrN_znEFS.webp` załadowany, 1536×1024, właściwy alt,
+bez poziomego przepełnienia. Okładka żywieniowa nadal używa `food-editorial`.
+Formularzy nie używano. Natywnego zoomu, czytnika i fizycznego telefonu
+nie sprawdzano ponownie. Dowód: `.audit/meal-production-20261015/result.json`,
+zrzuty obejrzane w czacie. Zakres zakończony.

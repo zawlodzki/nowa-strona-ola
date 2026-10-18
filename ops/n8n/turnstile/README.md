@@ -1,7 +1,7 @@
 # Bramka Turnstile dla webhooka Oli
 
-`workflow.production.json` to przygotowany kandydat aktualizacji workflow
-`formularz Ola`, a nie konfiguracja zapisana do n8n. Credential wskazuje zatwierdzony `Ola Turnstile production`
+`workflow.production.json` przedstawia graf workflow `formularz Ola`
+opublikowany 15.10.2026 po odbiorze stagingu i publikacji frontendu. Credential wskazuje zatwierdzony `Ola Turnstile production`
 (`eri83sBSbYEoRx7U`). Plik nie zawiera sekretu,
 przypiętych danych, historii wykonania ani danych zgłoszeń.
 
@@ -137,3 +137,8 @@ powtórzenie po restarcie odrzucone. Kontener wskazany w przykładzie usunięto
 po próbie; kolejne uruchomienie wymaga utworzenia własnego kontenera zgodnego
 z kontrolami runnera. Ta próba izolowana nie dowodzi działania węzłów n8n. Osobny rzeczywisty
 odbiór Crypto/Postgres na stagingu zakończono 15.10.2026; wynik powyżej.
+
+Produkcja od 15.10.2026: activeVersionId
+`39af53f7-1377-4f3b-8ac1-a3b8bdf80606`, 11 aktywnych węzłów, zapis danych
+wykonań wyłączony. Dowód publikacji (lokalnie poza repozytorium: `.audit/ola-turnstile-production-proof.json`).
+Nie testowano produkcyjnego webhooka. Staging pozostaje wyłączony.

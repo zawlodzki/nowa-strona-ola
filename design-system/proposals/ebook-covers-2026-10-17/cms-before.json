@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "ebook-badania-ktore-maja-sens-pl",
+    "_rev": "D9pjXnjSkonW3tYBZyjTqH",
+    "availability": "planned",
+    "cover": {
+      "_type": "mediaObject",
+      "alt": "Kontrolowana okładka: Badania, które mają sens",
+      "rasterKey": "cover-badania-ktore-maja-sens",
+      "tone": "diagram"
+    },
+    "title": "Badania, które mają sens"
+  },
+  {
+    "_id": "ebook-suplementy-w-pcos-pl",
+    "_rev": "Hldtf1Ee54aeykZ46HPNzo",
+    "availability": "planned",
+    "cover": {
+      "_type": "mediaObject",
+      "alt": "Kontrolowana okładka: Suplementy w PMOS (PCOS)",
+      "rasterKey": "cover-suplementy-w-pcos",
+      "tone": "diagram"
+    },
+    "title": "Suplementy w PMOS (PCOS)"
+  },
+  {
+    "_id": "ebook-szczupla-a-jednak-pcos-pl",
+    "_rev": "D9pjXnjSkonW3tYBZyjTqH",
+    "availability": "planned",
+    "cover": {
+      "_type": "mediaObject",
+      "alt": "Kontrolowana okładka: Szczupła, a jednak PMOS (PCOS)",
+      "rasterKey": "cover-szczupla-a-jednak-pcos",
+      "tone": "diagram"
+    },
+    "title": "Szczupła, a jednak PMOS (PCOS)"
+  }
+]

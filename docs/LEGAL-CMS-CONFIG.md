@@ -237,4 +237,38 @@ nie zmienia ceny, oferty, CTA ani sekcji strony głównej.
 Fixture’y `polityka-prywatnosci` i `lista-cookies-i-identyfikatorow` mają
 wersję 2.4 oraz datę 13.10.2026. Odpowiadają przygotowanym źródłom Markdown.
 Mapowanie do Sanity: `legal-privacy-pl` i `legal-cookies-pl`, pola `body`,
-`version`, `effectiveFrom`. Publikacja CMS nie została jeszcze wykonana.
+`version`, `effectiveFrom`. Oba dokumenty opublikowano 13.10.2026
+z kontrolą _rev. Odczyt opublikowanej treści odpowiada fixture’om; publiczne
+Markdown potwierdzają wersję 2.4 i opis kodów. Produkcyjny deploy z main
+`5ff332c` zakończony SUCCESS.
+
+## Aktualizacja zamówień D27, 18.10.2026
+
+Na zlecenie użytkownika ponownie odczytano `projekt prawny ola` po zmianie D27.
+Źródło `regulamin.md` 2.4 i „Zgody i formularze” 2.5 zastępuje wariant dwóch
+checkboxów i dostawy po 14 dniach. Własne zamówienie zawiera jeden wymagany,
+niezaznaczony checkbox obejmujący regulamin, pełnoletność, zgodę na natychmiastowe
+dostarczenie treści i potwierdzenie utraty prawa odstąpienia. Przycisk brzmi
+„Zamawiam z obowiązkiem zapłaty”. Stripe nie dodaje checkboxa regulaminu.
+Numer oświadczenia w rejestrze zamówień to `pcos-d27-2026-10-18`.
+
+Konwerter i przykłady Markdown odpowiadają źródłu. Opublikowano wyłącznie
+uzasadniony zakres dokumentów PL, po kontroli rewizji. `legal-terms-pl` ma
+wersję 2.4, a odczyt po publikacji zwrócił rewizję `UdQdXKR5Wip8kOGZBYI1yB`.
+Polityki prywatności i regulaminu newslettera ta zmiana nie nadpisywała.
+Publiczne EN pozostaje wyłączone.
+
+Źródłową listę cookies uzupełniono o obsługę zamówienia na własnej stronie.
+Wersja 2.5 opisuje `__Host-ola_checkout`, niezbędne cookie dostępu do własnego
+zamówienia na 30 dni, oraz `ola.checkout.session` w sessionStorage danej karty
+do końca jej sesji. Cookie ma Secure, HttpOnly, SameSite=Lax i Path=/.
+Identyfikatory nie służą analityce. `legal-cookies-pl` 2.5 opublikowano
+z datą 18.10.2026. Odczyt zwrócił rewizję `W6ZgZ6YLs15DClTrjQnWag`.
+
+Publiczny odczyt potwierdził regulamin 2.4 oraz listę cookies 2.5 z opisem
+obu identyfikatorów. Workflow Publish content `39116733366` zakończył się
+sukcesem. Dostawę użytkownik odłożył. Dokumenty opisują docelowy proces i nie są dowodem
+uruchomienia dostawy ani sprzedaży. Wyłączone pozostają formularze płatności
+na produkcji. Płatność w sandboxie, wysyłka potwierdzenia i dokumentów PDF
+wymagają odbioru przed aktywacją. Sam audyt techniczny nie potwierdza oceny
+prawnej połączonego oświadczenia oznaczonej w źródle do konsultacji z radcą.

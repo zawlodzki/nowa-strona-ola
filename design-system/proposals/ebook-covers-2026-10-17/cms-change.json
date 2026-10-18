@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-17",
+  "projectId": "dyuqkn8c",
+  "dataset": "production",
+  "status": "published-and-deployed",
+  "changes": [
+    {
+      "key": "szczupla",
+      "id": "ebook-szczupla-a-jednak-pcos-pl",
+      "alt": "Ilustracyjna okładka „Szczupła, a jednak PCOS”. Aleksandra Olesiewicz-Zawłodzka. Papierowe profile kobiet na granatowym tle.",
+      "previousCover": {
+        "_type": "mediaObject",
+        "alt": "Kontrolowana okładka: Szczupła, a jednak PMOS (PCOS)",
+        "rasterKey": "cover-szczupla-a-jednak-pcos",
+        "tone": "diagram"
+      },
+      "revision": "D9pjXnjSkonW3tYBZyjTqH",
+      "assetId": "image-3caa30d19668de3849cca5d16269463abc80d846-1024x1536-webp",
+      "url": "https://cdn.sanity.io/images/dyuqkn8c/production/3caa30d19668de3849cca5d16269463abc80d846-1024x1536.webp",
+      "bytes": 331000
+    },
+    {
+      "key": "badania",
+      "id": "ebook-badania-ktore-maja-sens-pl",
+      "alt": "Ilustracyjna okładka „Badania w PCOS, które mają sens”. Aleksandra Olesiewicz-Zawłodzka. Papierowa ścieżka, kalendarz i lupa.",
+      "previousCover": {
+        "_type": "mediaObject",
+        "alt": "Kontrolowana okładka: Badania, które mają sens",
+        "rasterKey": "cover-badania-ktore-maja-sens",
+        "tone": "diagram"
+      },
+      "revision": "D9pjXnjSkonW3tYBZyjTqH",
+      "assetId": "image-03d5d7fa696979835574bb9ce60a9b867b94e59f-1024x1536-webp",
+      "url": "https://cdn.sanity.io/images/dyuqkn8c/production/03d5d7fa696979835574bb9ce60a9b867b94e59f-1024x1536.webp",
+      "bytes": 273824
+    },
+    {
+      "key": "suplementy",
+      "id": "ebook-suplementy-w-pcos-pl",
+      "alt": "Ilustracyjna okładka „Suplementy w PCOS”. Aleksandra Olesiewicz-Zawłodzka. Niemal pusta granatowa szafka na terakotowym tle.",
+      "previousCover": {
+        "_type": "mediaObject",
+        "alt": "Kontrolowana okładka: Suplementy w PMOS (PCOS)",
+        "rasterKey": "cover-suplementy-w-pcos",
+        "tone": "diagram"
+      },
+      "revision": "Hldtf1Ee54aeykZ46HPNzo",
+      "assetId": "image-f3983d0df96651a6e6c14fe4650dc128f081b275-1024x1536-webp",
+      "url": "https://cdn.sanity.io/images/dyuqkn8c/production/f3983d0df96651a6e6c14fe4650dc128f081b275-1024x1536.webp",
+      "bytes": 244740
+    }
+  ],
+  "published": true,
+  "codePullRequest": "https://github.com/zawlodzki/nowa-strona-ola/pull/126",
+  "codeStatus": "merged-and-deployed",
+  "mergeCommit": "081ff16c8e329a3047498ea66b673f62720515db",
+  "productionRun": "https://github.com/zawlodzki/nowa-strona-ola/actions/runs/39043923827",
+  "workerVersion": "82361138-53a7-470f-929c-a73e5ef1e734"
+}

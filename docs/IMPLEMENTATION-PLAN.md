@@ -3,7 +3,9 @@
 ## PR ścieżki zakupu, 18.10.2026
 
 - [x] Przygotować izolowany zakres i lokalne verify.
-- [ ] Uzyskać niezależny werdykt, zielone CI i scalić PR zgodnie ze zleceniem.
+- [x] Utworzyć PR #129 i uzyskać niezależny werdykt PASS+NOTES.
+- [x] Potwierdzić zielone CI i scalić zlecony PR.
+      Obie kontrole Quality PASS; PR #129 scalony jako `3bb6d51`.
 
 ## Mikrocopy przy zakupie, 18.10.2026
 
@@ -91,6 +93,56 @@ Weryfikacja kodu: [CODE-QUALITY.md](CODE-QUALITY.md).
 Próba komponentów: [UI-SPIKE-RESULTS.md](UI-SPIKE-RESULTS.md).
 
 ## 1. Cel i granice
+
+Ponowny audyt D27 i oferta po zakupie, zlecenie 18.10.2026:
+
+- [x] Potwierdzić aktualny model jednego checkboxa w źródłach prawnych.
+- [x] Zapisać cenę 97 zł i ofertę dwóch pozostałych e-booków za kolejne 97 zł.
+- [x] Przygotować [plan do zatwierdzenia](STRIPE-EBOOK-IMPLEMENTATION-PLAN-2026-10-18.md).
+- [x] Plan zatwierdzono i wdrożono w PR 128 i 129. Otwarte kroki (sandbox,
+      dostawa, aktywacja sprzedaży) prowadzi sekcja „Zamówienia serii e-booków”.
+
+Poprzednie założenia Z1/Z2 i odroczonej dostawy poniżej są historyczne
+i zostały zastąpione przez D27.
+
+Audyt zakupu trzech e-booków przez Stripe, zlecenie 18.10.2026:
+
+- [x] Porównać projekt prawny, kod strony i możliwości Checkout z kontem Stripe
+      w trybie tylko do odczytu. Zapisać konfigurację, mikrocopy i braki.
+- [x] ~~Wdrożyć podsumowanie zamówienia z Z1/Z2~~ — zastąpione przez D27
+      (jedno pole zgody) i wdrożone w ramach „Zamówień serii e-booków”.
+- [ ] Odebrać sandbox, dane konta i ustawienia podatkowe przed uruchomieniem sprzedaży.
+
+Wynik: [specyfikacja Stripe](STRIPE-EBOOK-CHECKOUT-2026-10-18.md).
+Nie utworzono produktów ani linków i nie uruchomiono sprzedaży.
+
+Korekta prezentacji okładek, zlecenie 17.10.2026:
+
+- [x] Odtworzyć zasłanianie badge na desktopie i 320 px, poprawić warstwy,
+      zastosować kolory matcha i wzmocnić wspólny miękki cień.
+- [x] Dodać test regresji z hit-testem i potwierdzić cztery błędy przed poprawką.
+- [x] Zakończyć pełne verify, niezależny odbiór i CI PR 127.
+- [x] Opublikować poprawkę i potwierdzić publiczny katalog oraz landingi.
+
+- [x] 17.10.2026: przygotować kopię aktualnego dwuliniowego logo 3a w PNG
+      do Stripe. [Plik](../design-system/exports/stripe/logo-stripe.png).
+
+Okładki trzech e-booków, zlecenie 17.10.2026:
+
+- [x] Przygotować po trzy propozycje na podstawie materiałów FIRMA,
+      z paletą i kompozycją odrębną od strony 3a. Zapisać obrazy i prompty.
+- [x] Wybrać warianty z użytkownikiem, dopracować skład i wdrożyć okładki
+      we wszystkich miejscach ekspozycji. Odebrać rzeczywiste miniatury.
+- [x] Wybór 17.10.2026: wszystkie ilustracje C. Zmienić podpis na pełne
+      nazwisko i wgrać okładki do Sanity. Przypisano obrazy do szkiców PL.
+- [x] Zapisać lokalny skill FIRMA dla fotografii i ilustracji, bez wariantu
+      typograficznego.
+- [x] Opublikować trzy dokumenty PL w Sanity i potwierdzić referencje obrazów.
+- [x] Przygotować obsługę obrazu z CMS we wszystkich widokach kart,
+      sprawdzić pełne verify w odseparowanej kopii i lokalne UI.
+- [x] Scalić PR 126 po CI i odebrać produkcyjny katalog oraz landingi.
+
+Materiały: [dziewięć propozycji](../design-system/proposals/ebook-covers-2026-10-17/README.md).
 
 Grafiki wyróżniające bloga, zlecenie 15.10.2026:
 
@@ -568,7 +620,14 @@ oznacza wykonanej implementacji.
       Schema.org, kwalifikację Google i lokalny retest poprawki.
 - [x] Poprawić lokalny graf zapowiadanego e-booka po krytycznym wyniku Google.
       Bez rzeczywistego Offer emituje Book; Product pozostaje przy sprzedaży.
-- [ ] Po wdrożeniu poprawki Book ponowić test produkcyjnego URL e-booka.
+- [x] Wykonać push poprawki SEO i otworzyć PR #99; osobna naprawa verify-ola
+      jest w PR #98. Oba otwarte 13.10.2026, bez draftu.
+- [x] Odebrać Quality i scalić PR #98 oraz #99 (13.10.2026).
+      Niezależne odbiory PASS+NOTES; main `ba89bac`.
+- [x] Wdrożyć poprawkę Book na staging i produkcję (`ba89bac`, 13.10.2026).
+      Retest produkcyjnego URL w Google: brak nieprawidłowego Product.
+- [x] Dokończyć retest produkcyjnego URL w Schema.org (13.10.2026).
+      Po zatwierdzonej CAPTCHA: 0 błędów i 0 ostrzeżeń.
 - [ ] Ustalić rzeczywisty timestamp redakcyjny lub zaakceptować opcjonalne
       uwagi Google dla dat artykułów zapisanych z dokładnością do dnia.
 - [x] Weryfikować adresy, 404, przekierowania, linki i nieznane typy sekcji.
@@ -585,12 +644,25 @@ oznacza wykonanej implementacji.
       powstają przy renderze strony i nie są polami dokumentu.
 - [ ] Uzupełnić pola SEO w Sanity, zarejestrować schemat i wdrożyć Studio
       (tylko na osobne polecenie).
-- [ ] SEO‑6: robots.txt według D1 i AI Crawl Control, Search Console i Bing,
-      IndexNow, zdjęcie `noindex` z gotowej produkcji, grupa kanałów AI w GA4.
-- [x] Potwierdzić Google sitemap: szczegóły mapy pokazują sukces i 23 URL,
-      13.10.2026. Lista wcześniej pokazywała nieaktualny błąd.
+- [x] SEO‑6: robots według D1 i odbiór AI Crawl Control (13.10.2026).
+      Google/Bing i boty odpowiedzi dozwolone; GPTBot, ClaudeBot, CCBot
+      i Meta-ExternalAgent zablokowane. Crawler Hints pozostają wyłączone.
+- [x] Potwierdzić produkcyjne indeksowanie i IndexNow: publiczne index/follow,
+      ostatni deploy zweryfikował klucz i zgłosił 23 URL z HTTP 200.
+      Nie jest to potwierdzenie obecności wszystkich stron w indeksie.
+- [x] Zgłosić sitemap apex do zweryfikowanych usług Google i Bing.
+      Bing Success, 23 adresy; Google przyjął zgłoszenie oraz prośbę
+      indeksowania strony głównej. Test live potwierdził dostęp do HTML i XML.
+- [x] Potwierdzić przetworzenie sitemap w Google, 13.10.2026.
+      Szczegóły mapy: sukces, 23 adresy, ostatni odczyt 13.10.2026.
+      Lista wcześniej pokazywała nieaktualny błąd pobrania.
+- [x] Zapisać grupę kanałów „AI assistants” w GA4, 13.10.2026.
+- [x] Rozstrzygnąć źródło AI: pięć kodów po zgodzie analitycznej,
+      decyzja 13.10.2026; pełny referrer i UTM nadal wyłączone.
+      [Odbiór usług](MEASUREMENT-SEO-ACCEPTANCE-2026-10-13.md).
 - [x] Zatwierdzić zakres źródła AI: pięć kodów po zgodzie analitycznej.
-- [ ] Wdrożyć i odebrać kody źródła AI w Astro, GTM i GA4.
+- [x] Wdrożyć i odebrać kody źródła AI w Astro, GTM 5 i GA4, 13.10.2026.
+      PR #103, main 5ff332c, Sanity 2.4, produkcja i staging SUCCESS.
       [Kontrakt](AI-SOURCE-CONTRACT.md).
 
 Odbiór: HTML/Markdown są zgodne; schema przechodzi walidację; wycofane treści
@@ -602,6 +674,23 @@ znikają z obu formatów i indeksów po udanej publikacji.
       z inwentaryzacją kontenerów, separacją zgód, panelem 3a i macierzą odbioru
       (11.10.2026). Plan nie oznacza wykonanej integracji.
 - [ ] Wdrożyć formularze CMS, walidację serwerową, Turnstile i ograniczenia.
+- [x] Przygotować kod ochrony Turnstile w wspólnym LeadForm, kontrakt v3
+      i generator bramki Siteverify n8n (14.10.2026). Odrzucenia odebrane na
+      osobnym webhooku staging; widgety i credentials utworzone po jawnej zgodzie.
+      Odbiór n8n 15.10 PASS: 200 dla świeżego, 403 dla powtórzeń; 8 równoczesnych
+      prób to 1 przyjęcie. Błąd rejestru 503. Odciski kluczy zgodne.
+      Frontend v3 i produkcyjna bramka n8n opublikowane 15.10 przez PR 104;
+      UI produkcji 1280/320 PASS bez testowego POST. [Kolejność uruchomienia](TURNSTILE-ROLLOUT.md).
+- [x] Przygotować trwały rejestr SHA256 w PostgreSQL i generator 11 węzłów
+      (14.10.2026). 32 równoczesne próby jednego odcisku: 1 przyjęcie,
+      31 odmów; powtórzenie po restarcie odrzucone. Schematy, role i credentials
+      utworzone po zgodzie; rzeczywiste uprawnienia i odbiór n8n PASS 15.10.
+      Staging po próbach wyłączony; produkcyjna bramka aktywna od 15.10.
+- [x] Zweryfikować zgodność Turnstile z Astro i obecną wysyłką do n8n
+      (14.10.2026). [Ocena i zakres wdrożenia](TURNSTILE-ASSESSMENT-2026-10-14.md).
+      Od 15.10 aktywny workflow ma walidację, Siteverify i trwały rejestr
+      SHA256; zapis danych wykonań wyłączony. Odbiór prawdziwego zgłoszenia
+      produkcyjnego nie był wykonywany zgodnie z zakazem testowego POST.
 - [ ] Dodać kolejkę, retry, kolejkę błędów i wersjonowany kontrakt n8n.
 - [ ] Sprawdzić deduplikację, awarię n8n, błędy walidacji i brak wycieków danych.
 - [x] Dodać klienta zewnętrznego c15t, panel PL/EN i Basic Consent Mode v2
@@ -641,7 +730,23 @@ znikają z obu formatów i indeksów po udanej publikacji.
       duplikatów i wycofanie z rzeczywistym przeładowaniem i usunięciem cookies.
 - [x] Sprawdzić dziewięć scenariuszy włączonego loadera na fixture’ach
       w Chromium, Firefox i WebKit; telemetria i leady testowe zablokowane.
-- [ ] Wykonać odbiór w Tag Assistant.
+- [x] Odebrać istniejący PR #97 zamiast tworzyć duplikat poprawki publikacji.
+      Niezależny przegląd PASS; CI 439 unit, 468 E2E PASS i 9 pominięć.
+- [x] Scalić #97 i wdrożyć main `dd2a6af` na produkcję oraz staging.
+      Runy `38384327939` i `38385157762` SUCCESS, 13.10.2026.
+- [x] Powtórzyć odbiór produkcyjnego pomiaru po #97. 9/9 PASS,
+      rzeczywiste GET init c15t 2×200, telemetria i zapisy receiptów zablokowane.
+- [x] Potwierdzić produkcyjny trwały receipt c15t i odtworzenie odmowy:
+      realne POST/GET 200, isValid, zgodna decyzja i aktualna polityka.
+- [x] Potwierdzić odbiór page_view i user_engagement w raporcie GA4.
+      Własny test: 1 użytkownik, 4 odsłony home i 1 user_engagement.
+- [x] Wykonać odbiór opublikowanych tagów Google w Tag Assistant.
+      Odmowa domyślna przed update/kontenerem, neutralne /m/home i home.
+- [x] Zatwierdzić domenę Oli w Meta i odebrać transport PageView HTTP 200.
+      Lista zawiera domenę i jej poddomeny; inne domeny są wykluczone.
+- [x] Potwierdzić PageView w raporcie Meta po przetworzeniu nowych danych.
+      13.10.2026 około 20:09 CEST: 3 zdarzenia, Aktywne, Przeglądarka.
+      Odpowiedź HTTP 200 nie jest dowodem obecności w raporcie.
 
 Odbiór: potwierdzenie po kolejce; awaria n8n uruchamia retry; brak zgody
 nie uruchamia skryptów Google.
@@ -655,7 +760,6 @@ nie uruchamia skryptów Google.
 - [x] Domknąć lokalny odbiór About3a przy 320/390/1440 px z reduced motion.
       Axe bez naruszeń, brak overflow; menu mobilne działa z Enter/Escape
       i przywraca fokus. Nie zastępuje pełnego odbioru WCAG ani produkcji.
-
 - [ ] Przejść scenariusze redakcyjne, publikacji, leadów i zgód.
 - [ ] Sprawdzić desktop/mobile, 320 px, zoom 200%, klawiaturę i reduced motion.
 - [ ] Zweryfikować WCAG 2.2 AA; automatyczny audyt uzupełnić kontrolą ręczną.
@@ -1099,8 +1203,9 @@ przy 1440/390/320 px bez JS i overflow. Szczegóły i ograniczenia w postępie.
 - [x] Potwierdzić pełne verify, produkcyjny artefakt i brak klucza w błędach.
 - [x] Wysłać [PR #82](https://github.com/zawlodzki/nowa-strona-ola/pull/82)
       z bazą `codex/seo-full-content-exports` (#81).
-- [ ] Na osobne zlecenie uruchomić produkcyjną indeksację i skonfigurować
-      klucz, Search Console, Bing oraz AI Crawl Control.
+- [x] Na osobne zlecenie uruchomić produkcyjną indeksację i skonfigurować
+      klucz, Search Console, Bing oraz AI Crawl Control. Wykonane 13.10.2026,
+      szczegóły w etapie 5.
 
 Instrukcja: [INDEXNOW-DEPLOYMENT.md](INDEXNOW-DEPLOYMENT.md). Bez zmiany
 ustawień GitHub, treści Sanity i publikacji w tej sesji.
@@ -1112,7 +1217,8 @@ ustawień GitHub, treści Sanity i publikacji w tej sesji.
 - [x] Przygotować szkic podmiany w Sanity, zachowując istniejące okładki.
 - [x] Zakończyć odbiór i pełne verify.
 - [x] Wypchnąć gałąź i utworzyć [PR 106](https://github.com/zawlodzki/nowa-strona-ola/pull/106).
-- [ ] Po scaleniu PR opublikować szkic homepage i odebrać produkcję.
+- [x] Scalić PR 106, opublikować szkic homepage w Sanity i odebrać produkcję
+      na desktopie i przy 320 px (15.10.2026).
 
 [Materiał i kolejność uruchomienia](../design-system/proposals/homepage-meal-2026-10-15/README.md).
 

@@ -21,6 +21,7 @@ Sprawdzony lokalny podgląd: `node scripts/preview-homepage-mockups.mjs`,
 - [Aktualny postęp i następny krok](docs/PROGRESS.md)
 - [Treści i decyzje do konfiguracji homepage w CMS](docs/HOMEPAGE-CMS-CONFIG.md)
 - [Zasady weryfikacji kodu](docs/CODE-QUALITY.md)
+- [Integracja Turnstile i kolejność uruchomienia](docs/TURNSTILE-ROLLOUT.md)
 - [Konfiguracja wdrożeń Cloudflare](docs/CLOUDFLARE-DEPLOYMENT.md)
 - [Kopia i odtworzenie Sanity](docs/SANITY-BACKUP-RESTORE.md)
 - [Wyniki próby Bejamas](docs/UI-SPIKE-RESULTS.md)
@@ -65,6 +66,46 @@ Opublikowane warianty zawierają poprawki po Impeccable: SVG strzałek,
 wybór grup PMOS (PCOS) / Perimenopauza i rozróżnione tematycznie okładki.
 
 ## Uruchomienie i weryfikacja
+
+Ocena [zgodności Turnstile i n8n](docs/TURNSTILE-ASSESSMENT-2026-10-14.md),
+14.10.2026. Sprawdzone na Node 26.11.0, bez wysyłki zgłoszeń:
+
+```sh
+npm run build
+export VERIFY_RUN_ID="ola-turnstile-20261014"
+node .cursor/skills/verify-ola/scripts/verify.mjs launch
+node .cursor/skills/verify-ola/scripts/verify.mjs browser start
+node .cursor/skills/verify-ola/scripts/verify.mjs doctor
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /kontakt/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Wyślij wiadomość" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
+node .cursor/skills/verify-ola/scripts/verify.mjs cleanup
+```
+
+Odbiór okładek e-booków sprawdzony 17.10.2026 na Node 24.21.0.
+Po uruchomieniu własnej sesji powyższym helperem:
+
+```sh
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Zobacz wszystkie e-booki"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Suplementy w PMOS (PCOS)" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
+```
+
+Oczekiwane POST to `[]`. Przy budowaniu z rzeczywistym Content Lake wymagany
+jest także publiczny `PUBLIC_TURNSTILE_SITEKEY`; podgląd z fixture’ów
+nie wymaga tego klucza. Wyniki odbioru okładek są w
+[postępie](docs/PROGRESS.md).
+
+Regresja warstw badge matcha i cienia okładek, sprawdzona 17.10.2026
+na aktualnym buildzie fixture, Node 24.21.0:
+
+```sh
+npx playwright test tests/e2e/ebook-cover-polish.spec.ts --project chromium
+```
+
+POST `[]` po wysłaniu pustego formularza. To wynik oceny z 14.10; Turnstile
+opublikowano 15.10.2026, zgodnie z [protokołem](docs/TURNSTILE-ROLLOUT.md).
 
 Node 24 według `.node-version`, npm oraz jeden `package-lock.json`.
 
@@ -233,8 +274,8 @@ i 393 E2E w trzech przeglądarkach.
 `tests/e2e/theme-preference.spec.ts` sprawdza zapis motywu, przejście
 linkiem, reload, inicjalizację przed body i blokadę storage. Preferencja
 `ao-theme` jest lokalna dla originu. [Plan GTM i c15t](docs/GTM-C15T-DEPLOYMENT-PLAN.md)
-opisuje zakres i bramki pomiaru. Panel c15t działa na stagingu; produkcja
-i pomiar GTM pozostają niewdrożone. Odbiór oraz dowody są w
+opisuje zakres i bramki pomiaru. Produkcyjny c15t i GTM są wdrożone
+od 13.10.2026; GTM 5 rozpoznaje pięć kodów źródła AI. Odbiór oraz dowody są w
 [postępie](docs/PROGRESS.md).
 
 Kontrola GTM z 12.10.2026 na Node 24.19.0: `npm run verify` przeszło
@@ -249,6 +290,18 @@ E2E_GTM_ENABLED=true npx playwright test tests/e2e/consent.spec.ts --grep 'GTM r
 
 Po tej kontroli przywróć domyślny artefakt przez `npm run build`. Eksport
 workspace i stan aktywacji opisuje [instrukcja GTM](ops/gtm/README.md).
+
+Kontrola źródeł AI z 13.10.2026: `npm run verify` przeszło 518 unit
+i 468 E2E; z włączonym GTM osobno 39 E2E w trzech silnikach. Rzeczywisty
+SDK GA4 sprawdzono dla pięciu kodów i braku źródła, z lokalnym przechwyceniem
+collect. Sprawdzone polecenie:
+
+```sh
+node scripts/check-ai-source-sdk.mjs
+```
+
+[Kontrakt źródła AI](docs/AI-SOURCE-CONTRACT.md) opisuje zakres danych
+i wynik publikacji. Skrypt nie wysyła zdarzeń do GA4.
 
 CLI `verify-ola` sprawdza właściciela portu przez `/proc` na Linuksie
 oraz `/usr/sbin/lsof` na macOS. `doctor` wymaga odpowiedzi homepage z tytułem
@@ -379,6 +432,11 @@ npx wrangler deploy --config wrangler.jsonc --env staging
 Plik `public/.assetsignore` wyklucza metadane lokalne z zasobów zgodnie z
 [dokumentacją Cloudflare](https://developers.cloudflare.com/workers/static-assets/binding/#ignoring-assets).
 
+Próba rejestru jednorazowych tokenów Turnstile: runner PostgreSQL, jego wymagania
+izolacji i sprawdzone polecenie w [ops/n8n/turnstile](ops/n8n/turnstile/README.md).
+Produkcja opublikowana 15.10.2026; bieżący stan w
+[postępie](docs/PROGRESS.md).
+
 ## Zamówienia e-booków, 18.10.2026
 
 Przygotowany proces obejmuje jeden e-book za 97 zł brutto i osobny zakup obu
@@ -411,6 +469,13 @@ i 549 E2E, z 12 celowymi pominięciami. Porównanie 20 stron fixture i Content L
 oraz SEO 39 stron przeszło. Otwarte kontrole pozostają
 w [postępie](docs/PROGRESS.md). Do uruchomienia realnych płatności
 brakuje sekretu runtime Stripe, webhooka, odbioru sandbox i dostawy.
+
+### Doraźny podgląd oferty, 18.10.2026
+
+W tej sesji sprawdzono `node /tmp/ola-checkout-review-server.mjs` na Node 24.
+Podgląd pod `http://127.0.0.1:4349/po-zakupie/?session_id=preview_ebook-01`
+używa przykładowego statusu zakupu i blokuje płatności. Skrypt jest tymczasowy,
+poza repozytorium. Nie jest wdrożeniem stagingu ani podglądem szkiców Sanity.
 
 ### Doraźny podgląd pierwszego zakupu, 18.10.2026
 

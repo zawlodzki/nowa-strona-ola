@@ -83,10 +83,41 @@ Nie wykrył też wyniku rozszerzonego, co odpowiada Book bez oferty.
 Graf ma 7336 znaków; kopia jest w `corrected-book.json` w katalogu dowodów.
 SHA-256 wynosi `2680d330b5fed9f0babcf9ced23aad2f9556b4ad70ec7864cb99c9ec71819f18`.
 
-Test dotyczy lokalnego artefaktu na fixture’ach. Publiczny URL e-booka
-nadal pokazuje stary graf i krytyczny wynik z macierzy. Wdrożenie oraz
-ponowny test produkcji pozostają otwarte. Nie przypisano wyniku trybu kodu
-do produkcyjnego URL.
+Test trybu kodu dotyczył lokalnego artefaktu na fixture’ach. Macierz
+powyżej zachowuje wyniki produkcji sprzed poprawki. Poniżej zapisano
+osobny odbiór publicznego URL po wdrożeniu; wynik trybu kodu nie został
+przypisany do produkcyjnego URL.
+
+## Odbiór po publikacji PR #99
+
+13.10.2026 opublikowano main `ba89bac86b6a9929fa1376e0efd2b17073489b28`.
+[Staging](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38423517711)
+i [produkcja](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38423922736)
+zakończyły się SUCCESS. Oba przebiegi wykonały kontrole i build na
+opublikowanych danych Sanity, z 460 testami jednostkowymi na Node 24.
+
+Publiczny landing zwrócił HTTP 200. Odczyt HTML potwierdził `Book` bez
+`offers`, nazwę „Suplementy w PMOS (PCOS)” i widoczny status „Wkrótce dostępny”.
+Tytuł pozostaje „Suplementy w PMOS (PCOS) | E-book Aleksandry Olesiewicz”.
+SHA-256 odczytanego HTML:
+`7fec5bfb31e35f5b1f4e199892ee2a220adcc6cf7261d2a8c810158becf71881`.
+
+[Google Rich Results Test dla produkcyjnego URL](https://search.google.com/test/rich-results/result?id=TLOElmQn9AzV39UZq5x_ww)
+zakończył próbę o 17:42:33 CEST, klient na smartfony. Wynik: „Nie wykryto
+żadnych elementów”. Nieprawidłowy Product nie występuje. Book bez oferty
+nie kwalifikuje się tu do wyniku rozszerzonego; test nie potwierdza indeksacji.
+
+Po zatwierdzeniu nowej CAPTCHA przez użytkownika dokończono
+[test produkcyjnego URL w Schema.org](https://validator.schema.org/#url=https%3A%2F%2Faleksandraolesiewicz.com%2Febooki%2Fsuplementy-w-pcos%2F)
+o 17:56 CEST. Wynik: **0 błędów i 0 ostrzeżeń**. Walidator pokazuje
+dwa główne elementy: Organization oraz FAQPage; pozostałe węzły grafu
+są powiązane referencjami. To osobny odbiór URL po publikacji, a nie
+przypisanie poprzedniego wyniku lokalnego grafu do aktualnej produkcji.
+
+Ponowny odczyt 12 reprezentatywnych stron zwrócił HTTP 200 i poprawny JSON-LD.
+To odczyt artefaktów, nie dwanaście nowych prób zewnętrznych walidatorów.
+Dowody, manifest SHA-256, HTML przed i po wdrożeniu oraz zrzuty wyników Google i Schema.org:
+`/private/tmp/ola-pr99-deployment/`. Nie wysyłano formularzy leada.
 
 ## Dowody i ograniczenia
 

@@ -514,14 +514,23 @@ bo fallbacki są pokryte testami.
 
 ### SEO‑6: start produkcji i pomiar
 
-- [ ] robots.txt według D1, sprawdzenie AI Crawl Control.
-- [x] Kod IndexNow w Actions po udanym deployu, bez uruchamiania indeksacji
-      i konfiguracji klucza (12.10.2026; odbiór w postępie).
-- [ ] Search Console i Bing (DNS), zgłoszenie sitemap i rzeczywisty odbiór
-      IndexNow po skonfigurowaniu gotowej produkcji.
-- [ ] Zdjęcie `noindex` wyłącznie z gotowej produkcji (etap 7 planu).
-- [ ] Grupa kanałów AI w GA4. Przegląd po 4 i 12 tygodniach: indeksacja,
-      zapytania, raporty AI, Core Web Vitals.
+- [x] robots według D1 i odbiór AI Crawl Control, 13.10.2026. Boty
+      wyszukiwania i odpowiedzi dozwolone; zapisane blokady botów treningowych.
+- [x] Kod IndexNow w Actions i odbiór produkcyjnego zgłoszenia: HTTP 200,
+      23 adresy; przed wysyłką zweryfikowany publiczny klucz, robots i sitemap.
+- [x] Istniejąca weryfikacja Search Console i Bing oraz zgłoszenie sitemap.
+      Bing Success i 23 URL; Google przyjął zgłoszenie i prośbę indeksowania
+      strony głównej, test live HTML/XML potwierdził dostęp.
+- [x] Potwierdzić przetworzenie sitemap Google: szczegóły mapy pokazują sukces
+      i 23 adresy, odczyt 13.10.2026; wcześniejszy błąd listy był nieaktualny.
+- [x] Zdjęcie noindex z gotowej produkcji; potwierdzenie HTTP i testem Google.
+- [x] Grupa kanałów AI assistants zapisana w GA4.
+- [x] Źródło AI: zatwierdzone pięć kodów po zgodzie analitycznej,
+      wdrożone w PR #103, Astro, GTM 5 i grupie GA4. Pełny referrer
+      i UTM wyłączone. Odbiór payloadu PASS; raporty wymagają ruchu.
+- [ ] Przegląd po 4 i 12 tygodniach: indeksacja, zapytania, raporty AI,
+      Core Web Vitals. Nie utworzono automatycznych przypomnień.
+      [Odbiór usług](MEASUREMENT-SEO-ACCEPTANCE-2026-10-13.md).
 
 ## 9. Decyzje do podjęcia (właścicielka / użytkownik)
 

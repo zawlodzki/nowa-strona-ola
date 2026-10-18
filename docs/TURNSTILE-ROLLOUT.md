@@ -2,7 +2,8 @@
 
 Użytkownik zlecił realizację 14.10.2026 po
 [ocenie zgodności](TURNSTILE-ASSESSMENT-2026-10-14.md).
-Kod integracji jest przygotowany. Ten dokument nie potwierdza publikacji.
+Frontend i produkcyjna bramka n8n opublikowane 15.10.2026 na zlecenie użytkownika.
+Protokół publikacji (lokalnie poza repozytorium: `.audit/ola-turnstile-production-proof.json`).
 
 ## Kształt integracji
 
@@ -32,7 +33,7 @@ Shared State rozdzieliła pliki frontendowe i generator n8n między autorów.
 istniejącego workflow. Wymaga snapshotu z jednym węzłem Webhook i odmawia
 nadpisania istniejącego przetwarzania. [Kandydat](../ops/n8n/turnstile/workflow.production.json)
 nie ma sekretu i wskazuje zatwierdzony credential production.
-Nie jest zapisany do aktywnego workflow.
+Ten graf jest opublikowany w aktywnym workflow produkcyjnym od 15.10.2026.
 
 Utworzono osobny workflow staging `tism0NvfJSKAU0lj`, sześć węzłów,
 z własną ścieżką `ola-turnstile-staging-20261014` i wyłączonym zapisem danych.
@@ -60,7 +61,7 @@ częstotliwości ani retencji logów infrastruktury.
 - Osobny widget Managed `Ola formularze staging`, sitekey `0x4AAAAAAFWYFaFYPdFsdtYW`, hostnames
   `ola-website-staging.zawlodzki.workers.dev`, `localhost`, `127.0.0.1`.
 - Actions identyczne z `formKey`: `newsletter`, `contact`, `withdrawal`, `waitlist`.
-- Do wykonania: publiczny klucz w GitHub environment variable `PUBLIC_TURNSTILE_SITEKEY`,
+- Ustawiono 15.10 publiczny klucz w GitHub environment variable `PUBLIC_TURNSTILE_SITEKEY`,
   osobno dla staging i production. Sekret tylko w credential n8n.
 - Credential n8n `Ola Turnstile production` (`eri83sBSbYEoRx7U`)
   i `Ola Turnstile staging` (`eVFPn8fCOItrG6g6`).
@@ -184,3 +185,18 @@ Po testach staging wyłączono i usunięto lokalny origin oraz symulację błęd
 Zapis danych wykonań wyłączony. Produkcyjny workflow i publiczny frontend bez zmian.
 Następnym krokiem jest konfiguracja publicznych zmiennych wdrożeń i odbiór
 frontendu v3; publikacja i aktywacja produkcyjnej bramki wymagają zlecenia.
+
+## Publikacja produkcyjna 15.10.2026
+
+[PR 104](https://github.com/zawlodzki/nowa-strona-ola/pull/104) scalony po obu
+Quality SUCCESS i niezależnym PASS+NOTES. Produkcyjny Publish content
+[38701609220](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/38701609220)
+SUCCESS. Frontend opublikowano przed wymuszeniem tokenu w n8n.
+Cloudflare version d0f1bfaf-3c3c-45ff-8334-30357df47ac3;
+aktywny graf n8n 39af53f7-1377-4f3b-8ac1-a3b8bdf80606, 11 węzłów,
+bez zapisu danych wykonań. Staging wyłączony. Kontrola rzeczywistego UI
+1280/320 PASS z zablokowaną siecią webhooka, bez produkcyjnego POST.
+
+Chroniony preview ma odrębny hostname poza allowlist widgetu i backendu
+produkcji. Wysyłka z niego wymaga osobnej konfiguracji lub trybu demo i nie
+jest częścią odbioru domeny publicznej. [Szczegóły i ograniczenia](PROGRESS.md).

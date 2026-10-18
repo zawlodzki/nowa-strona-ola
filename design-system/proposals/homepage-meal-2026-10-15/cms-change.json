@@ -1,7 +1,7 @@
 {
   "projectId": "dyuqkn8c",
   "dataset": "production",
-  "status": "draft-awaiting-pr-merge",
+  "status": "published",
   "documentId": "page-home-pl",
   "publishedRevisionBefore": "Hldtf1Ee54aeykZ46H9tbc",
   "draftId": "drafts.page-home-pl",
@@ -15,5 +15,10 @@
     "rasterKey": "home-meal",
     "alt": "Wątróbka drobiowa z jabłkiem i cebulą, gotowane ziemniaki i ogórek kiszony"
   },
-  "nextStep": "Po scaleniu i wdrożeniu PR porównać dokument i szkic z odczytanymi rewizjami, opublikować wyłącznie podmianę nakładki, następnie odebrać stronę."
+  "nextStep": "Podmiana opublikowana i odebrana na desktopie oraz przy 320 px. Brak dalszych zadań w tym zakresie.",
+  "publishedRevisionAfter": "7tcFiCWOj02pVQeWbH2n96",
+  "mergeCommit": "14b13801a252e367bf994bcf6fd5aaafc54009bb",
+  "productionRun": 38718443896,
+  "stagingRun": 38718441996,
+  "productionVersion": "5fb25e0f-bd1b-498f-8f7c-ffbc698391db"
 }
