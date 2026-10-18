@@ -1,5 +1,23 @@
 # Postęp wdrożenia
 
+## Webhook produkcji Sanity → 404, 18.10.2026
+
+- Objaw: Ola opublikowała `/blog/wysoki-testosteron-u-kobiet/` (19:20Z), zmian
+  nie było na produkcji. `publish-pages-production` zwracał 404 od 18:30Z
+  (ostatnie 202 o 09:47Z); staging działał (202).
+- Przyczyna: wersja `9e760fd3` Workera produkcji (13:59Z, checkout) dodała
+  `routes` bez `workers_dev`; Wrangler wyłączył wtedy workers.dev (`error 1042`).
+- Naprawa w Cloudflare: włączono subdomenę workers.dev przez API
+  (`/workers/scripts/ola-website-integrations-production/subdomain`), bez nowej
+  wersji kodu. Niepodpisany POST zwraca 401 `invalid_signature`, trasy
+  `/api/checkout/*` bez zmian.
+- Wynik: webhook produkcji zwrócił 202 o 19:48Z i 19:56Z, wdrożenie produkcji
+  o 19:56Z, artykuł widoczny na stronie. Wcześniejszy build stagingu padał na
+  linkach do szkiców (`jakie-badania-przy-pcos`, `tradzik-hormonalny`,
+  `inozytol-pcos`); po poprawie treści kolejny build przeszedł.
+- W repo: `"workers_dev": true` w `env.production` w `worker/wrangler.jsonc`,
+  aby kolejny deploy Workera produkcji nie wyłączył adresu webhooka.
+
 ## PR i scalenie ścieżki zakupu, 18.10.2026
 
 Użytkownik zlecił utworzenie PR i scalenie po testach. Zakres obejmuje

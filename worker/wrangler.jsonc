@@ -84,6 +84,8 @@
     },
     "production": {
       "name": "ola-website-integrations-production",
+      // Webhook Sanity wskazuje adres workers.dev; przy `routes` Wrangler domyślnie go wyłącza.
+      "workers_dev": true,
       "routes": [
         {
           "pattern": "aleksandraolesiewicz.com/api/checkout/*",
