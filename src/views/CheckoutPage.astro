@@ -1,0 +1,402 @@
+---
+import SeoHead from "@/views/SeoHead.astro";
+import { plainPageGraph } from "@/lib/seo/page-graphs";
+import { pageSeo } from "@/lib/seo/page-seo";
+import Layout3a from "@/design-system/Layout3a.astro";
+import SiteHeader from "@/design-system/components/SiteHeader.astro";
+import SiteFooter from "@/design-system/components/SiteFooter.astro";
+import SiteImage from "@/design-system/components/SiteImage.astro";
+import BookCover from "@/design-system/components/BookCover.astro";
+import Button from "@/design-system/components/Button.astro";
+import {
+  getEbook,
+  getSiteSettings,
+  getPcosCheckoutSettings,
+} from "@/sanity/repository";
+import { mapEbook } from "@/content/map-ebook";
+import { shellLinks } from "@/content/map-homepage";
+import {
+  checkoutCopy as copy,
+  checkoutProducts,
+} from "@/content/checkout-copy";
+
+interface Props {
+  kind: "single" | "crosssell" | "confirmation";
+}
+const { kind } = Astro.props;
+const settings = await getSiteSettings("pl");
+const shell = shellLinks(settings);
+const checkoutSettings = await getPcosCheckoutSettings();
+const products = await Promise.all(
+  checkoutProducts.map(async (product) => ({
+    ...product,
+    content: mapEbook(await getEbook("pl", product.slug), "pl"),
+  })),
+);
+const canonicalPath =
+  kind === "single"
+    ? "/zamowienie/"
+    : kind === "crosssell"
+      ? "/po-zakupie/"
+      : "/zamowienie/potwierdzenie/";
+const seo = pageSeo(settings, null, {
+  path: canonicalPath,
+  noindex: true,
+  markdown: false,
+  graph: plainPageGraph(),
+});
+const title =
+  kind === "single"
+    ? "Twoje zamówienie"
+    : kind === "crosssell"
+      ? checkoutSettings.crossSellTitle
+      : "Status Twojej płatności";
+---
+
+<Layout3a title={title} lang="pl" noindex>
+  <meta slot="head" name="referrer" content="no-referrer" />
+  <SeoHead slot="head" lang="pl" title={title} seo={seo} />
+  <SiteHeader
+    homeHref="/"
+    lang="pl"
+    links={[{ href: "/ebooki/", label: "E-booki" }]}
+  />
+  <main
+    id="main"
+    class="checkout ao-container"
+    data-checkout-kind={kind}
+    data-sales-state={checkoutSettings.salesState}
+  >
+    <header class="checkout__intro">
+      <p class="checkout__kicker">
+        {kind === "crosssell"
+          ? checkoutSettings.crossSellKicker
+          : "Seria e-booków o PMOS\u00A0(PCOS)"}
+      </p>
+      <h1>{title}</h1>
+      {kind === "crosssell" && (
+        <p data-paid-lead hidden>
+          {checkoutSettings.crossSellLead}
+        </p>
+      )}
+    </header>
+    <p data-checkout-status role="status" aria-live="polite">
+      {kind === "single"
+        ? "Sprawdzamy dostępność płatności."
+        : "Sprawdzamy status płatności."}
+    </p>
+    <noscript>
+      <p>
+        Włącz JavaScript, żeby sprawdzić dostępność płatności i złożyć
+        zamówienie. Bez JavaScript nie możemy potwierdzić uprawnienia do oferty
+        ani otworzyć płatności.
+      </p>
+      {kind === "crosssell" && (
+        <p>
+          {copy.bundlePrice}. {checkoutSettings.bundleOnlyNotice}
+        </p>
+      )}
+    </noscript>
+    {kind === "crosssell" && (
+      <div class="checkout__context">
+        <p>{checkoutSettings.educationNote}</p>
+        <p>{checkoutSettings.empathy}</p>
+        <p>{checkoutSettings.mechanism}</p>
+      </div>
+    )}
+    <section data-checkout-content hidden aria-label="Podsumowanie zamówienia">
+      <div class="checkout__products">
+        {products.map(({ code, benefit, content }) => (
+          <article data-product-code={code} class="checkout__product" hidden>
+            <div class="checkout__cover">
+              {content.cover?.src ? (
+                <SiteImage
+                  src={content.cover.src}
+                  alt={content.cover.label}
+                  width={252}
+                  height={378}
+                  fit="contain"
+                />
+              ) : (
+                <BookCover
+                  title={content.title}
+                  subtitle={content.subtitle ?? ""}
+                  author={content.author.name}
+                  topic="PMOS (PCOS)"
+                  tone={content.coverTone}
+                />
+              )}
+            </div>
+            <div>
+              <p class="checkout__kicker">{`E-book ${code.slice(-2)} · seria o PMOS\u00A0(PCOS)`}</p>
+              <h2>{content.title}</h2>
+              <p>{benefit}</p>
+              <p class="checkout__meta">
+                {content.format.toUpperCase().replace("-", " + ")}
+                {content.numberOfPages
+                  ? ` · ${content.numberOfPages} stron`
+                  : ""}
+              </p>
+              <p data-product-price>97 zł brutto</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      {kind !== "confirmation" && (
+        <form data-checkout-form class="checkout__form">
+          {kind === "crosssell" && (
+            <div class="checkout__offer">
+              <h2>{copy.bundlePrice}</h2>
+              <p>{checkoutSettings.bundleReference}</p>
+              <p>{checkoutSettings.bundleOnlyNotice}</p>
+              <p>
+                Zakup pakietu jest dobrowolny. Nie wpływa na Twoje wcześniejsze
+                zamówienie.
+              </p>
+            </div>
+          )}
+          <h2>Podsumowanie zamówienia</h2>
+          <p data-order-total class="checkout__total">
+            {kind === "single"
+              ? "Razem 97 zł brutto"
+              : "Razem 97 zł brutto za 2 e-booki"}
+          </p>
+          {kind === "single" ? (
+            <>
+              <label>
+                Imię i nazwisko
+                <input
+                  name="customerName"
+                  autocomplete="name"
+                  maxlength="160"
+                  required
+                />
+              </label>
+              <label>
+                Adres e-mail
+                <input
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  maxlength="254"
+                  required
+                />
+              </label>
+            </>
+          ) : (
+            <p>
+              Dane kupującej pobierzemy z pierwszego zamówienia. Ten pakiet to
+              osobne zamówienie i osobna płatność.
+            </p>
+          )}
+          <div class="checkout__legal">
+            <p>Sprzedawca: Wellbiz sp. z o.o.</p>
+            <p>
+              Dostawa: link do pobrania wysłany e-mailem, ważny 7 dni. E-booki
+              wysyłamy po zapłacie. Po ich dostarczeniu utracisz prawo
+              odstąpienia od umowy.
+            </p>
+            <p>
+              Potrzebujesz programu do odczytu formatu wskazanego przy e-booku,
+              adresu e-mail i dostępu do internetu. Szczegóły formatu podaliśmy
+              przy każdym e-booku.{" "}
+              <a href="/regulamin/">Warunki zakupu i pouczenie o odstąpieniu</a>
+              .
+            </p>
+          </div>
+          <label class="checkout__consent">
+            <input name="consentAccepted" type="checkbox" required />
+            <span>
+              Akceptuję{" "}
+              <a href="/regulamin/" target="_blank" rel="noopener noreferrer">
+                Regulamin
+              </a>{" "}
+              i oświadczam, że mam ukończone 18 lat. Zgadzam się na dostarczenie{" "}
+              {kind === "single" ? "e-booka" : "e-booków"} przed upływem 14 dni
+              na odstąpienie od umowy i przyjmuję do wiadomości, że{" "}
+              <strong>
+                po dostarczeniu {kind === "single" ? "e-booka" : "e-booków"}{" "}
+                utracę prawo odstąpienia od umowy
+              </strong>
+              .
+            </span>
+          </label>
+          <p data-consent-hint>Zaznacz pole, żeby złożyć zamówienie.</p>
+          <p>
+            {copy.privacy} Więcej w{" "}
+            <a
+              href="/polityka-prywatnosci/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Polityce prywatności
+            </a>
+            .
+          </p>
+          <p data-checkout-error role="alert" hidden></p>
+          <Button type="submit" disabled>
+            {checkoutSettings.continueLabel}
+          </Button>
+          <p>W kolejnym kroku przejdziesz do płatności Stripe.</p>
+        </form>
+      )}
+    </section>
+    {kind === "crosssell" && (
+      <a class="checkout__skip" hidden href="/zamowienie/potwierdzenie/">
+        {checkoutSettings.skipLabel}
+      </a>
+    )}
+    <a class="checkout__back" href="/ebooki/">
+      Wróć do e-booków
+    </a>
+  </main>
+  <SiteFooter
+    homeHref="/"
+    description={settings.footerNote ?? ""}
+    links={shell.navigation}
+    socialLinks={shell.socialLinks}
+    legalLinks={shell.legalLinks}
+    copyright={shell.copyright}
+    lang="pl"
+  />
+</Layout3a>
+<script>
+  import "@/lib/checkout-client";
+</script>
+<style>
+  .checkout {
+    padding-block: clamp(3rem, 6vw, 6rem);
+    display: grid;
+    gap: 2rem;
+  }
+  .checkout__intro {
+    display: grid;
+    gap: 1.25rem;
+    max-inline-size: 54rem;
+  }
+  .checkout h1 {
+    font-size: clamp(2.2rem, 1.8rem + 3vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+  .checkout h2 {
+    font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+    font-weight: 450;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .checkout p {
+    max-inline-size: 65ch;
+  }
+  .checkout__kicker {
+    color: var(--ao-accent);
+    font-size: 0.875rem;
+  }
+  .checkout__context {
+    display: grid;
+    gap: 1rem;
+    margin-block-end: 2rem;
+  }
+  .checkout__products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    gap: 2rem;
+  }
+  .checkout__product {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    border-block: 1px solid var(--ao-line);
+    padding-block: 2rem;
+  }
+  .checkout__product[hidden],
+  [data-checkout-content][hidden] {
+    display: none;
+  }
+  .checkout__cover {
+    flex: 0 1 15.75rem;
+  }
+  .checkout__cover :global(img) {
+    inline-size: 100%;
+    block-size: auto;
+  }
+  .checkout__product > div:last-child {
+    flex: 1 1 13rem;
+    display: grid;
+    gap: 0.75rem;
+    min-inline-size: 0;
+  }
+  .checkout__meta {
+    color: var(--ao-muted);
+  }
+  .checkout__form {
+    max-inline-size: 47rem;
+    display: grid;
+    gap: 1.25rem;
+    margin-block-start: 2rem;
+  }
+  .checkout__offer {
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    background: var(--ao-surface);
+    border-radius: var(--ao-radius-panel);
+    display: grid;
+    gap: 1rem;
+  }
+  .checkout__total {
+    font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .checkout label {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .checkout input:not([type="checkbox"]) {
+    inline-size: 100%;
+    min-block-size: 3rem;
+    border: 1px solid var(--ao-muted);
+    border-radius: var(--ao-radius-control);
+    padding: 0.75rem;
+    background: var(--ao-background);
+    color: var(--ao-ink);
+  }
+  .checkout .checkout__consent {
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+  }
+  .checkout input[type="checkbox"] {
+    flex: 0 0 1.5rem;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    margin: 0.2rem 0 0;
+    accent-color: var(--ao-accent);
+  }
+  .checkout__legal {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .checkout a {
+    text-decoration: underline;
+  }
+  .checkout :is(a, input, button):focus-visible {
+    outline: 2px solid var(--ao-accent);
+    outline-offset: 4px;
+  }
+  .checkout a:active {
+    opacity: 0.7;
+  }
+  .checkout :global(button) {
+    max-inline-size: 100%;
+    white-space: normal;
+    text-align: center;
+    justify-self: start;
+  }
+  .checkout__back,
+  .checkout__skip {
+    justify-self: start;
+    padding-block: 0.75rem;
+  }
+</style>

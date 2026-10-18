@@ -8,6 +8,7 @@ import { wagaLanding } from "@/content/ebook-landings/waga-cie-oklamuje";
 import { czyToJuzLanding } from "@/content/ebook-landings/czy-to-juz";
 import { nocLanding } from "@/content/ebook-landings/noc-zaczyna-sie-o-osiemnastej";
 import { EBOOK_SEED } from "@/content/homepage-seed";
+import { PCOS_PRODUCTS } from "@/lib/checkout-products";
 import { ebookPath } from "@/lib/paths";
 import { homepageCopy } from "@/content/homepage-seed";
 import {
@@ -130,6 +131,11 @@ function buildEbookFixture(
       description: item.description,
     })),
     delivery: null,
+    productCode:
+      language === "pl"
+        ? (PCOS_PRODUCTS.find((product) => product.slug === seed.slug.pl)
+            ?.code ?? null)
+        : null,
     checkoutUrl: null,
     waitlist: {
       buttonLabel: waitlist.buttonLabel,

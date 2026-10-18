@@ -1,6 +1,6 @@
 # Lista cookies i identyfikatorów aleksandraolesiewicz.com
 
-Wersja 2.4 · obowiązuje od 13.10.2026
+Wersja 2.5 · obowiązuje od 18.10.2026
 
 Lista uzupełnia [Politykę prywatności](/polityka-prywatnosci/) i opisuje pliki cookies, pamięć lokalną przeglądarki (localStorage) oraz podobne identyfikatory Strony.
 
@@ -25,6 +25,15 @@ Zapis zgód jest niezbędny do zapamiętania i wykonania Twojej decyzji, a zapis
 Decyzje zapisujemy w c15t na własnym serwerze. Dowód zawiera identyfikatory użytkownika zgód i decyzji, domenę, kategorie, datę, politykę i jej wersję, sposób dokonania wyboru, język, informacje o przeglądarce (User-Agent) oraz zamaskowany adres IP. Nie zbieramy w tym celu imienia, e-maila ani danych formularzy. Historię decyzji przechowujemy do 36 miesięcy od ostatniej decyzji. Termin ten dotyczy dowodu po stronie serwera, a nie ważności cookie. Pamięć przeglądarki sama nie stanowi potwierdzenia aktualnej zgody; stan weryfikuje c15t. Po upływie ważności prosimy o ponowny wybór.
 
 Zgody tej Strony są zbierane osobno od zgód zawlodzki.pl. Wspólna infrastruktura i administracja c15t nie przenoszą wyborów między tymi stronami. Środowisko testowe ma osobny profil zgód i nie przekazuje ich na domenę produkcyjną.
+
+## Obsługa zamówienia na Stronie
+
+| Identyfikator          | Dostawca                           | Mechanizm i zakres                                                                            | Cel                                                                                                                                                                                          | Okres działania                                                  |
+| ---------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `__Host-ola_checkout`  | Wellbiz, infrastruktura Cloudflare | cookie własne, Secure, HttpOnly, SameSite=Lax, ścieżka `/`, bez współdzielenia między hostami | losowy identyfikator przeglądarki umożliwiający bezpieczny odczyt własnego zamówienia i skorzystanie z oferty dwóch pozostałych e-booków po zapłacie; cookie nie zawiera imienia ani e-maila | do 30 dni od odnowienia podczas korzystania z procesu zamówienia |
+| `ola.checkout.session` | Wellbiz                            | sessionStorage, wyłącznie dla bieżącej karty i originu                                        | identyfikator sesji płatności umożliwiający powrót do statusu zamówienia po odświeżeniu; sam identyfikator nie uprawnia do odczytu zamówienia                                                | do zakończenia sesji karty lub wyczyszczenia jej pamięci         |
+
+Są to wpisy służące wyłącznie obsłudze zamówienia, a nie analityce lub reklamie. Powstają w procesie zamówienia, nie podczas zwykłego przeglądania strony głównej. Usunięcie cookie może uniemożliwić odczyt statusu w tej przeglądarce; w sprawie zamówienia można skontaktować się z nami e-mailem. Wpisy przeglądarki nie są jedynym dowodem zamówienia lub udzielonej zgody.
 
 ## Usługi ochrony i płatności
 

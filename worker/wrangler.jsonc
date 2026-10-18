@@ -10,9 +10,25 @@
       "invocation_logs": false,
       "head_sampling_rate": 0.1,
     },
-    "traces": { "enabled": true, "head_sampling_rate": 0.01 },
+    "traces": { "enabled": false },
   },
-  "vars": { "BUILD_TARGET_ENV": "staging" },
+  "vars": {
+    "BUILD_TARGET_ENV": "staging",
+    "CHECKOUT_ENABLED": "false",
+    "CHECKOUT_SITE_ORIGIN": "https://aleksandraolesiewicz.com",
+    "STRIPE_PRICE_EBOOK_01": "",
+    "STRIPE_PRICE_EBOOK_02": "",
+    "STRIPE_PRICE_EBOOK_03": "",
+    "STRIPE_PAIR_COUPON": "",
+  },
+  "d1_databases": [
+    {
+      "binding": "CHECKOUT_DB",
+      "database_name": "ola-checkout-local",
+      "database_id": "00000000-0000-0000-0000-000000000001",
+      "migrations_dir": "migrations",
+    },
+  ],
   "secrets": {
     "required": [
       "SANITY_WEBHOOK_SECRET",
@@ -38,7 +54,15 @@
   "env": {
     "staging": {
       "name": "ola-website-integrations-staging",
-      "vars": { "BUILD_TARGET_ENV": "staging" },
+      "vars": {
+        "BUILD_TARGET_ENV": "staging",
+        "CHECKOUT_ENABLED": "false",
+        "CHECKOUT_SITE_ORIGIN": "https://aleksandraolesiewicz.com",
+        "STRIPE_PRICE_EBOOK_01": "",
+        "STRIPE_PRICE_EBOOK_02": "",
+        "STRIPE_PRICE_EBOOK_03": "",
+        "STRIPE_PAIR_COUPON": "",
+      },
       "secrets": {
         "required": [
           "SANITY_WEBHOOK_SECRET",
@@ -64,7 +88,33 @@
     },
     "production": {
       "name": "ola-website-integrations-production",
-      "vars": { "BUILD_TARGET_ENV": "production" },
+      "routes": [
+        {
+          "pattern": "aleksandraolesiewicz.com/api/checkout/*",
+          "zone_name": "aleksandraolesiewicz.com",
+        },
+        {
+          "pattern": "aleksandraolesiewicz.com/webhooks/stripe",
+          "zone_name": "aleksandraolesiewicz.com",
+        },
+      ],
+      "d1_databases": [
+        {
+          "binding": "CHECKOUT_DB",
+          "database_name": "ola-checkout-orders",
+          "database_id": "3223d46b-350f-4f4d-8fff-f63f90da082f",
+          "migrations_dir": "migrations",
+        },
+      ],
+      "vars": {
+        "BUILD_TARGET_ENV": "production",
+        "CHECKOUT_ENABLED": "false",
+        "CHECKOUT_SITE_ORIGIN": "https://aleksandraolesiewicz.com",
+        "STRIPE_PRICE_EBOOK_01": "price_1URqR0Q8cdQEDgtW9swOgW4n",
+        "STRIPE_PRICE_EBOOK_02": "price_1URqRCQ8cdQEDgtWL1ZkAQQS",
+        "STRIPE_PRICE_EBOOK_03": "price_1URqRFQ8cdQEDgtWFn0DNVMC",
+        "STRIPE_PAIR_COUPON": "ola_complete_pair_50_v1",
+      },
       "secrets": {
         "required": [
           "SANITY_WEBHOOK_SECRET",

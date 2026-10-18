@@ -1,11 +1,40 @@
 # Strony prawne — konfiguracja CMS
 
-Aktualizacja: 2026-10-13. Właściciel zlecił uruchomienie pomiaru produkcyjnego
-i wyrównanie źródeł w `projekt prawny ola`. Opublikowano politykę prywatności
-i listę cookies 2.3 z datą 13.10.2026 dla GA4 i ręcznego PageView Meta po
-właściwej zgodzie. Kontener GTM w wersji 4 jest opublikowany, a produkcyjny loader włączony.
-Wdrożenie i odbiór produkcyjnego runtime zakończyły się PASS. Pozostałe
-ustalenia pakietu bez zmian.
+Aktualizacja 18.10.2026. Opublikowane PL obejmują regulamin 2.4 z datą
+10.10.2026, politykę prywatności 2.4 z datą 13.10.2026, listę cookies 2.5
+z datą 18.10.2026 i regulamin newslettera 2.1 z datą 10.10.2026.
+Historia wcześniejszych konfiguracji pomiaru pozostaje poniżej.
+
+## Aktualizacja zamówień D27, 18.10.2026
+
+Na zlecenie użytkownika ponownie odczytano `projekt prawny ola` po zmianie D27.
+Źródło `regulamin.md` 2.4 i „Zgody i formularze” 2.5 zastępuje wariant dwóch
+checkboxów i dostawy po 14 dniach. Własne zamówienie zawiera jeden wymagany,
+niezaznaczony checkbox obejmujący regulamin, pełnoletność, zgodę na natychmiastowe
+dostarczenie treści i potwierdzenie utraty prawa odstąpienia. Przycisk brzmi
+„Zamawiam z obowiązkiem zapłaty”. Stripe nie dodaje checkboxa regulaminu.
+Numer oświadczenia w rejestrze zamówień to `pcos-d27-2026-10-18`.
+
+Konwerter i przykłady Markdown odpowiadają źródłu. Opublikowano wyłącznie
+uzasadniony zakres dokumentów PL, po kontroli rewizji. `legal-terms-pl` ma
+wersję 2.4, a odczyt po publikacji zwrócił rewizję `UdQdXKR5Wip8kOGZBYI1yB`.
+Polityki prywatności i regulaminu newslettera ta zmiana nie nadpisywała.
+Publiczne EN pozostaje wyłączone.
+
+Źródłową listę cookies uzupełniono o obsługę zamówienia na własnej stronie.
+Wersja 2.5 opisuje `__Host-ola_checkout`, niezbędne cookie dostępu do własnego
+zamówienia na 30 dni, oraz `ola.checkout.session` w sessionStorage danej karty
+do końca jej sesji. Cookie ma Secure, HttpOnly, SameSite=Lax i Path=/.
+Identyfikatory nie służą analityce. `legal-cookies-pl` 2.5 opublikowano
+z datą 18.10.2026. Odczyt zwrócił rewizję `W6ZgZ6YLs15DClTrjQnWag`.
+
+Publiczny odczyt potwierdził regulamin 2.4 oraz listę cookies 2.5 z opisem
+obu identyfikatorów. Workflow Publish content `39116733366` zakończył się
+sukcesem. Dostawę użytkownik odłożył. Dokumenty opisują docelowy proces i nie są dowodem
+uruchomienia dostawy ani sprzedaży. Wyłączone pozostają formularze płatności
+na produkcji. Płatność w sandboxie, wysyłka potwierdzenia i dokumentów PDF
+wymagają odbioru przed aktywacją. Sam audyt techniczny nie potwierdza oceny
+prawnej połączonego oświadczenia oznaczonej w źródle do konsultacji z radcą.
 
 ## Źródło treści
 
@@ -13,16 +42,16 @@ ustalenia pakietu bez zmian.
 `projekt prawny ola/www-prawne/` — szkice B2C dla Wellbiz sp. z o.o.
 (sprzedaż e-booków i konsultacje dietetyczne online).
 
-| Plik źródłowy                                         | Trasa                               | Uwagi                                                      |
-| ----------------------------------------------------- | ----------------------------------- | ---------------------------------------------------------- |
-| `regulamin.md`                                        | `/regulamin/`                       | z dwoma załącznikami na tej samej stronie                  |
-| `pouczenie-o-odstapieniu.md`                          | `/regulamin/#pouczenie`             | załącznik nr 1, stała kotwica                              |
-| `formularz-odstapienia.md`                            | `/regulamin/#formularz-odstapienia` | załącznik nr 2, stała kotwica                              |
-| `polityka-prywatnosci.md`                             | `/polityka-prywatnosci/`            |                                                            |
-| `lista-cookies-i-identyfikatorow.md`                  | `/lista-cookies-i-identyfikatorow/` | opublikowana wersja 2.3; odbiór produkcyjnego runtime PASS |
-| `regulamin-newslettera.md`                            | `/regulamin-newslettera/`           |                                                            |
-| `zgody-i-formularze.md`                               | — (nie publikujemy)                 | §1 stopka i dane sprzedawcy, §8 informacja pod opiniami    |
-| `szablony-emaili.md`, `stopka-ebooka.md`, `README.md` | — (nie publikujemy)                 |                                                            |
+| Plik źródłowy                                         | Trasa                               | Uwagi                                                   |
+| ----------------------------------------------------- | ----------------------------------- | ------------------------------------------------------- |
+| `regulamin.md`                                        | `/regulamin/`                       | z dwoma załącznikami na tej samej stronie               |
+| `pouczenie-o-odstapieniu.md`                          | `/regulamin/#pouczenie`             | załącznik nr 1, stała kotwica                           |
+| `formularz-odstapienia.md`                            | `/regulamin/#formularz-odstapienia` | załącznik nr 2, stała kotwica                           |
+| `polityka-prywatnosci.md`                             | `/polityka-prywatnosci/`            |                                                         |
+| `lista-cookies-i-identyfikatorow.md`                  | `/lista-cookies-i-identyfikatorow/` | opublikowana wersja 2.5, data 18.10.2026                |
+| `regulamin-newslettera.md`                            | `/regulamin-newslettera/`           |                                                         |
+| `zgody-i-formularze.md`                               | — (nie publikujemy)                 | §1 stopka i dane sprzedawcy, §8 informacja pod opiniami |
+| `szablony-emaili.md`, `stopka-ebooka.md`, `README.md` | — (nie publikujemy)                 |                                                         |
 
 EN (`/en/privacy/`, `/en/terms/`) ma tylko informację, że wiążąca jest wersja
 polska. Dezaktywację EN prowadzi osobny etap.

@@ -28,6 +28,9 @@ const pages = [
   ["/lista-cookies-i-identyfikatorow/", "lista cookies"],
   ["/regulamin/", "regulamin"],
   ["/regulamin-newslettera/", "regulamin newslettera"],
+  ["/zamowienie/", "formularz zamówienia"],
+  ["/po-zakupie/", "oferta uzupełnienia serii"],
+  ["/zamowienie/potwierdzenie/", "potwierdzenie zamówienia"],
 ];
 
 function serve(directory) {

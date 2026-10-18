@@ -12,6 +12,11 @@ import {
   formatLowestPriceNote,
   formatPriceGross,
 } from "@/lib/offer";
+import {
+  PCOS_PRODUCTS,
+  toPcosProductCode,
+  type PcosProductCode,
+} from "@/lib/checkout-products";
 import { ebookPath } from "@/lib/paths";
 import { pickSiteImage } from "@/lib/site-images";
 import type {
@@ -97,6 +102,7 @@ export interface EbookView {
   numberOfPages?: number;
   /** Sale start date (YYYY-MM-DD) for JSON-LD datePublished. */
   publishedAt?: string;
+  productCode?: PcosProductCode;
   checkoutUrl?: string;
   /** Tylko dla statusu „Wkrótce dostępny” z kompletną konfiguracją zapisu. */
   waitlist?: EbookWaitlist;
@@ -178,6 +184,7 @@ type RawEbook = {
   chapters?: { title?: string | null; summary?: string | null }[] | null;
   includedMaterials?:
     { title?: string | null; description?: string | null }[] | null;
+  productCode?: string | null;
   checkoutUrl?: string | null;
   waitlist?: {
     buttonLabel?: string | null;
@@ -429,7 +436,20 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
       `E-book ${slug}: najniższa cena z 30 dni musi być dodatnią liczbą.`,
     );
   }
-  const checkoutUrl = ebook.checkoutUrl ?? undefined;
+  const productCode =
+    language === "pl" ? toPcosProductCode(ebook.productCode) : undefined;
+  if (
+    productCode &&
+    PCOS_PRODUCTS.find((product) => product.code === productCode)?.slug !== slug
+  ) {
+    throw new Error(`Kod produktu płatności nie odpowiada e-bookowi ${slug}.`);
+  }
+  if (ebook.productCode && !productCode) {
+    throw new Error(`E-book ${slug} ma nieznany kod produktu płatności.`);
+  }
+  const checkoutUrl = productCode
+    ? `/zamowienie/?produkt=${productCode}`
+    : (ebook.checkoutUrl ?? undefined);
   if (canPurchase(availability) && !checkoutUrl) {
     throw new Error(`E-book ${slug} w sprzedaży wymaga checkoutUrl HTTPS.`);
   }
@@ -557,6 +577,7 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
     })),
     numberOfPages: ebook.numberOfPages ?? undefined,
     publishedAt: ebook.publishedAt ?? undefined,
+    productCode,
     checkoutUrl: canPurchase(availability) ? checkoutUrl : undefined,
     waitlist: toWaitlist(ebook.waitlist, availability, slug),
     landing: {

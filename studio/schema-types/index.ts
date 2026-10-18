@@ -5,6 +5,7 @@ import { articleType } from "./documents/article";
 import { legalPageType } from "./documents/legal-page";
 import { authorType } from "./documents/author";
 import { categoryType } from "./documents/category";
+import { pcosCheckoutSettingsType } from "./documents/pcos-checkout-settings";
 import { ebookType } from "./documents/ebook";
 import { formType } from "./documents/form";
 import { pageType } from "./documents/page";
@@ -60,6 +61,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   categoryType,
   serviceType,
   ebookType,
+  pcosCheckoutSettingsType,
   testimonialType,
   formType,
   redirectType,

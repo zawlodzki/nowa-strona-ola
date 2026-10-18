@@ -1,6 +1,6 @@
 {
   "title": "Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com",
-  "version": "2.3",
+  "version": "2.4",
   "effectiveFrom": "2026-10-10",
   "seoDescription": "Regulamin sprzedaży e-booków i konsultacji dietetycznych online, z pouczeniem i wzorem formularza odstąpienia od umowy.",
   "body": [
@@ -1024,7 +1024,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "akceptuje Regulamin i potwierdza, że ukończył 18 lat (pole obowiązkowe),",
+          "text": "zaznacza pole obowiązkowe, w którym akceptuje Regulamin, potwierdza, że ukończył 18 lat, wyraża zgodę na dostarczenie E-booka przed upływem terminu do odstąpienia od umowy i przyjmuje do wiadomości, że z chwilą dostarczenia traci prawo odstąpienia (§ 15 ust. 4),",
           "marks": []
         }
       ],
@@ -1033,22 +1033,6 @@
     {
       "_type": "block",
       "_key": "b46",
-      "style": "normal",
-      "listItem": "number",
-      "level": 2,
-      "children": [
-        {
-          "_type": "span",
-          "_key": "s0",
-          "text": "wyraża zgodę na dostarczenie E-booka przed upływem terminu do odstąpienia od umowy i przyjmuje do wiadomości, że z chwilą dostarczenia traci prawo odstąpienia (pole dobrowolne — § 15 ust. 4),",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "b47",
       "style": "normal",
       "listItem": "number",
       "level": 2,
@@ -1076,7 +1060,7 @@
     },
     {
       "_type": "block",
-      "_key": "b48",
+      "_key": "b47",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1092,7 +1076,7 @@
     },
     {
       "_type": "block",
-      "_key": "b49",
+      "_key": "b48",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1100,7 +1084,7 @@
         {
           "_type": "span",
           "_key": "s0",
-          "text": "Umowa zostaje zawarta z chwilą otrzymania przez Klienta, na podany adres e-mail, potwierdzenia przyjęcia Zamówienia, wysyłanego po zaksięgowaniu płatności. Potwierdzenie zawiera istotne warunki Umowy, informację o wyrażonej zgodzie z ust. 2 pkt 2 (jeżeli została wyrażona), Regulamin w niezmiennym pliku PDF w wersji obowiązującej w dniu zawarcia Umowy oraz pouczenie o prawie odstąpienia i wzór formularza odstąpienia — na trwałym nośniku.",
+          "text": "Umowa zostaje zawarta z chwilą otrzymania przez Klienta, na podany adres e-mail, potwierdzenia przyjęcia Zamówienia, wysyłanego po zaksięgowaniu płatności. Potwierdzenie zawiera istotne warunki Umowy, potwierdzenie zgody i oświadczenia z ust. 2 pkt 1, Regulamin w niezmiennym pliku PDF w wersji obowiązującej w dniu zawarcia Umowy oraz pouczenie o prawie odstąpienia i wzór formularza odstąpienia — na trwałym nośniku.",
           "marks": []
         }
       ],
@@ -1108,7 +1092,7 @@
     },
     {
       "_type": "block",
-      "_key": "b50",
+      "_key": "b49",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1138,7 +1122,7 @@
     },
     {
       "_type": "block",
-      "_key": "b52",
+      "_key": "b51",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1166,7 +1150,7 @@
     },
     {
       "_type": "block",
-      "_key": "b53",
+      "_key": "b52",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1182,7 +1166,7 @@
     },
     {
       "_type": "block",
-      "_key": "b54",
+      "_key": "b53",
       "style": "normal",
       "listItem": "number",
       "level": 2,
@@ -1198,7 +1182,7 @@
     },
     {
       "_type": "block",
-      "_key": "b55",
+      "_key": "b54",
       "style": "normal",
       "listItem": "number",
       "level": 2,
@@ -1226,7 +1210,7 @@
     },
     {
       "_type": "block",
-      "_key": "b56",
+      "_key": "b55",
       "style": "normal",
       "listItem": "number",
       "level": 2,
@@ -1254,7 +1238,7 @@
     },
     {
       "_type": "block",
-      "_key": "b57",
+      "_key": "b56",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1270,7 +1254,7 @@
     },
     {
       "_type": "block",
-      "_key": "b58",
+      "_key": "b57",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1300,7 +1284,7 @@
     },
     {
       "_type": "block",
-      "_key": "b60",
+      "_key": "b59",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1316,7 +1300,7 @@
     },
     {
       "_type": "block",
-      "_key": "b61",
+      "_key": "b60",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1344,7 +1328,7 @@
     },
     {
       "_type": "block",
-      "_key": "b62",
+      "_key": "b61",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1360,7 +1344,7 @@
     },
     {
       "_type": "block",
-      "_key": "b63",
+      "_key": "b62",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1390,7 +1374,7 @@
     },
     {
       "_type": "block",
-      "_key": "b65",
+      "_key": "b64",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1430,7 +1414,7 @@
     },
     {
       "_type": "block",
-      "_key": "b66",
+      "_key": "b65",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1458,7 +1442,7 @@
     },
     {
       "_type": "block",
-      "_key": "b67",
+      "_key": "b66",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1488,7 +1472,7 @@
     },
     {
       "_type": "block",
-      "_key": "b69",
+      "_key": "b68",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1504,7 +1488,7 @@
     },
     {
       "_type": "block",
-      "_key": "b70",
+      "_key": "b69",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1532,7 +1516,7 @@
     },
     {
       "_type": "block",
-      "_key": "b71",
+      "_key": "b70",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1548,7 +1532,7 @@
     },
     {
       "_type": "block",
-      "_key": "b72",
+      "_key": "b71",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1590,7 +1574,7 @@
     },
     {
       "_type": "block",
-      "_key": "b74",
+      "_key": "b73",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1618,7 +1602,7 @@
     },
     {
       "_type": "block",
-      "_key": "b75",
+      "_key": "b74",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1646,7 +1630,7 @@
     },
     {
       "_type": "block",
-      "_key": "b76",
+      "_key": "b75",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1662,7 +1646,7 @@
     },
     {
       "_type": "block",
-      "_key": "b77",
+      "_key": "b76",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1696,7 +1680,7 @@
     },
     {
       "_type": "block",
-      "_key": "b78",
+      "_key": "b77",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1736,7 +1720,7 @@
     },
     {
       "_type": "block",
-      "_key": "b79",
+      "_key": "b78",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1778,7 +1762,7 @@
     },
     {
       "_type": "block",
-      "_key": "b81",
+      "_key": "b80",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1818,7 +1802,7 @@
     },
     {
       "_type": "block",
-      "_key": "b82",
+      "_key": "b81",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1858,7 +1842,7 @@
     },
     {
       "_type": "block",
-      "_key": "b83",
+      "_key": "b82",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1880,7 +1864,7 @@
     },
     {
       "_type": "block",
-      "_key": "b84",
+      "_key": "b83",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1908,7 +1892,7 @@
     },
     {
       "_type": "block",
-      "_key": "b85",
+      "_key": "b84",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1948,7 +1932,7 @@
     },
     {
       "_type": "block",
-      "_key": "b86",
+      "_key": "b85",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -1978,7 +1962,7 @@
     },
     {
       "_type": "block",
-      "_key": "b88",
+      "_key": "b87",
       "style": "normal",
       "children": [
         {
@@ -1992,7 +1976,7 @@
     },
     {
       "_type": "block",
-      "_key": "b89",
+      "_key": "b88",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2026,7 +2010,7 @@
     },
     {
       "_type": "block",
-      "_key": "b90",
+      "_key": "b89",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2048,7 +2032,7 @@
     },
     {
       "_type": "block",
-      "_key": "b91",
+      "_key": "b90",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2070,7 +2054,7 @@
     },
     {
       "_type": "block",
-      "_key": "b92",
+      "_key": "b91",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2092,7 +2076,7 @@
     },
     {
       "_type": "block",
-      "_key": "b93",
+      "_key": "b92",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2122,7 +2106,7 @@
     },
     {
       "_type": "block",
-      "_key": "b95",
+      "_key": "b94",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2138,7 +2122,7 @@
     },
     {
       "_type": "block",
-      "_key": "b96",
+      "_key": "b95",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2166,7 +2150,7 @@
     },
     {
       "_type": "block",
-      "_key": "b97",
+      "_key": "b96",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2208,7 +2192,7 @@
     },
     {
       "_type": "block",
-      "_key": "b99",
+      "_key": "b98",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2242,7 +2226,7 @@
     },
     {
       "_type": "block",
-      "_key": "b100",
+      "_key": "b99",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2258,7 +2242,7 @@
     },
     {
       "_type": "block",
-      "_key": "b101",
+      "_key": "b100",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2280,7 +2264,7 @@
     },
     {
       "_type": "block",
-      "_key": "b102",
+      "_key": "b101",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2322,7 +2306,7 @@
     },
     {
       "_type": "block",
-      "_key": "b104",
+      "_key": "b103",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2350,7 +2334,7 @@
     },
     {
       "_type": "block",
-      "_key": "b105",
+      "_key": "b104",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2396,7 +2380,7 @@
     },
     {
       "_type": "block",
-      "_key": "b106",
+      "_key": "b105",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2412,7 +2396,7 @@
     },
     {
       "_type": "block",
-      "_key": "b107",
+      "_key": "b106",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2438,19 +2422,7 @@
         {
           "_type": "span",
           "_key": "s3",
-          "text": ", jeżeli dostarczyliśmy E-book za wyraźną i uprzednią zgodą Klienta, który przed dostarczeniem został poinformowany, że po jego dostarczeniu utraci prawo odstąpienia, i przyjął to do wiadomości, a my przekazaliśmy potwierdzenie tej zgody na trwałym nośniku (§ 5 ust. 2 pkt 2 i ust. 4). Jeżeli Klient nie wyrazi tej zgody, E-book dostarczamy ",
-          "marks": []
-        },
-        {
-          "_type": "span",
-          "_key": "s4",
-          "text": "po upływie 14 dni",
-          "marks": ["strong"]
-        },
-        {
-          "_type": "span",
-          "_key": "s5",
-          "text": " od zawarcia Umowy, chyba że Klient wcześniej wyrazi zgodę e-mailem.",
+          "text": ", jeżeli dostarczyliśmy E-book za wyraźną i uprzednią zgodą Klienta, który przed dostarczeniem został poinformowany, że po jego dostarczeniu utraci prawo odstąpienia, i przyjął to do wiadomości, a my przekazaliśmy potwierdzenie tej zgody na trwałym nośniku (§ 5 ust. 2 pkt 1 i ust. 4). Wyrażenie tej zgody jest warunkiem złożenia Zamówienia E-booka.",
           "marks": []
         }
       ],
@@ -2458,7 +2430,7 @@
     },
     {
       "_type": "block",
-      "_key": "b108",
+      "_key": "b107",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2480,7 +2452,7 @@
     },
     {
       "_type": "block",
-      "_key": "b109",
+      "_key": "b108",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2508,7 +2480,7 @@
     },
     {
       "_type": "block",
-      "_key": "b110",
+      "_key": "b109",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2524,7 +2496,7 @@
     },
     {
       "_type": "block",
-      "_key": "b111",
+      "_key": "b110",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2572,7 +2544,7 @@
     },
     {
       "_type": "block",
-      "_key": "b113",
+      "_key": "b112",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2600,7 +2572,7 @@
     },
     {
       "_type": "block",
-      "_key": "b114",
+      "_key": "b113",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2616,7 +2588,7 @@
     },
     {
       "_type": "block",
-      "_key": "b115",
+      "_key": "b114",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2646,7 +2618,7 @@
     },
     {
       "_type": "block",
-      "_key": "b117",
+      "_key": "b116",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2662,7 +2634,7 @@
     },
     {
       "_type": "block",
-      "_key": "b118",
+      "_key": "b117",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2692,7 +2664,7 @@
     },
     {
       "_type": "block",
-      "_key": "b120",
+      "_key": "b119",
       "style": "normal",
       "children": [
         {
@@ -2738,7 +2710,7 @@
     },
     {
       "_type": "block",
-      "_key": "b122",
+      "_key": "b121",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2754,7 +2726,7 @@
     },
     {
       "_type": "block",
-      "_key": "b123",
+      "_key": "b122",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2784,7 +2756,7 @@
     },
     {
       "_type": "block",
-      "_key": "b125",
+      "_key": "b124",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2800,7 +2772,7 @@
     },
     {
       "_type": "block",
-      "_key": "b126",
+      "_key": "b125",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2816,7 +2788,7 @@
     },
     {
       "_type": "block",
-      "_key": "b127",
+      "_key": "b126",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2832,7 +2804,7 @@
     },
     {
       "_type": "block",
-      "_key": "b128",
+      "_key": "b127",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2862,7 +2834,7 @@
     },
     {
       "_type": "block",
-      "_key": "b130",
+      "_key": "b129",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2878,7 +2850,7 @@
     },
     {
       "_type": "block",
-      "_key": "b131",
+      "_key": "b130",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2894,7 +2866,7 @@
     },
     {
       "_type": "block",
-      "_key": "b132",
+      "_key": "b131",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2924,7 +2896,7 @@
     },
     {
       "_type": "block",
-      "_key": "b134",
+      "_key": "b133",
       "style": "normal",
       "listItem": "number",
       "level": 1,
@@ -2946,7 +2918,7 @@
     },
     {
       "_type": "block",
-      "_key": "b135",
+      "_key": "b134",
       "style": "normal",
       "listItem": "number",
       "level": 1,

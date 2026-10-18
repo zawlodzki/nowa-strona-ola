@@ -9,7 +9,7 @@ import { UndoIcon } from "@sanity/icons/Undo";
 import { UserIcon } from "@sanity/icons/User";
 import type { StructureResolver } from "sanity/structure";
 
-export const SINGLETON_TYPES = ["siteSettings"];
+export const SINGLETON_TYPES = ["siteSettings", "pcosCheckoutSettings"];
 
 function settingsItem(S: Parameters<StructureResolver>[0]) {
   return S.listItem()
@@ -87,6 +87,15 @@ export const structure: StructureResolver = (S) =>
     .title("Treści")
     .items([
       settingsItem(S),
+      S.listItem()
+        .title("Zamówienia serii PCOS")
+        .icon(CogIcon)
+        .child(
+          S.document()
+            .schemaType("pcosCheckoutSettings")
+            .documentId("pcosCheckoutSettings-pl")
+            .title("Zamówienia serii PCOS"),
+        ),
       S.divider(),
       languageList(S, "page", "Strony").icon(DocumentIcon),
       languageList(S, "article", "Artykuły").icon(DocumentTextIcon),

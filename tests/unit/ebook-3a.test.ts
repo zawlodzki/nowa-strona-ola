@@ -128,7 +128,7 @@ describe("ebook waitlist", () => {
     ebook.checkoutUrl = "https://buy.stripe.com/test_pcos";
     const view = mapEbook(ebook, "pl");
     expect(view.waitlist).toBeUndefined();
-    expect(view.checkoutUrl).toBe("https://buy.stripe.com/test_pcos");
+    expect(view.checkoutUrl).toBe("/zamowienie/?produkt=ebook-01");
   });
 
   it("falls back to the sales preview when no waitlist is configured", async () => {
@@ -228,6 +228,7 @@ describe("ebook product presentation", () => {
   it("requires complete presentation data for another product", async () => {
     const ebook = await legacyDocument();
     ebook.slug = "new-product";
+    ebook.productCode = null;
     if (!ebook.landing) throw new Error("expected landing");
     ebook.landing.coverTopic = undefined;
     expect(() => mapEbook(ebook, "pl")).toThrow("temat okładki");

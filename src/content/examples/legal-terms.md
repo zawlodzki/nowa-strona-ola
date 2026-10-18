@@ -1,6 +1,6 @@
 # Regulamin sprzedaży e-booków i świadczenia konsultacji dietetycznych online — aleksandraolesiewicz.com
 
-Wersja 2.3 · obowiązuje od 10.10.2026
+Wersja 2.4 · obowiązuje od 10.10.2026
 
 ## § 1. Postanowienia ogólne
 
@@ -56,11 +56,10 @@ Wersja 2.3 · obowiązuje od 10.10.2026
 
 1. Aby złożyć Zamówienie, Klient wybiera E-book, przechodzi do podsumowania zamówienia na Stronie i podaje imię, nazwisko i adres e-mail.
 2. Bezpośrednio przed złożeniem Zamówienia Klient widzi podsumowanie zawierające główne cechy E-booka, łączną cenę z podatkami, sposób dostarczenia i informację o prawie odstąpienia, a następnie:
-   1. akceptuje Regulamin i potwierdza, że ukończył 18 lat (pole obowiązkowe),
-   2. wyraża zgodę na dostarczenie E-booka przed upływem terminu do odstąpienia od umowy i przyjmuje do wiadomości, że z chwilą dostarczenia traci prawo odstąpienia (pole dobrowolne — § 15 ust. 4),
-   3. klika przycisk **„Zamawiam z obowiązkiem zapłaty”**.
+   1. zaznacza pole obowiązkowe, w którym akceptuje Regulamin, potwierdza, że ukończył 18 lat, wyraża zgodę na dostarczenie E-booka przed upływem terminu do odstąpienia od umowy i przyjmuje do wiadomości, że z chwilą dostarczenia traci prawo odstąpienia (§ 15 ust. 4),
+   2. klika przycisk **„Zamawiam z obowiązkiem zapłaty”**.
 3. Po kliknięciu przycisku Klient jest przekierowywany do strony płatności operatora Stripe w celu zapłaty ceny.
-4. Umowa zostaje zawarta z chwilą otrzymania przez Klienta, na podany adres e-mail, potwierdzenia przyjęcia Zamówienia, wysyłanego po zaksięgowaniu płatności. Potwierdzenie zawiera istotne warunki Umowy, informację o wyrażonej zgodzie z ust. 2 pkt 2 (jeżeli została wyrażona), Regulamin w niezmiennym pliku PDF w wersji obowiązującej w dniu zawarcia Umowy oraz pouczenie o prawie odstąpienia i wzór formularza odstąpienia — na trwałym nośniku.
+4. Umowa zostaje zawarta z chwilą otrzymania przez Klienta, na podany adres e-mail, potwierdzenia przyjęcia Zamówienia, wysyłanego po zaksięgowaniu płatności. Potwierdzenie zawiera istotne warunki Umowy, potwierdzenie zgody i oświadczenia z ust. 2 pkt 1, Regulamin w niezmiennym pliku PDF w wersji obowiązującej w dniu zawarcia Umowy oraz pouczenie o prawie odstąpienia i wzór formularza odstąpienia — na trwałym nośniku.
 5. Jeżeli płatność nie zostanie dokonana w ciągu 60 minut od złożenia Zamówienia, Zamówienie wygasa, a Umowa nie zostaje zawarta.
 
 ## § 6. Rezerwacja Usługi Dietetycznej i zawarcie Umowy
@@ -139,7 +138,7 @@ Postanowienia tego paragrafu stosuje się do Usługi Dodatkowej, jeżeli jest on
 1. Konsument oraz Przedsiębiorca na prawach konsumenta może odstąpić od Umowy w terminie **14 dni od dnia jej zawarcia** bez podania przyczyny, z zastrzeżeniem ust. 4 i 6.
 2. Oświadczenie o odstąpieniu można złożyć e-mailem na adres z § 1 ust. 4, pisemnie na adres siedziby albo przez formularz odstąpienia na Stronie (**/odstapienie**). Można skorzystać z [wzoru formularza](/regulamin/#formularz-odstapienia); nie jest to obowiązkowe. Po otrzymaniu oświadczenia przez formularz na Stronie niezwłocznie przesyłamy potwierdzenie jego otrzymania e-mailem. Do zachowania terminu wystarczy wysłanie oświadczenia przed jego upływem.
 3. Zwracamy wszystkie płatności niezwłocznie, nie później niż w terminie 14 dni od otrzymania oświadczenia, tym samym sposobem zapłaty, chyba że Klient wyraźnie zgodzi się na inny bezkosztowy sposób; z zastrzeżeniem ust. 5.
-4. **E-book.** Prawo odstąpienia **nie przysługuje**, jeżeli dostarczyliśmy E-book za wyraźną i uprzednią zgodą Klienta, który przed dostarczeniem został poinformowany, że po jego dostarczeniu utraci prawo odstąpienia, i przyjął to do wiadomości, a my przekazaliśmy potwierdzenie tej zgody na trwałym nośniku (§ 5 ust. 2 pkt 2 i ust. 4). Jeżeli Klient nie wyrazi tej zgody, E-book dostarczamy **po upływie 14 dni** od zawarcia Umowy, chyba że Klient wcześniej wyrazi zgodę e-mailem.
+4. **E-book.** Prawo odstąpienia **nie przysługuje**, jeżeli dostarczyliśmy E-book za wyraźną i uprzednią zgodą Klienta, który przed dostarczeniem został poinformowany, że po jego dostarczeniu utraci prawo odstąpienia, i przyjął to do wiadomości, a my przekazaliśmy potwierdzenie tej zgody na trwałym nośniku (§ 5 ust. 2 pkt 1 i ust. 4). Wyrażenie tej zgody jest warunkiem złożenia Zamówienia E-booka.
 5. **Usługi Dietetyczne.** Jeżeli Klient zażądał rozpoczęcia świadczenia przed upływem terminu do odstąpienia (§ 6 ust. 2 pkt 2), a następnie odstąpi od Umowy, płaci za świadczenia spełnione do chwili odstąpienia — kwotę proporcjonalną do zakresu spełnionego świadczenia, obliczoną według ceny z Umowy (np. przy Pakiecie: za odbyte spotkania). Jeżeli cena jest nadmierna, podstawą jest wartość rynkowa spełnionego świadczenia.
 6. Prawo odstąpienia od Umowy o Usługę Dietetyczną **nie przysługuje po pełnym wykonaniu usługi**, jeżeli rozpoczęliśmy ją za wyraźną i uprzednią zgodą Klienta, który przed rozpoczęciem został poinformowany, że po pełnym wykonaniu utraci prawo odstąpienia, i przyjął to do wiadomości.
 7. Klient nie ponosi kosztów świadczeń spełnionych przed odstąpieniem, jeżeli nie został prawidłowo poinformowany o prawie odstąpienia i obowiązku zapłaty proporcjonalnej albo nie złożył żądania z § 6 ust. 2 pkt 2.

@@ -1,3 +1,4 @@
+import { handleCheckout } from "./checkout";
 import type { LeadSubmission } from "@ola/shared";
 import {
   readSignedPublication,
@@ -12,6 +13,13 @@ const jsonHeaders = { "content-type": "application/json; charset=utf-8" };
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const { pathname } = new URL(request.url);
+
+    if (
+      pathname.startsWith("/api/checkout/") ||
+      pathname === "/webhooks/stripe"
+    ) {
+      return handleCheckout(request, env);
+    }
 
     if (request.method === "GET" && pathname === "/health") {
       return Response.json({ status: "ok" }, { headers: jsonHeaders });

@@ -1,3 +1,7 @@
+import {
+  mapPcosCheckoutSettings,
+  pcosCheckoutSettingsFixture,
+} from "@/content/pcos-checkout-settings";
 import { blogPageFromLegacySettings } from "./blog-page";
 import { createClient } from "@sanity/client";
 import type { Locale } from "@ola/shared";
@@ -28,6 +32,7 @@ import {
   fixtureEbooksWithLanding,
 } from "./ebook-fixtures";
 import {
+  PCOS_CHECKOUT_SETTINGS_QUERY,
   PUBLISHED_ARTICLE_PATHS_QUERY,
   PUBLISHED_ARTICLE_QUERY,
   PUBLISHED_ARTICLES_QUERY,
@@ -44,6 +49,7 @@ import {
   SITE_SETTINGS_QUERY,
 } from "./queries";
 import type {
+  PCOS_CHECKOUT_SETTINGS_QUERY_RESULT,
   PUBLISHED_ARTICLE_PATHS_QUERY_RESULT,
   PUBLISHED_ARTICLE_QUERY_RESULT,
   PUBLISHED_ARTICLES_QUERY_RESULT,
@@ -488,4 +494,19 @@ export async function listRedirects(
   const client = resolveClient(options);
   if (!client) return [];
   return client.fetch(PUBLISHED_REDIRECTS_QUERY);
+}
+
+export async function getPcosCheckoutSettings(
+  options: {
+    environment?: Record<string, string | undefined>;
+    client?: QueryClient;
+  } = {},
+) {
+  const client = resolveClient(options);
+  if (!client) return mapPcosCheckoutSettings(pcosCheckoutSettingsFixture);
+  return mapPcosCheckoutSettings(
+    await client.fetch<PCOS_CHECKOUT_SETTINGS_QUERY_RESULT>(
+      PCOS_CHECKOUT_SETTINGS_QUERY,
+    ),
+  );
 }

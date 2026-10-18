@@ -542,6 +542,7 @@ export const ebookProjection = /* groq */ `
   chapters[]{ _key, title, summary },
   includedMaterials[]{ _key, title, description },
   delivery{ description, timeline },
+  productCode,
   checkoutUrl,
   waitlist{
     buttonLabel,
@@ -681,4 +682,13 @@ export const PUBLISHED_REDIRECTS_QUERY = defineQuery(/* groq */ `
     defined(from) &&
     defined(to)
   ] | order(from asc){ from, to, status }
+`);
+
+export const PCOS_CHECKOUT_SETTINGS_QUERY = defineQuery(`
+  *[_type == "pcosCheckoutSettings" && _id == "pcosCheckoutSettings-pl"][0]{
+    salesState, singlePriceGross, pairPriceGross,
+    crossSellKicker, empathy, mechanism, bundleReference,
+    crossSellTitle, crossSellLead, bundleOnlyNotice,
+    continueLabel, skipLabel, educationNote, legalConsentVersion
+  }
 `);
