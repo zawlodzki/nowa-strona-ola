@@ -65,16 +65,15 @@ ma `paused`, Worker ma `CHECKOUT_ENABLED = false`. Brakuje runtime sekretu
 Stripe, skonfigurowanego webhooka oraz dostawy i mailowego potwierdzenia.
 Nie tworzono sesji płatniczej na koncie produkcyjnym w celu testu.
 
-Zapis commitu zatrzymał się dwukrotnie na podpisie 1Password. Pierwsza próba
-zwróciła `agent returned an error`, druga `failed to fill whole buffer`.
-Nie wyłączono skonfigurowanego podpisywania. Kod jest zachowany na gałęzi
-`codex/pcos-checkout` w osobnym worktree, a zmiany znajdują się w indeksie Git.
-Publiczny kod strony nie został jeszcze wdrożony. Build z opublikowanym Sanity
-i kontrola buildu oraz SEO 30 stron zakończyły się pomyślnie.
+Po odblokowaniu 1Password zapisano podpisany commit i utworzono
+[PR 128](https://github.com/zawlodzki/nowa-strona-ola/pull/128).
+Wcześniejsze zmiany użytkownika pozostały poza gałęzią. Build z opublikowanym
+Sanity oraz kontrola buildu i SEO 30 stron zakończyły się pomyślnie.
+Kod publicznej strony czeka na scalenie, publikację i odbiór domeny.
 
-Następny krok to odblokować podpis Git, zapisać commit, utworzyć PR i wdrożyć
-kod strony z wyłączoną sprzedażą. Aktywacja wymaga
-osobnego odbioru rzeczywistej płatności i dostawy.
+Następny krok to odebrać CI i niezależny przegląd PR, scalić zmianę oraz
+opublikować stronę z wyłączoną sprzedażą. Aktywacja wymaga osobnego odbioru
+rzeczywistej płatności i dostawy.
 
 Aktualizacja: 2026-10-16 (przycisk „Otwórz podgląd” z limitem renderów, Sanity 6.19.0 bez autoUpdates; wycofany przycisk „Otwórz podgląd” w Studio); 2026-10-13 (podgląd Studio liczy złożony tytuł D3; szablon tytułu D3 w `documentTitle`; kontrole `publish-content` nie zależą od `SITE_INDEXING` ani od ręcznej kopii Sanity; kopia datasetu Sanity, ćwiczenie odtworzenia zablokowane brakiem uprawnienia do tworzenia datasetu; flaki e2e od banera zgód; skala pisma licznika i brwi oraz hover Instagrama; GTM 4 opublikowany, pomiar wdrożony i dokumenty prawne 2.3 opublikowane; odbiór produkcyjnego runtime PASS); 2026-10-12 (zapas CSS strony głównej; ponowienie przejściowych błędów wrangler deploy; okładki e-booków bez drugiego ogłoszenia linku; pomiar Lighthouse i WCAG przed GTM; publish-content nie startuje przez runner.temp w env joba; workflow podglądu doklejał drugi sufiks nazwy Workera; suchy odczyt PMOS, ręczny tytuł SEO artykułu 11 i twarda spacja; właściciel wybrał hero V1 na „O mnie”; przegląd PR 73: lista treści w skrypcie PMOS, tytuły SEO do 60 znaków); 2026-10-11 (PMOS (PCOS), wydział w Bytomiu i historia na „O mnie”; plan GTM/c15t i trwały wybór motywu; e-booki „Wkrótce dostępny”: badge i lista oczekujących; wskaźnik 9000+ Instagram zamiast 450+); 2026-10-10 (wskaźnik 450+ jako godziny szkoleń; formularze wysyłają do n8n, `/odstapienie/`; dokumenty prawne B2C i stopka; ikony tematów w „Z kim pracuję”); 2026-10-09 („Z kim pracuję” zamiast logotypów; sticky navbar, linki i akcenty matcha; kontakt 3a; PR poprawek Sanity i bloga); 2026-10-08 (audyt CSS i aktualizacja Sanity).
 Specyfikacja: [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).

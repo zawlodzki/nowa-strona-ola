@@ -90,7 +90,8 @@ karty, subskrypcji i sztucznego licznika czasu.
 - [x] Zakończyć pełne `npm run verify` po ostatnich poprawkach.
 - [x] Wdrożyć Worker z `CHECKOUT_ENABLED = false` i potwierdzić stan publicznym GET.
 - [x] Wdrożyć menu Studio.
-- [ ] Zakończyć podpis commitu 1Password, utworzyć PR i wdrożyć kod strony.
+- [x] Zapisać podpisany commit i utworzyć [PR 128](https://github.com/zawlodzki/nowa-strona-ola/pull/128).
+- [ ] Scalić zweryfikowany PR i wdrożyć kod strony.
 - [ ] Dodać sekret runtime Stripe i endpoint webhooka. Potwierdzić ustawienia
       podatkowe i dane sprzedawcy przed uruchomieniem rzeczywistych płatności.
 - [ ] Sprawdzić pełny przebieg rzeczywistej płatności w Stripe sandbox.

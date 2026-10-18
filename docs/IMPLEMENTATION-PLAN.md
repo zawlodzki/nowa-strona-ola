@@ -20,7 +20,8 @@ brutto i osobne zamówienie dwóch pozostałych za łącznie 97 zł brutto.
       690 unit PASS, 549 E2E PASS, 12 celowych pominięć, 20 stron Content Lake zgodnych.
 - [x] Wdrożyć Worker z wyłączoną sprzedażą i potwierdzić katalog produkcyjny.
 - [x] Wdrożyć nowe menu Studio.
-- [ ] Zakończyć podpis commitu 1Password, utworzyć PR i wdrożyć kod strony.
+- [x] Zapisać podpisany commit i utworzyć [PR 128](https://github.com/zawlodzki/nowa-strona-ola/pull/128).
+- [ ] Scalić zweryfikowany PR i wdrożyć kod strony.
 - [ ] Dodać sekret Stripe i webhook oraz sprawdzić rzeczywistą płatność
       w sandboxie przed aktywacją sprzedaży.
 - [ ] Na osobnym etapie przygotować dostawę, maile i dokumenty PDF.
