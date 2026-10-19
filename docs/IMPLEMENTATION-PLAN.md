@@ -1,5 +1,18 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## Automatyzacje integracji i dostawy, analiza 19.10.2026
+
+- [x] Porównać n8n i Cloudflare pod kątem edycji przez agenta oraz obserwowalności.
+- [ ] Wybrać wykonawcę dostawy i ustalić jedną bazę nadrzędną zamówień.
+- [ ] Zaprojektować trwałe zlecenia dostawy, ponowienia, obsługę niejednoznacznej
+      wysyłki i kontrolę opłaconych zamówień bez dostawy.
+
+Rekomendacja do rozważenia: istniejący Worker i rejestr zamówień przy płatnościach,
+n8n dla integracji i koordynacji dostawy, osobna funkcja znakowania PDF,
+prywatne R2 oraz transakcyjny listmonk. Alternatywa przy obsłudze głównie przez
+Codex: Cloudflare Workflows w TypeScript. To propozycja, bez zmiany architektury,
+konfiguracji usług i aktywacji sprzedaży. Szczegóły i źródła w postępie.
+
 ## PR ścieżki zakupu, 18.10.2026
 
 - [x] Przygotować izolowany zakres i lokalne verify.

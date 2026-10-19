@@ -1,5 +1,42 @@
 # Postęp wdrożenia
 
+## Analiza automatyzacji, 19.10.2026
+
+Na zlecenie użytkownika przygotowano scalenie planu do main w PR #131.
+Pierwsze CI zatrzymało się na trzech błędach `no-undef` w istniejącym
+skrypcie eksportu logo Stripe. Konfiguracja ESLint nie obejmowała jego środowiska.
+Dodano deklaracje globali wyłącznie dla tego pliku, w tym `document` używany
+w przeglądarkowej funkcji Playwright. Nie zmieniono zachowania eksportu.
+Końcowy wynik ponownego CI i scalenia będzie dostępny w PR.
+
+Użytkownik wskazał formularze i Slack, newsletter listmonk, zamówienia
+w PostgreSQL oraz dostawę e-booków z watermarkiem. Priorytety: edycja przez
+Codex i wykrywanie błędów dostawy. Porównano repo i aktualną dokumentację.
+Istniejący checkout ma rejestr D1; PostgreSQL wymaga ustalenia, czy zastępuje
+ten rejestr, czy stanowi jego kopię do raportowania.
+
+Propozycja: zachować Worker przy płatnościach, użyć n8n do integracji
+i koordynacji dostawy, a znakowanie PDF wydzielić do testowalnej funkcji.
+Alternatywa przy utrzymaniu głównie przez agenta: Cloudflare Workflows.
+W obu wariantach potrzebne są trwałe zlecenia, odporność na duplikaty,
+osobne statusy pliku i e-maila, kontrola zaległych zamówień i monitoring
+niezależny od wykonawcy dostawy. Timeout wysyłki wymaga sprawdzenia wyniku,
+bo samo ponowienie może wysłać drugi e-mail. Slack nie może blokować dostawy.
+Treści zgłoszeń nie mogą trafiać do historii wykonań ani logów diagnostycznych.
+
+Źródła: [API n8n](https://docs.n8n.io/api/),
+[obsługa błędów n8n](https://docs.n8n.io/flow-logic/error-handling/),
+[trwałe kroki Cloudflare](https://developers.cloudflare.com/workflows/get-started/guide/),
+[odporność kroków na powtórzenia](https://developers.cloudflare.com/workflows/build/rules-of-workflows/),
+[transakcyjny listmonk](https://listmonk.app/docs/apis/transactional/)
+i [zwroty wiadomości](https://listmonk.app/docs/bounces/).
+
+Nie sprawdzano prywatnej konfiguracji n8n/listmonk ani rzeczywistych PDF-ów.
+Nie wdrożono integracji, monitoringu ani zmian CMS. Kontrole dokumentacji:
+Prettier i odnośniki lokalne. `npm run verify` nie uruchamiano, bo kod bez zmian.
+Następny krok: wybór wykonawcy dostawy i roli PostgreSQL, następnie projekt
+stanów i próba na testowym PDF-ie oraz odbiorniku poczty.
+
 ## Scalenie lokalnych notatek z main, 18.10.2026
 
 Lokalny main przewinięto do `origin/main` (`88c34fd`). Niezacommitowane notatki

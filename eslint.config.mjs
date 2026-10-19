@@ -22,6 +22,16 @@ export default [
   },
   js.configs.recommended,
   {
+    files: ["design-system/exports/stripe/export.mjs"],
+    languageOptions: {
+      globals: {
+        console: "readonly",
+        URL: "readonly",
+        document: "readonly",
+      },
+    },
+  },
+  {
     files: ["scripts/**/*.mjs"],
     languageOptions: {
       globals: {
