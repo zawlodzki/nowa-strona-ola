@@ -156,16 +156,22 @@ nie ma `_updatedAt`. Po nieudanym wdrożeniu nie powtarza alertu. Kolejna
 publikacja uruchamia nową próbę i nową ocenę. Ręczne uruchomienie ma domyślnie
 `dry_run: true` i tylko wypisuje komunikat w logu.
 
-Konfiguracja do wykonania (stan 19.10.2026: niewykonana):
+Konfiguracja (wykonana 19.10.2026 na polecenie użytkownika):
 
-- w n8n utworzyć osobny workflow: Webhook `POST` → Slack „Send message” na
-  `#ola-bledy-strony` z treścią `{{ $json.body.text }}`; zapisywanie danych
-  wykonań może zostać włączone, bo payload nie zawiera danych osobowych;
-- w GitHub dodać sekret repozytorium `PUBLICATION_ALERT_WEBHOOK_URL`. Sekret
-  repozytorium, a nie środowiska, bo zadanie w środowisku tworzyłoby co 30 min
-  wpis wdrożenia. Wykorzystują go tylko krok produkcji i monitor;
-- sprawdzić `Publication monitor` ręcznie z `dry_run: false` dopiero wtedy,
-  gdy webhook wskazuje kanał testowy albo Ola wie o próbie.
+- n8n: workflow `ola publikacja alerty` (id `lZaFofVph9rG2yUL`, aktywny).
+  Webhook `POST` na `flows.zawlodzki.com`, z losową ścieżką UUID. Węzeł
+  „Sprawdź alert” przepuszcza tylko `source: "ola-website"`, znany `kind`,
+  `text` do 3500 znaków i `runUrl` z repozytorium
+  `zawlodzki/nowa-strona-ola`. Inny payload dostaje 400 i nie trafia do Slacka.
+  Na kanał `#ola-bledy-strony` trafia tylko `text`, przez credential
+  `Slack account zawlodzki.pl`. Udane wykonania nie są zapisywane, błędne tak.
+  Błąd Slacka daje odpowiedź 500, więc krok w GitHub kończy się na czerwono;
+- adres webhooka jest wyłącznie w sekrecie repozytorium
+  `PUBLICATION_ALERT_WEBHOOK_URL` i w n8n. Sekret repozytorium, a nie
+  środowiska, bo zadanie w środowisku tworzyłoby co 30 min wpis wdrożenia.
+  Używają go tylko krok produkcji i monitor;
+- próby: niepoprawny payload → 400; jedna wiadomość `[TEST]` za zgodą
+  użytkownika → 200 i publikacja na kanale.
 
 Bez sekretu krok wysyłki kończy się błędem `PUBLICATION_ALERT_WEBHOOK_URL is
 not set`, więc przebieg jest czerwony i GitHub nadal wysyła swój e-mail.

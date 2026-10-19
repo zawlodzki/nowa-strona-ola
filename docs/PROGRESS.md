@@ -20,12 +20,14 @@ Kontrole: testy jednostkowe nowego skryptu, actionlint 1.7.12 z shellcheck,
 próba `monitor` na API GitHub i Sanity oraz `failure`/`send` z
 `ALERT_DRY_RUN=true`. `npm run verify`: wszystkie etapy zielone poza 5 testami
 e2e Playwright (Firefox/WebKit, timeouty); po ponowieniu `--last-failed` przeszły,
-`test:content-lake` zielony. Nie wysłano żadnego alertu; webhook n8n
-i sekret `PUBLICATION_ALERT_WEBHOOK_URL` nie istnieją. Workflowów nie uruchomiono
+`test:content-lake` zielony. Następnie, na polecenie
+użytkownika, utworzono w n8n workflow `ola publikacja alerty`
+(`lZaFofVph9rG2yUL`, webhook → walidacja → Slack `#ola-bledy-strony`) i sekret
+repozytorium `PUBLICATION_ALERT_WEBHOOK_URL`. Niepoprawny payload dostaje 400;
+jedna wiadomość `[TEST]` wysłana za zgodą użytkownika przeszła (200). Workflowów nie uruchomiono
 w GitHub, bo działają dopiero po scaleniu.
 
-Następny krok: utworzyć webhook n8n → Slack i sekret repozytorium, po scaleniu
-uruchomić `Publication monitor` ręcznie z `dry_run: true`, a potem raz z
+Następny krok: po scaleniu uruchomić `Publication monitor` ręcznie z `dry_run: true`, a potem raz z
 `dry_run: false` na kanale uzgodnionym z Olą. Osobno: ponowić publikację
 produkcji i usunąć niestabilny timeout testu.
 
