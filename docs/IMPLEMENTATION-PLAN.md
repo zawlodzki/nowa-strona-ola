@@ -1,5 +1,33 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## Newsletter — stan wdrożenia 19.10.2026
+
+- [x] Osobny Listmonk Aleksandry z SES, DNS, Access i brandingiem 3a.
+- [x] Produkcyjna gałąź n8n po Turnstile, double opt-in, rejestr zgód i idempotencja.
+- [x] Odseparowany staging E2E, SPF/DKIM/DMARC, retry/failure oraz backup/restore.
+- [ ] Odbiór pierwszego Access/MFA i podglądu kampanii przez Aleksandrę.
+
+Kontrakt formularza bez zmian (v3, formVersion/Z6 2.3). Dane wykonania n8n
+wyłączone; dowody zgód w osobnym rejestrze PostgreSQL. Dostawa e-booków
+oraz e-maile po zakupie są poza tą integracją. Szczegóły w PROGRESS.md
+oraz LISTMONK-OLA.md repo VPS. Kod strony niezmieniony.
+
+## Kontakt i lista oczekujących w n8n — 19.10.2026
+
+- [x] Kontakt → Slack zawlodzki.pl `#ola-nowe-leady` po Turnstile; błąd Slacka = 503.
+- [x] Waitlist e-booka → prywatna lista Listmonk ID 4 (single opt-in, bez maila).
+- [x] Staging E2E (Slack, nowy odbiorca na liście 4) i wdrożenie produkcji.
+- [ ] Ujęcie Slacka jako odbiorcy danych w polityce prywatności (decyzja prawna).
+- [ ] Odbiór pierwszego prawdziwego zgłoszenia kontaktu i waitlisty na produkcji.
+
+Nowy e-book „planned” wymaga osobnej listy i mapowania ścieżki w generatorze
+`build-ola-contact-waitlist-workflow.py` repo VPS. Kod strony niezmieniony.
+
+## Podgląd płatności Stripe, 19.10.2026
+
+- [x] Ponownie odczytać istniejące Payment Links: konto live, zero linków.
+- [ ] Przygotować dwie sesje podglądowe po udostępnieniu sandboxu Stripe.
+
 ## Automatyzacje integracji i dostawy, analiza 19.10.2026
 
 - [x] Porównać n8n i Cloudflare pod kątem edycji przez agenta oraz obserwowalności.
