@@ -1,5 +1,77 @@
 # Postęp wdrożenia
 
+## Kontakt → Slack i lista oczekujących → Listmonk — 19.10.2026
+
+Zlecenie: kontakt na Slack zawlodzki.pl `#ola-nowe-leady`; przycisk „Zapisz się
+na listę oczekujących” (e-book „Wkrótce dostępny”) na osobną listę Listmonk.
+Wcześniej kontakt i waitlist w `formularz Ola` (8vE6DwHNx5xqGrod) kończyły się
+samą odpowiedzią 200 po Turnstile, bez dalszej akcji.
+
+Wdrożono. Listmonk: prywatna lista single opt-in ID 4 „Lista oczekujących:
+Suplementy w PMOS (PCOS)”, dodana do roli listowej „Ola newsletter only”
+(n8n i Aleksandra). n8n: po gałęzi newslettera routing contact → waitlist →
+Respond; 61 węzłów, aktywny, zapis wykonań wyłączony. Kontakt: walidacja pól,
+escapowanie mrkdwn (blokuje `<!channel>`), Slack, błąd Slacka = 503. Waitlist:
+ścieżka strony e-booka (PL i EN) → lista 4; nowy odbiorca z `preconfirm`
+i dowodem zgłoszenia w `attribs.waitlist`, istniejący dopisywany, wypisani
+i zablokowani nie są przywracani (409). Błędy 503 podają etap i status HTTP
+Listmonk, bez danych osobowych. Źródła: repo VPS
+`scripts/build-ola-contact-waitlist-workflow.py`, `scripts/ola-forms/`,
+`scripts/provision-listmonk-ola-waitlist.py`.
+
+Kontrole: lokalne testy węzłów Code bez globalnego `URL`; staging
+`tism0NvfJSKAU0lj` E2E przez prawdziwy Turnstile w przeglądarce użytkownika:
+wiadomość na Slacku dotarła (potwierdził użytkownik), waitlist utworzyła
+odbiorcę 8 na liście 4 z odpowiedzią 200. Pierwszy test wykrył brak `URL`
+w sandboksie Code n8n (`invalid_source`); poprawione. Wykonania 1552–1553
+zapisano tymczasowo do diagnozy (tylko adresy testowe); zapis potem wyłączony,
+staging wyłączony. Odbiorcy testowi 7 i 8 pozostają na liście 4 do usunięcia
+przed kampanią. Produkcja wdrożona z porównaniem parametrów i połączeń;
+produkcyjnego webhooka nie wywoływano. Wbudowana przeglądarka nie przechodzi
+Turnstile (600010). Kod strony bez zmian; `npm run verify` nie uruchamiano.
+
+Otwarte: polityka prywatności nie wymienia Slacka jako odbiorcy danych z
+formularza kontaktowego. Następny krok: decyzja prawna o Slacku i odbiór
+pierwszego prawdziwego zgłoszenia.
+
+## Integracja newslettera Listmonk — 19.10.2026
+
+Na VPS wdrożono osobną instancję Aleksandry: newsletter.aleksandraolesiewicz.com,
+panel admin-newsletter za Access (Grzesiek i Aleksandra, MFA), SES Frankfurt
+z domeny m.aleksandraolesiewicz.com. Gałąź newsletter w produkcyjnym workflow
+`formularz Ola` (8vE6DwHNx5xqGrod) dodana po Turnstile i ochronie replay.
+Kontrakt schemaVersion 3 / formVersion 2.3 / Z6 2.3 bez zmian. Kontakt,
+odstąpienie i waitlist zachowują wcześniejsze zachowanie. Kod Astro bez zmian.
+
+Dedykowany rejestr PostgreSQL przechowuje dowody zgód i stan; nie zapisuje
+Turnstile. Brak payloadów wykonań n8n. Idempotencja i blokada równoległości,
+bez automatycznego odblokowania wypisanych lub blokowanych odbiorców;
+niejednoznaczna wysyłka wymaga kontroli administratora przed ponowieniem.
+Oddzielono utworzenie subskrybenta od opt-in, aby uniknąć dwóch maili.
+
+Rzeczywisty odseparowany staging: formularz → unconfirmed → pojedynczy e-mail
+→ confirmed → unsubscribed, Gmail SPF/DKIM/DMARC PASS. Test błędnego Turnstile
+403 verification_failed. Testy walidacji zgody, retry/concurrency, SMTP refusal
+w izolacji, backup/restore oraz granic dostępu PASS. Produkcyjnego webhooka
+nie wywoływano automatycznymi testami. Staging workflow tism0NvfJSKAU0lj
+po testach wyłączony; wersja produkcyjna aktywna. Pierwszy Access/MFA Oli
+pozostaje do jej odbioru. Dostawa e-booków i maile zakupowe poza zakresem.
+
+Dokumentacja operacyjna: LISTMONK-OLA.md w repo VPS, z backupem i rollbackiem.
+Nie zmieniono strony/CMS; npm run verify nie uruchamiano (dokumentacja).
+Następny krok: pierwsze logowanie Aleksandry oraz jej podgląd kampanii.
+
+## Odczyt linków Stripe do podglądu, 19.10.2026
+
+Na prośbę użytkownika o dwa linki do płatności ponownie odczytano produkcyjne
+konto `aleksandraolesiewicz.com`. `GET /v1/payment_links`, limit 100:
+zero rekordów, `has_more=false`. Konektor udostępnia tylko konto live.
+Nie utworzono linków, sesji Checkout ani zamówień, nie zmieniono ustawień.
+Implementacja tworzy indywidualne sesje po zamówieniu; pakiet wymaga
+opłaconego pierwszego zakupu. Brak stałych linków do pokazania.
+Następny krok: udostępnić sandbox Stripe i przygotować podgląd obu sesji
+bez uruchamiania sprzedaży. Kod bez zmian; verify nie powtarzano.
+
 ## Timeout testów blokujący wdrożenie produkcji, 19.10.2026
 
 Przebieg `Publish content` dla produkcji (run 39161054103, 18.10.2026 19:56)
