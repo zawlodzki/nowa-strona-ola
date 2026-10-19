@@ -1,5 +1,33 @@
 # Postęp wdrożenia
 
+## Timeout testów blokujący wdrożenie produkcji, 19.10.2026
+
+Przebieg `Publish content` dla produkcji (run 39161054103, 18.10.2026 19:56)
+padł w `npm run test`: test `site inventory › lists only routes that exist`
+w `tests/unit/seo-discovery.test.ts` przekroczył 5000 ms. Artykuł
+`article-hirsutyzm-pl` nie trafił przez to na produkcję.
+
+Przyczyna: workflow eksportuje `PUBLIC_SANITY_PROJECT_ID` i `PUBLIC_SANITY_DATASET`
+dla całego joba, a Vitest przekazuje je do `import.meta.env`. Test inwentarza
+wykonywał więc kilkanaście zapytań do żywego Content Lake zamiast fixture’ów
+(lokalnie z tymi zmiennymi ~1,5 s, bez nich ~20 ms); czas zależał od sieci
+i treści, stąd różnica między stagingiem a produkcją. Ten sam mechanizm
+udostępniał testom produkcyjny `PUBLIC_LEAD_WEBHOOK_URL`.
+
+Poprawka: `tests/setup-env.ts` czyści zmienne wdrożenia (`SITE_INDEXING`,
+`DEPLOYMENT_TARGET`, `PUBLIC_SANITY_*`, `PUBLIC_LEAD_WEBHOOK_URL`,
+`PUBLIC_GTM_ENABLED`, `PUBLIC_TURNSTILE_SITEKEY`); test regresji
+`tests/unit/setup-env.test.ts`. Limitu czasu nie podnoszono. Build nadal
+czyta Sanity, bo czyszczenie dotyczy tylko procesu Vitest.
+
+Kontrole: pełne `vitest run` z ustawionymi zmiennymi produkcji — test inwentarza
+41 ms. Lokalnie na wolumenie Google Drive przy równoległym uruchomieniu
+timeoutują testy uruchamiające procesy (checkout D1, wrangler, pseudo-shapes)
+także bez tej zmiany; sekwencyjnie (`--no-file-parallelism`) 65/65 plików
+zielone. Wynik `npm run verify` w opisie PR.
+
+Następny krok: po scaleniu ponowić wdrożenie produkcji (za zgodą użytkownika).
+
 ## Analiza automatyzacji, 19.10.2026
 
 Na zlecenie użytkownika przygotowano scalenie planu do main w PR #131.
