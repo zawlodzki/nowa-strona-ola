@@ -2,6 +2,13 @@
 
 ## Analiza automatyzacji, 19.10.2026
 
+Na zlecenie użytkownika przygotowano scalenie planu do main w PR #131.
+Pierwsze CI zatrzymało się na trzech błędach `no-undef` w istniejącym
+skrypcie eksportu logo Stripe. Konfiguracja ESLint nie obejmowała jego środowiska.
+Dodano deklaracje globali wyłącznie dla tego pliku, w tym `document` używany
+w przeglądarkowej funkcji Playwright. Nie zmieniono zachowania eksportu.
+Końcowy wynik ponownego CI i scalenia będzie dostępny w PR.
+
 Użytkownik wskazał formularze i Slack, newsletter listmonk, zamówienia
 w PostgreSQL oraz dostawę e-booków z watermarkiem. Priorytety: edycja przez
 Codex i wykrywanie błędów dostawy. Porównano repo i aktualną dokumentację.
