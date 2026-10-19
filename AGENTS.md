@@ -79,7 +79,7 @@
 | Jeden kadr zdjęcia                                                             | `imageCropPosition` i `SiteImage`                       |
 | Regiony szablonu                                                               | `src/content/template-regions.ts`                       |
 | Pin Studio                                                                     | `scripts/check-studio-pin.mjs`                          |
-| `SITE_INDEXING` czyszczone w testach                                           | `tests/setup-env.ts`                                    |
+| Zmienne wdrożenia (`SITE_INDEXING`, `PUBLIC_*`) czyszczone w testach           | `tests/setup-env.ts`, `tests/unit/setup-env.test.ts`    |
 | Charset                                                                        | `buildHeadersFile` i `tests/unit/seo-discovery.test.ts` |
 | Malowane pseudoelementy                                                        | `scripts/check-pseudo-shapes.mjs`                       |
 
