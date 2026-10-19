@@ -1,5 +1,34 @@
 # Postęp wdrożenia
 
+## Powiadomienia o nieopublikowanej treści, 19.10.2026
+
+Powód: 18.10.2026 webhook Sanity produkcji przez kilka godzin dostawał 404
+(naprawione w PR #130) i nikt nie dostał powiadomienia. Dodano
+`scripts/publication-alert.mjs`, workflow `Publication monitor` (cron co 30 min)
+i krok `if: failure()` w `Publish content` dla produkcji. Mechanizm opisano
+w [wdrożeniach Cloudflare](CLOUDFLARE-DEPLOYMENT.md). Decyzja użytkownika:
+alert dla Grzegorza i Oli przez osobny webhook n8n na Slack `#ola-bledy-strony`.
+Komunikat jest prosty: co nie zostało opublikowane, dlaczego i co zrobić.
+
+Znalezisko z próby monitora na żywych danych (tylko odczyt): artykuł
+„Hirsutyzm…” opublikowany 18.10.2026 19:56 nie trafił na produkcję. Przebieg
+produkcji 39161054103 padł na `Test timed out in 5000ms`, a staging przeszedł.
+Od tego czasu nie było udanego wdrożenia treści produkcji. Nie wdrażano
+ponownie bez zlecenia.
+
+Kontrole: testy jednostkowe nowego skryptu, actionlint 1.7.12 z shellcheck,
+próba `monitor` na API GitHub i Sanity oraz `failure`/`send` z
+`ALERT_DRY_RUN=true`. `npm run verify`: wszystkie etapy zielone poza 5 testami
+e2e Playwright (Firefox/WebKit, timeouty); po ponowieniu `--last-failed` przeszły,
+`test:content-lake` zielony. Nie wysłano żadnego alertu; webhook n8n
+i sekret `PUBLICATION_ALERT_WEBHOOK_URL` nie istnieją. Workflowów nie uruchomiono
+w GitHub, bo działają dopiero po scaleniu.
+
+Następny krok: utworzyć webhook n8n → Slack i sekret repozytorium, po scaleniu
+uruchomić `Publication monitor` ręcznie z `dry_run: true`, a potem raz z
+`dry_run: false` na kanale uzgodnionym z Olą. Osobno: ponowić publikację
+produkcji i usunąć niestabilny timeout testu.
+
 ## Analiza automatyzacji, 19.10.2026
 
 Na zlecenie użytkownika przygotowano scalenie planu do main w PR #131.

@@ -1,0 +1,62 @@
+name: Publication monitor
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Wypisz alert zamiast wysyłać go na webhook
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  actions: read
+  deployments: read
+
+concurrency:
+  group: publication-monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SANITY_PROJECT_ID: dyuqkn8c
+      SANITY_DATASET: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Compare Sanity publications with production deployments
+        id: monitor
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/publication-alert.mjs monitor "$RUNNER_TEMP/publication-alert.json"
+      - name: Check whether this publication was already reported
+        id: reported
+        if: steps.monitor.outputs.status == 'alert'
+        uses: actions/cache/restore@v4
+        with:
+          path: .publication-alert-sent
+          key: publication-alert-${{ steps.monitor.outputs.alert_key }}
+          lookup-only: true
+      - name: Send alert
+        if: steps.monitor.outputs.status == 'alert' && steps.reported.outputs.cache-hit != 'true'
+        env:
+          PUBLICATION_ALERT_WEBHOOK_URL: ${{ secrets.PUBLICATION_ALERT_WEBHOOK_URL }}
+          ALERT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
+        run: |
+          node scripts/publication-alert.mjs send "$RUNNER_TEMP/publication-alert.json"
+          if [ "$ALERT_DRY_RUN" != true ]; then
+            echo "$GITHUB_RUN_ID" > .publication-alert-sent
+          fi
+      - name: Remember reported publication
+        if: steps.monitor.outputs.status == 'alert' && steps.reported.outputs.cache-hit != 'true' && hashFiles('.publication-alert-sent') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: .publication-alert-sent
+          key: publication-alert-${{ steps.monitor.outputs.alert_key }}
