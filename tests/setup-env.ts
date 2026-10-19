@@ -9,6 +9,7 @@ export const DEPLOYMENT_ENV_KEYS = [
   "PUBLIC_LEAD_WEBHOOK_URL",
   "PUBLIC_GTM_ENABLED",
   "PUBLIC_TURNSTILE_SITEKEY",
+  "PUBLICATION_ALERT_WEBHOOK_URL",
 ] as const;
 
 for (const key of DEPLOYMENT_ENV_KEYS) delete process.env[key];

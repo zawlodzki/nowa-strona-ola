@@ -121,6 +121,63 @@ sekrety `CLOUDFLARE_ACCOUNT_ID` i `CLOUDFLARE_API_TOKEN` są ustawione. Token
 Actions to osobny API token Cloudflare (Workers Scripts), nie OAuth Wranglera.
 Pierwszy `repository_dispatch` `sanity-content-change` wdrożył staging.
 
+### Powiadomienia o treści, która nie trafiła na produkcję
+
+Ustalenie użytkownika (19.10.2026): alert dostają Grzegorz i Ola na Slacku
+zawlodzki.pl, kanał `#ola-bledy-strony`. GitHub wysyła JSON na osobny webhook
+n8n, który przekazuje pole `text` na ten kanał. To nie jest webhook formularzy;
+skrypt odrzuca jego adres i adresy bez HTTPS. Alert zawiera tylko tytuły
+i typy dokumentów, nazwę kroku, zepsute linki i adres przebiegu. Nie zawiera
+treści dokumentów, danych formularzy ani surowego logu.
+
+Dwa źródła alertu, oba w `scripts/publication-alert.mjs` (bez zależności npm):
+
+1. **Nieudany przebieg `Publish content` dla produkcji.** Ostatni krok
+   `if: failure()` działa tylko, gdy wdrożenie nie zakończyło się sukcesem.
+   Build zapisuje wyjście do `$RUNNER_TEMP/build.log`; skrypt wyciąga z niego
+   zepsute linki z `scripts/check-seo.mjs` i podaje pierwszy nieudany krok.
+   Błąd samego IndexNow po udanym deployu nie wysyła alertu, bo treść jest już
+   na stronie.
+2. **Monitor `Publication monitor`** (cron o :07 i :37, także ręcznie).
+   Pobiera z Sanity (`dyuqkn8c`, `production`, perspektywa `published`)
+   najnowszy `_updatedAt` dokumentów zgodnych z filtrem z
+   [kontraktu webhooka](sanity-publication-webhook.json). Porównuje go
+   z wdrożeniami GitHub środowiska `production`. Środowiska `production` używa też
+   `Deploy Studio`, więc liczą się tylko wdrożenia, których status prowadzi do
+   przebiegu `Publish content`. Wdrożenie utworzone po publikacji pobiera już
+   nową treść. Alert idzie, gdy publikacja ma ponad 20 min, a po niej nie ma
+   udanego, trwającego ani nieudanego wdrożenia. Nieudane zgłasza krok z punktu 1.
+   Ten sam `_updatedAt` i dokument są zgłaszane raz: klucz trafia do cache
+   Actions `publication-alert-<klucz>`. Cache wygasa po 7 dniach bez użycia.
+
+Monitor wykrywa ciche awarie webhooka Sanity, Workera integracji, kolejki
+i Repository Dispatch. Nie wykrywa usunięcia dokumentu, bo usunięty dokument
+nie ma `_updatedAt`. Po nieudanym wdrożeniu nie powtarza alertu. Kolejna
+publikacja uruchamia nową próbę i nową ocenę. Ręczne uruchomienie ma domyślnie
+`dry_run: true` i tylko wypisuje komunikat w logu.
+
+Konfiguracja (wykonana 19.10.2026 na polecenie użytkownika):
+
+- n8n: workflow `ola publikacja alerty` (id `lZaFofVph9rG2yUL`, aktywny).
+  Webhook `POST` na `flows.zawlodzki.com`, z losową ścieżką UUID. Węzeł
+  „Sprawdź alert” przepuszcza tylko `source: "ola-website"`, znany `kind`,
+  `text` do 3500 znaków i `runUrl` z repozytorium
+  `zawlodzki/nowa-strona-ola`. Inny payload dostaje 400 i nie trafia do Slacka.
+  Na kanał `#ola-bledy-strony` trafia tylko `text`, przez credential
+  `Slack account zawlodzki.pl`. Udane wykonania nie są zapisywane, błędne tak.
+  Błąd Slacka daje odpowiedź 500, więc krok w GitHub kończy się na czerwono;
+- adres webhooka jest wyłącznie w sekrecie repozytorium
+  `PUBLICATION_ALERT_WEBHOOK_URL` i w n8n. Sekret repozytorium, a nie
+  środowiska, bo zadanie w środowisku tworzyłoby co 30 min wpis wdrożenia.
+  Używają go tylko krok produkcji i monitor;
+- próby: niepoprawny payload → 400; jedna wiadomość `[TEST]` za zgodą
+  użytkownika → 200 i publikacja na kanale.
+
+Bez sekretu krok wysyłki kończy się błędem `PUBLICATION_ALERT_WEBHOOK_URL is
+not set`, więc przebieg jest czerwony i GitHub nadal wysyła swój e-mail.
+Testy jednostkowe (`tests/unit/publication-alert.test.ts`) używają atrap
+`fetch`, a `tests/setup-env.ts` czyści zmienną webhooka.
+
 ### Automatyczne aktualizacje i wdrożenia Studio
 
 `studio/sanity.cli.ts` włącza `deployment.autoUpdates: true` i zachowuje

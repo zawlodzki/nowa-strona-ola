@@ -527,7 +527,6 @@ describe("deploy workflows", () => {
         '            echo "::error::Wdrożenie zakończyło się sukcesem. Zgłoszenie IndexNow nie zostało potwierdzone."',
         "            exit 1",
         "          fi",
-        "",
       ].join("\n"),
     );
     expect(yaml.indexOf("Capture sitemap before deployment")).toBeLessThan(
@@ -536,5 +535,25 @@ describe("deploy workflows", () => {
     expect(yaml.indexOf("Deploy immutable successful build")).toBeLessThan(
       yaml.indexOf("Notify IndexNow after successful deployment"),
     );
+  });
+
+  it("alerts only about production publications that were not deployed", () => {
+    const yaml = workflow("publish-content.yml");
+    const alert = step(yaml, "Alert about failed production publication");
+    expect(alert).toContain(
+      "if: failure() && env.DEPLOYMENT_TARGET == 'production' && steps.deploy.outcome != 'success'",
+    );
+    expect(alert).toContain(
+      "PUBLICATION_ALERT_WEBHOOK_URL: ${{ secrets.PUBLICATION_ALERT_WEBHOOK_URL }}",
+    );
+    expect(alert).toContain(
+      'publication-alert.mjs failure "$RUNNER_TEMP/build.log"',
+    );
+    expect(step(yaml, "Validate and build public site")).toContain(
+      '} 2>&1 | tee "$RUNNER_TEMP/build.log"',
+    );
+    expect(
+      yaml.indexOf("Notify IndexNow after successful deployment"),
+    ).toBeLessThan(yaml.indexOf("Alert about failed production publication"));
   });
 });
