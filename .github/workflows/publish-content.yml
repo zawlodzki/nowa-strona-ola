@@ -42,6 +42,7 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - name: Validate deployment configuration
+        id: config
         run: |
           case "$DEPLOYMENT_TARGET" in
             staging|production) ;;
@@ -60,16 +61,22 @@ jobs:
           fi
           test -n "$CLOUDFLARE_ACCOUNT_ID"
           test -n "$CLOUDFLARE_API_TOKEN"
-      - run: npm ci
+      - name: Install dependencies
+        id: install
+        run: npm ci
       - name: Validate and build public site
+        id: build
+        shell: bash
         run: |
-          npm run format:check
-          npm run tokens:check
-          npm run lint
-          npm run check
-          npm run test
-          npm run build
-          npm run test:build
+          {
+            npm run format:check
+            npm run tokens:check
+            npm run lint
+            npm run check
+            npm run test
+            npm run build
+            npm run test:build
+          } 2>&1 | tee "$RUNNER_TEMP/build.log"
       - name: Restore sitemap from an earlier attempt
         id: indexnow_restore
         if: env.DEPLOYMENT_TARGET == 'production' && env.SITE_INDEXING == 'production' && env.INDEXNOW_KEY != ''
@@ -125,3 +132,14 @@ jobs:
             echo "::error::Wdrożenie zakończyło się sukcesem. Zgłoszenie IndexNow nie zostało potwierdzone."
             exit 1
           fi
+      - name: Alert about failed production publication
+        if: failure() && env.DEPLOYMENT_TARGET == 'production' && steps.deploy.outcome != 'success'
+        env:
+          PUBLICATION_ALERT_WEBHOOK_URL: ${{ secrets.PUBLICATION_ALERT_WEBHOOK_URL }}
+          FAILED_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          STEP_OUTCOMES: >-
+            {"config":"${{ steps.config.outcome }}","install":"${{ steps.install.outcome }}",
+            "build":"${{ steps.build.outcome }}","deploy":"${{ steps.deploy.outcome }}"}
+        run: |
+          node scripts/publication-alert.mjs failure "$RUNNER_TEMP/build.log" "$RUNNER_TEMP/publication-alert.json"
+          node scripts/publication-alert.mjs send "$RUNNER_TEMP/publication-alert.json"
