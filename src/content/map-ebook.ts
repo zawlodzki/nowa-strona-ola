@@ -1,4 +1,4 @@
-import type { Locale } from "@ola/shared";
+import { requireSafeHref, type Locale } from "@ola/shared";
 
 import { ebookCopy } from "@/content/ebook-seed";
 import {
@@ -565,7 +565,10 @@ export function mapEbook(ebook: RawEbook, language: Locale): EbookView {
     materials,
     sources: (ebook.sources ?? []).map((source) => ({
       title: required(source.title, "tytuł źródła"),
-      href: required(source.href, "adres źródła"),
+      href: requireSafeHref(
+        required(source.href, "adres źródła"),
+        "adres źródła",
+      ),
       scope: source.scope ?? undefined,
     })),
     numberOfPages: ebook.numberOfPages ?? undefined,

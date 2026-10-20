@@ -27,6 +27,7 @@ import {
 import { sameLanguageFilter, themeField } from "../shared/fields";
 
 import { blogIndexSettingsType } from "../objects/blog-index";
+import { validateHref } from "../objects/action-link";
 
 const requiredString = (rule: StringRule) => rule.required().max(120);
 
@@ -434,6 +435,7 @@ export const cardsSectionType = defineType({
               description:
                 "Wymagany dla kart z medium i listy odnośników. Sytuacje i cele są bez linków.",
               type: "string",
+              validation: (rule) => rule.custom(validateHref),
             }),
             defineField({
               name: "status",

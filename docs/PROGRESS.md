@@ -1,5 +1,42 @@
 # Postęp wdrożenia
 
+## Audyt bezpieczeństwa i poprawki linków CMS oraz podglądu, 20.10.2026
+
+Audyt `security-audit` (profil quick, tylko źródło, bez sandboxa) nie potwierdził
+podatności, ale wskazał dwa tropy. Raport leży poza repo:
+`~/security-audit-skill/nowa-strona-ola/run-1/`. Oba tropy poprawiono w kodzie:
+
+- Nowy `isSafeHref`/`requireSafeHref` w `packages/shared/src/safe-href.ts`
+  dopuszcza `/` (bez `//` i `/\`), `#`, `http(s)://` i pojedynczy `mailto:`.
+  Renderer Portable Text (linki, CTA, tabele, Markdown) i mapery
+  (`toAction`, karty, rezerwacja, film, nawigacja i linki stopki, źródła
+  artykułu i e-booka) zatrzymują build lub podgląd na niedozwolonym adresie
+  zamiast wstawiać go do `href`.
+- Studio: `isValidActionHref` korzysta ze wspólnego helpera; `validateHref`
+  dodano do linków w treści artykułu i stron prawnych, adresu karty sekcji
+  oraz nawigacji i linków prawnych w ustawieniach. Ścieżki `//host` są teraz
+  odrzucane także w odnośnikach akcji. Schematu nie wdrożono do Sanity.
+- Podgląd: `samePreviewOriginPath` (`preview/src/lib/redirect.ts`) cofa
+  przekierowanie po `/api/draft-mode/enable` na `/`, gdy `redirectTo` wychodzi
+  poza origin podglądu.
+
+Testy regresji: `tests/unit/safe-href.test.ts`, w tym test z prawdziwym
+`validatePreviewUrl`, który potwierdza, że biblioteka zwraca `//evil.example/`.
+`npm run verify` zatrzymał się na lincie przez cztery lokalne, ignorowane przez git
+skrypty `.audit/**/*.cjs` (nie z tej zmiany, nieruszane). Pozostałe kroki verify
+uruchomiono ręcznie z `eslint --ignore-pattern '.audit/**'`. Wynik: format, tokeny,
+check, 770 testów jednostkowych, build, build workspace'ów, test:build,
+564 testy e2e i content-lake przeszły. Lokalnie Node 26 (`.node-version` = 24).
+Odczyt datasetu `production` (tylko do odczytu, ten sam dzień):
+70 opublikowanych dokumentów, 112 pól `href`/`url`/`videoUrl`/`bookingUrl`
+i linki w komórkach tabel; 9 szkiców artykułów i szkic e-booka
+`suplementy-w-pcos` (linki w treści, CTA, tabelach, źródłach). Nowa reguła nie
+odrzuca żadnego adresu. Dokumentów `redirect` jest 0, a dokumentu share-access
+podglądu (`sanity-preview-url-secret.share-access`) nie ma, więc link do
+podglądu z zewnątrz dziś nie istnieje. Następny krok: deploy schematu Studio
+i podglądu. Wzmocnienia z raportu (CSP/HSTS, sekrety
+w folderze Google Drive, zakres tokenu w `publish-content.yml`) pozostają otwarte.
+
 ## Kontakt → Slack i lista oczekujących → Listmonk — 19.10.2026
 
 Zlecenie: kontakt na Slack zawlodzki.pl `#ola-nowe-leady`; przycisk „Zapisz się

@@ -1,4 +1,4 @@
-import { isFormKey, type Locale } from "@ola/shared";
+import { isFormKey, requireSafeHref, type Locale } from "@ola/shared";
 
 import { articlePath, ebookPath, pagePath } from "@/lib/paths";
 import { formatDate, toDatetime } from "@/lib/dates";
@@ -63,7 +63,7 @@ function required(value: string | null | undefined, label: string): string {
 
 export function toAction(link: LinkValue | null | undefined): ActionLink {
   return {
-    href: required(link?.href, "href"),
+    href: requireSafeHref(required(link?.href, "href"), "href"),
     label: required(link?.label, "etykieta odnośnika"),
     variant: link?.emphasis === "outline" ? "outline" : "default",
   };
@@ -266,7 +266,10 @@ export function toCards(section: {
       return {
         title: required(item.title, "tytuł karty"),
         body: required(item.body, "opis karty"),
-        href: required(item.href, "adres karty"),
+        href: requireSafeHref(
+          required(item.href, "adres karty"),
+          "adres karty",
+        ),
         status: item.status ?? undefined,
         media: hasMedia ? toMedia(item.media) : undefined,
       };
@@ -762,7 +765,7 @@ export function toServiceOffer(
         ? toMedia(section.media)
         : undefined,
     action: {
-      href: bookingUrl,
+      href: requireSafeHref(bookingUrl, "adres rezerwacji"),
       label: actionLabel,
       variant: section.action?.emphasis === "outline" ? "outline" : "default",
     },
@@ -966,7 +969,10 @@ export function toMediaSection(section: {
     image: toMedia(section.image),
     video: {
       title: required(section.videoTitle, "tytuł filmu"),
-      href: required(section.videoUrl, "adres filmu"),
+      href: requireSafeHref(
+        required(section.videoUrl, "adres filmu"),
+        "adres filmu",
+      ),
       platform: required(section.videoPlatform, "platforma filmu"),
     },
   };

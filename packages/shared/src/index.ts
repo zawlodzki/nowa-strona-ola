@@ -7,6 +7,7 @@ export {
   type DocumentTitle,
   type TitlePlacement,
 } from "./document-title";
+export { isSafeHref, requireSafeHref } from "./safe-href";
 
 export const locales = ["pl", "en"] as const;
 

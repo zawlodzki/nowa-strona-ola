@@ -1,4 +1,4 @@
-import type { Locale } from "@ola/shared";
+import { requireSafeHref, type Locale } from "@ola/shared";
 
 import { ebookCollectionCopy } from "@/content/ebook-collection-seed";
 import {
@@ -291,7 +291,12 @@ export function mapArticle(
   }
   const sources = (article.sources ?? []).flatMap((source) =>
     source?.title && source.href
-      ? [{ title: source.title, href: source.href }]
+      ? [
+          {
+            title: source.title,
+            href: requireSafeHref(source.href, "adres źródła"),
+          },
+        ]
       : [],
   );
   const related = (article.related ?? []).flatMap((item) => {
