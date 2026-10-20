@@ -1,5 +1,22 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## Porównanie Sanity i Payload, 20.10.2026
+
+- [x] Zinwentaryzować aktualne zastosowania Sanity i porównać je z Payload dla nowej strony Astro na Cloudflare.
+- [x] Sprawdzić oficjalną ścieżkę Workers/D1/R2 oraz ograniczenia mediów i podglądu.
+- [x] Zapisać zyski, koszty utrzymania, potrzeby przyszłe i zakres ewentualnej migracji.
+
+[Analiza](SANITY-VS-PAYLOAD-2026-10-20.md). Rekomendacja analityczna: Sanity dla
+podobnej witryny treściowej; Payload przy konkretnym wymaganiu własnego backendu
+lub portalu. Bez decyzji o zmianie CMS. Następny krok przed wyborem Payload:
+osobna próba artykułu, landingu, mediów, podglądu i odtworzenia danych na Workers.
+Nie zlecono implementacji próby ani migracji.
+
+## Rejestr zamówień D1, odczyt 19.10.2026
+
+- [x] Wyjaśnić moment zapisu, zakres danych i rozróżnienie pending/paid/expired.
+- [ ] Przed raportem porzuceń ustalić synchronizację zaległych rekordów i retencję.
+
 ## Newsletter — stan wdrożenia 19.10.2026
 
 - [x] Osobny Listmonk Aleksandry z SES, DNS, Access i brandingiem 3a.
@@ -26,7 +43,9 @@ Nowy e-book „planned” wymaga osobnej listy i mapowania ścieżki w generator
 ## Podgląd płatności Stripe, 19.10.2026
 
 - [x] Ponownie odczytać istniejące Payment Links: konto live, zero linków.
-- [ ] Przygotować dwie sesje podglądowe po udostępnieniu sandboxu Stripe.
+- [x] Przygotować dwie sesje podglądowe po udostępnieniu sandboxu Stripe.
+      Pierwszy e-book 97 zł, dwa kolejne 194 zł minus 50% = 97 zł; API i UI PASS.
+      Bez płatności, testu pełnej integracji i aktywacji sprzedaży.
 
 ## Automatyzacje integracji i dostawy, analiza 19.10.2026
 
