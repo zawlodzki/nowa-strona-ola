@@ -14,6 +14,7 @@ export default [
       ".agents/**",
       ".claude/**",
       ".cursor/**",
+      ".audit/**",
       "playwright-report/**",
       "test-results/**",
       "coverage/**",

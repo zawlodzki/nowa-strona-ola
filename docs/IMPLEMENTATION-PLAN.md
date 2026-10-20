@@ -1,5 +1,33 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## PR mobilnego banera, 20.10.2026
+
+- [x] Wydzielić dziewięć plików na gałąź `codex/mobile-consent-banner` od aktualnego main.
+- [x] Sprawdzić zgodność kodu, format, lint i zakres diffu.
+- [ ] Podpisać commit przez 1Password, wykonać push i utworzyć PR.
+      Dwie próby wygasły; następna wymaga zatwierdzenia Touch ID przez użytkownika.
+
+## Mobilny baner zgód, 20.10.2026
+
+- [x] Obejrzeć mobilną referencję Ramp Glass i dotychczasowy baner.
+- [x] Zastąpić pływającą ramkę pełną szerokością przy dolnej krawędzi.
+- [x] Dodać wewnętrzne odstępy, pionowe przyciski i wejście od dołu.
+- [x] Uruchomić pełne verify na Node 24 i odebrać desktop/mobile, 320 px,
+      klawiaturę, zoom CSS 200% oraz reduced motion.
+      770 unit PASS; pełny E2E 561 PASS i 3 błędy, po korekcie asercji
+      6 scenariuszy banera oraz powtórzenie artykułu PASS. Content Lake 21 stron PASS.
+      Wyniki pochodzą z kilku przebiegów, szczegóły w PROGRESS.md.
+
+Wygląd i ruch są lokalne; bez wdrożenia i zapisów do c15t/Sanity.
+
+## Możliwości animacji 3a, 20.10.2026
+
+- [x] Przejrzeć nowe możliwości ruchu i odrzucić nieuzasadnione animacje.
+- [x] Zapisać wartości, bramki i ograniczenia w [raporcie](ANIMATION-OPPORTUNITIES-2026-10-20.md).
+
+Pierwotny raport proponował automatyczne wejście banera zgód. Późniejsze
+zlecenie użytkownika zrealizowano w sekcji „Mobilny baner zgód” powyżej.
+
 ## Porównanie Sanity i Payload, 20.10.2026
 
 - [x] Zinwentaryzować aktualne zastosowania Sanity i porównać je z Payload dla nowej strony Astro na Cloudflare.

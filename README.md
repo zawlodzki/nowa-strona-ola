@@ -67,6 +67,20 @@ wybór grup PMOS (PCOS) / Perimenopauza i rozróżnione tematycznie okładki.
 
 ## Uruchomienie i weryfikacja
 
+Mobilny baner zgód (20.10.2026): pełny dolny pas do 767 px, 24 px oddechu,
+pionowe przyciski i wejście 250 ms. Odbiór po uruchomieniu sesji `verify-ola`
+(skill zarządza lokalnym portem), bez zapisywania zgód:
+
+```sh
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name Dostosuj --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser press --key Escape
+node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
+```
+
+Wynik POST powinien być `[]`. Kontrola 320 px/zoomu i klawiatury znajduje się
+w `tests/e2e/consent.spec.ts`; [wyniki i ograniczenia](docs/PROGRESS.md).
+
 Ocena [zgodności Turnstile i n8n](docs/TURNSTILE-ASSESSMENT-2026-10-14.md),
 14.10.2026. Sprawdzone na Node 26.11.0, bez wysyłki zgłoszeń:
 

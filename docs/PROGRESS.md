@@ -1,5 +1,112 @@
 # Postęp wdrożenia
 
+## Przygotowanie PR mobilnego banera, 20.10.2026
+
+Na polecenie „push pr” przeniesiono dziewięć plików tej zmiany do izolowanej
+gałęzi `codex/mobile-consent-banner` od `origin/main` (`bf720b6`). Zachowano
+nowszy wpis o nagłówkach bezpieczeństwa z main. Aktualizacja skilli z bieżącej
+gałęzi oraz `.impeccable/` pozostają poza zakresem. Format, lint zmienionego
+testu i konfiguracji oraz kontrola diffu PASS. Kod banera jest identyczny
+z lokalnie odebraną wersją. Opis PR zawiera rzeczywiste wyniki testów.
+
+Dwie próby podpisanego commitu zatrzymały się na 1Password:
+`failed to fill whole buffer`. Druga używała sesji interaktywnej. Git ma
+`commit.gpgsign=true` i `gpg.ssh.program=op-ssh-sign`; okno 1Password wymagało
+Touch ID. Nie wyłączano podpisu ani nie zmieniano uprawnień klucza.
+Nie utworzono commitu, nie wykonano push i nie otwarto PR. Zmiany są
+przygotowane w indeksie izolowanej gałęzi. Potrzebna obecność użytkownika
+przy kolejnym żądaniu Touch ID, następnie podpis, push i utworzenie PR do main.
+
+## Mobilny baner zgód, 20.10.2026
+
+Na zlecenie użytkownika obejrzano [Ramp Glass](https://ramp.com/glass)
+w Chromium oraz stary lokalny baner. Użyto `impeccable`, `good-css`,
+`animate` i `verify-ola`. Przy szerokości do 767 px baner ma pełną szerokość
+i dotyka dołu ekranu, bez bocznej ramki i zaokrągleń. Wewnątrz 24 px
+z uwzględnieniem safe area, przerwy 16 px i trzy pionowe przyciski
+z przerwą 12 px. Zachowano copy, kolejność akcji i kontrakt zgód.
+Baner przewija własną treść na małych ekranach i przy powiększeniu.
+
+Automatyczne wejście przez CSS `@starting-style`: opacity 0 → 1,
+mobile translateY(100%) → 0, desktop 8 px → 0, 250 ms `--ao-ease-out`.
+Ruch tylko przy `prefers-reduced-motion: no-preference`. Zamknięcie
+i zapis zgody nie czekają na animację; brak wspieranego wejścia zostawia
+baner natychmiast widoczny. Regułę dodano do MOTION.md, decyzję
+i brak pola Sanity do HOMEPAGE-CMS-CONFIG.md.
+
+Pierwsze verify (Node 26) zatrzymał lint czterech wcześniejszych,
+nieśledzonych skryptów `.audit/**/*.cjs` — 80 błędów. Katalog jest już
+ignorowany przez Git; dodano `.audit/**` do globalnych wykluczeń ESLint,
+jak dla innych artefaktów. Nie wyłączono reguł kodu ani testów.
+Drugi przebieg przeszedł lint i typy; 769/770 unit PASS, jeden timeout
+5000 ms w teście CLI `pseudo-shapes`. Sam skaner src zwrócił `ok`.
+Rozpoczęto pełny przebieg na wymaganym Node 24.21.0.
+
+Detector Impeccable dla zmienionego CSS: brak zgłoszeń (`[]`).
+Końcowe kontrole na Node 24.21.0:
+
+Końcowy Prettier, diff whitespace i dwa lokalne odnośniki nowych wpisów PASS.
+
+- Format, tokeny, lint, typy, 770 unit, buildy, dry-run Workera i kontrola
+  artefaktów PASS. Końcowy lint zmienionego testu i konfiguracji również PASS.
+- Pełne `npm run verify` zakończyło się na E2E: 561 PASS, 12 świadomych
+  pominięć GTM, 3 błędy. Dwa wynikały z nowej asercji idealnego przecięcia
+  viewportu w Chromium przy zoomie: ratio 0.998125 zamiast 1, czyli ułamek
+  piksela. Zastąpiono ją sprawdzeniem górnej i dolnej krawędzi przycisku
+  z tolerancją 1 px. Trzeci to timeout istniejącego testu rekomendacji
+  artykułu w WebKit, poza zmienioną powierzchnią.
+- Po korekcie osobny przebieg sześciu scenariuszy banera, `--workers=1`,
+  PASS w trzech silnikach i obu motywach, 23.1 s. Osobne powtórzenie
+  testu artykułu w WebKit PASS, 3.9 s. Wcześniejsze dodatkowe przebiegi
+  równolegle z pełnym zestawem miały timeout Firefoxa. Nie zmieniano
+  timeoutów ani nie wyłączano testów. Nie deklarujemy jednego zielonego
+  przebiegu całego verify po korekcie asercji.
+- `npm run test:content-lake` wykonane osobno PASS: 89 dokumentów bez
+  błędów, zgodność 21 stron fixture i Content Lake, SEO 40 stron noindex.
+- Odbiór Chromium: desktop 1440 px, mobile 390 i 320 px, poziomo 740×390,
+  dark, reduced motion, CSS zoom 200%, klawiatura Enter/Escape i powrót
+  fokusu PASS. Wszystkie przyciski można przewinąć do widoku, brak overflow.
+  Zrzuty obejrzano w dwóch ograniczonych rundach, bez dalszego polerowania.
+- Odbiór wykrył błąd ograniczenia wysokości przy CSS zoom 200%. Mobilne
+  `max-block-size` używa teraz procentu wysokości dostępnego obszaru zamiast
+  `100dvh`. Reprodukcja starej reguły w przeglądarce daje górną krawędź
+  y = −668 px; poprawiona reguła y = 176 px przy 390×844 i zoomie 200%.
+  Test w `consent.spec.ts` sprawdza nagłówek, zamknięcie i dostęp do akcji.
+- Instrumentacja wejścia potwierdza transition 250 ms, opacity 0 → 1
+  i transform translateY(100%) → none. Reduced motion: brak przejść.
+- `verify-ola`: doctor PASS, ustawienia cookies → Escape → powrót do banera,
+  snapshoty ARIA i POST `[]`. W dodatkowym odbiorze wszystkie POST oraz
+  zasoby spoza localhost były blokowane, a polityka c15t pochodziła z fixture.
+
+Dowody: `/tmp/ola-consent-mobile-review/`,
+`/tmp/ola-verify-evidence/ola-consent-mobile-zoom-20261020/` oraz wcześniejsza
+sesja `ola-consent-mobile-final-20261020`. Logi:
+`/tmp/ola-consent-mobile-verify-complete.log`,
+`/tmp/ola-consent-final-regression.log`, `/tmp/ola-consent-article-repeat.log`
+i `/tmp/ola-consent-mobile-content-lake.log`. Własne podglądy, sesje
+przeglądarki i karty referencji zamknięto; dowody zachowano.
+
+Nie sprawdzono natywnego zoomu przeglądarki, czytnika, fizycznego telefonu
+ani safe area na urządzeniu. To odbiór lokalnego builda fixture.
+Bez commitu, push, wdrożenia lub zapisu zgód/CMS; zachowano `.impeccable/`
+użytkownika. Następny krok: odbiór nowego kształtu banera przez użytkownika.
+Nie ma otwartego błędu implementacji z tego przeglądu.
+
+## Przegląd możliwości animacji 3a, 20.10.2026
+
+Zastosowano `find-animation-opportunities` oraz pomocniczo `good-css`
+i zasady TypeScript. [Raport](ANIMATION-OPPORTUNITIES-2026-10-20.md) zawiera
+jedną propozycję: automatyczne pojawienie się banera c15t, 250 ms, opacity
+i przesunięcie 8 px, z natychmiastowym stanem reduced motion według 3a.
+Odrzucono animacje menu/FAQ, wejścia treści i kart, danych zamówienia,
+formularzy i zmiany motywu. Rozróżniono istniejący ruch od nowych możliwości.
+
+Kod, CMS i pliki użytkownika bez zmian. Nie uruchamiano aplikacji, verify
+ani kontroli UI; nie wysyłano formularzy. Format Prettier i kontrola 2 lokalnych odnośników
+nowego raportu oraz dodanych wpisów PASS. Brak blokady dla analizy. Następny krok po wyborze
+użytkownika: plan wejścia banera i odbiór w przeglądarce, w tym desktop/mobile,
+klawiatura, 320 px, zoom 200% i reduced motion. To propozycja, nie wdrożenie.
+
 ## Analiza Sanity i Payload dla nowej strony, 20.10.2026
 
 Na zlecenie użytkownika porównano aktualny kod Studio, 12 typów dokumentów,

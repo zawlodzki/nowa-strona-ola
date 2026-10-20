@@ -558,6 +558,27 @@ for (const colorScheme of ["light", "dark"] satisfies ("light" | "dark")[]) {
     ).toBe(true);
     await page.keyboard.press("Escape");
     await expect(trigger).toBeFocused();
+    const bannerBounds = await banner(page).boundingBox();
+    expect(bannerBounds?.y).toBeGreaterThanOrEqual(0);
+    const close = banner(page).getByRole("button", {
+      name: "Zamknij bez zmiany zgód",
+      exact: true,
+    });
+    await close.scrollIntoViewIfNeeded();
+    await expect(close).toBeInViewport({ ratio: 1 });
+    for (const action of await banner(page)
+      .locator("[data-consent-action]")
+      .all()) {
+      await action.scrollIntoViewIfNeeded();
+      expect(
+        await action.evaluate((element) => element.getBoundingClientRect().top),
+      ).toBeGreaterThanOrEqual(-1);
+      expect(
+        await action.evaluate(
+          (element) => element.getBoundingClientRect().bottom,
+        ),
+      ).toBeLessThanOrEqual(801);
+    }
   });
 }
 
