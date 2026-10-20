@@ -1,5 +1,29 @@
 # Postęp wdrożenia
 
+## Analiza Sanity i Payload dla nowej strony, 20.10.2026
+
+Na zlecenie użytkownika porównano aktualny kod Studio, 12 typów dokumentów,
+23 typy sekcji, Portable Text, pluginy, podgląd Astro SSR, obrazy, publikację,
+SEO i odczyt katalogu przez checkout. Zweryfikowano dokumentację producentów
+oraz oficjalny szablon Payload na Workers z D1/R2 i OpenNext. Szablon wymaga
+Workers Paid i wyłącza crop/focalPoint z powodu braku sharp. Live Preview nie
+potwierdza równoważności z obecnymi nakładkami Sanity; Visual Editor ma osobną
+ofertę enterprise i oznaczenie Coming Soon.
+
+[Pełna analiza](SANITY-VS-PAYLOAD-2026-10-20.md) rozróżnia nowy projekt i migrację,
+wskazuje koszt własnego backendu, utrzymania mediów, edytora i podglądu.
+Rekomendacja: Sanity dla podobnej strony treściowej; Payload, gdy realnym
+wymaganiem są własna baza, portal, konta lub procesy biznesowe. To propozycja,
+bez zmiany architektury i decyzji użytkownika o wyborze CMS.
+
+Nie odczytywano w tej sesji produkcyjnego datasetu ani abonamentu. Nie wykonano
+prototypu, testów wydajności, odbioru UI ani wdrożenia Payload. Kod aplikacji,
+konfiguracja usług i treści CMS bez zmian; pełnego verify nie uruchamiano.
+Wcześniejsze lokalne zmiany zachowano. Prettier PASS dla trzech plików. Kontrola 4 lokalnych odnośników nowego
+raportu i dodanych wpisów PASS. Następny krok przed wyborem Payload to osobna
+próba artykułu, landingu, kadrowania, podglądu, publikacji i restore D1/R2.
+Nie zlecono implementacji tej próby. Brak blokady dla ukończenia analizy.
+
 ## Nagłówki bezpieczeństwa i zakres tokenu Cloudflare, 20.10.2026
 
 Dalsza część audytu z tego dnia (sekrety w `.dev.vars` zostają, decyzja
@@ -61,6 +85,42 @@ podglądu (`sanity-preview-url-secret.share-access`) nie ma, więc link do
 podglądu z zewnątrz dziś nie istnieje. Następny krok: deploy schematu Studio
 i podglądu. Wzmocnienia z raportu (CSP/HSTS, sekrety
 w folderze Google Drive, zakres tokenu w `publish-content.yml`) pozostają otwarte.
+
+## Wyjaśnienie rejestru zamówień D1, 19.10.2026
+
+Odczytano migracje 0001/0002, submit formularza i obsługę zamówień/webhooków.
+D1 zapisuje zamówienie pending po poprawnym submit z D27, przed wywołaniem
+Stripe. Samo wpisywanie danych nie wysyła ich do D1. Rekord obejmuje imię,
+e-mail, produkty, migawkę, kwotę, walutę, dowód oświadczenia i regulaminu,
+czas, identyfikatory Stripe oraz status. Pakiet ma osobny rekord z rodzicem.
+Paid wynika z weryfikacji Stripe; expired z wygasłej sesji, revoked ze zwrotu
+lub sporu. Pending nie dowodzi porzucenia: może oznaczać trwającą płatność,
+błąd utworzenia sesji albo opóźnioną synchronizację. Nie znaleziono okresowego
+porządkowania takich rekordów ani zapisu częściowo wypełnionego formularza.
+Osobna tabela zapisuje dobrowolną prośbę o link, nie status dostawy.
+
+Nie odczytywano produkcyjnych rekordów D1, nie zmieniono bazy ani kodu.
+Opis dotyczy przygotowanej implementacji. Następny krok przed rolloutem:
+audyt starego formatu danych i migracja 0002; przed raportem porzuceń kontrola
+synchronizacji Stripe oraz zasad retencji. Verify nie powtarzano, bo kod bez zmian.
+
+## Podgląd dwóch płatności w sandboxie Stripe, 19.10.2026
+
+Po połączeniu sandboxu przygotowano dwie sesje podglądowe na koncie
+`acct_1URYdZLrjXhCi17Z`, obie `livemode=false`. Pierwsza: jeden e-book za
+97 zł. Druga: dwa pozostałe e-booki, 194 zł minus 50%, razem 97 zł.
+Utworzono kupon testowy `ola_preview_pair_50_20261019` i produkty/ceny inline.
+Sesje oznaczono `checkout_visual_preview_only`.
+
+Otworzono oba rzeczywiste ekrany Stripe. Potwierdzono Piaskownicę i kwoty,
+w pakiecie dwie pozycje i rabat 97 zł. Nie wpisano danych klienta, nie zapłacono,
+nie zapisano fikcyjnych zgód ani zamówień D1. To podgląd Stripe, nie test pełnego
+zakupu i dostawy. Konto live, CMS i aktywność sprzedaży bez zmian. Sandbox
+pokazuje w tej przeglądarce Apple Pay, BLIK, kartę, Link i Klarna; Google Pay
+oraz Revolut Pay nie potwierdzono. Linki wygasają 19.10.2026 o 16:42:08
+Europe/Warsaw. Lokalny zapis: `.audit/stripe-sandbox-preview-20261019.json`.
+Kod aplikacji bez zmian; verify nie powtarzano. Następny krok: odbiór wizualny;
+przed testem całości potrzebna integracja sandboxu z Workerem i dostawą.
 
 ## Kontakt → Slack i lista oczekujących → Listmonk — 19.10.2026
 
