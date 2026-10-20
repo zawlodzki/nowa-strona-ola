@@ -29,8 +29,6 @@ jobs:
       PUBLIC_SANITY_DATASET: ${{ vars.PUBLIC_SANITY_DATASET }}
       PUBLIC_TURNSTILE_SITEKEY: ${{ vars.PUBLIC_TURNSTILE_SITEKEY }}
       PUBLIC_LEAD_WEBHOOK_URL: ${{ vars.PUBLIC_LEAD_WEBHOOK_URL }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - name: Set IndexNow snapshot path
         run: echo "INDEXNOW_PREVIOUS_FILE=$RUNNER_TEMP/indexnow-previous.xml" >> "$GITHUB_ENV"
@@ -43,6 +41,9 @@ jobs:
           cache: npm
       - name: Validate deployment configuration
         id: config
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           case "$DEPLOYMENT_TARGET" in
             staging|production) ;;
@@ -112,6 +113,9 @@ jobs:
           retention-days: 7
       - name: Deploy immutable successful build
         id: deploy
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node --import tsx scripts/retry-wrangler-deploy.ts -- npx wrangler deploy --config wrangler.jsonc --env "$DEPLOYMENT_TARGET"
       - name: Notify IndexNow after successful deployment
         if: success() && steps.deploy.outcome == 'success' && env.DEPLOYMENT_TARGET == 'production' && env.SITE_INDEXING == 'production' && env.INDEXNOW_KEY != ''
