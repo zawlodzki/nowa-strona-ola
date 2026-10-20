@@ -1,6 +1,8 @@
 import { LinkIcon } from "@sanity/icons/Link";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { validateHref } from "./action-link";
+
 const legalPortableTextBlock = defineArrayMember({
   type: "block",
   styles: [
@@ -30,7 +32,7 @@ const legalPortableTextBlock = defineArrayMember({
             name: "href",
             title: "Adres",
             type: "string",
-            validation: (rule) => rule.required(),
+            validation: (rule) => rule.required().custom(validateHref),
           }),
         ],
       },

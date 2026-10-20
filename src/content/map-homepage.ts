@@ -1,4 +1,4 @@
-import type { Locale } from "@ola/shared";
+import { requireSafeHref, type Locale } from "@ola/shared";
 
 import { footerLegalLinks, siteLegalCopy } from "@/content/site-legal";
 import { footerSocialLinks } from "@/content/social-profiles";
@@ -153,19 +153,28 @@ export function testimonialsDisclosure(settings: ShellSettings): string {
 
 export function shellLinks(settings: ShellSettings) {
   const language = settingsLanguage(settings);
-  const socialLinks = (settings.socialLinks ?? []).flatMap((item) =>
-    item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
-  );
-  const legalLinks = (settings.legalLinks ?? []).flatMap((item) =>
-    item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
-  );
+  const links = (
+    items:
+      | ({ label?: string | null; href?: string | null } | null)[]
+      | null
+      | undefined,
+    field: string,
+  ) =>
+    (items ?? []).flatMap((item) =>
+      item?.label && item.href
+        ? [{ label: item.label, href: requireSafeHref(item.href, field) }]
+        : [],
+    );
+  const socialLinks = links(settings.socialLinks, "profil");
+  const legalLinks = links(settings.legalLinks, "link prawny");
   return {
-    navigation: (settings.navigation ?? []).flatMap((item) =>
-      item?.label && item.href ? [{ label: item.label, href: item.href }] : [],
-    ),
+    navigation: links(settings.navigation, "nawigacja"),
     headerCta:
       settings.headerCta?.label && settings.headerCta.href
-        ? { label: settings.headerCta.label, href: settings.headerCta.href }
+        ? {
+            label: settings.headerCta.label,
+            href: requireSafeHref(settings.headerCta.href, "CTA w nagłówku"),
+          }
         : undefined,
     socialLinks: socialLinks.length > 0 ? socialLinks : footerSocialLinks(),
     legalLinks: legalLinks.length > 0 ? legalLinks : footerLegalLinks(language),

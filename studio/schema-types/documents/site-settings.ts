@@ -6,6 +6,7 @@ import {
   sameLanguageFilter,
   translationField,
 } from "../shared/fields";
+import { validateHref } from "../objects/action-link";
 
 export const siteSettingsType = defineType({
   name: "siteSettings",
@@ -144,7 +145,7 @@ export const siteSettingsType = defineType({
               name: "href",
               title: "Adres",
               type: "string",
-              validation: (rule) => rule.required(),
+              validation: (rule) => rule.required().custom(validateHref),
             }),
           ],
           preview: { select: { title: "label", subtitle: "href" } },
@@ -175,7 +176,7 @@ export const siteSettingsType = defineType({
               name: "href",
               title: "Adres",
               type: "string",
-              validation: (rule) => rule.required(),
+              validation: (rule) => rule.required().custom(validateHref),
             }),
           ],
           preview: { select: { title: "label", subtitle: "href" } },

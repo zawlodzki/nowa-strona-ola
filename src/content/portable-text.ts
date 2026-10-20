@@ -1,3 +1,5 @@
+import { requireSafeHref } from "@ola/shared";
+
 export interface TocEntry {
   id: string;
   text: string;
@@ -107,7 +109,7 @@ function renderChildren(
         else {
           const def = marks?.find((item) => item._key === mark);
           if (def?.href) {
-            html = `<a href="${escapeHtml(def.href)}">${html}</a>`;
+            html = `<a href="${escapeHtml(requireSafeHref(def.href, "link"))}">${html}</a>`;
           }
         }
       }
@@ -133,7 +135,8 @@ function markdownInline(
         else if (mark === "code") text = `\`${text}\``;
         else {
           const def = marks?.find((item) => item._key === mark);
-          if (def?.href) text = `[${text}](${def.href})`;
+          if (def?.href)
+            text = `[${text}](${requireSafeHref(def.href, "link")})`;
         }
       }
       return text;
@@ -201,7 +204,7 @@ export function renderInlineMarkup(value: string): string {
       const link = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
       if (link) {
         parts.push(
-          `<a href="${escapeHtml(link[2])}">${escapeHtml(link[1])}</a>`,
+          `<a href="${escapeHtml(requireSafeHref(link[2], "link w tabeli"))}">${escapeHtml(link[1])}</a>`,
         );
       } else {
         parts.push(escapeHtml(token));
@@ -376,7 +379,9 @@ export function articleBodyToHtml(blocks: unknown): {
     }
 
     if (block._type === "articleCta") {
-      const href = escapeHtml(block.action?.href ?? "#");
+      const href = escapeHtml(
+        requireSafeHref(block.action?.href ?? "#", "adres CTA"),
+      );
       const label = escapeHtml(block.action?.label ?? "");
       html.push(
         `<aside class="article-cta"><h2>${escapeHtml(block.title ?? "")}</h2><p>${escapeHtml(
@@ -509,7 +514,10 @@ export function articleBodyToMarkdown(blocks: unknown): string {
     if (block._type === "articleCta") {
       lines.push(`## ${block.title ?? ""}`, "", block.lead ?? "", "");
       if (block.action?.href && block.action.label) {
-        lines.push(`[${block.action.label}](${block.action.href})`, "");
+        lines.push(
+          `[${block.action.label}](${requireSafeHref(block.action.href, "adres CTA")})`,
+          "",
+        );
       }
       continue;
     }

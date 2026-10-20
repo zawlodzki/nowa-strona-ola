@@ -5,6 +5,7 @@ import { perspectiveCookieName } from "@sanity/preview-url-secret/constants";
 import type { APIRoute } from "astro";
 
 import { sanityApiVersion } from "../../../../../src/sanity/config";
+import { samePreviewOriginPath } from "../../../lib/redirect";
 import {
   createPreviewSession,
   previewCookiePartition,
@@ -44,5 +45,5 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
     ...previewCookiePartition(request),
   });
 
-  return redirect(redirectTo);
+  return redirect(samePreviewOriginPath(redirectTo, request.url));
 };
