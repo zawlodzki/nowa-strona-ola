@@ -3,6 +3,21 @@ import type { IndexNowConfiguration } from "@/lib/seo/indexnow";
 import { SITE_ORIGIN } from "@/lib/seo/site";
 
 /**
+ * Site-wide response headers for the public static site. The CSP limits
+ * plugins, `<base>`, form targets and framing without restricting scripts:
+ * pages carry inline module scripts and GTM loads tags after consent, so a
+ * script-src policy needs its own rollout against the deployed tag set.
+ */
+export const SECURITY_HEADERS = [
+  "Strict-Transport-Security: max-age=31536000",
+  "X-Content-Type-Options: nosniff",
+  "Referrer-Policy: strict-origin-when-cross-origin",
+  "X-Frame-Options: SAMEORIGIN",
+  "Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()",
+  "Content-Security-Policy: object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests",
+] as const;
+
+/**
  * `_headers` for Workers Static Assets (max 100 rules). Markdown alternates
  * stay out of the index and point to their HTML canonical (`:splat`).
  * `/*.txt` is the only Content-Type for text files. A repeated header is
@@ -32,6 +47,7 @@ export function buildHeadersFile({
     ["/llms-full.txt", "X-Robots-Tag: noindex"],
     ["/blog/rss.xml", "Content-Type: application/rss+xml; charset=utf-8"],
     ["/_astro/*", "Cache-Control: public, max-age=31536000, immutable"],
+    ["/*", ...SECURITY_HEADERS],
   );
   return `${rules
     .map(([path, ...headers]) =>

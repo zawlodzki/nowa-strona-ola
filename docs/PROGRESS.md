@@ -1,5 +1,30 @@
 # Postęp wdrożenia
 
+## Nagłówki bezpieczeństwa i zakres tokenu Cloudflare, 20.10.2026
+
+Dalsza część audytu z tego dnia (sekrety w `.dev.vars` zostają, decyzja
+użytkownika). `buildHeadersFile` dodaje regułę `/*` z `SECURITY_HEADERS`:
+HSTS (`max-age=31536000`, bez `includeSubDomains` i `preload`), `nosniff`,
+`Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options:
+SAMEORIGIN`, `Permissions-Policy` oraz CSP `object-src 'none'; base-uri 'self';
+form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests`. CSP celowo
+nie ogranicza skryptów: strony mają inline'owe skrypty modułowe, a GTM po zgodzie
+ładuje tagi z wielu domen. `script-src` wymaga osobnego wdrożenia z testem
+na produkcyjnym zestawie tagów. Do tego czasu ochroną przed `javascript:`
+w linkach z CMS pozostaje `requireSafeHref`.
+
+`publish-content.yml`: `CLOUDFLARE_ACCOUNT_ID` i `CLOUDFLARE_API_TOKEN` są
+teraz tylko w kroku walidacji (przed `npm ci`) i w kroku deploy, jak
+w `deploy-preview.yml`. `npm ci`, lint, testy i build ich nie widzą.
+
+Kontrole: `npm run verify` krok po kroku, z `eslint --ignore-pattern '.audit/**'`
+(lokalne skrypty `.audit/` nie przechodzą lintu). Przeszły: format, tokeny,
+check, 771 testów jednostkowych, build, workspace'y, test:build, 564 testy e2e
+i content-lake. `dist/_headers` zawiera nową regułę. Lokalny serwer `astro preview`
+nie stosuje `_headers`, więc e2e nie sprawdza nagłówków w przeglądarce.
+Następny krok: po wdrożeniu stagingu sprawdzić nagłówki w devtools i działanie
+Turnstile, zgód i checkoutu.
+
 ## Audyt bezpieczeństwa i poprawki linków CMS oraz podglądu, 20.10.2026
 
 Audyt `security-audit` (profil quick, tylko źródło, bez sandboxa) nie potwierdził
