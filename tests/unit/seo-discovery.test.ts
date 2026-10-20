@@ -80,6 +80,27 @@ describe("_headers", () => {
     expect(buildHeadersFile({ indexing: true })).not.toMatch(/^\/\*\n/);
   });
 
+  it("sends security headers on every path in every environment", () => {
+    for (const indexing of [true, false]) {
+      const headers = buildHeadersFile({ indexing });
+      for (const path of ["/", "/blog/wpis/", "/llms.txt", "/index.md"]) {
+        expect(headerValue(headers, path, "Strict-Transport-Security")).toBe(
+          "max-age=31536000",
+        );
+        expect(headerValue(headers, path, "X-Content-Type-Options")).toBe(
+          "nosniff",
+        );
+        expect(headerValue(headers, path, "X-Frame-Options")).toBe(
+          "SAMEORIGIN",
+        );
+        const csp = headerValue(headers, path, "Content-Security-Policy");
+        expect(csp).toContain("object-src 'none'");
+        expect(csp).toContain("base-uri 'self'");
+        expect(csp).toContain("frame-ancestors 'self'");
+      }
+    }
+  });
+
   it("points Markdown to the HTML canonical", () => {
     const headers = buildHeadersFile({ indexing: true });
     expect(headers).toContain(
