@@ -1,5 +1,16 @@
 # Homepage 3a — konfiguracja treści CMS
 
+## Mobilny baner zgód, decyzja użytkownika 20.10.2026
+
+Źródło: polecenie w czacie i referencja [Ramp Glass](https://ramp.com/glass).
+Na telefonie pełna szerokość przy dolnej krawędzi, bez pływającej ramki
+i zaokrągleń, większy odstęp treści od krawędzi oraz wejście od dołu.
+W kodzie przyjęto 24 px wewnątrz, 16 px między regionami, pionowe przyciski
+z odstępem 12 px i ruch 250 ms według tokenów 3a. Reduced motion bez ruchu.
+To decyzja wyglądu, nie zmiana copy, kolejności CTA lub kategorii zgód.
+Mapowanie: `ConsentPanel.css` i `design-system/MOTION.md`; brak pola Sanity
+dla tej prezentacji, layout pozostaje kontrolowany w kodzie. Bez zapisu do CMS.
+
 ## Oferta serii e-booków, decyzja użytkownika 18.10.2026
 
 Źródłem są polecenia użytkownika w tej sesji i korekta wykluczająca zakup
