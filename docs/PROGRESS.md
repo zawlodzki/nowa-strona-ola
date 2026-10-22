@@ -1,5 +1,43 @@
 # Postęp wdrożenia
 
+## Node 24 i budżety gzip przez fflate, 21–22.10.2026
+
+Pierwsze `verify` (Node 26.12) zatrzymał budżet CSS: 32818 B przy limicie
+32768 B. Nadwyżkę wnosi `ConsentPanel.css` z #138 (+151 B; HEAD 32667 B),
+ale Quality na `main` przeszło. Próba scalenia bloków `reduced-motion` banera
+i skrócenia selektora dała +4 B i 0 B gzip, więc ją wycofano.
+
+Przyczyną różnicy jest zlib binarki Node, nie główna wersja. CI na `main`
+(Linux x64, oficjalny Node 24.21) i oficjalny Node 24.22 na macOS arm64
+(zlib 1.3.2.1) dają css 32748 B, js 15937 B. Node z Homebrew (24 i 26,
+systemowy zlib 1.2.12): css 32818 B, js 15910 B. `fflate` daje na każdej
+binarce css 33500 B, js 16302 B.
+
+Na polecenie użytkownika:
+
+- `engines` zawężono do `>=24 <25` (też w `package-lock.json`), dodano
+  `.npmrc` z `engine-strict=true` i `scripts/check-node-version.mjs` jako
+  pierwszy krok `verify`. Na Node 26 skrypt, `verify` i `npm ci --dry-run`
+  kończą się błędem; na Node 24 przechodzą (niezgodne są tylko opcjonalne
+  `sharp-win32-ia32`).
+- Zainstalowano `node@24` z Homebrew (24.22.0, keg-only, bez zmian
+  w `~/.zshrc`) i wykonano `npm ci`.
+- `fflate` 0.8.3 dodano jako devDependency w dokładnej wersji;
+  `@shuding/opentype.js` dostał przy tym własne `fflate` 0.7.5 (zakres `^0.7`).
+  `scripts/gzip-size.mjs` (poziom 9, `mtime: 0`) zastąpił `node:zlib`
+  w `check-build.mjs`, `check-content-lake-build.mjs` i `check-css-budgets.mjs`.
+  Łączny limit CSS podniesiono z 32 do 33 KiB; limity szablonów i JS bez zmian.
+  Dodano `tests/unit/gzip-size.test.ts`.
+
+`npm run verify` na Node 24.22 (Homebrew, `PLAYWRIGHT_WORKERS=3`): format,
+tokeny, lint, check, 780 testów jednostkowych, buildy i `test:build` PASS.
+Budżety: css 33500 B (zapas 292 B), js 16302 B; strona główna ma 53 B zapasu
+do limitu szablonu 8 KiB. E2E: 563 PASS, 12 skipped, 1 FAIL
+(`turnstile.spec.ts:187`, Chromium, „element is not stable” przy zamykaniu
+banera w trakcie animacji wejścia); ponowiony osobno 3/3 PASS.
+`test:content-lake` uruchomiony osobno: PASS. Nie wdrażano.
+Następny krok: obserwować niestabilność testu Turnstile przy animacji banera.
+
 ## Markdown dla agentów i nagłówki 404 dla .md, 21.10.2026
 
 Przejrzano diagnostykę Cloudflare Agent Readiness przez publiczny skaner

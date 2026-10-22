@@ -82,6 +82,7 @@
 | Zmienne wdrożenia (`SITE_INDEXING`, `PUBLIC_*`) czyszczone w testach           | `tests/setup-env.ts`, `tests/unit/setup-env.test.ts`    |
 | Charset                                                                        | `buildHeadersFile` i `tests/unit/seo-discovery.test.ts` |
 | Malowane pseudoelementy                                                        | `scripts/check-pseudo-shapes.mjs`                       |
+| Verify tylko na Node z `.node-version`                                         | `scripts/check-node-version.mjs`                        |
 
 ## Cursor Cloud
 

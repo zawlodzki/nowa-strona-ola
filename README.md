@@ -122,6 +122,11 @@ POST `[]` po wysłaniu pustego formularza. To wynik oceny z 14.10; Turnstile
 opublikowano 15.10.2026, zgodnie z [protokołem](docs/TURNSTILE-ROLLOUT.md).
 
 Node 24 według `.node-version`, npm oraz jeden `package-lock.json`.
+`engines` (`>=24 <25`) z `engine-strict` w `.npmrc` blokuje `npm ci` na innej
+wersji, a `npm run verify` zaczyna od `scripts/check-node-version.mjs`.
+Budżety gzip (`check-build`, `check-content-lake-build`, `check-css-budgets`)
+liczy `scripts/gzip-size.mjs` przez `fflate` w czystym JS. Wynik nie zależy
+od zlib binarki Node (Homebrew i oficjalne buildy różnią się o dziesiątki B).
 
 ```sh
 npm ci

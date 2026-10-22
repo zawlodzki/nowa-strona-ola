@@ -1,10 +1,10 @@
 import { readFile, readdir } from "node:fs/promises";
-import { gzipSync } from "node:zlib";
 import assert from "node:assert/strict";
 import { tsImport } from "tsx/esm/api";
 import { checkCssBudgets } from "./check-css-budgets.mjs";
 import { assertEnglishDisabled } from "./check-disabled-locales.mjs";
 import { checkBuiltRegions } from "./check-regions.mjs";
+import { gzipSize } from "./gzip-size.mjs";
 
 const indexing = process.env.SITE_INDEXING === "production";
 const liveContent = Boolean(process.env.PUBLIC_SANITY_PROJECT_ID);
@@ -194,13 +194,12 @@ for (const name of assets) {
     : name.endsWith(".css")
       ? "css"
       : undefined;
-  if (type)
-    sizes[type] += gzipSync(await readFile(`dist/_astro/${name}`)).length;
+  if (type) sizes[type] += gzipSize(await readFile(`dist/_astro/${name}`));
 }
 assert(sizes.js <= 25 * 1024, `JS budget exceeded: ${sizes.js} B gzip`);
 // Tymczasowy limit etapu 4a (pakiety 5–7). Optymalizacja CSS przyjdzie później;
-// 32 KiB nie jest docelowym budżetem strony.
-assert(sizes.css <= 32 * 1024, `CSS budget exceeded: ${sizes.css} B gzip`);
+// 33 KiB (gzip fflate, od 21.10.2026) nie jest docelowym budżetem strony.
+assert(sizes.css <= 33 * 1024, `CSS budget exceeded: ${sizes.css} B gzip`);
 const woff2 = assets.filter((name) => name.endsWith(".woff2"));
 assert.equal(woff2.length, 1, `expected one woff2, got ${woff2.join(", ")}`);
 assert.equal(
