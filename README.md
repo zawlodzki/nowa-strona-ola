@@ -172,6 +172,18 @@ a `/llms-full.txt` łączy Markdown głównej, O mnie, konsultacji, kolekcji
 i landingów e-booków. Oba pliki korzystają z tego samego spisu co `.md`
 i sitemap. `npm run test:build` sprawdza zgodność eksportu, a E2E parsuje XML RSS.
 
+Mały Worker `src/edge/site-worker.ts` działa tylko dla stron HTML i plików `.md`
+(`run_worker_first` w `wrangler.jsonc`). Zapytanie z `Accept: text/markdown`
+dostaje wersję `.md` tej samej strony. Pozostałe dostają HTML z nagłówkiem
+`Link: rel="alternate"` i `Vary: Accept`. Brakujący `.md` zwraca 404 jako HTML,
+bez nagłówka canonical. Reguły `_headers` nadal obowiązują. Sprawdzone 21.10.2026
+lokalnie na zbudowanym `dist`:
+
+```sh
+npx wrangler dev --env="" --port 8799 --ip 127.0.0.1
+curl -sI -H "Accept: text/markdown" http://127.0.0.1:8799/o-mnie/
+```
+
 Odczyt i build opublikowanych danych Sanity bez zapisu, sprawdzony 12.10.2026:
 
 ```sh

@@ -1,5 +1,26 @@
 # Postęp wdrożenia
 
+## Markdown dla agentów i nagłówki 404 dla .md, 21.10.2026
+
+Przejrzano diagnostykę Cloudflare Agent Readiness przez publiczny skaner
+isitagentready.com, bo panel wymagał logowania. Wynik: 27 punktów, poziom 2.
+Za trafne uznano negocjację Markdown i nagłówek `Link`. Kontrole API, OAuth,
+MCP, WebMCP, DNS-AID i handlu pominięto: strona nie ma API ani logowania.
+
+Na polecenie użytkownika dodano Worker `src/edge/site-worker.ts`
+(`main`, `assets.binding`, `run_worker_first: ["/", "/*/", "/*.md"]`).
+Zapytanie z `Accept: text/markdown` zwraca wersję `.md` strony. HTML dostaje
+`Link: rel="alternate"; type="text/markdown"`, gdy wersja `.md` istnieje,
+oraz `Vary: Accept`. Brakujący `.md` zwraca 404 z `text/html` i bez
+zmyślonego canonical, który wcześniej dodawała reguła `/*.md` z `_headers`.
+
+Lokalnie, w `wrangler dev` na zbudowanym `dist`, potwierdzono, że reguły
+`_headers` (`noindex`, canonical `.md`) nadal obowiązują przy przejściu przez
+`env.ASSETS.fetch`. Bundel przeszedł `wrangler deploy --dry-run`. Dodano
+`tests/unit/site-worker.test.ts` (8 testów, PASS). Pełne `verify` opisuje
+wpis o Node 24 i budżetach gzip. Nie wdrażano.
+Następny krok: po wdrożeniu sprawdzić produkcję przez `curl` i ponowny skan.
+
 ## Przygotowanie PR mobilnego banera, 20.10.2026
 
 Na polecenie „push pr” przeniesiono dziewięć plików tej zmiany do izolowanej
