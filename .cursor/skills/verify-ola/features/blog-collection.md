@@ -44,4 +44,4 @@ Po H1 na stronie 1 uruchom `browser expect --text` z etykietą wyliczoną dla st
 - Pusta kategoria to `perimenopauza`, nie brak trasy. Drugą stronę otwieraj tylko, gdy wyliczona liczba stron jest większa niż 1.
 - Copy indeksu jest propozycją. Nie traktować tytułów i dat z makiety jako publikacji.
 - Artykuł z karty otwiera Article3a pod `blog/[slug]`.
-- Screenshoty kolekcji muszą poczekać na załadowanie obrazów (`verify.mjs browser screenshot` przewija stronę i czeka na `naturalWidth`). Miniatury są kadrowane do pejzażu 1.8 w pliku (`about` 1122×623), żeby Chromium malował je poza viewportem. Różowy prostokąt to tło `--ao-surface` przy wycieku portretowego pliku, nie brak `<img>`.
+- Screenshoty kolekcji muszą poczekać na załadowanie obrazów (`verify.mjs browser screenshot` przewija stronę i czeka na `naturalWidth`). Ramka karty ma `aspect-ratio: 1.8` i `object-fit: cover`. Atrybuty `about` to 1122×623, ale hotspot procentowy przełącza `SiteImage` na `fit: inside`, więc plik zostaje portretem wpasowanym w ten prostokąt. Różowe tło `--ao-surface` widać, gdy obraz nie wypełni ramki. To nie jest brak `<img>`.

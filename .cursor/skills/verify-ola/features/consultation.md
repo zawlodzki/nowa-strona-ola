@@ -1,6 +1,6 @@
 # Landing konsultacji
 
-Publiczna `/konsultacje/` pokazuje landing Consultation3a z fixture’ów. Hero ma cenę 450 zł / 60 minut z dokumentu usługi. Dwa linki „Zarezerwuj konsultację” prowadzą do Cal.com. Status rezerwacji to `live`, więc zdanie o tymczasowym kalendarzu nie jest na stronie. Dalej są mapa pytań, przebieg, efekty, prowadząca, dwie opinie i pytania FAQ z `src/content/consultation-seed.ts` w natywnym `details`. Strona nie ma formularza leada. `browser posts` po samym wejściu zwraca `[]`.
+Publiczna `/konsultacje/` pokazuje landing Consultation3a z fixture’ów. Hero pokazuje „450 zł” i „60 minut · online” z dokumentu usługi. Dwa linki „Zarezerwuj konsultację” prowadzą do Cal.com. Status rezerwacji to `live`, więc zdanie o tymczasowym kalendarzu nie jest na stronie. Dalej są mapa pytań, przebieg, efekty, prowadząca, dwie opinie i pytania FAQ z `src/content/consultation-seed.ts` w natywnym `details`. Strona nie ma formularza leada. `browser posts` po samym wejściu zwraca `[]`.
 
 ## Sub-features
 
@@ -20,7 +20,11 @@ Ze strony głównej wybierz „Konsultacje” w nawigacji albo drugi przycisk he
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /konsultacje/
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Wiesz już dużo. Ustal, co dalej."
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Zarezerwuj konsultację" --count 2
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Zarezerwuj konsultację" --nth 0 --attribute href --value "https://cal.com/dietetyk/konsultacja"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Zarezerwuj konsultację" --nth 1 --attribute href --value "https://cal.com/dietetyk/konsultacja"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Konsultacja · 450 zł" --attribute href --value "#cena"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "450 zł"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "60 minut · online"
 node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Konsultacje" --exact --attribute aria-current --value page
 node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path consultation/pl.aria.txt

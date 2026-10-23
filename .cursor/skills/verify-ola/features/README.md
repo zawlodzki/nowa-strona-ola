@@ -41,6 +41,7 @@ Każdy plik ma H1, jeden akapit zachowania widocznego dla użytkownika i dokład
 - [Landing e-booka](./ebook.md) otwiera `/ebooki/suplementy-w-pcos/` z karty homepage, 97 zł brutto, status „Wkrótce dostępny” i listę oczekujących bez POST.
 - [Pozostałe landingi e-booków](./ebook-landings.md) otwiera pozostałe adresy PL z `additionalEbookLandings` z odznaką zapowiedzi i przyciskiem listy oczekujących.
 - [Kolekcja e-booków](./ebook-collection.md) otwiera `/ebooki/`, kategorie bez JS, karty z `ebookPath` i brak POST.
+- [Zamówienie e-booków](./checkout.md) otwiera cztery adresy bez płatności, wstrzymaną sprzedaż i bramkę braku `session_id`.
 - [Przełącznik języka](./language.md) sprawdza brak linku „English” i 404 pod `/en/`.
 - [Dialog katalogu](./catalog-dialog.md) otwiera i zamyka dialog „Jak pracujemy”.
 - [Katalog 3a](./design-system.md) otwiera `/design-system/`, motyw i karuzelę.
