@@ -1,8 +1,10 @@
 # Weryfikacja kodu
 
 Stan: wdrożone narzędzia dla prototypu Astro; zakres rośnie razem z aplikacją.
-Node 24 (CI, .node-version), npm i jeden package-lock.json. Lokalna próba uruchomiona
-na Node 26.8.2 / npm 11.19.1; zgodność na Node 24 musi potwierdzić pierwsze CI.
+Node 24 (CI, .node-version), npm i jeden package-lock.json. `engines` `>=24 <25`
+z `engine-strict` blokuje instalację na innej wersji, a `verify` zaczyna od
+`scripts/check-node-version.mjs` (od 21.10.2026). Budżety gzip liczy
+`scripts/gzip-size.mjs` (`fflate`, niezależnie od zlib binarki Node).
 
 ## Jedna bramka jakości
 

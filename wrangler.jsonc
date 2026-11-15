@@ -1,9 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ola-website",
+  "main": "src/edge/site-worker.ts",
   "compatibility_date": "2026-09-13",
+  // The Worker runs only for HTML pages and Markdown alternates
+  // (Accept: text/markdown, Link header, 404 headers for missing .md).
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/", "/*/", "/*.md"],
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
   },

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { Buffer } from "node:buffer";
 import { readFile, readdir } from "node:fs/promises";
-import { gzipSync } from "node:zlib";
+
+import { gzipSize } from "./gzip-size.mjs";
 
 const templates = [
   {
@@ -111,7 +112,7 @@ export async function checkCssBudgets(directory = "dist") {
         );
         const content = await readFile(`${directory}${href}`, "utf8");
         sources.push(content);
-        externalGzipBytes += gzipSync(content).length;
+        externalGzipBytes += gzipSize(content);
       }
       const inline = [
         ...html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g),
