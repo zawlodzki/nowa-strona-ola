@@ -1,5 +1,22 @@
 # Postęp wdrożenia
 
+## Polityka przeglądarek, 15.11.2026
+
+Pierwsze zadanie modernizacji według Modern Web Guidance. W `AGENTS.md`
+dodano sekcję „Przeglądarki”: Baseline _Widely available_ bez fallbacku,
+_Newly available_ i _Limited_ tylko jako progresywne ulepszenie z wykrywaniem
+wsparcia, własny fallback do ok. 20 linii bez zależności i polyfilli, status
+Baseline z poradników skilla, kontrola w Chromium, Firefoksie i WebKit.
+
+Decyzja: brzmienie przyjęto z propozycji audytu i domyślnej polityki skilla.
+Polityka utrwala obecną praktykę (`WaitlistDialog` wykrywa Invoker Commands,
+popover bez polyfillu). Użytkownik może ją zaostrzyć, np. do konkretnego
+roku Baseline albo minimalnej wersji Safari.
+
+Kontrole: `prettier --check` i kontrola odnośników dla zmienionych plików.
+Kod bez zmian, więc bez `npm run verify`. Następny krok: P1, responsywne
+obrazy w `SiteImage`.
+
 ## Audyt Modern Web Guidance, 15.11.2026
 
 Na zlecenie użytkownika sprawdzono zgodność strony z aktualnymi standardami

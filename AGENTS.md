@@ -52,6 +52,22 @@
 - JSON-LD odzwierciedla widoczną treść. Szkice tylko w chronionym podglądzie;
   prywatne tokeny wyłącznie na serwerze lub podczas zaufanego budowania.
 
+## Przeglądarki
+
+Polityka z 15.11.2026, punkt odniesienia dla skilla `modern-web-guidance`
+i [audytu](docs/MODERN-WEB-AUDIT-2026-11-15.md).
+
+- Baseline _Widely available_ wolno używać bez fallbacku.
+- _Newly available_ i _Limited_ tylko jako progresywne ulepszenie: bez
+  wsparcia treść, nawigacja, formularze, zgody i zakup działają, a różnica
+  jest co najwyżej wizualna. Wsparcie wykrywaj (`@supports`, `"x" in obj`),
+  nie po user agencie.
+- Własny fallback ma najwyżej ok. 20 linii i nie dodaje zależności ani
+  polyfilli. Gdy to nie wystarcza, zostaw obecne rozwiązanie albo zapisz
+  decyzję w planie.
+- Status Baseline bierz z poradników `modern-web-guidance`, nie z pamięci.
+  Zachowanie sprawdzaj w Chromium, Firefoksie i WebKit (projekty Playwright).
+
 ## Weryfikacja i zmiany
 
 - Obowiązuje [CODE-QUALITY.md](docs/CODE-QUALITY.md). npm i jeden package-lock.json.
