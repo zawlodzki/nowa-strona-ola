@@ -1345,9 +1345,9 @@ porównaniem z design systemem na desktopie i mobile.
 
 - [x] Wykonać audyt zgodności strony z Modern Web Guidance i spisać
       ustalenia z priorytetami. Bez zmian w kodzie.
-- [ ] Zapisać w `AGENTS.md` politykę obsługi przeglądarek (np. Newly
+- [x] Zapisać w `AGENTS.md` politykę obsługi przeglądarek (np. Newly
       available z progresywnym ulepszeniem, fallback ≤ 20 linii, bez
-      zależności).
+      zależności). Sekcja „Przeglądarki” w `AGENTS.md`.
 
 ### P1 — wydajność ładowania
 
