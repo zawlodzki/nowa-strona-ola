@@ -1,5 +1,49 @@
 # Postęp wdrożenia
 
+## Speculation Rules w Layout3a, 15.11.2026
+
+Drugie zadanie P1 z modernizacji. `Layout3a` ma w `<head>` regułę dokumentu
+`<script type="speculationrules">`: `prefetch` linków `/*` z
+`eagerness: "moderate"` (najechanie ok. 200 ms albo wciśnięcie). Wykluczenia
+to `/zamowienie{/*}?`, `/po-zakupie{/*}?`, `/api/*` i `[rel~=nofollow]`.
+Wzorce rozwiązują się względem adresu strony, więc obejmują też bezwzględne
+linki `https://aleksandraolesiewicz.com/zamowienie/` z dokumentów prawnych.
+Tylko prefetch: prerender uruchomiłby zgody i analitykę przed wejściem na
+stronę, więc zostaje osobną pozycją planu do decyzji.
+
+Wsparcie Limited (Chrome, Edge). Firefox i WebKit ignorują skrypt, więc
+według polityki przeglądarek różnica jest wyłącznie w czasie ładowania.
+CSP nie ma `script-src`, więc skrypt inline nie wymaga hasha.
+Podgląd SSR używa tych samych widoków, więc reguła działa i tam: najechanie
+na link wywołuje render szkicu. Uznano to za akceptowalne, bo podgląd jest
+chroniony i rzadko używany.
+
+Test `tests/e2e/speculation-rules.spec.ts` (Chromium) wstrzykuje link,
+najeżdża na niego i liczy żądania z `Sec-Purpose: prefetch`. `/o-mnie/`
+i `/blog/` są pobierane. Adresy zamówienia (także z `?ebook=`), po zakupie,
+`/api/lead` i link `nofollow` nie są. Chromium łączy kandydatów po URL, więc
+sonda `nofollow` używa adresu, do którego strona nie linkuje inaczej.
+Mutacja: bez wykluczenia `/zamowienie` test jest czerwony. Trzy przebiegi
+z rzędu zielone. Bez zmian w wyglądzie, więc nie porównywano z makietą.
+
+Kontrole na Node 24.22.3. `npm run verify` w pierwszym przebiegu: format,
+tokeny, lint, typy, Vitest (783 testy), build, buildy workspace’ów i
+`test:build` (SEO 40 stron) PASS. E2E czerwone: 573 passed, 44 skipped,
+7 failed, wszystkie w Firefoksie i WebKit. Powtórka 3 testów Firefoksa,
+które padły ponownie (`matcha-accent-3a:224`, `mockup-3a-consistency:42`,
+`sticky-navigation-3a:73`), z `--repeat-each 3 --workers 1`: gałąź 9/9 PASS,
+ten sam zestaw na `Layout3a` z `main` 4/9 PASS. To niestabilność Firefoksa
+istniejąca na `main`, nie skutek zmiany. Drugi pełny `test:e2e` z
+`PLAYWRIGHT_WORKERS=4`: 579 passed, 44 skipped, 1 failed
+(`responsive-images` 1440 px, timeout `page.goto` po 30 s na 9 trasach).
+Powtórka tego pliku 28/28 PASS. `test:content-lake` PASS (nie uruchomił
+się w verify, bo łańcuch zatrzymał się na e2e). Żaden pojedynczy przebieg
+verify nie był w całości zielony; każdy krok przeszedł co najmniej raz.
+Niestabilne testy Firefoksa warto naprawić osobno.
+
+Następny krok: ocena `loading="eager"` w miniaturach poniżej pierwszego
+ekranu. AVIF i prerender czekają na decyzję.
+
 ## Responsywne obrazy w SiteImage, 15.11.2026
 
 Pierwsze zadanie P1 z modernizacji, stacked PR na polityce przeglądarek.
