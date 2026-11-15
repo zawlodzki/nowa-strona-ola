@@ -1,5 +1,35 @@
 # Postęp wdrożenia
 
+## Responsywne obrazy w SiteImage, 15.11.2026
+
+Pierwsze zadanie P1 z modernizacji, stacked PR na polityce przeglądarek.
+`SiteImage` generuje `srcset` z szerokości 240–1280 px i zadeklarowanej
+szerokości jako największego pliku (`srcsetWidths`). Wymaga też `sizes`
+z rejestru `IMAGE_SIZES` (`src/lib/image-sizes.ts`), więc nowy obraz bez
+opisanego slotu nie przejdzie typów. Każda szerokość ma ten sam `fit`
+i `position`, więc bramka „Jeden kadr zdjęcia” obowiązuje bez zmian.
+
+Sloty zmierzono na zbudowanej stronie (Chromium, 13 szerokości okna,
+320–1920 px). Układ przełącza się zapytaniami kontenera `page3a`, które nie
+liczą klasycznego paska przewijania, a `sizes` widzi całe okno. Progi, przy
+których kolumna się zwęża, przesunięto więc o 16 px w górę. W tym pasku slot
+jest zawyżony (więcej bajtów), a nie zaniżony (rozmyty obraz).
+
+Test `responsive-images.spec.ts` liczy slot z `sizes` i porównuje go z
+szerokością obrazu na 9 trasach: stosunek musi mieścić się w 0,95–1,3.
+Sprawdzono, że test łapie błąd: `heroPortrait: "100vw"` daje czerwony test.
+
+Pomiar ruchu (7 tras, cała strona przewinięta, wybrany plik wobec
+dotychczasowego największego): 390 px DPR3 2730 → 1746 KB (−36%),
+390 px DPR2 2730 → 876 KB (−68%), 1440 px DPR2 2954 → 2035 KB (−31%),
+1440 px DPR1 2954 → 710 KB (−76%). To rozmiary plików z `dist`, nie
+pomiar LCP.
+
+Nie zmierzono w przeglądarce: okładek e-booków z obrazem, `problemMedia`
+i `sampleMedia` (fixture’y ich nie mają). Ich sloty wzięto z szerokości
+kontenerów, w których się wyświetlą. AVIF odłożono jako osobne zadanie.
+Następny krok: Speculation Rules w `Layout3a`.
+
 ## Polityka przeglądarek, 15.11.2026
 
 Pierwsze zadanie modernizacji według Modern Web Guidance. W `AGENTS.md`

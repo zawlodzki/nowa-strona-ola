@@ -6,6 +6,7 @@ import Layout3a from "@/design-system/Layout3a.astro";
 import SiteHeader from "@/design-system/components/SiteHeader.astro";
 import SiteFooter from "@/design-system/components/SiteFooter.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import BookCover from "@/design-system/components/BookCover.astro";
 import Button from "@/design-system/components/Button.astro";
 import {
@@ -117,6 +118,7 @@ const title =
               <div class="checkout__cover">
                 {content.cover?.src ? (
                   <SiteImage
+                    sizes={IMAGE_SIZES.bookCover}
                     src={content.cover.src}
                     alt={content.cover.label}
                     width={252}

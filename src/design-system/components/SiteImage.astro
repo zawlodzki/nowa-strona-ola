@@ -2,10 +2,12 @@
 import { Image } from "astro:assets";
 
 import { siteRasters as rasters } from "@/assets/site-rasters";
+import type { ImageSizes } from "@/lib/image-sizes";
 import {
   imageCropPosition,
   pickSiteImage,
   sharpCropPosition,
+  srcsetWidths,
   type SiteRasterKey,
 } from "@/lib/site-images";
 
@@ -15,6 +17,8 @@ interface Props {
   alt: string;
   width: number;
   height: number;
+  /** Rendered slot width per breakpoint, as the HTML `sizes` attribute. */
+  sizes: ImageSizes;
   class?: string;
   loading?: "eager" | "lazy";
   decoding?: "async" | "sync" | "auto";
@@ -29,6 +33,7 @@ const {
   alt,
   width,
   height,
+  sizes,
   class: className,
   loading = "lazy",
   decoding = "async",
@@ -47,6 +52,7 @@ const imageFit =
 
 const picked = pickSiteImage(src, fallback);
 const eager = loading === "eager" || fetchpriority === "high";
+const widths = srcsetWidths(width);
 ---
 
 {picked?.type === "local" && (
@@ -58,6 +64,8 @@ const eager = loading === "eager" || fetchpriority === "high";
     class={className}
     style={imageStyle}
     layout="none"
+    widths={widths}
+    sizes={sizes}
     format="webp"
     fit={imageFit}
     position={sharpPosition}
@@ -75,6 +83,8 @@ const eager = loading === "eager" || fetchpriority === "high";
     class={className}
     style={imageStyle}
     layout="none"
+    widths={widths}
+    sizes={sizes}
     format="webp"
     fit={imageFit}
     position={sharpPosition}

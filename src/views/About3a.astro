@@ -13,6 +13,7 @@ import Section from "@/design-system/components/Section.astro";
 import SplitPanel from "@/design-system/components/SplitPanel.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import {
   aboutCopy,
   diplomaCropPosition,
@@ -59,6 +60,7 @@ const { degrees, trainings } = splitCredentials(person.credentials);
     )}
     <figure slot="media" class="about3a-portrait">
       <SiteImage
+        sizes={IMAGE_SIZES.heroPortrait}
         src={content.hero.media?.src}
         objectPosition="50% 15%"
         fallback="about"
@@ -160,6 +162,7 @@ const { degrees, trainings } = splitCredentials(person.credentials);
         <figure class="about3a-diploma">
           {diplomaImage ? (
             <SiteImage
+              sizes={IMAGE_SIZES.diploma}
               src={diplomaSrc}
               alt={content.credentials.person.diploma?.label ?? ""}
               width={diplomaFrame.width}
@@ -293,6 +296,7 @@ const { degrees, trainings } = splitCredentials(person.credentials);
           </TextLink>
         )}
         <SiteImage
+          sizes={IMAGE_SIZES.consultationCard}
           slot="media"
           src={content.consultation.media.src}
           fallback="contact"

@@ -18,6 +18,7 @@ import ProductOrbit from "@/design-system/decorations/ProductOrbit.astro";
 import SheetShadow from "@/design-system/decorations/SheetShadow.astro";
 import SupplementBottles from "@/design-system/decorations/SupplementBottles.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import { ebookCopy } from "@/content/ebook-seed";
 import {
   ebookPaymentMethods,
@@ -84,6 +85,7 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
       <div class="ebook3a-book">
         {content.cover?.src ? (
           <SiteImage
+            sizes={IMAGE_SIZES.ebookStageCover}
             src={content.cover.src}
             alt={content.cover.label}
             width={504}
@@ -129,6 +131,7 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
       <div class="ebook3a-shelf">
         {landing.problemMedia?.src ? (
           <SiteImage
+            sizes={IMAGE_SIZES.ebookShelf}
             src={landing.problemMedia.src}
             alt={landing.problemMedia.label}
             width={708}
@@ -220,6 +223,7 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
         <SheetShadow />
         {landing.sampleMedia?.src ? (
           <SiteImage
+            sizes={IMAGE_SIZES.ebookSample}
             src={landing.sampleMedia.src}
             alt={landing.sampleMedia.label}
             width={708}
@@ -292,6 +296,7 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
     <Container class="ebook3a-split ebook3a-author">
       <figure>
         <SiteImage
+          sizes={IMAGE_SIZES.ebookAuthor}
           src={author.photo?.src}
           objectPosition="50% 15%"
           fallback="about"
@@ -329,6 +334,7 @@ const purchaseText = `${landing.purchaseLabel} · ${content.priceGross} ${conten
           <div class="ebook3a-book">
             {content.cover?.src ? (
               <SiteImage
+                sizes={IMAGE_SIZES.ebookStageCover}
                 src={content.cover.src}
                 alt={content.cover.label}
                 width={504}

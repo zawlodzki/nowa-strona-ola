@@ -1,5 +1,6 @@
 ---
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import { nutritionCoverSize } from "@/lib/ebook-covers";
 
 export type CoverArtKind =
@@ -60,6 +61,7 @@ const nutrition = nutritionCoverSize();
 {kind === "nutrition" && (
   <div class="ao-book-art ao-book-art--nutrition" aria-hidden="true">
     <SiteImage
+      sizes={IMAGE_SIZES.bookCoverArt}
       src={imageSrc}
       fallback="food"
       alt=""

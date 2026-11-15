@@ -12,6 +12,7 @@ import TextLink from "@/design-system/components/TextLink.astro";
 import CheckMark from "@/design-system/decorations/CheckMark.astro";
 import StageBackdrop from "@/design-system/decorations/StageBackdrop.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import { consultationCopy } from "@/content/consultation-seed";
 import type { ConsultationView } from "@/content/map-consultation";
 
@@ -58,6 +59,7 @@ const expertParagraphs = expert.body
       <div class="consult3a-portrait__stage">
         <StageBackdrop wideTopLeft={150} />
         <SiteImage
+          sizes={IMAGE_SIZES.heroPortrait}
           src={hero.media?.src}
           fallback="hero"
           alt={hero.media?.label ?? ""}
@@ -162,6 +164,7 @@ const expertParagraphs = expert.body
         {process.media && (
           <figure>
             <SiteImage
+              sizes={IMAGE_SIZES.consultationProcess}
               src={process.media.src}
               fallback="contact"
               alt={process.media.label}
@@ -225,6 +228,7 @@ const expertParagraphs = expert.body
     <Container class="consult3a-split consult3a-expert">
       <figure>
         <SiteImage
+          sizes={IMAGE_SIZES.consultationExpert}
           src={expert.media.src}
           fallback="about"
           alt={expert.media.label}

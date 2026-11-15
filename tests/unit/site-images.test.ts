@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { imageCropPosition, pickSiteImage } from "../../src/lib/site-images";
+import {
+  imageCropPosition,
+  pickSiteImage,
+  srcsetWidths,
+} from "../../src/lib/site-images";
 
 describe("pickSiteImage", () => {
   it("maps mockup keys to local raster files", () => {
@@ -61,5 +65,17 @@ describe("imageCropPosition", () => {
     expect(imageCropPosition("50% 50%")).toBe("50% 50%");
     expect(imageCropPosition("left bottom")).toBe("left bottom");
     expect(imageCropPosition()).toBeUndefined();
+  });
+});
+
+describe("srcsetWidths", () => {
+  it("offers smaller files and keeps the declared width as the largest", () => {
+    expect(srcsetWidths(1122)).toEqual([240, 360, 480, 640, 800, 960, 1122]);
+    expect(srcsetWidths(252)).toEqual([240, 252]);
+  });
+
+  it("never asks for a file wider than the declared width", () => {
+    expect(srcsetWidths(96)).toEqual([96]);
+    expect(srcsetWidths(240)).toEqual([240]);
   });
 });

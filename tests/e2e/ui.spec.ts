@@ -5,7 +5,7 @@ import {
   mockConsentPolicy,
 } from "./helpers/consent-banner";
 
-async function expectDecodedWidth(locator: Locator, width: number) {
+async function expectDecodedImage(locator: Locator, largestWidth: number) {
   await locator.scrollIntoViewIfNeeded();
   await expect
     .poll(async () =>
@@ -20,7 +20,15 @@ async function expectDecodedWidth(locator: Locator, width: number) {
         return img.naturalWidth;
       }),
     )
-    .toBe(width);
+    .toBeGreaterThan(0);
+  const largest = await locator.evaluate((img: HTMLImageElement) =>
+    Math.max(
+      ...img.srcset
+        .split(",")
+        .map((candidate) => parseInt(candidate.trim().split(" ")[1])),
+    ),
+  );
+  expect(largest).toBe(largestWidth);
 }
 
 for (const [path, openName, closeName] of [
@@ -126,8 +134,8 @@ for (const width of [320, 390, 1440]) {
       });
     expect(metric.text).toBe("9000+");
     expect(metric.oneLine).toBe(true);
-    await expectDecodedWidth(page.locator(".home3a-about__food"), 1536);
-    await expectDecodedWidth(page.locator("#konsultacje-panel img"), 1536);
+    await expectDecodedImage(page.locator(".home3a-about__food"), 1536);
+    await expectDecodedImage(page.locator("#konsultacje-panel img"), 1536);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -282,7 +290,7 @@ test("about page without an English version", async ({ page }) => {
   expect(approachGrid.count).toBeGreaterThanOrEqual(3);
   expect(approachGrid.firstFillsRow).toBe(true);
   expect(approachGrid.pairSharesRow).toBe(true);
-  await expectDecodedWidth(page.locator("#konsultacja-panel img"), 1536);
+  await expectDecodedImage(page.locator("#konsultacja-panel img"), 1536);
   await expect(
     page.getByRole("heading", { name: "Wiedza, którą możesz sprawdzić." }),
   ).toBeVisible();
@@ -399,7 +407,7 @@ test("consultation page without an English version", async ({ page }) => {
   );
   const processImage = page.locator(".consult3a-process img");
   await expect(processImage).toHaveCSS("object-fit", "cover");
-  await expectDecodedWidth(processImage, 1536);
+  await expectDecodedImage(processImage, 1536);
   await expect(
     page.getByRole("link", { name: "Konsultacja · 450 zł" }),
   ).toHaveAttribute("href", "#cena");
