@@ -26,6 +26,23 @@ const headTitle = stegaClean(title).replace(/\s+/g, " ").trim();
 const headDescription = description
   ? stegaClean(description).replace(/\s+/g, " ").trim()
   : undefined;
+// Prefetch only: prerender would run consent and analytics scripts early.
+const speculationRules = {
+  prefetch: [
+    {
+      where: {
+        and: [
+          { href_matches: "/*" },
+          { not: { href_matches: "/zamowienie*" } },
+          { not: { href_matches: "/po-zakupie*" } },
+          { not: { href_matches: "/api/*" } },
+          { not: { selector_matches: "[rel~=nofollow]" } },
+        ],
+      },
+      eagerness: "moderate",
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -51,6 +68,11 @@ const headDescription = description
       crossorigin
     />
     <link rel="icon" href={iconUrl} type="image/svg+xml" />
+    <script
+      is:inline
+      type="speculationrules"
+      set:html={JSON.stringify(speculationRules)}
+    ></script>
     <slot name="head" />
   </head>
   <body class:list={["ao-site", legacyBase && "ao-site--legacy-base"]}>

@@ -1362,10 +1362,12 @@ porównaniem z design systemem na desktopie i mobile.
       `src/lib/image-sizes.ts`, test `tests/e2e/responsive-images.spec.ts`.
 - [ ] Rozważyć AVIF z WebP jako zapasem (`<Picture>` zmienia znaczniki i
       czas budowania; osobna decyzja).
-- [ ] Speculation Rules w `Layout3a`: reguła dokumentu, `prefetch` z
+- [x] Speculation Rules w `Layout3a`: reguła dokumentu, `prefetch` z
       `eagerness: "moderate"`, wykluczenia `/zamowienie*`, `/po-zakupie*`,
-      `/api/*` i `rel~=nofollow`. Prerender tylko po decyzji i sprawdzeniu
-      wpływu na zgody i analitykę.
+      `/api/*` i `rel~=nofollow`. Test
+      `tests/e2e/speculation-rules.spec.ts` (Chromium).
+- [ ] Prerender zamiast samego prefetchu tylko po decyzji i sprawdzeniu
+      wpływu na zgody c15t i analitykę (prerender uruchamia skrypty).
 - [ ] Ocenić `loading="eager"` + `decoding="sync"` w miniaturach poniżej
       pierwszego ekranu (`BlogCollection3a`, `Article3a`, `About3a`,
       `BookCoverArt`). Wprowadzone celowo dla makiety; potwierdzić wygląd

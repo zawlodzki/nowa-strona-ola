@@ -1,5 +1,44 @@
 # Postęp wdrożenia
 
+## Speculation Rules w Layout3a, 15.11.2026
+
+Drugie zadanie P1 z modernizacji. `Layout3a` wstawia w `<head>`
+`<script type="speculationrules">` z jedną regułą dokumentu: `prefetch`
+linków tej samej domeny z `eagerness: "moderate"` (najechanie kursorem na
+desktopie). Wykluczone: `/zamowienie*`, `/po-zakupie*`, `/api/*` i linki
+`rel~=nofollow`. Regułę dostają 42 z 47 stron `dist`; pozostałe pięć to
+wewnętrzne strony na starym `Layout` (`/ui/`, `/static/`, `/warsztat/`,
+`/wdrozenie/`, `/tylko-pl/`).
+
+Decyzja: tylko prefetch. Prerender uruchamia skrypty strony, w tym klienta
+zgód i analitykę, więc wymaga osobnej decyzji (nowa pozycja w planie).
+Wsparcie: Limited (Chrome, Edge); Firefox i Safari ignorują regułę, więc
+nawigacja działa bez zmian. CSP nie ma `script-src`, więc skrypt inline nie
+wymaga hasha.
+
+Test `speculation-rules.spec.ts` (tylko Chromium) dodaje link sondę,
+najeżdża na niego i zbiera żądania z nagłówkiem `Sec-Purpose: prefetch`.
+`/blog/` jest pobierany; `/zamowienie/?produkt=x`, `/po-zakupie/`,
+`/api/checkout/catalog` i link `nofollow` nie. Sprawdzono, że test łapie
+błąd: bez wykluczenia `/zamowienie*` przypadek zamówienia jest czerwony.
+
+Kontrole: `npm run verify` przeszedł format, tokeny, lint, typy, 783
+testy jednostkowe, build i `test:build`, ale e2e dało 129 czerwonych testów
+(88 Firefox, 36 WebKit, 5 Chromium). Powtórka tych plików zakończyła się
+`ECONNREFUSED` na 127.0.0.1:4321, czyli serwer podglądu przestał
+odpowiadać w trakcie biegu; lokalnie Playwright używa już działającego
+serwera na tym porcie. Jedna porażka była prawdziwa: sonda `nofollow`
+miała adres `/blog/`, obecny też w nawigacji, a Chrome dopasowuje
+najechanie po URL; sonda dostała unikalny adres. Pełne e2e z `CI=1` (własny
+serwer, 4 workery): 582 zaliczone, 50 pominiętych, 1 niestabilny
+(`article-mockup.spec.ts` w WebKit, zaliczony przy ponowieniu). Potem
+`format:check`, lint, typy i `test:content-lake` zielone. Skill `verify-web` wskazany w poleceniu nie
+istnieje w repo ani w skillach użytkownika; weryfikacja przez Playwright.
+Wygląd strony bez zmian (zmiana tylko w `<head>`), więc bez porównania z
+design systemem. Nie zmierzono wpływu na czas nawigacji w polu.
+Następny krok: ocena `loading="eager"` + `decoding="sync"` w miniaturach
+poniżej pierwszego ekranu.
+
 ## Responsywne obrazy w SiteImage, 15.11.2026
 
 Pierwsze zadanie P1 z modernizacji, stacked PR na polityce przeglądarek.
