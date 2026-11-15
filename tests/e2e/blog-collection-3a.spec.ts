@@ -42,6 +42,18 @@ async function cardMetrics(locator: Locator) {
   });
 }
 
+async function loadedCardMetrics(locator: Locator) {
+  await locator.scrollIntoViewIfNeeded();
+  await expect
+    .poll(() =>
+      locator
+        .locator("img")
+        .evaluate((el: HTMLImageElement) => el.naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  return (await cardMetrics(locator)) as CardMetrics;
+}
+
 async function lumaFromPng(page: Page, png: Buffer, clip?: ClipRect) {
   return page.evaluate(
     async ({ b64, clip: region }) => {
@@ -121,6 +133,7 @@ async function assertEveryThumbPaints(page: {
     const wrap = thumbs.nth(index);
     const img = wrap.locator("img");
     await expect(img).toHaveCount(1);
+    await wrap.scrollIntoViewIfNeeded();
     await expect
       .poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth))
       .toBeGreaterThan(0);
@@ -166,6 +179,7 @@ test("blog collection cards crop 1.8, round 24px and load every photo", async ({
       hasText: "Insulinooporność: od czego zacząć rozmowę o odżywianiu?",
     })
     .locator(".blog3a-card-image");
+  await badania.scrollIntoViewIfNeeded();
   await expect
     .poll(() =>
       badania
@@ -173,6 +187,7 @@ test("blog collection cards crop 1.8, round 24px and load every photo", async ({
         .evaluate((el: HTMLImageElement) => el.naturalWidth),
     )
     .toBeGreaterThan(0);
+  await insulin.scrollIntoViewIfNeeded();
   await expect
     .poll(() =>
       insulin
@@ -212,7 +227,7 @@ test("blog collection cards crop 1.8, round 24px and load every photo", async ({
 
   await page.goto("/blog/strona/2/");
   const page2Card = page.locator(".blog3a-card-image").first();
-  const page2 = (await cardMetrics(page2Card)) as CardMetrics;
+  const page2 = await loadedCardMetrics(page2Card);
   expect(page2.radius).toBe(24);
   expect(["1.8", "1.8/1"]).toContain(page2.aspectRatio);
   expect(page2.ratio).toBeGreaterThan(1.7);
@@ -228,7 +243,7 @@ test("blog collection EN, category and mobile keep the same crop and footer arro
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/blog/");
   const mobileCard = page.locator(".blog3a-card-image").first();
-  const mobile = (await cardMetrics(mobileCard)) as CardMetrics;
+  const mobile = await loadedCardMetrics(mobileCard);
   expect(mobile.radius).toBe(24);
   expect(["1.8", "1.8/1"]).toContain(mobile.aspectRatio);
   expect(mobile.naturalWidth).toBeGreaterThan(0);
@@ -240,7 +255,7 @@ test("blog collection EN, category and mobile keep the same crop and footer arro
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/blog/kategoria/pcos/");
   const categoryCard = page.locator(".blog3a-card-image").first();
-  const category = (await cardMetrics(categoryCard)) as CardMetrics;
+  const category = await loadedCardMetrics(categoryCard);
   expect(category.radius).toBe(24);
   expect(category.naturalWidth).toBeGreaterThan(0);
 });

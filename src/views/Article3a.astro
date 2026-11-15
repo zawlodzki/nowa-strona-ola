@@ -59,7 +59,6 @@ const bodyHtml = markArticleIntro(html);
             height={content.byline.photo.height}
             objectPosition={content.byline.photo.objectPosition}
             loading="eager"
-            decoding="sync"
           />
           <span>
             <strong>{content.byline.name}</strong>
@@ -250,8 +249,6 @@ const bodyHtml = markArticleIntro(html);
               width={person.photo.width}
               height={person.photo.height}
               objectPosition={person.photo.objectPosition}
-              loading="eager"
-              decoding="sync"
             />
             <div>
               <h2 id="author-title">{person.name}</h2>

@@ -1366,10 +1366,13 @@ porównaniem z design systemem na desktopie i mobile.
       `eagerness: "moderate"`, wykluczenia `/zamowienie*`, `/po-zakupie*`,
       `/api/*` i `rel~=nofollow`. Test `tests/e2e/speculation-rules.spec.ts`.
 - [ ] Prerender tylko po decyzji i sprawdzeniu wpływu na zgody i analitykę.
-- [ ] Ocenić `loading="eager"` + `decoding="sync"` w miniaturach poniżej
+- [x] Ocenić `loading="eager"` + `decoding="sync"` w miniaturach poniżej
       pierwszego ekranu (`BlogCollection3a`, `Article3a`, `About3a`,
-      `BookCoverArt`). Wprowadzone celowo dla makiety; potwierdzić wygląd
-      z `lazy` przed zmianą.
+      `BookCoverArt`). Miniatury, ramka autora i dyplom wracają do
+      domyślnego `lazy` + `async` z `SiteImage`. Awatar w nagłówku artykułu
+      i okładka `BookCoverArt` (pozioma karuzela na mobile) zostają `eager`
+      bez `sync`. Testy E2E przewijają do obrazu przed
+      sprawdzeniem `naturalWidth`.
 
 ### P2 — UX i odporność (wymagają decyzji projektowej)
 
