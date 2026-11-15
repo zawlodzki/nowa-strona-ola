@@ -98,22 +98,44 @@ Lokalnie, w `wrangler dev` na zbudowanym `dist`, potwierdzono, że reguły
 wpis o Node 24 i budżetach gzip. Nie wdrażano.
 Następny krok: po wdrożeniu sprawdzić produkcję przez `curl` i ponowny skan.
 
-## Przygotowanie PR mobilnego banera, 20.10.2026
+## Scalenie PR mobilnego banera, 21.10.2026
 
-Na polecenie „push pr” przeniesiono dziewięć plików tej zmiany do izolowanej
-gałęzi `codex/mobile-consent-banner` od `origin/main` (`bf720b6`). Zachowano
-nowszy wpis o nagłówkach bezpieczeństwa z main. Aktualizacja skilli z bieżącej
-gałęzi oraz `.impeccable/` pozostają poza zakresem. Format, lint zmienionego
-testu i konfiguracji oraz kontrola diffu PASS. Kod banera jest identyczny
-z lokalnie odebraną wersją. Opis PR zawiera rzeczywiste wyniki testów.
+Na polecenie „merge” scalono [PR #138](https://github.com/zawlodzki/nowa-strona-ola/pull/138)
+do `main` jako `0d25edce1ffa8f8781b03397fb89a61ed635206e`.
+Przed scaleniem oba joby Quality dla `62aefee` miały SUCCESS; PR był
+MERGEABLE/CLEAN. Użyto squash z kontrolą zgodności SHA nagłówka.
+GitHub potwierdził MERGED, 21.10.2026 o 09:39:49 czasu polskiego.
 
-Dwie próby podpisanego commitu zatrzymały się na 1Password:
-`failed to fill whole buffer`. Druga używała sesji interaktywnej. Git ma
-`commit.gpgsign=true` i `gpg.ssh.program=op-ssh-sign`; okno 1Password wymagało
-Touch ID. Nie wyłączano podpisu ani nie zmieniano uprawnień klucza.
-Nie utworzono commitu, nie wykonano push i nie otwarto PR. Zmiany są
-przygotowane w indeksie izolowanej gałęzi. Potrzebna obecność użytkownika
-przy kolejnym żądaniu Touch ID, następnie podpis, push i utworzenie PR do main.
+Nie zmieniano ani nie resetowano lokalnych checkoutów. Wpis o scaleniu
+pozostaje lokalny, podobnie jak wcześniejsza aktualizacja dziennika PR.
+Nie wykonano ręcznego wdrożenia i nie odebrano hostowanej strony.
+Następny krok: potwierdzić automatyczną publikację oraz odebrać mobilny
+baner na opublikowanym serwisie. Kontroli kodu nie powtarzano, ponieważ
+scalono dokładnie sprawdzony przez CI commit.
+
+## PR mobilnego banera, 20.10.2026
+
+Na polecenie „push pr” wydzielono dziewięć plików na gałąź
+`codex/mobile-consent-banner` od `origin/main` (`bf720b6`). Podpisany commit
+`62aefee` wysłano do GitHub i otwarto [PR #138](https://github.com/zawlodzki/nowa-strona-ola/pull/138)
+do `main`. Zachowano nowszy wpis o nagłówkach bezpieczeństwa z main.
+Aktualizacja skilli oraz `.impeccable/` pozostają poza zakresem PR.
+
+Format, lint zmienionego testu i konfiguracji oraz kontrola diffu PASS.
+Kod banera jest identyczny z lokalnie odebraną wersją. Opis PR zawiera
+rzeczywiste wyniki testów i brak jednego zielonego przebiegu całego verify
+po korekcie asercji. Oba joby Quality rozpoczęły pracę; wynik CI pozostaje
+oczekujący, nie jest deklarowany jako PASS.
+
+Dwie wcześniejsze próby podpisu wygasły w 1Password. Po odblokowaniu przez
+użytkownika podpis się udał; nie wyłączano podpisów ani nie rozszerzano
+uprawnień klucza. Nie scalano PR i nie wdrażano strony. Następny krok:
+odebrać CI i PR, a dopiero po osobnym zleceniu scalić zmianę.
+
+Ten wpis o utworzonym PR zapisano lokalnie. Dodatkowa próba podpisania
+aktualizacji dziennika wygasła w 1Password. Nie wpływa to na wysłany
+commit implementacji ani istniejący PR; aktualizacja dziennika nie została
+wysłana do GitHub.
 
 ## Mobilny baner zgód, 20.10.2026
 

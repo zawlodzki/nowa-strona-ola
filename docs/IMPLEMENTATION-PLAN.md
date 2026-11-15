@@ -1,11 +1,17 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## Scalenie mobilnego banera, 21.10.2026
+
+- [x] Potwierdzić SUCCESS obu kontroli Quality i brak konfliktów PR #138.
+- [x] Scalić zlecony PR do main, squash `0d25edc`.
+- [ ] Potwierdzić automatyczną publikację i odebrać baner na hostowanym serwisie.
+
 ## PR mobilnego banera, 20.10.2026
 
 - [x] Wydzielić dziewięć plików na gałąź `codex/mobile-consent-banner` od aktualnego main.
 - [x] Sprawdzić zgodność kodu, format, lint i zakres diffu.
-- [ ] Podpisać commit przez 1Password, wykonać push i utworzyć PR.
-      Dwie próby wygasły; następna wymaga zatwierdzenia Touch ID przez użytkownika.
+- [x] Podpisać commit przez 1Password, wykonać push i utworzyć [PR #138](https://github.com/zawlodzki/nowa-strona-ola/pull/138).
+      Commit `62aefee`; CI w toku. Bez scalenia i wdrożenia.
 
 ## Mobilny baner zgód, 20.10.2026
 
