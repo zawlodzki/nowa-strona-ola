@@ -7,6 +7,7 @@ import Newsletter from "@/design-system/components/Newsletter.astro";
 import AvailabilityBadge from "@/design-system/components/AvailabilityBadge.astro";
 import PriceGross from "@/design-system/components/PriceGross.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import TextLink from "@/design-system/components/TextLink.astro";
 import BookCover from "@/design-system/components/BookCover.astro";
 import ArrowIcon from "@/design-system/components/ArrowIcon.astro";
@@ -50,6 +51,7 @@ const bodyHtml = markArticleIntro(html);
       <div class="article-meta">
         <a class="byline" href={content.byline.href}>
           <SiteImage
+            sizes={IMAGE_SIZES.bylineAvatar}
             src={content.byline.photo.src}
             fallback={content.byline.photo.fallback}
             alt={content.byline.photo.alt}
@@ -94,6 +96,7 @@ const bodyHtml = markArticleIntro(html);
   <figure class="article-main-image">
     <Container>
       <SiteImage
+        sizes={IMAGE_SIZES.articleHero}
         src={content.hero.src}
         fallback={content.hero.fallback}
         alt={content.hero.alt}
@@ -240,6 +243,7 @@ const bodyHtml = markArticleIntro(html);
         {content.authors.map((person) => (
           <section class="author-box" id="autor" aria-labelledby="author-title">
             <SiteImage
+              sizes={IMAGE_SIZES.authorAvatar}
               src={person.photo.src}
               fallback={person.photo.fallback}
               alt={person.photo.alt}

@@ -8,6 +8,7 @@ import LeadForm from "@/design-system/components/LeadForm.astro";
 import Heading from "@/design-system/components/Heading.astro";
 import Newsletter from "@/design-system/components/Newsletter.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import TextLink from "@/design-system/components/TextLink.astro";
 import ArrowIcon from "@/design-system/components/ArrowIcon.astro";
 import { blogCardThumbSize } from "@/content/blog-collection-seed";
@@ -86,6 +87,7 @@ function readAria(item: BlogPostCard) {
                 aria-label={readAria(content.latest)}
               >
                 <SiteImage
+                  sizes={IMAGE_SIZES.blogFeatured}
                   src={content.latest.imageSrc}
                   alt={content.latest.imageAlt}
                   width={content.latest.imageWidth}
@@ -141,6 +143,7 @@ function readAria(item: BlogPostCard) {
                     aria-label={readAria(item)}
                   >
                     <SiteImage
+                      sizes={IMAGE_SIZES.blogCard}
                       src={item.imageSrc}
                       alt={item.imageAlt}
                       width={item.imageWidth}

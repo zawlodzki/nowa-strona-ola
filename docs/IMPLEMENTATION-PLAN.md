@@ -1351,9 +1351,11 @@ porównaniem z design systemem na desktopie i mobile.
 
 ### P1 — wydajność ładowania
 
-- [ ] Responsywne obrazy w `SiteImage`: `widths` + `sizes` zamiast jednego
-      pliku 1122–1536 px; zachować bramkę „Jeden kadr zdjęcia”. Rozważyć
-      AVIF z WebP jako zapasem.
+- [x] Responsywne obrazy w `SiteImage`: `widths` + `sizes` zamiast jednego
+      pliku 1122–1536 px; zachować bramkę „Jeden kadr zdjęcia”. Sloty w
+      `src/lib/image-sizes.ts`, test `tests/e2e/responsive-images.spec.ts`.
+- [ ] Rozważyć AVIF z WebP jako zapasem (`<Picture>` zmienia znaczniki i
+      czas budowania; osobna decyzja).
 - [ ] Speculation Rules w `Layout3a`: reguła dokumentu, `prefetch` z
       `eagerness: "moderate"`, wykluczenia `/zamowienie*`, `/po-zakupie*`,
       `/api/*` i `rel~=nofollow`. Prerender tylko po decyzji i sprawdzeniu

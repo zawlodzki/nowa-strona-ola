@@ -49,3 +49,10 @@ export function sharpCropPosition(objectPosition?: string): string | undefined {
   if (!instruction || instruction.includes("%")) return undefined;
   return instruction;
 }
+
+const SRCSET_STEPS = [240, 360, 480, 640, 800, 960, 1280] as const;
+
+/** `srcset` widths up to the declared width, which stays the largest file. */
+export function srcsetWidths(width: number): number[] {
+  return [...SRCSET_STEPS.filter((step) => step < width), width];
+}

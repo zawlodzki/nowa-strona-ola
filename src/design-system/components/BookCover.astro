@@ -1,6 +1,7 @@
 ---
 import CherryCoverAccent from "../decorations/CherryCoverAccent.astro";
 import SiteImage from "./SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import { pickSiteImage } from "@/lib/site-images";
 import type { MediaSpec } from "@/sections/types";
 
@@ -25,7 +26,14 @@ const hasImage = Boolean(pickSiteImage(image?.src));
   aria-hidden="true"
 >
   {hasImage ? (
-    <SiteImage src={image?.src} alt="" width={504} height={756} fit="contain" />
+    <SiteImage
+      src={image?.src}
+      sizes={IMAGE_SIZES.bookCover}
+      alt=""
+      width={504}
+      height={756}
+      fit="contain"
+    />
   ) : (
     <>
       <span class="ao-book-cover__author">{author}</span>

@@ -17,6 +17,7 @@ import Section from "@/design-system/components/Section.astro";
 import SplitPanel from "@/design-system/components/SplitPanel.astro";
 import TextLink from "@/design-system/components/TextLink.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import BookCoverArt, {
   type CoverArtKind,
 } from "@/design-system/decorations/BookCoverArt.astro";
@@ -93,6 +94,7 @@ function coverLabels(kind: CoverArtKind): string[] {
     <div slot="media" class="home3a-portrait">
       <StageBackdrop />
       <SiteImage
+        sizes={IMAGE_SIZES.heroPortrait}
         src={content.hero.media?.src}
         fallback="hero"
         alt={content.hero.media?.label ?? ""}
@@ -170,6 +172,7 @@ function coverLabels(kind: CoverArtKind): string[] {
     <Container class="home3a-about__grid">
       <div class="home3a-about__media">
         <SiteImage
+          sizes={IMAGE_SIZES.sidePortrait}
           src={content.about.media.src}
           objectPosition="50% 15%"
           fallback="about"
@@ -179,6 +182,7 @@ function coverLabels(kind: CoverArtKind): string[] {
           loading="lazy"
         />
         <SiteImage
+          sizes={IMAGE_SIZES.aboutFood}
           class="home3a-about__food"
           src={content.about.secondaryMedia?.src}
           fallback="home-meal"
@@ -336,6 +340,7 @@ function coverLabels(kind: CoverArtKind): string[] {
           </p>
         )}
         <SiteImage
+          sizes={IMAGE_SIZES.consultationCard}
           slot="media"
           src={content.consultation.media.src}
           fallback="contact"

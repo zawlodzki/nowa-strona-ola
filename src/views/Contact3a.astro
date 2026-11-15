@@ -7,6 +7,7 @@ import Heading from "@/design-system/components/Heading.astro";
 import Newsletter from "@/design-system/components/Newsletter.astro";
 import Section from "@/design-system/components/Section.astro";
 import SiteImage from "@/design-system/components/SiteImage.astro";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 import SocialLogo from "@/design-system/components/SocialLogo.astro";
 
 interface Props {
@@ -49,6 +50,7 @@ const pl = lang === "pl";
         <div class="contact3a-profile">
           <figure>
             <SiteImage
+              sizes={IMAGE_SIZES.sidePortrait}
               src={content.hero.media.src}
               fallback="contact"
               alt={content.hero.media.label}
