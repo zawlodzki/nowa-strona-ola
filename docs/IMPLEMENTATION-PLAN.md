@@ -1335,3 +1335,59 @@ ustawień GitHub, treści Sanity i publikacji w tej sesji.
 - [x] Na zlecenie wypchnąć gałąź pluginów i utworzyć
       [PR 107](https://github.com/zawlodzki/nowa-strona-ola/pull/107), bez
       wcześniejszych zmian roboczych spoza zakresu.
+
+## Modernizacja według Modern Web Guidance, 15.11.2026
+
+Źródło: [audyt](MODERN-WEB-AUDIT-2026-11-15.md) skillem `modern-web-guidance`
+(`legacy-scan` i ręczny przegląd z poradnikami). Kolejność według
+priorytetów audytu. Każda zmiana kodu osobno, z `npm run verify` oraz
+porównaniem z design systemem na desktopie i mobile.
+
+- [x] Wykonać audyt zgodności strony z Modern Web Guidance i spisać
+      ustalenia z priorytetami. Bez zmian w kodzie.
+- [ ] Zapisać w `AGENTS.md` politykę obsługi przeglądarek (np. Newly
+      available z progresywnym ulepszeniem, fallback ≤ 20 linii, bez
+      zależności).
+
+### P1 — wydajność ładowania
+
+- [ ] Responsywne obrazy w `SiteImage`: `widths` + `sizes` zamiast jednego
+      pliku 1122–1536 px; zachować bramkę „Jeden kadr zdjęcia”. Rozważyć
+      AVIF z WebP jako zapasem.
+- [ ] Speculation Rules w `Layout3a`: reguła dokumentu, `prefetch` z
+      `eagerness: "moderate"`, wykluczenia `/zamowienie*`, `/po-zakupie*`,
+      `/api/*` i `rel~=nofollow`. Prerender tylko po decyzji i sprawdzeniu
+      wpływu na zgody i analitykę.
+- [ ] Ocenić `loading="eager"` + `decoding="sync"` w miniaturach poniżej
+      pierwszego ekranu (`BlogCollection3a`, `Article3a`, `About3a`,
+      `BookCoverArt`). Wprowadzone celowo dla makiety; potwierdzić wygląd
+      z `lazy` przed zmianą.
+
+### P2 — UX i odporność (wymagają decyzji projektowej)
+
+- [ ] Menu mobilne: `<button popovertarget>` + `popover="auto"` zamiast
+      `<details>` z własnym Escape i kliknięciem poza; jedna lista
+      nawigacji. Zachować działanie bez JS i test fokusu w Safari.
+- [ ] Animacja zamykania dialogów i `::backdrop`: `@starting-style`,
+      `overlay`, `display`, osobne `transition-behavior: allow-discrete`,
+      fallback dla Firefoksa. Uzgodnić z MOTION.md.
+- [ ] Animacja otwierania FAQ przez `::details-content` i
+      `interpolate-size`, tylko przy `prefers-reduced-motion: no-preference`.
+- [ ] Stabilny fallback fontu: `font-size-adjust: from-font` albo
+      `@font-face` Arial z `size-adjust` i nadpisaniem metryk.
+- [ ] Decyzja o przejściach między stronami (`@view-transition`); MOTION.md
+      ich dziś nie przewiduje.
+
+### P3 — porządki
+
+- [ ] Panel zgód: ręczny light dismiss tylko bez wsparcia `closedby`;
+      przycisk zamknięcia przez `commandfor` + `command="close"` z
+      fallbackiem jak w `WaitlistDialog`.
+- [ ] Przełącznik motywu: nie zapisywać wyboru zgodnego z systemem i dać
+      powrót do trybu systemowego.
+- [ ] Formularz: `autocomplete="given-name"` dla pola „Imię”; opcjonalnie
+      `field-sizing: content` dla `textarea` i styl `:user-invalid`.
+- [ ] Karuzela: rozliczać stan na `scrollend`, debounce `scroll` tylko jako
+      fallback.
+- [ ] Bez pilnej potrzeby: rozważyć `animation-timeline: view()` dla
+      odsłaniania, z obecnym IntersectionObserver jako fallbackiem.

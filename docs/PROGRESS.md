@@ -1,5 +1,27 @@
 # Postęp wdrożenia
 
+## Audyt Modern Web Guidance, 15.11.2026
+
+Na zlecenie użytkownika sprawdzono zgodność strony z aktualnymi standardami
+skillem `modern-web-guidance` (GoogleChrome, wersja `2026_11_09-5bcc021b`).
+`legacy-scan src` sprawdził 33 poradniki (ok. 20% katalogu) i dał 4 trafienia;
+3 to fallback `WaitlistDialog` zgodny z poradnikiem, 1 rzeczywiste: zbędny
+ręczny light dismiss w panelu zgód. Resztę porównano ręcznie z 16 poradnikami
+i potwierdzono na buildzie z fixture’ami (47 stron, katalog tymczasowy).
+
+Wnioski: kod nie zawiera przestarzałych wzorców; rezerwy są w wydajności
+ładowania. P1: brak `srcset` (jeden plik 1122–1536 px, do ok. 316 KB, także
+na mobile), brak Speculation Rules, miniatury `eager` + `sync` poniżej
+pierwszego ekranu. P2 i P3 obejmują menu mobilne, animacje dialogów i FAQ,
+fallback fontu, przejścia stron, motyw, formularz i karuzelę. Pełna lista
+w [raporcie](MODERN-WEB-AUDIT-2026-11-15.md), zadania w
+[planie](IMPLEMENTATION-PLAN.md).
+
+Nie wykonano: pomiarów Lighthouse/CrUX i testów na urządzeniach; build na
+Node 26 zamiast 24; `npm run verify` niepotrzebny, bo kod bez zmian.
+Następny krok: polityka przeglądarek w `AGENTS.md`, potem P1 osobnymi
+zmianami.
+
 ## Node 24 i budżety gzip przez fflate, 21–22.10.2026
 
 Pierwsze `verify` (Node 26.12) zatrzymał budżet CSS: 32818 B przy limicie
