@@ -50,6 +50,7 @@ test("production article heading, deck and TOC match the 3a template", async ({
   expect(count).toBeGreaterThan(3);
   for (let index = 0; index < count; index += 1) {
     const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
     await expect
       .poll(async () =>
         image.evaluate((img) => (img as HTMLImageElement).naturalWidth),
@@ -58,6 +59,7 @@ test("production article heading, deck and TOC match the 3a template", async ({
   }
   const nutritionCover = page.locator(".ao-book-art--nutrition img");
   await expect(nutritionCover).toHaveCount(1);
+  await nutritionCover.scrollIntoViewIfNeeded();
   await expect
     .poll(async () =>
       nutritionCover.evaluate((img) => (img as HTMLImageElement).naturalWidth),

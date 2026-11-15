@@ -309,6 +309,7 @@ test("about page without an English version", async ({ page }) => {
     "alt",
     "Aleksandra Olesiewicz z pracą dyplomową przed budynkiem Wydziału Zdrowia Publicznego w Bytomiu",
   );
+  await diplomaPl.scrollIntoViewIfNeeded();
   await expect
     .poll(async () =>
       diplomaPl.evaluate((img) => (img as HTMLImageElement).naturalWidth),

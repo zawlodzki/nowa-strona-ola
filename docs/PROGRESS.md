@@ -1,5 +1,48 @@
 # Postęp wdrożenia
 
+## Leniwe miniatury poniżej pierwszego ekranu, 15.11.2026
+
+Trzecie zadanie P1 z modernizacji. `loading="eager"` + `decoding="sync"`
+dodano w #33 przy naprawie malowania miniatur bloga. Testy E2E sprawdzały
+`naturalWidth` bez przewinięcia, więc wymagały pobrania obrazu z góry.
+
+Zmiana: miniatury kart bloga (`BlogCollection3a`), ramka autora pod
+artykułem (`Article3a`) i dyplom (`About3a`) wracają do domyślnego
+`lazy` + `async` z `SiteImage`. Awatar w nagłówku artykułu jest na
+pierwszym ekranie, więc zostaje `eager`, bez `sync`. Okładka
+`BookCoverArt` też zostaje `eager` bez `sync`: na mobile jest trzecią kartą
+poziomej karuzeli na stronie głównej (x = 703 px przy ekranie 390 px).
+Chromium nie pobiera leniwego obrazu w poziomym kontenerze przed
+przesunięciem karuzeli. Lokalnie trwało to 229 ms, na wolnej sieci karta
+pokazałaby pustą okładkę. Zysk byłby jednym plikiem ok. 7 KB.
+
+Testy `article-3a`, `blog-collection-3a` i `ui` (dyplom) przewijają do
+obrazu przed sprawdzeniem `naturalWidth`, jak użytkownik. Bez tej poprawki
+padło 6 testów w Chromium, Firefoksie i WebKit.
+
+Wygląd: porównanie pikselowe pełnych zrzutów `main` i gałęzi po
+przewinięciu strony (`/`, `/blog/`, `/blog/strona/2/`, artykuł, `/o-mnie/`,
+`/ebooki/`; 1280 i 390 px; z JS i bez JS, reduced motion): 24/24 par
+0 px różnicy. verify-ola (desktop 1280 px): zrzuty `/`, `/blog/`, artykułu
+i `/o-mnie/` z miniaturami i dyplomem, `browser posts` = `[]`.
+
+Pobrane obrazy przy samym wejściu (bez przewijania, Chromium, fixture’y):
+na desktopie zestaw bez zmian, bo krótkie strony fixture mieszczą się w
+progu leniwego ładowania Chromium (ok. 1250 px od ekranu). Zmienia się
+kolejność: miniatury pobierają się po obrazie LCP. Na mobile `/o-mnie/`
+pobiera 1 obraz zamiast 2 (17 zamiast 42 KB, bez dyplomu). Z pełną treścią
+z Sanity (dłuższe strony, więcej wpisów) różnica będzie większa.
+Nie porównywano ręcznie 320 px ani zoomu 200%; nie zmieniano CSS.
+
+Kontrole na Node 24.22.3. `npm run verify`: format, tokeny, lint, typy,
+Vitest (783 testy), build, buildy workspace’ów i `test:build` (SEO 40
+stron) PASS. E2E: 579 passed, 44 skipped, 1 failed
+(`mockup-3a-consistency:42`, Firefox, nagłówek przy zoomie 200%, znana
+niestabilność z `main` opisana niżej). Powtórka z `--repeat-each 3
+--workers 1`: 3/3 PASS. `test:content-lake` uruchomiony osobno: PASS.
+Następny krok: P1 „AVIF z WebP jako zapasem” albo „Prerender” (oba
+wymagają decyzji), potem P2 menu mobilne na `popover`.
+
 ## Speculation Rules w Layout3a, 15.11.2026
 
 Drugie zadanie P1 z modernizacji. `Layout3a` ma w `<head>` regułę dokumentu
