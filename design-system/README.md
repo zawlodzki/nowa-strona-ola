@@ -1,6 +1,6 @@
 # Aleksandra Olesiewicz — design system 3a
 
-Status: **aktywny, docelowy**. Wersja 1.0.0, decyzja użytkownika z 07.10.2026.
+Status: **aktywny, docelowy**. Kierunek zatwierdzony 07.10.2026; paleta „Cegła i zieleń” z 16.11.2026.
 Strona docelowa ma realizować wariant **3a** i osiem ujednoliconych mockupów.
 Warianty 01, 1a, 02, 2a i 03 są porzucone. Wonderful jest
 [archiwum](../archive/wonderful-design-system/README.md), nie źródłem implementacji.

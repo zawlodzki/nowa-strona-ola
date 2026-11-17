@@ -1,5 +1,14 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## Zmiany Oli z Google Drive, 17.11.2026
+
+- [x] Porównać pliki palety i potwierdzić pięć szkiców e-booków w Sanity.
+- [x] Przenieść paletę i obsługę dwóch slugów na aktualny main w izolowanej gałęzi.
+- [x] Odebrać pięć landingów ze szkiców: walidacja, build, desktop/320 px, motywy, klawiatura, axe, CSS zoom i brak JS.
+- [ ] Domknąć pełne verify w CI Linux; lokalny Firefox nie startuje.
+- [ ] Uzyskać działający podpis 1Password i rozwiązać listy oczekujących.
+- [ ] Opublikować kod i treści w bezpiecznej kolejności oraz odebrać produkcję.
+
 ## Scalenie mobilnego banera, 21.10.2026
 
 - [x] Potwierdzić SUCCESS obu kontroli Quality i brak konfliktów PR #138.

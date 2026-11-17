@@ -116,11 +116,11 @@ test.describe("touch feedback", () => {
     const box = await link.boundingBox();
     if (!box) throw new Error("Instagram link has no hit area.");
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-    await expect(link).toHaveCSS("color", "rgb(112, 40, 63)");
+    await expect(link).toHaveCSS("color", "rgb(107, 35, 32)");
     await page.mouse.down();
-    await expect(link).toHaveCSS("color", "rgb(136, 47, 72)");
+    await expect(link).toHaveCSS("color", "rgb(153, 49, 47)");
     await page.mouse.up();
-    await expect(link).toHaveCSS("color", "rgb(112, 40, 63)");
+    await expect(link).toHaveCSS("color", "rgb(107, 35, 32)");
   });
 });
 
@@ -186,5 +186,5 @@ test("Instagram hover color stays on a fine pointer", async ({ page }) => {
   const box = await link.boundingBox();
   if (!box) throw new Error("Instagram link has no hit area.");
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-  await expect(link).toHaveCSS("color", "rgb(136, 47, 72)");
+  await expect(link).toHaveCSS("color", "rgb(153, 49, 47)");
 });

@@ -2,7 +2,8 @@
 
 ## Tożsamość
 
-Białe tło, wiśniowy tekst i CTA, jasne różowe powierzchnie. Mocny Switzer,
+Prawie białe tło #fffffc, ceglany tekst, zielone CTA i jasne brzoskwiniowe
+powierzchnie (paleta „Cegła i zieleń · oszczędna”, decyzja 16.11.2026). Mocny Switzer,
 obszerne nagłówki, miękkie media, konkretne treści i portrety Aleksandry.
 Nie wprowadzać pomarańczowego akcentu Wonderful, serifów botanicznego wariantu,
 ciemnego głównego tła wariantu 03 ani wyboru kierunków w stronie docelowej.
@@ -16,18 +17,25 @@ stare logo Gambarino nie jest wordmarkiem docelowego 3a. Nie usuwać go z histor
 
 Wartości wykonawcze w [tokens.json](tokens.json).
 
-| Rola              | Light   | Dark    | Zastosowanie                                      |
-| ----------------- | ------- | ------- | ------------------------------------------------- |
-| background        | #ffffff | #291a21 | Tło strony, menu, pola                            |
-| ink               | #70283f | #f3dce5 | Nagłówki, treść, znak                             |
-| muted             | #785861 | #d1b1bd | Lead, metadane, opisy                             |
-| line              | #dac3cc | #6c4655 | Linie, podziały, outline                          |
-| surface           | #f2dce3 | #422a35 | Newsletter, panel, wyróżnienie                    |
-| primary           | #882f48 | #edb8cb | CTA, focus, aktywna paginacja                     |
-| on-primary        | #fff4f6 | #291a21 | Treść w CTA                                       |
-| accent            | #53671B | #D8E78A | Secondary button, pojedyncze detale na tle strony |
-| accent-on-primary | #D8E78A | #D8E78A | Detale na wiśni (okładki cherry)                  |
-| accent-on-light   | #53671B | #53671B | Detale na jasnych okładkach, bez inwersji         |
+| Rola              | Light   | Dark    | Zastosowanie                                             |
+| ----------------- | ------- | ------- | -------------------------------------------------------- |
+| background        | #fffffc | #261715 | Tło strony, menu, pola                                   |
+| ink               | #6b2320 | #f6ddd6 | Nagłówki, treść, znak                                    |
+| muted             | #7a5a4f | #d6b4aa | Lead, metadane, opisy                                    |
+| line              | #f1e0d8 | #6b4540 | Linie, podziały, outline                                 |
+| surface           | #fcefe8 | #402926 | Newsletter, panel, wyróżnienie (brzoskwinia)             |
+| primary           | #99312f | #f0b3a8 | Cegła: focus, aktywne filtry i paginacja, ceglane panele |
+| on-primary        | #fffffc | #261715 | Treść na cegle                                           |
+| cta               | #7ec850 | #7ec850 | Tło przycisków głównych, CTA w nagłówku, badge, numery   |
+| on-cta            | #16300a | #16300a | Tekst i ikony na zieleni                                 |
+| accent            | #99312f | #7ec850 | Secondary button, TextLink, drobne akcenty tekstowe      |
+| accent-on-primary | #7ec850 | #7ec850 | Detale na cegle (okładki cherry, karta OG)               |
+| accent-on-light   | #7ec850 | #7ec850 | Tylko dekoracje na jasnym tle i okładkach, nigdy tekst   |
+
+Źródło wartości light: makieta „Cegła i zieleń · oszczędna · tło #fffffc”
+z przymiarki kolorów, wybrana przez użytkownika 16.11.2026. Wartości dark,
+`stage-alt` i `cover-spine` są pochodną dobraną przy wdrożeniu, bo makieta ich
+nie zawierała; wymagają odbioru wizualnego.
 
 Light jest wyglądem referencyjnym 3a. Dark zachowuje istniejący wariant podglądu;
 bez JS reaguje na ustawienie systemowe. Jawne `data-theme="light|dark"` wygrywa.
@@ -35,42 +43,37 @@ Od 11.10.2026 przełącznik w stopce zapisuje ręczny wybór w localStorage
 `ao-theme`. Layout odtwarza go przed wyświetleniem treści. Bez zapisu używa
 motywu systemowego; przy zablokowanej pamięci wybór działa w bieżącym dokumencie.
 Motyw nie zmienia zgód użytkownika.
-Okładki to grafika produktu: ich jasny lub wiśniowy front nie odwraca kolorów
+Okładki to grafika produktu: ich jasny lub ceglany front nie odwraca kolorów
 w dark. Stage zmienia paletę. Ten sam produkt ma jeden front w każdym szablonie.
 
-## Dodatkowy akcent matcha — decyzja 07.10.2026
+## Cegła i zieleń — decyzja 16.11.2026
 
-Użytkownik wybrał odcienie z 1a: **#53671B** na jasnej powierzchni oraz
-**#D8E78A** na wiśniowej lub ciemnej powierzchni.
-Matcha jest delikatnym dodatkiem do bieli, wiśni i różu.
-Wizualizacja zastosowań była lokalnym artefaktem poza repozytorium.
+Paleta ma cztery kolory: tło #fffffc, brzoskwinię #fcefe8, cegłę #99312f
+z ciemniejszym odcieniem tekstu #6b2320 oraz zieleń #7ec850. Zastępuje wiśnię,
+róż i matchę z 07.10.2026. Kształt i układ komponentów pozostają bez zmian.
 
-- Secondary button: białe wnętrze, cienka obwódka matcha. Tekst i strzałka
-  matcha jak na planszy 05; wariant tylko tam, gdzie szablon używa Button
-  `secondary` (katalog, homepage). Primary pozostaje wiśniowy; oba warianty
-  zachowują kształt tabletki.
-- Aktualizacja 09.10.2026 na podstawie prośby o czytelniejsze linki i akcenty:
-  wspólny TextLink używa `accent` dla tekstu, strzałki i podkreślenia.
-  Podkreślenie pozostaje widoczne bez hover, więc kolor nie jest jedynym
-  wyróżnikiem linku. Link liniowy jest lżejszą akcją niż Button.
-- Sufiks wskaźnika `9000+` i drobne oznaczenia etapów mogą korzystać z `accent`.
-  Liczba, nagłówki oraz duże powierzchnie zachowują wiśniową hierarchię.
-- Drobne elementy grafik (wdrożone 08.10.2026): jeden punkt na orbicie
-  produktu, jeden punkt na półce butelek, jedna kreska lub punkt na jasnej
-  okładce. Na okładce cherry: cienka pozioma strzałka i czytelna
-  czteroramienna iskierka w #D8E78A (`accent-on-primary`), jak na planszy 05. Nie przemalowywać reszty SVG.
-- Tło hero i portretu zachowuje dotychczasową paletę. Matcha nie służy
-  do wypełniania dużych paneli ani secondary buttonów.
-- Nagłówki, logo, primary CTA i treść zachowują wiśniową hierarchię.
-  Matcha w linkach dotyczy wspólnego TextLink, nie wszystkich odnośników
-  nawigacji, filtrów, stopki ani wszystkich ikon.
-- Nie używać akcentu jako jedynego oznaczenia sukcesu, błędu lub aktywnego stanu.
-  Na bieli stosować ciemny odcień, jasny zarezerwować dla ciemnej powierzchni.
+- Primary button, CTA w nagłówku, badge i numery etapów konsultacji: zielone
+  tło `cta` z ciemnozielonym tekstem `on-cta` (kontrast 7,0 : 1; 4,9 : 1 przy
+  hover z opacity 0.85). Makieta miała #1d3a0c, który przy hover dawał 4,3 : 1,
+  więc odcień przyciemniono do #16300a. Oba tokeny nie odwracają się w dark.
+- Secondary button: wnętrze `background`, obwódka i tekst `accent`. Na jasnym
+  tle `accent` to cegła, bo zieleń #7ec850 jest za jasna na tekst (2,0 : 1).
+- Wspólny TextLink, sufiks wskaźnika `9000+` i drobne oznaczenia używają
+  `accent`. Podkreślenie linku pozostaje widoczne bez hover.
+- Zieleń jako dekoracja: znak cudzysłowu w opiniach, punkt na orbicie produktu,
+  punkt na półce butelek, kreska lub punkt na jasnej okładce, strzałka
+  i iskierka na ceglanej okładce (`accent-on-primary`, 3,6 : 1 na cegle).
+- Aktywne filtry, aktywna paginacja, zaznaczenie tekstu i focus pozostają
+  ceglane (`primary`).
+- Panel oferty w koszyku cross-sell ma zielone tło z tekstem `cover-ink`
+  (5,4 : 1); przyciski w tym panelu są ceglane, żeby nie zlewały się z tłem.
+- Nie używać zieleni jako koloru tekstu na jasnym tle ani jako jedynego
+  oznaczenia sukcesu, błędu lub aktywnego stanu.
 
-Status: paleta i granice użycia zatwierdzone 07.10.2026. Tokeny `accent`,
-`accent-on-primary` i `accent-on-light` są w tokens.json. Secondary button
-ma białe wnętrze (`--ao-background`) i obwódkę matcha. Mapa zastosowań jest
-w opisie PR wdrożenia. Tło hero i portretu pozostaje wiśniowo-różowe.
+Poprzednia paleta (biel, wiśnia #882f48, róż #f2dce3, matcha #53671B / #D8E78A)
+obowiązywała od 07.10.2026 do 16.11.2026 i jest w historii repozytorium.
+Nazwy techniczne z tamtego okresu (`cherry3a`, `ao-book-cover--cherry`,
+`CherryCoverAccent`) pozostają identyfikatorami w kodzie.
 
 ## Typografia
 
