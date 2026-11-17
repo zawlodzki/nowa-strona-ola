@@ -13,9 +13,9 @@ import { OG_HEIGHT, OG_WIDTH } from "@/lib/seo/og-size";
 
 /** Light-theme 3a tokens (design-system/tokens.css). */
 const palette = {
-  background: "#882f48", // --ao-primary
-  text: "#fff4f6", // --ao-on-primary
-  accent: "#D8E78A", // --ao-accent-on-primary
+  background: "#99312f", // --ao-primary
+  text: "#fffffc", // --ao-on-primary
+  accent: "#7ec850", // --ao-accent-on-primary
 };
 
 const root = process.cwd();

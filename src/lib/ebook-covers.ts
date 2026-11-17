@@ -13,6 +13,8 @@ export const EBOOK_COVER_ART: Record<
   "tests-that-make-sense": { kind: "route", variant: "alt" },
   "szczupla-a-jednak-pcos": { kind: "nutrition", variant: "default" },
   "slim-and-still-pcos": { kind: "nutrition", variant: "default" },
+  "jedzenie-w-pcos-i-insulinoopornosci": { kind: "nutrition", variant: "alt" },
+  "tradzik-owlosienie-wlosy-w-pcos": { kind: "journal", variant: "default" },
   "waga-cie-oklamuje": { kind: "observation", variant: "default" },
   "the-scale-is-lying": { kind: "observation", variant: "default" },
   "czy-to-juz": { kind: "journal", variant: "alt" },

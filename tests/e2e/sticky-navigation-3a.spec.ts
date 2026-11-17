@@ -60,7 +60,7 @@ test("sticky navigation and its menu work without JS in dark mode", async ({
     .toBe(0);
   expect(
     await renderedColor(page.locator(".ao-header"), "background-color"),
-  ).toBe("rgb(41, 26, 33)");
+  ).toBe("rgb(38, 23, 21)");
   await page.getByText("Menu", { exact: true }).click();
   const links = page.locator(".ao-mobile-menu nav a");
   await links.last().scrollIntoViewIfNeeded();
@@ -114,35 +114,33 @@ test("article and legal anchors clear the header with enlarged text and zoom", a
   }
 });
 
-test("text links and small accents share matcha while main CTAs stay cherry", async ({
+test("text links and small accents share the accent while main CTAs stay green", async ({
   page,
 }) => {
   for (const colorScheme of ["light", "dark"] as const) {
     await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
-    const matcha =
-      colorScheme === "light" ? "rgb(83, 103, 27)" : "rgb(216, 231, 138)";
+    const accent =
+      colorScheme === "light" ? "rgb(153, 49, 47)" : "rgb(126, 200, 80)";
     for (const path of ["/", "/o-mnie/", "/konsultacje/", "/blog/"]) {
       await page.goto(path);
       const links = page.locator(".ao-text-link");
       expect(await links.count()).toBeGreaterThan(0);
       for (const link of await links.all()) {
-        expect(await renderedColor(link, "color")).toBe(matcha);
-        expect(await renderedColor(link, "border-bottom-color")).toBe(matcha);
+        expect(await renderedColor(link, "color")).toBe(accent);
+        expect(await renderedColor(link, "border-bottom-color")).toBe(accent);
       }
       const suffix = page.locator(
         ".home3a-count strong span, .about3a-count strong span, .consult3a-proof strong span",
       );
       if (await suffix.count()) {
-        expect(await renderedColor(suffix.first(), "color")).toBe(matcha);
+        expect(await renderedColor(suffix.first(), "color")).toBe(accent);
       }
       expect(
         await renderedColor(
           page.locator(".ao-button--primary").first(),
           "background-color",
         ),
-      ).toBe(
-        colorScheme === "light" ? "rgb(136, 47, 72)" : "rgb(237, 184, 203)",
-      );
+      ).toBe("rgb(126, 200, 80)");
     }
   }
 });

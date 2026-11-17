@@ -17,7 +17,7 @@ for (const colorScheme of ["light", "dark"] as const) {
       expect(
         await renderedColor(page.locator("body"), "background-color"),
       ).toBe(
-        colorScheme === "light" ? "rgb(255, 255, 255)" : "rgb(41, 26, 33)",
+        colorScheme === "light" ? "rgb(255, 255, 252)" : "rgb(38, 23, 21)",
       );
       expect(
         (
@@ -75,7 +75,7 @@ test("3a menu, FAQ, carousel and theme provide working controls", async ({
   await theme.click();
   await expect(theme).toHaveAttribute("aria-pressed", "true");
   expect(await renderedColor(page.locator("body"), "background-color")).toBe(
-    "rgb(41, 26, 33)",
+    "rgb(38, 23, 21)",
   );
 });
 
@@ -111,7 +111,7 @@ test("3a catalog without JavaScript preserves native navigation and content", as
   await expect(page.locator(".ao-carousel__controls")).toBeHidden();
   await expect(page.locator("#ds-books article")).toHaveCount(4);
   expect(await renderedColor(page.locator("body"), "background-color")).toBe(
-    "rgb(41, 26, 33)",
+    "rgb(38, 23, 21)",
   );
   expect(
     await page.evaluate(

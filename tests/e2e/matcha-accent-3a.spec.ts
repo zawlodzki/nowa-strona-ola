@@ -2,12 +2,14 @@ import { expect, test, type Locator } from "@playwright/test";
 
 import { renderedColor } from "./helpers/color";
 
-const MATCHA_LIGHT = "rgb(83, 103, 27)";
-const MATCHA_DARK = "rgb(216, 231, 138)";
-const WHITE = "rgb(255, 255, 255)";
-const CHERRY_FILL = "rgb(136, 47, 72)";
-const SURFACE = "rgb(242, 220, 227)";
-const DARK_BG = "rgb(41, 26, 33)";
+// Paleta „Cegła i zieleń · oszczędna” (16.11.2026): akcent tekstowy na jasnym
+// tle to cegła, zieleń wypełnia przyciski główne i dekoracje.
+const ACCENT_LIGHT = "rgb(153, 49, 47)";
+const GREEN = "rgb(126, 200, 80)";
+const ON_GREEN = "rgb(22, 48, 10)";
+const CANVAS = "rgb(255, 255, 252)";
+const SURFACE = "rgb(252, 239, 232)";
+const DARK_BG = "rgb(38, 23, 21)";
 
 async function buttonColors(locator: Locator) {
   const [background, color, border] = await Promise.all([
@@ -18,7 +20,7 @@ async function buttonColors(locator: Locator) {
   return { background, color, border };
 }
 
-test("catalog secondary button is white with matcha stroke", async ({
+test("catalog secondary button is canvas with a brick stroke", async ({
   page,
 }) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
@@ -31,24 +33,24 @@ test("catalog secondary button is white with matcha stroke", async ({
   });
   await expect(secondary).toBeVisible();
   expect(await buttonColors(secondary)).toEqual({
-    background: WHITE,
-    color: MATCHA_LIGHT,
-    border: MATCHA_LIGHT,
+    background: CANVAS,
+    color: ACCENT_LIGHT,
+    border: ACCENT_LIGHT,
   });
   const primary = page.getByRole("link", {
     name: "Zobacz komponenty",
     exact: true,
   });
   expect(await buttonColors(primary)).toEqual({
-    background: CHERRY_FILL,
-    color: "rgb(255, 244, 246)",
-    border: CHERRY_FILL,
+    background: GREEN,
+    color: ON_GREEN,
+    border: GREEN,
   });
   const stage = page.locator(".ds-portrait__backdrop");
   expect(await renderedColor(stage, "background-color")).toBe(SURFACE);
 });
 
-test("homepage secondary CTA follows the same matcha outline", async ({
+test("homepage secondary CTA follows the same brick outline", async ({
   page,
 }) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
@@ -60,15 +62,15 @@ test("homepage secondary CTA follows the same matcha outline", async ({
     exact: true,
   });
   expect(await buttonColors(secondary)).toEqual({
-    background: WHITE,
-    color: MATCHA_LIGHT,
-    border: MATCHA_LIGHT,
+    background: CANVAS,
+    color: ACCENT_LIGHT,
+    border: ACCENT_LIGHT,
   });
   const stage = page.locator(".ao-deco-stage").first();
   expect(await renderedColor(stage, "color")).toBe(SURFACE);
 });
 
-test("about secondary uses a matcha text link", async ({ page }) => {
+test("about secondary uses a brick text link", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/o-mnie/");
@@ -79,10 +81,10 @@ test("about secondary uses a matcha text link", async ({ page }) => {
   });
   await expect(secondary).toBeVisible();
   await expect(secondary).not.toHaveClass(/ao-button/);
-  expect(await renderedColor(secondary, "color")).toBe(MATCHA_LIGHT);
+  expect(await renderedColor(secondary, "color")).toBe(ACCENT_LIGHT);
 });
 
-test("dark catalog secondary uses light matcha on the dark canvas", async ({
+test("dark catalog secondary uses green on the dark canvas", async ({
   page,
 }) => {
   await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
@@ -95,12 +97,12 @@ test("dark catalog secondary uses light matcha on the dark canvas", async ({
   });
   expect(await buttonColors(secondary)).toEqual({
     background: DARK_BG,
-    color: MATCHA_DARK,
-    border: MATCHA_DARK,
+    color: GREEN,
+    border: GREEN,
   });
 });
 
-test("ebook orbit keeps a single matcha dot on the existing rings", async ({
+test("ebook orbit keeps a single green dot on the existing rings", async ({
   page,
 }) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
@@ -128,9 +130,7 @@ function rectsOverlap(
   );
 }
 
-test("cherry ebook cover shows a matcha arrow and sparkle", async ({
-  page,
-}) => {
+test("brick ebook cover shows a green arrow and sparkle", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/ebooki/");
@@ -146,7 +146,7 @@ test("cherry ebook cover shows a matcha arrow and sparkle", async ({
   expect(
     await accent.locator(".ao-deco-cherry-arrow-shaft").getAttribute("stroke"),
   ).toBe("var(--ao-accent-on-primary)");
-  expect(await renderedColor(sparkle, "fill")).toBe(MATCHA_DARK);
+  expect(await renderedColor(sparkle, "fill")).toBe(GREEN);
   const sparkleBox = await sparkle.evaluate((el) => {
     const box = el.getBoundingClientRect();
     return { width: box.width, height: box.height };
@@ -221,12 +221,11 @@ test("cherry cover accent does not collide with cover text", async ({
   }
 });
 
-test("decorative quote marks in reviews use the matcha accent", async ({
+test("decorative quote marks in reviews use the green accent", async ({
   page,
 }) => {
   for (const colorScheme of ["light", "dark"] as const) {
     await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
-    const matcha = colorScheme === "light" ? MATCHA_LIGHT : MATCHA_DARK;
     for (const path of [
       "/",
       "/o-mnie/",
@@ -238,7 +237,7 @@ test("decorative quote marks in reviews use the matcha accent", async ({
       expect(await marks.count(), path).toBeGreaterThan(0);
       for (const mark of await marks.all()) {
         await expect(mark).toHaveAttribute("aria-hidden", "true");
-        expect(await renderedColor(mark, "color"), path).toBe(matcha);
+        expect(await renderedColor(mark, "color"), path).toBe(GREEN);
       }
       // The quote itself keeps the regular ink colour.
       expect(
@@ -246,7 +245,7 @@ test("decorative quote marks in reviews use the matcha accent", async ({
           page.locator(".ao-review blockquote").first(),
           "color",
         ),
-      ).not.toBe(matcha);
+      ).not.toBe(GREEN);
     }
   }
 });

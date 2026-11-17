@@ -56,9 +56,9 @@ for (const width of [1280, 320]) {
         });
         expect(aboveCover).toBe(true);
         expect(await renderedColor(badge, "background-color")).toBe(
-          "rgb(216, 231, 138)",
+          "rgb(126, 200, 80)",
         );
-        expect(await renderedColor(badge, "color")).toBe("rgb(83, 103, 27)");
+        expect(await renderedColor(badge, "color")).toBe("rgb(22, 48, 10)");
         await expect(cover).not.toHaveCSS("box-shadow", "none");
       }
     });

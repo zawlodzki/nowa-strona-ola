@@ -1,5 +1,29 @@
 # Postęp wdrożenia
 
+## Przeniesienie zmian Oli, 17.11.2026
+
+Paleta i obsługa dwóch nowych e-booków przeniesione do trwałego worktree
+`/Users/grzesiek/.codex/worktrees/ola-drive-release/nowa strona ola`,
+gałąź `codex/ola-drive-release`, baza `origin/main` @ `2de4fb1`.
+Zachowano późniejsze poprawki obrazów oraz niezwiązane zmiany użytkownika.
+[Zakres, audyt copy, wyniki i kolejność publikacji](OLA-DRIVE-IMPORT-2026-11-17.md).
+
+Node 24.22.3: format/lint/typy, 783 unit, buildy i budżety PASS;
+393 E2E Chromium/WebKit PASS. Pełne verify nie jest zielone: 205 błędów
+uruchomienia Firefoxa na macOS 27. Wymagane CI Linux przed scaleniem.
+Osobny Content Lake: 21 stron zgodnych. Pięć szkiców: walidacja PASS,
+build 46 stron, 20 kontroli desktop/320 px light/dark, axe, klawiatura,
+CSS zoom 200%, reduced motion oraz 5 kontroli bez JS PASS.
+Niewykonane: natywny zoom, czytnik, fizyczny telefon i pełny ręczny ogląd
+wszystkich zrzutów. Formularzy nie wysyłano.
+
+Blokada: 1Password nie podpisuje commita (`failed to fill whole buffer`).
+Brak commita, push, PR i publikacji. N8n ma tylko listę Suplementów;
+cztery pozostałe landingi wymagają list lub decyzji o ukryciu zapisów.
+Pytanie pozostaje bez odpowiedzi; nie zmieniano n8n ani CMS.
+Następny krok: działający podpis, CI i publikacja kodu, następnie rozwiązanie
+list oczekujących oraz publikacja pięciu szkiców i odbiór produkcji.
+
 ## Leniwe miniatury poniżej pierwszego ekranu, 15.11.2026
 
 Trzecie zadanie P1 z modernizacji. `loading="eager"` + `decoding="sync"`

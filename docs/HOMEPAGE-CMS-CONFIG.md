@@ -1,5 +1,79 @@
 # Homepage 3a — konfiguracja treści CMS
 
+## Przeniesienie zmian Oli, 17.11.2026
+
+Źródło: zlecenie Grzegorza i kopia Oli na współdzielonym Dysku Google.
+Paleta „Cegła i zieleń” zastępuje wiśnię i matchę; tło #fffffc, CTA #7ec850
+z tekstem #16300a. Sekcje i stopka pozostają jasne. Zmiana w tokenach, bez pól CMS.
+Poniżej zapis decyzji Oli z 16.11, potwierdzony odczytem pięciu szkiców 17.11.
+Status na początku przeniesienia: szkice, bez publikacji. Sprzedaż pozostaje wstrzymana.
+
+## Landingi pięciu e-booków PMOS (PCOS), 16.11.2026
+
+Źródło: polecenie użytkownika z 16.11.2026 („utwórz brakujące landingi dla
+nowych e-booków, odśwież landingi dla edytowanych; dane można od razu dodać do
+Sanity”) oraz szkice e-booków z 16.11.2026 w folderze `PRODUKTY_CYFROWE`.
+Wszystkie zapisy są **szkicami** w Sanity. Nic nie opublikowano.
+
+| Dokument (szkic)                               | Zakres zapisu                                                                                                      | Stan                                                 |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| `ebook-jedzenie-w-pcos-i-insulinoopornosci-pl` | Nowy dokument: produkt, 7 rozdziałów, 6 materiałów, pełny `landing`, `seo`, `waitlist`, `sources`; `sortOrder = 7` | Szkic. Publikację blokuje wpis sluga w kodzie        |
+| `ebook-tradzik-owlosienie-wlosy-w-pcos-pl`     | Nowy dokument, ten sam zakres; `sortOrder = 8`                                                                     | Szkic. Jak wyżej                                     |
+| `ebook-badania-ktore-maja-sens-pl`             | `cardDescription`, `chapters`, `includedMaterials` (6), `seo.description`, wybrane pola `landing`, drugie źródło   | Szkic nad opublikowaną wersją z 18.10.2026           |
+| `ebook-suplementy-w-pcos-pl`                   | `cardDescription`, `chapters`, `includedMaterials`, wybrane pola `landing`                                         | Szkic (dopisany do istniejącego szkicu z 18.10.2026) |
+| `ebook-szczupla-a-jednak-pcos-pl`              | `chapters`, `includedMaterials`, wybrane pola `landing`                                                            | Szkic nad opublikowaną wersją z 18.10.2026           |
+
+Rozdziały i materiały odpowiadają teraz nagłówkom rozdziałów i załączników
+w szkicach e-booków. Copy nie zawiera znaczników luk. Zasada 6 copywritingu
+(osobista historia autorki) pominięta: zdanie o własnym PMOS (PCOS) w szkicach
+ma dopisek „do uzupełnienia” i nie występuje na stronie.
+
+Propozycje i braki, nie ustalenia:
+
+- **Cena dwóch nowych e-booków: 97 zł brutto.** Ustalenie użytkownika
+  z 16.11.2026 („każdy e-book jest za 97 zł”). Zapisano `priceGross = 97`
+  w obu szkicach; `offerLead`, `offerNote`, FAQ o zakupie i `seo.description`
+  mówią o planowanej cenie 97 zł.
+- **Pakiety, stan sprawdzony 16.11.2026:** trzy starsze e-booki PMOS (PCOS)
+  wskazują się nawzajem w `crossSell.complementaryEbooks` z kuponem
+  `ola_complete_pair_50_v1`; trzy e-booki o perimenopauzie też tworzą trójkę,
+  ale bez kuponu. „Jedzenie” i „Trądzik” nie mają `crossSell` i żaden e-book
+  na nie nie wskazuje. `pcosCheckoutSettings-pl` opisuje jedną serię trzech
+  tytułów („oba pozostałe e-booki”, 97 zł zamiast 194 zł).
+- **Okładki** (uzupełnienie z 16.11.2026, na polecenie użytkownika): trzy pliki
+  z `03_CONTENT/ASSETY/PROJEKTY/2026-11-16-okladki-pakiet-pcos` wgrano do Sanity
+  jako PNG 1024×1536 i podpięto w szkicach w `cover.image` z nowym `cover.alt`:
+  „Badania” v2 z insulinoopornością w tytule
+  (`image-20624cdd876c4ab066b6043bdc92e2dea62a2569-1024x1536-png`), „Jedzenie”
+  (`image-e6fd8c3aea810cd538a70c1f83510c79a1dc7c3f-1024x1536-png`) i „Trądzik”
+  (`image-e160c0dbeadc768c018552e6916de91633ce3c09-1024x1536-png`). Okładki
+  „Suplementów” i „Szczupłej” bez zmian, bo nie ma nowych plików. Publikacja
+  nowych e-booków wymaga nadal wpisu
+  sluga w `EBOOK_COVER_ART` (`src/lib/ebook-covers.ts`); bez niego kolekcja
+  `/ebooki/` nie zbuduje się po publikacji dokumentu.
+- **Tytuły trzech starszych e-booków** bez zmian. Szkic „Badań” ma w tytule
+  insulinooporność, ale okładka w Sanity ma stary tytuł; insulinooporność
+  trafiła tylko do leadu, faktów, FAQ i opisu SEO.
+- **Trójki pakietów, ustalenie użytkownika z 16.11.2026** („Ustaw trójki”,
+  układ z researchu 16.11.2026). Zapis w szkicach, w
+  `crossSell.complementaryEbooks`. Schemat pozwala na jedną parę na e-book,
+  więc tytułom z dwóch trójek przypisano jedną (wybór wykonawcy, do korekty):
+  Badania → Jedzenie + Suplementy; Jedzenie → Badania + Suplementy;
+  Suplementy → Badania + Jedzenie (trójka „Od diagnozy do planu”);
+  Szczupła → Badania + Trądzik („Szczupła z PCOS”);
+  Trądzik → Jedzenie + Suplementy („Objawy, które widać”).
+  Odwołania do nieopublikowanych e-booków są słabe i wzmocnią się przy
+  publikacji. Nowe e-booki dostały `kicker`, `title` i `lead` jak pozostałe,
+  bez `stripeCouponId`. Niewykonane: kody produktów i ceny Stripe nowych
+  e-booków, zakres kuponu `ola_complete_pair_50_v1`, teksty
+  `pcosCheckoutSettings-pl` oraz logika Workera. Szkiców Badań, Suplementów
+  i Szczupłej nie należy publikować przed publikacją nowych e-booków: walidacja
+  wymaga dwóch opublikowanych e-booków w parze.
+- `productCode` i `stripePriceId` nowych e-booków puste. `sortOrder` 7 i 8
+  ustawia je po perimenopauzie w widoku „wszystkie”; do decyzji.
+- Fixture’y w repo (`ebook-seed.ts`, `ebook-fixtures.ts`) nie znają dwóch nowych
+  tytułów i mają starsze copy trzech landingów.
+
 ## Mobilny baner zgód, decyzja użytkownika 20.10.2026
 
 Źródło: polecenie w czacie i referencja [Ramp Glass](https://ramp.com/glass).

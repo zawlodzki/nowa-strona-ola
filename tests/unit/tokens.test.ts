@@ -18,6 +18,9 @@ const tokens = JSON.parse(
     accent: { value: string };
     "accent-on-primary": { value: string };
     "accent-on-light": { value: string };
+    cta: { value: string };
+    "on-cta": { value: string };
+    surface: { value: string };
     background: { value: string };
     "cover-primary": { value: string };
   };
@@ -28,39 +31,44 @@ describe("generateTokensCss", () => {
   const css = generateTokensCss(tokens);
 
   it("emits custom properties from tokens.json", () => {
-    expect(css).toContain("--ao-ink: #70283f;");
+    expect(css).toContain("--ao-ink: #6b2320;");
     expect(css).not.toContain("--wf-");
     expect(generateLegacyAliasesCss(tokens)).toContain(
       "--wf-color-ink: var(--ao-ink);",
     );
     expect(css).toContain("--ao-space-24: 24px;");
     expect(css).toContain('--ao-font: "Switzer", Arial, sans-serif;');
-    expect(css).toContain("--ao-accent: #53671B;");
-    expect(css).toContain("--ao-accent-on-primary: #D8E78A;");
-    expect(css).toContain("--ao-accent-on-light: #53671B;");
+    expect(css).toContain("--ao-accent: #99312f;");
+    expect(css).toContain("--ao-accent-on-primary: #7ec850;");
+    expect(css).toContain("--ao-accent-on-light: #7ec850;");
+    expect(css).toContain("--ao-cta: #7ec850;");
+    expect(css).toContain("--ao-on-cta: #16300a;");
     expect(css).toContain('[data-theme="dark"]');
-    expect(css).toMatch(/\[data-theme="dark"\][\s\S]*--ao-accent: #D8E78A;/);
+    expect(css).toMatch(/\[data-theme="dark"\][\s\S]*--ao-accent: #7ec850;/);
   });
 
   it("keeps theme colors paired with a fallback and achromatic hues missing", () => {
     expect(css).toContain("@supports not (color: light-dark(white, black))");
-    expect(css).toContain(`--ao-background: light-dark(#ffffff, #291a21);`);
-    expect(css).toContain(`--ao-primary: light-dark(#882f48, #edb8cb);`);
+    expect(css).toContain(`--ao-background: light-dark(#fffffc, #261715);`);
+    expect(css).toContain(`--ao-primary: light-dark(#99312f, #f0b3a8);`);
     // hexToOklch remains available for contrast tooling; achromatic still loses hue.
     expect(hexToOklch("#ffffff")).toMatch(/0 none\)$/);
     expect(hexToOklch("#000000")).toBe("oklch(0.000000000 0 none)");
   });
 
-  it("keeps interactive matcha at WCAG AA against its canvas", () => {
+  it("keeps the text accent and green buttons at WCAG AA", () => {
     expect(
       contrastRatio(tokens.tokens.accent.value, tokens.tokens.background.value),
     ).toBeGreaterThanOrEqual(4.5);
     expect(
       contrastRatio(tokens.dark.accent, tokens.dark.background),
     ).toBeGreaterThanOrEqual(4.5);
-    expect(tokens.tokens["accent-on-light"].value).toBe(
-      tokens.tokens.accent.value,
-    );
+    expect(
+      contrastRatio(tokens.tokens.accent.value, tokens.tokens.surface.value),
+    ).toBeGreaterThanOrEqual(4.5);
+    expect(
+      contrastRatio(tokens.tokens["on-cta"].value, tokens.tokens.cta.value),
+    ).toBeGreaterThanOrEqual(4.5);
     expect(
       contrastRatio(
         tokens.tokens["accent-on-primary"].value,

@@ -386,7 +386,7 @@ test("pokazuje ofertę innej serii, panel matcha i cenę zakupu osobno", async (
   await expect(page.locator('[data-product-code="ebook-06"]')).toBeVisible();
   await expect(page.locator('[data-product-code="ebook-04"]')).toBeHidden();
   const panel = page.locator("[data-checkout-form]");
-  await expect(panel).toHaveCSS("background-color", "rgb(216, 231, 138)");
+  await expect(panel).toHaveCSS("background-color", "rgb(126, 200, 80)");
   const original = page.locator("s[data-reference-price]");
   await expect(original).toHaveText(/194\s+zł/);
   await expect(

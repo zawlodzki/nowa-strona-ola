@@ -128,8 +128,8 @@
   min-block-size: var(--ao-control-min);
   padding-inline: var(--ao-space-24);
   border-radius: var(--ao-radius-control);
-  background: var(--ao-primary);
-  color: var(--ao-on-primary);
+  background: var(--ao-cta);
+  color: var(--ao-on-cta);
 }
 .ao-button .ao-icon {
   inline-size: 24px;

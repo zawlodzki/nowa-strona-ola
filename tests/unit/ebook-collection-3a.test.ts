@@ -135,6 +135,12 @@ describe("ebook collection covers", () => {
       variant: "default",
     });
     expect(ebookCoverArt("suplementy-w-pcos").kind).toBe("decisions");
+    expect(ebookCoverArt("jedzenie-w-pcos-i-insulinoopornosci").kind).toBe(
+      "nutrition",
+    );
+    expect(ebookCoverArt("tradzik-owlosienie-wlosy-w-pcos").kind).toBe(
+      "journal",
+    );
     expect(() => ebookCoverArt("unknown-slug")).toThrow(
       "Brak mapowania okładki",
     );

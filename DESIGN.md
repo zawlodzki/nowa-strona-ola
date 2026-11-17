@@ -10,8 +10,8 @@ Jedynym aktywnym źródłem zasad jest [design-system/README.md](design-system/R
 [komponenty](design-system/COMPONENTS.md), [ruch](design-system/MOTION.md)
 i [integracja Astro](design-system/ASTRO-INTEGRATION.md).
 
-Białe główne tło, wiśniowa paleta, Switzer, wordmark w dwóch liniach,
-miękkie różowe powierzchnie, wspólne CTA/newsletter/footer. Zachować semantykę,
+Główne tło #fffffc, paleta „Cegła i zieleń · oszczędna” (16.11.2026), Switzer,
+wordmark w dwóch liniach, miękkie brzoskwiniowe powierzchnie, wspólne CTA/newsletter/footer. Zachować semantykę,
 reflow 320 px/200%, czytelny stan bez JS i reduced motion. Nie używać archiwalnych
 propozycji do projektowania nowych stron. Mockupy są referencją wyglądu;
 przykładowe treści i ceny podlegają odrębnym ustaleniom CMS.
