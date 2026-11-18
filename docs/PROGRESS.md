@@ -1,5 +1,32 @@
 # Postęp wdrożenia
 
+## Nawigacja karuzeli przy powiększeniu, 18.11.2026
+
+Przy natywnym powiększeniu 200% w Chromium wszystkie osiem kart z ostatniego
+wydania było osiągalnych w obu kierunkach oraz klawiszem Tab. Sprawdzono cztery
+szerokości okna od 640 do 1920 px, w tym układ o szerokości 320 px po
+powiększeniu. Przy `zoom: 2` w CSS strzałka pomijała część kart.
+
+Punkty przewijania są teraz mierzone względem toru w tych samych jednostkach
+co jego przewinięcie. Test regresji z Enter i Spacją odtworzył pomijanie kart
+na poprzednim buildzie. Po zmianie wszystkie sześć kart z fixture’ów jest
+osiągalnych w obu scenariuszach powiększenia na czterech szerokościach.
+Bez JavaScriptu tor przewija się strzałką klawiatury na 320 i 1440 px.
+Porównanie zrzutów dało 0 różnic na 320 px i 340 pikseli o różnicy do
+9 poziomów kanału na 1440 px. Lokalny odbiór nie zarejestrował żądań POST.
+Natywne powiększenie sprawdzono w Chromium. Firefox i WebKit obejmuje test
+powiększenia CSS.
+
+`npm run verify` na Node 24.22.3 zakończyło się kodem 0. Przeszło 781
+testów jednostkowych, 567 E2E w Chromium, Firefox i WebKit oraz porównanie
+21 stron z symulowanego Content Lake. Zestaw E2E miał 12 pominięć związanych
+z konfiguracją GTM. Pierwszą próbę blokował start Firefoksa na macOS 27.
+Drugi przebieg użył osobnych katalogów przez `MOZ_APP_DATA` i
+`MOZ_LOCAL_APP_DATA`.
+
+Następnym zadaniem jest wydzielenie poprawki monitora publikacji Sanity
+i sprawdzenie monitora na `main` w trybie `dry_run: true` po scaleniu.
+
 ## Przeniesienie zmian Oli, 17.11.2026
 
 Paleta i obsługa dwóch nowych e-booków przeniesione do trwałego worktree
