@@ -81,6 +81,14 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 Wynik POST powinien być `[]`. Kontrola 320 px/zoomu i klawiatury znajduje się
 w `tests/e2e/consent.spec.ts`; [wyniki i ograniczenia](docs/PROGRESS.md).
 
+Test nawigacji karuzeli klawiaturą przy powiększeniu CSS do 200% uruchomisz
+na Node 24 po zbudowaniu strony:
+
+```sh
+npm run build
+npm run test:e2e -- tests/e2e/carousel-3a.spec.ts
+```
+
 Ocena [zgodności Turnstile i n8n](docs/TURNSTILE-ASSESSMENT-2026-10-14.md),
 14.10.2026. Sprawdzone na Node 26.11.0, bez wysyłki zgłoszeń:
 

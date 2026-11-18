@@ -1,5 +1,10 @@
 # Plan wdrożenia i przygotowania repozytorium
 
+## Nawigacja karuzeli przy powiększeniu, 18.11.2026
+
+- [x] Sprawdzić dostęp do wszystkich kart strzałkami karuzeli przy natywnym powiększeniu 200% w Chromium.
+- [x] Poprawić pomijanie kart przy powiększeniu CSS do 200% i dodać test regresji.
+
 ## Zmiany Oli z Google Drive, 17.11.2026
 
 - [x] Porównać pliki palety i potwierdzić pięć szkiców e-booków w Sanity.

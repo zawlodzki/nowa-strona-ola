@@ -98,20 +98,14 @@ const positionLabel =
     const reduced = () =>
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const children = () => [...track.children] as HTMLElement[];
-    // Snap points come from the rendered cards, so padding, gap and the
-    // responsive card width are always included. Steps never rely on the
-    // browser re-snapping a programmatic scroll (iOS Safari does not).
+    // The positioned track makes card offsets use the same layout units
+    // as scrollLeft, including when an ancestor applies CSS zoom.
     const maxScroll = () => track.scrollWidth - track.clientWidth;
-    const snaps = () => {
-      const origin =
-        track.getBoundingClientRect().left +
-        track.clientLeft -
-        track.scrollLeft;
-      return children().map((item) => {
-        const left = item.getBoundingClientRect().left - origin;
-        return { left, right: left + item.offsetWidth };
-      });
-    };
+    const snaps = () =>
+      children().map((item) => ({
+        left: item.offsetLeft,
+        right: item.offsetLeft + item.offsetWidth,
+      }));
     const clampScroll = (left: number) =>
       Math.min(Math.max(left, 0), maxScroll());
     const stepTarget = (direction: number) => {

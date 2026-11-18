@@ -856,6 +856,7 @@ body.ao-site {
 .ao-carousel__track {
   --ao-carousel-card-width: calc((100% - 48px) / 3);
   display: flex;
+  position: relative;
   gap: var(--ao-space-24);
   overflow-x: auto;
   scroll-snap-type: x mandatory;

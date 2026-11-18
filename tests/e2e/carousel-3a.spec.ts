@@ -135,3 +135,41 @@ test("book group links scroll the first card of a topic into place", async ({
     expect(Math.abs(offset)).toBeLessThanOrEqual(1);
   }
 });
+
+test("book arrows show every card at 200% CSS zoom", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await dismissConsentBanner(page);
+  await page.addStyleTag({ content: "html { zoom: 2 }" });
+  await page.evaluate(() => document.fonts.ready);
+
+  const track = page.locator("#ebooks-track");
+  const carousel = page.locator("[data-carousel]", { has: track });
+  const cards = await track.locator(":scope > *").count();
+  const allCards = Array.from({ length: cards }, (_, index) => index);
+  const fullyVisible = () =>
+    track.evaluate((element) => {
+      const port = element.getBoundingClientRect();
+      return [...element.children].flatMap((card, index) => {
+        const { left, right } = card.getBoundingClientRect();
+        return left >= port.left - 1 && right <= port.right + 1 ? [index] : [];
+      });
+    });
+
+  for (const [name, key] of [
+    ["Następne elementy", "Enter"],
+    ["Poprzednie elementy", "Space"],
+  ]) {
+    const button = carousel.getByRole("button", { name, exact: true });
+    const seen = new Set(await fullyVisible());
+    await expect(button).toBeEnabled();
+    for (let step = 0; step < cards && (await button.isEnabled()); step += 1) {
+      await button.press(key);
+      await settle(track);
+      for (const index of await fullyVisible()) seen.add(index);
+    }
+    await expect(button).toBeDisabled();
+    expect([...seen].sort((a, b) => a - b)).toEqual(allCards);
+  }
+});
