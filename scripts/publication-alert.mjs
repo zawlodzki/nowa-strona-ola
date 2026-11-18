@@ -251,7 +251,8 @@ async function fetchJson(url, init, fetchImpl) {
 /**
  * Pobiera wdrożenia produkcji powiązane z przebiegami `Publish content`.
  * Środowiska `production` używa też `Deploy Studio`, więc filtr po przebiegu
- * jest konieczny. Kończy na pierwszym udanym wdrożeniu.
+ * jest konieczny. Odczytuje wynik sprzed `inactive` i kończy na pierwszym
+ * udanym wdrożeniu.
  */
 export async function fetchProductionDeployments({
   repository,
@@ -282,11 +283,11 @@ export async function fetchProductionDeployments({
   const result = [];
   for (const deployment of deployments) {
     const statuses = await fetchJson(
-      `${deployment.statuses_url}?per_page=1`,
+      `${deployment.statuses_url}?per_page=100`,
       init,
       fetchImpl,
     );
-    const status = statuses[0];
+    const status = statuses.find(({ state }) => state !== "inactive");
     const runId = status?.log_url?.match(/\/actions\/runs\/(\d+)/)?.[1];
     if (!runId || !runUrls.has(runId)) continue;
     result.push({

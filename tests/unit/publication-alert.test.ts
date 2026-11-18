@@ -205,7 +205,7 @@ describe("publication query", () => {
 });
 
 describe("GitHub deployments", () => {
-  it("keeps only Publish content deployments and stops at the first success", async () => {
+  it("finds the latest successful Publish content deployment even when inactive", async () => {
     const responses: Record<string, unknown> = {
       "https://api.test/repos/o/r/actions/workflows/publish-content.yml/runs?event=repository_dispatch&per_page=100":
         {
@@ -221,20 +221,31 @@ describe("GitHub deployments", () => {
           { created_at: "2026-10-19T08:00:00Z", statuses_url: "s/ok" },
           { created_at: "2026-10-19T07:00:00Z", statuses_url: "s/older" },
         ],
-      "s/studio?per_page=1": [
+      "s/studio": [
         { state: "success", log_url: "https://github.com/o/r/actions/runs/99" },
       ],
-      "s/failed?per_page=1": [
+      "s/failed": [
         { state: "failure", log_url: "https://github.com/o/r/actions/runs/11" },
       ],
-      "s/ok?per_page=1": [
+      "s/ok": [
+        {
+          state: "inactive",
+          log_url: "https://github.com/o/r/actions/runs/10",
+        },
         { state: "success", log_url: "https://github.com/o/r/actions/runs/10" },
       ],
+      "s/older": [],
     };
     const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
       const url = String(input);
-      if (!(url in responses)) throw new Error(`Unexpected ${url}`);
-      return new Response(JSON.stringify(responses[url]));
+      const [path, query] = url.split("?");
+      const response = responses[url] ?? responses[path];
+      if (response === undefined) throw new Error(`Unexpected ${url}`);
+      const limit = Number(new URLSearchParams(query).get("per_page"));
+      const page = Array.isArray(response)
+        ? response.slice(0, limit)
+        : response;
+      return new Response(JSON.stringify(page));
     });
     const deployments = await fetchProductionDeployments({
       repository: "o/r",
@@ -255,7 +266,7 @@ describe("GitHub deployments", () => {
       },
     ]);
     expect(fetchImpl).not.toHaveBeenCalledWith(
-      "s/older?per_page=1",
+      expect.stringMatching(/^s\/older\?/),
       expect.anything(),
     );
   });
