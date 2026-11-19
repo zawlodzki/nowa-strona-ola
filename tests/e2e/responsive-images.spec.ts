@@ -84,19 +84,82 @@ for (const width of viewports) {
   });
 }
 
-test("every optimised image offers smaller files in srcset", async ({
+test("optimised pictures offer the same responsive slots in AVIF and WebP", async ({
   page,
   browserName,
 }) => {
   test.skip(browserName !== "chromium", "markup is engine-independent");
   for (const route of routes) {
     await page.goto(route);
-    const missing = await page.$$eval("img", (images) =>
+    const invalid = await page.$$eval("img", (images) =>
       images
         .filter((image) => /\/_astro\/.+\.webp/.test(image.src))
-        .filter((image) => !image.srcset || !image.sizes)
+        .filter((image) => {
+          const avif = image
+            .closest("picture")
+            ?.querySelector('source[type="image/avif"]');
+          const widths = (srcset: string) =>
+            srcset
+              .split(",")
+              .map((entry) => entry.trim().split(/\s+/).at(-1))
+              .join(",");
+          return (
+            !image.srcset ||
+            !image.sizes ||
+            !avif?.getAttribute("srcset") ||
+            avif.getAttribute("sizes") !== image.sizes ||
+            widths(avif.getAttribute("srcset") ?? "") !== widths(image.srcset)
+          );
+        })
         .map((image) => image.getAttribute("src")),
     );
-    expect(missing, `${route} images without srcset and sizes`).toEqual([]);
+    expect(
+      invalid,
+      `${route} pictures with missing or mismatched sources`,
+    ).toEqual([]);
+  }
+});
+
+test.describe("hero format negotiation without JavaScript", () => {
+  test.use({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+
+  for (const format of ["avif", "webp"]) {
+    test(`the browser downloads and decodes ${format.toUpperCase()}`, async ({
+      page,
+      browserName,
+    }) => {
+      test.skip(
+        browserName !== "chromium",
+        "format negotiation is covered in Chromium",
+      );
+      if (format === "webp") {
+        await page.route("/", async (route) => {
+          const response = await route.fetch();
+          const body = (await response.text()).replaceAll(
+            'type="image/avif"',
+            'type="image/unsupported"',
+          );
+          await route.fulfill({ response, body });
+        });
+      }
+
+      const [imageResponse] = await Promise.all([
+        page.waitForResponse((response) =>
+          /\/_astro\/hero\./.test(new URL(response.url()).pathname),
+        ),
+        page.goto("/"),
+      ]);
+
+      expect(imageResponse.ok()).toBe(true);
+      expect(imageResponse.headers()["content-type"]).toBe(`image/${format}`);
+      const hero = page.locator(".home3a-portrait img");
+      const currentSource = await hero.evaluate(async (image) => {
+        if (!(image instanceof HTMLImageElement))
+          throw new Error("Expected hero image");
+        await image.decode();
+        return image.currentSrc;
+      });
+      expect(currentSource).toBe(imageResponse.url());
+    });
   }
 });

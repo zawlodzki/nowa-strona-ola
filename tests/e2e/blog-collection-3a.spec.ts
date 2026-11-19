@@ -242,6 +242,10 @@ test("blog collection EN, category and mobile keep the same crop and footer arro
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/blog/");
+  const featured = await loadedCardMetrics(
+    page.locator(".blog3a-featured-image"),
+  );
+  expect(Math.abs(featured.imgHeight - featured.wrapHeight)).toBeLessThan(1);
   const mobileCard = page.locator(".blog3a-card-image").first();
   const mobile = await loadedCardMetrics(mobileCard);
   expect(mobile.radius).toBe(24);

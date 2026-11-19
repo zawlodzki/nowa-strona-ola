@@ -1,5 +1,95 @@
 # Postęp wdrożenia
 
+## AVIF w zdjęciach publicznego serwisu, 19.11.2026
+
+Na zlecenie użytkownika `SiteImage` dodaje AVIF do obrazów rastrowych
+w publicznym buildzie Astro. Oba formaty korzystają z tych samych
+szerokości w `srcset`, reguł `sizes` i ustawień kadru. Zdalne źródło musi być obsługiwane
+przez konfigurację obrazów Astro. Renderowanie SSR pozostaje przy
+dotychczasowym `Image`.
+
+Porównanie w Chromium objęło 76 par obrazów z opublikowanych treści Sanity
+na sześciu trasach. Przy 320 i 1440 px oraz powiększeniu CSS 200% geometria
+i kadry się zgadzały. Oceniono zrzuty portretu, zdjęcia potrawy, ilustracji
+artykułu i okładki w rozmiarach prezentacji. Każdy ze sprawdzonych plików
+AVIF był mniejszy od WebP. Przykładowa okładka na 320 px miała 25 232 B
+zamiast 43 502 B. Build z publicznym Sanity wygenerował 37 stron i 121
+wariantów AVIF o łącznej objętości 3 041 364 B.
+
+Odtworzono błąd mobilnej karty bloga: po dodaniu `Picture` element `source`
+tworzył dodatkowy wiersz siatki. Po poprawce zdjęcie wypełnia cały kadr
+w obu formatach. Test E2E sprawdza wysokość obrazu i jego ramki.
+Testy negocjacji potwierdzają w Chromium pobranie i dekodowanie AVIF
+oraz zapasowego WebP bez JavaScriptu. `verify-ola` potwierdził widoczność
+zdjęcia głównego i zero żądań POST.
+
+Lokalny Worker `preview` na opublikowanych danych przeszedł kontrolę
+siedmiu tras i odrzucił wejście bez sesji. Na landingu e-booka zwrócił
+oryginalny PNG z Sanity przez `/_image`. Szkice, hostowany podgląd
+i fizyczne urządzenie pozostają poza lokalną próbą. Obrazy w treści
+Portable Text i Open Graph mają osobne ścieżki renderowania.
+
+`npm run verify` na Node 24.22.3 przeszedł z 783 testami jednostkowymi,
+585 E2E i 48 zaplanowanymi pominięciami. Porównanie fixture’ów
+z symulowanym Content Lake potwierdziło zgodność 21 stron. Następny krok
+to odbiór PR i potwierdzenie formatów po publikacji na hostowanym serwisie.
+
+## Porównanie AVIF i WebP, 19.11.2026
+
+Rozpoczęto ocenę na izolowanej kopii publicznego builda Astro. Wariant próbny
+używa `Picture` z AVIF i WebP w `SiteImage`. Oba buildy na Node 24.22.3
+wygenerowały po 47 stron z tych samych fixture’ów.
+
+Chromium przy 390 px i DPR 2 pobrał zdjęcie główne o szerokości 800 px.
+WebP ważył 92 828 B, a AVIF 36 710 B. Każdy wynik powtórzył się w pięciu
+świeżych sesjach na format. Przy 1440 px i DPR 1 wartości wyniosły 65 770 B
+i 26 958 B. Sprawdzono MIME, dekodowanie, geometrię i atrybuty zdjęć na
+stronie głównej, „O mnie” i jednym artykule. Po podmianie deklaracji typu AVIF
+na nieobsługiwany typ Chromium pobrał dotychczasowe pliki WebP.
+`verify-ola` potwierdził widoczne zdjęcie główne i zero żądań POST.
+
+Wariant dla całego `SiteImage` dodał 129 plików AVIF o łącznej objętości
+4 048 917 B. Wszystkie 130 plików WebP zachowało identyczną zawartość.
+Wyniki opisują transfer obrazów z fixture’ów. Próba nie mierzyła LCP ani
+nie objęła obrazów z produkcyjnego Sanity i podglądu SSR. Skrypt i wyniki są
+w `/private/tmp/ola-avif.Pz6hBp/`, a dowód `verify-ola` w
+`/tmp/ola-verify-evidence/ola-avif-20261119/`.
+
+Zawężenie do zdjęcia głównego dodało 7 plików AVIF o łącznej objętości
+213 075 B. Przy 320 i 1440 px oba formaty dały tę samą geometrię i kadr.
+Po obejrzeniu zrzutów z obu szerokości nie stwierdzono widocznej degradacji
+portretu w rozmiarze prezentacji. Odtworzenie bez JavaScriptu przeszło,
+a Chromium nie próbował wysłać żadnego żądania zapisu.
+
+Pomiar LCP na fixture’ach w Chromium objął 7 prób na format i szerokość.
+Każda próba zaczynała się ze świeżym kontekstem i wyłączonym cache. Kolejność
+formatów zmieniano w kolejnych parach. Emulowano transfer 1,6 Mb/s,
+opóźnienie 100 ms i czterokrotne spowolnienie CPU.
+
+| Widok             | Element LCP       | WebP, mediana (zakres) | AVIF, mediana (zakres) |
+| ----------------- | ----------------- | ---------------------: | ---------------------: |
+| 390 × 844, DPR 2  | Tekst banera zgód |    1540 ms (1524–1716) |    1504 ms (1488–1536) |
+| 1440 × 900, DPR 1 | Zdjęcie główne    |    1352 ms (1300–1412) |    1096 ms (1092–1172) |
+
+Na desktopie zdjęcie wyznaczało LCP. Mediana zakończenia jego pobrania od
+nawigacji spadła z 1335 do 944 ms. Na mobile pobranie kończyło się wcześniej
+(1574 → 1186 ms), lecz kandydatem LCP pozostawał tekst banera, a zakresy LCP
+się pokryły. Wyniki dotyczą lokalnej próby, bez pomiaru na produkcji.
+
+Publiczny build z aktualnych opublikowanych danych Sanity nadal używał
+lokalnego portretu. Po podstawieniu w prototypie publicznego pliku PNG
+z Sanity statyczny build dostarczył AVIF 35 542 B i zastępczy WebP 61 742 B.
+Chromium potwierdził oba typy odpowiedzi i rozmiar 667 × 1000 px. Lokalny
+Worker SSR z adapterem Cloudflare `compile` i opublikowanymi danymi Sanity
+zwrócił przez `/_image` oryginalny PNG. HTML nie deklarował AVIF. Kontrola
+lokalnej sesji przeszła na siedmiu trasach, a wejścia bez sesji i bez
+sekretu aktywacji zwróciły 401. Próba nie obejmowała szkiców ani hostowanego
+podglądu. Skrypty, pomiary i zrzuty są w `/private/tmp/ola-avif.Pz6hBp/`.
+
+Ocenę zakończono. Po porównaniu pozostałych zdjęć użytkownik zlecił
+rozszerzenie wdrożenia na zdjęcia obsługiwane przez `SiteImage`
+w publicznym buildzie.
+
 ## Odbiór mobilnego banera zgód na produkcji, 19.11.2026
 
 [Publish content z 17.11](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/44169154166)
