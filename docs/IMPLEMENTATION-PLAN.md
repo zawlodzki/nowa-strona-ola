@@ -18,7 +18,8 @@
 
 - [x] Potwierdzić SUCCESS obu kontroli Quality i brak konfliktów PR #138.
 - [x] Scalić zlecony PR do main, squash `0d25edc`.
-- [ ] Potwierdzić automatyczną publikację i odebrać baner na hostowanym serwisie.
+- [x] Potwierdzić automatyczną publikację i odebrać baner na hostowanym serwisie.
+      Produkcja potwierdzona w [Publish content](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/44169154166). Odbiór w Chromium 19.11.2026.
 
 ## PR mobilnego banera, 20.10.2026
 
