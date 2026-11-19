@@ -45,6 +45,7 @@ function serve(directory) {
       ".js": "text/javascript",
       ".svg": "image/svg+xml",
       ".webp": "image/webp",
+      ".avif": "image/avif",
       ".png": "image/png",
       ".jpg": "image/jpeg",
       ".woff2": "font/woff2",

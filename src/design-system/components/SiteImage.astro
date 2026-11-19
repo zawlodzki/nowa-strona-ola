@@ -1,5 +1,6 @@
 ---
-import { Image } from "astro:assets";
+import { Image, Picture, imageConfig } from "astro:assets";
+import { isRemoteAllowed } from "astro/assets/utils";
 
 import { siteRasters as rasters } from "@/assets/site-rasters";
 import type { ImageSizes } from "@/lib/image-sizes";
@@ -52,44 +53,56 @@ const imageFit =
 
 const picked = pickSiteImage(src, fallback);
 const eager = loading === "eager" || fetchpriority === "high";
-const widths = srcsetWidths(width);
+const imageSource =
+  picked?.type === "local"
+    ? { src: rasters[picked.key] }
+    : picked && { src: picked.src };
+const source = imageSource?.src;
+const isStillRaster = (extension: string) =>
+  /^(?:avif|jpe?g|png|webp)$/i.test(extension);
+const canGenerateAvif =
+  Astro.isPrerendered &&
+  (typeof source === "string"
+    ? isRemoteAllowed(source, imageConfig) &&
+      isStillRaster(new URL(source).pathname.split(".").at(-1) ?? "")
+    : source && isStillRaster(source.format));
+
+const imageProps = {
+  alt,
+  width,
+  height,
+  class: className,
+  style: imageStyle,
+  layout: "none" as const,
+  widths: srcsetWidths(width),
+  sizes,
+  fit: imageFit,
+  position: sharpPosition,
+  loading: eager ? ("eager" as const) : ("lazy" as const),
+  fetchpriority,
+  decoding,
+};
 ---
 
-{picked?.type === "local" && (
-  <Image
-    src={rasters[picked.key]}
-    alt={alt}
-    width={width}
-    height={height}
-    class={className}
-    style={imageStyle}
-    layout="none"
-    widths={widths}
-    sizes={sizes}
-    format="webp"
-    fit={imageFit}
-    position={sharpPosition}
-    loading={eager ? "eager" : "lazy"}
-    fetchpriority={fetchpriority}
-    decoding={decoding}
-  />
-)}
-{picked?.type === "remote" && (
-  <Image
-    src={picked.src}
-    alt={alt}
-    width={width}
-    height={height}
-    class={className}
-    style={imageStyle}
-    layout="none"
-    widths={widths}
-    sizes={sizes}
-    format="webp"
-    fit={imageFit}
-    position={sharpPosition}
-    loading={eager ? "eager" : "lazy"}
-    fetchpriority={fetchpriority}
-    decoding={decoding}
-  />
-)}
+{imageSource &&
+  (canGenerateAvif ? (
+    <Picture
+      {...imageSource}
+      {...imageProps}
+      formats={["avif"]}
+      fallbackFormat="webp"
+      pictureAttributes={{ class: "ao-site-picture" }}
+    />
+  ) : (
+    <Image {...imageSource} {...imageProps} format="webp" />
+  ))}
+
+<style>
+  .ao-site-picture {
+    display: contents;
+  }
+
+  .ao-site-picture > :global(source) {
+    display: none;
+  }
+</style>

@@ -1375,8 +1375,10 @@ porównaniem z design systemem na desktopie i mobile.
 - [x] Responsywne obrazy w `SiteImage`: `widths` + `sizes` zamiast jednego
       pliku 1122–1536 px; zachować bramkę „Jeden kadr zdjęcia”. Sloty w
       `src/lib/image-sizes.ts`, test `tests/e2e/responsive-images.spec.ts`.
-- [ ] Rozważyć AVIF z WebP jako zapasem (`<Picture>` zmienia znaczniki i
-      czas budowania; osobna decyzja).
+- [x] Ocenić AVIF z WebP jako zapasem. Próba potwierdziła mniejszy transfer
+      zdjęć przy zachowaniu kadru i formatu zapasowego.
+- [x] Dodać AVIF z WebP do statycznego renderowania zdjęć w `SiteImage`.
+      Odbiór na hostowanym serwisie nastąpi po publikacji kodu.
 - [x] Speculation Rules w `Layout3a`: reguła dokumentu, `prefetch` z
       `eagerness: "moderate"`, wykluczenia `/zamowienie*`, `/po-zakupie*`,
       `/api/*` i `rel~=nofollow`. Test `tests/e2e/speculation-rules.spec.ts`.

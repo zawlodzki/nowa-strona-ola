@@ -89,6 +89,13 @@ npm run build
 npm run test:e2e -- tests/e2e/carousel-3a.spec.ts
 ```
 
+Kontrola AVIF, zapasowego WebP i kadru wyróżnionego zdjęcia na blogu:
+
+```sh
+npm run build
+npm run test:e2e -- --project=chromium tests/e2e/responsive-images.spec.ts tests/e2e/blog-collection-3a.spec.ts
+```
+
 Ocena [zgodności Turnstile i n8n](docs/TURNSTILE-ASSESSMENT-2026-10-14.md),
 14.10.2026. Sprawdzone na Node 26.11.0, bez wysyłki zgłoszeń:
 
