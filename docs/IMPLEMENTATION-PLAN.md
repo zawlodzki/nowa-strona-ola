@@ -1382,7 +1382,8 @@ porównaniem z design systemem na desktopie i mobile.
 - [x] Speculation Rules w `Layout3a`: reguła dokumentu, `prefetch` z
       `eagerness: "moderate"`, wykluczenia `/zamowienie*`, `/po-zakupie*`,
       `/api/*` i `rel~=nofollow`. Test `tests/e2e/speculation-rules.spec.ts`.
-- [ ] Prerender tylko po decyzji i sprawdzeniu wpływu na zgody i analitykę.
+- [x] Ocenić wpływ prerenderu na zgody i analitykę. Zalecenie to zachować
+      prefetch. [Wyniki próby](PROGRESS.md#ocena-prerenderu-dla-zgód-i-analityki-19112026).
 - [x] Ocenić `loading="eager"` + `decoding="sync"` w miniaturach poniżej
       pierwszego ekranu (`BlogCollection3a`, `Article3a`, `About3a`,
       `BookCoverArt`). Miniatury, ramka autora i dyplom wracają do
