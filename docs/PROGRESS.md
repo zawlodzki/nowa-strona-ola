@@ -1,5 +1,27 @@
 # Postęp wdrożenia
 
+## Odbiór mobilnego banera zgód na produkcji, 19.11.2026
+
+[Publish content z 17.11](https://github.com/zawlodzki/nowa-strona-ola/actions/runs/44169154166)
+zakończył wdrożenie do `production`. Git potwierdził, że wdrożony `94bf7f1`
+zawiera `0d25edc` z [PR #138](https://github.com/zawlodzki/nowa-strona-ola/pull/138).
+
+Chromium potwierdził na stronie głównej baner o pełnej szerokości przy dolnej
+krawędzi i pionowe przyciski na 390 i 320 px. Przy natywnym powiększeniu 200%
+okno o szerokości 640 px dało obszar strony o szerokości 320 px. Przy 1440 px
+baner miał margines po bokach i pod spodem. Na każdej szerokości Tab i Enter
+otwierały „Dostosuj”, Escape przywracał fokus, a przycisk zamknięcia chował
+baner. Przy ograniczonym ruchu czas przejścia wynosił 0 s. W żadnej próbie
+nie wystąpiło żądanie zapisu.
+
+`verify-ola` na istniejącym buildzie fixture’ów potwierdził otwarcie dialogu,
+zamknięcie go przez Escape i zamknięcie banera. Lista POST była pusta.
+Zrzuty, drzewa dostępności i wyniki są w
+`/tmp/ola-verify-evidence/ola-consent-review-20261119/`.
+Odbiór obejmował Chromium. Bez zmian aplikacji, zapisu zgód i testu na
+fizycznym telefonie. Następna samodzielna pozycja w planie to ocena AVIF
+z WebP jako zapasem.
+
 ## Nawigacja karuzeli przy powiększeniu, 18.11.2026
 
 Przy natywnym powiększeniu 200% w Chromium wszystkie osiem kart z ostatniego
