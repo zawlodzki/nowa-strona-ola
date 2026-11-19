@@ -13,13 +13,13 @@ dla pozostałych hostów. Próba użyła rzeczywistej reguły `prefetch` po
 najechaniu na link oraz wymuszonej reguły `prerender` dla jednego adresu.
 W wariancie prerenderu aktywację potwierdziło `activationStart > 0`.
 
-| Próba                                  | Przed aktywacją strony docelowej                | Po aktywacji                 |
-| -------------------------------------- | ----------------------------------------------- | ---------------------------- |
-| Prefetch, zgoda zapisana               | Sam HTML                                        | GTM i jedno `ao_page_view`   |
-| Prerender, bez zapisanego wyboru       | Odczyt polityki c15t                            | Zero `ao_page_view`          |
-| Prerender, odrzucone opcjonalne        | Odczyt polityki i zapisu zgody                  | Zero `ao_page_view`          |
-| Prerender, zgoda zapisana              | Odczyty c15t, atrapa GTM i jedno `ao_page_view` | Jedno `ao_page_view` łącznie |
-| Prerender, zgoda zapisana, bez wejścia | Odczyty c15t, atrapa GTM i jedno `ao_page_view` | Brak aktywacji               |
+| Próba                                  | Przed aktywacją strony docelowej                | Po aktywacji                      |
+| -------------------------------------- | ----------------------------------------------- | --------------------------------- |
+| Prefetch, zgoda zapisana               | HTML, bez żądań do c15t ani atrapy GTM          | Atrapa GTM i jedno `ao_page_view` |
+| Prerender, bez zapisanego wyboru       | Odczyt polityki c15t                            | Zero `ao_page_view`               |
+| Prerender, odrzucone opcjonalne        | Odczyt polityki i zapisu zgody                  | Zero `ao_page_view`               |
+| Prerender, zgoda zapisana              | Odczyty c15t, atrapa GTM i jedno `ao_page_view` | Jedno `ao_page_view` łącznie      |
+| Prerender, zgoda zapisana, bez wejścia | Odczyty c15t, atrapa GTM i jedno `ao_page_view` | Brak aktywacji                    |
 
 `initializeConsentPanel` zaczyna odczyt c15t przy uruchomieniu modułu.
 Po odtworzeniu zgody `analytics.ts` dodaje skrypt GTM i wpis do `dataLayer`.
