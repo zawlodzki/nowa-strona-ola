@@ -1,5 +1,48 @@
 # Postęp wdrożenia
 
+## Ocena prerenderu dla zgód i analityki, 19.11.2026
+
+Zadanie P1 zakończone. Zalecenie to zachować `prefetch` z `eagerness: "moderate"`
+w `Layout3a`. Pełny prerender może włączyć pomiar strony, której użytkownik
+ostatecznie nie otworzy. Wniosek dotyczy obecnego klienta zgód.
+
+Lokalna próba na `87d5bd8` objęła stronę główną i przejście na „O mnie”.
+Build 47 stron z fixture’ów uruchomiono na Node 24.22.3 z włączonym GTM.
+Chrome 153 używał lokalnych atrap c15t i skryptu GTM oraz zablokowanego DNS
+dla pozostałych hostów. Próba użyła rzeczywistej reguły `prefetch` po
+najechaniu na link oraz wymuszonej reguły `prerender` dla jednego adresu.
+W wariancie prerenderu aktywację potwierdziło `activationStart > 0`.
+
+| Próba                                  | Przed aktywacją strony docelowej                | Po aktywacji                      |
+| -------------------------------------- | ----------------------------------------------- | --------------------------------- |
+| Prefetch, zgoda zapisana               | HTML, bez żądań do c15t ani atrapy GTM          | Atrapa GTM i jedno `ao_page_view` |
+| Prerender, bez zapisanego wyboru       | Odczyt polityki c15t                            | Zero `ao_page_view`               |
+| Prerender, odrzucone opcjonalne        | Odczyt polityki i zapisu zgody                  | Zero `ao_page_view`               |
+| Prerender, zgoda zapisana              | Odczyty c15t, atrapa GTM i jedno `ao_page_view` | Jedno `ao_page_view` łącznie      |
+| Prerender, zgoda zapisana, bez wejścia | Odczyty c15t, atrapa GTM i jedno `ao_page_view` | Brak aktywacji                    |
+
+`initializeConsentPanel` zaczyna odczyt c15t przy uruchomieniu modułu.
+Po odtworzeniu zgody `analytics.ts` dodaje skrypt GTM i wpis do `dataLayer`.
+Kod odzyskiwania oczekującego wycofania może też wykonać POST przy starcie
+panelu. Próba nie symulowała oczekującego wycofania. POST-y w próbie służyły
+wyłącznie do ustawienia wyboru na stronie źródłowej w lokalnej atrapie.
+Nie badano faktycznej wysyłki zdarzeń przez GA4, Clarity ani Meta.
+Zalecenie odroczenia uruchomienia pomiaru do aktywacji odpowiada
+[dokumentacji Chrome](https://developer.chrome.com/docs/web-platform/implementing-speculation-rules).
+
+`verify-ola` niezależnie potwierdził otwarcie „Dostosuj”, zamknięcie przez
+Escape i nawigację linkiem „O mnie”. Lista POST zwróciła `[]`.
+Dowody są w `/tmp/ola-verify-evidence/ola-prerender-evaluation-20261119/`.
+Skrypt i wyniki pięciu prób zapisano jako `trial.mjs` i `trial-results.json`
+w `/private/tmp/ola-prerender.hJ2nry/`. Próba dotyczyła desktopowego
+Chromium. Pełne `npm run verify` nie było potrzebne dla zmiany dokumentacji.
+
+Przed ewentualnym wdrożeniem prerenderu trzeba odroczyć start panelu do
+`prerenderingchange` i odczytać aktualną zgodę po aktywacji. Test powinien
+objąć anulowanie, zmianę zgody w drugiej karcie, oczekujące wycofanie i
+pojedynczą odsłonę po aktywacji. Kolejna pozycja w planie modernizacji to
+decyzja projektowa o menu mobilnym opartym na Popover API.
+
 ## AVIF w zdjęciach publicznego serwisu, 19.11.2026
 
 Na zlecenie użytkownika `SiteImage` dodaje AVIF do obrazów rastrowych
