@@ -307,6 +307,50 @@ test("Escape closes customization without consent and restores native trigger fo
   await expect(dialog(page)).toBeVisible();
 });
 
+test("close button and backdrop dismiss settings without saving", async ({
+  page,
+  context,
+}) => {
+  const api = await backend(context);
+  await page.goto("/");
+  const trigger = banner(page).getByRole("button", {
+    name: "Dostosuj",
+    exact: true,
+  });
+  await trigger.click();
+  const settings = dialog(page);
+  await expect(settings).toBeVisible();
+  const element = page.locator("#ao-consent-dialog");
+  const support = await settings.evaluate((dialog) => {
+    for (const event of ["command", "cancel"]) {
+      dialog.addEventListener(event, () =>
+        dialog.setAttribute(`data-${event}`, ""),
+      );
+    }
+    return {
+      command: "commandForElement" in HTMLButtonElement.prototype,
+      closedBy: "closedBy" in HTMLDialogElement.prototype,
+    };
+  });
+  await settings
+    .getByRole("button", { name: "Zamknij bez zmiany zgód", exact: true })
+    .click();
+  await expect(settings).toBeHidden();
+  await expect(trigger).toBeFocused();
+  if (support.command)
+    await expect(element).toHaveAttribute("data-command", "");
+
+  await trigger.click();
+  await expect(settings).toBeVisible();
+  await page.mouse.click(4, 4);
+  await expect(settings).toBeHidden();
+  await expect(trigger).toBeFocused();
+  if (support.closedBy)
+    await expect(element).toHaveAttribute("data-cancel", "");
+  expect(api.posts).toEqual([]);
+  expect(await saved(page)).toBeNull();
+});
+
 test("failed new grant stays unconfirmed and can be retried", async ({
   page,
   context,

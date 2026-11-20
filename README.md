@@ -75,6 +75,9 @@ pionowe przyciski i wejście 250 ms. Odbiór po uruchomieniu sesji `verify-ola`
 node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /
 node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name Dostosuj --exact
 node .cursor/skills/verify-ola/scripts/verify.mjs browser press --key Escape
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name Dostosuj --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Zamknij bez zmiany zgód" --exact --nth 1
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role dialog --name "Ustawienia cookies" --exact --state hidden
 node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "O mnie" --exact --nth 0
 node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 ```

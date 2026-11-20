@@ -1,5 +1,29 @@
 # Postęp wdrożenia
 
+## Natywne zamykanie panelu zgód, 20.11.2026
+
+Przycisk w dialogu „Ustawienia cookies” korzysta z
+`commandfor` i `command="close"`. Kliknięcie w tło obsługuje istniejące
+`closedby="any"`. Klient dodaje procedurę awaryjną dla każdej funkcji osobno,
+gdy przeglądarka nie udostępnia odpowiedniego API. Procedura dla tła sprawdza
+również współrzędne kliknięcia względem obszaru dialogu. Po zamknięciu fokus
+wraca do „Dostosuj” lub „Ustawienia cookies”, zależnie od przycisku
+otwierającego dialog.
+
+Nowy test E2E przed zmianą nie odnotował zdarzenia `command` w Chromium.
+Po zmianie potwierdza zamknięcie przyciskiem i kliknięciem w tło, powrót
+fokusu oraz brak zapisu zgód. Zainstalowane Chromium 153, Firefox 155 i
+WebKit 26.6 udostępniały oba API. Symulacja ich braku w Chromium przy 320
+i 1440 px potwierdziła działanie przycisku, kliknięcia w tło i powrót
+fokusu. Kliknięcie nagłówka nie zamykało dialogu.
+
+`verify-ola` sprawdził Escape i przycisk zamknięcia na lokalnym buildzie.
+Lista POST zwróciła `[]`. Zrzut, zapis sesji i próba bez obu API są
+w `/tmp/ola-verify-evidence/ola-consent-close-20261120/`. Odbiór nie obejmował
+aplikacji Safari ani natywnego powiększenia przeglądarki.
+
+Następne zadanie P3 to powrót do trybu systemowego w przełączniku motywu.
+
 ## Ocena animacji otwierania FAQ, 20.11.2026
 
 Zalecenie po próbie to zachować natychmiastowe otwieranie FAQ w 3a.

@@ -76,6 +76,8 @@ const copy = {
   },
 }[lang];
 const prefix = lang === "en" ? "/en" : "";
+const dialogId = "ao-consent-dialog";
+const closeCommand = { commandfor: dialogId, command: "close" };
 ---
 
 <div
@@ -139,7 +141,7 @@ const prefix = lang === "en" ? "/en" : "";
         class="ao-button"
         data-consent-action="customize"
         aria-haspopup="dialog"
-        aria-controls="ao-consent-dialog"
+        aria-controls={dialogId}
       >
         {copy.customize}
       </button>
@@ -153,7 +155,7 @@ const prefix = lang === "en" ? "/en" : "";
     ></p>
   </section>
   <dialog
-    id="ao-consent-dialog"
+    id={dialogId}
     class="ao-dialog ao-consent-dialog"
     aria-labelledby="ao-consent-dialog-title"
     closedby="any"
@@ -168,6 +170,7 @@ const prefix = lang === "en" ? "/en" : "";
           class="ao-dialog__close"
           data-consent-close
           aria-label={copy.close}
+          {...closeCommand}
         >
           <svg
             class="ao-icon"
