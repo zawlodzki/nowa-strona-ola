@@ -1416,8 +1416,9 @@ porównaniem z design systemem na desktopie i mobile.
       przycisk zamknięcia przez `commandfor` + `command="close"` z
       fallbackiem jak w `WaitlistDialog`.
       [Wyniki odbioru](PROGRESS.md#natywne-zamykanie-panelu-zgód-20112026).
-- [ ] Przełącznik motywu: nie zapisywać wyboru zgodnego z systemem i dać
-      powrót do trybu systemowego.
+- [x] Przełącznik motywu zapisuje wybór różny od ustawienia systemu i
+      pozwala wrócić do motywu systemowego.
+      [Wyniki odbioru](PROGRESS.md#powrót-do-motywu-systemowego-20112026).
 - [ ] Formularz: `autocomplete="given-name"` dla pola „Imię”; opcjonalnie
       `field-sizing: content` dla `textarea` i styl `:user-invalid`.
 - [ ] Karuzela: rozliczać stan na `scrollend`, debounce `scroll` tylko jako

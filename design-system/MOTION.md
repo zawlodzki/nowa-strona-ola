@@ -12,7 +12,7 @@ przed IntersectionObserver. Brak wejściowej animacji nie blokuje treści.
 | Menu       | native details, Escape → close/focus summary, kliknięcie poza → close               | Bez animacji wysokości                          |
 | FAQ        | native details, plus obraca się do krzyżyka                                         | Stan bez animacji                               |
 | Baner zgód | automatyczne wejście: mobile od dołu o własną wysokość, desktop 8 px; opacity 0 → 1 | 250 ms, `--ao-ease-out`; reduced motion instant |
-| Motyw      | zmiana custom properties, aria-pressed                                              | Bez animacji kolorów, bez zapisu storage        |
+| Motyw      | zmiana custom properties, aria-pressed                                              | Bez animacji kolorów                            |
 
 `--ao-motion-panel: 250ms`, `--ao-motion-reveal: 600ms` oraz ease-out/quint i expo
 pozostają dostępnymi wartościami dla późniejszych, uzasadnionych interakcji.

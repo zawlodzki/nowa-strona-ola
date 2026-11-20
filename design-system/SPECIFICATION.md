@@ -39,9 +39,12 @@ nie zawierała; wymagają odbioru wizualnego.
 
 Light jest wyglądem referencyjnym 3a. Dark zachowuje istniejący wariant podglądu;
 bez JS reaguje na ustawienie systemowe. Jawne `data-theme="light|dark"` wygrywa.
-Od 11.10.2026 przełącznik w stopce zapisuje ręczny wybór w localStorage
-`ao-theme`. Layout odtwarza go przed wyświetleniem treści. Bez zapisu używa
-motywu systemowego; przy zablokowanej pamięci wybór działa w bieżącym dokumencie.
+Przełącznik w stopce zapisuje ręczny wybór w `ao-theme` tylko wtedy, gdy
+wybrany motyw różni się od ustawienia systemu. Layout odtwarza zapis przed
+wyświetleniem treści. Wybranie motywu zgodnego z systemem lub przycisku
+„Użyj motywu systemowego” usuwa zapis. Zmiana systemu respektuje nadal
+zapisany wybór. Otwarte karty aktualizują się po zmianie zapisu. Przy
+zablokowanej pamięci wybór działa w bieżącym dokumencie.
 Motyw nie zmienia zgód użytkownika.
 Okładki to grafika produktu: ich jasny lub ceglany front nie odwraca kolorów
 w dark. Stage zmienia paletę. Ten sam produkt ma jeden front w każdym szablonie.

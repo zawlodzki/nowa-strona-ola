@@ -552,6 +552,7 @@ button.ao-header__menu-toggle {
 .ao-footer__tools {
   display: flex;
   align-items: center;
+  gap: var(--ao-space-8);
   margin-inline-start: auto;
 }
 .ao-theme-toggle,

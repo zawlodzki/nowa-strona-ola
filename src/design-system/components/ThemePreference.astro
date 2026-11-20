@@ -3,25 +3,65 @@
     const storageKey = "ao-theme";
     const root = document.documentElement;
     const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const systemTheme = () => (media.matches ? "dark" : "light");
+    /** @param {string | null} value */
+    const readPreference = (value) =>
+      value === "light" || value === "dark" ? value : null;
     /** @type {"light" | "dark" | null} */
     let preference = null;
+    /** @type {Storage | null} */
+    let storage = null;
     try {
-      const saved = window.localStorage.getItem(storageKey);
-      if (saved === "light" || saved === "dark") preference = saved;
+      storage = window.localStorage;
+      preference = readPreference(storage.getItem(storageKey));
     } catch {
       preference = null;
     }
 
     const applyTheme = () => {
-      const theme = preference ?? (media.matches ? "dark" : "light");
+      const theme = preference ?? systemTheme();
       root.dataset.theme = theme;
       for (const button of document.querySelectorAll(".ao-theme-toggle")) {
         button.setAttribute("aria-pressed", String(theme === "dark"));
       }
+      const reset = document.querySelector("[data-theme-reset]");
+      if (!(reset instanceof HTMLButtonElement)) return;
+      if (preference === null && document.activeElement === reset) {
+        const toggle = reset.parentElement?.querySelector(".ao-theme-toggle");
+        if (toggle instanceof HTMLButtonElement) toggle.focus();
+      }
+      reset.hidden = preference === null;
     };
+
+    /** @param {"light" | "dark" | null} next */
+    const chooseTheme = (next) => {
+      preference = next;
+      applyTheme();
+      try {
+        if (next === null) storage?.removeItem(storageKey);
+        else storage?.setItem(storageKey, next);
+      } catch {
+        // The choice still applies in this document when storage is blocked.
+      }
+    };
+
     applyTheme();
     media.addEventListener("change", () => {
       if (preference === null) applyTheme();
+    });
+    window.addEventListener("storage", (event) => {
+      if (
+        !storage ||
+        event.storageArea !== storage ||
+        (event.key !== storageKey && event.key !== null)
+      )
+        return;
+      try {
+        preference = readPreference(storage.getItem(storageKey));
+      } catch {
+        return;
+      }
+      applyTheme();
     });
     document.addEventListener("DOMContentLoaded", () => {
       applyTheme();
@@ -29,15 +69,14 @@
         if (!(button instanceof HTMLButtonElement)) continue;
         button.hidden = false;
         button.addEventListener("click", () => {
-          preference = root.dataset.theme === "dark" ? "light" : "dark";
-          applyTheme();
-          try {
-            window.localStorage.setItem(storageKey, preference);
-          } catch {
-            // Storage może być zablokowany, wybór nadal obowiązuje na tej stronie.
-          }
+          const system = systemTheme();
+          const next = (preference ?? system) === "dark" ? "light" : "dark";
+          chooseTheme(next === system ? null : next);
         });
       }
+      document
+        .querySelector("[data-theme-reset]")
+        ?.addEventListener("click", () => chooseTheme(null));
     });
   })();
 </script>

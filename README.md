@@ -343,11 +343,23 @@ PLAYWRIGHT_WORKERS=2 npm run verify
 Końcowa kontrola integracji c15t 11.10.2026 przeszła 280 testów jednostkowych
 i 393 E2E w trzech przeglądarkach.
 `tests/e2e/theme-preference.spec.ts` sprawdza zapis motywu, przejście
-linkiem, reload, inicjalizację przed body i blokadę storage. Preferencja
-`ao-theme` jest lokalna dla originu. [Plan GTM i c15t](docs/GTM-C15T-DEPLOYMENT-PLAN.md)
+linkiem, odświeżenie, inicjalizację przed body, powrót do systemu
+w dwóch kartach i blokadę pamięci. Preferencja `ao-theme` jest lokalna
+dla originu. [Plan GTM i c15t](docs/GTM-C15T-DEPLOYMENT-PLAN.md)
 opisuje zakres i bramki pomiaru. Produkcyjny c15t i GTM są wdrożone
 od 13.10.2026; GTM 5 rozpoznaje pięć kodów źródła AI. Odbiór oraz dowody są w
 [postępie](docs/PROGRESS.md).
+
+W świeżej sesji `verify-ola` z jasnym motywem systemowym możesz sprawdzić
+ręczny wybór ciemnego motywu i przywrócenie systemowego:
+
+```sh
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /design-system/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Ciemny motyw" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Użyj motywu systemowego" --exact
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button --name "Ciemny motyw" --exact --attribute aria-pressed --value false
+node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
+```
 
 Kontrola GTM z 12.10.2026 na Node 24.19.0: `npm run verify` przeszło
 383 unit, 456 E2E i 88 dokumentów CMS. Dziewięć scenariuszy wymagających

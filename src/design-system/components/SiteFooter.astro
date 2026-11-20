@@ -81,7 +81,7 @@ function isHttpUrl(href: string) {
         ))}
         {consentEnabled && (
           <button
-            class="ao-consent-settings"
+            class="ao-footer__text-button"
             type="button"
             data-consent-open
             hidden
@@ -93,6 +93,14 @@ function isHttpUrl(href: string) {
       </nav>
       <div class="ao-footer__tools">
         <ThemeToggle label={pl ? "Ciemny motyw" : "Dark theme"} />
+        <button
+          class="ao-footer__text-button"
+          type="button"
+          data-theme-reset
+          hidden
+        >
+          {pl ? "Użyj motywu systemowego" : "Use system theme"}
+        </button>
         <a
           class="ao-back-to-top"
           href="#main"
@@ -106,7 +114,7 @@ function isHttpUrl(href: string) {
 </footer>
 
 <style>
-  .ao-consent-settings {
+  .ao-footer__text-button {
     min-block-size: var(--ao-target-min);
     padding: 0;
     border: 0;

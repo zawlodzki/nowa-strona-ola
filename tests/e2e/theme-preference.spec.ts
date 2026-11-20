@@ -46,6 +46,9 @@ for (const preference of ["light", "dark"] as const) {
       preference,
     );
     await page.emulateMedia({ colorScheme: preference });
+    expect(await page.evaluate(() => localStorage.getItem("ao-theme"))).toBe(
+      preference,
+    );
     await page.emulateMedia({
       colorScheme: preference === "dark" ? "light" : "dark",
     });
@@ -101,6 +104,49 @@ test("system changes control the theme until a manual choice", async ({
   await page.emulateMedia({ colorScheme: "dark" });
   await page.emulateMedia({ colorScheme: "light" });
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.getByRole("button", { name: "Ciemny motyw", exact: true }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  expect(
+    await page.evaluate(() => localStorage.getItem("ao-theme")),
+  ).toBeNull();
+  await page.reload();
+  await page.emulateMedia({ colorScheme: "dark" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+});
+
+test("reset releases a saved theme matching the system in both tabs", async ({
+  page,
+  context,
+}) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/design-system/");
+  await page.evaluate(() => localStorage.setItem("ao-theme", "dark"));
+  await page.reload();
+  const other = await context.newPage();
+  await other.emulateMedia({ colorScheme: "dark" });
+  await other.goto("/design-system/");
+  const reset = page.getByRole("button", { name: "Użyj motywu systemowego" });
+  const toggle = page.getByRole("button", {
+    name: "Ciemny motyw",
+    exact: true,
+  });
+  await expect(reset).toBeVisible();
+  await expect(
+    other.getByRole("button", { name: "Użyj motywu systemowego" }),
+  ).toBeVisible();
+  await page.bringToFront();
+  await reset.focus();
+  await page.keyboard.press("Enter");
+  await expect(reset).toBeHidden();
+  await expect(toggle).toBeFocused();
+  await expect(
+    other.getByRole("button", { name: "Użyj motywu systemowego" }),
+  ).toBeHidden();
+  await other.emulateMedia({ colorScheme: "light" });
+  await expect(other.locator("html")).toHaveAttribute("data-theme", "light");
+  expect(
+    await page.evaluate(() => localStorage.getItem("ao-theme")),
+  ).toBeNull();
 });
 
 test("invalid saved value falls back to the system", async ({ page }) => {
@@ -112,7 +158,7 @@ test("invalid saved value falls back to the system", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 });
 
-for (const blockedOperation of ["getItem", "setItem"] as const) {
+for (const blockedOperation of ["getItem", "setItem", "removeItem"] as const) {
   test(`blocked storage ${blockedOperation} keeps theme control usable`, async ({
     page,
   }) => {
