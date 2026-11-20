@@ -32,9 +32,9 @@ for (const width of [1440, 390, 320]) {
       }
     }
     if (width < 1200) {
-      await page.getByText("Menu", { exact: true }).click();
+      await page.getByRole("button", { name: "Menu", exact: true }).click();
       const mobile = page.getByRole("navigation", {
-        name: "Nawigacja mobilna",
+        name: "Nawigacja główna",
       });
       await expect(mobile).toBeVisible();
       await mobile.getByRole("link", { name: "O mnie", exact: true }).click();
@@ -61,13 +61,60 @@ test("sticky navigation and its menu work without JS in dark mode", async ({
   expect(
     await renderedColor(page.locator(".ao-header"), "background-color"),
   ).toBe("rgb(38, 23, 21)");
-  await page.getByText("Menu", { exact: true }).click();
-  const links = page.locator(".ao-mobile-menu nav a");
+  await page.locator("summary.ao-header__menu-toggle").click();
+  const links = page
+    .getByRole("navigation", { name: "Nawigacja główna" })
+    .getByRole("link");
   await links.last().scrollIntoViewIfNeeded();
+  await expect(links.last()).toBeInViewport();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(page.getByText("Menu", { exact: true })).toBeHidden();
   await expect(links.last()).toBeInViewport();
   await links.first().click();
   await expect(page).toHaveURL(/\/ebooki\/$/);
   await context.close();
+});
+
+test("mobile popover closes on Escape, outside clicks, resize and same-page navigation", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 390, height: 720 });
+  await page.goto("/design-system/");
+
+  const navigation = page.getByRole("navigation", {
+    name: "Nawigacja główna",
+  });
+  const trigger = navigation.getByRole("button", { name: "Menu", exact: true });
+  const newsletter = navigation.getByRole("link", {
+    name: "Newsletter",
+    exact: true,
+  });
+
+  await expect(newsletter).toBeHidden();
+  await trigger.click();
+  await newsletter.focus();
+  await page.keyboard.press("Escape");
+  await expect(newsletter).toBeHidden();
+  await expect(trigger).toBeFocused();
+
+  await trigger.click();
+  await page.mouse.click(2, 2);
+  await expect(newsletter).toBeHidden();
+
+  await trigger.click();
+  await expect(newsletter).toBeVisible();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(trigger).toBeHidden();
+  await expect(newsletter).toBeInViewport();
+  await page.setViewportSize({ width: 390, height: 720 });
+  await expect(newsletter).toBeHidden();
+
+  await trigger.click();
+  await newsletter.click();
+  await expect(page).toHaveURL(/#newsletter$/);
+  await expect(newsletter).toBeHidden();
+  await expect(page.locator("#newsletter")).toBeInViewport();
 });
 
 test("article and legal anchors clear the header with enlarged text and zoom", async ({

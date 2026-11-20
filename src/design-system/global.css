@@ -293,23 +293,36 @@ body.ao-site {
   background: var(--ao-background);
 }
 .ao-header__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 290px) minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--ao-space-32);
+  grid-template-columns: minmax(0, 290px) minmax(0, 1fr);
   min-block-size: var(--ao-header-min);
   padding-block: var(--ao-space-12);
 }
-.ao-header__desktop {
+.ao-header__panel {
+  all: unset;
+  box-sizing: border-box;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.ao-header__inner,
+.ao-header__panel {
+  display: grid;
+  align-items: center;
+  gap: var(--ao-space-32);
+}
+.ao-header__links {
   display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   justify-content: center;
   align-items: center;
   gap: var(--ao-space-24);
 }
-.ao-header__desktop a,
-.ao-header__cta {
-  display: inline-flex;
+.ao-header__panel :where(a) {
+  display: flex;
   align-items: center;
+}
+.ao-header__panel :where(a),
+.ao-header__menu-toggle {
   min-block-size: var(--ao-target-min);
   font-size: 0.875rem;
 }
@@ -323,60 +336,29 @@ body.ao-site {
     text-underline-offset: 6px;
   }
 }
-.ao-header__cta {
-  gap: var(--ao-space-16);
-  padding-block: 10px;
-  padding-inline: var(--ao-space-20);
-  border-radius: var(--ao-radius-control);
-  background: var(--ao-cta);
-  color: var(--ao-on-cta) !important;
-  font-size: 0.8125rem;
+@container header3a (width > 74.9375rem) {
+  .ao-header__cta {
+    gap: var(--ao-space-16);
+    padding-block: 10px;
+    padding-inline: var(--ao-space-20);
+    border-radius: var(--ao-radius-control);
+    background: var(--ao-cta);
+    color: var(--ao-on-cta) !important;
+    font-size: 0.8125rem;
+  }
+  .ao-header nav > :is(details, button) {
+    display: none;
+  }
 }
-.ao-mobile-menu {
-  display: none;
+button.ao-header__menu-toggle {
+  display: block;
 }
-.ao-mobile-menu summary {
-  min-block-size: var(--ao-target-min);
+.ao-header__menu-toggle {
   cursor: pointer;
-  list-style: none;
-  padding-block: var(--ao-space-12);
-  font-size: 0.875rem;
   white-space: nowrap;
-}
-.ao-mobile-menu summary::-webkit-details-marker {
-  display: none;
-}
-.ao-mobile-menu summary::after {
-  content: " +";
-}
-.ao-mobile-menu[open] summary::after {
-  content: " −";
-}
-.ao-mobile-menu:not([open]) nav {
-  display: none;
-}
-.ao-mobile-menu nav {
-  position: absolute;
-  inset-block-start: 100%;
-  inset-inline-end: 0;
-  inset-block-end: auto;
-  inset-inline-start: 0;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: var(--ao-space-8);
-  padding-block: var(--ao-space-16) var(--ao-space-24);
-  padding-inline: var(--ao-gutter);
-  background: var(--ao-background);
-  color: var(--ao-ink);
-  border-block-end: 1px solid var(--ao-line);
-  max-block-size: calc(100dvh - var(--ao-header-clearance));
-  overflow-y: auto;
-  overscroll-behavior-block: contain;
-}
-.ao-mobile-menu nav a {
-  padding-block: var(--ao-space-12);
-  min-block-size: var(--ao-target-min);
+  border: 0;
+  background: transparent;
+  color: inherit;
 }
 .ao-newsletter__layout {
   display: grid;
@@ -907,23 +889,46 @@ body.ao-site {
 .ao-header :is(a, summary, button) {
   scroll-margin-block-start: calc(-1 * var(--ao-sticky-offset));
 }
-/* The menu panel scrolls on its own; matching padding cancels the margin there. */
-.ao-mobile-menu nav {
-  scroll-padding-block-start: var(--ao-sticky-offset);
-}
 @container header3a (max-width:74.9375rem) {
   .ao-header__inner {
     display: flex;
     flex-wrap: wrap;
     gap: var(--ao-space-16);
   }
-  .ao-header__desktop,
-  .ao-header__cta {
-    display: none;
-  }
-  .ao-mobile-menu {
-    display: block;
+  .ao-header nav {
     margin-inline-start: auto;
+  }
+  .ao-header__panel {
+    position: absolute;
+    inset-inline: 0;
+    inset-block: 100% auto;
+    display: none;
+    padding-block: var(--ao-space-16) var(--ao-space-24);
+    padding-inline: var(--ao-gutter);
+    background: var(--ao-background);
+    border-block-end: 1px solid var(--ao-line);
+    max-block-size: calc(100dvh - var(--ao-header-clearance));
+    overflow-y: auto;
+    overscroll-behavior-block: contain;
+    scroll-padding-block-start: var(--ao-sticky-offset);
+  }
+  .ao-header__panel:is(:popover-open, details[open] ~ *) {
+    display: flex;
+  }
+  :is(.ao-header__panel, .ao-header__links) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--ao-space-8);
+  }
+  .ao-header__panel a,
+  .ao-header__menu-toggle {
+    padding: var(--ao-space-12) 0;
+  }
+  .ao-header__panel a {
+    font-size: inherit;
+  }
+  .ao-header__cta svg {
+    display: none;
   }
 }
 @container page3a (max-width:1199px) {

@@ -1394,9 +1394,10 @@ porównaniem z design systemem na desktopie i mobile.
 
 ### P2 — UX i odporność (wymagają decyzji projektowej)
 
-- [ ] Menu mobilne: `<button popovertarget>` + `popover="auto"` zamiast
-      `<details>` z własnym Escape i kliknięciem poza; jedna lista
-      nawigacji. Zachować działanie bez JS i test fokusu w Safari.
+- [x] Menu mobilne: jedna nawigacja z `popover="auto"` i wariantem
+      `details` bez JS. Fokus sprawdzony w WebKit.
+      [Wyniki](PROGRESS.md#menu-mobilne-z-popover-api-20112026).
+- [ ] Potwierdzić powrót fokusu w aplikacji Safari przy ręcznym odbiorze.
 - [ ] Animacja zamykania dialogów i `::backdrop`: `@starting-style`,
       `overlay`, `display`, osobne `transition-behavior: allow-discrete`,
       fallback dla Firefoksa. Uzgodnić z MOTION.md.
