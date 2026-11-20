@@ -1412,9 +1412,10 @@ porównaniem z design systemem na desktopie i mobile.
 
 ### P3 — porządki
 
-- [ ] Panel zgód: ręczny light dismiss tylko bez wsparcia `closedby`;
+- [x] Panel zgód: ręczny light dismiss tylko bez wsparcia `closedby`;
       przycisk zamknięcia przez `commandfor` + `command="close"` z
       fallbackiem jak w `WaitlistDialog`.
+      [Wyniki odbioru](PROGRESS.md#natywne-zamykanie-panelu-zgód-20112026).
 - [ ] Przełącznik motywu: nie zapisywać wyboru zgodnego z systemem i dać
       powrót do trybu systemowego.
 - [ ] Formularz: `autocomplete="given-name"` dla pola „Imię”; opcjonalnie

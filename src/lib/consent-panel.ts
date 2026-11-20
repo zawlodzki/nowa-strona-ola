@@ -97,15 +97,27 @@ export function initializeConsentPanel(): void {
       dismissed = true;
       banner.hidden = true;
     });
-  panel
-    .querySelector<HTMLButtonElement>("[data-consent-close]")
-    ?.addEventListener("click", () => dialog.close());
+  if (!("commandForElement" in HTMLButtonElement.prototype)) {
+    dialog
+      .querySelector<HTMLButtonElement>("[data-consent-close]")
+      ?.addEventListener("click", () => dialog.close());
+  }
   dialog.addEventListener("close", () => {
     if (trigger && !trigger.closest("[hidden]")) trigger.focus();
   });
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
-  });
+  if (!("closedBy" in HTMLDialogElement.prototype)) {
+    dialog.addEventListener("click", (event) => {
+      if (event.target !== dialog) return;
+      const { left, right, top, bottom } = dialog.getBoundingClientRect();
+      if (
+        event.clientX < left ||
+        event.clientX > right ||
+        event.clientY < top ||
+        event.clientY > bottom
+      )
+        dialog.close();
+    });
+  }
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !dialog.open && !banner.hidden) {
       dismissed = true;
