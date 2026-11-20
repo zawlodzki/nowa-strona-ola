@@ -104,6 +104,20 @@ npm run build
 npm run test:e2e -- --project=chromium tests/e2e/responsive-images.spec.ts tests/e2e/blog-collection-3a.spec.ts
 ```
 
+Po zbudowaniu strony z fixture’ów i uruchomieniu sesji `verify-ola` możesz
+sprawdzić otwieranie i zamykanie FAQ bez JavaScriptu. Po kliknięciu odpowiedź
+jest widoczna. Enter zamyka pytanie, a lista POST zwraca `[]`.
+
+```sh
+node .cursor/skills/verify-ola/scripts/verify.mjs browser context --javascript false
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /design-system/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser click --text "Czy te komponenty działają bez JavaScript?"
+node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path faq-open.aria.txt
+node .cursor/skills/verify-ola/scripts/verify.mjs browser press --key Enter
+node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path faq-closed.aria.txt
+node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
+```
+
 Ocena [zgodności Turnstile i n8n](docs/TURNSTILE-ASSESSMENT-2026-10-14.md),
 14.10.2026. Sprawdzone na Node 26.11.0, bez wysyłki zgłoszeń:
 
