@@ -15,13 +15,20 @@ if (!baseUrl || !token || !evidenceRoot || !portFile) {
 }
 
 const browser = await chromium.launch({ headless: true });
-let context = await browser.newContext({
-  viewport: { width: 1280, height: 900 },
-});
+let viewport = { width: 1280, height: 900 };
+let javascriptEnabled = true;
+
+function contextOptions() {
+  return {
+    viewport,
+    javaScriptEnabled: javascriptEnabled,
+  };
+}
+
+let context = await browser.newContext(contextOptions());
 context.setDefaultTimeout(15000);
 context.setDefaultNavigationTimeout(15000);
 let page = await context.newPage();
-let javascriptEnabled = true;
 const posts = [];
 
 function track(nextPage) {
@@ -82,10 +89,7 @@ async function run(body) {
     case "context": {
       await context.close();
       javascriptEnabled = body.javascript !== false;
-      context = await browser.newContext({
-        viewport: { width: 1280, height: 900 },
-        javaScriptEnabled: javascriptEnabled,
-      });
+      context = await browser.newContext(contextOptions());
       context.setDefaultTimeout(15000);
       context.setDefaultNavigationTimeout(15000);
       page = await context.newPage();
@@ -151,6 +155,25 @@ async function run(body) {
     }
     case "posts":
       return JSON.stringify(posts);
+    case "viewport": {
+      const width = Number(body.width);
+      const height = Number(body.height);
+      if (
+        !Number.isInteger(width) ||
+        !Number.isInteger(height) ||
+        width < 320 ||
+        width > 1920 ||
+        height < 480 ||
+        height > 1400
+      ) {
+        throw new Error(
+          "viewport needs integer --width from 320 to 1920 and --height from 480 to 1400",
+        );
+      }
+      viewport = { width, height };
+      await page.setViewportSize(viewport);
+      return `${width}x${height}`;
+    }
     case "snapshot": {
       const file = evidenceFile(body.path);
       await mkdir(path.dirname(file), { recursive: true });
