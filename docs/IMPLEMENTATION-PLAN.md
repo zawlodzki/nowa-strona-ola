@@ -1401,8 +1401,10 @@ porównaniem z design systemem na desktopie i mobile.
 - [x] Ocenić animację zamykania dialogów i `::backdrop` w Chromium,
       Firefoksie i WebKit. Zalecenie po próbie to zachować natychmiastowe
       zamknięcie. [Wyniki próby](PROGRESS.md#ocena-animacji-zamykania-dialogów-20112026).
-- [ ] Animacja otwierania FAQ przez `::details-content` i
-      `interpolate-size`, tylko przy `prefers-reduced-motion: no-preference`.
+- [x] Ocenić animację otwierania FAQ z `::details-content` i
+      `interpolate-size` przy `prefers-reduced-motion: no-preference`.
+      Zalecenie po próbie to zachować natychmiastowe otwieranie.
+      [Wyniki próby](PROGRESS.md#ocena-animacji-otwierania-faq-20112026).
 - [ ] Stabilny fallback fontu: `font-size-adjust: from-font` albo
       `@font-face` Arial z `size-adjust` i nadpisaniem metryk.
 - [ ] Decyzja o przejściach między stronami (`@view-transition`); MOTION.md

@@ -1,5 +1,36 @@
 # Postęp wdrożenia
 
+## Ocena animacji otwierania FAQ, 20.11.2026
+
+Zalecenie po próbie to zachować natychmiastowe otwieranie FAQ w 3a.
+Prototyp stopniowo przesuwa kolejne pytanie przez 180 ms. Na ekranie 320 px
+otwarcie przesunęło kolejne pytanie o 210–273 px, zależnie od strony.
+Natychmiastowy układ pozwala od razu odczytać odpowiedź i ma takie samo
+zachowanie w trzech sprawdzonych silnikach.
+
+Porównanie objęło konsultacje, e-book „Suplementy w PMOS (PCOS)” i artykuł
+o przygotowaniu do konsultacji. Chromium 153 animował otwarcie i zachował
+natychmiastowe zamknięcie. Firefox 155 i WebKit 26.6 otwierały FAQ od razu.
+Przy ograniczonym ruchu każdy silnik od razu pokazywał pełną odpowiedź.
+Prototyp korzystał z natywnego `details`, `::details-content` i lokalnego
+`interpolate-size`. [Poradnik Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance/guides/ui-components/accordion).
+
+W 30 próbach na silnik sprawdzono desktop, 320 px, powiększenie CSS
+do 200%, ograniczony ruch i działanie bez JavaScriptu. Kliknięcie, Enter
+i Spacja otwierały odpowiedź. Szybkie ponowne przełączenie zamykało pytanie,
+fokus klawiatury zostawał na pytaniu, a wcześniej otwarte odpowiedzi
+pozostawały otwarte. Próba nie obejmowała natywnego zoomu przeglądarki,
+aplikacji Safari ani czytnika ekranu.
+
+Izolowany build fixture’ów z `177fbf5` na Node 24.22.3 wygenerował 47 stron.
+`verify-ola` potwierdził w Chromium otwarcie i zamknięcie FAQ katalogu 3a bez
+JavaScriptu. Lista POST zwróciła `[]`. Prototyp, zapis pomiarów i zrzuty są
+w `/tmp/ola-verify-evidence/ola-faq-trial-20261120/`. Zrzuty obu wariantów
+po pełnym otwarciu przy 320 px są identyczne w Chromium.
+
+Następna pozycja P2 to porównanie metryk Switzera i fontu zastępczego pod
+kątem zmian układu po załadowaniu kroju.
+
 ## Ocena animacji zamykania dialogów, 20.11.2026
 
 Zalecenie po próbie to zachować natychmiastowe zamykanie dialogów 3a.
