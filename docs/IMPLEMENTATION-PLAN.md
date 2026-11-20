@@ -1398,9 +1398,9 @@ porównaniem z design systemem na desktopie i mobile.
       `details` bez JS. Fokus sprawdzony w WebKit.
       [Wyniki](PROGRESS.md#menu-mobilne-z-popover-api-20112026).
 - [ ] Potwierdzić powrót fokusu w aplikacji Safari przy ręcznym odbiorze.
-- [ ] Animacja zamykania dialogów i `::backdrop`: `@starting-style`,
-      `overlay`, `display`, osobne `transition-behavior: allow-discrete`,
-      fallback dla Firefoksa. Uzgodnić z MOTION.md.
+- [x] Ocenić animację zamykania dialogów i `::backdrop` w Chromium,
+      Firefoksie i WebKit. Zalecenie po próbie to zachować natychmiastowe
+      zamknięcie. [Wyniki próby](PROGRESS.md#ocena-animacji-zamykania-dialogów-20112026).
 - [ ] Animacja otwierania FAQ przez `::details-content` i
       `interpolate-size`, tylko przy `prefers-reduced-motion: no-preference`.
 - [ ] Stabilny fallback fontu: `font-size-adjust: from-font` albo
