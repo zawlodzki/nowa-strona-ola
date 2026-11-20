@@ -38,25 +38,30 @@ for (const colorScheme of ["light", "dark"] as const) {
         ),
       ).toBe(true);
       if (width < 1440)
-        await expect(page.locator(".ao-mobile-menu summary")).toBeInViewport();
+        await expect(
+          page.getByRole("button", { name: "Menu", exact: true }),
+        ).toBeInViewport();
     });
   }
 }
 
 test("3a menu, FAQ, carousel and theme provide working controls", async ({
   page,
+  browserName,
 }) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/design-system/");
-  const trigger = page.locator(".ao-mobile-menu summary");
+  const trigger = page.getByRole("button", { name: "Menu", exact: true });
   await trigger.focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator(".ao-mobile-menu")).toHaveAttribute("open", "");
-  await page.keyboard.press("Tab");
+  const panel = page.locator("#site-navigation-panel");
+  await expect(panel).toBeVisible();
+  await page.keyboard.press(browserName === "webkit" ? "Alt+Tab" : "Tab");
+  await expect(panel.getByRole("link").first()).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
-  await expect(page.locator(".ao-mobile-menu")).not.toHaveAttribute("open", "");
+  await expect(panel).toBeHidden();
   await page
     .getByText("Czy te komponenty działają bez JavaScript?", { exact: true })
     .click();
@@ -92,9 +97,11 @@ test("3a catalog without JavaScript preserves native navigation and content", as
   const page = await context.newPage();
   await page.goto(`${baseURL}/design-system/`);
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await page.locator(".ao-mobile-menu summary").click();
+  await page.locator("summary.ao-header__menu-toggle").click();
   await expect(
-    page.getByRole("navigation", { name: "Nawigacja mobilna" }),
+    page
+      .getByRole("navigation", { name: "Nawigacja główna" })
+      .getByRole("link", { name: "Newsletter", exact: true }),
   ).toBeVisible();
   await page
     .getByText("Czy te komponenty działają bez JavaScript?", { exact: true })

@@ -88,7 +88,7 @@ test.describe("touch feedback", () => {
         () => matchMedia("(hover: hover) and (pointer: fine)").matches,
       ),
     ).toBe(false);
-    const control = page.locator(".ao-mobile-menu summary");
+    const control = page.getByRole("button", { name: "Menu", exact: true });
     const box = await control.boundingBox();
     if (!box) throw new Error("Menu trigger has no hit area.");
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
@@ -96,7 +96,7 @@ test.describe("touch feedback", () => {
     await expect(control).toHaveCSS("opacity", "0.75");
     await page.mouse.up();
     await expect(control).toHaveCSS("opacity", "1");
-    await expect(page.locator(".ao-mobile-menu")).toHaveAttribute("open", "");
+    await expect(page.locator("#site-navigation-panel")).toBeVisible();
   });
 
   test("Instagram keeps its resting color on a coarse pointer", async ({

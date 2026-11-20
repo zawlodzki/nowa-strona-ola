@@ -82,6 +82,13 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 Wynik POST powinien być `[]`. Kontrola 320 px/zoomu i klawiatury znajduje się
 w `tests/e2e/consent.spec.ts`; [wyniki i ograniczenia](docs/PROGRESS.md).
 
+Testy menu mobilnego uruchomisz po zbudowaniu strony na Node 24.
+
+```sh
+npm run build
+npm run test:e2e -- tests/e2e/css-practices.spec.ts tests/e2e/design-system-3a.spec.ts tests/e2e/sticky-navigation-3a.spec.ts
+```
+
 Test nawigacji karuzeli klawiaturą przy powiększeniu CSS do 200% uruchomisz
 na Node 24 po zbudowaniu strony:
 

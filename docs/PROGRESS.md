@@ -1,5 +1,30 @@
 # Postęp wdrożenia
 
+## Menu mobilne z Popover API, 20.11.2026
+
+`SiteHeader` renderuje jeden zestaw linków i jedno CTA dla obu szerokości.
+Przycisk otwiera `popover="auto"`. Przeglądarka zamyka panel przez Escape
+i kliknięcie poza nim. Po kliknięciu przycisku skrypt jawnie ustawia fokus,
+żeby WebKit mógł go przywrócić. Gdy użytkownik przejdzie na szerokość
+desktopową lub wybierze link w panelu, skrypt zamyka popover. `details`
+zapewnia dostęp do tej samej nawigacji przy wyłączonym JavaScripcie i bez
+obsługi Popover API.
+
+Porównanie z bazowym buildem potwierdziło tę samą geometrię linków i CTA
+przy 320, 390 i 1440 px w Chromium i WebKit. Niezależna próba przy 320 ×
+850 px z powiększeniem CSS do 200% potwierdziła przewijanie listy w obrębie
+okna. Budżety CSS przeszły, w tym 8172 B gzip na stronie głównej przy
+limicie 8192 B.
+
+Testy obejmują klawiaturę, powrót fokusu po kliknięciu przycisku,
+nawigację bez JavaScriptu, przewijanie menu, zmianę szerokości i zamknięcie
+po przejściu do newslettera na tej samej stronie. W Chromium, Firefoksie
+i WebKit przeszły 72 ukierunkowane scenariusze. `verify-ola` potwierdził
+widoczny link „Newsletter” bez JavaScriptu i pustą listę POST. Dowody są
+w `/tmp/ola-verify-evidence/ola-menu-popover-20261120/`. Safari WebDriver
+wymaga włączenia zdalnej automatyzacji.
+Następna pozycja P2 to ocena animacji zamykania dialogu i tła.
+
 ## Ocena prerenderu dla zgód i analityki, 19.11.2026
 
 Zadanie P1 zakończone. Zalecenie to zachować `prefetch` z `eagerness: "moderate"`
