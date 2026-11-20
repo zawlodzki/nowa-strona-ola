@@ -325,6 +325,8 @@ async function browserCommand(argv) {
     body.nth = index;
   }
   if (named.javascript === "false") body.javascript = false;
+  if (named.width !== undefined) body.width = Number(named.width);
+  if (named.height !== undefined) body.height = Number(named.height);
   if (command === "context" && named.javascript === undefined) {
     body.javascript = true;
   }

@@ -44,7 +44,8 @@ Każdy plik ma H1, jeden akapit zachowania widocznego dla użytkownika i dokład
 - [Zamówienie e-booków](./checkout.md) otwiera cztery adresy bez płatności, wstrzymaną sprzedaż i bramkę braku `session_id`.
 - [Przełącznik języka](./language.md) sprawdza brak linku „English” i 404 pod `/en/`.
 - [Dialog katalogu](./catalog-dialog.md) otwiera i zamyka dialog „Jak pracujemy”.
-- [Katalog 3a](./design-system.md) otwiera `/design-system/`, motyw i karuzelę.
+- [Katalog 3a](./design-system.md) otwiera `/design-system/`, lead o palecie cegły i zieleni, motyw i karuzelę.
+- [Menu mobilne](./mobile-nav.md) na wąskim widoku otwiera „Menu” w nagłówku 3a i zamyka je klawiszem Escape.
 - [Kolekcja bloga](./blog-collection.md) otwiera `/blog/`, paginację, kategorię i pustą kategorię, bez POST.
 - [Artykuł na blogu](./blog-article.md) wchodzi z listy bloga w artykuł Article3a.
 - [Strony prawne](./legal-pages.md) otwiera cztery dokumenty PL, odstąpienie od umowy i link zgody newslettera.

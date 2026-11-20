@@ -31,5 +31,4 @@ Z menu „Kontakt” albo bezpośrednio `/kontakt/`. `/en/contact/` nie jest pub
 
 ## Gotchas
 
-Viewporty, CSS zoom, reduced motion, klawiatura i axe: Playwright
-`tests/e2e/contact-3a.spec.ts`; CLI skilla nie ustawia viewportu.
+`browser viewport` ustawia szerokość i wysokość. CSS zoom, reduced motion, klawiatura i axe zostają w Playwright `tests/e2e/contact-3a.spec.ts`.

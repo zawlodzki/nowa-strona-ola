@@ -1,6 +1,6 @@
 # Katalog 3a
 
-Na `/design-system/` użytkownik ogląda zatwierdzony katalog komponentów 3a. Przy włączonym JavaScript może przełączyć motyw i przesunąć karuzelę. Z `/ui/` wchodzi tym samym adresem.
+Na `/design-system/` użytkownik ogląda zatwierdzony katalog komponentów 3a. Lead mówi o jasnym tle, palecie cegły i zieleni oraz Switzerze. Przy włączonym JavaScript może przełączyć motyw i przesunąć karuzelę. Z `/ui/` wchodzi tym samym adresem.
 
 ## Sub-features
 
@@ -24,6 +24,7 @@ Preconditions:
 
 - **Wejście z katalogu.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /ui/`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role link --name "Docelowy design system 3a" --exact --attribute href --value "/design-system/"`. Atrybut to `/design-system/`.
 - **Otwórz katalog 3a.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Docelowy design system 3a" --exact`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Design system 3a"`.
+- **Lead.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wybrany kierunek strony Aleksandry Olesiewicz. Jasne tło, paleta cegły i zieleni oraz Switzer. Komponenty wynikają z ośmiu mockupów po audycie spójności."`. `expect --text` wymaga całego tekstu akapitu.
 - **Motyw.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Ciemny motyw" --exact`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button --name "Ciemny motyw" --exact --attribute aria-pressed --value "true"`.
 - **Karuzela.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Następne elementy" --exact`. Wynik to kliknięcie tego przycisku.
 - **Otwarte FAQ.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "To katalog stanów. Wysłanie danych wymaga integracji formularza z Workerem, kolejką i n8n."`. Ten blok jest otwarty w HTML.
