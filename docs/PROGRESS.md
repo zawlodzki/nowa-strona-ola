@@ -1,5 +1,35 @@
 # Postęp wdrożenia
 
+## Ocena animacji zamykania dialogów, 20.11.2026
+
+Zalecenie po próbie to zachować natychmiastowe zamykanie dialogów 3a.
+Chromium 153 wygasił panel i tło w 250 ms po zamknięciu. W Firefoksie 155
+i WebKit 26.6 ten sam CSS animował wejście, a zamknięcie było natychmiastowe.
+Wspólny efekt wymagałby przejęcia obsługi zamknięcia w JS i odroczenia
+`close()`. W każdym scenariuszu fokus wrócił na przycisk otwierający.
+Po kliknięciu przycisku zamknięcia listy oczekujących w Firefoksie powrót
+fokusu odnotowano po usunięciu atrybutu `open`.
+[Poradnik Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance/guides/ui-behaviors/animate-to-from-top-layer).
+
+Próba użyła lokalnej kopii drzewa PR #154. Build fixture’ów na Node
+24.22.3 wygenerował 47 stron. W ustawieniach cookies i na liście oczekujących
+sprawdzono Escape, przycisk zamknięcia, kliknięcie poza panelem i powrót
+fokusu. Próba zakończyła się 28 udanymi zamknięciami w każdym silniku.
+Przy 320 px oba panele mieściły się w oknie. W trybie ograniczonego ruchu
+nie wystartowały przejścia. `verify-ola` potwierdził otwarcie i zamknięcie
+obu dialogów oraz działanie listy oczekujących bez JavaScriptu w Chromium.
+Lista POST była pusta. Prototyp i wyniki są w
+`/tmp/ola-verify-evidence/ola-dialog-trial-20261120/`.
+
+Przy `zoom: 2` oba panele wykraczały poza okno w wersji bazowej i w prototypie.
+Escape nadal zamykał dialog. Przycisk zamknięcia panelu zgód był poza zasięgiem
+kliknięcia w próbie WebKit i Firefoksa. Został do sprawdzenia w osobnym
+odbiorze przy natywnym powiększeniu przeglądarki do 200%. Próba objęła WebKit
+Playwrighta. Ręczny odbiór menu w aplikacji Safari nadal jest otwarty.
+
+Następna pozycja P2 to ocena animacji otwierania FAQ i jej wyłączenia
+w trybie ograniczonego ruchu.
+
 ## Menu mobilne z Popover API, 20.11.2026
 
 `SiteHeader` renderuje jeden zestaw linków i jedno CTA dla obu szerokości.
