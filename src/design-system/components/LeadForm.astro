@@ -127,7 +127,11 @@ const autocomplete: Partial<Record<FormFieldCopy["input"], string>> = {
         <input
           class="ao-input"
           type={field.input}
-          autocomplete={autocomplete[field.input]}
+          autocomplete={
+            field.input === "text" && field.name === "name"
+              ? "given-name"
+              : autocomplete[field.input]
+          }
           maxlength={fieldMaxLength(field.input)}
           placeholder={
             field.placeholder ??
