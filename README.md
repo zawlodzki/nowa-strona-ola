@@ -121,6 +121,16 @@ node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path
 node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
 ```
 
+W uruchomionej sesji `verify-ola` sprawdź wskazówkę autouzupełniania pola
+„Imię” w formularzu demonstracyjnym. W katalogu jest też pole tylko do
+odczytu o tej samej etykiecie.
+
+```sh
+node .cursor/skills/verify-ola/scripts/verify.mjs browser goto --path /ui/
+node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role textbox --name "Imię" --exact --nth 1 --attribute autocomplete --value given-name
+node .cursor/skills/verify-ola/scripts/verify.mjs browser posts
+```
+
 Ocena [zgodności Turnstile i n8n](docs/TURNSTILE-ASSESSMENT-2026-10-14.md),
 14.10.2026. Sprawdzone na Node 26.11.0, bez wysyłki zgłoszeń:
 

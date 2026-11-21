@@ -1419,8 +1419,10 @@ porównaniem z design systemem na desktopie i mobile.
 - [x] Przełącznik motywu zapisuje wybór różny od ustawienia systemu i
       pozwala wrócić do motywu systemowego.
       [Wyniki odbioru](PROGRESS.md#powrót-do-motywu-systemowego-20112026).
-- [ ] Formularz: `autocomplete="given-name"` dla pola „Imię”; opcjonalnie
-      `field-sizing: content` dla `textarea` i styl `:user-invalid`.
+- [x] Formularz: `autocomplete="given-name"` dla pola „Imię”.
+      [Wyniki odbioru](PROGRESS.md#autouzupełnianie-imienia-w-formularzu-21112026).
+- [ ] Opcjonalnie ocenić `field-sizing: content` dla `textarea` i styl
+      `:user-invalid`.
 - [ ] Karuzela: rozliczać stan na `scrollend`, debounce `scroll` tylko jako
       fallback.
 - [ ] Bez pilnej potrzeby: rozważyć `animation-timeline: view()` dla

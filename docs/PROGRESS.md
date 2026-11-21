@@ -1,5 +1,28 @@
 # Postęp wdrożenia
 
+## Autouzupełnianie imienia w formularzu, 21.11.2026
+
+Wspólny `LeadForm` przypisuje `autocomplete="given-name"` do pola
+tekstowego o kluczu `name`. Porównanie inputów w buildach fixture'ów
+przed i po zmianie wykazało jedną różnicę, w formularzu demonstracyjnym
+na `/ui/`.
+
+`verify-ola` potwierdził atrybut przy 1440 i 320 px oraz bez JavaScriptu.
+Pusta próba wysłania pokazała błąd pola. Lista POST zwróciła `[]`.
+Chromium, Firefox i WebKit zaliczyły dziewięć prób przejścia klawiaturą
+przy 1440 i 320 px oraz powiększeniu CSS do 200% z ograniczonym ruchem.
+Odbiór nie obejmował zapisanych danych autouzupełniania, aplikacji Safari
+ani natywnego powiększenia. Dowody są w
+`/tmp/ola-verify-evidence/ola-given-name-20261121/`.
+
+Pełne `npm run verify` na Node 24.22.3 przeszło w izolowanej kopii
+commita `531963f` z poprawką formularza. Wynik to 783 testy jednostkowe,
+597 E2E, 48 pominięć i zgodność 21 stron w symulacji Content Lake.
+Przebieg używał osobnego katalogu danych Firefoksa zgodnie z README.
+
+Warianty `field-sizing` i `:user-invalid` pozostają opcjonalne. Następne
+zadanie P3 to rozliczenie stanu karuzeli na `scrollend`.
+
 ## Powrót do motywu systemowego, 20.11.2026
 
 Przycisk „Użyj motywu systemowego” pojawia się w stopce po ręcznym
