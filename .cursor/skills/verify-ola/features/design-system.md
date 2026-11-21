@@ -6,6 +6,7 @@ Na `/design-system/` użytkownik ogląda zatwierdzony katalog komponentów 3a. L
 
 - `ds-heading` pokazuje H1 „Design system 3a”.
 - `ds-theme` przełącza przycisk „Ciemny motyw” na `aria-pressed="true"`.
+- `ds-theme-system` przywraca jasny motyw systemowy po ręcznym wyborze ciemnego.
 - `ds-carousel` pokazuje przycisk „Następne elementy”.
 - `ds-from-ui` prowadzi z `/ui/` linkiem „Docelowy design system 3a”.
 - `ds-no-js` przy wyłączonym JavaScript ukrywa motyw i sterowanie karuzelą.
@@ -26,6 +27,7 @@ Preconditions:
 - **Otwórz katalog 3a.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role link --name "Docelowy design system 3a" --exact`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role heading --name "Design system 3a"`.
 - **Lead.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "Wybrany kierunek strony Aleksandry Olesiewicz. Jasne tło, paleta cegły i zieleni oraz Switzer. Komponenty wynikają z ośmiu mockupów po audycie spójności."`. `expect --text` wymaga całego tekstu akapitu.
 - **Motyw.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Ciemny motyw" --exact`, potem `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --role button --name "Ciemny motyw" --exact --attribute aria-pressed --value "true"`.
+- **Powrót do systemu.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Użyj motywu systemowego" --exact`. Przy jasnym motywie systemowym stan „Ciemny motyw” wraca do `aria-pressed="false"`. Sprawdź `browser posts`, który zwraca `[]`.
 - **Karuzela.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser click --role button --name "Następne elementy" --exact`. Wynik to kliknięcie tego przycisku.
 - **Otwarte FAQ.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser expect --text "To katalog stanów. Wysłanie danych wymaga integracji formularza z Workerem, kolejką i n8n."`. Ten blok jest otwarty w HTML.
 - **Dowód.** Uruchom `node .cursor/skills/verify-ola/scripts/verify.mjs browser snapshot --aria --path design-system/page.aria.txt` i `node .cursor/skills/verify-ola/scripts/verify.mjs browser screenshot --path design-system/page.png`. Snapshot zawiera H1 i przycisk motywu.
@@ -35,7 +37,7 @@ Preconditions:
 
 - To nie jest `/ui/`. Dialog „Jak pracujemy” należy do tamtego przepisu.
 - Przycisk motywu i sterowanie karuzelą startują z `hidden` i pokazuje je skrypt. Przy wyłączonym JavaScript te role mają `--count 0`.
-- Zapisany `ao-theme` wygrywa z `prefers-color-scheme`. Świeża sesja verify-ola ma puste storage i jasny start, więc pierwsze kliknięcie ustawia `aria-pressed` na `true`. Przy zapisanym ciemnym motywie pierwsze kliknięcie ustawia `false`.
+- Zapisany `ao-theme` wygrywa z `prefers-color-scheme`. Świeża sesja verify-ola ma pustą pamięć i jasny start, więc pierwsze kliknięcie ustawia `aria-pressed` na `true`. Wybranie jasnego w tej sesji lub przywrócenie systemu usuwa zapis.
 - Pytanie FAQ „Czy te komponenty działają bez JavaScript?” jest w `details`. Harness nie otwiera go przez `--role group`. Dowodem jest otwarty drugi blok, nie kliknięcie pierwszego pytania.
 - Przycisk newslettera na tej stronie ma napis „Zapisuję się”. W HTML startuje jako disabled, a skrypt strony go włącza. Ten przepis go nie wysyła.
 - Link marki na tej stronie prowadzi na `/design-system/`, nie na `/`.

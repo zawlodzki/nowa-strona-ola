@@ -1,5 +1,35 @@
 # Postęp wdrożenia
 
+## Powrót do motywu systemowego, 20.11.2026
+
+Przycisk „Użyj motywu systemowego” pojawia się w stopce po ręcznym
+wyborze motywu. Usuwa `ao-theme` i oddaje fokus przełącznikowi. Wybranie
+przełącznikiem motywu zgodnego z aktualnym ustawieniem systemu też usuwa
+zapis. Gdy to system zmienia motyw, zapisany wcześniej wybór nadal
+obowiązuje. Zmiany zapisu synchronizują się między kartami tego samego
+originu. Bez zapisu lub bez JavaScriptu 3a używa ustawienia systemu.
+
+Test powrotu przełącznikiem przed zmianą odczytał zapisane `light`
+zamiast pustego klucza. Test dwóch kart wykazał też brak przycisku powrotu.
+Nowe scenariusze sprawdzają reset zapisanej preferencji zgodnej z systemem,
+powrót fokusu i reagowanie na kolejne zmiany systemu. Istniejące scenariusze
+nadal sprawdzają wygląd przed pierwszym renderem, nawigację i odświeżenie.
+
+`verify-ola` potwierdził zmianę motywu i powrót do ustawienia systemu
+w katalogu 3a. Lista POST zwróciła `[]`. Chromium, Firefox i WebKit
+potwierdziły obrys fokusu z odstępem od tekstu przy 1440 px, 320 px
+i powiększeniu CSS do 200%, z ograniczonym ruchem. Katalog podążał
+za ciemnym motywem systemowym także bez JavaScriptu. Budżet zewnętrznego
+CSS strony głównej wyniósł 8176 B gzip przy limicie 8192 B. Ręczny
+odbiór w aplikacji Safari i natywne powiększenie pozostają otwarte.
+Dowody są w `/tmp/ola-verify-evidence/ola-theme-system-final-20261120/`.
+
+Pełne `npm run verify` na Node 24.22.3 przeszło na końcowym wariancie
+opartym na drzewie `8642a3c`. Wynik to 783 testy jednostkowe, 597 E2E,
+48 pominięć i zgodność 21 stron w próbie Content Lake.
+
+Następne zadanie P3 to `autocomplete="given-name"` w polu „Imię”.
+
 ## Natywne zamykanie panelu zgód, 20.11.2026
 
 Przycisk w dialogu „Ustawienia cookies” korzysta z
