@@ -156,7 +156,7 @@ const positionLabel =
         }
         const start = Math.max(1, first + 1);
         const end = Math.max(start, last + 1);
-        position.textContent =
+        const label =
           start === end
             ? polish
               ? `${start} z ${items.length}`
@@ -164,6 +164,7 @@ const positionLabel =
             : polish
               ? `${start}–${end} z ${items.length}`
               : `${start}–${end} of ${items.length}`;
+        if (position.textContent !== label) position.textContent = label;
       }
       if (groups.length && items.length) {
         const visible = items.find(
@@ -200,7 +201,19 @@ const positionLabel =
           behavior: reduced() ? "instant" : "smooth",
         });
       });
-    track.addEventListener("scroll", update, { passive: true });
+    if (Reflect.has(track, "onscrollend")) {
+      track.addEventListener("scrollend", update);
+    } else {
+      let scrollTimer: number | undefined;
+      track.addEventListener(
+        "scroll",
+        () => {
+          window.clearTimeout(scrollTimer);
+          scrollTimer = window.setTimeout(update, 100);
+        },
+        { passive: true },
+      );
+    }
     new ResizeObserver(update).observe(track);
     update();
   }

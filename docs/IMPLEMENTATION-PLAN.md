@@ -1423,7 +1423,9 @@ porównaniem z design systemem na desktopie i mobile.
       [Wyniki odbioru](PROGRESS.md#autouzupełnianie-imienia-w-formularzu-21112026).
 - [ ] Opcjonalnie ocenić `field-sizing: content` dla `textarea` i styl
       `:user-invalid`.
-- [ ] Karuzela: rozliczać stan na `scrollend`, debounce `scroll` tylko jako
-      fallback.
+- [x] Karuzela aktualizuje licznik, aktywny temat i stan przycisków po
+      `scrollend`. Starsze przeglądarki czekają 100 ms od ostatniego
+      zdarzenia `scroll`.
+      [Wyniki odbioru](PROGRESS.md#stan-karuzeli-po-przewinięciu-22112026).
 - [ ] Bez pilnej potrzeby: rozważyć `animation-timeline: view()` dla
       odsłaniania, z obecnym IntersectionObserver jako fallbackiem.
