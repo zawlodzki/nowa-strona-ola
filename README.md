@@ -92,8 +92,9 @@ npm run build
 npm run test:e2e -- tests/e2e/css-practices.spec.ts tests/e2e/design-system-3a.spec.ts tests/e2e/sticky-navigation-3a.spec.ts
 ```
 
-Test nawigacji karuzeli klawiaturą przy powiększeniu CSS do 200% uruchomisz
-na Node 24 po zbudowaniu strony:
+Po zbudowaniu strony na Node 24 uruchom testy karuzeli. Sprawdzają nawigację
+klawiaturą przy powiększeniu CSS do 200% i aktualizację licznika po przewinięciu
+przy 320 px, także przy zasymulowanym braku `scrollend`.
 
 ```sh
 npm run build

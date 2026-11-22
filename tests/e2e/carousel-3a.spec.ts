@@ -136,6 +136,69 @@ test("book group links scroll the first card of a topic into place", async ({
   }
 });
 
+for (const nativeScrollEnd of [true, false]) {
+  test(`book carousel updates its position after scrolling (${nativeScrollEnd ? "native" : "fallback"})`, async ({
+    page,
+  }) => {
+    if (!nativeScrollEnd)
+      await page.addInitScript(() => {
+        let prototype: object | null = HTMLElement.prototype;
+        while (prototype) {
+          Reflect.deleteProperty(prototype, "onscrollend");
+          prototype = Reflect.getPrototypeOf(prototype);
+        }
+      });
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.setViewportSize({ width: 320, height: 844 });
+    await page.goto("/");
+    await dismissConsentBanner(page);
+    const track = page.locator("#ebooks-track");
+    const carousel = page.locator("[data-carousel]", { has: track });
+    const topic = carousel.getByRole("link", {
+      name: "Perimenopauza",
+      exact: true,
+    });
+    const position = carousel.locator("[data-carousel-position]");
+    await expect(
+      carousel.getByRole("button", { name: "Poprzednie elementy" }),
+    ).toBeDisabled();
+    await expect(position).toHaveText(/^1(?:–\d+)? z \d+$/);
+    const initialPosition = await position.textContent();
+    await expect(topic).not.toHaveAttribute("aria-current", "true");
+    expect(await track.evaluate((element) => "onscrollend" in element)).toBe(
+      nativeScrollEnd,
+    );
+
+    const duringScroll: Array<string | null> = [];
+    await page.exposeFunction(
+      "recordCarouselPosition",
+      (value: string | null) => {
+        duringScroll.push(value);
+      },
+    );
+    await track.evaluate((element) => {
+      const position = element
+        .closest("[data-carousel]")
+        ?.querySelector("[data-carousel-position]");
+      element.addEventListener(
+        "scroll",
+        () =>
+          Reflect.get(
+            window,
+            "recordCarouselPosition",
+          )(position?.textContent ?? null),
+        { once: true },
+      );
+    });
+    await topic.click();
+
+    await expect(topic).toHaveAttribute("aria-current", "true");
+    await expect(position).not.toHaveText(initialPosition ?? "");
+    await expect.poll(() => duringScroll).toEqual([initialPosition]);
+  });
+}
+
 test("book arrows show every card at 200% CSS zoom", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });

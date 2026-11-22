@@ -1,5 +1,37 @@
 # Postęp wdrożenia
 
+## Stan karuzeli po przewinięciu, 22.11.2026
+
+Wspólny `Carousel` aktualizuje licznik, aktywny temat e-booków i stan strzałek
+po `scrollend`. Przy braku obsługi zdarzenia każda karuzela czeka 100 ms
+od ostatniego `scroll`. Licznik `aria-live` zmienia tekst tylko wtedy, gdy
+wyświetlany zakres jest inny. Stan jest też przeliczany przy inicjalizacji
+i zmianie rozmiaru toru. Geometria kart przy powiększeniu pochodzi z PR #149.
+
+Oba nowe scenariusze w Chromium na poprzednim buildzie wykazały zmianę
+licznika już przy `scroll`. W sesji `verify-ola` przy 1280 px kliknięcie
+„Perimenopauza” zmieniło licznik z „1–3 z 6” na „4–6 z 6” po przewinięciu.
+Przeglądarka oznaczyła temat jako aktywny i wyłączyła przycisk „Następne
+elementy”. Bez JavaScriptu katalog 3a pokazał karty i ukrył przyciski.
+Lista POST zwróciła `[]`. Dowody są w
+`/tmp/ola-verify-evidence/ola-scrollend-20261122/`.
+
+W Chromium przy 320 px i ograniczonym ruchu Enter zmienił zakres na „2–3 z 6”,
+a przewijanie poziome do końca na „5–6 z 6”. Tor nie poszerzył strony,
+a lista POST zwróciła `[]`. Zrzuty z tej próby są w tym samym katalogu.
+Ręczny odbiór w aplikacji Safari, gest fizycznym dotykiem, natywne
+powiększenie przeglądarki i odsłuch licznika czytnikiem pozostają otwarte.
+
+Wszystkie 24 próby karuzeli w Chromium, Firefoksie i WebKit przeszły.
+Obejmowały natywne zakończenie przewijania, symulację braku `scrollend`,
+strzałki przy 390 i 1440 px oraz klawiaturę przy powiększeniu CSS do 200%.
+W pierwotnej kopii roboczej pełne `npm run verify` na Node 24.22.3 przeszło z 781 testami jednostkowymi,
+582 E2E, 12 pominięciami i zgodnością 21 stron w symulacji Content Lake.
+Trzy testy podglądu `verify-ola` również przeszły.
+
+Następne zadanie w kolejce P3 to opcjonalna ocena `animation-timeline: view()`
+dla odsłaniania sekcji.
+
 ## Autouzupełnianie imienia w formularzu, 21.11.2026
 
 Wspólny `LeadForm` przypisuje `autocomplete="given-name"` do pola
